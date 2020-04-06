@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-plugins {
-    kotlin("jvm") version "1.3.71"
-}
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.MatcherAssert.assertThat
+import org.junit.Test
 
-repositories {
-    mavenCentral()
-}
+class HelloWorldTest {
 
-dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-    testImplementation("junit", "junit", "4.12")
+    @Test
+    fun `Hello World test`() {
+        assertThat("Hello" + " World", `is`("Hello World"))
+    }
 }
