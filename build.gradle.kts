@@ -20,9 +20,14 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven(url = "https://dl.bintray.com/kotlin/kotlin-dev")
 }
+
+val dokkaVersion = "0.11.0-dev-40"
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+    compileOnly("org.jetbrains.dokka", "dokka-core", dokkaVersion)
+    compileOnly("org.jetbrains.dokka", "dokka-core-dependencies", dokkaVersion)
     testImplementation("junit", "junit", "4.12")
 }
