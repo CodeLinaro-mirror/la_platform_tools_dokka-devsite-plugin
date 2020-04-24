@@ -23,7 +23,7 @@ repositories {
     maven(url = "https://dl.bintray.com/kotlin/kotlin-dev")
 }
 
-val dokkaVersion = "0.11.0-dev-40"
+val dokkaVersion = "0.11.0-dev-41"
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
