@@ -27,7 +27,7 @@ val dokkaVersion = "0.11.0-dev-41"
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-    compileOnly("org.jetbrains.dokka", "dokka-core", dokkaVersion)
-    compileOnly("org.jetbrains.dokka", "dokka-core-dependencies", dokkaVersion)
+    implementation("org.jetbrains.dokka", "dokka-core", dokkaVersion)
+    implementation("org.jetbrains.dokka", "dokka-core-dependencies", dokkaVersion)
     testImplementation("junit", "junit", "4.12")
 }
