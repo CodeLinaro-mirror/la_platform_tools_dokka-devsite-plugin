@@ -14,13 +14,32 @@
  * limitations under the License.
  */
 
-plugins {
-    kotlin("jvm") version "1.3.71"
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath("com.github.jengelman.gradle.plugins:shadow:4.0.4")
+    }
 }
+
+defaultTasks = mutableListOf("test", "jar", "shadowJar")
 
 repositories {
     mavenCentral()
     maven(url = "https://dl.bintray.com/kotlin/kotlin-dev")
+}
+
+plugins {
+    kotlin("jvm") version "1.3.71"
+    id("com.github.johnrengelman.shadow") version "4.0.4"
+    id("application")
+}
+
+application {
+    mainClassName = "com.example.Todo" // TODO: determine main class
 }
 
 val dokkaVersion = "0.11.0-dev-41"
@@ -30,4 +49,15 @@ dependencies {
     implementation("org.jetbrains.dokka", "dokka-core", dokkaVersion)
     implementation("org.jetbrains.dokka", "dokka-core-dependencies", dokkaVersion)
     testImplementation("junit", "junit", "4.12")
+}
+
+group = "com.google.devsite"
+version = "0.0.1-alpha01" // This is appended to archiveBaseName in the ShadowJar task. TODO: determine versioning
+
+tasks.withType(ShadowJar::class.java) {
+    archiveBaseName.set("dokka-devsite-plugin-full")
+    archiveClassifier.set(null as String?)
+    archiveVersion.set(null as String?)
+    setZip64(true)
+    destinationDirectory.set(project.buildDir)
 }
