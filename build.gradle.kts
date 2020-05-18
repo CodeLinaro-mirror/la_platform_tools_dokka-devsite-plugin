@@ -33,7 +33,7 @@ repositories {
 }
 
 plugins {
-    kotlin("jvm") version "1.3.71"
+    kotlin("jvm") version "1.3.72"
     id("com.github.johnrengelman.shadow") version "4.0.4"
     id("application")
 }
@@ -52,8 +52,7 @@ dependencies {
 }
 
 group = "com.google.devsite"
-version = "0.0.1-alpha01" // This is appended to archiveBaseName in the ShadowJar task. TODO: determine versioning
-
+version = "0.0.1-alpha01" // This is appended to archiveBaseName in the ShadowJar task.
 tasks.withType(ShadowJar::class.java) {
     archiveBaseName.set("dokka-devsite-plugin-full")
     archiveClassifier.set(null as String?)
