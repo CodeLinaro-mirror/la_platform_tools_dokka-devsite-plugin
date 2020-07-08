@@ -15,48 +15,51 @@
  */
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath("com.github.jengelman.gradle.plugins:shadow:4.0.4")
-    }
-}
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 defaultTasks = mutableListOf("test", "jar", "shadowJar")
 
 repositories {
-    mavenCentral()
-    maven(url = "https://dl.bintray.com/kotlin/kotlin-dev")
+    jcenter()
+    maven("https://kotlin.bintray.com/kotlinx")
+    maven("https://dl.bintray.com/kotlin/kotlin-dev")
 }
 
 plugins {
-    kotlin("jvm") version "1.3.72"
+    kotlin("jvm") version "1.4-M3"
     id("com.github.johnrengelman.shadow") version "4.0.4"
     id("application")
 }
 
 application {
-    mainClassName = "com.example.Todo" // TODO: determine main class
+    mainClassName = "org.jetbrains.dokka.MainKt"
 }
 
-val dokkaVersion = "0.11.0-dev-41"
+val dokkaVersion = "1.4.0-M3-dev-54"
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-    implementation("org.jetbrains.dokka", "dokka-core", dokkaVersion)
-    implementation("org.jetbrains.dokka", "dokka-core-dependencies", dokkaVersion)
-    testImplementation("junit", "junit", "4.12")
+    compileOnly(kotlin("stdlib-jdk8"))
+
+    implementation("org.jetbrains.dokka:dokka-base:$dokkaVersion")
+    implementation("org.jetbrains.dokka:dokka-cli:$dokkaVersion")
+    implementation("org.jetbrains.dokka:dokka-core:$dokkaVersion")
+
+    testImplementation("junit:junit:4.12")
 }
 
 group = "com.google.devsite"
 version = "0.0.1-alpha01" // This is appended to archiveBaseName in the ShadowJar task.
-tasks.withType(ShadowJar::class.java) {
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+tasks.withType<ShadowJar> {
     archiveBaseName.set("dokka-devsite-plugin-full")
     archiveClassifier.set(null as String?)
     archiveVersion.set(null as String?)
-    setZip64(true)
+    isZip64 = true
     destinationDirectory.set(project.buildDir)
 }

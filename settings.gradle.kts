@@ -15,3 +15,18 @@
  */
 
 rootProject.name = "dokka-devsite-plugin"
+
+pluginManagement {
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.namespace == "org.jetbrains.kotlin") {
+                useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:${requested.version}")
+            }
+        }
+    }
+
+    repositories {
+        gradlePluginPortal()
+        maven("https://dl.bintray.com/kotlin/kotlin-dev")
+    }
+}
