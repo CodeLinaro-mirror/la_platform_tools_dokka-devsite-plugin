@@ -20,6 +20,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 defaultTasks = mutableListOf("test", "jar", "shadowJar")
 
 repositories {
+    mavenLocal()
     jcenter()
     maven("https://kotlin.bintray.com/kotlinx")
     maven("https://dl.bintray.com/kotlin/kotlin-dev")
@@ -35,7 +36,7 @@ application {
     mainClassName = "org.jetbrains.dokka.MainKt"
 }
 
-val dokkaVersion = "1.4.0-M3-dev-54"
+val dokkaVersion = "0.11.0-SNAPSHOT"
 
 dependencies {
     compileOnly(kotlin("stdlib-jdk8"))
@@ -43,6 +44,8 @@ dependencies {
     implementation("org.jetbrains.dokka:dokka-base:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-cli:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-core:$dokkaVersion")
+    implementation("org.jetbrains.dokka:javadoc-plugin:$dokkaVersion")
+    implementation("org.jetbrains.dokka:mathjax-plugin:$dokkaVersion")
 
     testImplementation("junit:junit:4.12")
 }
