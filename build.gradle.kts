@@ -20,10 +20,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 defaultTasks = mutableListOf("test", "jar", "shadowJar")
 
 repositories {
-    mavenLocal()
     jcenter()
     maven("https://kotlin.bintray.com/kotlinx")
     maven("https://dl.bintray.com/kotlin/kotlin-dev")
+    maven("../dokka-utils")
 }
 
 plugins {
