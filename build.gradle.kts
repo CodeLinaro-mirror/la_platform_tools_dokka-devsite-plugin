@@ -48,6 +48,8 @@ dependencies {
     implementation("org.jetbrains.dokka:mathjax-plugin:$dokkaVersion")
 
     testImplementation("junit:junit:4.12")
+    testImplementation("org.jetbrains.dokka:dokka-test-api:$dokkaVersion")
+    testImplementation("org.jsoup:jsoup:1.12.1")
 }
 
 group = "com.google.devsite"
