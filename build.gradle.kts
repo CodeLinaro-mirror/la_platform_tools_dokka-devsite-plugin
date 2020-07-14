@@ -45,7 +45,6 @@ dependencies {
     implementation("org.jetbrains.dokka:dokka-cli:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-core:$dokkaVersion")
     implementation("org.jetbrains.dokka:javadoc-plugin:$dokkaVersion")
-    implementation("org.jetbrains.dokka:mathjax-plugin:$dokkaVersion")
 
     testImplementation("junit:junit:4.12")
     testImplementation("org.jetbrains.dokka:dokka-test-api:$dokkaVersion")

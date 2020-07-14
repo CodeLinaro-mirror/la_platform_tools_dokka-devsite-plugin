@@ -16,10 +16,9 @@
 
 import org.jetbrains.dokka.testApi.testRunner.AbstractCoreTest
 import org.jsoup.Jsoup
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import utils.TestOutputWriterPlugin
-
-internal const val LIB_PATH = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS_SVG&latest"
 
 class MathjaxPluginTest : AbstractCoreTest() {
   @Test
@@ -49,14 +48,12 @@ class MathjaxPluginTest : AbstractCoreTest() {
       configuration,
       pluginOverrides = listOf(writerPlugin)
     ) {
-      renderingStage = {
-        _, _ -> Jsoup
-        .parse(writerPlugin.writer.contents["root/example/test.html"])
-        .head()
-        .select("link, script")
-        .let {
-          assert(it.`is`("[href=$LIB_PATH], [src=$LIB_PATH]"))
-        }
+      renderingStage = { _, _ ->
+        val mathjaxElements = Jsoup
+          .parse(writerPlugin.writer.contents["root/example/test.html"])
+          .body()
+          .select("devsite-mathjax")
+        assertEquals(mathjaxElements.size, 1)
       }
     }
   }
@@ -85,16 +82,13 @@ class MathjaxPluginTest : AbstractCoreTest() {
       configuration,
       pluginOverrides = listOf(writerPlugin)
     ) {
-      renderingStage = {
-        _, _ -> Jsoup
-        .parse(writerPlugin.writer.contents["root/example/test.html"])
-        .head()
-        .select("link, script")
-        .let {
-          assert(!it.`is`("[href=${LIB_PATH}], [src=${LIB_PATH}]"))
-        }
+      renderingStage = { _, _ ->
+        val mathjaxElements = Jsoup
+          .parse(writerPlugin.writer.contents["root/example/test.html"])
+          .body()
+          .select("devsite-mathjax")
+        assertEquals(mathjaxElements.size, 0)
       }
     }
   }
-
 }
