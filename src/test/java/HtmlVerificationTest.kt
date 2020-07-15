@@ -25,40 +25,39 @@ import java.io.File
  *
  * Html output results can be found in testData/HtmlVerificationTest
  */
-class HtmlVerificationTest: AbstractCoreTest() {
-  @Test
-  fun simpleClass() {
-    val configuration = dokkaConfiguration {
-      sourceSets {
-        sourceSet {
-          sourceRoots = listOf("src/main/kotlin/test/Test.kt")
+class HtmlVerificationTest : AbstractCoreTest() {
+    @Test
+    fun simpleClass() {
+        val configuration = dokkaConfiguration {
+            sourceSets {
+                sourceSet {
+                    sourceRoots = listOf("src/main/kotlin/test/Test.kt")
+                }
+            }
         }
-      }
-    }
-    val source =
-      """
-      |/src/main/kotlin/test/Test.kt
-      |package example
-      |/**
-      | * This is a comment
-      | */
-      |class Test()
-      """.trimIndent()
-    val writerPlugin = TestOutputWriterPlugin()
-    testInline(
-      source,
-      configuration,
-      pluginOverrides = listOf(writerPlugin)
-    ) {
-      renderingStage = { _, _ ->
-        writerPlugin.writer.contents.filter {
-          it.key.endsWith(".html")
-        }.forEach { fileName, fileContent ->
-          val outputDirectory = File("./testData/HtmlVerificationTest/simpleClass/")
-          val expectedOutput = File(outputDirectory, fileName)
-          assertEquals(expectedOutput.readText(), fileContent)
+        val source = """
+            |/src/main/kotlin/test/Test.kt
+            |package example
+            |/**
+            | * This is a comment
+            | */
+            |class Test()
+        """.trimIndent()
+        val writerPlugin = TestOutputWriterPlugin()
+        testInline(
+                source,
+                configuration,
+                pluginOverrides = listOf(writerPlugin)
+        ) {
+            renderingStage = { _, _ ->
+                writerPlugin.writer.contents.filter {
+                    it.key.endsWith(".html")
+                }.forEach { fileName, fileContent ->
+                    val outputDirectory = File("./testData/HtmlVerificationTest/simpleClass/")
+                    val expectedOutput = File(outputDirectory, fileName)
+                    assertEquals(expectedOutput.readText(), fileContent)
+                }
+            }
         }
-      }
     }
-  }
 }

@@ -21,17 +21,16 @@ import org.junit.Test
 import utils.TestOutputWriterPlugin
 
 class MathjaxPluginTest : AbstractCoreTest() {
-  @Test
-  fun `Basic test`() {
-    val configuration = dokkaConfiguration {
-      sourceSets {
-        sourceSet {
-          sourceRoots = listOf("src/main/kotlin/test/Test.kt")
+    @Test
+    fun `Basic test`() {
+        val configuration = dokkaConfiguration {
+            sourceSets {
+                sourceSet {
+                    sourceRoots = listOf("src/main/kotlin/test/Test.kt")
+                }
+            }
         }
-      }
-    }
-    val source =
-      """
+        val source = """
             |/src/main/kotlin/test/Test.kt
             |package example
             | /**
@@ -41,54 +40,54 @@ class MathjaxPluginTest : AbstractCoreTest() {
             | * \(C_{out} = C_{dst}\)
             | */
             | fun test(): String = ""
-            """.trimIndent()
-    val writerPlugin = TestOutputWriterPlugin()
-    testInline(
-      source,
-      configuration,
-      pluginOverrides = listOf(writerPlugin)
-    ) {
-      renderingStage = { _, _ ->
-        val mathjaxElements = Jsoup
-          .parse(writerPlugin.writer.contents["root/example/test.html"])
-          .body()
-          .select("devsite-mathjax")
-        assertEquals(mathjaxElements.size, 1)
-      }
-    }
-  }
-
-  @Test
-  fun noMathjaxTest() {
-    val configuration = dokkaConfiguration {
-      sourceSets {
-        sourceSet {
-          sourceRoots = listOf("src/main/kotlin/test/Test.kt")
+        """.trimIndent()
+        val writerPlugin = TestOutputWriterPlugin()
+        testInline(
+                source,
+                configuration,
+                pluginOverrides = listOf(writerPlugin)
+        ) {
+            renderingStage = { _, _ ->
+                val mathjaxElements = Jsoup
+                        .parse(writerPlugin.writer.contents["root/example/test.html"])
+                        .body()
+                        .select("devsite-mathjax")
+                assertEquals(mathjaxElements.size, 1)
+            }
         }
-      }
     }
-    val source =
-      """
+
+    @Test
+    fun noMathjaxTest() {
+        val configuration = dokkaConfiguration {
+            sourceSets {
+                sourceSet {
+                    sourceRoots = listOf("src/main/kotlin/test/Test.kt")
+                }
+            }
+        }
+
+        val source = """
             |/src/main/kotlin/test/Test.kt
             |package example
             | /**
             | * Just a regular kdoc
             | */
             | fun test(): String = ""
-            """.trimIndent()
-    val writerPlugin = TestOutputWriterPlugin()
-    testInline(
-      source,
-      configuration,
-      pluginOverrides = listOf(writerPlugin)
-    ) {
-      renderingStage = { _, _ ->
-        val mathjaxElements = Jsoup
-          .parse(writerPlugin.writer.contents["root/example/test.html"])
-          .body()
-          .select("devsite-mathjax")
-        assertEquals(mathjaxElements.size, 0)
-      }
+        """.trimIndent()
+        val writerPlugin = TestOutputWriterPlugin()
+        testInline(
+                source,
+                configuration,
+                pluginOverrides = listOf(writerPlugin)
+        ) {
+            renderingStage = { _, _ ->
+                val mathjaxElements = Jsoup
+                        .parse(writerPlugin.writer.contents["root/example/test.html"])
+                        .body()
+                        .select("devsite-mathjax")
+                assertEquals(mathjaxElements.size, 0)
+            }
+        }
     }
-  }
 }

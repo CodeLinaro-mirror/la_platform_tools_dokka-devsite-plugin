@@ -35,13 +35,13 @@ private const val MATHJAX_TAG = "<devsite-mathjax config=\"TeX-AMS_SVG\"></devsi
 object MathjaxTransformer : PageTransformer {
     override fun invoke(input: RootPageNode) = input.transformContentPagesTree {
         it.modified(
-                embeddedResources = it.embeddedResources + if (it.isNeedingMathjax) listOf(MATHJAX_TAG) else emptyList()
+            embeddedResources = it.embeddedResources + if (it.isNeedingMathjax) listOf(MATHJAX_TAG) else emptyList()
         )
     }
 
     private val ContentPage.isNeedingMathjax
         get() = documentable?.documentation?.values
-                ?.flatMap { it.children }
-                .orEmpty()
-                .any { (it as? CustomTagWrapper)?.name == ANNOTATION }
+            ?.flatMap { it.children }
+            .orEmpty()
+            .any { (it as? CustomTagWrapper)?.name == ANNOTATION }
 }
