@@ -24,6 +24,7 @@ repositories {
     maven("https://kotlin.bintray.com/kotlinx")
     maven("https://dl.bintray.com/kotlin/kotlin-dev")
     maven("../dokka-utils")
+    maven("../../prebuilts/androidx/external")
 }
 
 plugins {
