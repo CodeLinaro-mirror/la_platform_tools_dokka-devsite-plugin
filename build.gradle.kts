@@ -17,7 +17,7 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-defaultTasks = mutableListOf("test", "jar", "shadowJar")
+defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint")
 
 repositories {
     jcenter()
@@ -67,4 +67,34 @@ tasks.withType<ShadowJar> {
     archiveVersion.set(null as String?)
     isZip64 = true
     destinationDirectory.set(project.buildDir)
+}
+
+val ktlintConfiguration by configurations.creating
+dependencies {
+    ktlintConfiguration("com.pinterest:ktlint:0.33.0")
+}
+
+val outputDir = "${project.buildDir}/reports/ktlint/"
+val inputFiles = project.fileTree(mapOf("dir" to "src", "include" to "**/*.kt"))
+
+val ktlint by tasks.creating(JavaExec::class) {
+    inputs.files(inputFiles)
+    outputs.dir(outputDir)
+
+    description = "Check Kotlin code style."
+    group = "Verification"
+    classpath = ktlintConfiguration
+    main = "com.pinterest.ktlint.Main"
+    args = listOf("src/**/*.kt")
+}
+
+val ktlintFormat by tasks.creating(JavaExec::class) {
+    inputs.files(inputFiles)
+    outputs.dir(outputDir)
+
+    description = "Fix Kotlin code style deviations."
+    group = "Formatting"
+    classpath = ktlintConfiguration
+    main = "com.pinterest.ktlint.Main"
+    args = listOf("-F", "src/**/*.kt")
 }
