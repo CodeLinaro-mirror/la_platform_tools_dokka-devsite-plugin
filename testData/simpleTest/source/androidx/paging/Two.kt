@@ -14,22 +14,11 @@
  * limitations under the License.
  */
 
-import org.junit.Test
+package androidx.paging
 
 /**
- * Full integration test of source to html generation.
+ * Sample class 2
  */
-class HtmlVerificationTest : DackkaTest() {
-    @Test
-    fun simpleClass() {
-        val source = """
-            |/src/main/kotlin/test/Test.kt
-            |package example
-            |/**
-            | * This is a comment
-            | */
-            |class Bar()
-        """.trimIndent()
-        verifyInline("HtmlVerificationTest/simpleClass", source)
-    }
+class Two() {
+    val v
 }

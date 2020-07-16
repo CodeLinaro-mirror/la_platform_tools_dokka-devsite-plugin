@@ -17,19 +17,11 @@
 import org.junit.Test
 
 /**
- * Full integration test of source to html generation.
+ * Full integration tests of source to html generation.
  */
-class HtmlVerificationTest : DackkaTest() {
+class SimpleFilesTest : DackkaTest() {
     @Test
-    fun simpleClass() {
-        val source = """
-            |/src/main/kotlin/test/Test.kt
-            |package example
-            |/**
-            | * This is a comment
-            | */
-            |class Bar()
-        """.trimIndent()
-        verifyInline("HtmlVerificationTest/simpleClass", source)
+    fun a() {
+        verifyDirectory("simpleTest")
     }
 }
