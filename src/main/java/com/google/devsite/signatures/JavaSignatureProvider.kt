@@ -59,15 +59,26 @@ import org.jetbrains.dokka.pages.ContentKind
 import org.jetbrains.dokka.pages.ContentNode
 import org.jetbrains.dokka.utilities.DokkaLogger
 
-class JavaSignatureProvider(ctcc: CommentsToContentConverter, logger: DokkaLogger) : SignatureProvider,
-        JvmSignatureUtils by JavaSignatureUtils {
+/**
+ * Provides Java signatures for source files of all types.
+ *
+ * For example, this class takes a Kotlin function and generates a Java method signature.
+ */
+class JavaSignatureProvider(
+        converter: CommentsToContentConverter,
+        logger: DokkaLogger
+) : SignatureProvider, JvmSignatureUtils by JavaSignatureUtils {
 
-    private val contentBuilder = DevsitePageContentBuilder(ctcc, this, logger)
+    private val contentBuilder = DevsitePageContentBuilder(converter, this, logger)
 
     private val ignoredVisibilities = setOf(JavaVisibility.Default)
 
-    private val ignoredModifiers =
-            setOf(KotlinModifier.Open, JavaModifier.Empty, KotlinModifier.Empty, KotlinModifier.Sealed)
+    private val ignoredModifiers = setOf(
+            KotlinModifier.Open,
+            JavaModifier.Empty,
+            KotlinModifier.Empty,
+            KotlinModifier.Sealed
+    )
 
     override fun signature(documentable: Documentable): List<ContentNode> = when (documentable) {
         is DFunction -> signature(documentable)
@@ -81,165 +92,178 @@ class JavaSignatureProvider(ctcc: CommentsToContentConverter, logger: DokkaLogge
         )
     }
 
-    private fun signature(c: DClasslike): List<ContentNode> =
-            javadocSignature(c) {
-                annotations {
-                    annotationsBlock(c)
-                }
-                modifiers {
-                    text(c.visibility[it]?.takeIf { it !in ignoredVisibilities }?.name?.plus(" ") ?: "")
+    private fun signature(documentableClassLike: DClasslike): List<ContentNode> {
+        return javadocSignature(documentableClassLike) {
+            annotations {
+                annotationsBlock(documentableClassLike)
+            }
+            modifiers {
+                text(documentableClassLike.visibility[it]?.takeIf {
+                    it !in ignoredVisibilities
+                }?.name?.plus(" ") ?: "")
 
-                    if (c is DClass) {
-                        text(c.modifier[it]?.takeIf { it !in ignoredModifiers }?.name?.plus(" ") ?: "")
-                        text(c.modifiers()[it]?.toSignatureString() ?: "")
-                    }
+                if (documentableClassLike is DClass) {
+                    text(documentableClassLike.modifier[it]?.takeIf {
+                        it !in ignoredModifiers
+                    }?.name?.plus(" ") ?: "")
+                    text(documentableClassLike.modifiers()[it]?.toSignatureString() ?: "")
+                }
 
-                    when (c) {
-                        is DClass -> text("class")
-                        is DInterface -> text("interface")
-                        is DEnum -> text("enum")
-                        is DObject -> text("class")
-                        is DAnnotation -> text("@interface")
-                    }
-                }
-                signatureWithoutModifiers {
-                    link(c.name!!, c.dri)
-                    if (c is WithGenerics) {
-                        list(c.generics, prefix = "<", suffix = ">") {
-                            +buildSignature(it)
-                        }
-                    }
-                }
-                supertypes {
-                    if (c is WithSupertypes) {
-                        c.supertypes.map { (p, dris) ->
-                            val (classes, interfaces) = dris.partition { it.kind == JavaClassKindTypes.CLASS }
-                            list(classes, prefix = " extends ", sourceSets = setOf(p)) {
-                                link(it.dri.sureClassNames, it.dri, sourceSets = setOf(p))
-                            }
-                            list(interfaces, prefix = " implements ", sourceSets = setOf(p)) {
-                                link(it.dri.sureClassNames, it.dri, sourceSets = setOf(p))
-                            }
-                        }
-                    }
+                when (documentableClassLike) {
+                    is DClass -> text("class")
+                    is DInterface -> text("interface")
+                    is DEnum -> text("enum")
+                    is DObject -> text("class")
+                    is DAnnotation -> text("@interface")
                 }
             }
-
-    private fun signature(f: DFunction): List<ContentNode> =
-            javadocSignature(f) {
-                annotations {
-                    annotationsBlock(f)
-                }
-                modifiers {
-                    text(f.modifier[it]?.takeIf { it !in ignoredModifiers }?.name?.plus(" ") ?: "")
-                    text(f.modifiers()[it]?.toSignatureString() ?: "")
-                    list(f.generics, prefix = "<", suffix = "> ") {
+            signatureWithoutModifiers {
+                link(documentableClassLike.name!!, documentableClassLike.dri)
+                if (documentableClassLike is WithGenerics) {
+                    list(documentableClassLike.generics, prefix = "<", suffix = ">") {
                         +buildSignature(it)
                     }
-                    signatureForProjection(f.type)
-                }
-                signatureWithoutModifiers {
-                    link(f.name, f.dri)
-                    text("(")
-                    list(f.parameters) {
-                        annotationsInline(it)
-                        text(it.modifiers()[it]?.toSignatureString().orEmpty())
-                        signatureForProjection(it.type)
-                        text(Typography.nbsp.toString())
-                        text(it.name.orEmpty())
-                    }
-                    text(")")
                 }
             }
-
-    private fun signature(p: DProperty): List<ContentNode> =
-            javadocSignature(p) {
-                annotations {
-                    annotationsBlock(p)
-                }
-                modifiers {
-                    text(p.visibility[it]?.takeIf { it !in ignoredVisibilities }?.name?.plus(" ") ?: "")
-                    text(p.modifier[it]?.name + " ")
-                    text(p.modifiers()[it]?.toSignatureString() ?: "")
-                    signatureForProjection(p.type)
-                }
-                signatureWithoutModifiers {
-                    link(p.name, p.dri)
-                }
-            }
-
-    private fun signature(e: DEnumEntry): List<ContentNode> =
-            javadocSignature(e) {
-                annotations {
-                    annotationsBlock(e)
-                }
-                modifiers {
-                    text(e.modifiers()[it]?.toSignatureString() ?: "")
-                }
-                signatureWithoutModifiers {
-                    link(e.name, e.dri)
-                }
-            }
-
-    private fun signature(t: DTypeParameter): List<ContentNode> =
-            javadocSignature(t) {
-                annotations {
-                    annotationsBlock(t)
-                }
-                signatureWithoutModifiers {
-                    text(t.name)
-                }
-                supertypes {
-                    list(t.bounds, prefix = "extends ") {
-                        signatureForProjection(it)
-                    }
-                }
-            }
-
-    private fun signature(p: DParameter): List<ContentNode> =
-            javadocSignature(p) {
-                modifiers {
-                    signatureForProjection(p.type)
-                }
-                signatureWithoutModifiers {
-                    link(p.name.orEmpty(), p.dri)
-                }
-            }
-
-    private fun javadocSignature(
-        d: Documentable,
-        extra: PropertyContainer<ContentNode> = PropertyContainer.empty(),
-        block: DevsitePageContentBuilder.DevsiteContentBuilder.(DokkaConfiguration.DokkaSourceSet) -> Unit
-    ): List<ContentNode> =
-            d.sourceSets.map { sourceSet ->
-                contentBuilder.contentFor(d, ContentKind.Main) {
-                    with(contentBuilder) {
-                        javadocGroup(d.dri, d.sourceSets, extra) {
-                            block(sourceSet)
+            supertypes {
+                if (documentableClassLike is WithSupertypes) {
+                    documentableClassLike.supertypes.map { (p, dris) ->
+                        val (classes, interfaces) = dris.partition { it.kind == JavaClassKindTypes.CLASS }
+                        list(classes, prefix = " extends ", sourceSets = setOf(p)) {
+                            link(it.dri.sureClassNames, it.dri, sourceSets = setOf(p))
+                        }
+                        list(interfaces, prefix = " implements ", sourceSets = setOf(p)) {
+                            link(it.dri.sureClassNames, it.dri, sourceSets = setOf(p))
                         }
                     }
                 }
             }
-
-    private fun PageContentBuilder.DocumentableContentBuilder.signatureForProjection(p: Projection): Unit = when (p) {
-        is OtherParameter -> link(p.name, p.declarationDRI)
-        is TypeConstructor -> group {
-            link(p.dri.classNames.orEmpty(), p.dri)
-            list(p.projections, prefix = "<", suffix = ">") {
-                signatureForProjection(it)
-            }
         }
-        is Variance -> group {
-            text(p.kind.toString() + " ")
-            signatureForProjection(p.inner)
-        }
-        is Star -> text("?")
-        is Nullable -> signatureForProjection(p.inner)
-        is JavaObject, is Dynamic -> link("Object", DRI("java.lang", "Object"))
-        is Void -> text("void")
-        is PrimitiveJavaType -> text(p.name)
-        is UnresolvedBound -> text(p.name)
     }
 
-    private fun DRI.fqName(): String = "${packageName.orEmpty()}.${classNames.orEmpty()}"
+    private fun signature(documentableFunction: DFunction): List<ContentNode> {
+        return javadocSignature(documentableFunction) {
+            annotations {
+                annotationsBlock(documentableFunction)
+            }
+            modifiers {
+                text(documentableFunction.modifier[it]?.takeIf { it !in ignoredModifiers }?.name?.plus(" ") ?: "")
+                text(documentableFunction.modifiers()[it]?.toSignatureString() ?: "")
+                list(documentableFunction.generics, prefix = "<", suffix = "> ") { +buildSignature(it) }
+                signatureForProjection(documentableFunction.type)
+            }
+            signatureWithoutModifiers {
+                link(documentableFunction.name, documentableFunction.dri)
+                text("(")
+                list(documentableFunction.parameters) {
+                    annotationsInline(it)
+                    text(it.modifiers()[it]?.toSignatureString().orEmpty())
+                    signatureForProjection(it.type)
+                    text(Typography.nbsp.toString())
+                    text(it.name.orEmpty())
+                }
+                text(")")
+            }
+        }
+    }
+
+    private fun signature(documentableProperty: DProperty): List<ContentNode> {
+        return javadocSignature(documentableProperty) {
+            annotations {
+                annotationsBlock(documentableProperty)
+            }
+            modifiers {
+                text(documentableProperty.visibility[it]?.takeIf {
+                    it !in ignoredVisibilities
+                }?.name?.plus(" ") ?: "")
+                text(documentableProperty.modifier[it]?.name + " ")
+                text(documentableProperty.modifiers()[it]?.toSignatureString() ?: "")
+                signatureForProjection(documentableProperty.type)
+            }
+            signatureWithoutModifiers {
+                link(documentableProperty.name, documentableProperty.dri)
+            }
+        }
+    }
+
+    private fun signature(documentableEnumEntry: DEnumEntry): List<ContentNode> {
+        return javadocSignature(documentableEnumEntry) {
+            annotations {
+                annotationsBlock(documentableEnumEntry)
+            }
+            modifiers {
+                text(documentableEnumEntry.modifiers()[it]?.toSignatureString() ?: "")
+            }
+            signatureWithoutModifiers {
+                link(documentableEnumEntry.name, documentableEnumEntry.dri)
+            }
+        }
+    }
+
+    private fun signature(documentableTypeParameter: DTypeParameter): List<ContentNode> {
+        return javadocSignature(documentableTypeParameter) {
+            annotations {
+                annotationsBlock(documentableTypeParameter)
+            }
+            signatureWithoutModifiers {
+                text(documentableTypeParameter.name)
+            }
+            supertypes {
+                list(documentableTypeParameter.bounds, prefix = "extends ") {
+                    signatureForProjection(it)
+                }
+            }
+        }
+    }
+
+    private fun signature(documentableParameter: DParameter): List<ContentNode> {
+        return javadocSignature(documentableParameter) {
+            modifiers {
+                signatureForProjection(documentableParameter.type)
+            }
+            signatureWithoutModifiers {
+                link(documentableParameter.name.orEmpty(), documentableParameter.dri)
+            }
+        }
+    }
+
+    private fun javadocSignature(
+            documentable: Documentable,
+            extra: PropertyContainer<ContentNode> = PropertyContainer.empty(),
+            block: DevsitePageContentBuilder.DevsiteContentBuilder.(DokkaConfiguration.DokkaSourceSet) -> Unit
+    ): List<ContentNode> {
+        return documentable.sourceSets.map { sourceSet ->
+            contentBuilder.contentFor(documentable, ContentKind.Main) {
+                with(contentBuilder) {
+                    javadocGroup(documentable.dri, documentable.sourceSets, extra) {
+                        block(sourceSet)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun PageContentBuilder.DocumentableContentBuilder.signatureForProjection(projection: Projection) {
+        return when (projection) {
+            is OtherParameter -> link(projection.name, projection.declarationDRI)
+            is TypeConstructor -> group {
+                link(projection.dri.classNames.orEmpty(), projection.dri)
+                list(projection.projections, prefix = "<", suffix = ">") {
+                    signatureForProjection(it)
+                }
+            }
+            is Variance -> group {
+                text(projection.kind.toString() + " ")
+                signatureForProjection(projection.inner)
+            }
+            is Star -> text("?")
+            is Nullable -> signatureForProjection(projection.inner)
+            is JavaObject, is Dynamic -> link("Object", DRI("java.lang", "Object"))
+            is Void -> text("void")
+            is PrimitiveJavaType -> text(projection.name)
+            is UnresolvedBound -> text(projection.name)
+        }
+    }
+
+    private fun DRI.fullyQualifiedName(): String = "${packageName.orEmpty()}.${classNames.orEmpty()}"
 }
