@@ -19,6 +19,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint")
 
+// TODO: remove dokka-utils and other entries as needed once we migrate away from snapshot builds
 repositories {
     jcenter()
     maven("https://kotlin.bintray.com/kotlinx")
