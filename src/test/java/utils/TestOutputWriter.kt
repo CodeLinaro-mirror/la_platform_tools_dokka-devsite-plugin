@@ -20,7 +20,7 @@ import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.renderers.OutputWriter
 import org.jetbrains.dokka.plugability.DokkaPlugin
 
-class TestOutputWriterPlugin(failOnOverwrite: Boolean = true) : DokkaPlugin() {
+class TestOutputWriterPlugin(failOnOverwrite: Boolean = false) : DokkaPlugin() {
     val writer = TestOutputWriter(failOnOverwrite)
 
     private val dokkaBase by lazy { plugin<DokkaBase>() }
@@ -32,7 +32,7 @@ class TestOutputWriterPlugin(failOnOverwrite: Boolean = true) : DokkaPlugin() {
     }
 }
 
-class TestOutputWriter(private val failOnOverwrite: Boolean = true) : OutputWriter {
+class TestOutputWriter(private val failOnOverwrite: Boolean = false) : OutputWriter {
     val contents: Map<String, String> get() = _contents
 
     private val _contents = mutableMapOf<String, String>()
@@ -42,7 +42,6 @@ class TestOutputWriter(private val failOnOverwrite: Boolean = true) : OutputWrit
             if (failOnOverwrite) throw AssertionError("File $fullPath is being overwritten.")
         }
     }
-
     override suspend fun writeResources(pathFrom: String, pathTo: String) =
             write(pathTo, "*** content of $pathFrom ***", "")
 }

@@ -14,20 +14,12 @@
  * limitations under the License.
  */
 
-package com.google.devsite
+package com.google.devsite.pages
 
-import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.model.doc.CustomTagWrapper
 import org.jetbrains.dokka.pages.ContentPage
 import org.jetbrains.dokka.pages.RootPageNode
-import org.jetbrains.dokka.plugability.DokkaPlugin
 import org.jetbrains.dokka.transformers.pages.PageTransformer
-
-class DevsiteMathjaxPlugin : DokkaPlugin() {
-    val transformer by extending {
-        CoreExtensions.pageTransformer with MathjaxTransformer
-    }
-}
 
 private const val ANNOTATION = "usesMathJax"
 private const val MATHJAX_TAG = "<devsite-mathjax config=\"TeX-AMS_SVG\"></devsite-mathjax>"
@@ -35,13 +27,13 @@ private const val MATHJAX_TAG = "<devsite-mathjax config=\"TeX-AMS_SVG\"></devsi
 object MathjaxTransformer : PageTransformer {
     override fun invoke(input: RootPageNode) = input.transformContentPagesTree {
         it.modified(
-            embeddedResources = it.embeddedResources + if (it.isNeedingMathjax) listOf(MATHJAX_TAG) else emptyList()
+                embeddedResources = it.embeddedResources + if (it.isNeedingMathjax) listOf(MATHJAX_TAG) else emptyList()
         )
     }
 
     private val ContentPage.isNeedingMathjax
         get() = documentable?.documentation?.values
-            ?.flatMap { it.children }
-            .orEmpty()
-            .any { (it as? CustomTagWrapper)?.name == ANNOTATION }
+                ?.flatMap { it.children }
+                .orEmpty()
+                .any { (it as? CustomTagWrapper)?.name == ANNOTATION }
 }

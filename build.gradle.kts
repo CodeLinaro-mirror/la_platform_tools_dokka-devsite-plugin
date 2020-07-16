@@ -38,15 +38,16 @@ application {
     mainClassName = "org.jetbrains.dokka.MainKt"
 }
 
-val dokkaVersion = "0.11.0-SNAPSHOT"
+val dokkaVersion = "1.4-M3-SNAPSHOT"
 
 dependencies {
     compileOnly(kotlin("stdlib-jdk8"))
+    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.1-1.4-M3")
 
     implementation("org.jetbrains.dokka:dokka-base:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-cli:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-core:$dokkaVersion")
-    implementation("org.jetbrains.dokka:javadoc-plugin:$dokkaVersion")
+    implementation("org.jetbrains.dokka:kotlin-as-java-plugin:$dokkaVersion")
 
     testImplementation("junit:junit:4.12")
     testImplementation("org.jetbrains.dokka:dokka-test-api:$dokkaVersion")

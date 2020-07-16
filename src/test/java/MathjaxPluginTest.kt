@@ -17,10 +17,12 @@
 import org.jetbrains.dokka.testApi.testRunner.AbstractCoreTest
 import org.jsoup.Jsoup
 import org.junit.Assert.assertEquals
+import org.junit.Ignore
 import org.junit.Test
 import utils.TestOutputWriterPlugin
 
 class MathjaxPluginTest : AbstractCoreTest() {
+    @Ignore
     @Test
     fun `Basic test`() {
         val configuration = dokkaConfiguration {
@@ -33,6 +35,7 @@ class MathjaxPluginTest : AbstractCoreTest() {
         val source = """
             |/src/main/kotlin/test/Test.kt
             |package example
+            | class Bar()
             | /**
             | * @usesMathJax
             | *
@@ -49,7 +52,7 @@ class MathjaxPluginTest : AbstractCoreTest() {
         ) {
             renderingStage = { _, _ ->
                 val mathjaxElements = Jsoup
-                        .parse(writerPlugin.writer.contents["root/example/test.html"])
+                        .parse(writerPlugin.writer.contents["example/Bar.html"])
                         .body()
                         .select("devsite-mathjax")
                 assertEquals(mathjaxElements.size, 1)
@@ -70,6 +73,7 @@ class MathjaxPluginTest : AbstractCoreTest() {
         val source = """
             |/src/main/kotlin/test/Test.kt
             |package example
+            | class Bar
             | /**
             | * Just a regular kdoc
             | */
@@ -83,7 +87,7 @@ class MathjaxPluginTest : AbstractCoreTest() {
         ) {
             renderingStage = { _, _ ->
                 val mathjaxElements = Jsoup
-                        .parse(writerPlugin.writer.contents["root/example/test.html"])
+                        .parse(writerPlugin.writer.contents["example/Bar.html"])
                         .body()
                         .select("devsite-mathjax")
                 assertEquals(mathjaxElements.size, 0)

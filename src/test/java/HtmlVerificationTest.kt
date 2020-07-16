@@ -41,7 +41,7 @@ class HtmlVerificationTest : AbstractCoreTest() {
             |/**
             | * This is a comment
             | */
-            |class Test()
+            |class Bar()
         """.trimIndent()
         val writerPlugin = TestOutputWriterPlugin()
         testInline(

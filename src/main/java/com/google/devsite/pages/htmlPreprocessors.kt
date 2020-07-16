@@ -14,8 +14,17 @@
  * limitations under the License.
  */
 
-package com.google.devsite
+package com.google.devsite.pages
 
-import org.jetbrains.dokka.plugability.DokkaPlugin
+import org.jetbrains.dokka.pages.RootPageNode
+import org.jetbrains.dokka.transformers.pages.PageTransformer
 
-class DackkaPlugin : DokkaPlugin()
+object AllClassesPageInstaller : PageTransformer {
+    override fun invoke(input: RootPageNode): RootPageNode {
+        val classes = input.children.filterIsInstance<DevsitePackagePageNode>().flatMap {
+            it.children.filterIsInstance<DevsiteClasslikePageNode>()
+        }
+
+        return input.modified(children = input.children + AllClassesPage(classes))
+    }
+}
