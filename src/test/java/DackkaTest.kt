@@ -51,7 +51,7 @@ open class DackkaTest : AbstractCoreTest() {
             renderingStage = { _, _ ->
                 writerPlugin.writer.contents.filter {
                     it.key.endsWith(".html")
-                }.forEach { fileName, fileContent ->
+                }.forEach { (fileName, fileContent) ->
                     val outputDirectory = File(baseDir, "docs")
                     val expectedFile = File(outputDirectory, fileName)
                     val expectedText = if (expectedFile.exists()) {
@@ -83,7 +83,7 @@ open class DackkaTest : AbstractCoreTest() {
             renderingStage = { _, _ ->
                 writerPlugin.writer.contents.filter {
                     it.key.endsWith(".html")
-                }.forEach { fileName, fileContent ->
+                }.forEach { (fileName, fileContent) ->
                     val outputDirectory = File("./testData/$testName")
                     val expectedOutput = File(outputDirectory, fileName)
                     assertEquals(expectedOutput.readText(), fileContent)

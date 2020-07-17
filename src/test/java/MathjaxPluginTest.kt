@@ -22,7 +22,8 @@ import org.junit.Test
 import utils.TestOutputWriterPlugin
 
 class MathjaxPluginTest : AbstractCoreTest() {
-    @Ignore
+
+    @Ignore("Mathjax tags aren't being rendered as DevsiteRenderer is still being built out")
     @Test
     fun `Basic test`() {
         val configuration = dokkaConfiguration {
@@ -55,7 +56,7 @@ class MathjaxPluginTest : AbstractCoreTest() {
                         .parse(writerPlugin.writer.contents["example/Bar.html"])
                         .body()
                         .select("devsite-mathjax")
-                assertEquals(mathjaxElements.size, 1)
+                assertEquals(1, mathjaxElements.size)
             }
         }
     }
@@ -90,7 +91,7 @@ class MathjaxPluginTest : AbstractCoreTest() {
                         .parse(writerPlugin.writer.contents["example/Bar.html"])
                         .body()
                         .select("devsite-mathjax")
-                assertEquals(mathjaxElements.size, 0)
+                assertEquals(0, mathjaxElements.size)
             }
         }
     }
