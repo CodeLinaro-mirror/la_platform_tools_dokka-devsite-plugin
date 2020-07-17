@@ -24,7 +24,13 @@ import org.jetbrains.dokka.transformers.pages.PageTransformer
 private const val ANNOTATION = "usesMathJax"
 private const val MATHJAX_TAG = "<devsite-mathjax config=\"TeX-AMS_SVG\"></devsite-mathjax>"
 
-object MathjaxTransformer : PageTransformer {
+/**
+ * Adds MathJax custom DevSite tag
+ *
+ * The MathJax tag is added if there are one or more @usesMathJax annotations on the page. The tag only needs to be
+ * added once per generated page (and not per every occurrence of the @usesMathJax annotation).
+ */
+internal object MathjaxTransformer : PageTransformer {
     override fun invoke(input: RootPageNode) = input.transformContentPagesTree {
         it.modified(
                 embeddedResources = it.embeddedResources + if (it.isNeedingMathjax) listOf(MATHJAX_TAG) else emptyList()
