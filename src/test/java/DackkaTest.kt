@@ -87,7 +87,7 @@ open class DackkaTest : AbstractCoreTest() {
             } else {
                 ""
             }
-            assertEquals(expectedText, fileContent)
+            assertEquals("Unexpected text in " + fileName, expectedText, fileContent)
        }
     }
 }
