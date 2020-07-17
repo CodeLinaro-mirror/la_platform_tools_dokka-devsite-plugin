@@ -49,18 +49,7 @@ open class DackkaTest : AbstractCoreTest() {
                 pluginOverrides = listOf(writerPlugin)
         ) {
             renderingStage = { _, _ ->
-                writerPlugin.writer.contents.filter {
-                    it.key.endsWith(".html")
-                }.forEach { (fileName, fileContent) ->
-                    val outputDirectory = File(baseDir, "docs")
-                    val expectedFile = File(outputDirectory, fileName)
-                    val expectedText = if (expectedFile.exists()) {
-                        expectedFile.readText()
-                    } else {
-                        ""
-                    }
-                    assertEquals(expectedText, fileContent)
-                }
+                verifyOutput(writerPlugin, File(baseDir, "docs"))
             }
         }
     }
@@ -81,14 +70,24 @@ open class DackkaTest : AbstractCoreTest() {
                 pluginOverrides = listOf(writerPlugin)
         ) {
             renderingStage = { _, _ ->
-                writerPlugin.writer.contents.filter {
-                    it.key.endsWith(".html")
-                }.forEach { (fileName, fileContent) ->
-                    val outputDirectory = File("./testData/$testName")
-                    val expectedOutput = File(outputDirectory, fileName)
-                    assertEquals(expectedOutput.readText(), fileContent)
-                }
+                verifyOutput(writerPlugin, File("./testData/$testName"))
             }
         }
+    }
+
+    // confirms that the given output writer's output matches the contents of the given directory
+    fun verifyOutput(writerPlugin: TestOutputWriterPlugin, outputDirectory: File) {
+        val outputDirectory = File(outputDirectory.absolutePath)
+        writerPlugin.writer.contents.filter {
+            it.key.endsWith(".html")
+        }.forEach { (fileName, fileContent) ->
+            val expectedFile = File(outputDirectory, fileName)
+            val expectedText = if (expectedFile.exists()) {
+                expectedFile.readText()
+            } else {
+                ""
+            }
+            assertEquals(expectedText, fileContent)
+       }
     }
 }
