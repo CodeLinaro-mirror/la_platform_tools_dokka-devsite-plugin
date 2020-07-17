@@ -32,13 +32,13 @@ open class DackkaTest : AbstractCoreTest() {
      * outputs are located at testData/$path/docs
      */
     fun verifyDirectory(path: String) {
-        val baseDir = File("testData/" + path)
-        val sourceDir = File(baseDir, "source")
+        val baseDir = "testData/" + path
+        val sourceDir = baseDir + "/source"
 
         val configuration = dokkaConfiguration {
             sourceSets {
                 sourceSet {
-                    sourceRoots = listOf(sourceDir.absolutePath)
+                    sourceRoots = listOf(File(sourceDir).absolutePath)
                 }
             }
         }
@@ -49,7 +49,7 @@ open class DackkaTest : AbstractCoreTest() {
                 pluginOverrides = listOf(writerPlugin)
         ) {
             renderingStage = { _, _ ->
-                verifyOutput(writerPlugin, File(baseDir, "docs"))
+                verifyOutput(writerPlugin, baseDir + "/docs")
             }
         }
     }
@@ -70,24 +70,48 @@ open class DackkaTest : AbstractCoreTest() {
                 pluginOverrides = listOf(writerPlugin)
         ) {
             renderingStage = { _, _ ->
-                verifyOutput(writerPlugin, File("./testData/$testName"))
+                verifyOutput(writerPlugin, "testData/$testName")
             }
         }
     }
 
     // confirms that the given output writer's output matches the contents of the given directory
-    fun verifyOutput(writerPlugin: TestOutputWriterPlugin, outputDirectory: File) {
-        val outputDirectory = File(outputDirectory.absolutePath)
-        writerPlugin.writer.contents.filter {
+    fun verifyOutput(writerPlugin: TestOutputWriterPlugin, outputPath: String) {
+        val outputDirectory = File(outputPath).absolutePath
+        val generatedFiles = writerPlugin.writer.contents.filter {
             it.key.endsWith(".html")
-        }.forEach { (fileName, fileContent) ->
+        }
+        val dumpedFile = File("build/docs/" + outputPath)
+        dump(writerPlugin, dumpedFile.absolutePath)
+        generatedFiles.forEach { (fileName, generatedContent) ->
             val expectedFile = File(outputDirectory, fileName)
             val expectedText = if (expectedFile.exists()) {
                 expectedFile.readText()
             } else {
                 ""
             }
-            assertEquals("Unexpected text in " + fileName, expectedText, fileContent)
+            if (expectedText != generatedContent) {
+                val message = "Unexpected output in " + fileName + ".\n" +
+                    "To update the expected output to match the current output, run this " +
+                    "command:\n\n" +
+                    "  rm -rf $outputDirectory && " +
+                    "cp -r ${dumpedFile.absolutePath} $outputDirectory\n\n" +
+                    "Difference in outputs:\n"
+                assertEquals(message, expectedText, generatedContent)
+            }
        }
+    }
+
+    // exports the output of writerPlugin to outputPath
+    fun dump(writerPlugin: TestOutputWriterPlugin, outputPath: String) {
+        val outputDirectory = File(outputPath)
+        outputDirectory.deleteRecursively()
+        val generatedFiles = writerPlugin.writer.contents.filter {
+            it.key.endsWith(".html")
+        }.forEach { (fileName, fileContent) ->
+            val expectedFile = File(outputDirectory, fileName)
+            expectedFile.parentFile.mkdirs()
+            expectedFile.writeText(fileContent)
+       }        
     }
 }
