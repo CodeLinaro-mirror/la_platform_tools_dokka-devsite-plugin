@@ -99,7 +99,7 @@ open class DackkaTest : AbstractCoreTest() {
                     "Difference in outputs:\n"
                 assertEquals(message, expectedText, generatedContent)
             }
-       }
+        }
     }
 
     // exports the output of writerPlugin to outputPath
@@ -112,6 +112,6 @@ open class DackkaTest : AbstractCoreTest() {
             val expectedFile = File(outputDirectory, fileName)
             expectedFile.parentFile.mkdirs()
             expectedFile.writeText(fileContent)
-       }        
+        }
     }
 }

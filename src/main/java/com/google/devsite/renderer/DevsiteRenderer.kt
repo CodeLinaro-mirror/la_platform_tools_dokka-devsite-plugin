@@ -40,7 +40,7 @@ import org.jetbrains.dokka.pages.PageNode
 import org.jetbrains.dokka.plugability.DokkaContext
 
 class DevsiteRenderer(
-        context: DokkaContext
+    context: DokkaContext
 ) : DefaultRenderer<FlowContent>(context) {
     override val preprocessors = listOf(
             MathjaxTransformer,
@@ -51,8 +51,8 @@ class DevsiteRenderer(
     }
 
     override fun buildPage(
-            page: ContentPage,
-            content: (FlowContent, ContentPage) -> Unit
+        page: ContentPage,
+        content: (FlowContent, ContentPage) -> Unit
     ): String = buildHtml(page, page.embeddedResources) {
         div {
             id = "content"
@@ -83,9 +83,9 @@ class DevsiteRenderer(
     }
 
     override fun FlowContent.buildList(
-            node: ContentList,
-            pageContext: ContentPage,
-            sourceSetRestriction: Set<DokkaConfiguration.DokkaSourceSet>?
+        node: ContentList,
+        pageContext: ContentPage,
+        sourceSetRestriction: Set<DokkaConfiguration.DokkaSourceSet>?
     ) {
     }
 
@@ -99,9 +99,9 @@ class DevsiteRenderer(
     }
 
     override fun FlowContent.buildTable(
-            node: ContentTable,
-            pageContext: ContentPage,
-            sourceSetRestriction: Set<DokkaConfiguration.DokkaSourceSet>?
+        node: ContentTable,
+        pageContext: ContentPage,
+        sourceSetRestriction: Set<DokkaConfiguration.DokkaSourceSet>?
     ) {
     }
 

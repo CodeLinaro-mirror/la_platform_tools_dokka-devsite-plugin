@@ -22,7 +22,7 @@ import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.transformers.documentation.DocumentableToPageTranslator
 
 class DevsiteDocumentableToPageTranslator(
-        private val signatureProvider: SignatureProvider
+    private val signatureProvider: SignatureProvider
 ) : DocumentableToPageTranslator {
     override fun invoke(module: DModule): RootPageNode =
             DevsitePageCreator(signatureProvider).pageForModule(module)

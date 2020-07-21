@@ -46,126 +46,150 @@ import org.jetbrains.kotlin.resolve.DescriptorUtils.getClassDescriptorForType
 interface DevsitePageNode : ContentPage
 
 class DevsiteModulePageNode(
-        override val name: String,
-        override val content: DevsiteContentNode,
-        override val children: List<PageNode>,
-        override val dri: Set<DRI>
+    override val name: String,
+    override val content: DevsiteContentNode,
+    override val children: List<PageNode>,
+    override val dri: Set<DRI>
 ) :
-        RootPageNode(),
-        DevsitePageNode {
+    RootPageNode(),
+    DevsitePageNode {
 
     override val documentable: Documentable? = null
     override val embeddedResources: List<String> = emptyList()
     override fun modified(name: String, children: List<PageNode>): RootPageNode =
-            DevsiteModulePageNode(name, content, children, dri)
+        DevsiteModulePageNode(name, content, children, dri)
 
     override fun modified(
-            name: String,
-            content: ContentNode,
-            dri: Set<DRI>,
-            embeddedResources: List<String>,
-            children: List<PageNode>
+        name: String,
+        content: ContentNode,
+        dri: Set<DRI>,
+        embeddedResources: List<String>,
+        children: List<PageNode>
     ): ContentPage = DevsiteModulePageNode(name, content as DevsiteContentNode, children, dri)
 }
 
 class DevsitePackagePageNode(
-        override val name: String,
-        override val content: DevsiteContentNode,
-        override val dri: Set<DRI>,
+    override val name: String,
+    override val content: DevsiteContentNode,
+    override val dri: Set<DRI>,
 
-        override val documentable: Documentable? = null,
-        override val children: List<PageNode> = emptyList(),
-        override val embeddedResources: List<String> = listOf()
+    override val documentable: Documentable? = null,
+    override val children: List<PageNode> = emptyList(),
+    override val embeddedResources: List<String> = listOf()
 ) : DevsitePageNode {
 
     override fun modified(
-            name: String,
-            children: List<PageNode>
+        name: String,
+        children: List<PageNode>
     ): PageNode = DevsitePackagePageNode(
+        name,
+        content,
+        dri,
+        documentable,
+        children,
+        embeddedResources
+    )
+
+    override fun modified(
+        name: String,
+        content: ContentNode,
+        dri: Set<DRI>,
+        embeddedResources: List<String>,
+        children: List<PageNode>
+    ): ContentPage =
+        DevsitePackagePageNode(
             name,
-            content,
+            content as DevsiteContentNode,
             dri,
             documentable,
             children,
             embeddedResources
-    )
-
-    override fun modified(
-            name: String,
-            content: ContentNode,
-            dri: Set<DRI>,
-            embeddedResources: List<String>,
-            children: List<PageNode>
-    ): ContentPage =
-            DevsitePackagePageNode(
-                    name,
-                    content as DevsiteContentNode,
-                    dri,
-                    documentable,
-                    children,
-                    embeddedResources
-            )
+        )
 }
 
 sealed class AnchorableJavadocNode(open val dri: DRI)
 
 data class DevsiteEntryNode(
-        override val dri: DRI,
-        val name: String,
-        val signature: DevsiteSignatureContentNode,
-        val brief: List<ContentNode>
+    override val dri: DRI,
+    val name: String,
+    val signature: DevsiteSignatureContentNode,
+    val brief: List<ContentNode>
 ) : AnchorableJavadocNode(dri)
 
 data class DevsiteParameterNode(
-        override val dri: DRI,
-        val name: String,
-        val type: ContentNode,
-        val description: List<ContentNode>,
-        val typeBound: Bound
+    override val dri: DRI,
+    val name: String,
+    val type: ContentNode,
+    val description: List<ContentNode>,
+    val typeBound: Bound
 ) : AnchorableJavadocNode(dri)
 
 data class DevsitePropertyNode(
-        override val dri: DRI,
-        val name: String,
-        val signature: DevsiteSignatureContentNode,
-        val brief: List<ContentNode>
+    override val dri: DRI,
+    val name: String,
+    val signature: DevsiteSignatureContentNode,
+    val brief: List<ContentNode>
 ) : AnchorableJavadocNode(dri)
 
 data class DevsiteFunctionNode(
-        val signature: DevsiteSignatureContentNode,
-        val brief: List<ContentNode>,
-        val parameters: List<DevsiteParameterNode>,
-        val name: String,
-        override val dri: DRI,
-        val extras: PropertyContainer<DFunction> = PropertyContainer.empty()
+    val signature: DevsiteSignatureContentNode,
+    val brief: List<ContentNode>,
+    val parameters: List<DevsiteParameterNode>,
+    val name: String,
+    override val dri: DRI,
+    val extras: PropertyContainer<DFunction> = PropertyContainer.empty()
 ) : AnchorableJavadocNode(dri)
 
 class DevsiteClasslikePageNode(
-        override val name: String,
-        override val content: DevsiteContentNode,
-        override val dri: Set<DRI>,
-        val signature: DevsiteSignatureContentNode,
-        val description: List<ContentNode>,
-        val constructors: List<DevsiteFunctionNode>,
-        val methods: List<DevsiteFunctionNode>,
-        val entries: List<DevsiteEntryNode>,
-        val classlikes: List<DevsiteClasslikePageNode>,
-        val properties: List<DevsitePropertyNode>,
-        override val documentable: Documentable? = null,
-        override val children: List<PageNode> = emptyList(),
-        override val embeddedResources: List<String> = listOf(),
-        val extras: PropertyContainer<Documentable>
+    override val name: String,
+    override val content: DevsiteContentNode,
+    override val dri: Set<DRI>,
+    val signature: DevsiteSignatureContentNode,
+    val description: List<ContentNode>,
+    val constructors: List<DevsiteFunctionNode>,
+    val methods: List<DevsiteFunctionNode>,
+    val entries: List<DevsiteEntryNode>,
+    val classlikes: List<DevsiteClasslikePageNode>,
+    val properties: List<DevsitePropertyNode>,
+    override val documentable: Documentable? = null,
+    override val children: List<PageNode> = emptyList(),
+    override val embeddedResources: List<String> = listOf(),
+    val extras: PropertyContainer<Documentable>
 ) : DevsitePageNode {
 
     val kind: String? = documentable?.kind()
     val packageName = dri.first().packageName
 
     override fun modified(
-            name: String,
-            children: List<PageNode>
+        name: String,
+        children: List<PageNode>
     ): PageNode = DevsiteClasslikePageNode(
+        name,
+        content,
+        dri,
+        signature,
+        description,
+        constructors,
+        methods,
+        entries,
+        classlikes,
+        properties,
+        documentable,
+        children,
+        embeddedResources,
+        extras
+    )
+
+    override fun modified(
+        name: String,
+        content: ContentNode,
+        dri: Set<DRI>,
+        embeddedResources: List<String>,
+        children: List<PageNode>
+    ): ContentPage =
+        DevsiteClasslikePageNode(
             name,
-            content,
+            content as DevsiteContentNode,
             dri,
             signature,
             description,
@@ -178,36 +202,12 @@ class DevsiteClasslikePageNode(
             children,
             embeddedResources,
             extras
-    )
-
-    override fun modified(
-            name: String,
-            content: ContentNode,
-            dri: Set<DRI>,
-            embeddedResources: List<String>,
-            children: List<PageNode>
-    ): ContentPage =
-            DevsiteClasslikePageNode(
-                    name,
-                    content as DevsiteContentNode,
-                    dri,
-                    signature,
-                    description,
-                    constructors,
-                    methods,
-                    entries,
-                    classlikes,
-                    properties,
-                    documentable,
-                    children,
-                    embeddedResources,
-                    extras
-            )
+        )
 }
 
 class AllClassesPage(val classes: List<DevsiteClasslikePageNode>) : DevsitePageNode {
     val classEntries =
-            classes.map { LinkDevsiteListEntry(it.name, it.dri, ContentKind.Classlikes, it.sourceSets().toSet()) }
+        classes.map { LinkDevsiteListEntry(it.name, it.dri, ContentKind.Classlikes, it.sourceSets().toSet()) }
 
     override val name: String = "All Classes"
     override val dri: Set<DRI> = setOf(DRI.topLevel)
@@ -216,33 +216,33 @@ class AllClassesPage(val classes: List<DevsiteClasslikePageNode>) : DevsitePageN
     override val embeddedResources: List<String> = emptyList()
 
     override val content: ContentNode =
-            EmptyNode(
-                    DRI.topLevel,
-                    ContentKind.Classlikes,
-                    classes.flatMap { it.sourceSets() }.toSet()
-            )
+        EmptyNode(
+            DRI.topLevel,
+            ContentKind.Classlikes,
+            classes.flatMap { it.sourceSets() }.toSet()
+        )
 
     override fun modified(
-            name: String,
-            content: ContentNode,
-            dri: Set<DRI>,
-            embeddedResources: List<String>,
-            children: List<PageNode>
+        name: String,
+        content: ContentNode,
+        dri: Set<DRI>,
+        embeddedResources: List<String>,
+        children: List<PageNode>
     ): ContentPage = TODO()
 
     override fun modified(name: String, children: List<PageNode>): PageNode =
-            TODO()
+        TODO()
 
     override val children: List<PageNode> = emptyList()
 }
 
 class TreeViewPage(
-        override val name: String,
-        val packages: List<DevsitePackagePageNode>?,
-        val classes: List<DevsiteClasslikePageNode>?,
-        override val dri: Set<DRI>,
-        override val documentable: Documentable?,
-        val root: PageNode
+    override val name: String,
+    val packages: List<DevsitePackagePageNode>?,
+    val classes: List<DevsiteClasslikePageNode>?,
+    override val dri: Set<DRI>,
+    override val documentable: Documentable?,
+    val root: PageNode
 ) : DevsitePageNode {
     init {
         assert(packages == null || classes == null)
@@ -271,37 +271,37 @@ class TreeViewPage(
     }
 
     override fun modified(
-            name: String,
-            content: ContentNode,
-            dri: Set<DRI>,
-            embeddedResources: List<String>,
-            children: List<PageNode>
+        name: String,
+        content: ContentNode,
+        dri: Set<DRI>,
+        embeddedResources: List<String>,
+        children: List<PageNode>
     ): ContentPage =
-            TreeViewPage(
-                    name,
-                    packages = children.filterIsInstance<DevsitePackagePageNode>().takeIf { it.isNotEmpty() },
-                    classes = children.filterIsInstance<DevsiteClasslikePageNode>().takeIf { it.isNotEmpty() },
-                    dri = dri,
-                    documentable = documentable,
-                    root = root
-            )
+        TreeViewPage(
+            name,
+            packages = children.filterIsInstance<DevsitePackagePageNode>().takeIf { it.isNotEmpty() },
+            classes = children.filterIsInstance<DevsiteClasslikePageNode>().takeIf { it.isNotEmpty() },
+            dri = dri,
+            documentable = documentable,
+            root = root
+        )
 
     override fun modified(name: String, children: List<PageNode>): PageNode =
-            TreeViewPage(
-                    name,
-                    packages = children.filterIsInstance<DevsitePackagePageNode>().takeIf { it.isNotEmpty() },
-                    classes = children.filterIsInstance<DevsiteClasslikePageNode>().takeIf { it.isNotEmpty() },
-                    dri = dri,
-                    documentable = documentable,
-                    root = root
-            )
+        TreeViewPage(
+            name,
+            packages = children.filterIsInstance<DevsitePackagePageNode>().takeIf { it.isNotEmpty() },
+            classes = children.filterIsInstance<DevsiteClasslikePageNode>().takeIf { it.isNotEmpty() },
+            dri = dri,
+            documentable = documentable,
+            root = root
+        )
 
     override val embeddedResources: List<String> = emptyList()
 
     override val content: ContentNode = EmptyNode(
-            DRI.topLevel,
-            ContentKind.Classlikes,
-            emptySet()
+        DRI.topLevel,
+        ContentKind.Classlikes,
+        emptySet()
     )
 
     private fun generateInheritanceTree(): Pair<List<InheritanceNode>, List<InheritanceNode>> {
@@ -317,12 +317,12 @@ class TreeViewPage(
         }
 
         fun collect(dri: DRI): InheritanceNode =
-                InheritanceNode(
-                        dri,
-                        mergeMap[dri]?.children.orEmpty().map { collect(it.dri) },
-                        mergeMap[dri]?.interfaces.orEmpty(),
-                        mergeMap[dri]?.isInterface ?: false
-                )
+            InheritanceNode(
+                dri,
+                mergeMap[dri]?.children.orEmpty().map { collect(it.dri) },
+                mergeMap[dri]?.interfaces.orEmpty(),
+                mergeMap[dri]?.isInterface ?: false
+            )
 
         fun classTreeRec(node: InheritanceNode): List<InheritanceNode> = if (node.isInterface) {
             node.children.flatMap(::classTreeRec)
@@ -345,43 +345,43 @@ class TreeViewPage(
         }
 
         val psiInheritanceTree = documentables.flatMap { (_, v) -> (v as? WithExpectActual)?.sources?.values.orEmpty() }
-                .filterIsInstance<PsiDocumentableSource>().mapNotNull { it.psi as? PsiClass }
-                .flatMap(::gatherPsiClasses)
-                .flatMap { entry -> entry.second.map { it to entry.first } }
-                .let {
-                    it + it.map { it.second to null }
-                }
-                .groupBy({ it.first }) { it.second }
-                .map { it.key to it.value.filterNotNull().distinct() }
-                .map { (k, v) ->
-                    InheritanceNode(
-                            DRI.from(k),
-                            v.map { InheritanceNode(DRI.from(it)) },
-                            k.supers.filter { it.isInterface }.map { DRI.from(it) },
-                            k.isInterface
-                    )
-                }
+            .filterIsInstance<PsiDocumentableSource>().mapNotNull { it.psi as? PsiClass }
+            .flatMap(::gatherPsiClasses)
+            .flatMap { entry -> entry.second.map { it to entry.first } }
+            .let {
+                it + it.map { it.second to null }
+            }
+            .groupBy({ it.first }) { it.second }
+            .map { it.key to it.value.filterNotNull().distinct() }
+            .map { (k, v) ->
+                InheritanceNode(
+                    DRI.from(k),
+                    v.map { InheritanceNode(DRI.from(it)) },
+                    k.supers.filter { it.isInterface }.map { DRI.from(it) },
+                    k.isInterface
+                )
+            }
 
         val descriptorInheritanceTree = descriptorMap.flatMap { (_, v) ->
             v.typeConstructor.supertypes
-                    .map { getClassDescriptorForType(it) to v }
+                .map { getClassDescriptorForType(it) to v }
         }
-                .let {
-                    it + it.map { it.second to null }
-                }
-                .groupBy({ it.first }) { it.second }
-                .map { it.key to it.value.filterNotNull().distinct() }
-                .map { (k, v) ->
-                    InheritanceNode(
-                            DRI.from(k),
-                            v.map { InheritanceNode(DRI.from(it)) },
-                            k.typeConstructor.supertypes.map { getClassDescriptorForType(it) }
-                                    .mapNotNull { cd ->
-                                        cd.takeIf { it.kind == ClassKind.INTERFACE }?.let { DRI.from(it) }
-                                    },
-                            isInterface = k.kind == ClassKind.INTERFACE
-                    )
-                }
+            .let {
+                it + it.map { it.second to null }
+            }
+            .groupBy({ it.first }) { it.second }
+            .map { it.key to it.value.filterNotNull().distinct() }
+            .map { (k, v) ->
+                InheritanceNode(
+                    DRI.from(k),
+                    v.map { InheritanceNode(DRI.from(it)) },
+                    k.typeConstructor.supertypes.map { getClassDescriptorForType(it) }
+                        .mapNotNull { cd ->
+                            cd.takeIf { it.kind == ClassKind.INTERFACE }?.let { DRI.from(it) }
+                        },
+                    isInterface = k.kind == ClassKind.INTERFACE
+                )
+            }
 
         descriptorInheritanceTree.forEach { addToMap(it, mergeMap) }
         psiInheritanceTree.forEach { addToMap(it, mergeMap) }
@@ -400,15 +400,15 @@ class TreeViewPage(
     }
 
     private fun getDocumentableEntries(node: ContentPage): List<Pair<DRI, Documentable>> =
-            listOfNotNull(node.documentable?.let { it.dri to it }) +
-                    node.children.filterIsInstance<ContentPage>().flatMap(::getDocumentableEntries)
+        listOfNotNull(node.documentable?.let { it.dri to it }) +
+            node.children.filterIsInstance<ContentPage>().flatMap(::getDocumentableEntries)
 
     private fun getDescriptorMap(): Map<DRI, ClassDescriptor> {
         val map: MutableMap<DRI, ClassDescriptor> = mutableMapOf()
         documentables
-                .mapNotNull { (k, v) ->
-                    v.descriptorForPlatform()?.let { k to it }?.also { (k, v) -> map[k] = v }
-                }.map { it.second }.forEach { gatherSupertypes(it, map) }
+            .mapNotNull { (k, v) ->
+                v.descriptorForPlatform()?.let { k to it }?.also { (k, v) -> map[k] = v }
+            }.map { it.second }.forEach { gatherSupertypes(it, map) }
 
         return map.toMap()
     }
@@ -416,21 +416,21 @@ class TreeViewPage(
     private fun gatherSupertypes(descriptor: ClassDescriptor, map: MutableMap<DRI, ClassDescriptor>) {
         map.putIfAbsent(DRI.from(descriptor), descriptor)
         descriptor.typeConstructor.supertypes.map { getClassDescriptorForType(it) }
-                .forEach { gatherSupertypes(it, map) }
+            .forEach { gatherSupertypes(it, map) }
     }
 
     private fun Documentable?.descriptorForPlatform(platform: Platform = Platform.jvm) =
-            (this as? WithExpectActual).descriptorForPlatform(platform)
+        (this as? WithExpectActual).descriptorForPlatform(platform)
 
     private fun WithExpectActual?.descriptorForPlatform(platform: Platform = Platform.jvm) = this?.let {
         it.sources.entries.find { it.key.analysisPlatform == platform }?.value?.let { it as? DescriptorDocumentableSource }?.descriptor as? ClassDescriptor
     }
 
     data class InheritanceNode(
-            val dri: DRI,
-            val children: List<InheritanceNode> = emptyList(),
-            val interfaces: List<DRI> = emptyList(),
-            val isInterface: Boolean = false
+        val dri: DRI,
+        val children: List<InheritanceNode> = emptyList(),
+        val interfaces: List<DRI> = emptyList(),
+        val isInterface: Boolean = false
     ) {
         override fun equals(other: Any?): Boolean = other is InheritanceNode && other.dri == dri
         override fun hashCode(): Int = dri.hashCode()
@@ -438,11 +438,11 @@ class TreeViewPage(
 }
 
 private fun Documentable.kind(): String? =
-        when (this) {
-            is DClass -> "class"
-            is DEnum -> "enum"
-            is DAnnotation -> "annotation"
-            is DObject -> "object"
-            is DInterface -> "interface"
-            else -> null
-        }
+    when (this) {
+        is DClass -> "class"
+        is DEnum -> "enum"
+        is DAnnotation -> "annotation"
+        is DObject -> "object"
+        is DInterface -> "interface"
+        else -> null
+    }

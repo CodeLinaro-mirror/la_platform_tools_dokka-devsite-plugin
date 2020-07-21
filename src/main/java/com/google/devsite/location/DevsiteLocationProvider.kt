@@ -43,8 +43,8 @@ import java.util.HashMap
 import java.util.IdentityHashMap
 
 class DevsiteLocationProvider(
-        pageRoot: RootPageNode,
-        dokkaContext: DokkaContext
+    pageRoot: RootPageNode,
+    dokkaContext: DokkaContext
 ) : BaseLocationProvider(dokkaContext) {
     private val pathIndex = IdentityHashMap<PageNode, List<String>>().apply {
         fun registerPath(page: PageNode, prefix: List<String> = emptyList()) {
@@ -80,7 +80,7 @@ class DevsiteLocationProvider(
     }
 
     private operator fun IdentityHashMap<PageNode, List<String>>.get(
-            dri: DRI
+        dri: DRI
     ) = this[nodeIndex[dri]]
 
     private fun List<String>.relativeTo(context: List<String>): String {

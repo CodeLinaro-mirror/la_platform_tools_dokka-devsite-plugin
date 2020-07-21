@@ -30,9 +30,9 @@ enum class DevsiteContentKind : Kind {
 }
 
 abstract class DevsiteContentNode(
-        dri: Set<DRI>,
-        kind: Kind,
-        override val sourceSets: Set<DokkaSourceSet>
+    dri: Set<DRI>,
+    kind: Kind,
+    override val sourceSets: Set<DokkaSourceSet>
 ) : ContentNode {
     override val dci: DCI = DCI(dri, kind)
     override val style: Set<Style> = emptySet()
@@ -51,35 +51,35 @@ interface DevsiteListEntry {
 }
 
 class EmptyNode(
-        dri: DRI,
-        kind: Kind,
-        override val sourceSets: Set<DokkaSourceSet>,
-        override val extra: PropertyContainer<ContentNode> = PropertyContainer.empty()
+    dri: DRI,
+    kind: Kind,
+    override val sourceSets: Set<DokkaSourceSet>,
+    override val extra: PropertyContainer<ContentNode> = PropertyContainer.empty()
 ) : ContentNode {
     override val dci: DCI = DCI(setOf(dri), kind)
     override val style: Set<Style> = emptySet()
 
     override fun withNewExtras(newExtras: PropertyContainer<ContentNode>): ContentNode =
-            EmptyNode(dci.dri.first(), dci.kind, sourceSets, newExtras)
+        EmptyNode(dci.dri.first(), dci.kind, sourceSets, newExtras)
 
     override fun hasAnyContent(): Boolean = false
 }
 
 class DevsiteContentGroup(
-        val dri: Set<DRI>,
-        val kind: Kind,
-        sourceSets: Set<DokkaSourceSet>,
-        override val children: List<DevsiteContentNode>
+    val dri: Set<DRI>,
+    val kind: Kind,
+    sourceSets: Set<DokkaSourceSet>,
+    override val children: List<DevsiteContentNode>
 ) : DevsiteContentNode(dri, kind, sourceSets) {
 
     companion object {
         operator fun invoke(
-                dri: Set<DRI>,
-                kind: Kind,
-                sourceSets: Set<DokkaSourceSet>,
-                block: JavaContentGroupBuilder.() -> Unit
+            dri: Set<DRI>,
+            kind: Kind,
+            sourceSets: Set<DokkaSourceSet>,
+            block: JavaContentGroupBuilder.() -> Unit
         ): DevsiteContentGroup =
-                DevsiteContentGroup(dri, kind, sourceSets, JavaContentGroupBuilder(sourceSets).apply(block).list)
+            DevsiteContentGroup(dri, kind, sourceSets, JavaContentGroupBuilder(sourceSets).apply(block).list)
     }
 
     override fun hasAnyContent(): Boolean = children.isNotEmpty()
@@ -90,52 +90,52 @@ class JavaContentGroupBuilder(val sourceSets: Set<DokkaSourceSet>) {
 }
 
 class TitleNode(
-        val title: String,
-        val subtitle: List<ContentNode>,
-        val version: String,
-        val parent: String?,
-        val dri: Set<DRI>,
-        val kind: Kind,
-        sourceSets: Set<DokkaSourceSet>
+    val title: String,
+    val subtitle: List<ContentNode>,
+    val version: String,
+    val parent: String?,
+    val dri: Set<DRI>,
+    val kind: Kind,
+    sourceSets: Set<DokkaSourceSet>
 ) : DevsiteContentNode(dri, kind, sourceSets) {
     override fun hasAnyContent(): Boolean = !title.isBlank() || !version.isBlank() || subtitle.isNotEmpty()
 }
 
 fun JavaContentGroupBuilder.title(
-        title: String,
-        subtitle: List<ContentNode>,
-        version: String,
-        parent: String? = null,
-        dri: Set<DRI>,
-        kind: Kind
+    title: String,
+    subtitle: List<ContentNode>,
+    version: String,
+    parent: String? = null,
+    dri: Set<DRI>,
+    kind: Kind
 ) {
     list.add(TitleNode(title, subtitle, version, parent, dri, kind, sourceSets))
 }
 
 class RootListNode(
-        val entries: List<LeafListNode>,
-        val dri: Set<DRI>,
-        val kind: Kind,
-        sourceSets: Set<DokkaSourceSet>
+    val entries: List<LeafListNode>,
+    val dri: Set<DRI>,
+    val kind: Kind,
+    sourceSets: Set<DokkaSourceSet>
 ) : DevsiteContentNode(dri, kind, sourceSets) {
     override fun hasAnyContent(): Boolean = children.isNotEmpty()
 }
 
 class LeafListNode(
-        val tabTitle: String,
-        val colTitle: String,
-        val entries: List<DevsiteListEntry>,
-        val dri: Set<DRI>,
-        val kind: Kind,
-        sourceSets: Set<DokkaSourceSet>
+    val tabTitle: String,
+    val colTitle: String,
+    val entries: List<DevsiteListEntry>,
+    val dri: Set<DRI>,
+    val kind: Kind,
+    sourceSets: Set<DokkaSourceSet>
 ) : DevsiteContentNode(dri, kind, sourceSets) {
     override fun hasAnyContent(): Boolean = children.isNotEmpty()
 }
 
 fun JavaContentGroupBuilder.rootList(
-        dri: Set<DRI>,
-        kind: Kind,
-        rootList: List<DevsiteList>
+    dri: Set<DRI>,
+    kind: Kind,
+    rootList: List<DevsiteList>
 ) {
     val children = rootList.map {
         LeafListNode(it.tabTitle, it.colTitle, it.children, dri, kind, sourceSets)
@@ -144,9 +144,9 @@ fun JavaContentGroupBuilder.rootList(
 }
 
 fun JavaContentGroupBuilder.leafList(
-        dri: Set<DRI>,
-        kind: Kind,
-        leafList: DevsiteList
+    dri: Set<DRI>,
+    kind: Kind,
+    leafList: DevsiteList
 ) {
     list.add(LeafListNode(leafList.tabTitle, leafList.colTitle, leafList.children, dri, kind, sourceSets))
 }
@@ -158,10 +158,10 @@ fun JavadocList(tabTitle: String, colTitle: String, children: List<DevsiteListEn
 }
 
 class LinkDevsiteListEntry(
-        val name: String,
-        val dri: Set<DRI>,
-        val kind: Kind = ContentKind.Symbol,
-        val sourceSets: Set<DokkaSourceSet>
+    val name: String,
+    val dri: Set<DRI>,
+    val kind: Kind = ContentKind.Symbol,
+    val sourceSets: Set<DokkaSourceSet>
 ) : DevsiteListEntry {
     override val stringTag: String
         get() = if (builtString == null)
@@ -180,12 +180,12 @@ data class RowDevsiteListEntry(val link: LinkDevsiteListEntry, val doc: List<Con
 }
 
 data class DevsiteSignatureContentNode(
-        val dri: DRI,
-        val kind: Kind = ContentKind.Symbol,
-        val annotations: ContentNode?,
-        val modifiers: ContentNode?,
-        val signatureWithoutModifiers: ContentNode,
-        val supertypes: ContentNode?
+    val dri: DRI,
+    val kind: Kind = ContentKind.Symbol,
+    val annotations: ContentNode?,
+    val modifiers: ContentNode?,
+    val signatureWithoutModifiers: ContentNode,
+    val supertypes: ContentNode?
 ) : DevsiteContentNode(setOf(dri), kind, signatureWithoutModifiers.sourceSets) {
     override fun hasAnyContent(): Boolean = true
 }

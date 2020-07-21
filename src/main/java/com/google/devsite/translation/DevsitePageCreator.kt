@@ -64,7 +64,7 @@ import org.jetbrains.dokka.pages.DCI
 import kotlin.reflect.KClass
 
 open class DevsitePageCreator(
-        private val signatureProvider: SignatureProvider
+    private val signatureProvider: SignatureProvider
 ) {
 
     fun pageForModule(m: DModule): DevsiteModulePageNode =

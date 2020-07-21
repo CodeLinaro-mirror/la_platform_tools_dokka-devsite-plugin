@@ -207,9 +207,9 @@ class JavaSignatureProvider(ctcc: CommentsToContentConverter, logger: DokkaLogge
             }
 
     private fun javadocSignature(
-            d: Documentable,
-            extra: PropertyContainer<ContentNode> = PropertyContainer.empty(),
-            block: DevsitePageContentBuilder.DevsiteContentBuilder.(DokkaConfiguration.DokkaSourceSet) -> Unit
+        d: Documentable,
+        extra: PropertyContainer<ContentNode> = PropertyContainer.empty(),
+        block: DevsitePageContentBuilder.DevsiteContentBuilder.(DokkaConfiguration.DokkaSourceSet) -> Unit
     ): List<ContentNode> =
             d.sourceSets.map { sourceSet ->
                 contentBuilder.contentFor(d, ContentKind.Main) {

@@ -28,16 +28,16 @@ import org.jetbrains.dokka.pages.ContentNode
 import org.jetbrains.dokka.utilities.DokkaLogger
 
 class DevsitePageContentBuilder(
-        commentsConverter: CommentsToContentConverter,
-        signatureProvider: SignatureProvider,
-        logger: DokkaLogger
+    commentsConverter: CommentsToContentConverter,
+    signatureProvider: SignatureProvider,
+    logger: DokkaLogger
 ) : PageContentBuilder(commentsConverter, signatureProvider, logger) {
 
     fun PageContentBuilder.DocumentableContentBuilder.javadocGroup(
-            dri: DRI = mainDRI.first(),
-            sourceSets: Set<DokkaConfiguration.DokkaSourceSet> = mainSourcesetData,
-            extra: PropertyContainer<ContentNode> = mainExtra,
-            block: DevsiteContentBuilder.() -> Unit
+        dri: DRI = mainDRI.first(),
+        sourceSets: Set<DokkaConfiguration.DokkaSourceSet> = mainSourcesetData,
+        extra: PropertyContainer<ContentNode> = mainExtra,
+        block: DevsiteContentBuilder.() -> Unit
     ) {
         +DevsiteContentBuilder(
                 mainDri = dri,
@@ -47,9 +47,9 @@ class DevsitePageContentBuilder(
     }
 
     open inner class DevsiteContentBuilder(
-            private val mainDri: DRI,
-            private val mainExtra: PropertyContainer<ContentNode>,
-            private val mainSourceSet: Set<DokkaConfiguration.DokkaSourceSet>
+        private val mainDri: DRI,
+        private val mainExtra: PropertyContainer<ContentNode>,
+        private val mainSourceSet: Set<DokkaConfiguration.DokkaSourceSet>
     ) {
         var annotations: ContentNode? = null
         var modifiers: ContentNode? = null
