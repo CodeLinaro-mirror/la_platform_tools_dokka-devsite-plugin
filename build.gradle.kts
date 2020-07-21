@@ -15,6 +15,7 @@
  */
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint")
@@ -71,6 +72,27 @@ tasks.withType<ShadowJar> {
     destinationDirectory.set(project.buildDir)
 }
 
+tasks.withType(Test::class.java) {
+    testLogging.events = hashSetOf(
+            TestLogEvent.FAILED,
+            TestLogEvent.PASSED,
+            TestLogEvent.SKIPPED,
+            TestLogEvent.STANDARD_OUT,
+            TestLogEvent.STANDARD_ERROR
+    )
+    val zipTask = project.tasks.register("zipResultsOf${name.capitalize()}", Zip::class.java) {
+        destinationDirectory.set(File(getDistributionDirectory(), "host-test-reports"))
+        archiveFileName.set("dackka-tests.zip")
+    }
+    if (isBuildingOnServer()) ignoreFailures = true
+    finalizedBy(zipTask)
+    doFirst {
+        zipTask.configure {
+            from(reports.junitXml.destination)
+        }
+    }
+}
+
 val ktlintConfiguration by configurations.creating
 dependencies {
     ktlintConfiguration("com.pinterest:ktlint:0.33.0")
@@ -99,4 +121,20 @@ val ktlintFormat by tasks.creating(JavaExec::class) {
     classpath = ktlintConfiguration
     main = "com.pinterest.ktlint.Main"
     args = listOf("-F", "src/**/*.kt")
+}
+
+/**
+ * The build server will copy the contents of the distribution directory and make it available for
+ * download.
+ */
+fun getDistributionDirectory(): File {
+    return if (System.getenv("DIST_DIR") != null) {
+        File(System.getenv("DIST_DIR"))
+    } else {
+        File("out/dist")
+    }
+}
+
+fun isBuildingOnServer(): Boolean {
+    return System.getenv("OUT_DIR") != null && System.getenv("DIST_DIR") != null
 }
