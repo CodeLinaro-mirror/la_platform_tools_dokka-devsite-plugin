@@ -65,8 +65,8 @@ import org.jetbrains.dokka.utilities.DokkaLogger
  * For example, this class takes a Kotlin function and generates a Java method signature.
  */
 class JavaSignatureProvider(
-        converter: CommentsToContentConverter,
-        logger: DokkaLogger
+    converter: CommentsToContentConverter,
+    logger: DokkaLogger
 ) : SignatureProvider, JvmSignatureUtils by JavaSignatureUtils {
 
     private val contentBuilder = DevsitePageContentBuilder(converter, this, logger)
@@ -228,9 +228,9 @@ class JavaSignatureProvider(
     }
 
     private fun javadocSignature(
-            documentable: Documentable,
-            extra: PropertyContainer<ContentNode> = PropertyContainer.empty(),
-            block: DevsitePageContentBuilder.DevsiteContentBuilder.(DokkaConfiguration.DokkaSourceSet) -> Unit
+        documentable: Documentable,
+        extra: PropertyContainer<ContentNode> = PropertyContainer.empty(),
+        block: DevsitePageContentBuilder.DevsiteContentBuilder.(DokkaConfiguration.DokkaSourceSet) -> Unit
     ): List<ContentNode> {
         return documentable.sourceSets.map { sourceSet ->
             contentBuilder.contentFor(documentable, ContentKind.Main) {
