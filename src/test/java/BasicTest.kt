@@ -14,11 +14,19 @@
  * limitations under the License.
  */
 
-package androidx.paging
+import org.junit.Test
 
 /**
- * Sample class 1
+ * Full integration tests of source to html generation.
  */
-class One() {
-    val v
+class BasicTest : DackkaTest() {
+    @Test
+    fun `Validate simple classes`() {
+        verifyDirectory("simple")
+    }
+
+    @Test
+    fun `Validate simple top-level functions`() {
+        verifyDirectory("topLevelFunctions")
+    }
 }

@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-import org.junit.Test
+package androidx.paging
 
 /**
- * Full integration tests of source to html generation.
+ * Sample interface 2
  */
-class SimpleFilesTest : DackkaTest() {
-    @Test
-    fun a() {
-        verifyDirectory("simpleTest")
-    }
+interface Two {
+    val x
+
+    fun z()
 }

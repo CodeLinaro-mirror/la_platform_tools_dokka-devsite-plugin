@@ -26,14 +26,14 @@ import java.io.File
  */
 open class DackkaTest : AbstractCoreTest() {
     /**
-     * reads sources and outputs from a directory, and validates based on them
+     * Reads sources and outputs from a directory, and validates based on them.
      *
      * Sources are located at testData/$path/source
      * outputs are located at testData/$path/docs
      */
     fun verifyDirectory(path: String) {
-        val baseDir = "testData/" + path
-        val sourceDir = baseDir + "/source"
+        val baseDir = "testData/$path"
+        val sourceDir = "$baseDir/source"
 
         val configuration = dokkaConfiguration {
             sourceSets {
@@ -45,70 +45,54 @@ open class DackkaTest : AbstractCoreTest() {
 
         val writerPlugin = TestOutputWriterPlugin()
         testFromData(
-                configuration,
-                pluginOverrides = listOf(writerPlugin)
+            configuration,
+            pluginOverrides = listOf(writerPlugin)
         ) {
             renderingStage = { _, _ ->
-                verifyOutput(writerPlugin, baseDir + "/docs")
+                verifyOutput(writerPlugin, "$baseDir/docs")
             }
         }
     }
 
-    // validates the given source against the outputs in the given directory
-    fun verifyInline(testName: String, source: String) {
-        val configuration = dokkaConfiguration {
-            sourceSets {
-                sourceSet {
-                    sourceRoots = listOf("src/main/kotlin/test/Test.kt")
-                }
-            }
-        }
-        val writerPlugin = TestOutputWriterPlugin()
-        testInline(
-                source,
-                configuration,
-                pluginOverrides = listOf(writerPlugin)
-        ) {
-            renderingStage = { _, _ ->
-                verifyOutput(writerPlugin, "testData/$testName")
-            }
-        }
-    }
-
-    // confirms that the given output writer's output matches the contents of the given directory
-    fun verifyOutput(writerPlugin: TestOutputWriterPlugin, outputPath: String) {
+    /** Confirms that the given output writer's output matches the contents of the given directory. */
+    private fun verifyOutput(writerPlugin: TestOutputWriterPlugin, outputPath: String) {
         val outputDirectory = File(outputPath).absolutePath
         val generatedFiles = writerPlugin.writer.contents.filter {
             it.key.endsWith(".html")
         }
-        val dumpedFile = File("build/docs/" + outputPath)
+
+        val dumpedFile = File("build/docs/$outputPath")
         dump(writerPlugin, dumpedFile.absolutePath)
-        generatedFiles.forEach { (fileName, generatedContent) ->
+
+        for ((fileName, generatedContent) in generatedFiles) {
             val expectedFile = File(outputDirectory, fileName)
             val expectedText = if (expectedFile.exists()) {
                 expectedFile.readText()
             } else {
                 ""
             }
-            if (expectedText != generatedContent) {
-                val message = "Unexpected output in " + fileName + ".\n" +
-                    "To update the expected output to match the current output, run this " +
-                    "command:\n\n" +
-                    "  rm -rf $outputDirectory && " +
-                    "cp -r ${dumpedFile.absolutePath} $outputDirectory\n\n" +
-                    "Difference in outputs:\n"
+
+            if (expectedText.trim() != generatedContent.trim()) {
+                val message = """
+                    |Unexpected output in $fileName.
+                    |To update the expected output to match the current output, run this command:
+                    |
+                    |  rm -rf $outputDirectory && cp -r ${dumpedFile.absolutePath} $outputDirectory
+                    |
+                    |Difference in outputs:
+                """.trimMargin()
                 assertEquals(message, expectedText, generatedContent)
             }
         }
     }
 
-    // exports the output of writerPlugin to outputPath
-    fun dump(writerPlugin: TestOutputWriterPlugin, outputPath: String) {
+    /** Exports the output of writerPlugin to outputPath. */
+    private fun dump(writerPlugin: TestOutputWriterPlugin, outputPath: String) {
         val outputDirectory = File(outputPath)
         outputDirectory.deleteRecursively()
-        val generatedFiles = writerPlugin.writer.contents.filter {
-            it.key.endsWith(".html")
-        }.forEach { (fileName, fileContent) ->
+        val generatedFiles = writerPlugin.writer.contents
+
+        for ((fileName, fileContent) in generatedFiles) {
             val expectedFile = File(outputDirectory, fileName)
             expectedFile.parentFile.mkdirs()
             expectedFile.writeText(fileContent)

@@ -42,6 +42,7 @@ class TestOutputWriter(private val failOnOverwrite: Boolean = false) : OutputWri
             if (failOnOverwrite) throw AssertionError("File $fullPath is being overwritten.")
         }
     }
+
     override suspend fun writeResources(pathFrom: String, pathTo: String) =
             write(pathTo, "*** content of $pathFrom ***", "")
 }

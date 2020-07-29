@@ -36,14 +36,14 @@ class MathjaxPluginTest : AbstractCoreTest() {
         val source = """
             |/src/main/kotlin/test/Test.kt
             |package example
-            | class Bar()
-            | /**
+            |
+            |/**
             | * @usesMathJax
             | *
             | * \(\alpha_{out} = \alpha_{dst}\)
             | * \(C_{out} = C_{dst}\)
             | */
-            | fun test(): String = ""
+            |class Bar()
         """.trimIndent()
         val writerPlugin = TestOutputWriterPlugin()
         testInline(
@@ -53,7 +53,7 @@ class MathjaxPluginTest : AbstractCoreTest() {
         ) {
             renderingStage = { _, _ ->
                 val mathjaxElements = Jsoup
-                        .parse(writerPlugin.writer.contents["example/Bar.html"])
+                        .parse(writerPlugin.writer.contents.getValue("reference/java/example/TestKt.html"))
                         .body()
                         .select("devsite-mathjax")
                 assertEquals(1, mathjaxElements.size)
@@ -75,11 +75,11 @@ class MathjaxPluginTest : AbstractCoreTest() {
         val source = """
             |/src/main/kotlin/test/Test.kt
             |package example
-            | class Bar
-            | /**
+            |
+            |/**
             | * Just a regular kdoc
             | */
-            | fun test(): String = ""
+            |class Bar
         """.trimIndent()
         val writerPlugin = TestOutputWriterPlugin()
         testInline(
@@ -89,7 +89,7 @@ class MathjaxPluginTest : AbstractCoreTest() {
         ) {
             renderingStage = { _, _ ->
                 val mathjaxElements = Jsoup
-                        .parse(writerPlugin.writer.contents["example/Bar.html"])
+                        .parse(writerPlugin.writer.contents.getValue("reference/java/example/Bar.html"))
                         .body()
                         .select("devsite-mathjax")
                 assertEquals(0, mathjaxElements.size)

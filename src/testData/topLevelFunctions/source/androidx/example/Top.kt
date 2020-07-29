@@ -14,11 +14,23 @@
  * limitations under the License.
  */
 
-package androidx.paging
+package androidx.example
 
-/**
- * Sample class 2
- */
-class Two() {
-    val v
-}
+/** Humpty Dumpty sat on a wall... */
+const val bool = true
+
+val hello = Foo()
+
+/** The Wheels on the Bus go round and round... */
+val String.world: Int get() = 42
+
+fun a() = Unit
+
+/** Top level function docs next to [a]. This is a second sentence. Talk to [world]. */
+fun b(i1: Int, i2: String, i3: Boolean, foo: Foo): String = ""
+
+/** I'm so sad, they're deleteing me! */
+@Deprecated("This method was too sad.")
+fun sadBoi(): Nothing = error("Ouch")
+
+class Foo
