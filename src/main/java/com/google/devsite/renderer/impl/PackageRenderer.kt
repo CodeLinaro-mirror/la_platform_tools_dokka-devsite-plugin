@@ -14,20 +14,23 @@
  * limitations under the License.
  */
 
-package com.google.devsite
+package com.google.devsite.renderer.impl
 
-import com.google.devsite.renderer.MultiLanguageRenderer
-import org.jetbrains.dokka.CoreExtensions
-import org.jetbrains.dokka.base.DokkaBase
-import org.jetbrains.dokka.plugability.DokkaPlugin
-import org.jetbrains.dokka.plugability.querySingle
+import com.google.devsite.renderer.impl.paths.FilePathProvider
+import org.jetbrains.dokka.base.renderers.OutputWriter
+import org.jetbrains.dokka.pages.ClasslikePageNode
+import org.jetbrains.dokka.pages.PackagePageNode
 
-class DevsitePlugin : DokkaPlugin() {
-    val dokkaBase by lazy { plugin<DokkaBase>() }
+/** Renders docs for a single package, including the summary and each symbol. */
+internal class PackageRenderer(
+    private val outputWriter: OutputWriter,
+    private val pathProvider: FilePathProvider
+) {
+    suspend fun writePackageSummary(packagePage: PackagePageNode) {
+        // TODO
+    }
 
-    val renderer by extending {
-        CoreExtensions.renderer providing {
-            MultiLanguageRenderer(dokkaBase.querySingle { outputWriter })
-        } override dokkaBase.htmlRenderer
+    suspend fun writeClass(clazz: ClasslikePageNode) {
+        // TODO
     }
 }

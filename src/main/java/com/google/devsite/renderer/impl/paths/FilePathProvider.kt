@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package com.google.devsite
+package com.google.devsite.renderer.impl.paths
 
-import com.google.devsite.renderer.MultiLanguageRenderer
-import org.jetbrains.dokka.CoreExtensions
-import org.jetbrains.dokka.base.DokkaBase
-import org.jetbrains.dokka.plugability.DokkaPlugin
-import org.jetbrains.dokka.plugability.querySingle
+/** Converts various inputs to output file paths. */
+internal interface FilePathProvider {
+    /** The raw list of packages in plain text format. */
+    val packageList: String
 
-class DevsitePlugin : DokkaPlugin() {
-    val dokkaBase by lazy { plugin<DokkaBase>() }
+    /** The HTML list of packages for human consumption. */
+    val packages: String
 
-    val renderer by extending {
-        CoreExtensions.renderer providing {
-            MultiLanguageRenderer(dokkaBase.querySingle { outputWriter })
-        } override dokkaBase.htmlRenderer
-    }
+    /** The HTML list of classes for human consumption. */
+    val classes: String
+
+    /** The global index file that encompasses all packages. */
+    val rootIndex: String
 }
