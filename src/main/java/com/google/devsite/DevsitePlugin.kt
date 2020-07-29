@@ -16,41 +16,17 @@
 
 package com.google.devsite
 
-import com.google.devsite.location.DevsiteLocationProviderFactory
 import com.google.devsite.renderer.DevsiteRenderer
-import com.google.devsite.signatures.JavaSignatureProvider
-import com.google.devsite.translation.DevsiteDocumentableToPageTranslator
 import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.base.DokkaBase
-import org.jetbrains.dokka.kotlinAsJava.KotlinAsJavaPlugin
 import org.jetbrains.dokka.plugability.DokkaPlugin
-import org.jetbrains.dokka.plugability.querySingle
 
 class DevsitePlugin : DokkaPlugin() {
     val dokkaBase by lazy { plugin<DokkaBase>() }
-    val kotlinAsJava by lazy { plugin<KotlinAsJavaPlugin>() }
-
-    val locationProvider by extending {
-        dokkaBase.locationProviderFactory providing {
-            DevsiteLocationProviderFactory(it)
-        } override dokkaBase.locationProvider
-    }
 
     val renderer by extending {
         CoreExtensions.renderer providing {
             DevsiteRenderer(it)
         } override dokkaBase.htmlRenderer
-    }
-
-    val pageTranslator by extending {
-        CoreExtensions.documentableToPageTranslator providing {
-            DevsiteDocumentableToPageTranslator(dokkaBase.querySingle { signatureProvider })
-        } override dokkaBase.documentableToPageTranslator
-    }
-
-    val javadocSignatureProvider by extending {
-        dokkaBase.signatureProvider providing {
-            JavaSignatureProvider(it.single(dokkaBase.commentsToContentConverter), it.logger)
-        } override kotlinAsJava.javaSignatureProvider
     }
 }
