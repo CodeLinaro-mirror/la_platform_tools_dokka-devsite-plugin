@@ -20,12 +20,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint")
 
-// TODO: remove dokka-utils and other entries as needed once we migrate away from snapshot builds
 repositories {
-    jcenter()
-    maven("https://kotlin.bintray.com/kotlinx")
-    maven("https://dl.bintray.com/kotlin/kotlin-dev")
-    maven("../dokka-utils")
     maven("../../prebuilts/androidx/external")
 }
 
@@ -39,7 +34,7 @@ application {
     mainClassName = "org.jetbrains.dokka.MainKt"
 }
 
-val dokkaVersion = "1.4-M3-SNAPSHOT"
+val dokkaVersion = "1.4.0-rc-24"
 
 dependencies {
     compileOnly(kotlin("stdlib-jdk8"))
