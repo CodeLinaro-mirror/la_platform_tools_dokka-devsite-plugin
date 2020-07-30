@@ -20,7 +20,7 @@ package androidx.paging
  * Sample interface 2
  */
 interface Two {
-    val x
+    val x: One
 
     fun z()
 }

@@ -71,6 +71,10 @@ tasks.withType<ShadowJar> {
     destinationDirectory.set(project.buildDir)
 }
 
+sourceSets.test {
+    java.srcDirs("src/testData")
+}
+
 tasks.withType(Test::class.java) {
     testLogging.events = hashSetOf(
             TestLogEvent.FAILED,

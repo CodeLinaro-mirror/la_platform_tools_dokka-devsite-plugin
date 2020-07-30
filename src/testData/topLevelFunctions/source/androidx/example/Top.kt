@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+@file:Suppress("UNUSED_PARAMETER")
 package androidx.example
 
 /** Humpty Dumpty sat on a wall... */
