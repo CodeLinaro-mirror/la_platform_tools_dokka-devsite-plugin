@@ -14,20 +14,9 @@
  * limitations under the License.
  */
 
-package com.google.devsite
+package com.google.devsite.renderer.impl.paths
 
-import com.google.devsite.renderer.MultiLanguageRenderer
-import org.jetbrains.dokka.CoreExtensions
-import org.jetbrains.dokka.base.DokkaBase
-import org.jetbrains.dokka.plugability.DokkaPlugin
-import org.jetbrains.dokka.plugability.querySingle
-
-class DevsitePlugin : DokkaPlugin() {
-    val dokkaBase by lazy { plugin<DokkaBase>() }
-
-    val renderer by extending {
-        CoreExtensions.renderer providing {
-            MultiLanguageRenderer(dokkaBase.querySingle { outputWriter })
-        } override dokkaBase.htmlRenderer
-    }
-}
+/** Creates file paths for DAC Kotlin consumption. */
+internal class DacKotlinFilePathProvider(
+    tenant: String
+) : DacFilePathProviderBase("kotlin/$tenant")

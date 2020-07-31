@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package com.google.devsite
+package com.google.devsite.renderer.impl.paths
 
-import com.google.devsite.renderer.MultiLanguageRenderer
-import org.jetbrains.dokka.CoreExtensions
-import org.jetbrains.dokka.base.DokkaBase
-import org.jetbrains.dokka.plugability.DokkaPlugin
-import org.jetbrains.dokka.plugability.querySingle
+/** Directory structure tailored for d.android.com. */
+internal abstract class DacFilePathProviderBase(tenant: String) : FilePathProvider {
+    private val rootPath = "reference/$tenant"
 
-class DevsitePlugin : DokkaPlugin() {
-    val dokkaBase by lazy { plugin<DokkaBase>() }
+    override val packageList = "$rootPath/package-list"
 
-    val renderer by extending {
-        CoreExtensions.renderer providing {
-            MultiLanguageRenderer(dokkaBase.querySingle { outputWriter })
-        } override dokkaBase.htmlRenderer
-    }
+    override val packages = "$rootPath/packages.html"
+
+    override val classes = "$rootPath/classes.html"
+
+    override val rootIndex = "$rootPath/index.html"
 }

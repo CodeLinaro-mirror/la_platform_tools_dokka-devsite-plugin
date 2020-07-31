@@ -44,6 +44,7 @@ val dokkaVersion = "1.4-M3-SNAPSHOT"
 dependencies {
     compileOnly(kotlin("stdlib-jdk8"))
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.1-1.4-M3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7-1.4-M3")
 
     implementation("org.jetbrains.dokka:dokka-base:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-cli:$dokkaVersion")
