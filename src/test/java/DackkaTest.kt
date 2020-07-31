@@ -38,7 +38,9 @@ open class DackkaTest : AbstractCoreTest() {
         val configuration = dokkaConfiguration {
             sourceSets {
                 sourceSet {
-                    sourceRoots = listOf(File(sourceDir).absolutePath)
+                    val sources = File(sourceDir).absoluteFile
+                    check(sources.isDirectory) { "$sources does not exist or is not a directory" }
+                    sourceRoots = listOf(sources.absolutePath)
                 }
             }
         }
