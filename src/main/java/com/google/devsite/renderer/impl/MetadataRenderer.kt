@@ -17,6 +17,11 @@
 package com.google.devsite.renderer.impl
 
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import kotlinx.html.body
+import kotlinx.html.head
+import kotlinx.html.html
+import kotlinx.html.meta
+import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.base.renderers.OutputWriter
 import org.jetbrains.dokka.pages.RootPageNode
 
@@ -34,7 +39,18 @@ internal class MetadataRenderer(
 
     /** Writes the home page. */
     suspend fun writeRootIndex() {
-        // TODO
+        val rootIndex = createHTML().html {
+            head {
+                meta {
+                    httpEquiv = "refresh"
+                    content = "0;url=classes.html"
+                }
+            }
+
+            body()
+        }
+
+        outputWriter.write(pathProvider.rootIndex, rootIndex, "")
     }
 
     /** Writes the list of packages in human readable format. */
