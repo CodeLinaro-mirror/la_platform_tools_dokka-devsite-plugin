@@ -25,7 +25,7 @@ repositories {
 }
 
 plugins {
-    kotlin("jvm") version "1.4-M3"
+    kotlin("jvm") version "1.4.0-rc"
     id("com.github.johnrengelman.shadow") version "4.0.4"
     id("application")
 }
@@ -38,8 +38,8 @@ val dokkaVersion = "1.4.0-rc-24"
 
 dependencies {
     compileOnly(kotlin("stdlib-jdk8"))
-    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.1-1.4-M3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7-1.4-M3")
+    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.1-1.4.0-rc")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.3.8-1.4.0-rc")
 
     implementation("org.jetbrains.dokka:dokka-base:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-cli:$dokkaVersion")
