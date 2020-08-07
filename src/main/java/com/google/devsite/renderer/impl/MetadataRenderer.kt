@@ -27,7 +27,9 @@ internal class MetadataRenderer(
 ) {
     /** Writes the list of packages in machine readable format. */
     suspend fun writePackageList(root: RootPageNode) {
-        // TODO
+        val allPackageNames = root.children.joinToString("\n") { it.name }
+
+        outputWriter.write(pathProvider.packageList, allPackageNames, "")
     }
 
     /** Writes the home page. */

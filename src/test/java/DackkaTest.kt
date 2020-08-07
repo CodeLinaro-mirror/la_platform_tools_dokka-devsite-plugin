@@ -59,9 +59,7 @@ open class DackkaTest : AbstractCoreTest() {
     /** Confirms that the given output writer's output matches the contents of the given directory. */
     private fun verifyOutput(writerPlugin: TestOutputWriterPlugin, outputPath: String) {
         val outputDirectory = File(outputPath).absolutePath
-        val generatedFiles = writerPlugin.writer.contents.filter {
-            it.key.endsWith(".html")
-        }
+        val generatedFiles = writerPlugin.writer.contents
 
         val dumpedFile = File("build/docs/$outputPath")
         dump(writerPlugin, dumpedFile.absolutePath)
