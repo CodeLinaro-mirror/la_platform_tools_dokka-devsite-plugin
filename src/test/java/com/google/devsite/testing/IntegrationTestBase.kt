@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
+package com.google.devsite.testing
+
 import org.jetbrains.dokka.testApi.testRunner.AbstractCoreTest
 import org.junit.Assert.assertEquals
-import utils.TestOutputWriterPlugin
 import java.io.File
 
 /**
@@ -24,7 +25,7 @@ import java.io.File
  *
  * Html output results can be found in testData/
  */
-open class DackkaTest : AbstractCoreTest() {
+abstract class IntegrationTestBase : AbstractCoreTest() {
     /**
      * Reads sources and outputs from a directory, and validates based on them.
      *

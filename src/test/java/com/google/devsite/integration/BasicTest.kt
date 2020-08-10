@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
+package com.google.devsite.integration
+
+import com.google.devsite.testing.IntegrationTestBase
 import org.junit.Test
 
 /**
  * Full integration tests of source to html generation.
  */
-class BasicTest : DackkaTest() {
+class BasicTest : IntegrationTestBase() {
     @Test
     fun `Validate simple classes`() {
         verifyDirectory("simple")

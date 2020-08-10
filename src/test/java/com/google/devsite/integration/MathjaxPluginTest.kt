@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
+package com.google.devsite.integration
+
 import org.jetbrains.dokka.testApi.testRunner.AbstractCoreTest
 import org.jsoup.Jsoup
 import org.junit.Assert.assertEquals
 import org.junit.Ignore
 import org.junit.Test
-import utils.TestOutputWriterPlugin
+import com.google.devsite.testing.TestOutputWriterPlugin
 
 class MathjaxPluginTest : AbstractCoreTest() {
 

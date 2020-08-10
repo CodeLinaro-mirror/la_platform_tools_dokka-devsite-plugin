@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package utils
+package com.google.devsite.testing
 
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.renderers.OutputWriter

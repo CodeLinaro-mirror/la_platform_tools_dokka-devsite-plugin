@@ -46,6 +46,7 @@ dependencies {
     implementation("org.jetbrains.dokka:dokka-core:$dokkaVersion")
 
     testImplementation("junit:junit:4.12")
+    testImplementation("com.google.truth:truth:1.0.1")
     testImplementation("org.jetbrains.dokka:dokka-test-api:$dokkaVersion")
     testImplementation("org.jsoup:jsoup:1.12.1")
 }
