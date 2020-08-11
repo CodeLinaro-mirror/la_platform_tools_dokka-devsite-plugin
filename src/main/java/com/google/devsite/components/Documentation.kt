@@ -14,22 +14,13 @@
  * limitations under the License.
  */
 
-package com.google.devsite.renderer.impl.paths
+package com.google.devsite.components
 
-/** Converts various inputs to output file paths. */
-internal interface FilePathProvider {
-    /** The raw list of packages in plain text format. */
-    val packageList: String
+/** Represents the hand-written documentation for a symbol. */
+internal interface Documentation : ContextFreeComponent {
+    val data: Params
 
-    /** The HTML list of packages for human consumption. */
-    val packages: String
-
-    /** The HTML list of classes for human consumption. */
-    val classes: String
-
-    /** The global index file that encompasses all packages. */
-    val rootIndex: String
-
-    /** @return the path of a class-like type */
-    fun forType(packageName: String, name: String): String
+    class Params(
+        // TODO(asaveau): Implement documentation parsing
+    )
 }

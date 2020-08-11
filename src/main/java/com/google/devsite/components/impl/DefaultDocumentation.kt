@@ -14,22 +14,16 @@
  * limitations under the License.
  */
 
-package com.google.devsite.renderer.impl.paths
+package com.google.devsite.components.impl
 
-/** Converts various inputs to output file paths. */
-internal interface FilePathProvider {
-    /** The raw list of packages in plain text format. */
-    val packageList: String
+import com.google.devsite.components.Documentation
+import kotlinx.html.FlowContent
 
-    /** The HTML list of packages for human consumption. */
-    val packages: String
-
-    /** The HTML list of classes for human consumption. */
-    val classes: String
-
-    /** The global index file that encompasses all packages. */
-    val rootIndex: String
-
-    /** @return the path of a class-like type */
-    fun forType(packageName: String, name: String): String
+/** Default implementation of the hand-written documentation for a symbol. */
+internal class DefaultDocumentation(
+    override val data: Documentation.Params
+) : Documentation {
+    override fun render(html: FlowContent) = html.run {
+        +"TODO"
+    }
 }

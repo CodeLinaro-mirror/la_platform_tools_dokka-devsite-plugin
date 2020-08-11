@@ -17,14 +17,23 @@
 package com.google.devsite.renderer.impl.paths
 
 /** Directory structure tailored for d.android.com. */
-internal abstract class DacFilePathProviderBase(tenant: String) : FilePathProvider {
-    private val rootPath = "reference/$tenant"
+internal abstract class DacFilePathProviderBase(
+    tenant: String,
+    pathPrefix: String? = null
+) : FilePathProvider {
+    private val rootDevsitePath = "/reference" + if (pathPrefix == null) "" else "/$pathPrefix"
+    private val tenantPath = "$rootDevsitePath/$tenant"
 
-    override val packageList = "$rootPath/package-list"
+    override val packageList = "$tenantPath/package-list"
 
-    override val packages = "$rootPath/packages.html"
+    override val packages = "$tenantPath/packages.html"
 
-    override val classes = "$rootPath/classes.html"
+    override val classes = "$tenantPath/classes.html"
 
-    override val rootIndex = "$rootPath/index.html"
+    override val rootIndex = "$tenantPath/index.html"
+
+    override fun forType(packageName: String, name: String): String {
+        val packageAsPath = packageName.replace(".", "/")
+        return "$rootDevsitePath/$packageAsPath/$name.html"
+    }
 }

@@ -1,0 +1,70 @@
+/*
+ * Copyright 2020 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.google.devsite.renderer.converters
+
+import com.google.devsite.components.ClassesIndex
+import com.google.devsite.components.DevsitePage
+import com.google.devsite.components.Documentation
+import com.google.devsite.components.SummaryItem
+import com.google.devsite.components.SummaryList
+import com.google.devsite.components.Type
+import com.google.devsite.components.impl.DefaultClassesIndex
+import com.google.devsite.components.impl.DefaultDevsitePage
+import com.google.devsite.components.impl.DefaultDocumentation
+import com.google.devsite.components.impl.DefaultSummaryItem
+import com.google.devsite.components.impl.DefaultSummaryList
+import com.google.devsite.components.impl.DefaultType
+import com.google.devsite.renderer.impl.paths.FilePathProvider
+import org.jetbrains.dokka.pages.ClasslikePageNode
+import org.jetbrains.dokka.pages.RootPageNode
+
+/** Converts documentables into components for the root metadata (class/package index). */
+internal class RootDocumentableConverter(
+    private val root: RootPageNode,
+    private val pathProvider: FilePathProvider
+) {
+    /** @return the root component for the class index page. */
+    fun classesPage(): DevsitePage {
+        val allClasses = root.children.flatMap { it.children }.filterIsInstance<ClasslikePageNode>()
+        val alphabetizedClasses = allClasses.groupBy { it.name.first().toUpperCase() }
+        val componentClasses = alphabetizedClasses.mapValues { (_, nodes) ->
+            DefaultSummaryList(SummaryList.Params(nodes.map(::summaryForClass)))
+        }
+
+        return DefaultDevsitePage(
+            DevsitePage.Params(
+                "Class Index",
+                DefaultClassesIndex(ClassesIndex.Params(pathProvider.packages, componentClasses))
+            )
+        )
+    }
+
+    private fun summaryForClass(clazz: ClasslikePageNode): DefaultSummaryItem {
+        val packageName = clazz.documentable!!.dri.packageName!!
+        return DefaultSummaryItem(
+            SummaryItem.Params(
+                title = DefaultType(
+                    Type.Params(
+                        name = clazz.name,
+                        url = pathProvider.forType(packageName, clazz.name)
+                    )
+                ),
+                description = DefaultDocumentation(Documentation.Params())
+            )
+        )
+    }
+}

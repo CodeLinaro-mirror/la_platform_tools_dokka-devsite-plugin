@@ -14,22 +14,28 @@
  * limitations under the License.
  */
 
-package com.google.devsite.renderer.impl.paths
+package com.google.devsite.components.impl
 
-/** Converts various inputs to output file paths. */
-internal interface FilePathProvider {
-    /** The raw list of packages in plain text format. */
-    val packageList: String
+import com.google.common.truth.Truth.assertThat
+import com.google.devsite.components.Type
+import kotlinx.html.div
+import kotlinx.html.stream.createHTML
+import org.junit.Test
 
-    /** The HTML list of packages for human consumption. */
-    val packages: String
+class DefaultTypeTest {
+    @Test
+    fun `Type renders correctly`() {
+        val component = DefaultType(Type.Params("Name", "link"))
 
-    /** The HTML list of classes for human consumption. */
-    val classes: String
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
 
-    /** The global index file that encompasses all packages. */
-    val rootIndex: String
-
-    /** @return the path of a class-like type */
-    fun forType(packageName: String, name: String): String
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div><a href="link">Name</a></div>
+            """.trim()
+        )
+    }
 }
