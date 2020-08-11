@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer.impl
 
+import com.google.devsite.renderer.converters.RootDocumentableConverter
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.html.body
 import kotlinx.html.head
@@ -60,7 +61,12 @@ internal class MetadataRenderer(
 
     /** Writes the list of classes in human readable format. */
     suspend fun writeClasses(root: RootPageNode) {
-        // TODO
+        val converter = RootDocumentableConverter(root, pathProvider)
+        val classIndex = createHTML().html {
+            converter.classesPage().render(this)
+        }
+
+        outputWriter.write(pathProvider.classes, classIndex, "")
     }
 
     /** Writes the ToC for devsite consumption. */
