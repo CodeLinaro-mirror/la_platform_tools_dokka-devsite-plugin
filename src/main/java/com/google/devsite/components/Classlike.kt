@@ -16,11 +16,11 @@
 
 package com.google.devsite.components
 
-/** Represents the hand-written documentation for a symbol. */
-internal interface Documentation : ContextFreeComponent {
+/** Represents class-like pages (class, interface, exception, etc). */
+internal interface Classlike : ContextFreeComponent {
     val data: Params
 
     class Params(
-        // TODO(b/163811276): Implement documentation parsing
+        // TODO(b/163811257): implement class component
     )
 }

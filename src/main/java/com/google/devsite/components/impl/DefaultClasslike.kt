@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components
+package com.google.devsite.components.impl
 
-/** Represents the hand-written documentation for a symbol. */
-internal interface Documentation : ContextFreeComponent {
-    val data: Params
+import com.google.devsite.components.Classlike
+import kotlinx.html.FlowContent
 
-    class Params(
-        // TODO(b/163811276): Implement documentation parsing
-    )
+/** Default implementation of class-like pages. */
+internal class DefaultClasslike(
+    override val data: Classlike.Params
+) : Classlike {
+    override fun render(html: FlowContent) = html.run {
+        // TODO(b/163811257): implement
+    }
 }
