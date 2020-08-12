@@ -31,7 +31,9 @@ import com.google.devsite.components.impl.DefaultSummaryItem
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultType
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.pages.ClasslikePageNode
+import org.jetbrains.dokka.pages.PackagePageNode
 import org.jetbrains.dokka.pages.RootPageNode
 
 /** Converts documentables into components for the root metadata (class/package index). */
@@ -57,8 +59,12 @@ internal class RootDocumentableConverter(
 
     /** @return the root component for the package index page. */
     fun packagesPage(): DevsitePage {
-        val allPackages = root.children.map { it.name }
-        val componentPackages = DefaultSummaryList(SummaryList.Params(allPackages.map(::summaryForPackage)))
+        val packages = root.children.filterIsInstance<PackagePageNode>()
+        val componentPackages = DefaultSummaryList(
+            SummaryList.Params(
+                packages.map(::summaryForPackage)
+            )
+        )
 
         return DefaultDevsitePage(
             DevsitePage.Params(
@@ -69,7 +75,8 @@ internal class RootDocumentableConverter(
     }
 
     private fun summaryForClass(clazz: ClasslikePageNode): DefaultSummaryItem {
-        val packageName = clazz.documentable!!.dri.packageName!!
+        val doc = clazz.documentable!!
+        val packageName = doc.dri.packageName!!
         return DefaultSummaryItem(
             SummaryItem.Params(
                 title = DefaultType(
@@ -78,22 +85,34 @@ internal class RootDocumentableConverter(
                         url = pathProvider.forType(packageName, clazz.name)
                     )
                 ),
-                description = DefaultDocumentation(Documentation.Params())
+                description = DefaultDocumentation(
+                    Documentation.Params(
+                        tags = doc.tags(),
+                        summary = true
+                    )
+                )
             )
         )
     }
 
-    private fun summaryForPackage(packageName: String): DefaultSummaryItem {
+    private fun summaryForPackage(packageNode: PackagePageNode): DefaultSummaryItem {
         return DefaultSummaryItem(
             SummaryItem.Params(
                 title = DefaultType(
                     Type.Params(
-                        name = packageName,
-                        url = pathProvider.forType(packageName, "package-summary")
+                        name = packageNode.name,
+                        url = pathProvider.forType(packageNode.name, "package-summary")
                     )
                 ),
-                description = DefaultDocumentation(Documentation.Params())
+                description = DefaultDocumentation(
+                    Documentation.Params(
+                        tags = packageNode.documentable!!.tags(),
+                        summary = true
+                    )
+                )
             )
         )
     }
+
+    private fun Documentable.tags() = documentation.values.singleOrNull()?.children.orEmpty()
 }

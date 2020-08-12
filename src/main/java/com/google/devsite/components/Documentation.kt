@@ -16,11 +16,14 @@
 
 package com.google.devsite.components
 
+import org.jetbrains.dokka.model.doc.TagWrapper
+
 /** Represents the hand-written documentation for a symbol. */
 internal interface Documentation : ContextFreeComponent {
     val data: Params
 
     class Params(
-        // TODO(b/163811276): Implement documentation parsing
+        val tags: List<TagWrapper>,
+        val summary: Boolean = false
     )
 }
