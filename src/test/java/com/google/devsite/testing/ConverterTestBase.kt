@@ -20,24 +20,18 @@ import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.testApi.testRunner.AbstractCoreTest
 
 abstract class ConverterTestBase : AbstractCoreTest() {
-    fun testWithRootPageNode(sourceCode: String, test: (RootPageNode) -> Unit) {
+    protected fun testWithRootPageNode(sourceFiles: List<String>, test: (RootPageNode) -> Unit) {
         val configuration = dokkaConfiguration {
             sourceSets {
                 sourceSet {
-                    sourceRoots = listOf("src/main/kotlin/androidx/example/Test.kt")
+                    sourceRoots = sourceFiles.map { it.lineSequence().first().removePrefix("/") }
                 }
             }
         }
 
-        val source = """
-            |/src/main/kotlin/androidx/example/Test.kt
-            |package androidx.example
-            |
-            |$sourceCode
-        """.trimIndent()
         val writerPlugin = TestOutputWriterPlugin()
         testInline(
-            source,
+            sourceFiles.joinToString("\n\n"),
             configuration,
             pluginOverrides = listOf(writerPlugin)
         ) {
@@ -45,5 +39,15 @@ abstract class ConverterTestBase : AbstractCoreTest() {
                 test(node)
             }
         }
+    }
+
+    protected fun testWithRootPageNode(sourceCode: String, test: (RootPageNode) -> Unit) {
+        val source = """
+            |/src/main/kotlin/androidx/example/Test.kt
+            |package androidx.example
+            |
+            |$sourceCode
+        """.trimMargin()
+        testWithRootPageNode(listOf(source), test)
     }
 }

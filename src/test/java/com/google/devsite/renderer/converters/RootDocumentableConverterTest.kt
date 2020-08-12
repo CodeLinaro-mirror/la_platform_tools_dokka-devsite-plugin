@@ -18,6 +18,7 @@ package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.ClassesIndex
+import com.google.devsite.components.PackageIndex
 import com.google.devsite.components.Type
 import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
 import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
@@ -31,10 +32,10 @@ class RootDocumentableConverterTest(
     private val language: Language
 ) : ConverterTestBase() {
     @Test
-    fun `Classes index creates components with correct page title`() {
+    fun `Class index creates components with correct page title`() {
         val source = """
             |class Foo
-        """.trimIndent()
+        """.trimMargin()
 
         testWithRootPageNode(source) { root ->
             val converter = RootDocumentableConverter(root, pathProvider())
@@ -46,10 +47,10 @@ class RootDocumentableConverterTest(
     }
 
     @Test
-    fun `Classes index creates components with correct packages link`() {
+    fun `Class index creates components with correct packages link`() {
         val source = """
             |class Foo
-        """.trimIndent()
+        """.trimMargin()
 
         testWithRootPageNode(source) { root ->
             val converter = RootDocumentableConverter(root, pathProvider())
@@ -67,10 +68,10 @@ class RootDocumentableConverterTest(
     }
 
     @Test
-    fun `Classes index creates components for single class`() {
+    fun `Class index creates components for single class`() {
         val source = """
             |class Foo
-        """.trimIndent()
+        """.trimMargin()
 
         testWithRootPageNode(source) { root ->
             val converter = RootDocumentableConverter(root, pathProvider())
@@ -96,12 +97,12 @@ class RootDocumentableConverterTest(
     }
 
     @Test
-    fun `Classes index creates components for multiple classes starting with same letter`() {
+    fun `Class index creates components for multiple classes starting with same letter`() {
         val source = """
             |class Fo
             |class Foo
             |class Fooo
-        """.trimIndent()
+        """.trimMargin()
 
         testWithRootPageNode(source) { root ->
             val converter = RootDocumentableConverter(root, pathProvider())
@@ -132,11 +133,11 @@ class RootDocumentableConverterTest(
     }
 
     @Test
-    fun `Classes index creates components for multiple classes starting with different letters`() {
+    fun `Class index creates components for multiple classes starting with different letters`() {
         val source = """
             |class Foo
             |class Bar
-        """.trimIndent()
+        """.trimMargin()
 
         testWithRootPageNode(source) { root ->
             val converter = RootDocumentableConverter(root, pathProvider())
@@ -170,6 +171,120 @@ class RootDocumentableConverterTest(
                     .isEqualTo("/reference/androidx/example/Bar.html")
                 Language.KOTLIN -> assertThat(barClazz.data.url)
                     .isEqualTo("/reference/kotlin/androidx/example/Bar.html")
+            }
+        }
+    }
+
+    @Test
+    fun `Package index creates components with correct page title`() {
+        val source = """
+            |class Foo
+        """.trimMargin()
+
+        testWithRootPageNode(source) { root ->
+            val converter = RootDocumentableConverter(root, pathProvider())
+
+            val components = converter.packagesPage()
+
+            assertThat(components.data.title).isEqualTo("Package Index")
+        }
+    }
+
+    @Test
+    fun `Package index creates components with correct classes link`() {
+        val source = """
+            |class Foo
+        """.trimMargin()
+
+        testWithRootPageNode(source) { root ->
+            val converter = RootDocumentableConverter(root, pathProvider())
+
+            val components = converter.packagesPage()
+
+            val packageIndex = components.data.content as PackageIndex
+            when (language) {
+                Language.JAVA -> assertThat(packageIndex.data.classesUrl)
+                    .isEqualTo("/reference/androidx/classes.html")
+                Language.KOTLIN -> assertThat(packageIndex.data.classesUrl)
+                    .isEqualTo("/reference/kotlin/androidx/classes.html")
+            }
+        }
+    }
+
+    @Test
+    fun `Package index creates components for single package`() {
+        val sourceFiles = listOf(
+            """
+                |/src/main/kotlin/androidx/example/Test.kt
+                |package androidx.example
+                |
+                |class Foo
+            """.trimMargin()
+        )
+
+        testWithRootPageNode(sourceFiles) { root ->
+            val converter = RootDocumentableConverter(root, pathProvider())
+
+            val components = converter.packagesPage()
+
+            val packageIndex = components.data.content as PackageIndex
+            val packages = packageIndex.data.packages.data.items
+            assertThat(packages).hasSize(1)
+
+            val packageLink = packages.single().data.title as Type
+            assertThat(packageLink.data.name).isEqualTo("androidx.example")
+            when (language) {
+                Language.JAVA -> assertThat(packageLink.data.url)
+                    .isEqualTo("/reference/androidx/example/package-summary.html")
+                Language.KOTLIN -> assertThat(packageLink.data.url)
+                    .isEqualTo("/reference/kotlin/androidx/example/package-summary.html")
+            }
+        }
+    }
+
+    @Test
+    fun `Package index creates components for multiple packages`() {
+        val sourceFiles = listOf(
+            """
+                |/src/main/kotlin/androidx/example/A.kt
+                |package a
+                |
+                |class A
+            """.trimMargin(),
+            """
+                |/src/main/kotlin/androidx/example/B.kt
+                |package b
+                |
+                |class B
+            """.trimMargin(),
+            """
+                |/src/main/kotlin/androidx/example/C.kt
+                |package c
+                |
+                |class C
+            """.trimMargin()
+        )
+
+        testWithRootPageNode(sourceFiles) { root ->
+            val converter = RootDocumentableConverter(root, pathProvider())
+
+            val components = converter.packagesPage()
+
+            val packageIndex = components.data.content as PackageIndex
+            val packages = packageIndex.data.packages.data.items
+            assertThat(packages).hasSize(3)
+
+            val expectedPackages = listOf("a", "b", "c")
+            for ((i, packageItem) in packages.withIndex()) {
+                val packageLink = packageItem.data.title as Type
+
+                assertThat(packageLink.data.name).isEqualTo(expectedPackages[i])
+                when (language) {
+                    Language.JAVA -> assertThat(packageLink.data.url)
+                        .isEqualTo("/reference/${expectedPackages[i]}/package-summary.html")
+                    Language.KOTLIN -> assertThat(packageLink.data.url)
+                        .isEqualTo("/reference/kotlin/${expectedPackages[i]}/package-summary.html")
+                }
             }
         }
     }

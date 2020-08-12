@@ -19,12 +19,14 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.components.ClassesIndex
 import com.google.devsite.components.DevsitePage
 import com.google.devsite.components.Documentation
+import com.google.devsite.components.PackageIndex
 import com.google.devsite.components.SummaryItem
 import com.google.devsite.components.SummaryList
 import com.google.devsite.components.Type
 import com.google.devsite.components.impl.DefaultClassesIndex
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultDocumentation
+import com.google.devsite.components.impl.DefaultPackageIndex
 import com.google.devsite.components.impl.DefaultSummaryItem
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultType
@@ -53,6 +55,19 @@ internal class RootDocumentableConverter(
         )
     }
 
+    /** @return the root component for the package index page. */
+    fun packagesPage(): DevsitePage {
+        val allPackages = root.children.map { it.name }
+        val componentPackages = DefaultSummaryList(SummaryList.Params(allPackages.map(::summaryForPackage)))
+
+        return DefaultDevsitePage(
+            DevsitePage.Params(
+                "Package Index",
+                DefaultPackageIndex(PackageIndex.Params(pathProvider.classes, componentPackages))
+            )
+        )
+    }
+
     private fun summaryForClass(clazz: ClasslikePageNode): DefaultSummaryItem {
         val packageName = clazz.documentable!!.dri.packageName!!
         return DefaultSummaryItem(
@@ -61,6 +76,20 @@ internal class RootDocumentableConverter(
                     Type.Params(
                         name = clazz.name,
                         url = pathProvider.forType(packageName, clazz.name)
+                    )
+                ),
+                description = DefaultDocumentation(Documentation.Params())
+            )
+        )
+    }
+
+    private fun summaryForPackage(packageName: String): DefaultSummaryItem {
+        return DefaultSummaryItem(
+            SummaryItem.Params(
+                title = DefaultType(
+                    Type.Params(
+                        name = packageName,
+                        url = pathProvider.forType(packageName, "package-summary")
                     )
                 ),
                 description = DefaultDocumentation(Documentation.Params())

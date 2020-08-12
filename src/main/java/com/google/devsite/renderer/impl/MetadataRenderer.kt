@@ -56,7 +56,12 @@ internal class MetadataRenderer(
 
     /** Writes the list of packages in human readable format. */
     suspend fun writePackages(root: RootPageNode) {
-        // TODO
+        val converter = RootDocumentableConverter(root, pathProvider)
+        val packageIndex = createHTML().html {
+            converter.packagesPage().render(this)
+        }
+
+        outputWriter.write(pathProvider.packages, packageIndex, "")
     }
 
     /** Writes the list of classes in human readable format. */
