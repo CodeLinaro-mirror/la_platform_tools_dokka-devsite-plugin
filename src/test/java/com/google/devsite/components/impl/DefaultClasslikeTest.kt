@@ -14,13 +14,8 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components
+package com.google.devsite.components.impl
 
-/** Represents the hand-written documentation for a symbol. */
-internal interface Documentation : ContextFreeComponent {
-    val data: Params
-
-    class Params(
-        // TODO(b/163811276): Implement documentation parsing
-    )
+class DefaultClasslikeTest {
+    // TODO(b/163811257): implement class component
 }

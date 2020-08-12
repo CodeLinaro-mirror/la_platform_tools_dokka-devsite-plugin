@@ -14,13 +14,21 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components
+package com.google.devsite.components.impl
 
-/** Represents the hand-written documentation for a symbol. */
-internal interface Documentation : ContextFreeComponent {
-    val data: Params
+import com.google.devsite.components.PackageSummary
+import kotlinx.html.FlowContent
 
-    class Params(
-        // TODO(b/163811276): Implement documentation parsing
-    )
+/** Default implementation of the package summary page. */
+internal class DefaultPackageSummary(
+    override val data: PackageSummary.Params
+) : PackageSummary {
+    override fun render(html: FlowContent) = html.run {
+        // TODO(b/163810929): add interfaces
+        // TODO(b/163810931): add classes
+        // TODO(b/163810939): add enums
+        // TODO(b/163811325): add exceptions
+        // TODO(b/163811228): add annotations
+        // TODO(b/163811266): add Kotlin bits
+    }
 }
