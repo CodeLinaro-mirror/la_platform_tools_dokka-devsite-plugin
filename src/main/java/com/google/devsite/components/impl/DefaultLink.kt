@@ -14,14 +14,19 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components
+package com.google.devsite.components.impl
 
-/** Represents a class-like type. */
-internal interface Type : ContextFreeComponent {
-    val data: Params
+import com.google.devsite.components.Link
+import kotlinx.html.FlowContent
+import kotlinx.html.a
 
-    class Params(
-        val name: String,
-        val url: String
-    )
+/** Default implementation of a link. */
+internal class DefaultLink(
+    override val data: Link.Params
+) : Link {
+    override fun render(html: FlowContent) = html.run {
+        a(data.url) {
+            +data.name
+        }
+    }
 }

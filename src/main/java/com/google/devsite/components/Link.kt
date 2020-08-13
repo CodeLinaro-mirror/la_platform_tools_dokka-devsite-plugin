@@ -14,25 +14,14 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components.impl
+package com.google.devsite.components
 
-import com.google.devsite.components.SummaryItem
-import kotlinx.html.TBODY
-import kotlinx.html.td
-import kotlinx.html.tr
+/** Represents a link. */
+internal interface Link : ContextFreeComponent {
+    val data: Params
 
-/** Default implementation of the two-pane layout item. */
-internal class DefaultSummaryItem(
-    override val data: SummaryItem.Params
-) : SummaryItem {
-    override fun render(html: TBODY) {
-        html.tr {
-            td {
-                data.title.render(this)
-            }
-            td {
-                data.description.render(this)
-            }
-        }
-    }
+    class Params(
+        val name: String,
+        val url: String
+    )
 }

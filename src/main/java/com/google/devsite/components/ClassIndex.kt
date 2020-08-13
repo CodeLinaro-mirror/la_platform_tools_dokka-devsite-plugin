@@ -14,28 +14,14 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components.impl
+package com.google.devsite.components
 
-import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.Type
-import kotlinx.html.div
-import kotlinx.html.stream.createHTML
-import org.junit.Test
+/** Represents the list of classes page. */
+internal interface ClassIndex : ContextFreeComponent {
+    val data: Params
 
-class DefaultTypeTest {
-    @Test
-    fun `Type renders correctly`() {
-        val component = DefaultType(Type.Params("Name", "link"))
-
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
-
-        // language=html
-        assertThat(output).isEqualTo(
-            """
-<div><a href="link">Name</a></div>
-            """.trim()
-        )
-    }
+    class Params(
+        val packagesUrl: String,
+        val alphabetizedClasses: Map<Char, SummaryList>
+    )
 }

@@ -17,30 +17,28 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.SummaryItem.Params
+import com.google.devsite.components.TwoPaneSummaryItem.Params
 import com.google.devsite.components.testing.PlainTextOutput
 import kotlinx.html.stream.createHTML
-import kotlinx.html.tbody
+import kotlinx.html.tr
 import org.junit.Test
 
-class DefaultSummaryItemTest {
+class DefaultTwoPaneSummaryItemTest {
     @Test
     fun `Empty item renders correctly`() {
-        val component = DefaultSummaryItem(Params(PlainTextOutput(""), PlainTextOutput("")))
+        val component = DefaultTwoPaneSummaryItem(Params(PlainTextOutput(""), PlainTextOutput("")))
 
-        val output = createHTML().tbody {
+        val output = createHTML().tr {
             component.render(this)
         }.trim()
 
         // language=html
         assertThat(output).isEqualTo(
             """
-<tbody>
-  <tr>
-    <td></td>
-    <td></td>
-  </tr>
-</tbody>
+<tr>
+  <td></td>
+  <td></td>
+</tr>
             """.trim()
         )
     }
@@ -48,21 +46,19 @@ class DefaultSummaryItemTest {
     @Test
     fun `Simple item renders correctly`() {
         val component =
-            DefaultSummaryItem(Params(PlainTextOutput("Title"), PlainTextOutput("Description")))
+            DefaultTwoPaneSummaryItem(Params(PlainTextOutput("Title"), PlainTextOutput("Description")))
 
-        val b = createHTML().tbody {
+        val b = createHTML().tr {
             component.render(this)
         }.trim()
 
         // language=html
         assertThat(b).isEqualTo(
             """
-<tbody>
-  <tr>
-    <td>Title</td>
-    <td>Description</td>
-  </tr>
-</tbody>
+<tr>
+  <td>Title</td>
+  <td>Description</td>
+</tr>
             """.trim()
         )
     }

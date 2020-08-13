@@ -16,17 +16,20 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.Type
-import kotlinx.html.FlowContent
-import kotlinx.html.a
+import com.google.devsite.components.TwoPaneSummaryItem
+import kotlinx.html.TR
+import kotlinx.html.td
 
-/** Default implementation of a class-like type. */
-internal class DefaultType(
-    override val data: Type.Params
-) : Type {
-    override fun render(html: FlowContent) = html.run {
-        a(data.url) {
-            +data.name
+/** Default implementation of the two-pane layout item. */
+internal class DefaultTwoPaneSummaryItem(
+    override val data: TwoPaneSummaryItem.Params
+) : TwoPaneSummaryItem {
+    override fun render(html: TR) = html.run {
+        td {
+            data.title.render(this)
+        }
+        td {
+            data.description.render(this)
         }
     }
 }

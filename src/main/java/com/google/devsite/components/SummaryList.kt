@@ -16,9 +16,9 @@
 
 package com.google.devsite.components
 
-/** Builds a two-pane layout with a symbol title on the left and its description on the right. */
+/** Builds a table view. */
 internal interface SummaryList : ContextFreeComponent {
     val data: Params
 
-    class Params(val items: List<SummaryItem>)
+    class Params(val header: RowComponent?, val items: List<RowComponent>)
 }

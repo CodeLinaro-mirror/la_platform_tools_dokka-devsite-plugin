@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components
+package com.google.devsite.components.testing
 
-/** Builds a two-pane layout item. */
-internal interface SummaryItem : TableComponent {
-    val data: Params
+import com.google.devsite.components.RowComponent
+import kotlinx.html.TR
+import kotlinx.html.unsafe
 
-    class Params(
-        val title: ContextFreeComponent,
-        val description: ContextFreeComponent
-    )
+internal object NoopRow : RowComponent {
+    override fun render(html: TR) = html.run {
+        unsafe { +"<noop/>" }
+    }
 }

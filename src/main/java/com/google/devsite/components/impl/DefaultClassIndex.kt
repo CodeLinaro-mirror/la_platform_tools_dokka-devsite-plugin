@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.ClassesIndex
+import com.google.devsite.components.ClassIndex
 import kotlinx.html.FlowContent
 import kotlinx.html.a
 import kotlinx.html.div
@@ -26,9 +26,9 @@ import kotlinx.html.p
 import kotlinx.html.unsafe
 
 /** Default implementation of the list of classes page. */
-internal class DefaultClassesIndex(
-    override val data: ClassesIndex.Params
-) : ClassesIndex {
+internal class DefaultClassIndex(
+    override val data: ClassIndex.Params
+) : ClassIndex {
     init {
         require(data.alphabetizedClasses.isNotEmpty()) {
             "This page shouldn't be rendered if there are no classes."

@@ -17,9 +17,10 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.ClassesIndex
+import com.google.devsite.components.ClassIndex
 import com.google.devsite.components.PackageIndex
-import com.google.devsite.components.Type
+import com.google.devsite.components.TwoPaneSummaryItem
+import com.google.devsite.components.Link
 import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
 import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
 import com.google.devsite.testing.ConverterTestBase
@@ -57,7 +58,7 @@ class RootDocumentableConverterTest(
 
             val components = converter.classesPage()
 
-            val classIndex = components.data.content as ClassesIndex
+            val classIndex = components.data.content as ClassIndex
             when (language) {
                 Language.JAVA -> assertThat(classIndex.data.packagesUrl)
                     .isEqualTo("/reference/androidx/packages.html")
@@ -78,14 +79,14 @@ class RootDocumentableConverterTest(
 
             val components = converter.classesPage()
 
-            val classIndex = components.data.content as ClassesIndex
+            val classIndex = components.data.content as ClassIndex
             assertThat(classIndex.data.alphabetizedClasses).hasSize(1)
 
             val (letter, summary) = classIndex.data.alphabetizedClasses.entries.single()
             assertThat(letter).isEqualTo('F')
             assertThat(summary.data.items).hasSize(1)
 
-            val clazz = summary.data.items.single().data.title as Type
+            val clazz = (summary.data.items.single() as TwoPaneSummaryItem).data.title as Link
             assertThat(clazz.data.name).isEqualTo("Foo")
             when (language) {
                 Language.JAVA -> assertThat(clazz.data.url)
@@ -109,7 +110,7 @@ class RootDocumentableConverterTest(
 
             val components = converter.classesPage()
 
-            val classIndex = components.data.content as ClassesIndex
+            val classIndex = components.data.content as ClassIndex
             assertThat(classIndex.data.alphabetizedClasses).hasSize(1)
 
             val (letter, summary) = classIndex.data.alphabetizedClasses.entries.single()
@@ -117,7 +118,7 @@ class RootDocumentableConverterTest(
             assertThat(summary.data.items).hasSize(3)
 
             val expectedClasses = listOf("Fo", "Foo", "Fooo")
-            val classes = summary.data.items.map { it.data.title as Type }
+            val classes = summary.data.items.map { (it as TwoPaneSummaryItem).data.title as Link }
             for ((i, clazz) in classes.withIndex()) {
                 val expectedName = expectedClasses[i]
 
@@ -144,14 +145,14 @@ class RootDocumentableConverterTest(
 
             val components = converter.classesPage()
 
-            val classIndex = components.data.content as ClassesIndex
+            val classIndex = components.data.content as ClassIndex
             assertThat(classIndex.data.alphabetizedClasses).hasSize(2)
 
             val (fooLetter, fooSummary) = classIndex.data.alphabetizedClasses.entries.first()
             assertThat(fooLetter).isEqualTo('F')
             assertThat(fooSummary.data.items).hasSize(1)
 
-            val fooClazz = fooSummary.data.items.single().data.title as Type
+            val fooClazz = (fooSummary.data.items.single() as TwoPaneSummaryItem).data.title as Link
             assertThat(fooClazz.data.name).isEqualTo("Foo")
             when (language) {
                 Language.JAVA -> assertThat(fooClazz.data.url)
@@ -164,7 +165,7 @@ class RootDocumentableConverterTest(
             assertThat(barLetter).isEqualTo('B')
             assertThat(barSummary.data.items).hasSize(1)
 
-            val barClazz = barSummary.data.items.single().data.title as Type
+            val barClazz = (barSummary.data.items.single() as TwoPaneSummaryItem).data.title as Link
             assertThat(barClazz.data.name).isEqualTo("Bar")
             when (language) {
                 Language.JAVA -> assertThat(barClazz.data.url)
@@ -231,7 +232,7 @@ class RootDocumentableConverterTest(
             val packages = packageIndex.data.packages.data.items
             assertThat(packages).hasSize(1)
 
-            val packageLink = packages.single().data.title as Type
+            val packageLink = (packages.single() as TwoPaneSummaryItem).data.title as Link
             assertThat(packageLink.data.name).isEqualTo("androidx.example")
             when (language) {
                 Language.JAVA -> assertThat(packageLink.data.url)
@@ -276,7 +277,7 @@ class RootDocumentableConverterTest(
 
             val expectedPackages = listOf("a", "b", "c")
             for ((i, packageItem) in packages.withIndex()) {
-                val packageLink = packageItem.data.title as Type
+                val packageLink = (packageItem as TwoPaneSummaryItem).data.title as Link
 
                 assertThat(packageLink.data.name).isEqualTo(expectedPackages[i])
                 when (language) {

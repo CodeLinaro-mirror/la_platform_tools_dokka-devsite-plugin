@@ -20,8 +20,10 @@ import com.google.devsite.components.SummaryList
 import kotlinx.html.FlowContent
 import kotlinx.html.table
 import kotlinx.html.tbody
+import kotlinx.html.thead
+import kotlinx.html.tr
 
-/** Default implementation of the symbol table. */
+/** Default implementation of the table view. */
 internal class DefaultSummaryList(
     override val data: SummaryList.Params
 ) : SummaryList {
@@ -29,9 +31,19 @@ internal class DefaultSummaryList(
         if (data.items.isEmpty()) return
 
         html.table {
+            if (data.header != null) {
+                thead {
+                    tr {
+                        data.header.render(this)
+                    }
+                }
+            }
+
             tbody {
                 for (item in data.items) {
-                    item.render(this)
+                    tr {
+                        item.render(this)
+                    }
                 }
             }
         }

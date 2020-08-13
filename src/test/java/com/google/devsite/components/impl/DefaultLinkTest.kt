@@ -14,17 +14,28 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components.testing
+package com.google.devsite.components.impl
 
-import com.google.devsite.components.SummaryItem
-import kotlinx.html.TBODY
-import kotlinx.html.unsafe
+import com.google.common.truth.Truth.assertThat
+import com.google.devsite.components.Link
+import kotlinx.html.div
+import kotlinx.html.stream.createHTML
+import org.junit.Test
 
-internal object NoopSummaryItem : SummaryItem {
-    override val data: SummaryItem.Params
-        get() = throw NotImplementedError()
+class DefaultLinkTest {
+    @Test
+    fun `Link renders correctly`() {
+        val component = DefaultLink(Link.Params("Name", "link"))
 
-    override fun render(html: TBODY) = html.run {
-        unsafe { +"<noop/>" }
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div><a href="link">Name</a></div>
+            """.trim()
+        )
     }
 }

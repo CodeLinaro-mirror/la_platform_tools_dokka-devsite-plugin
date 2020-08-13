@@ -17,25 +17,25 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.ClassesIndex
+import com.google.devsite.components.ClassIndex
 import com.google.devsite.components.testing.NoopSummaryList
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
 import org.junit.Test
 import kotlin.test.assertFailsWith
 
-class DefaultClassesIndexTest {
+class DefaultClassIndexTest {
     @Test
     fun `Empty classes rejects render`() {
         assertFailsWith<IllegalArgumentException> {
-            DefaultClassesIndex(ClassesIndex.Params("packages.html", emptyMap()))
+            DefaultClassIndex(ClassIndex.Params("packages.html", emptyMap()))
         }
     }
 
     @Test
     fun `Single class renders correctly`() {
         val component =
-            DefaultClassesIndex(ClassesIndex.Params("packages.html", mapOf('A' to NoopSummaryList)))
+            DefaultClassIndex(ClassIndex.Params("packages.html", mapOf('A' to NoopSummaryList)))
 
         val output = createHTML().body {
             component.render(this)
@@ -56,8 +56,8 @@ class DefaultClassesIndexTest {
 
     @Test
     fun `Multiple classes renders correctly`() {
-        val component = DefaultClassesIndex(
-            ClassesIndex.Params(
+        val component = DefaultClassIndex(
+            ClassIndex.Params(
                 "packages.html",
                 mapOf('A' to NoopSummaryList, 'B' to NoopSummaryList, 'Z' to NoopSummaryList)
             )
@@ -86,8 +86,8 @@ class DefaultClassesIndexTest {
 
     @Test
     fun `Unordered classes renders correctly`() {
-        val component = DefaultClassesIndex(
-            ClassesIndex.Params(
+        val component = DefaultClassIndex(
+            ClassIndex.Params(
                 "packages.html",
                 mapOf('B' to NoopSummaryList, 'A' to NoopSummaryList)
             )

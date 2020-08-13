@@ -16,12 +16,12 @@
 
 package com.google.devsite.components
 
-/** Represents the list of classes page. */
-internal interface ClassesIndex : ContextFreeComponent {
+/** Builds a two-pane layout item. */
+internal interface TwoPaneSummaryItem : RowComponent {
     val data: Params
 
     class Params(
-        val packagesUrl: String,
-        val alphabetizedClasses: Map<Char, SummaryList>
+        val title: ContextFreeComponent,
+        val description: ContextFreeComponent
     )
 }

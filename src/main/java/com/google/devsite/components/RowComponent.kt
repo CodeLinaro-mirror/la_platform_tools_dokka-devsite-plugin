@@ -16,7 +16,7 @@
 
 package com.google.devsite.components
 
-import kotlinx.html.TBODY
+import kotlinx.html.TR
 
-/** Represents a component rendered in the context of a table. */
-internal interface TableComponent : HtmlComponent<TBODY>
+/** Represents a component rendered in the context of a table row. */
+internal interface RowComponent : HtmlComponent<TR>

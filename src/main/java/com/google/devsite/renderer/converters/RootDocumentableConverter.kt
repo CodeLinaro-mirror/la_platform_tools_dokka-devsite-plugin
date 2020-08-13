@@ -16,20 +16,20 @@
 
 package com.google.devsite.renderer.converters
 
-import com.google.devsite.components.ClassesIndex
+import com.google.devsite.components.ClassIndex
 import com.google.devsite.components.DevsitePage
 import com.google.devsite.components.Documentation
+import com.google.devsite.components.Link
 import com.google.devsite.components.PackageIndex
-import com.google.devsite.components.SummaryItem
 import com.google.devsite.components.SummaryList
-import com.google.devsite.components.Type
-import com.google.devsite.components.impl.DefaultClassesIndex
+import com.google.devsite.components.TwoPaneSummaryItem
+import com.google.devsite.components.impl.DefaultClassIndex
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultDocumentation
+import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultPackageIndex
-import com.google.devsite.components.impl.DefaultSummaryItem
 import com.google.devsite.components.impl.DefaultSummaryList
-import com.google.devsite.components.impl.DefaultType
+import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.pages.ClasslikePageNode
@@ -46,13 +46,18 @@ internal class RootDocumentableConverter(
         val allClasses = root.children.flatMap { it.children }.filterIsInstance<ClasslikePageNode>()
         val alphabetizedClasses = allClasses.groupBy { it.name.first().toUpperCase() }
         val componentClasses = alphabetizedClasses.mapValues { (_, nodes) ->
-            DefaultSummaryList(SummaryList.Params(nodes.map(::summaryForClass)))
+            DefaultSummaryList(
+                SummaryList.Params(
+                    header = null,
+                    nodes.map(::summaryForClass)
+                )
+            )
         }
 
         return DefaultDevsitePage(
             DevsitePage.Params(
                 "Class Index",
-                DefaultClassesIndex(ClassesIndex.Params(pathProvider.packages, componentClasses))
+                DefaultClassIndex(ClassIndex.Params(pathProvider.packages, componentClasses))
             )
         )
     }
@@ -62,6 +67,7 @@ internal class RootDocumentableConverter(
         val packages = root.children.filterIsInstance<PackagePageNode>()
         val componentPackages = DefaultSummaryList(
             SummaryList.Params(
+                header = null,
                 packages.map(::summaryForPackage)
             )
         )
@@ -74,13 +80,13 @@ internal class RootDocumentableConverter(
         )
     }
 
-    private fun summaryForClass(clazz: ClasslikePageNode): DefaultSummaryItem {
+    private fun summaryForClass(clazz: ClasslikePageNode): DefaultTwoPaneSummaryItem {
         val doc = clazz.documentable!!
         val packageName = doc.dri.packageName!!
-        return DefaultSummaryItem(
-            SummaryItem.Params(
-                title = DefaultType(
-                    Type.Params(
+        return DefaultTwoPaneSummaryItem(
+            TwoPaneSummaryItem.Params(
+                title = DefaultLink(
+                    Link.Params(
                         name = clazz.name,
                         url = pathProvider.forType(packageName, clazz.name)
                     )
@@ -95,11 +101,11 @@ internal class RootDocumentableConverter(
         )
     }
 
-    private fun summaryForPackage(packageNode: PackagePageNode): DefaultSummaryItem {
-        return DefaultSummaryItem(
-            SummaryItem.Params(
-                title = DefaultType(
-                    Type.Params(
+    private fun summaryForPackage(packageNode: PackagePageNode): DefaultTwoPaneSummaryItem {
+        return DefaultTwoPaneSummaryItem(
+            TwoPaneSummaryItem.Params(
+                title = DefaultLink(
+                    Link.Params(
                         name = packageNode.name,
                         url = pathProvider.forType(packageNode.name, "package-summary")
                     )
