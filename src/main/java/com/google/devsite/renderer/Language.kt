@@ -14,23 +14,14 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components.impl
+package com.google.devsite.renderer
 
-import com.google.devsite.components.Link
-import kotlinx.html.FlowContent
-import kotlinx.html.a
-
-/** Default implementation of a link. */
-internal class DefaultLink(
-    override val data: Link.Params
-) : Link {
-    override fun render(html: FlowContent) = html.run {
-        if (data.url.isEmpty()) {
-            +data.name
-        } else {
-            a(data.url) {
-                +data.name
-            }
-        }
-    }
+/**
+ * The target rendering programming language.
+ *
+ * Note: this is unrelated to the source language. Rather, the source will be make to look like the
+ * rendering language.
+ */
+enum class Language {
+    JAVA, KOTLIN
 }
