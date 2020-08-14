@@ -46,6 +46,8 @@ abstract class IntegrationTestBase : AbstractCoreTest() {
             }
         }
 
+        System.setProperty("tenant", "dokkatest")
+
         val writerPlugin = TestOutputWriterPlugin()
         testFromData(
             configuration,

@@ -29,23 +29,27 @@ dependencies.add(
         )
     )
 )
+
 tasks.register<Copy>("generateConfig") {
     from("src/test/resources")
     into("${project.buildDir}/resources")
-    filter({ text ->
+    filter { text ->
         // Dackka requires absolute paths, so expand "$projectDir" into its value
         text.replace("\$projectDir", "$projectDir")
-    })
+    }
 }
 
 tasks.register<JavaExec>("run") {
     description = "Ensures that dackka can be invoked as a .jar from the command line"
-    dependsOn(project.configurations.getByName("runnerJar"))
-    dependsOn("generateConfig")
+
+    dependsOn("generateConfig", project.configurations.getByName("runnerJar"))
     classpath = files({
         project.configurations.getByName("runnerJar").resolvedConfiguration.files
     })
+
+    environment("DEVSITE_TENANT", "androidx")
     args = listOf("${project.buildDir}/resources/config.json")
+
     doFirst {
         generatedDir.deleteRecursively()
     }
@@ -54,19 +58,21 @@ tasks.register<JavaExec>("run") {
 tasks.register<Task>("verifyRun") {
     dependsOn("run")
     doLast {
-        val expectedPaths = listOf("index.html",
-            "androidx.paging/Pager.html",
-            "androidx.paging/PagingDataKt.html",
-            "androidx.paging/PagingData.html")
+        val expectedPaths = listOf(
+            "reference/androidx/index.html",
+            "reference/androidx/classes.html",
+            "reference/androidx/packages.html"
+        )
+
         for (relativePath in expectedPaths) {
             val path = "${generatedDir}/$relativePath"
             if (!file(path).exists()) {
-                // TODO TMP while we get the new architecture set up
-//                throw GradleException("Failed to create " + path)
+                throw GradleException("Failed to create $path")
             }
         }
     }
 }
+
 tasks.register<Task>("test") {
     dependsOn("verifyRun")
 }
