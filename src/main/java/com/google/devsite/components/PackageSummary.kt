@@ -21,6 +21,10 @@ internal interface PackageSummary : ContextFreeComponent {
     val data: Params
 
     class Params(
-        // TODO(b/163810704): implement package summary component
+        val interfaces: SummaryList,
+        val classes: SummaryList,
+        val enums: SummaryList,
+        val exceptions: SummaryList,
+        val annotations: SummaryList
     )
 }

@@ -35,7 +35,7 @@ class DefaultClassIndexTest {
     @Test
     fun `Single class renders correctly`() {
         val component =
-            DefaultClassIndex(ClassIndex.Params("packages.html", mapOf('A' to NoopSummaryList)))
+            DefaultClassIndex(ClassIndex.Params("packages.html", mapOf('A' to NoopSummaryList())))
 
         val output = createHTML().body {
             component.render(this)
@@ -59,7 +59,7 @@ class DefaultClassIndexTest {
         val component = DefaultClassIndex(
             ClassIndex.Params(
                 "packages.html",
-                mapOf('A' to NoopSummaryList, 'B' to NoopSummaryList, 'Z' to NoopSummaryList)
+                mapOf('A' to NoopSummaryList(), 'B' to NoopSummaryList(), 'Z' to NoopSummaryList())
             )
         )
 
@@ -89,7 +89,7 @@ class DefaultClassIndexTest {
         val component = DefaultClassIndex(
             ClassIndex.Params(
                 "packages.html",
-                mapOf('B' to NoopSummaryList, 'A' to NoopSummaryList)
+                mapOf('B' to NoopSummaryList(), 'A' to NoopSummaryList())
             )
         )
 

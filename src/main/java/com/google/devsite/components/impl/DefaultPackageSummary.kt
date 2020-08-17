@@ -17,18 +17,28 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.PackageSummary
+import com.google.devsite.components.SummaryList
 import kotlinx.html.FlowContent
+import kotlinx.html.h2
 
 /** Default implementation of the package summary page. */
 internal class DefaultPackageSummary(
     override val data: PackageSummary.Params
 ) : PackageSummary {
     override fun render(html: FlowContent) = html.run {
-        // TODO(b/163810929): add interfaces
-        // TODO(b/163810931): add classes
-        // TODO(b/163810939): add enums
-        // TODO(b/163811325): add exceptions
-        // TODO(b/163811228): add annotations
         // TODO(b/163811266): add Kotlin bits
+
+        renderSummary(data.interfaces, "Interfaces")
+        renderSummary(data.classes, "Classes")
+        renderSummary(data.enums, "Enums")
+        renderSummary(data.exceptions, "Exceptions")
+        renderSummary(data.annotations, "Annotations")
+    }
+
+    private fun FlowContent.renderSummary(summary: SummaryList, title: String) {
+        if (summary.hasContent()) {
+            h2 { +title }
+        }
+        summary.render(this)
     }
 }
