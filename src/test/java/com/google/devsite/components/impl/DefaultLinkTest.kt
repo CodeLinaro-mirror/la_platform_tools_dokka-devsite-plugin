@@ -38,4 +38,20 @@ class DefaultLinkTest {
             """.trim()
         )
     }
+
+    @Test
+    fun `Empty link renders correctly`() {
+        val component = DefaultLink(Link.Params("Name", ""))
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>Name</div>
+            """.trim()
+        )
+    }
 }

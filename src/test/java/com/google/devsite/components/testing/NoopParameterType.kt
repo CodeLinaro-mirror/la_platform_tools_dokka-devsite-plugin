@@ -14,23 +14,16 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components.impl
+package com.google.devsite.components.testing
 
-import com.google.devsite.components.Link
+import com.google.devsite.components.ParameterType
 import kotlinx.html.FlowContent
-import kotlinx.html.a
 
-/** Default implementation of a link. */
-internal class DefaultLink(
-    override val data: Link.Params
-) : Link {
+internal class NoopParameterType(private val text: String) : ParameterType {
+    override val data: ParameterType.Params
+        get() = throw NotImplementedError()
+
     override fun render(html: FlowContent) = html.run {
-        if (data.url.isEmpty()) {
-            +data.name
-        } else {
-            a(data.url) {
-                +data.name
-            }
-        }
+        +text
     }
 }

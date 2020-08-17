@@ -16,21 +16,27 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.Link
+import com.google.devsite.components.ParameterType
+import kotlinx.html.Entities
 import kotlinx.html.FlowContent
-import kotlinx.html.a
+import kotlinx.html.span
 
-/** Default implementation of a link. */
-internal class DefaultLink(
-    override val data: Link.Params
-) : Link {
+/** Default implementation of a function parameter type. */
+internal class DefaultParameterType(
+    override val data: ParameterType.Params
+) : ParameterType {
     override fun render(html: FlowContent) = html.run {
-        if (data.url.isEmpty()) {
-            +data.name
-        } else {
-            a(data.url) {
-                +data.name
+        data.type.render(this)
+        if (data.generics.isNotEmpty()) {
+            span("symbol") { +"<" }
+            for (generic in data.generics) {
+                generic.render(this)
+                if (generic !== data.generics.last()) {
+                    +","
+                    +Entities.nbsp
+                }
             }
+            span("symbol") { +">" }
         }
     }
 }
