@@ -31,7 +31,6 @@ import com.google.devsite.components.impl.DefaultPackageIndex
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.renderer.impl.paths.FilePathProvider
-import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.pages.ClasslikePageNode
 import org.jetbrains.dokka.pages.PackagePageNode
 import org.jetbrains.dokka.pages.RootPageNode
@@ -41,7 +40,7 @@ internal class RootDocumentableConverter(
     private val root: RootPageNode,
     private val pathProvider: FilePathProvider
 ) {
-    /** @return the root component for the class index page. */
+    /** @return the root component for the class index page */
     fun classesPage(): DevsitePage {
         val allClasses = root.children.flatMap { it.children }.filterIsInstance<ClasslikePageNode>()
         val alphabetizedClasses = allClasses.groupBy { it.name.first().toUpperCase() }
@@ -62,7 +61,7 @@ internal class RootDocumentableConverter(
         )
     }
 
-    /** @return the root component for the package index page. */
+    /** @return the root component for the package index page */
     fun packagesPage(): DevsitePage {
         val packages = root.children.filterIsInstance<PackagePageNode>()
         val componentPackages = DefaultSummaryList(
@@ -119,6 +118,4 @@ internal class RootDocumentableConverter(
             )
         )
     }
-
-    private fun Documentable.tags() = documentation.values.singleOrNull()?.children.orEmpty()
 }

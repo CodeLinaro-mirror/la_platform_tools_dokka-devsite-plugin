@@ -18,9 +18,10 @@ package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.ClassIndex
+import com.google.devsite.components.Link
 import com.google.devsite.components.PackageIndex
 import com.google.devsite.components.TwoPaneSummaryItem
-import com.google.devsite.components.Link
+import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
 import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
 import com.google.devsite.testing.ConverterTestBase
@@ -294,9 +295,6 @@ class RootDocumentableConverterTest(
         Language.JAVA -> DacJavaFilePathProvider("androidx")
         Language.KOTLIN -> DacKotlinFilePathProvider("androidx")
     }
-
-    // TODO(asaveau): remove in favor of the real language enum, I don't know where that will be ATM
-    enum class Language { JAVA, KOTLIN }
 
     companion object {
         @JvmStatic

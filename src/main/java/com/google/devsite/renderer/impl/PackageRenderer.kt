@@ -16,7 +16,10 @@
 
 package com.google.devsite.renderer.impl
 
+import com.google.devsite.renderer.converters.PackageDocumentableConverter
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import kotlinx.html.html
+import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.base.renderers.OutputWriter
 import org.jetbrains.dokka.pages.ClasslikePageNode
 import org.jetbrains.dokka.pages.PackagePageNode
@@ -27,7 +30,13 @@ internal class PackageRenderer(
     private val pathProvider: FilePathProvider
 ) {
     suspend fun writePackageSummary(packagePage: PackagePageNode) {
-        // TODO
+        val converter = PackageDocumentableConverter(packagePage, pathProvider)
+        val page = converter.summaryPage()
+        val packageSummary = createHTML().html {
+            page.render(this)
+        }
+
+        outputWriter.write(pathProvider.forType(packagePage.name, "package-summary"), packageSummary, "")
     }
 
     suspend fun writeClass(clazz: ClasslikePageNode) {
