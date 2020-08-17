@@ -29,6 +29,8 @@ abstract class ConverterTestBase : AbstractCoreTest() {
             }
         }
 
+        System.setProperty("tenant", "androidx")
+
         val writerPlugin = TestOutputWriterPlugin()
         testInline(
             sourceFiles.joinToString("\n\n"),

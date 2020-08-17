@@ -35,6 +35,12 @@ internal class MultiLanguageRenderer(
     private val preprocessors = listOf(
         MathjaxTransformer
     )
+    private val tenant: String by lazy {
+        checkNotNull(System.getenv("DEVSITE_TENANT") ?: System.getProperty("tenant")) {
+            "Please specify the DEVSITE_TENANT envar. For example, if you were generating" +
+                " AndroidX docs, you would set DEVSITE_TENANT=\"androidx\""
+        }
+    }
 
     override fun render(root: RootPageNode) {
         val newRoot = preprocessors.fold(root) { previous, transformer -> transformer(previous) }
@@ -46,7 +52,7 @@ internal class MultiLanguageRenderer(
     }
 
     private fun renderJava(root: RootPageNode) {
-        val filePaths = DacJavaFilePathProvider("androidx")
+        val filePaths = DacJavaFilePathProvider(tenant)
         DevsiteRenderer(
             MetadataRenderer(outputWriter, filePaths),
             PackageRenderer(outputWriter, filePaths)
@@ -54,7 +60,7 @@ internal class MultiLanguageRenderer(
     }
 
     private fun renderKotlin(root: RootPageNode) {
-        val filePaths = DacKotlinFilePathProvider("androidx")
+        val filePaths = DacKotlinFilePathProvider(tenant)
         DevsiteRenderer(
             MetadataRenderer(outputWriter, filePaths),
             PackageRenderer(outputWriter, filePaths)
