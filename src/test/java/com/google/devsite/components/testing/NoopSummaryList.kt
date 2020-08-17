@@ -20,11 +20,13 @@ import com.google.devsite.components.SummaryList
 import kotlinx.html.FlowContent
 import kotlinx.html.div
 
-internal object NoopSummaryList : SummaryList {
+internal class NoopSummaryList(private val shown: Boolean = true) : SummaryList {
     override val data: SummaryList.Params
         get() = throw NotImplementedError()
 
     override fun render(html: FlowContent) = html.run {
-        div { +"noop" }
+        if (hasContent()) div { +"noop" }
     }
+
+    override fun hasContent() = shown
 }

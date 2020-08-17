@@ -27,7 +27,7 @@ class DefaultPackageIndexTest {
     @Test
     fun `Package list renders correctly`() {
         val component =
-            DefaultPackageIndex(PackageIndex.Params("classes.html", NoopSummaryList))
+            DefaultPackageIndex(PackageIndex.Params("classes.html", NoopSummaryList()))
 
         val output = createHTML().body {
             component.render(this)

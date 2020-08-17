@@ -16,6 +16,181 @@
 
 package com.google.devsite.components.impl
 
+import com.google.common.truth.Truth.assertThat
+import com.google.devsite.components.PackageSummary.Params
+import com.google.devsite.components.testing.NoopSummaryList
+import kotlinx.html.div
+import kotlinx.html.stream.createHTML
+import org.junit.Test
+
 class DefaultPackageSummaryTest {
-    // TODO(b/163810704): implement package summary component
+    @Test
+    fun `Package summary with only interfaces renders correctly`() {
+        val component = DefaultPackageSummary(
+            Params(
+                interfaces = NoopSummaryList(shown = true),
+                classes = NoopSummaryList(shown = false),
+                enums = NoopSummaryList(shown = false),
+                exceptions = NoopSummaryList(shown = false),
+                annotations = NoopSummaryList(shown = false)
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <h2>Interfaces</h2>
+  <div>noop</div>
+</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Package summary with only classes renders correctly`() {
+        val component = DefaultPackageSummary(
+            Params(
+                interfaces = NoopSummaryList(shown = false),
+                classes = NoopSummaryList(shown = true),
+                enums = NoopSummaryList(shown = false),
+                exceptions = NoopSummaryList(shown = false),
+                annotations = NoopSummaryList(shown = false)
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <h2>Classes</h2>
+  <div>noop</div>
+</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Package summary with only enums renders correctly`() {
+        val component = DefaultPackageSummary(
+            Params(
+                interfaces = NoopSummaryList(shown = false),
+                classes = NoopSummaryList(shown = false),
+                enums = NoopSummaryList(shown = true),
+                exceptions = NoopSummaryList(shown = false),
+                annotations = NoopSummaryList(shown = false)
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <h2>Enums</h2>
+  <div>noop</div>
+</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Package summary with only exceptions renders correctly`() {
+        val component = DefaultPackageSummary(
+            Params(
+                interfaces = NoopSummaryList(shown = false),
+                classes = NoopSummaryList(shown = false),
+                enums = NoopSummaryList(shown = false),
+                exceptions = NoopSummaryList(shown = true),
+                annotations = NoopSummaryList(shown = false)
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <h2>Exceptions</h2>
+  <div>noop</div>
+</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Package summary with only annotations renders correctly`() {
+        val component = DefaultPackageSummary(
+            Params(
+                interfaces = NoopSummaryList(shown = false),
+                classes = NoopSummaryList(shown = false),
+                enums = NoopSummaryList(shown = false),
+                exceptions = NoopSummaryList(shown = false),
+                annotations = NoopSummaryList(shown = true)
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <h2>Annotations</h2>
+  <div>noop</div>
+</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Package summary with all class-likes renders correctly`() {
+        val component = DefaultPackageSummary(
+            Params(
+                interfaces = NoopSummaryList(),
+                classes = NoopSummaryList(),
+                enums = NoopSummaryList(),
+                exceptions = NoopSummaryList(),
+                annotations = NoopSummaryList()
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <h2>Interfaces</h2>
+  <div>noop</div>
+  <h2>Classes</h2>
+  <div>noop</div>
+  <h2>Enums</h2>
+  <div>noop</div>
+  <h2>Exceptions</h2>
+  <div>noop</div>
+  <h2>Annotations</h2>
+  <div>noop</div>
+</div>
+            """.trim()
+        )
+    }
 }

@@ -28,7 +28,7 @@ internal class DefaultSummaryList(
     override val data: SummaryList.Params
 ) : SummaryList {
     override fun render(html: FlowContent) {
-        if (data.items.isEmpty()) return
+        if (!hasContent()) return
 
         html.table {
             if (data.header != null) {
@@ -48,4 +48,6 @@ internal class DefaultSummaryList(
             }
         }
     }
+
+    override fun hasContent() = data.items.isNotEmpty()
 }

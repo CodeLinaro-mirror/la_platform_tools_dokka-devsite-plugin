@@ -20,5 +20,8 @@ package com.google.devsite.components
 internal interface SummaryList : ContextFreeComponent {
     val data: Params
 
+    /** @return true if there is summary content to render, false otherwise */
+    fun hasContent(): Boolean
+
     class Params(val header: RowComponent?, val items: List<RowComponent>)
 }
