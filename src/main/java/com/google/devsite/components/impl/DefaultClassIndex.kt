@@ -20,6 +20,7 @@ import com.google.devsite.components.ClassIndex
 import kotlinx.html.FlowContent
 import kotlinx.html.a
 import kotlinx.html.div
+import kotlinx.html.em
 import kotlinx.html.h2
 import kotlinx.html.id
 import kotlinx.html.p
@@ -29,12 +30,6 @@ import kotlinx.html.unsafe
 internal class DefaultClassIndex(
     override val data: ClassIndex.Params
 ) : ClassIndex {
-    init {
-        require(data.alphabetizedClasses.isNotEmpty()) {
-            "This page shouldn't be rendered if there are no classes."
-        }
-    }
-
     override fun render(html: FlowContent) = html.run {
         p {
             +"These are all the API classes. See all "
@@ -42,6 +37,15 @@ internal class DefaultClassIndex(
                 +"API packages"
             }
             +"."
+        }
+
+        if (data.alphabetizedClasses.isEmpty()) {
+            p {
+                em {
+                    +"This project has no classes."
+                }
+            }
+            return
         }
 
         val sortedClasses = data.alphabetizedClasses.toSortedMap()

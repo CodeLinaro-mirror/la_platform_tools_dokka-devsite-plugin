@@ -22,14 +22,25 @@ import com.google.devsite.components.testing.NoopSummaryList
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
 import org.junit.Test
-import kotlin.test.assertFailsWith
 
 class DefaultClassIndexTest {
     @Test
-    fun `Empty classes rejects render`() {
-        assertFailsWith<IllegalArgumentException> {
-            DefaultClassIndex(ClassIndex.Params("packages.html", emptyMap()))
-        }
+    fun `Empty classes renders correctly`() {
+        val component = DefaultClassIndex(ClassIndex.Params("packages.html", emptyMap()))
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p>These are all the API classes. See all <a href="packages.html">API packages</a>.</p>
+  <p><em>This project has no classes.</em></p>
+</body>
+            """.trim()
+        )
     }
 
     @Test
