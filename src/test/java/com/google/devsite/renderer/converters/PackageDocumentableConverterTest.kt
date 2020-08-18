@@ -47,7 +47,8 @@ class PackageDocumentableConverterTest(
         )
 
         testWithRootPageNode(sourceFiles) { root ->
-            val converter = PackageDocumentableConverter(root.packagePage(), pathProvider())
+            val converter =
+                PackageDocumentableConverter(language, root.packagePage(), pathProvider())
 
             val components = runBlocking { converter.summaryPage() }
 
@@ -62,7 +63,8 @@ class PackageDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = PackageDocumentableConverter(root.packagePage(), pathProvider())
+            val converter =
+                PackageDocumentableConverter(language, root.packagePage(), pathProvider())
 
             val components = runBlocking { converter.summaryPage() }
             val packageComponent = components.data.content as PackageSummary
@@ -87,7 +89,8 @@ class PackageDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = PackageDocumentableConverter(root.packagePage(), pathProvider())
+            val converter =
+                PackageDocumentableConverter(language, root.packagePage(), pathProvider())
 
             val components = runBlocking { converter.summaryPage() }
             val packageComponent = components.data.content as PackageSummary
@@ -112,7 +115,8 @@ class PackageDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = PackageDocumentableConverter(root.packagePage(), pathProvider())
+            val converter =
+                PackageDocumentableConverter(language, root.packagePage(), pathProvider())
 
             val components = runBlocking { converter.summaryPage() }
             val packageComponent = components.data.content as PackageSummary
@@ -137,7 +141,8 @@ class PackageDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = PackageDocumentableConverter(root.packagePage(), pathProvider())
+            val converter =
+                PackageDocumentableConverter(language, root.packagePage(), pathProvider())
 
             val components = runBlocking { converter.summaryPage() }
             val packageComponent = components.data.content as PackageSummary
@@ -162,7 +167,8 @@ class PackageDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = PackageDocumentableConverter(root.packagePage(), pathProvider())
+            val converter =
+                PackageDocumentableConverter(language, root.packagePage(), pathProvider())
 
             val components = runBlocking { converter.summaryPage() }
             val packageComponent = components.data.content as PackageSummary

@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer.impl
 
+import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.PackageDocumentableConverter
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.html.html
@@ -27,10 +28,11 @@ import org.jetbrains.dokka.pages.PackagePageNode
 /** Renders docs for a single package, including the summary and each symbol. */
 internal class PackageRenderer(
     private val outputWriter: OutputWriter,
-    private val pathProvider: FilePathProvider
+    private val pathProvider: FilePathProvider,
+    private val language: Language
 ) {
     suspend fun writePackageSummary(packagePage: PackagePageNode) {
-        val converter = PackageDocumentableConverter(packagePage, pathProvider)
+        val converter = PackageDocumentableConverter(language, packagePage, pathProvider)
         val page = converter.summaryPage()
         val packageSummary = createHTML().html {
             page.render(this)

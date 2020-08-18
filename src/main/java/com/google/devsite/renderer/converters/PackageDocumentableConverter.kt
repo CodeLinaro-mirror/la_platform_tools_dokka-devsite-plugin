@@ -28,6 +28,7 @@ import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultPackageSummary
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
+import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -41,6 +42,7 @@ import org.jetbrains.dokka.pages.PackagePageNode
 
 /** Converts documentables into components for the package summary page. */
 internal class PackageDocumentableConverter(
+    private val language: Language,
     private val packagePage: PackagePageNode,
     private val pathProvider: FilePathProvider
 ) {

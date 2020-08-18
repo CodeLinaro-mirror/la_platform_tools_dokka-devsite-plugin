@@ -55,7 +55,7 @@ internal class MultiLanguageRenderer(
         val filePaths = DacJavaFilePathProvider(tenant)
         DevsiteRenderer(
             MetadataRenderer(outputWriter, filePaths),
-            PackageRenderer(outputWriter, filePaths)
+            PackageRenderer(outputWriter, filePaths, Language.JAVA)
         ).render(root)
     }
 
@@ -63,7 +63,7 @@ internal class MultiLanguageRenderer(
         val filePaths = DacKotlinFilePathProvider(tenant)
         DevsiteRenderer(
             MetadataRenderer(outputWriter, filePaths),
-            PackageRenderer(outputWriter, filePaths)
+            PackageRenderer(outputWriter, filePaths, Language.KOTLIN)
         ).render(root)
     }
 }
