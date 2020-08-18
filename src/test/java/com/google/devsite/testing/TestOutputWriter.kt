@@ -27,8 +27,8 @@ class TestOutputWriterPlugin(failOnOverwrite: Boolean = false) : DokkaPlugin() {
 
     val testWriter by extending {
         (dokkaBase.outputWriter
-                with writer
-                override dokkaBase.fileWriter)
+            with writer
+            override dokkaBase.fileWriter)
     }
 }
 
@@ -44,5 +44,5 @@ class TestOutputWriter(private val failOnOverwrite: Boolean = false) : OutputWri
     }
 
     override suspend fun writeResources(pathFrom: String, pathTo: String) =
-            write(pathTo, "*** content of $pathFrom ***", "")
+        write(pathTo, "*** content of $pathFrom ***", "")
 }

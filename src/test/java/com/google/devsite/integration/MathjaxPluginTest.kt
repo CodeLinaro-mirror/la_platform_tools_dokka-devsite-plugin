@@ -16,12 +16,12 @@
 
 package com.google.devsite.integration
 
+import com.google.devsite.testing.TestOutputWriterPlugin
 import org.jetbrains.dokka.testApi.testRunner.AbstractCoreTest
 import org.jsoup.Jsoup
 import org.junit.Assert.assertEquals
 import org.junit.Ignore
 import org.junit.Test
-import com.google.devsite.testing.TestOutputWriterPlugin
 
 class MathjaxPluginTest : AbstractCoreTest() {
 
@@ -49,15 +49,15 @@ class MathjaxPluginTest : AbstractCoreTest() {
         """.trimIndent()
         val writerPlugin = TestOutputWriterPlugin()
         testInline(
-                source,
-                configuration,
-                pluginOverrides = listOf(writerPlugin)
+            source,
+            configuration,
+            pluginOverrides = listOf(writerPlugin)
         ) {
             renderingStage = { _, _ ->
                 val mathjaxElements = Jsoup
-                        .parse(writerPlugin.writer.contents.getValue("reference/java/example/TestKt.html"))
-                        .body()
-                        .select("devsite-mathjax")
+                    .parse(writerPlugin.writer.contents.getValue("reference/java/example/TestKt.html"))
+                    .body()
+                    .select("devsite-mathjax")
                 assertEquals(1, mathjaxElements.size)
             }
         }
@@ -85,15 +85,15 @@ class MathjaxPluginTest : AbstractCoreTest() {
         """.trimIndent()
         val writerPlugin = TestOutputWriterPlugin()
         testInline(
-                source,
-                configuration,
-                pluginOverrides = listOf(writerPlugin)
+            source,
+            configuration,
+            pluginOverrides = listOf(writerPlugin)
         ) {
             renderingStage = { _, _ ->
                 val mathjaxElements = Jsoup
-                        .parse(writerPlugin.writer.contents.getValue("reference/java/example/Bar.html"))
-                        .body()
-                        .select("devsite-mathjax")
+                    .parse(writerPlugin.writer.contents.getValue("reference/java/example/Bar.html"))
+                    .body()
+                    .select("devsite-mathjax")
                 assertEquals(0, mathjaxElements.size)
             }
         }

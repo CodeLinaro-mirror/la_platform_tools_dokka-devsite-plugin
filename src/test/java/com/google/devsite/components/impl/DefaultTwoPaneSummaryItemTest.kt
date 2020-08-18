@@ -46,7 +46,12 @@ class DefaultTwoPaneSummaryItemTest {
     @Test
     fun `Simple item renders correctly`() {
         val component =
-            DefaultTwoPaneSummaryItem(Params(PlainTextOutput("Title"), PlainTextOutput("Description")))
+            DefaultTwoPaneSummaryItem(
+                Params(
+                    PlainTextOutput("Title"),
+                    PlainTextOutput("Description")
+                )
+            )
 
         val b = createHTML().tr {
             component.render(this)

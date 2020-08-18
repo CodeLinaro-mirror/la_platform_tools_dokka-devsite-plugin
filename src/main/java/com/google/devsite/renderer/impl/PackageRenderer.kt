@@ -38,7 +38,11 @@ internal class PackageRenderer(
             page.render(this)
         }
 
-        outputWriter.write(pathProvider.forType(packagePage.name, "package-summary"), packageSummary, "")
+        outputWriter.write(
+            pathProvider.forType(packagePage.name, "package-summary"),
+            packageSummary,
+            ""
+        )
     }
 
     suspend fun writeClass(clazz: ClasslikePageNode) {
