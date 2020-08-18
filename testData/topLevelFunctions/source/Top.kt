@@ -16,7 +16,7 @@
 
 @file:Suppress("UNUSED_PARAMETER")
 
-package androidx.example
+package dokkatest.toplevel
 
 /** Humpty Dumpty sat on a wall... */
 const val bool = true

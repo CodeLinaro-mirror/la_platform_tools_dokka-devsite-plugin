@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package androidx.paging
+package dokkatest.simple
 
 /**
- * Sample interface 2
+ * Sample class 1
  */
-interface Two {
-    val x: One
+class One() {
+    /** Property docs. */
+    val v = 0
 
-    fun z()
+    /** Function docs. */
+    fun w() = Unit
 }

@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 
-package abc
+package dokkatest.simple
 
-fun foo() = ""
+/**
+ * Sample interface 2
+ */
+interface Two {
+    val x: One
+
+    fun z()
+}

@@ -14,15 +14,6 @@
  * limitations under the License.
  */
 
-package androidx.paging
+package dokkatest.alone
 
-/**
- * Sample class 1
- */
-class One() {
-    /** Property docs. */
-    val v = 0
-
-    /** Function docs. */
-    fun w() = Unit
-}
+fun foo() = ""
