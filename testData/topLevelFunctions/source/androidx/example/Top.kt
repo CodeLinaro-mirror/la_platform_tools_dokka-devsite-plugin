@@ -15,6 +15,7 @@
  */
 
 @file:Suppress("UNUSED_PARAMETER")
+
 package androidx.example
 
 /** Humpty Dumpty sat on a wall... */
@@ -33,5 +34,11 @@ fun b(i1: Int, i2: String, i3: Boolean, foo: Foo): String = ""
 /** I'm so sad, they're deleteing me! */
 @Deprecated("This method was too sad.")
 fun sadBoi(): Nothing = error("Ouch")
+
+/** A brutally difficult function to render. Good luck! */
+suspend inline fun <T, R : Number> List<T>.foo(
+    a: T,
+    @Suppress("abc") block: suspend Set<Boolean>.(Map<String, List<T>>, Double) -> Collection<R>
+): List<Float> = emptyList()
 
 class Foo

@@ -16,15 +16,20 @@
 
 package com.google.devsite.components
 
+import com.google.devsite.renderer.Language
+
 /** Represents the package summary page. */
 internal interface PackageSummary : ContextFreeComponent {
     val data: Params
 
     class Params(
+        val displayLanguage: Language,
         val interfaces: SummaryList,
         val classes: SummaryList,
         val enums: SummaryList,
         val exceptions: SummaryList,
-        val annotations: SummaryList
+        val annotations: SummaryList,
+        val topLevelFunctionsSummary: SummaryList,
+        val extensionFunctionsSummary: SummaryList
     )
 }

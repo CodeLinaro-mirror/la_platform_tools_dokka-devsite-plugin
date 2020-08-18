@@ -17,6 +17,7 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.components.FunctionSummary
 import com.google.devsite.components.Link
 import com.google.devsite.components.PackageSummary
 import com.google.devsite.components.TwoPaneSummaryItem
@@ -156,6 +157,52 @@ internal class PackageDocumentableConverterTest(
 
             assertThat(titleComponent.data.name).isEqualTo("ImAnAnnotation")
             assertPath(titleComponent.data.url, "androidx/example/ImAnAnnotation.html")
+        }
+    }
+
+    @Test
+    fun `Package summary creates components for top-level functions`() {
+        val source = """
+            |fun foo()
+        """.trimMargin()
+
+        testWithRootPageNode(source) { root ->
+            val converter =
+                PackageDocumentableConverter(language, root.packagePage(), pathProvider())
+
+            val components = runBlocking { converter.summaryPage() }
+            val packageComponent = components.data.content as PackageSummary
+            assertThat(packageComponent.data.topLevelFunctionsSummary.data.items).hasSize(1)
+            assertThat(packageComponent.data.extensionFunctionsSummary.data.items).isEmpty()
+
+            val functions = packageComponent.data.topLevelFunctionsSummary
+            val functionComponent = functions.data.items.single() as FunctionSummary
+            val titleComponent = functionComponent.data.signature.data.name
+
+            assertThat(titleComponent.data.name).isEqualTo("foo")
+        }
+    }
+
+    @Test
+    fun `Package summary creates components for extension functions`() {
+        val source = """
+            |fun String.foo()
+        """.trimMargin()
+
+        testWithRootPageNode(source) { root ->
+            val converter =
+                PackageDocumentableConverter(language, root.packagePage(), pathProvider())
+
+            val components = runBlocking { converter.summaryPage() }
+            val packageComponent = components.data.content as PackageSummary
+            assertThat(packageComponent.data.topLevelFunctionsSummary.data.items).isEmpty()
+            assertThat(packageComponent.data.extensionFunctionsSummary.data.items).hasSize(1)
+
+            val functions = packageComponent.data.extensionFunctionsSummary
+            val functionComponent = functions.data.items.single() as FunctionSummary
+            val titleComponent = functionComponent.data.signature.data.name
+
+            assertThat(titleComponent.data.name).isEqualTo("foo")
         }
     }
 

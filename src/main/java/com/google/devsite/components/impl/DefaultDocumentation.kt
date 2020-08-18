@@ -147,7 +147,8 @@ internal class DefaultDocumentation(
                 is See -> TODO("b/163811276: ${tag.javaClass.simpleName}")
                 is Param -> TODO("b/163811276: ${tag.javaClass.simpleName}")
                 is Throws -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is Sample -> TODO("b/163811276: ${tag.javaClass.simpleName}")
+                // TODO("b/163811276: ${tag.javaClass.simpleName}")
+                is Sample -> Unit // Don't crash b/c integ tests are using this
                 is Property -> TODO("b/163811276: ${tag.javaClass.simpleName}")
                 is CustomTagWrapper -> TODO("b/163811276: ${tag.javaClass.simpleName}")
                 is Author -> TODO("b/163811276: ${tag.javaClass.simpleName}")

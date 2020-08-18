@@ -18,6 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.devsite.components.PackageSummary
 import com.google.devsite.components.SummaryList
+import com.google.devsite.renderer.Language
 import kotlinx.html.FlowContent
 import kotlinx.html.h2
 
@@ -33,6 +34,11 @@ internal class DefaultPackageSummary(
         renderSummary(data.enums, "Enums")
         renderSummary(data.exceptions, "Exceptions")
         renderSummary(data.annotations, "Annotations")
+
+        if (data.displayLanguage == Language.KOTLIN) {
+            renderSummary(data.topLevelFunctionsSummary, "Top-level functions summary")
+            renderSummary(data.extensionFunctionsSummary, "Extension functions summary")
+        }
     }
 
     private fun FlowContent.renderSummary(summary: SummaryList, title: String) {

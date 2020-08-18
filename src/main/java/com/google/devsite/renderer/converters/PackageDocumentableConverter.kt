@@ -36,6 +36,7 @@ import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DEnum
+import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.pages.PackagePageNode
@@ -46,6 +47,8 @@ internal class PackageDocumentableConverter(
     private val packagePage: PackagePageNode,
     private val pathProvider: FilePathProvider
 ) {
+    private val functionConverter = FunctionDocumentableConverter(language, pathProvider)
+
     /** @return the root component for the package summary page */
     suspend fun summaryPage(): DevsitePage = coroutineScope {
         val doc = packagePage.documentable as DPackage
@@ -69,17 +72,26 @@ internal class PackageDocumentableConverter(
         val annotations = async {
             classlikesToSummary(doc.classlikes.filterIsInstance<DAnnotation>())
         }
+        val topLevelFunctionsSummary = async {
+            functionsToSummary(doc.functions.filter { it.receiver == null })
+        }
+        val extensionFunctionsSummary = async {
+            functionsToSummary(doc.functions.filterNot { it.receiver == null })
+        }
 
         DefaultDevsitePage(
             DevsitePage.Params(
                 packagePage.name,
                 DefaultPackageSummary(
                     PackageSummary.Params(
+                        language,
                         interfaces = interfaces.await(),
                         classes = classes.await(),
                         enums = enums.await(),
                         exceptions = exceptions.await(),
-                        annotations = annotations.await()
+                        annotations = annotations.await(),
+                        topLevelFunctionsSummary = topLevelFunctionsSummary.await(),
+                        extensionFunctionsSummary = extensionFunctionsSummary.await()
                     )
                 )
             )
@@ -107,6 +119,19 @@ internal class PackageDocumentableConverter(
                     )
                 )
             )
+        }
+
+        return DefaultSummaryList(
+            SummaryList.Params(
+                header = null,
+                items = components
+            )
+        )
+    }
+
+    private fun functionsToSummary(functions: List<DFunction>): SummaryList {
+        val components = functions.mapNotNull {
+            functionConverter.summary(it)
         }
 
         return DefaultSummaryList(
