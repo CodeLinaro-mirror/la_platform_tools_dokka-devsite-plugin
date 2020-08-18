@@ -16,10 +16,16 @@
 
 package com.google.devsite.testing
 
+import com.google.common.truth.Truth.assertThat
+import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
+import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
 import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.testApi.testRunner.AbstractCoreTest
 
-abstract class ConverterTestBase : AbstractCoreTest() {
+internal abstract class ConverterTestBase(
+    private val language: Language = Language.JAVA
+) : AbstractCoreTest() {
     protected fun testWithRootPageNode(sourceFiles: List<String>, test: (RootPageNode) -> Unit) {
         val configuration = dokkaConfiguration {
             sourceSets {
@@ -51,5 +57,17 @@ abstract class ConverterTestBase : AbstractCoreTest() {
             |$sourceCode
         """.trimMargin()
         testWithRootPageNode(listOf(source), test)
+    }
+
+    protected fun assertPath(actual: String, expected: String) {
+        when (language) {
+            Language.JAVA -> assertThat(actual).isEqualTo("/reference/$expected")
+            Language.KOTLIN -> assertThat(actual).isEqualTo("/reference/kotlin/$expected")
+        }
+    }
+
+    protected fun pathProvider() = when (language) {
+        Language.JAVA -> DacJavaFilePathProvider("androidx")
+        Language.KOTLIN -> DacKotlinFilePathProvider("androidx")
     }
 }

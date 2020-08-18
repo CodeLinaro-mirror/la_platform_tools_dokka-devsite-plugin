@@ -25,7 +25,7 @@ import org.jetbrains.dokka.pages.ClasslikePageNode
 import org.jetbrains.dokka.pages.ContentPage
 import org.junit.Test
 
-class DefaultDocumentationTest : ConverterTestBase() {
+internal class DefaultDocumentationTest : ConverterTestBase() {
     @Test
     fun `No documentation renders correctly`() {
         val source = """

@@ -21,8 +21,6 @@ import com.google.devsite.components.Link
 import com.google.devsite.components.PackageSummary
 import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
-import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
-import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.pages.PackagePageNode
@@ -32,9 +30,9 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-class PackageDocumentableConverterTest(
+internal class PackageDocumentableConverterTest(
     private val language: Language
-) : ConverterTestBase() {
+) : ConverterTestBase(language) {
     @Test
     fun `Package summary creates components with correct page title`() {
         val sourceFiles = listOf(
@@ -73,12 +71,7 @@ class PackageDocumentableConverterTest(
             val titleComponent = interfaceComponent.data.title as Link
 
             assertThat(titleComponent.data.name).isEqualTo("ImAnInterface")
-            when (language) {
-                Language.JAVA -> assertThat(titleComponent.data.url)
-                    .isEqualTo("/reference/androidx/example/ImAnInterface.html")
-                Language.KOTLIN -> assertThat(titleComponent.data.url)
-                    .isEqualTo("/reference/kotlin/androidx/example/ImAnInterface.html")
-            }
+            assertPath(titleComponent.data.url, "androidx/example/ImAnInterface.html")
         }
     }
 
@@ -99,12 +92,7 @@ class PackageDocumentableConverterTest(
             val titleComponent = classComponent.data.title as Link
 
             assertThat(titleComponent.data.name).isEqualTo("ImAClass")
-            when (language) {
-                Language.JAVA -> assertThat(titleComponent.data.url)
-                    .isEqualTo("/reference/androidx/example/ImAClass.html")
-                Language.KOTLIN -> assertThat(titleComponent.data.url)
-                    .isEqualTo("/reference/kotlin/androidx/example/ImAClass.html")
-            }
+            assertPath(titleComponent.data.url, "androidx/example/ImAClass.html")
         }
     }
 
@@ -125,12 +113,7 @@ class PackageDocumentableConverterTest(
             val titleComponent = enumComponent.data.title as Link
 
             assertThat(titleComponent.data.name).isEqualTo("ImAnEnum")
-            when (language) {
-                Language.JAVA -> assertThat(titleComponent.data.url)
-                    .isEqualTo("/reference/androidx/example/ImAnEnum.html")
-                Language.KOTLIN -> assertThat(titleComponent.data.url)
-                    .isEqualTo("/reference/kotlin/androidx/example/ImAnEnum.html")
-            }
+            assertPath(titleComponent.data.url, "androidx/example/ImAnEnum.html")
         }
     }
 
@@ -151,12 +134,7 @@ class PackageDocumentableConverterTest(
             val titleComponent = exceptionComponent.data.title as Link
 
             assertThat(titleComponent.data.name).isEqualTo("ImAnException")
-            when (language) {
-                Language.JAVA -> assertThat(titleComponent.data.url)
-                    .isEqualTo("/reference/androidx/example/ImAnException.html")
-                Language.KOTLIN -> assertThat(titleComponent.data.url)
-                    .isEqualTo("/reference/kotlin/androidx/example/ImAnException.html")
-            }
+            assertPath(titleComponent.data.url, "androidx/example/ImAnException.html")
         }
     }
 
@@ -177,21 +155,11 @@ class PackageDocumentableConverterTest(
             val titleComponent = annotationComponent.data.title as Link
 
             assertThat(titleComponent.data.name).isEqualTo("ImAnAnnotation")
-            when (language) {
-                Language.JAVA -> assertThat(titleComponent.data.url)
-                    .isEqualTo("/reference/androidx/example/ImAnAnnotation.html")
-                Language.KOTLIN -> assertThat(titleComponent.data.url)
-                    .isEqualTo("/reference/kotlin/androidx/example/ImAnAnnotation.html")
-            }
+            assertPath(titleComponent.data.url, "androidx/example/ImAnAnnotation.html")
         }
     }
 
     private fun RootPageNode.packagePage() = children.filterIsInstance<PackagePageNode>().single()
-
-    private fun pathProvider() = when (language) {
-        Language.JAVA -> DacJavaFilePathProvider("androidx")
-        Language.KOTLIN -> DacKotlinFilePathProvider("androidx")
-    }
 
     companion object {
         @JvmStatic

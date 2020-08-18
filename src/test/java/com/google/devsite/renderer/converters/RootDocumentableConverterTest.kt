@@ -22,17 +22,13 @@ import com.google.devsite.components.Link
 import com.google.devsite.components.PackageIndex
 import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
-import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
-import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
 import com.google.devsite.testing.ConverterTestBase
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-class RootDocumentableConverterTest(
-    private val language: Language
-) : ConverterTestBase() {
+internal class RootDocumentableConverterTest(language: Language) : ConverterTestBase(language) {
     @Test
     fun `Class index creates components with correct page title`() {
         val source = """
@@ -60,12 +56,7 @@ class RootDocumentableConverterTest(
             val components = converter.classesPage()
 
             val classIndex = components.data.content as ClassIndex
-            when (language) {
-                Language.JAVA -> assertThat(classIndex.data.packagesUrl)
-                    .isEqualTo("/reference/androidx/packages.html")
-                Language.KOTLIN -> assertThat(classIndex.data.packagesUrl)
-                    .isEqualTo("/reference/kotlin/androidx/packages.html")
-            }
+            assertPath(classIndex.data.packagesUrl, "androidx/packages.html")
         }
     }
 
@@ -89,12 +80,7 @@ class RootDocumentableConverterTest(
 
             val clazz = (summary.data.items.single() as TwoPaneSummaryItem).data.title as Link
             assertThat(clazz.data.name).isEqualTo("Foo")
-            when (language) {
-                Language.JAVA -> assertThat(clazz.data.url)
-                    .isEqualTo("/reference/androidx/example/Foo.html")
-                Language.KOTLIN -> assertThat(clazz.data.url)
-                    .isEqualTo("/reference/kotlin/androidx/example/Foo.html")
-            }
+            assertPath(clazz.data.url, "androidx/example/Foo.html")
         }
     }
 
@@ -124,12 +110,7 @@ class RootDocumentableConverterTest(
                 val expectedName = expectedClasses[i]
 
                 assertThat(clazz.data.name).isEqualTo(expectedName)
-                when (language) {
-                    Language.JAVA -> assertThat(clazz.data.url)
-                        .isEqualTo("/reference/androidx/example/$expectedName.html")
-                    Language.KOTLIN -> assertThat(clazz.data.url)
-                        .isEqualTo("/reference/kotlin/androidx/example/$expectedName.html")
-                }
+                assertPath(clazz.data.url, "androidx/example/$expectedName.html")
             }
         }
     }
@@ -155,12 +136,7 @@ class RootDocumentableConverterTest(
 
             val fooClazz = (fooSummary.data.items.single() as TwoPaneSummaryItem).data.title as Link
             assertThat(fooClazz.data.name).isEqualTo("Foo")
-            when (language) {
-                Language.JAVA -> assertThat(fooClazz.data.url)
-                    .isEqualTo("/reference/androidx/example/Foo.html")
-                Language.KOTLIN -> assertThat(fooClazz.data.url)
-                    .isEqualTo("/reference/kotlin/androidx/example/Foo.html")
-            }
+            assertPath(fooClazz.data.url, "androidx/example/Foo.html")
 
             val (barLetter, barSummary) = classIndex.data.alphabetizedClasses.entries.last()
             assertThat(barLetter).isEqualTo('B')
@@ -168,12 +144,7 @@ class RootDocumentableConverterTest(
 
             val barClazz = (barSummary.data.items.single() as TwoPaneSummaryItem).data.title as Link
             assertThat(barClazz.data.name).isEqualTo("Bar")
-            when (language) {
-                Language.JAVA -> assertThat(barClazz.data.url)
-                    .isEqualTo("/reference/androidx/example/Bar.html")
-                Language.KOTLIN -> assertThat(barClazz.data.url)
-                    .isEqualTo("/reference/kotlin/androidx/example/Bar.html")
-            }
+            assertPath(barClazz.data.url, "androidx/example/Bar.html")
         }
     }
 
@@ -204,12 +175,7 @@ class RootDocumentableConverterTest(
             val components = converter.packagesPage()
 
             val packageIndex = components.data.content as PackageIndex
-            when (language) {
-                Language.JAVA -> assertThat(packageIndex.data.classesUrl)
-                    .isEqualTo("/reference/androidx/classes.html")
-                Language.KOTLIN -> assertThat(packageIndex.data.classesUrl)
-                    .isEqualTo("/reference/kotlin/androidx/classes.html")
-            }
+            assertPath(packageIndex.data.classesUrl, "androidx/classes.html")
         }
     }
 
@@ -235,12 +201,7 @@ class RootDocumentableConverterTest(
 
             val packageLink = (packages.single() as TwoPaneSummaryItem).data.title as Link
             assertThat(packageLink.data.name).isEqualTo("androidx.example")
-            when (language) {
-                Language.JAVA -> assertThat(packageLink.data.url)
-                    .isEqualTo("/reference/androidx/example/package-summary.html")
-                Language.KOTLIN -> assertThat(packageLink.data.url)
-                    .isEqualTo("/reference/kotlin/androidx/example/package-summary.html")
-            }
+            assertPath(packageLink.data.url, "androidx/example/package-summary.html")
         }
     }
 
@@ -281,19 +242,9 @@ class RootDocumentableConverterTest(
                 val packageLink = (packageItem as TwoPaneSummaryItem).data.title as Link
 
                 assertThat(packageLink.data.name).isEqualTo(expectedPackages[i])
-                when (language) {
-                    Language.JAVA -> assertThat(packageLink.data.url)
-                        .isEqualTo("/reference/${expectedPackages[i]}/package-summary.html")
-                    Language.KOTLIN -> assertThat(packageLink.data.url)
-                        .isEqualTo("/reference/kotlin/${expectedPackages[i]}/package-summary.html")
-                }
+                assertPath(packageLink.data.url, "${expectedPackages[i]}/package-summary.html")
             }
         }
-    }
-
-    private fun pathProvider() = when (language) {
-        Language.JAVA -> DacJavaFilePathProvider("androidx")
-        Language.KOTLIN -> DacKotlinFilePathProvider("androidx")
     }
 
     companion object {
