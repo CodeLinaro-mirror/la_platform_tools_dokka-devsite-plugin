@@ -20,7 +20,7 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.FunctionSummary.Params
 import com.google.devsite.components.testing.NoopDocumentation
 import com.google.devsite.components.testing.NoopFunctionSignature
-import com.google.devsite.components.testing.NoopLink
+import com.google.devsite.components.testing.NoopParameterType
 import kotlinx.html.stream.createHTML
 import kotlinx.html.table
 import kotlinx.html.tr
@@ -32,7 +32,7 @@ class DefaultFunctionSummaryTest {
         val component = DefaultFunctionSummary(
             Params(
                 modifiers = emptyList(),
-                returnType = NoopLink("Unit"),
+                returnType = NoopParameterType("Unit"),
                 signature = NoopFunctionSignature("foo()"),
                 description = NoopDocumentation("This method does baz.")
             )
@@ -63,7 +63,7 @@ class DefaultFunctionSummaryTest {
         val component = DefaultFunctionSummary(
             Params(
                 modifiers = listOf("open", "suspend"),
-                returnType = NoopLink("Unit"),
+                returnType = NoopParameterType("Unit"),
                 signature = NoopFunctionSignature("foo()"),
                 description = NoopDocumentation("This method does baz.")
             )

@@ -19,6 +19,7 @@ package com.google.devsite.components.impl
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.ParameterType.Params
 import com.google.devsite.components.testing.NoopLink
+import com.google.devsite.components.testing.NoopParameterType
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -50,7 +51,7 @@ class DefaultParameterTypeTest {
         val component = DefaultParameterType(
             Params(
                 type = NoopLink("List"),
-                generics = listOf(NoopLink("String"))
+                generics = listOf(NoopParameterType("String"))
             )
         )
 
@@ -71,7 +72,7 @@ class DefaultParameterTypeTest {
         val component = DefaultParameterType(
             Params(
                 type = NoopLink("Map"),
-                generics = listOf(NoopLink("String"), NoopLink("Int"))
+                generics = listOf(NoopParameterType("String"), NoopParameterType("Int"))
             )
         )
 

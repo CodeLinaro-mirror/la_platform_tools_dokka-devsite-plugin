@@ -22,7 +22,7 @@ internal interface FunctionSummary : RowComponent {
 
     class Params(
         val modifiers: List<String>,
-        val returnType: Link,
+        val returnType: ParameterType,
         val signature: FunctionSignature,
         val description: Documentation
     )

@@ -22,6 +22,6 @@ internal interface ParameterType : ContextFreeComponent {
 
     class Params(
         val type: Link,
-        val generics: List<Link>
+        val generics: List<ParameterType>
     )
 }
