@@ -98,6 +98,27 @@ internal class PackageDocumentableConverterTest(
     }
 
     @Test
+    fun `Package summary creates components for nested classes`() {
+        val source = """
+            |class Outer { class Inner }
+        """.trimMargin()
+
+        testWithRootPageNode(source) { root ->
+            val converter =
+                PackageDocumentableConverter(language, root.packagePage(), pathProvider())
+
+            val components = runBlocking { converter.summaryPage() }
+            val packageComponent = components.data.content as PackageSummary
+            val classComponent =
+                packageComponent.data.classes.data.items.last() as TwoPaneSummaryItem
+            val titleComponent = classComponent.data.title as Link
+
+            assertThat(titleComponent.data.name).isEqualTo("Outer.Inner")
+            assertPath(titleComponent.data.url, "androidx/example/Outer.Inner.html")
+        }
+    }
+
+    @Test
     fun `Package summary creates components for enums`() {
         val source = """
             |enum class ImAnEnum

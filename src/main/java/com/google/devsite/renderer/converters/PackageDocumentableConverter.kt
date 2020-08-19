@@ -52,25 +52,26 @@ internal class PackageDocumentableConverter(
     /** @return the root component for the package summary page */
     suspend fun summaryPage(): DevsitePage = coroutineScope {
         val doc = packagePage.documentable as DPackage
+        val allClasslikes = doc.explodedChildren.filterIsInstance<DClasslike>()
         val interfaces = async {
-            classlikesToSummary(doc.classlikes.filterIsInstance<DInterface>())
+            classlikesToSummary(allClasslikes.filterIsInstance<DInterface>())
         }
         val classes = async {
-            classlikesToSummary(doc.classlikes.filterIsInstance<DClass>())
+            classlikesToSummary(allClasslikes.filterIsInstance<DClass>())
         }
         val enums = async {
-            classlikesToSummary(doc.classlikes.filterIsInstance<DEnum>())
+            classlikesToSummary(allClasslikes.filterIsInstance<DEnum>())
         }
         val exceptions = async {
             // Dokka doesn't tell us when something is an exception and the supertypes only
             // include direct parents, so we make an educated guess that a class is an exception
             // type if it inherits methods from Throwable.
-            classlikesToSummary(doc.classlikes.filterIsInstance<DClass>().filter { clazz ->
+            classlikesToSummary(allClasslikes.filterIsInstance<DClass>().filter { clazz ->
                 clazz.functions.any { function -> function.dri.classNames == "Throwable" }
             })
         }
         val annotations = async {
-            classlikesToSummary(doc.classlikes.filterIsInstance<DAnnotation>())
+            classlikesToSummary(allClasslikes.filterIsInstance<DAnnotation>())
         }
         val topLevelFunctionsSummary = async {
             functionsToSummary(doc.functions.filter { it.receiver == null })
@@ -101,7 +102,7 @@ internal class PackageDocumentableConverter(
     private fun classlikesToSummary(classlikes: List<DClasslike>): SummaryList {
         val components = classlikes.map { classlike ->
             val packageName = classlike.dri.packageName!!
-            val name = classlike.name!!
+            val name = classlike.dri.classNames!!
 
             DefaultTwoPaneSummaryItem(
                 TwoPaneSummaryItem.Params(

@@ -17,6 +17,11 @@
 package com.google.devsite.renderer.converters
 
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.WithChildren
+
+/** Recursively expands all children. */
+internal val <T> WithChildren<T>.explodedChildren: List<T>
+    get() = children + children.filterIsInstance<WithChildren<T>>().flatMap { it.explodedChildren }
 
 /** @return the doc tags (aka human-written javadoc or kdoc) associated with this documentable */
 internal fun Documentable.tags() = documentation.values.singleOrNull()?.children.orEmpty()

@@ -31,6 +31,9 @@ import com.google.devsite.components.impl.DefaultPackageIndex
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import org.jetbrains.dokka.model.DClasslike
+import org.jetbrains.dokka.model.DEnumEntry
+import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.pages.ClasslikePageNode
 import org.jetbrains.dokka.pages.PackagePageNode
 import org.jetbrains.dokka.pages.RootPageNode
@@ -42,8 +45,11 @@ internal class RootDocumentableConverter(
 ) {
     /** @return the root component for the class index page */
     fun classesPage(): DevsitePage {
-        val allClasses = root.children.flatMap { it.children }.filterIsInstance<ClasslikePageNode>()
-        val alphabetizedClasses = allClasses.groupBy { it.name.first().toUpperCase() }
+        val allClasses = root.explodedChildren
+            .filterIsInstance<ClasslikePageNode>()
+            .filterNot { it.documentable is DEnumEntry }
+            .map { it.documentable as DClasslike }
+        val alphabetizedClasses = allClasses.groupBy(::categorizeClasslikes)
         val componentClasses = alphabetizedClasses.mapValues { (_, nodes) ->
             DefaultSummaryList(
                 SummaryList.Params(
@@ -63,7 +69,9 @@ internal class RootDocumentableConverter(
 
     /** @return the root component for the package index page */
     fun packagesPage(): DevsitePage {
-        val packages = root.children.filterIsInstance<PackagePageNode>()
+        val packages = root.children
+            .filterIsInstance<PackagePageNode>()
+            .map { it.documentable as DPackage }
         val componentPackages = DefaultSummaryList(
             SummaryList.Params(
                 header = null,
@@ -79,20 +87,27 @@ internal class RootDocumentableConverter(
         )
     }
 
-    private fun summaryForClass(clazz: ClasslikePageNode): DefaultTwoPaneSummaryItem {
-        val doc = clazz.documentable!!
-        val packageName = doc.dri.packageName!!
+    /** Groups class-like types into buckets of their first letter. */
+    private fun categorizeClasslikes(classlike: DClasslike): Char {
+        val name = classlike.dri.classNames!!
+        return name.first().toUpperCase()
+    }
+
+    private fun summaryForClass(classlike: DClasslike): DefaultTwoPaneSummaryItem {
+        val packageName = classlike.dri.packageName!!
+        val name = classlike.dri.classNames!!
+
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
                 title = DefaultLink(
                     Link.Params(
-                        name = clazz.name,
-                        url = pathProvider.forType(packageName, clazz.name)
+                        name = name,
+                        url = pathProvider.forType(packageName, name)
                     )
                 ),
                 description = DefaultDocumentation(
                     Documentation.Params(
-                        tags = doc.tags(),
+                        tags = classlike.tags(),
                         summary = true
                     )
                 )
@@ -100,18 +115,18 @@ internal class RootDocumentableConverter(
         )
     }
 
-    private fun summaryForPackage(packageNode: PackagePageNode): DefaultTwoPaneSummaryItem {
+    private fun summaryForPackage(packageDoc: DPackage): DefaultTwoPaneSummaryItem {
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
                 title = DefaultLink(
                     Link.Params(
-                        name = packageNode.name,
-                        url = pathProvider.forType(packageNode.name, "package-summary")
+                        name = packageDoc.name,
+                        url = pathProvider.forType(packageDoc.name, "package-summary")
                     )
                 ),
                 description = DefaultDocumentation(
                     Documentation.Params(
-                        tags = packageNode.documentable!!.tags(),
+                        tags = packageDoc.tags(),
                         summary = true
                     )
                 )

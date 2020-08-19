@@ -85,6 +85,58 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
     }
 
     @Test
+    fun `Class index creates components for nested class`() {
+        val source = """
+            |class Outer { class Inner }
+        """.trimMargin()
+
+        testWithRootPageNode(source) { root ->
+            val converter = RootDocumentableConverter(root, pathProvider())
+
+            val components = converter.classesPage()
+
+            val classIndex = components.data.content as ClassIndex
+            val summaries = classIndex.data.alphabetizedClasses
+            assertThat(summaries).hasSize(1)
+
+            val (letter, summary) = classIndex.data.alphabetizedClasses.entries.single()
+            assertThat(letter).isEqualTo('O')
+            assertThat(summary.data.items).hasSize(2)
+
+            val outer = (summary.data.items.first() as TwoPaneSummaryItem).data.title as Link
+            assertThat(outer.data.name).isEqualTo("Outer")
+            assertPath(outer.data.url, "androidx/example/Outer.html")
+
+            val inner = (summary.data.items.last() as TwoPaneSummaryItem).data.title as Link
+            assertThat(inner.data.name).isEqualTo("Outer.Inner")
+            assertPath(inner.data.url, "androidx/example/Outer.Inner.html")
+        }
+    }
+
+    @Test
+    fun `Class index creates components for enum`() {
+        val source = """
+            |enum class Choice { A, B }
+        """.trimMargin()
+
+        testWithRootPageNode(source) { root ->
+            val converter = RootDocumentableConverter(root, pathProvider())
+
+            val components = converter.classesPage()
+
+            val classIndex = components.data.content as ClassIndex
+            val summaries = classIndex.data.alphabetizedClasses
+            assertThat(summaries).hasSize(1)
+
+            val (_, summary) = classIndex.data.alphabetizedClasses.entries.single()
+
+            val enum = (summary.data.items.single() as TwoPaneSummaryItem).data.title as Link
+            assertThat(enum.data.name).isEqualTo("Choice")
+            assertPath(enum.data.url, "androidx/example/Choice.html")
+        }
+    }
+
+    @Test
     fun `Class index creates components for multiple classes starting with same letter`() {
         val source = """
             |class Fo
