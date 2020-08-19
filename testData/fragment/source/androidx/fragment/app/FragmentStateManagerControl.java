@@ -14,32 +14,17 @@
  * limitations under the License.
  */
 
-package com.google.devsite.integration
 
-import com.google.devsite.testing.IntegrationTestBase
-import org.junit.Test
+package androidx.fragment.app;
+
 
 /**
- * Full integration tests of source to html generation.
+ * @see androidx.fragment.app.FragmentManager#enableNewStateManager(boolean)
  */
-class BasicTest : IntegrationTestBase() {
-    @Test
-    fun `Validate simple classes`() {
-        verifyDirectory("simple")
-    }
 
-    @Test
-    fun `Validate simple top-level functions`() {
-        verifyDirectory("topLevelFunctions")
-    }
-
-    @Test
-    fun `Validate inner classes`() {
-        verifyDirectory("innerClasses")
-    }
-
-    @Test
-    fun `Validate prod AndroidX fragment lib`() {
-        verifyDirectory("fragment")
-    }
+@SuppressWarnings({"unchecked", "deprecation", "all"})
+@java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.CLASS)
+@java.lang.annotation.Target({java.lang.annotation.ElementType.METHOD})
+public @interface FragmentStateManagerControl {
 }
+
