@@ -70,7 +70,11 @@ tasks.withType<ShadowJar> {
 }
 
 sourceSets.test {
-    java.srcDirs("testData/simple", "testData/topLevelFunctions")
+    java.srcDirs(
+        "testData/innerClasses",
+        "testData/simple",
+        "testData/topLevelFunctions"
+    )
 }
 
 val zipTask = project.tasks.register<Zip>("zipResultsOf${name.capitalize()}") {

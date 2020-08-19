@@ -32,4 +32,9 @@ class BasicTest : IntegrationTestBase() {
     fun `Validate simple top-level functions`() {
         verifyDirectory("topLevelFunctions")
     }
+
+    @Test
+    fun `Validate inner classes`() {
+        verifyDirectory("innerClasses")
+    }
 }
