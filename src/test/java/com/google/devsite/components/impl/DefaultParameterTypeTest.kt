@@ -29,8 +29,7 @@ class DefaultParameterTypeTest {
     fun `Simple parameter type renders correctly`() {
         val component = DefaultParameterType(
             Params(
-                type = NoopLink("Int"),
-                generics = emptyList()
+                type = NoopLink("Int")
             )
         )
 

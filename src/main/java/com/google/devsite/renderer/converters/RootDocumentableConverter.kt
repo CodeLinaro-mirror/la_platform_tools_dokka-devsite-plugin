@@ -47,8 +47,7 @@ internal class RootDocumentableConverter(
         val componentClasses = alphabetizedClasses.mapValues { (_, nodes) ->
             DefaultSummaryList(
                 SummaryList.Params(
-                    header = null,
-                    nodes.map(::summaryForClass)
+                    items = nodes.map(::summaryForClass)
                 )
             )
         }
@@ -66,8 +65,7 @@ internal class RootDocumentableConverter(
         val packages = root.children.filterIsInstance<PackagePageNode>()
         val componentPackages = DefaultSummaryList(
             SummaryList.Params(
-                header = null,
-                packages.map(::summaryForPackage)
+                items = packages.map(::summaryForPackage)
             )
         )
 

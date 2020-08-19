@@ -31,7 +31,6 @@ class DefaultFunctionSummaryTest {
     fun `Simple function summary renders correctly`() {
         val component = DefaultFunctionSummary(
             Params(
-                modifiers = emptyList(),
                 returnType = NoopParameterType("Unit"),
                 signature = NoopFunctionSignature("foo()"),
                 description = NoopDocumentation("This method does baz.")

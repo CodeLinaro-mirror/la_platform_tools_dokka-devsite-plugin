@@ -26,7 +26,7 @@ import org.junit.Test
 class DefaultSummaryListTest {
     @Test
     fun `Empty summary renders correctly`() {
-        val component = DefaultSummaryList(Params(header = null, emptyList()))
+        val component = DefaultSummaryList(Params(items = emptyList()))
 
         val output = createHTML().div {
             component.render(this)
@@ -42,7 +42,7 @@ class DefaultSummaryListTest {
 
     @Test
     fun `Simple summary renders correctly`() {
-        val component = DefaultSummaryList(Params(header = null, listOf(NoopRow, NoopRow)))
+        val component = DefaultSummaryList(Params(items = listOf(NoopRow, NoopRow)))
 
         val output = createHTML().div {
             component.render(this)
