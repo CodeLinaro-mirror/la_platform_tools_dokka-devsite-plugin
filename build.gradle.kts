@@ -70,7 +70,7 @@ tasks.withType<ShadowJar> {
 }
 
 sourceSets.test {
-    java.srcDirs("testData")
+    java.srcDirs("testData/simple", "testData/topLevelFunctions")
 }
 
 tasks.withType(Test::class.java) {

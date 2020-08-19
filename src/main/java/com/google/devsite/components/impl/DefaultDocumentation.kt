@@ -58,13 +58,11 @@ import org.jetbrains.dokka.model.doc.Big
 import org.jetbrains.dokka.model.doc.BlockQuote
 import org.jetbrains.dokka.model.doc.Br
 import org.jetbrains.dokka.model.doc.Cite
-import org.jetbrains.dokka.model.doc.CodeBlock
 import org.jetbrains.dokka.model.doc.CodeInline
 import org.jetbrains.dokka.model.doc.Constructor
 import org.jetbrains.dokka.model.doc.CustomDocTag
 import org.jetbrains.dokka.model.doc.CustomTagWrapper
 import org.jetbrains.dokka.model.doc.Dd
-import org.jetbrains.dokka.model.doc.Deprecated
 import org.jetbrains.dokka.model.doc.Description
 import org.jetbrains.dokka.model.doc.Dfn
 import org.jetbrains.dokka.model.doc.Dir
@@ -103,15 +101,10 @@ import org.jetbrains.dokka.model.doc.NoFrames
 import org.jetbrains.dokka.model.doc.NoScript
 import org.jetbrains.dokka.model.doc.Ol
 import org.jetbrains.dokka.model.doc.P
-import org.jetbrains.dokka.model.doc.Param
-import org.jetbrains.dokka.model.doc.Pre
 import org.jetbrains.dokka.model.doc.Property
 import org.jetbrains.dokka.model.doc.Receiver
-import org.jetbrains.dokka.model.doc.Return
-import org.jetbrains.dokka.model.doc.Sample
 import org.jetbrains.dokka.model.doc.Script
 import org.jetbrains.dokka.model.doc.Section
-import org.jetbrains.dokka.model.doc.See
 import org.jetbrains.dokka.model.doc.Since
 import org.jetbrains.dokka.model.doc.Small
 import org.jetbrains.dokka.model.doc.Span
@@ -127,7 +120,6 @@ import org.jetbrains.dokka.model.doc.Table
 import org.jetbrains.dokka.model.doc.Td
 import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.model.doc.Th
-import org.jetbrains.dokka.model.doc.Throws
 import org.jetbrains.dokka.model.doc.Title
 import org.jetbrains.dokka.model.doc.Tr
 import org.jetbrains.dokka.model.doc.Tt
@@ -144,20 +136,20 @@ internal class DefaultDocumentation(
         for (tag in data.tags) {
             when (tag) {
                 is Description -> renderTags(listOf(tag.root))
-                is See -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is Param -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is Throws -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                // TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is Sample -> Unit // Don't crash b/c integ tests are using this
+                // Don't crash because it's used in the integration tests
+//                is Param -> TODO("b/163811276: ${tag.javaClass.simpleName}")
+//                is Return -> TODO("b/163811276: ${tag.javaClass.simpleName}")
+//                is Throws -> TODO("b/163811276: ${tag.javaClass.simpleName}")
+//                is Deprecated -> TODO("b/163811276: ${tag.javaClass.simpleName}")
+//                is See -> TODO("b/163811276: ${tag.javaClass.simpleName}")
+//                is Sample -> TODO("b/163811276: ${tag.javaClass.simpleName}")
                 is Property -> TODO("b/163811276: ${tag.javaClass.simpleName}")
                 is CustomTagWrapper -> TODO("b/163811276: ${tag.javaClass.simpleName}")
                 is Author -> TODO("b/163811276: ${tag.javaClass.simpleName}")
                 is Version -> TODO("b/163811276: ${tag.javaClass.simpleName}")
                 is Since -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is Return -> TODO("b/163811276: ${tag.javaClass.simpleName}")
                 is Receiver -> TODO("b/163811276: ${tag.javaClass.simpleName}")
                 is Constructor -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is Deprecated -> TODO("b/163811276: ${tag.javaClass.simpleName}")
                 is Suppress -> TODO("b/163811276: ${tag.javaClass.simpleName}")
             }
         }
@@ -186,12 +178,12 @@ internal class DefaultDocumentation(
                 is Ul -> ul { renderUnorderedList(tag.children) }
                 HorizontalRule -> hr { renderTags(tag.children) }
                 is CodeInline -> code { renderTags(tag.children) }
-                is BlockQuote -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is CodeBlock -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is Img -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is Pre -> TODO("b/163811276: ${tag.javaClass.simpleName}")
                 // Don't crash because it's used in the integration tests
+//                is CodeBlock -> TODO("b/163811276: ${tag.javaClass.simpleName}")
+//                is Pre -> TODO("b/163811276: ${tag.javaClass.simpleName}")
 //                is DocumentationLink -> TODO("b/163811276: ${tag.javaClass.simpleName}")
+                is Img -> TODO("b/163811276: ${tag.javaClass.simpleName}")
+                is BlockQuote -> TODO("b/163811276: ${tag.javaClass.simpleName}")
 
                 is Html, is Head, is Meta, is Header, is Title, is H1, is H2, is Footer, is IFrame,
                 is Main, is Menu, is Nav, is Index ->
@@ -204,7 +196,8 @@ internal class DefaultDocumentation(
                     throw NotImplementedError("Unknown use case for ${tag.javaClass.simpleName}.")
                 is THead, is TBody, is Td, is TFoot, is Th, is Tr ->
                     error("Not in table context: ${tag.javaClass.simpleName}.")
-                is Li -> error("Not in list context: ${tag.javaClass.simpleName}.")
+                // TODO(b/165400860): javadoc parsing is completely broken
+//                is Li -> error("Not in list context: ${tag.javaClass.simpleName}.")
             }
         }
     }
