@@ -214,4 +214,28 @@ class DefaultParameterTest {
             """.trim()
         )
     }
+
+    @Test
+    fun `Kotlin parameter with lambda modifiers renders correctly`() {
+        val component = DefaultParameter(
+            Params(
+                name = "number",
+                lambdaParams = listOf(NoopParameterType("String")),
+                lambdaModifiers = listOf("suspend"),
+                primary = NoopParameterType("Int"),
+                language = Language.KOTLIN
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div><span class="identifier">number</span><span class="symbol">:</span>&nbsp;suspend&nbsp;<span class="symbol">(</span>String<span class="symbol">) &rarr; </span>Int</div>
+            """.trim()
+        )
+    }
 }

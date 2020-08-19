@@ -52,6 +52,11 @@ internal class DefaultParameter(
                 span("symbol") { +":" }
                 +Entities.nbsp
 
+                for (modifier in data.lambdaModifiers) {
+                    +modifier
+                    +Entities.nbsp
+                }
+
                 if (data.receiver != null) {
                     data.receiver.render(this)
                     span("symbol") { +"." }
