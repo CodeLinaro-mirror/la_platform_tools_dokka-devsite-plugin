@@ -215,7 +215,7 @@ internal class FunctionDocumentableConverter(
         return DefaultLink(
             Link.Params(
                 name = name,
-                url = "#$name(${fullyQualifiedProjections.joinToString()})"
+                url = "#$name(${fullyQualifiedProjections.joinToString(",")})"
             )
         )
     }
