@@ -52,12 +52,14 @@ class DefaultSummaryListTest {
         assertThat(output).isEqualTo(
             """
 <div>
-  <table>
-    <tbody>
-      <tr><noop/></tr>
-      <tr><noop/></tr>
-    </tbody>
-  </table>
+  <div class="devsite-table-wrapper">
+    <table class="responsive">
+      <tbody>
+        <tr><noop/></tr>
+        <tr><noop/></tr>
+      </tbody>
+    </table>
+  </div>
 </div>
             """.trim()
         )
@@ -75,14 +77,16 @@ class DefaultSummaryListTest {
         assertThat(output).isEqualTo(
             """
 <div>
-  <table>
-    <thead>
-      <tr><noop/></tr>
-    </thead>
-    <tbody>
-      <tr><noop/></tr>
-    </tbody>
-  </table>
+  <div class="devsite-table-wrapper">
+    <table class="responsive">
+      <thead>
+        <tr><noop/></tr>
+      </thead>
+      <tbody>
+        <tr><noop/></tr>
+      </tbody>
+    </table>
+  </div>
 </div>
             """.trim()
         )

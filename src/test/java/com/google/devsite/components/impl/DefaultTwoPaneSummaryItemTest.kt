@@ -36,8 +36,8 @@ class DefaultTwoPaneSummaryItemTest {
         assertThat(output).isEqualTo(
             """
 <tr>
-  <td></td>
-  <td></td>
+  <td><code></code></td>
+  <td width="100%"></td>
 </tr>
             """.trim()
         )
@@ -61,8 +61,8 @@ class DefaultTwoPaneSummaryItemTest {
         assertThat(b).isEqualTo(
             """
 <tr>
-  <td>Title</td>
-  <td>Description</td>
+  <td><code>Title</code></td>
+  <td width="100%">Description</td>
 </tr>
             """.trim()
         )

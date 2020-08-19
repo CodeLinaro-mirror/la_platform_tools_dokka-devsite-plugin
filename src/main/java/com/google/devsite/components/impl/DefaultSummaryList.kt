@@ -18,6 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.devsite.components.SummaryList
 import kotlinx.html.FlowContent
+import kotlinx.html.div
 import kotlinx.html.table
 import kotlinx.html.tbody
 import kotlinx.html.thead
@@ -27,22 +28,24 @@ import kotlinx.html.tr
 internal class DefaultSummaryList(
     override val data: SummaryList.Params
 ) : SummaryList {
-    override fun render(html: FlowContent) {
+    override fun render(html: FlowContent) = html.run {
         if (!hasContent()) return
 
-        html.table {
-            if (data.header != null) {
-                thead {
-                    tr {
-                        data.header.render(this)
+        div("devsite-table-wrapper") {
+            table("responsive") {
+                if (data.header != null) {
+                    thead {
+                        tr {
+                            data.header.render(this)
+                        }
                     }
                 }
-            }
 
-            tbody {
-                for (item in data.items) {
-                    tr {
-                        item.render(this)
+                tbody {
+                    for (item in data.items) {
+                        tr {
+                            item.render(this)
+                        }
                     }
                 }
             }

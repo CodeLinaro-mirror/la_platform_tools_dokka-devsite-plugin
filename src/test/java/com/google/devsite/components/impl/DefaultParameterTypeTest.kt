@@ -61,7 +61,7 @@ class DefaultParameterTypeTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>List<span class="symbol">&lt;</span>String<span class="symbol">&gt;</span></div>
+<div>List&lt;String&gt;</div>
             """.trim()
         )
     }
@@ -82,7 +82,7 @@ class DefaultParameterTypeTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>Map<span class="symbol">&lt;</span>String,&nbsp;Int<span class="symbol">&gt;</span></div>
+<div>Map&lt;String,&nbsp;Int&gt;</div>
             """.trim()
         )
     }

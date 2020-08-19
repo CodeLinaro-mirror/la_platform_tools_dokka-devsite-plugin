@@ -21,7 +21,6 @@ import kotlinx.html.Entities
 import kotlinx.html.TR
 import kotlinx.html.code
 import kotlinx.html.div
-import kotlinx.html.span
 import kotlinx.html.td
 
 /**
@@ -35,15 +34,19 @@ internal class DefaultFunctionSummary(
 ) : FunctionSummary {
     override fun render(html: TR) = html.run {
         td {
-            for (modifier in data.modifiers) {
-                span("keyword") { +modifier }
-                +Entities.nbsp
-            }
+            code {
+                for (modifier in data.modifiers) {
+                    +modifier
+                    +Entities.nbsp
+                }
 
-            data.returnType.render(this)
+                data.returnType.render(this)
+            }
         }
 
         td {
+            attributes["width"] = "100%"
+
             div {
                 code {
                     data.signature.render(this)

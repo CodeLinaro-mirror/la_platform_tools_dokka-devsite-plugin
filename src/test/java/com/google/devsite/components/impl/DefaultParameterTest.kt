@@ -45,7 +45,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div><span class="identifier">number</span><span class="symbol">:</span>&nbsp;Int</div>
+<div>number:&nbsp;Int</div>
             """.trim()
         )
     }
@@ -68,7 +68,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>int&nbsp;<span class="identifier">number</span></div>
+<div>int&nbsp;number</div>
             """.trim()
         )
     }
@@ -92,7 +92,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>@Really&nbsp;@Special&nbsp;<span class="identifier">number</span><span class="symbol">:</span>&nbsp;Int</div>
+<div>@Really&nbsp;@Special&nbsp;number:&nbsp;Int</div>
             """.trim()
         )
     }
@@ -116,7 +116,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>@Really&nbsp;@Special&nbsp;int&nbsp;<span class="identifier">number</span></div>
+<div>@Really&nbsp;@Special&nbsp;int&nbsp;number</div>
             """.trim()
         )
     }
@@ -198,7 +198,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div><span class="identifier">block</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">) &rarr; </span>Unit</div>
+<div>block:&nbsp;() <span>&rarr;</span> Unit</div>
             """.trim()
         )
     }
@@ -222,7 +222,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div><span class="identifier">number</span><span class="symbol">:</span>&nbsp;Int<span class="symbol">.</span><span class="symbol">(</span><span class="symbol">) &rarr; </span>Int</div>
+<div>number:&nbsp;Int.() <span>&rarr;</span> Int</div>
             """.trim()
         )
     }
@@ -246,7 +246,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div><span class="identifier">number</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span>Int,&nbsp;String<span class="symbol">) &rarr; </span>Int</div>
+<div>number:&nbsp;(Int,&nbsp;String) <span>&rarr;</span> Int</div>
             """.trim()
         )
     }
@@ -271,7 +271,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div><span class="identifier">number</span><span class="symbol">:</span>&nbsp;Boolean<span class="symbol">.</span><span class="symbol">(</span>String<span class="symbol">) &rarr; </span>Int</div>
+<div>number:&nbsp;Boolean.(String) <span>&rarr;</span> Int</div>
             """.trim()
         )
     }
@@ -296,7 +296,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div><span class="identifier">number</span><span class="symbol">:</span>&nbsp;suspend&nbsp;<span class="symbol">(</span>String<span class="symbol">) &rarr; </span>Int</div>
+<div>number:&nbsp;suspend&nbsp;(String) <span>&rarr;</span> Int</div>
             """.trim()
         )
     }

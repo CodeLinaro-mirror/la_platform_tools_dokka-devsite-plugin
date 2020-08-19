@@ -41,11 +41,11 @@ internal class DefaultParameter(
             Language.JAVA -> {
                 data.primary.render(this)
                 +Entities.nbsp
-                span("identifier") { +data.name }
+                +data.name
             }
             Language.KOTLIN -> {
-                span("identifier") { +data.name }
-                span("symbol") { +":" }
+                +data.name
+                +":"
                 +Entities.nbsp
 
                 for (modifier in data.lambdaModifiers) {
@@ -55,10 +55,10 @@ internal class DefaultParameter(
 
                 if (data.receiver != null) {
                     data.receiver.render(this)
-                    span("symbol") { +"." }
+                    +"."
                 }
 
-                if (data.isLambda) span("symbol") { +"(" }
+                if (data.isLambda) +"("
                 for (type in data.lambdaParams) {
                     type.render(this)
                     if (type !== data.lambdaParams.last()) {
@@ -67,11 +67,9 @@ internal class DefaultParameter(
                     }
                 }
                 if (data.isLambda) {
-                    span("symbol") {
-                        +") "
-                        unsafe { +"&rarr;" }
-                        +" "
-                    }
+                    +") "
+                    span { unsafe { +"&rarr;" } }
+                    +" "
                 }
 
                 data.primary.render(this)

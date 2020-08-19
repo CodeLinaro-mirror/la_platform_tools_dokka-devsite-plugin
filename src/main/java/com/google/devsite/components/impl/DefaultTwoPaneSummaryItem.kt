@@ -18,17 +18,22 @@ package com.google.devsite.components.impl
 
 import com.google.devsite.components.TwoPaneSummaryItem
 import kotlinx.html.TR
+import kotlinx.html.code
 import kotlinx.html.td
 
-/** Default implementation of the two-pane layout item. */
+/** Default implementation of the two-pane layout item for symbol tables. */
 internal class DefaultTwoPaneSummaryItem(
     override val data: TwoPaneSummaryItem.Params
 ) : TwoPaneSummaryItem {
     override fun render(html: TR) = html.run {
         td {
-            data.title.render(this)
+            code {
+                data.title.render(this)
+            }
         }
         td {
+            attributes["width"] = "100%"
+
             data.description.render(this)
         }
     }

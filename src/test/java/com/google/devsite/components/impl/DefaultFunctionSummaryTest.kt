@@ -46,8 +46,8 @@ class DefaultFunctionSummaryTest {
             """
 <table>
   <tr>
-    <td>Unit</td>
-    <td>
+    <td><code>Unit</code></td>
+    <td width="100%">
       <div><code>foo()</code></div>
       <p>This method does baz.</p>
     </td>
@@ -77,8 +77,8 @@ class DefaultFunctionSummaryTest {
             """
 <table>
   <tr>
-    <td><span class="keyword">open</span>&nbsp;<span class="keyword">suspend</span>&nbsp;Unit</td>
-    <td>
+    <td><code>open&nbsp;suspend&nbsp;Unit</code></td>
+    <td width="100%">
       <div><code>foo()</code></div>
       <p>This method does baz.</p>
     </td>
