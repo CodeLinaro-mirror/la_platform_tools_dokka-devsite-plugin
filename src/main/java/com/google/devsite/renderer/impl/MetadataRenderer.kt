@@ -21,19 +21,10 @@ import com.google.devsite.components.RedirectPage
 import com.google.devsite.components.impl.DefaultPackageList
 import com.google.devsite.components.impl.DefaultRedirectPage
 import com.google.devsite.renderer.converters.RootDocumentableConverter
-import com.google.devsite.renderer.converters.annotations
-import com.google.devsite.renderer.converters.classes
-import com.google.devsite.renderer.converters.enums
-import com.google.devsite.renderer.converters.exceptions
-import com.google.devsite.renderer.converters.interfaces
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.html.html
 import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.base.renderers.OutputWriter
-import org.jetbrains.dokka.model.DClasslike
-import org.jetbrains.dokka.model.DModule
-import org.jetbrains.dokka.model.DPackage
-import org.jetbrains.dokka.pages.ModulePageNode
 import org.jetbrains.dokka.pages.RootPageNode
 
 /** Renders root metadata files that provide a global overview of the entire packages surface. */
@@ -83,52 +74,11 @@ internal class MetadataRenderer(
 
     /** Writes the ToC for devsite consumption. */
     suspend fun writeToc(root: RootPageNode) {
-        val toc = StringBuilder()
-
-        toc.appendLine("toc:")
-
-        toc.appendLine("- title: Class Index")
-        toc.appendLine("  path: ${pathProvider.classes}")
-        toc.appendLine()
-
-        toc.appendLine("- title: Package Index")
-        toc.appendLine("  path: ${pathProvider.packages}")
-        toc.appendLine()
-
-        val module = (root as ModulePageNode).documentable!! as DModule
-
-        for (pkg in module.packages) {
-            val dPackage = pkg as DPackage
-            toc.appendLine("- title: ${dPackage.name}")
-            toc.appendLine("  path: ${pathProvider.forType(dPackage.name, "package-summary")}")
-            toc.appendLine()
-            toc.appendLine("  section:")
-
-            val classMap = LinkedHashMap<String, List<DClasslike>?>()
-            classMap["Classes"] = dPackage.classes()
-            classMap["Interfaces"] = dPackage.interfaces()
-            classMap["Enums"] = dPackage.enums()
-            classMap["Annotations"] = dPackage.annotations()
-            classMap["Exceptions"] = dPackage.exceptions()
-
-            for (type in classMap.keys) {
-                val classes = classMap[type]
-                if (classes.isNullOrEmpty()) {
-                    continue
-                }
-                toc.appendLine("  - title: $type")
-                toc.appendLine()
-                toc.appendLine("    section:")
-
-                for (clazz in classes) {
-                    val path = pathProvider.forType(dPackage.name, clazz.name!!)
-                    toc.appendLine("    - title: ${clazz.name}")
-                    toc.appendLine("      path: $path")
-                    toc.appendLine()
-                }
-            }
+        val converter = RootDocumentableConverter(root, pathProvider)
+        val toc = buildString {
+            converter.tocPage().render(this)
         }
 
-        outputWriter.write(pathProvider.toc, toc.toString(), "")
+        outputWriter.write(pathProvider.toc, toc, "")
     }
 }
