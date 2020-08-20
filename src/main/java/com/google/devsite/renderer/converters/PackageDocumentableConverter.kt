@@ -91,8 +91,8 @@ internal class PackageDocumentableConverter(
 
     private fun classlikesToSummary(classlikes: List<DClasslike>): SummaryList {
         val components = classlikes.map { classlike ->
-            val packageName = classlike.dri.packageName!!
-            val name = classlike.dri.classNames!!
+            val packageName = classlike.packageName()
+            val name = classlike.name()
 
             DefaultTwoPaneSummaryItem(
                 TwoPaneSummaryItem.Params(

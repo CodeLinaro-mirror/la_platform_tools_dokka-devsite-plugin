@@ -23,6 +23,7 @@ import com.google.devsite.components.PackageIndex
 import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.testing.ConverterTestBase
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -296,6 +297,75 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
                 assertThat(packageLink.data.name).isEqualTo(expectedPackages[i])
                 assertPath(packageLink.data.url, "${expectedPackages[i]}/package-summary.html")
             }
+        }
+    }
+
+    @Test
+    fun `Toc creates components with correct metadata links`() {
+        val source = """
+            |class Foo
+        """.trimMargin()
+
+        testWithRootPageNode(source) { root ->
+            val converter = RootDocumentableConverter(root, pathProvider())
+
+            val toc = runBlocking { converter.tocPage() }
+
+            assertPath(toc.data.classesUrl, "androidx/classes.html")
+            assertPath(toc.data.packagesUrl, "androidx/packages.html")
+        }
+    }
+
+    @Test
+    fun `Toc creates components with correct package link`() {
+        val source = """
+            |class Foo
+        """.trimMargin()
+
+        testWithRootPageNode(source) { root ->
+            val converter = RootDocumentableConverter(root, pathProvider())
+
+            val toc = runBlocking { converter.tocPage() }
+            val tocPackage = toc.data.packages.single()
+
+            assertThat(tocPackage.data.name).isEqualTo("androidx.example")
+            assertPath(tocPackage.data.packageUrl, "androidx/example/package-summary.html")
+        }
+    }
+
+    @Test
+    fun `Toc creates components with correct class link`() {
+        val source = """
+            |class Foo
+        """.trimMargin()
+
+        testWithRootPageNode(source) { root ->
+            val converter = RootDocumentableConverter(root, pathProvider())
+
+            val toc = runBlocking { converter.tocPage() }
+            val tocPackage = toc.data.packages.single()
+            val clazz = tocPackage.data.classes.single()
+
+            assertThat(clazz.name).isEqualTo("Foo")
+            assertPath(clazz.url, "androidx/example/Foo.html")
+        }
+    }
+
+    @Test
+    fun `Toc creates components with correct inner class link`() {
+        val source = """
+            |class Outer { class Inner }
+        """.trimMargin()
+
+        testWithRootPageNode(source) { root ->
+            val converter = RootDocumentableConverter(root, pathProvider())
+
+            val toc = runBlocking { converter.tocPage() }
+            val tocPackage = toc.data.packages.single()
+            val inner = tocPackage.data.classes.last()
+
+            assertThat(inner.name).isEqualTo("Outer.Inner")
+            assertPath(inner.url, "androidx/example/Outer.Inner.html")
         }
     }
 

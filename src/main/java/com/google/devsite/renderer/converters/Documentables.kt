@@ -18,11 +18,14 @@ package com.google.devsite.renderer.converters
 
 import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClass
+import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DEnum
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.WithChildren
+import org.jetbrains.dokka.pages.PackagePageNode
+import org.jetbrains.dokka.pages.RootPageNode
 
 /** Recursively expands all children. */
 internal val <T> WithChildren<T>.explodedChildren: List<T>
@@ -30,6 +33,17 @@ internal val <T> WithChildren<T>.explodedChildren: List<T>
 
 /** @return the doc tags (aka human-written javadoc or kdoc) associated with this documentable */
 internal fun Documentable.tags() = documentation.values.singleOrNull()?.children.orEmpty()
+
+/**
+ * Returns the type's name. Do not use [Documentable.name] as it won't include the outer class.
+ */
+internal fun DClasslike.name() = dri.classNames!!
+
+internal fun DClasslike.packageName() = dri.packageName!!
+
+internal fun RootPageNode.packages() = children
+    .filterIsInstance<PackagePageNode>()
+    .map { it.documentable as DPackage }
 
 internal fun DPackage.classes() = explodedChildren.filterIsInstance<DClass>()
 internal fun DPackage.enums() = explodedChildren.filterIsInstance<DEnum>()

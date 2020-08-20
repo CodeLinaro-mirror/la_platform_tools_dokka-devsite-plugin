@@ -22,6 +22,8 @@ import com.google.devsite.components.Documentation
 import com.google.devsite.components.Link
 import com.google.devsite.components.PackageIndex
 import com.google.devsite.components.SummaryList
+import com.google.devsite.components.TableOfContents
+import com.google.devsite.components.TocPackage
 import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultClassIndex
 import com.google.devsite.components.impl.DefaultDevsitePage
@@ -29,13 +31,19 @@ import com.google.devsite.components.impl.DefaultDocumentation
 import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultPackageIndex
 import com.google.devsite.components.impl.DefaultSummaryList
+import com.google.devsite.components.impl.DefaultTableOfContents
+import com.google.devsite.components.impl.DefaultTocPackage
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.pages.ClasslikePageNode
-import org.jetbrains.dokka.pages.PackagePageNode
 import org.jetbrains.dokka.pages.RootPageNode
 
 /** Converts documentables into components for the root metadata (class/package index). */
@@ -68,9 +76,7 @@ internal class RootDocumentableConverter(
 
     /** @return the root component for the package index page */
     fun packagesPage(): DevsitePage {
-        val packages = root.children
-            .filterIsInstance<PackagePageNode>()
-            .map { it.documentable as DPackage }
+        val packages = root.packages()
         val componentPackages = DefaultSummaryList(
             SummaryList.Params(
                 items = packages.map(::summaryForPackage)
@@ -85,15 +91,31 @@ internal class RootDocumentableConverter(
         )
     }
 
+    /** @return the Devsite _toc.yaml */
+    suspend fun tocPage(): TableOfContents {
+        val packageComponents = root.packages().map { packageDoc ->
+            coroutineScope {
+                packageForTocAsync(packageDoc)
+            }
+        }.awaitAll()
+
+        return DefaultTableOfContents(
+            TableOfContents.Params(
+                classesUrl = pathProvider.classes,
+                packagesUrl = pathProvider.packages,
+                packages = packageComponents
+            )
+        )
+    }
+
     /** Groups class-like types into buckets of their first letter. */
     private fun categorizeClasslikes(classlike: DClasslike): Char {
-        val name = classlike.dri.classNames!!
-        return name.first().toUpperCase()
+        return classlike.name().first().toUpperCase()
     }
 
     private fun summaryForClass(classlike: DClasslike): DefaultTwoPaneSummaryItem {
-        val packageName = classlike.dri.packageName!!
-        val name = classlike.dri.classNames!!
+        val packageName = classlike.packageName()
+        val name = classlike.name()
 
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
@@ -130,5 +152,32 @@ internal class RootDocumentableConverter(
                 )
             )
         )
+    }
+
+    private fun CoroutineScope.packageForTocAsync(
+        packageDoc: DPackage
+    ): Deferred<DefaultTocPackage> = async {
+        val interfaces = async { packageDoc.interfaces().map(::typeForToc) }
+        val classes = async { packageDoc.classes().map(::typeForToc) }
+        val enums = async { packageDoc.enums().map(::typeForToc) }
+        val exceptions = async { packageDoc.exceptions().map(::typeForToc) }
+        val annotations = async { packageDoc.annotations().map(::typeForToc) }
+
+        DefaultTocPackage(
+            TocPackage.Params(
+                name = packageDoc.name,
+                packageUrl = pathProvider.forType(packageDoc.name, "package-summary"),
+                interfaces = interfaces.await(),
+                classes = classes.await(),
+                enums = enums.await(),
+                exceptions = exceptions.await(),
+                annotations = annotations.await()
+            )
+        )
+    }
+
+    private fun typeForToc(classlike: DClasslike): TocPackage.Type {
+        val url = pathProvider.forType(classlike.packageName(), classlike.name())
+        return TocPackage.Type(classlike.name(), url)
     }
 }
