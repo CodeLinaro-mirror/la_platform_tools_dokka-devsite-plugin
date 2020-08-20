@@ -29,8 +29,7 @@ class DefaultFunctionSignatureTest {
     fun `Signature with no params renders correctly`() {
         val component = DefaultFunctionSignature(
             Params(
-                name = NoopLink("foo"),
-                parameters = emptyList()
+                name = NoopLink("foo")
             )
         )
 

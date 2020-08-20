@@ -32,10 +32,7 @@ class DefaultParameterTest {
         val component = DefaultParameter(
             Params(
                 name = "number",
-                receiver = null,
-                lambdaParams = emptyList(),
                 primary = NoopParameterType("Int"),
-                annotations = emptyList(),
                 language = Language.KOTLIN
             )
         )
@@ -57,10 +54,7 @@ class DefaultParameterTest {
         val component = DefaultParameter(
             Params(
                 name = "number",
-                receiver = null,
-                lambdaParams = emptyList(),
                 primary = NoopParameterType("int"),
-                annotations = emptyList(),
                 language = Language.JAVA
             )
         )
@@ -82,8 +76,6 @@ class DefaultParameterTest {
         val component = DefaultParameter(
             Params(
                 name = "number",
-                receiver = null,
-                lambdaParams = emptyList(),
                 primary = NoopParameterType("Int"),
                 annotations = listOf(NoopLink("@Really"), NoopLink("@Special")),
                 language = Language.KOTLIN
@@ -107,8 +99,6 @@ class DefaultParameterTest {
         val component = DefaultParameter(
             Params(
                 name = "number",
-                receiver = null,
-                lambdaParams = emptyList(),
                 primary = NoopParameterType("int"),
                 annotations = listOf(NoopLink("@Really"), NoopLink("@Special")),
                 language = Language.JAVA
@@ -134,9 +124,7 @@ class DefaultParameterTest {
                 Params(
                     name = "number",
                     receiver = NoopParameterType("int"),
-                    lambdaParams = emptyList(),
                     primary = NoopParameterType("int"),
-                    annotations = emptyList(),
                     language = Language.JAVA
                 )
             )
@@ -149,10 +137,8 @@ class DefaultParameterTest {
             DefaultParameter(
                 Params(
                     name = "number",
-                    receiver = null,
                     lambdaParams = listOf(NoopParameterType("int")),
                     primary = NoopParameterType("int"),
-                    annotations = emptyList(),
                     language = Language.JAVA
                 )
             )
@@ -165,9 +151,7 @@ class DefaultParameterTest {
             Params(
                 name = "number",
                 receiver = NoopParameterType("Int"),
-                lambdaParams = emptyList(),
                 primary = NoopParameterType("Int"),
-                annotations = emptyList(),
                 language = Language.KOTLIN
             )
         )
@@ -189,10 +173,8 @@ class DefaultParameterTest {
         val component = DefaultParameter(
             Params(
                 name = "number",
-                receiver = null,
                 lambdaParams = listOf(NoopParameterType("Int"), NoopParameterType("String")),
                 primary = NoopParameterType("Int"),
-                annotations = emptyList(),
                 language = Language.KOTLIN
             )
         )
@@ -217,7 +199,6 @@ class DefaultParameterTest {
                 receiver = NoopParameterType("Boolean"),
                 lambdaParams = listOf(NoopParameterType("String")),
                 primary = NoopParameterType("Int"),
-                annotations = emptyList(),
                 language = Language.KOTLIN
             )
         )

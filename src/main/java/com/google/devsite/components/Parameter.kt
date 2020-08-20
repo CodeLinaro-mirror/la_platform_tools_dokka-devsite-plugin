@@ -24,10 +24,10 @@ internal interface Parameter : ContextFreeComponent {
 
     class Params(
         val name: String,
-        val receiver: ParameterType?,
-        val lambdaParams: List<ParameterType>,
+        val receiver: ParameterType? = null,
+        val lambdaParams: List<ParameterType> = emptyList(),
         val primary: ParameterType,
-        val annotations: List<Link>,
+        val annotations: List<Link> = emptyList(),
         val language: Language
     )
 }

@@ -124,7 +124,6 @@ internal class PackageDocumentableConverter(
 
         return DefaultSummaryList(
             SummaryList.Params(
-                header = null,
                 items = components
             )
         )
@@ -137,7 +136,6 @@ internal class PackageDocumentableConverter(
 
         return DefaultSummaryList(
             SummaryList.Params(
-                header = null,
                 items = components
             )
         )

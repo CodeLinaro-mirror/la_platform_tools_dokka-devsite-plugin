@@ -21,7 +21,7 @@ internal interface FunctionSummary : RowComponent {
     val data: Params
 
     class Params(
-        val modifiers: List<String>,
+        val modifiers: List<String> = emptyList(),
         val returnType: ParameterType,
         val signature: FunctionSignature,
         val description: Documentation
