@@ -16,13 +16,8 @@
 
 package com.google.devsite.components
 
-import kotlinx.html.Tag
-
-/**
- * HTML components are small, modular yet opinionated pieces of UI. They should be simple, purely
- * mapping input data to HTML.
- */
-internal interface HtmlComponent<T : Tag> : Component<T> {
-    /** Render this component's data into [html]. */
-    override fun render(html: T)
+/** Text components render arbitrary pieces of plain text. */
+internal interface TextComponent : Component<StringBuilder> {
+    /** Render this component's data into [text]. */
+    override fun render(text: StringBuilder)
 }
