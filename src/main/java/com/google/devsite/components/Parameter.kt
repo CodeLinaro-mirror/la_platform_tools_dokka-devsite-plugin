@@ -26,6 +26,7 @@ internal interface Parameter : ContextFreeComponent {
         val name: String,
         val receiver: ParameterType? = null,
         val lambdaParams: List<ParameterType> = emptyList(),
+        val lambdaModifiers: List<String> = emptyList(),
         val primary: ParameterType,
         val annotations: List<Link> = emptyList(),
         val language: Language

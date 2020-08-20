@@ -104,7 +104,7 @@ internal class FunctionDocumentableConverter(
                     primary = primaryType,
                     // TODO(b/165104993): figure out path to implementing annotations
                     annotations = emptyList(),
-                    language
+                    language = language
                 )
             )
         }
