@@ -16,6 +16,8 @@
 
 package com.google.devsite.renderer.impl
 
+import com.google.devsite.components.RedirectPage
+import com.google.devsite.components.impl.DefaultRedirectPage
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.PackageDocumentableConverter
 import com.google.devsite.renderer.impl.paths.FilePathProvider
@@ -31,6 +33,20 @@ internal class PackageRenderer(
     private val pathProvider: FilePathProvider,
     private val language: Language
 ) {
+    /** Writes the home page. */
+    suspend fun writeIndex(packagePage: PackagePageNode) {
+        val redirectComponent = DefaultRedirectPage(RedirectPage.Params("package-summary.html"))
+        val index = createHTML().html {
+            redirectComponent.render(this)
+        }
+
+        outputWriter.write(
+            pathProvider.forType(packagePage.name, "index"),
+            index,
+            ""
+        )
+    }
+
     suspend fun writePackageSummary(packagePage: PackagePageNode) {
         val converter = PackageDocumentableConverter(language, packagePage, pathProvider)
         val page = converter.summaryPage()

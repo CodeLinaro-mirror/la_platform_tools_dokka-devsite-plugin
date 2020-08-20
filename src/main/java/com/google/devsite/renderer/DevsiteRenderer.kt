@@ -49,6 +49,7 @@ internal class DevsiteRenderer(
     }
 
     private suspend fun writePackage(packagePage: PackagePageNode) = coroutineScope {
+        launch { packageRenderer.writeIndex(packagePage) }
         launch { packageRenderer.writePackageSummary(packagePage) }
         for (clazz in packagePage.children.filterIsInstance<ClasslikePageNode>()) {
             launch { packageRenderer.writeClass(clazz) }
