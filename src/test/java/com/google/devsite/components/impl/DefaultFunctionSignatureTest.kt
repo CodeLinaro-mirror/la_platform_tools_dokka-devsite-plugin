@@ -65,4 +65,25 @@ class DefaultFunctionSignatureTest {
             """.trim()
         )
     }
+
+    @Test
+    fun `Signature with receiver renders correctly`() {
+        val component = DefaultFunctionSignature(
+            Params(
+                name = NoopLink("foo"),
+                receiver = NoopParameter("String")
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>String.foo()</div>
+            """.trim()
+        )
+    }
 }

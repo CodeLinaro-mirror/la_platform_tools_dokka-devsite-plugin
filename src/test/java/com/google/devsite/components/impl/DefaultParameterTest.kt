@@ -74,6 +74,52 @@ class DefaultParameterTest {
     }
 
     @Test
+    fun `Kotlin parameter without name renders correctly`() {
+        val component = DefaultParameter(
+            Params(
+                isLambda = false,
+                name = "",
+                primary = NoopParameterType("Int"),
+                language = Language.KOTLIN
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>Int</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Java parameter without name renders correctly`() {
+        val component = DefaultParameter(
+            Params(
+                isLambda = false,
+                name = "",
+                primary = NoopParameterType("int"),
+                language = Language.JAVA
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>int</div>
+            """.trim()
+        )
+    }
+
+    @Test
     fun `Kotlin parameter with annotations renders correctly`() {
         val component = DefaultParameter(
             Params(

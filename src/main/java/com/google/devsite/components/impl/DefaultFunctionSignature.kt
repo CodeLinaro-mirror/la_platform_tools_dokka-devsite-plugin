@@ -25,6 +25,11 @@ internal class DefaultFunctionSignature(
     override val data: FunctionSignature.Params
 ) : FunctionSignature {
     override fun render(html: FlowContent) = html.run {
+        if (data.receiver != null) {
+            data.receiver.render(this)
+            +"."
+        }
+
         data.name.render(this)
         +"("
         for (parameter in data.parameters) {

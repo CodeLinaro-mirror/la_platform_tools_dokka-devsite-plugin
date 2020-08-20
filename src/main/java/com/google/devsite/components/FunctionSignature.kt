@@ -22,6 +22,7 @@ internal interface FunctionSignature : ContextFreeComponent {
 
     class Params(
         val name: Link,
+        val receiver: Parameter? = null,
         val parameters: List<Parameter> = emptyList()
     )
 }

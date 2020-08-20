@@ -40,13 +40,17 @@ internal class DefaultParameter(
         when (data.language) {
             Language.JAVA -> {
                 data.primary.render(this)
-                +Entities.nbsp
-                +data.name
+                if (data.name.isNotEmpty()) {
+                    +Entities.nbsp
+                    +data.name
+                }
             }
             Language.KOTLIN -> {
-                +data.name
-                +":"
-                +Entities.nbsp
+                if (data.name.isNotEmpty()) {
+                    +data.name
+                    +":"
+                    +Entities.nbsp
+                }
 
                 for (modifier in data.lambdaModifiers) {
                     +modifier
