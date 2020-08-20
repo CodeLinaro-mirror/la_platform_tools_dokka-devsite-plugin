@@ -16,12 +16,11 @@
 
 package com.google.devsite.renderer.impl
 
+import com.google.devsite.components.RedirectPage
+import com.google.devsite.components.impl.DefaultRedirectPage
 import com.google.devsite.renderer.converters.RootDocumentableConverter
 import com.google.devsite.renderer.impl.paths.FilePathProvider
-import kotlinx.html.body
-import kotlinx.html.head
 import kotlinx.html.html
-import kotlinx.html.meta
 import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.base.renderers.OutputWriter
 import org.jetbrains.dokka.pages.RootPageNode
@@ -40,15 +39,9 @@ internal class MetadataRenderer(
 
     /** Writes the home page. */
     suspend fun writeRootIndex() {
+        val redirectComponent = DefaultRedirectPage(RedirectPage.Params("classes.html"))
         val rootIndex = createHTML().html {
-            head {
-                meta {
-                    httpEquiv = "refresh"
-                    content = "0;url=classes.html"
-                }
-            }
-
-            body()
+            redirectComponent.render(this)
         }
 
         outputWriter.write(pathProvider.rootIndex, rootIndex, "")
