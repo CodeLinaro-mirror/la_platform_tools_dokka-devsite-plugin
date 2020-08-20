@@ -16,8 +16,8 @@
 
 package com.google.devsite.testing
 
+import com.google.common.truth.Truth.assertWithMessage
 import org.jetbrains.dokka.testApi.testRunner.AbstractCoreTest
-import org.junit.Assert.assertEquals
 import java.io.File
 
 /**
@@ -84,7 +84,7 @@ abstract class IntegrationTestBase : AbstractCoreTest() {
                     |
                     |Difference in outputs:
                 """.trimMargin()
-                assertEquals(message, expectedText, generatedContent)
+                assertWithMessage(message).that(generatedContent).isEqualTo(expectedText)
             }
         }
     }
