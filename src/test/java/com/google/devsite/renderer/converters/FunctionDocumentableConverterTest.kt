@@ -219,7 +219,6 @@ internal class FunctionDocumentableConverterTest(
         }
     }
 
-    @Ignore // TODO(asaveau): whoops, forgot about receivers. Need to implement.
     @Test
     fun `Function summary component creates extension receiver`() {
         val source = """
@@ -231,6 +230,28 @@ internal class FunctionDocumentableConverterTest(
 
             val summary = converter.summary(root.function()) ?: return@t
             val signature = summary.data.signature
+
+            val param = when (language) {
+                Language.JAVA -> {
+                    assertThat(signature.data.receiver).isNull()
+                    signature.data.parameters.single()
+                }
+                Language.KOTLIN -> {
+                    assertThat(signature.data.receiver).isNotNull()
+                    signature.data.receiver!!
+                }
+            }
+
+            val type = param.data.primary
+
+            assertThat(param.data.isLambda).isFalse()
+            assertThat(type.data.type.data.name).isEqualTo("String")
+            assertThat(param.data.lambdaParams).isEmpty()
+            assertThat(param.data.receiver).isNull()
+            when (language) {
+                Language.JAVA -> assertThat(param.data.name).isEqualTo("receiver")
+                Language.KOTLIN -> assertThat(param.data.name).isEmpty()
+            }
         }
     }
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@file:Suppress("UNUSED_PARAMETER")
+@file:Suppress("UNUSED_PARAMETER", "unused", "RedundantSuspendModifier")
 
 package dokkatest.toplevel
 
@@ -31,15 +31,15 @@ fun a() = Unit
 /** Top level function docs next to [a]. This is a second sentence. Talk to [world]. */
 fun b(i1: Int, i2: String, i3: Boolean, foo: Foo): String = ""
 
-/** I'm so sad, they're deleteing me! */
+/** I'm so sad, they're deleting me! */
 @Deprecated("This method was too sad.")
 fun sadBoi(): Nothing = error("Ouch")
 
 /** A brutally difficult function to render. Good luck! */
-suspend inline fun <T, R : Number> List<T>.foo(
+suspend inline fun <T, R : Number> (T.(Int) -> List<R>).foo(
     a: T,
-    crossinline stuff: () -> Unit,
-    @Suppress("abc") block: suspend Set<Boolean>.(Map<String, List<T>>, Double) -> Collection<R>
+    crossinline stuff: () -> (() -> String),
+    @Suppress("abc") block: suspend Set<Boolean>.(cache: Map<String, List<T>>, mapper: ((Double) -> Double)) -> Collection<R>
 ): List<Float> = emptyList()
 
 class Foo

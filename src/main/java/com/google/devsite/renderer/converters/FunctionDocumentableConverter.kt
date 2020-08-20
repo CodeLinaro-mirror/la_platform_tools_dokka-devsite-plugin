@@ -32,6 +32,7 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.AdditionalModifiers
 import org.jetbrains.dokka.model.DFunction
+import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.FunctionModifiers
 import org.jetbrains.dokka.model.Nullable
 import org.jetbrains.dokka.model.OtherParameter
@@ -73,53 +74,67 @@ internal class FunctionDocumentableConverter(
     }
 
     private fun DFunction.signature(): FunctionSignature {
-        val parameters = parameters.map { param ->
-            val isLambda = param.type.isLambda()
-
-            val receiver = param.type.receiver()
-            val primaryType = if (isLambda) {
-                // Get the return type of the lambda
-                (param.type as TypeConstructor).projections.last().toComponent()
-            } else {
-                param.type.toComponent()
-            }
-            val lambdaModifiers: List<String> = if (param.type.isLambda(suspendOnly = true)) {
-                listOf("suspend")
-            } else {
-                emptyList()
-            }
-            val lambdaParams: List<ParameterType> = if (isLambda) {
-                // Always ignore the return type of the lambda since that's handled by primaryType.
-                val lambdaProjections = (param.type as TypeConstructor).projections.dropLast(1)
-                if (receiver == null) {
-                    lambdaProjections.map { it.toComponent() }
-                } else {
-                    // If the receiver is available, we also ignore the first type
-                    lambdaProjections.drop(1).map { it.toComponent() }
-                }
-            } else {
-                emptyList()
-            }
-
-            DefaultParameter(
-                Parameter.Params(
-                    isLambda = isLambda,
-                    name = param.name!!,
-                    receiver = receiver,
-                    lambdaModifiers = lambdaModifiers,
-                    lambdaParams = lambdaParams,
-                    primary = primaryType,
-                    // TODO(b/165104993): figure out path to implementing annotations
-                    annotations = emptyList(),
-                    language = language
-                )
-            )
-        }
+        val receiver = receiver?.let(::componentForParameter)
+        val parameters = parameters.map(::componentForParameter)
 
         return DefaultFunctionSignature(
             FunctionSignature.Params(
                 name = relativeLink(),
-                parameters = parameters
+                receiver = when (language) {
+                    Language.JAVA -> null
+                    Language.KOTLIN -> receiver
+                },
+                parameters = when (language) {
+                    Language.JAVA -> listOfNotNull(receiver) + parameters
+                    Language.KOTLIN -> parameters
+                }
+            )
+        )
+    }
+
+    private fun componentForParameter(param: DParameter): Parameter {
+        val isLambda = param.type.isLambda()
+        val name = when (language) {
+            Language.JAVA -> param.name ?: "receiver"
+            Language.KOTLIN -> param.name.orEmpty()
+        }
+
+        val receiver = param.type.receiver()
+        val primaryType = if (isLambda) {
+            // Get the return type of the lambda
+            (param.type as TypeConstructor).projections.last().toComponent()
+        } else {
+            param.type.toComponent()
+        }
+        val lambdaModifiers: List<String> = if (param.type.isLambda(suspendOnly = true)) {
+            listOf("suspend")
+        } else {
+            emptyList()
+        }
+        val lambdaParams: List<ParameterType> = if (isLambda) {
+            // Always ignore the return type of the lambda since that's handled by primaryType.
+            val lambdaProjections = (param.type as TypeConstructor).projections.dropLast(1)
+            if (receiver == null) {
+                lambdaProjections.map { it.toComponent() }
+            } else {
+                // If the receiver is available, we also ignore the first type
+                lambdaProjections.drop(1).map { it.toComponent() }
+            }
+        } else {
+            emptyList()
+        }
+
+        return DefaultParameter(
+            Parameter.Params(
+                isLambda = isLambda,
+                name = name,
+                receiver = receiver,
+                lambdaModifiers = lambdaModifiers,
+                lambdaParams = lambdaParams,
+                primary = primaryType,
+                // TODO(b/165104993): figure out path to implementing annotations
+                annotations = emptyList(),
+                language = language
             )
         )
     }
