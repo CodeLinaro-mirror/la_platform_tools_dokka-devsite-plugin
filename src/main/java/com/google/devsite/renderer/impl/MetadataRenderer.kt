@@ -123,8 +123,9 @@ internal class MetadataRenderer(
                 toc.appendLine("    section:")
 
                 for (clazz in classes) {
+                    val path = pathProvider.forType(dPackage.name, clazz.name!!)
                     toc.appendLine("    - title: ${clazz.name}")
-                    toc.appendLine("      path: ${pathProvider.forType(dPackage.name, clazz.name!!)}")
+                    toc.appendLine("      path: $path")
                     toc.appendLine()
                 }
             }
