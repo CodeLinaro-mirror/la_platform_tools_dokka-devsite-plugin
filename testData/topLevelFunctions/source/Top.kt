@@ -38,6 +38,7 @@ fun sadBoi(): Nothing = error("Ouch")
 /** A brutally difficult function to render. Good luck! */
 suspend inline fun <T, R : Number> List<T>.foo(
     a: T,
+    crossinline stuff: () -> Unit,
     @Suppress("abc") block: suspend Set<Boolean>.(Map<String, List<T>>, Double) -> Collection<R>
 ): List<Float> = emptyList()
 

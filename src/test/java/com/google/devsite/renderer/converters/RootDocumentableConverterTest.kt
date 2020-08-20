@@ -301,7 +301,7 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
 
     companion object {
         @JvmStatic
-        @Parameterized.Parameters
+        @Parameterized.Parameters(name = "{0}")
         fun data() = listOf(
             arrayOf(Language.JAVA),
             arrayOf(Language.KOTLIN)

@@ -83,6 +83,11 @@ internal class FunctionDocumentableConverter(
             } else {
                 param.type.toComponent()
             }
+            val lambdaModifiers: List<String> = if (param.type.isLambda(suspendOnly = true)) {
+                listOf("suspend")
+            } else {
+                emptyList()
+            }
             val lambdaParams: List<ParameterType> = if (isLambda) {
                 // Always ignore the return type of the lambda since that's handled by primaryType.
                 val lambdaProjections = (param.type as TypeConstructor).projections.dropLast(1)
@@ -101,6 +106,7 @@ internal class FunctionDocumentableConverter(
                     isLambda = isLambda,
                     name = param.name!!,
                     receiver = receiver,
+                    lambdaModifiers = lambdaModifiers,
                     lambdaParams = lambdaParams,
                     primary = primaryType,
                     // TODO(b/165104993): figure out path to implementing annotations
@@ -200,9 +206,19 @@ internal class FunctionDocumentableConverter(
     }
 
     /** Determine whether or not a param is a lambda using the kotlin function type. */
-    private fun Projection.isLambda(): Boolean = when (this) {
-        is TypeConstructor -> dri.packageName == "kotlin" &&
-            dri.classNames.orEmpty().startsWith("Function")
+    private fun Projection.isLambda(suspendOnly: Boolean = false): Boolean = when (this) {
+        is TypeConstructor -> {
+            val typeName = dri.classNames.orEmpty()
+            val isStandardLambda = dri.packageName == "kotlin" && typeName.startsWith("Function")
+            val isSuspendLambda =
+                dri.packageName == "kotlin.coroutines" && typeName.startsWith("SuspendFunction")
+
+            if (suspendOnly) {
+                isSuspendLambda
+            } else {
+                isStandardLambda || isSuspendLambda
+            }
+        }
         is OtherParameter -> false
         is Nullable -> inner.isLambda()
         else -> error("Unknown bound: $this")

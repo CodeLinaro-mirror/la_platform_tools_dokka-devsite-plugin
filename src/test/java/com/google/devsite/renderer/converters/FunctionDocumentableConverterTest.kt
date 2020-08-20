@@ -367,12 +367,12 @@ internal class FunctionDocumentableConverterTest(
 
             assertThat(param.data.isLambda).isTrue()
             assertThat(param.data.receiver).isNull()
+            assertThat(param.data.lambdaModifiers).isEmpty()
             assertThat(param.data.lambdaParams).isEmpty()
             assertThat(param.data.primary.data.type.data.name).isEqualTo("Unit")
         }
     }
 
-    @Ignore // TODO(asaveau): implement suspend lambdas
     @Test
     fun `Function summary component creates suspend lambda param`() {
         val source = """
@@ -385,6 +385,55 @@ internal class FunctionDocumentableConverterTest(
             val summary = converter.summary(root.function()) ?: return@t
             val signature = summary.data.signature
             val param = signature.data.parameters.single()
+
+            assertThat(param.data.isLambda).isTrue()
+            assertThat(param.data.receiver).isNull()
+            assertThat(param.data.lambdaParams).isEmpty()
+            assertThat(param.data.lambdaModifiers).containsExactly("suspend")
+            assertThat(param.data.primary.data.type.data.name).isEqualTo("Unit")
+        }
+    }
+
+    @Ignore // TODO(b/165709374): dokka doesn't understand suspending lambda receivers
+    @Test
+    fun `Function summary component creates suspend lambda param with receiver`() {
+        val source = """
+            |fun foo(a: suspend Float.() -> Unit)
+        """.trimMargin()
+
+        testWithRootPageNode(source) t@{ root ->
+            val converter = FunctionDocumentableConverter(language, pathProvider())
+
+            val summary = converter.summary(root.function()) ?: return@t
+            val signature = summary.data.signature
+            val param = signature.data.parameters.single()
+
+            assertThat(param.data.isLambda).isTrue()
+            assertThat(param.data.receiver).isNotNull()
+            assertThat(param.data.receiver!!.data.type.data.name).isEqualTo("Float")
+            assertThat(param.data.lambdaModifiers).containsExactly("suspend")
+            assertThat(param.data.lambdaParams).isEmpty()
+        }
+    }
+
+    @Test
+    fun `Function summary component creates suspend lambda param with params`() {
+        val source = """
+            |fun foo(a: suspend (Float) -> Unit)
+        """.trimMargin()
+
+        testWithRootPageNode(source) t@{ root ->
+            val converter = FunctionDocumentableConverter(language, pathProvider())
+
+            val summary = converter.summary(root.function()) ?: return@t
+            val signature = summary.data.signature
+            val param = signature.data.parameters.single()
+
+            assertThat(param.data.isLambda).isTrue()
+            assertThat(param.data.receiver).isNull()
+            assertThat(param.data.lambdaModifiers).containsExactly("suspend")
+            assertThat(param.data.lambdaParams).hasSize(1)
+            assertThat(param.data.lambdaParams.single().data.type.data.name).isEqualTo("Float")
         }
     }
 
@@ -403,6 +452,7 @@ internal class FunctionDocumentableConverterTest(
 
             assertThat(param.data.isLambda).isTrue()
             assertThat(param.data.receiver).isNull()
+            assertThat(param.data.lambdaModifiers).isEmpty()
             assertThat(param.data.lambdaParams).hasSize(1)
             assertThat(param.data.lambdaParams.single().data.type.data.name).isEqualTo("String")
         }
@@ -424,6 +474,7 @@ internal class FunctionDocumentableConverterTest(
             assertThat(param.data.isLambda).isTrue()
             assertThat(param.data.receiver).isNotNull()
             assertThat(param.data.receiver!!.data.type.data.name).isEqualTo("Float")
+            assertThat(param.data.lambdaModifiers).isEmpty()
             assertThat(param.data.lambdaParams).isEmpty()
         }
     }
@@ -444,6 +495,7 @@ internal class FunctionDocumentableConverterTest(
             assertThat(param.data.isLambda).isTrue()
             assertThat(param.data.receiver).isNotNull()
             assertThat(param.data.receiver!!.data.type.data.name).isEqualTo("Int")
+            assertThat(param.data.lambdaModifiers).isEmpty()
             assertThat(param.data.lambdaParams).hasSize(2)
             assertThat(param.data.lambdaParams.first().data.type.data.name).isEqualTo("Map")
             assertThat(param.data.lambdaParams.last().data.type.data.name).isEqualTo("Double")
@@ -491,7 +543,7 @@ internal class FunctionDocumentableConverterTest(
 
     companion object {
         @JvmStatic
-        @Parameterized.Parameters
+        @Parameterized.Parameters(name = "{0}")
         fun data() = listOf(
             arrayOf(Language.JAVA),
             arrayOf(Language.KOTLIN)
