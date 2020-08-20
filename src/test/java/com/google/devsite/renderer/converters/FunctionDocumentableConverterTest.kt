@@ -248,6 +248,7 @@ internal class FunctionDocumentableConverterTest(
             val param = signature.data.parameters.single()
             val type = param.data.primary
 
+            assertThat(param.data.isLambda).isFalse()
             assertThat(param.data.name).isEqualTo("a")
             assertThat(type.data.type.data.name).isEqualTo("String")
             assertThat(param.data.lambdaParams).isEmpty()
@@ -364,6 +365,7 @@ internal class FunctionDocumentableConverterTest(
             val signature = summary.data.signature
             val param = signature.data.parameters.single()
 
+            assertThat(param.data.isLambda).isTrue()
             assertThat(param.data.receiver).isNull()
             assertThat(param.data.lambdaParams).isEmpty()
             assertThat(param.data.primary.data.type.data.name).isEqualTo("Unit")
@@ -399,6 +401,7 @@ internal class FunctionDocumentableConverterTest(
             val signature = summary.data.signature
             val param = signature.data.parameters.single()
 
+            assertThat(param.data.isLambda).isTrue()
             assertThat(param.data.receiver).isNull()
             assertThat(param.data.lambdaParams).hasSize(1)
             assertThat(param.data.lambdaParams.single().data.type.data.name).isEqualTo("String")
@@ -418,6 +421,7 @@ internal class FunctionDocumentableConverterTest(
             val signature = summary.data.signature
             val param = signature.data.parameters.single()
 
+            assertThat(param.data.isLambda).isTrue()
             assertThat(param.data.receiver).isNotNull()
             assertThat(param.data.receiver!!.data.type.data.name).isEqualTo("Float")
             assertThat(param.data.lambdaParams).isEmpty()
@@ -437,6 +441,7 @@ internal class FunctionDocumentableConverterTest(
             val signature = summary.data.signature
             val param = signature.data.parameters.single()
 
+            assertThat(param.data.isLambda).isTrue()
             assertThat(param.data.receiver).isNotNull()
             assertThat(param.data.receiver!!.data.type.data.name).isEqualTo("Int")
             assertThat(param.data.lambdaParams).hasSize(2)

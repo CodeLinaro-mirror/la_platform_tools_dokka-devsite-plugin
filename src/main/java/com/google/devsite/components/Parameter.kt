@@ -22,7 +22,11 @@ import com.google.devsite.renderer.Language
 internal interface Parameter : ContextFreeComponent {
     val data: Params
 
+    /** Ensure this component's combination of params makes sense. */
+    fun validate()
+
     class Params(
+        val isLambda: Boolean,
         val name: String,
         val receiver: ParameterType? = null,
         val lambdaParams: List<ParameterType> = emptyList(),
