@@ -31,6 +31,7 @@ class DefaultParameterTest {
     fun `Simple Kotlin parameter renders correctly`() {
         val component = DefaultParameter(
             Params(
+                isLambda = false,
                 name = "number",
                 primary = NoopParameterType("Int"),
                 language = Language.KOTLIN
@@ -53,6 +54,7 @@ class DefaultParameterTest {
     fun `Simple Java parameter renders correctly`() {
         val component = DefaultParameter(
             Params(
+                isLambda = false,
                 name = "number",
                 primary = NoopParameterType("int"),
                 language = Language.JAVA
@@ -75,6 +77,7 @@ class DefaultParameterTest {
     fun `Kotlin parameter with annotations renders correctly`() {
         val component = DefaultParameter(
             Params(
+                isLambda = false,
                 name = "number",
                 primary = NoopParameterType("Int"),
                 annotations = listOf(NoopLink("@Really"), NoopLink("@Special")),
@@ -98,6 +101,7 @@ class DefaultParameterTest {
     fun `Java parameter with annotations renders correctly`() {
         val component = DefaultParameter(
             Params(
+                isLambda = false,
                 name = "number",
                 primary = NoopParameterType("int"),
                 annotations = listOf(NoopLink("@Really"), NoopLink("@Special")),
@@ -118,12 +122,12 @@ class DefaultParameterTest {
     }
 
     @Test
-    fun `Java parameter with receiver is rejected`() {
+    fun `Java parameter with lambda is rejected`() {
         assertFailsWith<IllegalArgumentException> {
             DefaultParameter(
                 Params(
+                    isLambda = true,
                     name = "number",
-                    receiver = NoopParameterType("int"),
                     primary = NoopParameterType("int"),
                     language = Language.JAVA
                 )
@@ -132,23 +136,78 @@ class DefaultParameterTest {
     }
 
     @Test
-    fun `Java parameter with lambda params is rejected`() {
+    fun `Standard parameter with receiver is rejected`() {
         assertFailsWith<IllegalArgumentException> {
             DefaultParameter(
                 Params(
+                    isLambda = false,
                     name = "number",
-                    lambdaParams = listOf(NoopParameterType("int")),
+                    receiver = NoopParameterType("int"),
                     primary = NoopParameterType("int"),
-                    language = Language.JAVA
+                    language = Language.KOTLIN
                 )
             )
         }
+    }
+
+    @Test
+    fun `Standard parameter with lambda modifiers is rejected`() {
+        assertFailsWith<IllegalArgumentException> {
+            DefaultParameter(
+                Params(
+                    isLambda = false,
+                    name = "number",
+                    lambdaModifiers = listOf("suspend"),
+                    primary = NoopParameterType("int"),
+                    language = Language.KOTLIN
+                )
+            )
+        }
+    }
+
+    @Test
+    fun `Standard parameter with lambda params is rejected`() {
+        assertFailsWith<IllegalArgumentException> {
+            DefaultParameter(
+                Params(
+                    isLambda = false,
+                    name = "number",
+                    lambdaParams = listOf(NoopParameterType("int")),
+                    primary = NoopParameterType("int"),
+                    language = Language.KOTLIN
+                )
+            )
+        }
+    }
+
+    @Test
+    fun `Kotlin parameter with factory lambda renders correctly`() {
+        val component = DefaultParameter(
+            Params(
+                isLambda = true,
+                name = "block",
+                primary = NoopParameterType("Unit"),
+                language = Language.KOTLIN
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div><span class="identifier">block</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">) &rarr; </span>Unit</div>
+            """.trim()
+        )
     }
 
     @Test
     fun `Kotlin parameter with receiver renders correctly`() {
         val component = DefaultParameter(
             Params(
+                isLambda = true,
                 name = "number",
                 receiver = NoopParameterType("Int"),
                 primary = NoopParameterType("Int"),
@@ -172,6 +231,7 @@ class DefaultParameterTest {
     fun `Kotlin parameter with lambda params renders correctly`() {
         val component = DefaultParameter(
             Params(
+                isLambda = true,
                 name = "number",
                 lambdaParams = listOf(NoopParameterType("Int"), NoopParameterType("String")),
                 primary = NoopParameterType("Int"),
@@ -195,6 +255,7 @@ class DefaultParameterTest {
     fun `Kotlin parameter with both receiver and lambda params renders correctly`() {
         val component = DefaultParameter(
             Params(
+                isLambda = true,
                 name = "number",
                 receiver = NoopParameterType("Boolean"),
                 lambdaParams = listOf(NoopParameterType("String")),
@@ -219,6 +280,7 @@ class DefaultParameterTest {
     fun `Kotlin parameter with lambda modifiers renders correctly`() {
         val component = DefaultParameter(
             Params(
+                isLambda = true,
                 name = "number",
                 lambdaParams = listOf(NoopParameterType("String")),
                 lambdaModifiers = listOf("suspend"),

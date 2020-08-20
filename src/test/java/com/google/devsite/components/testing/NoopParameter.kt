@@ -26,4 +26,6 @@ internal class NoopParameter(private val text: String) : Parameter {
     override fun render(html: FlowContent) = html.run {
         +text
     }
+
+    override fun validate() = Unit
 }

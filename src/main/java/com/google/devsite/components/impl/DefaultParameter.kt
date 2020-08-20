@@ -27,12 +27,8 @@ import kotlinx.html.unsafe
 internal class DefaultParameter(
     override val data: Parameter.Params
 ) : Parameter {
-    private val isLambda = data.receiver != null || data.lambdaParams.isNotEmpty()
-
     init {
-        require(data.language != Language.JAVA || !isLambda) {
-            "Lambda functions shouldn't be documented in Java."
-        }
+        validate()
     }
 
     override fun render(html: FlowContent) = html.run {
@@ -62,7 +58,7 @@ internal class DefaultParameter(
                     span("symbol") { +"." }
                 }
 
-                if (isLambda) span("symbol") { +"(" }
+                if (data.isLambda) span("symbol") { +"(" }
                 for (type in data.lambdaParams) {
                     type.render(this)
                     if (type !== data.lambdaParams.last()) {
@@ -70,7 +66,7 @@ internal class DefaultParameter(
                         +Entities.nbsp
                     }
                 }
-                if (isLambda) {
+                if (data.isLambda) {
                     span("symbol") {
                         +") "
                         unsafe { +"&rarr;" }
@@ -80,6 +76,21 @@ internal class DefaultParameter(
 
                 data.primary.render(this)
             }
+        }
+    }
+
+    override fun validate() {
+        require(!data.isLambda || data.language != Language.JAVA) {
+            "Lambda functions shouldn't be documented in Java."
+        }
+        require(data.isLambda || data.receiver == null) {
+            "Parameter receivers don't make sense outside a lambda."
+        }
+        require(data.isLambda || data.lambdaModifiers.isEmpty()) {
+            "Lambda modifiers don't make sense outside a lambda."
+        }
+        require(data.isLambda || data.lambdaParams.isEmpty()) {
+            "Lambda params don't make sense outside a lambda."
         }
     }
 }

@@ -98,6 +98,7 @@ internal class FunctionDocumentableConverter(
 
             DefaultParameter(
                 Parameter.Params(
+                    isLambda = isLambda,
                     name = param.name!!,
                     receiver = receiver,
                     lambdaParams = lambdaParams,
