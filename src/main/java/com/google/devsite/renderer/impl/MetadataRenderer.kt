@@ -16,7 +16,9 @@
 
 package com.google.devsite.renderer.impl
 
+import com.google.devsite.components.PackageList
 import com.google.devsite.components.RedirectPage
+import com.google.devsite.components.impl.DefaultPackageList
 import com.google.devsite.components.impl.DefaultRedirectPage
 import com.google.devsite.renderer.converters.RootDocumentableConverter
 import com.google.devsite.renderer.converters.annotations
@@ -41,9 +43,12 @@ internal class MetadataRenderer(
 ) {
     /** Writes the list of packages in machine readable format. */
     suspend fun writePackageList(root: RootPageNode) {
-        val allPackageNames = root.children.joinToString("\n", postfix = "\n") { it.name }
+        val component = DefaultPackageList(PackageList.Params(root.children.map { it.name }))
+        val packageList = buildString {
+            component.render(this)
+        }
 
-        outputWriter.write(pathProvider.packageList, allPackageNames, "")
+        outputWriter.write(pathProvider.packageList, packageList, "")
     }
 
     /** Writes the home page. */
