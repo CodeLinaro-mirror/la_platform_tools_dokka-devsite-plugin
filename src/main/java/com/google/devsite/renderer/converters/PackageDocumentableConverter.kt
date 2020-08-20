@@ -32,12 +32,8 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import org.jetbrains.dokka.model.DAnnotation
-import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
-import org.jetbrains.dokka.model.DEnum
 import org.jetbrains.dokka.model.DFunction
-import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.pages.PackagePageNode
 
@@ -52,26 +48,20 @@ internal class PackageDocumentableConverter(
     /** @return the root component for the package summary page */
     suspend fun summaryPage(): DevsitePage = coroutineScope {
         val doc = packagePage.documentable as DPackage
-        val allClasslikes = doc.explodedChildren.filterIsInstance<DClasslike>()
         val interfaces = async {
-            classlikesToSummary(allClasslikes.filterIsInstance<DInterface>())
+            classlikesToSummary(doc.interfaces())
         }
         val classes = async {
-            classlikesToSummary(allClasslikes.filterIsInstance<DClass>())
+            classlikesToSummary(doc.classes())
         }
         val enums = async {
-            classlikesToSummary(allClasslikes.filterIsInstance<DEnum>())
+            classlikesToSummary(doc.enums())
         }
         val exceptions = async {
-            // Dokka doesn't tell us when something is an exception and the supertypes only
-            // include direct parents, so we make an educated guess that a class is an exception
-            // type if it inherits methods from Throwable.
-            classlikesToSummary(allClasslikes.filterIsInstance<DClass>().filter { clazz ->
-                clazz.functions.any { function -> function.dri.classNames == "Throwable" }
-            })
+            classlikesToSummary(doc.exceptions())
         }
         val annotations = async {
-            classlikesToSummary(allClasslikes.filterIsInstance<DAnnotation>())
+            classlikesToSummary(doc.annotations())
         }
         val topLevelFunctionsSummary = async {
             functionsToSummary(doc.functions.filter { it.receiver == null })

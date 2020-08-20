@@ -32,6 +32,8 @@ internal abstract class DacFilePathProviderBase(
 
     override val rootIndex = "$tenantPath/index.html"
 
+    override val toc = "$tenantPath/_toc.yaml"
+
     override fun forType(packageName: String, name: String): String {
         val packageAsPath = packageName.replace(".", "/")
         return "$rootDevsitePath/$packageAsPath/$name.html"

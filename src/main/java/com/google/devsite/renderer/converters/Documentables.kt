@@ -16,6 +16,11 @@
 
 package com.google.devsite.renderer.converters
 
+import org.jetbrains.dokka.model.DAnnotation
+import org.jetbrains.dokka.model.DClass
+import org.jetbrains.dokka.model.DEnum
+import org.jetbrains.dokka.model.DInterface
+import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.WithChildren
 
@@ -25,3 +30,11 @@ internal val <T> WithChildren<T>.explodedChildren: List<T>
 
 /** @return the doc tags (aka human-written javadoc or kdoc) associated with this documentable */
 internal fun Documentable.tags() = documentation.values.singleOrNull()?.children.orEmpty()
+
+internal fun DPackage.classes() = explodedChildren.filterIsInstance<DClass>()
+internal fun DPackage.enums() = explodedChildren.filterIsInstance<DEnum>()
+internal fun DPackage.interfaces() = explodedChildren.filterIsInstance<DInterface>()
+internal fun DPackage.annotations() = explodedChildren.filterIsInstance<DAnnotation>()
+internal fun DPackage.exceptions() = explodedChildren.filterIsInstance<DClass>().filter { clazz ->
+    clazz.functions.any { function -> function.dri.classNames == "Throwable" }
+}
