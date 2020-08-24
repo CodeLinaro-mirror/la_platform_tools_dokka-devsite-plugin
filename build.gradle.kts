@@ -73,18 +73,21 @@ sourceSets.test {
     java.srcDirs("testData/simple", "testData/topLevelFunctions")
 }
 
-tasks.withType(Test::class.java) {
+val zipTask = project.tasks.register<Zip>("zipResultsOf${name.capitalize()}") {
+    destinationDirectory.set(File(getDistributionDirectory(), "host-test-reports"))
+    archiveFileName.set("dackka-tests.zip")
+}
+
+tasks.withType<Test> {
+    maxParallelForks = Runtime.getRuntime().availableProcessors()
     testLogging.events = hashSetOf(
-            TestLogEvent.FAILED,
-            TestLogEvent.PASSED,
-            TestLogEvent.SKIPPED,
-            TestLogEvent.STANDARD_OUT,
-            TestLogEvent.STANDARD_ERROR
+        TestLogEvent.FAILED,
+        TestLogEvent.PASSED,
+        TestLogEvent.SKIPPED,
+        TestLogEvent.STANDARD_OUT,
+        TestLogEvent.STANDARD_ERROR
     )
-    val zipTask = project.tasks.register("zipResultsOf${name.capitalize()}", Zip::class.java) {
-        destinationDirectory.set(File(getDistributionDirectory(), "host-test-reports"))
-        archiveFileName.set("dackka-tests.zip")
-    }
+
     if (isBuildingOnServer()) ignoreFailures = true
     finalizedBy(zipTask)
     doFirst {
