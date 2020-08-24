@@ -75,7 +75,7 @@ abstract class IntegrationTestBase : AbstractCoreTest() {
                 ""
             }
 
-            if (expectedText.trim() != generatedContent.trim()) {
+            if (expectedText != generatedContent) {
                 val message = """
                     |Unexpected output in $fileName.
                     |To update the expected output to match the current output, run this command:
