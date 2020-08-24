@@ -546,7 +546,7 @@ internal class FunctionDocumentableConverterTest(
 
             // TODO(asaveau): update once receivers are implemented
             assertThat(summary.data.signature.data.name.data.url)
-                .isEqualTo("#foo(kotlin.collections.Map, kotlin.Function2)")
+                .isEqualTo("#foo(kotlin.collections.Map,kotlin.Function2)")
         }
     }
 
