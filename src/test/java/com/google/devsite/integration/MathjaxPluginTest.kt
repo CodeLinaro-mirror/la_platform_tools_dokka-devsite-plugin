@@ -55,7 +55,10 @@ class MathjaxPluginTest : AbstractCoreTest() {
         ) {
             renderingStage = { _, _ ->
                 val mathjaxElements = Jsoup
-                    .parse(writerPlugin.writer.contents.getValue("reference/java/example/TestKt.html"))
+                    .parse(
+                        writerPlugin.writer.contents
+                            .getValue("reference/java/example/TestKt.html")
+                    )
                     .body()
                     .select("devsite-mathjax")
                 assertEquals(1, mathjaxElements.size)

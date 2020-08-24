@@ -33,7 +33,11 @@ private const val MATHJAX_TAG = "<devsite-mathjax config=\"TeX-AMS_SVG\"></devsi
 internal object MathjaxTransformer : PageTransformer {
     override fun invoke(input: RootPageNode) = input.transformContentPagesTree {
         it.modified(
-            embeddedResources = it.embeddedResources + if (it.isNeedingMathjax) listOf(MATHJAX_TAG) else emptyList()
+            embeddedResources = it.embeddedResources + if (it.isNeedingMathjax) {
+                listOf(MATHJAX_TAG)
+            } else {
+                emptyList()
+            }
         )
     }
 
