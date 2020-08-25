@@ -22,12 +22,16 @@ import com.google.devsite.components.FunctionSummary
 import com.google.devsite.components.Link
 import com.google.devsite.components.Parameter
 import com.google.devsite.components.ParameterType
+import com.google.devsite.components.TwoPaneSummaryItem
+import com.google.devsite.components.TypeSummary
 import com.google.devsite.components.impl.DefaultDocumentation
 import com.google.devsite.components.impl.DefaultFunctionSignature
 import com.google.devsite.components.impl.DefaultFunctionSummary
 import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultParameter
 import com.google.devsite.components.impl.DefaultParameterType
+import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
+import com.google.devsite.components.impl.DefaultTypeSummary
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.AdditionalModifiers
@@ -45,16 +49,24 @@ internal class FunctionDocumentableConverter(
     private val pathProvider: FilePathProvider
 ) {
     /** @return the function summary component */
-    fun summary(function: DFunction): FunctionSummary {
-        return DefaultFunctionSummary(
-            FunctionSummary.Params(
-                modifiers = function.modifiers(),
-                returnType = function.type.toComponent(),
-                signature = function.signature(),
-                description = DefaultDocumentation(
-                    Documentation.Params(
-                        tags = function.tags(),
-                        summary = true
+    fun summary(function: DFunction): TwoPaneSummaryItem {
+        return DefaultTwoPaneSummaryItem(
+            TwoPaneSummaryItem.Params(
+                title = DefaultTypeSummary(
+                    TypeSummary.Params(
+                        modifiers = function.modifiers(),
+                        type = function.type.toComponent()
+                    )
+                ),
+                description = DefaultFunctionSummary(
+                    FunctionSummary.Params(
+                        signature = function.signature(),
+                        description = DefaultDocumentation(
+                            Documentation.Params(
+                                tags = function.tags(),
+                                summary = true
+                            )
+                        )
                     )
                 )
             )

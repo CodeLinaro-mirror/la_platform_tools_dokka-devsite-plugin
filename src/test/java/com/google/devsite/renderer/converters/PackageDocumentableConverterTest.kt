@@ -197,8 +197,9 @@ internal class PackageDocumentableConverterTest(
             assertThat(packageComponent.data.extensionFunctionsSummary.data.items).isEmpty()
 
             val functions = packageComponent.data.topLevelFunctionsSummary
-            val functionComponent = functions.data.items.single() as FunctionSummary
-            val titleComponent = functionComponent.data.signature.data.name
+            val functionComponent = functions.data.items.single() as TwoPaneSummaryItem
+            val summary = functionComponent.data.description as FunctionSummary
+            val titleComponent = summary.data.signature.data.name
 
             assertThat(titleComponent.data.name).isEqualTo("foo")
         }
@@ -220,8 +221,9 @@ internal class PackageDocumentableConverterTest(
             assertThat(packageComponent.data.extensionFunctionsSummary.data.items).hasSize(1)
 
             val functions = packageComponent.data.extensionFunctionsSummary
-            val functionComponent = functions.data.items.single() as FunctionSummary
-            val titleComponent = functionComponent.data.signature.data.name
+            val functionComponent = functions.data.items.single() as TwoPaneSummaryItem
+            val summary = functionComponent.data.description as FunctionSummary
+            val titleComponent = summary.data.signature.data.name
 
             assertThat(titleComponent.data.name).isEqualTo("foo")
         }

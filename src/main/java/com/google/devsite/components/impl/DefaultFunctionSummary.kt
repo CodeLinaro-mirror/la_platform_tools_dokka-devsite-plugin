@@ -17,43 +17,21 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.FunctionSummary
-import kotlinx.html.Entities
-import kotlinx.html.TR
+import kotlinx.html.FlowContent
 import kotlinx.html.code
 import kotlinx.html.div
-import kotlinx.html.td
 
-/**
- * Default implementation of a function summary row.
- *
- * The return type and modifiers will be in the left column, while the signature and short
- * description are on the right. Annotations should not be included in the summary to save space.
- */
+/** Default implementation of a function summary. */
 internal class DefaultFunctionSummary(
     override val data: FunctionSummary.Params
 ) : FunctionSummary {
-    override fun render(html: TR) = html.run {
-        td {
+    override fun render(html: FlowContent) = html.run {
+        div {
             code {
-                for (modifier in data.modifiers) {
-                    +modifier
-                    +Entities.nbsp
-                }
-
-                data.returnType.render(this)
+                data.signature.render(this)
             }
         }
 
-        td {
-            attributes["width"] = "100%"
-
-            div {
-                code {
-                    data.signature.render(this)
-                }
-            }
-
-            data.description.render(this)
-        }
+        data.description.render(this)
     }
 }
