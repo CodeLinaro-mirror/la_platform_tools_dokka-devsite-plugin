@@ -34,6 +34,7 @@ import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableOfContents
 import com.google.devsite.components.impl.DefaultTocPackage
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
+import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
@@ -48,6 +49,7 @@ import org.jetbrains.dokka.pages.RootPageNode
 
 /** Converts documentables into components for the root metadata (class/package index). */
 internal class RootDocumentableConverter(
+    language: Language,
     private val root: RootPageNode,
     private val pathProvider: FilePathProvider
 ) {

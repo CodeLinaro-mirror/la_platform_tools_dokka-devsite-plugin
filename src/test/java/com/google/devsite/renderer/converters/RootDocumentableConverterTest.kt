@@ -29,7 +29,9 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-internal class RootDocumentableConverterTest(language: Language) : ConverterTestBase(language) {
+internal class RootDocumentableConverterTest(
+    private val language: Language
+) : ConverterTestBase(language) {
     @Test
     fun `Class index creates components with correct page title`() {
         val source = """
@@ -37,7 +39,7 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(root, pathProvider())
+            val converter = RootDocumentableConverter(language, root, pathProvider())
 
             val components = converter.classesPage()
 
@@ -52,7 +54,7 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(root, pathProvider())
+            val converter = RootDocumentableConverter(language, root, pathProvider())
 
             val components = converter.classesPage()
 
@@ -68,7 +70,7 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(root, pathProvider())
+            val converter = RootDocumentableConverter(language, root, pathProvider())
 
             val components = converter.classesPage()
 
@@ -92,7 +94,7 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(root, pathProvider())
+            val converter = RootDocumentableConverter(language, root, pathProvider())
 
             val components = converter.classesPage()
 
@@ -121,7 +123,7 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(root, pathProvider())
+            val converter = RootDocumentableConverter(language, root, pathProvider())
 
             val components = converter.classesPage()
 
@@ -146,7 +148,7 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(root, pathProvider())
+            val converter = RootDocumentableConverter(language, root, pathProvider())
 
             val components = converter.classesPage()
 
@@ -176,7 +178,7 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(root, pathProvider())
+            val converter = RootDocumentableConverter(language, root, pathProvider())
 
             val components = converter.classesPage()
 
@@ -208,7 +210,7 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(root, pathProvider())
+            val converter = RootDocumentableConverter(language, root, pathProvider())
 
             val components = converter.packagesPage()
 
@@ -223,7 +225,7 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(root, pathProvider())
+            val converter = RootDocumentableConverter(language, root, pathProvider())
 
             val components = converter.packagesPage()
 
@@ -244,7 +246,7 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
         )
 
         testWithRootPageNode(sourceFiles) { root ->
-            val converter = RootDocumentableConverter(root, pathProvider())
+            val converter = RootDocumentableConverter(language, root, pathProvider())
 
             val components = converter.packagesPage()
 
@@ -282,7 +284,7 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
         )
 
         testWithRootPageNode(sourceFiles) { root ->
-            val converter = RootDocumentableConverter(root, pathProvider())
+            val converter = RootDocumentableConverter(language, root, pathProvider())
 
             val components = converter.packagesPage()
 
@@ -307,7 +309,7 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(root, pathProvider())
+            val converter = RootDocumentableConverter(language, root, pathProvider())
 
             val toc = runBlocking { converter.tocPage() }
 
@@ -323,7 +325,7 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(root, pathProvider())
+            val converter = RootDocumentableConverter(language, root, pathProvider())
 
             val toc = runBlocking { converter.tocPage() }
             val tocPackage = toc.data.packages.single()
@@ -340,7 +342,7 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(root, pathProvider())
+            val converter = RootDocumentableConverter(language, root, pathProvider())
 
             val toc = runBlocking { converter.tocPage() }
             val tocPackage = toc.data.packages.single()
@@ -358,7 +360,7 @@ internal class RootDocumentableConverterTest(language: Language) : ConverterTest
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(root, pathProvider())
+            val converter = RootDocumentableConverter(language, root, pathProvider())
 
             val toc = runBlocking { converter.tocPage() }
             val tocPackage = toc.data.packages.single()

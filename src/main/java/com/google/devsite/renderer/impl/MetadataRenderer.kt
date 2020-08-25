@@ -20,6 +20,7 @@ import com.google.devsite.components.PackageList
 import com.google.devsite.components.RedirectPage
 import com.google.devsite.components.impl.DefaultPackageList
 import com.google.devsite.components.impl.DefaultRedirectPage
+import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.RootDocumentableConverter
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.html.html
@@ -30,7 +31,8 @@ import org.jetbrains.dokka.pages.RootPageNode
 /** Renders root metadata files that provide a global overview of the entire packages surface. */
 internal class MetadataRenderer(
     private val outputWriter: OutputWriter,
-    private val pathProvider: FilePathProvider
+    private val pathProvider: FilePathProvider,
+    private val language: Language
 ) {
     /** Writes the list of packages in machine readable format. */
     suspend fun writePackageList(root: RootPageNode) {
@@ -54,7 +56,7 @@ internal class MetadataRenderer(
 
     /** Writes the list of packages in human readable format. */
     suspend fun writePackages(root: RootPageNode) {
-        val converter = RootDocumentableConverter(root, pathProvider)
+        val converter = RootDocumentableConverter(language, root, pathProvider)
         val packageIndex = createHTML().html {
             converter.packagesPage().render(this)
         }
@@ -64,7 +66,7 @@ internal class MetadataRenderer(
 
     /** Writes the list of classes in human readable format. */
     suspend fun writeClasses(root: RootPageNode) {
-        val converter = RootDocumentableConverter(root, pathProvider)
+        val converter = RootDocumentableConverter(language, root, pathProvider)
         val classIndex = createHTML().html {
             converter.classesPage().render(this)
         }
@@ -74,7 +76,7 @@ internal class MetadataRenderer(
 
     /** Writes the ToC for devsite consumption. */
     suspend fun writeToc(root: RootPageNode) {
-        val converter = RootDocumentableConverter(root, pathProvider)
+        val converter = RootDocumentableConverter(language, root, pathProvider)
         val toc = buildString {
             converter.tocPage().render(this)
         }
