@@ -45,9 +45,7 @@ internal class FunctionDocumentableConverter(
     private val pathProvider: FilePathProvider
 ) {
     /** @return the function summary component */
-    fun summary(function: DFunction): FunctionSummary? {
-        if (!shouldDocument(function)) return null
-
+    fun summary(function: DFunction): FunctionSummary {
         return DefaultFunctionSummary(
             FunctionSummary.Params(
                 modifiers = function.modifiers(),
@@ -61,16 +59,6 @@ internal class FunctionDocumentableConverter(
                 )
             )
         )
-    }
-
-    private fun shouldDocument(function: DFunction): Boolean {
-        return if (language == Language.KOTLIN) {
-            true
-        } else {
-            // We currently ignore higher order functions
-            // TODO(b/165105949): document as FunctionN in synthetic classes
-            function.parameters.none { it.type.isLambda() }
-        }
     }
 
     private fun DFunction.signature(): FunctionSignature {
@@ -92,12 +80,26 @@ internal class FunctionDocumentableConverter(
         )
     }
 
-    private fun componentForParameter(param: DParameter): Parameter {
+    private fun componentForParameter(param: DParameter): Parameter = when (language) {
+        Language.JAVA -> componentForJavaParameter(param)
+        Language.KOTLIN -> componentForKotlinParameter(param)
+    }
+
+    private fun componentForJavaParameter(param: DParameter): Parameter {
+        return DefaultParameter(
+            Parameter.Params(
+                isLambda = false,
+                name = param.name ?: "receiver",
+                primary = param.type.toComponent(),
+                // TODO(b/165104993): figure out path to implementing annotations
+                annotations = emptyList(),
+                language = Language.JAVA
+            )
+        )
+    }
+
+    private fun componentForKotlinParameter(param: DParameter): Parameter {
         val isLambda = param.type.isLambda()
-        val name = when (language) {
-            Language.JAVA -> param.name ?: "receiver"
-            Language.KOTLIN -> param.name.orEmpty()
-        }
 
         val receiver = param.type.receiver()
         val primaryType = if (isLambda) {
@@ -127,14 +129,14 @@ internal class FunctionDocumentableConverter(
         return DefaultParameter(
             Parameter.Params(
                 isLambda = isLambda,
-                name = name,
+                name = param.name.orEmpty(),
                 receiver = receiver,
                 lambdaModifiers = lambdaModifiers,
                 lambdaParams = lambdaParams,
                 primary = primaryType,
                 // TODO(b/165104993): figure out path to implementing annotations
                 annotations = emptyList(),
-                language = language
+                language = Language.KOTLIN
             )
         )
     }

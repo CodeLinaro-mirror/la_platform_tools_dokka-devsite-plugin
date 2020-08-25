@@ -120,7 +120,7 @@ internal class PackageDocumentableConverter(
     }
 
     private fun functionsToSummary(functions: List<DFunction>): SummaryList {
-        val components = functions.mapNotNull {
+        val components = functions.map {
             functionConverter.summary(it)
         }
 

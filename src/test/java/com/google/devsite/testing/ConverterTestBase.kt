@@ -70,4 +70,16 @@ internal abstract class ConverterTestBase(
         Language.JAVA -> DacJavaFilePathProvider("androidx")
         Language.KOTLIN -> DacKotlinFilePathProvider("androidx")
     }
+
+    protected fun javaOnly(block: () -> Unit) {
+        if (language == Language.JAVA) {
+            block()
+        }
+    }
+
+    protected fun kotlinOnly(block: () -> Unit) {
+        if (language == Language.KOTLIN) {
+            block()
+        }
+    }
 }

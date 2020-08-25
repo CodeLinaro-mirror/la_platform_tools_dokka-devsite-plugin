@@ -17,6 +17,7 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.components.Parameter
 import com.google.devsite.renderer.Language
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.model.DFunction
@@ -41,7 +42,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
 
             assertThat(summary.data.modifiers).containsExactly("final")
         }
@@ -56,7 +57,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
 
             assertThat(summary.data.modifiers).containsExactly("final")
         }
@@ -71,7 +72,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
 
             assertThat(summary.data.modifiers).containsExactly("final", "suspend")
         }
@@ -86,7 +87,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
 
             assertThat(summary.data.modifiers).containsExactly("final", "inline")
         }
@@ -104,7 +105,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function(fromClass = true)) ?: return@t
+            val summary = converter.summary(root.function(fromClass = true))
 
             assertThat(summary.data.modifiers).containsExactly("protected")
         }
@@ -121,7 +122,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function(fromClass = true)) ?: return@t
+            val summary = converter.summary(root.function(fromClass = true))
 
             assertThat(summary.data.modifiers).containsExactly("abstract")
         }
@@ -138,7 +139,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function(fromClass = true)) ?: return@t
+            val summary = converter.summary(root.function(fromClass = true))
 
             assertThat(summary.data.modifiers).containsExactly("open")
         }
@@ -155,7 +156,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function(fromClass = true)) ?: return@t
+            val summary = converter.summary(root.function(fromClass = true))
 
             assertThat(summary.data.modifiers).containsExactly("abstract")
         }
@@ -171,7 +172,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val returnType = summary.data.returnType
             val link = returnType.data.type
 
@@ -189,7 +190,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val returnType = summary.data.returnType
             val generics = returnType.data.generics
 
@@ -212,7 +213,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val signature = summary.data.signature
 
             assertThat(signature.data.name.data.name).isEqualTo("iAmACoolFunction")
@@ -228,7 +229,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val signature = summary.data.signature
 
             val param = when (language) {
@@ -244,10 +245,8 @@ internal class FunctionDocumentableConverterTest(
 
             val type = param.data.primary
 
-            assertThat(param.data.isLambda).isFalse()
+            assertNoLambdaStuff(param.data)
             assertThat(type.data.type.data.name).isEqualTo("String")
-            assertThat(param.data.lambdaParams).isEmpty()
-            assertThat(param.data.receiver).isNull()
             when (language) {
                 Language.JAVA -> assertThat(param.data.name).isEqualTo("receiver")
                 Language.KOTLIN -> assertThat(param.data.name).isEmpty()
@@ -264,16 +263,14 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val signature = summary.data.signature
             val param = signature.data.parameters.single()
             val type = param.data.primary
 
-            assertThat(param.data.isLambda).isFalse()
+            assertNoLambdaStuff(param.data)
             assertThat(param.data.name).isEqualTo("a")
             assertThat(type.data.type.data.name).isEqualTo("String")
-            assertThat(param.data.lambdaParams).isEmpty()
-            assertThat(param.data.receiver).isNull()
         }
     }
 
@@ -287,7 +284,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val signature = summary.data.signature
         }
     }
@@ -301,7 +298,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val signature = summary.data.signature
             val param = signature.data.parameters.single()
             val generics = param.data.primary.data.generics
@@ -321,7 +318,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val signature = summary.data.signature
             val param = signature.data.parameters.single()
         }
@@ -337,7 +334,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val signature = summary.data.signature
             val param = signature.data.parameters.single()
         }
@@ -353,7 +350,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val signature = summary.data.signature
         }
     }
@@ -368,7 +365,7 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val signature = summary.data.signature
         }
     }
@@ -382,15 +379,24 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val signature = summary.data.signature
             val param = signature.data.parameters.single()
 
-            assertThat(param.data.isLambda).isTrue()
-            assertThat(param.data.receiver).isNull()
-            assertThat(param.data.lambdaModifiers).isEmpty()
-            assertThat(param.data.lambdaParams).isEmpty()
-            assertThat(param.data.primary.data.type.data.name).isEqualTo("Unit")
+            javaOnly {
+                assertNoLambdaStuff(param.data)
+
+                val primary = param.data.primary.data
+                assertThat(primary.type.data.name).isEqualTo("Function0")
+                assertThat(primary.generics.single().data.type.data.name).isEqualTo("Unit")
+            }
+            kotlinOnly {
+                assertThat(param.data.isLambda).isTrue()
+                assertThat(param.data.receiver).isNull()
+                assertThat(param.data.lambdaModifiers).isEmpty()
+                assertThat(param.data.lambdaParams).isEmpty()
+                assertThat(param.data.primary.data.type.data.name).isEqualTo("Unit")
+            }
         }
     }
 
@@ -403,15 +409,24 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val signature = summary.data.signature
             val param = signature.data.parameters.single()
 
-            assertThat(param.data.isLambda).isTrue()
-            assertThat(param.data.receiver).isNull()
-            assertThat(param.data.lambdaParams).isEmpty()
-            assertThat(param.data.lambdaModifiers).containsExactly("suspend")
-            assertThat(param.data.primary.data.type.data.name).isEqualTo("Unit")
+            javaOnly {
+                assertNoLambdaStuff(param.data)
+
+                val primary = param.data.primary.data
+                assertThat(primary.type.data.name).isEqualTo("SuspendFunction0")
+                assertThat(primary.generics.single().data.type.data.name).isEqualTo("Unit")
+            }
+            kotlinOnly {
+                assertThat(param.data.isLambda).isTrue()
+                assertThat(param.data.receiver).isNull()
+                assertThat(param.data.lambdaParams).isEmpty()
+                assertThat(param.data.lambdaModifiers).containsExactly("suspend")
+                assertThat(param.data.primary.data.type.data.name).isEqualTo("Unit")
+            }
         }
     }
 
@@ -425,15 +440,21 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val signature = summary.data.signature
             val param = signature.data.parameters.single()
 
-            assertThat(param.data.isLambda).isTrue()
-            assertThat(param.data.receiver).isNotNull()
-            assertThat(param.data.receiver!!.data.type.data.name).isEqualTo("Float")
-            assertThat(param.data.lambdaModifiers).containsExactly("suspend")
-            assertThat(param.data.lambdaParams).isEmpty()
+            javaOnly {
+                assertNoLambdaStuff(param.data)
+                assertThat(param.data.primary.data.type.data.name).isEqualTo("")
+            }
+            kotlinOnly {
+                assertThat(param.data.isLambda).isTrue()
+                assertThat(param.data.receiver).isNotNull()
+                assertThat(param.data.receiver!!.data.type.data.name).isEqualTo("Float")
+                assertThat(param.data.lambdaModifiers).containsExactly("suspend")
+                assertThat(param.data.lambdaParams).isEmpty()
+            }
         }
     }
 
@@ -446,15 +467,25 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val signature = summary.data.signature
             val param = signature.data.parameters.single()
 
-            assertThat(param.data.isLambda).isTrue()
-            assertThat(param.data.receiver).isNull()
-            assertThat(param.data.lambdaModifiers).containsExactly("suspend")
-            assertThat(param.data.lambdaParams).hasSize(1)
-            assertThat(param.data.lambdaParams.single().data.type.data.name).isEqualTo("Float")
+            javaOnly {
+                assertNoLambdaStuff(param.data)
+
+                val primary = param.data.primary.data
+                assertThat(primary.type.data.name).isEqualTo("SuspendFunction1")
+                assertThat(primary.generics.first().data.type.data.name).isEqualTo("Float")
+                assertThat(primary.generics.last().data.type.data.name).isEqualTo("Unit")
+            }
+            kotlinOnly {
+                assertThat(param.data.isLambda).isTrue()
+                assertThat(param.data.receiver).isNull()
+                assertThat(param.data.lambdaModifiers).containsExactly("suspend")
+                assertThat(param.data.lambdaParams).hasSize(1)
+                assertThat(param.data.lambdaParams.single().data.type.data.name).isEqualTo("Float")
+            }
         }
     }
 
@@ -467,15 +498,25 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val signature = summary.data.signature
             val param = signature.data.parameters.single()
 
-            assertThat(param.data.isLambda).isTrue()
-            assertThat(param.data.receiver).isNull()
-            assertThat(param.data.lambdaModifiers).isEmpty()
-            assertThat(param.data.lambdaParams).hasSize(1)
-            assertThat(param.data.lambdaParams.single().data.type.data.name).isEqualTo("String")
+            javaOnly {
+                assertNoLambdaStuff(param.data)
+
+                val primary = param.data.primary.data
+                assertThat(primary.type.data.name).isEqualTo("Function1")
+                assertThat(primary.generics.first().data.type.data.name).isEqualTo("String")
+                assertThat(primary.generics.last().data.type.data.name).isEqualTo("Unit")
+            }
+            kotlinOnly {
+                assertThat(param.data.isLambda).isTrue()
+                assertThat(param.data.receiver).isNull()
+                assertThat(param.data.lambdaModifiers).isEmpty()
+                assertThat(param.data.lambdaParams).hasSize(1)
+                assertThat(param.data.lambdaParams.single().data.type.data.name).isEqualTo("String")
+            }
         }
     }
 
@@ -488,15 +529,25 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val signature = summary.data.signature
             val param = signature.data.parameters.single()
 
-            assertThat(param.data.isLambda).isTrue()
-            assertThat(param.data.receiver).isNotNull()
-            assertThat(param.data.receiver!!.data.type.data.name).isEqualTo("Float")
-            assertThat(param.data.lambdaModifiers).isEmpty()
-            assertThat(param.data.lambdaParams).isEmpty()
+            javaOnly {
+                assertNoLambdaStuff(param.data)
+
+                val primary = param.data.primary.data
+                assertThat(primary.type.data.name).isEqualTo("Function1")
+                assertThat(primary.generics.first().data.type.data.name).isEqualTo("Float")
+                assertThat(primary.generics.last().data.type.data.name).isEqualTo("Unit")
+            }
+            kotlinOnly {
+                assertThat(param.data.isLambda).isTrue()
+                assertThat(param.data.receiver).isNotNull()
+                assertThat(param.data.receiver!!.data.type.data.name).isEqualTo("Float")
+                assertThat(param.data.lambdaModifiers).isEmpty()
+                assertThat(param.data.lambdaParams).isEmpty()
+            }
         }
     }
 
@@ -509,27 +560,49 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
             val signature = summary.data.signature
             val param = signature.data.parameters.single()
 
-            assertThat(param.data.isLambda).isTrue()
-            assertThat(param.data.receiver).isNotNull()
-            assertThat(param.data.receiver!!.data.type.data.name).isEqualTo("Int")
-            assertThat(param.data.lambdaModifiers).isEmpty()
-            assertThat(param.data.lambdaParams).hasSize(2)
-            assertThat(param.data.lambdaParams.first().data.type.data.name).isEqualTo("Map")
-            assertThat(param.data.lambdaParams.last().data.type.data.name).isEqualTo("Double")
-            assertThat(param.data.primary.data.type.data.name).isEqualTo("Collection")
+            javaOnly {
+                assertNoLambdaStuff(param.data)
 
-            val mapGenerics = param.data.lambdaParams.first().data.generics
-            assertThat(mapGenerics).hasSize(2)
-            assertThat(mapGenerics.first().data.type.data.name).isEqualTo("String")
-            assertThat(mapGenerics.last().data.type.data.name).isEqualTo("Int")
+                val primary = param.data.primary.data
+                assertThat(primary.type.data.name).isEqualTo("Function3")
+                assertThat(primary.generics).hasSize(4)
+                assertThat(primary.generics[0].data.type.data.name).isEqualTo("Int")
+                assertThat(primary.generics[1].data.type.data.name).isEqualTo("Map")
+                assertThat(primary.generics[2].data.type.data.name).isEqualTo("Double")
+                assertThat(primary.generics[3].data.type.data.name).isEqualTo("Collection")
 
-            val collectionGenerics = param.data.primary.data.generics
-            assertThat(collectionGenerics).hasSize(1)
-            assertThat(collectionGenerics.single().data.type.data.name).isEqualTo("Float")
+                val mapGenerics = primary.generics[1].data.generics
+                assertThat(mapGenerics).hasSize(2)
+                assertThat(mapGenerics.first().data.type.data.name).isEqualTo("String")
+                assertThat(mapGenerics.last().data.type.data.name).isEqualTo("Int")
+
+                val collectionGenerics = primary.generics[3].data.generics
+                assertThat(collectionGenerics).hasSize(1)
+                assertThat(collectionGenerics.single().data.type.data.name).isEqualTo("Float")
+            }
+            kotlinOnly {
+                assertThat(param.data.isLambda).isTrue()
+                assertThat(param.data.receiver).isNotNull()
+                assertThat(param.data.receiver!!.data.type.data.name).isEqualTo("Int")
+                assertThat(param.data.lambdaModifiers).isEmpty()
+                assertThat(param.data.lambdaParams).hasSize(2)
+                assertThat(param.data.lambdaParams.first().data.type.data.name).isEqualTo("Map")
+                assertThat(param.data.lambdaParams.last().data.type.data.name).isEqualTo("Double")
+                assertThat(param.data.primary.data.type.data.name).isEqualTo("Collection")
+
+                val mapGenerics = param.data.lambdaParams.first().data.generics
+                assertThat(mapGenerics).hasSize(2)
+                assertThat(mapGenerics.first().data.type.data.name).isEqualTo("String")
+                assertThat(mapGenerics.last().data.type.data.name).isEqualTo("Int")
+
+                val collectionGenerics = param.data.primary.data.generics
+                assertThat(collectionGenerics).hasSize(1)
+                assertThat(collectionGenerics.single().data.type.data.name).isEqualTo("Float")
+            }
         }
     }
 
@@ -542,12 +615,19 @@ internal class FunctionDocumentableConverterTest(
         testWithRootPageNode(source) t@{ root ->
             val converter = FunctionDocumentableConverter(language, pathProvider())
 
-            val summary = converter.summary(root.function()) ?: return@t
+            val summary = converter.summary(root.function())
 
             // TODO(asaveau): update once receivers are implemented
             assertThat(summary.data.signature.data.name.data.url)
                 .isEqualTo("#foo(kotlin.collections.Map,kotlin.Function2)")
         }
+    }
+
+    private fun assertNoLambdaStuff(data: Parameter.Params) {
+        assertThat(data.isLambda).isFalse()
+        assertThat(data.receiver).isNull()
+        assertThat(data.lambdaParams).isEmpty()
+        assertThat(data.lambdaModifiers).isEmpty()
     }
 
     private fun RootPageNode.function(fromClass: Boolean = false): DFunction {
