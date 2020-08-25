@@ -40,7 +40,6 @@ class DefaultRedirectPageTest {
     <meta content="0; url=foo.html" http-equiv="refresh">
     <meta name="robots" content="noindex">
     <link href="foo.html" rel="canonical">
-    <script>location="foo.html"</script>
     <title>Redirecting&hellip;</title>
   </head>
   <body>

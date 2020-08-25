@@ -24,7 +24,6 @@ import kotlinx.html.h1
 import kotlinx.html.head
 import kotlinx.html.link
 import kotlinx.html.meta
-import kotlinx.html.script
 import kotlinx.html.title
 import kotlinx.html.unsafe
 
@@ -40,12 +39,6 @@ internal class DefaultRedirectPage(
             }
             meta(name = "robots", content = "noindex")
             link(rel = "canonical", href = data.url)
-
-            script {
-                unsafe {
-                    +"location=\"${data.url}\""
-                }
-            }
 
             title {
                 +"Redirecting"
