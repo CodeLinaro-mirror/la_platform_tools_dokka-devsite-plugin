@@ -18,7 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.FunctionSummary.Params
-import com.google.devsite.components.testing.NoopDocumentation
+import com.google.devsite.components.testing.NoopDescription
 import com.google.devsite.components.testing.NoopFunctionSignature
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
@@ -30,7 +30,7 @@ class DefaultFunctionSummaryTest {
         val component = DefaultFunctionSummary(
             Params(
                 signature = NoopFunctionSignature("foo()"),
-                description = NoopDocumentation("This method does baz.")
+                description = NoopDescription("This method does baz.")
             )
         )
 

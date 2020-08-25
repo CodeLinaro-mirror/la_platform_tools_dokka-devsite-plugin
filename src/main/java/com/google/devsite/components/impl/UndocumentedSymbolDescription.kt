@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components.testing
+package com.google.devsite.components.impl
 
-import com.google.devsite.components.Documentation
+import com.google.devsite.components.Description
 import kotlinx.html.FlowContent
-import kotlinx.html.p
 
-internal class NoopDocumentation(private val text: String) : Documentation {
-    override val data: Documentation.Params
-        get() = throw NotImplementedError()
+/** Implementation of a javadoc description that has no documentation. */
+internal class UndocumentedSymbolDescription : Description {
+    override val data: Description.Params
+        get() = error("Unused")
 
-    override fun render(html: FlowContent) = html.run {
-        p { +text }
-    }
+    // Do nothing
+    override fun render(html: FlowContent) = Unit
 }

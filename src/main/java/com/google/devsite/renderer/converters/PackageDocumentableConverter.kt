@@ -17,13 +17,11 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.DevsitePage
-import com.google.devsite.components.Documentation
 import com.google.devsite.components.Link
 import com.google.devsite.components.PackageSummary
 import com.google.devsite.components.SummaryList
 import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultDevsitePage
-import com.google.devsite.components.impl.DefaultDocumentation
 import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultPackageSummary
 import com.google.devsite.components.impl.DefaultSummaryList
@@ -43,7 +41,9 @@ internal class PackageDocumentableConverter(
     private val packagePage: PackagePageNode,
     private val pathProvider: FilePathProvider
 ) {
-    private val functionConverter = FunctionDocumentableConverter(language, pathProvider)
+    private val javadocConverter = DocTagConverter(language, pathProvider)
+    private val functionConverter =
+        FunctionDocumentableConverter(language, pathProvider, javadocConverter)
 
     /** @return the root component for the package summary page */
     suspend fun summaryPage(): DevsitePage = coroutineScope {
@@ -102,12 +102,7 @@ internal class PackageDocumentableConverter(
                             url = pathProvider.forType(packageName, name)
                         )
                     ),
-                    description = DefaultDocumentation(
-                        Documentation.Params(
-                            tags = classlike.tags(),
-                            summary = true
-                        )
-                    )
+                    description = javadocConverter.summaryDescription(classlike)
                 )
             )
         }

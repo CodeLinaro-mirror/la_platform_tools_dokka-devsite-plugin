@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components
+package com.google.devsite.components.testing
 
-import org.jetbrains.dokka.model.doc.TagWrapper
+import com.google.devsite.components.Description
+import kotlinx.html.FlowContent
+import kotlinx.html.p
 
-/** Represents the hand-written documentation for a symbol. */
-internal interface Documentation : ContextFreeComponent {
-    val data: Params
+internal class NoopDescription(private val text: String) : Description {
+    override val data: Description.Params
+        get() = throw NotImplementedError()
 
-    class Params(
-        val tags: List<TagWrapper>,
-        val summary: Boolean = false
-    )
+    override fun render(html: FlowContent) = html.run {
+        p { +text }
+    }
 }

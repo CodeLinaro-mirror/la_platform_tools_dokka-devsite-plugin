@@ -17,7 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.Documentation.Params
+import com.google.devsite.components.Description.Params
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
@@ -25,31 +25,7 @@ import org.jetbrains.dokka.pages.ClasslikePageNode
 import org.jetbrains.dokka.pages.ContentPage
 import org.junit.Test
 
-internal class DefaultDocumentationTest : ConverterTestBase() {
-    @Test
-    fun `No documentation renders correctly`() {
-        val source = """
-            |class Foo
-        """.trimMargin()
-
-        testWithRootPageNode(source) { root ->
-            val tags = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tags()
-            val component = DefaultDocumentation(Params(tags))
-
-            val output = createHTML().body {
-                component.render(this)
-            }.trim()
-
-            // language=html
-            assertThat(output).isEqualTo(
-                """
-<body></body>
-                """.trim()
-            )
-        }
-    }
-
+internal class DefaultDescriptionTest : ConverterTestBase() {
     @Test
     fun `Single sentence renders correctly`() {
         val source = """
@@ -58,9 +34,9 @@ internal class DefaultDocumentationTest : ConverterTestBase() {
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val tags = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tags()
-            val component = DefaultDocumentation(Params(tags))
+            val tag = root.children.flatMap { it.children }
+                .filterIsInstance<ClasslikePageNode>().single().tag()
+            val component = DefaultDescription(Params(tag))
 
             val output = createHTML().body {
                 component.render(this)
@@ -78,15 +54,78 @@ internal class DefaultDocumentationTest : ConverterTestBase() {
     }
 
     @Test
+    fun `Deprecation renders renders correctly`() {
+        val source = """
+            |/** Hello world! */
+            |class Foo
+        """.trimMargin()
+
+        testWithRootPageNode(source) { root ->
+            val tag = root.children.flatMap { it.children }
+                .filterIsInstance<ClasslikePageNode>().single().tag()
+            val component = DefaultDescription(Params(
+                tag,
+                deprecation = "This class is deprecated."
+            ))
+
+            val output = createHTML().body {
+                component.render(this)
+            }.trim()
+
+            // language=html
+            assertThat(output).isEqualTo(
+                """
+<body>
+  <p class="caution"><strong>This class is deprecated.</strong><br>
+    <p>Hello world!</p>
+  </p>
+</body>
+                """.trim()
+            )
+        }
+    }
+
+    @Test
+    fun `Deprecation summary renders renders correctly`() {
+        val source = """
+            |/** Hello world! */
+            |class Foo
+        """.trimMargin()
+
+        testWithRootPageNode(source) { root ->
+            val tag = root.children.flatMap { it.children }
+                .filterIsInstance<ClasslikePageNode>().single().tag()
+            val component = DefaultDescription(Params(
+                tag,
+                summary = true,
+                deprecation = "This class is deprecated."
+            ))
+
+            val output = createHTML().body {
+                component.render(this)
+            }.trim()
+
+            // language=html
+            assertThat(output).isEqualTo(
+                """
+<body>
+  <p><em>This class is deprecated.</em> Hello world!</p>
+</body>
+                """.trim()
+            )
+        }
+    }
+
+    @Test
     fun `Paragraphs render correctly`() {
         val source = """
             |/**
             | * There was an old lady who swallowed a fly.
             | * I dunno why she swallowed that fly,
             | * Perhaps she'll die.
-            | * 
+            | *
             | * ...
-            | * 
+            | *
             | * There was an old lady who swallowed a cow.
             | * I don't know how she swallowed a cow!
             | * She swallowed the cow to catch the goat...
@@ -98,7 +137,7 @@ internal class DefaultDocumentationTest : ConverterTestBase() {
             | * She swallowed the spider to catch the fly.
             | * But I dunno why she swallowed that fly
             | * Perhaps she'll die.
-            | * 
+            | *
             | * There was an old lady who swallowed a horse -
             | * She's dead, of course.
             | */
@@ -106,9 +145,9 @@ internal class DefaultDocumentationTest : ConverterTestBase() {
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val tags = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tags()
-            val component = DefaultDocumentation(Params(tags))
+            val tag = root.children.flatMap { it.children }
+                .filterIsInstance<ClasslikePageNode>().single().tag()
+            val component = DefaultDescription(Params(tag))
 
             val output = createHTML().body {
                 component.render(this)
@@ -142,9 +181,9 @@ internal class DefaultDocumentationTest : ConverterTestBase() {
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val tags = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tags()
-            val component = DefaultDocumentation(Params(tags))
+            val tag = root.children.flatMap { it.children }
+                .filterIsInstance<ClasslikePageNode>().single().tag()
+            val component = DefaultDescription(Params(tag))
 
             val output = createHTML().body {
                 component.render(this)
@@ -169,9 +208,9 @@ internal class DefaultDocumentationTest : ConverterTestBase() {
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val tags = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tags()
-            val component = DefaultDocumentation(Params(tags))
+            val tag = root.children.flatMap { it.children }
+                .filterIsInstance<ClasslikePageNode>().single().tag()
+            val component = DefaultDescription(Params(tag))
 
             val output = createHTML().body {
                 component.render(this)
@@ -196,11 +235,11 @@ internal class DefaultDocumentationTest : ConverterTestBase() {
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val tags = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tags()
-            val component = DefaultDocumentation(Params(tags))
+            val tag = root.children.flatMap { it.children }
+                .filterIsInstance<ClasslikePageNode>().single().tag()
+            val component = DefaultDescription(Params(tag))
 
-            val output = createHTML().body {
+            val output = createHTML(prettyPrint = false).body {
                 component.render(this)
             }.trim()
 
@@ -208,11 +247,7 @@ internal class DefaultDocumentationTest : ConverterTestBase() {
             // language=html
             assertThat(output).isEqualTo(
                 """
-<body>
-  <p><em>Italics</em>, <b>Bold</b>, <b><em>Both</em></b>, 
-    <del></del>
-.</p>
-</body>
+<body><p><em>Italics</em>, <b>Bold</b>, <b><em>Both</em></b>, <del></del>.</p></body>
                 """.trim()
             )
         }
@@ -231,9 +266,9 @@ internal class DefaultDocumentationTest : ConverterTestBase() {
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val tags = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tags()
-            val component = DefaultDocumentation(Params(tags))
+            val tag = root.children.flatMap { it.children }
+                .filterIsInstance<ClasslikePageNode>().single().tag()
+            val component = DefaultDescription(Params(tag))
 
             val output = createHTML().body {
                 component.render(this)
@@ -276,9 +311,9 @@ internal class DefaultDocumentationTest : ConverterTestBase() {
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val tags = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tags()
-            val component = DefaultDocumentation(Params(tags))
+            val tag = root.children.flatMap { it.children }
+                .filterIsInstance<ClasslikePageNode>().single().tag()
+            val component = DefaultDescription(Params(tag))
 
             val output = createHTML().body {
                 component.render(this)
@@ -322,9 +357,9 @@ internal class DefaultDocumentationTest : ConverterTestBase() {
         """.trimMargin()
 
         testWithRootPageNode(source) { root ->
-            val tags = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tags()
-            val component = DefaultDocumentation(Params(tags))
+            val tag = root.children.flatMap { it.children }
+                .filterIsInstance<ClasslikePageNode>().single().tag()
+            val component = DefaultDescription(Params(tag))
 
             val output = createHTML().body {
                 component.render(this)
@@ -363,6 +398,6 @@ internal class DefaultDocumentationTest : ConverterTestBase() {
         }
     }
 
-    private fun ContentPage.tags() =
-        documentable!!.documentation.values.singleOrNull()?.children.orEmpty()
+    private fun ContentPage.tag() =
+        documentable!!.documentation.values.singleOrNull()?.children.orEmpty().single().root
 }

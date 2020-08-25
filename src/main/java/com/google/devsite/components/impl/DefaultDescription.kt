@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.Documentation
+import com.google.devsite.components.Description
 import kotlinx.html.FlowContent
 import kotlinx.html.OL
 import kotlinx.html.TABLE
@@ -41,6 +41,7 @@ import kotlinx.html.li
 import kotlinx.html.ol
 import kotlinx.html.p
 import kotlinx.html.span
+import kotlinx.html.strong
 import kotlinx.html.sub
 import kotlinx.html.sup
 import kotlinx.html.table
@@ -52,18 +53,14 @@ import kotlinx.html.thead
 import kotlinx.html.tr
 import kotlinx.html.ul
 import org.jetbrains.dokka.model.doc.A
-import org.jetbrains.dokka.model.doc.Author
 import org.jetbrains.dokka.model.doc.B
 import org.jetbrains.dokka.model.doc.Big
 import org.jetbrains.dokka.model.doc.BlockQuote
 import org.jetbrains.dokka.model.doc.Br
 import org.jetbrains.dokka.model.doc.Cite
 import org.jetbrains.dokka.model.doc.CodeInline
-import org.jetbrains.dokka.model.doc.Constructor
 import org.jetbrains.dokka.model.doc.CustomDocTag
-import org.jetbrains.dokka.model.doc.CustomTagWrapper
 import org.jetbrains.dokka.model.doc.Dd
-import org.jetbrains.dokka.model.doc.Description
 import org.jetbrains.dokka.model.doc.Dfn
 import org.jetbrains.dokka.model.doc.Dir
 import org.jetbrains.dokka.model.doc.Div
@@ -101,18 +98,14 @@ import org.jetbrains.dokka.model.doc.NoFrames
 import org.jetbrains.dokka.model.doc.NoScript
 import org.jetbrains.dokka.model.doc.Ol
 import org.jetbrains.dokka.model.doc.P
-import org.jetbrains.dokka.model.doc.Property
-import org.jetbrains.dokka.model.doc.Receiver
 import org.jetbrains.dokka.model.doc.Script
 import org.jetbrains.dokka.model.doc.Section
-import org.jetbrains.dokka.model.doc.Since
 import org.jetbrains.dokka.model.doc.Small
 import org.jetbrains.dokka.model.doc.Span
 import org.jetbrains.dokka.model.doc.Strikethrough
 import org.jetbrains.dokka.model.doc.Strong
 import org.jetbrains.dokka.model.doc.Sub
 import org.jetbrains.dokka.model.doc.Sup
-import org.jetbrains.dokka.model.doc.Suppress
 import org.jetbrains.dokka.model.doc.TBody
 import org.jetbrains.dokka.model.doc.TFoot
 import org.jetbrains.dokka.model.doc.THead
@@ -126,31 +119,32 @@ import org.jetbrains.dokka.model.doc.Tt
 import org.jetbrains.dokka.model.doc.U
 import org.jetbrains.dokka.model.doc.Ul
 import org.jetbrains.dokka.model.doc.Var
-import org.jetbrains.dokka.model.doc.Version
 
 /** Default implementation of the hand-written documentation for a symbol. */
-internal class DefaultDocumentation(
-    override val data: Documentation.Params
-) : Documentation {
+internal class DefaultDescription(
+    override val data: Description.Params
+) : Description {
     override fun render(html: FlowContent) = html.run {
-        for (tag in data.tags) {
-            when (tag) {
-                is Description -> renderTags(listOf(tag.root))
-                // Don't crash because it's used in the integration tests
-//                is Param -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-//                is Return -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-//                is Throws -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-//                is Deprecated -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-//                is See -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-//                is Sample -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is Property -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is CustomTagWrapper -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is Author -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is Version -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is Since -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is Receiver -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is Constructor -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is Suppress -> TODO("b/163811276: ${tag.javaClass.simpleName}")
+        if (data.deprecation == null) {
+            renderTags(listOf(data.root))
+        } else {
+            if (data.summary) {
+                if (data.root is P) {
+                    p {
+                        em { +data.deprecation }
+                        +" "
+                        renderTags(data.root.children)
+                    }
+                } else {
+                    em { +data.deprecation }
+                    renderTags(data.root.children)
+                }
+            } else {
+                p("caution") {
+                    strong { +data.deprecation }
+                    br()
+                    renderTags(listOf(data.root))
+                }
             }
         }
     }

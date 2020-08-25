@@ -35,6 +35,8 @@ import org.junit.runners.Parameterized
 internal class FunctionDocumentableConverterTest(
     private val language: Language
 ) : ConverterTestBase(language) {
+    private val docConverter = DocTagConverter(language, pathProvider())
+
     @Test
     fun `Top level function summary component has correct default modifiers`() {
         val source = """
@@ -42,7 +44,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val type = summary.data.title as TypeSummary
@@ -58,7 +60,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val type = summary.data.title as TypeSummary
@@ -74,7 +76,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val type = summary.data.title as TypeSummary
@@ -90,7 +92,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val type = summary.data.title as TypeSummary
@@ -109,7 +111,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function(fromClass = true))
             val type = summary.data.title as TypeSummary
@@ -127,7 +129,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function(fromClass = true))
             val type = summary.data.title as TypeSummary
@@ -145,7 +147,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function(fromClass = true))
             val type = summary.data.title as TypeSummary
@@ -163,7 +165,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function(fromClass = true))
             val type = summary.data.title as TypeSummary
@@ -180,7 +182,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val type = summary.data.title as TypeSummary
@@ -199,7 +201,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val type = summary.data.title as TypeSummary
@@ -223,7 +225,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val breakdown = summary.data.description as FunctionSummary
@@ -240,7 +242,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val breakdown = summary.data.description as FunctionSummary
@@ -275,7 +277,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val breakdown = summary.data.description as FunctionSummary
@@ -297,7 +299,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val breakdown = summary.data.description as FunctionSummary
@@ -312,7 +314,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val breakdown = summary.data.description as FunctionSummary
@@ -333,7 +335,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val breakdown = summary.data.description as FunctionSummary
@@ -350,7 +352,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val breakdown = summary.data.description as FunctionSummary
@@ -367,7 +369,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val breakdown = summary.data.description as FunctionSummary
@@ -383,7 +385,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val breakdown = summary.data.description as FunctionSummary
@@ -398,7 +400,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val breakdown = summary.data.description as FunctionSummary
@@ -429,7 +431,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val breakdown = summary.data.description as FunctionSummary
@@ -461,7 +463,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val breakdown = summary.data.description as FunctionSummary
@@ -489,7 +491,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val breakdown = summary.data.description as FunctionSummary
@@ -521,7 +523,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val breakdown = summary.data.description as FunctionSummary
@@ -553,7 +555,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val breakdown = summary.data.description as FunctionSummary
@@ -585,7 +587,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val breakdown = summary.data.description as FunctionSummary
@@ -641,7 +643,7 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
             val breakdown = summary.data.description as FunctionSummary

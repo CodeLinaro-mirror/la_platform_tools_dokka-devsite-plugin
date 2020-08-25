@@ -16,7 +16,6 @@
 
 package com.google.devsite.renderer.converters
 
-import com.google.devsite.components.Documentation
 import com.google.devsite.components.FunctionSignature
 import com.google.devsite.components.FunctionSummary
 import com.google.devsite.components.Link
@@ -24,7 +23,6 @@ import com.google.devsite.components.Parameter
 import com.google.devsite.components.ParameterType
 import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.TypeSummary
-import com.google.devsite.components.impl.DefaultDocumentation
 import com.google.devsite.components.impl.DefaultFunctionSignature
 import com.google.devsite.components.impl.DefaultFunctionSummary
 import com.google.devsite.components.impl.DefaultLink
@@ -46,7 +44,8 @@ import org.jetbrains.dokka.model.TypeConstructor
 /** Converts documentable functions into function components. */
 internal class FunctionDocumentableConverter(
     private val language: Language,
-    private val pathProvider: FilePathProvider
+    private val pathProvider: FilePathProvider,
+    private val javadocConverter: DocTagConverter
 ) {
     /** @return the function summary component */
     fun summary(function: DFunction): TwoPaneSummaryItem {
@@ -61,12 +60,7 @@ internal class FunctionDocumentableConverter(
                 description = DefaultFunctionSummary(
                     FunctionSummary.Params(
                         signature = function.signature(),
-                        description = DefaultDocumentation(
-                            Documentation.Params(
-                                tags = function.tags(),
-                                summary = true
-                            )
-                        )
+                        description = javadocConverter.summaryDescription(function)
                     )
                 )
             )
