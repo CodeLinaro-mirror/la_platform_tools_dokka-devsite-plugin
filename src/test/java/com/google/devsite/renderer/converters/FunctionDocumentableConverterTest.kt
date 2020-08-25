@@ -647,9 +647,8 @@ internal class FunctionDocumentableConverterTest(
             val breakdown = summary.data.description as FunctionSummary
             val signature = breakdown.data.signature
 
-            // TODO(asaveau): update once receivers are implemented
             assertThat(signature.data.name.data.url)
-                .isEqualTo("#foo(kotlin.collections.Map,kotlin.Function2)")
+                .isEqualTo("#foo(kotlin.collections.List,kotlin.collections.Map,kotlin.Function2)")
         }
     }
 

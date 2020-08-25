@@ -222,14 +222,15 @@ internal class FunctionDocumentableConverter(
      * the same page this summary is being rendered to.
      */
     private fun DFunction.relativeLink(): Link {
-        val fullyQualifiedProjections = parameters.map { param ->
+        val paramTypes = parameters.map { param ->
             param.type.toFullyQualifiedSignature()
         }
+        val allParams = listOfNotNull(receiver?.type?.toFullyQualifiedSignature()) + paramTypes
 
         return DefaultLink(
             Link.Params(
                 name = name,
-                url = "#$name(${fullyQualifiedProjections.joinToString(",")})"
+                url = "#$name(${allParams.joinToString(",")})"
             )
         )
     }
