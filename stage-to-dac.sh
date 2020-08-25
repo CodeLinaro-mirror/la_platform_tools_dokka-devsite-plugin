@@ -16,6 +16,7 @@ cd "$client"
 cp -r "$start_dir"/"$path" third_party/devsite/android/en/
 p4 reopen
 /google/data/ro/projects/devsite/devsite2 stage --db="$USER" \
+  "third_party/devsite/android/en/assets" \
   "third_party/devsite/android/en/reference/$package_base" \
   "third_party/devsite/android/en/reference/kotlin/$package_base"
 
