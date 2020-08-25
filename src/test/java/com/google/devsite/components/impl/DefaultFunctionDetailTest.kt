@@ -1,0 +1,213 @@
+/*
+ * Copyright 2020 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.google.devsite.components.impl
+
+import com.google.common.truth.Truth.assertThat
+import com.google.devsite.components.FunctionDetail
+import com.google.devsite.components.testing.NoopContextFreeComponent
+import com.google.devsite.components.testing.NoopFunctionSignature
+import com.google.devsite.components.testing.NoopParameterType
+import com.google.devsite.renderer.Language
+import kotlinx.html.div
+import kotlinx.html.stream.createHTML
+import org.junit.Test
+
+class DefaultFunctionDetailTest {
+    @Test
+    fun `Simple Java function renders correctly`() {
+        val component = DefaultFunctionDetail(
+            FunctionDetail.Params(
+                language = Language.JAVA,
+                name = "foo",
+                anchors = emptySet(),
+                returnType = NoopParameterType("void"),
+                signature = NoopFunctionSignature("foo()"),
+                metadata = emptyList()
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <div>
+    <h3 class="api-name">foo</h3>
+    <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
+  </div>
+</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Simple Kotlin function renders correctly`() {
+        val component = DefaultFunctionDetail(
+            FunctionDetail.Params(
+                language = Language.KOTLIN,
+                name = "foo",
+                anchors = emptySet(),
+                returnType = NoopParameterType("Unit"),
+                signature = NoopFunctionSignature("foo()"),
+                metadata = emptyList()
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <div>
+    <h3 class="api-name">foo</h3>
+    <pre class="api-signature no-pretty-print">foo():&nbsp;Unit</pre>
+  </div>
+</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Java function with modifiers renders correctly`() {
+        val component = DefaultFunctionDetail(
+            FunctionDetail.Params(
+                language = Language.JAVA,
+                name = "foo",
+                anchors = emptySet(),
+                modifiers = listOf("protected", "abstract"),
+                returnType = NoopParameterType("void"),
+                signature = NoopFunctionSignature("foo()"),
+                metadata = emptyList()
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <div>
+    <h3 class="api-name">foo</h3>
+    <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;void&nbsp;foo()</pre>
+  </div>
+</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Kotlin function with modifiers renders correctly`() {
+        val component = DefaultFunctionDetail(
+            FunctionDetail.Params(
+                language = Language.KOTLIN,
+                name = "foo",
+                anchors = emptySet(),
+                modifiers = listOf("protected", "abstract"),
+                returnType = NoopParameterType("Unit"),
+                signature = NoopFunctionSignature("foo()"),
+                metadata = emptyList()
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <div>
+    <h3 class="api-name">foo</h3>
+    <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;foo():&nbsp;Unit</pre>
+  </div>
+</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Function anchors render correctly`() {
+        val component = DefaultFunctionDetail(
+            FunctionDetail.Params(
+                language = Language.JAVA,
+                name = "foo",
+                anchors = setOf("#foo()", "#foo--"),
+                returnType = NoopParameterType("void"),
+                signature = NoopFunctionSignature("foo()"),
+                metadata = emptyList()
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <div><a name="#foo()"></a><a name="#foo--"></a>
+    <h3 class="api-name">foo</h3>
+    <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
+  </div>
+</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Function with metadata renders correctly`() {
+        val component = DefaultFunctionDetail(
+            FunctionDetail.Params(
+                language = Language.JAVA,
+                name = "foo",
+                anchors = emptySet(),
+                returnType = NoopParameterType("void"),
+                signature = NoopFunctionSignature("foo()"),
+                metadata = listOf(NoopContextFreeComponent, NoopContextFreeComponent)
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <div>
+    <h3 class="api-name">foo</h3>
+    <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
+    <div>noop</div>
+    <div>noop</div>
+  </div>
+</div>
+            """.trim()
+        )
+    }
+}
