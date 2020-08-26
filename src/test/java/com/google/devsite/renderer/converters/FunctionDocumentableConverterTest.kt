@@ -654,6 +654,40 @@ internal class FunctionDocumentableConverterTest(
         }
     }
 
+    @Test
+    fun `Function detail component has correct name`() {
+        val source = """
+            |fun foo()
+        """.trimMargin()
+
+        testWithRootPageNode(source) t@{ root ->
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+
+            val detail = converter.detail(root.function())
+
+            assertThat(detail.data.name).isEqualTo("foo")
+        }
+    }
+
+    @Test
+    fun `Function detail component has correct anchors`() {
+        val source = """
+            |fun List<String>.foo(a: Map<String, Int>, block: String.(Float) -> Double) = Unit
+        """.trimMargin()
+
+        testWithRootPageNode(source) t@{ root ->
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+
+            val detail = converter.detail(root.function())
+
+            assertThat(detail.data.anchors).containsExactly(
+                "foo(kotlin.collections.List,kotlin.collections.Map,kotlin.Function2)",
+                "foo(kotlin.collections.List, kotlin.collections.Map, kotlin.Function2)",
+                "foo-kotlin.collections.List-kotlin.collections.Map-kotlin.Function2-"
+            )
+        }
+    }
+
     private fun assertNoLambdaStuff(data: Parameter.Params) {
         assertThat(data.isLambda).isFalse()
         assertThat(data.receiver).isNull()

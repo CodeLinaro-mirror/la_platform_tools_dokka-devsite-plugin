@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.components.FunctionDetail
 import com.google.devsite.components.FunctionSignature
 import com.google.devsite.components.FunctionSummary
 import com.google.devsite.components.Link
@@ -23,6 +24,7 @@ import com.google.devsite.components.Parameter
 import com.google.devsite.components.ParameterType
 import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.TypeSummary
+import com.google.devsite.components.impl.DefaultFunctionDetail
 import com.google.devsite.components.impl.DefaultFunctionSignature
 import com.google.devsite.components.impl.DefaultFunctionSummary
 import com.google.devsite.components.impl.DefaultLink
@@ -63,6 +65,22 @@ internal class FunctionDocumentableConverter(
                         description = javadocConverter.summaryDescription(function)
                     )
                 )
+            )
+        )
+    }
+
+    /** @return the function detail component */
+    fun detail(function: DFunction): FunctionDetail {
+        val returnType = function.type.toComponent()
+        return DefaultFunctionDetail(
+            FunctionDetail.Params(
+                language = language,
+                name = function.name,
+                anchors = generateCompatAnchors(function),
+                modifiers = function.modifiers(),
+                returnType = returnType,
+                signature = function.signature(),
+                metadata = javadocConverter.metadata(function, returnType)
             )
         )
     }
@@ -246,6 +264,27 @@ internal class FunctionDocumentableConverter(
         is OtherParameter -> false
         is Nullable -> inner.isLambda()
         else -> error("Unknown bound: $this")
+    }
+
+    /**
+     * Creates method anchors compatible with several different iterations of javadoc.
+     *
+     * The different types are:
+     * - `foo(int,int)`
+     * - `foo(int, int)`
+     * - `foo-int-int-`
+     */
+    private fun generateCompatAnchors(function: DFunction): Set<String> {
+        val receiver = listOfNotNull(function.receiver?.type?.toFullyQualifiedSignature())
+        val params = function.parameters.map { it.type.toFullyQualifiedSignature() }
+        val all = receiver + params
+        val name = function.name
+
+        return setOf(
+            "$name(${all.joinToString(",")})",
+            "$name(${all.joinToString(", ")})",
+            "$name-${all.joinToString("-")}-"
+        )
     }
 
     private fun Projection.toFullyQualifiedSignature(): String = when (this) {
