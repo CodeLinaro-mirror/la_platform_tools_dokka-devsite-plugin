@@ -16,6 +16,7 @@
 
 package com.google.devsite.components
 
+import com.google.devsite.renderer.Language
 import kotlinx.html.HTML
 
 /** Represents any devsite page and should be used as the root component. */
@@ -23,6 +24,8 @@ internal interface DevsitePage : HtmlComponent<HTML> {
     val data: Params
 
     class Params(
+        val language: Language,
+        val path: String,
         val title: String,
         val content: ContextFreeComponent
     )

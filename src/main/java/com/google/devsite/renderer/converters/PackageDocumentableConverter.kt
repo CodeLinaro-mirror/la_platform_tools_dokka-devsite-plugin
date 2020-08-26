@@ -64,6 +64,8 @@ internal class PackageDocumentableConverter(
 
         DefaultDevsitePage(
             DevsitePage.Params(
+                language,
+                pathProvider.relative.forType(doc.name, "package-summary"),
                 packagePage.name,
                 DefaultPackageSummary(
                     PackageSummary.Params(

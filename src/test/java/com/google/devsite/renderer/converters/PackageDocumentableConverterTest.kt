@@ -56,6 +56,27 @@ internal class PackageDocumentableConverterTest(
     }
 
     @Test
+    fun `Package summary creates components with correct path`() {
+        val sourceFiles = listOf(
+            """
+                |/src/main/kotlin/androidx/example/A.kt
+                |package hello.i.am.a.packagez
+                |
+                |class A
+            """.trimMargin()
+        )
+
+        testWithRootPageNode(sourceFiles) { root ->
+            val converter =
+                PackageDocumentableConverter(language, root.packagePage(), pathProvider())
+
+            val components = runBlocking { converter.summaryPage() }
+
+            assertThat(components.data.path).isEqualTo("hello/i/am/a/packagez/package-summary.html")
+        }
+    }
+
+    @Test
     fun `Package summary creates components for interfaces`() {
         val source = """
             |interface ImAnInterface

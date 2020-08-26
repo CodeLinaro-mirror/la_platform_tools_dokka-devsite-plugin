@@ -18,6 +18,9 @@ package com.google.devsite.renderer.impl.paths
 
 /** Converts various inputs to output file paths. */
 internal interface FilePathProvider {
+    /** Get this provider with only relative paths. */
+    val relative: FilePathProvider
+
     /** The raw list of packages in plain text format. */
     val packageList: String
 

@@ -48,6 +48,21 @@ internal class RootDocumentableConverterTest(
     }
 
     @Test
+    fun `Class index creates components with correct path`() {
+        val source = """
+            |class Foo
+        """.trimMargin()
+
+        testWithRootPageNode(source) { root ->
+            val converter = RootDocumentableConverter(language, root, pathProvider())
+
+            val components = converter.classesPage()
+
+            assertThat(components.data.path).isEqualTo("androidx/classes.html")
+        }
+    }
+
+    @Test
     fun `Class index creates components with correct packages link`() {
         val source = """
             |class Foo
@@ -215,6 +230,21 @@ internal class RootDocumentableConverterTest(
             val components = converter.packagesPage()
 
             assertThat(components.data.title).isEqualTo("Package Index")
+        }
+    }
+
+    @Test
+    fun `Package index creates components with correct path`() {
+        val source = """
+            |class Foo
+        """.trimMargin()
+
+        testWithRootPageNode(source) { root ->
+            val converter = RootDocumentableConverter(language, root, pathProvider())
+
+            val components = converter.packagesPage()
+
+            assertThat(components.data.path).isEqualTo("androidx/packages.html")
         }
     }
 

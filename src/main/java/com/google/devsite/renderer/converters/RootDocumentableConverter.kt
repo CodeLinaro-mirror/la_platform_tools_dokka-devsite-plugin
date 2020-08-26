@@ -47,7 +47,7 @@ import org.jetbrains.dokka.pages.RootPageNode
 
 /** Converts documentables into components for the root metadata (class/package index). */
 internal class RootDocumentableConverter(
-    language: Language,
+    private val language: Language,
     private val root: RootPageNode,
     private val pathProvider: FilePathProvider
 ) {
@@ -70,6 +70,8 @@ internal class RootDocumentableConverter(
 
         return DefaultDevsitePage(
             DevsitePage.Params(
+                language,
+                pathProvider.relative.classes,
                 "Class Index",
                 DefaultClassIndex(ClassIndex.Params(pathProvider.packages, componentClasses))
             )
@@ -87,6 +89,8 @@ internal class RootDocumentableConverter(
 
         return DefaultDevsitePage(
             DevsitePage.Params(
+                language,
+                pathProvider.relative.packages,
                 "Package Index",
                 DefaultPackageIndex(PackageIndex.Params(pathProvider.classes, componentPackages))
             )
