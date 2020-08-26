@@ -16,7 +16,6 @@
 
 package com.google.devsite.renderer
 
-import com.google.devsite.pages.MathjaxTransformer
 import com.google.devsite.renderer.impl.MetadataRenderer
 import com.google.devsite.renderer.impl.PackageRenderer
 import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
@@ -32,9 +31,6 @@ import org.jetbrains.dokka.renderers.Renderer
 internal class MultiLanguageRenderer(
     private val outputWriter: OutputWriter
 ) : Renderer {
-    private val preprocessors = listOf(
-        MathjaxTransformer
-    )
     private val tenant: String by lazy {
         checkNotNull(System.getenv("DEVSITE_TENANT") ?: System.getProperty("tenant")) {
             "Please specify the DEVSITE_TENANT envar. For example, if you were generating" +
@@ -43,11 +39,9 @@ internal class MultiLanguageRenderer(
     }
 
     override fun render(root: RootPageNode) {
-        val newRoot = preprocessors.fold(root) { previous, transformer -> transformer(previous) }
-
         runBlocking(Dispatchers.Default) {
-            launch { renderJava(newRoot) }
-            launch { renderKotlin(newRoot) }
+            launch { renderJava(root) }
+            launch { renderKotlin(root) }
         }
     }
 
