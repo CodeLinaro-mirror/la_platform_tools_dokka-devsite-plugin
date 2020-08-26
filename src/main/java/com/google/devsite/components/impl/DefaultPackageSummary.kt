@@ -16,6 +16,7 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.PackageSummary
 import com.google.devsite.components.SummaryList
 import com.google.devsite.renderer.Language
@@ -38,6 +39,9 @@ internal class DefaultPackageSummary(
         if (data.displayLanguage == Language.KOTLIN) {
             renderSummary(data.topLevelFunctionsSummary, "Top-level functions summary")
             renderSummary(data.extensionFunctionsSummary, "Extension functions summary")
+
+            renderDetails(data.topLevelFunctions, "Top-level functions")
+            renderDetails(data.extensionFunctions, "Extension functions")
         }
     }
 
@@ -46,5 +50,15 @@ internal class DefaultPackageSummary(
             h2 { +title }
         }
         summary.render(this)
+    }
+
+    private fun FlowContent.renderDetails(details: List<ContextFreeComponent>, title: String) {
+        if (details.isNotEmpty()) {
+            h2 { +title }
+        }
+
+        for (detail in details) {
+            detail.render(this)
+        }
     }
 }

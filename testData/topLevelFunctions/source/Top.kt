@@ -14,7 +14,12 @@
  * limitations under the License.
  */
 
-@file:Suppress("UNUSED_PARAMETER", "unused", "RedundantSuspendModifier")
+@file:Suppress(
+    "unused",
+    "UNUSED_PARAMETER",
+    "RedundantSuspendModifier",
+    "REDUNDANT_INLINE_SUSPEND_FUNCTION_TYPE"
+)
 
 package dokkatest.toplevel
 
@@ -35,7 +40,18 @@ fun b(i1: Int, i2: String, i3: Boolean, foo: Foo): String = ""
 @Deprecated("This method was too sad.")
 fun sadBoi(): Nothing = error("Ouch")
 
-/** A brutally difficult function to render. Good luck! */
+/**
+ * A brutally difficult function to render. Good luck!
+ *
+ * @throws IllegalStateException because the world is broken
+ * @param a choose your own adventure!
+ * @return a list of... something?
+ * @receiver what is even going on here
+ * @param block Lots, and LOTS of lambdas. Oh, and suspending ones too.
+ * @see b it's a lot simpler
+ * @param stuff lambdas
+ * @author Nobody cares :(
+ */
 suspend inline fun <T, R : Number> (T.(Int) -> List<R>).foo(
     a: T,
     crossinline stuff: () -> (() -> String),

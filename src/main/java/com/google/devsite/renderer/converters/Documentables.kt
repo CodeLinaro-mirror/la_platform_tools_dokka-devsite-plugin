@@ -49,3 +49,6 @@ internal fun DPackage.annotations() = explodedChildren.filterIsInstance<DAnnotat
 internal fun DPackage.exceptions() = explodedChildren.filterIsInstance<DClass>().filter { clazz ->
     clazz.functions.any { function -> function.dri.classNames == "Throwable" }
 }
+
+internal fun DPackage.topLevelFunctions() = functions.filter { it.receiver == null }
+internal fun DPackage.extensionFunctions() = functions.filterNot { it.receiver == null }

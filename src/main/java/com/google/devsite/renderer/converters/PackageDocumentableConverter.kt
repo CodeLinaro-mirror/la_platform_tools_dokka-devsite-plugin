@@ -17,6 +17,7 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.DevsitePage
+import com.google.devsite.components.FunctionDetail
 import com.google.devsite.components.Link
 import com.google.devsite.components.PackageSummary
 import com.google.devsite.components.SummaryList
@@ -48,27 +49,18 @@ internal class PackageDocumentableConverter(
     /** @return the root component for the package summary page */
     suspend fun summaryPage(): DevsitePage = coroutineScope {
         val doc = packagePage.documentable as DPackage
-        val interfaces = async {
-            classlikesToSummary(doc.interfaces())
-        }
-        val classes = async {
-            classlikesToSummary(doc.classes())
-        }
-        val enums = async {
-            classlikesToSummary(doc.enums())
-        }
-        val exceptions = async {
-            classlikesToSummary(doc.exceptions())
-        }
-        val annotations = async {
-            classlikesToSummary(doc.annotations())
-        }
-        val topLevelFunctionsSummary = async {
-            functionsToSummary(doc.functions.filter { it.receiver == null })
-        }
-        val extensionFunctionsSummary = async {
-            functionsToSummary(doc.functions.filterNot { it.receiver == null })
-        }
+
+        val interfaces = async { classlikesToSummary(doc.interfaces()) }
+        val classes = async { classlikesToSummary(doc.classes()) }
+        val enums = async { classlikesToSummary(doc.enums()) }
+        val exceptions = async { classlikesToSummary(doc.exceptions()) }
+        val annotations = async { classlikesToSummary(doc.annotations()) }
+
+        val topLevelFunctionsSummary = async { functionsToSummary(doc.topLevelFunctions()) }
+        val extensionFunctionsSummary = async { functionsToSummary(doc.extensionFunctions()) }
+
+        val topLevelFunctions = async { functionsToDetail(doc.topLevelFunctions()) }
+        val extensionFunctions = async { functionsToDetail(doc.extensionFunctions()) }
 
         DefaultDevsitePage(
             DevsitePage.Params(
@@ -82,7 +74,9 @@ internal class PackageDocumentableConverter(
                         exceptions = exceptions.await(),
                         annotations = annotations.await(),
                         topLevelFunctionsSummary = topLevelFunctionsSummary.await(),
-                        extensionFunctionsSummary = extensionFunctionsSummary.await()
+                        extensionFunctionsSummary = extensionFunctionsSummary.await(),
+                        topLevelFunctions = topLevelFunctions.await(),
+                        extensionFunctions = extensionFunctions.await()
                     )
                 )
             )
@@ -124,5 +118,11 @@ internal class PackageDocumentableConverter(
                 items = components
             )
         )
+    }
+
+    private fun functionsToDetail(functions: List<DFunction>): List<FunctionDetail> {
+        return functions.map {
+            functionConverter.detail(it)
+        }
     }
 }

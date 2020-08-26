@@ -103,7 +103,7 @@ internal class DocTagConverter(
                 is Return -> returnType(tags as List<Return>, checkNotNull(returnType))
                 is Throws -> throws(tags as List<Throws>)
                 is See -> see(tags as List<See>)
-                is Sample -> TODO("b/163811276: sample")
+                is Sample -> null // TODO("b/163811276: sample")
                 is Property -> TODO("b/163811276: property")
                 is CustomTagWrapper -> TODO("b/163811276: custom tag wrapper")
                 is Since -> TODO("b/163811276: since")
