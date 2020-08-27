@@ -16,25 +16,22 @@
 
 package com.google.devsite.renderer.impl.paths
 
-/** Directory structure tailored for d.android.com. */
-internal abstract class DacFilePathProviderBase(
-    tenant: String,
-    pathPrefix: String? = null,
-    final override val relative: FilePathProvider = RelativeFilePathProvider(tenant)
-) : FilePathProvider {
-    private val dacPath = "/reference" + if (pathPrefix == null) "" else "/$pathPrefix"
+/** Creates relative file paths that have no knowledge of the containing website. */
+internal class RelativeFilePathProvider(tenant: String) : FilePathProvider {
+    override val relative = this
 
-    override val packageList = "$dacPath/${relative.packageList}"
+    override val packageList = "$tenant/package-list"
 
-    override val packages = "$dacPath/${relative.packages}"
+    override val packages = "$tenant/packages.html"
 
-    override val classes = "$dacPath/${relative.classes}"
+    override val classes = "$tenant/classes.html"
 
-    override val rootIndex = "$dacPath/${relative.rootIndex}"
+    override val rootIndex = "$tenant/index.html"
 
-    override val toc = "$dacPath/${relative.toc}"
+    override val toc = "$tenant/_toc.yaml"
 
     override fun forType(packageName: String, name: String): String {
-        return "$dacPath/${relative.forType(packageName, name)}"
+        val packageAsPath = packageName.replace(".", "/")
+        return "$packageAsPath/$name.html"
     }
 }

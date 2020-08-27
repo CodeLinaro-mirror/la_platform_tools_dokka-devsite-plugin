@@ -31,9 +31,6 @@ import org.jetbrains.dokka.pages.RootPageNode
 internal val <T> WithChildren<T>.explodedChildren: List<T>
     get() = children + children.filterIsInstance<WithChildren<T>>().flatMap { it.explodedChildren }
 
-/** @return the doc tags (aka human-written javadoc or kdoc) associated with this documentable */
-internal fun Documentable.tags() = documentation.values.singleOrNull()?.children.orEmpty()
-
 /**
  * Returns the type's name. Do not use [Documentable.name] as it won't include the outer class.
  */
@@ -52,3 +49,6 @@ internal fun DPackage.annotations() = explodedChildren.filterIsInstance<DAnnotat
 internal fun DPackage.exceptions() = explodedChildren.filterIsInstance<DClass>().filter { clazz ->
     clazz.functions.any { function -> function.dri.classNames == "Throwable" }
 }
+
+internal fun DPackage.topLevelFunctions() = functions.filter { it.receiver == null }
+internal fun DPackage.extensionFunctions() = functions.filterNot { it.receiver == null }

@@ -16,17 +16,15 @@
 
 package com.google.devsite.components
 
-import com.google.devsite.renderer.Language
-import kotlinx.html.HTML
+import org.jetbrains.dokka.model.doc.DocTag
 
-/** Represents any devsite page and should be used as the root component. */
-internal interface DevsitePage : HtmlComponent<HTML> {
+/** Represents the hand-written documentation for a symbol. */
+internal interface Description : ContextFreeComponent {
     val data: Params
 
     class Params(
-        val language: Language,
-        val path: String,
-        val title: String,
-        val content: ContextFreeComponent
+        val root: DocTag,
+        val summary: Boolean = false,
+        val deprecation: String? = null
     )
 }

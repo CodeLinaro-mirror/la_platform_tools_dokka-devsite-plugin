@@ -16,18 +16,22 @@
 
 package com.google.devsite.renderer.converters
 
-import com.google.devsite.components.Documentation
+import com.google.devsite.components.FunctionDetail
 import com.google.devsite.components.FunctionSignature
 import com.google.devsite.components.FunctionSummary
 import com.google.devsite.components.Link
 import com.google.devsite.components.Parameter
 import com.google.devsite.components.ParameterType
-import com.google.devsite.components.impl.DefaultDocumentation
+import com.google.devsite.components.TwoPaneSummaryItem
+import com.google.devsite.components.TypeSummary
+import com.google.devsite.components.impl.DefaultFunctionDetail
 import com.google.devsite.components.impl.DefaultFunctionSignature
 import com.google.devsite.components.impl.DefaultFunctionSummary
 import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultParameter
 import com.google.devsite.components.impl.DefaultParameterType
+import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
+import com.google.devsite.components.impl.DefaultTypeSummary
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.AdditionalModifiers
@@ -42,21 +46,41 @@ import org.jetbrains.dokka.model.TypeConstructor
 /** Converts documentable functions into function components. */
 internal class FunctionDocumentableConverter(
     private val language: Language,
-    private val pathProvider: FilePathProvider
+    private val pathProvider: FilePathProvider,
+    private val javadocConverter: DocTagConverter
 ) {
     /** @return the function summary component */
-    fun summary(function: DFunction): FunctionSummary {
-        return DefaultFunctionSummary(
-            FunctionSummary.Params(
-                modifiers = function.modifiers(),
-                returnType = function.type.toComponent(),
-                signature = function.signature(),
-                description = DefaultDocumentation(
-                    Documentation.Params(
-                        tags = function.tags(),
-                        summary = true
+    fun summary(function: DFunction): TwoPaneSummaryItem {
+        return DefaultTwoPaneSummaryItem(
+            TwoPaneSummaryItem.Params(
+                title = DefaultTypeSummary(
+                    TypeSummary.Params(
+                        modifiers = function.modifiers(),
+                        type = function.type.toComponent()
+                    )
+                ),
+                description = DefaultFunctionSummary(
+                    FunctionSummary.Params(
+                        signature = function.signature(),
+                        description = javadocConverter.summaryDescription(function)
                     )
                 )
+            )
+        )
+    }
+
+    /** @return the function detail component */
+    fun detail(function: DFunction): FunctionDetail {
+        val returnType = function.type.toComponent()
+        return DefaultFunctionDetail(
+            FunctionDetail.Params(
+                language = language,
+                name = function.name,
+                anchors = generateCompatAnchors(function),
+                modifiers = function.modifiers(),
+                returnType = returnType,
+                signature = function.signature(),
+                metadata = javadocConverter.metadata(function, returnType)
             )
         )
     }
@@ -210,14 +234,15 @@ internal class FunctionDocumentableConverter(
      * the same page this summary is being rendered to.
      */
     private fun DFunction.relativeLink(): Link {
-        val fullyQualifiedProjections = parameters.map { param ->
+        val paramTypes = parameters.map { param ->
             param.type.toFullyQualifiedSignature()
         }
+        val allParams = listOfNotNull(receiver?.type?.toFullyQualifiedSignature()) + paramTypes
 
         return DefaultLink(
             Link.Params(
                 name = name,
-                url = "#$name(${fullyQualifiedProjections.joinToString(",")})"
+                url = "#$name(${allParams.joinToString(",")})"
             )
         )
     }
@@ -239,6 +264,27 @@ internal class FunctionDocumentableConverter(
         is OtherParameter -> false
         is Nullable -> inner.isLambda()
         else -> error("Unknown bound: $this")
+    }
+
+    /**
+     * Creates method anchors compatible with several different iterations of javadoc.
+     *
+     * The different types are:
+     * - `foo(int,int)`
+     * - `foo(int, int)`
+     * - `foo-int-int-`
+     */
+    private fun generateCompatAnchors(function: DFunction): Set<String> {
+        val receiver = listOfNotNull(function.receiver?.type?.toFullyQualifiedSignature())
+        val params = function.parameters.map { it.type.toFullyQualifiedSignature() }
+        val all = receiver + params
+        val name = function.name
+
+        return setOf(
+            "$name(${all.joinToString(",")})",
+            "$name(${all.joinToString(", ")})",
+            "$name-${all.joinToString("-")}-"
+        )
     }
 
     private fun Projection.toFullyQualifiedSignature(): String = when (this) {

@@ -18,12 +18,10 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.FunctionSummary.Params
-import com.google.devsite.components.testing.NoopDocumentation
+import com.google.devsite.components.testing.NoopDescription
 import com.google.devsite.components.testing.NoopFunctionSignature
-import com.google.devsite.components.testing.NoopParameterType
+import kotlinx.html.div
 import kotlinx.html.stream.createHTML
-import kotlinx.html.table
-import kotlinx.html.tr
 import org.junit.Test
 
 class DefaultFunctionSummaryTest {
@@ -31,59 +29,22 @@ class DefaultFunctionSummaryTest {
     fun `Simple function summary renders correctly`() {
         val component = DefaultFunctionSummary(
             Params(
-                returnType = NoopParameterType("Unit"),
                 signature = NoopFunctionSignature("foo()"),
-                description = NoopDocumentation("This method does baz.")
+                description = NoopDescription("This method does baz.")
             )
         )
 
-        val output = createHTML().table {
-            tr { component.render(this) }
+        val output = createHTML().div {
+            component.render(this)
         }.trim()
 
         // language=html
         assertThat(output).isEqualTo(
             """
-<table>
-  <tr>
-    <td><code>Unit</code></td>
-    <td width="100%">
-      <div><code>foo()</code></div>
-      <p>This method does baz.</p>
-    </td>
-  </tr>
-</table>
-            """.trim()
-        )
-    }
-
-    @Test
-    fun `Function summary with modifiers renders correctly`() {
-        val component = DefaultFunctionSummary(
-            Params(
-                modifiers = listOf("open", "suspend"),
-                returnType = NoopParameterType("Unit"),
-                signature = NoopFunctionSignature("foo()"),
-                description = NoopDocumentation("This method does baz.")
-            )
-        )
-
-        val output = createHTML().table {
-            tr { component.render(this) }
-        }.trim()
-
-        // language=html
-        assertThat(output).isEqualTo(
-            """
-<table>
-  <tr>
-    <td><code>open&nbsp;suspend&nbsp;Unit</code></td>
-    <td width="100%">
-      <div><code>foo()</code></div>
-      <p>This method does baz.</p>
-    </td>
-  </tr>
-</table>
+<div>
+  <div><code>foo()</code></div>
+  <p>This method does baz.</p>
+</div>
             """.trim()
         )
     }

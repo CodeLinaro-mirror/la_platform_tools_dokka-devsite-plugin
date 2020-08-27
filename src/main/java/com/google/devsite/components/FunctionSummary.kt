@@ -16,14 +16,12 @@
 
 package com.google.devsite.components
 
-/** Represents a function or method summary row. */
-internal interface FunctionSummary : RowComponent {
+/** Represents a function's signature along with its description. */
+internal interface FunctionSummary : ContextFreeComponent {
     val data: Params
 
     class Params(
-        val modifiers: List<String> = emptyList(),
-        val returnType: ParameterType,
         val signature: FunctionSignature,
-        val description: Documentation
+        val description: Description
     )
 }

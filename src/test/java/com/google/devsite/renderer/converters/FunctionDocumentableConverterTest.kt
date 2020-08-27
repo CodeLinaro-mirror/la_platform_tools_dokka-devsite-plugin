@@ -17,7 +17,9 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.components.FunctionSummary
 import com.google.devsite.components.Parameter
+import com.google.devsite.components.TypeSummary
 import com.google.devsite.renderer.Language
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.model.DFunction
@@ -33,6 +35,8 @@ import org.junit.runners.Parameterized
 internal class FunctionDocumentableConverterTest(
     private val language: Language
 ) : ConverterTestBase(language) {
+    private val docConverter = DocTagConverter(language, pathProvider())
+
     @Test
     fun `Top level function summary component has correct default modifiers`() {
         val source = """
@@ -40,11 +44,12 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
+            val type = summary.data.title as TypeSummary
 
-            assertThat(summary.data.modifiers).containsExactly("final")
+            assertThat(type.data.modifiers).containsExactly("final")
         }
     }
 
@@ -55,11 +60,12 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
+            val type = summary.data.title as TypeSummary
 
-            assertThat(summary.data.modifiers).containsExactly("final")
+            assertThat(type.data.modifiers).containsExactly("final")
         }
     }
 
@@ -70,11 +76,12 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
+            val type = summary.data.title as TypeSummary
 
-            assertThat(summary.data.modifiers).containsExactly("final", "suspend")
+            assertThat(type.data.modifiers).containsExactly("final", "suspend")
         }
     }
 
@@ -85,11 +92,12 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
+            val type = summary.data.title as TypeSummary
 
-            assertThat(summary.data.modifiers).containsExactly("final", "inline")
+            assertThat(type.data.modifiers).containsExactly("final", "inline")
         }
     }
 
@@ -103,11 +111,12 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function(fromClass = true))
+            val type = summary.data.title as TypeSummary
 
-            assertThat(summary.data.modifiers).containsExactly("protected")
+            assertThat(type.data.modifiers).containsExactly("protected")
         }
     }
 
@@ -120,11 +129,12 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function(fromClass = true))
+            val type = summary.data.title as TypeSummary
 
-            assertThat(summary.data.modifiers).containsExactly("abstract")
+            assertThat(type.data.modifiers).containsExactly("abstract")
         }
     }
 
@@ -137,11 +147,12 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function(fromClass = true))
+            val type = summary.data.title as TypeSummary
 
-            assertThat(summary.data.modifiers).containsExactly("open")
+            assertThat(type.data.modifiers).containsExactly("open")
         }
     }
 
@@ -154,11 +165,12 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function(fromClass = true))
+            val type = summary.data.title as TypeSummary
 
-            assertThat(summary.data.modifiers).containsExactly("abstract")
+            assertThat(type.data.modifiers).containsExactly("abstract")
         }
     }
 
@@ -170,10 +182,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val returnType = summary.data.returnType
+            val type = summary.data.title as TypeSummary
+            val returnType = type.data.type
             val link = returnType.data.type
 
             assertThat(link.data.name).isEqualTo("A")
@@ -188,10 +201,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val returnType = summary.data.returnType
+            val type = summary.data.title as TypeSummary
+            val returnType = type.data.type
             val generics = returnType.data.generics
 
             assertThat(generics).hasSize(2)
@@ -211,10 +225,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val signature = summary.data.signature
+            val breakdown = summary.data.description as FunctionSummary
+            val signature = breakdown.data.signature
 
             assertThat(signature.data.name.data.name).isEqualTo("iAmACoolFunction")
         }
@@ -227,10 +242,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val signature = summary.data.signature
+            val breakdown = summary.data.description as FunctionSummary
+            val signature = breakdown.data.signature
 
             val param = when (language) {
                 Language.JAVA -> {
@@ -261,10 +277,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val signature = summary.data.signature
+            val breakdown = summary.data.description as FunctionSummary
+            val signature = breakdown.data.signature
             val param = signature.data.parameters.single()
             val type = param.data.primary
 
@@ -282,10 +299,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val signature = summary.data.signature
+            val breakdown = summary.data.description as FunctionSummary
+            val signature = breakdown.data.signature
         }
     }
 
@@ -296,10 +314,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val signature = summary.data.signature
+            val breakdown = summary.data.description as FunctionSummary
+            val signature = breakdown.data.signature
             val param = signature.data.parameters.single()
             val generics = param.data.primary.data.generics
 
@@ -316,10 +335,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val signature = summary.data.signature
+            val breakdown = summary.data.description as FunctionSummary
+            val signature = breakdown.data.signature
             val param = signature.data.parameters.single()
         }
     }
@@ -332,10 +352,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val signature = summary.data.signature
+            val breakdown = summary.data.description as FunctionSummary
+            val signature = breakdown.data.signature
             val param = signature.data.parameters.single()
         }
     }
@@ -348,10 +369,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val signature = summary.data.signature
+            val breakdown = summary.data.description as FunctionSummary
+            val signature = breakdown.data.signature
         }
     }
 
@@ -363,10 +385,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val signature = summary.data.signature
+            val breakdown = summary.data.description as FunctionSummary
+            val signature = breakdown.data.signature
         }
     }
 
@@ -377,10 +400,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val signature = summary.data.signature
+            val breakdown = summary.data.description as FunctionSummary
+            val signature = breakdown.data.signature
             val param = signature.data.parameters.single()
 
             javaOnly {
@@ -407,10 +431,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val signature = summary.data.signature
+            val breakdown = summary.data.description as FunctionSummary
+            val signature = breakdown.data.signature
             val param = signature.data.parameters.single()
 
             javaOnly {
@@ -438,10 +463,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val signature = summary.data.signature
+            val breakdown = summary.data.description as FunctionSummary
+            val signature = breakdown.data.signature
             val param = signature.data.parameters.single()
 
             javaOnly {
@@ -465,10 +491,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val signature = summary.data.signature
+            val breakdown = summary.data.description as FunctionSummary
+            val signature = breakdown.data.signature
             val param = signature.data.parameters.single()
 
             javaOnly {
@@ -496,10 +523,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val signature = summary.data.signature
+            val breakdown = summary.data.description as FunctionSummary
+            val signature = breakdown.data.signature
             val param = signature.data.parameters.single()
 
             javaOnly {
@@ -527,10 +555,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val signature = summary.data.signature
+            val breakdown = summary.data.description as FunctionSummary
+            val signature = breakdown.data.signature
             val param = signature.data.parameters.single()
 
             javaOnly {
@@ -558,10 +587,11 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
-            val signature = summary.data.signature
+            val breakdown = summary.data.description as FunctionSummary
+            val signature = breakdown.data.signature
             val param = signature.data.parameters.single()
 
             javaOnly {
@@ -613,13 +643,48 @@ internal class FunctionDocumentableConverterTest(
         """.trimMargin()
 
         testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider())
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
 
             val summary = converter.summary(root.function())
+            val breakdown = summary.data.description as FunctionSummary
+            val signature = breakdown.data.signature
 
-            // TODO(asaveau): update once receivers are implemented
-            assertThat(summary.data.signature.data.name.data.url)
-                .isEqualTo("#foo(kotlin.collections.Map,kotlin.Function2)")
+            assertThat(signature.data.name.data.url)
+                .isEqualTo("#foo(kotlin.collections.List,kotlin.collections.Map,kotlin.Function2)")
+        }
+    }
+
+    @Test
+    fun `Function detail component has correct name`() {
+        val source = """
+            |fun foo()
+        """.trimMargin()
+
+        testWithRootPageNode(source) t@{ root ->
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+
+            val detail = converter.detail(root.function())
+
+            assertThat(detail.data.name).isEqualTo("foo")
+        }
+    }
+
+    @Test
+    fun `Function detail component has correct anchors`() {
+        val source = """
+            |fun List<String>.foo(a: Map<String, Int>, block: String.(Float) -> Double) = Unit
+        """.trimMargin()
+
+        testWithRootPageNode(source) t@{ root ->
+            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+
+            val detail = converter.detail(root.function())
+
+            assertThat(detail.data.anchors).containsExactly(
+                "foo(kotlin.collections.List,kotlin.collections.Map,kotlin.Function2)",
+                "foo(kotlin.collections.List, kotlin.collections.Map, kotlin.Function2)",
+                "foo-kotlin.collections.List-kotlin.collections.Map-kotlin.Function2-"
+            )
         }
     }
 

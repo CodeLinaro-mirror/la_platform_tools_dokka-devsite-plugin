@@ -18,7 +18,6 @@ package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.ClassIndex
 import com.google.devsite.components.DevsitePage
-import com.google.devsite.components.Documentation
 import com.google.devsite.components.Link
 import com.google.devsite.components.PackageIndex
 import com.google.devsite.components.SummaryList
@@ -27,13 +26,13 @@ import com.google.devsite.components.TocPackage
 import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultClassIndex
 import com.google.devsite.components.impl.DefaultDevsitePage
-import com.google.devsite.components.impl.DefaultDocumentation
 import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultPackageIndex
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableOfContents
 import com.google.devsite.components.impl.DefaultTocPackage
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
+import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
@@ -48,9 +47,12 @@ import org.jetbrains.dokka.pages.RootPageNode
 
 /** Converts documentables into components for the root metadata (class/package index). */
 internal class RootDocumentableConverter(
+    private val language: Language,
     private val root: RootPageNode,
     private val pathProvider: FilePathProvider
 ) {
+    private val javadocConverter = DocTagConverter(language, pathProvider)
+
     /** @return the root component for the class index page */
     fun classesPage(): DevsitePage {
         val allClasses = root.explodedChildren
@@ -68,6 +70,8 @@ internal class RootDocumentableConverter(
 
         return DefaultDevsitePage(
             DevsitePage.Params(
+                language,
+                pathProvider.relative.classes,
                 "Class Index",
                 DefaultClassIndex(ClassIndex.Params(pathProvider.packages, componentClasses))
             )
@@ -85,6 +89,8 @@ internal class RootDocumentableConverter(
 
         return DefaultDevsitePage(
             DevsitePage.Params(
+                language,
+                pathProvider.relative.packages,
                 "Package Index",
                 DefaultPackageIndex(PackageIndex.Params(pathProvider.classes, componentPackages))
             )
@@ -125,12 +131,7 @@ internal class RootDocumentableConverter(
                         url = pathProvider.forType(packageName, name)
                     )
                 ),
-                description = DefaultDocumentation(
-                    Documentation.Params(
-                        tags = classlike.tags(),
-                        summary = true
-                    )
-                )
+                description = javadocConverter.summaryDescription(classlike)
             )
         )
     }
@@ -144,12 +145,7 @@ internal class RootDocumentableConverter(
                         url = pathProvider.forType(packageDoc.name, "package-summary")
                     )
                 ),
-                description = DefaultDocumentation(
-                    Documentation.Params(
-                        tags = packageDoc.tags(),
-                        summary = true
-                    )
-                )
+                description = javadocConverter.summaryDescription(packageDoc)
             )
         )
     }

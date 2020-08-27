@@ -18,6 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.PackageSummary.Params
+import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.components.testing.NoopSummaryList
 import com.google.devsite.renderer.Language
 import kotlinx.html.div
@@ -36,7 +37,9 @@ class DefaultPackageSummaryTest {
                 exceptions = NoopSummaryList(shown = false),
                 annotations = NoopSummaryList(shown = false),
                 topLevelFunctionsSummary = NoopSummaryList(shown = false),
-                extensionFunctionsSummary = NoopSummaryList(shown = false)
+                extensionFunctionsSummary = NoopSummaryList(shown = false),
+                topLevelFunctions = emptyList(),
+                extensionFunctions = emptyList()
             )
         )
 
@@ -66,7 +69,9 @@ class DefaultPackageSummaryTest {
                 exceptions = NoopSummaryList(shown = false),
                 annotations = NoopSummaryList(shown = false),
                 topLevelFunctionsSummary = NoopSummaryList(shown = false),
-                extensionFunctionsSummary = NoopSummaryList(shown = false)
+                extensionFunctionsSummary = NoopSummaryList(shown = false),
+                topLevelFunctions = emptyList(),
+                extensionFunctions = emptyList()
             )
         )
 
@@ -96,7 +101,9 @@ class DefaultPackageSummaryTest {
                 exceptions = NoopSummaryList(shown = false),
                 annotations = NoopSummaryList(shown = false),
                 topLevelFunctionsSummary = NoopSummaryList(shown = false),
-                extensionFunctionsSummary = NoopSummaryList(shown = false)
+                extensionFunctionsSummary = NoopSummaryList(shown = false),
+                topLevelFunctions = emptyList(),
+                extensionFunctions = emptyList()
             )
         )
 
@@ -126,7 +133,9 @@ class DefaultPackageSummaryTest {
                 exceptions = NoopSummaryList(shown = true),
                 annotations = NoopSummaryList(shown = false),
                 topLevelFunctionsSummary = NoopSummaryList(shown = false),
-                extensionFunctionsSummary = NoopSummaryList(shown = false)
+                extensionFunctionsSummary = NoopSummaryList(shown = false),
+                topLevelFunctions = emptyList(),
+                extensionFunctions = emptyList()
             )
         )
 
@@ -156,7 +165,9 @@ class DefaultPackageSummaryTest {
                 exceptions = NoopSummaryList(shown = false),
                 annotations = NoopSummaryList(shown = true),
                 topLevelFunctionsSummary = NoopSummaryList(shown = false),
-                extensionFunctionsSummary = NoopSummaryList(shown = false)
+                extensionFunctionsSummary = NoopSummaryList(shown = false),
+                topLevelFunctions = emptyList(),
+                extensionFunctions = emptyList()
             )
         )
 
@@ -186,7 +197,9 @@ class DefaultPackageSummaryTest {
                 exceptions = NoopSummaryList(),
                 annotations = NoopSummaryList(),
                 topLevelFunctionsSummary = NoopSummaryList(),
-                extensionFunctionsSummary = NoopSummaryList()
+                extensionFunctionsSummary = NoopSummaryList(),
+                topLevelFunctions = listOf(NoopContextFreeComponent),
+                extensionFunctions = listOf(NoopContextFreeComponent)
             )
         )
 
@@ -224,7 +237,9 @@ class DefaultPackageSummaryTest {
                 exceptions = NoopSummaryList(shown = false),
                 annotations = NoopSummaryList(shown = false),
                 topLevelFunctionsSummary = NoopSummaryList(shown = true),
-                extensionFunctionsSummary = NoopSummaryList(shown = false)
+                extensionFunctionsSummary = NoopSummaryList(shown = false),
+                topLevelFunctions = listOf(NoopContextFreeComponent),
+                extensionFunctions = emptyList()
             )
         )
 
@@ -237,6 +252,8 @@ class DefaultPackageSummaryTest {
             """
 <div>
   <h2>Top-level functions summary</h2>
+  <div>noop</div>
+  <h2>Top-level functions</h2>
   <div>noop</div>
 </div>
             """.trim()
@@ -254,7 +271,9 @@ class DefaultPackageSummaryTest {
                 exceptions = NoopSummaryList(shown = false),
                 annotations = NoopSummaryList(shown = false),
                 topLevelFunctionsSummary = NoopSummaryList(shown = false),
-                extensionFunctionsSummary = NoopSummaryList(shown = true)
+                extensionFunctionsSummary = NoopSummaryList(shown = true),
+                topLevelFunctions = emptyList(),
+                extensionFunctions = listOf(NoopContextFreeComponent)
             )
         )
 
@@ -267,6 +286,46 @@ class DefaultPackageSummaryTest {
             """
 <div>
   <h2>Extension functions summary</h2>
+  <div>noop</div>
+  <h2>Extension functions</h2>
+  <div>noop</div>
+</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Package summary with all Kotlin bits renders correctly`() {
+        val component = DefaultPackageSummary(
+            Params(
+                displayLanguage = Language.KOTLIN,
+                interfaces = NoopSummaryList(shown = false),
+                classes = NoopSummaryList(shown = false),
+                enums = NoopSummaryList(shown = false),
+                exceptions = NoopSummaryList(shown = false),
+                annotations = NoopSummaryList(shown = false),
+                topLevelFunctionsSummary = NoopSummaryList(shown = true),
+                extensionFunctionsSummary = NoopSummaryList(shown = true),
+                topLevelFunctions = listOf(NoopContextFreeComponent),
+                extensionFunctions = listOf(NoopContextFreeComponent)
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <h2>Top-level functions summary</h2>
+  <div>noop</div>
+  <h2>Extension functions summary</h2>
+  <div>noop</div>
+  <h2>Top-level functions</h2>
+  <div>noop</div>
+  <h2>Extension functions</h2>
   <div>noop</div>
 </div>
             """.trim()
