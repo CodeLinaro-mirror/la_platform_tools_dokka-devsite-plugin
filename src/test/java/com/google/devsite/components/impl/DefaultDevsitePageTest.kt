@@ -29,7 +29,7 @@ class DefaultDevsitePageTest {
     fun `Java page renders correctly`() {
         val component = DefaultDevsitePage(
             Params(
-                language = Language.JAVA,
+                displayLanguage = Language.JAVA,
                 path = "page.html",
                 title = "Page Title",
                 content = NoopContextFreeComponent
@@ -65,7 +65,7 @@ class DefaultDevsitePageTest {
     fun `Kotlin page renders correctly`() {
         val component = DefaultDevsitePage(
             Params(
-                language = Language.KOTLIN,
+                displayLanguage = Language.KOTLIN,
                 path = "page.html",
                 title = "Page Title",
                 content = NoopContextFreeComponent

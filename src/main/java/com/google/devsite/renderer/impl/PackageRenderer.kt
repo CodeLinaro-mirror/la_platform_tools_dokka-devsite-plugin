@@ -31,7 +31,7 @@ import org.jetbrains.dokka.pages.PackagePageNode
 internal class PackageRenderer(
     private val outputWriter: OutputWriter,
     private val pathProvider: FilePathProvider,
-    private val language: Language
+    private val displayLanguage: Language
 ) {
     /** Writes the home page. */
     suspend fun writeIndex(packagePage: PackagePageNode) {
@@ -48,7 +48,7 @@ internal class PackageRenderer(
     }
 
     suspend fun writePackageSummary(packagePage: PackagePageNode) {
-        val converter = PackageDocumentableConverter(language, packagePage, pathProvider)
+        val converter = PackageDocumentableConverter(displayLanguage, packagePage, pathProvider)
         val page = converter.summaryPage()
         val packageSummary = createHTML().html {
             page.render(this)

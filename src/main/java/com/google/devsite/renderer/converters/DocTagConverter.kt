@@ -58,7 +58,7 @@ import com.google.devsite.components.Description as DescriptionComponent
 
 /** Extracts the hand written documentation from documentables into the correct components. */
 internal class DocTagConverter(
-    private val language: Language,
+    private val displayLanguage: Language,
     private val pathProvider: FilePathProvider
 ) {
     /** @return the hand-written javadoc */
@@ -214,11 +214,11 @@ internal class DocTagConverter(
         is DInterface -> "interface"
         is DEnum -> "enum"
         is DAnnotation -> "annotation"
-        is DFunction -> when (language) {
+        is DFunction -> when (displayLanguage) {
             Language.JAVA -> "method"
             Language.KOTLIN -> "function"
         }
-        is DProperty -> when (language) {
+        is DProperty -> when (displayLanguage) {
             Language.JAVA -> "field"
             Language.KOTLIN -> "property"
         }

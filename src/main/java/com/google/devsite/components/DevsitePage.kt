@@ -24,7 +24,7 @@ internal interface DevsitePage : HtmlComponent<HTML> {
     val data: Params
 
     class Params(
-        val language: Language,
+        val displayLanguage: Language,
         val path: String,
         val title: String,
         val content: ContextFreeComponent

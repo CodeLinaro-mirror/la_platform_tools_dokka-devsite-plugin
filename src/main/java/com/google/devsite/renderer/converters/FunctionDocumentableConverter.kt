@@ -45,7 +45,7 @@ import org.jetbrains.dokka.model.TypeConstructor
 
 /** Converts documentable functions into function components. */
 internal class FunctionDocumentableConverter(
-    private val language: Language,
+    private val displayLanguage: Language,
     private val pathProvider: FilePathProvider,
     private val javadocConverter: DocTagConverter
 ) {
@@ -74,7 +74,7 @@ internal class FunctionDocumentableConverter(
         val returnType = function.type.toComponent()
         return DefaultFunctionDetail(
             FunctionDetail.Params(
-                language = language,
+                displayLanguage = displayLanguage,
                 name = function.name,
                 anchors = generateCompatAnchors(function),
                 modifiers = function.modifiers(),
@@ -92,11 +92,11 @@ internal class FunctionDocumentableConverter(
         return DefaultFunctionSignature(
             FunctionSignature.Params(
                 name = relativeLink(),
-                receiver = when (language) {
+                receiver = when (displayLanguage) {
                     Language.JAVA -> null
                     Language.KOTLIN -> receiver
                 },
-                parameters = when (language) {
+                parameters = when (displayLanguage) {
                     Language.JAVA -> listOfNotNull(receiver) + parameters
                     Language.KOTLIN -> parameters
                 }
@@ -104,7 +104,7 @@ internal class FunctionDocumentableConverter(
         )
     }
 
-    private fun componentForParameter(param: DParameter): Parameter = when (language) {
+    private fun componentForParameter(param: DParameter): Parameter = when (displayLanguage) {
         Language.JAVA -> componentForJavaParameter(param)
         Language.KOTLIN -> componentForKotlinParameter(param)
     }
@@ -117,7 +117,7 @@ internal class FunctionDocumentableConverter(
                 primary = param.type.toComponent(),
                 // TODO(b/165104993): figure out path to implementing annotations
                 annotations = emptyList(),
-                language = Language.JAVA
+                displayLanguage = Language.JAVA
             )
         )
     }
@@ -160,7 +160,7 @@ internal class FunctionDocumentableConverter(
                 primary = primaryType,
                 // TODO(b/165104993): figure out path to implementing annotations
                 annotations = emptyList(),
-                language = Language.KOTLIN
+                displayLanguage = Language.KOTLIN
             )
         )
     }

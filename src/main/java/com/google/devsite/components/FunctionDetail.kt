@@ -23,7 +23,7 @@ internal interface FunctionDetail : ContextFreeComponent {
     val data: Params
 
     class Params(
-        val language: Language,
+        val displayLanguage: Language,
         val name: String,
         val anchors: Set<String>,
         val modifiers: List<String> = emptyList(),

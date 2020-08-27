@@ -33,6 +33,6 @@ internal interface Parameter : ContextFreeComponent {
         val lambdaModifiers: List<String> = emptyList(),
         val primary: ParameterType,
         val annotations: List<Link> = emptyList(),
-        val language: Language
+        val displayLanguage: Language
     )
 }

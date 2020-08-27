@@ -41,7 +41,7 @@ internal class DefaultFunctionDetail(
                 +Entities.nbsp
             }
 
-            when (data.language) {
+            when (data.displayLanguage) {
                 Language.JAVA -> {
                     data.returnType.render(this)
                     +Entities.nbsp

@@ -37,7 +37,7 @@ internal class DefaultParameter(
             +Entities.nbsp
         }
 
-        when (data.language) {
+        when (data.displayLanguage) {
             Language.JAVA -> {
                 data.primary.render(this)
                 if (data.name.isNotEmpty()) {
@@ -82,7 +82,7 @@ internal class DefaultParameter(
     }
 
     override fun validate() {
-        require(!data.isLambda || data.language != Language.JAVA) {
+        require(!data.isLambda || data.displayLanguage != Language.JAVA) {
             "Lambda functions shouldn't be documented in Java."
         }
         require(data.isLambda || data.receiver == null) {

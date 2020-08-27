@@ -42,7 +42,7 @@ internal class DefaultDevsitePage(
 
             unsafe { +"{% setvar page_path %}${data.path}{% endsetvar %}\n" }
             unsafe { +"{% setvar can_switch %}1{% endsetvar %}\n" }
-            when (data.language) {
+            when (data.displayLanguage) {
                 Language.JAVA -> unsafe { +"{% include \"reference/_java_switcher2.md\" %}\n" }
                 Language.KOTLIN -> unsafe { +"{% include \"reference/_kotlin_switcher2.md\" %}\n" }
             }

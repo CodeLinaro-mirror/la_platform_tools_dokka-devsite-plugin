@@ -32,7 +32,7 @@ import org.jetbrains.dokka.pages.RootPageNode
 internal class MetadataRenderer(
     private val outputWriter: OutputWriter,
     private val pathProvider: FilePathProvider,
-    private val language: Language
+    private val displayLanguage: Language
 ) {
     /** Writes the list of packages in machine readable format. */
     suspend fun writePackageList(root: RootPageNode) {
@@ -56,7 +56,7 @@ internal class MetadataRenderer(
 
     /** Writes the list of packages in human readable format. */
     suspend fun writePackages(root: RootPageNode) {
-        val converter = RootDocumentableConverter(language, root, pathProvider)
+        val converter = RootDocumentableConverter(displayLanguage, root, pathProvider)
         val packageIndex = createHTML().html {
             converter.packagesPage().render(this)
         }
@@ -66,7 +66,7 @@ internal class MetadataRenderer(
 
     /** Writes the list of classes in human readable format. */
     suspend fun writeClasses(root: RootPageNode) {
-        val converter = RootDocumentableConverter(language, root, pathProvider)
+        val converter = RootDocumentableConverter(displayLanguage, root, pathProvider)
         val classIndex = createHTML().html {
             converter.classesPage().render(this)
         }
@@ -76,7 +76,7 @@ internal class MetadataRenderer(
 
     /** Writes the ToC for devsite consumption. */
     suspend fun writeToc(root: RootPageNode) {
-        val converter = RootDocumentableConverter(language, root, pathProvider)
+        val converter = RootDocumentableConverter(displayLanguage, root, pathProvider)
         val toc = buildString {
             converter.tocPage().render(this)
         }

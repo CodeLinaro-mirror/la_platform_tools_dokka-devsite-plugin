@@ -31,7 +31,7 @@ class DefaultFunctionDetailTest {
     fun `Simple Java function renders correctly`() {
         val component = DefaultFunctionDetail(
             FunctionDetail.Params(
-                language = Language.JAVA,
+                displayLanguage = Language.JAVA,
                 name = "foo",
                 anchors = emptySet(),
                 returnType = NoopParameterType("void"),
@@ -61,7 +61,7 @@ class DefaultFunctionDetailTest {
     fun `Simple Kotlin function renders correctly`() {
         val component = DefaultFunctionDetail(
             FunctionDetail.Params(
-                language = Language.KOTLIN,
+                displayLanguage = Language.KOTLIN,
                 name = "foo",
                 anchors = emptySet(),
                 returnType = NoopParameterType("Unit"),
@@ -91,7 +91,7 @@ class DefaultFunctionDetailTest {
     fun `Java function with modifiers renders correctly`() {
         val component = DefaultFunctionDetail(
             FunctionDetail.Params(
-                language = Language.JAVA,
+                displayLanguage = Language.JAVA,
                 name = "foo",
                 anchors = emptySet(),
                 modifiers = listOf("protected", "abstract"),
@@ -122,7 +122,7 @@ class DefaultFunctionDetailTest {
     fun `Kotlin function with modifiers renders correctly`() {
         val component = DefaultFunctionDetail(
             FunctionDetail.Params(
-                language = Language.KOTLIN,
+                displayLanguage = Language.KOTLIN,
                 name = "foo",
                 anchors = emptySet(),
                 modifiers = listOf("protected", "abstract"),
@@ -153,7 +153,7 @@ class DefaultFunctionDetailTest {
     fun `Function anchors render correctly`() {
         val component = DefaultFunctionDetail(
             FunctionDetail.Params(
-                language = Language.JAVA,
+                displayLanguage = Language.JAVA,
                 name = "foo",
                 anchors = setOf("#foo()", "#foo--"),
                 returnType = NoopParameterType("void"),
@@ -183,7 +183,7 @@ class DefaultFunctionDetailTest {
     fun `Function with metadata renders correctly`() {
         val component = DefaultFunctionDetail(
             FunctionDetail.Params(
-                language = Language.JAVA,
+                displayLanguage = Language.JAVA,
                 name = "foo",
                 anchors = emptySet(),
                 returnType = NoopParameterType("void"),

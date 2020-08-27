@@ -38,13 +38,13 @@ import org.jetbrains.dokka.pages.PackagePageNode
 
 /** Converts documentables into components for the package summary page. */
 internal class PackageDocumentableConverter(
-    private val language: Language,
+    private val displayLanguage: Language,
     private val packagePage: PackagePageNode,
     private val pathProvider: FilePathProvider
 ) {
-    private val javadocConverter = DocTagConverter(language, pathProvider)
+    private val javadocConverter = DocTagConverter(displayLanguage, pathProvider)
     private val functionConverter =
-        FunctionDocumentableConverter(language, pathProvider, javadocConverter)
+        FunctionDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
 
     /** @return the root component for the package summary page */
     suspend fun summaryPage(): DevsitePage = coroutineScope {
@@ -64,12 +64,12 @@ internal class PackageDocumentableConverter(
 
         DefaultDevsitePage(
             DevsitePage.Params(
-                language,
+                displayLanguage,
                 pathProvider.relative.forType(doc.name, "package-summary"),
                 packagePage.name,
                 DefaultPackageSummary(
                     PackageSummary.Params(
-                        language,
+                        displayLanguage,
                         interfaces = interfaces.await(),
                         classes = classes.await(),
                         enums = enums.await(),
