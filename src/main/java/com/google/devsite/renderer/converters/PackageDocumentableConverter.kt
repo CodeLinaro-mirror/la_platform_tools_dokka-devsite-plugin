@@ -65,9 +65,10 @@ internal class PackageDocumentableConverter(
         DefaultDevsitePage(
             DevsitePage.Params(
                 displayLanguage,
-                pathProvider.relative.forType(doc.name, "package-summary"),
-                packagePage.name,
-                DefaultPackageSummary(
+                path = pathProvider.relative.forType(doc.name, "package-summary"),
+                bookPath = pathProvider.book,
+                title = packagePage.name,
+                content = DefaultPackageSummary(
                     PackageSummary.Params(
                         displayLanguage,
                         interfaces = interfaces.await(),

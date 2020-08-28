@@ -58,6 +58,15 @@ internal class RootDocumentableConverterTest(
     }
 
     @Test
+    fun `Class index creates components with correct book path`() {
+        val page = """
+            |class Foo
+        """.render().page(forClasses = true)
+
+        assertPath(page.data.bookPath, "androidx/_book.yaml")
+    }
+
+    @Test
     fun `Class index creates components with correct packages link`() {
         val page = """
             |class Foo
@@ -171,6 +180,15 @@ internal class RootDocumentableConverterTest(
         """.render().page(forPackages = true)
 
         assertThat(page.data.path).isEqualTo("androidx/packages.html")
+    }
+
+    @Test
+    fun `Package index creates components with correct book path`() {
+        val page = """
+            |class Foo
+        """.render().page(forPackages = true)
+
+        assertPath(page.data.bookPath, "androidx/_book.yaml")
     }
 
     @Test

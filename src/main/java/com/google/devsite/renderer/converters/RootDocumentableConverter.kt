@@ -71,9 +71,15 @@ internal class RootDocumentableConverter(
         return DefaultDevsitePage(
             DevsitePage.Params(
                 displayLanguage,
-                pathProvider.relative.classes,
-                "Class Index",
-                DefaultClassIndex(ClassIndex.Params(pathProvider.packages, componentClasses))
+                path = pathProvider.relative.classes,
+                bookPath = pathProvider.book,
+                title = "Class Index",
+                content = DefaultClassIndex(
+                    ClassIndex.Params(
+                        pathProvider.packages,
+                        componentClasses
+                    )
+                )
             )
         )
     }
@@ -90,9 +96,15 @@ internal class RootDocumentableConverter(
         return DefaultDevsitePage(
             DevsitePage.Params(
                 displayLanguage,
-                pathProvider.relative.packages,
-                "Package Index",
-                DefaultPackageIndex(PackageIndex.Params(pathProvider.classes, componentPackages))
+                path = pathProvider.relative.packages,
+                bookPath = pathProvider.book,
+                title = "Package Index",
+                content = DefaultPackageIndex(
+                    PackageIndex.Params(
+                        pathProvider.classes,
+                        componentPackages
+                    )
+                )
             )
         )
     }
