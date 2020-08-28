@@ -23,102 +23,83 @@ import kotlinx.html.body
 import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.pages.ClasslikePageNode
 import org.jetbrains.dokka.pages.ContentPage
+import org.jetbrains.dokka.pages.RootPageNode
 import org.junit.Test
 
 internal class DefaultDescriptionTest : ConverterTestBase() {
     @Test
     fun `Single sentence renders correctly`() {
-        val source = """
+        val component = """
             |/** Hello world! */
             |class Foo
-        """.trimMargin()
+        """.render().description()
 
-        testWithRootPageNode(source) { root ->
-            val tag = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tag()
-            val component = DefaultDescription(Params(tag))
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
 
-            val output = createHTML().body {
-                component.render(this)
-            }.trim()
-
-            // language=html
-            assertThat(output).isEqualTo(
-                """
+        // language=html
+        assertThat(output).isEqualTo(
+            """
 <body>
   <p>Hello world!</p>
 </body>
-                """.trim()
-            )
-        }
+            """.trim()
+        )
     }
 
     @Test
     fun `Deprecation renders renders correctly`() {
-        val source = """
+        val component = """
             |/** Hello world! */
             |class Foo
-        """.trimMargin()
+        """.render().description(
+            deprecation = "This class is deprecated."
+        )
 
-        testWithRootPageNode(source) { root ->
-            val tag = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tag()
-            val component = DefaultDescription(Params(
-                tag,
-                deprecation = "This class is deprecated."
-            ))
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
 
-            val output = createHTML().body {
-                component.render(this)
-            }.trim()
-
-            // language=html
-            assertThat(output).isEqualTo(
-                """
+        // language=html
+        assertThat(output).isEqualTo(
+            """
 <body>
   <p class="caution"><strong>This class is deprecated.</strong><br>
     <p>Hello world!</p>
   </p>
 </body>
-                """.trim()
-            )
-        }
+            """.trim()
+        )
     }
 
     @Test
     fun `Deprecation summary renders renders correctly`() {
-        val source = """
+        val component = """
             |/** Hello world! */
             |class Foo
-        """.trimMargin()
+        """.render().description(
+            summary = true,
+            deprecation = "This class is deprecated."
+        )
 
-        testWithRootPageNode(source) { root ->
-            val tag = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tag()
-            val component = DefaultDescription(Params(
-                tag,
-                summary = true,
-                deprecation = "This class is deprecated."
-            ))
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
 
-            val output = createHTML().body {
-                component.render(this)
-            }.trim()
-
-            // language=html
-            assertThat(output).isEqualTo(
-                """
+        // language=html
+        assertThat(output).isEqualTo(
+            """
 <body>
   <p><em>This class is deprecated.</em> Hello world!</p>
 </body>
-                """.trim()
-            )
-        }
+            """.trim()
+        )
     }
 
     @Test
     fun `Paragraphs render correctly`() {
-        val source = """
+        val component = """
             |/**
             | * There was an old lady who swallowed a fly.
             | * I dunno why she swallowed that fly,
@@ -142,20 +123,15 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
             | * She's dead, of course.
             | */
             |class Foo
-        """.trimMargin()
+        """.render().description()
 
-        testWithRootPageNode(source) { root ->
-            val tag = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tag()
-            val component = DefaultDescription(Params(tag))
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
 
-            val output = createHTML().body {
-                component.render(this)
-            }.trim()
-
-            // language=html
-            assertThat(output).isEqualTo(
-                """
+        // language=html
+        assertThat(output).isEqualTo(
+            """
 <body>
   <p>
     <p>There was an old lady who swallowed a fly. I dunno why she swallowed that fly, Perhaps she'll die.</p>
@@ -164,98 +140,79 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
     <p>There was an old lady who swallowed a horse - She's dead, of course.</p>
   </p>
 </body>
-                """.trim()
-            )
-        }
+            """.trim()
+        )
     }
 
     @Test
     fun `Line breaks render correctly`() {
-        val source = """
+        val component = """
             |/**
             | * A \
             | * B \
             | * C.
             | */
             |class Foo
-        """.trimMargin()
+        """.render().description()
 
-        testWithRootPageNode(source) { root ->
-            val tag = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tag()
-            val component = DefaultDescription(Params(tag))
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
 
-            val output = createHTML().body {
-                component.render(this)
-            }.trim()
-
-            // language=html
-            assertThat(output).isEqualTo(
-                """
+        // language=html
+        assertThat(output).isEqualTo(
+            """
 <body>
   <p>A <br>B <br>C.</p>
 </body>
-                """.trim()
-            )
-        }
+            """.trim()
+        )
     }
 
     @Test
     fun `Inline code renders correctly`() {
-        val source = """
+        val component = """
             |/** The `Boolean` type has two possible values: `true` or `false`. */
             |class Foo
-        """.trimMargin()
+        """.render().description()
 
-        testWithRootPageNode(source) { root ->
-            val tag = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tag()
-            val component = DefaultDescription(Params(tag))
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
 
-            val output = createHTML().body {
-                component.render(this)
-            }.trim()
-
-            // language=html
-            assertThat(output).isEqualTo(
-                """
+        // language=html
+        assertThat(output).isEqualTo(
+            """
 <body>
   <p>The <code>Boolean</code> type has two possible values: <code>true</code> or <code>false</code>.</p>
 </body>
-                """.trim()
-            )
-        }
+            """.trim()
+        )
     }
 
     @Test
     fun `Formatted text renders correctly`() {
-        val source = """
+        val component = """
             |/** *Italics*, **Bold**, ***Both***, ~~Bad~~. */
             |class Foo
-        """.trimMargin()
+        """.render().description()
 
-        testWithRootPageNode(source) { root ->
-            val tag = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tag()
-            val component = DefaultDescription(Params(tag))
+        val output = createHTML(prettyPrint = false).body {
+            component.render(this)
+        }.trim()
 
-            val output = createHTML(prettyPrint = false).body {
-                component.render(this)
-            }.trim()
-
-            // TODO(b/163860333): the strikethrough gets removed because reasons ¯\_(ツ)_/¯
-            // language=html
-            assertThat(output).isEqualTo(
-                """
+        // TODO(b/163860333): the strikethrough gets removed because reasons ¯\_(ツ)_/¯
+        // language=html
+        assertThat(output).isEqualTo(
+            """
 <body><p><em>Italics</em>, <b>Bold</b>, <b><em>Both</em></b>, <del></del>.</p></body>
-                """.trim()
-            )
-        }
+            """.trim()
+        )
     }
 
     @Test
     fun `Itemized list renders correctly`() {
-        val source = """
+        val component = """
             |/**
             | * Stuff:
             | *   - Thing 1
@@ -263,20 +220,15 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
             | *   - Thing 3
             | */
             |class Foo
-        """.trimMargin()
+        """.render().description()
 
-        testWithRootPageNode(source) { root ->
-            val tag = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tag()
-            val component = DefaultDescription(Params(tag))
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
 
-            val output = createHTML().body {
-                component.render(this)
-            }.trim()
-
-            // language=html
-            assertThat(output).isEqualTo(
-                """
+        // language=html
+        assertThat(output).isEqualTo(
+            """
 <body>
   <p>
     <p>Stuff:</p>
@@ -293,14 +245,13 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
     </ul>
   </p>
 </body>
-                """.trim()
-            )
-        }
+            """.trim()
+        )
     }
 
     @Test
     fun `Numbered list renders correctly`() {
-        val source = """
+        val component = """
             |/**
             | * Stuff:
             | *   1. Thing 1
@@ -308,20 +259,15 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
             | *   3. Thing 3
             | */
             |class Foo
-        """.trimMargin()
+        """.render().description()
 
-        testWithRootPageNode(source) { root ->
-            val tag = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tag()
-            val component = DefaultDescription(Params(tag))
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
 
-            val output = createHTML().body {
-                component.render(this)
-            }.trim()
-
-            // language=html
-            assertThat(output).isEqualTo(
-                """
+        // language=html
+        assertThat(output).isEqualTo(
+            """
 <body>
   <p>
     <p>Stuff:</p>
@@ -338,14 +284,13 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
     </ol>
   </p>
 </body>
-                """.trim()
-            )
-        }
+            """.trim()
+        )
     }
 
     @Test
     fun `Table renders correctly`() {
-        val source = """
+        val component = """
             |/**
             | * | Tables   |      Are      |       Cool |
             | * |----------|:-------------:|-----------:|
@@ -354,21 +299,16 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
             | * | col 3 is | right-aligned |    ${'$'}1 |
             | */
             |class Foo
-        """.trimMargin()
+        """.render().description()
 
-        testWithRootPageNode(source) { root ->
-            val tag = root.children.flatMap { it.children }
-                .filterIsInstance<ClasslikePageNode>().single().tag()
-            val component = DefaultDescription(Params(tag))
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
 
-            val output = createHTML().body {
-                component.render(this)
-            }.trim()
-
-            // TODO(b/163856933): fix the bad formatting
-            // language=html
-            assertThat(output).isEqualTo(
-                """
+        // TODO(b/163856933): fix the bad formatting
+        // language=html
+        assertThat(output).isEqualTo(
+            """
 <body>
   <table>
     <tr>
@@ -393,9 +333,17 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
     </tr>
   </table>
 </body>
-                """.trim()
-            )
-        }
+            """.trim()
+        )
+    }
+
+    private fun RootPageNode.description(
+        summary: Boolean = false,
+        deprecation: String? = null
+    ): DefaultDescription {
+        val tag = children.flatMap { it.children }
+            .filterIsInstance<ClasslikePageNode>().single().tag()
+        return DefaultDescription(Params(tag, summary, deprecation))
     }
 
     private fun ContentPage.tag() =

@@ -18,12 +18,19 @@ package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.ClassIndex
-import com.google.devsite.components.Link
+import com.google.devsite.components.DevsitePage
 import com.google.devsite.components.PackageIndex
-import com.google.devsite.components.TwoPaneSummaryItem
+import com.google.devsite.components.SummaryList
+import com.google.devsite.components.TableOfContents
+import com.google.devsite.components.TocPackage
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.testing.content
+import com.google.devsite.renderer.converters.testing.item
+import com.google.devsite.renderer.converters.testing.items
+import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
+import org.jetbrains.dokka.pages.RootPageNode
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -34,265 +41,170 @@ internal class RootDocumentableConverterTest(
 ) : ConverterTestBase(language) {
     @Test
     fun `Class index creates components with correct page title`() {
-        val source = """
+        val page = """
             |class Foo
-        """.trimMargin()
+        """.render().page(forClasses = true)
 
-        testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(language, root, pathProvider())
-
-            val components = converter.classesPage()
-
-            assertThat(components.data.title).isEqualTo("Class Index")
-        }
+        assertThat(page.data.title).isEqualTo("Class Index")
     }
 
     @Test
     fun `Class index creates components with correct path`() {
-        val source = """
+        val page = """
             |class Foo
-        """.trimMargin()
+        """.render().page(forClasses = true)
 
-        testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(language, root, pathProvider())
-
-            val components = converter.classesPage()
-
-            assertThat(components.data.path).isEqualTo("androidx/classes.html")
-        }
+        assertThat(page.data.path).isEqualTo("androidx/classes.html")
     }
 
     @Test
     fun `Class index creates components with correct packages link`() {
-        val source = """
+        val page = """
             |class Foo
-        """.trimMargin()
+        """.render().page(forClasses = true)
 
-        testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(language, root, pathProvider())
+        val classIndex = page.content<ClassIndex>()
 
-            val components = converter.classesPage()
-
-            val classIndex = components.data.content as ClassIndex
-            assertPath(classIndex.data.packagesUrl, "androidx/packages.html")
-        }
+        assertPath(classIndex.data.packagesUrl, "androidx/packages.html")
     }
 
     @Test
     fun `Class index creates components for single class`() {
-        val source = """
+        val page = """
             |class Foo
-        """.trimMargin()
+        """.render().page(forClasses = true)
 
-        testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(language, root, pathProvider())
+        val classIndex = page.content<ClassIndex>()
+        val (letter, summary) = classIndex.item()
 
-            val components = converter.classesPage()
-
-            val classIndex = components.data.content as ClassIndex
-            assertThat(classIndex.data.alphabetizedClasses).hasSize(1)
-
-            val (letter, summary) = classIndex.data.alphabetizedClasses.entries.single()
-            assertThat(letter).isEqualTo('F')
-            assertThat(summary.data.items).hasSize(1)
-
-            val clazz = (summary.data.items.single() as TwoPaneSummaryItem).data.title as Link
-            assertThat(clazz.data.name).isEqualTo("Foo")
-            assertPath(clazz.data.url, "androidx/example/Foo.html")
-        }
+        assertThat(letter).isEqualTo('F')
+        assertThat(summary.item().link().name).isEqualTo("Foo")
+        assertPath(summary.item().link().url, "androidx/example/Foo.html")
     }
 
     @Test
     fun `Class index creates components for nested class`() {
-        val source = """
+        val page = """
             |class Outer { class Inner }
-        """.trimMargin()
+        """.render().page(forClasses = true)
 
-        testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(language, root, pathProvider())
+        val classIndex = page.content<ClassIndex>()
+        val (letter, summary) = classIndex.item()
+        val outer = summary.items(2).first()
+        val inner = summary.items(2).last()
 
-            val components = converter.classesPage()
-
-            val classIndex = components.data.content as ClassIndex
-            val summaries = classIndex.data.alphabetizedClasses
-            assertThat(summaries).hasSize(1)
-
-            val (letter, summary) = classIndex.data.alphabetizedClasses.entries.single()
-            assertThat(letter).isEqualTo('O')
-            assertThat(summary.data.items).hasSize(2)
-
-            val outer = (summary.data.items.first() as TwoPaneSummaryItem).data.title as Link
-            assertThat(outer.data.name).isEqualTo("Outer")
-            assertPath(outer.data.url, "androidx/example/Outer.html")
-
-            val inner = (summary.data.items.last() as TwoPaneSummaryItem).data.title as Link
-            assertThat(inner.data.name).isEqualTo("Outer.Inner")
-            assertPath(inner.data.url, "androidx/example/Outer.Inner.html")
-        }
+        assertThat(letter).isEqualTo('O')
+        assertThat(outer.link().name).isEqualTo("Outer")
+        assertPath(outer.link().url, "androidx/example/Outer.html")
+        assertThat(inner.link().name).isEqualTo("Outer.Inner")
+        assertPath(inner.link().url, "androidx/example/Outer.Inner.html")
     }
 
     @Test
     fun `Class index creates components for enum`() {
-        val source = """
+        val page = """
             |enum class Choice { A, B }
-        """.trimMargin()
+        """.render().page(forClasses = true)
 
-        testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(language, root, pathProvider())
+        val classIndex = page.content<ClassIndex>()
+        val (letter, summary) = classIndex.item()
 
-            val components = converter.classesPage()
-
-            val classIndex = components.data.content as ClassIndex
-            val summaries = classIndex.data.alphabetizedClasses
-            assertThat(summaries).hasSize(1)
-
-            val (_, summary) = classIndex.data.alphabetizedClasses.entries.single()
-
-            val enum = (summary.data.items.single() as TwoPaneSummaryItem).data.title as Link
-            assertThat(enum.data.name).isEqualTo("Choice")
-            assertPath(enum.data.url, "androidx/example/Choice.html")
-        }
+        assertThat(letter).isEqualTo('C')
+        assertThat(summary.item().link().name).isEqualTo("Choice")
+        assertPath(summary.item().link().url, "androidx/example/Choice.html")
     }
 
     @Test
     fun `Class index creates components for multiple classes starting with same letter`() {
-        val source = """
+        val page = """
             |class Fo
             |class Foo
             |class Fooo
-        """.trimMargin()
+        """.render().page(forClasses = true)
 
-        testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(language, root, pathProvider())
+        val classIndex = page.content<ClassIndex>()
+        val (letter, summary) = classIndex.item()
 
-            val components = converter.classesPage()
+        assertThat(letter).isEqualTo('F')
 
-            val classIndex = components.data.content as ClassIndex
-            assertThat(classIndex.data.alphabetizedClasses).hasSize(1)
+        val expectedClasses = listOf("Fo", "Foo", "Fooo")
+        for ((i, clazz) in summary.items(3).withIndex()) {
+            val expectedName = expectedClasses[i]
 
-            val (letter, summary) = classIndex.data.alphabetizedClasses.entries.single()
-            assertThat(letter).isEqualTo('F')
-            assertThat(summary.data.items).hasSize(3)
-
-            val expectedClasses = listOf("Fo", "Foo", "Fooo")
-            val classes = summary.data.items.map { (it as TwoPaneSummaryItem).data.title as Link }
-            for ((i, clazz) in classes.withIndex()) {
-                val expectedName = expectedClasses[i]
-
-                assertThat(clazz.data.name).isEqualTo(expectedName)
-                assertPath(clazz.data.url, "androidx/example/$expectedName.html")
-            }
+            assertThat(clazz.link().name).isEqualTo(expectedName)
+            assertPath(clazz.link().url, "androidx/example/$expectedName.html")
         }
     }
 
     @Test
     fun `Class index creates components for multiple classes starting with different letters`() {
-        val source = """
+        val page = """
             |class Foo
             |class Bar
-        """.trimMargin()
+        """.render().page(forClasses = true)
 
-        testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(language, root, pathProvider())
+        val classIndex = page.content<ClassIndex>()
+        val (fooLetter, fooSummary) = classIndex.items(2).first()
+        val (barLetter, barSummary) = classIndex.items(2).last()
 
-            val components = converter.classesPage()
-
-            val classIndex = components.data.content as ClassIndex
-            assertThat(classIndex.data.alphabetizedClasses).hasSize(2)
-
-            val (fooLetter, fooSummary) = classIndex.data.alphabetizedClasses.entries.first()
-            assertThat(fooLetter).isEqualTo('F')
-            assertThat(fooSummary.data.items).hasSize(1)
-
-            val fooClazz = (fooSummary.data.items.single() as TwoPaneSummaryItem).data.title as Link
-            assertThat(fooClazz.data.name).isEqualTo("Foo")
-            assertPath(fooClazz.data.url, "androidx/example/Foo.html")
-
-            val (barLetter, barSummary) = classIndex.data.alphabetizedClasses.entries.last()
-            assertThat(barLetter).isEqualTo('B')
-            assertThat(barSummary.data.items).hasSize(1)
-
-            val barClazz = (barSummary.data.items.single() as TwoPaneSummaryItem).data.title as Link
-            assertThat(barClazz.data.name).isEqualTo("Bar")
-            assertPath(barClazz.data.url, "androidx/example/Bar.html")
-        }
+        assertThat(fooLetter).isEqualTo('F')
+        assertThat(barLetter).isEqualTo('B')
+        assertThat(fooSummary.item().link().name).isEqualTo("Foo")
+        assertThat(barSummary.item().link().name).isEqualTo("Bar")
+        assertPath(fooSummary.item().link().url, "androidx/example/Foo.html")
+        assertPath(barSummary.item().link().url, "androidx/example/Bar.html")
     }
 
     @Test
     fun `Package index creates components with correct page title`() {
-        val source = """
+        val page = """
             |class Foo
-        """.trimMargin()
+        """.render().page(forPackages = true)
 
-        testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(language, root, pathProvider())
-
-            val components = converter.packagesPage()
-
-            assertThat(components.data.title).isEqualTo("Package Index")
-        }
+        assertThat(page.data.title).isEqualTo("Package Index")
     }
 
     @Test
     fun `Package index creates components with correct path`() {
-        val source = """
+        val page = """
             |class Foo
-        """.trimMargin()
+        """.render().page(forPackages = true)
 
-        testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(language, root, pathProvider())
-
-            val components = converter.packagesPage()
-
-            assertThat(components.data.path).isEqualTo("androidx/packages.html")
-        }
+        assertThat(page.data.path).isEqualTo("androidx/packages.html")
     }
 
     @Test
     fun `Package index creates components with correct classes link`() {
-        val source = """
+        val page = """
             |class Foo
-        """.trimMargin()
+        """.render().page(forPackages = true)
 
-        testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(language, root, pathProvider())
+        val packageIndex = page.content<PackageIndex>()
 
-            val components = converter.packagesPage()
-
-            val packageIndex = components.data.content as PackageIndex
-            assertPath(packageIndex.data.classesUrl, "androidx/classes.html")
-        }
+        assertPath(packageIndex.data.classesUrl, "androidx/classes.html")
     }
 
     @Test
     fun `Package index creates components for single package`() {
-        val sourceFiles = listOf(
+        val page = listOf(
             """
                 |/src/main/kotlin/androidx/example/Test.kt
                 |package androidx.example
                 |
                 |class Foo
             """.trimMargin()
-        )
+        ).render().page(forPackages = true)
 
-        testWithRootPageNode(sourceFiles) { root ->
-            val converter = RootDocumentableConverter(language, root, pathProvider())
+        val packageIndex = page.content<PackageIndex>()
+        val packagez = packageIndex.data.packages.item()
 
-            val components = converter.packagesPage()
-
-            val packageIndex = components.data.content as PackageIndex
-            val packages = packageIndex.data.packages.data.items
-            assertThat(packages).hasSize(1)
-
-            val packageLink = (packages.single() as TwoPaneSummaryItem).data.title as Link
-            assertThat(packageLink.data.name).isEqualTo("androidx.example")
-            assertPath(packageLink.data.url, "androidx/example/package-summary.html")
-        }
+        assertThat(packagez.link().name).isEqualTo("androidx.example")
+        assertPath(packagez.link().url, "androidx/example/package-summary.html")
     }
 
     @Test
     fun `Package index creates components for multiple packages`() {
-        val sourceFiles = listOf(
+        val page = listOf(
             """
                 |/src/main/kotlin/androidx/example/A.kt
                 |package a
@@ -311,95 +223,87 @@ internal class RootDocumentableConverterTest(
                 |
                 |class C
             """.trimMargin()
-        )
+        ).render().page(forPackages = true)
 
-        testWithRootPageNode(sourceFiles) { root ->
-            val converter = RootDocumentableConverter(language, root, pathProvider())
+        val packageIndex = page.content<PackageIndex>()
+        val packages = packageIndex.data.packages.items(3)
 
-            val components = converter.packagesPage()
-
-            val packageIndex = components.data.content as PackageIndex
-            val packages = packageIndex.data.packages.data.items
-            assertThat(packages).hasSize(3)
-
-            val expectedPackages = listOf("a", "b", "c")
-            for ((i, packageItem) in packages.withIndex()) {
-                val packageLink = (packageItem as TwoPaneSummaryItem).data.title as Link
-
-                assertThat(packageLink.data.name).isEqualTo(expectedPackages[i])
-                assertPath(packageLink.data.url, "${expectedPackages[i]}/package-summary.html")
-            }
+        val expectedPackages = listOf("a", "b", "c")
+        for ((i, packagez) in packages.withIndex()) {
+            assertThat(packagez.link().name).isEqualTo(expectedPackages[i])
+            assertPath(packagez.link().url, "${expectedPackages[i]}/package-summary.html")
         }
     }
 
     @Test
     fun `Toc creates components with correct metadata links`() {
-        val source = """
+        val toc = """
             |class Foo
-        """.trimMargin()
+        """.render().toc()
 
-        testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(language, root, pathProvider())
-
-            val toc = runBlocking { converter.tocPage() }
-
-            assertPath(toc.data.classesUrl, "androidx/classes.html")
-            assertPath(toc.data.packagesUrl, "androidx/packages.html")
-        }
+        assertPath(toc.data.classesUrl, "androidx/classes.html")
+        assertPath(toc.data.packagesUrl, "androidx/packages.html")
     }
 
     @Test
     fun `Toc creates components with correct package link`() {
-        val source = """
+        val toc = """
             |class Foo
-        """.trimMargin()
+        """.render().toc()
 
-        testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(language, root, pathProvider())
+        val tocPackage = toc.item<TocPackage>()
 
-            val toc = runBlocking { converter.tocPage() }
-            val tocPackage = toc.data.packages.single()
-
-            assertThat(tocPackage.data.name).isEqualTo("androidx.example")
-            assertPath(tocPackage.data.packageUrl, "androidx/example/package-summary.html")
-        }
+        assertThat(tocPackage.data.name).isEqualTo("androidx.example")
+        assertPath(tocPackage.data.packageUrl, "androidx/example/package-summary.html")
     }
 
     @Test
     fun `Toc creates components with correct class link`() {
-        val source = """
+        val toc = """
             |class Foo
-        """.trimMargin()
+        """.render().toc()
 
-        testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(language, root, pathProvider())
+        val tocPackage = toc.item<TocPackage>()
+        val clazz = tocPackage.data.classes.item()
 
-            val toc = runBlocking { converter.tocPage() }
-            val tocPackage = toc.data.packages.single()
-            val clazz = tocPackage.data.classes.single()
-
-            assertThat(clazz.name).isEqualTo("Foo")
-            assertPath(clazz.url, "androidx/example/Foo.html")
-        }
+        assertThat(clazz.name).isEqualTo("Foo")
+        assertPath(clazz.url, "androidx/example/Foo.html")
     }
 
     @Test
     fun `Toc creates components with correct inner class link`() {
-        val source = """
+        val toc = """
             |class Outer { class Inner }
-        """.trimMargin()
+        """.render().toc()
 
-        testWithRootPageNode(source) { root ->
-            val converter = RootDocumentableConverter(language, root, pathProvider())
+        val tocPackage = toc.item<TocPackage>()
+        val inner = tocPackage.data.classes.items(2).last()
 
-            val toc = runBlocking { converter.tocPage() }
-            val tocPackage = toc.data.packages.single()
-            val inner = tocPackage.data.classes.last()
+        assertThat(inner.name).isEqualTo("Outer.Inner")
+        assertPath(inner.url, "androidx/example/Outer.Inner.html")
+    }
 
-            assertThat(inner.name).isEqualTo("Outer.Inner")
-            assertPath(inner.url, "androidx/example/Outer.Inner.html")
+    private fun RootPageNode.page(
+        forClasses: Boolean = false,
+        forPackages: Boolean = false
+    ): DevsitePage {
+        check(!(forClasses && forPackages)) { "Must choose 1." }
+
+        val converter = RootDocumentableConverter(language, this, pathProvider())
+        return when {
+            forClasses -> converter.classesPage()
+            forPackages -> converter.packagesPage()
+            else -> error("Must choose 1.")
         }
     }
+
+    private fun RootPageNode.toc(): TableOfContents {
+        val converter = RootDocumentableConverter(language, this, pathProvider())
+        return runBlocking { converter.tocPage() }
+    }
+
+    private fun ClassIndex.item() = item<Map.Entry<Char, SummaryList>>()
+    private fun ClassIndex.items(size: Int? = null) = items<Map.Entry<Char, SummaryList>>(size)
 
     companion object {
         @JvmStatic
