@@ -20,15 +20,15 @@ package com.google.devsite.renderer.impl.paths
 internal class RelativeFilePathProvider(tenant: String) : FilePathProvider {
     override val relative = this
 
-    override val packageList = "$tenant/package-list"
+    override val packageList = "$tenant/$MACHINE_PACKAGE_LIST_FILE"
 
-    override val packages = "$tenant/packages.html"
+    override val packages = "$tenant/$PACKAGE_INDEX_FILE"
 
-    override val classes = "$tenant/classes.html"
+    override val classes = "$tenant/$CLASS_INDEX_FILE"
 
-    override val rootIndex = "$tenant/index.html"
+    override val rootIndex = "$tenant/$DIR_INDEX_FILE"
 
-    override val toc = "$tenant/_toc.yaml"
+    override val toc = "$tenant/$TOC_FILE"
 
     override val book = "$tenant/_book.yaml"
 

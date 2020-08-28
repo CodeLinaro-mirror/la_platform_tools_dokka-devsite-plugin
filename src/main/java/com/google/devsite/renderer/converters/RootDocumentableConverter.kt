@@ -146,12 +146,7 @@ internal class RootDocumentableConverter(
     private fun summaryForPackage(packageDoc: DPackage): DefaultTwoPaneSummaryItem {
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
-                title = DefaultLink(
-                    Link.Params(
-                        name = packageDoc.name,
-                        url = pathProvider.forType(packageDoc.name, "package-summary")
-                    )
-                ),
+                title = pathProvider.linkForReference(packageDoc.dri),
                 description = javadocConverter.summaryDescription(packageDoc)
             )
         )
@@ -169,7 +164,7 @@ internal class RootDocumentableConverter(
         DefaultTocPackage(
             TocPackage.Params(
                 name = packageDoc.name,
-                packageUrl = pathProvider.forType(packageDoc.name, "package-summary"),
+                packageUrl = pathProvider.forReference(packageDoc.dri).url,
                 interfaces = interfaces.await(),
                 classes = classes.await(),
                 enums = enums.await(),

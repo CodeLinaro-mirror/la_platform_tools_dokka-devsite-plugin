@@ -19,6 +19,7 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import com.google.devsite.renderer.impl.paths.PACKAGE_SUMMARY_NAME
 import org.jetbrains.dokka.links.Callable
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.JavaClassReference
@@ -45,7 +46,7 @@ internal fun FilePathProvider.forReference(dri: DRI): ReferencePath {
     val symbol = dri.callable
 
     val (typeName, typeUrl) = if (className == null) {
-        packageName to forType(packageName, "package-summary")
+        packageName to forType(packageName, PACKAGE_SUMMARY_NAME)
     } else {
         className to forType(packageName, className)
     }

@@ -20,7 +20,10 @@ import com.google.devsite.components.RedirectPage
 import com.google.devsite.components.impl.DefaultRedirectPage
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.PackageDocumentableConverter
+import com.google.devsite.renderer.impl.paths.DIR_INDEX_NAME
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import com.google.devsite.renderer.impl.paths.PACKAGE_SUMMARY_FILE
+import com.google.devsite.renderer.impl.paths.PACKAGE_SUMMARY_NAME
 import kotlinx.html.html
 import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.base.renderers.OutputWriter
@@ -35,13 +38,13 @@ internal class PackageRenderer(
 ) {
     /** Writes the home page. */
     suspend fun writeIndex(packagePage: PackagePageNode) {
-        val redirectComponent = DefaultRedirectPage(RedirectPage.Params("package-summary.html"))
+        val redirectComponent = DefaultRedirectPage(RedirectPage.Params(PACKAGE_SUMMARY_FILE))
         val index = createHTML().html {
             redirectComponent.render(this)
         }
 
         outputWriter.write(
-            pathProvider.forType(packagePage.name, "index"),
+            pathProvider.forType(packagePage.name, DIR_INDEX_NAME),
             index,
             ""
         )
@@ -55,7 +58,7 @@ internal class PackageRenderer(
         }
 
         outputWriter.write(
-            pathProvider.forType(packagePage.name, "package-summary"),
+            pathProvider.forType(packagePage.name, PACKAGE_SUMMARY_NAME),
             packageSummary,
             ""
         )
