@@ -41,7 +41,9 @@ import org.jetbrains.dokka.model.FunctionModifiers
 import org.jetbrains.dokka.model.Nullable
 import org.jetbrains.dokka.model.OtherParameter
 import org.jetbrains.dokka.model.Projection
+import org.jetbrains.dokka.model.Star
 import org.jetbrains.dokka.model.TypeConstructor
+import org.jetbrains.dokka.model.Variance
 
 /** Converts documentable functions into function components. */
 internal class FunctionDocumentableConverter(
@@ -172,8 +174,9 @@ internal class FunctionDocumentableConverter(
         } else {
             null
         }
-        is OtherParameter -> null
+        is OtherParameter, Star -> null
         is Nullable -> inner.receiver()
+        is Variance -> inner.receiver()
         else -> error("Unknown bound: $this")
     }
 
@@ -191,8 +194,10 @@ internal class FunctionDocumentableConverter(
     private fun Projection.toComponent(): ParameterType {
         val generics: List<ParameterType> = when (this) {
             is TypeConstructor -> projections.map { it.toComponent() }
-            is OtherParameter -> emptyList()
+            is OtherParameter, Star -> emptyList()
             is Nullable -> listOf(inner.toComponent())
+            // TODO(b/166530498): support variance
+            is Variance -> listOf(inner.toComponent())
             else -> error("Unknown bound: $this")
         }
 
@@ -225,7 +230,18 @@ internal class FunctionDocumentableConverter(
                 url = ""
             )
         )
+        Star -> DefaultLink(
+            Link.Params(
+                name = when (displayLanguage) {
+                    Language.JAVA -> "?"
+                    Language.KOTLIN -> "*"
+                },
+                url = ""
+            )
+        )
         is Nullable -> inner.toLink()
+        // TODO(b/166530498): support variance
+        is Variance -> inner.toLink()
         else -> error("Unknown bound: $this")
     }
 
@@ -263,6 +279,8 @@ internal class FunctionDocumentableConverter(
         }
         is OtherParameter -> false
         is Nullable -> inner.isLambda()
+        is Variance -> inner.isLambda()
+        is Star -> false
         else -> error("Unknown bound: $this")
     }
 
@@ -288,10 +306,11 @@ internal class FunctionDocumentableConverter(
     }
 
     private fun Projection.toFullyQualifiedSignature(): String = when (this) {
-        is TypeConstructor ->
-            dri.packageName!! + "." + dri.classNames!!
+        is TypeConstructor -> dri.packageName!! + "." + dri.classNames!!
         is OtherParameter -> name
-        is Nullable -> inner.toFullyQualifiedSignature() + "?"
+        is Nullable -> inner.toFullyQualifiedSignature()
+        is Variance -> inner.toFullyQualifiedSignature()
+        is Star -> ""
         else -> error("Unknown bound: $this")
     }
 }
