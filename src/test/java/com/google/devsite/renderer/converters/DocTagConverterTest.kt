@@ -17,15 +17,16 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.Description
-import com.google.devsite.components.Link
 import com.google.devsite.components.Raw
 import com.google.devsite.components.SummaryList
-import com.google.devsite.components.TableTitle
-import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.impl.UndocumentedSymbolDescription
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.testing.item
+import com.google.devsite.renderer.converters.testing.link
+import com.google.devsite.renderer.converters.testing.title
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.Documentable
@@ -42,178 +43,127 @@ internal class DocTagConverterTest(
 ) : ConverterTestBase(language) {
     @Test
     fun `Empty description isn't documented`() {
-        val source = """
+        val description = """
             |class Foo
-        """.trimMargin()
+        """.render().description()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = DocTagConverter(language, pathProvider())
-
-            val description = converter.summaryDescription(root.doc())
-
-            assertThat(description.javaClass)
-                .isAssignableTo(UndocumentedSymbolDescription::class.java)
-        }
+        assertThat(description.javaClass)
+            .isAssignableTo(UndocumentedSymbolDescription::class.java)
     }
 
     @Test
     fun `Basic summary description has correct flags`() {
-        val source = """
+        val description = """
             |/** Hello World! */
             |class Foo
-        """.trimMargin()
+        """.render().description()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = DocTagConverter(language, pathProvider())
-
-            val description = converter.summaryDescription(root.doc())
-
-            assertThat(description.data.summary).isTrue()
-            assertThat(description.data.deprecation).isNull()
-        }
+        assertThat(description.data.summary).isTrue()
+        assertThat(description.data.deprecation).isNull()
     }
 
     @Ignore // TODO(b/166333285): support deprecation
     @Test
     fun `Deprecated summary description has correct flags`() {
-        val source = """
+        val description = """
             |@Deprecated("Bye")
             |class Foo
-        """.trimMargin()
+        """.render().description()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = DocTagConverter(language, pathProvider())
-
-            val description = converter.summaryDescription(root.doc())
-
-            assertThat(description.data.summary).isTrue()
-            assertThat(description.data.deprecation).isEqualTo("Bye")
-        }
+        assertThat(description.data.summary).isTrue()
+        assertThat(description.data.deprecation).isEqualTo("Bye")
     }
 
     @Test
     fun `Full documentation has description`() {
-        val source = """
+        val documentation = """
             |/** Hello World! */
             |class Foo
-        """.trimMargin()
+        """.render().documentation()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = DocTagConverter(language, pathProvider())
+        val description = documentation.item() as Description
 
-            val documentation = converter.metadata(root.doc())
-            assertThat(documentation).hasSize(1)
-
-            val description = documentation.single() as Description
-            assertThat(description.data.summary).isFalse()
-        }
+        assertThat(description.data.summary).isFalse()
     }
 
     @Test
     fun `Full documentation has params`() {
-        val source = """
+        val documentation = """
             |/** @param a blah */
             |fun foo(a: Int)
-        """.trimMargin()
+        """.render().documentation()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = DocTagConverter(language, pathProvider())
+        val paramSummary = documentation.last() as SummaryList
+        val paramText = paramSummary.item().data.title as Raw
 
-            val documentation = converter.metadata(root.doc())
-            val paramSummary = documentation.last() as SummaryList
-            val header = paramSummary.data.header as TableTitle
-            val params = paramSummary.data.items.map { it as TwoPaneSummaryItem }
-
-            assertThat(header.data.title).isEqualTo("Parameters")
-            assertThat(params).hasSize(1)
-            assertThat((params.single().data.title as Raw).data.text).isEqualTo("a")
-        }
+        assertThat(paramSummary.title()).isEqualTo("Parameters")
+        assertThat(paramText.data.text).isEqualTo("a")
     }
 
     @Test
     fun `Full documentation has receiver param`() {
-        val source = """
+        val documentation = """
             |/** @receiver blah */
             |fun Int.foo()
-        """.trimMargin()
+        """.render().documentation()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = DocTagConverter(language, pathProvider())
+        val paramSummary = documentation.last() as SummaryList
+        val paramText = paramSummary.item().data.title as Raw
 
-            val documentation = converter.metadata(root.doc())
-            val paramSummary = documentation.last() as SummaryList
-            val header = paramSummary.data.header as TableTitle
-            val params = paramSummary.data.items.map { it as TwoPaneSummaryItem }
-
-            assertThat(header.data.title).isEqualTo("Parameters")
-            assertThat(params).hasSize(1)
-            assertThat((params.single().data.title as Raw).data.text).isEqualTo("receiver")
-        }
+        assertThat(paramSummary.title()).isEqualTo("Parameters")
+        assertThat(paramText.data.text).isEqualTo("receiver")
     }
 
     @Test
     fun `Full documentation has return type`() {
-        val source = """
+        val documentation = """
             |/** @return blah */
             |fun foo() = Unit
-        """.trimMargin()
+        """.render().documentation()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = DocTagConverter(language, pathProvider())
+        val paramSummary = documentation.last() as SummaryList
+        val returns = paramSummary.item()
 
-            val documentation =
-                converter.metadata(root.doc(), returnType = NoopContextFreeComponent)
-            val paramSummary = documentation.last() as SummaryList
-            val header = paramSummary.data.header as TableTitle
-            val returns = paramSummary.data.items.map { it as TwoPaneSummaryItem }
-
-            assertThat(header.data.title).isEqualTo("Returns")
-            assertThat(returns).hasSize(1)
-            assertThat(returns.single().data.title).isSameInstanceAs(NoopContextFreeComponent)
-        }
+        assertThat(paramSummary.title()).isEqualTo("Returns")
+        assertThat(returns.data.title).isSameInstanceAs(NoopContextFreeComponent)
     }
 
     @Test
     fun `Full documentation has thrown exceptions`() {
-        val source = """
+        val documentation = """
             |/** @throws IllegalStateException blah */
             |fun foo()
-        """.trimMargin()
+        """.render().documentation()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = DocTagConverter(language, pathProvider())
+        val paramSummary = documentation.last() as SummaryList
+        val paramText = paramSummary.item().data.title as Raw
 
-            val documentation = converter.metadata(root.doc())
-            val paramSummary = documentation.last() as SummaryList
-            val header = paramSummary.data.header as TableTitle
-            val params = paramSummary.data.items.map { it as TwoPaneSummaryItem }
-
-            assertThat(header.data.title).isEqualTo("Throws")
-            assertThat(params).hasSize(1)
-            assertThat((params.single().data.title as Raw).data.text)
-                .isEqualTo("IllegalStateException")
-        }
+        assertThat(paramSummary.title()).isEqualTo("Throws")
+        assertThat(paramText.data.text).isEqualTo("IllegalStateException")
     }
 
     @Test
     fun `Full documentation has see alsos`() {
-        val source = """
+        val documentation = """
             |/** @see String blah */
             |fun foo()
-        """.trimMargin()
+        """.render().documentation()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = DocTagConverter(language, pathProvider())
+        val paramSummary = documentation.last() as SummaryList
+        val paramText = paramSummary.item()
 
-            val documentation = converter.metadata(root.doc())
-            val paramSummary = documentation.last() as SummaryList
-            val header = paramSummary.data.header as TableTitle
-            val params = paramSummary.data.items.map { it as TwoPaneSummaryItem }
+        assertThat(paramSummary.title()).isEqualTo("See also")
+        assertThat(paramText.link().name).isEqualTo("String")
+    }
 
-            assertThat(header.data.title).isEqualTo("See also")
-            assertThat(params).hasSize(1)
-            assertThat((params.single().data.title as Link).data.name).isEqualTo("String")
-        }
+    private fun RootPageNode.description(): Description {
+        val converter = DocTagConverter(language, pathProvider())
+        return converter.summaryDescription(doc())
+    }
+
+    private fun RootPageNode.documentation(): List<ContextFreeComponent> {
+        val converter = DocTagConverter(language, pathProvider())
+        return converter.metadata(doc(), returnType = NoopContextFreeComponent)
     }
 
     private fun RootPageNode.doc(): Documentable {

@@ -17,10 +17,18 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.components.FunctionDetail
 import com.google.devsite.components.FunctionSummary
+import com.google.devsite.components.Link
 import com.google.devsite.components.Parameter
+import com.google.devsite.components.ParameterType
+import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.TypeSummary
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.testing.functionSummary
+import com.google.devsite.renderer.converters.testing.item
+import com.google.devsite.renderer.converters.testing.items
+import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
@@ -39,653 +47,466 @@ internal class FunctionDocumentableConverterTest(
 
     @Test
     fun `Top level function summary component has correct default modifiers`() {
-        val source = """
+        val summary = """
             |fun foo() = Unit
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val returnz = summary.returnSummary()
 
-            val summary = converter.summary(root.function())
-            val type = summary.data.title as TypeSummary
-
-            assertThat(type.data.modifiers).containsExactly("final")
-        }
+        assertThat(returnz.modifiers).containsExactly("final")
     }
 
     @Test
     fun `Function summary component ignores public modifier`() {
-        val source = """
+        val summary = """
             |public fun foo() = Unit
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val returnz = summary.returnSummary()
 
-            val summary = converter.summary(root.function())
-            val type = summary.data.title as TypeSummary
-
-            assertThat(type.data.modifiers).containsExactly("final")
-        }
+        assertThat(returnz.modifiers).containsExactly("final")
     }
 
     @Test
     fun `Function summary component has suspend modifier`() {
-        val source = """
+        val summary = """
             |suspend fun foo() = Unit
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val returnz = summary.returnSummary()
 
-            val summary = converter.summary(root.function())
-            val type = summary.data.title as TypeSummary
-
-            assertThat(type.data.modifiers).containsExactly("final", "suspend")
-        }
+        assertThat(returnz.modifiers).containsExactly("final", "suspend")
     }
 
     @Test
     fun `Function summary component has inline modifier`() {
-        val source = """
+        val summary = """
             |inline fun foo() = Unit
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val returnz = summary.returnSummary()
 
-            val summary = converter.summary(root.function())
-            val type = summary.data.title as TypeSummary
-
-            assertThat(type.data.modifiers).containsExactly("final", "inline")
-        }
+        assertThat(returnz.modifiers).containsExactly("final", "inline")
     }
 
     @Ignore // TODO(b/165112358): foo doesn't show up in the dokka model
     @Test
     fun `Function summary component in abstract class has protected modifier`() {
-        val source = """
+        val summary = """
             |abstract class Foo {
             |    protected open fun foo() = Unit
             |}
-        """.trimMargin()
+        """.render().summary(fromClass = true)
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val returnz = summary.returnSummary()
 
-            val summary = converter.summary(root.function(fromClass = true))
-            val type = summary.data.title as TypeSummary
-
-            assertThat(type.data.modifiers).containsExactly("protected")
-        }
+        assertThat(returnz.modifiers).containsExactly("protected")
     }
 
     @Test
     fun `Function summary component in abstract class has abstract modifier`() {
-        val source = """
+        val summary = """
             |abstract class Foo {
             |    abstract fun foo()
             |}
-        """.trimMargin()
+        """.render().summary(fromClass = true)
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val returnz = summary.returnSummary()
 
-            val summary = converter.summary(root.function(fromClass = true))
-            val type = summary.data.title as TypeSummary
-
-            assertThat(type.data.modifiers).containsExactly("abstract")
-        }
+        assertThat(returnz.modifiers).containsExactly("abstract")
     }
 
     @Test
     fun `Function summary component in class has open modifiers`() {
-        val source = """
+        val summary = """
             |class Foo {
             |    open fun foo() = Unit
             |}
-        """.trimMargin()
+        """.render().summary(fromClass = true)
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val returnz = summary.returnSummary()
 
-            val summary = converter.summary(root.function(fromClass = true))
-            val type = summary.data.title as TypeSummary
-
-            assertThat(type.data.modifiers).containsExactly("open")
-        }
+        assertThat(returnz.modifiers).containsExactly("open")
     }
 
     @Test
     fun `Function summary component in interface has abstract modifiers`() {
-        val source = """
+        val summary = """
             |interface Foo {
             |    fun foo()
             |}
-        """.trimMargin()
+        """.render().summary(fromClass = true)
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val returnz = summary.returnSummary()
 
-            val summary = converter.summary(root.function(fromClass = true))
-            val type = summary.data.title as TypeSummary
-
-            assertThat(type.data.modifiers).containsExactly("abstract")
-        }
+        assertThat(returnz.modifiers).containsExactly("abstract")
     }
 
     @Test
     fun `Function summary component creates return type link`() {
-        val source = """
+        val summary = """
             |class A
             |fun foo(): A
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val returnType = summary.returnSummary().type
 
-            val summary = converter.summary(root.function())
-            val type = summary.data.title as TypeSummary
-            val returnType = type.data.type
-            val link = returnType.data.type
-
-            assertThat(link.data.name).isEqualTo("A")
-            assertPath(link.data.url, "androidx/example/A.html")
-        }
+        assertThat(returnType.link().name).isEqualTo("A")
+        assertPath(returnType.link().url, "androidx/example/A.html")
     }
 
     @Test
     fun `Function summary component creates return type generics`() {
-        val source = """
+        val summary = """
             |fun foo(): Map<String, List<Int>>
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val returnz = summary.returnSummary()
+        val generics = returnz.type.data.generics.items(2)
+        val nestedGenerics = generics.last().data.generics.item()
 
-            val summary = converter.summary(root.function())
-            val type = summary.data.title as TypeSummary
-            val returnType = type.data.type
-            val generics = returnType.data.generics
-
-            assertThat(generics).hasSize(2)
-            assertThat(generics.first().data.type.data.name).isEqualTo("String")
-            assertThat(generics.last().data.type.data.name).isEqualTo("List")
-
-            val nestedGenerics = generics.last().data.generics
-            assertThat(nestedGenerics).hasSize(1)
-            assertThat(nestedGenerics.single().data.type.data.name).isEqualTo("Int")
-        }
+        assertThat(generics.first().link().name).isEqualTo("String")
+        assertThat(generics.last().link().name).isEqualTo("List")
+        assertThat(nestedGenerics.link().name).isEqualTo("Int")
     }
 
     @Test
     fun `Function summary component creates signature with name`() {
-        val source = """
+        val summary = """
             |fun iAmACoolFunction()
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val function = summary.functionSummary()
 
-            val summary = converter.summary(root.function())
-            val breakdown = summary.data.description as FunctionSummary
-            val signature = breakdown.data.signature
-
-            assertThat(signature.data.name.data.name).isEqualTo("iAmACoolFunction")
-        }
+        assertThat(function.name()).isEqualTo("iAmACoolFunction")
     }
 
     @Test
     fun `Function summary component creates extension receiver`() {
-        val source = """
+        val summary = """
             |fun String.foo()
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val function = summary.functionSummary()
+        val signature = function.data.signature
 
-            val summary = converter.summary(root.function())
-            val breakdown = summary.data.description as FunctionSummary
-            val signature = breakdown.data.signature
-
-            val param = when (language) {
-                Language.JAVA -> {
-                    assertThat(signature.data.receiver).isNull()
-                    signature.data.parameters.single()
-                }
-                Language.KOTLIN -> {
-                    assertThat(signature.data.receiver).isNotNull()
-                    signature.data.receiver!!
-                }
+        val param = when (language) {
+            Language.JAVA -> {
+                assertThat(signature.data.receiver).isNull()
+                signature.data.parameters.item()
             }
-
-            val type = param.data.primary
-
-            assertNoLambdaStuff(param.data)
-            assertThat(type.data.type.data.name).isEqualTo("String")
-            when (language) {
-                Language.JAVA -> assertThat(param.data.name).isEqualTo("receiver")
-                Language.KOTLIN -> assertThat(param.data.name).isEmpty()
+            Language.KOTLIN -> {
+                assertThat(signature.data.receiver).isNotNull()
+                signature.data.receiver!!
             }
+        }
+
+        val type = param.data.primary
+
+        assertNoLambdaStuff(param.data)
+        assertThat(type.link().name).isEqualTo("String")
+        when (language) {
+            Language.JAVA -> assertThat(param.data.name).isEqualTo("receiver")
+            Language.KOTLIN -> assertThat(param.data.name).isEmpty()
         }
     }
 
     @Test
     fun `Function summary component creates params`() {
-        val source = """
+        val summary = """
             |fun foo(a: String)
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val function = summary.functionSummary()
+        val param = function.param()
+        val paramType = param.data.primary
 
-            val summary = converter.summary(root.function())
-            val breakdown = summary.data.description as FunctionSummary
-            val signature = breakdown.data.signature
-            val param = signature.data.parameters.single()
-            val type = param.data.primary
-
-            assertNoLambdaStuff(param.data)
-            assertThat(param.data.name).isEqualTo("a")
-            assertThat(type.data.type.data.name).isEqualTo("String")
-        }
+        assertNoLambdaStuff(param.data)
+        assertThat(param.data.name).isEqualTo("a")
+        assertThat(paramType.link().name).isEqualTo("String")
     }
 
     @Ignore // TODO(b/165139177): figure out correct implementation
     @Test
     fun `Function summary component handles nullable types`() {
-        val source = """
+        val summary = """
             |fun Int?.foo(a: List<String?>?)
-        """.trimMargin()
-
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
-
-            val summary = converter.summary(root.function())
-            val breakdown = summary.data.description as FunctionSummary
-            val signature = breakdown.data.signature
-        }
+        """.render().summary()
     }
 
     @Test
     fun `Function summary component creates params with generics`() {
-        val source = """
+        val summary = """
             |fun foo(a: List<Int>)
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val function = summary.functionSummary()
+        val generic = function.param().data.primary.data.generics.item()
 
-            val summary = converter.summary(root.function())
-            val breakdown = summary.data.description as FunctionSummary
-            val signature = breakdown.data.signature
-            val param = signature.data.parameters.single()
-            val generics = param.data.primary.data.generics
-
-            assertThat(generics).hasSize(1)
-            assertThat(generics.single().data.type.data.name).isEqualTo("Int")
-        }
+        assertThat(generic.link().name).isEqualTo("Int")
     }
 
     @Ignore // TODO(asaveau): figure out inline generics
     @Test
     fun `Function summary component creates params with inline generics and generic param`() {
-        val source = """
+        val summary = """
             |fun <T> foo(a: List<T>)
-        """.trimMargin()
-
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
-
-            val summary = converter.summary(root.function())
-            val breakdown = summary.data.description as FunctionSummary
-            val signature = breakdown.data.signature
-            val param = signature.data.parameters.single()
-        }
+        """.render().summary()
     }
 
     @Ignore // TODO(asaveau): figure out inline generics
     @Test
     fun `Function summary component creates params with inline generics param`() {
-        val source = """
+        val summary = """
             |fun <T> foo(a: T)
-        """.trimMargin()
-
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
-
-            val summary = converter.summary(root.function())
-            val breakdown = summary.data.description as FunctionSummary
-            val signature = breakdown.data.signature
-            val param = signature.data.parameters.single()
-        }
+        """.render().summary()
     }
 
     @Ignore // TODO(asaveau): figure out inline generics
     @Test
     fun `Function summary component creates params with inline generics receiver`() {
-        val source = """
+        val summary = """
             |fun <T> T.foo()
-        """.trimMargin()
-
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
-
-            val summary = converter.summary(root.function())
-            val breakdown = summary.data.description as FunctionSummary
-            val signature = breakdown.data.signature
-        }
+        """.render().summary()
     }
 
     @Ignore // TODO(asaveau): figure out inline generics
     @Test
     fun `Function summary component creates params with inline generics return type`() {
-        val source = """
+        val summary = """
             |fun <T> foo(): T
-        """.trimMargin()
-
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
-
-            val summary = converter.summary(root.function())
-            val breakdown = summary.data.description as FunctionSummary
-            val signature = breakdown.data.signature
-        }
+        """.render().summary()
     }
 
     @Test
     fun `Function summary component creates factory lambda param`() {
-        val source = """
+        val summary = """
             |fun foo(a: () -> Unit)
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val function = summary.functionSummary()
+        val param = function.param().data
 
-            val summary = converter.summary(root.function())
-            val breakdown = summary.data.description as FunctionSummary
-            val signature = breakdown.data.signature
-            val param = signature.data.parameters.single()
+        javaOnly {
+            assertNoLambdaStuff(param)
 
-            javaOnly {
-                assertNoLambdaStuff(param.data)
-
-                val primary = param.data.primary.data
-                assertThat(primary.type.data.name).isEqualTo("Function0")
-                assertThat(primary.generics.single().data.type.data.name).isEqualTo("Unit")
-            }
-            kotlinOnly {
-                assertThat(param.data.isLambda).isTrue()
-                assertThat(param.data.receiver).isNull()
-                assertThat(param.data.lambdaModifiers).isEmpty()
-                assertThat(param.data.lambdaParams).isEmpty()
-                assertThat(param.data.primary.data.type.data.name).isEqualTo("Unit")
-            }
+            val primary = param.primary.data
+            assertThat(primary.type.data.name).isEqualTo("Function0")
+            assertThat(primary.generics.item().link().name).isEqualTo("Unit")
+        }
+        kotlinOnly {
+            assertThat(param.isLambda).isTrue()
+            assertThat(param.receiver).isNull()
+            assertThat(param.lambdaModifiers).isEmpty()
+            assertThat(param.lambdaParams).isEmpty()
+            assertThat(param.primary.link().name).isEqualTo("Unit")
         }
     }
 
     @Test
     fun `Function summary component creates suspend lambda param`() {
-        val source = """
+        val summary = """
             |fun foo(a: suspend () -> Unit)
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val function = summary.functionSummary()
+        val param = function.param().data
 
-            val summary = converter.summary(root.function())
-            val breakdown = summary.data.description as FunctionSummary
-            val signature = breakdown.data.signature
-            val param = signature.data.parameters.single()
+        javaOnly {
+            assertNoLambdaStuff(param)
 
-            javaOnly {
-                assertNoLambdaStuff(param.data)
-
-                val primary = param.data.primary.data
-                assertThat(primary.type.data.name).isEqualTo("SuspendFunction0")
-                assertThat(primary.generics.single().data.type.data.name).isEqualTo("Unit")
-            }
-            kotlinOnly {
-                assertThat(param.data.isLambda).isTrue()
-                assertThat(param.data.receiver).isNull()
-                assertThat(param.data.lambdaParams).isEmpty()
-                assertThat(param.data.lambdaModifiers).containsExactly("suspend")
-                assertThat(param.data.primary.data.type.data.name).isEqualTo("Unit")
-            }
+            val primary = param.primary.data
+            assertThat(primary.type.data.name).isEqualTo("SuspendFunction0")
+            assertThat(primary.generics.single().link().name).isEqualTo("Unit")
+        }
+        kotlinOnly {
+            assertThat(param.isLambda).isTrue()
+            assertThat(param.receiver).isNull()
+            assertThat(param.lambdaParams).isEmpty()
+            assertThat(param.lambdaModifiers).containsExactly("suspend")
+            assertThat(param.primary.link().name).isEqualTo("Unit")
         }
     }
 
     @Ignore // TODO(b/165709374): dokka doesn't understand suspending lambda receivers
     @Test
     fun `Function summary component creates suspend lambda param with receiver`() {
-        val source = """
+        val summary = """
             |fun foo(a: suspend Float.() -> Unit)
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
-
-            val summary = converter.summary(root.function())
-            val breakdown = summary.data.description as FunctionSummary
-            val signature = breakdown.data.signature
-            val param = signature.data.parameters.single()
-
-            javaOnly {
-                assertNoLambdaStuff(param.data)
-                assertThat(param.data.primary.data.type.data.name).isEqualTo("")
-            }
-            kotlinOnly {
-                assertThat(param.data.isLambda).isTrue()
-                assertThat(param.data.receiver).isNotNull()
-                assertThat(param.data.receiver!!.data.type.data.name).isEqualTo("Float")
-                assertThat(param.data.lambdaModifiers).containsExactly("suspend")
-                assertThat(param.data.lambdaParams).isEmpty()
-            }
+        val function = summary.functionSummary()
+        val param = function.param().data
+        javaOnly {
+            assertNoLambdaStuff(param)
+            assertThat(param.primary.link().name).isEqualTo("")
+        }
+        kotlinOnly {
+            assertThat(param.isLambda).isTrue()
+            assertThat(param.receiver).isNotNull()
+            assertThat(param.receiver!!.link().name).isEqualTo("Float")
+            assertThat(param.lambdaModifiers).containsExactly("suspend")
+            assertThat(param.lambdaParams).isEmpty()
         }
     }
 
     @Test
     fun `Function summary component creates suspend lambda param with params`() {
-        val source = """
+        val summary = """
             |fun foo(a: suspend (Float) -> Unit)
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val function = summary.functionSummary()
+        val param = function.param().data
 
-            val summary = converter.summary(root.function())
-            val breakdown = summary.data.description as FunctionSummary
-            val signature = breakdown.data.signature
-            val param = signature.data.parameters.single()
+        javaOnly {
+            assertNoLambdaStuff(param)
 
-            javaOnly {
-                assertNoLambdaStuff(param.data)
-
-                val primary = param.data.primary.data
-                assertThat(primary.type.data.name).isEqualTo("SuspendFunction1")
-                assertThat(primary.generics.first().data.type.data.name).isEqualTo("Float")
-                assertThat(primary.generics.last().data.type.data.name).isEqualTo("Unit")
-            }
-            kotlinOnly {
-                assertThat(param.data.isLambda).isTrue()
-                assertThat(param.data.receiver).isNull()
-                assertThat(param.data.lambdaModifiers).containsExactly("suspend")
-                assertThat(param.data.lambdaParams).hasSize(1)
-                assertThat(param.data.lambdaParams.single().data.type.data.name).isEqualTo("Float")
-            }
+            val primary = param.primary.data
+            assertThat(primary.type.data.name).isEqualTo("SuspendFunction1")
+            assertThat(primary.generics.first().link().name).isEqualTo("Float")
+            assertThat(primary.generics.last().link().name).isEqualTo("Unit")
+        }
+        kotlinOnly {
+            assertThat(param.isLambda).isTrue()
+            assertThat(param.receiver).isNull()
+            assertThat(param.lambdaModifiers).containsExactly("suspend")
+            assertThat(param.lambdaParams).hasSize(1)
+            assertThat(param.lambdaParams.single().link().name).isEqualTo("Float")
         }
     }
 
     @Test
     fun `Function summary component creates lambda param`() {
-        val source = """
+        val summary = """
             |fun foo(a: (String) -> Unit)
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val function = summary.functionSummary()
+        val param = function.param().data
 
-            val summary = converter.summary(root.function())
-            val breakdown = summary.data.description as FunctionSummary
-            val signature = breakdown.data.signature
-            val param = signature.data.parameters.single()
+        javaOnly {
+            assertNoLambdaStuff(param)
 
-            javaOnly {
-                assertNoLambdaStuff(param.data)
-
-                val primary = param.data.primary.data
-                assertThat(primary.type.data.name).isEqualTo("Function1")
-                assertThat(primary.generics.first().data.type.data.name).isEqualTo("String")
-                assertThat(primary.generics.last().data.type.data.name).isEqualTo("Unit")
-            }
-            kotlinOnly {
-                assertThat(param.data.isLambda).isTrue()
-                assertThat(param.data.receiver).isNull()
-                assertThat(param.data.lambdaModifiers).isEmpty()
-                assertThat(param.data.lambdaParams).hasSize(1)
-                assertThat(param.data.lambdaParams.single().data.type.data.name).isEqualTo("String")
-            }
+            val primary = param.primary.data
+            assertThat(primary.type.data.name).isEqualTo("Function1")
+            assertThat(primary.generics.first().link().name).isEqualTo("String")
+            assertThat(primary.generics.last().link().name).isEqualTo("Unit")
+        }
+        kotlinOnly {
+            assertThat(param.isLambda).isTrue()
+            assertThat(param.receiver).isNull()
+            assertThat(param.lambdaModifiers).isEmpty()
+            assertThat(param.lambdaParams).hasSize(1)
+            assertThat(param.lambdaParams.single().link().name).isEqualTo("String")
         }
     }
 
     @Test
     fun `Function summary component creates lambda param with receiver`() {
-        val source = """
+        val summary = """
             |fun foo(a: Float.() -> Unit)
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val function = summary.functionSummary()
+        val param = function.param().data
 
-            val summary = converter.summary(root.function())
-            val breakdown = summary.data.description as FunctionSummary
-            val signature = breakdown.data.signature
-            val param = signature.data.parameters.single()
+        javaOnly {
+            assertNoLambdaStuff(param)
 
-            javaOnly {
-                assertNoLambdaStuff(param.data)
-
-                val primary = param.data.primary.data
-                assertThat(primary.type.data.name).isEqualTo("Function1")
-                assertThat(primary.generics.first().data.type.data.name).isEqualTo("Float")
-                assertThat(primary.generics.last().data.type.data.name).isEqualTo("Unit")
-            }
-            kotlinOnly {
-                assertThat(param.data.isLambda).isTrue()
-                assertThat(param.data.receiver).isNotNull()
-                assertThat(param.data.receiver!!.data.type.data.name).isEqualTo("Float")
-                assertThat(param.data.lambdaModifiers).isEmpty()
-                assertThat(param.data.lambdaParams).isEmpty()
-            }
+            val primary = param.primary.data
+            assertThat(primary.type.data.name).isEqualTo("Function1")
+            assertThat(primary.generics.first().link().name).isEqualTo("Float")
+            assertThat(primary.generics.last().link().name).isEqualTo("Unit")
+        }
+        kotlinOnly {
+            assertThat(param.isLambda).isTrue()
+            assertThat(param.receiver).isNotNull()
+            assertThat(param.receiver!!.link().name).isEqualTo("Float")
+            assertThat(param.lambdaModifiers).isEmpty()
+            assertThat(param.lambdaParams).isEmpty()
         }
     }
 
     @Test
     fun `Function summary component creates lambda param with difficult generic combination`() {
-        val source = """
+        val summary = """
             |fun foo(block: Int.(Map<String, Int>, Double) -> Collection<Float>)
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val function = summary.functionSummary()
+        val param = function.param().data
 
-            val summary = converter.summary(root.function())
-            val breakdown = summary.data.description as FunctionSummary
-            val signature = breakdown.data.signature
-            val param = signature.data.parameters.single()
+        javaOnly {
+            assertNoLambdaStuff(param)
 
-            javaOnly {
-                assertNoLambdaStuff(param.data)
+            val primary = param.primary.data
+            assertThat(primary.type.data.name).isEqualTo("Function3")
+            assertThat(primary.generics).hasSize(4)
+            assertThat(primary.generics[0].link().name).isEqualTo("Int")
+            assertThat(primary.generics[1].link().name).isEqualTo("Map")
+            assertThat(primary.generics[2].link().name).isEqualTo("Double")
+            assertThat(primary.generics[3].link().name).isEqualTo("Collection")
 
-                val primary = param.data.primary.data
-                assertThat(primary.type.data.name).isEqualTo("Function3")
-                assertThat(primary.generics).hasSize(4)
-                assertThat(primary.generics[0].data.type.data.name).isEqualTo("Int")
-                assertThat(primary.generics[1].data.type.data.name).isEqualTo("Map")
-                assertThat(primary.generics[2].data.type.data.name).isEqualTo("Double")
-                assertThat(primary.generics[3].data.type.data.name).isEqualTo("Collection")
+            val mapGenerics = primary.generics[1].data.generics.items(2)
+            assertThat(mapGenerics.first().link().name).isEqualTo("String")
+            assertThat(mapGenerics.last().link().name).isEqualTo("Int")
 
-                val mapGenerics = primary.generics[1].data.generics
-                assertThat(mapGenerics).hasSize(2)
-                assertThat(mapGenerics.first().data.type.data.name).isEqualTo("String")
-                assertThat(mapGenerics.last().data.type.data.name).isEqualTo("Int")
+            val collectionGeneric = primary.generics[3].data.generics.item()
+            assertThat(collectionGeneric.link().name).isEqualTo("Float")
+        }
+        kotlinOnly {
+            assertThat(param.isLambda).isTrue()
+            assertThat(param.receiver).isNotNull()
+            assertThat(param.receiver!!.link().name).isEqualTo("Int")
+            assertThat(param.lambdaModifiers).isEmpty()
+            assertThat(param.lambdaParams).hasSize(2)
+            assertThat(param.lambdaParams.first().link().name).isEqualTo("Map")
+            assertThat(param.lambdaParams.last().link().name).isEqualTo("Double")
+            assertThat(param.primary.link().name).isEqualTo("Collection")
 
-                val collectionGenerics = primary.generics[3].data.generics
-                assertThat(collectionGenerics).hasSize(1)
-                assertThat(collectionGenerics.single().data.type.data.name).isEqualTo("Float")
-            }
-            kotlinOnly {
-                assertThat(param.data.isLambda).isTrue()
-                assertThat(param.data.receiver).isNotNull()
-                assertThat(param.data.receiver!!.data.type.data.name).isEqualTo("Int")
-                assertThat(param.data.lambdaModifiers).isEmpty()
-                assertThat(param.data.lambdaParams).hasSize(2)
-                assertThat(param.data.lambdaParams.first().data.type.data.name).isEqualTo("Map")
-                assertThat(param.data.lambdaParams.last().data.type.data.name).isEqualTo("Double")
-                assertThat(param.data.primary.data.type.data.name).isEqualTo("Collection")
+            val mapGenerics = param.lambdaParams.first().data.generics.items(2)
+            assertThat(mapGenerics.first().link().name).isEqualTo("String")
+            assertThat(mapGenerics.last().link().name).isEqualTo("Int")
 
-                val mapGenerics = param.data.lambdaParams.first().data.generics
-                assertThat(mapGenerics).hasSize(2)
-                assertThat(mapGenerics.first().data.type.data.name).isEqualTo("String")
-                assertThat(mapGenerics.last().data.type.data.name).isEqualTo("Int")
-
-                val collectionGenerics = param.data.primary.data.generics
-                assertThat(collectionGenerics).hasSize(1)
-                assertThat(collectionGenerics.single().data.type.data.name).isEqualTo("Float")
-            }
+            val collectionGeneric = param.primary.data.generics.item()
+            assertThat(collectionGeneric.link().name).isEqualTo("Float")
         }
     }
 
     @Test
     fun `Function summary component has correct relative link`() {
-        val source = """
+        val summary = """
             |fun List<String>.foo(a: Map<String, Int>, block: String.(Float) -> Double) = Unit
-        """.trimMargin()
+        """.render().summary()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val function = summary.functionSummary()
+        val signature = function.data.signature
 
-            val summary = converter.summary(root.function())
-            val breakdown = summary.data.description as FunctionSummary
-            val signature = breakdown.data.signature
-
-            assertThat(signature.data.name.data.url)
-                .isEqualTo("#foo(kotlin.collections.List,kotlin.collections.Map,kotlin.Function2)")
-        }
+        assertThat(signature.data.name.data.url)
+            .isEqualTo("#foo(kotlin.collections.List,kotlin.collections.Map,kotlin.Function2)")
     }
 
     @Test
     fun `Function detail component has correct name`() {
-        val source = """
+        val detail = """
             |fun foo()
-        """.trimMargin()
+        """.render().detail()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
-
-            val detail = converter.detail(root.function())
-
-            assertThat(detail.data.name).isEqualTo("foo")
-        }
+        assertThat(detail.data.name).isEqualTo("foo")
     }
 
     @Test
     fun `Function detail component has correct anchors`() {
-        val source = """
+        val detail = """
             |fun List<String>.foo(a: Map<String, Int>, block: String.(Float) -> Double) = Unit
-        """.trimMargin()
+        """.render().detail()
 
-        testWithRootPageNode(source) t@{ root ->
-            val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
-
-            val detail = converter.detail(root.function())
-
-            assertThat(detail.data.anchors).containsExactly(
-                "foo(kotlin.collections.List,kotlin.collections.Map,kotlin.Function2)",
-                "foo(kotlin.collections.List, kotlin.collections.Map, kotlin.Function2)",
-                "foo-kotlin.collections.List-kotlin.collections.Map-kotlin.Function2-"
-            )
-        }
+        assertThat(detail.data.anchors).containsExactly(
+            "foo(kotlin.collections.List,kotlin.collections.Map,kotlin.Function2)",
+            "foo(kotlin.collections.List, kotlin.collections.Map, kotlin.Function2)",
+            "foo-kotlin.collections.List-kotlin.collections.Map-kotlin.Function2-"
+        )
     }
 
     private fun assertNoLambdaStuff(data: Parameter.Params) {
@@ -695,7 +516,17 @@ internal class FunctionDocumentableConverterTest(
         assertThat(data.lambdaModifiers).isEmpty()
     }
 
-    private fun RootPageNode.function(fromClass: Boolean = false): DFunction {
+    private fun RootPageNode.summary(fromClass: Boolean = false): TwoPaneSummaryItem {
+        val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        return converter.summary(function(fromClass))
+    }
+
+    private fun RootPageNode.detail(fromClass: Boolean = false): FunctionDetail {
+        val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        return converter.detail(function(fromClass))
+    }
+
+    private fun RootPageNode.function(fromClass: Boolean): DFunction {
         val packageDoc = children
             .filterIsInstance<PackagePageNode>().single()
             .documentable as DPackage
@@ -706,6 +537,11 @@ internal class FunctionDocumentableConverterTest(
             packageDoc.functions.single()
         }
     }
+
+    private fun ParameterType.link(): Link.Params = data.type.data
+    private fun FunctionSummary.param(): Parameter = data.signature.data.parameters.item()
+    private fun TwoPaneSummaryItem.returnSummary(): TypeSummary.Params =
+        (data.title as TypeSummary).data
 
     companion object {
         @JvmStatic

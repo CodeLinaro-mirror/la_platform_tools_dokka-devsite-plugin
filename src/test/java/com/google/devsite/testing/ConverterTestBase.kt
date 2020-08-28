@@ -20,44 +20,18 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
 import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
+import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.testApi.testRunner.AbstractCoreTest
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 internal abstract class ConverterTestBase(
     private val language: Language = Language.JAVA
 ) : AbstractCoreTest() {
-    protected fun testWithRootPageNode(sourceFiles: List<String>, test: (RootPageNode) -> Unit) {
-        val configuration = dokkaConfiguration {
-            sourceSets {
-                sourceSet {
-                    sourceRoots = sourceFiles.map { it.lineSequence().first().removePrefix("/") }
-                }
-            }
-        }
+    protected fun List<String>.render(): RootPageNode = testWithRootPageNode(this)
 
-        System.setProperty("tenant", "androidx")
-
-        val writerPlugin = TestOutputWriterPlugin()
-        testInline(
-            sourceFiles.joinToString("\n\n"),
-            configuration,
-            pluginOverrides = listOf(writerPlugin)
-        ) {
-            renderingStage = { node, _ ->
-                test(node)
-            }
-        }
-    }
-
-    protected fun testWithRootPageNode(sourceCode: String, test: (RootPageNode) -> Unit) {
-        val source = """
-            |/src/main/kotlin/androidx/example/Test.kt
-            |package androidx.example
-            |
-            |$sourceCode
-        """.trimMargin()
-        testWithRootPageNode(listOf(source), test)
-    }
+    protected fun String.render(): RootPageNode = testWithRootPageNode(trimMargin())
 
     protected fun assertPath(actual: String, expected: String) {
         when (language) {
@@ -81,5 +55,40 @@ internal abstract class ConverterTestBase(
         if (language == Language.KOTLIN) {
             block()
         }
+    }
+
+    private fun testWithRootPageNode(sourceFiles: List<String>): RootPageNode = runBlocking {
+        val configuration = dokkaConfiguration {
+            sourceSets {
+                sourceSet {
+                    sourceRoots = sourceFiles.map { it.lineSequence().first().removePrefix("/") }
+                }
+            }
+        }
+
+        System.setProperty("tenant", "androidx")
+
+        val writerPlugin = TestOutputWriterPlugin()
+        suspendCoroutine { cont ->
+            testInline(
+                sourceFiles.joinToString("\n\n"),
+                configuration,
+                pluginOverrides = listOf(writerPlugin)
+            ) {
+                renderingStage = { node, _ ->
+                    cont.resume(node)
+                }
+            }
+        }
+    }
+
+    private fun testWithRootPageNode(sourceCode: String): RootPageNode {
+        val source = """
+            |/src/main/kotlin/androidx/example/Test.kt
+            |package androidx.example
+            |
+            |$sourceCode
+        """.trimMargin()
+        return testWithRootPageNode(listOf(source))
     }
 }
