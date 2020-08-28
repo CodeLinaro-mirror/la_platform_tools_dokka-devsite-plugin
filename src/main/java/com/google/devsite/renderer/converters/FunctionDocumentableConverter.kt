@@ -91,7 +91,7 @@ internal class FunctionDocumentableConverter(
 
         return DefaultFunctionSignature(
             FunctionSignature.Params(
-                name = relativeLink(),
+                name = pathProvider.linkForReference(dri),
                 receiver = when (displayLanguage) {
                     Language.JAVA -> null
                     Language.KOTLIN -> receiver
@@ -229,24 +229,6 @@ internal class FunctionDocumentableConverter(
         else -> error("Unknown bound: $this")
     }
 
-    /**
-     * Creates a deep link to the function, assuming its detailed documentation will be present on
-     * the same page this summary is being rendered to.
-     */
-    private fun DFunction.relativeLink(): Link {
-        val paramTypes = parameters.map { param ->
-            param.type.toFullyQualifiedSignature()
-        }
-        val allParams = listOfNotNull(receiver?.type?.toFullyQualifiedSignature()) + paramTypes
-
-        return DefaultLink(
-            Link.Params(
-                name = name,
-                url = "#$name(${allParams.joinToString(",")})"
-            )
-        )
-    }
-
     /** Determine whether or not a param is a lambda using the kotlin function type. */
     private fun Projection.isLambda(suspendOnly: Boolean = false): Boolean = when (this) {
         is TypeConstructor -> {
@@ -275,15 +257,11 @@ internal class FunctionDocumentableConverter(
      * - `foo-int-int-`
      */
     private fun generateCompatAnchors(function: DFunction): Set<String> {
-        val receiver = listOfNotNull(function.receiver?.type?.toFullyQualifiedSignature())
-        val params = function.parameters.map { it.type.toFullyQualifiedSignature() }
-        val all = receiver + params
-        val name = function.name
-
+        val callable = function.dri.callable!!
         return setOf(
-            "$name(${all.joinToString(",")})",
-            "$name(${all.joinToString(", ")})",
-            "$name-${all.joinToString("-")}-"
+            callable.anchor(),
+            callable.anchor(separator = ", "),
+            callable.anchor("-", "-", "-")
         )
     }
 

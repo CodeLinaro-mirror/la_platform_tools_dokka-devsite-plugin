@@ -477,14 +477,17 @@ internal class FunctionDocumentableConverterTest(
     @Test
     fun `Function summary component has correct relative link`() {
         val summary = """
-            |fun List<String>.foo(a: Map<String, Int>, block: String.(Float) -> Double) = Unit
+            |fun <T : Number> List<String>.foo(t: T, a: Map<String, Int>, block: String.(Float) -> Double) = Unit
         """.render().summary()
 
         val function = summary.functionSummary()
         val signature = function.data.signature
 
-        assertThat(signature.data.name.data.url)
-            .isEqualTo("#foo(kotlin.collections.List,kotlin.collections.Map,kotlin.Function2)")
+        assertPath(
+            signature.data.name.data.url,
+            "androidx/example/package-summary.html#" +
+                "foo(kotlin.collections.List,kotlin.Number,kotlin.collections.Map,kotlin.Function2)"
+        )
     }
 
     @Test
@@ -499,13 +502,13 @@ internal class FunctionDocumentableConverterTest(
     @Test
     fun `Function detail component has correct anchors`() {
         val detail = """
-            |fun List<String>.foo(a: Map<String, Int>, block: String.(Float) -> Double) = Unit
+            |fun <T : Number> List<String>.foo(t: T, a: Map<String, Int>, block: String.(Float) -> Double) = Unit
         """.render().detail()
 
         assertThat(detail.data.anchors).containsExactly(
-            "foo(kotlin.collections.List,kotlin.collections.Map,kotlin.Function2)",
-            "foo(kotlin.collections.List, kotlin.collections.Map, kotlin.Function2)",
-            "foo-kotlin.collections.List-kotlin.collections.Map-kotlin.Function2-"
+            "foo(kotlin.collections.List,kotlin.Number,kotlin.collections.Map,kotlin.Function2)",
+            "foo(kotlin.collections.List, kotlin.Number, kotlin.collections.Map, kotlin.Function2)",
+            "foo-kotlin.collections.List-kotlin.Number-kotlin.collections.Map-kotlin.Function2-"
         )
     }
 
