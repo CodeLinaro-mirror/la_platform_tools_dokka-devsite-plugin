@@ -16,6 +16,7 @@
 
 package com.google.devsite.components
 
+import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.doc.DocTag
 
 /** Represents the hand-written documentation for a symbol. */
@@ -23,6 +24,7 @@ internal interface Description : ContextFreeComponent {
     val data: Params
 
     class Params(
+        val pathProvider: FilePathProvider,
         val root: DocTag,
         val summary: Boolean = false,
         val deprecation: String? = null

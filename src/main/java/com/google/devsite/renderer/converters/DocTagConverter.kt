@@ -205,7 +205,14 @@ internal class DocTagConverter(
         summary: Boolean = false,
         deprecation: String? = null
     ): DescriptionComponent {
-        return DefaultDescription(DescriptionComponent.Params(tag.root, summary, deprecation))
+        return DefaultDescription(
+            DescriptionComponent.Params(
+                pathProvider,
+                tag.root,
+                summary,
+                deprecation
+            )
+        )
     }
 
     private fun Documentable.deprecationText() =

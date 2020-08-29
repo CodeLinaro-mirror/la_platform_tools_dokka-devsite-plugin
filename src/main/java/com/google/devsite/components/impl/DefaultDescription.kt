@@ -17,6 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.Description
+import com.google.devsite.renderer.converters.linkForReference
 import kotlinx.html.FlowContent
 import kotlinx.html.OL
 import kotlinx.html.TABLE
@@ -27,6 +28,7 @@ import kotlinx.html.TR
 import kotlinx.html.UL
 import kotlinx.html.a
 import kotlinx.html.b
+import kotlinx.html.blockQuote
 import kotlinx.html.br
 import kotlinx.html.code
 import kotlinx.html.del
@@ -37,9 +39,11 @@ import kotlinx.html.h4
 import kotlinx.html.h5
 import kotlinx.html.h6
 import kotlinx.html.hr
+import kotlinx.html.img
 import kotlinx.html.li
 import kotlinx.html.ol
 import kotlinx.html.p
+import kotlinx.html.pre
 import kotlinx.html.span
 import kotlinx.html.strong
 import kotlinx.html.sub
@@ -58,6 +62,7 @@ import org.jetbrains.dokka.model.doc.Big
 import org.jetbrains.dokka.model.doc.BlockQuote
 import org.jetbrains.dokka.model.doc.Br
 import org.jetbrains.dokka.model.doc.Cite
+import org.jetbrains.dokka.model.doc.CodeBlock
 import org.jetbrains.dokka.model.doc.CodeInline
 import org.jetbrains.dokka.model.doc.CustomDocTag
 import org.jetbrains.dokka.model.doc.Dd
@@ -66,6 +71,7 @@ import org.jetbrains.dokka.model.doc.Dir
 import org.jetbrains.dokka.model.doc.Div
 import org.jetbrains.dokka.model.doc.Dl
 import org.jetbrains.dokka.model.doc.DocTag
+import org.jetbrains.dokka.model.doc.DocumentationLink
 import org.jetbrains.dokka.model.doc.Dt
 import org.jetbrains.dokka.model.doc.Em
 import org.jetbrains.dokka.model.doc.Font
@@ -98,6 +104,7 @@ import org.jetbrains.dokka.model.doc.NoFrames
 import org.jetbrains.dokka.model.doc.NoScript
 import org.jetbrains.dokka.model.doc.Ol
 import org.jetbrains.dokka.model.doc.P
+import org.jetbrains.dokka.model.doc.Pre
 import org.jetbrains.dokka.model.doc.Script
 import org.jetbrains.dokka.model.doc.Section
 import org.jetbrains.dokka.model.doc.Small
@@ -172,12 +179,12 @@ internal class DefaultDescription(
                 is Ul -> ul { renderUnorderedList(tag.children) }
                 HorizontalRule -> hr { renderTags(tag.children) }
                 is CodeInline -> code { renderTags(tag.children) }
-                // Don't crash because it's used in the integration tests
-//                is CodeBlock -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-//                is Pre -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-//                is DocumentationLink -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is Img -> TODO("b/163811276: ${tag.javaClass.simpleName}")
-                is BlockQuote -> TODO("b/163811276: ${tag.javaClass.simpleName}")
+                is Pre, is CodeBlock -> pre { renderTags(tag.children) }
+                is DocumentationLink -> code {
+                    data.pathProvider.linkForReference(tag.dri).render(this)
+                }
+                is Img -> img(src = tag.params.getValue("src")) { renderTags(tag.children) }
+                is BlockQuote -> blockQuote { renderTags(tag.children) }
 
                 is Html, is Head, is Meta, is Header, is Title, is H1, is H2, is Footer, is IFrame,
                 is Main, is Menu, is Nav, is Index ->
@@ -191,7 +198,7 @@ internal class DefaultDescription(
                 is THead, is TBody, is Td, is TFoot, is Th, is Tr ->
                     error("Not in table context: ${tag.javaClass.simpleName}.")
                 // TODO(b/165400860): javadoc parsing is completely broken
-//                is Li -> error("Not in list context: ${tag.javaClass.simpleName}.")
+                is Li -> Unit // error("Not in list context: ${tag.javaClass.simpleName}.")
             }
         }
     }

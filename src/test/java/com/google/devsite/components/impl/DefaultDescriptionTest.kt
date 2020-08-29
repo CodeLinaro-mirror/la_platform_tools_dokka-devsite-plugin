@@ -24,6 +24,7 @@ import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.pages.ClasslikePageNode
 import org.jetbrains.dokka.pages.ContentPage
 import org.jetbrains.dokka.pages.RootPageNode
+import org.junit.Ignore
 import org.junit.Test
 
 internal class DefaultDescriptionTest : ConverterTestBase() {
@@ -337,13 +338,157 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         )
     }
 
+    @Test
+    fun `Code block renders correctly`() {
+        val component = """
+            |/**
+            | * Welcome:
+            | *
+            | * ```kotlin
+            | * fun main() {
+            | *     println("Hello World!")
+            | * }
+            | * ```
+            | */
+            |class Foo
+        """.render().description()
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p>
+    <p>Welcome:</p>
+    <pre>fun main() {<br>    println(&quot;Hello World!&quot;)<br>}</pre>
+  </p>
+</body>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Plain link renders correctly`() {
+        val component = """
+            |/** Click [here](http://meme). */
+            |class Foo
+        """.render().description()
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p>Click <a href="http://meme">here</a>.</p>
+</body>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Link to type renders correctly`() {
+        val component = """
+            |class Bar
+            |
+            |/** [Bar] is pretty cool. */
+            |class Foo
+        """.render().description()
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p><code><a href="/reference/androidx/example/Bar.html">Bar</a></code> is pretty cool.</p>
+</body>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Link to symbol renders correctly`() {
+        val component = """
+            |fun bar() = Unit
+            |
+            |/** [bar] is pretty cool. */
+            |class Foo
+        """.render().description()
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p><code><a href="/reference/androidx/example/package-summary.html#bar()">bar</a></code> is pretty cool.</p>
+</body>
+            """.trim()
+        )
+    }
+
+    @Ignore // TODO(b/166844219): dokka borked
+    @Test
+    fun `Image renders correctly`() {
+        val component = """
+            |/** ![Alt text](/path/to/img.jpg "Image Title") */
+            |class Foo
+        """.render().description()
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Quote renders correctly`() {
+        val component = """
+            |/**
+            | * > Two things are infinite: the universe and human stupidity; and I'm not sure about
+            | * > the universe. -- Albert Einstein
+            | */
+            |class Foo
+        """.render().description()
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <blockquote>
+    <p>Two things are infinite: the universe and human stupidity; and I'm not sure about the universe. -- Albert Einstein</p>
+  </blockquote>
+</body>
+            """.trim()
+        )
+    }
+
     private fun RootPageNode.description(
         summary: Boolean = false,
         deprecation: String? = null
     ): DefaultDescription {
         val tag = children.flatMap { it.children }
-            .filterIsInstance<ClasslikePageNode>().single().tag()
-        return DefaultDescription(Params(tag, summary, deprecation))
+            .filterIsInstance<ClasslikePageNode>().single { it.name == "Foo" }.tag()
+        return DefaultDescription(Params(pathProvider(), tag, summary, deprecation))
     }
 
     private fun ContentPage.tag() =
