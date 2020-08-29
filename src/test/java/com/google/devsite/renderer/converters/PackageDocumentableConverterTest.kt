@@ -82,6 +82,20 @@ internal class PackageDocumentableConverterTest(
     }
 
     @Test
+    fun `Package summary creates components with sorted interfaces`() {
+        val page = """
+            |interface B
+            |interface A
+        """.render().page()
+
+        val summary = page.content<PackageSummary>()
+        val interfaces = summary.data.interfaces.items(2)
+
+        assertThat(interfaces.first().link().name).isEqualTo("A")
+        assertThat(interfaces.last().link().name).isEqualTo("B")
+    }
+
+    @Test
     fun `Package summary creates components for classes`() {
         val page = """
             |class ImAClass
@@ -92,6 +106,20 @@ internal class PackageDocumentableConverterTest(
 
         assertThat(clazz.link().name).isEqualTo("ImAClass")
         assertPath(clazz.link().url, "androidx/example/ImAClass.html")
+    }
+
+    @Test
+    fun `Package summary creates components with sorted classes`() {
+        val page = """
+            |class B
+            |class A
+        """.render().page()
+
+        val summary = page.content<PackageSummary>()
+        val classes = summary.data.classes.items(2)
+
+        assertThat(classes.first().link().name).isEqualTo("A")
+        assertThat(classes.last().link().name).isEqualTo("B")
     }
 
     @Test
@@ -121,6 +149,20 @@ internal class PackageDocumentableConverterTest(
     }
 
     @Test
+    fun `Package summary creates components with sorted enums`() {
+        val page = """
+            |enum class B
+            |enum class A
+        """.render().page()
+
+        val summary = page.content<PackageSummary>()
+        val enums = summary.data.enums.items(2)
+
+        assertThat(enums.first().link().name).isEqualTo("A")
+        assertThat(enums.last().link().name).isEqualTo("B")
+    }
+
+    @Test
     fun `Package summary creates components for exceptions`() {
         val page = """
             |class ImAnException : RuntimeException()
@@ -134,6 +176,20 @@ internal class PackageDocumentableConverterTest(
     }
 
     @Test
+    fun `Package summary creates components with sorted exceptions`() {
+        val page = """
+            |class B : RuntimeException()
+            |class A : RuntimeException()
+        """.render().page()
+
+        val summary = page.content<PackageSummary>()
+        val classes = summary.data.classes.items(2)
+
+        assertThat(classes.first().link().name).isEqualTo("A")
+        assertThat(classes.last().link().name).isEqualTo("B")
+    }
+
+    @Test
     fun `Package summary creates components for annotations`() {
         val page = """
             |annotation class ImAnAnnotation
@@ -144,6 +200,20 @@ internal class PackageDocumentableConverterTest(
 
         assertThat(annotation.link().name).isEqualTo("ImAnAnnotation")
         assertPath(annotation.link().url, "androidx/example/ImAnAnnotation.html")
+    }
+
+    @Test
+    fun `Package summary creates components with sorted annotations`() {
+        val page = """
+            |annotation class B
+            |annotation class A
+        """.render().page()
+
+        val summary = page.content<PackageSummary>()
+        val classes = summary.data.annotations.items(2)
+
+        assertThat(classes.first().link().name).isEqualTo("A")
+        assertThat(classes.last().link().name).isEqualTo("B")
     }
 
     @Test
@@ -162,6 +232,20 @@ internal class PackageDocumentableConverterTest(
     }
 
     @Test
+    fun `Package summary creates components with sorted top-level functions`() {
+        val page = """
+            |fun b() = Unit
+            |fun a() = Unit
+        """.render().page()
+
+        val summary = page.content<PackageSummary>()
+        val topLevels = summary.data.topLevelFunctionsSummary.items(2)
+
+        assertThat(topLevels.first().functionSummary().name()).isEqualTo("a")
+        assertThat(topLevels.last().functionSummary().name()).isEqualTo("b")
+    }
+
+    @Test
     fun `Package summary creates components for extension functions`() {
         val page = """
             |fun String.foo()
@@ -174,6 +258,20 @@ internal class PackageDocumentableConverterTest(
         assertThat(topLevels.items()).isEmpty()
         assertThat(extensions.items()).hasSize(1)
         assertThat(extensions.function().name()).isEqualTo("foo")
+    }
+
+    @Test
+    fun `Package summary creates components with sorted extension functions`() {
+        val page = """
+            |fun String.b() = Unit
+            |fun String.a() = Unit
+        """.render().page()
+
+        val summary = page.content<PackageSummary>()
+        val extensions = summary.data.extensionFunctionsSummary.items(2)
+
+        assertThat(extensions.first().functionSummary().name()).isEqualTo("a")
+        assertThat(extensions.last().functionSummary().name()).isEqualTo("b")
     }
 
     private fun RootPageNode.page(): DevsitePage {

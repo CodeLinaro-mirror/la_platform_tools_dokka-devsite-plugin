@@ -40,9 +40,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.model.DClasslike
-import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.DPackage
-import org.jetbrains.dokka.pages.ClasslikePageNode
 import org.jetbrains.dokka.pages.RootPageNode
 
 /** Converts documentables into components for the root metadata (class/package index). */
@@ -55,10 +53,7 @@ internal class RootDocumentableConverter(
 
     /** @return the root component for the class index page */
     fun classesPage(): DevsitePage {
-        val allClasses = root.explodedChildren
-            .filterIsInstance<ClasslikePageNode>()
-            .filterNot { it.documentable is DEnumEntry }
-            .map { it.documentable as DClasslike }
+        val allClasses = root.packages().flatMap { it.classlikes() }.sortedBy { it.name() }
         val alphabetizedClasses = allClasses.groupBy(::categorizeClasslikes)
         val componentClasses = alphabetizedClasses.mapValues { (_, nodes) ->
             DefaultSummaryList(

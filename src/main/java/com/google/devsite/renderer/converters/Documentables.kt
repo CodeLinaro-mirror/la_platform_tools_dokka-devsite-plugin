@@ -41,14 +41,29 @@ internal fun DClasslike.packageName() = dri.packageName!!
 internal fun RootPageNode.packages() = children
     .filterIsInstance<PackagePageNode>()
     .map { it.documentable as DPackage }
+    .sortedBy { it.name }
 
-internal fun DPackage.classes() = explodedChildren.filterIsInstance<DClass>()
-internal fun DPackage.enums() = explodedChildren.filterIsInstance<DEnum>()
-internal fun DPackage.interfaces() = explodedChildren.filterIsInstance<DInterface>()
-internal fun DPackage.annotations() = explodedChildren.filterIsInstance<DAnnotation>()
-internal fun DPackage.exceptions() = explodedChildren.filterIsInstance<DClass>().filter { clazz ->
+internal fun DPackage.classlikes() =
+    explodedChildren.filterIsInstance<DClasslike>().sortedBy { it.name() }
+
+internal fun DPackage.classes() =
+    explodedChildren.filterIsInstance<DClass>().sortedBy { it.name() }
+
+internal fun DPackage.enums() =
+    explodedChildren.filterIsInstance<DEnum>().sortedBy { it.name() }
+
+internal fun DPackage.interfaces() =
+    explodedChildren.filterIsInstance<DInterface>().sortedBy { it.name() }
+
+internal fun DPackage.annotations() =
+    explodedChildren.filterIsInstance<DAnnotation>().sortedBy { it.name() }
+
+internal fun DPackage.exceptions() = classes().filter { clazz ->
     clazz.functions.any { function -> function.dri.classNames == "Throwable" }
 }
 
-internal fun DPackage.topLevelFunctions() = functions.filter { it.receiver == null }
-internal fun DPackage.extensionFunctions() = functions.filterNot { it.receiver == null }
+internal fun DPackage.topLevelFunctions() =
+    functions.filter { it.receiver == null }.sortedBy { it.name }
+
+internal fun DPackage.extensionFunctions() =
+    functions.filterNot { it.receiver == null }.sortedBy { it.name }

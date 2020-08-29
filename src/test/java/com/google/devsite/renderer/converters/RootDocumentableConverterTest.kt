@@ -137,6 +137,58 @@ internal class RootDocumentableConverterTest(
     }
 
     @Test
+    fun `Class index creates components with sorted classes`() {
+        val page = """
+            |class AB
+            |class AA
+        """.render().page(forClasses = true)
+
+        val classIndex = page.content<ClassIndex>()
+        val classes = classIndex.item().value.items(2)
+
+        assertThat(classes.first().link().name).isEqualTo("AA")
+        assertThat(classes.last().link().name).isEqualTo("AB")
+    }
+
+    @Test
+    fun `Class index creates components with sorted classes across packages`() {
+        val page = listOf(
+            """
+                |/src/main/kotlin/androidx/example/A.kt
+                |package a
+                |
+                |class AB
+            """.trimMargin(),
+            """
+                |/src/main/kotlin/androidx/example/B.kt
+                |package b
+                |
+                |class AA
+            """.trimMargin()
+        ).render().page(forClasses = true)
+
+        val classIndex = page.content<ClassIndex>()
+        val classes = classIndex.item().value.items(2)
+
+        assertThat(classes.first().link().name).isEqualTo("AA")
+        assertThat(classes.last().link().name).isEqualTo("AB")
+    }
+
+    @Test
+    fun `Class index creates components with sorted categories`() {
+        val page = """
+            |class B
+            |class A
+        """.render().page(forClasses = true)
+
+        val classIndex = page.content<ClassIndex>()
+        val classes = classIndex.items(2)
+
+        assertThat(classes.first().key).isEqualTo('A')
+        assertThat(classes.last().key).isEqualTo('B')
+    }
+
+    @Test
     fun `Class index creates components for multiple classes starting with different letters`() {
         val page = """
             |class Foo
@@ -144,8 +196,8 @@ internal class RootDocumentableConverterTest(
         """.render().page(forClasses = true)
 
         val classIndex = page.content<ClassIndex>()
-        val (fooLetter, fooSummary) = classIndex.items(2).first()
-        val (barLetter, barSummary) = classIndex.items(2).last()
+        val (fooLetter, fooSummary) = classIndex.items(2).last()
+        val (barLetter, barSummary) = classIndex.items(2).first()
 
         assertThat(fooLetter).isEqualTo('F')
         assertThat(barLetter).isEqualTo('B')
@@ -233,6 +285,30 @@ internal class RootDocumentableConverterTest(
             assertThat(packagez.link().name).isEqualTo(expectedPackages[i])
             assertPath(packagez.link().url, "${expectedPackages[i]}/package-summary.html")
         }
+    }
+
+    @Test
+    fun `Package index creates components with sorted packages`() {
+        val page = listOf(
+            """
+                |/src/main/kotlin/androidx/example/B.kt
+                |package b
+                |
+                |class B
+            """.trimMargin(),
+            """
+                |/src/main/kotlin/androidx/example/A.kt
+                |package a
+                |
+                |class A
+            """.trimMargin()
+        ).render().page(forPackages = true)
+
+        val packageIndex = page.content<PackageIndex>()
+        val packages = packageIndex.data.packages.items(2)
+
+        assertThat(packages.first().link().name).isEqualTo("a")
+        assertThat(packages.last().link().name).isEqualTo("b")
     }
 
     @Test

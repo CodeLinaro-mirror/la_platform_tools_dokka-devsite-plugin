@@ -94,32 +94,4 @@ class DefaultClassIndexTest {
             """.trim()
         )
     }
-
-    @Test
-    fun `Unordered classes renders correctly`() {
-        val component = DefaultClassIndex(
-            ClassIndex.Params(
-                "packages.html",
-                mapOf('B' to NoopSummaryList(), 'A' to NoopSummaryList())
-            )
-        )
-
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
-
-        // language=html
-        assertThat(output).isEqualTo(
-            """
-<body>
-  <p>These are all the API classes. See all <a href="packages.html">API packages</a>.</p>
-  <div class="jd-letterlist"><a href="#letter_A">A</a>&nbsp;&nbsp;<a href="#letter_B">B</a>&nbsp;&nbsp;</div>
-  <h2 id="letter_A">A</h2>
-  <div>noop</div>
-  <h2 id="letter_B">B</h2>
-  <div>noop</div>
-</body>
-            """.trim()
-        )
-    }
 }

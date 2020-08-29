@@ -48,15 +48,14 @@ internal class DefaultClassIndex(
             return
         }
 
-        val sortedClasses = data.alphabetizedClasses.toSortedMap()
         div("jd-letterlist") {
-            for ((letter) in sortedClasses.entries) {
+            for ((letter) in data.alphabetizedClasses.entries) {
                 a("#letter_$letter") { +letter.toString() }
                 unsafe { +"&nbsp;&nbsp;" }
             }
         }
 
-        for ((letter, summary) in sortedClasses.entries) {
+        for ((letter, summary) in data.alphabetizedClasses.entries) {
             h2 {
                 id = "letter_$letter"
                 +letter.toString()
