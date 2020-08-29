@@ -17,13 +17,11 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.ContextFreeComponent
-import com.google.devsite.components.Link
 import com.google.devsite.components.Raw
 import com.google.devsite.components.SummaryList
 import com.google.devsite.components.TableTitle
 import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultDescription
-import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultRaw
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableTitle
@@ -176,17 +174,9 @@ internal class DocTagConverter(
 
     private fun see(tags: List<See>): SummaryList {
         val params = tags.map { tag ->
-            val target = tag.address!!
-            val path = pathProvider.forType(target.packageName!!, target.classNames.orEmpty())
-
             DefaultTwoPaneSummaryItem(
                 TwoPaneSummaryItem.Params(
-                    title = DefaultLink(
-                        Link.Params(
-                            name = tag.name,
-                            url = path
-                        )
-                    ),
+                    title = pathProvider.linkForReference(tag.address!!),
                     description = description(tag)
                 )
             )

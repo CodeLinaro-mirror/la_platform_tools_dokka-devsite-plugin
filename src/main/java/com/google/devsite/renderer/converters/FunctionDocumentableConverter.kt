@@ -217,17 +217,7 @@ internal class FunctionDocumentableConverter(
      * Converts a documentable type to a link component, assuming all generics have been resolved.
      */
     private fun Projection.toLink(): Link = when (this) {
-        is TypeConstructor -> {
-            val packageName = dri.packageName!!
-            val name = dri.classNames!!
-
-            DefaultLink(
-                Link.Params(
-                    name = name,
-                    url = pathProvider.forType(packageName, name)
-                )
-            )
-        }
+        is TypeConstructor -> pathProvider.linkForReference(dri)
         is OtherParameter -> DefaultLink(
             Link.Params(
                 name = name,

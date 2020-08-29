@@ -18,7 +18,6 @@ package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.ClassIndex
 import com.google.devsite.components.DevsitePage
-import com.google.devsite.components.Link
 import com.google.devsite.components.PackageIndex
 import com.google.devsite.components.SummaryList
 import com.google.devsite.components.TableOfContents
@@ -26,7 +25,6 @@ import com.google.devsite.components.TocPackage
 import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultClassIndex
 import com.google.devsite.components.impl.DefaultDevsitePage
-import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultPackageIndex
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableOfContents
@@ -127,17 +125,9 @@ internal class RootDocumentableConverter(
     }
 
     private fun summaryForClass(classlike: DClasslike): DefaultTwoPaneSummaryItem {
-        val packageName = classlike.packageName()
-        val name = classlike.name()
-
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
-                title = DefaultLink(
-                    Link.Params(
-                        name = name,
-                        url = pathProvider.forType(packageName, name)
-                    )
-                ),
+                title = pathProvider.linkForReference(classlike.dri),
                 description = javadocConverter.summaryDescription(classlike)
             )
         )
@@ -175,7 +165,7 @@ internal class RootDocumentableConverter(
     }
 
     private fun typeForToc(classlike: DClasslike): TocPackage.Type {
-        val url = pathProvider.forType(classlike.packageName(), classlike.name())
+        val url = pathProvider.forReference(classlike.dri).url
         return TocPackage.Type(classlike.name(), url)
     }
 }
