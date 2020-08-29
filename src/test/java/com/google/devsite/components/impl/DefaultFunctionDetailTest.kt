@@ -33,7 +33,7 @@ class DefaultFunctionDetailTest {
             FunctionDetail.Params(
                 displayLanguage = Language.JAVA,
                 name = "foo",
-                anchors = emptySet(),
+                anchors = linkedSetOf(),
                 returnType = NoopParameterType("void"),
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
@@ -63,7 +63,7 @@ class DefaultFunctionDetailTest {
             FunctionDetail.Params(
                 displayLanguage = Language.KOTLIN,
                 name = "foo",
-                anchors = emptySet(),
+                anchors = linkedSetOf(),
                 returnType = NoopParameterType("Unit"),
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
@@ -93,7 +93,7 @@ class DefaultFunctionDetailTest {
             FunctionDetail.Params(
                 displayLanguage = Language.JAVA,
                 name = "foo",
-                anchors = emptySet(),
+                anchors = linkedSetOf(),
                 modifiers = listOf("protected", "abstract"),
                 returnType = NoopParameterType("void"),
                 signature = NoopFunctionSignature("foo()"),
@@ -124,7 +124,7 @@ class DefaultFunctionDetailTest {
             FunctionDetail.Params(
                 displayLanguage = Language.KOTLIN,
                 name = "foo",
-                anchors = emptySet(),
+                anchors = linkedSetOf(),
                 modifiers = listOf("protected", "abstract"),
                 returnType = NoopParameterType("Unit"),
                 signature = NoopFunctionSignature("foo()"),
@@ -155,7 +155,7 @@ class DefaultFunctionDetailTest {
             FunctionDetail.Params(
                 displayLanguage = Language.JAVA,
                 name = "foo",
-                anchors = setOf("#foo()", "#foo--"),
+                anchors = linkedSetOf("foo(a,b)", "foo(a, b)", "foo-a-b-"),
                 returnType = NoopParameterType("void"),
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
@@ -170,8 +170,8 @@ class DefaultFunctionDetailTest {
         assertThat(output).isEqualTo(
             """
 <div>
-  <div><a name="#foo()"></a><a name="#foo--"></a>
-    <h3 class="api-name">foo</h3>
+  <div><a name="foo(a, b)"></a><a name="foo-a-b-"></a>
+    <h3 class="api-name" id="foo(a,b)">foo</h3>
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
   </div>
 </div>
@@ -185,7 +185,7 @@ class DefaultFunctionDetailTest {
             FunctionDetail.Params(
                 displayLanguage = Language.JAVA,
                 name = "foo",
-                anchors = emptySet(),
+                anchors = linkedSetOf(),
                 returnType = NoopParameterType("void"),
                 signature = NoopFunctionSignature("foo()"),
                 metadata = listOf(NoopContextFreeComponent, NoopContextFreeComponent)

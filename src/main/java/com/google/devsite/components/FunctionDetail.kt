@@ -25,7 +25,7 @@ internal interface FunctionDetail : ContextFreeComponent {
     class Params(
         val displayLanguage: Language,
         val name: String,
-        val anchors: Set<String>,
+        val anchors: LinkedHashSet<String>,
         val modifiers: List<String> = emptyList(),
         val returnType: ParameterType,
         val signature: FunctionSignature,

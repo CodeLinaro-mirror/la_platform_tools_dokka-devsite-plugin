@@ -261,16 +261,17 @@ internal class FunctionDocumentableConverter(
     }
 
     /**
-     * Creates method anchors compatible with several different iterations of javadoc.
+     * Creates method anchors compatible with several different iterations of javadoc in order of
+     * preference.
      *
      * The different types are:
      * - `foo(int,int)`
      * - `foo(int, int)`
      * - `foo-int-int-`
      */
-    private fun generateCompatAnchors(function: DFunction): Set<String> {
+    private fun generateCompatAnchors(function: DFunction): LinkedHashSet<String> {
         val callable = function.dri.callable!!
-        return setOf(
+        return linkedSetOf(
             callable.anchor(),
             callable.anchor(separator = ", "),
             callable.anchor("-", "-", "-")

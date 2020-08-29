@@ -30,11 +30,15 @@ internal class DefaultFunctionDetail(
     override val data: FunctionDetail.Params
 ) : FunctionDetail {
     override fun render(html: FlowContent) = html.div {
-        for (anchor in data.anchors) {
+        for (anchor in data.anchors.drop(1)) {
             a { attributes["name"] = anchor }
         }
 
-        h3("api-name") { +data.name }
+        h3("api-name") {
+            data.anchors.firstOrNull()?.let { attributes["id"] = it }
+
+            +data.name
+        }
         pre("api-signature no-pretty-print") {
             for (modifier in data.modifiers) {
                 +modifier
