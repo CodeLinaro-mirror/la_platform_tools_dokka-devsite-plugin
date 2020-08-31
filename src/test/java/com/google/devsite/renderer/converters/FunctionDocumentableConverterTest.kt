@@ -246,6 +246,32 @@ internal class FunctionDocumentableConverterTest(
         assertThat(generic.link().name).isEqualTo("Int")
     }
 
+    @Test
+    fun `Function summary component creates params with * generics`() {
+        val summary = """
+            |fun foo(a: List<*>)
+        """.render().summary()
+
+        val function = summary.functionSummary()
+        val generic = function.param().data.primary.data.generics.item()
+
+        javaOnly { assertThat(generic.link().name).isEqualTo("?") }
+        kotlinOnly { assertThat(generic.link().name).isEqualTo("*") }
+    }
+
+    @Test
+    fun `Function summary component creates params with variance generics`() {
+        val summary = """
+            |fun foo(a: List<out String>)
+        """.render().summary()
+
+        val function = summary.functionSummary()
+        val generic = function.param().data.primary.data.generics.item()
+
+        // TODO(b/166530498): support variance
+        assertThat(generic.link().name).isEqualTo("String")
+    }
+
     @Ignore // TODO(asaveau): figure out inline generics
     @Test
     fun `Function summary component creates params with inline generics and generic param`() {
