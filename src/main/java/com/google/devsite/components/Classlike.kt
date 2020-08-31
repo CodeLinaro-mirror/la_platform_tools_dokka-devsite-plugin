@@ -20,6 +20,10 @@ package com.google.devsite.components
 internal interface Classlike : ContextFreeComponent {
     val data: Params
 
-    // TODO(b/163811257): implement class component
-    class Params
+    class Params(
+        val description: List<ContextFreeComponent>,
+        val symbolTypes: List<Pair<SummaryList, SymbolType>>
+    )
+
+    data class SymbolType(val title: String, val symbols: List<ContextFreeComponent>)
 }
