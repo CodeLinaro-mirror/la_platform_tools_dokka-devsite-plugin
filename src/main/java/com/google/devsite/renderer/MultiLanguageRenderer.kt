@@ -45,7 +45,7 @@ internal class MultiLanguageRenderer(
         }
     }
 
-    private fun renderJava(root: RootPageNode) {
+    private suspend fun renderJava(root: RootPageNode) {
         val language = Language.JAVA
         val filePaths = DacJavaFilePathProvider(tenant)
         DevsiteRenderer(
@@ -54,7 +54,7 @@ internal class MultiLanguageRenderer(
         ).render(root)
     }
 
-    private fun renderKotlin(root: RootPageNode) {
+    private suspend fun renderKotlin(root: RootPageNode) {
         val language = Language.KOTLIN
         val filePaths = DacKotlinFilePathProvider(tenant)
         DevsiteRenderer(

@@ -18,25 +18,20 @@ package com.google.devsite.renderer
 
 import com.google.devsite.renderer.impl.MetadataRenderer
 import com.google.devsite.renderer.impl.PackageRenderer
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.pages.ClasslikePageNode
 import org.jetbrains.dokka.pages.PackagePageNode
 import org.jetbrains.dokka.pages.RootPageNode
-import org.jetbrains.dokka.renderers.Renderer
 
 internal class DevsiteRenderer(
     private val rootFileRenderer: MetadataRenderer,
     private val packageRenderer: PackageRenderer
-) : Renderer {
-    override fun render(root: RootPageNode) {
-        runBlocking(Dispatchers.Default) {
-            writeRootMetadata(root)
-            for (packagePage in root.children.filterIsInstance<PackagePageNode>()) {
-                writePackage(packagePage)
-            }
+) {
+    suspend fun render(root: RootPageNode) {
+        writeRootMetadata(root)
+        for (packagePage in root.children.filterIsInstance<PackagePageNode>()) {
+            writePackage(packagePage)
         }
     }
 
