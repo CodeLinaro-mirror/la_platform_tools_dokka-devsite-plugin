@@ -82,7 +82,11 @@ internal class FunctionDocumentableConverter(
                 modifiers = function.modifiers(),
                 returnType = returnType,
                 signature = function.signature(),
-                metadata = javadocConverter.metadata(function, returnType)
+                metadata = javadocConverter.metadata(
+                    doc = function,
+                    returnType = returnType,
+                    paramNames = listOf("receiver") + function.parameters.map { it.name!! }
+                )
             )
         )
     }

@@ -25,6 +25,7 @@ import com.google.devsite.components.impl.UndocumentedSymbolDescription
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.item
+import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.title
 import com.google.devsite.testing.ConverterTestBase
@@ -156,14 +157,60 @@ internal class DocTagConverterTest(
         assertThat(paramText.link().name).isEqualTo("String")
     }
 
+    @Test
+    fun `Full documentation sorts tags in pre-defined order`() {
+        val documentation = """
+            |/**
+            | * @see String
+            | * @param a
+            | * @return
+            | */
+            |fun foo(a: String)
+        """.render().documentation()
+
+        val returnSummary = documentation[1] as SummaryList
+        val paramSummary = documentation[2] as SummaryList
+        val seeSummary = documentation[3] as SummaryList
+
+        assertThat(returnSummary.title()).isEqualTo("Returns")
+        assertThat(paramSummary.title()).isEqualTo("Parameters")
+        assertThat(seeSummary.title()).isEqualTo("See also")
+    }
+
+    @Test
+    fun `Full documentation sorts params in given order`() {
+        val expected = listOf("a", "b", "c")
+        val documentation = """
+            |/**
+            | * @param b
+            | * @param c
+            | * @param a
+            | */
+            |fun foo(a: String, b: String, c: String)
+        """.render().documentation(paramNames = expected)
+
+        val paramSummary = documentation.last() as SummaryList
+        val params = paramSummary.items(3)
+
+        for ((i, param) in params.withIndex()) {
+            assertThat((param.data.title as Raw).data.text).isEqualTo(expected[i])
+        }
+    }
+
     private fun RootPageNode.description(): Description {
         val converter = DocTagConverter(language, pathProvider())
         return converter.summaryDescription(doc())
     }
 
-    private fun RootPageNode.documentation(): List<ContextFreeComponent> {
+    private fun RootPageNode.documentation(
+        paramNames: List<String> = emptyList()
+    ): List<ContextFreeComponent> {
         val converter = DocTagConverter(language, pathProvider())
-        return converter.metadata(doc(), returnType = NoopContextFreeComponent)
+        return converter.metadata(
+            doc(),
+            returnType = NoopContextFreeComponent,
+            paramNames = paramNames
+        )
     }
 
     private fun RootPageNode.doc(): Documentable {

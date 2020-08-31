@@ -83,7 +83,8 @@ internal class DocTagConverter(
      */
     fun metadata(
         doc: Documentable,
-        returnType: ContextFreeComponent? = null
+        returnType: ContextFreeComponent? = null,
+        paramNames: List<String> = emptyList()
     ): List<ContextFreeComponent> {
         val description = doc.find<Description>()?.let(::description)
         val deprecation = doc.find<Deprecated>()?.let {
@@ -94,7 +95,8 @@ internal class DocTagConverter(
         }
 
         val preparedTags = listOfNotNull(receiverParam) + doc.tags()
-        val tables = preparedTags.groupBy { it.javaClass }.mapNotNull { (_, tags) ->
+        val tagsByType = preparedTags.sortedWith(tagOrder(paramNames)).groupBy { it.javaClass }
+        val tables = tagsByType.mapNotNull { (_, tags) ->
             // We know all the elements in `tags` will be of the same type, so we pick an arbitrary
             // one to do the switching and then cast the list to its type.
             @kotlin.Suppress("UNCHECKED_CAST")
@@ -239,5 +241,30 @@ internal class DocTagConverter(
         null
     } else {
         single()
+    }
+
+    private fun tagOrder(paramNames: List<String>) = compareBy<TagWrapper> { tag ->
+        when (tag) {
+            is Deprecated -> 0
+            is Description -> 1
+            is Return -> 2
+            is Constructor -> 3
+            is Property -> 4
+            is Receiver -> 5
+            is Param -> 6
+            is Throws -> 7
+            is See -> 8
+            is Sample -> 9
+            is Since -> 10
+            is Version -> 11
+            is Author -> 12
+            is Suppress -> 13
+            is CustomTagWrapper -> 14
+        }
+    }.thenBy { tag ->
+        when (tag) {
+            is Param -> paramNames.indexOf(tag.name)
+            else -> -1
+        }
     }
 }
