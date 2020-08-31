@@ -33,7 +33,7 @@ internal class DefaultDevsitePage(
         attributes["devsite"] = "true"
         head {
             title { +data.title }
-            unsafe { +"{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}\n" }
+            unsafe { +"{% setvar book_path %}${data.bookPath}{% endsetvar %}\n" }
             unsafe { +"{% include \"_shared/_reference-head-tags.html\" %}\n" }
         }
 

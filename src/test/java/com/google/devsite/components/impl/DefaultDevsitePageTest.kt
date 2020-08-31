@@ -31,6 +31,7 @@ class DefaultDevsitePageTest {
             Params(
                 displayLanguage = Language.JAVA,
                 path = "page.html",
+                bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
                 content = NoopContextFreeComponent
             )
@@ -67,6 +68,7 @@ class DefaultDevsitePageTest {
             Params(
                 displayLanguage = Language.KOTLIN,
                 path = "page.html",
+                bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
                 content = NoopContextFreeComponent
             )

@@ -69,6 +69,15 @@ internal class PackageDocumentableConverterTest(
     }
 
     @Test
+    fun `Package summary creates components with correct book path`() {
+        val page = """
+            |class Foo
+        """.render().page()
+
+        assertPath(page.data.bookPath, "androidx/_book.yaml")
+    }
+
+    @Test
     fun `Package summary creates components for interfaces`() {
         val page = """
             |interface ImAnInterface

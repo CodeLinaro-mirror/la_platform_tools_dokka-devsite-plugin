@@ -36,6 +36,9 @@ internal interface FilePathProvider {
     /** The _toc.yaml file, responsible for pointing to the paths of each index.html file in the doc tree. */
     val toc: String
 
+    /** The _book.yaml file, responsible for the sidebar nav. */
+    val book: String
+
     /** @return the path of a class-like type */
     fun forType(packageName: String, name: String): String
 }

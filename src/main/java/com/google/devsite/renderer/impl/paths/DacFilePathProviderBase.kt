@@ -34,6 +34,8 @@ internal abstract class DacFilePathProviderBase(
 
     override val toc = "$dacPath/${relative.toc}"
 
+    override val book = "$dacPath/${relative.book}"
+
     override fun forType(packageName: String, name: String): String {
         return "$dacPath/${relative.forType(packageName, name)}"
     }
