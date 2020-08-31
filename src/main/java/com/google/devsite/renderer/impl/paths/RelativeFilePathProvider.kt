@@ -30,7 +30,7 @@ internal class RelativeFilePathProvider(tenant: String) : FilePathProvider {
 
     override val toc = "$tenant/$TOC_FILE"
 
-    override val book = "$tenant/_book.yaml"
+    override val book = "$tenant/$BOOK_FILE"
 
     override fun forType(packageName: String, name: String): String {
         val packageAsPath = packageName.replace(".", "/")

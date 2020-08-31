@@ -24,5 +24,5 @@ internal const val DIR_INDEX_FILE = "$DIR_INDEX_NAME.html"
 internal const val PACKAGE_INDEX_FILE = "packages.html"
 internal const val CLASS_INDEX_FILE = "classes.html"
 internal const val TOC_FILE = "_toc.yaml"
-// TODO(asaveau): add _book.yaml once other CL is merged
+internal const val BOOK_FILE = "_book.yaml"
 internal const val PACKAGE_SUMMARY_FILE = "$PACKAGE_SUMMARY_NAME.html"
