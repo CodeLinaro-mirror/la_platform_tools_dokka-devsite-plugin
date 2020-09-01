@@ -23,8 +23,8 @@ internal class DefaultTocPackage(
     override val data: TocPackage.Params
 ) : TocPackage {
     override fun render(text: StringBuilder) = text.run {
-        appendLine("- title: ${data.name}")
-        appendLine("  path: ${data.packageUrl}")
+        appendLine("- title: \"${data.name}\"")
+        appendLine("  path: \"${data.packageUrl}\"")
         appendLine()
 
         val content = listOf(
@@ -49,7 +49,7 @@ internal class DefaultTocPackage(
     private fun StringBuilder.renderTypes(sectionName: String, types: List<TocPackage.Type>) {
         if (types.isEmpty()) return
 
-        appendLine("  - title: $sectionName")
+        appendLine("  - title: \"$sectionName\"")
         appendLine()
         appendLine("    section:")
 
@@ -61,7 +61,7 @@ internal class DefaultTocPackage(
     }
 
     private fun StringBuilder.renderType(type: TocPackage.Type) {
-        appendLine("    - title: ${type.name}")
-        appendLine("      path: ${type.url}")
+        appendLine("    - title: \"${type.name}\"")
+        appendLine("      path: \"${type.url}\"")
     }
 }

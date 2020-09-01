@@ -25,11 +25,11 @@ internal class DefaultTableOfContents(
     override fun render(text: StringBuilder) = text.run {
         appendLine("toc:")
 
-        appendLine("- title: Class Index")
-        appendLine("  path: ${data.classesUrl}")
+        appendLine("- title: \"Class Index\"")
+        appendLine("  path: \"${data.classesUrl}\"")
         appendLine()
-        appendLine("- title: Package Index")
-        appendLine("  path: ${data.packagesUrl}")
+        appendLine("- title: \"Package Index\"")
+        appendLine("  path: \"${data.packagesUrl}\"")
         appendLine()
 
         for (packageSection in data.packages) {
