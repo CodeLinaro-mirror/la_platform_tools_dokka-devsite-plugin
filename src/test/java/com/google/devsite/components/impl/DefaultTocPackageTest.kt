@@ -53,7 +53,8 @@ class DefaultTocPackageTest {
                 classes = listOf(Type("Class", "link")),
                 enums = listOf(Type("Enum", "link")),
                 exceptions = listOf(Type("Exception", "link")),
-                annotations = listOf(Type("Annotation", "link"))
+                annotations = listOf(Type("Annotation", "link")),
+                typeAliases = listOf(Type("TypeAlias", "link"))
             )
         )
 
@@ -95,6 +96,12 @@ class DefaultTocPackageTest {
 
     section:
     - title: Annotation
+      path: link
+
+  - title: Type aliases
+
+    section:
+    - title: TypeAlias
       path: link
             """.trim()
         )

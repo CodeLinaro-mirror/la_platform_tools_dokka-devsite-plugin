@@ -43,6 +43,7 @@ internal class DefaultTocPackage(
         renderTypes("Enums", data.enums)
         renderTypes("Exceptions", data.exceptions)
         renderTypes("Annotations", data.annotations)
+        renderTypes("Type aliases", data.typeAliases)
     }
 
     private fun StringBuilder.renderTypes(sectionName: String, types: List<TocPackage.Type>) {
