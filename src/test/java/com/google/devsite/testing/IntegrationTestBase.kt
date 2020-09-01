@@ -46,7 +46,9 @@ abstract class IntegrationTestBase : AbstractCoreTest() {
             }
         }
 
-        System.setProperty("tenant", "dokkatest")
+        val inferredTenant = File(sourceDir).listFiles().orEmpty()
+            .singleOrNull { it.isDirectory }?.name ?: "dokkatest"
+        System.setProperty("tenant", inferredTenant)
 
         val writerPlugin = TestOutputWriterPlugin()
         testFromData(
