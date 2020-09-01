@@ -51,7 +51,7 @@ internal class DevsiteRenderer(
         launch { packageRenderer.writeIndex(packageDoc) }
         launch { packageRenderer.writePackageSummary(packageDoc) }
         for (clazz in packageDoc.classlikes()) {
-            launch { packageRenderer.writeClass(clazz) }
+            launch { packageRenderer.writeClasslike(clazz) }
         }
     }
 }

@@ -1,0 +1,336 @@
+<html devsite="true">
+  <head>
+    <title>ListFragment</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>ListFragment</h1>
+{% setvar page_path %}androidx/fragment/app/ListFragment.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>TODO(b/166518424) class signature</p>
+    <p>TODO(b/166518951) inheritance hierarchy</p>
+    <p>TODO(b/166518636) direct subclasses</p>
+    <p>TODO(b/166518636) indirect subclasses</p>
+    <hr>
+    <p>Static library support version of the framework's . Used to write apps that run on platforms prior to Android 3.0. When running on Android 3.0 or above, this implementation is still used; it does not try to switch to the framework's implementation. See the framework SDK documentation for a class overview.</p>
+    <h2>Summary</h2>
+    <p>Nested *</p>
+    <p>Enum values</p>
+    <p>Constants</p>
+    <p>Public fields</p>
+    <p>Protected fields</p>
+    <p>Public constructors</p>
+    <p>Protected constructors</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>&nbsp;ListAdapter</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#getListAdapter()">getListAdapter</a>()</code></div>
+              <p>Get the ListAdapter associated with this fragment's ListView.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;ListView</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#getListView()">getListView</a>()</code></div>
+              <p>Get the fragment's list view widget.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Long.html">Long</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#getSelectedItemId()">getSelectedItemId</a>()</code></div>
+              <p>Get the cursor row ID of the currently selected list item.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#getSelectedItemPosition()">getSelectedItemPosition</a>()</code></div>
+              <p>Get the position of the currently selected list item.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;View</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a>(inflater:&nbsp;LayoutInflater,&nbsp;container:&nbsp;ViewGroup,&nbsp;savedInstanceState:&nbsp;Bundle)</code></div>
+              <p>
+                <p>Provide default implementation to return a simple list view. Subclasses can override to replace with their own layout. If doing so, the returned view hierarchy <em>must</em> have a ListView whose id is and can optionally have a sibling view id that is to be shown when the list is empty. </p>
+                <p>If you are overriding this method with your own custom content, consider including the standard layout in your layout file, so that you continue to retain all of the standard behavior of ListFragment. In particular, this is currently the only way to have the built-in indeterminant progress state be shown.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#onDestroyView()">onDestroyView</a>()</code></div>
+              <p>Detach from list view.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#onListItemClick(android.widget.ListView,android.view.View,int,long)">onListItemClick</a>(l:&nbsp;ListView,&nbsp;v:&nbsp;View,&nbsp;position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,&nbsp;id:&nbsp;<a href="/reference/kotlin/kotlin/Long.html">Long</a>)</code></div>
+              <p>This method will be called when an item in the list is selected. Subclasses should override. Subclasses can call getListView().getItemAtPosition(position) if they need to access the data associated with the selected item.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#onViewCreated(android.view.View,android.os.Bundle)">onViewCreated</a>(view:&nbsp;View,&nbsp;savedInstanceState:&nbsp;Bundle)</code></div>
+              <p>Attach to list view once the view hierarchy has been created.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final&nbsp;ListAdapter</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#requireListAdapter()">requireListAdapter</a>()</code></div>
+              <p>Get the ListAdapter associated with this fragment's ListView.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#setEmptyText(java.lang.CharSequence)">setEmptyText</a>(text:&nbsp;<a href="/reference/kotlin/java/lang/CharSequence.html">CharSequence</a>)</code></div>
+              <p>The default content for a ListFragment has a TextView that can be shown when the list is empty. If you would like to have it shown, call this method to supply the text it should use.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#setListAdapter(android.widget.ListAdapter)">setListAdapter</a>(adapter:&nbsp;ListAdapter)</code></div>
+              <p>Provide the cursor for the list view.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#setListShown(boolean)">setListShown</a>(shown:&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a>)</code></div>
+              <p>
+                <p>Control whether the list is being displayed. You can make it not displayed if you are waiting for the initial data to show in it. During this time an indeterminant progress indicator will be shown instead. </p>
+                <p>Applications do not normally need to use this themselves. The default behavior of ListFragment is to start with the list not being shown, only showing it once an adapter is given with <code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#setListAdapter(android.widget.ListAdapter)">setListAdapter</a></code> . If the list at that point had not been shown, when it does get shown it will be do without the user ever seeing the hidden state.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#setListShownNoAnimation(boolean)">setListShownNoAnimation</a>(shown:&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a>)</code></div>
+              <p>Like <code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#setListShown(boolean)">setListShown</a></code> , but no animation is used when transitioning from the previous state.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#setSelection(int)">setSelection</a>(position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>)</code></div>
+              <p>Set the currently selected list item to the specified position with the adapter's data</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="getListAdapter--"></a>
+      <h3 class="api-name" id="getListAdapter()">getListAdapter</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#getListAdapter()">getListAdapter</a>():&nbsp;ListAdapter</pre>
+      <p>Get the ListAdapter associated with this fragment's ListView.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#requireListAdapter()">requireListAdapter</a></code></td>
+              <td width="100%"><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#requireListAdapter()">requireListAdapter</a></code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="getListView--"></a>
+      <h3 class="api-name" id="getListView()">getListView</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#getListView()">getListView</a>():&nbsp;ListView</pre>
+      <p>Get the fragment's list view widget.</p>
+    </div>
+    <div><a name="getSelectedItemId--"></a>
+      <h3 class="api-name" id="getSelectedItemId()">getSelectedItemId</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#getSelectedItemId()">getSelectedItemId</a>():&nbsp;<a href="/reference/kotlin/kotlin/Long.html">Long</a></pre>
+      <p>Get the cursor row ID of the currently selected list item.</p>
+    </div>
+    <div><a name="getSelectedItemPosition--"></a>
+      <h3 class="api-name" id="getSelectedItemPosition()">getSelectedItemPosition</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#getSelectedItemPosition()">getSelectedItemPosition</a>():&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></pre>
+      <p>Get the position of the currently selected list item.</p>
+    </div>
+    <div><a name="onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)"></a><a name="onCreateView-android.view.LayoutInflater-android.view.ViewGroup-android.os.Bundle-"></a>
+      <h3 class="api-name" id="onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a>(inflater:&nbsp;LayoutInflater,&nbsp;container:&nbsp;ViewGroup,&nbsp;savedInstanceState:&nbsp;Bundle):&nbsp;View</pre>
+      <p>
+        <p>Provide default implementation to return a simple list view. Subclasses can override to replace with their own layout. If doing so, the returned view hierarchy <em>must</em> have a ListView whose id is and can optionally have a sibling view id that is to be shown when the list is empty. </p>
+        <p>If you are overriding this method with your own custom content, consider including the standard layout in your layout file, so that you continue to retain all of the standard behavior of ListFragment. In particular, this is currently the only way to have the built-in indeterminant progress state be shown.</p>
+      </p>
+    </div>
+    <div><a name="onDestroyView--"></a>
+      <h3 class="api-name" id="onDestroyView()">onDestroyView</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#onDestroyView()">onDestroyView</a>():&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+      <p>Detach from list view.</p>
+    </div>
+    <div><a name="onListItemClick(android.widget.ListView, android.view.View, int, long)"></a><a name="onListItemClick-android.widget.ListView-android.view.View-int-long-"></a>
+      <h3 class="api-name" id="onListItemClick(android.widget.ListView,android.view.View,int,long)">onListItemClick</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#onListItemClick(android.widget.ListView,android.view.View,int,long)">onListItemClick</a>(l:&nbsp;ListView,&nbsp;v:&nbsp;View,&nbsp;position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,&nbsp;id:&nbsp;<a href="/reference/kotlin/kotlin/Long.html">Long</a>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+      <p>This method will be called when an item in the list is selected. Subclasses should override. Subclasses can call getListView().getItemAtPosition(position) if they need to access the data associated with the selected item.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>l</code></td>
+              <td width="100%">
+                <p>The ListView where the click happened</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>v</code></td>
+              <td width="100%">
+                <p>The view that was clicked within the ListView</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>position</code></td>
+              <td width="100%">
+                <p>The position of the view in the list</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>id</code></td>
+              <td width="100%">
+                <p>The row id of the item that was clicked</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onViewCreated(android.view.View, android.os.Bundle)"></a><a name="onViewCreated-android.view.View-android.os.Bundle-"></a>
+      <h3 class="api-name" id="onViewCreated(android.view.View,android.os.Bundle)">onViewCreated</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#onViewCreated(android.view.View,android.os.Bundle)">onViewCreated</a>(view:&nbsp;View,&nbsp;savedInstanceState:&nbsp;Bundle):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+      <p>Attach to list view once the view hierarchy has been created.</p>
+    </div>
+    <div><a name="requireListAdapter--"></a>
+      <h3 class="api-name" id="requireListAdapter()">requireListAdapter</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;<a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#requireListAdapter()">requireListAdapter</a>():&nbsp;ListAdapter</pre>
+      <p>Get the ListAdapter associated with this fragment's ListView.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Throws</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>@throws java.lang.IllegalStateException if no ListAdapter has been set.
+ * </code></td>
+              <td width="100%">
+                <p>java.lang.IllegalStateException if no ListAdapter has been set.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#getListAdapter()">getListAdapter</a></code></td>
+              <td width="100%"><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#getListAdapter()">getListAdapter</a></code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="setEmptyText-java.lang.CharSequence-"></a>
+      <h3 class="api-name" id="setEmptyText(java.lang.CharSequence)">setEmptyText</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#setEmptyText(java.lang.CharSequence)">setEmptyText</a>(text:&nbsp;<a href="/reference/kotlin/java/lang/CharSequence.html">CharSequence</a>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+      <p>The default content for a ListFragment has a TextView that can be shown when the list is empty. If you would like to have it shown, call this method to supply the text it should use.</p>
+    </div>
+    <div><a name="setListAdapter-android.widget.ListAdapter-"></a>
+      <h3 class="api-name" id="setListAdapter(android.widget.ListAdapter)">setListAdapter</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#setListAdapter(android.widget.ListAdapter)">setListAdapter</a>(adapter:&nbsp;ListAdapter):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+      <p>Provide the cursor for the list view.</p>
+    </div>
+    <div><a name="setListShown-boolean-"></a>
+      <h3 class="api-name" id="setListShown(boolean)">setListShown</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#setListShown(boolean)">setListShown</a>(shown:&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+      <p>
+        <p>Control whether the list is being displayed. You can make it not displayed if you are waiting for the initial data to show in it. During this time an indeterminant progress indicator will be shown instead. </p>
+        <p>Applications do not normally need to use this themselves. The default behavior of ListFragment is to start with the list not being shown, only showing it once an adapter is given with <code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#setListAdapter(android.widget.ListAdapter)">setListAdapter</a></code> . If the list at that point had not been shown, when it does get shown it will be do without the user ever seeing the hidden state.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>shown</code></td>
+              <td width="100%">
+                <p>If true, the list view is shown; if false, the progress indicator. The initial value is true.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="setListShownNoAnimation-boolean-"></a>
+      <h3 class="api-name" id="setListShownNoAnimation(boolean)">setListShownNoAnimation</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#setListShownNoAnimation(boolean)">setListShownNoAnimation</a>(shown:&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+      <p>Like <code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#setListShown(boolean)">setListShown</a></code> , but no animation is used when transitioning from the previous state.</p>
+    </div>
+    <div><a name="setSelection-int-"></a>
+      <h3 class="api-name" id="setSelection(int)">setSelection</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#setSelection(int)">setSelection</a>(position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+      <p>Set the currently selected list item to the specified position with the adapter's data</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>position</code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

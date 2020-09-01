@@ -1,0 +1,580 @@
+<html devsite="true">
+  <head>
+    <title>FragmentManager.FragmentLifecycleCallbacks</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>FragmentManager.FragmentLifecycleCallbacks</h1>
+{% setvar page_path %}androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>TODO(b/166518424) class signature</p>
+    <p>TODO(b/166518951) inheritance hierarchy</p>
+    <p>TODO(b/166518636) direct subclasses</p>
+    <p>TODO(b/166518636) indirect subclasses</p>
+    <hr>
+    <p>Callback interface for listening to fragment state changes that happen within a given FragmentManager.</p>
+    <h2>Summary</h2>
+    <p>Nested *</p>
+    <p>Enum values</p>
+    <p>Constants</p>
+    <p>Public fields</p>
+    <p>Protected fields</p>
+    <p>Public constructors</p>
+    <p>Protected constructors</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>&nbsp;void</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentActivityCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentActivityCreated</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f,&nbsp;Bundle&nbsp;savedInstanceState)</code></div>
+              <p><em>This method is deprecated.</em> To get a callback specifically when a Fragment activity's is called, register a on the Activity's in <code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentAttached</a></code> , removing it when it receives the callback.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;void</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentAttached</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f,&nbsp;Context&nbsp;context)</code></div>
+              <p>Called after the fragment has been attached to its host. Its host will have had <code>onAttachFragment</code> called before this call happens.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;void</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentCreated</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f,&nbsp;Bundle&nbsp;savedInstanceState)</code></div>
+              <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code> . This will only happen once for any given fragment instance, though the fragment may be attached and detached multiple times.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;void</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentDestroyed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentDestroyed</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f)</code></div>
+              <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onDestroy()">onDestroy</a></code> .</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;void</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentDetached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentDetached</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f)</code></div>
+              <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onDetach()">onDetach</a></code> .</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;void</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentPaused(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentPaused</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f)</code></div>
+              <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onPause()">onPause</a></code> .</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;void</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentPreAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentPreAttached</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f,&nbsp;Context&nbsp;context)</code></div>
+              <p>Called right before the fragment's <code><a href="/reference/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code> method is called. This is a good time to inject any required dependencies or perform other configuration for the fragment before any of the fragment's lifecycle methods are invoked.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;void</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentPreCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentPreCreated</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f,&nbsp;Bundle&nbsp;savedInstanceState)</code></div>
+              <p>Called right before the fragment's <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code> method is called. This is a good time to inject any required dependencies or perform other configuration for the fragment.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;void</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentResumed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentResumed</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f)</code></div>
+              <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onResume()">onResume</a></code> .</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;void</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentSaveInstanceState(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentSaveInstanceState</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f,&nbsp;Bundle&nbsp;outState)</code></div>
+              <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onSaveInstanceState(android.os.Bundle)">onSaveInstanceState</a></code> .</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;void</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentStarted(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentStarted</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f)</code></div>
+              <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onStart()">onStart</a></code> .</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;void</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentStopped(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentStopped</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f)</code></div>
+              <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onStop()">onStop</a></code> .</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;void</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentViewCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.view.View,android.os.Bundle)">onFragmentViewCreated</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f,&nbsp;View&nbsp;v,&nbsp;Bundle&nbsp;savedInstanceState)</code></div>
+              <p>Called after the fragment has returned a non-null view from the FragmentManager's request to <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> .</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;void</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentViewDestroyed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentViewDestroyed</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f)</code></div>
+              <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onDestroyView()">onDestroyView</a></code> .</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="onFragmentActivityCreated(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.os.Bundle)"></a><a name="onFragmentActivityCreated-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.os.Bundle-"></a>
+      <h3 class="api-name" id="onFragmentActivityCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentActivityCreated</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentActivityCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentActivityCreated</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f,&nbsp;Bundle&nbsp;savedInstanceState)</pre>
+      <p class="caution"><strong>This method is deprecated.</strong><br>
+        <p>To get a callback specifically when a Fragment activity's is called, register a on the Activity's in <code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentAttached</a></code> , removing it when it receives the callback.</p>
+      </p>
+      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onActivityCreated(android.os.Bundle)">onActivityCreated</a></code> . This will only happen once for any given fragment instance, though the fragment may be attached and detached multiple times.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fm</code></td>
+              <td width="100%">
+                <p>Host FragmentManager</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>f</code></td>
+              <td width="100%">
+                <p>Fragment changing state</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>savedInstanceState</code></td>
+              <td width="100%">
+                <p>Saved instance bundle from a previous instance</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onFragmentAttached(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.content.Context)"></a><a name="onFragmentAttached-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.content.Context-"></a>
+      <h3 class="api-name" id="onFragmentAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentAttached</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentAttached</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f,&nbsp;Context&nbsp;context)</pre>
+      <p>Called after the fragment has been attached to its host. Its host will have had <code>onAttachFragment</code> called before this call happens.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fm</code></td>
+              <td width="100%">
+                <p>Host FragmentManager</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>f</code></td>
+              <td width="100%">
+                <p>Fragment changing state</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>context</code></td>
+              <td width="100%">
+                <p>Context that the Fragment was attached to</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onFragmentCreated(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.os.Bundle)"></a><a name="onFragmentCreated-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.os.Bundle-"></a>
+      <h3 class="api-name" id="onFragmentCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentCreated</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentCreated</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f,&nbsp;Bundle&nbsp;savedInstanceState)</pre>
+      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code> . This will only happen once for any given fragment instance, though the fragment may be attached and detached multiple times.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fm</code></td>
+              <td width="100%">
+                <p>Host FragmentManager</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>f</code></td>
+              <td width="100%">
+                <p>Fragment changing state</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>savedInstanceState</code></td>
+              <td width="100%">
+                <p>Saved instance bundle from a previous instance</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onFragmentDestroyed(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentDestroyed-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a>
+      <h3 class="api-name" id="onFragmentDestroyed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentDestroyed</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentDestroyed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentDestroyed</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f)</pre>
+      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onDestroy()">onDestroy</a></code> .</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fm</code></td>
+              <td width="100%">
+                <p>Host FragmentManager</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>f</code></td>
+              <td width="100%">
+                <p>Fragment changing state</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onFragmentDetached(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentDetached-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a>
+      <h3 class="api-name" id="onFragmentDetached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentDetached</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentDetached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentDetached</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f)</pre>
+      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onDetach()">onDetach</a></code> .</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fm</code></td>
+              <td width="100%">
+                <p>Host FragmentManager</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>f</code></td>
+              <td width="100%">
+                <p>Fragment changing state</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onFragmentPaused(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentPaused-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a>
+      <h3 class="api-name" id="onFragmentPaused(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentPaused</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentPaused(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentPaused</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f)</pre>
+      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onPause()">onPause</a></code> .</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fm</code></td>
+              <td width="100%">
+                <p>Host FragmentManager</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>f</code></td>
+              <td width="100%">
+                <p>Fragment changing state</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onFragmentPreAttached(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.content.Context)"></a><a name="onFragmentPreAttached-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.content.Context-"></a>
+      <h3 class="api-name" id="onFragmentPreAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentPreAttached</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentPreAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentPreAttached</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f,&nbsp;Context&nbsp;context)</pre>
+      <p>Called right before the fragment's <code><a href="/reference/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code> method is called. This is a good time to inject any required dependencies or perform other configuration for the fragment before any of the fragment's lifecycle methods are invoked.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fm</code></td>
+              <td width="100%">
+                <p>Host FragmentManager</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>f</code></td>
+              <td width="100%">
+                <p>Fragment changing state</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>context</code></td>
+              <td width="100%">
+                <p>Context that the Fragment is being attached to</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onFragmentPreCreated(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.os.Bundle)"></a><a name="onFragmentPreCreated-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.os.Bundle-"></a>
+      <h3 class="api-name" id="onFragmentPreCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentPreCreated</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentPreCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentPreCreated</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f,&nbsp;Bundle&nbsp;savedInstanceState)</pre>
+      <p>Called right before the fragment's <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code> method is called. This is a good time to inject any required dependencies or perform other configuration for the fragment.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fm</code></td>
+              <td width="100%">
+                <p>Host FragmentManager</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>f</code></td>
+              <td width="100%">
+                <p>Fragment changing state</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>savedInstanceState</code></td>
+              <td width="100%">
+                <p>Saved instance bundle from a previous instance</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onFragmentResumed(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentResumed-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a>
+      <h3 class="api-name" id="onFragmentResumed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentResumed</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentResumed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentResumed</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f)</pre>
+      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onResume()">onResume</a></code> .</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fm</code></td>
+              <td width="100%">
+                <p>Host FragmentManager</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>f</code></td>
+              <td width="100%">
+                <p>Fragment changing state</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onFragmentSaveInstanceState(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.os.Bundle)"></a><a name="onFragmentSaveInstanceState-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.os.Bundle-"></a>
+      <h3 class="api-name" id="onFragmentSaveInstanceState(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentSaveInstanceState</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentSaveInstanceState(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentSaveInstanceState</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f,&nbsp;Bundle&nbsp;outState)</pre>
+      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onSaveInstanceState(android.os.Bundle)">onSaveInstanceState</a></code> .</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fm</code></td>
+              <td width="100%">
+                <p>Host FragmentManager</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>f</code></td>
+              <td width="100%">
+                <p>Fragment changing state</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>outState</code></td>
+              <td width="100%">
+                <p>Saved state bundle for the fragment</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onFragmentStarted(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentStarted-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a>
+      <h3 class="api-name" id="onFragmentStarted(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentStarted</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentStarted(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentStarted</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f)</pre>
+      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onStart()">onStart</a></code> .</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fm</code></td>
+              <td width="100%">
+                <p>Host FragmentManager</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>f</code></td>
+              <td width="100%">
+                <p>Fragment changing state</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onFragmentStopped(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentStopped-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a>
+      <h3 class="api-name" id="onFragmentStopped(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentStopped</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentStopped(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentStopped</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f)</pre>
+      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onStop()">onStop</a></code> .</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fm</code></td>
+              <td width="100%">
+                <p>Host FragmentManager</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>f</code></td>
+              <td width="100%">
+                <p>Fragment changing state</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onFragmentViewCreated(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.view.View, android.os.Bundle)"></a><a name="onFragmentViewCreated-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.view.View-android.os.Bundle-"></a>
+      <h3 class="api-name" id="onFragmentViewCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.view.View,android.os.Bundle)">onFragmentViewCreated</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentViewCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.view.View,android.os.Bundle)">onFragmentViewCreated</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f,&nbsp;View&nbsp;v,&nbsp;Bundle&nbsp;savedInstanceState)</pre>
+      <p>Called after the fragment has returned a non-null view from the FragmentManager's request to <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> .</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fm</code></td>
+              <td width="100%">
+                <p>Host FragmentManager</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>f</code></td>
+              <td width="100%">
+                <p>Fragment that created and owns the view</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>v</code></td>
+              <td width="100%">
+                <p>View returned by the fragment</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>savedInstanceState</code></td>
+              <td width="100%">
+                <p>Saved instance bundle from a previous instance</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onFragmentViewDestroyed(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentViewDestroyed-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a>
+      <h3 class="api-name" id="onFragmentViewDestroyed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentViewDestroyed</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentViewDestroyed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentViewDestroyed</a>(<a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fm,&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;f)</pre>
+      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/androidx/fragment/app/Fragment.html#onDestroyView()">onDestroyView</a></code> .</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fm</code></td>
+              <td width="100%">
+                <p>Host FragmentManager</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>f</code></td>
+              <td width="100%">
+                <p>Fragment changing state</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

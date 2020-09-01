@@ -1,0 +1,196 @@
+<html devsite="true">
+  <head>
+    <title>FragmentFactory</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>FragmentFactory</h1>
+{% setvar page_path %}androidx/fragment/app/FragmentFactory.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>TODO(b/166518424) class signature</p>
+    <p>TODO(b/166518951) inheritance hierarchy</p>
+    <p>TODO(b/166518636) direct subclasses</p>
+    <p>TODO(b/166518636) indirect subclasses</p>
+    <hr>
+    <p>Interface used to control the instantiation of <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> instances. Implementations can be registered with a <code><a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code> via <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">setFragmentFactory</a></code> .</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">See also</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">setFragmentFactory</a></code></td>
+            <td width="100%"><code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">setFragmentFactory</a></code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <p>Nested *</p>
+    <p>Enum values</p>
+    <p>Constants</p>
+    <p>Public fields</p>
+    <p>Protected fields</p>
+    <p>Public constructors</p>
+    <p>Protected constructors</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/fragment/app/FragmentFactory.html#instantiate(java.lang.ClassLoader,java.lang.String)">instantiate</a>(<a href="/reference/java/lang/ClassLoader.html">ClassLoader</a>&nbsp;classLoader,&nbsp;<a href="/reference/java/lang/String.html">String</a>&nbsp;className)</code></div>
+              <p>Create a new instance of a Fragment with the given class name. This uses <code><a href="/reference/androidx/fragment/app/FragmentFactory.html#loadFragmentClass(java.lang.ClassLoader,java.lang.String)">loadFragmentClass</a></code> and the empty constructor of the resulting Class by default.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>static&nbsp;&nbsp;<a href="/reference/java/lang/Class.html">Class</a>&lt;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/fragment/app/FragmentFactory.html#loadFragmentClass(java.lang.ClassLoader,java.lang.String)">loadFragmentClass</a>(<a href="/reference/java/lang/ClassLoader.html">ClassLoader</a>&nbsp;classLoader,&nbsp;<a href="/reference/java/lang/String.html">String</a>&nbsp;className)</code></div>
+              <p>Parse a Fragment Class from the given class name. The resulting Class is kept in a global cache, bypassing the <code><a href="/reference/java/lang/Class.html#forName(java.lang.String)">forName</a></code> calls when passed the same class name again.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="instantiate(java.lang.ClassLoader, java.lang.String)"></a><a name="instantiate-java.lang.ClassLoader-java.lang.String-"></a>
+      <h3 class="api-name" id="instantiate(java.lang.ClassLoader,java.lang.String)">instantiate</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;<a href="/reference/androidx/fragment/app/FragmentFactory.html#instantiate(java.lang.ClassLoader,java.lang.String)">instantiate</a>(<a href="/reference/java/lang/ClassLoader.html">ClassLoader</a>&nbsp;classLoader,&nbsp;<a href="/reference/java/lang/String.html">String</a>&nbsp;className)</pre>
+      <p>Create a new instance of a Fragment with the given class name. This uses <code><a href="/reference/androidx/fragment/app/FragmentFactory.html#loadFragmentClass(java.lang.ClassLoader,java.lang.String)">loadFragmentClass</a></code> and the empty constructor of the resulting Class by default.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+              <td width="100%">
+                <p>Returns a new fragment instance.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>classLoader</code></td>
+              <td width="100%">
+                <p>The default classloader to use for instantiation</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>className</code></td>
+              <td width="100%">
+                <p>The class name of the fragment to instantiate.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Throws</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>@throws androidx.fragment.app.Fragment.InstantiationException If there is a failure in instantiating
+ * the given fragment class.  This is a runtime exception; it is not
+ * normally expected to happen.</code></td>
+              <td width="100%">
+                <p>androidx.fragment.app.Fragment.InstantiationException If there is a failure in instantiating the given fragment class. This is a runtime exception; it is not normally expected to happen.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="loadFragmentClass(java.lang.ClassLoader, java.lang.String)"></a><a name="loadFragmentClass-java.lang.ClassLoader-java.lang.String-"></a>
+      <h3 class="api-name" id="loadFragmentClass(java.lang.ClassLoader,java.lang.String)">loadFragmentClass</h3>
+      <pre class="api-signature no-pretty-print">static&nbsp;&nbsp;<a href="/reference/java/lang/Class.html">Class</a>&lt;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&gt;&nbsp;<a href="/reference/androidx/fragment/app/FragmentFactory.html#loadFragmentClass(java.lang.ClassLoader,java.lang.String)">loadFragmentClass</a>(<a href="/reference/java/lang/ClassLoader.html">ClassLoader</a>&nbsp;classLoader,&nbsp;<a href="/reference/java/lang/String.html">String</a>&nbsp;className)</pre>
+      <p>Parse a Fragment Class from the given class name. The resulting Class is kept in a global cache, bypassing the <code><a href="/reference/java/lang/Class.html#forName(java.lang.String)">forName</a></code> calls when passed the same class name again.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/java/lang/Class.html">Class</a>&lt;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&gt;</code></td>
+              <td width="100%">
+                <p>Returns the parsed Fragment Class</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>classLoader</code></td>
+              <td width="100%">
+                <p>The default classloader to use for loading the Class</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>className</code></td>
+              <td width="100%">
+                <p>The class name of the fragment to parse.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Throws</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>@throws androidx.fragment.app.Fragment.InstantiationException If there is a failure in parsing
+ * the given fragment class.  This is a runtime exception; it is not
+ * normally expected to happen.</code></td>
+              <td width="100%">
+                <p>androidx.fragment.app.Fragment.InstantiationException If there is a failure in parsing the given fragment class. This is a runtime exception; it is not normally expected to happen.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
