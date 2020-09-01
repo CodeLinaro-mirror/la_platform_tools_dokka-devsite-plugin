@@ -39,8 +39,6 @@ class DefaultTocPackageTest {
             """
 - title: androidx.example
   path: androidx/example/package-summary
-
-  section:
             """.trim()
         )
     }
