@@ -31,9 +31,7 @@ import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.model.DFunction
-import org.jetbrains.dokka.model.DPackage
-import org.jetbrains.dokka.pages.PackagePageNode
-import org.jetbrains.dokka.pages.RootPageNode
+import org.jetbrains.dokka.model.DModule
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -545,20 +543,18 @@ internal class FunctionDocumentableConverterTest(
         assertThat(data.lambdaModifiers).isEmpty()
     }
 
-    private fun RootPageNode.summary(fromClass: Boolean = false): TwoPaneSummaryItem {
+    private fun DModule.summary(fromClass: Boolean = false): TwoPaneSummaryItem {
         val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
         return converter.summary(function(fromClass))
     }
 
-    private fun RootPageNode.detail(fromClass: Boolean = false): FunctionDetail {
+    private fun DModule.detail(fromClass: Boolean = false): FunctionDetail {
         val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
         return converter.detail(function(fromClass))
     }
 
-    private fun RootPageNode.function(fromClass: Boolean): DFunction {
-        val packageDoc = children
-            .filterIsInstance<PackagePageNode>().single()
-            .documentable as DPackage
+    private fun DModule.function(fromClass: Boolean): DFunction {
+        val packageDoc = packages.single()
 
         return if (fromClass) {
             packageDoc.classlikes.single().functions.single { it.name == "foo" }

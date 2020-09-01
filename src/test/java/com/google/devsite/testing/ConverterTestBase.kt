@@ -21,7 +21,8 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
 import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
 import kotlinx.coroutines.runBlocking
-import org.jetbrains.dokka.pages.RootPageNode
+import org.jetbrains.dokka.model.DModule
+import org.jetbrains.dokka.pages.ModulePageNode
 import org.jetbrains.dokka.testApi.testRunner.AbstractCoreTest
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -29,9 +30,9 @@ import kotlin.coroutines.suspendCoroutine
 internal abstract class ConverterTestBase(
     private val language: Language = Language.JAVA
 ) : AbstractCoreTest() {
-    protected fun List<String>.render(): RootPageNode = testWithRootPageNode(this)
+    protected fun List<String>.render(): DModule = testWithRootPageNode(this)
 
-    protected fun String.render(): RootPageNode = testWithRootPageNode(trimMargin())
+    protected fun String.render(): DModule = testWithRootPageNode(trimMargin())
 
     protected fun assertPath(actual: String, expected: String) {
         when (language) {
@@ -57,7 +58,7 @@ internal abstract class ConverterTestBase(
         }
     }
 
-    private fun testWithRootPageNode(sourceFiles: List<String>): RootPageNode = runBlocking {
+    private fun testWithRootPageNode(sourceFiles: List<String>): DModule = runBlocking {
         val configuration = dokkaConfiguration {
             sourceSets {
                 sourceSet {
@@ -76,13 +77,14 @@ internal abstract class ConverterTestBase(
                 pluginOverrides = listOf(writerPlugin)
             ) {
                 renderingStage = { node, _ ->
-                    cont.resume(node)
+                    val module = (node as ModulePageNode).documentable as DModule
+                    cont.resume(module)
                 }
             }
         }
     }
 
-    private fun testWithRootPageNode(sourceCode: String): RootPageNode {
+    private fun testWithRootPageNode(sourceCode: String): DModule {
         val source = """
             |/src/main/kotlin/androidx/example/Test.kt
             |package androidx.example

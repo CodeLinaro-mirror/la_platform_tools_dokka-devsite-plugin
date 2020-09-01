@@ -16,12 +16,14 @@
 
 package com.google.devsite.renderer
 
+import com.google.devsite.renderer.converters.classlikes
 import com.google.devsite.renderer.impl.MetadataRenderer
 import com.google.devsite.renderer.impl.PackageRenderer
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import org.jetbrains.dokka.pages.ClasslikePageNode
-import org.jetbrains.dokka.pages.PackagePageNode
+import org.jetbrains.dokka.model.DModule
+import org.jetbrains.dokka.model.DPackage
+import org.jetbrains.dokka.pages.ModulePageNode
 import org.jetbrains.dokka.pages.RootPageNode
 
 internal class DevsiteRenderer(
@@ -29,24 +31,26 @@ internal class DevsiteRenderer(
     private val packageRenderer: PackageRenderer
 ) {
     suspend fun render(root: RootPageNode) {
-        writeRootMetadata(root)
-        for (packagePage in root.children.filterIsInstance<PackagePageNode>()) {
-            writePackage(packagePage)
+        val module = (root as ModulePageNode).documentable as DModule
+
+        writeRootMetadata(module)
+        for (packageDoc in module.packages) {
+            writePackage(packageDoc)
         }
     }
 
-    private suspend fun writeRootMetadata(root: RootPageNode) = coroutineScope {
-        launch { rootFileRenderer.writePackageList(root) }
+    private suspend fun writeRootMetadata(module: DModule) = coroutineScope {
+        launch { rootFileRenderer.writePackageList(module) }
         launch { rootFileRenderer.writeRootIndex() }
-        launch { rootFileRenderer.writePackages(root) }
-        launch { rootFileRenderer.writeClasses(root) }
-        launch { rootFileRenderer.writeToc(root) }
+        launch { rootFileRenderer.writePackages(module) }
+        launch { rootFileRenderer.writeClasses(module) }
+        launch { rootFileRenderer.writeToc(module) }
     }
 
-    private suspend fun writePackage(packagePage: PackagePageNode) = coroutineScope {
-        launch { packageRenderer.writeIndex(packagePage) }
-        launch { packageRenderer.writePackageSummary(packagePage) }
-        for (clazz in packagePage.children.filterIsInstance<ClasslikePageNode>()) {
+    private suspend fun writePackage(packageDoc: DPackage) = coroutineScope {
+        launch { packageRenderer.writeIndex(packageDoc) }
+        launch { packageRenderer.writePackageSummary(packageDoc) }
+        for (clazz in packageDoc.classlikes()) {
             launch { packageRenderer.writeClass(clazz) }
         }
     }

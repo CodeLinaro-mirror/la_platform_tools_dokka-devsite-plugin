@@ -21,9 +21,8 @@ import com.google.devsite.components.Description.Params
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
-import org.jetbrains.dokka.pages.ClasslikePageNode
-import org.jetbrains.dokka.pages.ContentPage
-import org.jetbrains.dokka.pages.RootPageNode
+import org.jetbrains.dokka.model.DModule
+import org.jetbrains.dokka.model.Documentable
 import org.junit.Ignore
 import org.junit.Test
 
@@ -482,15 +481,14 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         )
     }
 
-    private fun RootPageNode.description(
+    private fun DModule.description(
         summary: Boolean = false,
         deprecation: String? = null
     ): DefaultDescription {
-        val tag = children.flatMap { it.children }
-            .filterIsInstance<ClasslikePageNode>().single { it.name == "Foo" }.tag()
+        val tag = packages.single().classlikes.single { it.name == "Foo" }.tag()
         return DefaultDescription(Params(pathProvider(), tag, summary, deprecation))
     }
 
-    private fun ContentPage.tag() =
-        documentable!!.documentation.values.singleOrNull()?.children.orEmpty().single().root
+    private fun Documentable.tag() =
+        documentation.values.singleOrNull()?.children.orEmpty().single().root
 }

@@ -24,8 +24,6 @@ import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.WithChildren
-import org.jetbrains.dokka.pages.PackagePageNode
-import org.jetbrains.dokka.pages.RootPageNode
 
 /** Recursively expands all children. */
 internal val <T> WithChildren<T>.explodedChildren: List<T>
@@ -37,11 +35,6 @@ internal val <T> WithChildren<T>.explodedChildren: List<T>
 internal fun DClasslike.name() = dri.classNames!!
 
 internal fun DClasslike.packageName() = dri.packageName!!
-
-internal fun RootPageNode.packages() = children
-    .filterIsInstance<PackagePageNode>()
-    .map { it.documentable as DPackage }
-    .sortedBy { it.name }
 
 internal fun DPackage.classlikes() =
     explodedChildren.filterIsInstance<DClasslike>().sortedBy { it.name() }

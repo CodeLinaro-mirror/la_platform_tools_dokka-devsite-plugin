@@ -30,7 +30,7 @@ import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
-import org.jetbrains.dokka.pages.RootPageNode
+import org.jetbrains.dokka.model.DModule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -377,7 +377,7 @@ internal class RootDocumentableConverterTest(
         assertPath(inner.url, "androidx/example/Outer.Inner.html")
     }
 
-    private fun RootPageNode.page(
+    private fun DModule.page(
         forClasses: Boolean = false,
         forPackages: Boolean = false
     ): DevsitePage {
@@ -391,7 +391,7 @@ internal class RootDocumentableConverterTest(
         }
     }
 
-    private fun RootPageNode.toc(): TableOfContents {
+    private fun DModule.toc(): TableOfContents {
         val converter = RootDocumentableConverter(language, this, pathProvider())
         return runBlocking { converter.tocPage() }
     }

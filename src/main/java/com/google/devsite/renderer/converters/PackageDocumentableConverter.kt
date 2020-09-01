@@ -32,12 +32,11 @@ import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
-import org.jetbrains.dokka.pages.PackagePageNode
 
 /** Converts documentables into components for the package summary page. */
 internal class PackageDocumentableConverter(
     private val displayLanguage: Language,
-    private val packagePage: PackagePageNode,
+    private val doc: DPackage,
     private val pathProvider: FilePathProvider
 ) {
     private val javadocConverter = DocTagConverter(displayLanguage, pathProvider)
@@ -46,8 +45,6 @@ internal class PackageDocumentableConverter(
 
     /** @return the root component for the package summary page */
     suspend fun summaryPage(): DevsitePage = coroutineScope {
-        val doc = packagePage.documentable as DPackage
-
         val interfaces = async { classlikesToSummary(doc.interfaces()) }
         val classes = async { classlikesToSummary(doc.classes()) }
         val enums = async { classlikesToSummary(doc.enums()) }
@@ -65,7 +62,7 @@ internal class PackageDocumentableConverter(
                 displayLanguage,
                 path = pathProvider.relative.forReference(doc.dri).url,
                 bookPath = pathProvider.book,
-                title = packagePage.name,
+                title = doc.name,
                 content = DefaultPackageSummary(
                     PackageSummary.Params(
                         displayLanguage,

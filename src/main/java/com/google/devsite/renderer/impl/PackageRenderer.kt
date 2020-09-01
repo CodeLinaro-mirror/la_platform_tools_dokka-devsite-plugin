@@ -27,8 +27,8 @@ import com.google.devsite.renderer.impl.paths.PACKAGE_SUMMARY_NAME
 import kotlinx.html.html
 import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.base.renderers.OutputWriter
-import org.jetbrains.dokka.pages.ClasslikePageNode
-import org.jetbrains.dokka.pages.PackagePageNode
+import org.jetbrains.dokka.model.DClasslike
+import org.jetbrains.dokka.model.DPackage
 
 /** Renders docs for a single package, including the summary and each symbol. */
 internal class PackageRenderer(
@@ -37,34 +37,34 @@ internal class PackageRenderer(
     private val displayLanguage: Language
 ) {
     /** Writes the home page. */
-    suspend fun writeIndex(packagePage: PackagePageNode) {
+    suspend fun writeIndex(packageDoc: DPackage) {
         val redirectComponent = DefaultRedirectPage(RedirectPage.Params(PACKAGE_SUMMARY_FILE))
         val index = createHTML().html {
             redirectComponent.render(this)
         }
 
         outputWriter.write(
-            pathProvider.forType(packagePage.name, DIR_INDEX_NAME),
+            pathProvider.forType(packageDoc.name, DIR_INDEX_NAME),
             index,
             ""
         )
     }
 
-    suspend fun writePackageSummary(packagePage: PackagePageNode) {
-        val converter = PackageDocumentableConverter(displayLanguage, packagePage, pathProvider)
+    suspend fun writePackageSummary(packageDoc: DPackage) {
+        val converter = PackageDocumentableConverter(displayLanguage, packageDoc, pathProvider)
         val page = converter.summaryPage()
         val packageSummary = createHTML().html {
             page.render(this)
         }
 
         outputWriter.write(
-            pathProvider.forType(packagePage.name, PACKAGE_SUMMARY_NAME),
+            pathProvider.forType(packageDoc.name, PACKAGE_SUMMARY_NAME),
             packageSummary,
             ""
         )
     }
 
-    suspend fun writeClass(clazz: ClasslikePageNode) {
+    suspend fun writeClass(classlike: DClasslike) {
         // TODO
     }
 }

@@ -38,20 +38,20 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.model.DClasslike
+import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
-import org.jetbrains.dokka.pages.RootPageNode
 
 /** Converts documentables into components for the root metadata (class/package index). */
 internal class RootDocumentableConverter(
     private val displayLanguage: Language,
-    private val root: RootPageNode,
+    private val module: DModule,
     private val pathProvider: FilePathProvider
 ) {
     private val javadocConverter = DocTagConverter(displayLanguage, pathProvider)
 
     /** @return the root component for the class index page */
     fun classesPage(): DevsitePage {
-        val allClasses = root.packages().flatMap { it.classlikes() }.sortedBy { it.name() }
+        val allClasses = module.packages.flatMap { it.classlikes() }.sortedBy { it.name() }
         val alphabetizedClasses = allClasses.groupBy(::categorizeClasslikes)
         val componentClasses = alphabetizedClasses.mapValues { (_, nodes) ->
             DefaultSummaryList(
@@ -79,7 +79,7 @@ internal class RootDocumentableConverter(
 
     /** @return the root component for the package index page */
     fun packagesPage(): DevsitePage {
-        val packages = root.packages()
+        val packages = module.packages
         val componentPackages = DefaultSummaryList(
             SummaryList.Params(
                 items = packages.map(::summaryForPackage)
@@ -104,7 +104,7 @@ internal class RootDocumentableConverter(
 
     /** @return the Devsite _toc.yaml */
     suspend fun tocPage(): TableOfContents {
-        val packageComponents = root.packages().map { packageDoc ->
+        val packageComponents = module.packages.map { packageDoc ->
             coroutineScope {
                 packageForTocAsync(packageDoc)
             }

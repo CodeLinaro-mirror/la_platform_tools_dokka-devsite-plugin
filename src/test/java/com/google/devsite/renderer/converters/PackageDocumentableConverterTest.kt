@@ -30,8 +30,7 @@ import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
-import org.jetbrains.dokka.pages.PackagePageNode
-import org.jetbrains.dokka.pages.RootPageNode
+import org.jetbrains.dokka.model.DModule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -283,9 +282,8 @@ internal class PackageDocumentableConverterTest(
         assertThat(extensions.last().functionSummary().name()).isEqualTo("b")
     }
 
-    private fun RootPageNode.page(): DevsitePage {
-        val packagePage = children.filterIsInstance<PackagePageNode>().single()
-        val converter = PackageDocumentableConverter(language, packagePage, pathProvider())
+    private fun DModule.page(): DevsitePage {
+        val converter = PackageDocumentableConverter(language, packages.single(), pathProvider())
         return runBlocking { converter.summaryPage() }
     }
 

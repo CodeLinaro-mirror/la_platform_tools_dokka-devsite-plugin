@@ -27,7 +27,7 @@ import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.html.html
 import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.base.renderers.OutputWriter
-import org.jetbrains.dokka.pages.RootPageNode
+import org.jetbrains.dokka.model.DModule
 
 /** Renders root metadata files that provide a global overview of the entire packages surface. */
 internal class MetadataRenderer(
@@ -36,8 +36,8 @@ internal class MetadataRenderer(
     private val displayLanguage: Language
 ) {
     /** Writes the list of packages in machine readable format. */
-    suspend fun writePackageList(root: RootPageNode) {
-        val component = DefaultPackageList(PackageList.Params(root.children.map { it.name }))
+    suspend fun writePackageList(module: DModule) {
+        val component = DefaultPackageList(PackageList.Params(module.packages.map { it.name }))
         val packageList = buildString {
             component.render(this)
         }
@@ -56,8 +56,8 @@ internal class MetadataRenderer(
     }
 
     /** Writes the list of packages in human readable format. */
-    suspend fun writePackages(root: RootPageNode) {
-        val converter = RootDocumentableConverter(displayLanguage, root, pathProvider)
+    suspend fun writePackages(module: DModule) {
+        val converter = RootDocumentableConverter(displayLanguage, module, pathProvider)
         val packageIndex = createHTML().html {
             converter.packagesPage().render(this)
         }
@@ -66,8 +66,8 @@ internal class MetadataRenderer(
     }
 
     /** Writes the list of classes in human readable format. */
-    suspend fun writeClasses(root: RootPageNode) {
-        val converter = RootDocumentableConverter(displayLanguage, root, pathProvider)
+    suspend fun writeClasses(module: DModule) {
+        val converter = RootDocumentableConverter(displayLanguage, module, pathProvider)
         val classIndex = createHTML().html {
             converter.classesPage().render(this)
         }
@@ -76,8 +76,8 @@ internal class MetadataRenderer(
     }
 
     /** Writes the ToC for devsite consumption. */
-    suspend fun writeToc(root: RootPageNode) {
-        val converter = RootDocumentableConverter(displayLanguage, root, pathProvider)
+    suspend fun writeToc(module: DModule) {
+        val converter = RootDocumentableConverter(displayLanguage, module, pathProvider)
         val toc = buildString {
             converter.tocPage().render(this)
         }

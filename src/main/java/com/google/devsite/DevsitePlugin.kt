@@ -16,6 +16,7 @@
 
 package com.google.devsite
 
+import com.google.devsite.renderer.DocumentablesWrapper
 import com.google.devsite.renderer.MultiLanguageRenderer
 import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.base.DokkaBase
@@ -23,7 +24,13 @@ import org.jetbrains.dokka.plugability.DokkaPlugin
 import org.jetbrains.dokka.plugability.querySingle
 
 class DevsitePlugin : DokkaPlugin() {
-    val dokkaBase by lazy { plugin<DokkaBase>() }
+    private val dokkaBase by lazy { plugin<DokkaBase>() }
+
+    val translator by extending {
+        CoreExtensions.documentableToPageTranslator providing {
+            DocumentablesWrapper()
+        } override dokkaBase.documentableToPageTranslator
+    }
 
     val renderer by extending {
         CoreExtensions.renderer providing {

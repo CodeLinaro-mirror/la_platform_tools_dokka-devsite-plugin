@@ -29,10 +29,8 @@ import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.title
 import com.google.devsite.testing.ConverterTestBase
-import org.jetbrains.dokka.model.DPackage
+import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.Documentable
-import org.jetbrains.dokka.pages.PackagePageNode
-import org.jetbrains.dokka.pages.RootPageNode
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -197,12 +195,12 @@ internal class DocTagConverterTest(
         }
     }
 
-    private fun RootPageNode.description(): Description {
+    private fun DModule.description(): Description {
         val converter = DocTagConverter(language, pathProvider())
         return converter.summaryDescription(doc())
     }
 
-    private fun RootPageNode.documentation(
+    private fun DModule.documentation(
         paramNames: List<String> = emptyList()
     ): List<ContextFreeComponent> {
         val converter = DocTagConverter(language, pathProvider())
@@ -213,10 +211,8 @@ internal class DocTagConverterTest(
         )
     }
 
-    private fun RootPageNode.doc(): Documentable {
-        val packageDoc = children
-            .filterIsInstance<PackagePageNode>().single()
-            .documentable as DPackage
+    private fun DModule.doc(): Documentable {
+        val packageDoc = packages.single()
 
         return packageDoc.classlikes.singleOrNull() ?: packageDoc.functions.single()
     }
