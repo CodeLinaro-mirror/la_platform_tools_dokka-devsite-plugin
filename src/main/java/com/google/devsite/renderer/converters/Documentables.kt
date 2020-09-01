@@ -51,6 +51,8 @@ internal fun DPackage.interfaces() =
 internal fun DPackage.annotations() =
     explodedChildren.filterIsInstance<DAnnotation>().sortedBy { it.name() }
 
+internal fun DPackage.typeAliases() = typealiases.sortedBy { it.name }
+
 internal fun DPackage.exceptions() = classes().filter { clazz ->
     clazz.functions.any { function -> function.dri.classNames == "Throwable" }
 }

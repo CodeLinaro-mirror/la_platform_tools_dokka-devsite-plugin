@@ -29,9 +29,9 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
+import org.jetbrains.dokka.model.Documentable
 
 /** Converts documentables into components for the package summary page. */
 internal class PackageDocumentableConverter(
@@ -45,11 +45,12 @@ internal class PackageDocumentableConverter(
 
     /** @return the root component for the package summary page */
     suspend fun summaryPage(): DevsitePage = coroutineScope {
-        val interfaces = async { classlikesToSummary(doc.interfaces()) }
-        val classes = async { classlikesToSummary(doc.classes()) }
-        val enums = async { classlikesToSummary(doc.enums()) }
-        val exceptions = async { classlikesToSummary(doc.exceptions()) }
-        val annotations = async { classlikesToSummary(doc.annotations()) }
+        val interfaces = async { docsToSummary(doc.interfaces()) }
+        val classes = async { docsToSummary(doc.classes()) }
+        val enums = async { docsToSummary(doc.enums()) }
+        val exceptions = async { docsToSummary(doc.exceptions()) }
+        val annotations = async { docsToSummary(doc.annotations()) }
+        val typeAliases = async { docsToSummary(doc.typeAliases()) }
 
         val topLevelFunctionsSummary = async { functionsToSummary(doc.topLevelFunctions()) }
         val extensionFunctionsSummary = async { functionsToSummary(doc.extensionFunctions()) }
@@ -71,6 +72,7 @@ internal class PackageDocumentableConverter(
                         enums = enums.await(),
                         exceptions = exceptions.await(),
                         annotations = annotations.await(),
+                        typeAliases = typeAliases.await(),
                         topLevelFunctionsSummary = topLevelFunctionsSummary.await(),
                         extensionFunctionsSummary = extensionFunctionsSummary.await(),
                         topLevelFunctions = topLevelFunctions.await(),
@@ -81,7 +83,7 @@ internal class PackageDocumentableConverter(
         )
     }
 
-    private fun classlikesToSummary(classlikes: List<DClasslike>): SummaryList {
+    private fun docsToSummary(classlikes: List<Documentable>): SummaryList {
         val components = classlikes.map { classlike ->
             DefaultTwoPaneSummaryItem(
                 TwoPaneSummaryItem.Params(

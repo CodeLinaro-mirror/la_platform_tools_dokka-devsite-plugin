@@ -59,3 +59,5 @@ suspend inline fun <T, R : Number> (T.(Int) -> List<R>).foo(
 ): List<Float> = emptyList()
 
 class Foo
+
+typealias Bar = Foo

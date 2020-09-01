@@ -37,6 +37,8 @@ internal class DefaultPackageSummary(
         renderSummary(data.annotations, "Annotations")
 
         if (data.displayLanguage == Language.KOTLIN) {
+            renderSummary(data.typeAliases, "Type aliases")
+
             renderSummary(data.topLevelFunctionsSummary, "Top-level functions summary")
             renderSummary(data.extensionFunctionsSummary, "Extension functions summary")
 
