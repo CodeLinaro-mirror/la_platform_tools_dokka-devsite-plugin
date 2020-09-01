@@ -17,11 +17,13 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.components.Link
 import com.google.devsite.components.Raw
 import com.google.devsite.components.SummaryList
 import com.google.devsite.components.TableTitle
 import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultDescription
+import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultRaw
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableTitle
@@ -29,6 +31,7 @@ import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.impl.UndocumentedSymbolDescription
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DEnum
@@ -41,6 +44,7 @@ import org.jetbrains.dokka.model.doc.Constructor
 import org.jetbrains.dokka.model.doc.CustomTagWrapper
 import org.jetbrains.dokka.model.doc.Deprecated
 import org.jetbrains.dokka.model.doc.Description
+import org.jetbrains.dokka.model.doc.DocumentationLink
 import org.jetbrains.dokka.model.doc.Param
 import org.jetbrains.dokka.model.doc.Property
 import org.jetbrains.dokka.model.doc.Receiver
@@ -176,7 +180,7 @@ internal class DocTagConverter(
         val params = tags.map { tag ->
             DefaultTwoPaneSummaryItem(
                 TwoPaneSummaryItem.Params(
-                    title = pathProvider.linkForReference(tag.address!!),
+                    title = tag.toLink(),
                     description = description(tag)
                 )
             )
@@ -263,5 +267,60 @@ internal class DocTagConverter(
             is Param -> paramNames.indexOf(tag.name)
             else -> -1
         }
+    }
+
+    /**
+     * Extract the see tag's reference into a link.
+     *
+     * This one is painful. An address is only sometimes there, other times there's a docs link
+     * nested somewhere in the tree, and as a last resort the name is always present with whatever
+     * a developer writes which could either be a fully qualified reference or just the URL
+     * fragment.
+     */
+    private fun See.toLink(): Link {
+        val address = address
+        if (address != null) {
+            return pathProvider.linkForReference(address)
+        }
+        val docsLink = root.explodedChildren.filterIsInstance<DocumentationLink>().singleOrNull()
+        if (docsLink != null) {
+            return pathProvider.linkForReference(docsLink.dri)
+        }
+
+        // TODO(b/167437580): figure out how to reliably parse links
+        val segments = name.split("#")
+        return if (segments.size == 1) {
+            // Assume we have a fully qualified type
+            val (packageName, typeName) = fullyQualifiedTypeToPackageNameAndType(segments.single())
+            if (packageName.isEmpty() || typeName.isEmpty()) {
+                // Turns out we didn't, so give up
+                DefaultLink(Link.Params(name, url = ""))
+            } else {
+                pathProvider.linkForReference(DRI(packageName, typeName))
+            }
+        } else if (segments.size == 2) {
+            val (type, anchor) = segments
+            if (type.isEmpty()) {
+                // Self link
+                DefaultLink(Link.Params(anchor, anchor))
+            } else {
+                // Assume fully qualified link with anchor
+                val (packageName, typeName) = fullyQualifiedTypeToPackageNameAndType(type)
+                val url = pathProvider.forType(packageName, typeName)
+                DefaultLink(Link.Params(typeName, "$url#$anchor"))
+            }
+        } else {
+            error("Could not understand path: $name")
+        }
+    }
+
+    /** Horrible guess-work to try and extract the package and type names. */
+    private fun fullyQualifiedTypeToPackageNameAndType(full: String): Pair<String, String> {
+        val parts = full.split(".")
+
+        val packageName = parts.takeWhile { it.all(Char::isLowerCase) }.joinToString(".")
+        val typeName = parts.takeLastWhile { it.first().isUpperCase() }.joinToString(".")
+
+        return packageName to typeName
     }
 }
