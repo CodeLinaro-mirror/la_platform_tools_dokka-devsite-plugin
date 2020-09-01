@@ -515,6 +515,49 @@ internal class FunctionDocumentableConverterTest(
     }
 
     @Test
+    fun `Function summary component understands Java primitives`() {
+        val summary = """
+            |public void foo(
+            |    boolean a, int b, double c, float d, short e, long f, char g, byte h) {}
+        """.render(java = true).summary(fromClass = true)
+
+        val function = summary.functionSummary()
+        val returnType = summary.returnSummary().type.link()
+        val signature = function.data.signature
+
+        javaOnly {
+            assertThat(returnType.name).isEqualTo("void")
+
+            val expected =
+                listOf("boolean", "int", "double", "float", "short", "long", "char", "byte")
+            for ((i, param) in signature.data.parameters.withIndex()) {
+                assertThat(param.data.primary.link().name).isEqualTo(expected[i])
+            }
+        }
+        kotlinOnly {
+            assertThat(returnType.name).isEqualTo("Unit")
+
+            val expected =
+                listOf("Boolean", "Int", "Double", "Float", "Short", "Long", "Char", "Byte")
+            for ((i, param) in signature.data.parameters.withIndex()) {
+                assertThat(param.data.primary.link().name).isEqualTo(expected[i])
+            }
+        }
+    }
+
+    @Test
+    fun `Function summary component understands Java object`() {
+        val summary = """
+            |public Object foo() {}
+        """.render(java = true).summary(fromClass = true)
+
+        val returnType = summary.returnSummary().type.link()
+
+        javaOnly { assertThat(returnType.name).isEqualTo("Object") }
+        kotlinOnly { assertThat(returnType.name).isEqualTo("Any") }
+    }
+
+    @Test
     fun `Function detail component has correct name`() {
         val detail = """
             |fun foo()
