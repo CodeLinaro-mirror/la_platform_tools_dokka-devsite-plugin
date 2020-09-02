@@ -79,7 +79,7 @@ internal class RootDocumentableConverter(
 
     /** @return the root component for the package index page */
     fun packagesPage(): DevsitePage {
-        val packages = module.packages
+        val packages = module.sortedPackages()
         val componentPackages = DefaultSummaryList(
             SummaryList.Params(
                 items = packages.map(::summaryForPackage)
@@ -104,7 +104,7 @@ internal class RootDocumentableConverter(
 
     /** @return the Devsite _toc.yaml */
     suspend fun tocPage(): TableOfContents {
-        val packageComponents = module.packages.map { packageDoc ->
+        val packageComponents = module.sortedPackages().map { packageDoc ->
             coroutineScope {
                 packageForTocAsync(packageDoc)
             }

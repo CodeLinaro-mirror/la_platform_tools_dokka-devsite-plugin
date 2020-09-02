@@ -21,6 +21,7 @@ import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DEnum
 import org.jetbrains.dokka.model.DInterface
+import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.WithChildren
@@ -35,6 +36,8 @@ internal val <T> WithChildren<T>.explodedChildren: List<T>
 internal fun DClasslike.name() = dri.classNames!!
 
 internal fun DClasslike.packageName() = dri.packageName!!
+
+internal fun DModule.sortedPackages() = packages.sortedBy { it.name }
 
 internal fun DPackage.classlikes() =
     explodedChildren.filterIsInstance<DClasslike>().sortedBy { it.name() }
