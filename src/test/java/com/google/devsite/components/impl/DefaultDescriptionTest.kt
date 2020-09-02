@@ -289,6 +289,79 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
     }
 
     @Test
+    fun `Nested lists render correctly`() {
+        val component = """
+            |/**
+            | * Stuff:
+            | * *   a
+            | *     1.  a
+            | *     2.  b
+            | *     3.  c
+            | * *   b
+            | *     -   a
+            | *     -   b
+            | *     -   c
+            | *         *   a
+            | * *   c
+            | */
+            |class Foo
+        """.render().description()
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p>
+    <p>Stuff:</p>
+    <ul>
+      <li>
+        <p>a</p>
+      </li>
+      <ol>
+        <li>
+          <p>a</p>
+        </li>
+        <li>
+          <p>b</p>
+        </li>
+        <li>
+          <p>c</p>
+        </li>
+      </ol>
+      <li>
+        <p>b</p>
+      </li>
+      <ul>
+        <li>
+          <p>a</p>
+        </li>
+        <li>
+          <p>b</p>
+        </li>
+        <li>
+          <p>c</p>
+        </li>
+        <ul>
+          <li>
+            <p>a</p>
+          </li>
+        </ul>
+      </ul>
+      <li>
+        <p>c</p>
+      </li>
+    </ul>
+  </p>
+</body>
+            """.trim()
+        )
+    }
+
+    @Test
     fun `Table renders correctly`() {
         val component = """
             |/**

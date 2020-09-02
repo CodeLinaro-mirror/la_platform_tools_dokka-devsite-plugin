@@ -263,6 +263,7 @@ internal class DefaultDescription(
         for (tag in tags) {
             when (tag) {
                 is Li -> li { renderTags(tag.children) }
+                is Ol, is Ul -> renderTags(listOf(tag))
                 else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
             }
         }
@@ -272,6 +273,7 @@ internal class DefaultDescription(
         for (tag in tags) {
             when (tag) {
                 is Li -> li { renderTags(tag.children) }
+                is Ol, is Ul -> renderTags(listOf(tag))
                 else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
             }
         }
