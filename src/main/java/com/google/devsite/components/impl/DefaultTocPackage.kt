@@ -26,6 +26,16 @@ internal class DefaultTocPackage(
         appendLine("- title: ${data.name}")
         appendLine("  path: ${data.packageUrl}")
         appendLine()
+
+        val content = listOf(
+            data.interfaces,
+            data.classes,
+            data.enums,
+            data.exceptions,
+            data.annotations
+        ).flatten()
+        if (content.isEmpty()) return
+
         appendLine("  section:")
 
         renderTypes("Interfaces", data.interfaces)
