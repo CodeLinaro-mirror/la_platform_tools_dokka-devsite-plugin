@@ -27,7 +27,8 @@ internal interface TocPackage : TextComponent {
         val classes: List<Type> = emptyList(),
         val enums: List<Type> = emptyList(),
         val exceptions: List<Type> = emptyList(),
-        val annotations: List<Type> = emptyList()
+        val annotations: List<Type> = emptyList(),
+        val typeAliases: List<Type> = emptyList()
     )
 
     data class Type(val name: String, val url: String)

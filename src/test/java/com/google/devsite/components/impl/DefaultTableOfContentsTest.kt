@@ -39,11 +39,11 @@ class DefaultTableOfContentsTest {
         assertThat(output).isEqualTo(
             """
 toc:
-- title: Class Index
-  path: classes.html
+- title: "Class Index"
+  path: "classes.html"
 
-- title: Package Index
-  path: packages.html
+- title: "Package Index"
+  path: "packages.html"
 
 noop
 noop

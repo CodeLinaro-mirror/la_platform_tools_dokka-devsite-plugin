@@ -37,8 +37,8 @@ class DefaultTocPackageTest {
 
         assertThat(output).isEqualTo(
             """
-- title: androidx.example
-  path: androidx/example/package-summary
+- title: "androidx.example"
+  path: "androidx/example/package-summary"
             """.trim()
         )
     }
@@ -53,7 +53,8 @@ class DefaultTocPackageTest {
                 classes = listOf(Type("Class", "link")),
                 enums = listOf(Type("Enum", "link")),
                 exceptions = listOf(Type("Exception", "link")),
-                annotations = listOf(Type("Annotation", "link"))
+                annotations = listOf(Type("Annotation", "link")),
+                typeAliases = listOf(Type("TypeAlias", "link"))
             )
         )
 
@@ -63,39 +64,45 @@ class DefaultTocPackageTest {
 
         assertThat(output).isEqualTo(
             """
-- title: androidx.example
-  path: androidx/example/package-summary
+- title: "androidx.example"
+  path: "androidx/example/package-summary"
 
   section:
-  - title: Interfaces
+  - title: "Interfaces"
 
     section:
-    - title: Interface
-      path: link
+    - title: "Interface"
+      path: "link"
 
-  - title: Classes
-
-    section:
-    - title: Class
-      path: link
-
-  - title: Enums
+  - title: "Classes"
 
     section:
-    - title: Enum
-      path: link
+    - title: "Class"
+      path: "link"
 
-  - title: Exceptions
-
-    section:
-    - title: Exception
-      path: link
-
-  - title: Annotations
+  - title: "Enums"
 
     section:
-    - title: Annotation
-      path: link
+    - title: "Enum"
+      path: "link"
+
+  - title: "Exceptions"
+
+    section:
+    - title: "Exception"
+      path: "link"
+
+  - title: "Annotations"
+
+    section:
+    - title: "Annotation"
+      path: "link"
+
+  - title: "Type aliases"
+
+    section:
+    - title: "TypeAlias"
+      path: "link"
             """.trim()
         )
     }
@@ -119,17 +126,17 @@ class DefaultTocPackageTest {
 
         assertThat(output).isEqualTo(
             """
-- title: androidx.example
-  path: androidx/example/package-summary
+- title: "androidx.example"
+  path: "androidx/example/package-summary"
 
   section:
-  - title: Interfaces
+  - title: "Interfaces"
 
     section:
-    - title: InterfaceA
-      path: link/a
-    - title: InterfaceB
-      path: link/b
+    - title: "InterfaceA"
+      path: "link/a"
+    - title: "InterfaceB"
+      path: "link/b"
             """.trim()
         )
     }
