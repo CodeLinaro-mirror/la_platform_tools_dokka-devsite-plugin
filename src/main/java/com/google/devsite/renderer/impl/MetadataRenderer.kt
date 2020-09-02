@@ -22,6 +22,7 @@ import com.google.devsite.components.impl.DefaultPackageList
 import com.google.devsite.components.impl.DefaultRedirectPage
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.RootDocumentableConverter
+import com.google.devsite.renderer.converters.sortedPackages
 import com.google.devsite.renderer.impl.paths.CLASS_INDEX_FILE
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.html.html
@@ -37,7 +38,8 @@ internal class MetadataRenderer(
 ) {
     /** Writes the list of packages in machine readable format. */
     suspend fun writePackageList(module: DModule) {
-        val component = DefaultPackageList(PackageList.Params(module.packages.map { it.name }))
+        val component =
+            DefaultPackageList(PackageList.Params(module.sortedPackages().map { it.name }))
         val packageList = buildString {
             component.render(this)
         }

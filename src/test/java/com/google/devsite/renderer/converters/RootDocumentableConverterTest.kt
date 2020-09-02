@@ -315,7 +315,7 @@ internal class RootDocumentableConverterTest(
                 |class B
             """.trimMargin(),
             """
-                |/src/main/kotlin/androidx/example/A.kt
+                |/src/main/kotlin/androidx/example/a/A.kt
                 |package a
                 |
                 |class A
