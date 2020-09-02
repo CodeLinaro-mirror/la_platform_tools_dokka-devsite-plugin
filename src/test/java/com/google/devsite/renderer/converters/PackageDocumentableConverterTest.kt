@@ -225,6 +225,33 @@ internal class PackageDocumentableConverterTest(
     }
 
     @Test
+    fun `Package summary creates components for type aliases`() {
+        val page = """
+            |typealias ImATypeAlias = String
+        """.render().page()
+
+        val summary = page.content<PackageSummary>()
+        val annotation = summary.data.typeAliases.item()
+
+        assertThat(annotation.link().name).isEqualTo("ImATypeAlias")
+        assertPath(annotation.link().url, "androidx/example/ImATypeAlias.html")
+    }
+
+    @Test
+    fun `Package summary creates components with sorted type aliases`() {
+        val page = """
+            |typealias B = String
+            |typealias A = String
+        """.render().page()
+
+        val summary = page.content<PackageSummary>()
+        val classes = summary.data.typeAliases.items(2)
+
+        assertThat(classes.first().link().name).isEqualTo("A")
+        assertThat(classes.last().link().name).isEqualTo("B")
+    }
+
+    @Test
     fun `Package summary creates components for top-level functions`() {
         val page = """
             |fun foo()

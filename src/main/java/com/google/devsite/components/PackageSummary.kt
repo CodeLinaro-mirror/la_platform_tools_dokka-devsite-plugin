@@ -29,6 +29,7 @@ internal interface PackageSummary : ContextFreeComponent {
         val enums: SummaryList,
         val exceptions: SummaryList,
         val annotations: SummaryList,
+        val typeAliases: SummaryList,
         val topLevelFunctionsSummary: SummaryList,
         val extensionFunctionsSummary: SummaryList,
         val topLevelFunctions: List<ContextFreeComponent>,

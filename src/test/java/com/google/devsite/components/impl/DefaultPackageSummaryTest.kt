@@ -36,6 +36,7 @@ class DefaultPackageSummaryTest {
                 enums = NoopSummaryList(shown = false),
                 exceptions = NoopSummaryList(shown = false),
                 annotations = NoopSummaryList(shown = false),
+                typeAliases = NoopSummaryList(shown = false),
                 topLevelFunctionsSummary = NoopSummaryList(shown = false),
                 extensionFunctionsSummary = NoopSummaryList(shown = false),
                 topLevelFunctions = emptyList(),
@@ -68,6 +69,7 @@ class DefaultPackageSummaryTest {
                 enums = NoopSummaryList(shown = false),
                 exceptions = NoopSummaryList(shown = false),
                 annotations = NoopSummaryList(shown = false),
+                typeAliases = NoopSummaryList(shown = false),
                 topLevelFunctionsSummary = NoopSummaryList(shown = false),
                 extensionFunctionsSummary = NoopSummaryList(shown = false),
                 topLevelFunctions = emptyList(),
@@ -100,6 +102,7 @@ class DefaultPackageSummaryTest {
                 enums = NoopSummaryList(shown = true),
                 exceptions = NoopSummaryList(shown = false),
                 annotations = NoopSummaryList(shown = false),
+                typeAliases = NoopSummaryList(shown = false),
                 topLevelFunctionsSummary = NoopSummaryList(shown = false),
                 extensionFunctionsSummary = NoopSummaryList(shown = false),
                 topLevelFunctions = emptyList(),
@@ -132,6 +135,7 @@ class DefaultPackageSummaryTest {
                 enums = NoopSummaryList(shown = false),
                 exceptions = NoopSummaryList(shown = true),
                 annotations = NoopSummaryList(shown = false),
+                typeAliases = NoopSummaryList(shown = false),
                 topLevelFunctionsSummary = NoopSummaryList(shown = false),
                 extensionFunctionsSummary = NoopSummaryList(shown = false),
                 topLevelFunctions = emptyList(),
@@ -164,6 +168,7 @@ class DefaultPackageSummaryTest {
                 enums = NoopSummaryList(shown = false),
                 exceptions = NoopSummaryList(shown = false),
                 annotations = NoopSummaryList(shown = true),
+                typeAliases = NoopSummaryList(shown = false),
                 topLevelFunctionsSummary = NoopSummaryList(shown = false),
                 extensionFunctionsSummary = NoopSummaryList(shown = false),
                 topLevelFunctions = emptyList(),
@@ -187,6 +192,39 @@ class DefaultPackageSummaryTest {
     }
 
     @Test
+    fun `Package summary with only type aliases renders correctly`() {
+        val component = DefaultPackageSummary(
+            Params(
+                displayLanguage = Language.KOTLIN,
+                interfaces = NoopSummaryList(shown = false),
+                classes = NoopSummaryList(shown = false),
+                enums = NoopSummaryList(shown = false),
+                exceptions = NoopSummaryList(shown = false),
+                annotations = NoopSummaryList(shown = false),
+                typeAliases = NoopSummaryList(shown = true),
+                topLevelFunctionsSummary = NoopSummaryList(shown = false),
+                extensionFunctionsSummary = NoopSummaryList(shown = false),
+                topLevelFunctions = emptyList(),
+                extensionFunctions = emptyList()
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <h2>Type aliases</h2>
+  <div>noop</div>
+</div>
+            """.trim()
+        )
+    }
+
+    @Test
     fun `Package summary with all class-likes renders correctly`() {
         val component = DefaultPackageSummary(
             Params(
@@ -196,6 +234,7 @@ class DefaultPackageSummaryTest {
                 enums = NoopSummaryList(),
                 exceptions = NoopSummaryList(),
                 annotations = NoopSummaryList(),
+                typeAliases = NoopSummaryList(),
                 topLevelFunctionsSummary = NoopSummaryList(),
                 extensionFunctionsSummary = NoopSummaryList(),
                 topLevelFunctions = listOf(NoopContextFreeComponent),
@@ -236,6 +275,7 @@ class DefaultPackageSummaryTest {
                 enums = NoopSummaryList(shown = false),
                 exceptions = NoopSummaryList(shown = false),
                 annotations = NoopSummaryList(shown = false),
+                typeAliases = NoopSummaryList(shown = false),
                 topLevelFunctionsSummary = NoopSummaryList(shown = true),
                 extensionFunctionsSummary = NoopSummaryList(shown = false),
                 topLevelFunctions = listOf(NoopContextFreeComponent),
@@ -270,6 +310,7 @@ class DefaultPackageSummaryTest {
                 enums = NoopSummaryList(shown = false),
                 exceptions = NoopSummaryList(shown = false),
                 annotations = NoopSummaryList(shown = false),
+                typeAliases = NoopSummaryList(shown = false),
                 topLevelFunctionsSummary = NoopSummaryList(shown = false),
                 extensionFunctionsSummary = NoopSummaryList(shown = true),
                 topLevelFunctions = emptyList(),
@@ -304,6 +345,7 @@ class DefaultPackageSummaryTest {
                 enums = NoopSummaryList(shown = false),
                 exceptions = NoopSummaryList(shown = false),
                 annotations = NoopSummaryList(shown = false),
+                typeAliases = NoopSummaryList(shown = false),
                 topLevelFunctionsSummary = NoopSummaryList(shown = true),
                 extensionFunctionsSummary = NoopSummaryList(shown = true),
                 topLevelFunctions = listOf(NoopContextFreeComponent),
