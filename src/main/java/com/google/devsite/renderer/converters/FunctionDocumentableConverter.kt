@@ -34,16 +34,21 @@ import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultTypeSummary
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.AdditionalModifiers
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.FunctionModifiers
+import org.jetbrains.dokka.model.JavaObject
 import org.jetbrains.dokka.model.Nullable
 import org.jetbrains.dokka.model.OtherParameter
+import org.jetbrains.dokka.model.PrimitiveJavaType
 import org.jetbrains.dokka.model.Projection
 import org.jetbrains.dokka.model.Star
 import org.jetbrains.dokka.model.TypeConstructor
+import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Variance
+import org.jetbrains.dokka.model.Void
 
 /** Converts documentable functions into function components. */
 internal class FunctionDocumentableConverter(
@@ -178,7 +183,7 @@ internal class FunctionDocumentableConverter(
         } else {
             null
         }
-        is OtherParameter, Star -> null
+        is OtherParameter, is PrimitiveJavaType, is UnresolvedBound, Star, JavaObject -> null
         is Nullable -> inner.receiver()
         is Variance -> inner.receiver()
         else -> error("Unknown bound: $this")
@@ -198,7 +203,8 @@ internal class FunctionDocumentableConverter(
     private fun Projection.toComponent(): ParameterType {
         val generics: List<ParameterType> = when (this) {
             is TypeConstructor -> projections.map { it.toComponent() }
-            is OtherParameter, Star -> emptyList()
+            is OtherParameter, is PrimitiveJavaType, is UnresolvedBound,
+            Star, Void, JavaObject -> emptyList()
             is Nullable -> listOf(inner.toComponent())
             // TODO(b/166530498): support variance
             is Variance -> listOf(inner.toComponent())
@@ -233,6 +239,19 @@ internal class FunctionDocumentableConverter(
                 url = ""
             )
         )
+        Void -> when (displayLanguage) {
+            Language.JAVA -> DefaultLink(Link.Params(name = "void", url = ""))
+            Language.KOTLIN -> pathProvider.linkForReference(DRI("kotlin", "Unit"))
+        }
+        JavaObject -> when (displayLanguage) {
+            Language.JAVA -> pathProvider.linkForReference(DRI("java.lang", "Object"))
+            Language.KOTLIN -> pathProvider.linkForReference(DRI("kotlin", "Any"))
+        }
+        is PrimitiveJavaType -> when (displayLanguage) {
+            Language.JAVA -> DefaultLink(Link.Params(name = name, url = ""))
+            Language.KOTLIN -> pathProvider.linkForReference(DRI("kotlin", name.capitalize()))
+        }
+        is UnresolvedBound -> DefaultLink(Link.Params(name = name, url = ""))
         is Nullable -> inner.toLink()
         // TODO(b/166530498): support variance
         is Variance -> inner.toLink()
@@ -253,10 +272,9 @@ internal class FunctionDocumentableConverter(
                 isStandardLambda || isSuspendLambda
             }
         }
-        is OtherParameter -> false
         is Nullable -> inner.isLambda()
         is Variance -> inner.isLambda()
-        is Star -> false
+        is OtherParameter, is PrimitiveJavaType, is UnresolvedBound, Star, JavaObject -> false
         else -> error("Unknown bound: $this")
     }
 
@@ -276,14 +294,5 @@ internal class FunctionDocumentableConverter(
             callable.anchor(separator = ", "),
             callable.anchor("-", "-", "-")
         )
-    }
-
-    private fun Projection.toFullyQualifiedSignature(): String = when (this) {
-        is TypeConstructor -> dri.packageName!! + "." + dri.classNames!!
-        is OtherParameter -> name
-        is Nullable -> inner.toFullyQualifiedSignature()
-        is Variance -> inner.toFullyQualifiedSignature()
-        is Star -> ""
-        else -> error("Unknown bound: $this")
     }
 }

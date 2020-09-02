@@ -32,7 +32,11 @@ internal abstract class ConverterTestBase(
 ) : AbstractCoreTest() {
     protected fun List<String>.render(): DModule = testWithRootPageNode(this)
 
-    protected fun String.render(): DModule = testWithRootPageNode(trimMargin())
+    protected fun String.render(java: Boolean = false): DModule = if (java) {
+        testJavaWithRootPageNode(trimMargin())
+    } else {
+        testWithRootPageNode(trimMargin())
+    }
 
     protected fun assertPath(actual: String, expected: String) {
         when (language) {
@@ -62,7 +66,7 @@ internal abstract class ConverterTestBase(
         val configuration = dokkaConfiguration {
             sourceSets {
                 sourceSet {
-                    sourceRoots = sourceFiles.map { it.lineSequence().first().removePrefix("/") }
+                    sourceRoots = listOf("src/main")
                 }
             }
         }
@@ -90,6 +94,18 @@ internal abstract class ConverterTestBase(
             |package androidx.example
             |
             |$sourceCode
+        """.trimMargin()
+        return testWithRootPageNode(listOf(source))
+    }
+
+    private fun testJavaWithRootPageNode(sourceCode: String): DModule {
+        val source = """
+            |/src/main/java/androidx/example/Test.java
+            |package androidx.example;
+            |
+            |public class Test {
+            |$sourceCode
+            |}
         """.trimMargin()
         return testWithRootPageNode(listOf(source))
     }
