@@ -7,6 +7,7 @@ set -e
 
 start_dir="$PWD"
 path="${1:-"testData/simple/docs/reference"}"
+path=${path%/} # Strip trailing slash so sed parsing works below
 package_base="${2:-"dokkatest"}"
 
 client="$(p4 g4d -f tmp-dokka-devsite)"
