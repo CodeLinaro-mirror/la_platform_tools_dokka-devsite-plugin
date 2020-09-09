@@ -156,6 +156,98 @@ internal class DocTagConverterTest(
     }
 
     @Test
+    fun `See also parses external link`() {
+        val documentation = """
+            |/** @see String */
+            |class Foo
+        """.render().documentation()
+
+        val paramSummary = documentation.last() as SummaryList
+        val paramText = paramSummary.item()
+
+        assertPath(paramText.link().url, "kotlin/String.html")
+    }
+
+    @Test
+    fun `See also parses internal link`() {
+        val documentation = """
+            |/** @see Bar */
+            |class Foo { class Bar }
+        """.render().documentation()
+
+        val paramSummary = documentation.last() as SummaryList
+        val paramText = paramSummary.item()
+
+        assertPath(paramText.link().url, "androidx/example/Foo.Bar.html")
+    }
+
+    @Test
+    fun `See also parses link with Kotlin style function`() {
+        val documentation = """
+            |/** @see String.isEmpty */
+            |class Foo
+        """.render().documentation()
+
+        val paramSummary = documentation.last() as SummaryList
+        val paramText = paramSummary.item()
+
+        // TODO(b/167437580): figure out how to reliably parse links
+        assertThat(paramText.link().url).isEmpty()
+    }
+
+    @Test
+    fun `See also parses link with Java style function`() {
+        val documentation = """
+            |/** @see String#isEmpty() */
+            |public void foo() {}
+        """.render(java = true).documentation(doc = ::classFunctionDoc)
+
+        val paramSummary = documentation.last() as SummaryList
+        val paramText = paramSummary.item()
+
+        assertPath(paramText.link().url, "java/lang/String.html#isEmpty()")
+    }
+
+    @Test
+    fun `See also parses link with unresolved function`() {
+        val documentation = """
+            |/** @see com.example.foo.Foo#bar() */
+            |public void foo() {}
+        """.render(java = true).documentation(doc = ::classFunctionDoc)
+
+        val paramSummary = documentation.last() as SummaryList
+        val paramText = paramSummary.item()
+
+        assertPath(paramText.link().url, "com/example/foo/Foo.html#bar()")
+    }
+
+    @Test
+    fun `See also parses link with class`() {
+        val documentation = """
+            |/** @see String */
+            |public void foo() {}
+        """.render(java = true).documentation(doc = ::classFunctionDoc)
+
+        val paramSummary = documentation.last() as SummaryList
+        val paramText = paramSummary.item()
+
+        assertPath(paramText.link().url, "java/lang/String.html")
+    }
+
+    @Test
+    fun `See also parses link with unresolved class`() {
+        val documentation = """
+            |/** @see com.example.foo.Foo */
+            |public void foo() {}
+        """.render(java = true).documentation(doc = ::classFunctionDoc)
+
+        val paramSummary = documentation.last() as SummaryList
+        val paramText = paramSummary.item()
+
+        assertPath(paramText.link().url, "com/example/foo/Foo.html")
+    }
+
+    @Test
     fun `Full documentation sorts tags in pre-defined order`() {
         val documentation = """
             |/**
@@ -197,11 +289,13 @@ internal class DocTagConverterTest(
 
     private fun DModule.description(): Description {
         val converter = DocTagConverter(language, pathProvider())
-        return converter.summaryDescription(doc())
+        return converter.summaryDescription(smartDoc(this))
     }
 
     private fun DModule.documentation(
-        paramNames: List<String> = emptyList()
+        doc: DModule.() -> Documentable = ::smartDoc,
+        paramNames: List<String> = emptyList(),
+        insideClass: Boolean = false
     ): List<ContextFreeComponent> {
         val converter = DocTagConverter(language, pathProvider())
         return converter.metadata(
@@ -211,10 +305,14 @@ internal class DocTagConverterTest(
         )
     }
 
-    private fun DModule.doc(): Documentable {
-        val packageDoc = packages.single()
+    private fun smartDoc(module: DModule): Documentable {
+        val packageDoc = module.packages.single()
 
         return packageDoc.classlikes.singleOrNull() ?: packageDoc.functions.single()
+    }
+
+    private fun classFunctionDoc(module: DModule): Documentable {
+        return module.packages.single().classlikes.single().functions.single()
     }
 
     companion object {
