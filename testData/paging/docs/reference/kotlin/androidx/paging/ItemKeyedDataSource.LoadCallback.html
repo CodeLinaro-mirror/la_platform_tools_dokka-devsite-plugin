@@ -1,0 +1,96 @@
+<html devsite="true">
+  <head>
+    <title>ItemKeyedDataSource.LoadCallback</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>ItemKeyedDataSource.LoadCallback</h1>
+{% setvar page_path %}androidx/paging/ItemKeyedDataSource.LoadCallback.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>TODO(b/166518424) class signature</p>
+    <p>TODO(b/166518951) inheritance hierarchy</p>
+    <p>TODO(b/166518636) direct subclasses</p>
+    <p>TODO(b/166518636) indirect subclasses</p>
+    <hr>
+    <p>
+      <p>Callback for ItemKeyedDataSource <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadBefore(androidx.paging.ItemKeyedDataSource.LoadParams)">loadBefore</a></code> and <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadAfter(androidx.paging.ItemKeyedDataSource.LoadParams)">loadAfter</a></code> to return data.</p>
+      <p>A callback can be called only once, and will throw if called again.</p>
+      <p>It is always valid for a DataSource loading method that takes a callback to stash the callback and call it later. This enables DataSources to be fully asynchronous, and to handle temporary, recoverable error states (such as a network error that can be retried).</p>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">Parameters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Value</code></td>
+            <td width="100%">
+              <p>Type of items being loaded.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <p>Nested *</p>
+    <p>Enum values</p>
+    <p>Constants</p>
+    <p>Public fields</p>
+    <p>Protected fields</p>
+    <p>Public constructors</p>
+    <p>Protected constructors</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>abstract&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List)">onResult</a>(data:&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;Value&gt;)</code></div>
+              <p>
+                <p>Called to pass loaded data from a DataSource.</p>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="onResult-kotlin.collections.List-"></a>
+      <h3 class="api-name" id="onResult(kotlin.collections.List)">onResult</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List)">onResult</a>(data:&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;Value&gt;):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+      <p>
+        <p>Called to pass loaded data from a DataSource.</p>
+        <p>Call this method from your ItemKeyedDataSource's <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadBefore(androidx.paging.ItemKeyedDataSource.LoadParams)">loadBefore</a></code> and <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadAfter(androidx.paging.ItemKeyedDataSource.LoadParams)">loadAfter</a></code> methods to return data.</p>
+        <p>Call this from <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadInitial(androidx.paging.ItemKeyedDataSource.LoadInitialParams)">loadInitial</a></code> to initialize without counting available data, or supporting placeholders.</p>
+        <p>It is always valid to pass a different amount of data than what is requested. Pass an empty list if there is no more data to load.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>data</code></td>
+              <td width="100%">
+                <p>List of items loaded from the <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a></code>.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

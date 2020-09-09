@@ -1,0 +1,269 @@
+<html devsite="true">
+  <head>
+    <title>LoadStateAdapter</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>LoadStateAdapter</h1>
+{% setvar page_path %}androidx/paging/LoadStateAdapter.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>TODO(b/166518424) class signature</p>
+    <p>TODO(b/166518951) inheritance hierarchy</p>
+    <p>TODO(b/166518636) direct subclasses</p>
+    <p>TODO(b/166518636) indirect subclasses</p>
+    <hr>
+    <p>
+      <p>Adapter for displaying a RecyclerView item based on <code><a href="/reference/androidx/paging/LoadState.html">LoadState</a></code>, such as a loading spinner, or a retry error button.</p>
+      <p>By default will use one shared RecyclerView.Adapter.getItemViewType for all items.</p>
+      <p>By default, both <code><a href="/reference/androidx/paging/LoadState.Loading.html">LoadState.Loading</a></code> and <code><a href="/reference/androidx/paging/LoadState.Error.html">LoadState.Error</a></code> are presented as adapter items, other states are not. To configure this, override <code><a href="/reference/androidx/paging/LoadStateAdapter.html#displayLoadStateAsItem(androidx.paging.LoadState)">displayLoadStateAsItem</a></code>.</p>
+      <p>To present this Adapter as a header and or footer alongside your <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>, see <code><a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a></code>, or use androidx.recyclerview.widget.ConcatAdapter directly to concatenate Adapters.</p>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">See also</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code><a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a></code></td>
+            <td width="100%">
+              <p></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</a></code></td>
+            <td width="100%">
+              <p></p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</a></code></td>
+            <td width="100%">
+              <p></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <p>Nested *</p>
+    <p>Enum values</p>
+    <p>Constants</p>
+    <p>Public fields</p>
+    <p>Protected fields</p>
+    <p>Public constructors</p>
+    <p>Protected constructors</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>open&nbsp;<a href="/reference/kotlin/Boolean.html">Boolean</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/paging/LoadStateAdapter.html#displayLoadStateAsItem(androidx.paging.LoadState)">displayLoadStateAsItem</a>(<a href="/reference/androidx/paging/LoadState.html">LoadState</a>&nbsp;loadState)</code></div>
+              <p>
+                <p>Returns true if the LoadState should be displayed as a list item when active.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final&nbsp;<a href="/reference/kotlin/Int.html">Int</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/paging/LoadStateAdapter.html#getItemCount()">getItemCount</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final&nbsp;<a href="/reference/kotlin/Int.html">Int</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/paging/LoadStateAdapter.html#getItemViewType(kotlin.Int)">getItemViewType</a>(<a href="/reference/kotlin/Int.html">Int</a>&nbsp;position)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open&nbsp;<a href="/reference/kotlin/Int.html">Int</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/paging/LoadStateAdapter.html#getStateViewType(androidx.paging.LoadState)">getStateViewType</a>(<a href="/reference/androidx/paging/LoadState.html">LoadState</a>&nbsp;loadState)</code></div>
+              <p>
+                <p>Override this method to use different view types per LoadState.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/paging/LoadStateAdapter.html#onBindViewHolder(kotlin.Any,kotlin.Int)">onBindViewHolder</a>(VH&nbsp;holder,&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;position)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/paging/LoadStateAdapter.html#onBindViewHolder(kotlin.Any,androidx.paging.LoadState)">onBindViewHolder</a>(VH&nbsp;holder,&nbsp;<a href="/reference/androidx/paging/LoadState.html">LoadState</a>&nbsp;loadState)</code></div>
+              <p>
+                <p>Called to bind the passed LoadState to the ViewHolder.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final&nbsp;VH</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/paging/LoadStateAdapter.html#onCreateViewHolder(,kotlin.Int)">onCreateViewHolder</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;parent,&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;viewType)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract&nbsp;VH</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/paging/LoadStateAdapter.html#onCreateViewHolder(,androidx.paging.LoadState)">onCreateViewHolder</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;parent,&nbsp;<a href="/reference/androidx/paging/LoadState.html">LoadState</a>&nbsp;loadState)</code></div>
+              <p>
+                <p>Called to create a ViewHolder for the given LoadState.</p>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="displayLoadStateAsItem-androidx.paging.LoadState-"></a>
+      <h3 class="api-name" id="displayLoadStateAsItem(androidx.paging.LoadState)">displayLoadStateAsItem</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;<a href="/reference/kotlin/Boolean.html">Boolean</a>&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html#displayLoadStateAsItem(androidx.paging.LoadState)">displayLoadStateAsItem</a>(<a href="/reference/androidx/paging/LoadState.html">LoadState</a>&nbsp;loadState)</pre>
+      <p>
+        <p>Returns true if the LoadState should be displayed as a list item when active.</p>
+        <p>By default, <code><a href="/reference/androidx/paging/LoadState.Loading.html">LoadState.Loading</a></code> and <code><a href="/reference/androidx/paging/LoadState.Error.html">LoadState.Error</a></code> present as list items, others do not.</p>
+      </p>
+    </div>
+    <div><a name="getItemCount--"></a>
+      <h3 class="api-name" id="getItemCount()">getItemCount</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html#getItemCount()">getItemCount</a>()</pre>
+    </div>
+    <div><a name="getItemViewType-kotlin.Int-"></a>
+      <h3 class="api-name" id="getItemViewType(kotlin.Int)">getItemViewType</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html#getItemViewType(kotlin.Int)">getItemViewType</a>(<a href="/reference/kotlin/Int.html">Int</a>&nbsp;position)</pre>
+    </div>
+    <div><a name="getStateViewType-androidx.paging.LoadState-"></a>
+      <h3 class="api-name" id="getStateViewType(androidx.paging.LoadState)">getStateViewType</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html#getStateViewType(androidx.paging.LoadState)">getStateViewType</a>(<a href="/reference/androidx/paging/LoadState.html">LoadState</a>&nbsp;loadState)</pre>
+      <p>
+        <p>Override this method to use different view types per LoadState.</p>
+        <p>By default, this LoadStateAdapter only uses a single view type.</p>
+      </p>
+    </div>
+    <div><a name="onBindViewHolder(kotlin.Any, kotlin.Int)"></a><a name="onBindViewHolder-kotlin.Any-kotlin.Int-"></a>
+      <h3 class="api-name" id="onBindViewHolder(kotlin.Any,kotlin.Int)">onBindViewHolder</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html#onBindViewHolder(kotlin.Any,kotlin.Int)">onBindViewHolder</a>(VH&nbsp;holder,&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;position)</pre>
+    </div>
+    <div><a name="onBindViewHolder(kotlin.Any, androidx.paging.LoadState)"></a><a name="onBindViewHolder-kotlin.Any-androidx.paging.LoadState-"></a>
+      <h3 class="api-name" id="onBindViewHolder(kotlin.Any,androidx.paging.LoadState)">onBindViewHolder</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html#onBindViewHolder(kotlin.Any,androidx.paging.LoadState)">onBindViewHolder</a>(VH&nbsp;holder,&nbsp;<a href="/reference/androidx/paging/LoadState.html">LoadState</a>&nbsp;loadState)</pre>
+      <p>
+        <p>Called to bind the passed LoadState to the ViewHolder.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>loadState</code></td>
+              <td width="100%">
+                <p>
+                  <p>LoadState to display.</p>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/LoadStateAdapter.html#getItemViewType(kotlin.Int)">getItemViewType</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/LoadStateAdapter.html#displayLoadStateAsItem(androidx.paging.LoadState)">displayLoadStateAsItem</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onCreateViewHolder(, kotlin.Int)"></a><a name="onCreateViewHolder--kotlin.Int-"></a>
+      <h3 class="api-name" id="onCreateViewHolder(,kotlin.Int)">onCreateViewHolder</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;VH&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html#onCreateViewHolder(,kotlin.Int)">onCreateViewHolder</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;parent,&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;viewType)</pre>
+    </div>
+    <div><a name="onCreateViewHolder(, androidx.paging.LoadState)"></a><a name="onCreateViewHolder--androidx.paging.LoadState-"></a>
+      <h3 class="api-name" id="onCreateViewHolder(,androidx.paging.LoadState)">onCreateViewHolder</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;VH&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html#onCreateViewHolder(,androidx.paging.LoadState)">onCreateViewHolder</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;parent,&nbsp;<a href="/reference/androidx/paging/LoadState.html">LoadState</a>&nbsp;loadState)</pre>
+      <p>
+        <p>Called to create a ViewHolder for the given LoadState.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>parent</code></td>
+              <td width="100%">
+                <p>The ViewGroup into which the new View will be added after it is bound to     an adapter position.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>loadState</code></td>
+              <td width="100%">
+                <p>
+                  <p>The LoadState to be initially presented by the new ViewHolder.</p>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/LoadStateAdapter.html#getItemViewType(kotlin.Int)">getItemViewType</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/LoadStateAdapter.html#displayLoadStateAsItem(androidx.paging.LoadState)">displayLoadStateAsItem</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+<html devsite="true">
+  <head>
+    <title>androidx.paging.rxjava2</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>androidx.paging.rxjava2</h1>
+{% setvar page_path %}androidx/paging/rxjava2/package-summary.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <h2>Classes</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <tbody>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/paging/rxjava2/RxPagingSource.html">RxPagingSource</a></code></td>
+            <td width="100%">
+              <p>
+                <p>Rx-based compatibility wrapper around <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>'s suspending APIs.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/androidx/paging/rxjava2/RxRemoteMediator.html">RxRemoteMediator</a></code></td>
+            <td width="100%">
+              <p>RxJava2 compatibility wrapper around <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html">RemoteMediator</a></code>'s suspending APIs.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Extension functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <tbody>
+          <tr>
+            <td><code>final&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;.<a href="/reference/kotlin/androidx/paging/rxjava2/package-summary.html#cachedIn(,)">cachedIn</a>(scope:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>)</code></div>
+              <p>
+                <p>Operator which caches an Observable of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> within a CoroutineScope.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;.<a href="/reference/kotlin/androidx/paging/rxjava2/package-summary.html#cachedIn(,)">cachedIn</a>(scope:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>)</code></div>
+              <p>
+                <p>Operator which caches a Flowable of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> within a CoroutineScope.</p>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Extension functions</h2>
+    <div><a name="cachedIn(, )"></a><a name="cachedIn---"></a>
+      <h3 class="api-name" id="cachedIn(,)">cachedIn</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;.<a href="/reference/kotlin/androidx/paging/rxjava2/package-summary.html#cachedIn(,)">cachedIn</a>(scope:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;</pre>
+      <p>
+        <p>Operator which caches an Observable of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> within a CoroutineScope.</p>
+        <p><code><a href="/reference/kotlin/androidx/paging/package-summary.html#cachedIn(,)">cachedIn</a></code> multicasts pages loaded and transformed by a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>, allowing multiple observers on the same instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> to receive the same events, avoiding redundant work, but comes at the cost of buffering those events in memory.</p>
+        <p>Calling <code><a href="/reference/kotlin/androidx/paging/package-summary.html#cachedIn(,)">cachedIn</a></code> is required to allow calling androidx.paging.AsyncPagingDataAdapter on the same instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> emitted by <code><a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a></code> or any of its transformed derivatives, as reloading data from scratch on the same generation of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> is an unsupported operation.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>scope</code></td>
+              <td width="100%">
+                <p>The CoroutineScope where the page cache will be kept alive. Typically this would be a managed scope such as <code>ViewModel.viewModelScope</code>, which automatically cancels after the <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> stream is no longer needed. Otherwise, the provided CoroutineScope must be manually cancelled to avoid memory leaks.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="cachedIn(, )"></a><a name="cachedIn---"></a>
+      <h3 class="api-name" id="cachedIn(,)">cachedIn</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;.<a href="/reference/kotlin/androidx/paging/rxjava2/package-summary.html#cachedIn(,)">cachedIn</a>(scope:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;</pre>
+      <p>
+        <p>Operator which caches a Flowable of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> within a CoroutineScope.</p>
+        <p><code><a href="/reference/kotlin/androidx/paging/package-summary.html#cachedIn(,)">cachedIn</a></code> multicasts pages loaded and transformed by a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>, allowing multiple observers on the same instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> to receive the same events, avoiding redundant work, but comes at the cost of buffering those events in memory.</p>
+        <p>Calling <code><a href="/reference/kotlin/androidx/paging/package-summary.html#cachedIn(,)">cachedIn</a></code> is required to allow calling androidx.paging.AsyncPagingDataAdapter on the same instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> emitted by <code><a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a></code> or any of its transformed derivatives, as reloading data from scratch on the same generation of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> is an unsupported operation.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>scope</code></td>
+              <td width="100%">
+                <p>The CoroutineScope where the page cache will be kept alive. Typically this would be a managed scope such as <code>ViewModel.viewModelScope</code>, which automatically cancels after the <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> stream is no longer needed. Otherwise, the provided CoroutineScope must be manually cancelled to avoid memory leaks.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

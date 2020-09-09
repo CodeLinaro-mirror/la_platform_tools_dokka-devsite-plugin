@@ -1,0 +1,477 @@
+<html devsite="true">
+  <head>
+    <title>PagedList.Builder</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>PagedList.Builder</h1>
+{% setvar page_path %}androidx/paging/PagedList.Builder.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>TODO(b/166518424) class signature</p>
+    <p>TODO(b/166518951) inheritance hierarchy</p>
+    <p>TODO(b/166518636) direct subclasses</p>
+    <p>TODO(b/166518636) indirect subclasses</p>
+    <hr>
+    <p>
+      <p>Builder class for <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
+      <p><code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#pagingSource()">pagingSource</a></code>, <code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#config()">config</a></code>, <code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#notifyDispatcher()">notifyDispatcher</a></code> and <code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#fetchDispatcher()">fetchDispatcher</a></code> must all be provided.</p>
+      <p>A <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> queries initial data from its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> during construction, to avoid empty <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>s being presented to the UI when possible. It's preferred to present initial data, so that the UI doesn't show an empty list, or placeholders for a few frames, just before showing initial content.</p>
+      <p><code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a></code> does this creation on a background thread automatically, if you want to receive a <code>LiveData&lt;PagedList&lt;...&gt;&gt;</code>.</p>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">Parameters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Key</code></td>
+            <td width="100%">
+              <p>Type of key used to load data from the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>Value</code></td>
+            <td width="100%">
+              <p>Type of items held and loaded by the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <p>Nested *</p>
+    <p>Enum values</p>
+    <p>Constants</p>
+    <p>Public fields</p>
+    <p>Protected fields</p>
+    <p>Public constructors</p>
+    <p>Protected constructors</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>final&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#build()">build</a>()</code></div>
+              <p>
+                <p>Creates a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> with the given parameters.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setBoundaryCallback(androidx.paging.PagedList.BoundaryCallback)">setBoundaryCallback</a>(boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;&gt;)</code></div>
+              <p>
+                <p>The <code><a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a></code> for out of data events.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setCoroutineScope()">setCoroutineScope</a>(coroutineScope:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>)</code></div>
+              <p>
+                <p>Set the CoroutineScope that page loads should be launched within.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setFetchDispatcher()">setFetchDispatcher</a>(fetchDispatcher:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>)</code></div>
+              <p>
+                <p>The CoroutineDispatcher used to fetch additional pages from the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setFetchExecutor(java.util.concurrent.Executor)">setFetchExecutor</a>(fetchExecutor:&nbsp;<a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a>)</code></div>
+              <p>
+                <p>The <code><a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a></code> used to fetch additional pages from the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setInitialKey(kotlin.Any)">setInitialKey</a>(initialKey:&nbsp;Key&lt;Key&gt;)</code></div>
+              <p>
+                <p>Sets the initial key the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> should load around as part of initialization.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setNotifyDispatcher()">setNotifyDispatcher</a>(notifyDispatcher:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>)</code></div>
+              <p>
+                <p>The CoroutineDispatcher defining where page loading updates are dispatched.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setNotifyExecutor(java.util.concurrent.Executor)">setNotifyExecutor</a>(notifyExecutor:&nbsp;<a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a>)</code></div>
+              <p>
+                <p>The <code><a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a></code> defining where page loading updates are dispatched.</p>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="build--"></a>
+      <h3 class="api-name" id="build()">build</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#build()">build</a>():&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;</pre>
+      <p>
+        <p>Creates a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> with the given parameters.</p>
+        <p>This call will dispatch the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>'s loadInitial method immediately on the current thread, and block the current on the result. This method should always be called on a worker thread to prevent blocking the main thread.</p>
+        <p>It's fine to create a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> with an async <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> on the main thread, such as in the constructor of a ViewModel. An async network load won't block the initial call to the Load function. For a synchronous <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> such as one created from a Room database, a <code>LiveData&lt;PagedList&gt;</code> can be safely constructed with <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a></code> on the main thread, since actual construction work is deferred, and done on a background thread.</p>
+        <p>While <code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#build()">build</a></code> will always return a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>, it's important to note that the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> initial load may fail to acquire data from the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>. This can happen for example if the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> is invalidated during its initial load. If this happens, the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> will be immediately <code><a href="/reference/kotlin/androidx/paging/PagedList.html#isDetached()">isDetached</a></code>, and you can retry construction (including setting a new <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>).</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;</code></td>
+              <td width="100%">
+                <p>The newly constructed <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Throws</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>IllegalArgumentException</code></td>
+              <td width="100%">
+                <p>
+                  <p>if <code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#notifyDispatcher()">notifyDispatcher</a></code> or <code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#fetchDispatcher()">fetchDispatcher</a></code> are not set.</p>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="setBoundaryCallback-androidx.paging.PagedList.BoundaryCallback-"></a>
+      <h3 class="api-name" id="setBoundaryCallback(androidx.paging.PagedList.BoundaryCallback)">setBoundaryCallback</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setBoundaryCallback(androidx.paging.PagedList.BoundaryCallback)">setBoundaryCallback</a>(boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;&gt;):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
+      <p>
+        <p>The <code><a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a></code> for out of data events.</p>
+        <p>Pass a <code><a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a></code> to listen to when the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> runs out of data to load.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+              <td width="100%">
+                <p>this</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>boundaryCallback</code></td>
+              <td width="100%">
+                <p><code><a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a></code> for listening to out-of-data events.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="setCoroutineScope--"></a>
+      <h3 class="api-name" id="setCoroutineScope()">setCoroutineScope</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setCoroutineScope()">setCoroutineScope</a>(coroutineScope:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
+      <p>
+        <p>Set the CoroutineScope that page loads should be launched within.</p>
+        <p>The set <code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#coroutineScope()">coroutineScope</a></code> allows a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> to cancel running load operations when the results are no longer needed - for example, when the containing Activity is destroyed.</p>
+        <p>Defaults to GlobalScope.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+              <td width="100%">
+                <p>this</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>coroutineScope</code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="setFetchDispatcher--"></a>
+      <h3 class="api-name" id="setFetchDispatcher()">setFetchDispatcher</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setFetchDispatcher()">setFetchDispatcher</a>(fetchDispatcher:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
+      <p>
+        <p>The CoroutineDispatcher used to fetch additional pages from the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
+        <p>Does not affect initial load, which will be done immediately on whichever thread the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> is created on.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+              <td width="100%">
+                <p>this</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fetchDispatcher</code></td>
+              <td width="100%">
+                <p>CoroutineDispatcher used to fetch from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="setFetchExecutor-java.util.concurrent.Executor-"></a>
+      <h3 class="api-name" id="setFetchExecutor(java.util.concurrent.Executor)">setFetchExecutor</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setFetchExecutor(java.util.concurrent.Executor)">setFetchExecutor</a>(fetchExecutor:&nbsp;<a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
+      <p>
+        <p>The <code><a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a></code> used to fetch additional pages from the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
+        <p>Does not affect initial load, which will be done immediately on whichever thread the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> is created on.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+              <td width="100%">
+                <p>this</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>fetchExecutor</code></td>
+              <td width="100%">
+                <p><code><a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a></code> used to fetch from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="setInitialKey-kotlin.Any-"></a>
+      <h3 class="api-name" id="setInitialKey(kotlin.Any)">setInitialKey</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setInitialKey(kotlin.Any)">setInitialKey</a>(initialKey:&nbsp;Key&lt;Key&gt;):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
+      <p>
+        <p>Sets the initial key the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> should load around as part of initialization.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+              <td width="100%">
+                <p>this</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>initialKey</code></td>
+              <td width="100%">
+                <p>Key the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> should load around as part of initialization.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="setNotifyDispatcher--"></a>
+      <h3 class="api-name" id="setNotifyDispatcher()">setNotifyDispatcher</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setNotifyDispatcher()">setNotifyDispatcher</a>(notifyDispatcher:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
+      <p>
+        <p>The CoroutineDispatcher defining where page loading updates are dispatched.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+              <td width="100%">
+                <p>this</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>notifyDispatcher</code></td>
+              <td width="100%">
+                <p>CoroutineDispatcher that receives <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the ui/main thread.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="setNotifyExecutor-java.util.concurrent.Executor-"></a>
+      <h3 class="api-name" id="setNotifyExecutor(java.util.concurrent.Executor)">setNotifyExecutor</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setNotifyExecutor(java.util.concurrent.Executor)">setNotifyExecutor</a>(notifyExecutor:&nbsp;<a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
+      <p>
+        <p>The <code><a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a></code> defining where page loading updates are dispatched.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+              <td width="100%">
+                <p>this</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>notifyExecutor</code></td>
+              <td width="100%">
+                <p><code><a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a></code> that receives <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the ui/main thread.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

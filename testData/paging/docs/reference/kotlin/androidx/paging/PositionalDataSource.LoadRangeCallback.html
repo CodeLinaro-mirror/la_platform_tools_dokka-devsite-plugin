@@ -1,0 +1,93 @@
+<html devsite="true">
+  <head>
+    <title>PositionalDataSource.LoadRangeCallback</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>PositionalDataSource.LoadRangeCallback</h1>
+{% setvar page_path %}androidx/paging/PositionalDataSource.LoadRangeCallback.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>TODO(b/166518424) class signature</p>
+    <p>TODO(b/166518951) inheritance hierarchy</p>
+    <p>TODO(b/166518636) direct subclasses</p>
+    <p>TODO(b/166518636) indirect subclasses</p>
+    <hr>
+    <p>
+      <p>Callback for PositionalDataSource <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#loadRange(androidx.paging.PositionalDataSource.LoadRangeParams)">loadRange</a></code> to return data.</p>
+      <p>A callback should be called only once, and may throw if called again.</p>
+      <p>It is always valid for a <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code> loading method that takes a callback to stash the callback and call it later. This enables DataSources to be fully asynchronous, and to handle temporary, recoverable error states (such as a network error that can be retried).</p>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">Parameters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>T</code></td>
+            <td width="100%">
+              <p>Type of items being loaded.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <p>Nested *</p>
+    <p>Enum values</p>
+    <p>Constants</p>
+    <p>Public fields</p>
+    <p>Protected fields</p>
+    <p>Public constructors</p>
+    <p>Protected constructors</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>abstract&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadRangeCallback.html#onResult(kotlin.collections.List)">onResult</a>(data:&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;T&gt;)</code></div>
+              <p>
+                <p>Called to pass loaded data from <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#loadRange(androidx.paging.PositionalDataSource.LoadRangeParams)">loadRange</a></code>.</p>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="onResult-kotlin.collections.List-"></a>
+      <h3 class="api-name" id="onResult(kotlin.collections.List)">onResult</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadRangeCallback.html#onResult(kotlin.collections.List)">onResult</a>(data:&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;T&gt;):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+      <p>
+        <p>Called to pass loaded data from <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#loadRange(androidx.paging.PositionalDataSource.LoadRangeParams)">loadRange</a></code>.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>data</code></td>
+              <td width="100%">
+                <p>List of items loaded from the <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>. Must be same size as requested, unless at end of list.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

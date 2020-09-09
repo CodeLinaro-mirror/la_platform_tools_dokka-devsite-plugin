@@ -1,0 +1,466 @@
+<html devsite="true">
+  <head>
+    <title>DataSource.Factory</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>DataSource.Factory</h1>
+{% setvar page_path %}androidx/paging/DataSource.Factory.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>TODO(b/166518424) class signature</p>
+    <p>TODO(b/166518951) inheritance hierarchy</p>
+    <p>TODO(b/166518636) direct subclasses</p>
+    <p>TODO(b/166518636) indirect subclasses</p>
+    <hr>
+    <p>
+      <p>Factory for DataSources.</p>
+      <p>Data-loading systems of an application or library can implement this interface to allow <code>LiveData&lt;PagedList&gt;</code>s to be created. For example, Room can provide a <code><a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code> for a given SQL query:</p>
+      <pre>@Dao<br>interface UserDao {<br>    @Query(&quot;SELECT * FROM user ORDER BY lastName ASC&quot;)<br>    public abstract DataSource.Factory&lt;Integer, User&gt; usersByLastName();<br>}</pre>
+      <p>In the above sample, <code>Integer</code> is used because it is the <code>Key</code> type of PositionalDataSource. Currently, Room uses the <code>LIMIT</code>/<code>OFFSET</code> SQL keywords to page a large query with a PositionalDataSource.</p>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">Parameters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Key</code></td>
+            <td width="100%">
+              <p>Key identifying items in DataSource.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>Value</code></td>
+            <td width="100%">
+              <p>Type of items in the list loaded by the DataSources.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <p>Nested *</p>
+    <p>Enum values</p>
+    <p>Constants</p>
+    <p>Public fields</p>
+    <p>Protected fields</p>
+    <p>Public constructors</p>
+    <p>Protected constructors</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>final&nbsp;<a href="/reference/kotlin/Function0.html">Function0</a>&lt;<a href="/reference/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/paging/DataSource.Factory.html#asPagingSourceFactory()">asPagingSourceFactory</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;fetchDispatcher)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract&nbsp;<a href="/reference/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;Value&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/paging/DataSource.Factory.html#create()">create</a>()</code></div>
+              <p>
+                <p>Create a <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open&nbsp;<a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/paging/DataSource.Factory.html#map()">map</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;Value,&nbsp;ToValue&gt;&nbsp;function)</code></div>
+              <p>
+                <p>Applies the given function to each value emitted by DataSources produced by this Factory.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open&nbsp;<a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/paging/DataSource.Factory.html#map(kotlin.Function1)">map</a>(<a href="/reference/kotlin/Function1.html">Function1</a>&lt;Value,&nbsp;ToValue&gt;&nbsp;function)</code></div>
+              <p>
+                <p>Applies the given function to each value emitted by DataSources produced by this Factory.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open&nbsp;<a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/paging/DataSource.Factory.html#mapByPage()">mapByPage</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/collections/List.html">List</a>&lt;Value&gt;,&nbsp;<a href="/reference/kotlin/collections/List.html">List</a>&lt;ToValue&gt;&gt;&nbsp;function)</code></div>
+              <p>
+                <p>Applies the given function to each value emitted by DataSources produced by this Factory.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open&nbsp;<a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/paging/DataSource.Factory.html#mapByPage(kotlin.Function1)">mapByPage</a>(<a href="/reference/kotlin/Function1.html">Function1</a>&lt;<a href="/reference/kotlin/collections/List.html">List</a>&lt;Value&gt;,&nbsp;<a href="/reference/kotlin/collections/List.html">List</a>&lt;ToValue&gt;&gt;&nbsp;function)</code></div>
+              <p>
+                <p>Applies the given function to each value emitted by DataSources produced by this Factory.</p>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="asPagingSourceFactory--"></a>
+      <h3 class="api-name" id="asPagingSourceFactory()">asPagingSourceFactory</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;<a href="/reference/kotlin/Function0.html">Function0</a>&lt;<a href="/reference/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;&gt;&nbsp;<a href="/reference/androidx/paging/DataSource.Factory.html#asPagingSourceFactory()">asPagingSourceFactory</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;fetchDispatcher)</pre>
+    </div>
+    <div><a name="create--"></a>
+      <h3 class="api-name" id="create()">create</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="/reference/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;Value&gt;&nbsp;<a href="/reference/androidx/paging/DataSource.Factory.html#create()">create</a>()</pre>
+      <p>
+        <p>Create a <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>.</p>
+        <p>The <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code> should invalidate itself if the snapshot is no longer valid. If a <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code> becomes invalid, the only way to query more data is to create a new <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code> from the Factory.</p>
+        <p><code><a href="/reference/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a></code> for example will construct a new PagedList and DataSource when the current DataSource is invalidated, and pass the new PagedList through the <code>LiveData&lt;PagedList&gt;</code> to observers.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;Value&gt;</code></td>
+              <td width="100%">
+                <p>the new DataSource.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="map--"></a>
+      <h3 class="api-name" id="map()">map</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;<a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;ToValue&gt;&nbsp;<a href="/reference/androidx/paging/DataSource.Factory.html#map()">map</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;Value,&nbsp;ToValue&gt;&nbsp;function)</pre>
+      <p>
+        <p>Applies the given function to each value emitted by DataSources produced by this Factory.</p>
+        <p>Same as <code><a href="/reference/androidx/paging/DataSource.Factory.html#mapByPage(kotlin.Function1)">mapByPage</a></code>, but operates on individual items.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
+              <td width="100%">
+                <p>
+                  <p>A new <code><a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code>, which transforms items using the given function.</p>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ToValue</code></td>
+              <td width="100%">
+                <p>Type of items produced by the new <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>, from the passed function.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>function</code></td>
+              <td width="100%">
+                <p>Function that runs on each loaded item, returning items of a potentially new type.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/DataSource.Factory.html#mapByPage(kotlin.Function1)">mapByPage</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="map-kotlin.Function1-"></a>
+      <h3 class="api-name" id="map(kotlin.Function1)">map</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;<a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;ToValue&gt;&nbsp;<a href="/reference/androidx/paging/DataSource.Factory.html#map(kotlin.Function1)">map</a>(<a href="/reference/kotlin/Function1.html">Function1</a>&lt;Value,&nbsp;ToValue&gt;&nbsp;function)</pre>
+      <p>
+        <p>Applies the given function to each value emitted by DataSources produced by this Factory.</p>
+        <p>An overload of <code><a href="/reference/androidx/paging/DataSource.Factory.html#map(kotlin.Function1)">map</a></code> that accepts a kotlin function type.</p>
+        <p>Same as <code><a href="/reference/androidx/paging/DataSource.Factory.html#mapByPage(kotlin.Function1)">mapByPage</a></code>, but operates on individual items.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
+              <td width="100%">
+                <p>
+                  <p>A new <code><a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code>, which transforms items using the given function.</p>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ToValue</code></td>
+              <td width="100%">
+                <p>Type of items produced by the new <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>, from the passed function.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>function</code></td>
+              <td width="100%">
+                <p>Function that runs on each loaded item, returning items of a potentially new type.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/DataSource.Factory.html#mapByPage(kotlin.Function1)">mapByPage</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="mapByPage--"></a>
+      <h3 class="api-name" id="mapByPage()">mapByPage</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;<a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;ToValue&gt;&nbsp;<a href="/reference/androidx/paging/DataSource.Factory.html#mapByPage()">mapByPage</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/collections/List.html">List</a>&lt;Value&gt;,&nbsp;<a href="/reference/kotlin/collections/List.html">List</a>&lt;ToValue&gt;&gt;&nbsp;function)</pre>
+      <p>
+        <p>Applies the given function to each value emitted by DataSources produced by this Factory.</p>
+        <p>Same as <code><a href="/reference/androidx/paging/DataSource.Factory.html#map(kotlin.Function1)">map</a></code>, but allows for batch conversions.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
+              <td width="100%">
+                <p>
+                  <p>A new <code><a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code>, which transforms items using the given function.</p>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ToValue</code></td>
+              <td width="100%">
+                <p>Type of items produced by the new <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>, from the passed function.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>function</code></td>
+              <td width="100%">
+                <p>Function that runs on each loaded page, returning items of a potentially new type.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/DataSource.Factory.html#map(kotlin.Function1)">map</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="mapByPage-kotlin.Function1-"></a>
+      <h3 class="api-name" id="mapByPage(kotlin.Function1)">mapByPage</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;<a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;ToValue&gt;&nbsp;<a href="/reference/androidx/paging/DataSource.Factory.html#mapByPage(kotlin.Function1)">mapByPage</a>(<a href="/reference/kotlin/Function1.html">Function1</a>&lt;<a href="/reference/kotlin/collections/List.html">List</a>&lt;Value&gt;,&nbsp;<a href="/reference/kotlin/collections/List.html">List</a>&lt;ToValue&gt;&gt;&nbsp;function)</pre>
+      <p>
+        <p>Applies the given function to each value emitted by DataSources produced by this Factory.</p>
+        <p>An overload of <code><a href="/reference/androidx/paging/DataSource.Factory.html#mapByPage(kotlin.Function1)">mapByPage</a></code> that accepts a kotlin function type.</p>
+        <p>Same as <code><a href="/reference/androidx/paging/DataSource.Factory.html#map(kotlin.Function1)">map</a></code>, but allows for batch conversions.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
+              <td width="100%">
+                <p>
+                  <p>A new <code><a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code>, which transforms items using the given function.</p>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ToValue</code></td>
+              <td width="100%">
+                <p>Type of items produced by the new <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>, from the passed function.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>function</code></td>
+              <td width="100%">
+                <p>Function that runs on each loaded page, returning items of a potentially new type.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/DataSource.Factory.html#map(kotlin.Function1)">map</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

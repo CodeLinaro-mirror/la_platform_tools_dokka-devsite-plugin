@@ -42,4 +42,9 @@ class BasicTest : IntegrationTestBase() {
     fun `Validate prod AndroidX fragment lib`() {
         verifyDirectory("fragment")
     }
+
+    @Test
+    fun `Validate prod AndroidX paging lib`() {
+        verifyDirectory("paging")
+    }
 }

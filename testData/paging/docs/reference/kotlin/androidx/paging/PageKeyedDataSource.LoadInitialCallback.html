@@ -1,0 +1,161 @@
+<html devsite="true">
+  <head>
+    <title>PageKeyedDataSource.LoadInitialCallback</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>PageKeyedDataSource.LoadInitialCallback</h1>
+{% setvar page_path %}androidx/paging/PageKeyedDataSource.LoadInitialCallback.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>TODO(b/166518424) class signature</p>
+    <p>TODO(b/166518951) inheritance hierarchy</p>
+    <p>TODO(b/166518636) direct subclasses</p>
+    <p>TODO(b/166518636) indirect subclasses</p>
+    <hr>
+    <p>
+      <p>Callback for <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadInitial(androidx.paging.PageKeyedDataSource.LoadInitialParams)">loadInitial</a></code> to return data and, optionally, position/count information.</p>
+      <p>A callback can be called only once, and will throw if called again.</p>
+      <p>If you can compute the number of items in the data set before and after the loaded range, call the five parameter <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Any,kotlin.Any)">onResult</a></code> to pass that information. You can skip passing this information by calling the three parameter <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Any,kotlin.Any)">onResult</a></code>, either if it's difficult to compute, or if <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialParams.html#placeholdersEnabled()">placeholdersEnabled</a></code> is <code>false</code>, so the positioning information will be ignored.</p>
+      <p>It is always valid for a DataSource loading method that takes a callback to stash the callback and call it later. This enables DataSources to be fully asynchronous, and to handle temporary, recoverable error states (such as a network error that can be retried).</p>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">Parameters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Key</code></td>
+            <td width="100%">
+              <p>Type of data used to query pages.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>Value</code></td>
+            <td width="100%">
+              <p>Type of items being loaded.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <p>Nested *</p>
+    <p>Enum values</p>
+    <p>Constants</p>
+    <p>Public fields</p>
+    <p>Protected fields</p>
+    <p>Public constructors</p>
+    <p>Protected constructors</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>abstract&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int,kotlin.Any,kotlin.Any)">onResult</a>(data:&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;Value&gt;,&nbsp;position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,&nbsp;totalCount:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,&nbsp;previousPageKey:&nbsp;Key&lt;Key&gt;,&nbsp;nextPageKey:&nbsp;Key&lt;Key&gt;)</code></div>
+              <p>
+                <p>Called to pass initial load state from a DataSource.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Any,kotlin.Any)">onResult</a>(data:&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;Value&gt;,&nbsp;previousPageKey:&nbsp;Key&lt;Key&gt;,&nbsp;nextPageKey:&nbsp;Key&lt;Key&gt;)</code></div>
+              <p>
+                <p>Called to pass loaded data from a DataSource.</p>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="onResult(kotlin.collections.List, kotlin.Int, kotlin.Int, kotlin.Any, kotlin.Any)"></a><a name="onResult-kotlin.collections.List-kotlin.Int-kotlin.Int-kotlin.Any-kotlin.Any-"></a>
+      <h3 class="api-name" id="onResult(kotlin.collections.List,kotlin.Int,kotlin.Int,kotlin.Any,kotlin.Any)">onResult</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int,kotlin.Any,kotlin.Any)">onResult</a>(data:&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;Value&gt;,&nbsp;position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,&nbsp;totalCount:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,&nbsp;previousPageKey:&nbsp;Key&lt;Key&gt;,&nbsp;nextPageKey:&nbsp;Key&lt;Key&gt;):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+      <p>
+        <p>Called to pass initial load state from a DataSource.</p>
+        <p>Call this method from your DataSource's <code>loadInitial</code> function to return data, and inform how many placeholders should be shown before and after. If counting is cheap to compute (for example, if a network load returns the information regardless), it's recommended to pass data back through this method.</p>
+        <p>It is always valid to pass a different amount of data than what is requested. Pass an empty list if there is no more data to load.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>data</code></td>
+              <td width="100%">
+                <p>List of items loaded from the <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>. If this is empty, the <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code> is treated as empty, and no further loads will occur.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>position</code></td>
+              <td width="100%">
+                <p>Position of the item at the front of the list. If there are <code>N</code> items before the items in data that can be loaded from this DataSource, pass <code>N</code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>totalCount</code></td>
+              <td width="100%">
+                <p>Total number of items that may be returned from this DataSource. Includes the number in the initial <code>data</code> parameter as well as any items that can be loaded in front or behind of <code>data</code>.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onResult(kotlin.collections.List, kotlin.Any, kotlin.Any)"></a><a name="onResult-kotlin.collections.List-kotlin.Any-kotlin.Any-"></a>
+      <h3 class="api-name" id="onResult(kotlin.collections.List,kotlin.Any,kotlin.Any)">onResult</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Any,kotlin.Any)">onResult</a>(data:&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;Value&gt;,&nbsp;previousPageKey:&nbsp;Key&lt;Key&gt;,&nbsp;nextPageKey:&nbsp;Key&lt;Key&gt;):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+      <p>
+        <p>Called to pass loaded data from a DataSource.</p>
+        <p>Call this from <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadInitial(androidx.paging.PageKeyedDataSource.LoadInitialParams)">loadInitial</a></code> to initialize without counting available data, or supporting placeholders.</p>
+        <p>It is always valid to pass a different amount of data than what is requested. Pass an empty list if there is no more data to load.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>data</code></td>
+              <td width="100%">
+                <p>List of items loaded from the <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>previousPageKey</code></td>
+              <td width="100%">
+                <p>Key for page before the initial load result, or <code>null</code> if no more data can be loaded before.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>nextPageKey</code></td>
+              <td width="100%">
+                <p>Key for page after the initial load result, or <code>null</code> if no more data can be loaded after.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

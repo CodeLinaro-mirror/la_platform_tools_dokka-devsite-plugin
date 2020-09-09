@@ -1,0 +1,539 @@
+<html devsite="true">
+  <head>
+    <title>PageKeyedDataSource</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>PageKeyedDataSource</h1>
+{% setvar page_path %}androidx/paging/PageKeyedDataSource.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>TODO(b/166518424) class signature</p>
+    <p>TODO(b/166518951) inheritance hierarchy</p>
+    <p>TODO(b/166518636) direct subclasses</p>
+    <p>TODO(b/166518636) indirect subclasses</p>
+    <hr>
+    <p>
+      <p>Incremental data loader for page-keyed content, where requests return keys for next/previous pages.</p>
+      <p>Implement a <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code> using <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a></code> if you need to use data from page <code>N - 1</code> to load page <code>N</code>. This is common, for example, in network APIs that include a next/previous link or key with each page load.</p>
+      <p>The <code>InMemoryByPageRepository</code> in the <a href="https://github.com/googlesamples/android-architecture-components/blob/master/PagingWithNetworkSample/README.md">PagingWithNetworkSample</a> shows how to implement a network PageKeyedDataSource using <a href="https://square.github.io/retrofit/">Retrofit</a>, while handling swipe-to-refresh, network errors, and retry.</p>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">Parameters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Key</code></td>
+            <td width="100%">
+              <p>Type of data used to query Value types out of the <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>Value</code></td>
+            <td width="100%">
+              <p>Type of items being loaded by the <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <p>Nested *</p>
+    <p>Enum values</p>
+    <p>Constants</p>
+    <p>Public fields</p>
+    <p>Protected fields</p>
+    <p>Public constructors</p>
+    <p>Protected constructors</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>abstract&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams,androidx.paging.PageKeyedDataSource.LoadCallback)">loadAfter</a>(params:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html">PageKeyedDataSource.LoadParams</a>&lt;Key&gt;,&nbsp;callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html">PageKeyedDataSource.LoadCallback</a>&lt;Key,&nbsp;Value&gt;)</code></div>
+              <p>
+                <p>Append page with the key specified by <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html#key()">key</a></code>.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams,androidx.paging.PageKeyedDataSource.LoadCallback)">loadBefore</a>(params:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html">PageKeyedDataSource.LoadParams</a>&lt;Key&gt;,&nbsp;callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html">PageKeyedDataSource.LoadCallback</a>&lt;Key,&nbsp;Value&gt;)</code></div>
+              <p>
+                <p>Prepend page with the key specified by <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html#key()">key</a></code>.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadInitial(androidx.paging.PageKeyedDataSource.LoadInitialParams,androidx.paging.PageKeyedDataSource.LoadInitialCallback)">loadInitial</a>(params:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialParams.html">PageKeyedDataSource.LoadInitialParams</a>&lt;Key&gt;,&nbsp;callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html">PageKeyedDataSource.LoadInitialCallback</a>&lt;Key,&nbsp;Value&gt;)</code></div>
+              <p>
+                <p>Load initial data.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>override&nbsp;final&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#map()">map</a>(function:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;Value,&nbsp;ToValue&gt;)</code></div>
+              <p>
+                <p>Applies the given function to each value emitted by the DataSource.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>override&nbsp;final&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#map(kotlin.Function1)">map</a>(function:&nbsp;(Value) <span>&rarr;</span> ToValue)</code></div>
+              <p>
+                <p>Applies the given function to each value emitted by the DataSource.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>override&nbsp;final&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#mapByPage()">mapByPage</a>(function:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;Value&gt;,&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;ToValue&gt;&gt;)</code></div>
+              <p>
+                <p>Applies the given function to each value emitted by the DataSource.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>override&nbsp;final&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a>(function:&nbsp;(<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;Value&gt;) <span>&rarr;</span> <a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;ToValue&gt;)</code></div>
+              <p>
+                <p>Applies the given function to each value emitted by the DataSource.</p>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="loadAfter(androidx.paging.PageKeyedDataSource.LoadParams, androidx.paging.PageKeyedDataSource.LoadCallback)"></a><a name="loadAfter-androidx.paging.PageKeyedDataSource.LoadParams-androidx.paging.PageKeyedDataSource.LoadCallback-"></a>
+      <h3 class="api-name" id="loadAfter(androidx.paging.PageKeyedDataSource.LoadParams,androidx.paging.PageKeyedDataSource.LoadCallback)">loadAfter</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams,androidx.paging.PageKeyedDataSource.LoadCallback)">loadAfter</a>(params:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html">PageKeyedDataSource.LoadParams</a>&lt;Key&gt;,&nbsp;callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html">PageKeyedDataSource.LoadCallback</a>&lt;Key,&nbsp;Value&gt;):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+      <p>
+        <p>Append page with the key specified by <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html#key()">key</a></code>.</p>
+        <p>It's valid to return a different list size than the page size if it's easier, e.g. if your backend defines page sizes. It is generally preferred to increase the number loaded than reduce.</p>
+        <p>Data may be passed synchronously during the load method, or deferred and called at a later time. Further loads going down will be blocked until the callback is called.</p>
+        <p>If data cannot be loaded (for example, if the request is invalid, or the data would be stale and inconsistent), it is valid to call <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#invalidate()">invalidate</a></code> to invalidate the data source, and prevent further loading.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>params</code></td>
+              <td width="100%">
+                <p>Parameters for the load, including the key for the new page, and requested load size.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>callback</code></td>
+              <td width="100%">
+                <p>Callback that receives loaded data.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="loadBefore(androidx.paging.PageKeyedDataSource.LoadParams, androidx.paging.PageKeyedDataSource.LoadCallback)"></a><a name="loadBefore-androidx.paging.PageKeyedDataSource.LoadParams-androidx.paging.PageKeyedDataSource.LoadCallback-"></a>
+      <h3 class="api-name" id="loadBefore(androidx.paging.PageKeyedDataSource.LoadParams,androidx.paging.PageKeyedDataSource.LoadCallback)">loadBefore</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams,androidx.paging.PageKeyedDataSource.LoadCallback)">loadBefore</a>(params:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html">PageKeyedDataSource.LoadParams</a>&lt;Key&gt;,&nbsp;callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html">PageKeyedDataSource.LoadCallback</a>&lt;Key,&nbsp;Value&gt;):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+      <p>
+        <p>Prepend page with the key specified by <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html#key()">key</a></code>.</p>
+        <p>It's valid to return a different list size than the page size if it's easier, e.g. if your backend defines page sizes. It is generally preferred to increase the number loaded than reduce.</p>
+        <p>Data may be passed synchronously during the load method, or deferred and called at a later time. Further loads going down will be blocked until the callback is called.</p>
+        <p>If data cannot be loaded (for example, if the request is invalid, or the data would be stale and inconsistent), it is valid to call <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#invalidate()">invalidate</a></code> to invalidate the data source, and prevent further loading.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>params</code></td>
+              <td width="100%">
+                <p>Parameters for the load, including the key for the new page, and requested load size.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>callback</code></td>
+              <td width="100%">
+                <p>Callback that receives loaded data.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="loadInitial(androidx.paging.PageKeyedDataSource.LoadInitialParams, androidx.paging.PageKeyedDataSource.LoadInitialCallback)"></a><a name="loadInitial-androidx.paging.PageKeyedDataSource.LoadInitialParams-androidx.paging.PageKeyedDataSource.LoadInitialCallback-"></a>
+      <h3 class="api-name" id="loadInitial(androidx.paging.PageKeyedDataSource.LoadInitialParams,androidx.paging.PageKeyedDataSource.LoadInitialCallback)">loadInitial</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadInitial(androidx.paging.PageKeyedDataSource.LoadInitialParams,androidx.paging.PageKeyedDataSource.LoadInitialCallback)">loadInitial</a>(params:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialParams.html">PageKeyedDataSource.LoadInitialParams</a>&lt;Key&gt;,&nbsp;callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html">PageKeyedDataSource.LoadInitialCallback</a>&lt;Key,&nbsp;Value&gt;):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+      <p>
+        <p>Load initial data.</p>
+        <p>This method is called first to initialize a PagedList with data. If it's possible to count the items that can be loaded by the DataSource, it's recommended to pass the loaded data to the callback via the three-parameter <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Any,kotlin.Any)">onResult</a></code>. This enables PagedLists presenting data from this source to display placeholders to represent unloaded items.</p>
+        <p><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialParams.html#requestedLoadSize()">requestedLoadSize</a></code> is a hint, not a requirement, so it may be may be altered or ignored.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>params</code></td>
+              <td width="100%">
+                <p>Parameters for initial load, including requested load size.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>callback</code></td>
+              <td width="100%">
+                <p>Callback that receives initial load data.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="map--"></a>
+      <h3 class="api-name" id="map()">map</h3>
+      <pre class="api-signature no-pretty-print">override&nbsp;final&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#map()">map</a>(function:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;Value,&nbsp;ToValue&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
+      <p>
+        <p>Applies the given function to each value emitted by the DataSource.</p>
+        <p>Same as <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code>, but operates on individual items.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
+              <td width="100%">
+                <p>
+                  <p>A new DataSource, which transforms items using the given function.</p>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ToValue</code></td>
+              <td width="100%">
+                <p>Type of items produced by the new DataSource, from the passed function.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>function</code></td>
+              <td width="100%">
+                <p>Function that runs on each loaded item, returning items of a potentially new type.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map(kotlin.Function1)">map</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#mapByPage(kotlin.Function1)">mapByPage</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="map-kotlin.Function1-"></a>
+      <h3 class="api-name" id="map(kotlin.Function1)">map</h3>
+      <pre class="api-signature no-pretty-print">override&nbsp;final&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#map(kotlin.Function1)">map</a>(function:&nbsp;(Value) <span>&rarr;</span> ToValue):&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
+      <p>
+        <p>Applies the given function to each value emitted by the DataSource.</p>
+        <p>An overload of <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#map(kotlin.Function1)">map</a></code> that accepts a kotlin function type.</p>
+        <p>Same as <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code>, but operates on individual items.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
+              <td width="100%">
+                <p>
+                  <p>A new DataSource, which transforms items using the given function.</p>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ToValue</code></td>
+              <td width="100%">
+                <p>Type of items produced by the new DataSource, from the passed function.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>function</code></td>
+              <td width="100%">
+                <p>Function that runs on each loaded item, returning items of a potentially new type.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map(kotlin.Function1)">map</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="mapByPage--"></a>
+      <h3 class="api-name" id="mapByPage()">mapByPage</h3>
+      <pre class="api-signature no-pretty-print">override&nbsp;final&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#mapByPage()">mapByPage</a>(function:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;Value&gt;,&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;ToValue&gt;&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
+      <p>
+        <p>Applies the given function to each value emitted by the DataSource.</p>
+        <p>Same as <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#map(kotlin.Function1)">map</a></code>, but allows for batch conversions.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
+              <td width="100%">
+                <p>
+                  <p>A new DataSource, which transforms items using the given function.</p>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ToValue</code></td>
+              <td width="100%">
+                <p>Type of items produced by the new DataSource, from the passed function.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>function</code></td>
+              <td width="100%">
+                <p>Function that runs on each loaded page, returning items of a potentially new type.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#map(kotlin.Function1)">map</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map(kotlin.Function1)">map</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#mapByPage(kotlin.Function1)">mapByPage</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="mapByPage-kotlin.Function1-"></a>
+      <h3 class="api-name" id="mapByPage(kotlin.Function1)">mapByPage</h3>
+      <pre class="api-signature no-pretty-print">override&nbsp;final&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a>(function:&nbsp;(<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;Value&gt;) <span>&rarr;</span> <a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;ToValue&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
+      <p>
+        <p>Applies the given function to each value emitted by the DataSource.</p>
+        <p>An overload of <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code> that accepts a kotlin function type.</p>
+        <p>Same as <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#map(kotlin.Function1)">map</a></code>, but allows for batch conversions.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
+              <td width="100%">
+                <p>
+                  <p>A new <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>, which transforms items using the given function.</p>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ToValue</code></td>
+              <td width="100%">
+                <p>Type of items produced by the new DataSource, from the passed function.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>function</code></td>
+              <td width="100%">
+                <p>Function that runs on each loaded page, returning items of a potentially new type.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#map(kotlin.Function1)">map</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map(kotlin.Function1)">map</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#mapByPage(kotlin.Function1)">mapByPage</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

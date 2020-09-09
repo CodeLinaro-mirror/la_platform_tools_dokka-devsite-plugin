@@ -1,0 +1,201 @@
+<html devsite="true">
+  <head>
+    <title>PositionalDataSource.Companion</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>PositionalDataSource.Companion</h1>
+{% setvar page_path %}androidx/paging/PositionalDataSource.Companion.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>TODO(b/166518424) class signature</p>
+    <p>TODO(b/166518951) inheritance hierarchy</p>
+    <p>TODO(b/166518636) direct subclasses</p>
+    <p>TODO(b/166518636) indirect subclasses</p>
+    <hr>
+    <p></p>
+    <h2>Summary</h2>
+    <p>Nested *</p>
+    <p>Enum values</p>
+    <p>Constants</p>
+    <p>Public fields</p>
+    <p>Protected fields</p>
+    <p>Public constructors</p>
+    <p>Protected constructors</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>final&nbsp;<a href="/reference/kotlin/Int.html">Int</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/paging/PositionalDataSource.Companion.html#computeInitialLoadPosition(androidx.paging.PositionalDataSource.LoadInitialParams,kotlin.Int)">computeInitialLoadPosition</a>(<a href="/reference/androidx/paging/PositionalDataSource.LoadInitialParams.html">PositionalDataSource.LoadInitialParams</a>&nbsp;params,&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;totalCount)</code></div>
+              <p>
+                <p>Helper for computing an initial position in <code><a href="/reference/androidx/paging/PositionalDataSource.html#loadInitial(androidx.paging.PositionalDataSource.LoadInitialParams)">loadInitial</a></code> when total data set size can be computed ahead of loading.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/paging/PositionalDataSource.Companion.html#computeInitialLoadSize(androidx.paging.PositionalDataSource.LoadInitialParams,kotlin.Int,kotlin.Int)">computeInitialLoadSize</a>(<a href="/reference/androidx/paging/PositionalDataSource.LoadInitialParams.html">PositionalDataSource.LoadInitialParams</a>&nbsp;params,&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;initialLoadPosition,&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;totalCount)</code></div>
+              <p>
+                <p>Helper for computing an initial load size in <code><a href="/reference/androidx/paging/PositionalDataSource.html#loadInitial(androidx.paging.PositionalDataSource.LoadInitialParams)">loadInitial</a></code> when total data set size can be computed ahead of loading.</p>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="computeInitialLoadPosition(androidx.paging.PositionalDataSource.LoadInitialParams, kotlin.Int)"></a><a name="computeInitialLoadPosition-androidx.paging.PositionalDataSource.LoadInitialParams-kotlin.Int-"></a>
+      <h3 class="api-name" id="computeInitialLoadPosition(androidx.paging.PositionalDataSource.LoadInitialParams,kotlin.Int)">computeInitialLoadPosition</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;<a href="/reference/androidx/paging/PositionalDataSource.Companion.html#computeInitialLoadPosition(androidx.paging.PositionalDataSource.LoadInitialParams,kotlin.Int)">computeInitialLoadPosition</a>(<a href="/reference/androidx/paging/PositionalDataSource.LoadInitialParams.html">PositionalDataSource.LoadInitialParams</a>&nbsp;params,&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;totalCount)</pre>
+      <p>
+        <p>Helper for computing an initial position in <code><a href="/reference/androidx/paging/PositionalDataSource.html#loadInitial(androidx.paging.PositionalDataSource.LoadInitialParams)">loadInitial</a></code> when total data set size can be computed ahead of loading.</p>
+        <p>The value computed by this function will do bounds checking, page alignment, and positioning based on initial load size requested.</p>
+        <p>Example usage in a <code><a href="/reference/androidx/paging/PositionalDataSource.html">PositionalDataSource</a></code> subclass:</p>
+        <pre>class ItemDataSource extends PositionalDataSource&lt;Item&gt; {<br>    private int computeCount() {<br>        // actual count code here<br>    }<br><br>    private List&lt;Item&gt; loadRangeInternal(int startPosition, int loadCount) {<br>        // actual load code here<br>    }<br><br>    @Override<br>    public void loadInitial(@NonNull LoadInitialParams params,<br>        @NonNull LoadInitialCallback&lt;Item&gt; callback) {<br>        int totalCount = computeCount();<br>        int position = computeInitialLoadPosition(params, totalCount);<br>        int loadSize = computeInitialLoadSize(params, position, totalCount);<br>        callback.onResult(loadRangeInternal(position, loadSize), position, totalCount);<br>    }<br><br>    @Override<br>    public void loadRange(@NonNull LoadRangeParams params,<br>        @NonNull LoadRangeCallback&lt;Item&gt; callback) {<br>        callback.onResult(loadRangeInternal(params.startPosition, params.loadSize));<br>    }<br>}</pre>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/Int.html">Int</a></code></td>
+              <td width="100%">
+                <p>
+                  <p>Position to start loading at.</p>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>params</code></td>
+              <td width="100%">
+                <p>Params passed to <code><a href="/reference/androidx/paging/PositionalDataSource.html#loadInitial(androidx.paging.PositionalDataSource.LoadInitialParams)">loadInitial</a></code>, including page size, and requested start / loadSize.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>totalCount</code></td>
+              <td width="100%">
+                <p>Total size of the data set.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/PositionalDataSource.Companion.html#computeInitialLoadSize(androidx.paging.PositionalDataSource.LoadInitialParams,kotlin.Int,kotlin.Int)">computeInitialLoadSize</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="computeInitialLoadSize(androidx.paging.PositionalDataSource.LoadInitialParams, kotlin.Int, kotlin.Int)"></a><a name="computeInitialLoadSize-androidx.paging.PositionalDataSource.LoadInitialParams-kotlin.Int-kotlin.Int-"></a>
+      <h3 class="api-name" id="computeInitialLoadSize(androidx.paging.PositionalDataSource.LoadInitialParams,kotlin.Int,kotlin.Int)">computeInitialLoadSize</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/paging/PositionalDataSource.Companion.html#computeInitialLoadSize(androidx.paging.PositionalDataSource.LoadInitialParams,kotlin.Int,kotlin.Int)">computeInitialLoadSize</a>(<a href="/reference/androidx/paging/PositionalDataSource.LoadInitialParams.html">PositionalDataSource.LoadInitialParams</a>&nbsp;params,&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;initialLoadPosition,&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;totalCount)</pre>
+      <p>
+        <p>Helper for computing an initial load size in <code><a href="/reference/androidx/paging/PositionalDataSource.html#loadInitial(androidx.paging.PositionalDataSource.LoadInitialParams)">loadInitial</a></code> when total data set size can be computed ahead of loading.</p>
+        <p>This function takes the requested load size, and bounds checks it against the value returned by <code><a href="/reference/androidx/paging/PositionalDataSource.Companion.html#computeInitialLoadPosition(androidx.paging.PositionalDataSource.LoadInitialParams,kotlin.Int)">computeInitialLoadPosition</a></code>.</p>
+        <p>Example usage in a <code><a href="/reference/androidx/paging/PositionalDataSource.html">PositionalDataSource</a></code> subclass:</p>
+        <pre>class ItemDataSource extends PositionalDataSource&lt;Item&gt; {<br>    private int computeCount() {<br>        // actual count code here<br>    }<br><br>    private List&lt;Item&gt; loadRangeInternal(int startPosition, int loadCount) {<br>        // actual load code here<br>    }<br><br>    @Override<br>    public void loadInitial(@NonNull LoadInitialParams params,<br>        @NonNull LoadInitialCallback&lt;Item&gt; callback) {<br>        int totalCount = computeCount();<br>        int position = computeInitialLoadPosition(params, totalCount);<br>        int loadSize = computeInitialLoadSize(params, position, totalCount);<br>        callback.onResult(loadRangeInternal(position, loadSize), position, totalCount);<br>    }<br><br>    @Override<br>    public void loadRange(@NonNull LoadRangeParams params,<br>        @NonNull LoadRangeCallback&lt;Item&gt; callback) {<br>        callback.onResult(loadRangeInternal(params.startPosition, params.loadSize));<br>    }<br>}</pre>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+              <td width="100%">
+                <p>
+                  <p>Number of items to load.</p>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>params</code></td>
+              <td width="100%">
+                <p>Params passed to <code><a href="/reference/androidx/paging/PositionalDataSource.html#loadInitial(androidx.paging.PositionalDataSource.LoadInitialParams)">loadInitial</a></code>, including page size, and requested start / loadSize.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>initialLoadPosition</code></td>
+              <td width="100%">
+                <p>Value returned by <code><a href="/reference/androidx/paging/PositionalDataSource.Companion.html#computeInitialLoadPosition(androidx.paging.PositionalDataSource.LoadInitialParams,kotlin.Int)">computeInitialLoadPosition</a></code></p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>totalCount</code></td>
+              <td width="100%">
+                <p>Total size of the data set.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/PositionalDataSource.Companion.html#computeInitialLoadPosition(androidx.paging.PositionalDataSource.LoadInitialParams,kotlin.Int)">computeInitialLoadPosition</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
