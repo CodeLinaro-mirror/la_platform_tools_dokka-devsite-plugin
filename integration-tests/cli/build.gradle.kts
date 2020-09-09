@@ -48,7 +48,7 @@ tasks.register<JavaExec>("run") {
     })
 
     environment("DEVSITE_TENANT", "androidx")
-    args = listOf("${project.buildDir}/resources/config.json")
+    args = listOf("${project.buildDir}/resources/config.json", "-moduleName", "sample")
 
     doFirst {
         generatedDir.deleteRecursively()

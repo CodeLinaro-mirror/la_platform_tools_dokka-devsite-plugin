@@ -41,11 +41,11 @@ import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.FunctionModifiers
 import org.jetbrains.dokka.model.JavaObject
 import org.jetbrains.dokka.model.Nullable
-import org.jetbrains.dokka.model.OtherParameter
 import org.jetbrains.dokka.model.PrimitiveJavaType
 import org.jetbrains.dokka.model.Projection
 import org.jetbrains.dokka.model.Star
 import org.jetbrains.dokka.model.TypeConstructor
+import org.jetbrains.dokka.model.TypeParameter
 import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Variance
 import org.jetbrains.dokka.model.Void
@@ -183,9 +183,9 @@ internal class FunctionDocumentableConverter(
         } else {
             null
         }
-        is OtherParameter, is PrimitiveJavaType, is UnresolvedBound, Star, JavaObject -> null
+        is TypeParameter, is PrimitiveJavaType, is UnresolvedBound, Star, JavaObject -> null
         is Nullable -> inner.receiver()
-        is Variance -> inner.receiver()
+        is Variance<*> -> inner.receiver()
         else -> error("Unknown bound: $this")
     }
 
@@ -201,13 +201,18 @@ internal class FunctionDocumentableConverter(
 
     /** Converts a documentable type to its type component, recursively expanding generics */
     private fun Projection.toComponent(): ParameterType {
+
+        if (this is Variance<*>) {
+            return inner.toComponent()
+        }
+
         val generics: List<ParameterType> = when (this) {
             is TypeConstructor -> projections.map { it.toComponent() }
-            is OtherParameter, is PrimitiveJavaType, is UnresolvedBound,
+            is TypeParameter, is PrimitiveJavaType, is UnresolvedBound,
             Star, Void, JavaObject -> emptyList()
             is Nullable -> listOf(inner.toComponent())
             // TODO(b/166530498): support variance
-            is Variance -> listOf(inner.toComponent())
+            is Variance<*> -> listOf(inner.toComponent())
             else -> error("Unknown bound: $this")
         }
 
@@ -224,7 +229,7 @@ internal class FunctionDocumentableConverter(
      */
     private fun Projection.toLink(): Link = when (this) {
         is TypeConstructor -> pathProvider.linkForReference(dri)
-        is OtherParameter -> DefaultLink(
+        is TypeParameter -> DefaultLink(
             Link.Params(
                 name = name,
                 url = ""
@@ -254,7 +259,7 @@ internal class FunctionDocumentableConverter(
         is UnresolvedBound -> DefaultLink(Link.Params(name = name, url = ""))
         is Nullable -> inner.toLink()
         // TODO(b/166530498): support variance
-        is Variance -> inner.toLink()
+        is Variance<*> -> inner.toLink()
         else -> error("Unknown bound: $this")
     }
 
@@ -273,8 +278,8 @@ internal class FunctionDocumentableConverter(
             }
         }
         is Nullable -> inner.isLambda()
-        is Variance -> inner.isLambda()
-        is OtherParameter, is PrimitiveJavaType, is UnresolvedBound, Star, JavaObject -> false
+        is Variance<*> -> inner.isLambda()
+        is TypeParameter, is PrimitiveJavaType, is UnresolvedBound, Star, JavaObject -> false
         else -> error("Unknown bound: $this")
     }
 

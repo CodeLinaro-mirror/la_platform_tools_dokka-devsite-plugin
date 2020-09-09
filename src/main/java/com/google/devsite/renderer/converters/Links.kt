@@ -24,7 +24,7 @@ import org.jetbrains.dokka.links.Callable
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.JavaClassReference
 import org.jetbrains.dokka.links.Nullable
-import org.jetbrains.dokka.links.SelfType
+import org.jetbrains.dokka.links.RecursiveType
 import org.jetbrains.dokka.links.StarProjection
 import org.jetbrains.dokka.links.TypeConstructor
 import org.jetbrains.dokka.links.TypeParam
@@ -78,7 +78,7 @@ private fun TypeReference.name(): String = when (this) {
     is TypeConstructor -> fullyQualifiedName
     is Nullable -> wrapped.name()
     is TypeParam -> bounds.single().name()
-    SelfType, StarProjection -> ""
+    is RecursiveType, StarProjection -> ""
 }
 
 internal data class ReferencePath(val name: String, val url: String)
