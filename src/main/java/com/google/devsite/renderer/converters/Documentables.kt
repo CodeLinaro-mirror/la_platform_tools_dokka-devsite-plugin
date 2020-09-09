@@ -60,8 +60,19 @@ internal fun DPackage.exceptions() = classes().filter { clazz ->
     clazz.functions.any { function -> function.dri.classNames == "Throwable" }
 }
 
+internal fun DPackage.topLevelConstants() =
+    properties.filter { isConstant(it.modifiers()) }.sortedBy { it.name }
+
+internal fun DPackage.topLevelProperties() = properties
+    .filterNot { isConstant(it.modifiers()) }
+    .filter { it.receiver == null }
+    .sortedBy { it.name }
+
 internal fun DPackage.topLevelFunctions() =
     functions.filter { it.receiver == null }.sortedBy { it.name }
+
+internal fun DPackage.extensionProperties() =
+    properties.filterNot { it.receiver == null }.sortedBy { it.name }
 
 internal fun DPackage.extensionFunctions() =
     functions.filterNot { it.receiver == null }.sortedBy { it.name }
