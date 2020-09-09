@@ -31,6 +31,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
+import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
 
 /** Converts documentables into components for the package summary page. */
@@ -42,6 +43,8 @@ internal class PackageDocumentableConverter(
     private val javadocConverter = DocTagConverter(displayLanguage, pathProvider)
     private val functionConverter =
         FunctionDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
+    private val propertyConverter =
+        PropertyDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
 
     /** @return the root component for the package summary page */
     suspend fun summaryPage(): DevsitePage = coroutineScope {
@@ -52,10 +55,16 @@ internal class PackageDocumentableConverter(
         val annotations = async { docsToSummary(doc.annotations()) }
         val typeAliases = async { docsToSummary(doc.typeAliases()) }
 
+        val topLevelConstantsSummary = async { propertiesToSummary(doc.topLevelConstants()) }
+        val topLevelPropertiesSummary = async { propertiesToSummary(doc.topLevelProperties()) }
         val topLevelFunctionsSummary = async { functionsToSummary(doc.topLevelFunctions()) }
+        val extensionPropertiesSummary = async { propertiesToSummary(doc.extensionProperties()) }
         val extensionFunctionsSummary = async { functionsToSummary(doc.extensionFunctions()) }
 
+        val topLevelConstants = async { propertiesToDetail(doc.topLevelConstants()) }
+        val topLevelProperties = async { propertiesToDetail(doc.topLevelProperties()) }
         val topLevelFunctions = async { functionsToDetail(doc.topLevelFunctions()) }
+        val extensionProperties = async { propertiesToDetail(doc.extensionProperties()) }
         val extensionFunctions = async { functionsToDetail(doc.extensionFunctions()) }
 
         DefaultDevsitePage(
@@ -73,9 +82,15 @@ internal class PackageDocumentableConverter(
                         exceptions = exceptions.await(),
                         annotations = annotations.await(),
                         typeAliases = typeAliases.await(),
+                        topLevelConstantsSummary = topLevelConstantsSummary.await(),
+                        topLevelPropertiesSummary = topLevelPropertiesSummary.await(),
                         topLevelFunctionsSummary = topLevelFunctionsSummary.await(),
+                        extensionPropertiesSummary = extensionPropertiesSummary.await(),
                         extensionFunctionsSummary = extensionFunctionsSummary.await(),
+                        topLevelConstants = topLevelConstants.await(),
+                        topLevelProperties = topLevelProperties.await(),
                         topLevelFunctions = topLevelFunctions.await(),
+                        extensionProperties = extensionProperties.await(),
                         extensionFunctions = extensionFunctions.await()
                     )
                 )
@@ -115,6 +130,24 @@ internal class PackageDocumentableConverter(
     private fun functionsToDetail(functions: List<DFunction>): List<FunctionDetail> {
         return functions.map {
             functionConverter.detail(it)
+        }
+    }
+
+    private fun propertiesToSummary(properties: List<DProperty>): SummaryList {
+        val components = properties.map {
+            propertyConverter.summary(it)
+        }
+
+        return DefaultSummaryList(
+            SummaryList.Params(
+                items = components
+            )
+        )
+    }
+
+    private fun propertiesToDetail(properties: List<DProperty>): List<FunctionDetail> {
+        return properties.map {
+            propertyConverter.detail(it)
         }
     }
 }

@@ -30,9 +30,15 @@ internal interface PackageSummary : ContextFreeComponent {
         val exceptions: SummaryList,
         val annotations: SummaryList,
         val typeAliases: SummaryList,
+        val topLevelConstantsSummary: SummaryList,
+        val topLevelPropertiesSummary: SummaryList,
         val topLevelFunctionsSummary: SummaryList,
+        val extensionPropertiesSummary: SummaryList,
         val extensionFunctionsSummary: SummaryList,
+        val topLevelConstants: List<ContextFreeComponent>,
+        val topLevelProperties: List<ContextFreeComponent>,
         val topLevelFunctions: List<ContextFreeComponent>,
+        val extensionProperties: List<ContextFreeComponent>,
         val extensionFunctions: List<ContextFreeComponent>
     )
 }

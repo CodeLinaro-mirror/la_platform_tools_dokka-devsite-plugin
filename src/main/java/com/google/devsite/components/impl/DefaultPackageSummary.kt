@@ -28,8 +28,6 @@ internal class DefaultPackageSummary(
     override val data: PackageSummary.Params
 ) : PackageSummary {
     override fun render(html: FlowContent) = html.run {
-        // TODO(b/163811266): add Kotlin bits
-
         renderSummary(data.interfaces, "Interfaces")
         renderSummary(data.classes, "Classes")
         renderSummary(data.enums, "Enums")
@@ -39,10 +37,16 @@ internal class DefaultPackageSummary(
         if (data.displayLanguage == Language.KOTLIN) {
             renderSummary(data.typeAliases, "Type aliases")
 
+            renderSummary(data.topLevelConstantsSummary, "Constants summary")
+            renderSummary(data.topLevelPropertiesSummary, "Top-level properties summary")
             renderSummary(data.topLevelFunctionsSummary, "Top-level functions summary")
+            renderSummary(data.extensionPropertiesSummary, "Extension properties summary")
             renderSummary(data.extensionFunctionsSummary, "Extension functions summary")
 
+            renderDetails(data.topLevelConstants, "Constants")
+            renderDetails(data.topLevelProperties, "Top-level properties")
             renderDetails(data.topLevelFunctions, "Top-level functions")
+            renderDetails(data.extensionProperties, "Extension properties")
             renderDetails(data.extensionFunctions, "Extension functions")
         }
     }
