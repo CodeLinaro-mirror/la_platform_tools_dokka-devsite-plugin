@@ -133,58 +133,69 @@ internal class DefaultDescription(
 ) : Description {
     override fun render(html: FlowContent) = html.run {
         if (data.deprecation == null) {
-            renderTags(listOf(data.root))
+            renderTags(listOf(data.root), State())
         } else {
             if (data.summary) {
                 if (data.root is P) {
                     p {
                         em { +data.deprecation }
                         +" "
-                        renderTags(data.root.children)
+                        renderTags(data.root.children, State())
                     }
                 } else {
                     em { +data.deprecation }
-                    renderTags(data.root.children)
+                    renderTags(data.root.children, State())
                 }
             } else {
                 p("caution") {
                     strong { +data.deprecation }
                     br()
-                    renderTags(listOf(data.root))
+                    renderTags(listOf(data.root), State())
                 }
             }
         }
     }
 
-    private fun FlowContent.renderTags(tags: List<DocTag>) {
+    private fun FlowContent.renderTags(tags: List<DocTag>, state: State) {
         for (tag in tags) {
+            if (state.terminate) break
+
             when (tag) {
-                is Text -> +tag.body
-                is P -> p { renderTags(tag.children) }
-                is A -> a(tag.params.getValue("href")) { renderTags(tag.children) }
-                is B, is Strong -> b { renderTags(tag.children) }
-                Br -> br { renderTags(tag.children) }
-                is H3 -> h3 { renderTags(tag.children) }
-                is H4 -> h4 { renderTags(tag.children) }
-                is H5 -> h5 { renderTags(tag.children) }
-                is H6 -> h6 { renderTags(tag.children) }
-                is I, is Em -> em { renderTags(tag.children) }
-                is Div -> div { renderTags(tag.children) }
-                is Span -> span { renderTags(tag.children) }
-                is Strikethrough -> del { renderTags(tag.children) }
-                is Sub -> sub { renderTags(tag.children) }
-                is Sup -> sup { renderTags(tag.children) }
-                is Table -> table { renderTable(tag.children) }
-                is Ol -> ol { renderOrderedList(tag.children) }
-                is Ul -> ul { renderUnorderedList(tag.children) }
-                HorizontalRule -> hr { renderTags(tag.children) }
-                is CodeInline -> code { renderTags(tag.children) }
-                is Pre, is CodeBlock -> pre { renderTags(tag.children) }
+                is Text -> if (data.summary) {
+                    if (tag.body.contains(".")) {
+                        +tag.body.replaceAfter(".", "")
+                        state.terminate = true
+                    } else {
+                        +tag.body
+                    }
+                } else {
+                    +tag.body
+                }
+                is P -> p { renderTags(tag.children, state) }
+                is A -> a(tag.params.getValue("href")) { renderTags(tag.children, state) }
+                is B, is Strong -> b { renderTags(tag.children, state) }
+                Br -> br { renderTags(tag.children, state) }
+                is H3 -> h3 { renderTags(tag.children, state) }
+                is H4 -> h4 { renderTags(tag.children, state) }
+                is H5 -> h5 { renderTags(tag.children, state) }
+                is H6 -> h6 { renderTags(tag.children, state) }
+                is I, is Em -> em { renderTags(tag.children, state) }
+                is Div -> div { renderTags(tag.children, state) }
+                is Span -> span { renderTags(tag.children, state) }
+                is Strikethrough -> del { renderTags(tag.children, state) }
+                is Sub -> sub { renderTags(tag.children, state) }
+                is Sup -> sup { renderTags(tag.children, state) }
+                is Table -> table { renderTable(tag.children, state) }
+                is Ol -> ol { renderOrderedList(tag.children, state) }
+                is Ul -> ul { renderUnorderedList(tag.children, state) }
+                HorizontalRule -> hr { renderTags(tag.children, state) }
+                is CodeInline -> code { renderTags(tag.children, state) }
+                is Pre, is CodeBlock -> pre { renderTags(tag.children, state) }
                 is DocumentationLink -> code {
                     data.pathProvider.linkForReference(tag.dri).render(this)
                 }
-                is Img -> img(src = tag.params.getValue("src")) { renderTags(tag.children) }
-                is BlockQuote -> blockQuote { renderTags(tag.children) }
+                is Img -> img(src = tag.params.getValue("src")) { renderTags(tag.children, state) }
+                is BlockQuote -> blockQuote { renderTags(tag.children, state) }
 
                 is Html, is Head, is Meta, is Header, is Title, is H1, is H2, is Footer, is IFrame,
                 is Main, is Menu, is Nav, is Index ->
@@ -203,79 +214,85 @@ internal class DefaultDescription(
         }
     }
 
-    private fun TABLE.renderTable(tags: List<DocTag>) {
+    private fun TABLE.renderTable(tags: List<DocTag>, state: State) {
         for (tag in tags) {
             when (tag) {
-                is THead -> thead { renderTableHeader(tag.children) }
-                is TBody -> tbody { renderTableBody(tag.children) }
-                is TFoot -> tfoot { renderTableFooter(tag.children) }
-                is Th -> tr { renderTableRow(tag.children, isHeader = true) }
-                is Tr -> tr { renderTableRow(tag.children, isHeader = false) }
+                is THead -> thead { renderTableHeader(tag.children, state) }
+                is TBody -> tbody { renderTableBody(tag.children, state) }
+                is TFoot -> tfoot { renderTableFooter(tag.children, state) }
+                is Th -> tr { renderTableRow(tag.children, isHeader = true, state) }
+                is Tr -> tr { renderTableRow(tag.children, isHeader = false, state) }
                 else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
             }
         }
     }
 
-    private fun THEAD.renderTableHeader(tags: List<DocTag>) {
+    private fun THEAD.renderTableHeader(tags: List<DocTag>, state: State) {
         for (tag in tags) {
             when (tag) {
-                is Tr -> tr { renderTableRow(tag.children, isHeader = true) }
+                is Tr -> tr { renderTableRow(tag.children, isHeader = true, state) }
                 else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
             }
         }
     }
 
-    private fun TBODY.renderTableBody(tags: List<DocTag>) {
+    private fun TBODY.renderTableBody(tags: List<DocTag>, state: State) {
         for (tag in tags) {
             when (tag) {
-                is Tr -> tr { renderTableRow(tag.children, isHeader = false) }
+                is Tr -> tr { renderTableRow(tag.children, isHeader = false, state) }
                 else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
             }
         }
     }
 
-    private fun TFOOT.renderTableFooter(tags: List<DocTag>) {
+    private fun TFOOT.renderTableFooter(tags: List<DocTag>, state: State) {
         for (tag in tags) {
             when (tag) {
-                is Tr -> tr { renderTableRow(tag.children, isHeader = false) }
+                is Tr -> tr { renderTableRow(tag.children, isHeader = false, state) }
                 else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
             }
         }
     }
 
-    private fun TR.renderTableRow(tags: List<DocTag>, isHeader: Boolean) {
+    private fun TR.renderTableRow(tags: List<DocTag>, isHeader: Boolean, state: State) {
         for (tag in tags) {
             when (tag) {
-                is Td -> td { renderTags(tag.children) }
+                is Td -> td { renderTags(tag.children, state) }
                 is P -> if (isHeader) {
                     // KotlinX.HTML seems broken here: we can't render paragraphs or divs
                     // TODO(b/164125463): Figure out how to add other elements
                     th { +(tag.children.single() as Text).body }
                 } else {
-                    td { renderTags(tag.children) }
+                    td { renderTags(tag.children, state) }
                 }
                 else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
             }
         }
     }
 
-    private fun OL.renderOrderedList(tags: List<DocTag>) {
+    private fun OL.renderOrderedList(tags: List<DocTag>, state: State) {
         for (tag in tags) {
             when (tag) {
-                is Li -> li { renderTags(tag.children) }
-                is Ol, is Ul -> renderTags(listOf(tag))
+                is Li -> li { renderTags(tag.children, state) }
+                is Ol, is Ul -> renderTags(listOf(tag), state)
                 else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
             }
         }
     }
 
-    private fun UL.renderUnorderedList(tags: List<DocTag>) {
+    private fun UL.renderUnorderedList(tags: List<DocTag>, state: State) {
         for (tag in tags) {
             when (tag) {
-                is Li -> li { renderTags(tag.children) }
-                is Ol, is Ul -> renderTags(listOf(tag))
+                is Li -> li { renderTags(tag.children, state) }
+                is Ol, is Ul -> renderTags(listOf(tag), state)
                 else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
             }
         }
     }
+
+    /**
+     * Mutable state holder for tag rendering. We aren't using fields to preserve thread safety and
+     * idempotency of the component.
+     */
+    private class State(var terminate: Boolean = false)
 }

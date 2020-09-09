@@ -64,8 +64,7 @@
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a>(inflater:&nbsp;LayoutInflater,&nbsp;container:&nbsp;ViewGroup,&nbsp;savedInstanceState:&nbsp;Bundle)</code></div>
               <p>
-                <p>Provide default implementation to return a simple list view. Subclasses can override to replace with their own layout. If doing so, the returned view hierarchy <em>must</em> have a ListView whose id is and can optionally have a sibling view id that is to be shown when the list is empty. </p>
-                <p>If you are overriding this method with your own custom content, consider including the standard layout in your layout file, so that you continue to retain all of the standard behavior of ListFragment. In particular, this is currently the only way to have the built-in indeterminant progress state be shown.</p>
+                <p>Provide default implementation to return a simple list view.</p>
               </p>
             </td>
           </tr>
@@ -80,7 +79,7 @@
             <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#onListItemClick(android.widget.ListView,android.view.View,int,long)">onListItemClick</a>(l:&nbsp;ListView,&nbsp;v:&nbsp;View,&nbsp;position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,&nbsp;id:&nbsp;<a href="/reference/kotlin/kotlin/Long.html">Long</a>)</code></div>
-              <p>This method will be called when an item in the list is selected. Subclasses should override. Subclasses can call getListView().getItemAtPosition(position) if they need to access the data associated with the selected item.</p>
+              <p>This method will be called when an item in the list is selected.</p>
             </td>
           </tr>
           <tr>
@@ -101,7 +100,7 @@
             <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#setEmptyText(java.lang.CharSequence)">setEmptyText</a>(text:&nbsp;<a href="/reference/kotlin/java/lang/CharSequence.html">CharSequence</a>)</code></div>
-              <p>The default content for a ListFragment has a TextView that can be shown when the list is empty. If you would like to have it shown, call this method to supply the text it should use.</p>
+              <p>The default content for a ListFragment has a TextView that can be shown when the list is empty.</p>
             </td>
           </tr>
           <tr>
@@ -116,8 +115,7 @@
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#setListShown(boolean)">setListShown</a>(shown:&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a>)</code></div>
               <p>
-                <p>Control whether the list is being displayed. You can make it not displayed if you are waiting for the initial data to show in it. During this time an indeterminant progress indicator will be shown instead. </p>
-                <p>Applications do not normally need to use this themselves. The default behavior of ListFragment is to start with the list not being shown, only showing it once an adapter is given with <code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html#setListAdapter(android.widget.ListAdapter)">setListAdapter</a></code> . If the list at that point had not been shown, when it does get shown it will be do without the user ever seeing the hidden state.</p>
+                <p>Control whether the list is being displayed.</p>
               </p>
             </td>
           </tr>

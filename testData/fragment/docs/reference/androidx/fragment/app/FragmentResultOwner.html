@@ -35,28 +35,28 @@
             <td><code>abstract&nbsp;void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResult(java.lang.String)">clearFragmentResult</a>(<a href="/reference/java/lang/String.html">String</a>&nbsp;requestKey)</code></div>
-              <p>Clears the stored result for the given requestKey. This clears any result that was previously set via <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a></code> that hasn't yet been delivered to a <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> .</p>
+              <p>Clears the stored result for the given requestKey.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract&nbsp;void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResultListener(java.lang.String)">clearFragmentResultListener</a>(<a href="/reference/java/lang/String.html">String</a>&nbsp;requestKey)</code></div>
-              <p>Clears the stored <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for the given requestKey. This clears any <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> that was previously set via <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code> .</p>
+              <p>Clears the stored <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for the given requestKey.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract&nbsp;void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a>(<a href="/reference/java/lang/String.html">String</a>&nbsp;requestKey,&nbsp;Bundle&nbsp;result)</code></div>
-              <p>Sets the given result for the requestKey. This result will be delivered to a <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> that is called given to <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code> with the same requestKey. If no <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> with the same key is set or the Lifecycle associated with the listener is not at least , the result is stored until one becomes available, or <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResult(java.lang.String)">clearFragmentResult</a></code> is called with the same requestKey.</p>
+              <p>Sets the given result for the requestKey.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract&nbsp;void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a>(<a href="/reference/java/lang/String.html">String</a>&nbsp;requestKey,&nbsp;LifecycleOwner&nbsp;lifecycleOwner,&nbsp;<a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a>&nbsp;listener)</code></div>
-              <p>Sets the <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for a given requestKey. Once the given is at least in the state, any results set by <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a></code> using the same requestKey will be delivered to the <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html#onFragmentResult(java.lang.String,android.os.Bundle)">onFragmentResult</a></code> . The callback will remain active until the LifecycleOwner reaches the state or <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResultListener(java.lang.String)">clearFragmentResultListener</a></code> is called with the same requestKey.</p>
+              <p>Sets the <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for a given requestKey.</p>
             </td>
           </tr>
         </tbody>

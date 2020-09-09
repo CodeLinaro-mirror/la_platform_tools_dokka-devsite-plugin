@@ -74,6 +74,35 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
     }
 
     @Test
+    fun `Summary trims documentation on period`() {
+        val component = """
+            |/**
+            | * 1 2 3. 4 5 6
+            | *
+            | * Stuff.
+            | */
+            |class Foo
+        """.render().description(
+            summary = true
+        )
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p>
+    <p>1 2 3.</p>
+  </p>
+</body>
+            """.trim()
+        )
+    }
+
+    @Test
     fun `Deprecation summary renders renders correctly`() {
         val component = """
             |/** Hello world! */

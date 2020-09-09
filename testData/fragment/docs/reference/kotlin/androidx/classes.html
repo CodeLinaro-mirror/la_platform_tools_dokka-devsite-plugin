@@ -18,7 +18,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html">DialogFragment</a></code></td>
             <td width="100%">
-              <p>Static library support version of the framework's . Used to write apps that run on platforms prior to Android 3.0. When running on Android 3.0 or above, this implementation is still used; it does not try to switch to the framework's implementation. See the framework SDK documentation for a class overview.</p>
+              <p>Static library support version of the framework's .</p>
             </td>
           </tr>
         </tbody>
@@ -32,12 +32,7 @@
             <td><code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
             <td width="100%">
               <p>
-                <p>Static library support version of the framework's . Used to write apps that run on platforms prior to Android 3.0. When running on Android 3.0 or above, this implementation is still used; it does not try to switch to the framework's implementation. See the framework documentation for a class overview. </p>
-                <p>The main differences when using this support version instead of the framework version are: </p>
-                <ul>
-                  <li>Your activity must extend <code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html">FragmentActivity</a></code></li>
-                  <li>You must call <code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#getSupportFragmentManager()">getSupportFragmentManager</a></code> to get the <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></li>
-                </ul>
+                <p>Static library support version of the framework's .</p>
               </p>
             </td>
           </tr>
@@ -57,13 +52,7 @@
             <td><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html">FragmentActivity</a></code></td>
             <td width="100%">
               <p>
-                <p>Base class for activities that want to use the support-based <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code> . </p>
-                <p>Known limitations:</p>
-                <ul>
-                  <li>
-                    <p>When using the <code>&lt;fragment&gt;</code> tag, this implementation can not use the parent view's ID as the new fragment's ID. You must explicitly specify an ID (or tag) in the <code>&lt;fragment&gt;</code>.</p>
-                  </li>
-                </ul>
+                <p>Base class for activities that want to use the support-based <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code> .</p>
               </p>
             </td>
           </tr>
@@ -77,37 +66,7 @@
             <td><code><a href="/reference/kotlin/androidx/fragment/app/FragmentContainerView.html">FragmentContainerView</a></code></td>
             <td width="100%">
               <p>
-                <p>FragmentContainerView is a customized Layout designed specifically for Fragments. It extends , so it can reliably handle Fragment Transactions, and it also has additional features to coordinate with fragment behavior. </p>
-                <p>FragmentContainerView should be used as the container for Fragments, commonly set in the xml layout of an activity, e.g.: </p>
-                <pre>&lt;androidx.fragment.app.FragmentContainerView
-       xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-       xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-       android:id=&quot;@+id/fragment_container_view&quot;
-       android:layout_width=&quot;match_parent&quot;
-       android:layout_height=&quot;match_parent&quot;&gt;
-&lt;/androidx.fragment.app.FragmentContainerView&gt;
-</pre>
-                <p> FragmentContainerView can also be used to add a Fragment by using the <code>android:name</code> attribute. FragmentContainerView will perform a one time operation that: </p>
-                <ul>
-                  <li>Creates a new instance of the Fragment</li>
-                  <li>Calls <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onInflate(android.content.Context,android.util.AttributeSet,android.os.Bundle)">onInflate</a></code></li>
-                  <li>Executes a FragmentTransaction to add the Fragment to the appropriate FragmentManager</li>
-                </ul>
-                <p> You can optionally include an <code>android:tag</code> which allows you to use <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#findFragmentByTag(java.lang.String)">findFragmentByTag</a></code> to retrieve the added Fragment. </p>
-                <pre>&lt;androidx.fragment.app.FragmentContainerView
-       xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-       xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-       android:id=&quot;@+id/fragment_container_view&quot;
-       android:layout_width=&quot;match_parent&quot;
-       android:layout_height=&quot;match_parent&quot;
-       android:name=&quot;com.example.MyFragment&quot;
-       android:tag=&quot;my_tag&quot;&gt;
-&lt;/androidx.fragment.app.FragmentContainerView&gt;
-</pre>
-                <p>FragmentContainerView should not be used as a replacement for other ViewGroups (FrameLayout, LinearLayout, etc) outside of Fragment use cases. </p>
-                <p>FragmentContainerView will only allow views returned by a Fragment's <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> . Attempting to add any other view will result in an <code><a href="/reference/kotlin/java/lang/IllegalStateException.html">IllegalStateException</a></code> . </p>
-                <p>Layout animations and transitions are disabled for FragmentContainerView for APIs above 17. Otherwise, Animations should be done through <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#setCustomAnimations(int,int,int,int)">setCustomAnimations</a></code> . If animateLayoutChanges is set to <code>true</code> or <code><a href="/reference/kotlin/androidx/fragment/app/FragmentContainerView.html#setLayoutTransition(android.animation.LayoutTransition)">setLayoutTransition</a></code> is called directly an <code><a href="/reference/kotlin/java/lang/UnsupportedOperationException.html">UnsupportedOperationException</a></code> will be thrown. </p>
-                <p>Fragments using exit animations are drawn before all others for FragmentContainerView. This ensures that exiting Fragments do not appear on top of the view.</p>
+                <p>FragmentContainerView is a customized Layout designed specifically for Fragments.</p>
               </p>
             </td>
           </tr>
@@ -115,30 +74,21 @@
             <td><code><a href="/reference/kotlin/androidx/fragment/app/FragmentController.html">FragmentController</a></code></td>
             <td width="100%">
               <p>
-                <p>Provides integration points with a <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code> for a fragment host. </p>
-                <p> It is the responsibility of the host to take care of the Fragment's lifecycle. The methods provided by <code><a href="/reference/kotlin/androidx/fragment/app/FragmentController.html">FragmentController</a></code> are for that purpose.</p>
+                <p>Provides integration points with a <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code> for a fragment host.</p>
               </p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/fragment/app/FragmentFactory.html">FragmentFactory</a></code></td>
             <td width="100%">
-              <p>Interface used to control the instantiation of <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code> instances. Implementations can be registered with a <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code> via <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">setFragmentFactory</a></code> .</p>
+              <p>Interface used to control the instantiation of <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code> instances.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/fragment/app/FragmentHostCallback.html">FragmentHostCallback</a></code></td>
             <td width="100%">
               <p>
-                <p>Integration points with the Fragment host. </p>
-                <p> Fragments may be hosted by any object; such as an . In order to host fragments, implement <code><a href="/reference/kotlin/androidx/fragment/app/FragmentHostCallback.html">FragmentHostCallback</a></code> , overriding the methods applicable to the host. </p>
-                <p> FragmentManager changes its behavior based on what optional interfaces your FragmentHostCallback implements. This includes the following: </p>
-                <ul>
-                  <li>: Removes the need to override <code><a href="/reference/kotlin/androidx/fragment/app/FragmentHostCallback.html#onStartIntentSenderFromFragment(androidx.fragment.app.Fragment,android.content.IntentSender,int,android.content.Intent,int,int,int,android.os.Bundle)">onStartIntentSenderFromFragment</a></code> or <code><a href="/reference/kotlin/androidx/fragment/app/FragmentHostCallback.html#onRequestPermissionsFromFragment(androidx.fragment.app.Fragment,java.lang.String[],int)">onRequestPermissionsFromFragment</a></code> .</li>
-                  <li><b><code><a href="/reference/kotlin/androidx/fragment/app/FragmentOnAttachListener.html">FragmentOnAttachListener</a></code></b>: Removes the need to manually call <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#addFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener)">addFragmentOnAttachListener</a></code> from your host in order to receive <code><a href="/reference/kotlin/androidx/fragment/app/FragmentOnAttachListener.html#onAttachFragment(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onAttachFragment</a></code> callbacks for the <code><a href="/reference/kotlin/androidx/fragment/app/FragmentController.html#getSupportFragmentManager()">getSupportFragmentManager</a></code> .</li>
-                  <li>: Removes the need to manually call <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#popBackStackImmediate()">popBackStackImmediate</a></code> when handling the system back button.</li>
-                  <li>: Removes the need for your <code><a href="/reference/kotlin/androidx/fragment/app/FragmentController.html">FragmentController</a></code> to call <code><a href="/reference/kotlin/androidx/fragment/app/FragmentController.html#retainNestedNonConfig()">retainNestedNonConfig</a></code> or <code><a href="/reference/kotlin/androidx/fragment/app/FragmentController.html#restoreAllState(android.os.Parcelable,androidx.fragment.app.FragmentManagerNonConfig)">restoreAllState</a></code> .</li>
-                </ul>
+                <p>Integration points with the Fragment host.</p>
               </p>
             </td>
           </tr>
@@ -146,8 +96,7 @@
             <td><code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
             <td width="100%">
               <p>
-                <p>Static library support version of the framework's . Used to write apps that run on platforms prior to Android 3.0. When running on Android 3.0 or above, this implementation is still used; it does not try to switch to the framework's implementation. See the framework <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code> documentation for a class overview. </p>
-                <p>Your activity must derive from <code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html">FragmentActivity</a></code> to use this. From such an activity, you can acquire the <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code> by calling <code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#getSupportFragmentManager()">getSupportFragmentManager</a></code> .</p>
+                <p>Static library support version of the framework's .</p>
               </p>
             </td>
           </tr>
@@ -155,8 +104,7 @@
             <td><code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.BackStackEntry.html">FragmentManager.BackStackEntry</a></code></td>
             <td width="100%">
               <p>
-                <p>Representation of an entry on the fragment back stack, as created with <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#addToBackStack(java.lang.String)">addToBackStack</a></code> . Entries can later be retrieved with <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#getBackStackEntryAt(int)">getBackStackEntryAt</a></code> . </p>
-                <p>Note that you should never hold on to a BackStackEntry object; the identifier as returned by <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.BackStackEntry.html#getId()">getId</a></code> is the only thing that will be persisted across activity instances.</p>
+                <p>Representation of an entry on the fragment back stack, as created with <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#addToBackStack(java.lang.String)">addToBackStack</a></code> .</p>
               </p>
             </td>
           </tr>
@@ -181,7 +129,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/fragment/app/FragmentOnAttachListener.html">FragmentOnAttachListener</a></code></td>
             <td width="100%">
-              <p>Listener for receiving a callback immediately following <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code> . This can be used to perform any additional setup / provide any dependencies that the Fragment may need prior to child fragments being attached or the Fragment going through <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code> .</p>
+              <p>Listener for receiving a callback immediately following <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code> .</p>
             </td>
           </tr>
           <tr>
@@ -193,7 +141,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code></td>
             <td width="100%">
-              <p>Listener for handling fragment results. This object should be passed to <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code> and it will listen for results with the same key that are passed into <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a></code> .</p>
+              <p>Listener for handling fragment results.</p>
             </td>
           </tr>
           <tr>
@@ -221,7 +169,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a></code></td>
             <td width="100%">
-              <p>Static library support version of the framework's . Used to write apps that run on platforms prior to Android 3.0. When running on Android 3.0 or above, this implementation is still used; it does not try to switch to the framework's implementation. See the framework SDK documentation for a class overview.</p>
+              <p>Static library support version of the framework's .</p>
             </td>
           </tr>
         </tbody>
@@ -234,7 +182,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/fragment/app/ListFragment.html">ListFragment</a></code></td>
             <td width="100%">
-              <p>Static library support version of the framework's . Used to write apps that run on platforms prior to Android 3.0. When running on Android 3.0 or above, this implementation is still used; it does not try to switch to the framework's implementation. See the framework SDK documentation for a class overview.</p>
+              <p>Static library support version of the framework's .</p>
             </td>
           </tr>
         </tbody>
