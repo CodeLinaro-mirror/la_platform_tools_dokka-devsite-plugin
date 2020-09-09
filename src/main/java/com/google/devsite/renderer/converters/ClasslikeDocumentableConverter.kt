@@ -31,6 +31,8 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
+import org.jetbrains.dokka.model.DProperty
+import org.jetbrains.dokka.model.Documentable
 
 /** Converts documentable class-likes into the classlike component. */
 internal class ClasslikeDocumentableConverter(
@@ -41,21 +43,57 @@ internal class ClasslikeDocumentableConverter(
     private val javadocConverter = DocTagConverter(displayLanguage, pathProvider)
     private val functionConverter =
         FunctionDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
+    private val propertyConverter =
+        PropertyDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
 
     /** @return the classlike component */
     suspend fun classlike(): DevsitePage = coroutineScope {
-        val declaredFunctions = classlike.myFunctions()
+        val declaredFunctions = classlike.functions.myTypes().sortedBy { it.name }
+        val declaredProperties = classlike.properties.myTypes().sortedBy { it.name }
+
+        val constantsSummary = async {
+            propertiesToSummary(constantsTitle(), declaredProperties.constants())
+        }
+        val publicPropertiesSummary = async {
+            propertiesToSummary(publicPropertiesTitle(), declaredProperties.filter(::isPublic))
+        }
+        val protectedPropertiesSummary = async {
+            propertiesToSummary(
+                protectedPropertiesTitle(),
+                declaredProperties.filter(::isProtected)
+            )
+        }
         val publicFunctionsSummary = async {
-            functionsToSummary(publicMethodsTitle(), declaredFunctions.public())
+            functionsToSummary(publicMethodsTitle(), declaredFunctions.filter(::isPublic))
         }
         val protectedFunctionsSummary = async {
-            functionsToSummary(protectedMethodsTitle(), declaredFunctions.protected())
+            functionsToSummary(protectedMethodsTitle(), declaredFunctions.filter(::isProtected))
         }
 
-        val publicFunctions = async { functionsToDetail(declaredFunctions.public()) }
-        val protectedFunctions = async { functionsToDetail(declaredFunctions.protected()) }
+        val constants =
+            async { propertiesToDetail(declaredProperties.constants()) }
+        val publicProperties =
+            async { propertiesToDetail(declaredProperties.filter(::isPublic)) }
+        val protectedProperties =
+            async { propertiesToDetail(declaredProperties.filter(::isProtected)) }
+        val publicFunctions =
+            async { functionsToDetail(declaredFunctions.filter(::isPublic)) }
+        val protectedFunctions =
+            async { functionsToDetail(declaredFunctions.filter(::isProtected)) }
 
         val allSymbols = listOf(
+            constantsSummary.await() to Classlike.SymbolType(
+                constantsTitle(),
+                constants.await()
+            ),
+            publicPropertiesSummary.await() to Classlike.SymbolType(
+                publicPropertiesTitle(),
+                publicProperties.await()
+            ),
+            protectedPropertiesSummary.await() to Classlike.SymbolType(
+                publicPropertiesTitle(),
+                protectedProperties.await()
+            ),
             publicFunctionsSummary.await() to Classlike.SymbolType(
                 publicMethodsTitle(),
                 publicFunctions.await()
@@ -106,20 +144,55 @@ internal class ClasslikeDocumentableConverter(
         }
     }
 
+    private fun propertiesToSummary(name: String, properties: List<DProperty>): SummaryList {
+        val components = properties.map {
+            propertyConverter.summary(it)
+        }
+
+        return DefaultSummaryList(
+            SummaryList.Params(
+                header = DefaultTableTitle(
+                    TableTitle.Params(
+                        title = name,
+                        big = true
+                    )
+                ),
+                items = components
+            )
+        )
+    }
+
+    private fun propertiesToDetail(properties: List<DProperty>): List<FunctionDetail> {
+        return properties.map {
+            propertyConverter.detail(it)
+        }
+    }
+
     /**
-     * Returns the list of declared functions. That is, functions directly owned by this class-like
+     * Returns the list of declared symbols. That is, symbols directly owned by this class-like
      * and not found through the inheritance hierarchy.
      */
-    private fun DClasslike.myFunctions() = functions.filter { function ->
+    private fun <T : Documentable> List<T>.myTypes() = filter { function ->
         classlike.packageName() == function.dri.packageName &&
             classlike.name() == function.dri.classNames
     }
 
-    private fun List<DFunction>.public() = withVisibility("public")
-    private fun List<DFunction>.protected() = withVisibility("protected")
-    private fun List<DFunction>.withVisibility(type: String) = filter { function ->
-        type == function.visibility.values.single().name
-    }.sortedBy { it.name }
+    private fun isPublic(function: DFunction) = "public" in function.modifiers()
+    private fun isProtected(function: DFunction) = "protected" in function.modifiers()
+
+    /** Filters for public, non-constant properties. */
+    private fun isPublic(property: DProperty): Boolean {
+        val modifiers = property.modifiers()
+        return "public" in modifiers && !isConstant(modifiers)
+    }
+
+    /** Filters for protected, non-constant properties. */
+    private fun isProtected(property: DProperty): Boolean {
+        val modifiers = property.modifiers()
+        return "protected" in modifiers && !isConstant(modifiers)
+    }
+
+    private fun List<DProperty>.constants() = filter { isConstant(it.modifiers()) }
 
     private fun publicMethodsTitle() = "Public ${methodsTitle()}"
     private fun protectedMethodsTitle() = "Protected ${methodsTitle()}"
@@ -127,4 +200,13 @@ internal class ClasslikeDocumentableConverter(
         Language.JAVA -> "methods"
         Language.KOTLIN -> "functions"
     }
+
+    private fun publicPropertiesTitle() = "Public ${propertiesTitle()}"
+    private fun protectedPropertiesTitle() = "Protected ${propertiesTitle()}"
+    private fun propertiesTitle(): String = when (displayLanguage) {
+        Language.JAVA -> "fields"
+        Language.KOTLIN -> "properties"
+    }
+
+    private fun constantsTitle() = "Constants"
 }

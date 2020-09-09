@@ -71,11 +71,42 @@
     <h2>Summary</h2>
     <p>Nested *</p>
     <p>Enum values</p>
-    <p>Constants</p>
-    <p>Public fields</p>
-    <p>Protected fields</p>
     <p>Public constructors</p>
     <p>Protected constructors</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>final <a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingSource.html#invalid()">invalid</a></code></div>
+              <p>Whether this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> has been invalidated, which should happen when the data this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> represents changes since it was first instantiated.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingSource.html#jumpingSupported()">jumpingSupported</a></code></div>
+              <p>
+                <p><code>true</code> if this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> supports jumping, <code>false</code> otherwise.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>open <a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingSource.html#keyReuseSupported()">keyReuseSupported</a></code></div>
+              <p><code>true</code> if this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> expects to re-use keys to load distinct pages without a call to <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code>, <code>false</code> otherwise.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <thead>
@@ -131,6 +162,44 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getInvalid()"></a><a name="setInvalid()"></a><a name="getInvalid--"></a><a name="setInvalid--"></a>
+      <h3 class="api-name" id="invalid()">invalid</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html#invalid()">invalid</a>:&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></pre>
+      <p>Whether this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> has been invalidated, which should happen when the data this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> represents changes since it was first instantiated.</p>
+    </div>
+    <div><a name="getJumpingSupported()"></a><a name="setJumpingSupported()"></a><a name="getJumpingSupported--"></a><a name="setJumpingSupported--"></a>
+      <h3 class="api-name" id="jumpingSupported()">jumpingSupported</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;open&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html#jumpingSupported()">jumpingSupported</a>:&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></pre>
+      <p>
+        <p><code>true</code> if this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> supports jumping, <code>false</code> otherwise.</p>
+        <p>Override this to <code>true</code> if pseudo-fast scrolling via jumps is supported.</p>
+        <p>A jump occurs when a <code>RecyclerView</code> scrolls through a number of placeholders defined by <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#jumpThreshold()">jumpThreshold</a></code> and triggers a load with <code><a href="/reference/kotlin/androidx/paging/LoadType.REFRESH.html">LoadType.REFRESH</a></code>.</p>
+        <p><code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s that support jumps should override <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a></code> to return a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> that would load data fulfilling the viewport given a user's current <code><a href="/reference/kotlin/androidx/paging/PagingState.html#anchorPosition()">anchorPosition</a></code>.</p>
+      </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#jumpThreshold()">jumpThreshold</a></code></td>
+              <td width="100%">
+                <p></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="getKeyReuseSupported()"></a><a name="setKeyReuseSupported()"></a><a name="getKeyReuseSupported--"></a><a name="setKeyReuseSupported--"></a>
+      <h3 class="api-name" id="keyReuseSupported()">keyReuseSupported</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;open&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html#keyReuseSupported()">keyReuseSupported</a>:&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></pre>
+      <p><code>true</code> if this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> expects to re-use keys to load distinct pages without a call to <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code>, <code>false</code> otherwise.</p>
     </div>
     <h2>Public functions</h2>
     <div><a name="getRefreshKey-androidx.paging.PagingState-"></a>

@@ -18,11 +18,41 @@
     <h2>Summary</h2>
     <p>Nested *</p>
     <p>Enum values</p>
-    <p>Constants</p>
-    <p>Public fields</p>
-    <p>Protected fields</p>
     <p>Public constructors</p>
     <p>Protected constructors</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>final <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a>&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#dataRefreshFlow()">dataRefreshFlow</a></code></div>
+              <p>A Flow of <code><a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></code> that is emitted when new <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> generations are submitted and displayed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#loadStateFlow()">loadStateFlow</a></code></div>
+              <p>
+                <p>A hot Flow of <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>final <a href="/reference/kotlin/kotlin/Int.html">Int</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#size()">size</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <thead>
@@ -131,6 +161,24 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getDataRefreshFlow()"></a><a name="setDataRefreshFlow()"></a><a name="getDataRefreshFlow--"></a><a name="setDataRefreshFlow--"></a>
+      <h3 class="api-name" id="dataRefreshFlow()">dataRefreshFlow</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#dataRefreshFlow()">dataRefreshFlow</a>:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a>&gt;</pre>
+      <p>A Flow of <code><a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></code> that is emitted when new <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> generations are submitted and displayed. The <code><a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></code> that is emitted is <code>true</code> if the new <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> is empty, <code>false</code> otherwise.</p>
+    </div>
+    <div><a name="getLoadStateFlow()"></a><a name="setLoadStateFlow()"></a><a name="getLoadStateFlow--"></a><a name="setLoadStateFlow--"></a>
+      <h3 class="api-name" id="loadStateFlow()">loadStateFlow</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#loadStateFlow()">loadStateFlow</a>:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;</pre>
+      <p>
+        <p>A hot Flow of <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
+        <p>This flow is conflated, so it buffers the last update to <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> and immediately delivers the current load states on collection.</p>
+      </p>
+    </div>
+    <div><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
+      <h3 class="api-name" id="size()">size</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#size()">size</a>:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></pre>
     </div>
     <h2>Public functions</h2>
     <div><a name="addDataRefreshListener-kotlin.Function1-"></a>
