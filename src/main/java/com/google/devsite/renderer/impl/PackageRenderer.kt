@@ -19,7 +19,10 @@ package com.google.devsite.renderer.impl
 import com.google.devsite.components.RedirectPage
 import com.google.devsite.components.impl.DefaultRedirectPage
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.ClasslikeDocumentableConverter
 import com.google.devsite.renderer.converters.PackageDocumentableConverter
+import com.google.devsite.renderer.converters.name
+import com.google.devsite.renderer.converters.packageName
 import com.google.devsite.renderer.impl.paths.DIR_INDEX_NAME
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.renderer.impl.paths.PACKAGE_SUMMARY_FILE
@@ -64,7 +67,17 @@ internal class PackageRenderer(
         )
     }
 
-    suspend fun writeClass(classlike: DClasslike) {
-        // TODO
+    suspend fun writeClasslike(classlikeDoc: DClasslike) {
+        val converter = ClasslikeDocumentableConverter(displayLanguage, classlikeDoc, pathProvider)
+        val page = converter.classlike()
+        val classlike = createHTML().html {
+            page.render(this)
+        }
+
+        outputWriter.write(
+            pathProvider.forType(classlikeDoc.packageName(), classlikeDoc.name()),
+            classlike,
+            ""
+        )
     }
 }

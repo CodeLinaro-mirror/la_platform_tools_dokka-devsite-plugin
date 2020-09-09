@@ -1,0 +1,142 @@
+<html devsite="true">
+  <head>
+    <title>FragmentStatePagerAdapter</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>FragmentStatePagerAdapter</h1>
+{% setvar page_path %}androidx/fragment/app/FragmentStatePagerAdapter.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>TODO(b/166518424) class signature</p>
+    <p>TODO(b/166518951) inheritance hierarchy</p>
+    <p>TODO(b/166518636) direct subclasses</p>
+    <p>TODO(b/166518636) indirect subclasses</p>
+    <hr>
+    <p class="caution"><strong>This class is deprecated.</strong><br>
+      <p>Switch to and use instead.</p>
+    </p>
+    <p>
+      <p>Implementation of that uses a <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code> to manage each page. This class also handles saving and restoring of fragment's state. </p>
+      <p>This version of the pager is more useful when there are a large number of pages, working more like a list view. When pages are not visible to the user, their entire fragment may be destroyed, only keeping the saved state of that fragment. This allows the pager to hold on to much less memory associated with each visited page as compared to <code><a href="/reference/kotlin/androidx/fragment/app/FragmentPagerAdapter.html">FragmentPagerAdapter</a></code> at the cost of potentially more overhead when switching between pages. </p>
+      <p>When using FragmentPagerAdapter the host ViewPager must have a valid ID set.</p>
+      <p>Subclasses only need to implement <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#getItem(int)">getItem</a></code> and to have a working adapter. </p>
+      <p>Here is an example implementation of a pager containing fragments of lists: {@sample frameworks/support/samples/Support4Demos/src/main/java/com/example/android/supportv4/app/FragmentStatePagerSupport.java * complete} </p>
+      <p>The <code>R.layout.fragment_pager</code> resource of the top-level fragment is: {@sample frameworks/support/samples/Support4Demos/src/main/res/layout/fragment_pager.xml * complete} </p>
+      <p>The <code>R.layout.fragment_pager_list</code> resource containing each individual fragment's layout is: {@sample frameworks/support/samples/Support4Demos/src/main/res/layout/fragment_pager_list.xml * complete}</p>
+    </p>
+    <h2>Summary</h2>
+    <p>Nested *</p>
+    <p>Enum values</p>
+    <p>Constants</p>
+    <p>Public fields</p>
+    <p>Protected fields</p>
+    <p>Public constructors</p>
+    <p>Protected constructors</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#destroyItem(android.view.ViewGroup,int,java.lang.Object)">destroyItem</a>(container:&nbsp;ViewGroup,&nbsp;position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,&nbsp;object:&nbsp;<a href="/reference/kotlin/kotlin/Any.html">Any</a>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#finishUpdate(android.view.ViewGroup)">finishUpdate</a>(container:&nbsp;ViewGroup)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#getItem(int)">getItem</a>(position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>)</code></div>
+              <p>Return the Fragment associated with a specified position.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Any.html">Any</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#instantiateItem(android.view.ViewGroup,int)">instantiateItem</a>(container:&nbsp;ViewGroup,&nbsp;position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#isViewFromObject(android.view.View,java.lang.Object)">isViewFromObject</a>(view:&nbsp;View,&nbsp;object:&nbsp;<a href="/reference/kotlin/kotlin/Any.html">Any</a>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#restoreState(android.os.Parcelable,java.lang.ClassLoader)">restoreState</a>(state:&nbsp;Parcelable,&nbsp;loader:&nbsp;<a href="/reference/kotlin/java/lang/ClassLoader.html">ClassLoader</a>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;Parcelable</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#saveState()">saveState</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#setPrimaryItem(android.view.ViewGroup,int,java.lang.Object)">setPrimaryItem</a>(container:&nbsp;ViewGroup,&nbsp;position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,&nbsp;object:&nbsp;<a href="/reference/kotlin/kotlin/Any.html">Any</a>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td><code>&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#startUpdate(android.view.ViewGroup)">startUpdate</a>(container:&nbsp;ViewGroup)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="destroyItem(android.view.ViewGroup, int, java.lang.Object)"></a><a name="destroyItem-android.view.ViewGroup-int-java.lang.Object-"></a>
+      <h3 class="api-name" id="destroyItem(android.view.ViewGroup,int,java.lang.Object)">destroyItem</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#destroyItem(android.view.ViewGroup,int,java.lang.Object)">destroyItem</a>(container:&nbsp;ViewGroup,&nbsp;position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,&nbsp;object:&nbsp;<a href="/reference/kotlin/kotlin/Any.html">Any</a>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+    </div>
+    <div><a name="finishUpdate-android.view.ViewGroup-"></a>
+      <h3 class="api-name" id="finishUpdate(android.view.ViewGroup)">finishUpdate</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#finishUpdate(android.view.ViewGroup)">finishUpdate</a>(container:&nbsp;ViewGroup):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+    </div>
+    <div><a name="getItem-int-"></a>
+      <h3 class="api-name" id="getItem(int)">getItem</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#getItem(int)">getItem</a>(position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></pre>
+      <p>Return the Fragment associated with a specified position.</p>
+    </div>
+    <div><a name="instantiateItem(android.view.ViewGroup, int)"></a><a name="instantiateItem-android.view.ViewGroup-int-"></a>
+      <h3 class="api-name" id="instantiateItem(android.view.ViewGroup,int)">instantiateItem</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#instantiateItem(android.view.ViewGroup,int)">instantiateItem</a>(container:&nbsp;ViewGroup,&nbsp;position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>):&nbsp;<a href="/reference/kotlin/kotlin/Any.html">Any</a></pre>
+    </div>
+    <div><a name="isViewFromObject(android.view.View, java.lang.Object)"></a><a name="isViewFromObject-android.view.View-java.lang.Object-"></a>
+      <h3 class="api-name" id="isViewFromObject(android.view.View,java.lang.Object)">isViewFromObject</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#isViewFromObject(android.view.View,java.lang.Object)">isViewFromObject</a>(view:&nbsp;View,&nbsp;object:&nbsp;<a href="/reference/kotlin/kotlin/Any.html">Any</a>):&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></pre>
+    </div>
+    <div><a name="restoreState(android.os.Parcelable, java.lang.ClassLoader)"></a><a name="restoreState-android.os.Parcelable-java.lang.ClassLoader-"></a>
+      <h3 class="api-name" id="restoreState(android.os.Parcelable,java.lang.ClassLoader)">restoreState</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#restoreState(android.os.Parcelable,java.lang.ClassLoader)">restoreState</a>(state:&nbsp;Parcelable,&nbsp;loader:&nbsp;<a href="/reference/kotlin/java/lang/ClassLoader.html">ClassLoader</a>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+    </div>
+    <div><a name="saveState--"></a>
+      <h3 class="api-name" id="saveState()">saveState</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#saveState()">saveState</a>():&nbsp;Parcelable</pre>
+    </div>
+    <div><a name="setPrimaryItem(android.view.ViewGroup, int, java.lang.Object)"></a><a name="setPrimaryItem-android.view.ViewGroup-int-java.lang.Object-"></a>
+      <h3 class="api-name" id="setPrimaryItem(android.view.ViewGroup,int,java.lang.Object)">setPrimaryItem</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#setPrimaryItem(android.view.ViewGroup,int,java.lang.Object)">setPrimaryItem</a>(container:&nbsp;ViewGroup,&nbsp;position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,&nbsp;object:&nbsp;<a href="/reference/kotlin/kotlin/Any.html">Any</a>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+    </div>
+    <div><a name="startUpdate-android.view.ViewGroup-"></a>
+      <h3 class="api-name" id="startUpdate(android.view.ViewGroup)">startUpdate</h3>
+      <pre class="api-signature no-pretty-print">&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#startUpdate(android.view.ViewGroup)">startUpdate</a>(container:&nbsp;ViewGroup):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
+    </div>
+  </body>
+</html>
