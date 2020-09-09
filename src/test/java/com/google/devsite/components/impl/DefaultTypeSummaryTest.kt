@@ -18,7 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.TypeSummary
-import com.google.devsite.components.testing.NoopParameterType
+import com.google.devsite.components.testing.NoopParameter
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -28,7 +28,7 @@ class DefaultTypeSummaryTest {
     fun `Simple type renders correctly`() {
         val component = DefaultTypeSummary(
             TypeSummary.Params(
-                type = NoopParameterType("Unit")
+                type = NoopParameter("Unit")
             )
         )
 
@@ -49,7 +49,7 @@ class DefaultTypeSummaryTest {
         val component = DefaultTypeSummary(
             TypeSummary.Params(
                 modifiers = listOf("open", "suspend"),
-                type = NoopParameterType("Unit")
+                type = NoopParameter("Unit")
             )
         )
 

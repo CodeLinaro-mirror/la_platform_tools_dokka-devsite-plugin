@@ -20,7 +20,7 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.FunctionDetail
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.components.testing.NoopFunctionSignature
-import com.google.devsite.components.testing.NoopParameterType
+import com.google.devsite.components.testing.NoopParameter
 import com.google.devsite.renderer.Language
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
@@ -34,7 +34,7 @@ class DefaultFunctionDetailTest {
                 displayLanguage = Language.JAVA,
                 name = "foo",
                 anchors = linkedSetOf(),
-                returnType = NoopParameterType("void"),
+                returnType = NoopParameter("void"),
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
             )
@@ -64,7 +64,7 @@ class DefaultFunctionDetailTest {
                 displayLanguage = Language.KOTLIN,
                 name = "foo",
                 anchors = linkedSetOf(),
-                returnType = NoopParameterType("Unit"),
+                returnType = NoopParameter("Unit"),
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
             )
@@ -95,7 +95,7 @@ class DefaultFunctionDetailTest {
                 name = "foo",
                 anchors = linkedSetOf(),
                 modifiers = listOf("protected", "abstract"),
-                returnType = NoopParameterType("void"),
+                returnType = NoopParameter("void"),
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
             )
@@ -126,7 +126,7 @@ class DefaultFunctionDetailTest {
                 name = "foo",
                 anchors = linkedSetOf(),
                 modifiers = listOf("protected", "abstract"),
-                returnType = NoopParameterType("Unit"),
+                returnType = NoopParameter("Unit"),
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
             )
@@ -156,7 +156,7 @@ class DefaultFunctionDetailTest {
                 displayLanguage = Language.JAVA,
                 name = "foo",
                 anchors = linkedSetOf("foo(a,b)", "foo(a, b)", "foo-a-b-"),
-                returnType = NoopParameterType("void"),
+                returnType = NoopParameter("void"),
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
             )
@@ -186,7 +186,7 @@ class DefaultFunctionDetailTest {
                 displayLanguage = Language.JAVA,
                 name = "foo",
                 anchors = linkedSetOf(),
-                returnType = NoopParameterType("void"),
+                returnType = NoopParameter("void"),
                 signature = NoopFunctionSignature("foo()"),
                 metadata = listOf(NoopContextFreeComponent, NoopContextFreeComponent)
             )

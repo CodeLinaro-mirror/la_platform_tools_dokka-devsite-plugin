@@ -160,7 +160,7 @@ internal class FunctionDocumentableConverterTest(
         """.render().summary()
 
         val returnz = summary.returnSummary()
-        val generics = returnz.type.data.generics.items(2)
+        val generics = returnz.type.data.primary.data.generics.items(2)
         val nestedGenerics = generics.last().data.generics.item()
 
         assertThat(generics.first().link().name).isEqualTo("String")
@@ -230,31 +230,6 @@ internal class FunctionDocumentableConverterTest(
         val summary = """
             |fun Int?.foo(a: List<String?>?)
         """.render().summary()
-    }
-
-    @Test
-    fun `Function summary component creates params with generics`() {
-        val summary = """
-            |fun foo(a: List<Int>)
-        """.render().summary()
-
-        val function = summary.functionSummary()
-        val generic = function.param().data.primary.data.generics.item()
-
-        assertThat(generic.link().name).isEqualTo("Int")
-    }
-
-    @Test
-    fun `Function summary component creates params with * generics`() {
-        val summary = """
-            |fun foo(a: List<*>)
-        """.render().summary()
-
-        val function = summary.functionSummary()
-        val generic = function.param().data.primary.data.generics.item()
-
-        javaOnly { assertThat(generic.link().name).isEqualTo("?") }
-        kotlinOnly { assertThat(generic.link().name).isEqualTo("*") }
     }
 
     @Test
@@ -453,52 +428,6 @@ internal class FunctionDocumentableConverterTest(
     }
 
     @Test
-    fun `Function summary component creates lambda param with difficult generic combination`() {
-        val summary = """
-            |fun foo(block: Int.(Map<String, Int>, Double) -> Collection<Float>)
-        """.render().summary()
-
-        val function = summary.functionSummary()
-        val param = function.param().data
-
-        javaOnly {
-            assertNoLambdaStuff(param)
-
-            val primary = param.primary.data
-            assertThat(primary.type.data.name).isEqualTo("Function3")
-            assertThat(primary.generics).hasSize(4)
-            assertThat(primary.generics[0].link().name).isEqualTo("Int")
-            assertThat(primary.generics[1].link().name).isEqualTo("Map")
-            assertThat(primary.generics[2].link().name).isEqualTo("Double")
-            assertThat(primary.generics[3].link().name).isEqualTo("Collection")
-
-            val mapGenerics = primary.generics[1].data.generics.items(2)
-            assertThat(mapGenerics.first().link().name).isEqualTo("String")
-            assertThat(mapGenerics.last().link().name).isEqualTo("Int")
-
-            val collectionGeneric = primary.generics[3].data.generics.item()
-            assertThat(collectionGeneric.link().name).isEqualTo("Float")
-        }
-        kotlinOnly {
-            assertThat(param.isLambda).isTrue()
-            assertThat(param.receiver).isNotNull()
-            assertThat(param.receiver!!.link().name).isEqualTo("Int")
-            assertThat(param.lambdaModifiers).isEmpty()
-            assertThat(param.lambdaParams).hasSize(2)
-            assertThat(param.lambdaParams.first().link().name).isEqualTo("Map")
-            assertThat(param.lambdaParams.last().link().name).isEqualTo("Double")
-            assertThat(param.primary.link().name).isEqualTo("Collection")
-
-            val mapGenerics = param.lambdaParams.first().data.generics.items(2)
-            assertThat(mapGenerics.first().link().name).isEqualTo("String")
-            assertThat(mapGenerics.last().link().name).isEqualTo("Int")
-
-            val collectionGeneric = param.primary.data.generics.item()
-            assertThat(collectionGeneric.link().name).isEqualTo("Float")
-        }
-    }
-
-    @Test
     fun `Function summary component has correct relative link`() {
         val summary = """
             |fun <T : Number> List<String>.foo(t: T, a: Map<String, Int>, block: String.(Float) -> Double) = Unit
@@ -606,6 +535,7 @@ internal class FunctionDocumentableConverterTest(
         }
     }
 
+    private fun Parameter.link(): Link.Params = data.primary.link()
     private fun ParameterType.link(): Link.Params = data.type.data
     private fun FunctionSummary.param(): Parameter = data.signature.data.parameters.item()
     private fun TwoPaneSummaryItem.returnSummary(): TypeSummary.Params =

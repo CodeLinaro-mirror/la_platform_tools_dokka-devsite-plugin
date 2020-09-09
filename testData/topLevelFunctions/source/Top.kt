@@ -56,7 +56,7 @@ suspend inline fun <T, R : Number> (T.(Int) -> List<R>).foo(
     a: T,
     crossinline stuff: () -> (() -> String),
     @Suppress("abc") block: suspend Set<Boolean>.(cache: Map<String, List<T>>, mapper: ((Double) -> Double)) -> Collection<R>
-): List<Float> = emptyList()
+): () -> List<Float> = { emptyList() }
 
 class Foo
 

@@ -19,36 +19,17 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.components.FunctionDetail
 import com.google.devsite.components.FunctionSignature
 import com.google.devsite.components.FunctionSummary
-import com.google.devsite.components.Link
-import com.google.devsite.components.Parameter
-import com.google.devsite.components.ParameterType
 import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.TypeSummary
 import com.google.devsite.components.impl.DefaultFunctionDetail
 import com.google.devsite.components.impl.DefaultFunctionSignature
 import com.google.devsite.components.impl.DefaultFunctionSummary
-import com.google.devsite.components.impl.DefaultLink
-import com.google.devsite.components.impl.DefaultParameter
-import com.google.devsite.components.impl.DefaultParameterType
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultTypeSummary
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
-import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.AdditionalModifiers
 import org.jetbrains.dokka.model.DFunction
-import org.jetbrains.dokka.model.DParameter
-import org.jetbrains.dokka.model.FunctionModifiers
-import org.jetbrains.dokka.model.JavaObject
-import org.jetbrains.dokka.model.Nullable
-import org.jetbrains.dokka.model.PrimitiveJavaType
-import org.jetbrains.dokka.model.Projection
-import org.jetbrains.dokka.model.Star
-import org.jetbrains.dokka.model.TypeConstructor
-import org.jetbrains.dokka.model.TypeParameter
-import org.jetbrains.dokka.model.UnresolvedBound
-import org.jetbrains.dokka.model.Variance
-import org.jetbrains.dokka.model.Void
 
 /** Converts documentable functions into function components. */
 internal class FunctionDocumentableConverter(
@@ -56,6 +37,8 @@ internal class FunctionDocumentableConverter(
     private val pathProvider: FilePathProvider,
     private val javadocConverter: DocTagConverter
 ) {
+    private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
+
     /** @return the function summary component */
     fun summary(function: DFunction): TwoPaneSummaryItem {
         return DefaultTwoPaneSummaryItem(
@@ -63,7 +46,7 @@ internal class FunctionDocumentableConverter(
                 title = DefaultTypeSummary(
                     TypeSummary.Params(
                         modifiers = function.modifiers(),
-                        type = function.type.toComponent()
+                        type = paramConverter.componentForProjection(function.type)
                     )
                 ),
                 description = DefaultFunctionSummary(
@@ -78,7 +61,7 @@ internal class FunctionDocumentableConverter(
 
     /** @return the function detail component */
     fun detail(function: DFunction): FunctionDetail {
-        val returnType = function.type.toComponent()
+        val returnType = paramConverter.componentForProjection(function.type)
         return DefaultFunctionDetail(
             FunctionDetail.Params(
                 displayLanguage = displayLanguage,
@@ -97,8 +80,8 @@ internal class FunctionDocumentableConverter(
     }
 
     private fun DFunction.signature(): FunctionSignature {
-        val receiver = receiver?.let(::componentForParameter)
-        val parameters = parameters.map(::componentForParameter)
+        val receiver = receiver?.let(paramConverter::componentForParameter)
+        val parameters = parameters.map(paramConverter::componentForParameter)
 
         return DefaultFunctionSignature(
             FunctionSignature.Params(
@@ -115,80 +98,6 @@ internal class FunctionDocumentableConverter(
         )
     }
 
-    private fun componentForParameter(param: DParameter): Parameter = when (displayLanguage) {
-        Language.JAVA -> componentForJavaParameter(param)
-        Language.KOTLIN -> componentForKotlinParameter(param)
-    }
-
-    private fun componentForJavaParameter(param: DParameter): Parameter {
-        return DefaultParameter(
-            Parameter.Params(
-                isLambda = false,
-                name = param.name ?: "receiver",
-                primary = param.type.toComponent(),
-                // TODO(b/165104993): figure out path to implementing annotations
-                annotations = emptyList(),
-                displayLanguage = Language.JAVA
-            )
-        )
-    }
-
-    private fun componentForKotlinParameter(param: DParameter): Parameter {
-        val isLambda = param.type.isLambda()
-
-        val receiver = param.type.receiver()
-        val primaryType = if (isLambda) {
-            // Get the return type of the lambda
-            (param.type as TypeConstructor).projections.last().toComponent()
-        } else {
-            param.type.toComponent()
-        }
-        val lambdaModifiers: List<String> = if (param.type.isLambda(suspendOnly = true)) {
-            listOf("suspend")
-        } else {
-            emptyList()
-        }
-        val lambdaParams: List<ParameterType> = if (isLambda) {
-            // Always ignore the return type of the lambda since that's handled by primaryType.
-            val lambdaProjections = (param.type as TypeConstructor).projections.dropLast(1)
-            if (receiver == null) {
-                lambdaProjections.map { it.toComponent() }
-            } else {
-                // If the receiver is available, we also ignore the first type
-                lambdaProjections.drop(1).map { it.toComponent() }
-            }
-        } else {
-            emptyList()
-        }
-
-        return DefaultParameter(
-            Parameter.Params(
-                isLambda = isLambda,
-                name = param.name.orEmpty(),
-                receiver = receiver,
-                lambdaModifiers = lambdaModifiers,
-                lambdaParams = lambdaParams,
-                primary = primaryType,
-                // TODO(b/165104993): figure out path to implementing annotations
-                annotations = emptyList(),
-                displayLanguage = Language.KOTLIN
-            )
-        )
-    }
-
-    /** Converts a lambda receiver projection to its type component if available. */
-    private fun Projection.receiver(): ParameterType? = when (this) {
-        is TypeConstructor -> if (modifier == FunctionModifiers.EXTENSION) {
-            projections.first().toComponent()
-        } else {
-            null
-        }
-        is TypeParameter, is PrimitiveJavaType, is UnresolvedBound, Star, JavaObject -> null
-        is Nullable -> inner.receiver()
-        is Variance<*> -> inner.receiver()
-        else -> error("Unknown bound: $this")
-    }
-
     /** @return the complete list of modifiers for this function */
     private fun DFunction.modifiers(): List<String> {
         val baseModifiers = modifier.values.map { it.name }
@@ -197,90 +106,6 @@ internal class FunctionDocumentableConverter(
         }
 
         return extraModifiers + baseModifiers
-    }
-
-    /** Converts a documentable type to its type component, recursively expanding generics */
-    private fun Projection.toComponent(): ParameterType {
-
-        if (this is Variance<*>) {
-            return inner.toComponent()
-        }
-
-        val generics: List<ParameterType> = when (this) {
-            is TypeConstructor -> projections.map { it.toComponent() }
-            is TypeParameter, is PrimitiveJavaType, is UnresolvedBound,
-            Star, Void, JavaObject -> emptyList()
-            is Nullable -> listOf(inner.toComponent())
-            // TODO(b/166530498): support variance
-            is Variance<*> -> listOf(inner.toComponent())
-            else -> error("Unknown bound: $this")
-        }
-
-        return DefaultParameterType(
-            ParameterType.Params(
-                type = toLink(),
-                generics = generics
-            )
-        )
-    }
-
-    /**
-     * Converts a documentable type to a link component, assuming all generics have been resolved.
-     */
-    private fun Projection.toLink(): Link = when (this) {
-        is TypeConstructor -> pathProvider.linkForReference(dri)
-        is TypeParameter -> DefaultLink(
-            Link.Params(
-                name = name,
-                url = ""
-            )
-        )
-        Star -> DefaultLink(
-            Link.Params(
-                name = when (displayLanguage) {
-                    Language.JAVA -> "?"
-                    Language.KOTLIN -> "*"
-                },
-                url = ""
-            )
-        )
-        Void -> when (displayLanguage) {
-            Language.JAVA -> DefaultLink(Link.Params(name = "void", url = ""))
-            Language.KOTLIN -> pathProvider.linkForReference(DRI("kotlin", "Unit"))
-        }
-        JavaObject -> when (displayLanguage) {
-            Language.JAVA -> pathProvider.linkForReference(DRI("java.lang", "Object"))
-            Language.KOTLIN -> pathProvider.linkForReference(DRI("kotlin", "Any"))
-        }
-        is PrimitiveJavaType -> when (displayLanguage) {
-            Language.JAVA -> DefaultLink(Link.Params(name = name, url = ""))
-            Language.KOTLIN -> pathProvider.linkForReference(DRI("kotlin", name.capitalize()))
-        }
-        is UnresolvedBound -> DefaultLink(Link.Params(name = name, url = ""))
-        is Nullable -> inner.toLink()
-        // TODO(b/166530498): support variance
-        is Variance<*> -> inner.toLink()
-        else -> error("Unknown bound: $this")
-    }
-
-    /** Determine whether or not a param is a lambda using the kotlin function type. */
-    private fun Projection.isLambda(suspendOnly: Boolean = false): Boolean = when (this) {
-        is TypeConstructor -> {
-            val typeName = dri.classNames.orEmpty()
-            val isStandardLambda = dri.packageName == "kotlin" && typeName.startsWith("Function")
-            val isSuspendLambda =
-                dri.packageName == "kotlin.coroutines" && typeName.startsWith("SuspendFunction")
-
-            if (suspendOnly) {
-                isSuspendLambda
-            } else {
-                isStandardLambda || isSuspendLambda
-            }
-        }
-        is Nullable -> inner.isLambda()
-        is Variance<*> -> inner.isLambda()
-        is TypeParameter, is PrimitiveJavaType, is UnresolvedBound, Star, JavaObject -> false
-        else -> error("Unknown bound: $this")
     }
 
     /**

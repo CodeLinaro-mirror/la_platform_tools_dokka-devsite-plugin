@@ -27,7 +27,7 @@ internal interface FunctionDetail : ContextFreeComponent {
         val name: String,
         val anchors: LinkedHashSet<String>,
         val modifiers: List<String> = emptyList(),
-        val returnType: ParameterType,
+        val returnType: Parameter,
         val signature: FunctionSignature,
         val metadata: List<ContextFreeComponent>
     )
