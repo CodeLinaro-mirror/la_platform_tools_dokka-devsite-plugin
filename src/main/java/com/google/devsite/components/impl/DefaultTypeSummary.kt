@@ -27,7 +27,7 @@ internal class DefaultTypeSummary(
     override fun render(html: FlowContent) = html.run {
         for (modifier in data.modifiers) {
             +modifier
-            +Entities.nbsp
+            if (modifier === data.modifiers.last()) +" " else +Entities.nbsp
         }
 
         data.type.render(this)

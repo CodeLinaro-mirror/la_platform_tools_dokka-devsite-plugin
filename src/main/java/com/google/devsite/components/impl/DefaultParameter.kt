@@ -71,9 +71,10 @@ internal class DefaultParameter(
                     }
                 }
                 if (data.isLambda) {
-                    +") "
+                    +")"
+                    +Entities.nbsp
                     span { unsafe { +"&rarr;" } }
-                    +" "
+                    +Entities.nbsp
                 }
 
                 data.primary.render(this)
@@ -94,5 +95,13 @@ internal class DefaultParameter(
         require(data.isLambda || data.lambdaParams.isEmpty()) {
             "Lambda params don't make sense outside a lambda."
         }
+    }
+
+    override fun weightedSize(): Double {
+        var result = 1.0
+        // TODO(b/168232975): tune this once b/165727919 goes through
+        if (data.name.isBlank()) result -= 0.5
+        if (data.isLambda) result += 1
+        return result
     }
 }

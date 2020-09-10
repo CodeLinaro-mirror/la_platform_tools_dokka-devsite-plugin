@@ -86,4 +86,28 @@ class DefaultFunctionSignatureTest {
             """.trim()
         )
     }
+
+    @Test
+    fun `Signature with breaks renders correctly`() {
+        val component = DefaultFunctionSignature(
+            Params(
+                name = NoopLink("foo"),
+                parameters = listOf(
+                    NoopParameter("String foo", forceBreak = true),
+                    NoopParameter("int bar", forceBreak = true)
+                )
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>foo(<br>&nbsp;&nbsp;&nbsp;&nbsp;String foo,<br>&nbsp;&nbsp;&nbsp;&nbsp;int bar<br>)</div>
+            """.trim()
+        )
+    }
 }

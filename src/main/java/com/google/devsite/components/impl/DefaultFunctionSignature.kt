@@ -19,6 +19,7 @@ package com.google.devsite.components.impl
 import com.google.devsite.components.FunctionSignature
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
+import kotlinx.html.br
 
 /** Default implementation of a function signature. */
 internal class DefaultFunctionSignature(
@@ -29,16 +30,30 @@ internal class DefaultFunctionSignature(
             data.receiver.render(this)
             +"."
         }
+        val shouldBreak = shouldBreak()
 
         data.name.render(this)
         +"("
+        if (shouldBreak) br()
         for (parameter in data.parameters) {
+            if (shouldBreak) repeat(4) { +Entities.nbsp }
             parameter.render(this)
+
             if (parameter !== data.parameters.last()) {
                 +","
-                +Entities.nbsp
+                if (shouldBreak) br() else +Entities.nbsp
             }
         }
+        if (shouldBreak) br()
         +")"
+    }
+
+    /** Uses the estimated function size to guess if it will overflow. */
+    private fun shouldBreak(): Boolean {
+        val allParams = listOfNotNull(data.receiver) + data.parameters
+        val paramSize = allParams.sumByDouble { it.weightedSize() }
+
+        // TODO(b/168232975): tune this once b/165727919 goes through
+        return paramSize >= 2
     }
 }

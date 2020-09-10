@@ -60,7 +60,7 @@ class DefaultTypeSummaryTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>open&nbsp;suspend&nbsp;Unit</div>
+<div>open&nbsp;suspend Unit</div>
             """.trim()
         )
     }

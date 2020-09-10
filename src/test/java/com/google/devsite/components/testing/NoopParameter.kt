@@ -19,7 +19,10 @@ package com.google.devsite.components.testing
 import com.google.devsite.components.Parameter
 import kotlinx.html.FlowContent
 
-internal class NoopParameter(private val text: String) : Parameter {
+internal class NoopParameter(
+    private val text: String,
+    private val forceBreak: Boolean = false
+) : Parameter {
     override val data: Parameter.Params
         get() = throw NotImplementedError()
 
@@ -28,4 +31,6 @@ internal class NoopParameter(private val text: String) : Parameter {
     }
 
     override fun validate() = Unit
+
+    override fun weightedSize() = if (forceBreak) Double.POSITIVE_INFINITY else 0.0
 }

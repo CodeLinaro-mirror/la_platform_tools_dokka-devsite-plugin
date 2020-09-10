@@ -25,6 +25,16 @@ internal interface Parameter : ContextFreeComponent {
     /** Ensure this component's combination of params makes sense. */
     fun validate()
 
+    /**
+     * Returns the "length" of this parameter for use in overflow calculation.
+     *
+     * Instead of using the number of parameters or their rendered length in characters, this
+     * function provides an arbitrary parameter size intended to represent the estimated rendered
+     * length relative to other parameters. 1 is the standard parameter size, but the returned value
+     * can be anything.
+     */
+    fun weightedSize(): Double
+
     class Params(
         val isLambda: Boolean,
         val name: String,
