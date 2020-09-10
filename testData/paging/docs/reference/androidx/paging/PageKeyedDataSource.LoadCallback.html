@@ -14,11 +14,9 @@
     <p>TODO(b/166518636) direct subclasses</p>
     <p>TODO(b/166518636) indirect subclasses</p>
     <hr>
-    <p>
-      <p>Callback for <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams)">loadBefore</a></code> and <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams)">loadAfter</a></code> to return data.</p>
-      <p>A callback can be called only once, and will throw if called again.</p>
-      <p>It is always valid for a DataSource loading method that takes a callback to stash the callback and call it later. This enables DataSources to be fully asynchronous, and to handle temporary, recoverable error states (such as a network error that can be retried).</p>
-    </p>
+    <p>Callback for <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams)">loadBefore</a></code> and <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams)">loadAfter</a></code> to return data.</p>
+    <p>A callback can be called only once, and will throw if called again.</p>
+    <p>It is always valid for a DataSource loading method that takes a callback to stash the callback and call it later. This enables DataSources to be fully asynchronous, and to handle temporary, recoverable error states (such as a network error that can be retried).</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <thead>
@@ -59,9 +57,7 @@
             <td><code>abstract <a href="/reference/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PageKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List,kotlin.Any)">onResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/kotlin/collections/List.html">List</a>&lt;Value&gt;&nbsp;data,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&lt;Key&gt;&nbsp;adjacentPageKey<br>)</code></div>
-              <p>
-                <p>Called to pass loaded data from a <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>.</p>
-              </p>
+              <p>Called to pass loaded data from a <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>.</p>
             </td>
           </tr>
         </tbody>
@@ -71,12 +67,10 @@
     <div><a name="onResult(kotlin.collections.List, kotlin.Any)"></a><a name="onResult-kotlin.collections.List-kotlin.Any-"></a>
       <h3 class="api-name" id="onResult(kotlin.collections.List,kotlin.Any)">onResult</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/PageKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List,kotlin.Any)">onResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/kotlin/collections/List.html">List</a>&lt;Value&gt;&nbsp;data,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&lt;Key&gt;&nbsp;adjacentPageKey<br>)</pre>
-      <p>
-        <p>Called to pass loaded data from a <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>.</p>
-        <p>Call this method from your PageKeyedDataSource's <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams)">loadBefore</a></code> and <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams)">loadAfter</a></code> methods to return data.</p>
-        <p>It is always valid to pass a different amount of data than what is requested. Pass an empty list if there is no more data to load.</p>
-        <p>Pass the key for the subsequent page to load to adjacentPageKey. For example, if you've loaded a page in <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams)">loadBefore</a></code>, pass the key for the previous page, or <code>null</code> if the loaded page is the first. If in <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams)">loadAfter</a></code>, pass the key for the next page, or <code>null</code> if the loaded page is the last.</p>
-      </p>
+      <p>Called to pass loaded data from a <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>.</p>
+      <p>Call this method from your PageKeyedDataSource's <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams)">loadBefore</a></code> and <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams)">loadAfter</a></code> methods to return data.</p>
+      <p>It is always valid to pass a different amount of data than what is requested. Pass an empty list if there is no more data to load.</p>
+      <p>Pass the key for the subsequent page to load to adjacentPageKey. For example, if you've loaded a page in <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams)">loadBefore</a></code>, pass the key for the previous page, or <code>null</code> if the loaded page is the first. If in <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams)">loadAfter</a></code>, pass the key for the next page, or <code>null</code> if the loaded page is the last.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>

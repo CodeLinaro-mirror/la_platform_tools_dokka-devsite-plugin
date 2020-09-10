@@ -14,12 +14,10 @@
     <p>TODO(b/166518636) direct subclasses</p>
     <p>TODO(b/166518636) indirect subclasses</p>
     <hr>
-    <p>
-      <p>Callback for <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadInitial(androidx.paging.ItemKeyedDataSource.LoadInitialParams)">loadInitial</a></code> to return data and, optionally, position/count information.</p>
-      <p>A callback can be called only once, and will throw if called again.</p>
-      <p>If you can compute the number of items in the data set before and after the loaded range, call the three parameter <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List)">onResult</a></code> to pass that information. You can skip passing this information by calling the single parameter <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List)">onResult</a></code>, either if it's difficult to compute, or if <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html#placeholdersEnabled()">placeholdersEnabled</a></code> is <code>false</code>, so the positioning information will be ignored.</p>
-      <p>It is always valid for a DataSource loading method that takes a callback to stash the callback and call it later. This enables DataSources to be fully asynchronous, and to handle temporary, recoverable error states (such as a network error that can be retried).</p>
-    </p>
+    <p>Callback for <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadInitial(androidx.paging.ItemKeyedDataSource.LoadInitialParams)">loadInitial</a></code> to return data and, optionally, position/count information.</p>
+    <p>A callback can be called only once, and will throw if called again.</p>
+    <p>If you can compute the number of items in the data set before and after the loaded range, call the three parameter <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List)">onResult</a></code> to pass that information. You can skip passing this information by calling the single parameter <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List)">onResult</a></code>, either if it's difficult to compute, or if <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html#placeholdersEnabled()">placeholdersEnabled</a></code> is <code>false</code>, so the positioning information will be ignored.</p>
+    <p>It is always valid for a DataSource loading method that takes a callback to stash the callback and call it later. This enables DataSources to be fully asynchronous, and to handle temporary, recoverable error states (such as a network error that can be retried).</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <thead>
@@ -54,9 +52,7 @@
             <td><code>abstract <a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;Value&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;totalCount:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a><br>)</code></div>
-              <p>
-                <p>Called to pass initial load state from a DataSource.</p>
-              </p>
+              <p>Called to pass initial load state from a DataSource.</p>
             </td>
           </tr>
         </tbody>
@@ -66,11 +62,9 @@
     <div><a name="onResult(kotlin.collections.List, kotlin.Int, kotlin.Int)"></a><a name="onResult-kotlin.collections.List-kotlin.Int-kotlin.Int-"></a>
       <h3 class="api-name" id="onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</h3>
       <pre class="api-signature no-pretty-print">abstract&nbsp;<a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;Value&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;totalCount:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a><br>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
-      <p>
-        <p>Called to pass initial load state from a DataSource.</p>
-        <p>Call this method from your DataSource's <code>loadInitial</code> function to return data, and inform how many placeholders should be shown before and after. If counting is cheap to compute (for example, if a network load returns the information regardless), it's recommended to pass data back through this method.</p>
-        <p>It is always valid to pass a different amount of data than what is requested. Pass an empty list if there is no more data to load.</p>
-      </p>
+      <p>Called to pass initial load state from a DataSource.</p>
+      <p>Call this method from your DataSource's <code>loadInitial</code> function to return data, and inform how many placeholders should be shown before and after. If counting is cheap to compute (for example, if a network load returns the information regardless), it's recommended to pass data back through this method.</p>
+      <p>It is always valid to pass a different amount of data than what is requested. Pass an empty list if there is no more data to load.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>

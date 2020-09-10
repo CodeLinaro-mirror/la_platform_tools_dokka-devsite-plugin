@@ -14,18 +14,16 @@
     <p>TODO(b/166518636) direct subclasses</p>
     <p>TODO(b/166518636) indirect subclasses</p>
     <hr>
-    <p>
-      <p>Base class for an abstraction of pageable static data from some source, where loading pages of data is typically an expensive operation. Some examples of common <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>s might be from network or from a database.</p>
-      <p>An instance of a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> is used to load pages of data for an instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>.</p>
-      <p>A <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> can grow as it loads more data, but the data loaded cannot be updated. If the underlying data set is modified, a new <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> / <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> pair must be created to represent an updated snapshot of the data.</p>
-      <h3> Loading Pages</h3>
-      <p><code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> queries data from its <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> in response to loading hints generated as the user scrolls in a <code>RecyclerView</code>.</p>
-      <p>To control how and when a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> queries data from its <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>, see <code><a href="/reference/androidx/paging/PagingConfig.html">PagingConfig</a></code>, which defines behavior such as <code><a href="/reference/androidx/paging/PagingConfig.html#pageSize()">pageSize</a></code> and <code><a href="/reference/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a></code>.</p>
-      <h3> Updating Data</h3>
-      <p>A <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> / <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> pair is a snapshot of the data set. A new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> / <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> must be created if an update occurs, such as a reorder, insert, delete, or content update occurs. A <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> must detect that it cannot continue loading its snapshot (for instance, when Database query notices a table being invalidated), and call <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code>. Then a new <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> / <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> pair would be created to represent data from the new state of the database query.</p>
-      <h3> Presenting Data to UI</h3>
-      <p>To present data loaded by a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to a <code>RecyclerView</code>, create an instance of <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code>, which provides a stream of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> that you may collect from and submit to a <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>.</p>
-    </p>
+    <p>Base class for an abstraction of pageable static data from some source, where loading pages of data is typically an expensive operation. Some examples of common <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>s might be from network or from a database.</p>
+    <p>An instance of a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> is used to load pages of data for an instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>.</p>
+    <p>A <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> can grow as it loads more data, but the data loaded cannot be updated. If the underlying data set is modified, a new <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> / <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> pair must be created to represent an updated snapshot of the data.</p>
+    <h3> Loading Pages</h3>
+    <p><code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> queries data from its <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> in response to loading hints generated as the user scrolls in a <code>RecyclerView</code>.</p>
+    <p>To control how and when a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> queries data from its <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>, see <code><a href="/reference/androidx/paging/PagingConfig.html">PagingConfig</a></code>, which defines behavior such as <code><a href="/reference/androidx/paging/PagingConfig.html#pageSize()">pageSize</a></code> and <code><a href="/reference/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a></code>.</p>
+    <h3> Updating Data</h3>
+    <p>A <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> / <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> pair is a snapshot of the data set. A new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> / <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> must be created if an update occurs, such as a reorder, insert, delete, or content update occurs. A <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> must detect that it cannot continue loading its snapshot (for instance, when Database query notices a table being invalidated), and call <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code>. Then a new <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> / <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> pair would be created to represent data from the new state of the database query.</p>
+    <h3> Presenting Data to UI</h3>
+    <p>To present data loaded by a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to a <code>RecyclerView</code>, create an instance of <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code>, which provides a stream of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> that you may collect from and submit to a <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <thead>
@@ -43,9 +41,7 @@
           <tr>
             <td><code>Value</code></td>
             <td width="100%">
-              <p>
-                <p>Type of data loaded in by this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>. E.g., the type of data that will be passed to a <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code> to be displayed in a <code>RecyclerView</code>.</p>
-              </p>
+              <p>Type of data loaded in by this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>. E.g., the type of data that will be passed to a <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code> to be displayed in a <code>RecyclerView</code>.</p>
             </td>
           </tr>
         </tbody>
@@ -92,9 +88,7 @@
             <td><code><a href="/reference/kotlin/Boolean.html">Boolean</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingSource.html#jumpingSupported()">jumpingSupported</a></code></div>
-              <p>
-                <p><code>true</code> if this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> supports jumping, <code>false</code> otherwise.</p>
-              </p>
+              <p><code>true</code> if this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> supports jumping, <code>false</code> otherwise.</p>
             </td>
           </tr>
           <tr>
@@ -119,45 +113,35 @@
             <td><code>Key&lt;Key&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a>(<a href="/reference/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;&nbsp;state)</code></div>
-              <p>
-                <p>Request a refresh key given the current <code><a href="/reference/androidx/paging/PagingState.html">PagingState</a></code> of the associated <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> used to present loaded data from this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
-              </p>
+              <p>Request a refresh key given the current <code><a href="/reference/androidx/paging/PagingState.html">PagingState</a></code> of the associated <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> used to present loaded data from this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a>()</code></div>
-              <p>
-                <p>Signal the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to stop loading.</p>
-              </p>
+              <p>Signal the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to stop loading.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract <a href="/reference/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a>&lt;Key,&nbsp;Value&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a>(<a href="/reference/androidx/paging/PagingSource.LoadParams.html">PagingSource.LoadParams</a>&lt;Key&gt;&nbsp;params)</code></div>
-              <p>
-                <p>Loading API for <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
-              </p>
+              <p>Loading API for <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code>final <a href="/reference/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingSource.html#registerInvalidatedCallback(kotlin.Function0)">registerInvalidatedCallback</a>(<a href="/reference/kotlin/Function0.html">Function0</a>&lt;<a href="/reference/kotlin/Unit.html">Unit</a>&gt;&nbsp;onInvalidatedCallback)</code></div>
-              <p>
-                <p>Add a callback to invoke when the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> is first invalidated.</p>
-              </p>
+              <p>Add a callback to invoke when the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> is first invalidated.</p>
             </td>
           </tr>
           <tr>
             <td><code>final <a href="/reference/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingSource.html#unregisterInvalidatedCallback(kotlin.Function0)">unregisterInvalidatedCallback</a>(<a href="/reference/kotlin/Function0.html">Function0</a>&lt;<a href="/reference/kotlin/Unit.html">Unit</a>&gt;&nbsp;onInvalidatedCallback)</code></div>
-              <p>
-                <p>Remove a previously added invalidate callback.</p>
-              </p>
+              <p>Remove a previously added invalidate callback.</p>
             </td>
           </tr>
         </tbody>
@@ -172,12 +156,10 @@
     <div><a name="getJumpingSupported()"></a><a name="setJumpingSupported()"></a><a name="getJumpingSupported--"></a><a name="setJumpingSupported--"></a>
       <h3 class="api-name" id="jumpingSupported()">jumpingSupported</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/kotlin/Boolean.html">Boolean</a>&nbsp;<a href="/reference/androidx/paging/PagingSource.html#jumpingSupported()">jumpingSupported</a></pre>
-      <p>
-        <p><code>true</code> if this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> supports jumping, <code>false</code> otherwise.</p>
-        <p>Override this to <code>true</code> if pseudo-fast scrolling via jumps is supported.</p>
-        <p>A jump occurs when a <code>RecyclerView</code> scrolls through a number of placeholders defined by <code><a href="/reference/androidx/paging/PagingConfig.html#jumpThreshold()">jumpThreshold</a></code> and triggers a load with <code><a href="/reference/androidx/paging/LoadType.REFRESH.html">LoadType.REFRESH</a></code>.</p>
-        <p><code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>s that support jumps should override <code><a href="/reference/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a></code> to return a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> that would load data fulfilling the viewport given a user's current <code><a href="/reference/androidx/paging/PagingState.html#anchorPosition()">anchorPosition</a></code>.</p>
-      </p>
+      <p><code>true</code> if this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> supports jumping, <code>false</code> otherwise.</p>
+      <p>Override this to <code>true</code> if pseudo-fast scrolling via jumps is supported.</p>
+      <p>A jump occurs when a <code>RecyclerView</code> scrolls through a number of placeholders defined by <code><a href="/reference/androidx/paging/PagingConfig.html#jumpThreshold()">jumpThreshold</a></code> and triggers a load with <code><a href="/reference/androidx/paging/LoadType.REFRESH.html">LoadType.REFRESH</a></code>.</p>
+      <p><code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>s that support jumps should override <code><a href="/reference/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a></code> to return a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> that would load data fulfilling the viewport given a user's current <code><a href="/reference/androidx/paging/PagingState.html#anchorPosition()">anchorPosition</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -205,39 +187,31 @@
     <div><a name="getRefreshKey-androidx.paging.PagingState-"></a>
       <h3 class="api-name" id="getRefreshKey(androidx.paging.PagingState)">getRefreshKey</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;Key&lt;Key&gt;&nbsp;<a href="/reference/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a>(<a href="/reference/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;&nbsp;state)</pre>
-      <p>
-        <p>Request a refresh key given the current <code><a href="/reference/androidx/paging/PagingState.html">PagingState</a></code> of the associated <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> used to present loaded data from this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
-        <p>The <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> returned by this method is used to populate the <code><a href="/reference/androidx/paging/PagingSource.LoadParams.html#key()">key</a></code> for load requests of type <code><a href="/reference/androidx/paging/LoadType.REFRESH.html">LoadType.REFRESH</a></code>.</p>
-        <p>For example, if items are loaded based on position, and keys are positions, <code><a href="/reference/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a></code> should return the position of the item.</p>
-        <p>Alternately, if items contain a key used to load, get the key from the item in the page at index <code><a href="/reference/androidx/paging/PagingState.html#anchorPosition()">anchorPosition</a></code>.</p>
-        <p>If this operation cannot be supported (generally, because keys cannot be reused across refresh) return <code>null</code> - this is the default behavior.</p>
-        <p>Note: This method is guaranteed to only be called if the initial load succeeds and the list of loaded pages is not empty. In the case where a refresh is triggered before the initial load succeeds or it errors out, the initial key passed to <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code> will be used.</p>
-      </p>
+      <p>Request a refresh key given the current <code><a href="/reference/androidx/paging/PagingState.html">PagingState</a></code> of the associated <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> used to present loaded data from this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
+      <p>The <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> returned by this method is used to populate the <code><a href="/reference/androidx/paging/PagingSource.LoadParams.html#key()">key</a></code> for load requests of type <code><a href="/reference/androidx/paging/LoadType.REFRESH.html">LoadType.REFRESH</a></code>.</p>
+      <p>For example, if items are loaded based on position, and keys are positions, <code><a href="/reference/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a></code> should return the position of the item.</p>
+      <p>Alternately, if items contain a key used to load, get the key from the item in the page at index <code><a href="/reference/androidx/paging/PagingState.html#anchorPosition()">anchorPosition</a></code>.</p>
+      <p>If this operation cannot be supported (generally, because keys cannot be reused across refresh) return <code>null</code> - this is the default behavior.</p>
+      <p>Note: This method is guaranteed to only be called if the initial load succeeds and the list of loaded pages is not empty. In the case where a refresh is triggered before the initial load succeeds or it errors out, the initial key passed to <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code> will be used.</p>
     </div>
     <div><a name="invalidate--"></a>
       <h3 class="api-name" id="invalidate()">invalidate</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a>()</pre>
-      <p>
-        <p>Signal the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to stop loading.</p>
-        <p>This method is idempotent. i.e., If <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code> has already been called, subsequent calls to this method should have no effect.</p>
-      </p>
+      <p>Signal the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to stop loading.</p>
+      <p>This method is idempotent. i.e., If <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code> has already been called, subsequent calls to this method should have no effect.</p>
     </div>
     <div><a name="load-androidx.paging.PagingSource.LoadParams-"></a>
       <h3 class="api-name" id="load(androidx.paging.PagingSource.LoadParams)">load</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;<a href="/reference/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a>&lt;Key,&nbsp;Value&gt;&nbsp;<a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a>(<a href="/reference/androidx/paging/PagingSource.LoadParams.html">PagingSource.LoadParams</a>&lt;Key&gt;&nbsp;params)</pre>
-      <p>
-        <p>Loading API for <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
-        <p>Implement this method to trigger your async load (e.g. from database or network).</p>
-      </p>
+      <p>Loading API for <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
+      <p>Implement this method to trigger your async load (e.g. from database or network).</p>
     </div>
     <div><a name="registerInvalidatedCallback-kotlin.Function0-"></a>
       <h3 class="api-name" id="registerInvalidatedCallback(kotlin.Function0)">registerInvalidatedCallback</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/PagingSource.html#registerInvalidatedCallback(kotlin.Function0)">registerInvalidatedCallback</a>(<a href="/reference/kotlin/Function0.html">Function0</a>&lt;<a href="/reference/kotlin/Unit.html">Unit</a>&gt;&nbsp;onInvalidatedCallback)</pre>
-      <p>
-        <p>Add a callback to invoke when the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> is first invalidated.</p>
-        <p>Once invalidated, a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> will not become valid again.</p>
-        <p>A <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> will only invoke its callbacks once - the first time <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code> is called, on that thread.</p>
-      </p>
+      <p>Add a callback to invoke when the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> is first invalidated.</p>
+      <p>Once invalidated, a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> will not become valid again.</p>
+      <p>A <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> will only invoke its callbacks once - the first time <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code> is called, on that thread.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -259,9 +233,7 @@
     <div><a name="unregisterInvalidatedCallback-kotlin.Function0-"></a>
       <h3 class="api-name" id="unregisterInvalidatedCallback(kotlin.Function0)">unregisterInvalidatedCallback</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/PagingSource.html#unregisterInvalidatedCallback(kotlin.Function0)">unregisterInvalidatedCallback</a>(<a href="/reference/kotlin/Function0.html">Function0</a>&lt;<a href="/reference/kotlin/Unit.html">Unit</a>&gt;&nbsp;onInvalidatedCallback)</pre>
-      <p>
-        <p>Remove a previously added invalidate callback.</p>
-      </p>
+      <p>Remove a previously added invalidate callback.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>

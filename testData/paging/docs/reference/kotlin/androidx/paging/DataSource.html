@@ -14,24 +14,22 @@
     <p>TODO(b/166518636) direct subclasses</p>
     <p>TODO(b/166518636) indirect subclasses</p>
     <hr>
-    <p>
-      <p>Base class for loading pages of snapshot data into a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
-      <p>DataSource is queried to load pages of content into a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>. A PagedList can grow as it loads more data, but the data loaded cannot be updated. If the underlying data set is modified, a new PagedList / DataSource pair must be created to represent the new data.</p>
-      <h3> Loading Pages</h3>
-      <p>PagedList queries data from its DataSource in response to loading hints. PagedListAdapter calls <code><a href="/reference/kotlin/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code> to load content as the user scrolls in a RecyclerView.</p>
-      <p>To control how and when a PagedList queries data from its DataSource, see <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code>. The Config object defines things like load sizes and prefetch distance.</p>
-      <h3> Updating Paged Data</h3>
-      <p>A PagedList / DataSource pair are a snapshot of the data set. A new pair of PagedList / DataSource must be created if an update occurs, such as a reorder, insert, delete, or content update occurs. A DataSource must detect that it cannot continue loading its snapshot (for instance, when Database query notices a table being invalidated), and call <code><a href="/reference/kotlin/androidx/paging/DataSource.html#invalidate()">invalidate</a></code>. Then a new PagedList / DataSource pair would be created to load data from the new state of the Database query.</p>
-      <p>To page in data that doesn't update, you can create a single DataSource, and pass it to a single PagedList. For example, loading from network when the network's paging API doesn't provide updates.</p>
-      <p>To page in data from a source that does provide updates, you can create a <code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code>, where each DataSource created is invalidated when an update to the data set occurs that makes the current snapshot invalid. For example, when paging a query from the Database, and the table being queried inserts or removes items. You can also use a DataSource.Factory to provide multiple versions of network-paged lists. If reloading all content (e.g. in response to an action like swipe-to-refresh) is required to get a new version of data, you can connect an explicit refresh signal to call <code><a href="/reference/kotlin/androidx/paging/DataSource.html#invalidate()">invalidate</a></code> on the current <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>.</p>
-      <p>If you have more granular update signals, such as a network API signaling an update to a single item in the list, it's recommended to load data from network into memory. Then present that data to the PagedList via a DataSource that wraps an in-memory snapshot. Each time the in-memory copy changes, invalidate the previous DataSource, and a new one wrapping the new state of the snapshot can be created.</p>
-      <h3> Implementing a DataSource</h3>
-      <p>To implement, extend one of the subclasses: <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a></code>, <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a></code>, or <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a></code>.</p>
-      <p>Use <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a></code> if pages you load embed keys for loading adjacent pages. For example a network response that returns some items, and a next/previous page links.</p>
-      <p>Use <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a></code> if you need to use data from item <code>N-1</code> to load item <code>N</code>. For example, if requesting the backend for the next comments in the list requires the ID or timestamp of the most recent loaded comment, or if querying the next users from a name-sorted database query requires the name and unique ID of the previous.</p>
-      <p>Use <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a></code> if you can load pages of a requested size at arbitrary positions, and provide a fixed item count. PositionalDataSource supports querying pages at arbitrary positions, so can provide data to PagedLists in arbitrary order. Note that PositionalDataSource is required to respect page size for efficient tiling. If you want to override page size (e.g. when network page size constraints are only known at runtime), use one of the other DataSource classes.</p>
-      <p>Because a <code>null</code> item indicates a placeholder in <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>, DataSource may not return <code>null</code> items in lists that it loads. This is so that users of the PagedList can differentiate unloaded placeholder items from content that has been paged in.</p>
-    </p>
+    <p>Base class for loading pages of snapshot data into a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
+    <p>DataSource is queried to load pages of content into a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>. A PagedList can grow as it loads more data, but the data loaded cannot be updated. If the underlying data set is modified, a new PagedList / DataSource pair must be created to represent the new data.</p>
+    <h3> Loading Pages</h3>
+    <p>PagedList queries data from its DataSource in response to loading hints. PagedListAdapter calls <code><a href="/reference/kotlin/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code> to load content as the user scrolls in a RecyclerView.</p>
+    <p>To control how and when a PagedList queries data from its DataSource, see <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code>. The Config object defines things like load sizes and prefetch distance.</p>
+    <h3> Updating Paged Data</h3>
+    <p>A PagedList / DataSource pair are a snapshot of the data set. A new pair of PagedList / DataSource must be created if an update occurs, such as a reorder, insert, delete, or content update occurs. A DataSource must detect that it cannot continue loading its snapshot (for instance, when Database query notices a table being invalidated), and call <code><a href="/reference/kotlin/androidx/paging/DataSource.html#invalidate()">invalidate</a></code>. Then a new PagedList / DataSource pair would be created to load data from the new state of the Database query.</p>
+    <p>To page in data that doesn't update, you can create a single DataSource, and pass it to a single PagedList. For example, loading from network when the network's paging API doesn't provide updates.</p>
+    <p>To page in data from a source that does provide updates, you can create a <code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code>, where each DataSource created is invalidated when an update to the data set occurs that makes the current snapshot invalid. For example, when paging a query from the Database, and the table being queried inserts or removes items. You can also use a DataSource.Factory to provide multiple versions of network-paged lists. If reloading all content (e.g. in response to an action like swipe-to-refresh) is required to get a new version of data, you can connect an explicit refresh signal to call <code><a href="/reference/kotlin/androidx/paging/DataSource.html#invalidate()">invalidate</a></code> on the current <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>.</p>
+    <p>If you have more granular update signals, such as a network API signaling an update to a single item in the list, it's recommended to load data from network into memory. Then present that data to the PagedList via a DataSource that wraps an in-memory snapshot. Each time the in-memory copy changes, invalidate the previous DataSource, and a new one wrapping the new state of the snapshot can be created.</p>
+    <h3> Implementing a DataSource</h3>
+    <p>To implement, extend one of the subclasses: <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a></code>, <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a></code>, or <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a></code>.</p>
+    <p>Use <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a></code> if pages you load embed keys for loading adjacent pages. For example a network response that returns some items, and a next/previous page links.</p>
+    <p>Use <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a></code> if you need to use data from item <code>N-1</code> to load item <code>N</code>. For example, if requesting the backend for the next comments in the list requires the ID or timestamp of the most recent loaded comment, or if querying the next users from a name-sorted database query requires the name and unique ID of the previous.</p>
+    <p>Use <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a></code> if you can load pages of a requested size at arbitrary positions, and provide a fixed item count. PositionalDataSource supports querying pages at arbitrary positions, so can provide data to PagedLists in arbitrary order. Note that PositionalDataSource is required to respect page size for efficient tiling. If you want to override page size (e.g. when network page size constraints are only known at runtime), use one of the other DataSource classes.</p>
+    <p>Because a <code>null</code> item indicates a placeholder in <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>, DataSource may not return <code>null</code> items in lists that it loads. This is so that users of the PagedList can differentiate unloaded placeholder items from content that has been paged in.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <thead>
@@ -84,81 +82,63 @@
             <td><code>open <a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/DataSource.html#addInvalidatedCallback(androidx.paging.DataSource.InvalidatedCallback)">addInvalidatedCallback</a>(onInvalidatedCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a>)</code></div>
-              <p>
-                <p>Add a callback to invoke when the DataSource is first invalidated.</p>
-              </p>
+              <p>Add a callback to invoke when the DataSource is first invalidated.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/DataSource.html#addInvalidatedCallback(kotlin.Function0)">addInvalidatedCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onInvalidatedCallback:&nbsp;()&nbsp;-&gt;&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a><br>)</code></div>
-              <p>
-                <p>Add a callback to invoke when the DataSource is first invalidated.</p>
-              </p>
+              <p>Add a callback to invoke when the DataSource is first invalidated.</p>
             </td>
           </tr>
           <tr>
             <td><code>open <a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/DataSource.html#invalidate()">invalidate</a>()</code></div>
-              <p>
-                <p>Signal the data source to stop loading, and notify its callback.</p>
-              </p>
+              <p>Signal the data source to stop loading, and notify its callback.</p>
             </td>
           </tr>
           <tr>
             <td><code>open <a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/DataSource.html#map()">map</a>(function:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;Value,&nbsp;ToValue&gt;)</code></div>
-              <p>
-                <p>Applies the given function to each value emitted by the DataSource.</p>
-              </p>
+              <p>Applies the given function to each value emitted by the DataSource.</p>
             </td>
           </tr>
           <tr>
             <td><code>open <a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;function:&nbsp;(Value)&nbsp;-&gt;&nbsp;ToValue<br>)</code></div>
-              <p>
-                <p>Applies the given function to each value emitted by the DataSource.</p>
-              </p>
+              <p>Applies the given function to each value emitted by the DataSource.</p>
             </td>
           </tr>
           <tr>
             <td><code>open <a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage()">mapByPage</a>(function:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;Value&gt;,&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;ToValue&gt;&gt;)</code></div>
-              <p>
-                <p>Applies the given function to each value emitted by the DataSource.</p>
-              </p>
+              <p>Applies the given function to each value emitted by the DataSource.</p>
             </td>
           </tr>
           <tr>
             <td><code>open <a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;function:&nbsp;(<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;Value&gt;)&nbsp;-&gt;&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;ToValue&gt;<br>)</code></div>
-              <p>
-                <p>Applies the given function to each value emitted by the DataSource.</p>
-              </p>
+              <p>Applies the given function to each value emitted by the DataSource.</p>
             </td>
           </tr>
           <tr>
             <td><code>open <a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/DataSource.html#removeInvalidatedCallback(androidx.paging.DataSource.InvalidatedCallback)">removeInvalidatedCallback</a>(onInvalidatedCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a>)</code></div>
-              <p>
-                <p>Remove a previously added invalidate callback.</p>
-              </p>
+              <p>Remove a previously added invalidate callback.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/DataSource.html#removeInvalidatedCallback(kotlin.Function0)">removeInvalidatedCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onInvalidatedCallback:&nbsp;()&nbsp;-&gt;&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a><br>)</code></div>
-              <p>
-                <p>Remove a previously added invalidate callback.</p>
-              </p>
+              <p>Remove a previously added invalidate callback.</p>
             </td>
           </tr>
         </tbody>
@@ -191,11 +171,9 @@
     <div><a name="addInvalidatedCallback-androidx.paging.DataSource.InvalidatedCallback-"></a>
       <h3 class="api-name" id="addInvalidatedCallback(androidx.paging.DataSource.InvalidatedCallback)">addInvalidatedCallback</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html#addInvalidatedCallback(androidx.paging.DataSource.InvalidatedCallback)">addInvalidatedCallback</a>(onInvalidatedCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
-      <p>
-        <p>Add a callback to invoke when the DataSource is first invalidated.</p>
-        <p>Once invalidated, a data source will not become valid again.</p>
-        <p>A data source will only invoke its callbacks once - the first time <code><a href="/reference/kotlin/androidx/paging/DataSource.html#invalidate()">invalidate</a></code> is called, on that thread.</p>
-      </p>
+      <p>Add a callback to invoke when the DataSource is first invalidated.</p>
+      <p>Once invalidated, a data source will not become valid again.</p>
+      <p>A data source will only invoke its callbacks once - the first time <code><a href="/reference/kotlin/androidx/paging/DataSource.html#invalidate()">invalidate</a></code> is called, on that thread.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -217,12 +195,10 @@
     <div><a name="addInvalidatedCallback-kotlin.Function0-"></a>
       <h3 class="api-name" id="addInvalidatedCallback(kotlin.Function0)">addInvalidatedCallback</h3>
       <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/DataSource.html#addInvalidatedCallback(kotlin.Function0)">addInvalidatedCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onInvalidatedCallback:&nbsp;()&nbsp;-&gt;&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a><br>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
-      <p>
-        <p>Add a callback to invoke when the DataSource is first invalidated.</p>
-        <p>Once invalidated, a data source will not become valid again.</p>
-        <p>A data source will only invoke its callbacks once - the first time <code><a href="/reference/kotlin/androidx/paging/DataSource.html#invalidate()">invalidate</a></code> is called, on that thread.</p>
-        <p>This is a redundant override of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#addInvalidatedCallback(kotlin.Function0)">addInvalidatedCallback</a></code>, which accepts Kotlin functions.</p>
-      </p>
+      <p>Add a callback to invoke when the DataSource is first invalidated.</p>
+      <p>Once invalidated, a data source will not become valid again.</p>
+      <p>A data source will only invoke its callbacks once - the first time <code><a href="/reference/kotlin/androidx/paging/DataSource.html#invalidate()">invalidate</a></code> is called, on that thread.</p>
+      <p>This is a redundant override of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#addInvalidatedCallback(kotlin.Function0)">addInvalidatedCallback</a></code>, which accepts Kotlin functions.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -244,18 +220,14 @@
     <div><a name="invalidate--"></a>
       <h3 class="api-name" id="invalidate()">invalidate</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html#invalidate()">invalidate</a>():&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
-      <p>
-        <p>Signal the data source to stop loading, and notify its callback.</p>
-        <p>If invalidate has already been called, this method does nothing.</p>
-      </p>
+      <p>Signal the data source to stop loading, and notify its callback.</p>
+      <p>If invalidate has already been called, this method does nothing.</p>
     </div>
     <div><a name="map--"></a>
       <h3 class="api-name" id="map()">map</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html#map()">map</a>(function:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;Value,&nbsp;ToValue&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
-      <p>
-        <p>Applies the given function to each value emitted by the DataSource.</p>
-        <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code>, but operates on individual items.</p>
-      </p>
+      <p>Applies the given function to each value emitted by the DataSource.</p>
+      <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code>, but operates on individual items.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -267,9 +239,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
               <td width="100%">
-                <p>
-                  <p>A new DataSource, which transforms items using the given function.</p>
-                </p>
+                <p>A new DataSource, which transforms items using the given function.</p>
               </td>
             </tr>
           </tbody>
@@ -331,11 +301,9 @@
     <div><a name="map-kotlin.Function1-"></a>
       <h3 class="api-name" id="map(kotlin.Function1)">map</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;function:&nbsp;(Value)&nbsp;-&gt;&nbsp;ToValue<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
-      <p>
-        <p>Applies the given function to each value emitted by the DataSource.</p>
-        <p>An overload of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a></code> that accepts a kotlin function type.</p>
-        <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code>, but operates on individual items.</p>
-      </p>
+      <p>Applies the given function to each value emitted by the DataSource.</p>
+      <p>An overload of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a></code> that accepts a kotlin function type.</p>
+      <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code>, but operates on individual items.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -347,9 +315,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
               <td width="100%">
-                <p>
-                  <p>A new DataSource, which transforms items using the given function.</p>
-                </p>
+                <p>A new DataSource, which transforms items using the given function.</p>
               </td>
             </tr>
           </tbody>
@@ -405,10 +371,8 @@
     <div><a name="mapByPage--"></a>
       <h3 class="api-name" id="mapByPage()">mapByPage</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage()">mapByPage</a>(function:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;Value&gt;,&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;ToValue&gt;&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
-      <p>
-        <p>Applies the given function to each value emitted by the DataSource.</p>
-        <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a></code>, but allows for batch conversions.</p>
-      </p>
+      <p>Applies the given function to each value emitted by the DataSource.</p>
+      <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a></code>, but allows for batch conversions.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -420,9 +384,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
               <td width="100%">
-                <p>
-                  <p>A new DataSource, which transforms items using the given function.</p>
-                </p>
+                <p>A new DataSource, which transforms items using the given function.</p>
               </td>
             </tr>
           </tbody>
@@ -484,11 +446,9 @@
     <div><a name="mapByPage-kotlin.Function1-"></a>
       <h3 class="api-name" id="mapByPage(kotlin.Function1)">mapByPage</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;function:&nbsp;(<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;Value&gt;)&nbsp;-&gt;&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;ToValue&gt;<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
-      <p>
-        <p>Applies the given function to each value emitted by the DataSource.</p>
-        <p>An overload of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code> that accepts a kotlin function type.</p>
-        <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a></code>, but allows for batch conversions.</p>
-      </p>
+      <p>Applies the given function to each value emitted by the DataSource.</p>
+      <p>An overload of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code> that accepts a kotlin function type.</p>
+      <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a></code>, but allows for batch conversions.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -500,9 +460,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
               <td width="100%">
-                <p>
-                  <p>A new <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>, which transforms items using the given function.</p>
-                </p>
+                <p>A new <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>, which transforms items using the given function.</p>
               </td>
             </tr>
           </tbody>
@@ -564,9 +522,7 @@
     <div><a name="removeInvalidatedCallback-androidx.paging.DataSource.InvalidatedCallback-"></a>
       <h3 class="api-name" id="removeInvalidatedCallback(androidx.paging.DataSource.InvalidatedCallback)">removeInvalidatedCallback</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html#removeInvalidatedCallback(androidx.paging.DataSource.InvalidatedCallback)">removeInvalidatedCallback</a>(onInvalidatedCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
-      <p>
-        <p>Remove a previously added invalidate callback.</p>
-      </p>
+      <p>Remove a previously added invalidate callback.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -588,10 +544,8 @@
     <div><a name="removeInvalidatedCallback-kotlin.Function0-"></a>
       <h3 class="api-name" id="removeInvalidatedCallback(kotlin.Function0)">removeInvalidatedCallback</h3>
       <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/DataSource.html#removeInvalidatedCallback(kotlin.Function0)">removeInvalidatedCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onInvalidatedCallback:&nbsp;()&nbsp;-&gt;&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a><br>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
-      <p>
-        <p>Remove a previously added invalidate callback.</p>
-        <p>This is a redundant override of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#removeInvalidatedCallback(kotlin.Function0)">removeInvalidatedCallback</a></code>, which accepts Kotlin functions.</p>
-      </p>
+      <p>Remove a previously added invalidate callback.</p>
+      <p>This is a redundant override of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#removeInvalidatedCallback(kotlin.Function0)">removeInvalidatedCallback</a></code>, which accepts Kotlin functions.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>

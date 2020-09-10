@@ -125,18 +125,14 @@
             <td><code> void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/DialogFragment.html#onCreate(android.os.Bundle)">onCreate</a>(Bundle&nbsp;savedInstanceState)</code></div>
-              <p>
-                <p>Called to do initial creation of a fragment.</p>
-              </p>
+              <p>Called to do initial creation of a fragment.</p>
             </td>
           </tr>
           <tr>
             <td><code> Dialog</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/DialogFragment.html#onCreateDialog(android.os.Bundle)">onCreateDialog</a>(Bundle&nbsp;savedInstanceState)</code></div>
-              <p>
-                <p>Override to build your own custom Dialog container.</p>
-              </p>
+              <p>Override to build your own custom Dialog container.</p>
             </td>
           </tr>
           <tr>
@@ -163,19 +159,15 @@
             <td><code> LayoutInflater</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/DialogFragment.html#onGetLayoutInflater(android.os.Bundle)">onGetLayoutInflater</a>(Bundle&nbsp;savedInstanceState)</code></div>
-              <p>
-                <p>{@inheritDoc} </p>
-                <p> If this is called from within <code><a href="/reference/androidx/fragment/app/DialogFragment.html#onCreateDialog(android.os.Bundle)">onCreateDialog</a></code> , the layout inflater from <code><a href="/reference/androidx/fragment/app/Fragment.html#onGetLayoutInflater(android.os.Bundle)">onGetLayoutInflater</a></code> , without the dialog theme, will be returned.</p>
-              </p>
+              <p>{@inheritDoc} </p>
+              <p> If this is called from within <code><a href="/reference/androidx/fragment/app/DialogFragment.html#onCreateDialog(android.os.Bundle)">onCreateDialog</a></code> , the layout inflater from <code><a href="/reference/androidx/fragment/app/Fragment.html#onGetLayoutInflater(android.os.Bundle)">onGetLayoutInflater</a></code> , without the dialog theme, will be returned.</p>
             </td>
           </tr>
           <tr>
             <td><code> void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/DialogFragment.html#onSaveInstanceState(android.os.Bundle)">onSaveInstanceState</a>(Bundle&nbsp;outState)</code></div>
-              <p>
-                <p>Called to ask the fragment to save its current dynamic state, so it can later be reconstructed in a new instance if its process is restarted.</p>
-              </p>
+              <p>Called to ask the fragment to save its current dynamic state, so it can later be reconstructed in a new instance if its process is restarted.</p>
             </td>
           </tr>
           <tr>
@@ -217,9 +209,7 @@
             <td><code> void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/DialogFragment.html#setShowsDialog(boolean)">setShowsDialog</a>(boolean&nbsp;showsDialog)</code></div>
-              <p>
-                <p>Controls whether this fragment should be shown in a dialog.</p>
-              </p>
+              <p>Controls whether this fragment should be shown in a dialog.</p>
             </td>
           </tr>
           <tr>
@@ -331,11 +321,9 @@
     <div><a name="onCreate-android.os.Bundle-"></a>
       <h3 class="api-name" id="onCreate(android.os.Bundle)">onCreate</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/DialogFragment.html#onCreate(android.os.Bundle)">onCreate</a>(Bundle&nbsp;savedInstanceState)</pre>
-      <p>
-        <p>Called to do initial creation of a fragment. This is called after <code><a href="/reference/androidx/fragment/app/Fragment.html#onAttach(android.app.Activity)">onAttach</a></code> and before <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> . </p>
-        <p>Note that this can be called while the fragment's activity is still in the process of being created. As such, you can not rely on things like the activity's content view hierarchy being initialized at this point. If you want to do work once the activity itself is created, add a on the activity's Lifecycle, removing it when it receives the callback. </p>
-        <p>Any restored child fragments will be created before the base <code>Fragment.onCreate</code> method returns.</p>
-      </p>
+      <p>Called to do initial creation of a fragment. This is called after <code><a href="/reference/androidx/fragment/app/Fragment.html#onAttach(android.app.Activity)">onAttach</a></code> and before <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> . </p>
+      <p>Note that this can be called while the fragment's activity is still in the process of being created. As such, you can not rely on things like the activity's content view hierarchy being initialized at this point. If you want to do work once the activity itself is created, add a on the activity's Lifecycle, removing it when it receives the callback. </p>
+      <p>Any restored child fragments will be created before the base <code>Fragment.onCreate</code> method returns.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -357,11 +345,9 @@
     <div><a name="onCreateDialog-android.os.Bundle-"></a>
       <h3 class="api-name" id="onCreateDialog(android.os.Bundle)">onCreateDialog</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;&nbsp;Dialog&nbsp;<a href="/reference/androidx/fragment/app/DialogFragment.html#onCreateDialog(android.os.Bundle)">onCreateDialog</a>(Bundle&nbsp;savedInstanceState)</pre>
-      <p>
-        <p>Override to build your own custom Dialog container. This is typically used to show an AlertDialog instead of a generic Dialog; when doing so, <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> does not need to be implemented since the AlertDialog takes care of its own content. </p>
-        <p>This method will be called after <code><a href="/reference/androidx/fragment/app/DialogFragment.html#onCreate(android.os.Bundle)">onCreate</a></code> and immediately before <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> . The default implementation simply instantiates and returns a class. </p>
-        <p><em>Note: DialogFragment own the and callbacks. You must not set them yourself.</em> To find out about these events, override <code><a href="/reference/androidx/fragment/app/DialogFragment.html#onCancel(android.content.DialogInterface)">onCancel</a></code> and <code><a href="/reference/androidx/fragment/app/DialogFragment.html#onDismiss(android.content.DialogInterface)">onDismiss</a></code> .</p>
-      </p>
+      <p>Override to build your own custom Dialog container. This is typically used to show an AlertDialog instead of a generic Dialog; when doing so, <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> does not need to be implemented since the AlertDialog takes care of its own content. </p>
+      <p>This method will be called after <code><a href="/reference/androidx/fragment/app/DialogFragment.html#onCreate(android.os.Bundle)">onCreate</a></code> and immediately before <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> . The default implementation simply instantiates and returns a class. </p>
+      <p><em>Note: DialogFragment own the and callbacks. You must not set them yourself.</em> To find out about these events, override <code><a href="/reference/androidx/fragment/app/DialogFragment.html#onCancel(android.content.DialogInterface)">onCancel</a></code> and <code><a href="/reference/androidx/fragment/app/DialogFragment.html#onDismiss(android.content.DialogInterface)">onDismiss</a></code> .</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -414,18 +400,14 @@
     <div><a name="onGetLayoutInflater-android.os.Bundle-"></a>
       <h3 class="api-name" id="onGetLayoutInflater(android.os.Bundle)">onGetLayoutInflater</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;&nbsp;LayoutInflater&nbsp;<a href="/reference/androidx/fragment/app/DialogFragment.html#onGetLayoutInflater(android.os.Bundle)">onGetLayoutInflater</a>(Bundle&nbsp;savedInstanceState)</pre>
-      <p>
-        <p>{@inheritDoc} </p>
-        <p> If this is called from within <code><a href="/reference/androidx/fragment/app/DialogFragment.html#onCreateDialog(android.os.Bundle)">onCreateDialog</a></code> , the layout inflater from <code><a href="/reference/androidx/fragment/app/Fragment.html#onGetLayoutInflater(android.os.Bundle)">onGetLayoutInflater</a></code> , without the dialog theme, will be returned.</p>
-      </p>
+      <p>{@inheritDoc} </p>
+      <p> If this is called from within <code><a href="/reference/androidx/fragment/app/DialogFragment.html#onCreateDialog(android.os.Bundle)">onCreateDialog</a></code> , the layout inflater from <code><a href="/reference/androidx/fragment/app/Fragment.html#onGetLayoutInflater(android.os.Bundle)">onGetLayoutInflater</a></code> , without the dialog theme, will be returned.</p>
     </div>
     <div><a name="onSaveInstanceState-android.os.Bundle-"></a>
       <h3 class="api-name" id="onSaveInstanceState(android.os.Bundle)">onSaveInstanceState</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/DialogFragment.html#onSaveInstanceState(android.os.Bundle)">onSaveInstanceState</a>(Bundle&nbsp;outState)</pre>
-      <p>
-        <p>Called to ask the fragment to save its current dynamic state, so it can later be reconstructed in a new instance if its process is restarted. If a new instance of the fragment later needs to be created, the data you place in the Bundle here will be available in the Bundle given to <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code> , <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> , and <code><a href="/reference/androidx/fragment/app/Fragment.html#onViewCreated(android.view.View,android.os.Bundle)">onViewCreated</a></code> . </p>
-        <p>This corresponds to and most of the discussion there applies here as well. Note however: <em>this method may be called at any time before <code><a href="/reference/androidx/fragment/app/Fragment.html#onDestroy()">onDestroy</a></code></em>. There are many situations where a fragment may be mostly torn down (such as when placed on the back stack with no UI showing), but its state will not be saved until its owning activity actually needs to save its state.</p>
-      </p>
+      <p>Called to ask the fragment to save its current dynamic state, so it can later be reconstructed in a new instance if its process is restarted. If a new instance of the fragment later needs to be created, the data you place in the Bundle here will be available in the Bundle given to <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code> , <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> , and <code><a href="/reference/androidx/fragment/app/Fragment.html#onViewCreated(android.view.View,android.os.Bundle)">onViewCreated</a></code> . </p>
+      <p>This corresponds to and most of the discussion there applies here as well. Note however: <em>this method may be called at any time before <code><a href="/reference/androidx/fragment/app/Fragment.html#onDestroy()">onDestroy</a></code></em>. There are many situations where a fragment may be mostly torn down (such as when placed on the back stack with no UI showing), but its state will not be saved until its owning activity actually needs to save its state.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -540,11 +522,9 @@
     <div><a name="setShowsDialog-boolean-"></a>
       <h3 class="api-name" id="setShowsDialog(boolean)">setShowsDialog</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/DialogFragment.html#setShowsDialog(boolean)">setShowsDialog</a>(boolean&nbsp;showsDialog)</pre>
-      <p>
-        <p>Controls whether this fragment should be shown in a dialog. If not set, no Dialog will be created and the fragment's view hierarchy will thus not be added to it. This allows you to instead use it as a normal fragment (embedded inside of its activity). </p>
-        <p>This is normally set for you based on whether the fragment is associated with a container view ID passed to <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#add(int,androidx.fragment.app.Fragment)">add</a></code> . If the fragment was added with a container, setShowsDialog will be initialized to false; otherwise, it will be true. </p>
-        <p>If calling this manually, it should be called in <code><a href="/reference/androidx/fragment/app/DialogFragment.html#onCreate(android.os.Bundle)">onCreate</a></code> as calling it any later will have no effect.</p>
-      </p>
+      <p>Controls whether this fragment should be shown in a dialog. If not set, no Dialog will be created and the fragment's view hierarchy will thus not be added to it. This allows you to instead use it as a normal fragment (embedded inside of its activity). </p>
+      <p>This is normally set for you based on whether the fragment is associated with a container view ID passed to <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#add(int,androidx.fragment.app.Fragment)">add</a></code> . If the fragment was added with a container, setShowsDialog will be initialized to false; otherwise, it will be true. </p>
+      <p>If calling this manually, it should be called in <code><a href="/reference/androidx/fragment/app/DialogFragment.html#onCreate(android.os.Bundle)">onCreate</a></code> as calling it any later will have no effect.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>

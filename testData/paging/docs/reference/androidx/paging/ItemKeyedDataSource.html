@@ -14,11 +14,9 @@
     <p>TODO(b/166518636) direct subclasses</p>
     <p>TODO(b/166518636) indirect subclasses</p>
     <hr>
-    <p>
-      <p>Incremental data loader for paging keyed content, where loaded content uses previously loaded items as input to future loads.</p>
-      <p>Implement a DataSource using ItemKeyedDataSource if you need to use data from item <code>N - 1</code> to load item <code>N</code>. This is common, for example, in uniquely sorted database queries where attributes of the item such just before the next query define how to execute it.</p>
-      <p>The <code>InMemoryByItemRepository</code> in the <a href="https://github.com/googlesamples/android-architecture-components/blob/master/PagingWithNetworkSample/README.md">PagingWithNetworkSample</a> shows how to implement a network ItemKeyedDataSource using <a href="https://square.github.io/retrofit/">Retrofit</a>, while handling swipe-to-refresh, network errors, and retry.</p>
-    </p>
+    <p>Incremental data loader for paging keyed content, where loaded content uses previously loaded items as input to future loads.</p>
+    <p>Implement a DataSource using ItemKeyedDataSource if you need to use data from item <code>N - 1</code> to load item <code>N</code>. This is common, for example, in uniquely sorted database queries where attributes of the item such just before the next query define how to execute it.</p>
+    <p>The <code>InMemoryByItemRepository</code> in the <a href="https://github.com/googlesamples/android-architecture-components/blob/master/PagingWithNetworkSample/README.md">PagingWithNetworkSample</a> shows how to implement a network ItemKeyedDataSource using <a href="https://square.github.io/retrofit/">Retrofit</a>, while handling swipe-to-refresh, network errors, and retry.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <thead>
@@ -83,72 +81,56 @@
             <td><code>abstract Key</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#getKey(kotlin.Any)">getKey</a>(Value&nbsp;item)</code></div>
-              <p>
-                <p>Return a key associated with the given item.</p>
-              </p>
+              <p>Return a key associated with the given item.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract <a href="/reference/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadAfter(androidx.paging.ItemKeyedDataSource.LoadParams,androidx.paging.ItemKeyedDataSource.LoadCallback)">loadAfter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadParams.html">ItemKeyedDataSource.LoadParams</a>&lt;Key&gt;&nbsp;params,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadCallback.html">ItemKeyedDataSource.LoadCallback</a>&lt;Value&gt;&nbsp;callback<br>)</code></div>
-              <p>
-                <p>Load list data after the key specified in <code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadParams.html#key()">key</a></code>.</p>
-              </p>
+              <p>Load list data after the key specified in <code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadParams.html#key()">key</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract <a href="/reference/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadBefore(androidx.paging.ItemKeyedDataSource.LoadParams,androidx.paging.ItemKeyedDataSource.LoadCallback)">loadBefore</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadParams.html">ItemKeyedDataSource.LoadParams</a>&lt;Key&gt;&nbsp;params,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadCallback.html">ItemKeyedDataSource.LoadCallback</a>&lt;Value&gt;&nbsp;callback<br>)</code></div>
-              <p>
-                <p>Load list data before the key specified in <code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadParams.html#key()">key</a></code>.</p>
-              </p>
+              <p>Load list data before the key specified in <code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadParams.html#key()">key</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract <a href="/reference/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadInitial(androidx.paging.ItemKeyedDataSource.LoadInitialParams,androidx.paging.ItemKeyedDataSource.LoadInitialCallback)">loadInitial</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html">ItemKeyedDataSource.LoadInitialParams</a>&lt;Key&gt;&nbsp;params,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html">ItemKeyedDataSource.LoadInitialCallback</a>&lt;Value&gt;&nbsp;callback<br>)</code></div>
-              <p>
-                <p>Load initial data.</p>
-              </p>
+              <p>Load initial data.</p>
             </td>
           </tr>
           <tr>
             <td><code>final <a href="/reference/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#map()">map</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;Value,&nbsp;ToValue&gt;&nbsp;function)</code></div>
-              <p>
-                <p>Applies the given function to each value emitted by the DataSource.</p>
-              </p>
+              <p>Applies the given function to each value emitted by the DataSource.</p>
             </td>
           </tr>
           <tr>
             <td><code>final <a href="/reference/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#map(kotlin.Function1)">map</a>(<a href="/reference/kotlin/Function1.html">Function1</a>&lt;Value,&nbsp;ToValue&gt;&nbsp;function)</code></div>
-              <p>
-                <p>Applies the given function to each value emitted by the DataSource.</p>
-              </p>
+              <p>Applies the given function to each value emitted by the DataSource.</p>
             </td>
           </tr>
           <tr>
             <td><code>final <a href="/reference/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#mapByPage()">mapByPage</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/collections/List.html">List</a>&lt;Value&gt;,&nbsp;<a href="/reference/kotlin/collections/List.html">List</a>&lt;ToValue&gt;&gt;&nbsp;function)</code></div>
-              <p>
-                <p>Applies the given function to each value emitted by the DataSource.</p>
-              </p>
+              <p>Applies the given function to each value emitted by the DataSource.</p>
             </td>
           </tr>
           <tr>
             <td><code>final <a href="/reference/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a>(<a href="/reference/kotlin/Function1.html">Function1</a>&lt;<a href="/reference/kotlin/collections/List.html">List</a>&lt;Value&gt;,&nbsp;<a href="/reference/kotlin/collections/List.html">List</a>&lt;ToValue&gt;&gt;&nbsp;function)</code></div>
-              <p>
-                <p>Applies the given function to each value emitted by the DataSource.</p>
-              </p>
+              <p>Applies the given function to each value emitted by the DataSource.</p>
             </td>
           </tr>
         </tbody>
@@ -185,11 +167,9 @@
     <div><a name="getKey-kotlin.Any-"></a>
       <h3 class="api-name" id="getKey(kotlin.Any)">getKey</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;Key&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.html#getKey(kotlin.Any)">getKey</a>(Value&nbsp;item)</pre>
-      <p>
-        <p>Return a key associated with the given item.</p>
-        <p>If your ItemKeyedDataSource is loading from a source that is sorted and loaded by a unique integer ID, you would return <code>item.getID()</code> here. This key can then be passed to <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadBefore(androidx.paging.ItemKeyedDataSource.LoadParams)">loadBefore</a></code> or <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadAfter(androidx.paging.ItemKeyedDataSource.LoadParams)">loadAfter</a></code> to load additional items adjacent to the item passed to this function.</p>
-        <p>If your key is more complex, such as when you're sorting by name, then resolving collisions with integer ID, you'll need to return both. In such a case you would use a wrapper class, such as <code>Pair&lt;String, Integer&gt;</code> or, in Kotlin, <code>data class Key(val name: String, val id: Int)</code></p>
-      </p>
+      <p>Return a key associated with the given item.</p>
+      <p>If your ItemKeyedDataSource is loading from a source that is sorted and loaded by a unique integer ID, you would return <code>item.getID()</code> here. This key can then be passed to <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadBefore(androidx.paging.ItemKeyedDataSource.LoadParams)">loadBefore</a></code> or <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadAfter(androidx.paging.ItemKeyedDataSource.LoadParams)">loadAfter</a></code> to load additional items adjacent to the item passed to this function.</p>
+      <p>If your key is more complex, such as when you're sorting by name, then resolving collisions with integer ID, you'll need to return both. In such a case you would use a wrapper class, such as <code>Pair&lt;String, Integer&gt;</code> or, in Kotlin, <code>data class Key(val name: String, val id: Int)</code></p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -228,12 +208,10 @@
     <div><a name="loadAfter(androidx.paging.ItemKeyedDataSource.LoadParams, androidx.paging.ItemKeyedDataSource.LoadCallback)"></a><a name="loadAfter-androidx.paging.ItemKeyedDataSource.LoadParams-androidx.paging.ItemKeyedDataSource.LoadCallback-"></a>
       <h3 class="api-name" id="loadAfter(androidx.paging.ItemKeyedDataSource.LoadParams,androidx.paging.ItemKeyedDataSource.LoadCallback)">loadAfter</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadAfter(androidx.paging.ItemKeyedDataSource.LoadParams,androidx.paging.ItemKeyedDataSource.LoadCallback)">loadAfter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadParams.html">ItemKeyedDataSource.LoadParams</a>&lt;Key&gt;&nbsp;params,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadCallback.html">ItemKeyedDataSource.LoadCallback</a>&lt;Value&gt;&nbsp;callback<br>)</pre>
-      <p>
-        <p>Load list data after the key specified in <code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadParams.html#key()">key</a></code>.</p>
-        <p>It's valid to return a different list size than the page size if it's easier, e.g. if your backend defines page sizes. It is generally preferred to increase the number loaded than reduce.</p>
-        <p>Data may be passed synchronously during the loadAfter method, or deferred and called at a later time. Further loads going down will be blocked until the callback is called.</p>
-        <p>If data cannot be loaded (for example, if the request is invalid, or the data would be stale and inconsistent), it is valid to call <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#invalidate()">invalidate</a></code> to invalidate the data source, and prevent further loading.</p>
-      </p>
+      <p>Load list data after the key specified in <code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadParams.html#key()">key</a></code>.</p>
+      <p>It's valid to return a different list size than the page size if it's easier, e.g. if your backend defines page sizes. It is generally preferred to increase the number loaded than reduce.</p>
+      <p>Data may be passed synchronously during the loadAfter method, or deferred and called at a later time. Further loads going down will be blocked until the callback is called.</p>
+      <p>If data cannot be loaded (for example, if the request is invalid, or the data would be stale and inconsistent), it is valid to call <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#invalidate()">invalidate</a></code> to invalidate the data source, and prevent further loading.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -261,13 +239,11 @@
     <div><a name="loadBefore(androidx.paging.ItemKeyedDataSource.LoadParams, androidx.paging.ItemKeyedDataSource.LoadCallback)"></a><a name="loadBefore-androidx.paging.ItemKeyedDataSource.LoadParams-androidx.paging.ItemKeyedDataSource.LoadCallback-"></a>
       <h3 class="api-name" id="loadBefore(androidx.paging.ItemKeyedDataSource.LoadParams,androidx.paging.ItemKeyedDataSource.LoadCallback)">loadBefore</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadBefore(androidx.paging.ItemKeyedDataSource.LoadParams,androidx.paging.ItemKeyedDataSource.LoadCallback)">loadBefore</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadParams.html">ItemKeyedDataSource.LoadParams</a>&lt;Key&gt;&nbsp;params,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadCallback.html">ItemKeyedDataSource.LoadCallback</a>&lt;Value&gt;&nbsp;callback<br>)</pre>
-      <p>
-        <p>Load list data before the key specified in <code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadParams.html#key()">key</a></code>.</p>
-        <p>It's valid to return a different list size than the page size if it's easier, e.g. if your backend defines page sizes. It is generally preferred to increase the number loaded than reduce.</p>
-        <p><b>Note:</b> Data returned will be prepended just before the key passed, so if you vary size, ensure that the last item is adjacent to the passed key.</p>
-        <p>Data may be passed synchronously during the loadBefore method, or deferred and called at a later time. Further loads going up will be blocked until the callback is called.</p>
-        <p>If data cannot be loaded (for example, if the request is invalid, or the data would be stale and inconsistent), it is valid to call <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#invalidate()">invalidate</a></code> to invalidate the data source, and prevent further loading.</p>
-      </p>
+      <p>Load list data before the key specified in <code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadParams.html#key()">key</a></code>.</p>
+      <p>It's valid to return a different list size than the page size if it's easier, e.g. if your backend defines page sizes. It is generally preferred to increase the number loaded than reduce.</p>
+      <p><b>Note:</b> Data returned will be prepended just before the key passed, so if you vary size, ensure that the last item is adjacent to the passed key.</p>
+      <p>Data may be passed synchronously during the loadBefore method, or deferred and called at a later time. Further loads going up will be blocked until the callback is called.</p>
+      <p>If data cannot be loaded (for example, if the request is invalid, or the data would be stale and inconsistent), it is valid to call <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#invalidate()">invalidate</a></code> to invalidate the data source, and prevent further loading.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -295,11 +271,9 @@
     <div><a name="loadInitial(androidx.paging.ItemKeyedDataSource.LoadInitialParams, androidx.paging.ItemKeyedDataSource.LoadInitialCallback)"></a><a name="loadInitial-androidx.paging.ItemKeyedDataSource.LoadInitialParams-androidx.paging.ItemKeyedDataSource.LoadInitialCallback-"></a>
       <h3 class="api-name" id="loadInitial(androidx.paging.ItemKeyedDataSource.LoadInitialParams,androidx.paging.ItemKeyedDataSource.LoadInitialCallback)">loadInitial</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadInitial(androidx.paging.ItemKeyedDataSource.LoadInitialParams,androidx.paging.ItemKeyedDataSource.LoadInitialCallback)">loadInitial</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html">ItemKeyedDataSource.LoadInitialParams</a>&lt;Key&gt;&nbsp;params,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html">ItemKeyedDataSource.LoadInitialCallback</a>&lt;Value&gt;&nbsp;callback<br>)</pre>
-      <p>
-        <p>Load initial data.</p>
-        <p>This method is called first to initialize a <code><a href="/reference/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> with data. If it's possible to count the items that can be loaded by the DataSource, it's recommended to pass the loaded data to the callback via the three-parameter <code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List)">onResult</a></code>. This enables PagedLists presenting data from this source to display placeholders to represent unloaded items.</p>
-        <p><code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html#requestedInitialKey()">requestedInitialKey</a></code> and <code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html#requestedLoadSize()">requestedLoadSize</a></code> are hints, not requirements, so they may be altered or ignored. Note that ignoring the <code>requestedInitialKey</code> can prevent subsequent PagedList/DataSource pairs from initializing at the same location. If your DataSource never invalidates (for example, loading from the network without the network ever signalling that old data must be reloaded), it's fine to ignore the <code>initialLoadKey</code> and always start from the beginning of the data set.</p>
-      </p>
+      <p>Load initial data.</p>
+      <p>This method is called first to initialize a <code><a href="/reference/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> with data. If it's possible to count the items that can be loaded by the DataSource, it's recommended to pass the loaded data to the callback via the three-parameter <code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List)">onResult</a></code>. This enables PagedLists presenting data from this source to display placeholders to represent unloaded items.</p>
+      <p><code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html#requestedInitialKey()">requestedInitialKey</a></code> and <code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html#requestedLoadSize()">requestedLoadSize</a></code> are hints, not requirements, so they may be altered or ignored. Note that ignoring the <code>requestedInitialKey</code> can prevent subsequent PagedList/DataSource pairs from initializing at the same location. If your DataSource never invalidates (for example, loading from the network without the network ever signalling that old data must be reloaded), it's fine to ignore the <code>initialLoadKey</code> and always start from the beginning of the data set.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -327,10 +301,8 @@
     <div><a name="map--"></a>
       <h3 class="api-name" id="map()">map</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.html#map()">map</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;Value,&nbsp;ToValue&gt;&nbsp;function)</pre>
-      <p>
-        <p>Applies the given function to each value emitted by the DataSource.</p>
-        <p>Same as <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code>, but operates on individual items.</p>
-      </p>
+      <p>Applies the given function to each value emitted by the DataSource.</p>
+      <p>Same as <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code>, but operates on individual items.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -342,9 +314,7 @@
             <tr>
               <td><code><a href="/reference/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
               <td width="100%">
-                <p>
-                  <p>A new DataSource, which transforms items using the given function.</p>
-                </p>
+                <p>A new DataSource, which transforms items using the given function.</p>
               </td>
             </tr>
           </tbody>
@@ -406,11 +376,9 @@
     <div><a name="map-kotlin.Function1-"></a>
       <h3 class="api-name" id="map(kotlin.Function1)">map</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.html#map(kotlin.Function1)">map</a>(<a href="/reference/kotlin/Function1.html">Function1</a>&lt;Value,&nbsp;ToValue&gt;&nbsp;function)</pre>
-      <p>
-        <p>Applies the given function to each value emitted by the DataSource.</p>
-        <p>An overload of <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#map(kotlin.Function1)">map</a></code> that accepts a kotlin function type.</p>
-        <p>Same as <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code>, but operates on individual items.</p>
-      </p>
+      <p>Applies the given function to each value emitted by the DataSource.</p>
+      <p>An overload of <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#map(kotlin.Function1)">map</a></code> that accepts a kotlin function type.</p>
+      <p>Same as <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code>, but operates on individual items.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -422,9 +390,7 @@
             <tr>
               <td><code><a href="/reference/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
               <td width="100%">
-                <p>
-                  <p>A new DataSource, which transforms items using the given function.</p>
-                </p>
+                <p>A new DataSource, which transforms items using the given function.</p>
               </td>
             </tr>
           </tbody>
@@ -480,10 +446,8 @@
     <div><a name="mapByPage--"></a>
       <h3 class="api-name" id="mapByPage()">mapByPage</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.html#mapByPage()">mapByPage</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/collections/List.html">List</a>&lt;Value&gt;,&nbsp;<a href="/reference/kotlin/collections/List.html">List</a>&lt;ToValue&gt;&gt;&nbsp;function)</pre>
-      <p>
-        <p>Applies the given function to each value emitted by the DataSource.</p>
-        <p>Same as <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#map(kotlin.Function1)">map</a></code>, but allows for batch conversions.</p>
-      </p>
+      <p>Applies the given function to each value emitted by the DataSource.</p>
+      <p>Same as <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#map(kotlin.Function1)">map</a></code>, but allows for batch conversions.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -495,9 +459,7 @@
             <tr>
               <td><code><a href="/reference/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
               <td width="100%">
-                <p>
-                  <p>A new DataSource, which transforms items using the given function.</p>
-                </p>
+                <p>A new DataSource, which transforms items using the given function.</p>
               </td>
             </tr>
           </tbody>
@@ -559,11 +521,9 @@
     <div><a name="mapByPage-kotlin.Function1-"></a>
       <h3 class="api-name" id="mapByPage(kotlin.Function1)">mapByPage</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a>(<a href="/reference/kotlin/Function1.html">Function1</a>&lt;<a href="/reference/kotlin/collections/List.html">List</a>&lt;Value&gt;,&nbsp;<a href="/reference/kotlin/collections/List.html">List</a>&lt;ToValue&gt;&gt;&nbsp;function)</pre>
-      <p>
-        <p>Applies the given function to each value emitted by the DataSource.</p>
-        <p>An overload of <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code> that accepts a kotlin function type.</p>
-        <p>Same as <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#map(kotlin.Function1)">map</a></code>, but allows for batch conversions.</p>
-      </p>
+      <p>Applies the given function to each value emitted by the DataSource.</p>
+      <p>An overload of <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code> that accepts a kotlin function type.</p>
+      <p>Same as <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#map(kotlin.Function1)">map</a></code>, but allows for batch conversions.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -575,9 +535,7 @@
             <tr>
               <td><code><a href="/reference/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
               <td width="100%">
-                <p>
-                  <p>A new <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>, which transforms items using the given function.</p>
-                </p>
+                <p>A new <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>, which transforms items using the given function.</p>
               </td>
             </tr>
           </tbody>

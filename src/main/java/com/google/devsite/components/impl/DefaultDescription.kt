@@ -150,7 +150,7 @@ internal class DefaultDescription(
                 p("caution") {
                     strong { +data.deprecation }
                     br()
-                    renderTags(listOf(data.root), State())
+                    renderTags(data.root.children, State())
                 }
             }
         }
@@ -171,7 +171,14 @@ internal class DefaultDescription(
                 } else {
                     +tag.body
                 }
-                is P -> p { renderTags(tag.children, state) }
+                is P -> if (tag.children.any { it is P }) {
+                    // Dokka parsing leaves much to be wanted. In this case it adds pointless
+                    // paragraphs everywhere, so we have to try and inline them.
+                    // TODO(b/168237288): remove once Dokka stops generating extra p tags
+                    renderTags(tag.children, state)
+                } else {
+                    p { renderTags(tag.children, state) }
+                }
                 is A -> a(tag.params.getValue("href")) { renderTags(tag.children, state) }
                 is B, is Strong -> b { renderTags(tag.children, state) }
                 Br -> br { renderTags(tag.children, state) }

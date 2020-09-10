@@ -65,9 +65,7 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p class="caution"><strong>This class is deprecated.</strong><br>
-    <p>Hello world!</p>
-  </p>
+  <p class="caution"><strong>This class is deprecated.</strong><br>Hello world!</p>
 </body>
             """.trim()
         )
@@ -94,9 +92,7 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p>
-    <p>1 2 3.</p>
-  </p>
+  <p>1 2 3.</p>
 </body>
             """.trim()
         )
@@ -162,12 +158,10 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p>
-    <p>There was an old lady who swallowed a fly. I dunno why she swallowed that fly, Perhaps she'll die.</p>
-    <p>...</p>
-    <p>There was an old lady who swallowed a cow. I don't know how she swallowed a cow! She swallowed the cow to catch the goat... She swallowed the goat to catch the dog... She swallowed the dog to catch the cat... She swallowed the cat to catch the bird ... She swallowed the bird to catch the spider That wiggled and wiggled and tickled inside her. She swallowed the spider to catch the fly. But I dunno why she swallowed that fly Perhaps she'll die.</p>
-    <p>There was an old lady who swallowed a horse - She's dead, of course.</p>
-  </p>
+  <p>There was an old lady who swallowed a fly. I dunno why she swallowed that fly, Perhaps she'll die.</p>
+  <p>...</p>
+  <p>There was an old lady who swallowed a cow. I don't know how she swallowed a cow! She swallowed the cow to catch the goat... She swallowed the goat to catch the dog... She swallowed the dog to catch the cat... She swallowed the cat to catch the bird ... She swallowed the bird to catch the spider That wiggled and wiggled and tickled inside her. She swallowed the spider to catch the fly. But I dunno why she swallowed that fly Perhaps she'll die.</p>
+  <p>There was an old lady who swallowed a horse - She's dead, of course.</p>
 </body>
             """.trim()
         )
@@ -259,20 +253,18 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p>
-    <p>Stuff:</p>
-    <ul>
-      <li>
-        <p>Thing 1</p>
-      </li>
-      <li>
-        <p>Thing 2</p>
-      </li>
-      <li>
-        <p>Thing 3</p>
-      </li>
-    </ul>
-  </p>
+  <p>Stuff:</p>
+  <ul>
+    <li>
+      <p>Thing 1</p>
+    </li>
+    <li>
+      <p>Thing 2</p>
+    </li>
+    <li>
+      <p>Thing 3</p>
+    </li>
+  </ul>
 </body>
             """.trim()
         )
@@ -298,20 +290,18 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p>
-    <p>Stuff:</p>
-    <ol>
-      <li>
-        <p>Thing 1</p>
-      </li>
-      <li>
-        <p>Thing 2</p>
-      </li>
-      <li>
-        <p>Thing 3</p>
-      </li>
-    </ol>
-  </p>
+  <p>Stuff:</p>
+  <ol>
+    <li>
+      <p>Thing 1</p>
+    </li>
+    <li>
+      <p>Thing 2</p>
+    </li>
+    <li>
+      <p>Thing 3</p>
+    </li>
+  </ol>
 </body>
             """.trim()
         )
@@ -344,47 +334,45 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p>
-    <p>Stuff:</p>
+  <p>Stuff:</p>
+  <ul>
+    <li>
+      <p>a</p>
+    </li>
+    <ol>
+      <li>
+        <p>a</p>
+      </li>
+      <li>
+        <p>b</p>
+      </li>
+      <li>
+        <p>c</p>
+      </li>
+    </ol>
+    <li>
+      <p>b</p>
+    </li>
     <ul>
       <li>
         <p>a</p>
       </li>
-      <ol>
-        <li>
-          <p>a</p>
-        </li>
-        <li>
-          <p>b</p>
-        </li>
-        <li>
-          <p>c</p>
-        </li>
-      </ol>
       <li>
         <p>b</p>
+      </li>
+      <li>
+        <p>c</p>
       </li>
       <ul>
         <li>
           <p>a</p>
         </li>
-        <li>
-          <p>b</p>
-        </li>
-        <li>
-          <p>c</p>
-        </li>
-        <ul>
-          <li>
-            <p>a</p>
-          </li>
-        </ul>
       </ul>
-      <li>
-        <p>c</p>
-      </li>
     </ul>
-  </p>
+    <li>
+      <p>c</p>
+    </li>
+  </ul>
 </body>
             """.trim()
         )
@@ -462,10 +450,8 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p>
-    <p>Welcome:</p>
-    <pre>fun main() {<br>    println(&quot;Hello World!&quot;)<br>}</pre>
-  </p>
+  <p>Welcome:</p>
+  <pre>fun main() {<br>    println(&quot;Hello World!&quot;)<br>}</pre>
 </body>
             """.trim()
         )
