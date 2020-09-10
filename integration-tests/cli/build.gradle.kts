@@ -46,6 +46,7 @@ tasks.register<JavaExec>("run") {
     classpath = files({
         project.configurations.getByName("runnerJar").resolvedConfiguration.files
     })
+    outputs.dir(generatedDir)
 
     environment("DEVSITE_TENANT", "androidx")
     args = listOf("${project.buildDir}/resources/config.json", "-moduleName", "sample")
@@ -55,8 +56,11 @@ tasks.register<JavaExec>("run") {
     }
 }
 
-tasks.register<Task>("verifyRun") {
+tasks.register("verifyRun") {
     dependsOn("run")
+    inputs.dir(generatedDir)
+    outputs.file(File(temporaryDir, "fake-output-for-up-to-date-checks"))
+
     doLast {
         val expectedPaths = listOf(
             "reference/androidx/index.html",
@@ -73,6 +77,6 @@ tasks.register<Task>("verifyRun") {
     }
 }
 
-tasks.register<Task>("test") {
+tasks.register("test") {
     dependsOn("verifyRun")
 }
