@@ -31,6 +31,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
+import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
 
@@ -121,8 +122,9 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun functionsToSummary(name: String, functions: List<DFunction>): SummaryList {
+        val modifierHints = ModifierHints(displayLanguage, isSummary = true, isInterface())
         val components = functions.map {
-            functionConverter.summary(it)
+            functionConverter.summary(it, modifierHints)
         }
 
         return DefaultSummaryList(
@@ -139,14 +141,16 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun functionsToDetail(functions: List<DFunction>): List<FunctionDetail> {
+        val modifierHints = ModifierHints(displayLanguage, isSummary = false, isInterface())
         return functions.map {
-            functionConverter.detail(it)
+            functionConverter.detail(it, modifierHints)
         }
     }
 
     private fun propertiesToSummary(name: String, properties: List<DProperty>): SummaryList {
+        val modifierHints = ModifierHints(displayLanguage, isSummary = true, isInterface())
         val components = properties.map {
-            propertyConverter.summary(it)
+            propertyConverter.summary(it, modifierHints)
         }
 
         return DefaultSummaryList(
@@ -163,8 +167,9 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun propertiesToDetail(properties: List<DProperty>): List<FunctionDetail> {
+        val modifierHints = ModifierHints(displayLanguage, isSummary = false, isInterface())
         return properties.map {
-            propertyConverter.detail(it)
+            propertyConverter.detail(it, modifierHints)
         }
     }
 
@@ -176,6 +181,8 @@ internal class ClasslikeDocumentableConverter(
         classlike.packageName() == function.dri.packageName &&
             classlike.name() == function.dri.classNames
     }
+
+    private fun isInterface() = classlike is DInterface
 
     private fun isPublic(function: DFunction) = "public" in function.modifiers()
     private fun isProtected(function: DFunction) = "protected" in function.modifiers()

@@ -21,7 +21,7 @@ package dokkatest.inner
 /** I'm the outsider. */
 abstract class OuterClass {
     /** I need help. */
-    abstract fun implementMe()
+    protected abstract fun implementMe()
 
     /** I guide others to a treasure I cannot possess. */
     interface InnerInterface {
@@ -30,8 +30,8 @@ abstract class OuterClass {
     }
 
     /** I collect the stones. */
-    class InnerClass : OuterClass(), InnerInterface {
-        override fun implementMe() = Unit
+    open class InnerClass : OuterClass(), InnerInterface {
+        public final override fun implementMe() = Unit
 
         override fun inner(choice: InnerEnum) = Unit
     }

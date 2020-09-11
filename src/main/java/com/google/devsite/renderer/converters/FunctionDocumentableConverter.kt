@@ -28,7 +28,6 @@ import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultTypeSummary
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
-import org.jetbrains.dokka.model.AdditionalModifiers
 import org.jetbrains.dokka.model.DFunction
 
 /** Converts documentable functions into function components. */
@@ -40,12 +39,12 @@ internal class FunctionDocumentableConverter(
     private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
 
     /** @return the function summary component */
-    fun summary(function: DFunction): TwoPaneSummaryItem {
+    fun summary(function: DFunction, hints: ModifierHints): TwoPaneSummaryItem {
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
                 title = DefaultTypeSummary(
                     TypeSummary.Params(
-                        modifiers = function.modifiers(),
+                        modifiers = function.modifiers().modifiersFor(hints),
                         type = paramConverter.componentForProjection(function.type)
                     )
                 ),
@@ -60,14 +59,14 @@ internal class FunctionDocumentableConverter(
     }
 
     /** @return the function detail component */
-    fun detail(function: DFunction): FunctionDetail {
+    fun detail(function: DFunction, hints: ModifierHints): FunctionDetail {
         val returnType = paramConverter.componentForProjection(function.type)
         return DefaultFunctionDetail(
             FunctionDetail.Params(
                 displayLanguage = displayLanguage,
                 name = function.name,
                 anchors = generateCompatAnchors(function),
-                modifiers = function.modifiers(),
+                modifiers = function.modifiers().modifiersFor(hints),
                 returnType = returnType,
                 signature = function.signature(),
                 metadata = javadocConverter.metadata(
@@ -96,16 +95,6 @@ internal class FunctionDocumentableConverter(
                 }
             )
         )
-    }
-
-    /** @return the complete list of modifiers for this function */
-    private fun DFunction.modifiers(): List<String> {
-        val baseModifiers = modifier.values.map { it.name }
-        val extraModifiers = extra.allOfType<AdditionalModifiers>().flatMap { modifiers ->
-            modifiers.content.values.single().map { it.name }
-        }
-
-        return extraModifiers + baseModifiers
     }
 
     /**

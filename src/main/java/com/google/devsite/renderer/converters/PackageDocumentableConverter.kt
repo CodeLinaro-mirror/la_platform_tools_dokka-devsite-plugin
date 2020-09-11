@@ -116,8 +116,9 @@ internal class PackageDocumentableConverter(
     }
 
     private fun functionsToSummary(functions: List<DFunction>): SummaryList {
+        val modifierHints = ModifierHints(displayLanguage, isSummary = true)
         val components = functions.map {
-            functionConverter.summary(it)
+            functionConverter.summary(it, modifierHints)
         }
 
         return DefaultSummaryList(
@@ -128,14 +129,16 @@ internal class PackageDocumentableConverter(
     }
 
     private fun functionsToDetail(functions: List<DFunction>): List<FunctionDetail> {
+        val modifierHints = ModifierHints(displayLanguage, isSummary = false)
         return functions.map {
-            functionConverter.detail(it)
+            functionConverter.detail(it, modifierHints)
         }
     }
 
     private fun propertiesToSummary(properties: List<DProperty>): SummaryList {
+        val modifierHints = ModifierHints(displayLanguage, isSummary = true)
         val components = properties.map {
-            propertyConverter.summary(it)
+            propertyConverter.summary(it, modifierHints)
         }
 
         return DefaultSummaryList(
@@ -146,8 +149,9 @@ internal class PackageDocumentableConverter(
     }
 
     private fun propertiesToDetail(properties: List<DProperty>): List<FunctionDetail> {
+        val modifierHints = ModifierHints(displayLanguage, isSummary = false)
         return properties.map {
-            propertyConverter.detail(it)
+            propertyConverter.detail(it, modifierHints)
         }
     }
 }

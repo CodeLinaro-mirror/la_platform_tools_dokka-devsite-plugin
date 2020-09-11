@@ -39,12 +39,12 @@ internal class PropertyDocumentableConverter(
     private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
 
     /** @return the property summary component */
-    fun summary(property: DProperty): TwoPaneSummaryItem {
+    fun summary(property: DProperty, hints: ModifierHints): TwoPaneSummaryItem {
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
                 title = DefaultTypeSummary(
                     TypeSummary.Params(
-                        modifiers = property.modifiers(withVisibility = false),
+                        modifiers = property.modifiers().modifiersFor(hints),
                         type = paramConverter.componentForProjection(property.type)
                     )
                 ),
@@ -59,14 +59,14 @@ internal class PropertyDocumentableConverter(
     }
 
     /** @return the property detail component */
-    fun detail(property: DProperty): FunctionDetail {
+    fun detail(property: DProperty, hints: ModifierHints): FunctionDetail {
         val returnType = paramConverter.componentForProjection(property.type)
         return DefaultFunctionDetail(
             FunctionDetail.Params(
                 displayLanguage = displayLanguage,
                 name = property.name,
                 anchors = property.generateAnchors(),
-                modifiers = property.modifiers(),
+                modifiers = property.modifiers().modifiersFor(hints),
                 returnType = returnType,
                 signature = property.signature(),
                 metadata = javadocConverter.metadata(

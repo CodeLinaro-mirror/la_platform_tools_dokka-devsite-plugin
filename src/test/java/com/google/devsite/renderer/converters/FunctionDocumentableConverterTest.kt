@@ -51,7 +51,7 @@ internal class FunctionDocumentableConverterTest(
 
         val returnz = summary.returnSummary()
 
-        assertThat(returnz.modifiers).containsExactly("final")
+        kotlinOnly { assertThat(returnz.modifiers).isEmpty() }
     }
 
     @Test
@@ -62,7 +62,8 @@ internal class FunctionDocumentableConverterTest(
 
         val returnz = summary.returnSummary()
 
-        assertThat(returnz.modifiers).containsExactly("final")
+        kotlinOnly { assertThat(returnz.modifiers).isEmpty() }
+        javaOnly { assertThat(returnz.modifiers).containsExactly("final") }
     }
 
     @Test
@@ -73,7 +74,7 @@ internal class FunctionDocumentableConverterTest(
 
         val returnz = summary.returnSummary()
 
-        assertThat(returnz.modifiers).containsExactly("final", "suspend")
+        kotlinOnly { assertThat(returnz.modifiers).containsExactly("suspend") }
     }
 
     @Test
@@ -84,7 +85,7 @@ internal class FunctionDocumentableConverterTest(
 
         val returnz = summary.returnSummary()
 
-        assertThat(returnz.modifiers).containsExactly("final", "inline")
+        kotlinOnly { assertThat(returnz.modifiers).containsExactly("inline") }
     }
 
     @Ignore // TODO(b/165112358): foo doesn't show up in the dokka model
@@ -124,7 +125,8 @@ internal class FunctionDocumentableConverterTest(
 
         val returnz = summary.returnSummary()
 
-        assertThat(returnz.modifiers).containsExactly("open")
+        kotlinOnly { assertThat(returnz.modifiers).containsExactly("open") }
+        javaOnly { assertThat(returnz.modifiers).isEmpty() }
     }
 
     @Test
@@ -133,11 +135,12 @@ internal class FunctionDocumentableConverterTest(
             |interface Foo {
             |    fun foo()
             |}
-        """.render().summary(fromClass = true)
+        """.render().summary(fromClass = true, ModifierHints(language, isInterface = true))
 
         val returnz = summary.returnSummary()
 
-        assertThat(returnz.modifiers).containsExactly("abstract")
+        kotlinOnly { assertThat(returnz.modifiers).isEmpty() }
+        javaOnly { assertThat(returnz.modifiers).containsExactly("abstract") }
     }
 
     @Test
@@ -496,6 +499,16 @@ internal class FunctionDocumentableConverterTest(
     }
 
     @Test
+    fun `Top level function detail component has correct default modifiers`() {
+        val detail = """
+            |fun foo() = Unit
+        """.render().detail()
+
+        javaOnly { assertThat(detail.data.modifiers).containsExactly("public", "final") }
+        kotlinOnly { assertThat(detail.data.modifiers).isEmpty() }
+    }
+
+    @Test
     fun `Function detail component has correct anchors`() {
         val detail = """
             |fun <T : Number> List<String>.foo(t: T, a: Map<String, Int>, block: String.(Float) -> Double) = Unit
@@ -515,14 +528,20 @@ internal class FunctionDocumentableConverterTest(
         assertThat(data.lambdaModifiers).isEmpty()
     }
 
-    private fun DModule.summary(fromClass: Boolean = false): TwoPaneSummaryItem {
+    private fun DModule.summary(
+        fromClass: Boolean = false,
+        hints: ModifierHints = ModifierHints(language)
+    ): TwoPaneSummaryItem {
         val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
-        return converter.summary(function(fromClass))
+        return converter.summary(function(fromClass), hints.copy(isSummary = true))
     }
 
-    private fun DModule.detail(fromClass: Boolean = false): FunctionDetail {
+    private fun DModule.detail(
+        fromClass: Boolean = false,
+        hints: ModifierHints = ModifierHints(language)
+    ): FunctionDetail {
         val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
-        return converter.detail(function(fromClass))
+        return converter.detail(function(fromClass), hints)
     }
 
     private fun DModule.function(fromClass: Boolean): DFunction {

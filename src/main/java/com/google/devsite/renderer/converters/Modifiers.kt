@@ -16,19 +16,18 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.renderer.Language
 import org.jetbrains.dokka.model.AdditionalModifiers
 import org.jetbrains.dokka.model.WithAbstraction
 import org.jetbrains.dokka.model.WithVisibility
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 
 /** @return the complete list of modifiers for this type */
-internal fun <T> T.modifiers(
-    withVisibility: Boolean = true
-): List<String> where T : WithAbstraction,
-                      T : WithVisibility,
-                      T : WithExtraProperties<*> {
+internal fun <T> T.modifiers(): List<String>
+    where T : WithAbstraction,
+          T : WithVisibility,
+          T : WithExtraProperties<*> {
     val visibilityModifiers = listOf(visibility.values.single().name)
-        .takeIf { withVisibility }.orEmpty()
     val baseModifiers = modifier.values.map { it.name }
     val extraModifiers = extra.allOfType<AdditionalModifiers>().flatMap { modifiers ->
         modifiers.content.values.single().map { it.name }
@@ -40,3 +39,85 @@ internal fun <T> T.modifiers(
 /** @return true if the modifiers represent a constant symbol, false otherwise */
 internal fun isConstant(modifiers: List<String>) =
     "const" in modifiers || "static" in modifiers && "final" in modifiers
+
+/** Returns a filtered and re-written list of modifiers. */
+internal fun List<String>.modifiersFor(
+    hints: ModifierHints
+): List<String> {
+    val modifiers = toMutableList()
+
+    when (hints.displayLanguage) {
+        Language.JAVA -> {
+            // Rewrite known modifiers
+            if ("const" in modifiers) {
+                modifiers.add("static")
+                modifiers.add("final")
+            }
+
+            // These modifiers don't exist in Java
+            modifiers.remove("suspend")
+            modifiers.remove("inline")
+            modifiers.remove("noinline")
+            modifiers.remove("reified")
+            modifiers.remove("operator")
+            modifiers.remove("override")
+            modifiers.remove("open")
+            modifiers.remove("const")
+        }
+        Language.KOTLIN -> {
+            // Align default modifiers
+            modifiers.remove("public")
+            if ("override" !in modifiers) {
+                modifiers.remove("final")
+            }
+            if (hints.isInterface) {
+                modifiers.remove("abstract")
+            }
+
+            // These modifiers don't exist in Kotlin
+            modifiers.remove("static")
+
+            // Not useful
+            modifiers.remove("override")
+        }
+    }
+
+    if (hints.isSummary) {
+        modifiers.remove("public")
+        modifiers.remove("protected")
+    }
+
+    return modifiers
+}
+
+/**
+ * Provides modifier hints for what should be shown in the documentation.
+ *
+ * Note: this is an imperfect approximation that won't be correct in all cases, but Dokka doesn't
+ * give us a better solution without replicating compiler functionality. The crux of the problem is
+ * that Dokka always includes modifiers even if they weren't specified in the code. Example:
+ *
+ * ```
+ * interface Foo { fun bar() }
+ * ```
+ *
+ * The Dokka modifiers will include `abstract`. While technically correct, that's just noise from
+ * the compiler for developers. These hints give us a way of saying "look, developers will know this
+ * modifier is implicit." That said, we can only go so far without replicating too much compiler
+ * functionality. For example:
+ *
+ * ```
+ * abstract Foo { protected abstract fun foo() }
+ * class Bar { public override fun foo() }
+ * ```
+ *
+ * Without digging through the hierarchy to see that `foo()` is actually protected by default, we
+ * have no way of knowing we should keep the `public` modifier. (Note: this doesn't affect our
+ * understanding that the function is public and should go in the "Public functions" section. It
+ * just means the signature will be "incorrect" since it doesn't reflect the real source code.)
+ */
+internal data class ModifierHints(
+    val displayLanguage: Language,
+    val isSummary: Boolean = false,
+    val isInterface: Boolean = false
+)
