@@ -538,7 +538,6 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         )
     }
 
-    @Ignore // TODO(b/166844219): dokka borked
     @Test
     fun `Image renders correctly`() {
         val component = """
@@ -553,6 +552,9 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         // language=html
         assertThat(output).isEqualTo(
             """
+<body>
+  <p><img alt="Alt text" src="/path/to/img.jpg"></p>
+</body>
             """.trim()
         )
     }
@@ -578,6 +580,28 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
   <blockquote>
     <p>Two things are infinite: the universe and human stupidity; and I'm not sure about the universe. -- Albert Einstein</p>
   </blockquote>
+</body>
+            """.trim()
+        )
+    }
+
+    @Ignore // TODO(b/163860333): Strikethrough broken
+    @Test
+    fun `Strikethrough renders correctly`() {
+        val component = """
+            |/** ~~Hello~~ world! */
+            |class Foo
+        """.render().description()
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p><del>Hello</del> world!</p>
 </body>
             """.trim()
         )
