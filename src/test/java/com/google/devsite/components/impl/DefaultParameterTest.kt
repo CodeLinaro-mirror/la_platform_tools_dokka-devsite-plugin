@@ -244,7 +244,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>block:&nbsp;()&nbsp;<span>&rarr;</span>&nbsp;Unit</div>
+<div>block:&nbsp;()&nbsp;-&gt;&nbsp;Unit</div>
             """.trim()
         )
     }
@@ -268,7 +268,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>number:&nbsp;Int.()&nbsp;<span>&rarr;</span>&nbsp;Int</div>
+<div>number:&nbsp;Int.()&nbsp;-&gt;&nbsp;Int</div>
             """.trim()
         )
     }
@@ -292,7 +292,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>number:&nbsp;(Int,&nbsp;String)&nbsp;<span>&rarr;</span>&nbsp;Int</div>
+<div>number:&nbsp;(Int,&nbsp;String)&nbsp;-&gt;&nbsp;Int</div>
             """.trim()
         )
     }
@@ -317,7 +317,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>number:&nbsp;Boolean.(String)&nbsp;<span>&rarr;</span>&nbsp;Int</div>
+<div>number:&nbsp;Boolean.(String)&nbsp;-&gt;&nbsp;Int</div>
             """.trim()
         )
     }
@@ -342,7 +342,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>number:&nbsp;suspend&nbsp;(String)&nbsp;<span>&rarr;</span>&nbsp;Int</div>
+<div>number:&nbsp;suspend&nbsp;(String)&nbsp;-&gt;&nbsp;Int</div>
             """.trim()
         )
     }

@@ -20,8 +20,6 @@ import com.google.devsite.components.Parameter
 import com.google.devsite.renderer.Language
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
-import kotlinx.html.span
-import kotlinx.html.unsafe
 
 /** Default implementation of a function parameter. */
 internal class DefaultParameter(
@@ -73,7 +71,7 @@ internal class DefaultParameter(
                 if (data.isLambda) {
                     +")"
                     +Entities.nbsp
-                    span { unsafe { +"&rarr;" } }
+                    +"->"
                     +Entities.nbsp
                 }
 
