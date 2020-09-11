@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-./gradlew :test --tests="com.google.devsite.integration.*" && exit 0 || printf "\n-----------\nUpdating..."
+./gradlew --continue :test --tests="com.google.devsite.integration.*" && exit 0 || printf "\n-----------\nUpdating..."
 
 rm -rf testData/fragment/docs && cp -r build/docs/testData/fragment/docs testData/fragment/docs
 rm -rf testData/innerClasses/docs && cp -r build/docs/testData/innerClasses/docs testData/innerClasses/docs
