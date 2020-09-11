@@ -42,7 +42,7 @@ fun sadBoi(): Nothing = error("Ouch")
 
 /**
  * A brutally difficult function to render. Good luck!
- *
+ * ![Alt text](/path/to/img.jpg)
  * @throws IllegalStateException because the world is broken
  * @param a choose your own adventure!
  * @return a list of... something?

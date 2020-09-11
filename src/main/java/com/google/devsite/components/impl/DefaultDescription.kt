@@ -194,7 +194,9 @@ internal class DefaultDescription(
                 is DocumentationLink -> code {
                     data.pathProvider.linkForReference(tag.dri).render(this)
                 }
-                is Img -> img(src = tag.params.getValue("src")) { renderTags(tag.children, state) }
+                is Img -> img(src = tag.params.getValue("href"), alt = tag.params.get("alt")) {
+                    renderTags(tag.children, state)
+                }
                 is BlockQuote -> blockQuote { renderTags(tag.children, state) }
 
                 is Html, is Head, is Meta, is Header, is Title, is H1, is H2, is Footer, is IFrame,
