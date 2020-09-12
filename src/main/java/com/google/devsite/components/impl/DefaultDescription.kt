@@ -210,8 +210,7 @@ internal class DefaultDescription(
                     throw NotImplementedError("Unknown use case for ${tag.javaClass.simpleName}.")
                 is THead, is TBody, is Td, is TFoot, is Th, is Tr ->
                     error("Not in table context: ${tag.javaClass.simpleName}.")
-                // TODO(b/165400860): javadoc parsing is completely broken
-                is Li -> Unit // error("Not in list context: ${tag.javaClass.simpleName}.")
+                is Li -> error("Not in list context: ${tag.javaClass.simpleName}.")
             }
         }
     }
