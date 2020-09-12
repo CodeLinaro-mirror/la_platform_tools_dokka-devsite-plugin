@@ -126,9 +126,28 @@ internal class ParameterDocumentableConverterTest(
         }
     }
 
-    private fun DModule.param(): Parameter {
+    @Test
+    fun `Parameter includes default value`() {
+        val param = """
+            |fun foo(stuff: List<String> = listOf("a", "b", "c"))
+        """.render().param().data
+
+        javaOnly { assertThat(param.defaultValue).isNull() }
+        kotlinOnly { assertThat(param.defaultValue).isEqualTo("""listOf("a", "b", "c")""") }
+    }
+
+    @Test
+    fun `Parameter excludes default value in summary`() {
+        val param = """
+            |fun foo(stuff: List<String> = listOf("a", "b", "c"))
+        """.render().param(forSummary = true).data
+
+        assertThat(param.defaultValue).isNull()
+    }
+
+    private fun DModule.param(forSummary: Boolean = false): Parameter {
         val converter = ParameterDocumentableConverter(language, pathProvider())
-        return converter.componentForParameter(parameterDoc())
+        return converter.componentForParameter(parameterDoc(), forSummary)
     }
 
     private fun DModule.parameterDoc(): DParameter {

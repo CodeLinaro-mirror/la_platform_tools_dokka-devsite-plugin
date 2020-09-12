@@ -50,7 +50,7 @@ internal class FunctionDocumentableConverter(
                 ),
                 description = DefaultFunctionSummary(
                     FunctionSummary.Params(
-                        signature = function.signature(),
+                        signature = function.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(function)
                     )
                 )
@@ -69,7 +69,7 @@ internal class FunctionDocumentableConverter(
                 modifiers = function.modifiers().modifiersFor(hints),
                 returnType = returnType,
                 symbolType = FunctionDetail.SymbolType.FUNCTION,
-                signature = function.signature(),
+                signature = function.signature(isSummary = false),
                 metadata = javadocConverter.metadata(
                     doc = function,
                     returnType = returnType,
@@ -79,9 +79,9 @@ internal class FunctionDocumentableConverter(
         )
     }
 
-    private fun DFunction.signature(): FunctionSignature {
-        val receiver = receiver?.let(paramConverter::componentForParameter)
-        val parameters = parameters.map(paramConverter::componentForParameter)
+    private fun DFunction.signature(isSummary: Boolean): FunctionSignature {
+        val receiver = receiver?.let { paramConverter.componentForParameter(it, isSummary) }
+        val parameters = parameters.map { paramConverter.componentForParameter(it, isSummary) }
 
         return DefaultFunctionSignature(
             FunctionSignature.Params(

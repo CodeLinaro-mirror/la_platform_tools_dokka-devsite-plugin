@@ -26,6 +26,7 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.DParameter
+import org.jetbrains.dokka.model.DefaultValue
 import org.jetbrains.dokka.model.FunctionModifiers
 import org.jetbrains.dokka.model.JavaObject
 import org.jetbrains.dokka.model.Nullable
@@ -44,9 +45,16 @@ internal class ParameterDocumentableConverter(
     private val pathProvider: FilePathProvider
 ) {
     /** Returns the component for a parameter. */
-    fun componentForParameter(param: DParameter): Parameter = when (displayLanguage) {
+    fun componentForParameter(
+        param: DParameter,
+        isSummary: Boolean
+    ): Parameter = when (displayLanguage) {
         Language.JAVA -> componentForJavaProjection(param.type, param.name ?: "receiver")
-        Language.KOTLIN -> componentForKotlinProjection(param.type, param.name.orEmpty())
+        Language.KOTLIN -> {
+            val defaultValue = param.extra.allOfType<DefaultValue>().singleOrNull()?.value
+                ?.takeUnless { isSummary }
+            componentForKotlinProjection(param.type, param.name.orEmpty(), defaultValue)
+        }
     }
 
     /** Returns the component for a type projection. */
@@ -68,7 +76,11 @@ internal class ParameterDocumentableConverter(
         )
     }
 
-    private fun componentForKotlinProjection(proj: Projection, name: String = ""): Parameter {
+    private fun componentForKotlinProjection(
+        proj: Projection,
+        name: String = "",
+        defaultValue: String? = null
+    ): Parameter {
         val isLambda = proj.isLambda()
 
         val receiver = proj.receiver()
@@ -98,6 +110,7 @@ internal class ParameterDocumentableConverter(
 
         return DefaultParameter(
             Parameter.Params(
+                displayLanguage = Language.KOTLIN,
                 isLambda = isLambda,
                 name = name,
                 receiver = receiver,
@@ -106,7 +119,7 @@ internal class ParameterDocumentableConverter(
                 primary = primaryType,
                 // TODO(b/165104993): figure out path to implementing annotations
                 annotations = emptyList(),
-                displayLanguage = Language.KOTLIN
+                defaultValue = defaultValue
             )
         )
     }

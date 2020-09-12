@@ -42,7 +42,9 @@ fun sadBoi(): Nothing = error("Ouch")
 
 /**
  * A brutally difficult function to render. Good luck!
- * ![Alt text](/path/to/img.jpg)
+ *
+ * ![Sarcastic laugh](https://thumbs.gfycat.com/BothFabulousHarvestmen-size_restricted.gif)
+ *
  * @throws IllegalStateException because the world is broken
  * @param a choose your own adventure!
  * @return a list of... something?
@@ -54,7 +56,7 @@ fun sadBoi(): Nothing = error("Ouch")
  */
 suspend inline fun <T, R : Number> (T.(Int) -> List<R>).foo(
     a: T,
-    crossinline stuff: () -> (() -> String),
+    crossinline stuff: () -> (() -> String) = { { "Nests." } },
     @Suppress("abc") block: suspend Set<Boolean>.(cache: Map<String, List<T>>, mapper: ((Double) -> Double)) -> Collection<R>
 ): () -> List<Float> = { emptyList() }
 

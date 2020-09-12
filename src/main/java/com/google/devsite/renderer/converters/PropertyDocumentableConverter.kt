@@ -50,7 +50,7 @@ internal class PropertyDocumentableConverter(
                 ),
                 description = DefaultFunctionSummary(
                     FunctionSummary.Params(
-                        signature = property.signature(),
+                        signature = property.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(property)
                     )
                 )
@@ -69,7 +69,7 @@ internal class PropertyDocumentableConverter(
                 modifiers = property.modifiers().modifiersFor(hints),
                 returnType = returnType,
                 symbolType = FunctionDetail.SymbolType.PROPERTY,
-                signature = property.signature(),
+                signature = property.signature(isSummary = false),
                 metadata = javadocConverter.metadata(
                     doc = property,
                     returnType = returnType,
@@ -79,8 +79,8 @@ internal class PropertyDocumentableConverter(
         )
     }
 
-    private fun DProperty.signature(): FunctionSignature {
-        val receiver = receiver?.let(paramConverter::componentForParameter)
+    private fun DProperty.signature(isSummary: Boolean): FunctionSignature {
+        val receiver = receiver?.let { paramConverter.componentForParameter(it, isSummary) }
 
         return DefaultPropertySignature(
             FunctionSignature.Params(

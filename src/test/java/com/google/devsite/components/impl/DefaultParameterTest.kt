@@ -346,4 +346,28 @@ class DefaultParameterTest {
             """.trim()
         )
     }
+
+    @Test
+    fun `Kotlin parameter with default value renders correctly`() {
+        val component = DefaultParameter(
+            Params(
+                displayLanguage = Language.KOTLIN,
+                isLambda = false,
+                name = "number",
+                primary = NoopParameterType("Int"),
+                defaultValue = "5"
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>number:&nbsp;Int = 5</div>
+            """.trim()
+        )
+    }
 }

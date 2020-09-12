@@ -76,6 +76,10 @@ internal class DefaultParameter(
                 }
 
                 data.primary.render(this)
+
+                if (data.defaultValue != null) {
+                    +" = ${data.defaultValue}"
+                }
             }
         }
     }

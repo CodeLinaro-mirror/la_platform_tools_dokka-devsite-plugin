@@ -36,6 +36,7 @@ internal interface Parameter : ContextFreeComponent {
     fun weightedSize(): Double
 
     class Params(
+        val displayLanguage: Language,
         val isLambda: Boolean,
         val name: String,
         val receiver: ParameterType? = null,
@@ -43,6 +44,6 @@ internal interface Parameter : ContextFreeComponent {
         val lambdaModifiers: List<String> = emptyList(),
         val primary: ParameterType,
         val annotations: List<Link> = emptyList(),
-        val displayLanguage: Language
+        val defaultValue: String? = null
     )
 }
