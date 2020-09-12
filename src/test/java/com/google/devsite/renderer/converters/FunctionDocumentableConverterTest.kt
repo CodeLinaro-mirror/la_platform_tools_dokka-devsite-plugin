@@ -18,6 +18,7 @@ package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.FunctionDetail
+import com.google.devsite.components.FunctionDetail.SymbolType
 import com.google.devsite.components.FunctionSummary
 import com.google.devsite.components.Link
 import com.google.devsite.components.Parameter
@@ -506,6 +507,15 @@ internal class FunctionDocumentableConverterTest(
 
         javaOnly { assertThat(detail.data.modifiers).containsExactly("public", "final") }
         kotlinOnly { assertThat(detail.data.modifiers).isEmpty() }
+    }
+
+    @Test
+    fun `Function detail component is marked as function type`() {
+        val detail = """
+            |fun foo()
+        """.render().detail()
+
+        assertThat(detail.data.symbolType).isEqualTo(SymbolType.FUNCTION)
     }
 
     @Test

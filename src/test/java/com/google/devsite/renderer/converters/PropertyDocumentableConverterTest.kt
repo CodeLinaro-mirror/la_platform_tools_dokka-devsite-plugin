@@ -18,6 +18,7 @@ package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.FunctionDetail
+import com.google.devsite.components.FunctionDetail.SymbolType
 import com.google.devsite.components.Link
 import com.google.devsite.components.Parameter
 import com.google.devsite.components.ParameterType
@@ -83,6 +84,15 @@ internal class PropertyDocumentableConverterTest(
         """.render().detail()
 
         assertThat(detail.data.name).isEqualTo("foo")
+    }
+
+    @Test
+    fun `Property detail component is marked as property type`() {
+        val detail = """
+            |val foo
+        """.render().detail()
+
+        assertThat(detail.data.symbolType).isEqualTo(SymbolType.PROPERTY)
     }
 
     @Test

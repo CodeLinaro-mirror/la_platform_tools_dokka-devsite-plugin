@@ -101,24 +101,24 @@
     <h2>Public properties</h2>
     <div><a name="getAnchorPosition()"></a><a name="setAnchorPosition()"></a><a name="getAnchorPosition--"></a><a name="setAnchorPosition--"></a>
       <h3 class="api-name" id="anchorPosition()">anchorPosition</h3>
-      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/PagingState.html#anchorPosition()">anchorPosition</a>:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>&lt;<a href="/reference/kotlin/kotlin/Int.html">Int</a>&gt;</pre>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html#anchorPosition()">anchorPosition</a>:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>&lt;<a href="/reference/kotlin/kotlin/Int.html">Int</a>&gt;</pre>
       <p>Most recently accessed index in the list, including placeholders.</p>
       <p><code>null</code> if no access in the <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> has been made yet. E.g., if this snapshot was generated before or during the first load.</p>
     </div>
     <div><a name="getConfig()"></a><a name="setConfig()"></a><a name="getConfig--"></a><a name="setConfig--"></a>
       <h3 class="api-name" id="config()">config</h3>
-      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/PagingState.html#config()">config</a>:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.html">PagingConfig</a></pre>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html#config()">config</a>:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.html">PagingConfig</a></pre>
       <p><code><a href="/reference/kotlin/androidx/paging/PagingConfig.html">PagingConfig</a></code> that was given when initializing the <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> stream.</p>
     </div>
     <div><a name="getPages()"></a><a name="setPages()"></a><a name="getPages--"></a><a name="setPages--"></a>
       <h3 class="api-name" id="pages()">pages</h3>
-      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/PagingState.html#pages()">pages</a>:&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">PagingSource.LoadResult.Page</a>&lt;Key,&nbsp;Value&gt;&gt;</pre>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html#pages()">pages</a>:&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">PagingSource.LoadResult.Page</a>&lt;Key,&nbsp;Value&gt;&gt;</pre>
       <p>Loaded pages of data in the list.</p>
     </div>
     <h2>Public functions</h2>
     <div><a name="closestItemToPosition-kotlin.Int-"></a>
       <h3 class="api-name" id="closestItemToPosition(kotlin.Int)">closestItemToPosition</h3>
-      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemToPosition(kotlin.Int)">closestItemToPosition</a>(anchorPosition:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>):&nbsp;Value&lt;Value&gt;</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html#closestItemToPosition(kotlin.Int)">closestItemToPosition</a>(anchorPosition:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>):&nbsp;Value&lt;Value&gt;</pre>
       <p>Coerces <code><a href="/reference/kotlin/androidx/paging/PagingState.html#anchorPosition()">anchorPosition</a></code> to closest loaded value in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#pages()">pages</a></code>.</p>
       <p>This function can be called with <code><a href="/reference/kotlin/androidx/paging/PagingState.html#anchorPosition()">anchorPosition</a></code> to fetch the loaded item that is closest to the last accessed index in the list.</p>
       <div class="devsite-table-wrapper">
@@ -158,7 +158,7 @@
     </div>
     <div><a name="closestPageToPosition-kotlin.Int-"></a>
       <h3 class="api-name" id="closestPageToPosition(kotlin.Int)">closestPageToPosition</h3>
-      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/PagingState.html#closestPageToPosition(kotlin.Int)">closestPageToPosition</a>(anchorPosition:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">PagingSource.LoadResult.Page</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">PagingSource.LoadResult.Page</a>&lt;Key,&nbsp;Value&gt;&gt;</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html#closestPageToPosition(kotlin.Int)">closestPageToPosition</a>(anchorPosition:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">PagingSource.LoadResult.Page</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">PagingSource.LoadResult.Page</a>&lt;Key,&nbsp;Value&gt;&gt;</pre>
       <p>Coerces an index in the list, including placeholders, to closest loaded page in <code><a href="/reference/kotlin/androidx/paging/PagingState.html#pages()">pages</a></code>.</p>
       <p>This function can be called with <code><a href="/reference/kotlin/androidx/paging/PagingState.html#anchorPosition()">anchorPosition</a></code> to fetch the loaded page that is closest to the last accessed index in the list.</p>
       <div class="devsite-table-wrapper">
@@ -198,7 +198,7 @@
     </div>
     <div><a name="firstItemOrNull--"></a>
       <h3 class="api-name" id="firstItemOrNull()">firstItemOrNull</h3>
-      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/PagingState.html#firstItemOrNull()">firstItemOrNull</a>():&nbsp;Value&lt;Value&gt;</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html#firstItemOrNull()">firstItemOrNull</a>():&nbsp;Value&lt;Value&gt;</pre>
       <p></p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -220,7 +220,7 @@
     </div>
     <div><a name="isEmpty--"></a>
       <h3 class="api-name" id="isEmpty()">isEmpty</h3>
-      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/PagingState.html#isEmpty()">isEmpty</a>():&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html#isEmpty()">isEmpty</a>():&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
       <p></p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -242,7 +242,7 @@
     </div>
     <div><a name="lastItemOrNull--"></a>
       <h3 class="api-name" id="lastItemOrNull()">lastItemOrNull</h3>
-      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/PagingState.html#lastItemOrNull()">lastItemOrNull</a>():&nbsp;Value&lt;Value&gt;</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html#lastItemOrNull()">lastItemOrNull</a>():&nbsp;Value&lt;Value&gt;</pre>
       <p></p>
       <div class="devsite-table-wrapper">
         <table class="responsive">

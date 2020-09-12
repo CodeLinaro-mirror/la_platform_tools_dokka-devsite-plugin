@@ -28,7 +28,14 @@ internal interface FunctionDetail : ContextFreeComponent {
         val anchors: LinkedHashSet<String>,
         val modifiers: List<String> = emptyList(),
         val returnType: Parameter,
+        val symbolType: SymbolType,
         val signature: FunctionSignature,
         val metadata: List<ContextFreeComponent>
     )
+
+    /** Holds the Kotlin keywords for various symbol types. */
+    enum class SymbolType(val keyword: String) {
+        PROPERTY("val"),
+        FUNCTION("fun")
+    }
 }

@@ -52,6 +52,8 @@ internal class DefaultFunctionDetail(
                     data.signature.render(this)
                 }
                 Language.KOTLIN -> {
+                    +data.symbolType.keyword
+                    +Entities.nbsp
                     data.signature.render(this)
                     +":"
                     +Entities.nbsp

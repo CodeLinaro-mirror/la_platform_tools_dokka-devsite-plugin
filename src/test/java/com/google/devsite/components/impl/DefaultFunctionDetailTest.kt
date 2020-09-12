@@ -17,7 +17,8 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.FunctionDetail
+import com.google.devsite.components.FunctionDetail.Params
+import com.google.devsite.components.FunctionDetail.SymbolType
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.components.testing.NoopFunctionSignature
 import com.google.devsite.components.testing.NoopParameter
@@ -30,11 +31,12 @@ class DefaultFunctionDetailTest {
     @Test
     fun `Simple Java function renders correctly`() {
         val component = DefaultFunctionDetail(
-            FunctionDetail.Params(
+            Params(
                 displayLanguage = Language.JAVA,
                 name = "foo",
                 anchors = linkedSetOf(),
                 returnType = NoopParameter("void"),
+                symbolType = SymbolType.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
             )
@@ -60,11 +62,12 @@ class DefaultFunctionDetailTest {
     @Test
     fun `Simple Kotlin function renders correctly`() {
         val component = DefaultFunctionDetail(
-            FunctionDetail.Params(
+            Params(
                 displayLanguage = Language.KOTLIN,
                 name = "foo",
                 anchors = linkedSetOf(),
                 returnType = NoopParameter("Unit"),
+                symbolType = SymbolType.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
             )
@@ -80,7 +83,38 @@ class DefaultFunctionDetailTest {
 <div>
   <div>
     <h3 class="api-name">foo</h3>
-    <pre class="api-signature no-pretty-print">foo():&nbsp;Unit</pre>
+    <pre class="api-signature no-pretty-print">fun&nbsp;foo():&nbsp;Unit</pre>
+  </div>
+</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Simple Kotlin property renders correctly`() {
+        val component = DefaultFunctionDetail(
+            Params(
+                displayLanguage = Language.KOTLIN,
+                name = "foo",
+                anchors = linkedSetOf(),
+                returnType = NoopParameter("Unit"),
+                symbolType = SymbolType.PROPERTY,
+                signature = NoopFunctionSignature("foo"),
+                metadata = emptyList()
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <div>
+    <h3 class="api-name">foo</h3>
+    <pre class="api-signature no-pretty-print">val&nbsp;foo:&nbsp;Unit</pre>
   </div>
 </div>
             """.trim()
@@ -90,12 +124,13 @@ class DefaultFunctionDetailTest {
     @Test
     fun `Java function with modifiers renders correctly`() {
         val component = DefaultFunctionDetail(
-            FunctionDetail.Params(
+            Params(
                 displayLanguage = Language.JAVA,
                 name = "foo",
                 anchors = linkedSetOf(),
                 modifiers = listOf("protected", "abstract"),
                 returnType = NoopParameter("void"),
+                symbolType = SymbolType.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
             )
@@ -121,12 +156,13 @@ class DefaultFunctionDetailTest {
     @Test
     fun `Kotlin function with modifiers renders correctly`() {
         val component = DefaultFunctionDetail(
-            FunctionDetail.Params(
+            Params(
                 displayLanguage = Language.KOTLIN,
                 name = "foo",
                 anchors = linkedSetOf(),
                 modifiers = listOf("protected", "abstract"),
                 returnType = NoopParameter("Unit"),
+                symbolType = SymbolType.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
             )
@@ -142,7 +178,7 @@ class DefaultFunctionDetailTest {
 <div>
   <div>
     <h3 class="api-name">foo</h3>
-    <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;foo():&nbsp;Unit</pre>
+    <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;fun&nbsp;foo():&nbsp;Unit</pre>
   </div>
 </div>
             """.trim()
@@ -152,11 +188,12 @@ class DefaultFunctionDetailTest {
     @Test
     fun `Function anchors render correctly`() {
         val component = DefaultFunctionDetail(
-            FunctionDetail.Params(
+            Params(
                 displayLanguage = Language.JAVA,
                 name = "foo",
                 anchors = linkedSetOf("foo(a,b)", "foo(a, b)", "foo-a-b-"),
                 returnType = NoopParameter("void"),
+                symbolType = SymbolType.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
             )
@@ -182,11 +219,12 @@ class DefaultFunctionDetailTest {
     @Test
     fun `Function with metadata renders correctly`() {
         val component = DefaultFunctionDetail(
-            FunctionDetail.Params(
+            Params(
                 displayLanguage = Language.JAVA,
                 name = "foo",
                 anchors = linkedSetOf(),
                 returnType = NoopParameter("void"),
+                symbolType = SymbolType.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = listOf(NoopContextFreeComponent, NoopContextFreeComponent)
             )

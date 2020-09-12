@@ -68,6 +68,7 @@ internal class FunctionDocumentableConverter(
                 anchors = generateCompatAnchors(function),
                 modifiers = function.modifiers().modifiersFor(hints),
                 returnType = returnType,
+                symbolType = FunctionDetail.SymbolType.FUNCTION,
                 signature = function.signature(),
                 metadata = javadocConverter.metadata(
                     doc = function,

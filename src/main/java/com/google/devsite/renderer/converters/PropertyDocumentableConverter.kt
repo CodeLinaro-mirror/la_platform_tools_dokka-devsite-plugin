@@ -68,6 +68,7 @@ internal class PropertyDocumentableConverter(
                 anchors = property.generateAnchors(),
                 modifiers = property.modifiers().modifiersFor(hints),
                 returnType = returnType,
+                symbolType = FunctionDetail.SymbolType.PROPERTY,
                 signature = property.signature(),
                 metadata = javadocConverter.metadata(
                     doc = property,

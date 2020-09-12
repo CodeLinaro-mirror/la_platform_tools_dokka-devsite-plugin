@@ -101,7 +101,7 @@
     <h2>Public functions</h2>
     <div><a name="buildFlowable--"></a>
       <h3 class="api-name" id="buildFlowable()">buildFlowable</h3>
-      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#buildFlowable()">buildFlowable</a>(backpressureStrategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#buildFlowable()">buildFlowable</a>(backpressureStrategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <p>Constructs a <code>Flowable&lt;PagedList&gt;</code>.</p>
       <p>The returned Observable will already be observed on the <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#notifyScheduler()">notifyScheduler</a></code>, and subscribed on the <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#fetchScheduler()">fetchScheduler</a></code>.</p>
       <div class="devsite-table-wrapper">
@@ -141,7 +141,7 @@
     </div>
     <div><a name="buildObservable--"></a>
       <h3 class="api-name" id="buildObservable()">buildObservable</h3>
-      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#buildObservable()">buildObservable</a>():&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#buildObservable()">buildObservable</a>():&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <p>Constructs a <code>Observable&lt;PagedList&gt;</code>.</p>
       <p>The returned Observable will already be observed on the <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#notifyScheduler()">notifyScheduler</a></code>, and subscribed on the <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#fetchScheduler()">fetchScheduler</a></code>.</p>
       <div class="devsite-table-wrapper">
@@ -164,7 +164,7 @@
     </div>
     <div><a name="setBoundaryCallback-androidx.paging.PagedList.BoundaryCallback-"></a>
       <h3 class="api-name" id="setBoundaryCallback(androidx.paging.PagedList.BoundaryCallback)">setBoundaryCallback</h3>
-      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setBoundaryCallback(androidx.paging.PagedList.BoundaryCallback)">setBoundaryCallback</a>(boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;&gt;):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setBoundaryCallback(androidx.paging.PagedList.BoundaryCallback)">setBoundaryCallback</a>(boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;&gt;):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
       <p>Sets a <code><a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a></code> on each PagedList created, typically used to load additional data from network when paging from local storage.</p>
       <p>Pass a BoundaryCallback to listen to when the PagedList runs out of data to load. If this method is not called, or <code>null</code> is passed, you will not be notified when each DataSource runs out of data to provide to its PagedList.</p>
       <p>If you are paging from a DataSource.Factory backed by local storage, you can set a BoundaryCallback to know when there is no more information to page from local storage. This is useful to page from the network when local storage is a cache of network data.</p>
@@ -206,7 +206,7 @@
     </div>
     <div><a name="setFetchScheduler--"></a>
       <h3 class="api-name" id="setFetchScheduler()">setFetchScheduler</h3>
-      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setFetchScheduler()">setFetchScheduler</a>(scheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setFetchScheduler()">setFetchScheduler</a>(scheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
       <p>Sets scheduler which will be used for background fetching of PagedLists, as well as on-demand fetching of pages inside.</p>
       <p>If not set, defaults to the Arch components I/O thread pool.</p>
       <p>The built Observable / Flowable will be subscribed on this scheduler.</p>
@@ -247,7 +247,7 @@
     </div>
     <div><a name="setInitialLoadKey-kotlin.Any-"></a>
       <h3 class="api-name" id="setInitialLoadKey(kotlin.Any)">setInitialLoadKey</h3>
-      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setInitialLoadKey(kotlin.Any)">setInitialLoadKey</a>(key:&nbsp;Key&lt;Key&gt;):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setInitialLoadKey(kotlin.Any)">setInitialLoadKey</a>(key:&nbsp;Key&lt;Key&gt;):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
       <p>First loading key passed to the first PagedList/DataSource.</p>
       <p>When a new PagedList/DataSource pair is created after the first, it acquires a load key from the previous generation so that data is loaded around the position already being observed.</p>
       <div class="devsite-table-wrapper">
@@ -287,7 +287,7 @@
     </div>
     <div><a name="setNotifyScheduler--"></a>
       <h3 class="api-name" id="setNotifyScheduler()">setNotifyScheduler</h3>
-      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setNotifyScheduler()">setNotifyScheduler</a>(scheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setNotifyScheduler()">setNotifyScheduler</a>(scheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
       <p>Sets scheduler which will be used for observing new PagedLists, as well as loading updates within the PagedLists.</p>
       <p>If not set, defaults to the UI thread.</p>
       <p>The built Observable / Flowable will be observed on this scheduler, so that the thread receiving PagedLists will also receive the internal updates to the PagedList.</p>
