@@ -17,6 +17,7 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.renderer.Language
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.model.DModule
 import org.junit.Ignore
@@ -27,7 +28,7 @@ internal class ModifiersTest : ConverterTestBase() {
     fun `Public modifier is found`() {
         val modifiers = """
             |fun foo() = Unit
-        """.render().modifiers()
+        """.render().modifierz()
 
         assertThat(modifiers).contains("public")
     }
@@ -39,7 +40,7 @@ internal class ModifiersTest : ConverterTestBase() {
             |abstract class Foo {
             |  protected fun foo() = Unit
             |}
-        """.render().modifiers()
+        """.render().modifierz()
 
         assertThat(modifiers).contains("protected")
     }
@@ -48,7 +49,7 @@ internal class ModifiersTest : ConverterTestBase() {
     fun `Suspend modifier is found`() {
         val modifiers = """
             |suspend fun foo() = Unit
-        """.render().modifiers()
+        """.render().modifierz()
 
         assertThat(modifiers).contains("suspend")
     }
@@ -57,7 +58,7 @@ internal class ModifiersTest : ConverterTestBase() {
     fun `Inline modifier is found`() {
         val modifiers = """
             |inline fun foo() = Unit
-        """.render().modifiers()
+        """.render().modifierz()
 
         assertThat(modifiers).contains("inline")
     }
@@ -68,7 +69,7 @@ internal class ModifiersTest : ConverterTestBase() {
             |abstract class Foo {
             |    abstract fun foo()
             |}
-        """.render().modifiers()
+        """.render().modifierz()
 
         assertThat(modifiers).contains("abstract")
     }
@@ -79,7 +80,7 @@ internal class ModifiersTest : ConverterTestBase() {
             |class Foo {
             |    open fun foo() = Unit
             |}
-        """.render().modifiers()
+        """.render().modifierz()
 
         assertThat(modifiers).contains("open")
     }
@@ -98,7 +99,87 @@ internal class ModifiersTest : ConverterTestBase() {
         assertThat(isConstant(modifiers)).isTrue()
     }
 
-    private fun DModule.modifiers(): List<String> {
+    @Test
+    fun `Unknown Kotlin modifiers are stripped from Java`() {
+        val hints = ModifierHints(Language.JAVA)
+        val modifiers = listOf(
+            "suspend",
+            "inline",
+            "noinline",
+            "reified",
+            "operator",
+            "override",
+            "open"
+        )
+
+        assertThat(modifiers.modifiersFor(hints)).isEmpty()
+    }
+
+    @Test
+    fun `Unknown Java modifiers are stripped from Kotlin`() {
+        val hints = ModifierHints(Language.KOTLIN)
+        val modifiers = listOf("static")
+
+        assertThat(modifiers.modifiersFor(hints)).isEmpty()
+    }
+
+    @Test
+    fun `Kotlin const modifier is rewritten to static final in Java`() {
+        val hints = ModifierHints(Language.JAVA)
+        val modifiers = listOf("const")
+
+        assertThat(modifiers.modifiersFor(hints)).containsExactly("static", "final")
+    }
+
+    @Test
+    fun `Kotlin public modifier is removed in Kotlin`() {
+        val hints = ModifierHints(Language.KOTLIN)
+        val modifiers = listOf("public")
+
+        assertThat(modifiers.modifiersFor(hints)).isEmpty()
+    }
+
+    @Test
+    fun `Kotlin override modifier is removed in Kotlin`() {
+        val hints = ModifierHints(Language.KOTLIN)
+        val modifiers = listOf("override")
+
+        assertThat(modifiers.modifiersFor(hints)).isEmpty()
+    }
+
+    @Test
+    fun `Kotlin final modifier is removed in Kotlin`() {
+        val hints = ModifierHints(Language.KOTLIN)
+        val modifiers = listOf("final")
+
+        assertThat(modifiers.modifiersFor(hints)).isEmpty()
+    }
+
+    @Test
+    fun `Kotlin final modifier is kept if an override is present in Kotlin`() {
+        val hints = ModifierHints(Language.KOTLIN)
+        val modifiers = listOf("override", "final")
+
+        assertThat(modifiers.modifiersFor(hints)).containsExactly("final")
+    }
+
+    @Test
+    fun `Kotlin abstract modifier is removed if in an interface in Kotlin`() {
+        val hints = ModifierHints(Language.KOTLIN, isInterface = true)
+        val modifiers = listOf("abstract")
+
+        assertThat(modifiers.modifiersFor(hints)).isEmpty()
+    }
+
+    @Test
+    fun `Visibility modifiers are removed in a summary`() {
+        val hints = ModifierHints(Language.JAVA, isSummary = true)
+        val modifiers = listOf("public", "protected")
+
+        assertThat(modifiers.modifiersFor(hints)).isEmpty()
+    }
+
+    private fun DModule.modifierz(): List<String> {
         val packageDoc = packages.single()
         val function = packageDoc.functions.singleOrNull()
             ?: packageDoc.classlikes.single().functions.single { it.name == "foo" }

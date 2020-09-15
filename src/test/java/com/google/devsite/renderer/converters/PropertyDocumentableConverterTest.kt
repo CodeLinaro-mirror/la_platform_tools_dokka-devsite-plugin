@@ -113,16 +113,22 @@ internal class PropertyDocumentableConverterTest(
         )
     }
 
-    private fun DModule.summary(fromClass: Boolean = false): TwoPaneSummaryItem {
+    private fun DModule.summary(
+        fromClass: Boolean = false,
+        hints: ModifierHints = ModifierHints(language)
+    ): TwoPaneSummaryItem {
         val docConverter = DocTagConverter(language, pathProvider())
         val converter = PropertyDocumentableConverter(language, pathProvider(), docConverter)
-        return converter.summary(property(fromClass))
+        return converter.summary(property(fromClass), hints)
     }
 
-    private fun DModule.detail(fromClass: Boolean = false): FunctionDetail {
+    private fun DModule.detail(
+        fromClass: Boolean = false,
+        hints: ModifierHints = ModifierHints(language)
+    ): FunctionDetail {
         val docConverter = DocTagConverter(language, pathProvider())
         val converter = PropertyDocumentableConverter(language, pathProvider(), docConverter)
-        return converter.detail(property(fromClass))
+        return converter.detail(property(fromClass), hints)
     }
 
     private fun DModule.property(fromClass: Boolean): DProperty {
