@@ -109,6 +109,16 @@ internal class PropertyDocumentableConverterTest(
     }
 
     @Test
+    fun `Property detail component has annotations`() {
+        val detail = """
+            |annotation class Hello
+            |@Hello val foo: String
+        """.render().detail()
+
+        assertThat(detail.data.annotations).isNotEmpty()
+    }
+
+    @Test
     fun `Property detail component has correct anchors`() {
         val detail = """
             |val <T : Number> List<T>.foo

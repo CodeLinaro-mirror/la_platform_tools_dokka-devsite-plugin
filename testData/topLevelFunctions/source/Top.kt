@@ -34,7 +34,7 @@ val String.world: Int get() = 42
 fun a() = Unit
 
 /** Top level function docs next to [a]. This is a second sentence. Talk to [world]. */
-fun b(i1: Int, i2: String, i3: Boolean, foo: Foo): String = ""
+fun b(i1: Int?, i2: String?, i3: Boolean, foo: Foo): String = ""
 
 /** I'm so sad, they're deleting me! */
 @Deprecated("This method was too sad.")
@@ -54,12 +54,25 @@ fun sadBoi(): Nothing = error("Ouch")
  * @param stuff lambdas
  * @author Nobody cares :(
  */
-suspend inline fun <T, R : Number> (T.(Int) -> List<R>).foo(
+@Wassup("hello", ["world"])
+suspend inline fun <@Wassup T, R : @Wassup Number> (T.(@Wassup Int) -> List<@Wassup R>).foo(
     a: T,
-    crossinline stuff: () -> (() -> String) = { { "Nests." } },
-    @Suppress("abc") block: suspend Set<Boolean>.(cache: Map<String, List<T>>, mapper: ((Double) -> Double)) -> Collection<R>
-): () -> List<Float> = { emptyList() }
+    crossinline stuff: @Wassup(a = "bar") () -> () -> String = { { "Nests." } },
+    @Wassup block: suspend Set<Boolean>.(
+        cache: Map<String?, List<T>>,
+        mapper: ((Double?) -> Double)
+    ) -> @Wassup(f = ["foo"]) Collection<R?>
+): () -> List<Float>? = { emptyList() }
 
 class Foo
+
+/** Howdy! */
+@Target(
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.TYPE,
+    AnnotationTarget.TYPE_PARAMETER,
+    AnnotationTarget.VALUE_PARAMETER
+)
+annotation class Wassup(val a: String = "", val f: Array<String> = [])
 
 typealias Bar = Foo

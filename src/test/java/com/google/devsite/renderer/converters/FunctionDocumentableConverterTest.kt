@@ -510,6 +510,16 @@ internal class FunctionDocumentableConverterTest(
     }
 
     @Test
+    fun `Top level function detail component has annotations`() {
+        val detail = """
+            |annotation class Hello
+            |@Hello fun foo() = Unit
+        """.render().detail()
+
+        assertThat(detail.data.annotations).isNotEmpty()
+    }
+
+    @Test
     fun `Function detail component is marked as function type`() {
         val detail = """
             |fun foo()

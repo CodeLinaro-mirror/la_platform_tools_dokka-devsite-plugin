@@ -66,6 +66,7 @@ internal class FunctionDocumentableConverter(
                 displayLanguage = displayLanguage,
                 name = function.name,
                 anchors = generateCompatAnchors(function),
+                annotations = function.annotations().annotationComponents(pathProvider),
                 modifiers = function.modifiers().modifiersFor(hints),
                 returnType = returnType,
                 symbolType = FunctionDetail.SymbolType.FUNCTION,
