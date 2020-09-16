@@ -46,7 +46,17 @@ internal class ParameterDocumentableConverter(
     private val displayLanguage: Language,
     private val pathProvider: FilePathProvider
 ) {
-    /** Returns the component for a parameter. */
+    /**
+     * Returns the component for a parameter.
+     *
+     * When rendering Kotlin, we look at annotations to determine if the type should be considered
+     * nullable. When rendering Java, we look at the Dokka type information to determine if the
+     * Kotlin type is nullable. Why are these flipped? Because if we were rendering Java with Java
+     * sources, we would already have annotations. But rendering Java with Kotlin sources won't have
+     * those nullability annotations so we need to look at the Kotlin type. Similarly, rendering
+     * Kotlin with Kotlin sources has the nullability type info built in, but rendering Kotlin with
+     * Java sources does not.
+     */
     fun componentForParameter(
         param: DParameter,
         isSummary: Boolean
@@ -54,7 +64,8 @@ internal class ParameterDocumentableConverter(
         Language.JAVA -> componentForJavaProjection(
             proj = param.type,
             name = param.name ?: "receiver",
-            annotations = param.annotations()
+            annotations = param.annotations(),
+            nullable = param.type.isNullable()
         )
         Language.KOTLIN -> {
             val defaultValue = param.extra.allOfType<DefaultValue>().singleOrNull()?.value
@@ -63,28 +74,44 @@ internal class ParameterDocumentableConverter(
                 proj = param.type,
                 name = param.name.orEmpty(),
                 defaultValue = defaultValue,
-                annotations = param.annotations()
+                annotations = param.annotations(),
+                nullable = param.annotations().isNullable()
             )
         }
     }
 
-    /** Returns the component for a type projection. */
-    fun componentForProjection(proj: Projection): Parameter = when (displayLanguage) {
+    /**
+     * Returns the component for a type projection.
+     *
+     * When rendering Java, we do not want to show nullability annotations because this is just a
+     * type (e.g. return type), so nullability will be handled elsewhere. When rendering Kotlin,
+     * we *do* want to show nullability information since it's built into the type. Thus, we look at
+     * annotations in addition to the Dokka Nullable type.
+     */
+    fun componentForProjection(
+        proj: Projection,
+        annotations: List<Annotations.Annotation> = emptyList()
+    ): Parameter = when (displayLanguage) {
         Language.JAVA -> componentForJavaProjection(proj)
-        Language.KOTLIN -> componentForKotlinProjection(proj)
+        Language.KOTLIN -> componentForKotlinProjection(proj, nullable = annotations.isNullable())
     }
 
     private fun componentForJavaProjection(
         proj: Projection,
         name: String = "",
-        annotations: List<Annotations.Annotation> = emptyList()
+        annotations: List<Annotations.Annotation> = emptyList(),
+        nullable: Boolean = false
     ): Parameter {
         return DefaultParameter(
             Parameter.Params(
                 isLambda = false,
                 name = name,
                 primary = proj.toComponent(),
-                annotations = annotations.annotationComponents(pathProvider),
+                annotations = annotations.annotationComponents(
+                    pathProvider,
+                    displayLanguage,
+                    nullable
+                ),
                 displayLanguage = Language.JAVA
             )
         )
@@ -94,7 +121,8 @@ internal class ParameterDocumentableConverter(
         proj: Projection,
         name: String = "",
         defaultValue: String? = null,
-        annotations: List<Annotations.Annotation> = emptyList()
+        annotations: List<Annotations.Annotation> = emptyList(),
+        nullable: Boolean = false
     ): Parameter {
         val isLambda = proj.isLambda()
 
@@ -103,7 +131,7 @@ internal class ParameterDocumentableConverter(
             // Get the return type of the lambda
             componentForKotlinProjection(proj.asTypeConstructor().projections.last())
         } else {
-            proj.toComponent()
+            proj.toComponent(nullable = nullable)
         }
         val lambdaModifiers: List<String> = if (proj.isLambda(suspendOnly = true)) {
             listOf("suspend")
@@ -132,7 +160,11 @@ internal class ParameterDocumentableConverter(
                 lambdaModifiers = lambdaModifiers,
                 lambdaParams = lambdaParams,
                 primary = primaryType,
-                annotations = annotations.annotationComponents(pathProvider),
+                annotations = annotations.annotationComponents(
+                    pathProvider,
+                    displayLanguage,
+                    nullable
+                ),
                 defaultValue = defaultValue
             )
         )
@@ -152,12 +184,12 @@ internal class ParameterDocumentableConverter(
     }
 
     /** Converts a documentable type to its type component, recursively expanding generics */
-    private fun Projection.toComponent(): ParameterType {
+    private fun Projection.toComponent(nullable: Boolean = false): ParameterType {
         if (this is Variance<*>) {
             return inner.toComponent()
         }
         if (this is Nullable) {
-            return inner.toComponent()
+            return inner.toComponent(nullable = displayLanguage == Language.KOTLIN)
         }
 
         val generics: List<ParameterBase> = when (this) {
@@ -170,7 +202,8 @@ internal class ParameterDocumentableConverter(
         return DefaultParameterType(
             ParameterType.Params(
                 type = toLink(),
-                generics = generics
+                nullable,
+                generics
             )
         )
     }
@@ -225,8 +258,8 @@ internal class ParameterDocumentableConverter(
                 isStandardLambda || isSuspendLambda
             }
         }
-        is Nullable -> inner.isLambda()
-        is Variance<*> -> inner.isLambda()
+        is Nullable -> inner.isLambda(suspendOnly)
+        is Variance<*> -> inner.isLambda(suspendOnly)
         is TypeParameter, is PrimitiveJavaType, is UnresolvedBound, Star, JavaObject, Void -> false
         else -> error("Unknown bound: $this")
     }

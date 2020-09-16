@@ -45,7 +45,10 @@ internal class PropertyDocumentableConverter(
                 title = DefaultTypeSummary(
                     TypeSummary.Params(
                         modifiers = property.modifiers().modifiersFor(hints),
-                        type = paramConverter.componentForProjection(property.type)
+                        type = paramConverter.componentForProjection(
+                            property.type,
+                            property.annotations()
+                        )
                     )
                 ),
                 description = DefaultFunctionSummary(
@@ -60,13 +63,18 @@ internal class PropertyDocumentableConverter(
 
     /** @return the property detail component */
     fun detail(property: DProperty, hints: ModifierHints): FunctionDetail {
-        val returnType = paramConverter.componentForProjection(property.type)
+        val annotations = property.annotations()
+        val returnType = paramConverter.componentForProjection(property.type, annotations)
         return DefaultFunctionDetail(
             FunctionDetail.Params(
                 displayLanguage = displayLanguage,
                 name = property.name,
                 anchors = property.generateAnchors(),
-                annotations = property.annotations().annotationComponents(pathProvider),
+                annotations = annotations.annotationComponents(
+                    pathProvider,
+                    displayLanguage,
+                    property.type.isNullable()
+                ),
                 modifiers = property.modifiers().modifiersFor(hints),
                 returnType = returnType,
                 symbolType = FunctionDetail.SymbolType.PROPERTY,

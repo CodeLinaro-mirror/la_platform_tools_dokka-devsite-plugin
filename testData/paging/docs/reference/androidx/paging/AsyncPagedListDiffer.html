@@ -164,14 +164,14 @@
           <tr>
             <td><code><a href="/reference/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
-              <div><code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;&nbsp;pagedList)</code></div>
+              <div><code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;&nbsp;pagedList)</code></div>
               <p>Pass a new <code><a href="/reference/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> to the differ.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
-              <div><code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;&nbsp;pagedList,&nbsp;<a href="/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback)</code></div>
+              <div><code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;&nbsp;pagedList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback<br>)</code></div>
               <p>Pass a new PagedList to the differ.</p>
             </td>
           </tr>
@@ -181,7 +181,7 @@
     <h2>Public fields</h2>
     <div><a name="getCurrentList()"></a><a name="setCurrentList()"></a><a name="getCurrentList--"></a><a name="setCurrentList--"></a>
       <h3 class="api-name" id="currentList()">currentList</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#currentList()">currentList</a></pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a><br>public&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#currentList()">currentList</a></pre>
       <p>Returns the PagedList currently being displayed by the differ.</p>
       <p>This is not necessarily the most recent list passed to <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a></code>, because a diff is computed asynchronously between the new list and the current list before updating the currentList value. May be <code>null</code> if no <code><a href="/reference/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> is being presented.</p>
       <div class="devsite-table-wrapper">
@@ -391,7 +391,7 @@
     </div>
     <div><a name="getItem-kotlin.Int-"></a>
       <h3 class="api-name" id="getItem(kotlin.Int)">getItem</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;T&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#getItem(kotlin.Int)">getItem</a>(<a href="/reference/kotlin/Int.html">Int</a>&nbsp;index)</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a><br>public&nbsp;T&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#getItem(kotlin.Int)">getItem</a>(<a href="/reference/kotlin/Int.html">Int</a>&nbsp;index)</pre>
       <p>Get the item from the current PagedList at the specified index.</p>
       <p>Note that this operates on both loaded items and null padding within the PagedList.</p>
       <div class="devsite-table-wrapper">
@@ -583,7 +583,7 @@
     </div>
     <div><a name="submitList-androidx.paging.PagedList-"></a>
       <h3 class="api-name" id="submitList(androidx.paging.PagedList)">submitList</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;&nbsp;pagedList)</pre>
+      <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;&nbsp;pagedList)</pre>
       <p>Pass a new <code><a href="/reference/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> to the differ.</p>
       <p>If a PagedList is already present, a diff will be computed asynchronously on a background thread. When the diff is computed, it will be applied (dispatched to the ListUpdateCallback), and the new PagedList will be swapped in as the <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#currentList()">currentList</a></code>.</p>
       <div class="devsite-table-wrapper">
@@ -606,7 +606,7 @@
     </div>
     <div><a name="submitList(androidx.paging.PagedList, java.lang.Runnable)"></a><a name="submitList-androidx.paging.PagedList-java.lang.Runnable-"></a>
       <h3 class="api-name" id="submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a>(<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;&nbsp;pagedList,&nbsp;<a href="/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback)</pre>
+      <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;&nbsp;pagedList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback<br>)</pre>
       <p>Pass a new PagedList to the differ.</p>
       <p>If a PagedList is already present, a diff will be computed asynchronously on a background thread. When the diff is computed, it will be applied (dispatched to the ListUpdateCallback), and the new PagedList will be swapped in as the <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#currentList()">currentList</a></code>.</p>
       <p>The commit callback can be used to know when the PagedList is committed, but note that it may not be executed. If PagedList B is submitted immediately after PagedList A, and is committed directly, the callback associated with PagedList A will not be run.</p>

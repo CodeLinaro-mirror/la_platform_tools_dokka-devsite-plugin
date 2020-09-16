@@ -22,15 +22,15 @@ import com.google.devsite.components.FunctionDetail.SymbolType
 import com.google.devsite.components.FunctionSummary
 import com.google.devsite.components.Link
 import com.google.devsite.components.Parameter
-import com.google.devsite.components.ParameterBase
-import com.google.devsite.components.ParameterType
 import com.google.devsite.components.SingleColumnSummaryItem
 import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.TypeSummary
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.testing.asType
 import com.google.devsite.renderer.converters.testing.functionSummary
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
+import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.model.DClass
@@ -534,6 +534,19 @@ internal class FunctionDocumentableConverterTest(
     }
 
     @Test
+    fun `Function detail component has nullability information`() {
+        val detail = """
+            |fun foo(): Unit? = Unit
+        """.render().detail()
+
+        javaOnly { assertThat(detail.data.annotations).isNotEmpty() }
+        kotlinOnly {
+            assertThat(detail.data.annotations).isEmpty()
+            assertThat(detail.data.returnType.asType().data.nullable).isTrue()
+        }
+    }
+
+    @Test
     fun `Function detail component is marked as function type`() {
         val detail = """
             |fun foo()
@@ -600,22 +613,9 @@ internal class FunctionDocumentableConverterTest(
     }
 
     private fun Parameter.link(): Link.Params = data.primary.link()
-    private fun ParameterType.link(): Link.Params = data.type.data
     private fun FunctionSummary.param(): Parameter = data.signature.data.parameters.item()
     private fun TwoPaneSummaryItem.returnSummary(): TypeSummary.Params =
         (data.title as TypeSummary).data
-
-    private fun ParameterBase.asType(): ParameterType = when (this) {
-        is Parameter -> data.primary.asType()
-        is ParameterType -> this
-        else -> error("Not supported: $this")
-    }
-
-    private fun ParameterBase.link(): Link.Params = when (this) {
-        is Parameter -> data.primary.asType().link()
-        is ParameterType -> data.type.data
-        else -> error("Not supported: $this")
-    }
 
     companion object {
         @JvmStatic

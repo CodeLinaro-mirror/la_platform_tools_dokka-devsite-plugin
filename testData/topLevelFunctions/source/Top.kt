@@ -57,7 +57,7 @@ fun sadBoi(): Nothing = error("Ouch")
 @Wassup("hello", ["world"])
 suspend inline fun <@Wassup T, R : @Wassup Number> (T.(@Wassup Int) -> List<@Wassup R>).foo(
     a: T,
-    crossinline stuff: @Wassup(a = "bar") () -> () -> String = { { "Nests." } },
+    crossinline stuff: @Wassup(a = "bar") () -> (() -> String?)? = { { "Nests." } },
     @Wassup block: suspend Set<Boolean>.(
         cache: Map<String?, List<T>>,
         mapper: ((Double?) -> Double)

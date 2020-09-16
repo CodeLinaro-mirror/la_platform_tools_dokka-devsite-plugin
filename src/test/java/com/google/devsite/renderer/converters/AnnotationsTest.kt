@@ -18,12 +18,15 @@ package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Link
+import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.testing.ConverterTestBase
+import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.Annotations.Annotation
 import org.jetbrains.dokka.model.DModule
 import org.junit.Ignore
 import org.junit.Test
+import kotlin.Boolean
 import com.google.devsite.components.Annotation as AnnotationComponent
 
 internal class AnnotationsTest : ConverterTestBase() {
@@ -34,9 +37,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |fun foo() = Unit
         """.render().annotations()
 
-        val components = annotations.annotationComponents(pathProvider())
-
-        assertThat(components).isEmpty()
+        assertThat(annotations.components()).isEmpty()
     }
 
     @Ignore // TODO(b/168667502): why isn't this on the classpath?
@@ -47,9 +48,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |fun foo() = Unit
         """.render().annotations()
 
-        val components = annotations.annotationComponents(pathProvider())
-
-        assertThat(components).isEmpty()
+        assertThat(annotations.components()).isEmpty()
     }
 
     @Test
@@ -59,9 +58,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |fun foo() = Unit
         """.render().annotations()
 
-        val components = annotations.annotationComponents(pathProvider())
-
-        assertThat(components).isEmpty()
+        assertThat(annotations.components()).isEmpty()
     }
 
     @Test
@@ -72,7 +69,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |fun foo() = Unit
         """.render().annotations()
 
-        val annotation = annotations.annotationComponents(pathProvider()).item()
+        val annotation = annotations.components().item()
 
         assertThat(annotation.link().name).isEqualTo("Hello")
         assertPath(annotation.link().url, "androidx/example/Hello.html")
@@ -86,11 +83,67 @@ internal class AnnotationsTest : ConverterTestBase() {
             |fun foo() = Unit
         """.render().annotations()
 
-        val annotation = annotations.annotationComponents(pathProvider()).item()
+        val annotation = annotations.components().item()
         val parameter = annotation.data.parameters.item()
 
         assertThat(parameter.name).isEqualTo("foo")
         assertThat(parameter.value).isEqualTo("\"abc\"")
+    }
+
+    @Test
+    fun `Nullability annotation is kept in Java`() {
+        val annotations = """
+            |annotation class Nullable
+            |@Nullable
+            |fun foo() = Unit
+        """.render().annotations()
+
+        assertThat(annotations.components()).isNotEmpty()
+    }
+
+    @Test
+    fun `Nullability annotation is removed in Kotlin`() {
+        val annotations = """
+            |annotation class Nullable
+            |@Nullable
+            |fun foo() = Unit
+        """.render().annotations()
+
+        assertThat(annotations.components(Language.KOTLIN)).isEmpty()
+    }
+
+    @Test
+    fun `Nullability annotation is found`() {
+        val annotations = """
+            |annotation class Nullable
+            |@Nullable
+            |fun foo() = Unit
+        """.render().annotations()
+
+        assertThat(annotations.isNullable()).isTrue()
+    }
+
+    @Test
+    fun `Nullability annotation is injected for nullable type in Java`() {
+        val annotations = emptyList<Annotation>().components(Language.JAVA, forcedNullable = true)
+
+        assertThat(annotations).isNotEmpty()
+    }
+
+    @Test
+    fun `Nullability annotation isn't doubly injected for nullable type`() {
+        val annotations = listOf(
+            Annotation(DRI("androidx.annotation", "Nullable"), emptyMap())
+        ).components(forcedNullable = true)
+
+        assertThat(annotations).hasSize(1)
+    }
+
+    @Test
+    fun `Nullability annotation is NOT injected for nullable type in Kotlin`() {
+        val annotations = emptyList<Annotation>().components(Language.KOTLIN, forcedNullable = true)
+
+        assertThat(annotations).isEmpty()
     }
 
     private fun DModule.annotations(): List<Annotation> {
@@ -100,6 +153,11 @@ internal class AnnotationsTest : ConverterTestBase() {
 
         return function.annotations()
     }
+
+    private fun List<Annotation>.components(
+        language: Language = Language.JAVA,
+        forcedNullable: Boolean = false
+    ) = annotationComponents(pathProvider(), language, forcedNullable)
 
     private fun AnnotationComponent.link(): Link.Params = data.type.data
 }

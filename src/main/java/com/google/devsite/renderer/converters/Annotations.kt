@@ -17,7 +17,9 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.impl.DefaultAnnotation
+import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.AnnotationParameterValue
 import org.jetbrains.dokka.model.AnnotationValue
 import org.jetbrains.dokka.model.Annotations
@@ -31,15 +33,29 @@ import com.google.devsite.components.Annotation as AnnotationComponent
 
 /** @return the components for the provided dokka model annotations */
 internal fun List<Annotation>.annotationComponents(
-    pathProvider: FilePathProvider
-): List<AnnotationComponent> = filter(::shouldDocumentAnnotation).map { annotation ->
-    val type = pathProvider.linkForReference(annotation.dri)
-    val params = annotation.params.map { (name, contents) ->
-        AnnotationComponent.Parameter(name, contents.toComponent())
+    pathProvider: FilePathProvider,
+    displayLanguage: Language,
+    nullable: Boolean
+): List<AnnotationComponent> {
+    val injectedAnnotations = mutableListOf<Annotation>()
+    if (nullable && !isNullable()) {
+        injectedAnnotations += Annotation(DRI("androidx.annotation", "Nullable"), emptyMap())
     }
 
-    DefaultAnnotation(AnnotationComponent.Params(type, params))
+    return (this + injectedAnnotations).filter { annotation ->
+        shouldDocumentAnnotation(annotation, displayLanguage)
+    }.map { annotation ->
+        val type = pathProvider.linkForReference(annotation.dri)
+        val params = annotation.params.map { (name, contents) ->
+            AnnotationComponent.Parameter(name, contents.toComponent())
+        }
+
+        DefaultAnnotation(AnnotationComponent.Params(type, params))
+    }
 }
+
+/** @return true if the `@Nullable` annotation is present, false otherwise */
+internal fun List<Annotation>.isNullable(): Boolean = any { it.dri.classNames == "Nullable" }
 
 /** @return the complete list of annotations for this type */
 internal fun WithExtraProperties<*>.annotations(): List<Annotation> {
@@ -49,16 +65,20 @@ internal fun WithExtraProperties<*>.annotations(): List<Annotation> {
 }
 
 /** @return true if a developer would find this annotation useful, false otherwise */
-private fun shouldDocumentAnnotation(annotation: Annotation): Boolean {
+private fun shouldDocumentAnnotation(annotation: Annotation, language: Language): Boolean {
     // Not useful to developers
     val isSuppressAnnotation = annotation.dri.classNames == "Suppress"
     val isKotlinJvmAnnotation = annotation.dri.packageName == "kotlin.jvm"
     // Surfaced separately
     val isDeprecatedAnnotation = annotation.dri.classNames == "Deprecated"
+    val isNullabilityAnnotation = annotation.dri.classNames == "NonNull" ||
+        annotation.dri.classNames == "Nullable"
 
     return !isSuppressAnnotation &&
         !isKotlinJvmAnnotation &&
-        !isDeprecatedAnnotation
+        !isDeprecatedAnnotation &&
+        // Keep nullability annotations for Java
+        (language == Language.JAVA || !isNullabilityAnnotation)
 }
 
 private fun AnnotationParameterValue.toComponent(): String = when (this) {

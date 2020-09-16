@@ -47,7 +47,10 @@ internal class FunctionDocumentableConverter(
                 title = DefaultTypeSummary(
                     TypeSummary.Params(
                         modifiers = function.modifiers().modifiersFor(hints),
-                        type = paramConverter.componentForProjection(function.type)
+                        type = paramConverter.componentForProjection(
+                            function.type,
+                            function.annotations()
+                        )
                     )
                 ),
                 description = DefaultFunctionSummary(
@@ -76,13 +79,18 @@ internal class FunctionDocumentableConverter(
 
     /** @return the function detail component */
     fun detail(function: DFunction, hints: ModifierHints): FunctionDetail {
-        val returnType = paramConverter.componentForProjection(function.type)
+        val annotations = function.annotations()
+        val returnType = paramConverter.componentForProjection(function.type, annotations)
         return DefaultFunctionDetail(
             FunctionDetail.Params(
                 displayLanguage = displayLanguage,
                 name = function.name,
                 anchors = generateCompatAnchors(function),
-                annotations = function.annotations().annotationComponents(pathProvider),
+                annotations = annotations.annotationComponents(
+                    pathProvider,
+                    displayLanguage,
+                    function.type.isNullable()
+                ),
                 modifiers = function.modifiers().modifiersFor(hints),
                 returnType = returnType,
                 symbolType = FunctionDetail.SymbolType.FUNCTION,

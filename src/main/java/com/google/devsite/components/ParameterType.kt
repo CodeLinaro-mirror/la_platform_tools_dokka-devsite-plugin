@@ -29,6 +29,7 @@ internal interface ParameterType : ParameterBase {
 
     class Params(
         val type: Link,
+        val nullable: Boolean = false,
         val generics: List<ParameterBase> = emptyList()
     )
 }

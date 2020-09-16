@@ -37,5 +37,6 @@ internal class DefaultParameterType(
             }
             +">"
         }
+        if (data.nullable) +"?"
     }
 }

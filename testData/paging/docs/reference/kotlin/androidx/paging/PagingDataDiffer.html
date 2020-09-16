@@ -93,14 +93,14 @@
             </td>
           </tr>
           <tr>
-            <td><code>operator T</code></td>
+            <td><code>operator T?</code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#get(kotlin.Int)">get</a>(@<a href="/reference/kotlin/kotlin/ranges/IntRange.html">IntRange</a>&nbsp;index:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>)</code></div>
               <p>Returns the presented item at the specified position, notifying Paging of the item access to trigger any loads necessary to fulfill <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a></code>.</p>
             </td>
           </tr>
           <tr>
-            <td><code>T</code></td>
+            <td><code>T?</code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#peek(kotlin.Int)">peek</a>(@<a href="/reference/kotlin/kotlin/ranges/IntRange.html">IntRange</a>&nbsp;index:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>)</code></div>
               <p>Returns the presented item at the specified position, without notifying Paging of the item access that would normally trigger page loads.</p>
@@ -113,7 +113,7 @@
             </td>
           </tr>
           <tr>
-            <td><code>suspend&nbsp;abstract <a href="/reference/kotlin/kotlin/Int.html">Int</a></code></td>
+            <td><code>suspend&nbsp;abstract <a href="/reference/kotlin/kotlin/Int.html">Int</a>?</code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#presentNewList(androidx.paging.NullPaddedList,androidx.paging.NullPaddedList,androidx.paging.CombinedLoadStates,kotlin.Int)">presentNewList</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;previousList:&nbsp;<a href="/reference/kotlin/androidx/paging/NullPaddedList.html">NullPaddedList</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;newList:&nbsp;<a href="/reference/kotlin/androidx/paging/NullPaddedList.html">NullPaddedList</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;newCombinedLoadStates:&nbsp;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;lastAccessedIndex:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a><br>)</code></div>
               <p></p>
@@ -264,7 +264,7 @@
     </div>
     <div><a name="get-kotlin.Int-"></a>
       <h3 class="api-name" id="get(kotlin.Int)">get</h3>
-      <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#get(kotlin.Int)">get</a>(@<a href="/reference/kotlin/kotlin/ranges/IntRange.html">IntRange</a>&nbsp;index:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>):&nbsp;T</pre>
+      <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#get(kotlin.Int)">get</a>(@<a href="/reference/kotlin/kotlin/ranges/IntRange.html">IntRange</a>&nbsp;index:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>):&nbsp;T?</pre>
       <p>Returns the presented item at the specified position, notifying Paging of the item access to trigger any loads necessary to fulfill <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -275,7 +275,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>T</code></td>
+              <td><code>T?</code></td>
               <td width="100%">
                 <p>The presented item at position <code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#index()">index</a></code>, <code>null</code> if it is a placeholder.</p>
               </td>
@@ -303,7 +303,7 @@
     </div>
     <div><a name="peek-kotlin.Int-"></a>
       <h3 class="api-name" id="peek(kotlin.Int)">peek</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#peek(kotlin.Int)">peek</a>(@<a href="/reference/kotlin/kotlin/ranges/IntRange.html">IntRange</a>&nbsp;index:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>):&nbsp;T</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#peek(kotlin.Int)">peek</a>(@<a href="/reference/kotlin/kotlin/ranges/IntRange.html">IntRange</a>&nbsp;index:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>):&nbsp;T?</pre>
       <p>Returns the presented item at the specified position, without notifying Paging of the item access that would normally trigger page loads.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -314,7 +314,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>T</code></td>
+              <td><code>T?</code></td>
               <td width="100%">
                 <p>The presented item at position <code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#index()">index</a></code>, <code>null</code> if it is a placeholder</p>
               </td>
@@ -346,7 +346,7 @@
     </div>
     <div><a name="presentNewList(androidx.paging.NullPaddedList, androidx.paging.NullPaddedList, androidx.paging.CombinedLoadStates, kotlin.Int)"></a><a name="presentNewList-androidx.paging.NullPaddedList-androidx.paging.NullPaddedList-androidx.paging.CombinedLoadStates-kotlin.Int-"></a>
       <h3 class="api-name" id="presentNewList(androidx.paging.NullPaddedList,androidx.paging.NullPaddedList,androidx.paging.CombinedLoadStates,kotlin.Int)">presentNewList</h3>
-      <pre class="api-signature no-pretty-print">suspend&nbsp;abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#presentNewList(androidx.paging.NullPaddedList,androidx.paging.NullPaddedList,androidx.paging.CombinedLoadStates,kotlin.Int)">presentNewList</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;previousList:&nbsp;<a href="/reference/kotlin/androidx/paging/NullPaddedList.html">NullPaddedList</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;newList:&nbsp;<a href="/reference/kotlin/androidx/paging/NullPaddedList.html">NullPaddedList</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;newCombinedLoadStates:&nbsp;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;lastAccessedIndex:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a><br>):&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></pre>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#presentNewList(androidx.paging.NullPaddedList,androidx.paging.NullPaddedList,androidx.paging.CombinedLoadStates,kotlin.Int)">presentNewList</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;previousList:&nbsp;<a href="/reference/kotlin/androidx/paging/NullPaddedList.html">NullPaddedList</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;newList:&nbsp;<a href="/reference/kotlin/androidx/paging/NullPaddedList.html">NullPaddedList</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;newCombinedLoadStates:&nbsp;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;lastAccessedIndex:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a><br>):&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>?</pre>
       <p></p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -357,7 +357,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><code><a href="/reference/kotlin/kotlin/Int.html">Int</a></code></td>
+              <td><code><a href="/reference/kotlin/kotlin/Int.html">Int</a>?</code></td>
               <td width="100%">
                 <p>Transformed result of <code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#lastAccessedIndex()">lastAccessedIndex</a></code> as an index of <code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#newList()">newList</a></code> using the diff result between <code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#previousList()">previousList</a></code> and <code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#newList()">newList</a></code>. Null if <code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#newList()">newList</a></code> or <code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#previousList()">previousList</a></code> lists are empty, where it does not make sense to transform <code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#lastAccessedIndex()">lastAccessedIndex</a></code>.</p>
               </td>

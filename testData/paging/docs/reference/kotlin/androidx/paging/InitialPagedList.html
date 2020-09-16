@@ -71,7 +71,7 @@
             </td>
           </tr>
           <tr>
-            <td><code>final K</code></td>
+            <td><code>final K?</code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/InitialPagedList.html#initialLastKey()">initialLastKey</a></code></div>
             </td>
@@ -91,7 +91,7 @@
             </td>
           </tr>
           <tr>
-            <td><code>open K</code></td>
+            <td><code>open K?</code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/InitialPagedList.html#lastKey()">lastKey</a></code></div>
               <p>Return the key for the position passed most recently to <code><a href="/reference/kotlin/androidx/paging/InitialPagedList.html#loadAround(kotlin.Int)">loadAround</a></code>.</p>
@@ -180,7 +180,7 @@
         <tbody>
           <tr>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/InitialPagedList.html#InitialPagedList(androidx.paging.PagingSource,,androidx.paging.PagedList.Config,kotlin.Any)">InitialPagedList</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pagingSource:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;K,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;coroutineScope:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLastKey:&nbsp;K<br>)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/InitialPagedList.html#InitialPagedList(androidx.paging.PagingSource,,androidx.paging.PagedList.Config,kotlin.Any)">InitialPagedList</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pagingSource:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;K,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;coroutineScope:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLastKey:&nbsp;K?<br>)</code></div>
             </td>
           </tr>
         </tbody>
@@ -253,7 +253,7 @@
     </div>
     <div><a name="getInitialLastKey()"></a><a name="setInitialLastKey()"></a><a name="getInitialLastKey--"></a><a name="setInitialLastKey--"></a>
       <h3 class="api-name" id="initialLastKey()">initialLastKey</h3>
-      <pre class="api-signature no-pretty-print">final&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/InitialPagedList.html#initialLastKey()">initialLastKey</a>:&nbsp;K</pre>
+      <pre class="api-signature no-pretty-print">final&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/InitialPagedList.html#initialLastKey()">initialLastKey</a>:&nbsp;K?</pre>
     </div>
     <div><a name="getIsDetached()"></a><a name="setIsDetached()"></a><a name="getIsDetached--"></a><a name="setIsDetached--"></a>
       <h3 class="api-name" id="isDetached()">isDetached</h3>
@@ -304,7 +304,7 @@
     </div>
     <div><a name="getLastKey()"></a><a name="setLastKey()"></a><a name="getLastKey--"></a><a name="setLastKey--"></a>
       <h3 class="api-name" id="lastKey()">lastKey</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/InitialPagedList.html#lastKey()">lastKey</a>:&nbsp;K</pre>
+      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/InitialPagedList.html#lastKey()">lastKey</a>:&nbsp;K?</pre>
       <p>Return the key for the position passed most recently to <code><a href="/reference/kotlin/androidx/paging/InitialPagedList.html#loadAround(kotlin.Int)">loadAround</a></code>.</p>
       <p>When a PagedList is invalidated, you can pass the key returned by this function to initialize the next PagedList. This ensures (depending on load times) that the next PagedList that arrives will have data that overlaps. If you use androidx.paging.LivePagedListBuilder, it will do this for you.</p>
       <div class="devsite-table-wrapper">
@@ -316,7 +316,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>K</code></td>
+              <td><code>K?</code></td>
               <td width="100%">
                 <p>Key of position most recently passed to <code><a href="/reference/kotlin/androidx/paging/InitialPagedList.html#loadAround(kotlin.Int)">loadAround</a></code>.</p>
               </td>
@@ -432,7 +432,7 @@
     <h2>Public constructors</h2>
     <div><a name="InitialPagedList(androidx.paging.PagingSource, , androidx.paging.PagedList.Config, kotlin.Any)"></a><a name="InitialPagedList-androidx.paging.PagingSource--androidx.paging.PagedList.Config-kotlin.Any-"></a>
       <h3 class="api-name" id="InitialPagedList(androidx.paging.PagingSource,,androidx.paging.PagedList.Config,kotlin.Any)">InitialPagedList</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/InitialPagedList.html#InitialPagedList(androidx.paging.PagingSource,,androidx.paging.PagedList.Config,kotlin.Any)">InitialPagedList</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pagingSource:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;K,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;coroutineScope:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLastKey:&nbsp;K<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/InitialPagedList.html">InitialPagedList</a>&lt;K,&nbsp;V&gt;</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/InitialPagedList.html#InitialPagedList(androidx.paging.PagingSource,,androidx.paging.PagedList.Config,kotlin.Any)">InitialPagedList</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pagingSource:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;K,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;coroutineScope:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLastKey:&nbsp;K?<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/InitialPagedList.html">InitialPagedList</a>&lt;K,&nbsp;V&gt;</pre>
     </div>
   </body>
 </html>

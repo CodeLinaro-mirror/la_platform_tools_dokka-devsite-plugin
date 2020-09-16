@@ -46,6 +46,27 @@ class DefaultParameterTypeTest {
     }
 
     @Test
+    fun `Simple nullable parameter type renders correctly`() {
+        val component = DefaultParameterType(
+            Params(
+                type = NoopLink("Int"),
+                nullable = true
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>Int?</div>
+            """.trim()
+        )
+    }
+
+    @Test
     fun `Parameter type with one generic renders correctly`() {
         val component = DefaultParameterType(
             Params(
@@ -62,6 +83,28 @@ class DefaultParameterTypeTest {
         assertThat(output).isEqualTo(
             """
 <div>List&lt;String&gt;</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Nullable parameter type with one generic renders correctly`() {
+        val component = DefaultParameterType(
+            Params(
+                type = NoopLink("List"),
+                nullable = true,
+                generics = listOf(NoopParameterType("String"))
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>List&lt;String&gt;?</div>
             """.trim()
         )
     }

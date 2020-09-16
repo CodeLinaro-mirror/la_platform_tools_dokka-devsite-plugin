@@ -24,6 +24,9 @@ import com.google.devsite.components.Component
 import com.google.devsite.components.DevsitePage
 import com.google.devsite.components.FunctionSummary
 import com.google.devsite.components.Link
+import com.google.devsite.components.Parameter
+import com.google.devsite.components.ParameterBase
+import com.google.devsite.components.ParameterType
 import com.google.devsite.components.SummaryList
 import com.google.devsite.components.TableOfContents
 import com.google.devsite.components.TableTitle
@@ -57,3 +60,16 @@ internal fun TwoPaneSummaryItem.link(): Link.Params = (data.title as Link).data
 internal fun TwoPaneSummaryItem.functionSummary() = data.description as FunctionSummary
 internal fun FunctionSummary.name(): String = data.signature.data.name.data.name
 internal fun SummaryList.title(): String = (data.header as TableTitle).data.title
+
+internal fun ParameterBase.asType(): ParameterType = when (this) {
+    is Parameter -> data.primary.asType()
+    is ParameterType -> this
+    else -> error("Not supported: $this")
+}
+
+internal fun ParameterType.link(): Link.Params = data.type.data
+internal fun ParameterBase.link(): Link.Params = when (this) {
+    is Parameter -> data.primary.asType().link()
+    is ParameterType -> data.type.data
+    else -> error("Not supported: $this")
+}

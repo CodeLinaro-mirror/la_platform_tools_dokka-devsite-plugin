@@ -24,6 +24,9 @@ import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.Nullable
+import org.jetbrains.dokka.model.Projection
+import org.jetbrains.dokka.model.Variance
 import org.jetbrains.dokka.model.WithChildren
 
 /** Recursively expands all children. */
@@ -76,3 +79,10 @@ internal fun DPackage.extensionProperties() =
 
 internal fun DPackage.extensionFunctions() =
     functions.filterNot { it.receiver == null }.sortedBy { it.name }
+
+/** @return true if this is a nullable type, false otherwise */
+internal fun Projection.isNullable(): Boolean = when (this) {
+    is Nullable -> true
+    is Variance<*> -> inner.isNullable()
+    else -> false
+}

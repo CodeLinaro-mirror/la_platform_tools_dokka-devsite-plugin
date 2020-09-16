@@ -17,13 +17,12 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.Link
 import com.google.devsite.components.Parameter
-import com.google.devsite.components.ParameterBase
-import com.google.devsite.components.ParameterType
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.testing.asType
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
+import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DParameter
@@ -157,6 +156,19 @@ internal class ParameterDocumentableConverterTest(
         assertThat(param.defaultValue).isNull()
     }
 
+    @Test
+    fun `Parameter includes nullability information`() {
+        val param = """
+            |fun foo(foo: Int?)
+        """.render().param(forSummary = true).data
+
+        javaOnly { assertThat(param.annotations).isNotEmpty() }
+        kotlinOnly {
+            assertThat(param.annotations).isEmpty()
+            assertThat(param.primary.asType().data.nullable).isTrue()
+        }
+    }
+
     private fun DModule.param(forSummary: Boolean = false): Parameter {
         val converter = ParameterDocumentableConverter(language, pathProvider())
         return converter.componentForParameter(parameterDoc(), forSummary)
@@ -164,18 +176,6 @@ internal class ParameterDocumentableConverterTest(
 
     private fun DModule.parameterDoc(): DParameter {
         return packages.single().functions.single().parameters.single()
-    }
-
-    private fun ParameterBase.asType(): ParameterType = when (this) {
-        is Parameter -> data.primary.asType()
-        is ParameterType -> this
-        else -> error("Not supported: $this")
-    }
-
-    private fun ParameterBase.link(): Link.Params = when (this) {
-        is Parameter -> data.primary.asType().link()
-        is ParameterType -> data.type.data
-        else -> error("Not supported: $this")
     }
 
     private fun assertNoLambdaStuff(data: Parameter.Params) {

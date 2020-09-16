@@ -25,6 +25,7 @@ import com.google.devsite.components.ParameterType
 import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.TypeSummary
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.testing.asType
 import com.google.devsite.renderer.converters.testing.functionSummary
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.testing.ConverterTestBase
@@ -116,6 +117,19 @@ internal class PropertyDocumentableConverterTest(
         """.render().detail()
 
         assertThat(detail.data.annotations).isNotEmpty()
+    }
+
+    @Test
+    fun `Property detail component has nullability information`() {
+        val detail = """
+            |val foo: String? = null
+        """.render().detail()
+
+        javaOnly { assertThat(detail.data.annotations).isNotEmpty() }
+        kotlinOnly {
+            assertThat(detail.data.annotations).isEmpty()
+            assertThat(detail.data.returnType.asType().data.nullable).isTrue()
+        }
     }
 
     @Test
