@@ -19,6 +19,7 @@ package com.google.devsite.renderer.converters
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Link
 import com.google.devsite.components.Parameter
+import com.google.devsite.components.ParameterBase
 import com.google.devsite.components.ParameterType
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.item
@@ -40,7 +41,7 @@ internal class ParameterDocumentableConverterTest(
             |fun foo(a: String) = Unit
         """.render().param()
 
-        val paramType = param.data.primary
+        val paramType = param.data.primary.asType()
 
         assertThat(paramType.link().name).isEqualTo("String")
     }
@@ -61,7 +62,7 @@ internal class ParameterDocumentableConverterTest(
             |fun foo(a: List<Int>)
         """.render().param()
 
-        val paramType = param.data.primary
+        val paramType = param.data.primary.asType()
         val generic = paramType.data.generics.item()
 
         assertThat(generic.link().name).isEqualTo("Int")
@@ -73,8 +74,8 @@ internal class ParameterDocumentableConverterTest(
             |fun foo(a: List<Set<Int>>)
         """.render().param()
 
-        val paramType = param.data.primary
-        val generic = paramType.data.generics.item()
+        val paramType = param.data.primary.asType()
+        val generic = paramType.data.generics.item().asType()
         val nestedGeneric = generic.data.generics.item()
 
         assertThat(nestedGeneric.link().name).isEqualTo("Int")
@@ -86,7 +87,7 @@ internal class ParameterDocumentableConverterTest(
             |fun foo(a: List<*>)
         """.render().param()
 
-        val paramType = param.data.primary
+        val paramType = param.data.primary.asType()
         val generic = paramType.data.generics.item()
 
         javaOnly { assertThat(generic.link().name).isEqualTo("?") }
@@ -102,7 +103,7 @@ internal class ParameterDocumentableConverterTest(
         javaOnly {
             assertNoLambdaStuff(param)
 
-            val primary = param.primary.data
+            val primary = param.primary.asType().data
             assertThat(primary.type.data.name).isEqualTo("Function3")
             assertThat(primary.generics).hasSize(4)
             assertThat(primary.generics[0].link().name).isEqualTo("Int")
@@ -110,11 +111,11 @@ internal class ParameterDocumentableConverterTest(
             assertThat(primary.generics[2].link().name).isEqualTo("Double")
             assertThat(primary.generics[3].link().name).isEqualTo("Collection")
 
-            val mapGenerics = primary.generics[1].data.generics.items(2)
+            val mapGenerics = primary.generics[1].asType().data.generics.items(2)
             assertThat(mapGenerics.first().link().name).isEqualTo("String")
             assertThat(mapGenerics.last().link().name).isEqualTo("Int")
 
-            val collectionGeneric = primary.generics[3].data.generics.item()
+            val collectionGeneric = primary.generics[3].asType().data.generics.item()
             assertThat(collectionGeneric.link().name).isEqualTo("Float")
         }
         kotlinOnly {
@@ -125,13 +126,14 @@ internal class ParameterDocumentableConverterTest(
             assertThat(param.lambdaParams).hasSize(2)
             assertThat(param.lambdaParams.first().link().name).isEqualTo("Map")
             assertThat(param.lambdaParams.last().link().name).isEqualTo("Double")
-            assertThat(param.primary.link().name).isEqualTo("Collection")
+            assertThat(param.primary.asType().link().name).isEqualTo("Collection")
 
-            val mapGenerics = param.lambdaParams.first().data.generics.items(2)
+            val mapGenerics =
+                param.lambdaParams.first().asType().data.generics.items(2)
             assertThat(mapGenerics.first().link().name).isEqualTo("String")
             assertThat(mapGenerics.last().link().name).isEqualTo("Int")
 
-            val collectionGeneric = param.primary.data.generics.item()
+            val collectionGeneric = param.primary.asType().data.generics.item()
             assertThat(collectionGeneric.link().name).isEqualTo("Float")
         }
     }
@@ -164,7 +166,17 @@ internal class ParameterDocumentableConverterTest(
         return packages.single().functions.single().parameters.single()
     }
 
-    private fun ParameterType.link(): Link.Params = data.type.data
+    private fun ParameterBase.asType(): ParameterType = when (this) {
+        is Parameter -> data.primary.asType()
+        is ParameterType -> this
+        else -> error("Not supported: $this")
+    }
+
+    private fun ParameterBase.link(): Link.Params = when (this) {
+        is Parameter -> data.primary.asType().link()
+        is ParameterType -> data.type.data
+        else -> error("Not supported: $this")
+    }
 
     private fun assertNoLambdaStuff(data: Parameter.Params) {
         assertThat(data.isLambda).isFalse()

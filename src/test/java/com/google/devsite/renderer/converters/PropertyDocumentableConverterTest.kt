@@ -161,7 +161,7 @@ internal class PropertyDocumentableConverterTest(
         }
     }
 
-    private fun Parameter.link(): Link.Params = data.primary.link()
+    private fun Parameter.link(): Link.Params = (data.primary as ParameterType).link()
     private fun ParameterType.link(): Link.Params = data.type.data
     private fun TwoPaneSummaryItem.returnSummary(): TypeSummary.Params =
         (data.title as TypeSummary).data

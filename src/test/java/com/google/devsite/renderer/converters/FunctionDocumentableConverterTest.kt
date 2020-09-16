@@ -22,6 +22,7 @@ import com.google.devsite.components.FunctionDetail.SymbolType
 import com.google.devsite.components.FunctionSummary
 import com.google.devsite.components.Link
 import com.google.devsite.components.Parameter
+import com.google.devsite.components.ParameterBase
 import com.google.devsite.components.ParameterType
 import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.TypeSummary
@@ -164,8 +165,8 @@ internal class FunctionDocumentableConverterTest(
         """.render().summary()
 
         val returnz = summary.returnSummary()
-        val generics = returnz.type.data.primary.data.generics.items(2)
-        val nestedGenerics = generics.last().data.generics.item()
+        val generics = returnz.type.asType().data.generics.items(2)
+        val nestedGenerics = generics.last().asType().data.generics.item()
 
         assertThat(generics.first().link().name).isEqualTo("String")
         assertThat(generics.last().link().name).isEqualTo("List")
@@ -243,7 +244,7 @@ internal class FunctionDocumentableConverterTest(
         """.render().summary()
 
         val function = summary.functionSummary()
-        val generic = function.param().data.primary.data.generics.item()
+        val generic = function.param().asType().data.generics.item()
 
         // TODO(b/166530498): support variance
         assertThat(generic.link().name).isEqualTo("String")
@@ -293,7 +294,7 @@ internal class FunctionDocumentableConverterTest(
         javaOnly {
             assertNoLambdaStuff(param)
 
-            val primary = param.primary.data
+            val primary = param.primary.asType().data
             assertThat(primary.type.data.name).isEqualTo("Function0")
             assertThat(primary.generics.item().link().name).isEqualTo("Unit")
         }
@@ -318,7 +319,7 @@ internal class FunctionDocumentableConverterTest(
         javaOnly {
             assertNoLambdaStuff(param)
 
-            val primary = param.primary.data
+            val primary = param.primary.asType().data
             assertThat(primary.type.data.name).isEqualTo("SuspendFunction0")
             assertThat(primary.generics.single().link().name).isEqualTo("Unit")
         }
@@ -365,7 +366,7 @@ internal class FunctionDocumentableConverterTest(
         javaOnly {
             assertNoLambdaStuff(param)
 
-            val primary = param.primary.data
+            val primary = param.primary.asType().data
             assertThat(primary.type.data.name).isEqualTo("SuspendFunction1")
             assertThat(primary.generics.first().link().name).isEqualTo("Float")
             assertThat(primary.generics.last().link().name).isEqualTo("Unit")
@@ -391,7 +392,7 @@ internal class FunctionDocumentableConverterTest(
         javaOnly {
             assertNoLambdaStuff(param)
 
-            val primary = param.primary.data
+            val primary = param.primary.asType().data
             assertThat(primary.type.data.name).isEqualTo("Function1")
             assertThat(primary.generics.first().link().name).isEqualTo("String")
             assertThat(primary.generics.last().link().name).isEqualTo("Unit")
@@ -417,7 +418,7 @@ internal class FunctionDocumentableConverterTest(
         javaOnly {
             assertNoLambdaStuff(param)
 
-            val primary = param.primary.data
+            val primary = param.primary.asType().data
             assertThat(primary.type.data.name).isEqualTo("Function1")
             assertThat(primary.generics.first().link().name).isEqualTo("Float")
             assertThat(primary.generics.last().link().name).isEqualTo("Unit")
@@ -579,6 +580,18 @@ internal class FunctionDocumentableConverterTest(
     private fun FunctionSummary.param(): Parameter = data.signature.data.parameters.item()
     private fun TwoPaneSummaryItem.returnSummary(): TypeSummary.Params =
         (data.title as TypeSummary).data
+
+    private fun ParameterBase.asType(): ParameterType = when (this) {
+        is Parameter -> data.primary.asType()
+        is ParameterType -> this
+        else -> error("Not supported: $this")
+    }
+
+    private fun ParameterBase.link(): Link.Params = when (this) {
+        is Parameter -> data.primary.asType().link()
+        is ParameterType -> data.type.data
+        else -> error("Not supported: $this")
+    }
 
     companion object {
         @JvmStatic

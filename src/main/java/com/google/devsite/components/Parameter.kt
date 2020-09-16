@@ -19,7 +19,7 @@ package com.google.devsite.components
 import com.google.devsite.renderer.Language
 
 /** Represents a function or method parameter. */
-internal interface Parameter : ContextFreeComponent {
+internal interface Parameter : ParameterBase {
     val data: Params
 
     /** Ensure this component's combination of params makes sense. */
@@ -39,10 +39,10 @@ internal interface Parameter : ContextFreeComponent {
         val displayLanguage: Language,
         val isLambda: Boolean,
         val name: String,
-        val receiver: ParameterType? = null,
-        val lambdaParams: List<ParameterType> = emptyList(),
+        val receiver: ParameterBase? = null,
+        val lambdaParams: List<ParameterBase> = emptyList(),
         val lambdaModifiers: List<String> = emptyList(),
-        val primary: ParameterType,
+        val primary: ParameterBase,
         val annotations: List<Annotation> = emptyList(),
         val defaultValue: String? = null
     )

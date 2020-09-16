@@ -18,6 +18,7 @@ package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.Link
 import com.google.devsite.components.Parameter
+import com.google.devsite.components.ParameterBase
 import com.google.devsite.components.ParameterType
 import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultParameter
@@ -100,7 +101,7 @@ internal class ParameterDocumentableConverter(
         val receiver = proj.receiver()
         val primaryType = if (isLambda) {
             // Get the return type of the lambda
-            (proj as TypeConstructor).projections.last().toComponent()
+            componentForKotlinProjection(proj.asTypeConstructor().projections.last())
         } else {
             proj.toComponent()
         }
@@ -109,14 +110,14 @@ internal class ParameterDocumentableConverter(
         } else {
             emptyList()
         }
-        val lambdaParams: List<ParameterType> = if (isLambda) {
+        val lambdaParams: List<Parameter> = if (isLambda) {
             // Always ignore the return type of the lambda since that's handled by primaryType.
-            val lambdaProjections = (proj as TypeConstructor).projections.dropLast(1)
+            val lambdaProjections = proj.asTypeConstructor().projections.dropLast(1)
             if (receiver == null) {
-                lambdaProjections.map { it.toComponent() }
+                lambdaProjections.map(::componentForKotlinProjection)
             } else {
                 // If the receiver is available, we also ignore the first type
-                lambdaProjections.drop(1).map { it.toComponent() }
+                lambdaProjections.drop(1).map(::componentForKotlinProjection)
             }
         } else {
             emptyList()
@@ -138,9 +139,9 @@ internal class ParameterDocumentableConverter(
     }
 
     /** Converts a lambda receiver projection to its type component if available. */
-    private fun Projection.receiver(): ParameterType? = when (this) {
+    private fun Projection.receiver(): Parameter? = when (this) {
         is TypeConstructor -> if (modifier == FunctionModifiers.EXTENSION) {
-            projections.first().toComponent()
+            componentForProjection(projections.first())
         } else {
             null
         }
@@ -155,14 +156,14 @@ internal class ParameterDocumentableConverter(
         if (this is Variance<*>) {
             return inner.toComponent()
         }
+        if (this is Nullable) {
+            return inner.toComponent()
+        }
 
-        val generics: List<ParameterType> = when (this) {
-            is TypeConstructor -> projections.map { it.toComponent() }
+        val generics: List<ParameterBase> = when (this) {
+            is TypeConstructor -> projections.map { componentForProjection(it) }
             is TypeParameter, is PrimitiveJavaType, is UnresolvedBound,
             Star, Void, JavaObject -> emptyList()
-            is Nullable -> listOf(inner.toComponent())
-            // TODO(b/166530498): support variance
-            is Variance<*> -> listOf(inner.toComponent())
             else -> error("Unknown bound: $this")
         }
 
@@ -207,9 +208,6 @@ internal class ParameterDocumentableConverter(
             Language.KOTLIN -> pathProvider.linkForReference(DRI("kotlin", name.capitalize()))
         }
         is UnresolvedBound -> DefaultLink(Link.Params(name = name, url = ""))
-        is Nullable -> inner.toLink()
-        // TODO(b/166530498): support variance
-        is Variance<*> -> inner.toLink()
         else -> error("Unknown bound: $this")
     }
 
@@ -231,5 +229,12 @@ internal class ParameterDocumentableConverter(
         is Variance<*> -> inner.isLambda()
         is TypeParameter, is PrimitiveJavaType, is UnresolvedBound, Star, JavaObject, Void -> false
         else -> error("Unknown bound: $this")
+    }
+
+    /** Gets the type constructor of a *lambda param only*. */
+    private fun Projection.asTypeConstructor(): TypeConstructor = when (this) {
+        is Variance<*> -> inner.asTypeConstructor()
+        is Nullable -> inner.asTypeConstructor()
+        else -> this as TypeConstructor
     }
 }

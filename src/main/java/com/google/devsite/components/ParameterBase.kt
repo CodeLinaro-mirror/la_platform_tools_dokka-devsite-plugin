@@ -16,12 +16,5 @@
 
 package com.google.devsite.components
 
-/** Represents a function or method parameter type. */
-internal interface ParameterType : ParameterBase {
-    val data: Params
-
-    class Params(
-        val type: Link,
-        val generics: List<ParameterBase> = emptyList()
-    )
-}
+/** Base type for parameter related components. */
+internal interface ParameterBase : ContextFreeComponent
