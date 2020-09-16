@@ -197,7 +197,7 @@ internal class DefaultDescription(
                 is Ul -> ul { renderUnorderedList(tag.children, state) }
                 HorizontalRule -> hr { renderTags(tag.children, state) }
                 is CodeInline -> code { renderTags(tag.children, state) }
-                is Pre, is CodeBlock -> pre { renderTags(tag.children, state) }
+                is Pre, is CodeBlock -> pre("prettyprint") { renderTags(tag.children, state) }
                 is DocumentationLink -> code {
                     data.pathProvider.linkForReference(tag.dri).render(this)
                 }

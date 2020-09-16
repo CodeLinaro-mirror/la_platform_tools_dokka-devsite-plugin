@@ -16,7 +16,7 @@
     <hr>
     <p>Factory for DataSources.</p>
     <p>Data-loading systems of an application or library can implement this interface to allow <code>LiveData&lt;PagedList&gt;</code>s to be created. For example, Room can provide a <code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code> for a given SQL query:</p>
-    <pre>@Dao<br>interface UserDao {<br>    @Query(&quot;SELECT * FROM user ORDER BY lastName ASC&quot;)<br>    public abstract DataSource.Factory&lt;Integer, User&gt; usersByLastName();<br>}</pre>
+    <pre class="prettyprint">@Dao<br>interface UserDao {<br>    @Query(&quot;SELECT * FROM user ORDER BY lastName ASC&quot;)<br>    public abstract DataSource.Factory&lt;Integer, User&gt; usersByLastName();<br>}</pre>
     <p>In the above sample, <code>Integer</code> is used because it is the <code>Key</code> type of PositionalDataSource. Currently, Room uses the <code>LIMIT</code>/<code>OFFSET</code> SQL keywords to page a large query with a PositionalDataSource.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">

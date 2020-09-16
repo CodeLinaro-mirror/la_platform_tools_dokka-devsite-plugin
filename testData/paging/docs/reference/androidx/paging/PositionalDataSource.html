@@ -17,7 +17,7 @@
     <p>Position-based data loader for a fixed-size, countable data set, supporting fixed-size loads at arbitrary page positions.</p>
     <p>Extend PositionalDataSource if you can load pages of a requested size at arbitrary positions, and provide a fixed item count. If your data source can't support loading arbitrary requested page sizes (e.g. when network page size constraints are only known at runtime), either use <code><a href="/reference/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a></code> or <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a></code>, or pass the initial result with the two parameter <code><a href="/reference/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int)">onResult</a></code>.</p>
     <p>Room can generate a Factory of PositionalDataSources for you:</p>
-    <pre>@Dao<br>interface UserDao {<br>    @Query(&quot;SELECT * FROM user ORDER BY age DESC&quot;)<br>    public abstract DataSource.Factory&lt;Integer, User&gt; loadUsersByAgeDesc();<br>}</pre>
+    <pre class="prettyprint">@Dao<br>interface UserDao {<br>    @Query(&quot;SELECT * FROM user ORDER BY age DESC&quot;)<br>    public abstract DataSource.Factory&lt;Integer, User&gt; loadUsersByAgeDesc();<br>}</pre>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <thead>

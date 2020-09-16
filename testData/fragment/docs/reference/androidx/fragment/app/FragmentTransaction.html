@@ -1073,7 +1073,7 @@
       <pre class="api-signature no-pretty-print">public&nbsp;&nbsp;<a href="/reference/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a>&nbsp;<a href="/reference/androidx/fragment/app/FragmentTransaction.html#setCustomAnimations(int,int)">setCustomAnimations</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;enter,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;exit<br>)</pre>
       <p>Set specific animation resources to run for the fragments that are entering and exiting in this transaction. These animations will not be played when popping the back stack. </p>
       <p>This method applies the custom animations to all future fragment operations; previous operations are unaffected. Fragment operations in the same <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a></code> can set different animations by calling this method prior to each operation, e.g: </p>
-      <pre> fragmentManager.beingTransaction()
+      <pre class="prettyprint"> fragmentManager.beingTransaction()
      .setCustomAnimations(enter1, exit1)
      .add(MyFragmentClass, args, tag1) // this fragment gets the first animations
      .setCustomAnimations(enter2, exit2)
@@ -1109,7 +1109,7 @@
       <pre class="api-signature no-pretty-print">public&nbsp;&nbsp;<a href="/reference/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a>&nbsp;<a href="/reference/androidx/fragment/app/FragmentTransaction.html#setCustomAnimations(int,int,int,int)">setCustomAnimations</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;enter,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;exit,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;popEnter,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;popExit<br>)</pre>
       <p>Set specific animation resources to run for the fragments that are entering and exiting in this transaction. The <code>popEnter</code> and <code>popExit</code> animations will be played for enter/exit operations specifically when popping the back stack. </p>
       <p>This method applies the custom animations to all future fragment operations; previous operations are unaffected. Fragment operations in the same <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a></code> can set different animations by calling this method prior to each operation, e.g: </p>
-      <pre> fragmentManager.beingTransaction()
+      <pre class="prettyprint"> fragmentManager.beingTransaction()
      .setCustomAnimations(enter1, exit1, popEnter1, popExit1)
      .add(MyFragmentClass, args, tag1) // this fragment gets the first animations
      .setCustomAnimations(enter2, exit2, popEnter2, popExit2)
