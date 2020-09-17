@@ -1,0 +1,105 @@
+/*
+ * Copyright 2020 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.google.devsite.renderer.converters
+
+import com.google.common.truth.Truth.assertThat
+import com.google.devsite.components.Link
+import com.google.devsite.renderer.converters.testing.item
+import com.google.devsite.testing.ConverterTestBase
+import org.jetbrains.dokka.model.Annotations.Annotation
+import org.jetbrains.dokka.model.DModule
+import org.junit.Ignore
+import org.junit.Test
+import com.google.devsite.components.Annotation as AnnotationComponent
+
+internal class AnnotationsTest : ConverterTestBase() {
+    @Test
+    fun `@Suppress annotations are ignored`() {
+        val annotations = """
+            |@Suppress("abc")
+            |fun foo() = Unit
+        """.render().annotations()
+
+        val components = annotations.annotationComponents(pathProvider())
+
+        assertThat(components).isEmpty()
+    }
+
+    @Ignore // TODO(b/168667502): why isn't this on the classpath?
+    @Test
+    fun `JVM annotations are ignored`() {
+        val annotations = """
+            |@JvmName("bar")
+            |fun foo() = Unit
+        """.render().annotations()
+
+        val components = annotations.annotationComponents(pathProvider())
+
+        assertThat(components).isEmpty()
+    }
+
+    @Test
+    fun `@Deprecated annotations are ignored`() {
+        val annotations = """
+            |@Deprecated("deprecated")
+            |fun foo() = Unit
+        """.render().annotations()
+
+        val components = annotations.annotationComponents(pathProvider())
+
+        assertThat(components).isEmpty()
+    }
+
+    @Test
+    fun `Component has annotation type`() {
+        val annotations = """
+            |annotation class Hello
+            |@Hello
+            |fun foo() = Unit
+        """.render().annotations()
+
+        val annotation = annotations.annotationComponents(pathProvider()).item()
+
+        assertThat(annotation.link().name).isEqualTo("Hello")
+        assertPath(annotation.link().url, "androidx/example/Hello.html")
+    }
+
+    @Test
+    fun `Component has annotation value`() {
+        val annotations = """
+            |annotation class Hello(val foo: String)
+            |@Hello("abc")
+            |fun foo() = Unit
+        """.render().annotations()
+
+        val annotation = annotations.annotationComponents(pathProvider()).item()
+        val parameter = annotation.data.parameters.item()
+
+        assertThat(parameter.name).isEqualTo("foo")
+        assertThat(parameter.value).isEqualTo("\"abc\"")
+    }
+
+    private fun DModule.annotations(): List<Annotation> {
+        val packageDoc = packages.single()
+        val function = packageDoc.functions.singleOrNull()
+            ?: packageDoc.classlikes.single().functions.single { it.name == "foo" }
+
+        return function.annotations()
+    }
+
+    private fun AnnotationComponent.link(): Link.Params = data.type.data
+}
