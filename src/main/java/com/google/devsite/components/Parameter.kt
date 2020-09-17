@@ -43,7 +43,7 @@ internal interface Parameter : ContextFreeComponent {
         val lambdaParams: List<ParameterType> = emptyList(),
         val lambdaModifiers: List<String> = emptyList(),
         val primary: ParameterType,
-        val annotations: List<Link> = emptyList(),
+        val annotations: List<Annotation> = emptyList(),
         val defaultValue: String? = null
     )
 }

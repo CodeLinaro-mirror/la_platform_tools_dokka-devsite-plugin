@@ -25,6 +25,7 @@ import com.google.devsite.components.impl.DefaultParameterType
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.links.DRI
+import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.DefaultValue
 import org.jetbrains.dokka.model.FunctionModifiers
@@ -49,11 +50,20 @@ internal class ParameterDocumentableConverter(
         param: DParameter,
         isSummary: Boolean
     ): Parameter = when (displayLanguage) {
-        Language.JAVA -> componentForJavaProjection(param.type, param.name ?: "receiver")
+        Language.JAVA -> componentForJavaProjection(
+            proj = param.type,
+            name = param.name ?: "receiver",
+            annotations = param.annotations()
+        )
         Language.KOTLIN -> {
             val defaultValue = param.extra.allOfType<DefaultValue>().singleOrNull()?.value
                 ?.takeUnless { isSummary }
-            componentForKotlinProjection(param.type, param.name.orEmpty(), defaultValue)
+            componentForKotlinProjection(
+                proj = param.type,
+                name = param.name.orEmpty(),
+                defaultValue = defaultValue,
+                annotations = param.annotations()
+            )
         }
     }
 
@@ -63,14 +73,17 @@ internal class ParameterDocumentableConverter(
         Language.KOTLIN -> componentForKotlinProjection(proj)
     }
 
-    private fun componentForJavaProjection(proj: Projection, name: String = ""): Parameter {
+    private fun componentForJavaProjection(
+        proj: Projection,
+        name: String = "",
+        annotations: List<Annotations.Annotation> = emptyList()
+    ): Parameter {
         return DefaultParameter(
             Parameter.Params(
                 isLambda = false,
                 name = name,
                 primary = proj.toComponent(),
-                // TODO(b/165104993): figure out path to implementing annotations
-                annotations = emptyList(),
+                annotations = annotations.annotationComponents(pathProvider),
                 displayLanguage = Language.JAVA
             )
         )
@@ -79,7 +92,8 @@ internal class ParameterDocumentableConverter(
     private fun componentForKotlinProjection(
         proj: Projection,
         name: String = "",
-        defaultValue: String? = null
+        defaultValue: String? = null,
+        annotations: List<Annotations.Annotation> = emptyList()
     ): Parameter {
         val isLambda = proj.isLambda()
 
@@ -117,8 +131,7 @@ internal class ParameterDocumentableConverter(
                 lambdaModifiers = lambdaModifiers,
                 lambdaParams = lambdaParams,
                 primary = primaryType,
-                // TODO(b/165104993): figure out path to implementing annotations
-                annotations = emptyList(),
+                annotations = annotations.annotationComponents(pathProvider),
                 defaultValue = defaultValue
             )
         )

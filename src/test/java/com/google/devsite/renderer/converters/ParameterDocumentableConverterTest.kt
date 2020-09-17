@@ -46,6 +46,16 @@ internal class ParameterDocumentableConverterTest(
     }
 
     @Test
+    fun `Parameter understands annotation`() {
+        val param = """
+            |annotation class Hello
+            |fun foo(@Hello a: List<Int>)
+        """.render().param()
+
+        assertThat(param.data.annotations).isNotEmpty()
+    }
+
+    @Test
     fun `Parameter understands generics`() {
         val param = """
             |fun foo(a: List<Int>)

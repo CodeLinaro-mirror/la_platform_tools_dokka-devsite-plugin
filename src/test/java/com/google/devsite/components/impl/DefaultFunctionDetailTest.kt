@@ -19,6 +19,7 @@ package com.google.devsite.components.impl
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.FunctionDetail.Params
 import com.google.devsite.components.FunctionDetail.SymbolType
+import com.google.devsite.components.testing.NoopAnnotation
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.components.testing.NoopFunctionSignature
 import com.google.devsite.components.testing.NoopParameter
@@ -115,6 +116,38 @@ class DefaultFunctionDetailTest {
   <div>
     <h3 class="api-name">foo</h3>
     <pre class="api-signature no-pretty-print">val&nbsp;foo:&nbsp;Unit</pre>
+  </div>
+</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Java function with annotations renders correctly`() {
+        val component = DefaultFunctionDetail(
+            Params(
+                displayLanguage = Language.JAVA,
+                name = "foo",
+                anchors = linkedSetOf(),
+                annotations = listOf(NoopAnnotation("@Foo"), NoopAnnotation("@Bar")),
+                returnType = NoopParameter("void"),
+                symbolType = SymbolType.FUNCTION,
+                signature = NoopFunctionSignature("foo()"),
+                metadata = emptyList()
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <div>
+    <h3 class="api-name">foo</h3>
+    <pre class="api-signature no-pretty-print">@Foo<br>@Bar<br>void&nbsp;foo()</pre>
   </div>
 </div>
             """.trim()

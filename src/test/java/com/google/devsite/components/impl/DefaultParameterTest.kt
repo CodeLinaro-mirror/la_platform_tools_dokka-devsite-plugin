@@ -18,7 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Parameter.Params
-import com.google.devsite.components.testing.NoopLink
+import com.google.devsite.components.testing.NoopAnnotation
 import com.google.devsite.components.testing.NoopParameterType
 import com.google.devsite.renderer.Language
 import kotlinx.html.div
@@ -126,7 +126,7 @@ class DefaultParameterTest {
                 isLambda = false,
                 name = "number",
                 primary = NoopParameterType("Int"),
-                annotations = listOf(NoopLink("@Really"), NoopLink("@Special")),
+                annotations = listOf(NoopAnnotation("@Really"), NoopAnnotation("@Special")),
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -150,7 +150,7 @@ class DefaultParameterTest {
                 isLambda = false,
                 name = "number",
                 primary = NoopParameterType("int"),
-                annotations = listOf(NoopLink("@Really"), NoopLink("@Special")),
+                annotations = listOf(NoopAnnotation("@Really"), NoopAnnotation("@Special")),
                 displayLanguage = Language.JAVA
             )
         )

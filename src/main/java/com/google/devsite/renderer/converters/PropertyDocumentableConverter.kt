@@ -66,6 +66,7 @@ internal class PropertyDocumentableConverter(
                 displayLanguage = displayLanguage,
                 name = property.name,
                 anchors = property.generateAnchors(),
+                annotations = property.annotations().annotationComponents(pathProvider),
                 modifiers = property.modifiers().modifiersFor(hints),
                 returnType = returnType,
                 symbolType = FunctionDetail.SymbolType.PROPERTY,

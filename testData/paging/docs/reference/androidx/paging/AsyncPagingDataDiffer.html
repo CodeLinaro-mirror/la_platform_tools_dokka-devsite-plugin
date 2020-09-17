@@ -78,14 +78,14 @@
           <tr>
             <td><code>final T&lt;T&gt;</code></td>
             <td width="100%">
-              <div><code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#getItem(kotlin.Int)">getItem</a>(<a href="/reference/kotlin/Int.html">Int</a>&nbsp;index)</code></div>
+              <div><code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#getItem(kotlin.Int)">getItem</a>(@<a href="/reference/kotlin/ranges/IntRange.html">IntRange</a>&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;index)</code></div>
               <p>Get the item from the current PagedList at the specified index.</p>
             </td>
           </tr>
           <tr>
             <td><code>final T&lt;T&gt;</code></td>
             <td width="100%">
-              <div><code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#peek(kotlin.Int)">peek</a>(<a href="/reference/kotlin/Int.html">Int</a>&nbsp;index)</code></div>
+              <div><code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#peek(kotlin.Int)">peek</a>(@<a href="/reference/kotlin/ranges/IntRange.html">IntRange</a>&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;index)</code></div>
               <p>Returns the presented item at the specified position, without notifying Paging of the item access that would normally trigger page loads.</p>
             </td>
           </tr>
@@ -144,7 +144,7 @@
     <h2>Public fields</h2>
     <div><a name="getDataRefreshFlow()"></a><a name="setDataRefreshFlow()"></a><a name="getDataRefreshFlow--"></a><a name="setDataRefreshFlow--"></a>
       <h3 class="api-name" id="dataRefreshFlow()">dataRefreshFlow</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/Boolean.html">Boolean</a>&gt;&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#dataRefreshFlow()">dataRefreshFlow</a></pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a><br>public&nbsp;final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/Boolean.html">Boolean</a>&gt;&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#dataRefreshFlow()">dataRefreshFlow</a></pre>
       <p>A Flow of <code><a href="/reference/kotlin/Boolean.html">Boolean</a></code> that is emitted when new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> generations are submitted and displayed. The <code><a href="/reference/kotlin/Boolean.html">Boolean</a></code> that is emitted is <code>true</code> if the new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is empty, <code>false</code> otherwise.</p>
     </div>
     <div><a name="getItemCount()"></a><a name="setItemCount()"></a><a name="getItemCount--"></a><a name="setItemCount--"></a>
@@ -171,14 +171,14 @@
     </div>
     <div><a name="getLoadStateFlow()"></a><a name="setLoadStateFlow()"></a><a name="getLoadStateFlow--"></a><a name="setLoadStateFlow--"></a>
       <h3 class="api-name" id="loadStateFlow()">loadStateFlow</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#loadStateFlow()">loadStateFlow</a></pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>public&nbsp;final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#loadStateFlow()">loadStateFlow</a></pre>
       <p>A hot Flow of <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
       <p>This flow is conflated, so it buffers the last update to <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> and immediately delivers the current load states on collection.</p>
     </div>
     <h2>Public methods</h2>
     <div><a name="addDataRefreshListener-kotlin.Function1-"></a>
       <h3 class="api-name" id="addDataRefreshListener(kotlin.Function1)">addDataRefreshListener</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#addDataRefreshListener(kotlin.Function1)">addDataRefreshListener</a>(<a href="/reference/kotlin/Function1.html">Function1</a>&lt;<a href="/reference/kotlin/Boolean.html">Boolean</a>,&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&gt;&nbsp;listener)</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a><br>public&nbsp;final&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#addDataRefreshListener(kotlin.Function1)">addDataRefreshListener</a>(<a href="/reference/kotlin/Function1.html">Function1</a>&lt;<a href="/reference/kotlin/Boolean.html">Boolean</a>,&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&gt;&nbsp;listener)</pre>
       <p>Add a listener to observe new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> generations.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -257,7 +257,7 @@
     </div>
     <div><a name="getItem-kotlin.Int-"></a>
       <h3 class="api-name" id="getItem(kotlin.Int)">getItem</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;T&lt;T&gt;&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#getItem(kotlin.Int)">getItem</a>(<a href="/reference/kotlin/Int.html">Int</a>&nbsp;index)</pre>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;T&lt;T&gt;&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#getItem(kotlin.Int)">getItem</a>(@<a href="/reference/kotlin/ranges/IntRange.html">IntRange</a>&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;index)</pre>
       <p>Get the item from the current PagedList at the specified index.</p>
       <p>Note that this operates on both loaded items and null padding within the PagedList.</p>
       <div class="devsite-table-wrapper">
@@ -297,7 +297,7 @@
     </div>
     <div><a name="peek-kotlin.Int-"></a>
       <h3 class="api-name" id="peek(kotlin.Int)">peek</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;T&lt;T&gt;&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#peek(kotlin.Int)">peek</a>(<a href="/reference/kotlin/Int.html">Int</a>&nbsp;index)</pre>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;T&lt;T&gt;&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#peek(kotlin.Int)">peek</a>(@<a href="/reference/kotlin/ranges/IntRange.html">IntRange</a>&nbsp;<a href="/reference/kotlin/Int.html">Int</a>&nbsp;index)</pre>
       <p>Returns the presented item at the specified position, without notifying Paging of the item access that would normally trigger page loads.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -360,7 +360,7 @@
     </div>
     <div><a name="removeDataRefreshListener-kotlin.Function1-"></a>
       <h3 class="api-name" id="removeDataRefreshListener(kotlin.Function1)">removeDataRefreshListener</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#removeDataRefreshListener(kotlin.Function1)">removeDataRefreshListener</a>(<a href="/reference/kotlin/Function1.html">Function1</a>&lt;<a href="/reference/kotlin/Boolean.html">Boolean</a>,&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&gt;&nbsp;listener)</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a><br>public&nbsp;final&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#removeDataRefreshListener(kotlin.Function1)">removeDataRefreshListener</a>(<a href="/reference/kotlin/Function1.html">Function1</a>&lt;<a href="/reference/kotlin/Boolean.html">Boolean</a>,&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&gt;&nbsp;listener)</pre>
       <p>Remove a previously registered listener for new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> generations.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">

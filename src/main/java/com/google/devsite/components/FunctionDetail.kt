@@ -26,6 +26,7 @@ internal interface FunctionDetail : ContextFreeComponent {
         val displayLanguage: Language,
         val name: String,
         val anchors: LinkedHashSet<String>,
+        val annotations: List<Annotation> = emptyList(),
         val modifiers: List<String> = emptyList(),
         val returnType: Parameter,
         val symbolType: SymbolType,

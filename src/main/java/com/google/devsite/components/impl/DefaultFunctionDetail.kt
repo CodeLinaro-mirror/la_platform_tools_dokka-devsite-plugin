@@ -21,6 +21,7 @@ import com.google.devsite.renderer.Language
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
 import kotlinx.html.a
+import kotlinx.html.br
 import kotlinx.html.div
 import kotlinx.html.h3
 import kotlinx.html.pre
@@ -40,6 +41,11 @@ internal class DefaultFunctionDetail(
             +data.name
         }
         pre("api-signature no-pretty-print") {
+            for (annotation in data.annotations) {
+                annotation.render(this)
+                br()
+            }
+
             for (modifier in data.modifiers) {
                 +modifier
                 +Entities.nbsp
