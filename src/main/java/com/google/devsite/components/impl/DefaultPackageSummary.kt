@@ -28,6 +28,10 @@ internal class DefaultPackageSummary(
     override val data: PackageSummary.Params
 ) : PackageSummary {
     override fun render(html: FlowContent) = html.run {
+        for (detail in data.description) {
+            detail.render(this)
+        }
+
         renderSummary(data.interfaces, "Interfaces")
         renderSummary(data.classes, "Classes")
         renderSummary(data.enums, "Enums")

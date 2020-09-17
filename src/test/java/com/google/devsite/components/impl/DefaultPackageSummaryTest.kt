@@ -21,6 +21,7 @@ import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.PackageSummary.Params
 import com.google.devsite.components.SummaryList
 import com.google.devsite.components.testing.NoopContextFreeComponent
+import com.google.devsite.components.testing.NoopDescription
 import com.google.devsite.components.testing.NoopSummaryList
 import com.google.devsite.renderer.Language
 import kotlinx.html.div
@@ -28,6 +29,24 @@ import kotlinx.html.stream.createHTML
 import org.junit.Test
 
 class DefaultPackageSummaryTest {
+    @Test
+    fun `Package summary with description renders correctly`() {
+        val component = createPackageSummary(description = listOf(NoopDescription("Hello World!")))
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <p>Hello World!</p>
+</div>
+            """.trim()
+        )
+    }
+
     @Test
     fun `Package summary with only interfaces renders correctly`() {
         val component = createPackageSummary(interfaces = NoopSummaryList(shown = true))
@@ -365,6 +384,7 @@ class DefaultPackageSummaryTest {
 
     private fun createPackageSummary(
         displayLanguage: Language = Language.JAVA,
+        description: List<ContextFreeComponent> = emptyList(),
         interfaces: SummaryList = NoopSummaryList(shown = false),
         classes: SummaryList = NoopSummaryList(shown = false),
         enums: SummaryList = NoopSummaryList(shown = false),
@@ -384,6 +404,7 @@ class DefaultPackageSummaryTest {
     ) = DefaultPackageSummary(
         Params(
             displayLanguage = displayLanguage,
+            description = description,
             interfaces = interfaces,
             classes = classes,
             enums = enums,

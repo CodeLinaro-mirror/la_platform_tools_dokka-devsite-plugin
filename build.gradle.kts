@@ -69,10 +69,11 @@ tasks.withType<ShadowJar> {
 }
 
 sourceSets.test {
+    // TODO(b/168667502): use glob to compile all integ tests
     java.srcDirs(
-        "testData/innerClasses",
-        "testData/simple",
-        "testData/topLevelFunctions"
+        "testData/innerClasses/source",
+        "testData/simple/source",
+        "testData/topLevelFunctions/source"
     )
 }
 

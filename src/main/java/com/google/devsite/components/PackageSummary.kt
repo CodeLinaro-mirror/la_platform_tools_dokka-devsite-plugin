@@ -24,6 +24,7 @@ internal interface PackageSummary : ContextFreeComponent {
 
     class Params(
         val displayLanguage: Language,
+        val description: List<ContextFreeComponent>,
         val interfaces: SummaryList,
         val classes: SummaryList,
         val enums: SummaryList,
