@@ -23,7 +23,6 @@ import kotlinx.html.body
 import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.Documentable
-import org.junit.Ignore
 import org.junit.Test
 
 internal class DefaultDescriptionTest : ConverterTestBase() {
@@ -224,11 +223,10 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
             component.render(this)
         }.trim()
 
-        // TODO(b/163860333): the strikethrough gets removed because reasons ¯\_(ツ)_/¯
         // language=html
         assertThat(output).isEqualTo(
             """
-<body><p><em>Italics</em>, <b>Bold</b>, <b><em>Both</em></b>, <del></del>.</p></body>
+<body><p><em>Italics</em>, <b>Bold</b>, <b><em>Both</em></b>, <del>Bad</del>.</p></body>
             """.trim()
         )
     }
@@ -395,31 +393,30 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
             component.render(this)
         }.trim()
 
-        // TODO(b/163856933): fix the bad formatting
         // language=html
         assertThat(output).isEqualTo(
             """
 <body>
   <table>
     <tr>
-      <th>Tables   </th>
-      <th>      Are      </th>
-      <th>       Cool </th>
+      <td>Tables</td>
+      <td>Are</td>
+      <td>Cool</td>
     </tr>
     <tr>
-      <td> col 1 is </td>
-      <td>  left-aligned </td>
-      <td> ${'$'}1600 </td>
+      <td>col 1 is</td>
+      <td>left-aligned</td>
+      <td>${'$'}1600</td>
     </tr>
     <tr>
-      <td> col 2 is </td>
-      <td>    centered   </td>
-      <td>   ${'$'}12 </td>
+      <td>col 2 is</td>
+      <td>centered</td>
+      <td>${'$'}12</td>
     </tr>
     <tr>
-      <td> col 3 is </td>
-      <td> right-aligned </td>
-      <td>    ${'$'}1 </td>
+      <td>col 3 is</td>
+      <td>right-aligned</td>
+      <td>${'$'}1</td>
     </tr>
   </table>
 </body>
@@ -571,7 +568,6 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         )
     }
 
-    @Ignore // TODO(b/163860333): Strikethrough broken
     @Test
     fun `Strikethrough renders correctly`() {
         val component = """
@@ -587,7 +583,9 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p><del>Hello</del> world!</p>
+  <p>
+    <del>Hello</del>
+ world!</p>
 </body>
             """.trim()
         )
