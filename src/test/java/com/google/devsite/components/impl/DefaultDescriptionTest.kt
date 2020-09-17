@@ -448,7 +448,7 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
             """
 <body>
   <p>Welcome:</p>
-  <pre>fun main() {<br>    println(&quot;Hello World!&quot;)<br>}</pre>
+  <pre class="prettyprint">fun main() {<br>    println(&quot;Hello World!&quot;)<br>}</pre>
 </body>
             """.trim()
         )
