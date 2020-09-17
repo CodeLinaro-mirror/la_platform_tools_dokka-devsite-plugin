@@ -18,8 +18,6 @@
     <h2>Summary</h2>
     <p>Nested *</p>
     <p>Enum values</p>
-    <p>Public constructors</p>
-    <p>Protected constructors</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <thead>
@@ -54,6 +52,29 @@
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/DialogFragment.html#STYLE_NO_TITLE()">STYLE_NO_TITLE</a></code></div>
               <p>Style for <code><a href="/reference/androidx/fragment/app/DialogFragment.html#setStyle(int,int)">setStyle</a></code> : don't include a title area.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/fragment/app/DialogFragment.html#DialogFragment()">DialogFragment</a>()</code></div>
+              <p>Constructor used by the default <code><a href="/reference/androidx/fragment/app/FragmentFactory.html">FragmentFactory</a></code> .</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/fragment/app/DialogFragment.html#DialogFragment(int)">DialogFragment</a>(int&nbsp;contentLayoutId)</code></div>
+              <p>Alternate constructor that can be called from your default, no argument constructor to provide a default layout that will be inflated by <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> .</p>
             </td>
           </tr>
         </tbody>
@@ -263,6 +284,47 @@
       <h3 class="api-name" id="STYLE_NO_TITLE()">STYLE_NO_TITLE</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/fragment/app/DialogFragment.html#STYLE_NO_TITLE()">STYLE_NO_TITLE</a></pre>
       <p>Style for <code><a href="/reference/androidx/fragment/app/DialogFragment.html#setStyle(int,int)">setStyle</a></code> : don't include a title area.</p>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="DialogFragment--"></a>
+      <h3 class="api-name" id="DialogFragment()">DialogFragment</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/DialogFragment.html#DialogFragment()">DialogFragment</a>()</pre>
+      <p>Constructor used by the default <code><a href="/reference/androidx/fragment/app/FragmentFactory.html">FragmentFactory</a></code> . You must <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">setFragmentFactory</a></code> if you want to use a non-default constructor to ensure that your constructor is called when the fragment is re-instantiated. </p>
+      <p>It is strongly recommended to supply arguments with <code><a href="/reference/androidx/fragment/app/Fragment.html#setArguments(android.os.Bundle)">setArguments</a></code> and later retrieved by the Fragment with <code><a href="/reference/androidx/fragment/app/Fragment.html#getArguments()">getArguments</a></code> . These arguments are automatically saved and restored alongside the Fragment. </p>
+      <p>Applications should generally not implement a constructor. Prefer <code><a href="/reference/androidx/fragment/app/DialogFragment.html#onAttach(android.content.Context)">onAttach</a></code> instead. It is the first place application code can run where the fragment is ready to be used - the point where the fragment is actually associated with its context.</p>
+    </div>
+    <div><a name="DialogFragment-int-"></a>
+      <h3 class="api-name" id="DialogFragment(int)">DialogFragment</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/DialogFragment.html#DialogFragment(int)">DialogFragment</a>(int&nbsp;contentLayoutId)</pre>
+      <p>Alternate constructor that can be called from your default, no argument constructor to provide a default layout that will be inflated by <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> . </p>
+      <pre class="prettyprint">class MyDialogFragment extends DialogFragment 
+{
+  public MyDialogFragment() 
+{
+    super(R.layout.dialog_fragment_main);
+}
+}
+</pre>
+ You must <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">setFragmentFactory</a></code> if you want to use a non-default constructor to ensure that your constructor is called when the fragment is re-instantiated.
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/fragment/app/DialogFragment.html#DialogFragment()">DialogFragment</a></code></td>
+              <td width="100%"><code><a href="/reference/androidx/fragment/app/DialogFragment.html#DialogFragment()">DialogFragment</a></code></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code></td>
+              <td width="100%"><code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <h2>Public methods</h2>
     <div><a name="dismiss--"></a>

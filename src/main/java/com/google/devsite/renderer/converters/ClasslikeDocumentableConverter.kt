@@ -34,6 +34,7 @@ import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.WithConstructors
 
 /** Converts documentable class-likes into the classlike component. */
 internal class ClasslikeDocumentableConverter(
@@ -51,6 +52,8 @@ internal class ClasslikeDocumentableConverter(
     suspend fun classlike(): DevsitePage = coroutineScope {
         val declaredFunctions = classlike.functions.myTypes().sortedBy { it.name }
         val declaredProperties = classlike.properties.myTypes().sortedBy { it.name }
+        val declaredConstructors = (classlike as? WithConstructors)?.constructors.orEmpty()
+            .sortedBy { it.parameters.size }
 
         val constantsSummary = async {
             propertiesToSummary(constantsTitle(), declaredProperties.constants())
@@ -62,6 +65,18 @@ internal class ClasslikeDocumentableConverter(
             propertiesToSummary(
                 protectedPropertiesTitle(),
                 declaredProperties.filter(::isProtected)
+            )
+        }
+        val publicConstructorsSummary = async {
+            constructorsToSummary(
+                publicConstructorsTitle(),
+                declaredConstructors.filter(::isPublic)
+            )
+        }
+        val protectedConstructorsSummary = async {
+            constructorsToSummary(
+                protectedConstructorsTitle(),
+                declaredConstructors.filter(::isProtected)
             )
         }
         val publicFunctionsSummary = async {
@@ -77,6 +92,10 @@ internal class ClasslikeDocumentableConverter(
             async { propertiesToDetail(declaredProperties.filter(::isPublic)) }
         val protectedProperties =
             async { propertiesToDetail(declaredProperties.filter(::isProtected)) }
+        val publicConstructors =
+            async { functionsToDetail(declaredConstructors.filter(::isPublic)) }
+        val protectedConstructors =
+            async { functionsToDetail(declaredConstructors.filter(::isProtected)) }
         val publicFunctions =
             async { functionsToDetail(declaredFunctions.filter(::isPublic)) }
         val protectedFunctions =
@@ -92,8 +111,16 @@ internal class ClasslikeDocumentableConverter(
                 publicProperties.await()
             ),
             protectedPropertiesSummary.await() to Classlike.SymbolType(
-                publicPropertiesTitle(),
+                protectedPropertiesTitle(),
                 protectedProperties.await()
+            ),
+            publicConstructorsSummary.await() to Classlike.SymbolType(
+                publicConstructorsTitle(),
+                publicConstructors.await()
+            ),
+            protectedConstructorsSummary.await() to Classlike.SymbolType(
+                protectedConstructorsTitle(),
+                protectedConstructors.await()
             ),
             publicFunctionsSummary.await() to Classlike.SymbolType(
                 publicMethodsTitle(),
@@ -126,6 +153,22 @@ internal class ClasslikeDocumentableConverter(
         val components = functions.map {
             functionConverter.summary(it, modifierHints)
         }
+
+        return DefaultSummaryList(
+            SummaryList.Params(
+                header = DefaultTableTitle(
+                    TableTitle.Params(
+                        title = name,
+                        big = true
+                    )
+                ),
+                items = components
+            )
+        )
+    }
+
+    private fun constructorsToSummary(name: String, constructors: List<DFunction>): SummaryList {
+        val components = constructors.map(functionConverter::summaryForConstructor)
 
         return DefaultSummaryList(
             SummaryList.Params(
@@ -200,6 +243,10 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun List<DProperty>.constants() = filter { isConstant(it.modifiers()) }
+
+    private fun publicConstructorsTitle() = "Public ${constructorsTitle()}"
+    private fun protectedConstructorsTitle() = "Protected ${constructorsTitle()}"
+    private fun constructorsTitle(): String = "constructors"
 
     private fun publicMethodsTitle() = "Public ${methodsTitle()}"
     private fun protectedMethodsTitle() = "Protected ${methodsTitle()}"

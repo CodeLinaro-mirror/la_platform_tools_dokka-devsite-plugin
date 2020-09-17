@@ -67,8 +67,6 @@
     <h2>Summary</h2>
     <p>Nested *</p>
     <p>Enum values</p>
-    <p>Public constructors</p>
-    <p>Protected constructors</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <thead>
@@ -96,6 +94,22 @@
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingSource.html#keyReuseSupported()">keyReuseSupported</a></code></div>
               <p><code>true</code> if this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> expects to re-use keys to load distinct pages without a call to <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code>, <code>false</code> otherwise.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/paging/PagingSource.html#PagingSource()">PagingSource</a>()</code></div>
             </td>
           </tr>
         </tbody>
@@ -182,6 +196,34 @@
       <h3 class="api-name" id="keyReuseSupported()">keyReuseSupported</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/kotlin/Boolean.html">Boolean</a>&nbsp;<a href="/reference/androidx/paging/PagingSource.html#keyReuseSupported()">keyReuseSupported</a></pre>
       <p><code>true</code> if this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> expects to re-use keys to load distinct pages without a call to <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code>, <code>false</code> otherwise.</p>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="PagingSource--"></a>
+      <h3 class="api-name" id="PagingSource()">PagingSource</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;&nbsp;<a href="/reference/androidx/paging/PagingSource.html#PagingSource()">PagingSource</a>()</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>Key</code></td>
+              <td width="100%">
+                <p>Type of key which define what data to load. E.g. <code><a href="/reference/kotlin/Int.html">Int</a></code> to represent either a page number or item position, or <code><a href="/reference/kotlin/String.html">String</a></code> if your network uses Strings as next tokens returned with each response.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>Value</code></td>
+              <td width="100%">
+                <p>Type of data loaded in by this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>. E.g., the type of data that will be passed to a <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code> to be displayed in a <code>RecyclerView</code>.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <h2>Public methods</h2>
     <div><a name="getRefreshKey-androidx.paging.PagingState-"></a>

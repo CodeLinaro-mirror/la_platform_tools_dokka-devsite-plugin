@@ -19,10 +19,14 @@ package com.google.devsite.renderer.converters
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Classlike
 import com.google.devsite.components.DevsitePage
+import com.google.devsite.components.FunctionSummary
+import com.google.devsite.components.SingleColumnSummaryItem
+import com.google.devsite.components.SummaryList
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.content
 import com.google.devsite.renderer.converters.testing.functionSummary
 import com.google.devsite.renderer.converters.testing.item
+import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.title
 import com.google.devsite.testing.ConverterTestBase
@@ -67,7 +71,7 @@ internal class ClasslikeDocumentableConverterTest(
     @Test
     fun `Empty classlike has no symbols`() {
         val page = """
-            |class Foo
+            |interface Foo
         """.render().page()
 
         val classlike = page.content<Classlike>()
@@ -107,6 +111,60 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(summary.item().functionSummary().name()).isEqualTo("foo")
     }
 
+    @Test
+    fun `Public property gets documented`() {
+        val page = """
+            |class Foo {
+            |    val foo = Unit
+            |}
+        """.render().page()
+
+        val classlike = page.content<Classlike>()
+        val (summary) = classlike.symbolsFor("Public properties", "Public fields")
+
+        assertThat(summary.item().functionSummary().name()).isEqualTo("foo")
+    }
+
+    @Ignore // TODO(b/165112358): foo doesn't show up in the dokka model
+    @Test
+    fun `Protected property gets documented`() {
+        val page = """
+            |abstract class Foo {
+            |    protected open val foo = Unit
+            |}
+        """.render().page()
+
+        val classlike = page.content<Classlike>()
+        val (summary) = classlike.symbolsFor("Protected properties", "Protected fields")
+
+        assertThat(summary.item().functionSummary().name()).isEqualTo("foo")
+    }
+
+    @Test
+    fun `Public constructor gets documented`() {
+        val page = """
+            |class Foo
+        """.render().page()
+
+        val classlike = page.content<Classlike>()
+        val (summary) = classlike.symbolsFor("Public constructors")
+
+        assertThat(summary.constructor().name()).isEqualTo("Foo")
+    }
+
+    @Ignore // TODO(b/165112358): foo doesn't show up in the dokka model
+    @Test
+    fun `Protected constructor gets documented`() {
+        val page = """
+            |open class Foo protected constructor()
+        """.render().page()
+
+        val classlike = page.content<Classlike>()
+        val (summary) = classlike.symbolsFor("Protected constructors")
+
+        assertThat(summary.constructor().name()).isEqualTo("Foo")
+    }
+
     private fun DModule.page(): DevsitePage {
         val classlike = packages.single().classlikes.single()
         val converter = ClasslikeDocumentableConverter(language, classlike, pathProvider())
@@ -118,6 +176,9 @@ internal class ClasslikeDocumentableConverterTest(
     ) = data.symbolTypes.single { (summary, _) ->
         summary.title() in types
     }
+
+    private fun SummaryList.constructor() =
+        (data.items.item() as SingleColumnSummaryItem).data.description as FunctionSummary
 
     companion object {
         @JvmStatic

@@ -19,11 +19,13 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.components.FunctionDetail
 import com.google.devsite.components.FunctionSignature
 import com.google.devsite.components.FunctionSummary
+import com.google.devsite.components.SingleColumnSummaryItem
 import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.TypeSummary
 import com.google.devsite.components.impl.DefaultFunctionDetail
 import com.google.devsite.components.impl.DefaultFunctionSignature
 import com.google.devsite.components.impl.DefaultFunctionSummary
+import com.google.devsite.components.impl.DefaultSingleColumnSummaryItem
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultTypeSummary
 import com.google.devsite.renderer.Language
@@ -49,6 +51,20 @@ internal class FunctionDocumentableConverter(
                     )
                 ),
                 description = DefaultFunctionSummary(
+                    FunctionSummary.Params(
+                        signature = function.signature(isSummary = true),
+                        description = javadocConverter.summaryDescription(function)
+                    )
+                )
+            )
+        )
+    }
+
+    /** @return the constructor summary component */
+    fun summaryForConstructor(function: DFunction): SingleColumnSummaryItem {
+        return DefaultSingleColumnSummaryItem(
+            SingleColumnSummaryItem.Params(
+                DefaultFunctionSummary(
                     FunctionSummary.Params(
                         signature = function.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(function)

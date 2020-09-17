@@ -51,8 +51,6 @@ class DefaultClasslikeTest {
   <h2>Summary</h2>
   <p>Nested *</p>
   <p>Enum values</p>
-  <p>Public constructors</p>
-  <p>Protected constructors</p>
 </body>
             """.trim()
         )
@@ -84,8 +82,6 @@ class DefaultClasslikeTest {
   <h2>Summary</h2>
   <p>Nested *</p>
   <p>Enum values</p>
-  <p>Public constructors</p>
-  <p>Protected constructors</p>
 </body>
             """.trim()
         )
@@ -121,8 +117,6 @@ class DefaultClasslikeTest {
   <h2>Summary</h2>
   <p>Nested *</p>
   <p>Enum values</p>
-  <p>Public constructors</p>
-  <p>Protected constructors</p>
   <div>noop</div>
   <h2>Symbols</h2>
   <div>noop</div>

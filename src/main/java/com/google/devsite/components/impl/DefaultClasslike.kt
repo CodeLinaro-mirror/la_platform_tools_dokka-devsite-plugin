@@ -44,8 +44,6 @@ internal class DefaultClasslike(
 
         p { +"Nested *" }
         p { +"Enum values" }
-        p { +"Public constructors" }
-        p { +"Protected constructors" }
         for ((summary, _) in data.symbolTypes) {
             summary.render(this)
         }

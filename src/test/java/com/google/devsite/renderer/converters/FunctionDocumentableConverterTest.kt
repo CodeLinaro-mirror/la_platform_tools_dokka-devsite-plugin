@@ -24,6 +24,7 @@ import com.google.devsite.components.Link
 import com.google.devsite.components.Parameter
 import com.google.devsite.components.ParameterBase
 import com.google.devsite.components.ParameterType
+import com.google.devsite.components.SingleColumnSummaryItem
 import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.TypeSummary
 import com.google.devsite.renderer.Language
@@ -32,6 +33,7 @@ import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.testing.ConverterTestBase
+import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DModule
 import org.junit.Ignore
@@ -156,6 +158,17 @@ internal class FunctionDocumentableConverterTest(
 
         assertThat(returnType.link().name).isEqualTo("A")
         assertPath(returnType.link().url, "androidx/example/A.html")
+    }
+
+    @Test
+    fun `Function summary component handles constructors`() {
+        val summary = """
+            |class MyClass
+        """.render().summaryForConstructor()
+
+        val constructor = summary.data.description as FunctionSummary
+
+        assertThat(constructor.name()).isEqualTo("MyClass")
     }
 
     @Test
@@ -557,6 +570,11 @@ internal class FunctionDocumentableConverterTest(
         return converter.summary(function(fromClass), hints.copy(isSummary = true))
     }
 
+    private fun DModule.summaryForConstructor(): SingleColumnSummaryItem {
+        val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        return converter.summaryForConstructor(function(fromConstructor = true))
+    }
+
     private fun DModule.detail(
         fromClass: Boolean = false,
         hints: ModifierHints = ModifierHints(language)
@@ -565,10 +583,16 @@ internal class FunctionDocumentableConverterTest(
         return converter.detail(function(fromClass), hints)
     }
 
-    private fun DModule.function(fromClass: Boolean): DFunction {
+    private fun DModule.function(
+        fromClass: Boolean = false,
+        fromConstructor: Boolean = false
+    ): DFunction {
         val packageDoc = packages.single()
 
-        return if (fromClass) {
+        return if (fromConstructor) {
+            val clazz = packageDoc.classlikes.single() as DClass
+            clazz.constructors.single()
+        } else if (fromClass) {
             packageDoc.classlikes.single().functions.single { it.name == "foo" }
         } else {
             packageDoc.functions.single()
