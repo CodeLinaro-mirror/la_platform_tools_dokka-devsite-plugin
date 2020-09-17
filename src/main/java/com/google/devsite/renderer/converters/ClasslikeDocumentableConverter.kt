@@ -21,10 +21,12 @@ import com.google.devsite.components.DevsitePage
 import com.google.devsite.components.FunctionDetail
 import com.google.devsite.components.SummaryList
 import com.google.devsite.components.TableTitle
+import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultClasslike
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableTitle
+import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.async
@@ -55,6 +57,9 @@ internal class ClasslikeDocumentableConverter(
         val declaredConstructors = (classlike as? WithConstructors)?.constructors.orEmpty()
             .sortedBy { it.parameters.size }
 
+        val nestedTypesSummary = async {
+            typesToSummary(classlike.classlikes())
+        }
         val constantsSummary = async {
             propertiesToSummary(constantsTitle(), declaredProperties.constants())
         }
@@ -102,6 +107,7 @@ internal class ClasslikeDocumentableConverter(
             async { functionsToDetail(declaredFunctions.filter(::isProtected)) }
 
         val allSymbols = listOf(
+            nestedTypesSummary.await() to Classlike.SymbolType(nestedTypesTitle(), emptyList()),
             constantsSummary.await() to Classlike.SymbolType(
                 constantsTitle(),
                 constants.await()
@@ -144,6 +150,29 @@ internal class ClasslikeDocumentableConverter(
                         symbolTypes = allSymbols
                     )
                 )
+            )
+        )
+    }
+
+    private fun typesToSummary(classlikes: List<Documentable>): SummaryList {
+        val components = classlikes.map { classlike ->
+            DefaultTwoPaneSummaryItem(
+                TwoPaneSummaryItem.Params(
+                    title = pathProvider.linkForReference(classlike.dri),
+                    description = javadocConverter.summaryDescription(classlike)
+                )
+            )
+        }
+
+        return DefaultSummaryList(
+            SummaryList.Params(
+                header = DefaultTableTitle(
+                    TableTitle.Params(
+                        title = nestedTypesTitle(),
+                        big = true
+                    )
+                ),
+                items = components
             )
         )
     }
@@ -243,6 +272,8 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun List<DProperty>.constants() = filter { isConstant(it.modifiers()) }
+
+    private fun nestedTypesTitle() = "Nested types"
 
     private fun publicConstructorsTitle() = "Public ${constructorsTitle()}"
     private fun protectedConstructorsTitle() = "Protected ${constructorsTitle()}"

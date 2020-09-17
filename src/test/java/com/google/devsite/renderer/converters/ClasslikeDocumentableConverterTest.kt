@@ -27,6 +27,7 @@ import com.google.devsite.renderer.converters.testing.content
 import com.google.devsite.renderer.converters.testing.functionSummary
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
+import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.title
 import com.google.devsite.testing.ConverterTestBase
@@ -163,6 +164,20 @@ internal class ClasslikeDocumentableConverterTest(
         val (summary) = classlike.symbolsFor("Protected constructors")
 
         assertThat(summary.constructor().name()).isEqualTo("Foo")
+    }
+
+    @Test
+    fun `Nested type gets documented`() {
+        val page = """
+            |class Foo {
+            |    class Bar
+            |}
+        """.render().page()
+
+        val classlike = page.content<Classlike>()
+        val (summary) = classlike.symbolsFor("Nested types")
+
+        assertThat(summary.item().link().name).isEqualTo("Foo.Bar")
     }
 
     private fun DModule.page(): DevsitePage {

@@ -39,7 +39,7 @@ internal fun DClasslike.packageName() = dri.packageName!!
 
 internal fun DModule.sortedPackages() = packages.sortedBy { it.name }
 
-internal fun DPackage.classlikes() =
+internal fun WithChildren<*>.classlikes() =
     explodedChildren.filterIsInstance<DClasslike>().sortedBy { it.name() }
 
 internal fun DPackage.classes() =
