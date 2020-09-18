@@ -98,6 +98,56 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
     }
 
     @Test
+    fun `Summary ignores period in word`() {
+        val component = """
+            |/**
+            | * This is foo.bar, blah blah.
+            | *
+            | * Stuff.
+            | */
+            |class Foo
+        """.render().description(
+            summary = true
+        )
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p>This is foo.bar, blah blah.</p>
+</body>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Summary ignores period in link`() {
+        val component = """
+            |/** [Foo.Bar] has great drinks. */
+            |class Foo
+        """.render().description(
+            summary = true
+        )
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p>Foo.Bar has great drinks.</p>
+</body>
+            """.trim()
+        )
+    }
+
+    @Test
     fun `Deprecation summary renders renders correctly`() {
         val component = """
             |/** Hello world! */

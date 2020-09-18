@@ -162,8 +162,8 @@ internal class DefaultDescription(
 
             when (tag) {
                 is Text -> if (data.summary) {
-                    if (tag.body.contains(".")) {
-                        +tag.body.replaceAfter(".", "")
+                    if (tag.body.endsWith(".") || tag.body.contains(". ")) {
+                        +tag.body.replaceAfter(". ", "").trimEnd()
                         state.terminate = true
                     } else {
                         +tag.body

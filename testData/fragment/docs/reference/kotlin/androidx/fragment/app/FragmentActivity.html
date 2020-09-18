@@ -40,7 +40,7 @@
           <tr>
             <td>
               <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#FragmentActivity(int)">FragmentActivity</a>(contentLayoutId:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>)</code></div>
-              <p>Alternate constructor that can be used to provide a default layout that will be inflated as part of <code>super.</code></p>
+              <p>Alternate constructor that can be used to provide a default layout that will be inflated as part of <code>super.onCreate(savedInstanceState)</code>.</p>
             </td>
           </tr>
         </tbody>
@@ -93,7 +93,7 @@
             <td><code> <a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onCreatePanelMenu(int,android.view.Menu)">onCreatePanelMenu</a>(featureId:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,&nbsp;menu:&nbsp;Menu)</code></div>
-              <p>Dispatch to Fragment.</p>
+              <p>Dispatch to Fragment.onCreateOptionsMenu().</p>
             </td>
           </tr>
           <tr>
@@ -127,7 +127,7 @@
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onMultiWindowModeChanged(boolean)">onMultiWindowModeChanged</a>(isInMultiWindowMode:&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a>)</code></div>
               <p>{@inheritDoc} </p>
-              <p><b>Note:</b> If you override this method you must call <code>super.</code></p>
+              <p><b>Note:</b> If you override this method you must call <code>super.onMultiWindowModeChanged</code> to correctly dispatch the event to support fragments attached to this activity.</p>
             </td>
           </tr>
           <tr>
@@ -142,7 +142,7 @@
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onPictureInPictureModeChanged(boolean)">onPictureInPictureModeChanged</a>(isInPictureInPictureMode:&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a>)</code></div>
               <p>{@inheritDoc} </p>
-              <p><b>Note:</b> If you override this method you must call <code>super.</code></p>
+              <p><b>Note:</b> If you override this method you must call <code>super.onPictureInPictureModeChanged</code> to correctly dispatch the event to support fragments attached to this activity.</p>
             </td>
           </tr>
           <tr>
@@ -183,14 +183,14 @@
             <td><code> <a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#startActivityFromFragment(androidx.fragment.app.Fragment,android.content.Intent,int)">startActivityFromFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;intent:&nbsp;Intent,<br>&nbsp;&nbsp;&nbsp;&nbsp;requestCode:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a><br>)</code></div>
-              <p>Called by Fragment.</p>
+              <p>Called by Fragment.startActivityForResult() to implement its behavior.</p>
             </td>
           </tr>
           <tr>
             <td><code> <a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#startActivityFromFragment(androidx.fragment.app.Fragment,android.content.Intent,int,android.os.Bundle)">startActivityFromFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;intent:&nbsp;Intent,<br>&nbsp;&nbsp;&nbsp;&nbsp;requestCode:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;options:&nbsp;Bundle<br>)</code></div>
-              <p>Called by Fragment.</p>
+              <p>Called by Fragment.startActivityForResult() to implement its behavior.</p>
             </td>
           </tr>
           <tr>
