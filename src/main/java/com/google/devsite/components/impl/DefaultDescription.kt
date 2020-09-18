@@ -136,14 +136,9 @@ internal class DefaultDescription(
             renderTags(listOf(data.root), State())
         } else {
             if (data.summary) {
-                if (data.root is P) {
-                    p {
-                        em { +data.deprecation }
-                        +" "
-                        renderTags(data.root.children, State())
-                    }
-                } else {
+                p {
                     em { +data.deprecation }
+                    +" "
                     renderTags(data.root.children, State())
                 }
             } else {

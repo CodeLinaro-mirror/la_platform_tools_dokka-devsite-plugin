@@ -37,6 +37,7 @@ import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.WithConstructors
+import org.jetbrains.dokka.model.properties.WithExtraProperties
 
 /** Converts documentable class-likes into the classlike component. */
 internal class ClasslikeDocumentableConverter(
@@ -56,6 +57,7 @@ internal class ClasslikeDocumentableConverter(
         val declaredProperties = classlike.properties.myTypes().sortedBy { it.name }
         val declaredConstructors = (classlike as? WithConstructors)?.constructors.orEmpty()
             .sortedBy { it.parameters.size }
+        val annotations = (classlike as? WithExtraProperties<*>)?.annotations().orEmpty()
 
         val nestedTypesSummary = async {
             typesToSummary(classlike.classlikes())
@@ -146,7 +148,10 @@ internal class ClasslikeDocumentableConverter(
                 title = classlike.name(),
                 content = DefaultClasslike(
                     Classlike.Params(
-                        description = javadocConverter.metadata(classlike),
+                        description = javadocConverter.metadata(
+                            classlike,
+                            annotations = annotations
+                        ),
                         symbolTypes = allSymbols
                     )
                 )

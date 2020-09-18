@@ -41,6 +41,7 @@ import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DTypeAlias
+import org.jetbrains.dokka.model.properties.WithExtraProperties
 
 /** Converts documentables into components for the root metadata (class/package index). */
 internal class RootDocumentableConverter(
@@ -126,10 +127,11 @@ internal class RootDocumentableConverter(
     }
 
     private fun summaryForClass(classlike: DClasslike): DefaultTwoPaneSummaryItem {
+        val annotations = (classlike as? WithExtraProperties<*>)?.annotations().orEmpty()
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
                 title = pathProvider.linkForReference(classlike.dri),
-                description = javadocConverter.summaryDescription(classlike)
+                description = javadocConverter.summaryDescription(classlike, annotations)
             )
         )
     }

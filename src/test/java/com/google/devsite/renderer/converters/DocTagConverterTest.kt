@@ -33,7 +33,7 @@ import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.doc.Img
-import org.junit.Ignore
+import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -63,7 +63,6 @@ internal class DocTagConverterTest(
         assertThat(description.data.deprecation).isNull()
     }
 
-    @Ignore // TODO(b/166333285): support deprecation
     @Test
     fun `Deprecated summary description has correct flags`() {
         val description = """
@@ -72,7 +71,7 @@ internal class DocTagConverterTest(
         """.render().description()
 
         assertThat(description.data.summary).isTrue()
-        assertThat(description.data.deprecation).isEqualTo("Bye")
+        assertThat(description.data.deprecation).isEqualTo("This class is deprecated.")
     }
 
     @Test
@@ -307,13 +306,14 @@ internal class DocTagConverterTest(
 
     private fun DModule.description(): Description {
         val converter = DocTagConverter(language, pathProvider())
-        return converter.summaryDescription(smartDoc(this))
+        val doc = smartDoc(this)
+        val annotations = (doc as? WithExtraProperties<*>)?.annotations().orEmpty()
+        return converter.summaryDescription(doc, annotations)
     }
 
     private fun DModule.documentation(
         doc: DModule.() -> Documentable = ::smartDoc,
-        paramNames: List<String> = emptyList(),
-        insideClass: Boolean = false
+        paramNames: List<String> = emptyList()
     ): List<ContextFreeComponent> {
         val converter = DocTagConverter(language, pathProvider())
         return converter.metadata(

@@ -33,6 +33,7 @@ import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.properties.WithExtraProperties
 
 /** Converts documentables into components for the package summary page. */
 internal class PackageDocumentableConverter(
@@ -100,10 +101,11 @@ internal class PackageDocumentableConverter(
 
     private fun docsToSummary(classlikes: List<Documentable>): SummaryList {
         val components = classlikes.map { classlike ->
+            val annotations = (classlike as? WithExtraProperties<*>)?.annotations().orEmpty()
             DefaultTwoPaneSummaryItem(
                 TwoPaneSummaryItem.Params(
                     title = pathProvider.linkForReference(classlike.dri),
-                    description = javadocConverter.summaryDescription(classlike)
+                    description = javadocConverter.summaryDescription(classlike, annotations)
                 )
             )
         }

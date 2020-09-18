@@ -42,21 +42,19 @@ internal class FunctionDocumentableConverter(
 
     /** @return the function summary component */
     fun summary(function: DFunction, hints: ModifierHints): TwoPaneSummaryItem {
+        val annotations = function.annotations()
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
                 title = DefaultTypeSummary(
                     TypeSummary.Params(
                         modifiers = function.modifiers().modifiersFor(hints),
-                        type = paramConverter.componentForProjection(
-                            function.type,
-                            function.annotations()
-                        )
+                        type = paramConverter.componentForProjection(function.type, annotations)
                     )
                 ),
                 description = DefaultFunctionSummary(
                     FunctionSummary.Params(
                         signature = function.signature(isSummary = true),
-                        description = javadocConverter.summaryDescription(function)
+                        description = javadocConverter.summaryDescription(function, annotations)
                     )
                 )
             )
@@ -98,7 +96,8 @@ internal class FunctionDocumentableConverter(
                 metadata = javadocConverter.metadata(
                     doc = function,
                     returnType = returnType,
-                    paramNames = listOf("receiver") + function.parameters.map { it.name!! }
+                    paramNames = listOf("receiver") + function.parameters.map { it.name!! },
+                    annotations = annotations
                 )
             )
         )

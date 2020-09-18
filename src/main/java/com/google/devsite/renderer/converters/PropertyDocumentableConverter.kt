@@ -40,21 +40,19 @@ internal class PropertyDocumentableConverter(
 
     /** @return the property summary component */
     fun summary(property: DProperty, hints: ModifierHints): TwoPaneSummaryItem {
+        val annotations = property.annotations()
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
                 title = DefaultTypeSummary(
                     TypeSummary.Params(
                         modifiers = property.modifiers().modifiersFor(hints),
-                        type = paramConverter.componentForProjection(
-                            property.type,
-                            property.annotations()
-                        )
+                        type = paramConverter.componentForProjection(property.type, annotations)
                     )
                 ),
                 description = DefaultFunctionSummary(
                     FunctionSummary.Params(
                         signature = property.signature(isSummary = true),
-                        description = javadocConverter.summaryDescription(property)
+                        description = javadocConverter.summaryDescription(property, annotations)
                     )
                 )
             )
@@ -82,7 +80,8 @@ internal class PropertyDocumentableConverter(
                 metadata = javadocConverter.metadata(
                     doc = property,
                     returnType = returnType,
-                    paramNames = listOf("receiver")
+                    paramNames = listOf("receiver"),
+                    annotations = annotations
                 )
             )
         )

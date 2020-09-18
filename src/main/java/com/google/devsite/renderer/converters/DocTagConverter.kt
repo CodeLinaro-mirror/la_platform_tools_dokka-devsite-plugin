@@ -32,6 +32,7 @@ import com.google.devsite.components.impl.UndocumentedSymbolDescription
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.links.DRI
+import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DEnum
@@ -39,12 +40,14 @@ import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.StringValue
 import org.jetbrains.dokka.model.doc.Author
 import org.jetbrains.dokka.model.doc.Constructor
 import org.jetbrains.dokka.model.doc.CustomTagWrapper
 import org.jetbrains.dokka.model.doc.Deprecated
 import org.jetbrains.dokka.model.doc.Description
 import org.jetbrains.dokka.model.doc.DocumentationLink
+import org.jetbrains.dokka.model.doc.P
 import org.jetbrains.dokka.model.doc.Param
 import org.jetbrains.dokka.model.doc.Property
 import org.jetbrains.dokka.model.doc.Receiver
@@ -54,8 +57,10 @@ import org.jetbrains.dokka.model.doc.See
 import org.jetbrains.dokka.model.doc.Since
 import org.jetbrains.dokka.model.doc.Suppress
 import org.jetbrains.dokka.model.doc.TagWrapper
+import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.model.doc.Throws
 import org.jetbrains.dokka.model.doc.Version
+import org.jetbrains.dokka.utilities.cast
 import com.google.devsite.components.Description as DescriptionComponent
 
 /** Extracts the hand written documentation from documentables into the correct components. */
@@ -64,8 +69,11 @@ internal class DocTagConverter(
     private val pathProvider: FilePathProvider
 ) {
     /** @return the hand-written javadoc */
-    fun summaryDescription(doc: Documentable): DescriptionComponent {
-        val deprecation = doc.find<Deprecated>()
+    fun summaryDescription(
+        doc: Documentable,
+        annotations: List<Annotations.Annotation> = emptyList()
+    ): DescriptionComponent {
+        val deprecation = deprecationComponent(doc, summary = true, annotations)
         return if (deprecation == null) {
             val description = doc.find<Description>()
             if (description == null) {
@@ -74,7 +82,7 @@ internal class DocTagConverter(
                 description(description, summary = true)
             }
         } else {
-            description(deprecation, summary = true, deprecation = doc.deprecationText())
+            deprecation
         }
     }
 
@@ -86,12 +94,11 @@ internal class DocTagConverter(
     fun metadata(
         doc: Documentable,
         returnType: ContextFreeComponent? = null,
-        paramNames: List<String> = emptyList()
+        paramNames: List<String> = emptyList(),
+        annotations: List<Annotations.Annotation> = emptyList()
     ): List<ContextFreeComponent> {
         val description = doc.find<Description>()?.let(::description)
-        val deprecation = doc.find<Deprecated>()?.let {
-            description(it, deprecation = doc.deprecationText())
-        }
+        val deprecation = deprecationComponent(doc, summary = false, annotations)
         val receiverParam = doc.find<Receiver>()?.let {
             Param(it.root, "receiver")
         }
@@ -207,6 +214,39 @@ internal class DocTagConverter(
                 deprecation
             )
         )
+    }
+
+    /** Returns the component for a deprecation. */
+    private fun deprecationComponent(
+        doc: Documentable,
+        summary: Boolean,
+        annotations: List<Annotations.Annotation>
+    ): DescriptionComponent? {
+        val deprecation = findDeprecation(doc, annotations) ?: return null
+        return description(deprecation, summary, deprecation = doc.deprecationText())
+    }
+
+    /**
+     * Finds either the javadoc @deprecated tag or the Kotlin @Deprecated annotation [TagWrapper].
+     */
+    private fun findDeprecation(
+        doc: Documentable,
+        annotations: List<Annotations.Annotation>
+    ): Deprecated? {
+        val javadocDeprecation = doc.find<Deprecated>()
+        if (javadocDeprecation != null) {
+            // Prefer javadoc deprecation messages since they allow formatting
+            return javadocDeprecation
+        }
+
+        val annotationDeprecationMessage = annotations.filter {
+            it.dri.classNames == "Deprecated"
+        }.strictSingleOrNull()?.params?.get("message")?.cast<StringValue>()?.value ?: return null
+        // Dokka makes message="foo" show up as "\"foo\"" since you typically want to show quotes
+        // when rendering an annotation. Remove those outer quotes.
+        val message = annotationDeprecationMessage.removeSurrounding("\"")
+
+        return Deprecated(P(children = listOf(Text(message))))
     }
 
     private fun Documentable.deprecationText() =

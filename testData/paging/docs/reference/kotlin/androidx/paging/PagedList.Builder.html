@@ -14,6 +14,7 @@
     <p>TODO(b/166518636) direct subclasses</p>
     <p>TODO(b/166518636) indirect subclasses</p>
     <hr>
+    <p class="caution"><strong>This class is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData, which no longer supports constructing snapshots of loaded data manually.</p>
     <p>Builder class for <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
     <p><code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#pagingSource()">pagingSource</a></code>, <code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#config()">config</a></code>, <code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#notifyDispatcher()">notifyDispatcher</a></code> and <code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#fetchDispatcher()">fetchDispatcher</a></code> must all be provided.</p>
     <p>A <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> queries initial data from its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> during construction, to avoid empty <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>s being presented to the UI when possible. It's preferred to present initial data, so that the UI doesn't show an empty list, or placeholders for a few frames, just before showing initial content.</p>
@@ -118,7 +119,7 @@
             <td><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setFetchExecutor(java.util.concurrent.Executor)">setFetchExecutor</a>(fetchExecutor:&nbsp;<a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a>)</code></div>
-              <p>The <code><a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a></code> used to fetch additional pages from the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
+              <p><em>This function is deprecated.</em> Passing an executor will cause it get wrapped as a CoroutineDispatcher, consider passing a CoroutineDispatcher directly</p>
             </td>
           </tr>
           <tr>
@@ -139,7 +140,7 @@
             <td><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setNotifyExecutor(java.util.concurrent.Executor)">setNotifyExecutor</a>(notifyExecutor:&nbsp;<a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a>)</code></div>
-              <p>The <code><a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a></code> defining where page loading updates are dispatched.</p>
+              <p><em>This function is deprecated.</em> Passing an executor will cause it get wrapped as a CoroutineDispatcher, consider passing a CoroutineDispatcher directly</p>
             </td>
           </tr>
         </tbody>
@@ -441,6 +442,7 @@
     <div><a name="setFetchExecutor-java.util.concurrent.Executor-"></a>
       <h3 class="api-name" id="setFetchExecutor(java.util.concurrent.Executor)">setFetchExecutor</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setFetchExecutor(java.util.concurrent.Executor)">setFetchExecutor</a>(fetchExecutor:&nbsp;<a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
+      <p class="caution"><strong>This function is deprecated.</strong><br>Passing an executor will cause it get wrapped as a CoroutineDispatcher, consider passing a CoroutineDispatcher directly</p>
       <p>The <code><a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a></code> used to fetch additional pages from the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
       <p>Does not affect initial load, which will be done immediately on whichever thread the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> is created on.</p>
       <div class="devsite-table-wrapper">
@@ -559,6 +561,7 @@
     <div><a name="setNotifyExecutor-java.util.concurrent.Executor-"></a>
       <h3 class="api-name" id="setNotifyExecutor(java.util.concurrent.Executor)">setNotifyExecutor</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Builder.html#setNotifyExecutor(java.util.concurrent.Executor)">setNotifyExecutor</a>(notifyExecutor:&nbsp;<a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
+      <p class="caution"><strong>This function is deprecated.</strong><br>Passing an executor will cause it get wrapped as a CoroutineDispatcher, consider passing a CoroutineDispatcher directly</p>
       <p>The <code><a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a></code> defining where page loading updates are dispatched.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
