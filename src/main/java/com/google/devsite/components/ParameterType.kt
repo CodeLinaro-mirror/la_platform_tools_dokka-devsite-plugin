@@ -20,6 +20,13 @@ package com.google.devsite.components
 internal interface ParameterType : ParameterBase {
     val data: Params
 
+    override fun length(): Int {
+        val typeSize = data.type.length()
+        val genericsSize = data.generics.sumBy { it.length() + 2 }
+
+        return typeSize + genericsSize
+    }
+
     class Params(
         val type: Link,
         val generics: List<ParameterBase> = emptyList()

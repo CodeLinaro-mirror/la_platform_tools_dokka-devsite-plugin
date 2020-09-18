@@ -17,8 +17,10 @@
 package com.google.devsite.components
 
 /** Represents a link. */
-internal interface Link : ContextFreeComponent {
+internal interface Link : ContextFreeComponent, Sizeable {
     val data: Params
+
+    override fun length() = data.name.length
 
     class Params(
         val name: String,

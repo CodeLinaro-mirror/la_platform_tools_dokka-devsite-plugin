@@ -17,8 +17,15 @@
 package com.google.devsite.components
 
 /** Represents an annotation. */
-internal interface Annotation : ContextFreeComponent {
+internal interface Annotation : ContextFreeComponent, Sizeable {
     val data: Params
+
+    override fun length(): Int {
+        val typeSize = data.type.length()
+        val paramSize = data.parameters.sumBy { it.name.length + it.value.length }
+
+        return typeSize + paramSize
+    }
 
     class Params(
         val type: Link,

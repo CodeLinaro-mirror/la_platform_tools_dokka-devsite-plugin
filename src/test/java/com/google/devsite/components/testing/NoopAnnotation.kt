@@ -26,4 +26,6 @@ internal class NoopAnnotation(private val text: String) : Annotation {
     override fun render(html: FlowContent) = html.run {
         +text
     }
+
+    override fun length() = text.length
 }

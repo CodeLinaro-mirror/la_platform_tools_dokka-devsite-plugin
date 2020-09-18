@@ -98,12 +98,4 @@ internal class DefaultParameter(
             "Lambda params don't make sense outside a lambda."
         }
     }
-
-    override fun weightedSize(): Double {
-        var result = 1.0
-        // TODO(b/168232975): tune this once b/165727919 goes through
-        if (data.name.isBlank()) result -= 0.5
-        if (data.isLambda) result += 1
-        return result
-    }
 }

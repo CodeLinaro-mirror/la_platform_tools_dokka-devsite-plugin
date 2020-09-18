@@ -50,10 +50,11 @@ internal class DefaultFunctionSignature(
 
     /** Uses the estimated function size to guess if it will overflow. */
     private fun shouldBreak(): Boolean {
+        val nameSize = data.name.length()
         val allParams = listOfNotNull(data.receiver) + data.parameters
-        val paramSize = allParams.sumByDouble { it.weightedSize() }
+        val paramSize = allParams.sumBy { it.length() + 2 }
 
-        // TODO(b/168232975): tune this once b/165727919 goes through
-        return paramSize >= 2
+        val totalSize = nameSize + paramSize
+        return totalSize >= 70
     }
 }

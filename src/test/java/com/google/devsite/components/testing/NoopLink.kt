@@ -26,4 +26,6 @@ internal class NoopLink(private val text: String) : Link {
     override fun render(html: FlowContent) = html.run {
         +text
     }
+
+    override fun length() = text.length
 }

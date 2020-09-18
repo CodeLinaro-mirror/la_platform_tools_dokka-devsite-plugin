@@ -14,18 +14,12 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components.testing
+package com.google.devsite.components
 
-import com.google.devsite.components.ParameterType
-import kotlinx.html.FlowContent
+/** Components that are able to estimate their size. */
+interface Sizeable : Comparable<Sizeable> {
+    /** Returns the length of this component for use in overflow calculation. */
+    fun length(): Int
 
-internal class NoopParameterType(private val text: String) : ParameterType {
-    override val data: ParameterType.Params
-        get() = throw NotImplementedError()
-
-    override fun render(html: FlowContent) = html.run {
-        +text
-    }
-
-    override fun length() = text.length
+    override fun compareTo(other: Sizeable) = compareValues(length(), other.length())
 }

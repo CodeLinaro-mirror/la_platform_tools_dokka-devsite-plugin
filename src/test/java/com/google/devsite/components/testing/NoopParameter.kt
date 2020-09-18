@@ -32,5 +32,5 @@ internal class NoopParameter(
 
     override fun validate() = Unit
 
-    override fun weightedSize() = if (forceBreak) Double.POSITIVE_INFINITY else 0.0
+    override fun length() = if (forceBreak) 10_000 else 0
 }

@@ -17,4 +17,4 @@
 package com.google.devsite.components
 
 /** Base type for parameter related components. */
-internal interface ParameterBase : ContextFreeComponent
+internal interface ParameterBase : ContextFreeComponent, Sizeable
