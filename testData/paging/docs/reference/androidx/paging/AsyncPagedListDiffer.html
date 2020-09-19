@@ -14,7 +14,7 @@
     <p>TODO(b/166518636) direct subclasses</p>
     <p>TODO(b/166518636) indirect subclasses</p>
     <hr>
-    <p>Helper object for mapping a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> into a androidx.recyclerview.widget.RecyclerView.Adapter.</p>
+    <p>Helper object for mapping a <code><a href="/reference/androidx/paging/PagedList.html">androidx.paging.PagedList</a></code> into a androidx.recyclerview.widget.RecyclerView.Adapter.</p>
     <p>For simplicity, the <code><a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code> wrapper class can often be used instead of the differ directly. This diff class is exposed for complex cases, and where overriding an adapter base class to support paging isn't convenient.</p>
     <p>When consuming a LiveData of PagedList, you can observe updates and dispatch them directly to <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a></code>. The AsyncPagedListDiffer then can present this updating data set simply for an adapter. It listens to PagedList loading callbacks, and uses DiffUtil on a background thread to compute updates as new PagedLists are received.</p>
     <p>It provides a simple list-like API with <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#getItem(kotlin.Int)">getItem</a></code> and <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#itemCount()">itemCount</a></code> for an adapter to acquire and present data objects.</p>
@@ -123,7 +123,7 @@
             <td><code><a href="/reference/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#addPagedListListener(androidx.paging.AsyncPagedListDiffer.PagedListListener)">addPagedListListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a>&lt;T&gt;&nbsp;listener<br>)</code></div>
-              <p>Add a <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a></code> to receive updates when the current <code><a href="/reference/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> changes.</p>
+              <p>Add a <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">PagedListListener</a></code> to receive updates when the current <code><a href="/reference/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> changes.</p>
             </td>
           </tr>
           <tr>
@@ -151,7 +151,7 @@
             <td><code><a href="/reference/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#removePagedListListener(androidx.paging.AsyncPagedListDiffer.PagedListListener)">removePagedListListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a>&lt;T&gt;&nbsp;listener<br>)</code></div>
-              <p>Remove a previously registered <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a></code>.</p>
+              <p>Remove a previously registered <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">PagedListListener</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -302,7 +302,7 @@
     <div><a name="addPagedListListener-androidx.paging.AsyncPagedListDiffer.PagedListListener-"></a>
       <h3 class="api-name" id="addPagedListListener(androidx.paging.AsyncPagedListDiffer.PagedListListener)">addPagedListListener</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#addPagedListListener(androidx.paging.AsyncPagedListDiffer.PagedListListener)">addPagedListListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a>&lt;T&gt;&nbsp;listener<br>)</pre>
-      <p>Add a <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a></code> to receive updates when the current <code><a href="/reference/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> changes.</p>
+      <p>Add a <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">PagedListListener</a></code> to receive updates when the current <code><a href="/reference/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> changes.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -494,7 +494,7 @@
     <div><a name="removePagedListListener-androidx.paging.AsyncPagedListDiffer.PagedListListener-"></a>
       <h3 class="api-name" id="removePagedListListener(androidx.paging.AsyncPagedListDiffer.PagedListListener)">removePagedListListener</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#removePagedListListener(androidx.paging.AsyncPagedListDiffer.PagedListListener)">removePagedListListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a>&lt;T&gt;&nbsp;listener<br>)</pre>
-      <p>Remove a previously registered <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">AsyncPagedListDiffer.PagedListListener</a></code>.</p>
+      <p>Remove a previously registered <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.PagedListListener.html">PagedListListener</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -608,7 +608,7 @@
       <h3 class="api-name" id="submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;&nbsp;pagedList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback<br>)</pre>
       <p>Pass a new PagedList to the differ.</p>
-      <p>If a PagedList is already present, a diff will be computed asynchronously on a background thread. When the diff is computed, it will be applied (dispatched to the ListUpdateCallback), and the new PagedList will be swapped in as the <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#currentList()">currentList</a></code>.</p>
+      <p>If a PagedList is already present, a diff will be computed asynchronously on a background thread. When the diff is computed, it will be applied (dispatched to the ListUpdateCallback), and the new PagedList will be swapped in as the <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#currentList()">current list</a></code>.</p>
       <p>The commit callback can be used to know when the PagedList is committed, but note that it may not be executed. If PagedList B is submitted immediately after PagedList A, and is committed directly, the callback associated with PagedList A will not be run.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">

@@ -159,7 +159,7 @@
       <p><code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#maxSize()">maxSize</a></code> is best effort, not a guarantee. In practice, if <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#maxSize()">maxSize</a></code> is many times <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">pageSize</a></code>, the number of items held by <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> will not grow above this number. Exceptions are made as necessary to guarantee:</p>
       <ul>
         <li>
-          <p>Pages are never dropped until there are more than two pages loaded. Note that a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> may not be held strictly to <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">pageSize</a></code>, so two pages may be larger than expected.</p>
+          <p>Pages are never dropped until there are more than two pages loaded. Note that a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> may not be held strictly to <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">requested pageSize</a></code>, so two pages may be larger than expected.</p>
         </li>
         <li>
           <p>Pages are never dropped if they are within a prefetch window (defined to be <code>pageSize + (2 * prefetchDistance)</code>) of the most recent load.</p>

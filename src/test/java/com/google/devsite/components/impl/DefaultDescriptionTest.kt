@@ -522,6 +522,29 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
     }
 
     @Test
+    fun `Named link to type renders correctly`() {
+        val component = """
+            |class Bar
+            |
+            |/** [Special snowflake][Bar] is pretty cool. */
+            |class Foo
+        """.render().description()
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p><code><a href="/reference/androidx/example/Bar.html">Special snowflake</a></code> is pretty cool.</p>
+</body>
+            """.trim()
+        )
+    }
+
+    @Test
     fun `Image renders correctly`() {
         val component = """
             |/** ![Alt text](/path/to/img.jpg "Image Title") */

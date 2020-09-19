@@ -14,7 +14,7 @@
     <p>TODO(b/166518636) direct subclasses</p>
     <p>TODO(b/166518636) indirect subclasses</p>
     <hr>
-    <p>Builder for <code>LiveData&lt;PagedList&gt;</code> for Java users, given a <code><a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code> and a <code><a href="/reference/androidx/paging/PagedList.Config.html">PagedList.Config</a></code>.</p>
+    <p>Builder for <code>LiveData&lt;PagedList&gt;</code> for Java users, given a <code><a href="/reference/androidx/paging/DataSource.Factory.html">androidx.paging.DataSource.Factory</a></code> and a <code><a href="/reference/androidx/paging/PagedList.Config.html">androidx.paging.PagedList.Config</a></code>.</p>
     <p>The required parameters are in the constructor, so you can simply construct and build, or optionally enable extra features (such as initial load key, or BoundaryCallback).</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -112,7 +112,7 @@
             <td><code>final <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/LivePagedListBuilder.html#setBoundaryCallback(androidx.paging.PagedList.BoundaryCallback)">setBoundaryCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="/reference/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;&nbsp;boundaryCallback<br>)</code></div>
-              <p>Sets a <code><a href="/reference/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a></code> on each PagedList created, typically used to load additional data from network when paging from local storage.</p>
+              <p>Sets a <code><a href="/reference/androidx/paging/PagedList.BoundaryCallback.html">androidx.</a></code></p>
             </td>
           </tr>
           <tr>
@@ -287,7 +287,7 @@
     <div><a name="setBoundaryCallback-androidx.paging.PagedList.BoundaryCallback-"></a>
       <h3 class="api-name" id="setBoundaryCallback(androidx.paging.PagedList.BoundaryCallback)">setBoundaryCallback</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/paging/LivePagedListBuilder.html#setBoundaryCallback(androidx.paging.PagedList.BoundaryCallback)">setBoundaryCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="/reference/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;&nbsp;boundaryCallback<br>)</pre>
-      <p>Sets a <code><a href="/reference/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a></code> on each PagedList created, typically used to load additional data from network when paging from local storage.</p>
+      <p>Sets a <code><a href="/reference/androidx/paging/PagedList.BoundaryCallback.html">androidx.paging.PagedList.BoundaryCallback</a></code> on each PagedList created, typically used to load additional data from network when paging from local storage.</p>
       <p>Pass a <code><a href="/reference/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a></code> to listen to when the PagedList runs out of data to load. If this method is not called, or <code>null</code> is passed, you will not be notified when each <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> runs out of data to provide to its <code><a href="/reference/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
       <p>If you are paging from a DataSource.Factory backed by local storage, you can set a BoundaryCallback to know when there is no more information to page from local storage. This is useful to page from the network when local storage is a cache of network data.</p>
       <p>Note that when using a BoundaryCallback with a <code>LiveData&lt;PagedList&gt;</code>, method calls on the callback may be dispatched multiple times - one for each PagedList/DataSource pair. If loading network data from a BoundaryCallback, you should prevent multiple dispatches of the same method from triggering multiple simultaneous network loads.</p>

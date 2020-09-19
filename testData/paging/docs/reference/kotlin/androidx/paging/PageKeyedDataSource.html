@@ -129,14 +129,14 @@
             <td><code>abstract <a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams,androidx.paging.PageKeyedDataSource.LoadCallback)">loadAfter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;params:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html">PageKeyedDataSource.LoadParams</a>&lt;Key&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html">PageKeyedDataSource.LoadCallback</a>&lt;Key,&nbsp;Value&gt;<br>)</code></div>
-              <p>Append page with the key specified by <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html#key()">key</a></code>.</p>
+              <p>Append page with the key specified by <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html#key()">LoadParams.</a></code></p>
             </td>
           </tr>
           <tr>
             <td><code>abstract <a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams,androidx.paging.PageKeyedDataSource.LoadCallback)">loadBefore</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;params:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html">PageKeyedDataSource.LoadParams</a>&lt;Key&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html">PageKeyedDataSource.LoadCallback</a>&lt;Key,&nbsp;Value&gt;<br>)</code></div>
-              <p>Prepend page with the key specified by <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html#key()">key</a></code>.</p>
+              <p>Prepend page with the key specified by <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html#key()">LoadParams.</a></code></p>
             </td>
           </tr>
           <tr>
@@ -236,7 +236,7 @@
     <div><a name="loadAfter(androidx.paging.PageKeyedDataSource.LoadParams, androidx.paging.PageKeyedDataSource.LoadCallback)"></a><a name="loadAfter-androidx.paging.PageKeyedDataSource.LoadParams-androidx.paging.PageKeyedDataSource.LoadCallback-"></a>
       <h3 class="api-name" id="loadAfter(androidx.paging.PageKeyedDataSource.LoadParams,androidx.paging.PageKeyedDataSource.LoadCallback)">loadAfter</h3>
       <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams,androidx.paging.PageKeyedDataSource.LoadCallback)">loadAfter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;params:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html">PageKeyedDataSource.LoadParams</a>&lt;Key&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html">PageKeyedDataSource.LoadCallback</a>&lt;Key,&nbsp;Value&gt;<br>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
-      <p>Append page with the key specified by <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html#key()">key</a></code>.</p>
+      <p>Append page with the key specified by <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html#key()">LoadParams.key</a></code>.</p>
       <p>It's valid to return a different list size than the page size if it's easier, e.g. if your backend defines page sizes. It is generally preferred to increase the number loaded than reduce.</p>
       <p>Data may be passed synchronously during the load method, or deferred and called at a later time. Further loads going down will be blocked until the callback is called.</p>
       <p>If data cannot be loaded (for example, if the request is invalid, or the data would be stale and inconsistent), it is valid to call <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#invalidate()">invalidate</a></code> to invalidate the data source, and prevent further loading.</p>
@@ -267,7 +267,7 @@
     <div><a name="loadBefore(androidx.paging.PageKeyedDataSource.LoadParams, androidx.paging.PageKeyedDataSource.LoadCallback)"></a><a name="loadBefore-androidx.paging.PageKeyedDataSource.LoadParams-androidx.paging.PageKeyedDataSource.LoadCallback-"></a>
       <h3 class="api-name" id="loadBefore(androidx.paging.PageKeyedDataSource.LoadParams,androidx.paging.PageKeyedDataSource.LoadCallback)">loadBefore</h3>
       <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams,androidx.paging.PageKeyedDataSource.LoadCallback)">loadBefore</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;params:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html">PageKeyedDataSource.LoadParams</a>&lt;Key&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html">PageKeyedDataSource.LoadCallback</a>&lt;Key,&nbsp;Value&gt;<br>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
-      <p>Prepend page with the key specified by <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html#key()">key</a></code>.</p>
+      <p>Prepend page with the key specified by <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadParams.html#key()">LoadParams.key</a></code>.</p>
       <p>It's valid to return a different list size than the page size if it's easier, e.g. if your backend defines page sizes. It is generally preferred to increase the number loaded than reduce.</p>
       <p>Data may be passed synchronously during the load method, or deferred and called at a later time. Further loads going down will be blocked until the callback is called.</p>
       <p>If data cannot be loaded (for example, if the request is invalid, or the data would be stale and inconsistent), it is valid to call <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#invalidate()">invalidate</a></code> to invalidate the data source, and prevent further loading.</p>
@@ -299,8 +299,8 @@
       <h3 class="api-name" id="loadInitial(androidx.paging.PageKeyedDataSource.LoadInitialParams,androidx.paging.PageKeyedDataSource.LoadInitialCallback)">loadInitial</h3>
       <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadInitial(androidx.paging.PageKeyedDataSource.LoadInitialParams,androidx.paging.PageKeyedDataSource.LoadInitialCallback)">loadInitial</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;params:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialParams.html">PageKeyedDataSource.LoadInitialParams</a>&lt;Key&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html">PageKeyedDataSource.LoadInitialCallback</a>&lt;Key,&nbsp;Value&gt;<br>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
       <p>Load initial data.</p>
-      <p>This method is called first to initialize a PagedList with data. If it's possible to count the items that can be loaded by the DataSource, it's recommended to pass the loaded data to the callback via the three-parameter <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Any,kotlin.Any)">onResult</a></code>. This enables PagedLists presenting data from this source to display placeholders to represent unloaded items.</p>
-      <p><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialParams.html#requestedLoadSize()">requestedLoadSize</a></code> is a hint, not a requirement, so it may be may be altered or ignored.</p>
+      <p>This method is called first to initialize a PagedList with data. If it's possible to count the items that can be loaded by the DataSource, it's recommended to pass the loaded data to the callback via the three-parameter <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Any,kotlin.Any)">LoadInitialCallback.onResult</a></code>. This enables PagedLists presenting data from this source to display placeholders to represent unloaded items.</p>
+      <p><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadInitialParams.html#requestedLoadSize()">LoadInitialParams.requestedLoadSize</a></code> is a hint, not a requirement, so it may be may be altered or ignored.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>

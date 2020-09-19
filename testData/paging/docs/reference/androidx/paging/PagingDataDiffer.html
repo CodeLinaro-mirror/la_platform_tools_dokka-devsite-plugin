@@ -144,7 +144,7 @@
             <td><code>final <a href="/reference/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingDataDiffer.html#retry()">retry</a>()</code></div>
-              <p>Retry any failed load requests that would result in a <code><a href="/reference/androidx/paging/LoadState.Error.html">LoadState.Error</a></code> update to this <code><a href="/reference/androidx/paging/PagingDataDiffer.html">PagingDataDiffer</a></code>.</p>
+              <p>Retry any failed load requests that would result in a <code><a href="/reference/androidx/paging/LoadState.Error.html">LoadState.</a></code></p>
             </td>
           </tr>
           <tr>
@@ -370,8 +370,8 @@
       <h3 class="api-name" id="refresh()">refresh</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&nbsp;<a href="/reference/androidx/paging/PagingDataDiffer.html#refresh()">refresh</a>()</pre>
       <p>Refresh the data presented by this <code><a href="/reference/androidx/paging/PagingDataDiffer.html">PagingDataDiffer</a></code>.</p>
-      <p><code><a href="/reference/androidx/paging/PagingDataDiffer.html#refresh()">refresh</a></code> triggers the creation of a new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> with a new instance of <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to represent an updated snapshot of the backing dataset. If a <code><a href="/reference/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> is set, calling <code><a href="/reference/androidx/paging/PagingDataDiffer.html#refresh()">refresh</a></code> will also trigger a call to <code><a href="/reference/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> with <code><a href="/reference/androidx/paging/LoadType.REFRESH.html">LoadType.REFRESH</a></code> to allow <code><a href="/reference/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> to check for updates to the dataset backing <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
-      <p>Note: This API is intended for UI-driven refresh signals, such as swipe-to-refresh. Invalidation due repository-layer signals, such as DB-updates, should instead use <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code>.</p>
+      <p><code><a href="/reference/androidx/paging/PagingDataDiffer.html#refresh()">refresh</a></code> triggers the creation of a new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> with a new instance of <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to represent an updated snapshot of the backing dataset. If a <code><a href="/reference/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> is set, calling <code><a href="/reference/androidx/paging/PagingDataDiffer.html#refresh()">refresh</a></code> will also trigger a call to <code><a href="/reference/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">RemoteMediator.load</a></code> with <code><a href="/reference/androidx/paging/LoadType.REFRESH.html">LoadType</a></code> to allow <code><a href="/reference/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> to check for updates to the dataset backing <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
+      <p>Note: This API is intended for UI-driven refresh signals, such as swipe-to-refresh. Invalidation due repository-layer signals, such as DB-updates, should instead use <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">PagingSource.invalidate</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -476,10 +476,10 @@
       <p><code><a href="/reference/androidx/paging/LoadState.Error.html">LoadState.Error</a></code> can be generated from two types of load requests:</p>
       <ul>
         <li>
-          <p><code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> returning <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Error.html">PagingSource.LoadResult.Error</a></code></p>
+          <p><code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code> returning <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Error.html">PagingSource.LoadResult.Error</a></code></p>
         </li>
         <li>
-          <p><code><a href="/reference/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a></code> returning <code><a href="/reference/androidx/paging/RemoteMediator.MediatorResult.Error.html">RemoteMediator.MediatorResult.Error</a></code></p>
+          <p><code><a href="/reference/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">RemoteMediator.load</a></code> returning <code><a href="/reference/androidx/paging/RemoteMediator.MediatorResult.Error.html">RemoteMediator.MediatorResult.Error</a></code></p>
         </li>
       </ul>
     </div>

@@ -27,10 +27,10 @@
     <p> FragmentContainerView can also be used to add a Fragment by using the <code>android:name</code> attribute. FragmentContainerView will perform a one time operation that: </p>
     <ul>
       <li>Creates a new instance of the Fragment</li>
-      <li>Calls <code><a href="/reference/androidx/fragment/app/Fragment.html#onInflate(android.content.Context,android.util.AttributeSet,android.os.Bundle)">onInflate</a></code></li>
+      <li>Calls <code><a href="/reference/androidx/fragment/app/Fragment.html#onInflate(android.content.Context,android.util.AttributeSet,android.os.Bundle)">Fragment#onInflate(Context, AttributeSet, Bundle)</a></code></li>
       <li>Executes a FragmentTransaction to add the Fragment to the appropriate FragmentManager</li>
     </ul>
-    <p> You can optionally include an <code>android:tag</code> which allows you to use <code><a href="/reference/androidx/fragment/app/FragmentManager.html#findFragmentByTag(java.lang.String)">findFragmentByTag</a></code> to retrieve the added Fragment. </p>
+    <p> You can optionally include an <code>android:tag</code> which allows you to use <code><a href="/reference/androidx/fragment/app/FragmentManager.html#findFragmentByTag(java.lang.String)">FragmentManager#findFragmentByTag(String)</a></code> to retrieve the added Fragment. </p>
     <pre class="prettyprint">&lt;androidx.fragment.app.FragmentContainerView
        xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
        xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
@@ -42,8 +42,8 @@
 &lt;/androidx.fragment.app.FragmentContainerView&gt;
 </pre>
     <p>FragmentContainerView should not be used as a replacement for other ViewGroups (FrameLayout, LinearLayout, etc) outside of Fragment use cases. </p>
-    <p>FragmentContainerView will only allow views returned by a Fragment's <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> . Attempting to add any other view will result in an <code><a href="/reference/java/lang/IllegalStateException.html">IllegalStateException</a></code> . </p>
-    <p>Layout animations and transitions are disabled for FragmentContainerView for APIs above 17. Otherwise, Animations should be done through <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#setCustomAnimations(int,int,int,int)">setCustomAnimations</a></code> . If animateLayoutChanges is set to <code>true</code> or <code><a href="/reference/androidx/fragment/app/FragmentContainerView.html#setLayoutTransition(android.animation.LayoutTransition)">setLayoutTransition</a></code> is called directly an <code><a href="/reference/java/lang/UnsupportedOperationException.html">UnsupportedOperationException</a></code> will be thrown. </p>
+    <p>FragmentContainerView will only allow views returned by a Fragment's <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">Fragment#onCreateView(LayoutInflater, ViewGroup, Bundle)</a></code> . Attempting to add any other view will result in an <code><a href="/reference/java/lang/IllegalStateException.html">IllegalStateException</a></code> . </p>
+    <p>Layout animations and transitions are disabled for FragmentContainerView for APIs above 17. Otherwise, Animations should be done through <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#setCustomAnimations(int,int,int,int)">FragmentTransaction#setCustomAnimations(int, int, int, int)</a></code> . If animateLayoutChanges is set to <code>true</code> or <code><a href="/reference/androidx/fragment/app/FragmentContainerView.html#setLayoutTransition(android.animation.LayoutTransition)">setLayoutTransition</a></code> is called directly an <code><a href="/reference/java/lang/UnsupportedOperationException.html">UnsupportedOperationException</a></code> will be thrown. </p>
     <p>Fragments using exit animations are drawn before all others for FragmentContainerView. This ensures that exiting Fragments do not appear on top of the view.</p>
     <h2>Summary</h2>
     <p>Enum values</p>
@@ -87,7 +87,7 @@
             <td><code> void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentContainerView.html#addView(android.view.View,int,android.view.ViewGroup.LayoutParams)">addView</a>(View&nbsp;child,&nbsp;int&nbsp;index,&nbsp;LayoutParams&nbsp;params)</code></div>
-              <p>FragmentContainerView will only allow views returned by a Fragment's <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> .</p>
+              <p>FragmentContainerView will only allow views returned by a Fragment's <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">Fragment#onCreateView(LayoutInflater, ViewGroup, Bundle)</a></code> .</p>
             </td>
           </tr>
           <tr>
@@ -175,7 +175,7 @@
     <div><a name="addView(android.view.View, int, android.view.ViewGroup.LayoutParams)"></a><a name="addView-android.view.View-int-android.view.ViewGroup.LayoutParams-"></a>
       <h3 class="api-name" id="addView(android.view.View,int,android.view.ViewGroup.LayoutParams)">addView</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentContainerView.html#addView(android.view.View,int,android.view.ViewGroup.LayoutParams)">addView</a>(View&nbsp;child,&nbsp;int&nbsp;index,&nbsp;LayoutParams&nbsp;params)</pre>
-      <p>FragmentContainerView will only allow views returned by a Fragment's <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> . Attempting to add any other view will result in an <code><a href="/reference/java/lang/IllegalStateException.html">IllegalStateException</a></code> . {@inheritDoc}</p>
+      <p>FragmentContainerView will only allow views returned by a Fragment's <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">Fragment#onCreateView(LayoutInflater, ViewGroup, Bundle)</a></code> . Attempting to add any other view will result in an <code><a href="/reference/java/lang/IllegalStateException.html">IllegalStateException</a></code> . {@inheritDoc}</p>
     </div>
     <div><a name="endViewTransition-android.view.View-"></a>
       <h3 class="api-name" id="endViewTransition(android.view.View)">endViewTransition</h3>
@@ -215,7 +215,7 @@
       <h3 class="api-name" id="setLayoutTransition(android.animation.LayoutTransition)">setLayoutTransition</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentContainerView.html#setLayoutTransition(android.animation.LayoutTransition)">setLayoutTransition</a>(LayoutTransition&nbsp;transition)</pre>
       <p>When called, this method throws a <code><a href="/reference/java/lang/UnsupportedOperationException.html">UnsupportedOperationException</a></code> on APIs above 17. On APIs 17 and below, it calls This can be called either explicitly, or implicitly by setting animateLayoutChanges to <code>true</code>. </p>
-      <p>View animations and transitions are disabled for FragmentContainerView for APIs above 17. Use <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#setCustomAnimations(int,int,int,int)">setCustomAnimations</a></code> and <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#setTransition(int)">setTransition</a></code> .</p>
+      <p>View animations and transitions are disabled for FragmentContainerView for APIs above 17. Use <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#setCustomAnimations(int,int,int,int)">FragmentTransaction#setCustomAnimations(int, int, int, int)</a></code> and <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#setTransition(int)">FragmentTransaction#setTransition(int)</a></code> .</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>

@@ -19,9 +19,9 @@
     <p> FragmentManager changes its behavior based on what optional interfaces your FragmentHostCallback implements. This includes the following: </p>
     <ul>
       <li>: Removes the need to override <code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onStartIntentSenderFromFragment(androidx.fragment.app.Fragment,android.content.IntentSender,int,android.content.Intent,int,int,int,android.os.Bundle)">onStartIntentSenderFromFragment</a></code> or <code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onRequestPermissionsFromFragment(androidx.fragment.app.Fragment,java.lang.String[],int)">onRequestPermissionsFromFragment</a></code> .</li>
-      <li><b><code><a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html">FragmentOnAttachListener</a></code></b>: Removes the need to manually call <code><a href="/reference/androidx/fragment/app/FragmentManager.html#addFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener)">addFragmentOnAttachListener</a></code> from your host in order to receive <code><a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html#onAttachFragment(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onAttachFragment</a></code> callbacks for the <code><a href="/reference/androidx/fragment/app/FragmentController.html#getSupportFragmentManager()">getSupportFragmentManager</a></code> .</li>
-      <li>: Removes the need to manually call <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate()">popBackStackImmediate</a></code> when handling the system back button.</li>
-      <li>: Removes the need for your <code><a href="/reference/androidx/fragment/app/FragmentController.html">FragmentController</a></code> to call <code><a href="/reference/androidx/fragment/app/FragmentController.html#retainNestedNonConfig()">retainNestedNonConfig</a></code> or <code><a href="/reference/androidx/fragment/app/FragmentController.html#restoreAllState(android.os.Parcelable,androidx.fragment.app.FragmentManagerNonConfig)">restoreAllState</a></code> .</li>
+      <li><b><code><a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html">FragmentOnAttachListener</a></code></b>: Removes the need to manually call <code><a href="/reference/androidx/fragment/app/FragmentManager.html#addFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener)">FragmentManager#addFragmentOnAttachListener</a></code> from your host in order to receive <code><a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html#onAttachFragment(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">FragmentOnAttachListener#onAttachFragment</a></code> callbacks for the <code><a href="/reference/androidx/fragment/app/FragmentController.html#getSupportFragmentManager()">FragmentController#getSupportFragmentManager()</a></code> .</li>
+      <li>: Removes the need to manually call <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate()">FragmentManager#popBackStackImmediate()</a></code> when handling the system back button.</li>
+      <li>: Removes the need for your <code><a href="/reference/androidx/fragment/app/FragmentController.html">FragmentController</a></code> to call <code><a href="/reference/androidx/fragment/app/FragmentController.html#retainNestedNonConfig()">FragmentController#retainNestedNonConfig()</a></code> or <code><a href="/reference/androidx/fragment/app/FragmentController.html#restoreAllState(android.os.Parcelable,androidx.fragment.app.FragmentManagerNonConfig)">FragmentController#restoreAllState(Parcelable, FragmentManagerNonConfig)</a></code> .</li>
     </ul>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -34,7 +34,7 @@
           <tr>
             <td><code>&lt;E&gt;</code></td>
             <td width="100%">
-              <p><code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html">FragmentHostCallback</a></code> the type of object that's currently hosting the fragments. An instance of this class must be returned by <code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onGetHost()">onGetHost</a></code> .</p>
+              <p><code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html">&lt;</a></code> the type of object that's currently hosting the fragments. An instance of this class must be returned by <code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onGetHost()">onGetHost</a></code> .</p>
             </td>
           </tr>
         </tbody>
@@ -221,7 +221,7 @@
     <div><a name="onGetHost--"></a>
       <h3 class="api-name" id="onGetHost()">onGetHost</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;E&nbsp;<a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onGetHost()">onGetHost</a>()</pre>
-      <p>Return the object that's currently hosting the fragment. If a <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> is hosted by a <code><a href="/reference/androidx/fragment/app/FragmentActivity.html">FragmentActivity</a></code> , the object returned here should be the same object returned from <code><a href="/reference/androidx/fragment/app/Fragment.html#getActivity()">getActivity</a></code> .</p>
+      <p>Return the object that's currently hosting the fragment. If a <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> is hosted by a <code><a href="/reference/androidx/fragment/app/FragmentActivity.html">FragmentActivity</a></code> , the object returned here should be the same object returned from <code><a href="/reference/androidx/fragment/app/Fragment.html#getActivity()">Fragment#getActivity()</a></code> .</p>
     </div>
     <div><a name="onGetLayoutInflater--"></a>
       <h3 class="api-name" id="onGetLayoutInflater()">onGetLayoutInflater</h3>
@@ -278,7 +278,7 @@
     <div><a name="onSupportInvalidateOptionsMenu--"></a>
       <h3 class="api-name" id="onSupportInvalidateOptionsMenu()">onSupportInvalidateOptionsMenu</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onSupportInvalidateOptionsMenu()">onSupportInvalidateOptionsMenu</a>()</pre>
-      <p>Invalidates the activity's options menu. See <code><a href="/reference/androidx/fragment/app/FragmentActivity.html#supportInvalidateOptionsMenu()">supportInvalidateOptionsMenu</a></code></p>
+      <p>Invalidates the activity's options menu. See <code><a href="/reference/androidx/fragment/app/FragmentActivity.html#supportInvalidateOptionsMenu()">FragmentActivity#supportInvalidateOptionsMenu()</a></code></p>
     </div>
   </body>
 </html>

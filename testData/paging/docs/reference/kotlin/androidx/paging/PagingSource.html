@@ -19,7 +19,7 @@
     <p>A <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> can grow as it loads more data, but the data loaded cannot be updated. If the underlying data set is modified, a new <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> / <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> pair must be created to represent an updated snapshot of the data.</p>
     <h3> Loading Pages</h3>
     <p><code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> queries data from its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> in response to loading hints generated as the user scrolls in a <code>RecyclerView</code>.</p>
-    <p>To control how and when a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> queries data from its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>, see <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html">PagingConfig</a></code>, which defines behavior such as <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">pageSize</a></code> and <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a></code>.</p>
+    <p>To control how and when a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> queries data from its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>, see <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html">PagingConfig</a></code>, which defines behavior such as <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">PagingConfig.pageSize</a></code> and <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#prefetchDistance()">PagingConfig.prefetchDistance</a></code>.</p>
     <h3> Updating Data</h3>
     <p>A <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> / <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> pair is a snapshot of the data set. A new <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> / <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> must be created if an update occurs, such as a reorder, insert, delete, or content update occurs. A <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> must detect that it cannot continue loading its snapshot (for instance, when Database query notices a table being invalidated), and call <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code>. Then a new <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> / <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> pair would be created to represent data from the new state of the database query.</p>
     <h3> Presenting Data to UI</h3>
@@ -77,43 +77,43 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html">PagingSource.LoadParams</a></code></td>
             <td width="100%">
-              <p>Params for a load request on a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code>.</p>
+              <p>Params for a load request on a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.</a></code></p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.Append.html">PagingSource.LoadParams.Append</a></code></td>
             <td width="100%">
-              <p>Params to load a page of data from a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> via <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> to be appended to the end of the list.</p>
+              <p>Params to load a page of data from a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> via <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.</a></code></p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.Prepend.html">PagingSource.LoadParams.Prepend</a></code></td>
             <td width="100%">
-              <p>Params to load a page of data from a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> via <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> to be prepended to the start of the list.</p>
+              <p>Params to load a page of data from a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> via <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.</a></code></p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.Refresh.html">PagingSource.LoadParams.Refresh</a></code></td>
             <td width="100%">
-              <p>Params for an initial load request on a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> or a refresh triggered by <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code>.</p>
+              <p>Params for an initial load request on a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.</a></code></p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a></code></td>
             <td width="100%">
-              <p>Result of a load request from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code>.</p>
+              <p>Result of a load request from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.</a></code></p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Error.html">PagingSource.LoadResult.Error</a></code></td>
             <td width="100%">
-              <p>Error result object for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code>.</p>
+              <p>Error result object for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.</a></code></p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">PagingSource.LoadResult.Page</a></code></td>
             <td width="100%">
-              <p>Success result object for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code>.</p>
+              <p>Success result object for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.</a></code></p>
             </td>
           </tr>
           <tr>
@@ -228,8 +228,8 @@
       <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html#jumpingSupported()">jumpingSupported</a>:&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></pre>
       <p><code>true</code> if this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> supports jumping, <code>false</code> otherwise.</p>
       <p>Override this to <code>true</code> if pseudo-fast scrolling via jumps is supported.</p>
-      <p>A jump occurs when a <code>RecyclerView</code> scrolls through a number of placeholders defined by <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#jumpThreshold()">jumpThreshold</a></code> and triggers a load with <code><a href="/reference/kotlin/androidx/paging/LoadType.REFRESH.html">LoadType.REFRESH</a></code>.</p>
-      <p><code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s that support jumps should override <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a></code> to return a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> that would load data fulfilling the viewport given a user's current <code><a href="/reference/kotlin/androidx/paging/PagingState.html#anchorPosition()">anchorPosition</a></code>.</p>
+      <p>A jump occurs when a <code>RecyclerView</code> scrolls through a number of placeholders defined by <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#jumpThreshold()">PagingConfig.jumpThreshold</a></code> and triggers a load with <code><a href="/reference/kotlin/androidx/paging/LoadType.REFRESH.html">LoadType</a></code>.</p>
+      <p><code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s that support jumps should override <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a></code> to return a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">Key</a></code> that would load data fulfilling the viewport given a user's current <code><a href="/reference/kotlin/androidx/paging/PagingState.html#anchorPosition()">PagingState.anchorPosition</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -286,9 +286,9 @@
       <h3 class="api-name" id="getRefreshKey(androidx.paging.PagingState)">getRefreshKey</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a><br>open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a>(state:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;):&nbsp;Key?</pre>
       <p>Request a refresh key given the current <code><a href="/reference/kotlin/androidx/paging/PagingState.html">PagingState</a></code> of the associated <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> used to present loaded data from this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
-      <p>The <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> returned by this method is used to populate the <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html#key()">key</a></code> for load requests of type <code><a href="/reference/kotlin/androidx/paging/LoadType.REFRESH.html">LoadType.REFRESH</a></code>.</p>
+      <p>The <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">Key</a></code> returned by this method is used to populate the <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html#key()">LoadParams.key</a></code> for load requests of type <code><a href="/reference/kotlin/androidx/paging/LoadType.REFRESH.html">REFRESH</a></code>.</p>
       <p>For example, if items are loaded based on position, and keys are positions, <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a></code> should return the position of the item.</p>
-      <p>Alternately, if items contain a key used to load, get the key from the item in the page at index <code><a href="/reference/kotlin/androidx/paging/PagingState.html#anchorPosition()">anchorPosition</a></code>.</p>
+      <p>Alternately, if items contain a key used to load, get the key from the item in the page at index <code><a href="/reference/kotlin/androidx/paging/PagingState.html#anchorPosition()">PagingState.anchorPosition</a></code>.</p>
       <p>If this operation cannot be supported (generally, because keys cannot be reused across refresh) return <code>null</code> - this is the default behavior.</p>
       <p>Note: This method is guaranteed to only be called if the initial load succeeds and the list of loaded pages is not empty. In the case where a refresh is triggered before the initial load succeeds or it errors out, the initial key passed to <code><a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a></code> will be used.</p>
     </div>

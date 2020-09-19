@@ -17,7 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.Description
-import com.google.devsite.renderer.converters.linkForReference
+import com.google.devsite.renderer.converters.forReference
 import kotlinx.html.FlowContent
 import kotlinx.html.OL
 import kotlinx.html.TABLE
@@ -199,7 +199,10 @@ internal class DefaultDescription(
                 is CodeInline -> code { renderTags(tag.children, state) }
                 is Pre, is CodeBlock -> pre("prettyprint") { renderTags(tag.children, state) }
                 is DocumentationLink -> code {
-                    data.pathProvider.linkForReference(tag.dri).render(this)
+                    val url = data.pathProvider.forReference(tag.dri).url
+                    a(url) {
+                        renderTags(tag.children, state)
+                    }
                 }
                 is Img -> img(src = tag.params.getValue("href"), alt = tag.params.get("alt")) {
                     renderTags(tag.children, state)
