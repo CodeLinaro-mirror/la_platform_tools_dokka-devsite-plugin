@@ -58,26 +58,26 @@ internal class ParameterDocumentableConverterTest(
     @Test
     fun `Parameter understands generics`() {
         val param = """
-            |fun foo(a: List<Int>)
+            |fun foo(a: List<String>)
         """.render().param()
 
         val paramType = param.data.primary.asType()
         val generic = paramType.data.generics.item()
 
-        assertThat(generic.link().name).isEqualTo("Int")
+        assertThat(generic.link().name).isEqualTo("String")
     }
 
     @Test
     fun `Parameter understands nested generics`() {
         val param = """
-            |fun foo(a: List<Set<Int>>)
+            |fun foo(a: List<Set<String>>)
         """.render().param()
 
         val paramType = param.data.primary.asType()
         val generic = paramType.data.generics.item().asType()
         val nestedGeneric = generic.data.generics.item()
 
-        assertThat(nestedGeneric.link().name).isEqualTo("Int")
+        assertThat(nestedGeneric.link().name).isEqualTo("String")
     }
 
     @Test
@@ -105,14 +105,14 @@ internal class ParameterDocumentableConverterTest(
             val primary = param.primary.asType().data
             assertThat(primary.type.data.name).isEqualTo("Function3")
             assertThat(primary.generics).hasSize(4)
-            assertThat(primary.generics[0].link().name).isEqualTo("Int")
+            assertThat(primary.generics[0].link().name).isEqualTo("Integer")
             assertThat(primary.generics[1].link().name).isEqualTo("Map")
             assertThat(primary.generics[2].link().name).isEqualTo("Double")
             assertThat(primary.generics[3].link().name).isEqualTo("Collection")
 
             val mapGenerics = primary.generics[1].asType().data.generics.items(2)
             assertThat(mapGenerics.first().link().name).isEqualTo("String")
-            assertThat(mapGenerics.last().link().name).isEqualTo("Int")
+            assertThat(mapGenerics.last().link().name).isEqualTo("Integer")
 
             val collectionGeneric = primary.generics[3].asType().data.generics.item()
             assertThat(collectionGeneric.link().name).isEqualTo("Float")
@@ -167,6 +167,51 @@ internal class ParameterDocumentableConverterTest(
             assertThat(param.annotations).isEmpty()
             assertThat(param.primary.asType().data.nullable).isTrue()
         }
+    }
+
+    @Test
+    fun `Nullable primitive type is upgraded in Java`() {
+        val param = """
+            |fun foo(foo: Int?)
+        """.render().param().data
+
+        val typeName = param.primary.asType().link().name
+
+        javaOnly { assertThat(typeName).isEqualTo("Integer") }
+        kotlinOnly { assertThat(typeName).isEqualTo("Int") }
+    }
+
+    @Test
+    fun `Primitive type in generic is upgraded in Java`() {
+        val param = """
+            |fun foo(foo: List<Int>)
+        """.render().param().data
+
+        val generic = param.primary.asType().data.generics.item()
+
+        javaOnly { assertThat(generic.link().name).isEqualTo("Integer") }
+        kotlinOnly { assertThat(generic.link().name).isEqualTo("Int") }
+    }
+
+    @Test
+    fun `Unit isn't changed in Java when used as a parameter`() {
+        val param = """
+            |fun foo(foo: Unit)
+        """.render().param().data
+
+        assertThat(param.primary.asType().link().name).isEqualTo("Unit")
+    }
+
+    @Test
+    fun `Primitive type is mapped in Java`() {
+        val param = """
+            |fun foo(foo: Int)
+        """.render().param().data
+
+        val typeName = param.primary.asType().link().name
+
+        javaOnly { assertThat(typeName).isEqualTo("int") }
+        kotlinOnly { assertThat(typeName).isEqualTo("Int") }
     }
 
     private fun DModule.param(forSummary: Boolean = false): Parameter {

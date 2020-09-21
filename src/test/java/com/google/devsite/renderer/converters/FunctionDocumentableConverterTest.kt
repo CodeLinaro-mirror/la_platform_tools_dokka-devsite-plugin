@@ -161,6 +161,24 @@ internal class FunctionDocumentableConverterTest(
     }
 
     @Test
+    fun `Function summary component creates void return type link`() {
+        val summary = """
+            |fun foo() = Unit
+        """.render().summary()
+
+        val returnType = summary.returnSummary().type
+
+        javaOnly {
+            assertThat(returnType.link().name).isEqualTo("void")
+            assertThat(returnType.link().url).isEmpty()
+        }
+        kotlinOnly {
+            assertThat(returnType.link().name).isEqualTo("Unit")
+            assertPath(returnType.link().url, "kotlin/Unit.html")
+        }
+    }
+
+    @Test
     fun `Function summary component handles constructors`() {
         val summary = """
             |class MyClass
@@ -174,7 +192,7 @@ internal class FunctionDocumentableConverterTest(
     @Test
     fun `Function summary component creates return type generics`() {
         val summary = """
-            |fun foo(): Map<String, List<Int>>
+            |fun foo(): Map<String, List<Long>>
         """.render().summary()
 
         val returnz = summary.returnSummary()
@@ -183,7 +201,7 @@ internal class FunctionDocumentableConverterTest(
 
         assertThat(generics.first().link().name).isEqualTo("String")
         assertThat(generics.last().link().name).isEqualTo("List")
-        assertThat(nestedGenerics.link().name).isEqualTo("Int")
+        assertThat(nestedGenerics.link().name).isEqualTo("Long")
     }
 
     @Test
@@ -553,6 +571,24 @@ internal class FunctionDocumentableConverterTest(
         """.render().detail()
 
         assertThat(detail.data.symbolType).isEqualTo(SymbolType.FUNCTION)
+    }
+
+    @Test
+    fun `Function detail component creates void return type link`() {
+        val detail = """
+            |fun foo() = Unit
+        """.render().detail()
+
+        val returnType = detail.data.returnType
+
+        javaOnly {
+            assertThat(returnType.link().name).isEqualTo("void")
+            assertThat(returnType.link().url).isEmpty()
+        }
+        kotlinOnly {
+            assertThat(returnType.link().name).isEqualTo("Unit")
+            assertPath(returnType.link().url, "kotlin/Unit.html")
+        }
     }
 
     @Test
