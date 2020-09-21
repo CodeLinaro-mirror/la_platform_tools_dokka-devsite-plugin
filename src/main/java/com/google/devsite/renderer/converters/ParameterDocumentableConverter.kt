@@ -292,18 +292,22 @@ internal class ParameterDocumentableConverter(
     ): Projection = when (this) {
         is TypeConstructor -> {
             val isStdlib = dri.packageName == "kotlin"
-            if (isReturnType && isStdlib && dri.classNames == "Unit") {
+            val className = dri.classNames.orEmpty()
+
+            if (isReturnType && isStdlib && className == "Unit") {
                 Void
-            } else if (isStdlib && dri.classNames in kotlinPrimitives) {
+            } else if (isStdlib && className in kotlinPrimitives) {
                 if (mustBoxPrimitive) {
-                    when (dri.classNames) {
+                    when (className) {
                         "Char" -> copy(DRI("java.lang", "Character"))
                         "Int" -> copy(DRI("java.lang", "Integer"))
-                        else -> copy(DRI("java.lang", dri.classNames))
+                        else -> copy(DRI("java.lang", className))
                     }
                 } else {
-                    PrimitiveJavaType(dri.classNames!!.toLowerCase())
+                    PrimitiveJavaType(className.toLowerCase())
                 }
+            } else if (isStdlib && className in kotlinPrimitiveArrays) {
+                PrimitiveJavaType(className.removeSuffix("Array").toLowerCase() + "[]")
             } else {
                 copy(projections = projections.map {
                     // Generics can't be true primitives in Java
@@ -320,6 +324,16 @@ internal class ParameterDocumentableConverter(
     private companion object {
         val kotlinPrimitives = setOf(
             "Boolean", "Byte", "Char", "Short", "Int", "Long", "Float", "Double"
+        )
+        val kotlinPrimitiveArrays = setOf(
+            "BooleanArray",
+            "ByteArray",
+            "CharArray",
+            "ShortArray",
+            "IntArray",
+            "LongArray",
+            "FloatArray",
+            "DoubleArray"
         )
     }
 }
