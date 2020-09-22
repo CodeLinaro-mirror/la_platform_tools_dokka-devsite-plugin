@@ -95,6 +95,31 @@ internal class ParameterDocumentableConverterTest(
     }
 
     @Test
+    fun `Parameter understands lambda generics`() {
+        val param = """
+            |fun foo(a: List<() -> String>)
+        """.render().param()
+
+        val generic = param.data.primary.asType().data.generics.item()
+        val lambdaParam = (generic as Parameter).data
+
+        javaOnly {
+            assertNoLambdaStuff(lambdaParam)
+
+            val primary = lambdaParam.primary.asType().data
+            assertThat(primary.type.data.name).isEqualTo("Function0")
+            assertThat(primary.generics.item().link().name).isEqualTo("String")
+        }
+        kotlinOnly {
+            assertThat(lambdaParam.isLambda).isTrue()
+            assertThat(lambdaParam.receiver).isNull()
+            assertThat(lambdaParam.lambdaModifiers).isEmpty()
+            assertThat(lambdaParam.lambdaParams).isEmpty()
+            assertThat(lambdaParam.primary.link().name).isEqualTo("String")
+        }
+    }
+
+    @Test
     fun `Parameter understands variance generics`() {
         val param = """
             |fun foo(a: Map<in String, out Double>)
