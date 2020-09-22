@@ -214,6 +214,18 @@ internal class ParameterDocumentableConverterTest(
         kotlinOnly { assertThat(typeName).isEqualTo("Int") }
     }
 
+    @Test
+    fun `Primitive array is mapped in Java`() {
+        val param = """
+            |fun foo(foo: IntArray)
+        """.render().param().data
+
+        val typeName = param.primary.asType().link().name
+
+        javaOnly { assertThat(typeName).isEqualTo("int[]") }
+        kotlinOnly { assertThat(typeName).isEqualTo("IntArray") }
+    }
+
     private fun DModule.param(forSummary: Boolean = false): Parameter {
         val converter = ParameterDocumentableConverter(language, pathProvider())
         return converter.componentForParameter(parameterDoc(), forSummary)
