@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.SummaryList
+import com.google.devsite.components.table.SummaryList
 import kotlinx.html.FlowContent
 import kotlinx.html.div
 import kotlinx.html.table

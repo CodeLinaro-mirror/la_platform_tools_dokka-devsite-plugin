@@ -17,7 +17,8 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.Classlike
+import com.google.devsite.components.pages.Classlike
+import com.google.devsite.components.pages.Classlike.Params
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.components.testing.NoopDescription
 import com.google.devsite.components.testing.NoopSummaryList
@@ -29,7 +30,7 @@ class DefaultClasslikeTest {
     @Test
     fun `Empty classlike renders correctly`() {
         val component = DefaultClasslike(
-            Classlike.Params(
+            Params(
                 description = emptyList(),
                 symbolTypes = emptyList()
             )
@@ -58,7 +59,7 @@ class DefaultClasslikeTest {
     @Test
     fun `Classlike with description renders correctly`() {
         val component = DefaultClasslike(
-            Classlike.Params(
+            Params(
                 description = listOf(NoopDescription("Hello World!")),
                 symbolTypes = emptyList()
             )
@@ -88,7 +89,7 @@ class DefaultClasslikeTest {
     @Test
     fun `Classlike with symbols renders correctly`() {
         val component = DefaultClasslike(
-            Classlike.Params(
+            Params(
                 description = emptyList(),
                 symbolTypes = listOf(
                     NoopSummaryList() to Classlike.SymbolType(

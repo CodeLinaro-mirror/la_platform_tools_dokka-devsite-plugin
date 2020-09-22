@@ -17,7 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.FunctionSignature
+import com.google.devsite.components.symbols.PropertySignature.Params
 import com.google.devsite.components.testing.NoopLink
 import com.google.devsite.components.testing.NoopParameter
 import kotlinx.html.div
@@ -28,29 +28,8 @@ class DefaultPropertySignatureTest {
     @Test
     fun `Signature with no params renders correctly`() {
         val component = DefaultPropertySignature(
-            FunctionSignature.Params(
+            Params(
                 name = NoopLink("foo")
-            )
-        )
-
-        val output = createHTML().div {
-            component.render(this)
-        }.trim()
-
-        // language=html
-        assertThat(output).isEqualTo(
-            """
-<div>foo</div>
-            """.trim()
-        )
-    }
-
-    @Test
-    fun `Signature with params is ignored`() {
-        val component = DefaultPropertySignature(
-            FunctionSignature.Params(
-                name = NoopLink("foo"),
-                parameters = listOf(NoopParameter("String foo"), NoopParameter("int bar"))
             )
         )
 
@@ -69,7 +48,7 @@ class DefaultPropertySignatureTest {
     @Test
     fun `Signature with receiver renders correctly`() {
         val component = DefaultPropertySignature(
-            FunctionSignature.Params(
+            Params(
                 name = NoopLink("foo"),
                 receiver = NoopParameter("String")
             )

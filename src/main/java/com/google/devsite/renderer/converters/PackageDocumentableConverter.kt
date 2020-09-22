@@ -16,15 +16,15 @@
 
 package com.google.devsite.renderer.converters
 
-import com.google.devsite.components.DevsitePage
-import com.google.devsite.components.FunctionDetail
-import com.google.devsite.components.PackageSummary
-import com.google.devsite.components.SummaryList
-import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultPackageSummary
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
+import com.google.devsite.components.pages.DevsitePage
+import com.google.devsite.components.pages.PackageSummary
+import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.async
@@ -131,7 +131,7 @@ internal class PackageDocumentableConverter(
         )
     }
 
-    private fun functionsToDetail(functions: List<DFunction>): List<FunctionDetail> {
+    private fun functionsToDetail(functions: List<DFunction>): List<SymbolDetail> {
         val modifierHints = ModifierHints(displayLanguage, isSummary = false)
         return functions.map {
             functionConverter.detail(it, modifierHints)
@@ -151,7 +151,7 @@ internal class PackageDocumentableConverter(
         )
     }
 
-    private fun propertiesToDetail(properties: List<DProperty>): List<FunctionDetail> {
+    private fun propertiesToDetail(properties: List<DProperty>): List<SymbolDetail> {
         val modifierHints = ModifierHints(displayLanguage, isSummary = false)
         return properties.map {
             propertyConverter.detail(it, modifierHints)

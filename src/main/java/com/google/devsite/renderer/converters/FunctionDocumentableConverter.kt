@@ -16,18 +16,18 @@
 
 package com.google.devsite.renderer.converters
 
-import com.google.devsite.components.FunctionDetail
-import com.google.devsite.components.FunctionSignature
-import com.google.devsite.components.FunctionSummary
-import com.google.devsite.components.SingleColumnSummaryItem
-import com.google.devsite.components.TwoPaneSummaryItem
-import com.google.devsite.components.TypeSummary
-import com.google.devsite.components.impl.DefaultFunctionDetail
 import com.google.devsite.components.impl.DefaultFunctionSignature
-import com.google.devsite.components.impl.DefaultFunctionSummary
 import com.google.devsite.components.impl.DefaultSingleColumnSummaryItem
+import com.google.devsite.components.impl.DefaultSymbolDetail
+import com.google.devsite.components.impl.DefaultSymbolSummary
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultTypeSummary
+import com.google.devsite.components.symbols.FunctionSignature
+import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.symbols.TypeSummary
+import com.google.devsite.components.table.SingleColumnSummaryItem
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.DFunction
@@ -55,8 +55,8 @@ internal class FunctionDocumentableConverter(
                         )
                     )
                 ),
-                description = DefaultFunctionSummary(
-                    FunctionSummary.Params(
+                description = DefaultSymbolSummary(
+                    SymbolSummary.Params(
                         signature = function.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(function, annotations)
                     )
@@ -69,8 +69,8 @@ internal class FunctionDocumentableConverter(
     fun summaryForConstructor(function: DFunction): SingleColumnSummaryItem {
         return DefaultSingleColumnSummaryItem(
             SingleColumnSummaryItem.Params(
-                DefaultFunctionSummary(
-                    FunctionSummary.Params(
+                DefaultSymbolSummary(
+                    SymbolSummary.Params(
                         signature = function.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(function)
                     )
@@ -80,13 +80,13 @@ internal class FunctionDocumentableConverter(
     }
 
     /** @return the function detail component */
-    fun detail(function: DFunction, hints: ModifierHints): FunctionDetail {
+    fun detail(function: DFunction, hints: ModifierHints): SymbolDetail {
         val annotations = function.annotations()
         val returnType =
             paramConverter.componentForProjection(function.type, annotations, isReturnType = true)
 
-        return DefaultFunctionDetail(
-            FunctionDetail.Params(
+        return DefaultSymbolDetail(
+            SymbolDetail.Params(
                 displayLanguage = displayLanguage,
                 name = function.name,
                 anchors = generateCompatAnchors(function),
@@ -97,7 +97,7 @@ internal class FunctionDocumentableConverter(
                 ),
                 modifiers = function.modifiers().modifiersFor(hints),
                 returnType = returnType,
-                symbolType = FunctionDetail.SymbolType.FUNCTION,
+                symbolType = SymbolDetail.SymbolType.FUNCTION,
                 signature = function.signature(isSummary = false),
                 metadata = javadocConverter.metadata(
                     doc = function,

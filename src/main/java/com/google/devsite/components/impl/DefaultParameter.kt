@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.Parameter
+import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.renderer.Language
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent

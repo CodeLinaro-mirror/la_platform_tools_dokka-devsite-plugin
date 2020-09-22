@@ -19,18 +19,18 @@
 package com.google.devsite.renderer.converters.testing
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.ClassIndex
 import com.google.devsite.components.Component
-import com.google.devsite.components.DevsitePage
-import com.google.devsite.components.FunctionSummary
 import com.google.devsite.components.Link
-import com.google.devsite.components.Parameter
-import com.google.devsite.components.ParameterBase
-import com.google.devsite.components.ParameterType
-import com.google.devsite.components.SummaryList
-import com.google.devsite.components.TableOfContents
-import com.google.devsite.components.TableTitle
-import com.google.devsite.components.TwoPaneSummaryItem
+import com.google.devsite.components.pages.ClassIndex
+import com.google.devsite.components.pages.DevsitePage
+import com.google.devsite.components.pages.TableOfContents
+import com.google.devsite.components.symbols.Parameter
+import com.google.devsite.components.symbols.SymbolBase
+import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.symbols.SymbolType
+import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TableTitle
+import com.google.devsite.components.table.TwoPaneSummaryItem
 
 internal fun <T> Collection<T>.item(): T = items(1).single()
 
@@ -57,19 +57,19 @@ internal fun SummaryList.item() = item<TwoPaneSummaryItem>()
 internal fun SummaryList.items(size: Int? = null) = items<TwoPaneSummaryItem>(size)
 
 internal fun TwoPaneSummaryItem.link(): Link.Params = (data.title as Link).data
-internal fun TwoPaneSummaryItem.functionSummary() = data.description as FunctionSummary
-internal fun FunctionSummary.name(): String = data.signature.data.name.data.name
+internal fun TwoPaneSummaryItem.functionSummary() = data.description as SymbolSummary
+internal fun SymbolSummary.name(): String = data.signature.data.name.data.name
 internal fun SummaryList.title(): String = (data.header as TableTitle).data.title
 
-internal fun ParameterBase.asType(): ParameterType = when (this) {
+internal fun SymbolBase.asType(): SymbolType = when (this) {
     is Parameter -> data.primary.asType()
-    is ParameterType -> this
+    is SymbolType -> this
     else -> error("Not supported: $this")
 }
 
-internal fun ParameterType.link(): Link.Params = data.type.data
-internal fun ParameterBase.link(): Link.Params = when (this) {
+internal fun SymbolType.link(): Link.Params = data.type.data
+internal fun SymbolBase.link(): Link.Params = when (this) {
     is Parameter -> data.primary.asType().link()
-    is ParameterType -> data.type.data
+    is SymbolType -> data.type.data
     else -> error("Not supported: $this")
 }

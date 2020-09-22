@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.FunctionSignature
+import com.google.devsite.components.symbols.FunctionSignature
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
 import kotlinx.html.br

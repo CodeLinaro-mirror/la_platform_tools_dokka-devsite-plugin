@@ -17,8 +17,8 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.ContextFreeComponent
-import com.google.devsite.components.PackageSummary
-import com.google.devsite.components.SummaryList
+import com.google.devsite.components.pages.PackageSummary
+import com.google.devsite.components.table.SummaryList
 import com.google.devsite.renderer.Language
 import kotlinx.html.FlowContent
 import kotlinx.html.h2

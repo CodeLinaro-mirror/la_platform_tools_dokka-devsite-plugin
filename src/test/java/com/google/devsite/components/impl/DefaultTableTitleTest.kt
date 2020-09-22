@@ -17,7 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.TableTitle
+import com.google.devsite.components.table.TableTitle.Params
 import kotlinx.html.stream.createHTML
 import kotlinx.html.tr
 import org.junit.Test
@@ -25,7 +25,7 @@ import org.junit.Test
 class DefaultTableTitleTest {
     @Test
     fun `Small header renders correctly`() {
-        val component = DefaultTableTitle(TableTitle.Params("Title"))
+        val component = DefaultTableTitle(Params("Title"))
 
         val output = createHTML().tr {
             component.render(this)
@@ -43,7 +43,7 @@ class DefaultTableTitleTest {
 
     @Test
     fun `Big header renders correctly`() {
-        val component = DefaultTableTitle(TableTitle.Params("Title", big = true))
+        val component = DefaultTableTitle(Params("Title", big = true))
 
         val output = createHTML().tr {
             component.render(this)

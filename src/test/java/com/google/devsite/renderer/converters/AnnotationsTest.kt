@@ -27,7 +27,7 @@ import org.jetbrains.dokka.model.DModule
 import org.junit.Ignore
 import org.junit.Test
 import kotlin.Boolean
-import com.google.devsite.components.Annotation as AnnotationComponent
+import com.google.devsite.components.symbols.Annotation as AnnotationComponent
 
 internal class AnnotationsTest : ConverterTestBase() {
     @Test

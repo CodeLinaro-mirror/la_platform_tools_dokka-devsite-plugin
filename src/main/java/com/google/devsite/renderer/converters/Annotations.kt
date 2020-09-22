@@ -29,7 +29,7 @@ import org.jetbrains.dokka.model.ClassValue
 import org.jetbrains.dokka.model.EnumValue
 import org.jetbrains.dokka.model.StringValue
 import org.jetbrains.dokka.model.properties.WithExtraProperties
-import com.google.devsite.components.Annotation as AnnotationComponent
+import com.google.devsite.components.symbols.Annotation as AnnotationComponent
 
 /** @return the components for the provided dokka model annotations */
 internal fun List<Annotation>.annotationComponents(

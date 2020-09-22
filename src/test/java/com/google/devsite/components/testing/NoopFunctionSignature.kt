@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.testing
 
-import com.google.devsite.components.FunctionSignature
+import com.google.devsite.components.symbols.FunctionSignature
 import kotlinx.html.FlowContent
 
 internal class NoopFunctionSignature(private val text: String) : FunctionSignature {

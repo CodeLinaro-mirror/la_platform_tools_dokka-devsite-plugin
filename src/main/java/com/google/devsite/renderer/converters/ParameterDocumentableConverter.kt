@@ -17,12 +17,12 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.Link
-import com.google.devsite.components.Parameter
-import com.google.devsite.components.ParameterBase
-import com.google.devsite.components.ParameterType
 import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultParameter
-import com.google.devsite.components.impl.DefaultParameterType
+import com.google.devsite.components.impl.DefaultSymbolType
+import com.google.devsite.components.symbols.Parameter
+import com.google.devsite.components.symbols.SymbolBase
+import com.google.devsite.components.symbols.SymbolType
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.links.DRI
@@ -188,7 +188,7 @@ internal class ParameterDocumentableConverter(
     }
 
     /** Converts a documentable type to its type component, recursively expanding generics */
-    private fun Projection.toComponent(nullable: Boolean = false): ParameterType {
+    private fun Projection.toComponent(nullable: Boolean = false): SymbolType {
         if (this is Variance<*>) {
             return inner.toComponent()
         }
@@ -196,15 +196,15 @@ internal class ParameterDocumentableConverter(
             return inner.toComponent(nullable = displayLanguage == Language.KOTLIN)
         }
 
-        val generics: List<ParameterBase> = when (this) {
+        val generics: List<SymbolBase> = when (this) {
             is TypeConstructor -> projections.map { componentForProjection(it) }
             is TypeParameter, is PrimitiveJavaType, is UnresolvedBound,
             Star, Void, JavaObject -> emptyList()
             else -> error("Unknown bound: $this")
         }
 
-        return DefaultParameterType(
-            ParameterType.Params(
+        return DefaultSymbolType(
+            SymbolType.Params(
                 type = toLink(),
                 nullable,
                 generics

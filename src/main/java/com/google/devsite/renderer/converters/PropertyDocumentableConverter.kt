@@ -16,16 +16,16 @@
 
 package com.google.devsite.renderer.converters
 
-import com.google.devsite.components.FunctionDetail
-import com.google.devsite.components.FunctionSignature
-import com.google.devsite.components.FunctionSummary
-import com.google.devsite.components.TwoPaneSummaryItem
-import com.google.devsite.components.TypeSummary
-import com.google.devsite.components.impl.DefaultFunctionDetail
-import com.google.devsite.components.impl.DefaultFunctionSummary
 import com.google.devsite.components.impl.DefaultPropertySignature
+import com.google.devsite.components.impl.DefaultSymbolDetail
+import com.google.devsite.components.impl.DefaultSymbolSummary
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultTypeSummary
+import com.google.devsite.components.symbols.PropertySignature
+import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.symbols.TypeSummary
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.DProperty
@@ -49,8 +49,8 @@ internal class PropertyDocumentableConverter(
                         type = paramConverter.componentForProjection(property.type, annotations)
                     )
                 ),
-                description = DefaultFunctionSummary(
-                    FunctionSummary.Params(
+                description = DefaultSymbolSummary(
+                    SymbolSummary.Params(
                         signature = property.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(property, annotations)
                     )
@@ -60,11 +60,11 @@ internal class PropertyDocumentableConverter(
     }
 
     /** @return the property detail component */
-    fun detail(property: DProperty, hints: ModifierHints): FunctionDetail {
+    fun detail(property: DProperty, hints: ModifierHints): SymbolDetail {
         val annotations = property.annotations()
         val returnType = paramConverter.componentForProjection(property.type, annotations)
-        return DefaultFunctionDetail(
-            FunctionDetail.Params(
+        return DefaultSymbolDetail(
+            SymbolDetail.Params(
                 displayLanguage = displayLanguage,
                 name = property.name,
                 anchors = property.generateAnchors(),
@@ -75,7 +75,7 @@ internal class PropertyDocumentableConverter(
                 ),
                 modifiers = property.modifiers().modifiersFor(hints),
                 returnType = returnType,
-                symbolType = FunctionDetail.SymbolType.PROPERTY,
+                symbolType = SymbolDetail.SymbolType.PROPERTY,
                 signature = property.signature(isSummary = false),
                 metadata = javadocConverter.metadata(
                     doc = property,
@@ -87,11 +87,11 @@ internal class PropertyDocumentableConverter(
         )
     }
 
-    private fun DProperty.signature(isSummary: Boolean): FunctionSignature {
+    private fun DProperty.signature(isSummary: Boolean): PropertySignature {
         val receiver = receiver?.let { paramConverter.componentForParameter(it, isSummary) }
 
         return DefaultPropertySignature(
-            FunctionSignature.Params(
+            PropertySignature.Params(
                 // TODO(b/168136770): figure out path for default anchors
                 name = pathProvider.linkForReference(dri),
                 receiver = when (displayLanguage) {

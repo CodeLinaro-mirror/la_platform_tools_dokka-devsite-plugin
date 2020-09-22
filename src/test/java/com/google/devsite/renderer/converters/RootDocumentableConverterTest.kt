@@ -17,12 +17,12 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.ClassIndex
-import com.google.devsite.components.DevsitePage
-import com.google.devsite.components.PackageIndex
-import com.google.devsite.components.SummaryList
-import com.google.devsite.components.TableOfContents
-import com.google.devsite.components.TocPackage
+import com.google.devsite.components.pages.ClassIndex
+import com.google.devsite.components.pages.DevsitePage
+import com.google.devsite.components.pages.PackageIndex
+import com.google.devsite.components.pages.TableOfContents
+import com.google.devsite.components.symbols.TocPackage
+import com.google.devsite.components.table.SummaryList
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.content
 import com.google.devsite.renderer.converters.testing.item

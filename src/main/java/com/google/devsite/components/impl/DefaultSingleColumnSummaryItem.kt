@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.SingleColumnSummaryItem
+import com.google.devsite.components.table.SingleColumnSummaryItem
 import kotlinx.html.TR
 import kotlinx.html.td
 

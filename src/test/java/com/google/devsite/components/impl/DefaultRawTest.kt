@@ -17,7 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.Raw
+import com.google.devsite.components.Raw.Params
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -25,7 +25,7 @@ import org.junit.Test
 class DefaultRawTest {
     @Test
     fun `Raw text renders correctly`() {
-        val component = DefaultRaw(Raw.Params("Hello world!"))
+        val component = DefaultRaw(Params("Hello world!"))
 
         val output = createHTML().div {
             component.render(this)

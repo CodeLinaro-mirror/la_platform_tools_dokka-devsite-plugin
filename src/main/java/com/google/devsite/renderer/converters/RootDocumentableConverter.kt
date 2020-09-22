@@ -16,13 +16,6 @@
 
 package com.google.devsite.renderer.converters
 
-import com.google.devsite.components.ClassIndex
-import com.google.devsite.components.DevsitePage
-import com.google.devsite.components.PackageIndex
-import com.google.devsite.components.SummaryList
-import com.google.devsite.components.TableOfContents
-import com.google.devsite.components.TocPackage
-import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultClassIndex
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultPackageIndex
@@ -30,6 +23,13 @@ import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableOfContents
 import com.google.devsite.components.impl.DefaultTocPackage
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
+import com.google.devsite.components.pages.ClassIndex
+import com.google.devsite.components.pages.DevsitePage
+import com.google.devsite.components.pages.PackageIndex
+import com.google.devsite.components.pages.TableOfContents
+import com.google.devsite.components.symbols.TocPackage
+import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.CoroutineScope

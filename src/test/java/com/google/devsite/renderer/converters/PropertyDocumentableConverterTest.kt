@@ -17,13 +17,13 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.FunctionDetail
-import com.google.devsite.components.FunctionDetail.SymbolType
 import com.google.devsite.components.Link
-import com.google.devsite.components.Parameter
-import com.google.devsite.components.ParameterType
-import com.google.devsite.components.TwoPaneSummaryItem
-import com.google.devsite.components.TypeSummary
+import com.google.devsite.components.symbols.Parameter
+import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.symbols.SymbolDetail.SymbolType.PROPERTY
+import com.google.devsite.components.symbols.SymbolType
+import com.google.devsite.components.symbols.TypeSummary
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.asType
 import com.google.devsite.renderer.converters.testing.functionSummary
@@ -93,7 +93,7 @@ internal class PropertyDocumentableConverterTest(
             |val foo
         """.render().detail()
 
-        assertThat(detail.data.symbolType).isEqualTo(SymbolType.PROPERTY)
+        assertThat(detail.data.symbolType).isEqualTo(PROPERTY)
     }
 
     @Test
@@ -159,7 +159,7 @@ internal class PropertyDocumentableConverterTest(
     private fun DModule.detail(
         fromClass: Boolean = false,
         hints: ModifierHints = ModifierHints(language)
-    ): FunctionDetail {
+    ): SymbolDetail {
         val docConverter = DocTagConverter(language, pathProvider())
         val converter = PropertyDocumentableConverter(language, pathProvider(), docConverter)
         return converter.detail(property(fromClass), hints)
@@ -175,8 +175,8 @@ internal class PropertyDocumentableConverterTest(
         }
     }
 
-    private fun Parameter.link(): Link.Params = (data.primary as ParameterType).link()
-    private fun ParameterType.link(): Link.Params = data.type.data
+    private fun Parameter.link(): Link.Params = (data.primary as SymbolType).link()
+    private fun SymbolType.link(): Link.Params = data.type.data
     private fun TwoPaneSummaryItem.returnSummary(): TypeSummary.Params =
         (data.title as TypeSummary).data
 

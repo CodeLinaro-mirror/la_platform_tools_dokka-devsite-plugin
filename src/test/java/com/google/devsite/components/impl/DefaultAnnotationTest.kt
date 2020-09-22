@@ -17,8 +17,8 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.Annotation.Parameter
-import com.google.devsite.components.Annotation.Params
+import com.google.devsite.components.symbols.Annotation.Parameter
+import com.google.devsite.components.symbols.Annotation.Params
 import com.google.devsite.components.testing.NoopLink
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML

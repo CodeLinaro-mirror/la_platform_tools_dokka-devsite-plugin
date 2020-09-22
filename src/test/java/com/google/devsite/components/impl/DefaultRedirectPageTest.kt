@@ -17,7 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.RedirectPage.Params
+import com.google.devsite.components.pages.RedirectPage.Params
 import kotlinx.html.html
 import kotlinx.html.stream.createHTML
 import org.junit.Test

@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.TableTitle
+import com.google.devsite.components.table.TableTitle
 import kotlinx.html.TR
 import kotlinx.html.th
 import kotlinx.html.unsafe

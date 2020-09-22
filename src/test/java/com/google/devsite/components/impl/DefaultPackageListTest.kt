@@ -17,14 +17,13 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.PackageList
+import com.google.devsite.components.pages.PackageList.Params
 import org.junit.Test
 
 class DefaultPackageListTest {
     @Test
     fun `Package list renders correctly`() {
-        val component =
-            DefaultPackageList(PackageList.Params(listOf("a", "b", "c")))
+        val component = DefaultPackageList(Params(listOf("a", "b", "c")))
 
         val output = buildString {
             component.render(this)

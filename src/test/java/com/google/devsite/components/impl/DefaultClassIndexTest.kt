@@ -17,7 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.ClassIndex
+import com.google.devsite.components.pages.ClassIndex.Params
 import com.google.devsite.components.testing.NoopSummaryList
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
@@ -26,7 +26,7 @@ import org.junit.Test
 class DefaultClassIndexTest {
     @Test
     fun `Empty classes renders correctly`() {
-        val component = DefaultClassIndex(ClassIndex.Params("packages.html", emptyMap()))
+        val component = DefaultClassIndex(Params("packages.html", emptyMap()))
 
         val output = createHTML().body {
             component.render(this)
@@ -46,7 +46,7 @@ class DefaultClassIndexTest {
     @Test
     fun `Single class renders correctly`() {
         val component =
-            DefaultClassIndex(ClassIndex.Params("packages.html", mapOf('A' to NoopSummaryList())))
+            DefaultClassIndex(Params("packages.html", mapOf('A' to NoopSummaryList())))
 
         val output = createHTML().body {
             component.render(this)
@@ -68,7 +68,7 @@ class DefaultClassIndexTest {
     @Test
     fun `Multiple classes renders correctly`() {
         val component = DefaultClassIndex(
-            ClassIndex.Params(
+            Params(
                 "packages.html",
                 mapOf('A' to NoopSummaryList(), 'B' to NoopSummaryList(), 'Z' to NoopSummaryList())
             )

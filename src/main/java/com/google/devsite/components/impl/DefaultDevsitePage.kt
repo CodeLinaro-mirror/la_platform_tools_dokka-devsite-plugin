@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.DevsitePage
+import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.renderer.Language
 import kotlinx.html.HTML
 import kotlinx.html.body

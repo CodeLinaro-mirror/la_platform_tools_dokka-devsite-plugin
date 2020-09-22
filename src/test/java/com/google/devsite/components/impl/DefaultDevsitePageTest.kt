@@ -17,7 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.DevsitePage.Params
+import com.google.devsite.components.pages.DevsitePage.Params
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.renderer.Language
 import kotlinx.html.html

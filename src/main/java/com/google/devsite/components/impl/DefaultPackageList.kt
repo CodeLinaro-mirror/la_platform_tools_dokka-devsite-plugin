@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.PackageList
+import com.google.devsite.components.pages.PackageList
 
 /** Default implementation of the package-list. */
 internal class DefaultPackageList(

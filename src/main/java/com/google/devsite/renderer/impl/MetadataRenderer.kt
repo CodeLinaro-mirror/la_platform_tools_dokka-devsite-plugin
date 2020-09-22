@@ -16,10 +16,10 @@
 
 package com.google.devsite.renderer.impl
 
-import com.google.devsite.components.PackageList
-import com.google.devsite.components.RedirectPage
 import com.google.devsite.components.impl.DefaultPackageList
 import com.google.devsite.components.impl.DefaultRedirectPage
+import com.google.devsite.components.pages.PackageList
+import com.google.devsite.components.pages.RedirectPage
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.RootDocumentableConverter
 import com.google.devsite.renderer.converters.sortedPackages
