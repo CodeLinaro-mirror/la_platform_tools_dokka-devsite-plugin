@@ -28,6 +28,7 @@ import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DModule
@@ -310,7 +311,9 @@ internal class PackageDocumentableConverterTest(
     }
 
     private fun DModule.page(): DevsitePage {
-        val converter = PackageDocumentableConverter(language, packages.single(), pathProvider())
+        val holder = runBlocking { DocumentablesHolder(this@page, this) }
+        val converter =
+            PackageDocumentableConverter(language, packages.single(), pathProvider(), holder)
         return runBlocking { converter.summaryPage() }
     }
 

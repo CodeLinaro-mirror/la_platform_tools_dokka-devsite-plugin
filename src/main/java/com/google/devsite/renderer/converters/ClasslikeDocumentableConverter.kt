@@ -28,6 +28,7 @@ import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableTitle
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -43,7 +44,8 @@ import org.jetbrains.dokka.model.properties.WithExtraProperties
 internal class ClasslikeDocumentableConverter(
     private val displayLanguage: Language,
     private val classlike: DClasslike,
-    private val pathProvider: FilePathProvider
+    private val pathProvider: FilePathProvider,
+    private val docsHolder: DocumentablesHolder
 ) {
     private val javadocConverter = DocTagConverter(displayLanguage, pathProvider)
     private val functionConverter =
@@ -60,7 +62,7 @@ internal class ClasslikeDocumentableConverter(
         val annotations = (classlike as? WithExtraProperties<*>)?.annotations().orEmpty()
 
         val nestedTypesSummary = async {
-            typesToSummary(classlike.classlikes())
+            typesToSummary(docsHolder.classlikesFor(classlike))
         }
         val constantsSummary = async {
             propertiesToSummary(constantsTitle(), declaredProperties.constants())

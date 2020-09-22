@@ -37,7 +37,8 @@ import org.jetbrains.dokka.model.DPackage
 internal class PackageRenderer(
     private val outputWriter: OutputWriter,
     private val pathProvider: FilePathProvider,
-    private val displayLanguage: Language
+    private val displayLanguage: Language,
+    private val docsHolder: DocumentablesHolder
 ) {
     /** Writes the home page. */
     suspend fun writeIndex(packageDoc: DPackage) {
@@ -54,7 +55,8 @@ internal class PackageRenderer(
     }
 
     suspend fun writePackageSummary(packageDoc: DPackage) {
-        val converter = PackageDocumentableConverter(displayLanguage, packageDoc, pathProvider)
+        val converter =
+            PackageDocumentableConverter(displayLanguage, packageDoc, pathProvider, docsHolder)
         val page = converter.summaryPage()
         val packageSummary = createHTML().html {
             page.render(this)
@@ -68,7 +70,8 @@ internal class PackageRenderer(
     }
 
     suspend fun writeClasslike(classlikeDoc: DClasslike) {
-        val converter = ClasslikeDocumentableConverter(displayLanguage, classlikeDoc, pathProvider)
+        val converter =
+            ClasslikeDocumentableConverter(displayLanguage, classlikeDoc, pathProvider, docsHolder)
         val page = converter.classlike()
         val classlike = createHTML().html {
             page.render(this)

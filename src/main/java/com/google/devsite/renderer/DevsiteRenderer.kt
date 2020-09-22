@@ -16,41 +16,37 @@
 
 package com.google.devsite.renderer
 
-import com.google.devsite.renderer.converters.classlikes
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.MetadataRenderer
 import com.google.devsite.renderer.impl.PackageRenderer
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
-import org.jetbrains.dokka.pages.ModulePageNode
-import org.jetbrains.dokka.pages.RootPageNode
 
 internal class DevsiteRenderer(
     private val rootFileRenderer: MetadataRenderer,
-    private val packageRenderer: PackageRenderer
+    private val packageRenderer: PackageRenderer,
+    private val docsHolder: DocumentablesHolder
 ) {
-    suspend fun render(root: RootPageNode) {
-        val module = (root as ModulePageNode).documentable as DModule
-
-        writeRootMetadata(module)
-        for (packageDoc in module.packages) {
+    suspend fun render() {
+        writeRootMetadata()
+        for (packageDoc in docsHolder.packages()) {
             writePackage(packageDoc)
         }
     }
 
-    private suspend fun writeRootMetadata(module: DModule) = coroutineScope {
-        launch { rootFileRenderer.writePackageList(module) }
+    private suspend fun writeRootMetadata() = coroutineScope {
+        launch { rootFileRenderer.writePackageList() }
         launch { rootFileRenderer.writeRootIndex() }
-        launch { rootFileRenderer.writePackages(module) }
-        launch { rootFileRenderer.writeClasses(module) }
-        launch { rootFileRenderer.writeToc(module) }
+        launch { rootFileRenderer.writePackages() }
+        launch { rootFileRenderer.writeClasses() }
+        launch { rootFileRenderer.writeToc() }
     }
 
     private suspend fun writePackage(packageDoc: DPackage) = coroutineScope {
         launch { packageRenderer.writeIndex(packageDoc) }
         launch { packageRenderer.writePackageSummary(packageDoc) }
-        for (clazz in packageDoc.classlikes()) {
+        for (clazz in docsHolder.classlikesFor(packageDoc)) {
             launch { packageRenderer.writeClasslike(clazz) }
         }
     }

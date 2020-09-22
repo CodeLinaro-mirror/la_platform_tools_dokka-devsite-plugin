@@ -28,6 +28,7 @@ import com.google.devsite.renderer.converters.testing.content
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DModule
@@ -383,16 +384,18 @@ internal class RootDocumentableConverterTest(
     ): DevsitePage {
         check(!(forClasses && forPackages)) { "Must choose 1." }
 
-        val converter = RootDocumentableConverter(language, this, pathProvider())
+        val holder = runBlocking { DocumentablesHolder(this@page, this) }
+        val converter = RootDocumentableConverter(language, pathProvider(), holder)
         return when {
-            forClasses -> converter.classesPage()
-            forPackages -> converter.packagesPage()
+            forClasses -> runBlocking { converter.classesPage() }
+            forPackages -> runBlocking { converter.packagesPage() }
             else -> error("Must choose 1.")
         }
     }
 
     private fun DModule.toc(): TableOfContents {
-        val converter = RootDocumentableConverter(language, this, pathProvider())
+        val holder = runBlocking { DocumentablesHolder(this@toc, this) }
+        val converter = RootDocumentableConverter(language, pathProvider(), holder)
         return runBlocking { converter.tocPage() }
     }
 
