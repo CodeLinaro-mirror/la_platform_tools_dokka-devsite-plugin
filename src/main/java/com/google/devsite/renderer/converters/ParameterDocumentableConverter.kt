@@ -87,12 +87,15 @@ internal class ParameterDocumentableConverter(
      * type (e.g. return type), so nullability will be handled elsewhere. When rendering Kotlin,
      * we *do* want to show nullability information since it's built into the type. Thus, we look at
      * annotations in addition to the Dokka Nullable type.
+     *
+     * @param isReturnType used to determine if Unit return types should be converted to void
      */
     fun componentForProjection(
         proj: Projection,
-        annotations: List<Annotations.Annotation> = emptyList()
+        annotations: List<Annotations.Annotation> = emptyList(),
+        isReturnType: Boolean = false
     ): Parameter = when (displayLanguage) {
-        Language.JAVA -> componentForJavaProjection(proj)
+        Language.JAVA -> componentForJavaProjection(proj, isReturnType = isReturnType)
         Language.KOTLIN -> componentForKotlinProjection(proj, nullable = annotations.isNullable())
     }
 
@@ -100,13 +103,14 @@ internal class ParameterDocumentableConverter(
         proj: Projection,
         name: String = "",
         annotations: List<Annotations.Annotation> = emptyList(),
-        nullable: Boolean = false
+        nullable: Boolean = false,
+        isReturnType: Boolean = false
     ): Parameter {
         return DefaultParameter(
             Parameter.Params(
                 isLambda = false,
                 name = name,
-                primary = proj.toComponent(),
+                primary = proj.rewriteKotlinPrimitivesForJava(isReturnType).toComponent(),
                 annotations = annotations.annotationComponents(
                     pathProvider,
                     displayLanguage,
@@ -269,5 +273,53 @@ internal class ParameterDocumentableConverter(
         is Variance<*> -> inner.asTypeConstructor()
         is Nullable -> inner.asTypeConstructor()
         else -> this as TypeConstructor
+    }
+
+    /**
+     * Runs through the tree of types, converting Kotlin primitives like Int, Boolean, etc. to their
+     * Java counterparts. This is tricky because:
+     *
+     * - Ints and Chars are Integer and Character in Java (sigh)
+     * - Nullable Kotlin primitives always have to be converted to their boxed types (since you
+     *   can't return a null primitive in Java)
+     * - Anything in a generic also has to be boxed
+     * - Unit aka void can appear in lists and must therefore only be converted to void for return
+     *   types
+     */
+    private fun Projection.rewriteKotlinPrimitivesForJava(
+        isReturnType: Boolean = false,
+        mustBoxPrimitive: Boolean = false
+    ): Projection = when (this) {
+        is TypeConstructor -> {
+            val isStdlib = dri.packageName == "kotlin"
+            if (isReturnType && isStdlib && dri.classNames == "Unit") {
+                Void
+            } else if (isStdlib && dri.classNames in kotlinPrimitives) {
+                if (mustBoxPrimitive) {
+                    when (dri.classNames) {
+                        "Char" -> copy(DRI("java.lang", "Character"))
+                        "Int" -> copy(DRI("java.lang", "Integer"))
+                        else -> copy(DRI("java.lang", dri.classNames))
+                    }
+                } else {
+                    PrimitiveJavaType(dri.classNames!!.toLowerCase())
+                }
+            } else {
+                copy(projections = projections.map {
+                    // Generics can't be true primitives in Java
+                    it.rewriteKotlinPrimitivesForJava(mustBoxPrimitive = true)
+                })
+            }
+        }
+        // Nullable types and variances can't be true primitives in Java
+        is Nullable -> inner.rewriteKotlinPrimitivesForJava(mustBoxPrimitive = true)
+        is Variance<*> -> inner.rewriteKotlinPrimitivesForJava(mustBoxPrimitive = true)
+        else -> this
+    }
+
+    private companion object {
+        val kotlinPrimitives = setOf(
+            "Boolean", "Byte", "Char", "Short", "Int", "Long", "Float", "Double"
+        )
     }
 }
