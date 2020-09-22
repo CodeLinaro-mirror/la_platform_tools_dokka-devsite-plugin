@@ -260,207 +260,28 @@ internal class FunctionDocumentableConverterTest(
         assertThat(paramType.link().name).isEqualTo("String")
     }
 
-    @Ignore // TODO(b/165139177): figure out correct implementation
+    @Ignore // TODO(b/168270546): figure out inline generics
     @Test
-    fun `Function summary component handles nullable types`() {
+    fun `Function summary component creates inline generics`() {
         val summary = """
-            |fun Int?.foo(a: List<String?>?)
+            |fun <T> foo() = Unit
         """.render().summary()
     }
 
+    @Ignore // TODO(b/168270546): figure out inline generics
     @Test
-    fun `Function summary component creates params with variance generics`() {
+    fun `Function summary component creates inline generics extending class`() {
         val summary = """
-            |fun foo(a: List<out String>)
-        """.render().summary()
-
-        val function = summary.functionSummary()
-        val generic = function.param().asType().data.generics.item()
-
-        // TODO(b/166530498): support variance
-        assertThat(generic.link().name).isEqualTo("String")
-    }
-
-    @Ignore // TODO(asaveau): figure out inline generics
-    @Test
-    fun `Function summary component creates params with inline generics and generic param`() {
-        val summary = """
-            |fun <T> foo(a: List<T>)
+            |fun <T: Number> foo() = Unit
         """.render().summary()
     }
 
-    @Ignore // TODO(asaveau): figure out inline generics
+    @Ignore // TODO(b/168270546): figure out inline generics
     @Test
-    fun `Function summary component creates params with inline generics param`() {
+    fun `Function summary component creates multiple inline generics`() {
         val summary = """
-            |fun <T> foo(a: T)
+            |fun <T, U, V> foo() = Unit
         """.render().summary()
-    }
-
-    @Ignore // TODO(asaveau): figure out inline generics
-    @Test
-    fun `Function summary component creates params with inline generics receiver`() {
-        val summary = """
-            |fun <T> T.foo()
-        """.render().summary()
-    }
-
-    @Ignore // TODO(asaveau): figure out inline generics
-    @Test
-    fun `Function summary component creates params with inline generics return type`() {
-        val summary = """
-            |fun <T> foo(): T
-        """.render().summary()
-    }
-
-    @Test
-    fun `Function summary component creates factory lambda param`() {
-        val summary = """
-            |fun foo(a: () -> Unit)
-        """.render().summary()
-
-        val function = summary.functionSummary()
-        val param = function.param().data
-
-        javaOnly {
-            assertNoLambdaStuff(param)
-
-            val primary = param.primary.asType().data
-            assertThat(primary.type.data.name).isEqualTo("Function0")
-            assertThat(primary.generics.item().link().name).isEqualTo("Unit")
-        }
-        kotlinOnly {
-            assertThat(param.isLambda).isTrue()
-            assertThat(param.receiver).isNull()
-            assertThat(param.lambdaModifiers).isEmpty()
-            assertThat(param.lambdaParams).isEmpty()
-            assertThat(param.primary.link().name).isEqualTo("Unit")
-        }
-    }
-
-    @Test
-    fun `Function summary component creates suspend lambda param`() {
-        val summary = """
-            |fun foo(a: suspend () -> Unit)
-        """.render().summary()
-
-        val function = summary.functionSummary()
-        val param = function.param().data
-
-        javaOnly {
-            assertNoLambdaStuff(param)
-
-            val primary = param.primary.asType().data
-            assertThat(primary.type.data.name).isEqualTo("SuspendFunction0")
-            assertThat(primary.generics.single().link().name).isEqualTo("Unit")
-        }
-        kotlinOnly {
-            assertThat(param.isLambda).isTrue()
-            assertThat(param.receiver).isNull()
-            assertThat(param.lambdaParams).isEmpty()
-            assertThat(param.lambdaModifiers).containsExactly("suspend")
-            assertThat(param.primary.link().name).isEqualTo("Unit")
-        }
-    }
-
-    @Ignore // TODO(b/165709374): dokka doesn't understand suspending lambda receivers
-    @Test
-    fun `Function summary component creates suspend lambda param with receiver`() {
-        val summary = """
-            |fun foo(a: suspend Float.() -> Unit)
-        """.render().summary()
-
-        val function = summary.functionSummary()
-        val param = function.param().data
-        javaOnly {
-            assertNoLambdaStuff(param)
-            assertThat(param.primary.link().name).isEqualTo("")
-        }
-        kotlinOnly {
-            assertThat(param.isLambda).isTrue()
-            assertThat(param.receiver).isNotNull()
-            assertThat(param.receiver!!.link().name).isEqualTo("Float")
-            assertThat(param.lambdaModifiers).containsExactly("suspend")
-            assertThat(param.lambdaParams).isEmpty()
-        }
-    }
-
-    @Test
-    fun `Function summary component creates suspend lambda param with params`() {
-        val summary = """
-            |fun foo(a: suspend (Float) -> Unit)
-        """.render().summary()
-
-        val function = summary.functionSummary()
-        val param = function.param().data
-
-        javaOnly {
-            assertNoLambdaStuff(param)
-
-            val primary = param.primary.asType().data
-            assertThat(primary.type.data.name).isEqualTo("SuspendFunction1")
-            assertThat(primary.generics.first().link().name).isEqualTo("Float")
-            assertThat(primary.generics.last().link().name).isEqualTo("Unit")
-        }
-        kotlinOnly {
-            assertThat(param.isLambda).isTrue()
-            assertThat(param.receiver).isNull()
-            assertThat(param.lambdaModifiers).containsExactly("suspend")
-            assertThat(param.lambdaParams).hasSize(1)
-            assertThat(param.lambdaParams.single().link().name).isEqualTo("Float")
-        }
-    }
-
-    @Test
-    fun `Function summary component creates lambda param`() {
-        val summary = """
-            |fun foo(a: (String) -> Unit)
-        """.render().summary()
-
-        val function = summary.functionSummary()
-        val param = function.param().data
-
-        javaOnly {
-            assertNoLambdaStuff(param)
-
-            val primary = param.primary.asType().data
-            assertThat(primary.type.data.name).isEqualTo("Function1")
-            assertThat(primary.generics.first().link().name).isEqualTo("String")
-            assertThat(primary.generics.last().link().name).isEqualTo("Unit")
-        }
-        kotlinOnly {
-            assertThat(param.isLambda).isTrue()
-            assertThat(param.receiver).isNull()
-            assertThat(param.lambdaModifiers).isEmpty()
-            assertThat(param.lambdaParams).hasSize(1)
-            assertThat(param.lambdaParams.single().link().name).isEqualTo("String")
-        }
-    }
-
-    @Test
-    fun `Function summary component creates lambda param with receiver`() {
-        val summary = """
-            |fun foo(a: Float.() -> Unit)
-        """.render().summary()
-
-        val function = summary.functionSummary()
-        val param = function.param().data
-
-        javaOnly {
-            assertNoLambdaStuff(param)
-
-            val primary = param.primary.asType().data
-            assertThat(primary.type.data.name).isEqualTo("Function1")
-            assertThat(primary.generics.first().link().name).isEqualTo("Float")
-            assertThat(primary.generics.last().link().name).isEqualTo("Unit")
-        }
-        kotlinOnly {
-            assertThat(param.isLambda).isTrue()
-            assertThat(param.receiver).isNotNull()
-            assertThat(param.receiver!!.link().name).isEqualTo("Float")
-            assertThat(param.lambdaModifiers).isEmpty()
-            assertThat(param.lambdaParams).isEmpty()
-        }
     }
 
     @Test

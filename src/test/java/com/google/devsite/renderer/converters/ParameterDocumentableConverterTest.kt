@@ -26,6 +26,7 @@ import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DParameter
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -91,6 +92,165 @@ internal class ParameterDocumentableConverterTest(
 
         javaOnly { assertThat(generic.link().name).isEqualTo("?") }
         kotlinOnly { assertThat(generic.link().name).isEqualTo("*") }
+    }
+
+    @Test
+    fun `Parameter understands variance generics`() {
+        val param = """
+            |fun foo(a: Map<in String, out Double>)
+        """.render().param()
+
+        val paramType = param.data.primary.asType()
+        val generic = paramType.data.generics.items(2)
+
+        // TODO(b/166530498): support variance
+        assertThat(generic.first().link().name).isEqualTo("String")
+        assertThat(generic.last().link().name).isEqualTo("Double")
+    }
+
+    @Test
+    fun `Parameter understands inline generics`() {
+        val param = """
+            |fun <T> foo(a: T)
+        """.render().param()
+
+        val paramType = param.data.primary.asType()
+
+        assertThat(paramType.link().name).isEqualTo("T")
+        assertThat(paramType.link().url).isEmpty()
+    }
+
+    @Test
+    fun `Parameter understands factory lambda`() {
+        val param = """
+            |fun foo(a: () -> Unit)
+        """.render().param().data
+
+        javaOnly {
+            assertNoLambdaStuff(param)
+
+            val primary = param.primary.asType().data
+            assertThat(primary.type.data.name).isEqualTo("Function0")
+            assertThat(primary.generics.item().link().name).isEqualTo("Unit")
+        }
+        kotlinOnly {
+            assertThat(param.isLambda).isTrue()
+            assertThat(param.receiver).isNull()
+            assertThat(param.lambdaModifiers).isEmpty()
+            assertThat(param.lambdaParams).isEmpty()
+            assertThat(param.primary.link().name).isEqualTo("Unit")
+        }
+    }
+
+    @Test
+    fun `Parameter understands suspend lambda`() {
+        val param = """
+            |fun foo(a: suspend () -> Unit)
+        """.render().param().data
+
+        javaOnly {
+            assertNoLambdaStuff(param)
+
+            val primary = param.primary.asType().data
+            assertThat(primary.type.data.name).isEqualTo("SuspendFunction0")
+            assertThat(primary.generics.single().link().name).isEqualTo("Unit")
+        }
+        kotlinOnly {
+            assertThat(param.isLambda).isTrue()
+            assertThat(param.receiver).isNull()
+            assertThat(param.lambdaParams).isEmpty()
+            assertThat(param.lambdaModifiers).containsExactly("suspend")
+            assertThat(param.primary.link().name).isEqualTo("Unit")
+        }
+    }
+
+    @Ignore // TODO(b/165709374): dokka doesn't understand suspending lambda receivers
+    @Test
+    fun `Parameter understands suspend lambda with receiver`() {
+        val param = """
+            |fun foo(a: suspend Float.() -> Unit)
+        """.render().param().data
+
+        javaOnly {
+            assertNoLambdaStuff(param)
+            assertThat(param.primary.link().name).isEqualTo("")
+        }
+        kotlinOnly {
+            assertThat(param.isLambda).isTrue()
+            assertThat(param.receiver).isNotNull()
+            assertThat(param.receiver!!.link().name).isEqualTo("Float")
+            assertThat(param.lambdaModifiers).containsExactly("suspend")
+            assertThat(param.lambdaParams).isEmpty()
+        }
+    }
+
+    @Test
+    fun `Parameter understands suspend lambda with params`() {
+        val param = """
+            |fun foo(a: suspend (Float) -> Unit)
+        """.render().param().data
+
+        javaOnly {
+            assertNoLambdaStuff(param)
+
+            val primary = param.primary.asType().data
+            assertThat(primary.type.data.name).isEqualTo("SuspendFunction1")
+            assertThat(primary.generics.first().link().name).isEqualTo("Float")
+            assertThat(primary.generics.last().link().name).isEqualTo("Unit")
+        }
+        kotlinOnly {
+            assertThat(param.isLambda).isTrue()
+            assertThat(param.receiver).isNull()
+            assertThat(param.lambdaModifiers).containsExactly("suspend")
+            assertThat(param.lambdaParams).hasSize(1)
+            assertThat(param.lambdaParams.single().link().name).isEqualTo("Float")
+        }
+    }
+
+    @Test
+    fun `Parameter understands parameterized lambda`() {
+        val param = """
+            |fun foo(a: (String) -> Unit)
+        """.render().param().data
+
+        javaOnly {
+            assertNoLambdaStuff(param)
+
+            val primary = param.primary.asType().data
+            assertThat(primary.type.data.name).isEqualTo("Function1")
+            assertThat(primary.generics.first().link().name).isEqualTo("String")
+            assertThat(primary.generics.last().link().name).isEqualTo("Unit")
+        }
+        kotlinOnly {
+            assertThat(param.isLambda).isTrue()
+            assertThat(param.receiver).isNull()
+            assertThat(param.lambdaModifiers).isEmpty()
+            assertThat(param.lambdaParams).hasSize(1)
+            assertThat(param.lambdaParams.single().link().name).isEqualTo("String")
+        }
+    }
+
+    @Test
+    fun `Parameter understands lambda with receiver`() {
+        val param = """
+            |fun foo(a: Float.() -> Unit)
+        """.render().param().data
+
+        javaOnly {
+            assertNoLambdaStuff(param)
+
+            val primary = param.primary.asType().data
+            assertThat(primary.type.data.name).isEqualTo("Function1")
+            assertThat(primary.generics.first().link().name).isEqualTo("Float")
+            assertThat(primary.generics.last().link().name).isEqualTo("Unit")
+        }
+        kotlinOnly {
+            assertThat(param.isLambda).isTrue()
+            assertThat(param.receiver).isNotNull()
+            assertThat(param.receiver!!.link().name).isEqualTo("Float")
+            assertThat(param.lambdaModifiers).isEmpty()
+            assertThat(param.lambdaParams).isEmpty()
+        }
     }
 
     @Test
