@@ -27,7 +27,7 @@ cp "$start_dir/testData/kotlin-book.yaml" third_party/devsite/android/en/referen
 p4 reopen
 
 /google/data/ro/projects/devsite/devsite2 stage --db="${FLAGS_db}" \
-  --parallelize_build --upload_safety_check_mode=ignore \
+  --parallelize_build --use_large_thread_pools --upload_safety_check_mode=ignore \
   "third_party/devsite/android/en/*.*" \
   "third_party/devsite/android/en/assets" \
   $(find "$start_dir/$path" -type d \
