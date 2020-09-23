@@ -31,6 +31,7 @@ import com.google.devsite.components.symbols.TocPackage
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
@@ -38,7 +39,6 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.model.DClasslike
-import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DTypeAlias
 import org.jetbrains.dokka.model.properties.WithExtraProperties
@@ -46,14 +46,14 @@ import org.jetbrains.dokka.model.properties.WithExtraProperties
 /** Converts documentables into components for the root metadata (class/package index). */
 internal class RootDocumentableConverter(
     private val displayLanguage: Language,
-    private val module: DModule,
-    private val pathProvider: FilePathProvider
+    private val pathProvider: FilePathProvider,
+    private val docsHolder: DocumentablesHolder
 ) {
     private val javadocConverter = DocTagConverter(displayLanguage, pathProvider)
 
     /** @return the root component for the class index page */
-    fun classesPage(): DevsitePage {
-        val allClasses = module.packages.flatMap { it.classlikes() }.sortedBy { it.name() }
+    suspend fun classesPage(): DevsitePage {
+        val allClasses = docsHolder.allClasslikes()
         val alphabetizedClasses = allClasses.groupBy(::categorizeClasslikes)
         val componentClasses = alphabetizedClasses.mapValues { (_, nodes) ->
             DefaultSummaryList(
@@ -80,8 +80,8 @@ internal class RootDocumentableConverter(
     }
 
     /** @return the root component for the package index page */
-    fun packagesPage(): DevsitePage {
-        val packages = module.sortedPackages()
+    suspend fun packagesPage(): DevsitePage {
+        val packages = docsHolder.packages()
         val componentPackages = DefaultSummaryList(
             SummaryList.Params(
                 items = packages.map(::summaryForPackage)
@@ -106,7 +106,7 @@ internal class RootDocumentableConverter(
 
     /** @return the Devsite _toc.yaml */
     suspend fun tocPage(): TableOfContents {
-        val packageComponents = module.sortedPackages().map { packageDoc ->
+        val packageComponents = docsHolder.packages().map { packageDoc ->
             coroutineScope {
                 packageForTocAsync(packageDoc)
             }
@@ -148,23 +148,23 @@ internal class RootDocumentableConverter(
     private fun CoroutineScope.packageForTocAsync(
         packageDoc: DPackage
     ): Deferred<DefaultTocPackage> = async {
-        val interfaces = async { packageDoc.interfaces().map(::typeForToc) }
-        val classes = async { packageDoc.classes().map(::typeForToc) }
-        val enums = async { packageDoc.enums().map(::typeForToc) }
-        val exceptions = async { packageDoc.exceptions().map(::typeForToc) }
-        val annotations = async { packageDoc.annotations().map(::typeForToc) }
-        val typeAliases = async { packageDoc.typeAliases().map(::typeForToc) }
+        val interfaces = docsHolder.interfacesFor(packageDoc).map(::typeForToc)
+        val classes = docsHolder.classesFor(packageDoc).map(::typeForToc)
+        val enums = docsHolder.enumsFor(packageDoc).map(::typeForToc)
+        val exceptions = docsHolder.exceptionsFor(packageDoc).map(::typeForToc)
+        val annotations = docsHolder.annotationsFor(packageDoc).map(::typeForToc)
+        val typeAliases = docsHolder.typeAliasesFor(packageDoc).map(::typeForToc)
 
         DefaultTocPackage(
             TocPackage.Params(
                 name = packageDoc.name,
                 packageUrl = pathProvider.forReference(packageDoc.dri).url,
-                interfaces = interfaces.await(),
-                classes = classes.await(),
-                enums = enums.await(),
-                exceptions = exceptions.await(),
-                annotations = annotations.await(),
-                typeAliases = typeAliases.await()
+                interfaces = interfaces,
+                classes = classes,
+                enums = enums,
+                exceptions = exceptions,
+                annotations = annotations,
+                typeAliases = typeAliases
             )
         )
     }

@@ -26,6 +26,7 @@ import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -39,7 +40,8 @@ import org.jetbrains.dokka.model.properties.WithExtraProperties
 internal class PackageDocumentableConverter(
     private val displayLanguage: Language,
     private val doc: DPackage,
-    private val pathProvider: FilePathProvider
+    private val pathProvider: FilePathProvider,
+    private val docsHolder: DocumentablesHolder
 ) {
     private val javadocConverter = DocTagConverter(displayLanguage, pathProvider)
     private val functionConverter =
@@ -49,24 +51,24 @@ internal class PackageDocumentableConverter(
 
     /** @return the root component for the package summary page */
     suspend fun summaryPage(): DevsitePage = coroutineScope {
-        val interfaces = async { docsToSummary(doc.interfaces()) }
-        val classes = async { docsToSummary(doc.classes()) }
-        val enums = async { docsToSummary(doc.enums()) }
-        val exceptions = async { docsToSummary(doc.exceptions()) }
-        val annotations = async { docsToSummary(doc.annotations()) }
-        val typeAliases = async { docsToSummary(doc.typeAliases()) }
+        val interfaces = async { docsToSummary(docsHolder.interfacesFor(doc)) }
+        val classes = async { docsToSummary(docsHolder.classesFor(doc)) }
+        val enums = async { docsToSummary(docsHolder.enumsFor(doc)) }
+        val exceptions = async { docsToSummary(docsHolder.exceptionsFor(doc)) }
+        val annotations = async { docsToSummary(docsHolder.annotationsFor(doc)) }
+        val typeAliases = async { docsToSummary(docsHolder.typeAliasesFor(doc)) }
 
-        val topLevelConstantsSummary = async { propertiesToSummary(doc.topLevelConstants()) }
-        val topLevelPropertiesSummary = async { propertiesToSummary(doc.topLevelProperties()) }
-        val topLevelFunctionsSummary = async { functionsToSummary(doc.topLevelFunctions()) }
-        val extensionPropertiesSummary = async { propertiesToSummary(doc.extensionProperties()) }
-        val extensionFunctionsSummary = async { functionsToSummary(doc.extensionFunctions()) }
+        val topLevelConstantsSummary = async { propertiesToSummary(topLevelConstants()) }
+        val topLevelPropertiesSummary = async { propertiesToSummary(topLevelProperties()) }
+        val topLevelFunctionsSummary = async { functionsToSummary(topLevelFunctions()) }
+        val extensionPropertiesSummary = async { propertiesToSummary(extensionProperties()) }
+        val extensionFunctionsSummary = async { functionsToSummary(extensionFunctions()) }
 
-        val topLevelConstants = async { propertiesToDetail(doc.topLevelConstants()) }
-        val topLevelProperties = async { propertiesToDetail(doc.topLevelProperties()) }
-        val topLevelFunctions = async { functionsToDetail(doc.topLevelFunctions()) }
-        val extensionProperties = async { propertiesToDetail(doc.extensionProperties()) }
-        val extensionFunctions = async { functionsToDetail(doc.extensionFunctions()) }
+        val topLevelConstants = async { propertiesToDetail(topLevelConstants()) }
+        val topLevelProperties = async { propertiesToDetail(topLevelProperties()) }
+        val topLevelFunctions = async { functionsToDetail(topLevelFunctions()) }
+        val extensionProperties = async { propertiesToDetail(extensionProperties()) }
+        val extensionFunctions = async { functionsToDetail(extensionFunctions()) }
 
         DefaultDevsitePage(
             DevsitePage.Params(
@@ -157,4 +159,25 @@ internal class PackageDocumentableConverter(
             propertyConverter.detail(it, modifierHints)
         }
     }
+
+    private fun topLevelConstants() = doc.properties
+        .filter { isConstant(it.modifiers()) }
+        .sortedBy { it.name }
+
+    private fun topLevelProperties() = doc.properties
+        .filterNot { isConstant(it.modifiers()) }
+        .filter { it.receiver == null }
+        .sortedBy { it.name }
+
+    private fun topLevelFunctions() = doc.functions
+        .filter { it.receiver == null }
+        .sortedBy { it.name }
+
+    private fun extensionProperties() = doc.properties
+        .filterNot { it.receiver == null }
+        .sortedBy { it.name }
+
+    private fun extensionFunctions() = doc.functions
+        .filterNot { it.receiver == null }
+        .sortedBy { it.name }
 }

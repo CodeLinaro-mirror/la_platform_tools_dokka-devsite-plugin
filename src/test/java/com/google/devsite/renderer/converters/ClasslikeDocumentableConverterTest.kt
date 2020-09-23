@@ -29,6 +29,7 @@ import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.title
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DModule
@@ -181,7 +182,8 @@ internal class ClasslikeDocumentableConverterTest(
 
     private fun DModule.page(): DevsitePage {
         val classlike = packages.single().classlikes.single()
-        val converter = ClasslikeDocumentableConverter(language, classlike, pathProvider())
+        val holder = runBlocking { DocumentablesHolder(this@page, this) }
+        val converter = ClasslikeDocumentableConverter(language, classlike, pathProvider(), holder)
         return runBlocking { converter.classlike() }
     }
 

@@ -16,13 +16,7 @@
 
 package com.google.devsite.renderer.converters
 
-import org.jetbrains.dokka.model.DAnnotation
-import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
-import org.jetbrains.dokka.model.DEnum
-import org.jetbrains.dokka.model.DInterface
-import org.jetbrains.dokka.model.DModule
-import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.Nullable
 import org.jetbrains.dokka.model.Projection
@@ -39,46 +33,6 @@ internal val <T> WithChildren<T>.explodedChildren: List<T>
 internal fun DClasslike.name() = dri.classNames!!
 
 internal fun DClasslike.packageName() = dri.packageName!!
-
-internal fun DModule.sortedPackages() = packages.sortedBy { it.name }
-
-internal fun WithChildren<*>.classlikes() =
-    explodedChildren.filterIsInstance<DClasslike>().sortedBy { it.name() }
-
-internal fun DPackage.classes() =
-    explodedChildren.filterIsInstance<DClass>().sortedBy { it.name() }
-
-internal fun DPackage.enums() =
-    explodedChildren.filterIsInstance<DEnum>().sortedBy { it.name() }
-
-internal fun DPackage.interfaces() =
-    explodedChildren.filterIsInstance<DInterface>().sortedBy { it.name() }
-
-internal fun DPackage.annotations() =
-    explodedChildren.filterIsInstance<DAnnotation>().sortedBy { it.name() }
-
-internal fun DPackage.typeAliases() = typealiases.sortedBy { it.name }
-
-internal fun DPackage.exceptions() = classes().filter { clazz ->
-    clazz.functions.any { function -> function.dri.classNames == "Throwable" }
-}
-
-internal fun DPackage.topLevelConstants() =
-    properties.filter { isConstant(it.modifiers()) }.sortedBy { it.name }
-
-internal fun DPackage.topLevelProperties() = properties
-    .filterNot { isConstant(it.modifiers()) }
-    .filter { it.receiver == null }
-    .sortedBy { it.name }
-
-internal fun DPackage.topLevelFunctions() =
-    functions.filter { it.receiver == null }.sortedBy { it.name }
-
-internal fun DPackage.extensionProperties() =
-    properties.filterNot { it.receiver == null }.sortedBy { it.name }
-
-internal fun DPackage.extensionFunctions() =
-    functions.filterNot { it.receiver == null }.sortedBy { it.name }
 
 /** @return true if this is a nullable type, false otherwise */
 internal fun Projection.isNullable(): Boolean = when (this) {

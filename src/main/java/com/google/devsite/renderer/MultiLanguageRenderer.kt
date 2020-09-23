@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer
 
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.MetadataRenderer
 import com.google.devsite.renderer.impl.PackageRenderer
 import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
@@ -24,6 +25,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.base.renderers.OutputWriter
+import org.jetbrains.dokka.model.DModule
+import org.jetbrains.dokka.pages.ModulePageNode
 import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.renderers.Renderer
 
@@ -39,27 +42,33 @@ internal class MultiLanguageRenderer(
     }
 
     override fun render(root: RootPageNode) {
+        val module = (root as ModulePageNode).documentable as DModule
+
         runBlocking(Dispatchers.Default) {
-            launch { renderJava(root) }
-            launch { renderKotlin(root) }
+            val holder = DocumentablesHolder(module, this)
+
+            launch { renderJava(holder) }
+            launch { renderKotlin(holder) }
         }
     }
 
-    private suspend fun renderJava(root: RootPageNode) {
+    private suspend fun renderJava(holder: DocumentablesHolder) {
         val language = Language.JAVA
         val filePaths = DacJavaFilePathProvider(tenant)
         DevsiteRenderer(
-            MetadataRenderer(outputWriter, filePaths, language),
-            PackageRenderer(outputWriter, filePaths, language)
-        ).render(root)
+            MetadataRenderer(outputWriter, filePaths, language, holder),
+            PackageRenderer(outputWriter, filePaths, language, holder),
+            holder
+        ).render()
     }
 
-    private suspend fun renderKotlin(root: RootPageNode) {
+    private suspend fun renderKotlin(holder: DocumentablesHolder) {
         val language = Language.KOTLIN
         val filePaths = DacKotlinFilePathProvider(tenant)
         DevsiteRenderer(
-            MetadataRenderer(outputWriter, filePaths, language),
-            PackageRenderer(outputWriter, filePaths, language)
-        ).render(root)
+            MetadataRenderer(outputWriter, filePaths, language, holder),
+            PackageRenderer(outputWriter, filePaths, language, holder),
+            holder
+        ).render()
     }
 }

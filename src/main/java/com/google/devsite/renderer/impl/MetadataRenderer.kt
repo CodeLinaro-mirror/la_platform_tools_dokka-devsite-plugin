@@ -22,24 +22,23 @@ import com.google.devsite.components.pages.PackageList
 import com.google.devsite.components.pages.RedirectPage
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.RootDocumentableConverter
-import com.google.devsite.renderer.converters.sortedPackages
 import com.google.devsite.renderer.impl.paths.CLASS_INDEX_FILE
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.html.html
 import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.base.renderers.OutputWriter
-import org.jetbrains.dokka.model.DModule
 
 /** Renders root metadata files that provide a global overview of the entire packages surface. */
 internal class MetadataRenderer(
     private val outputWriter: OutputWriter,
     private val pathProvider: FilePathProvider,
-    private val displayLanguage: Language
+    private val displayLanguage: Language,
+    private val docsHolder: DocumentablesHolder
 ) {
     /** Writes the list of packages in machine readable format. */
-    suspend fun writePackageList(module: DModule) {
+    suspend fun writePackageList() {
         val component =
-            DefaultPackageList(PackageList.Params(module.sortedPackages().map { it.name }))
+            DefaultPackageList(PackageList.Params(docsHolder.packages().map { it.name }))
         val packageList = buildString {
             component.render(this)
         }
@@ -58,28 +57,30 @@ internal class MetadataRenderer(
     }
 
     /** Writes the list of packages in human readable format. */
-    suspend fun writePackages(module: DModule) {
-        val converter = RootDocumentableConverter(displayLanguage, module, pathProvider)
+    suspend fun writePackages() {
+        val converter = RootDocumentableConverter(displayLanguage, pathProvider, docsHolder)
+        val page = converter.packagesPage()
         val packageIndex = createHTML().html {
-            converter.packagesPage().render(this)
+            page.render(this)
         }
 
         outputWriter.write(pathProvider.packages, packageIndex, "")
     }
 
     /** Writes the list of classes in human readable format. */
-    suspend fun writeClasses(module: DModule) {
-        val converter = RootDocumentableConverter(displayLanguage, module, pathProvider)
+    suspend fun writeClasses() {
+        val converter = RootDocumentableConverter(displayLanguage, pathProvider, docsHolder)
+        val page = converter.classesPage()
         val classIndex = createHTML().html {
-            converter.classesPage().render(this)
+            page.render(this)
         }
 
         outputWriter.write(pathProvider.classes, classIndex, "")
     }
 
     /** Writes the ToC for devsite consumption. */
-    suspend fun writeToc(module: DModule) {
-        val converter = RootDocumentableConverter(displayLanguage, module, pathProvider)
+    suspend fun writeToc() {
+        val converter = RootDocumentableConverter(displayLanguage, pathProvider, docsHolder)
         val toc = buildString {
             converter.tocPage().render(this)
         }
