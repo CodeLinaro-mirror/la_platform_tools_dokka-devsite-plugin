@@ -17,10 +17,10 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.DevsitePage
-import com.google.devsite.components.FunctionSummary
-import com.google.devsite.components.PackageSummary
-import com.google.devsite.components.SummaryList
+import com.google.devsite.components.pages.DevsitePage
+import com.google.devsite.components.pages.PackageSummary
+import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.table.SummaryList
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.content
 import com.google.devsite.renderer.converters.testing.functionSummary
@@ -314,7 +314,7 @@ internal class PackageDocumentableConverterTest(
         return runBlocking { converter.summaryPage() }
     }
 
-    private fun SummaryList.function(): FunctionSummary = item().functionSummary()
+    private fun SummaryList.function(): SymbolSummary = item().functionSummary()
 
     companion object {
         @JvmStatic

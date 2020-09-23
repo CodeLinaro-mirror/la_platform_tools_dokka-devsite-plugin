@@ -17,8 +17,8 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.TocPackage.Params
-import com.google.devsite.components.TocPackage.Type
+import com.google.devsite.components.symbols.TocPackage.Params
+import com.google.devsite.components.symbols.TocPackage.Type
 import org.junit.Test
 
 class DefaultTocPackageTest {

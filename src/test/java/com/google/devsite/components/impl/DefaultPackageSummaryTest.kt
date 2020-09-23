@@ -18,8 +18,8 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.ContextFreeComponent
-import com.google.devsite.components.PackageSummary.Params
-import com.google.devsite.components.SummaryList
+import com.google.devsite.components.pages.PackageSummary.Params
+import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.components.testing.NoopDescription
 import com.google.devsite.components.testing.NoopSummaryList

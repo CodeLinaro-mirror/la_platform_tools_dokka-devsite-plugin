@@ -16,13 +16,13 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.FunctionSignature
+import com.google.devsite.components.symbols.PropertySignature
 import kotlinx.html.FlowContent
 
 /** Default implementation of a property signature. */
 internal class DefaultPropertySignature(
-    override val data: FunctionSignature.Params
-) : FunctionSignature {
+    override val data: PropertySignature.Params
+) : PropertySignature {
     override fun render(html: FlowContent) = html.run {
         if (data.receiver != null) {
             data.receiver.render(this)

@@ -17,7 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.Link
+import com.google.devsite.components.Link.Params
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -25,7 +25,7 @@ import org.junit.Test
 class DefaultLinkTest {
     @Test
     fun `Link renders correctly`() {
-        val component = DefaultLink(Link.Params("Name", "link"))
+        val component = DefaultLink(Params("Name", "link"))
 
         val output = createHTML().div {
             component.render(this)
@@ -41,7 +41,7 @@ class DefaultLinkTest {
 
     @Test
     fun `Empty link renders correctly`() {
-        val component = DefaultLink(Link.Params("Name", ""))
+        val component = DefaultLink(Params("Name", ""))
 
         val output = createHTML().div {
             component.render(this)

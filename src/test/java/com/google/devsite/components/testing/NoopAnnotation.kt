@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.testing
 
-import com.google.devsite.components.Annotation
+import com.google.devsite.components.symbols.Annotation
 import kotlinx.html.FlowContent
 
 internal class NoopAnnotation(private val text: String) : Annotation {

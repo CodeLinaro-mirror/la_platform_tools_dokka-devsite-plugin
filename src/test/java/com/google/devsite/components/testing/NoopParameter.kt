@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.testing
 
-import com.google.devsite.components.Parameter
+import com.google.devsite.components.symbols.Parameter
 import kotlinx.html.FlowContent
 
 internal class NoopParameter(

@@ -17,7 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.TwoPaneSummaryItem.Params
+import com.google.devsite.components.table.TwoPaneSummaryItem.Params
 import com.google.devsite.components.testing.PlainTextOutput
 import kotlinx.html.stream.createHTML
 import kotlinx.html.tr

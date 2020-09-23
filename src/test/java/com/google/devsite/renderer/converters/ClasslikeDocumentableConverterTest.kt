@@ -17,16 +17,15 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.Classlike
-import com.google.devsite.components.DevsitePage
-import com.google.devsite.components.FunctionSummary
-import com.google.devsite.components.SingleColumnSummaryItem
-import com.google.devsite.components.SummaryList
+import com.google.devsite.components.pages.Classlike
+import com.google.devsite.components.pages.DevsitePage
+import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.table.SingleColumnSummaryItem
+import com.google.devsite.components.table.SummaryList
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.content
 import com.google.devsite.renderer.converters.testing.functionSummary
 import com.google.devsite.renderer.converters.testing.item
-import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.title
@@ -193,7 +192,7 @@ internal class ClasslikeDocumentableConverterTest(
     }
 
     private fun SummaryList.constructor() =
-        (data.items.item() as SingleColumnSummaryItem).data.description as FunctionSummary
+        (data.items.item() as SingleColumnSummaryItem).data.description as SymbolSummary
 
     companion object {
         @JvmStatic

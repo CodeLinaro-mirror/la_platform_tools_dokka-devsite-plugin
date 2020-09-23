@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.ClassIndex
+import com.google.devsite.components.pages.ClassIndex
 import kotlinx.html.FlowContent
 import kotlinx.html.a
 import kotlinx.html.div

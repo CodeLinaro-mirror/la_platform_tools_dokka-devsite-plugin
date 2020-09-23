@@ -17,7 +17,7 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.Parameter
+import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.asType
 import com.google.devsite.renderer.converters.testing.item

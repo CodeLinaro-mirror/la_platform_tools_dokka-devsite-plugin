@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.TwoPaneSummaryItem
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import kotlinx.html.TR
 import kotlinx.html.code
 import kotlinx.html.td

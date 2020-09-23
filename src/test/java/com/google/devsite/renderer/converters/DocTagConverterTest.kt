@@ -20,9 +20,9 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.Description
 import com.google.devsite.components.Raw
-import com.google.devsite.components.SummaryList
 import com.google.devsite.components.impl.DefaultDescription
 import com.google.devsite.components.impl.UndocumentedSymbolDescription
+import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.item

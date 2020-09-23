@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.RedirectPage
+import com.google.devsite.components.pages.RedirectPage
 import kotlinx.html.HTML
 import kotlinx.html.a
 import kotlinx.html.body

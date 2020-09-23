@@ -17,8 +17,8 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.SummaryList.Params
-import com.google.devsite.components.testing.NoopRow
+import com.google.devsite.components.table.SummaryList.Params
+import com.google.devsite.components.testing.NoopSummaryItem
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -42,7 +42,7 @@ class DefaultSummaryListTest {
 
     @Test
     fun `Simple summary renders correctly`() {
-        val component = DefaultSummaryList(Params(items = listOf(NoopRow, NoopRow)))
+        val component = DefaultSummaryList(Params(items = listOf(NoopSummaryItem, NoopSummaryItem)))
 
         val output = createHTML().div {
             component.render(this)
@@ -67,7 +67,8 @@ class DefaultSummaryListTest {
 
     @Test
     fun `Summary with header renders correctly`() {
-        val component = DefaultSummaryList(Params(header = NoopRow, listOf(NoopRow)))
+        val component =
+            DefaultSummaryList(Params(header = NoopSummaryItem, listOf(NoopSummaryItem)))
 
         val output = createHTML().div {
             component.render(this)

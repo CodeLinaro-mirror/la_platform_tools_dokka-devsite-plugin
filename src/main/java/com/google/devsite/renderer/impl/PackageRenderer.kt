@@ -16,8 +16,8 @@
 
 package com.google.devsite.renderer.impl
 
-import com.google.devsite.components.RedirectPage
 import com.google.devsite.components.impl.DefaultRedirectPage
+import com.google.devsite.components.pages.RedirectPage
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.ClasslikeDocumentableConverter
 import com.google.devsite.renderer.converters.PackageDocumentableConverter

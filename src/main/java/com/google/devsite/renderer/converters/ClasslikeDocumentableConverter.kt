@@ -16,17 +16,17 @@
 
 package com.google.devsite.renderer.converters
 
-import com.google.devsite.components.Classlike
-import com.google.devsite.components.DevsitePage
-import com.google.devsite.components.FunctionDetail
-import com.google.devsite.components.SummaryList
-import com.google.devsite.components.TableTitle
-import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultClasslike
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableTitle
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
+import com.google.devsite.components.pages.Classlike
+import com.google.devsite.components.pages.DevsitePage
+import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TableTitle
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.async
@@ -217,7 +217,7 @@ internal class ClasslikeDocumentableConverter(
         )
     }
 
-    private fun functionsToDetail(functions: List<DFunction>): List<FunctionDetail> {
+    private fun functionsToDetail(functions: List<DFunction>): List<SymbolDetail> {
         val modifierHints = ModifierHints(displayLanguage, isSummary = false, isInterface())
         return functions.map {
             functionConverter.detail(it, modifierHints)
@@ -243,7 +243,7 @@ internal class ClasslikeDocumentableConverter(
         )
     }
 
-    private fun propertiesToDetail(properties: List<DProperty>): List<FunctionDetail> {
+    private fun propertiesToDetail(properties: List<DProperty>): List<SymbolDetail> {
         val modifierHints = ModifierHints(displayLanguage, isSummary = false, isInterface())
         return properties.map {
             propertyConverter.detail(it, modifierHints)

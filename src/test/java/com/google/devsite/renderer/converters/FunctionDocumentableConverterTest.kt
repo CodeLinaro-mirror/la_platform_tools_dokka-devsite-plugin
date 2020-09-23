@@ -17,14 +17,15 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.FunctionDetail
-import com.google.devsite.components.FunctionDetail.SymbolType
-import com.google.devsite.components.FunctionSummary
 import com.google.devsite.components.Link
-import com.google.devsite.components.Parameter
-import com.google.devsite.components.SingleColumnSummaryItem
-import com.google.devsite.components.TwoPaneSummaryItem
-import com.google.devsite.components.TypeSummary
+import com.google.devsite.components.symbols.FunctionSignature
+import com.google.devsite.components.symbols.Parameter
+import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.symbols.SymbolDetail.SymbolType
+import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.symbols.TypeSummary
+import com.google.devsite.components.table.SingleColumnSummaryItem
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.asType
 import com.google.devsite.renderer.converters.testing.functionSummary
@@ -184,7 +185,7 @@ internal class FunctionDocumentableConverterTest(
             |class MyClass
         """.render().summaryForConstructor()
 
-        val constructor = summary.data.description as FunctionSummary
+        val constructor = summary.data.description as SymbolSummary
 
         assertThat(constructor.name()).isEqualTo("MyClass")
     }
@@ -222,16 +223,16 @@ internal class FunctionDocumentableConverterTest(
         """.render().summary()
 
         val function = summary.functionSummary()
-        val signature = function.data.signature
+        val signature = function.signature()
 
         val param = when (language) {
             Language.JAVA -> {
-                assertThat(signature.data.receiver).isNull()
-                signature.data.parameters.item()
+                assertThat(signature.receiver).isNull()
+                signature.parameters.item()
             }
             Language.KOTLIN -> {
-                assertThat(signature.data.receiver).isNotNull()
-                signature.data.receiver!!
+                assertThat(signature.receiver).isNotNull()
+                signature.receiver!!
             }
         }
 
@@ -309,14 +310,14 @@ internal class FunctionDocumentableConverterTest(
 
         val function = summary.functionSummary()
         val returnType = summary.returnSummary().type.link()
-        val signature = function.data.signature
+        val signature = function.signature()
 
         javaOnly {
             assertThat(returnType.name).isEqualTo("void")
 
             val expected =
                 listOf("boolean", "int", "double", "float", "short", "long", "char", "byte")
-            for ((i, param) in signature.data.parameters.withIndex()) {
+            for ((i, param) in signature.parameters.withIndex()) {
                 assertThat(param.data.primary.link().name).isEqualTo(expected[i])
             }
         }
@@ -325,7 +326,7 @@ internal class FunctionDocumentableConverterTest(
 
             val expected =
                 listOf("Boolean", "Int", "Double", "Float", "Short", "Long", "Char", "Byte")
-            for ((i, param) in signature.data.parameters.withIndex()) {
+            for ((i, param) in signature.parameters.withIndex()) {
                 assertThat(param.data.primary.link().name).isEqualTo(expected[i])
             }
         }
@@ -448,7 +449,7 @@ internal class FunctionDocumentableConverterTest(
     private fun DModule.detail(
         fromClass: Boolean = false,
         hints: ModifierHints = ModifierHints(language)
-    ): FunctionDetail {
+    ): SymbolDetail {
         val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
         return converter.detail(function(fromClass), hints)
     }
@@ -470,7 +471,12 @@ internal class FunctionDocumentableConverterTest(
     }
 
     private fun Parameter.link(): Link.Params = data.primary.link()
-    private fun FunctionSummary.param(): Parameter = data.signature.data.parameters.item()
+
+    private fun SymbolSummary.signature(): FunctionSignature.Params =
+        (data.signature as FunctionSignature).data
+
+    private fun SymbolSummary.param(): Parameter = signature().parameters.item()
+
     private fun TwoPaneSummaryItem.returnSummary(): TypeSummary.Params =
         (data.title as TypeSummary).data
 

@@ -17,7 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.TableOfContents
+import com.google.devsite.components.pages.TableOfContents.Params
 import com.google.devsite.components.testing.NoopTocPackage
 import org.junit.Test
 
@@ -25,7 +25,7 @@ class DefaultTableOfContentsTest {
     @Test
     fun `Toc renders correctly`() {
         val component = DefaultTableOfContents(
-            TableOfContents.Params(
+            Params(
                 classesUrl = "classes.html",
                 packagesUrl = "packages.html",
                 packages = listOf(NoopTocPackage, NoopTocPackage)

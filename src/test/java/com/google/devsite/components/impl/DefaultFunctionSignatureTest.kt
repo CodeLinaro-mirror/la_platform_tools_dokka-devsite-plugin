@@ -17,7 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.FunctionSignature.Params
+import com.google.devsite.components.symbols.FunctionSignature.Params
 import com.google.devsite.components.testing.NoopLink
 import com.google.devsite.components.testing.NoopParameter
 import kotlinx.html.div

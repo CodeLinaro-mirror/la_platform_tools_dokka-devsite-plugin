@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.Classlike
+import com.google.devsite.components.pages.Classlike
 import kotlinx.html.FlowContent
 import kotlinx.html.h2
 import kotlinx.html.hr

@@ -17,7 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.PackageIndex
+import com.google.devsite.components.pages.PackageIndex.Params
 import com.google.devsite.components.testing.NoopSummaryList
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
@@ -27,7 +27,7 @@ class DefaultPackageIndexTest {
     @Test
     fun `Package list renders correctly`() {
         val component =
-            DefaultPackageIndex(PackageIndex.Params("classes.html", NoopSummaryList()))
+            DefaultPackageIndex(Params("classes.html", NoopSummaryList()))
 
         val output = createHTML().body {
             component.render(this)

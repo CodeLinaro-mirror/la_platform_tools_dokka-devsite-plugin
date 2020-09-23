@@ -17,9 +17,9 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.Parameter.Params
+import com.google.devsite.components.symbols.Parameter.Params
 import com.google.devsite.components.testing.NoopAnnotation
-import com.google.devsite.components.testing.NoopParameterType
+import com.google.devsite.components.testing.NoopSymbolType
 import com.google.devsite.renderer.Language
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
@@ -33,7 +33,7 @@ class DefaultParameterTest {
             Params(
                 isLambda = false,
                 name = "number",
-                primary = NoopParameterType("Int"),
+                primary = NoopSymbolType("Int"),
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -56,7 +56,7 @@ class DefaultParameterTest {
             Params(
                 isLambda = false,
                 name = "number",
-                primary = NoopParameterType("int"),
+                primary = NoopSymbolType("int"),
                 displayLanguage = Language.JAVA
             )
         )
@@ -79,7 +79,7 @@ class DefaultParameterTest {
             Params(
                 isLambda = false,
                 name = "",
-                primary = NoopParameterType("Int"),
+                primary = NoopSymbolType("Int"),
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -102,7 +102,7 @@ class DefaultParameterTest {
             Params(
                 isLambda = false,
                 name = "",
-                primary = NoopParameterType("int"),
+                primary = NoopSymbolType("int"),
                 displayLanguage = Language.JAVA
             )
         )
@@ -125,7 +125,7 @@ class DefaultParameterTest {
             Params(
                 isLambda = false,
                 name = "number",
-                primary = NoopParameterType("Int"),
+                primary = NoopSymbolType("Int"),
                 annotations = listOf(NoopAnnotation("@Really"), NoopAnnotation("@Special")),
                 displayLanguage = Language.KOTLIN
             )
@@ -149,7 +149,7 @@ class DefaultParameterTest {
             Params(
                 isLambda = false,
                 name = "number",
-                primary = NoopParameterType("int"),
+                primary = NoopSymbolType("int"),
                 annotations = listOf(NoopAnnotation("@Really"), NoopAnnotation("@Special")),
                 displayLanguage = Language.JAVA
             )
@@ -174,7 +174,7 @@ class DefaultParameterTest {
                 Params(
                     isLambda = true,
                     name = "number",
-                    primary = NoopParameterType("int"),
+                    primary = NoopSymbolType("int"),
                     displayLanguage = Language.JAVA
                 )
             )
@@ -188,8 +188,8 @@ class DefaultParameterTest {
                 Params(
                     isLambda = false,
                     name = "number",
-                    receiver = NoopParameterType("int"),
-                    primary = NoopParameterType("int"),
+                    receiver = NoopSymbolType("int"),
+                    primary = NoopSymbolType("int"),
                     displayLanguage = Language.KOTLIN
                 )
             )
@@ -204,7 +204,7 @@ class DefaultParameterTest {
                     isLambda = false,
                     name = "number",
                     lambdaModifiers = listOf("suspend"),
-                    primary = NoopParameterType("int"),
+                    primary = NoopSymbolType("int"),
                     displayLanguage = Language.KOTLIN
                 )
             )
@@ -218,8 +218,8 @@ class DefaultParameterTest {
                 Params(
                     isLambda = false,
                     name = "number",
-                    lambdaParams = listOf(NoopParameterType("int")),
-                    primary = NoopParameterType("int"),
+                    lambdaParams = listOf(NoopSymbolType("int")),
+                    primary = NoopSymbolType("int"),
                     displayLanguage = Language.KOTLIN
                 )
             )
@@ -232,7 +232,7 @@ class DefaultParameterTest {
             Params(
                 isLambda = true,
                 name = "block",
-                primary = NoopParameterType("Unit"),
+                primary = NoopSymbolType("Unit"),
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -255,8 +255,8 @@ class DefaultParameterTest {
             Params(
                 isLambda = true,
                 name = "number",
-                receiver = NoopParameterType("Int"),
-                primary = NoopParameterType("Int"),
+                receiver = NoopSymbolType("Int"),
+                primary = NoopSymbolType("Int"),
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -279,8 +279,8 @@ class DefaultParameterTest {
             Params(
                 isLambda = true,
                 name = "number",
-                lambdaParams = listOf(NoopParameterType("Int"), NoopParameterType("String")),
-                primary = NoopParameterType("Int"),
+                lambdaParams = listOf(NoopSymbolType("Int"), NoopSymbolType("String")),
+                primary = NoopSymbolType("Int"),
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -303,9 +303,9 @@ class DefaultParameterTest {
             Params(
                 isLambda = true,
                 name = "number",
-                receiver = NoopParameterType("Boolean"),
-                lambdaParams = listOf(NoopParameterType("String")),
-                primary = NoopParameterType("Int"),
+                receiver = NoopSymbolType("Boolean"),
+                lambdaParams = listOf(NoopSymbolType("String")),
+                primary = NoopSymbolType("Int"),
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -328,9 +328,9 @@ class DefaultParameterTest {
             Params(
                 isLambda = true,
                 name = "number",
-                lambdaParams = listOf(NoopParameterType("String")),
+                lambdaParams = listOf(NoopSymbolType("String")),
                 lambdaModifiers = listOf("suspend"),
-                primary = NoopParameterType("Int"),
+                primary = NoopSymbolType("Int"),
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -354,7 +354,7 @@ class DefaultParameterTest {
                 displayLanguage = Language.KOTLIN,
                 isLambda = false,
                 name = "number",
-                primary = NoopParameterType("Int"),
+                primary = NoopSymbolType("Int"),
                 defaultValue = "5"
             )
         )

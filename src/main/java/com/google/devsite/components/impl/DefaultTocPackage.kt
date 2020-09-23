@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.TocPackage
+import com.google.devsite.components.symbols.TocPackage
 
 /** Default implementation of the toc. */
 internal class DefaultTocPackage(

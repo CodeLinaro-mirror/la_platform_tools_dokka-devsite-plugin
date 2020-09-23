@@ -19,9 +19,6 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.Link
 import com.google.devsite.components.Raw
-import com.google.devsite.components.SummaryList
-import com.google.devsite.components.TableTitle
-import com.google.devsite.components.TwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultDescription
 import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultRaw
@@ -29,6 +26,9 @@ import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableTitle
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.impl.UndocumentedSymbolDescription
+import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TableTitle
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.links.DRI
