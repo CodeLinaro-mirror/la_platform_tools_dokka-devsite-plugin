@@ -17,12 +17,17 @@
 package com.google.devsite.testing
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.DevsitePlugin
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
 import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
 import kotlinx.coroutines.runBlocking
+import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.pages.ModulePageNode
+import org.jetbrains.dokka.pages.RootPageNode
+import org.jetbrains.dokka.plugability.DokkaPlugin
+import org.jetbrains.dokka.renderers.Renderer
 import org.jetbrains.dokka.testApi.testRunner.AbstractCoreTest
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -71,14 +76,11 @@ internal abstract class ConverterTestBase(
             }
         }
 
-        System.setProperty("tenant", "androidx")
-
-        val writerPlugin = TestOutputWriterPlugin()
         suspendCoroutine { cont ->
             testInline(
                 sourceFiles.joinToString("\n\n"),
                 configuration,
-                pluginOverrides = listOf(writerPlugin)
+                pluginOverrides = listOf(NoopPlugin)
             ) {
                 renderingStage = { node, _ ->
                     val module = (node as ModulePageNode).documentable as DModule
@@ -108,5 +110,17 @@ internal abstract class ConverterTestBase(
             |}
         """.trimMargin()
         return testWithRootPageNode(listOf(source))
+    }
+
+    object NoopPlugin : DokkaPlugin() {
+        private val devsite by lazy { plugin<DevsitePlugin>() }
+
+        val renderer by extending {
+            CoreExtensions.renderer providing { NoopRenderer } override devsite.renderer
+        }
+
+        private object NoopRenderer : Renderer {
+            override fun render(root: RootPageNode) = Unit
+        }
     }
 }
