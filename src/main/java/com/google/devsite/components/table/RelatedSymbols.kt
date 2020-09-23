@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components.pages
+package com.google.devsite.components.table
 
 import com.google.devsite.components.ContextFreeComponent
-import com.google.devsite.components.table.RelatedSymbols
-import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.Link
 
-/** Represents class-like pages (class, interface, exception, etc). */
-internal interface Classlike : ContextFreeComponent {
+/** Represents the direct/indirect subclasses expandable summary. */
+internal interface RelatedSymbols : ContextFreeComponent {
     val data: Params
 
     class Params(
-        val relatedSymbols: RelatedSymbols,
-        val description: List<ContextFreeComponent>,
-        val symbolTypes: List<Pair<SummaryList, SymbolType>>
+        val directSubclasses: List<Link>,
+        val directSummary: SummaryList,
+        val indirectSubclasses: List<Link>,
+        val indirectSummary: SummaryList
     )
-
-    data class SymbolType(val title: String, val symbols: List<ContextFreeComponent>)
 }

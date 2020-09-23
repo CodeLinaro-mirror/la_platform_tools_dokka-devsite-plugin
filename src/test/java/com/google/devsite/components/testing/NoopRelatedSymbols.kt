@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components.pages
+package com.google.devsite.components.testing
 
-import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.table.RelatedSymbols
-import com.google.devsite.components.table.SummaryList
+import kotlinx.html.FlowContent
+import kotlinx.html.div
 
-/** Represents class-like pages (class, interface, exception, etc). */
-internal interface Classlike : ContextFreeComponent {
-    val data: Params
+internal class NoopRelatedSymbols(private val shown: Boolean = true) : RelatedSymbols {
+    override val data: RelatedSymbols.Params
+        get() = throw NotImplementedError()
 
-    class Params(
-        val relatedSymbols: RelatedSymbols,
-        val description: List<ContextFreeComponent>,
-        val symbolTypes: List<Pair<SummaryList, SymbolType>>
-    )
-
-    data class SymbolType(val title: String, val symbols: List<ContextFreeComponent>)
+    override fun render(html: FlowContent) = html.run {
+        if (shown) {
+            div { +"Related symbols" }
+        }
+    }
 }
