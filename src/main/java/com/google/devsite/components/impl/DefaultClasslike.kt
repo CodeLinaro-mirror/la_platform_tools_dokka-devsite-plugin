@@ -28,7 +28,7 @@ internal class DefaultClasslike(
 ) : Classlike {
     override fun render(html: FlowContent) = html.run {
         p { +"TODO(b/166518424) class signature" }
-        p { +"TODO(b/166518951) inheritance hierarchy" }
+        data.hierarchy.render(this)
         data.relatedSymbols.render(this)
 
         hr()

@@ -17,6 +17,7 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.Link
+import com.google.devsite.components.impl.DefaultClassHierarchy
 import com.google.devsite.components.impl.DefaultClasslike
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultRelatedSymbols
@@ -26,6 +27,7 @@ import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.table.ClassHierarchy
 import com.google.devsite.components.table.RelatedSymbols
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
@@ -157,6 +159,7 @@ internal class ClasslikeDocumentableConverter(
                 title = classlike.name(),
                 content = DefaultClasslike(
                     Classlike.Params(
+                        hierarchy = DefaultClassHierarchy(ClassHierarchy.Params(emptyList())),
                         relatedSymbols = relatedSymbols.await(),
                         description = javadocConverter.metadata(
                             classlike,

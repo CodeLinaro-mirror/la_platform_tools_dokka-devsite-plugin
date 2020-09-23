@@ -14,23 +14,19 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components.pages
+package com.google.devsite.components.testing
 
-import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.table.ClassHierarchy
-import com.google.devsite.components.table.RelatedSymbols
-import com.google.devsite.components.table.SummaryList
+import kotlinx.html.FlowContent
+import kotlinx.html.div
 
-/** Represents class-like pages (class, interface, exception, etc). */
-internal interface Classlike : ContextFreeComponent {
-    val data: Params
+internal class NoopClassHierarchy(private val shown: Boolean = true) : ClassHierarchy {
+    override val data: ClassHierarchy.Params
+        get() = throw NotImplementedError()
 
-    class Params(
-        val hierarchy: ClassHierarchy,
-        val relatedSymbols: RelatedSymbols,
-        val description: List<ContextFreeComponent>,
-        val symbolTypes: List<Pair<SummaryList, SymbolType>>
-    )
-
-    data class SymbolType(val title: String, val symbols: List<ContextFreeComponent>)
+    override fun render(html: FlowContent) = html.run {
+        if (shown) {
+            div { +"Class hierarchy" }
+        }
+    }
 }
