@@ -21,6 +21,7 @@ import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.Classlike.Params
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.components.testing.NoopDescription
+import com.google.devsite.components.testing.NoopRelatedSymbols
 import com.google.devsite.components.testing.NoopSummaryList
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
@@ -31,6 +32,7 @@ class DefaultClasslikeTest {
     fun `Empty classlike renders correctly`() {
         val component = DefaultClasslike(
             Params(
+                relatedSymbols = NoopRelatedSymbols(shown = false),
                 description = emptyList(),
                 symbolTypes = emptyList()
             )
@@ -46,8 +48,35 @@ class DefaultClasslikeTest {
 <body>
   <p>TODO(b/166518424) class signature</p>
   <p>TODO(b/166518951) inheritance hierarchy</p>
-  <p>TODO(b/166518636) direct subclasses</p>
-  <p>TODO(b/166518636) indirect subclasses</p>
+  <hr>
+  <h2>Summary</h2>
+  <p>Enum values</p>
+</body>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Classlike with related symbols renders correctly`() {
+        val component = DefaultClasslike(
+            Params(
+                relatedSymbols = NoopRelatedSymbols(),
+                description = emptyList(),
+                symbolTypes = emptyList()
+            )
+        )
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p>TODO(b/166518424) class signature</p>
+  <p>TODO(b/166518951) inheritance hierarchy</p>
+  <div>Related symbols</div>
   <hr>
   <h2>Summary</h2>
   <p>Enum values</p>
@@ -60,6 +89,7 @@ class DefaultClasslikeTest {
     fun `Classlike with description renders correctly`() {
         val component = DefaultClasslike(
             Params(
+                relatedSymbols = NoopRelatedSymbols(shown = false),
                 description = listOf(NoopDescription("Hello World!")),
                 symbolTypes = emptyList()
             )
@@ -75,8 +105,6 @@ class DefaultClasslikeTest {
 <body>
   <p>TODO(b/166518424) class signature</p>
   <p>TODO(b/166518951) inheritance hierarchy</p>
-  <p>TODO(b/166518636) direct subclasses</p>
-  <p>TODO(b/166518636) indirect subclasses</p>
   <hr>
   <p>Hello World!</p>
   <h2>Summary</h2>
@@ -90,6 +118,7 @@ class DefaultClasslikeTest {
     fun `Classlike with symbols renders correctly`() {
         val component = DefaultClasslike(
             Params(
+                relatedSymbols = NoopRelatedSymbols(shown = false),
                 description = emptyList(),
                 symbolTypes = listOf(
                     NoopSummaryList() to Classlike.SymbolType(
@@ -110,8 +139,6 @@ class DefaultClasslikeTest {
 <body>
   <p>TODO(b/166518424) class signature</p>
   <p>TODO(b/166518951) inheritance hierarchy</p>
-  <p>TODO(b/166518636) direct subclasses</p>
-  <p>TODO(b/166518636) indirect subclasses</p>
   <hr>
   <h2>Summary</h2>
   <p>Enum values</p>

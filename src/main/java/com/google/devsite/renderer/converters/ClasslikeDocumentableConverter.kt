@@ -18,12 +18,14 @@ package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.impl.DefaultClasslike
 import com.google.devsite.components.impl.DefaultDevsitePage
+import com.google.devsite.components.impl.DefaultRelatedSymbols
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableTitle
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.table.RelatedSymbols
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
 import com.google.devsite.components.table.TwoPaneSummaryItem
@@ -148,6 +150,14 @@ internal class ClasslikeDocumentableConverter(
                 title = classlike.name(),
                 content = DefaultClasslike(
                     Classlike.Params(
+                        relatedSymbols = DefaultRelatedSymbols(
+                            RelatedSymbols.Params(
+                                emptyList(),
+                                DefaultSummaryList(SummaryList.Params(null, emptyList())),
+                                emptyList(),
+                                DefaultSummaryList(SummaryList.Params(null, emptyList()))
+                            )
+                        ),
                         description = javadocConverter.metadata(
                             classlike,
                             annotations = annotations
