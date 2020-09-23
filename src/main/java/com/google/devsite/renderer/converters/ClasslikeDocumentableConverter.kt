@@ -43,6 +43,8 @@ import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.JavaClassKindTypes
+import org.jetbrains.dokka.model.KotlinClassKindTypes
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.WithSupertypes
 import org.jetbrains.dokka.model.properties.WithExtraProperties
@@ -117,6 +119,7 @@ internal class ClasslikeDocumentableConverter(
         val protectedFunctions =
             async { functionsToDetail(declaredFunctions.filter(::isProtected)) }
 
+        val hierarchy = async { computeHierarchy() }
         val relatedSymbols = async { findRelatedSymbols() }
 
         val allSymbols = listOf(
@@ -159,7 +162,7 @@ internal class ClasslikeDocumentableConverter(
                 title = classlike.name(),
                 content = DefaultClasslike(
                     Classlike.Params(
-                        hierarchy = DefaultClassHierarchy(ClassHierarchy.Params(emptyList())),
+                        hierarchy = hierarchy.await(),
                         relatedSymbols = relatedSymbols.await(),
                         description = javadocConverter.metadata(
                             classlike,
@@ -263,13 +266,38 @@ internal class ClasslikeDocumentableConverter(
         }
     }
 
-    /**
-     * Returns the list of declared symbols. That is, symbols directly owned by this class-like
-     * and not found through the inheritance hierarchy.
-     */
-    private fun <T : Documentable> List<T>.myTypes() = filter { function ->
-        classlike.packageName() == function.dri.packageName &&
-            classlike.name() == function.dri.classNames
+    /** Walks up this class' type hierarchy and returns the hierarchy component. */
+    private suspend fun computeHierarchy(): ClassHierarchy {
+        if (classlike !is WithSupertypes) {
+            return DefaultClassHierarchy(ClassHierarchy.Params(parents = emptyList()))
+        }
+
+        val classlikes = docsHolder.allClasslikes().associateBy { it.dri }
+        val parents = generateSequence(classlike) { classlike: DClasslike ->
+            val supertypes = (classlike as WithSupertypes).supertypes.values.single()
+            val parent = supertypes.singleOrNull { (_, kind) ->
+                kind == KotlinClassKindTypes.CLASS || kind == JavaClassKindTypes.CLASS
+            }?.typeConstructor?.dri
+
+            parent?.let { classlikes[parent] }
+        }.toList().reversed()
+
+        if (parents.size == 1) {
+            // Don't show the hierarchy if this class only extends Any/Object
+            return DefaultClassHierarchy(ClassHierarchy.Params(parents = emptyList()))
+        }
+
+        val classHierarchyRootDri = when (displayLanguage) {
+            Language.JAVA -> DRI(packageName = "java.lang", classNames = "Object")
+            Language.KOTLIN -> DRI(packageName = "kotlin", classNames = "Any")
+        }
+        val classHierarchyRootLink = pathProvider.linkForReference(classHierarchyRootDri)
+
+        val parentLinks = parents.map { classlike ->
+            pathProvider.linkForReference(classlike.dri)
+        }
+        val allLinks = listOf(classHierarchyRootLink) + parentLinks
+        return DefaultClassHierarchy(ClassHierarchy.Params(allLinks))
     }
 
     /** Finds the direct and indirect subclasses for this classlike, returning their component. */
@@ -343,6 +371,15 @@ internal class ClasslikeDocumentableConverter(
                 )
             }
         ))
+    }
+
+    /**
+     * Returns the list of declared symbols. That is, symbols directly owned by this class-like
+     * and not found through the inheritance hierarchy.
+     */
+    private fun <T : Documentable> List<T>.myTypes() = filter { function ->
+        classlike.packageName() == function.dri.packageName &&
+            classlike.name() == function.dri.classNames
     }
 
     private fun isInterface() = classlike is DInterface

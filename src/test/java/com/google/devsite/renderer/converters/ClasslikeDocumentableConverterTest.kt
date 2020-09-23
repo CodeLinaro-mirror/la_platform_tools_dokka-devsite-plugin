@@ -213,6 +213,54 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(subclasses.last().data.name).isEqualTo("B")
     }
 
+    @Test
+    fun `Class with root object as parent does not have hierarchy`() {
+        val page = """
+            |class Foo
+        """.render().page()
+
+        val classlike = page.content<Classlike>()
+        val parents = classlike.data.hierarchy.data.parents
+
+        assertThat(parents).isEmpty()
+    }
+
+    @Test
+    fun `Class with single parent has hierarchy with root object, parent, and itself`() {
+        val page = """
+            |abstract class Parent
+            |class Foo : Parent
+        """.render().page()
+
+        val classlike = page.content<Classlike>()
+        val parents = classlike.data.hierarchy.data.parents.items(3).toList()
+
+        javaOnly { assertThat(parents[0].data.name).isEqualTo("Object") }
+        kotlinOnly { assertThat(parents[0].data.name).isEqualTo("Any") }
+        assertThat(parents[1].data.name).isEqualTo("Parent")
+        assertThat(parents[2].data.name).isEqualTo("Foo")
+    }
+
+    @Test
+    fun `Class with multiple parents has hierarchy with root object and parents`() {
+        val page = """
+            |abstract class A
+            |abstract class B : A
+            |abstract class C : B
+            |class Foo : C
+        """.render().page()
+
+        val classlike = page.content<Classlike>()
+        val parents = classlike.data.hierarchy.data.parents.items(5).toList()
+
+        javaOnly { assertThat(parents[0].data.name).isEqualTo("Object") }
+        kotlinOnly { assertThat(parents[0].data.name).isEqualTo("Any") }
+        assertThat(parents[1].data.name).isEqualTo("A")
+        assertThat(parents[2].data.name).isEqualTo("B")
+        assertThat(parents[3].data.name).isEqualTo("C")
+        assertThat(parents[4].data.name).isEqualTo("Foo")
+    }
+
     private fun DModule.page(): DevsitePage {
         val classlike = packages.single().classlikes.single { it.name() == "Foo" }
         val holder = runBlocking { DocumentablesHolder(this@page, this) }
