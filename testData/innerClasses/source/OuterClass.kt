@@ -36,6 +36,9 @@ abstract class OuterClass {
         override fun inner(choice: InnerEnum) = Unit
     }
 
+    /** I'm at the bottom of the hierarchy. */
+    class Leaf : InnerClass()
+
     /** I offer choices. */
     enum class InnerEnum {
         /** I'm first. */

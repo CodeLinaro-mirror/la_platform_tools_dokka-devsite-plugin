@@ -26,6 +26,7 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.content
 import com.google.devsite.renderer.converters.testing.functionSummary
 import com.google.devsite.renderer.converters.testing.item
+import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.title
@@ -180,8 +181,40 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(summary.item().link().name).isEqualTo("Foo.Bar")
     }
 
+    @Test
+    fun `Direct subclasses are found`() {
+        val page = """
+            |abstract class Foo
+            |open class C : B
+            |open class B : Foo
+            |open class A : Foo
+        """.render().page()
+
+        val classlike = page.content<Classlike>()
+        val subclasses = classlike.data.relatedSymbols.data.directSubclasses.items(2)
+
+        assertThat(subclasses.first().data.name).isEqualTo("A")
+        assertThat(subclasses.last().data.name).isEqualTo("B")
+    }
+
+    @Test
+    fun `Indirect subclasses are found`() {
+        val page = """
+            |abstract class Foo
+            |open class C : Foo
+            |open class B : C
+            |open class A : B
+        """.render().page()
+
+        val classlike = page.content<Classlike>()
+        val subclasses = classlike.data.relatedSymbols.data.indirectSubclasses.items(2)
+
+        assertThat(subclasses.first().data.name).isEqualTo("A")
+        assertThat(subclasses.last().data.name).isEqualTo("B")
+    }
+
     private fun DModule.page(): DevsitePage {
-        val classlike = packages.single().classlikes.single()
+        val classlike = packages.single().classlikes.single { it.name() == "Foo" }
         val holder = runBlocking { DocumentablesHolder(this@page, this) }
         val converter = ClasslikeDocumentableConverter(language, classlike, pathProvider(), holder)
         return runBlocking { converter.classlike() }

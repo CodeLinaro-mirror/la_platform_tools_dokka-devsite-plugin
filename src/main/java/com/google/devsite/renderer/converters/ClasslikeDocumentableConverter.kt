@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultClasslike
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultRelatedSymbols
@@ -34,12 +35,14 @@ import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.WithConstructors
+import org.jetbrains.dokka.model.WithSupertypes
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 
 /** Converts documentable class-likes into the classlike component. */
@@ -112,6 +115,8 @@ internal class ClasslikeDocumentableConverter(
         val protectedFunctions =
             async { functionsToDetail(declaredFunctions.filter(::isProtected)) }
 
+        val relatedSymbols = async { findRelatedSymbols() }
+
         val allSymbols = listOf(
             nestedTypesSummary.await() to Classlike.SymbolType(nestedTypesTitle(), emptyList()),
             constantsSummary.await() to Classlike.SymbolType(
@@ -152,14 +157,7 @@ internal class ClasslikeDocumentableConverter(
                 title = classlike.name(),
                 content = DefaultClasslike(
                     Classlike.Params(
-                        relatedSymbols = DefaultRelatedSymbols(
-                            RelatedSymbols.Params(
-                                emptyList(),
-                                DefaultSummaryList(SummaryList.Params(null, emptyList())),
-                                emptyList(),
-                                DefaultSummaryList(SummaryList.Params(null, emptyList()))
-                            )
-                        ),
+                        relatedSymbols = relatedSymbols.await(),
                         description = javadocConverter.metadata(
                             classlike,
                             annotations = annotations
@@ -269,6 +267,79 @@ internal class ClasslikeDocumentableConverter(
     private fun <T : Documentable> List<T>.myTypes() = filter { function ->
         classlike.packageName() == function.dri.packageName &&
             classlike.name() == function.dri.classNames
+    }
+
+    /** Finds the direct and indirect subclasses for this classlike, returning their component. */
+    // We know our subclasses will always be DClasslikes
+    @Suppress("UNCHECKED_CAST")
+    private suspend fun findRelatedSymbols(): RelatedSymbols {
+        val withSuperTypes = docsHolder.allClasslikes().filterIsInstance<WithSupertypes>()
+        val directSubclasses = withSuperTypes.filter { child ->
+            child.supertypes.values.single().any { (type, _) ->
+                type.dri == classlike.dri
+            }
+        } as List<DClasslike>
+
+        val classlikes = docsHolder.allClasslikes().associateBy { it.dri }
+        val allSubclasses = classlikes.values
+            .filterIsInstance<WithSupertypes>()
+            .filter { isIndirectSubclass(it, classlikes) } as List<DClasslike>
+        val indirectSubclasses = allSubclasses - directSubclasses
+
+        return DefaultRelatedSymbols(
+            RelatedSymbols.Params(
+                directSubclasses = linksForClasslikes(directSubclasses),
+                directSummary = summaryForClasslikes(directSubclasses),
+                indirectSubclasses = linksForClasslikes(indirectSubclasses),
+                indirectSummary = summaryForClasslikes(indirectSubclasses)
+            )
+        )
+    }
+
+    /**
+     * Determines if this is an indirect subclass by traversing the type hierarchy using
+     * [classlikes].
+     */
+    private fun isIndirectSubclass(
+        child: WithSupertypes,
+        classlikes: Map<DRI, DClasslike>
+    ): Boolean {
+        val supertypes = child.supertypes.values.single()
+        return supertypes.any { (type, _) ->
+            if (type.dri == classlike.dri) return true
+
+            val parent = classlikes[type.dri]
+            if (parent is WithSupertypes) {
+                isIndirectSubclass(parent, classlikes)
+            } else {
+                false
+            }
+        }
+    }
+
+    /** Converts the classlikes to link components for use in the related symbols component. */
+    private fun linksForClasslikes(docs: List<DClasslike>): List<Link> {
+        return docs.map { pathProvider.linkForReference(it.dri) }
+    }
+
+    /** Converts the classlikes to a summary component for use in the related symbols component. */
+    private fun summaryForClasslikes(docs: List<DClasslike>): SummaryList {
+        return DefaultSummaryList(SummaryList.Params(
+            items = docs.map { classlike ->
+                val annotations =
+                    (classlike as? WithExtraProperties<*>)?.annotations().orEmpty()
+
+                DefaultTwoPaneSummaryItem(
+                    TwoPaneSummaryItem.Params(
+                        title = pathProvider.linkForReference(classlike.dri),
+                        description = javadocConverter.summaryDescription(
+                            classlike,
+                            annotations
+                        )
+                    )
+                )
+            }
+        ))
     }
 
     private fun isInterface() = classlike is DInterface
