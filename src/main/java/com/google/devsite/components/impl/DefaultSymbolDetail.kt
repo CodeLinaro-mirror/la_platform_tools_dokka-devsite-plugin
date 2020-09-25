@@ -17,6 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.symbols.SymbolDetail.SymbolType
 import com.google.devsite.renderer.Language
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
@@ -53,17 +54,23 @@ internal class DefaultSymbolDetail(
 
             when (data.displayLanguage) {
                 Language.JAVA -> {
-                    data.returnType.render(this)
-                    +Entities.nbsp
+                    if (data.symbolType != SymbolType.CONSTRUCTOR) {
+                        data.returnType.render(this)
+                        +Entities.nbsp
+                    }
+
                     data.signature.render(this)
                 }
                 Language.KOTLIN -> {
                     +data.symbolType.keyword
-                    +Entities.nbsp
+                    if (data.symbolType != SymbolType.CONSTRUCTOR) +Entities.nbsp
                     data.signature.render(this)
-                    +":"
-                    +Entities.nbsp
-                    data.returnType.render(this)
+
+                    if (data.symbolType != SymbolType.CONSTRUCTOR) {
+                        +":"
+                        +Entities.nbsp
+                        data.returnType.render(this)
+                    }
                 }
             }
         }

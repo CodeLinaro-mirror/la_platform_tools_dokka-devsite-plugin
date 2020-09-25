@@ -81,6 +81,20 @@ internal class FunctionDocumentableConverter(
 
     /** @return the function detail component */
     fun detail(function: DFunction, hints: ModifierHints): SymbolDetail {
+        return detail(function, hints, SymbolDetail.SymbolType.FUNCTION)
+    }
+
+    /** @return the constructor detail component */
+    fun detailForConstructor(function: DFunction, hints: ModifierHints): SymbolDetail {
+        return detail(function, hints, SymbolDetail.SymbolType.CONSTRUCTOR)
+    }
+
+    /** @return the symbol detail component */
+    private fun detail(
+        function: DFunction,
+        hints: ModifierHints,
+        type: SymbolDetail.SymbolType
+    ): SymbolDetail {
         val annotations = function.annotations()
         val returnType =
             paramConverter.componentForProjection(function.type, annotations, isReturnType = true)
@@ -97,7 +111,7 @@ internal class FunctionDocumentableConverter(
                 ),
                 modifiers = function.modifiers().modifiersFor(hints),
                 returnType = returnType,
-                symbolType = SymbolDetail.SymbolType.FUNCTION,
+                symbolType = type,
                 signature = function.signature(isSummary = false),
                 metadata = javadocConverter.metadata(
                     doc = function,

@@ -38,6 +38,7 @@ internal interface SymbolDetail : ContextFreeComponent {
     /** Holds the Kotlin keywords for various symbol types. */
     enum class SymbolType(val keyword: String) {
         PROPERTY("val"),
-        FUNCTION("fun")
+        FUNCTION("fun"),
+        CONSTRUCTOR("")
     }
 }

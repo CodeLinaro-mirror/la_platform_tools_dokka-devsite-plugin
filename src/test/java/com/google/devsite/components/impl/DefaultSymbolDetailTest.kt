@@ -123,6 +123,68 @@ class DefaultSymbolDetailTest {
     }
 
     @Test
+    fun `Simple Kotlin constructor renders correctly`() {
+        val component = DefaultSymbolDetail(
+            Params(
+                displayLanguage = Language.KOTLIN,
+                name = "MyClass",
+                anchors = linkedSetOf(),
+                returnType = NoopParameter("Unit"),
+                symbolType = SymbolType.CONSTRUCTOR,
+                signature = NoopFunctionSignature("MyClass()"),
+                metadata = emptyList()
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <div>
+    <h3 class="api-name">MyClass</h3>
+    <pre class="api-signature no-pretty-print">MyClass()</pre>
+  </div>
+</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Simple Java constructor renders correctly`() {
+        val component = DefaultSymbolDetail(
+            Params(
+                displayLanguage = Language.JAVA,
+                name = "MyClass",
+                anchors = linkedSetOf(),
+                returnType = NoopParameter("Unit"),
+                symbolType = SymbolType.CONSTRUCTOR,
+                signature = NoopFunctionSignature("MyClass()"),
+                metadata = emptyList()
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <div>
+    <h3 class="api-name">MyClass</h3>
+    <pre class="api-signature no-pretty-print">MyClass()</pre>
+  </div>
+</div>
+            """.trim()
+        )
+    }
+
+    @Test
     fun `Java function with annotations renders correctly`() {
         val component = DefaultSymbolDetail(
             Params(

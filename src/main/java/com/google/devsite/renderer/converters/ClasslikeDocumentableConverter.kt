@@ -111,9 +111,9 @@ internal class ClasslikeDocumentableConverter(
         val protectedProperties =
             async { propertiesToDetail(declaredProperties.filter(::isProtected)) }
         val publicConstructors =
-            async { functionsToDetail(declaredConstructors.filter(::isPublic)) }
+            async { constructorsToDetail(declaredConstructors.filter(::isPublic)) }
         val protectedConstructors =
-            async { functionsToDetail(declaredConstructors.filter(::isProtected)) }
+            async { constructorsToDetail(declaredConstructors.filter(::isProtected)) }
         val publicFunctions =
             async { functionsToDetail(declaredFunctions.filter(::isPublic)) }
         val protectedFunctions =
@@ -237,6 +237,13 @@ internal class ClasslikeDocumentableConverter(
         val modifierHints = ModifierHints(displayLanguage, isSummary = false, isInterface())
         return functions.map {
             functionConverter.detail(it, modifierHints)
+        }
+    }
+
+    private fun constructorsToDetail(functions: List<DFunction>): List<SymbolDetail> {
+        val modifierHints = ModifierHints(displayLanguage, isSummary = false, isInterface())
+        return functions.map {
+            functionConverter.detailForConstructor(it, modifierHints)
         }
     }
 
