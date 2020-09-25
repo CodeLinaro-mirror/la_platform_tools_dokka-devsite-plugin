@@ -53,6 +53,7 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
     private val allClasslikes: Deferred<List<DClasslike>>
     private val nestedClasslikesJob: Job
     private val nestedClasslikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
+    private val subclassGraph: Deferred<Map<DRI, Subclasses>>
 
     init {
         scope.apply {
@@ -78,6 +79,7 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
         }
 
         allClasslikes = scope.async { computeClasslikes(module) }
+        subclassGraph = scope.async { computeSubclassGraph(allClasslikes.await()) }
 
         nestedClasslikesJob = scope.launch {
             for (classlike in allClasslikes.await()) {
@@ -92,6 +94,8 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
     suspend fun packages(): List<DPackage> = packages.await()
 
     suspend fun allClasslikes(): List<DClasslike> = allClasslikes.await()
+
+    suspend fun subclassGraph(): Map<DRI, Subclasses> = subclassGraph.await()
 
     suspend fun classlikesFor(packageDoc: DPackage): List<DClasslike> =
         classlikes.getValue(packageDoc.dri).await()
