@@ -43,8 +43,6 @@ import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
-import org.jetbrains.dokka.model.JavaClassKindTypes
-import org.jetbrains.dokka.model.KotlinClassKindTypes
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.WithSupertypes
 import org.jetbrains.dokka.model.properties.WithExtraProperties
@@ -272,17 +270,8 @@ internal class ClasslikeDocumentableConverter(
             return DefaultClassHierarchy(ClassHierarchy.Params(parents = emptyList()))
         }
 
-        val classlikes = docsHolder.allClasslikes().associateBy { it.dri }
-        val parents = generateSequence(classlike) { classlike: DClasslike ->
-            val supertypes = (classlike as WithSupertypes).supertypes.values.single()
-            val parent = supertypes.singleOrNull { (_, kind) ->
-                kind == KotlinClassKindTypes.CLASS || kind == JavaClassKindTypes.CLASS
-            }?.typeConstructor?.dri
-
-            parent?.let { classlikes[parent] }
-        }.toList().reversed()
-
-        if (parents.size == 1) {
+        val parents = docsHolder.subclassGraph().getValue(classlike.dri).parents
+        if (parents.isEmpty()) {
             // Don't show the hierarchy if this class only extends Any/Object
             return DefaultClassHierarchy(ClassHierarchy.Params(parents = emptyList()))
         }
@@ -292,11 +281,12 @@ internal class ClasslikeDocumentableConverter(
             Language.KOTLIN -> DRI(packageName = "kotlin", classNames = "Any")
         }
         val classHierarchyRootLink = pathProvider.linkForReference(classHierarchyRootDri)
+        val thisLink = pathProvider.linkForReference(classlike.dri)
 
         val parentLinks = parents.map { classlike ->
             pathProvider.linkForReference(classlike.dri)
         }
-        val allLinks = listOf(classHierarchyRootLink) + parentLinks
+        val allLinks = listOf(classHierarchyRootLink) + parentLinks + listOf(thisLink)
         return DefaultClassHierarchy(ClassHierarchy.Params(allLinks))
     }
 
@@ -304,18 +294,9 @@ internal class ClasslikeDocumentableConverter(
     // We know our subclasses will always be DClasslikes
     @Suppress("UNCHECKED_CAST")
     private suspend fun findRelatedSymbols(): RelatedSymbols {
-        val withSuperTypes = docsHolder.allClasslikes().filterIsInstance<WithSupertypes>()
-        val directSubclasses = withSuperTypes.filter { child ->
-            child.supertypes.values.single().any { (type, _) ->
-                type.dri == classlike.dri
-            }
-        } as List<DClasslike>
-
-        val classlikes = docsHolder.allClasslikes().associateBy { it.dri }
-        val allSubclasses = classlikes.values
-            .filterIsInstance<WithSupertypes>()
-            .filter { isIndirectSubclass(it, classlikes) } as List<DClasslike>
-        val indirectSubclasses = allSubclasses - directSubclasses
+        val subclasses = docsHolder.subclassGraph().getValue(classlike.dri)
+        val directSubclasses = subclasses.direct
+        val indirectSubclasses = subclasses.indirect
 
         return DefaultRelatedSymbols(
             RelatedSymbols.Params(
@@ -325,27 +306,6 @@ internal class ClasslikeDocumentableConverter(
                 indirectSummary = summaryForClasslikes(indirectSubclasses)
             )
         )
-    }
-
-    /**
-     * Determines if this is an indirect subclass by traversing the type hierarchy using
-     * [classlikes].
-     */
-    private fun isIndirectSubclass(
-        child: WithSupertypes,
-        classlikes: Map<DRI, DClasslike>
-    ): Boolean {
-        val supertypes = child.supertypes.values.single()
-        return supertypes.any { (type, _) ->
-            if (type.dri == classlike.dri) return true
-
-            val parent = classlikes[type.dri]
-            if (parent is WithSupertypes) {
-                isIndirectSubclass(parent, classlikes)
-            } else {
-                false
-            }
-        }
     }
 
     /** Converts the classlikes to link components for use in the related symbols component. */
