@@ -26,7 +26,6 @@ import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DParameter
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -189,7 +188,6 @@ internal class ParameterDocumentableConverterTest(
         }
     }
 
-    @Ignore // TODO(b/165709374): dokka doesn't understand suspending lambda receivers
     @Test
     fun `Parameter understands suspend lambda with receiver`() {
         val param = """
@@ -198,7 +196,7 @@ internal class ParameterDocumentableConverterTest(
 
         javaOnly {
             assertNoLambdaStuff(param)
-            assertThat(param.primary.link().name).isEqualTo("")
+            assertThat(param.primary.link().name).isEqualTo("SuspendFunction1")
         }
         kotlinOnly {
             assertThat(param.isLambda).isTrue()
@@ -320,6 +318,16 @@ internal class ParameterDocumentableConverterTest(
             val collectionGeneric = param.primary.asType().data.generics.item()
             assertThat(collectionGeneric.link().name).isEqualTo("Float")
         }
+    }
+
+    @Test
+    fun `Parameter includes primitive default value`() {
+        val param = """
+            |fun foo(stuff: String = "stuff")
+        """.render().param().data
+
+        javaOnly { assertThat(param.defaultValue).isNull() }
+        kotlinOnly { assertThat(param.defaultValue).isEqualTo("\"stuff\"") }
     }
 
     @Test

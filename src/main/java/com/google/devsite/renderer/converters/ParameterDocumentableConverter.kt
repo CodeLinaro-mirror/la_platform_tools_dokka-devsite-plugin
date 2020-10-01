@@ -29,7 +29,8 @@ import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.DefaultValue
-import org.jetbrains.dokka.model.FunctionModifiers
+import org.jetbrains.dokka.model.FunctionalTypeConstructor
+import org.jetbrains.dokka.model.GenericTypeConstructor
 import org.jetbrains.dokka.model.JavaObject
 import org.jetbrains.dokka.model.Nullable
 import org.jetbrains.dokka.model.PrimitiveJavaType
@@ -137,11 +138,12 @@ internal class ParameterDocumentableConverter(
         } else {
             proj.toComponent(nullable = nullable)
         }
-        val lambdaModifiers: List<String> = if (proj.isLambda(suspendOnly = true)) {
+        val lambdaModifiers: List<String> = if (proj.isSuspend()) {
             listOf("suspend")
         } else {
             emptyList()
         }
+
         val lambdaParams: List<Parameter> = if (isLambda) {
             // Always ignore the return type of the lambda since that's handled by primaryType.
             val lambdaProjections = proj.asTypeConstructor().projections.dropLast(1)
@@ -176,12 +178,14 @@ internal class ParameterDocumentableConverter(
 
     /** Converts a lambda receiver projection to its type component if available. */
     private fun Projection.receiver(): Parameter? = when (this) {
-        is TypeConstructor -> if (modifier == FunctionModifiers.EXTENSION) {
+        is FunctionalTypeConstructor -> if (this.isExtensionFunction) {
             componentForProjection(projections.first())
         } else {
             null
         }
-        is TypeParameter, is PrimitiveJavaType, is UnresolvedBound, Star, JavaObject, Void -> null
+
+        is GenericTypeConstructor, is TypeParameter, is PrimitiveJavaType, is UnresolvedBound,
+        Star, JavaObject, Void -> null
         is Nullable -> inner.receiver()
         is Variance<*> -> inner.receiver()
         else -> error("Unknown bound: $this")
@@ -219,7 +223,7 @@ internal class ParameterDocumentableConverter(
         is TypeConstructor -> pathProvider.linkForReference(dri)
         is TypeParameter -> DefaultLink(
             Link.Params(
-                name = name,
+                name = presentableName ?: name,
                 url = ""
             )
         )
@@ -248,22 +252,22 @@ internal class ParameterDocumentableConverter(
         else -> error("Unknown bound: $this")
     }
 
+    private fun Projection.isSuspend(): Boolean = when (this) {
+        is FunctionalTypeConstructor -> {
+            this.isSuspendable
+        }
+        is Nullable -> inner.isSuspend()
+        is Variance<*> -> inner.isSuspend()
+        else -> false
+    }
     /** Determine whether or not a param is a lambda using the kotlin function type. */
-    private fun Projection.isLambda(suspendOnly: Boolean = false): Boolean = when (this) {
+    private fun Projection.isLambda(): Boolean = when (this) {
         is TypeConstructor -> {
             val typeName = dri.classNames.orEmpty()
-            val isStandardLambda = dri.packageName == "kotlin" && typeName.startsWith("Function")
-            val isSuspendLambda =
-                dri.packageName == "kotlin.coroutines" && typeName.startsWith("SuspendFunction")
-
-            if (suspendOnly) {
-                isSuspendLambda
-            } else {
-                isStandardLambda || isSuspendLambda
-            }
+            dri.packageName == "kotlin" && typeName.startsWith("Function") || isSuspend()
         }
-        is Nullable -> inner.isLambda(suspendOnly)
-        is Variance<*> -> inner.isLambda(suspendOnly)
+        is Nullable -> inner.isLambda()
+        is Variance<*> -> inner.isLambda()
         is TypeParameter, is PrimitiveJavaType, is UnresolvedBound, Star, JavaObject, Void -> false
         else -> error("Unknown bound: $this")
     }
@@ -290,7 +294,8 @@ internal class ParameterDocumentableConverter(
         isReturnType: Boolean = false,
         mustBoxPrimitive: Boolean = false
     ): Projection = when (this) {
-        is TypeConstructor -> {
+        is FunctionalTypeConstructor, is GenericTypeConstructor -> {
+            val typeConstructor = this as TypeConstructor
             val isStdlib = dri.packageName == "kotlin"
             val className = dri.classNames.orEmpty()
 
@@ -299,9 +304,9 @@ internal class ParameterDocumentableConverter(
             } else if (isStdlib && className in kotlinPrimitives) {
                 if (mustBoxPrimitive) {
                     when (className) {
-                        "Char" -> copy(DRI("java.lang", "Character"))
-                        "Int" -> copy(DRI("java.lang", "Integer"))
-                        else -> copy(DRI("java.lang", className))
+                        "Char" -> typeConstructor.copy(DRI("java.lang", "Character"))
+                        "Int" -> typeConstructor.copy(DRI("java.lang", "Integer"))
+                        else -> typeConstructor.copy(DRI("java.lang", className))
                     }
                 } else {
                     PrimitiveJavaType(className.toLowerCase())
@@ -309,7 +314,7 @@ internal class ParameterDocumentableConverter(
             } else if (isStdlib && className in kotlinPrimitiveArrays) {
                 PrimitiveJavaType(className.removeSuffix("Array").toLowerCase() + "[]")
             } else {
-                copy(projections = projections.map {
+                typeConstructor.copy(projections = projections.map {
                     // Generics can't be true primitives in Java
                     it.rewriteKotlinPrimitivesForJava(mustBoxPrimitive = true)
                 })
@@ -320,6 +325,17 @@ internal class ParameterDocumentableConverter(
         is Variance<*> -> inner.rewriteKotlinPrimitivesForJava(mustBoxPrimitive = true)
         else -> this
     }
+
+    // Adds the functionality of a generic copy constructor for TypeConstructor. `copy` is defined by
+    // GenericTypeConstructor and FunctionalTypeConstructor data subclasses
+    private fun TypeConstructor.copy(
+        dri: DRI = this.dri,
+        projections: List<Projection> = this.projections
+    ): Projection =
+        when (this) {
+            is GenericTypeConstructor -> this.copy(dri, projections)
+            is FunctionalTypeConstructor -> this.copy(dri, projections)
+        }
 
     private companion object {
         val kotlinPrimitives = setOf(
