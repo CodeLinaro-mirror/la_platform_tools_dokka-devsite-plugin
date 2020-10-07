@@ -136,12 +136,16 @@ internal class DefaultDescription(
             renderTags(listOf(data.root), State())
         } else {
             if (data.summary) {
+
+                // Displays the deprecation message in a table cell (e.g. class summary table)
                 p {
-                    em { +data.deprecation }
+                    strong { +data.deprecation }
                     +" "
                     renderTags(data.root.children, State())
                 }
             } else {
+
+                // Displays the deprecation message in notice box with "caution" styling
                 p("caution") {
                     strong { +data.deprecation }
                     br()
