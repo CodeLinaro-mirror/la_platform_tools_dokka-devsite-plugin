@@ -137,7 +137,8 @@ internal class FunctionDocumentableConverter(
                 parameters = when (displayLanguage) {
                     Language.JAVA -> listOfNotNull(receiver) + parameters
                     Language.KOTLIN -> parameters
-                }
+                },
+                isDeprecated = annotations().isDeprecated()
             )
         )
     }

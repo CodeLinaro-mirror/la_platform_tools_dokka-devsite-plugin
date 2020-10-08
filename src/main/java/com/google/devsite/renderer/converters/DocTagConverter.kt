@@ -234,7 +234,7 @@ internal class DocTagConverter(
         }
 
         val annotationDeprecationMessage = annotations.filter {
-            it.dri.classNames == "Deprecated"
+            it.isDeprecated()
         }.strictSingleOrNull()?.params?.get("message")?.cast<StringValue>()?.value ?: return null
         // Dokka makes message="foo" show up as "\"foo\"" since you typically want to show quotes
         // when rendering an annotation. Remove those outer quotes.

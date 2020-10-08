@@ -52,13 +52,43 @@ internal class AnnotationsTest : ConverterTestBase() {
     }
 
     @Test
-    fun `@Deprecated annotations are ignored`() {
+    fun `@Deprecated annotations are ignored since they are surfaced separately`() {
         val annotations = """
-            |@Deprecated("deprecated")
+            |@Deprecated("So long, farewell, auf wiedersehen, goodbye")
             |fun foo() = Unit
         """.render().annotations()
 
         assertThat(annotations.components()).isEmpty()
+    }
+
+    @Test
+    fun `@Deprecated annotation in list of Annotations is found`() {
+        val annotations = """
+            |@Deprecated("So long, farewell, auf wiedersehen, goodbye")
+            |fun foo() = Unit
+        """.render().annotations()
+
+        assertThat(annotations.isDeprecated()).isTrue()
+    }
+
+    @Test
+    fun `@Deprecated annotation in Annotation object is found`() {
+        val annotation = """
+            |@Deprecated("So long, farewell, auf wiedersehen, goodbye")
+            |fun foo() = Unit
+        """.render().annotations().first()
+
+        assertThat(annotation.isDeprecated()).isTrue()
+    }
+
+    @Test
+    fun `@Deprecated annotation in Annotation object is not found`() {
+        val annotation = """
+            |@FooAnnotation
+            |fun foo() = Unit
+        """.render().annotations().first()
+
+        assertThat(annotation.isDeprecated()).isFalse()
     }
 
     @Test

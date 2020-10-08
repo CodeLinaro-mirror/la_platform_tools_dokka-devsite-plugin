@@ -25,6 +25,7 @@ internal interface FunctionSignature : SymbolSignature {
     class Params(
         override val name: Link,
         override val receiver: Parameter? = null,
-        val parameters: List<Parameter> = emptyList()
+        val parameters: List<Parameter> = emptyList(),
+        val isDeprecated: Boolean = false
     ) : SymbolSignature.Params
 }

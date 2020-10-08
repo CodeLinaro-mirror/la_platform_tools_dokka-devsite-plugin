@@ -67,6 +67,31 @@ class DefaultFunctionSignatureTest {
     }
 
     @Test
+    fun `Signature with deprecation renders correctly`() {
+        val component = DefaultFunctionSignature(
+            Params(
+                name = NoopLink("foo"),
+                parameters = listOf(
+                    NoopParameter("String foo"),
+                    NoopParameter("int bar")
+                ),
+                isDeprecated = true
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div><span><del>foo</del></span>(String foo,&nbsp;int bar)</div>
+            """.trim()
+        )
+    }
+
+    @Test
     fun `Signature with receiver renders correctly`() {
         val component = DefaultFunctionSignature(
             Params(

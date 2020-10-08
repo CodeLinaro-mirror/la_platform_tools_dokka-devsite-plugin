@@ -20,6 +20,8 @@ import com.google.devsite.components.symbols.FunctionSignature
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
 import kotlinx.html.br
+import kotlinx.html.span
+import kotlinx.html.unsafe
 
 /** Default implementation of a function signature. */
 internal class DefaultFunctionSignature(
@@ -32,7 +34,19 @@ internal class DefaultFunctionSignature(
         }
         val shouldBreak = shouldBreak()
 
-        data.name.render(this)
+        if (data.isDeprecated) {
+
+            // Bug in kotlinx: <del> tag adds a new line before and after using it
+            // https://github.com/Kotlin/kotlinx.html/issues/113
+            // Manually declare <del> instead
+            span {
+                unsafe { +"<del>" }
+                data.name.render(html)
+                unsafe { +"</del>" }
+            }
+        } else {
+            data.name.render(this)
+        }
         +"("
         if (shouldBreak) br()
         for (parameter in data.parameters) {

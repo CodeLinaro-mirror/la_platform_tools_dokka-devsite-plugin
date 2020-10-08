@@ -57,12 +57,17 @@ internal fun List<Annotation>.annotationComponents(
 /** @return true if the `@Nullable` annotation is present, false otherwise */
 internal fun List<Annotation>.isNullable(): Boolean = any { it.dri.classNames == "Nullable" }
 
+/** @return true if the `@Deprecated` annotation is present, false otherwise */
+internal fun List<Annotation>.isDeprecated(): Boolean = any { it.isDeprecated() }
+
 /** @return the complete list of annotations for this type */
 internal fun WithExtraProperties<*>.annotations(): List<Annotation> {
     return extra.allOfType<Annotations>().flatMap { annotations ->
         annotations.content.values.single()
     }
 }
+/** @return true if the `@Deprecated` annotation is present, false otherwise */
+internal fun Annotation.isDeprecated(): Boolean = dri.classNames == "Deprecated"
 
 /** @return true if a developer would find this annotation useful, false otherwise */
 private fun shouldDocumentAnnotation(annotation: Annotation, language: Language): Boolean {
@@ -70,7 +75,7 @@ private fun shouldDocumentAnnotation(annotation: Annotation, language: Language)
     val isSuppressAnnotation = annotation.dri.classNames == "Suppress"
     val isKotlinJvmAnnotation = annotation.dri.packageName == "kotlin.jvm"
     // Surfaced separately
-    val isDeprecatedAnnotation = annotation.dri.classNames == "Deprecated"
+    val isDeprecatedAnnotation = annotation.isDeprecated()
     val isNullabilityAnnotation = annotation.dri.classNames == "NonNull" ||
         annotation.dri.classNames == "Nullable"
 
