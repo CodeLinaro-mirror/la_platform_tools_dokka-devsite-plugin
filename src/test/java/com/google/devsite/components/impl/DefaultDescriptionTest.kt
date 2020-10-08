@@ -64,7 +64,7 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p class="caution"><strong>This class is deprecated.</strong><br>Hello world!</p>
+  <aside class="caution"><strong>This class is deprecated.</strong><br>Hello world!</aside>
 </body>
             """.trim()
         )

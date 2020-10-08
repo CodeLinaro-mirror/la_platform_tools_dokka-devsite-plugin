@@ -27,6 +27,7 @@ import kotlinx.html.THEAD
 import kotlinx.html.TR
 import kotlinx.html.UL
 import kotlinx.html.a
+import kotlinx.html.aside
 import kotlinx.html.b
 import kotlinx.html.blockQuote
 import kotlinx.html.br
@@ -146,7 +147,7 @@ internal class DefaultDescription(
             } else {
 
                 // Displays the deprecation message in notice box with "caution" styling
-                p("caution") {
+                aside("caution") {
                     strong { +data.deprecation }
                     br()
                     renderTags(data.root.children, State())
