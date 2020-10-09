@@ -41,7 +41,6 @@ internal class DefaultClasslike(
             +"Summary"
         }
 
-        p { +"Enum values" }
         for ((summary, _) in data.symbolTypes) {
             summary.render(this)
         }

@@ -51,7 +51,6 @@ class DefaultClasslikeTest {
   <p>TODO(b/166518424) class signature</p>
   <hr>
   <h2>Summary</h2>
-  <p>Enum values</p>
 </body>
             """.trim()
         )
@@ -80,7 +79,6 @@ class DefaultClasslikeTest {
   <div>Class hierarchy</div>
   <hr>
   <h2>Summary</h2>
-  <p>Enum values</p>
 </body>
             """.trim()
         )
@@ -109,7 +107,6 @@ class DefaultClasslikeTest {
   <div>Related symbols</div>
   <hr>
   <h2>Summary</h2>
-  <p>Enum values</p>
 </body>
             """.trim()
         )
@@ -138,7 +135,6 @@ class DefaultClasslikeTest {
   <hr>
   <p>Hello World!</p>
   <h2>Summary</h2>
-  <p>Enum values</p>
 </body>
             """.trim()
         )
@@ -171,7 +167,6 @@ class DefaultClasslikeTest {
   <p>TODO(b/166518424) class signature</p>
   <hr>
   <h2>Summary</h2>
-  <p>Enum values</p>
   <div>noop</div>
   <h2>Symbols</h2>
   <div>noop</div>
