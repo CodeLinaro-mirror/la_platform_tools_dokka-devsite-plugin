@@ -33,6 +33,27 @@ internal class ModifiersTest : ConverterTestBase() {
         assertThat(modifiers).contains("public")
     }
 
+    @Test
+    fun `Public modifier is found in Java`() {
+        val modifiers = """
+            |public void foo()
+        """.render(java = true).modifierz()
+
+        assertThat(modifiers).contains("public")
+        assertThat(modifiers).hasSize(1)
+    }
+
+    @Test
+    fun `Multiple modifiers are found`() {
+        val modifiers = """
+            |class Foo {
+            |    public abstract fun foo()
+            |}
+        """.render().modifierz()
+
+        assertThat(modifiers).hasSize(2)
+    }
+
     @Ignore // TODO(b/165112358): foo doesn't show up in the dokka model
     @Test
     fun `Protected modifier is found`() {

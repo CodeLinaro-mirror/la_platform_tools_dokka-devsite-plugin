@@ -28,9 +28,9 @@ internal fun <T> T.modifiers(): List<String>
           T : WithVisibility,
           T : WithExtraProperties<*> {
     val visibilityModifiers = listOf(visibility.values.single().name)
-    val baseModifiers = modifier.values.map { it.name }
+    val baseModifiers = modifier.values.map { it.name }.filter { it.isNotEmpty() }
     val extraModifiers = extra.allOfType<AdditionalModifiers>().flatMap { modifiers ->
-        modifiers.content.values.single().map { it.name }
+        modifiers.content.values.single().map { it.name }.filter { it.isNotEmpty() }
     }
 
     return visibilityModifiers + extraModifiers + baseModifiers
