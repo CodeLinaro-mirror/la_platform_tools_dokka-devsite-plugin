@@ -16,7 +16,16 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.renderer.Language
+import org.jetbrains.dokka.base.transformers.documentables.isException
+import org.jetbrains.dokka.model.DAnnotation
+import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
+import org.jetbrains.dokka.model.DEnum
+import org.jetbrains.dokka.model.DFunction
+import org.jetbrains.dokka.model.DInterface
+import org.jetbrains.dokka.model.DObject
+import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.Nullable
 import org.jetbrains.dokka.model.Projection
@@ -40,3 +49,32 @@ internal fun Projection.isNullable(): Boolean = when (this) {
     is Variance<*> -> inner.isNullable()
     else -> false
 }
+
+/**
+ * @param displayLanguage the Language of the docs this Documentable will be displayed in
+ * @return the String name that represents this type when displayed
+ */
+fun Documentable.stringForType(displayLanguage: Language): String = when (this) {
+    is DClass -> "class"
+    is DInterface -> "interface"
+    is DEnum -> "enum"
+    is DAnnotation -> "annotation"
+    is DFunction -> when (displayLanguage) {
+        Language.JAVA -> "method"
+        Language.KOTLIN -> "function"
+    }
+    is DProperty -> when (displayLanguage) {
+        Language.JAVA -> "field"
+        Language.KOTLIN -> "property"
+    }
+    is DObject -> "object"
+    else -> error("Unsupported type: $this")
+}
+
+/* Returns if a class is an Exception or not
+   isException, the built in method in Dokka, only considers its supertype so we also look for
+   functions that are Throwable
+   https://github.com/Kotlin/dokka/issues/1557
+ */
+val DClass.isExceptionClass: Boolean
+    get() = isException || functions.any { function -> function.dri.classNames == "Throwable" }
