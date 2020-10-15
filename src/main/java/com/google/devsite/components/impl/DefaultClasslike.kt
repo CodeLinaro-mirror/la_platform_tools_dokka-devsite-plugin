@@ -27,7 +27,9 @@ internal class DefaultClasslike(
     override val data: Classlike.Params
 ) : Classlike {
     override fun render(html: FlowContent) = html.run {
-        p { +"TODO(b/166518424) class signature" }
+        p {
+            data.signature.render(this)
+        }
         data.hierarchy.render(this)
         data.relatedSymbols.render(this)
 

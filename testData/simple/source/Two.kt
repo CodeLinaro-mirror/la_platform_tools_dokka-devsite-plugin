@@ -24,3 +24,9 @@ interface Two {
 
     fun z()
 }
+/*
+ * Interface Four is for extending
+ */
+interface Four {
+    val fore: String
+}

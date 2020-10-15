@@ -19,7 +19,7 @@ package dokkatest.simple
 /**
  * Sample class 1
  */
-class One() {
+open class One(override val fore: String) : Four {
     /** Property docs. */
     val v = 0
 

@@ -17,6 +17,7 @@
 package com.google.devsite.components.pages
 
 import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.components.symbols.ClassSignature
 import com.google.devsite.components.table.ClassHierarchy
 import com.google.devsite.components.table.RelatedSymbols
 import com.google.devsite.components.table.SummaryList
@@ -26,6 +27,7 @@ internal interface Classlike : ContextFreeComponent {
     val data: Params
 
     class Params(
+        val signature: ClassSignature,
         val hierarchy: ClassHierarchy,
         val relatedSymbols: RelatedSymbols,
         val description: List<ContextFreeComponent>,

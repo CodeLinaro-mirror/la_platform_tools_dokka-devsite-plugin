@@ -62,6 +62,7 @@ internal fun List<String>.modifiersFor(
             modifiers.remove("operator")
             modifiers.remove("override")
             modifiers.remove("open")
+            modifiers.remove("sealed")
             modifiers.remove("const")
         }
         Language.KOTLIN -> {

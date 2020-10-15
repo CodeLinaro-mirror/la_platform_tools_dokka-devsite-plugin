@@ -261,6 +261,20 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(parents[4].data.name).isEqualTo("Foo")
     }
 
+    @Test
+    fun `Class signature appears with extends and implements`() {
+        val page = """
+            |interface A
+            |abstract class B
+            |class Foo : A, B
+        """.render().page()
+
+        val classlike = page.content<Classlike>()
+        assertThat(classlike.data.signature.data.type).isEqualTo("class")
+        assertThat(classlike.data.signature.data.extends.single().data.name).isEqualTo("B")
+        assertThat(classlike.data.signature.data.implements.single().data.name).isEqualTo("A")
+    }
+
     private fun DModule.page(): DevsitePage {
         val classlike = packages.single().classlikes.single { it.name() == "Foo" }
         val holder = runBlocking { DocumentablesHolder(this@page, this) }

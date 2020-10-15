@@ -45,7 +45,8 @@ internal fun computeSubclassGraph(classlikes: List<DClasslike>): Map<DRI, Subcla
             all = level.all.map { drisToClasslikes.getValue(it) },
             direct = level.direct.map { drisToClasslikes.getValue(it) },
             indirect = level.indirect.map { drisToClasslikes.getValue(it) },
-            parents = level.parents.map { drisToClasslikes.getValue(it) }
+            superClasses = level.superClasses.map { drisToClasslikes.getValue(it) },
+            interfaces = level.interfaces.map { drisToClasslikes.getValue(it) }
         )
     }
 }
@@ -85,12 +86,21 @@ private fun recursivelyUpdateClasslikeSupertypesTree(
             if (child !== leaf) indirect.add(leaf.dri)
         }
 
+        // TODO Support external types
+        // type.dri is not found in classlikes if it isn't from this package (or invocation?)
+        // external types like stdlib appear in the supertypes but we filter them out by forcing
+        // the use of classlikes here. This could just be DRI based and we'd connect the external
+        // packages to the proper base URL.
         val supertype = classlikes[type.dri]
         if (supertype != null) {
             recursivelyUpdateClasslikeSupertypesTree(supertype, subclasses, classlikes, leaf)
 
             if (kind == JavaClassKindTypes.CLASS || kind == KotlinClassKindTypes.CLASS) {
-                subclasses.getValue(leaf.dri).parents.add(supertype.dri)
+                subclasses.getValue(leaf.dri).superClasses.add(supertype.dri)
+            }
+
+            if (kind == JavaClassKindTypes.INTERFACE || kind == KotlinClassKindTypes.INTERFACE) {
+                subclasses.getValue(leaf.dri).interfaces.add(supertype.dri)
             }
         }
     }
@@ -100,7 +110,8 @@ internal data class Subclasses(
     val all: List<DClasslike>,
     val direct: List<DClasslike>,
     val indirect: List<DClasslike>,
-    val parents: List<DClasslike>
+    val superClasses: List<DClasslike>,
+    val interfaces: List<DClasslike>
 )
 
 // TODO(b/168956053): Use DClasslike directly once dokka has cheap hashCode impl
@@ -108,7 +119,8 @@ private data class MutableSubclasses(
     val all: MutableSet<DRI> = TreeSet(classComparator),
     val direct: MutableSet<DRI> = TreeSet(classComparator),
     val indirect: MutableSet<DRI> = TreeSet(classComparator),
-    val parents: MutableList<DRI> = mutableListOf()
+    val superClasses: MutableList<DRI> = mutableListOf(),
+    val interfaces: MutableList<DRI> = mutableListOf()
 ) {
     private companion object {
         /**

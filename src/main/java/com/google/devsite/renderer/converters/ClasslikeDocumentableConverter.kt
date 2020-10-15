@@ -18,6 +18,7 @@ package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultClassHierarchy
+import com.google.devsite.components.impl.DefaultClassSignature
 import com.google.devsite.components.impl.DefaultClasslike
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultRelatedSymbols
@@ -26,6 +27,7 @@ import com.google.devsite.components.impl.DefaultTableTitle
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.DevsitePage
+import com.google.devsite.components.symbols.ClassSignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.table.ClassHierarchy
 import com.google.devsite.components.table.RelatedSymbols
@@ -43,6 +45,7 @@ import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.WithAbstraction
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.WithSupertypes
 import org.jetbrains.dokka.model.properties.WithExtraProperties
@@ -117,6 +120,7 @@ internal class ClasslikeDocumentableConverter(
         val protectedFunctions =
             async { functionsToDetail(declaredFunctions.filter(::isProtected)) }
 
+        val signature = async { computeSignature() }
         val hierarchy = async { computeHierarchy() }
         val relatedSymbols = async { findRelatedSymbols() }
 
@@ -160,6 +164,7 @@ internal class ClasslikeDocumentableConverter(
                 title = classlike.name(),
                 content = DefaultClasslike(
                     Classlike.Params(
+                        signature = signature.await(),
                         hierarchy = hierarchy.await(),
                         relatedSymbols = relatedSymbols.await(),
                         description = javadocConverter.metadata(
@@ -271,13 +276,48 @@ internal class ClasslikeDocumentableConverter(
         }
     }
 
+    private suspend fun computeSignature(): ClassSignature {
+        val modifiers = if (classlike is WithAbstraction && classlike is WithExtraProperties<*>) {
+            classlike.modifiers().modifiersFor(ModifierHints(displayLanguage = displayLanguage))
+        } else {
+            emptyList()
+        }
+
+        if (classlike !is WithSupertypes) {
+            return DefaultClassSignature(ClassSignature.Params(
+                displayLanguage = displayLanguage,
+                name = classlike.name(),
+                type = classlike.stringForType(displayLanguage),
+                modifiers = modifiers,
+                implements = emptyList(),
+                extends = emptyList()))
+        }
+
+        val extends = docsHolder.subclassGraph().getValue(classlike.dri).superClasses.map {
+            pathProvider.linkForReference(it.dri)
+        }
+
+        val implements = docsHolder.subclassGraph().getValue(classlike.dri).interfaces.map {
+            pathProvider.linkForReference(it.dri)
+        }
+
+        return DefaultClassSignature(ClassSignature.Params(
+            displayLanguage = displayLanguage,
+            name = classlike.name(),
+            type = classlike.stringForType(displayLanguage),
+            modifiers = modifiers,
+            implements = implements,
+            extends = extends)
+        )
+    }
+
     /** Walks up this class' type hierarchy and returns the hierarchy component. */
     private suspend fun computeHierarchy(): ClassHierarchy {
         if (classlike !is WithSupertypes) {
             return DefaultClassHierarchy(ClassHierarchy.Params(parents = emptyList()))
         }
 
-        val parents = docsHolder.subclassGraph().getValue(classlike.dri).parents
+        val parents = docsHolder.subclassGraph().getValue(classlike.dri).superClasses
         if (parents.isEmpty()) {
             // Don't show the hierarchy if this class only extends Any/Object
             return DefaultClassHierarchy(ClassHierarchy.Params(parents = emptyList()))

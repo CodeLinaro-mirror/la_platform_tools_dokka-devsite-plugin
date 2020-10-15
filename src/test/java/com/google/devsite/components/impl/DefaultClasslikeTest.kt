@@ -20,6 +20,7 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.Classlike.Params
 import com.google.devsite.components.testing.NoopClassHierarchy
+import com.google.devsite.components.testing.NoopClassSignature
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.components.testing.NoopDescription
 import com.google.devsite.components.testing.NoopRelatedSymbols
@@ -33,6 +34,7 @@ class DefaultClasslikeTest {
     fun `Empty classlike renders correctly`() {
         val component = DefaultClasslike(
             Params(
+                signature = NoopClassSignature(),
                 hierarchy = NoopClassHierarchy(shown = false),
                 relatedSymbols = NoopRelatedSymbols(shown = false),
                 description = emptyList(),
@@ -48,7 +50,7 @@ class DefaultClasslikeTest {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p>TODO(b/166518424) class signature</p>
+  <p>Signature</p>
   <hr>
   <h2>Summary</h2>
 </body>
@@ -60,6 +62,7 @@ class DefaultClasslikeTest {
     fun `Classlike with hierarchy renders correctly`() {
         val component = DefaultClasslike(
             Params(
+                signature = NoopClassSignature(),
                 hierarchy = NoopClassHierarchy(),
                 relatedSymbols = NoopRelatedSymbols(shown = false),
                 description = emptyList(),
@@ -75,7 +78,7 @@ class DefaultClasslikeTest {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p>TODO(b/166518424) class signature</p>
+  <p>Signature</p>
   <div>Class hierarchy</div>
   <hr>
   <h2>Summary</h2>
@@ -88,6 +91,7 @@ class DefaultClasslikeTest {
     fun `Classlike with related symbols renders correctly`() {
         val component = DefaultClasslike(
             Params(
+                signature = NoopClassSignature(),
                 hierarchy = NoopClassHierarchy(shown = false),
                 relatedSymbols = NoopRelatedSymbols(),
                 description = emptyList(),
@@ -103,7 +107,7 @@ class DefaultClasslikeTest {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p>TODO(b/166518424) class signature</p>
+  <p>Signature</p>
   <div>Related symbols</div>
   <hr>
   <h2>Summary</h2>
@@ -116,6 +120,7 @@ class DefaultClasslikeTest {
     fun `Classlike with description renders correctly`() {
         val component = DefaultClasslike(
             Params(
+                signature = NoopClassSignature(),
                 hierarchy = NoopClassHierarchy(shown = false),
                 relatedSymbols = NoopRelatedSymbols(shown = false),
                 description = listOf(NoopDescription("Hello World!")),
@@ -131,7 +136,7 @@ class DefaultClasslikeTest {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p>TODO(b/166518424) class signature</p>
+  <p>Signature</p>
   <hr>
   <p>Hello World!</p>
   <h2>Summary</h2>
@@ -144,6 +149,7 @@ class DefaultClasslikeTest {
     fun `Classlike with symbols renders correctly`() {
         val component = DefaultClasslike(
             Params(
+                signature = NoopClassSignature(),
                 hierarchy = NoopClassHierarchy(shown = false),
                 relatedSymbols = NoopRelatedSymbols(shown = false),
                 description = emptyList(),
@@ -164,7 +170,7 @@ class DefaultClasslikeTest {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p>TODO(b/166518424) class signature</p>
+  <p>Signature</p>
   <hr>
   <h2>Summary</h2>
   <div>noop</div>
