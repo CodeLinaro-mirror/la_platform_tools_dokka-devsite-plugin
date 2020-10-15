@@ -192,10 +192,11 @@ internal class PackageDocumentableConverterTest(
         """.render().page()
 
         val summary = page.content<PackageSummary>()
-        val classes = summary.data.classes.items(2)
+        val classes = summary.data.classes.items(0)
+        val exceptions = summary.data.exceptions.items(2)
 
-        assertThat(classes.first().link().name).isEqualTo("A")
-        assertThat(classes.last().link().name).isEqualTo("B")
+        assertThat(exceptions.first().link().name).isEqualTo("A")
+        assertThat(exceptions.last().link().name).isEqualTo("B")
     }
 
     @Test

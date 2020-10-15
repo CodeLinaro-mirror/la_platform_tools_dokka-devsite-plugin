@@ -17,6 +17,7 @@
 package com.google.devsite.renderer.impl
 
 import com.google.devsite.renderer.converters.explodedChildren
+import com.google.devsite.renderer.converters.isExceptionClass
 import com.google.devsite.renderer.converters.name
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
@@ -66,7 +67,7 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
                 val interfaceList = async { computeInterfaces(children.await()) }
                 val annotationList = async { computeAnnotations(children.await()) }
                 val typeAliasList = async { computeTypesAliases(packageDoc) }
-                val exceptionList = async { computeExceptions(classList.await()) }
+                val exceptionList = async { computeExceptions(children.await()) }
 
                 classlikes[packageDoc.dri] = classlikesList
                 classes[packageDoc.dri] = classList
@@ -136,7 +137,9 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
     }
 
     private fun computeClasses(docs: List<Documentable>): List<DClass> {
-        return docs.filterIsInstance<DClass>().sortedBy { it.name() }
+        return docs.filterIsInstance<DClass>().filterNot { it.isExceptionClass }.sortedBy {
+            it.name()
+        }
     }
 
     private fun computeEnums(docs: List<Documentable>): List<DEnum> {
@@ -155,9 +158,7 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
         return packageDoc.typealiases.sortedBy { it.name }
     }
 
-    private fun computeExceptions(docs: List<DClass>): List<DClass> {
-        return docs.filter { clazz ->
-            clazz.functions.any { function -> function.dri.classNames == "Throwable" }
-        }
+    private fun computeExceptions(docs: List<Documentable>): List<DClass> {
+        return docs.filterIsInstance<DClass>().filter { it.isExceptionClass }.sortedBy { it.name() }
     }
 }

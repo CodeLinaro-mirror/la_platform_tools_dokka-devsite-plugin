@@ -33,12 +33,6 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.Annotations
-import org.jetbrains.dokka.model.DAnnotation
-import org.jetbrains.dokka.model.DClass
-import org.jetbrains.dokka.model.DEnum
-import org.jetbrains.dokka.model.DFunction
-import org.jetbrains.dokka.model.DInterface
-import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.StringValue
 import org.jetbrains.dokka.model.doc.Author
@@ -250,23 +244,7 @@ internal class DocTagConverter(
     }
 
     private fun Documentable.deprecationText() =
-        "This ${deprecationStringForType(this)} is deprecated."
-
-    private fun deprecationStringForType(doc: Documentable): String = when (doc) {
-        is DClass -> "class"
-        is DInterface -> "interface"
-        is DEnum -> "enum"
-        is DAnnotation -> "annotation"
-        is DFunction -> when (displayLanguage) {
-            Language.JAVA -> "method"
-            Language.KOTLIN -> "function"
-        }
-        is DProperty -> when (displayLanguage) {
-            Language.JAVA -> "field"
-            Language.KOTLIN -> "property"
-        }
-        else -> error("Unsupported deprecated type: $doc")
-    }
+        "This ${this.stringForType(displayLanguage)} is deprecated."
 
     /** Retrieves the doc tags of type [T]. */
     private inline fun <reified T> Documentable.find() =
