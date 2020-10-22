@@ -14,7 +14,7 @@
     </p>
     <hr>
     <aside class="caution"><strong>This class is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
-    <p>RecyclerView.Adapter base class for presenting paged data from <code><a href="/reference/androidx/paging/PagedList.html">androidx.paging.PagedList</a></code>s in a RecyclerView.</p>
+    <p><a href="[RecyclerView.Adapter]">RecyclerView.Adapter</a> base class for presenting paged data from <code><a href="/reference/androidx/paging/PagedList.html">androidx.paging.PagedList</a></code>s in a <a href="[RecyclerView]">RecyclerView</a>.</p>
     <p>This class is a convenience wrapper around <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html">AsyncPagedListDiffer</a></code> that implements common default behavior for item counting, and listening to PagedList update callbacks.</p>
     <p>While using a LiveData&lt;PagedList&gt; is an easy way to provide data to the adapter, it isn't required - you can use <code><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></code> when new lists are available.</p>
     <p>PagedListAdapter listens to PagedList loading callbacks as pages are loaded, and uses DiffUtil on a background thread to compute fine grained updates as new PagedLists are received.</p>
@@ -58,7 +58,7 @@
             <td><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagedListAdapter.html#currentList()">currentList</a></code></div>
-              <p>Returns the <code><a href="/reference/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> currently being displayed by the <code><a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code>.</p>
+              <p>Returns the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> currently being displayed by the <code><a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code>.</p>
             </td>
           </tr>
         </tbody>
@@ -76,7 +76,7 @@
             <td><code>void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagedListAdapter.html#addLoadStateListener(kotlin.Function2)">addLoadStateListener</a>(<a href="/reference/kotlin/Function2.html">Function2</a>&lt;<a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;<a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&gt;&nbsp;listener)</code></div>
-              <p>Add a <code><a href="/reference/androidx/paging/LoadState.html">LoadState</a></code> listener to observe the loading state of the current <code><a href="/reference/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
+              <p>Add a <code><a href="/reference/androidx/paging/LoadState.html">LoadState</a></code> listener to observe the loading state of the current <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -148,7 +148,7 @@
     <div><a name="getCurrentList()"></a><a name="setCurrentList()"></a><a name="getCurrentList--"></a><a name="setCurrentList--"></a>
       <h3 class="api-name" id="currentList()">currentList</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a><br>public&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;&nbsp;<a href="/reference/androidx/paging/PagedListAdapter.html#currentList()">currentList</a></pre>
-      <p>Returns the <code><a href="/reference/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> currently being displayed by the <code><a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code>.</p>
+      <p>Returns the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> currently being displayed by the <code><a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code>.</p>
       <p>This is not necessarily the most recent list passed to <code><a href="/reference/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></code>, because a diff is computed asynchronously between the new list and the current list before updating the currentList value. May be null if no PagedList is being presented.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -177,9 +177,7 @@
           <tbody>
             <tr>
               <td><code><a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -189,7 +187,7 @@
     <div><a name="addLoadStateListener-kotlin.Function2-"></a>
       <h3 class="api-name" id="addLoadStateListener(kotlin.Function2)">addLoadStateListener</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagedListAdapter.html#addLoadStateListener(kotlin.Function2)">addLoadStateListener</a>(<a href="/reference/kotlin/Function2.html">Function2</a>&lt;<a href="/reference/androidx/paging/LoadType.html">LoadType</a>,&nbsp;<a href="/reference/androidx/paging/LoadState.html">LoadState</a>,&nbsp;<a href="/reference/kotlin/Unit.html">Unit</a>&gt;&nbsp;listener)</pre>
-      <p>Add a <code><a href="/reference/androidx/paging/LoadState.html">LoadState</a></code> listener to observe the loading state of the current <code><a href="/reference/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
+      <p>Add a <code><a href="/reference/androidx/paging/LoadState.html">LoadState</a></code> listener to observe the loading state of the current <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>.</p>
       <p>As new PagedLists are submitted and displayed, the listener will be notified to reflect current <code><a href="/reference/androidx/paging/LoadType.REFRESH.html">LoadType.REFRESH</a></code>, <code><a href="/reference/androidx/paging/LoadType.PREPEND.html">LoadType.PREPEND</a></code>, and <code><a href="/reference/androidx/paging/LoadType.APPEND.html">LoadType.APPEND</a></code> states.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -218,9 +216,7 @@
           <tbody>
             <tr>
               <td><code><a href="/reference/androidx/paging/PagedListAdapter.html#removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -235,7 +231,7 @@
       <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;&nbsp;currentList)</pre>
       <aside class="caution"><strong>This method is deprecated.</strong><br>Use the two argument variant instead.</aside>
       <p>Called when the current PagedList is updated.</p>
-      <p>This may be dispatched as part of .submitList if a background diff isn't needed (such as when the first list is passed, or the list is cleared). In either case, PagedListAdapter will simply call .notifyItemRangeInserted.</p>
+      <p>This may be dispatched as part of <a href="[.submitList]">.submitList</a> if a background diff isn't needed (such as when the first list is passed, or the list is cleared). In either case, PagedListAdapter will simply call <a href="[.notifyItemRangeInserted]">.notifyItemRangeInserted</a>.</p>
       <p>This method will <em>not</em>be called when the Adapter switches from presenting a PagedList to a snapshot version of the PagedList during a diff. This means you cannot observe each PagedList via this method.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -264,9 +260,7 @@
           <tbody>
             <tr>
               <td><code><a href="/reference/androidx/paging/PagedListAdapter.html#currentList()">currentList</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -276,7 +270,7 @@
       <h3 class="api-name" id="onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;&nbsp;previousList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;&nbsp;currentList<br>)</pre>
       <p>Called when the current PagedList is updated.</p>
-      <p>This may be dispatched as part of .submitList if a background diff isn't needed (such as when the first list is passed, or the list is cleared). In either case, PagedListAdapter will simply call notifyItemRangeInserted.</p>
+      <p>This may be dispatched as part of <a href="[.submitList]">.submitList</a> if a background diff isn't needed (such as when the first list is passed, or the list is cleared). In either case, PagedListAdapter will simply call <a href="[notifyItemRangeInserted]">notifyItemRangeInserted</a>.</p>
       <p>This method will <em>not</em>be called when the Adapter switches from presenting a PagedList to a snapshot version of the PagedList during a diff. This means you cannot observe each PagedList via this method.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -289,13 +283,13 @@
             <tr>
               <td><code>previousList</code></td>
               <td width="100%">
-                <p><code><a href="/reference/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> that was previously displayed, may be null.</p>
+                <p><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> that was previously displayed, may be null.</p>
               </td>
             </tr>
             <tr>
               <td><code>currentList</code></td>
               <td width="100%">
-                <p>new <code><a href="/reference/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> being displayed, may be null.</p>
+                <p>new <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> being displayed, may be null.</p>
               </td>
             </tr>
           </tbody>
@@ -311,9 +305,7 @@
           <tbody>
             <tr>
               <td><code><a href="/reference/androidx/paging/PagedListAdapter.html#currentList()">currentList</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -350,9 +342,7 @@
           <tbody>
             <tr>
               <td><code><a href="/reference/androidx/paging/PagedListAdapter.html#addLoadStateListener(kotlin.Function2)">addLoadStateListener</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -414,17 +404,17 @@
     <div><a name="withLoadStateFooter-androidx.paging.LoadStateAdapter-"></a>
       <h3 class="api-name" id="withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</a>(<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;?&gt;&nbsp;footer)</pre>
-      <p>Create a ConcatAdapter with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadState.html">LoadType.PREPEND</a></code> as a list item at the start of the presented list.</p>
+      <p>Create a <a href="[ConcatAdapter]">ConcatAdapter</a> with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadState.html">LoadType.PREPEND</a></code> as a list item at the start of the presented list.</p>
     </div>
     <div><a name="withLoadStateHeader-androidx.paging.LoadStateAdapter-"></a>
       <h3 class="api-name" id="withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</a>(<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;?&gt;&nbsp;header)</pre>
-      <p>Create a ConcatAdapter with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadState.html">LoadType.APPEND</a></code> as a list item at the end of the presented list.</p>
+      <p>Create a <a href="[ConcatAdapter]">ConcatAdapter</a> with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadState.html">LoadType.APPEND</a></code> as a list item at the end of the presented list.</p>
     </div>
     <div><a name="withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter, androidx.paging.LoadStateAdapter)"></a><a name="withLoadStateHeaderAndFooter-androidx.paging.LoadStateAdapter-androidx.paging.LoadStateAdapter-"></a>
       <h3 class="api-name" id="withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;?&gt;&nbsp;header,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;?&gt;&nbsp;footer<br>)</pre>
-      <p>Create a ConcatAdapter with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadType.PREPEND.html">LoadType.PREPEND</a></code> and <code><a href="/reference/androidx/paging/LoadState.html">LoadType.APPEND</a></code>s as list items at the start and end respectively.</p>
+      <p>Create a <a href="[ConcatAdapter]">ConcatAdapter</a> with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadType.PREPEND.html">LoadType.PREPEND</a></code> and <code><a href="/reference/androidx/paging/LoadState.html">LoadType.APPEND</a></code>s as list items at the start and end respectively.</p>
     </div>
   </body>
 </html>

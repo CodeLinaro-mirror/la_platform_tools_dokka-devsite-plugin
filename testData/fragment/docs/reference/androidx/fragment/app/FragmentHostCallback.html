@@ -32,13 +32,13 @@
     </div>
     <hr>
     <p>Integration points with the Fragment host. </p>
-    <p> Fragments may be hosted by any object; such as an . In order to host fragments, implement <code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html">FragmentHostCallback</a></code> , overriding the methods applicable to the host. </p>
+    <p> Fragments may be hosted by any object; such as an Activity. In order to host fragments, implement <code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html">FragmentHostCallback</a></code>, overriding the methods applicable to the host. </p>
     <p> FragmentManager changes its behavior based on what optional interfaces your FragmentHostCallback implements. This includes the following: </p>
     <ul>
-      <li>: Removes the need to override <code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onStartIntentSenderFromFragment(androidx.fragment.app.Fragment,android.content.IntentSender,int,android.content.Intent,int,int,int,android.os.Bundle)">onStartIntentSenderFromFragment</a></code> or <code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onRequestPermissionsFromFragment(androidx.fragment.app.Fragment,java.lang.String[],int)">onRequestPermissionsFromFragment</a></code> .</li>
-      <li><b><code><a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html">FragmentOnAttachListener</a></code></b>: Removes the need to manually call <code><a href="/reference/androidx/fragment/app/FragmentManager.html#addFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener)">FragmentManager#addFragmentOnAttachListener</a></code> from your host in order to receive <code><a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html#onAttachFragment(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">FragmentOnAttachListener#onAttachFragment</a></code> callbacks for the <code><a href="/reference/androidx/fragment/app/FragmentController.html#getSupportFragmentManager()">FragmentController#getSupportFragmentManager()</a></code> .</li>
-      <li>: Removes the need to manually call <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate()">FragmentManager#popBackStackImmediate()</a></code> when handling the system back button.</li>
-      <li>: Removes the need for your <code><a href="/reference/androidx/fragment/app/FragmentController.html">FragmentController</a></code> to call <code><a href="/reference/androidx/fragment/app/FragmentController.html#retainNestedNonConfig()">FragmentController#retainNestedNonConfig()</a></code> or <code><a href="/reference/androidx/fragment/app/FragmentController.html#restoreAllState(android.os.Parcelable,androidx.fragment.app.FragmentManagerNonConfig)">FragmentController#restoreAllState(Parcelable, FragmentManagerNonConfig)</a></code> .</li>
+      <li><b>ActivityResultRegistryOwner</b>: Removes the need to override <code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onStartIntentSenderFromFragment(androidx.fragment.app.Fragment,android.content.IntentSender,int,android.content.Intent,int,int,int,android.os.Bundle)">onStartIntentSenderFromFragment</a></code> or <code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onRequestPermissionsFromFragment(androidx.fragment.app.Fragment,java.lang.String[],int)">onRequestPermissionsFromFragment</a></code>.</li>
+      <li><b><code><a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html">FragmentOnAttachListener</a></code></b>: Removes the need to manually call <code><a href="/reference/androidx/fragment/app/FragmentManager.html#addFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener)">FragmentManager#addFragmentOnAttachListener</a></code> from your host in order to receive <code><a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html#onAttachFragment(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">FragmentOnAttachListener#onAttachFragment</a></code> callbacks for the <code><a href="/reference/androidx/fragment/app/FragmentController.html#getSupportFragmentManager()">FragmentController#getSupportFragmentManager()</a></code>.</li>
+      <li><b>androidx.activity.OnBackPressedDispatcherOwner</b>: Removes the need to manually call <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate()">FragmentManager#popBackStackImmediate()</a></code> when handling the system back button.</li>
+      <li><b>androidx.lifecycle.ViewModelStoreOwner</b>: Removes the need for your <code><a href="/reference/androidx/fragment/app/FragmentController.html">FragmentController</a></code> to call <code><a href="/reference/androidx/fragment/app/FragmentController.html#retainNestedNonConfig()">FragmentController#retainNestedNonConfig()</a></code> or <code><a href="/reference/androidx/fragment/app/FragmentController.html#restoreAllState(android.os.Parcelable,androidx.fragment.app.FragmentManagerNonConfig)">FragmentController#restoreAllState(Parcelable, FragmentManagerNonConfig)</a></code>.</li>
     </ul>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -51,7 +51,7 @@
           <tr>
             <td><code>&lt;E&gt;</code></td>
             <td width="100%">
-              <p><code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html">&lt;</a></code> the type of object that's currently hosting the fragments. An instance of this class must be returned by <code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onGetHost()">onGetHost</a></code> .</p>
+              <p> the type of object that's currently hosting the fragments. An instance of this class must be returned by .</p>
             </td>
           </tr>
         </tbody>
@@ -107,7 +107,7 @@
             <td><code>LayoutInflater</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onGetLayoutInflater()">onGetLayoutInflater</a>()</code></div>
-              <p>Return a .</p>
+              <p>Return a LayoutInflater.</p>
             </td>
           </tr>
           <tr>
@@ -135,7 +135,9 @@
             <td><code>void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onRequestPermissionsFromFragment(androidx.fragment.app.Fragment,java.lang.String[],int)">onRequestPermissionsFromFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;fragment,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/kotlin/Array.html">Array</a>&lt;<a href="/reference/java/lang/String.html">String</a>&gt;&nbsp;permissions,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;requestCode<br>)</code></div>
-              <p><strong>This method is deprecated.</strong> Have your FragmentHostCallback implement to allow Fragments to use  with .</p>
+              <p><strong>This method is deprecated.</strong> 
+                <p>Haveyour FragmentHostCallback implement ActivityResultRegistryOwnerto allow Fragments to use#androidx.activity.result.ActivityResultCallback, /PointingToDeclaration/&gt;Fragment#registerForActivityResult(ActivityResultContract, ActivityResultCallback)with RequestMultiplePermissions.</p>
+              </p>
             </td>
           </tr>
           <tr>
@@ -156,21 +158,23 @@
             <td><code>void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onStartActivityFromFragment(androidx.fragment.app.Fragment,android.content.Intent,int)">onStartActivityFromFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;fragment,<br>&nbsp;&nbsp;&nbsp;&nbsp;Intent&nbsp;intent,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;requestCode<br>)</code></div>
-              <p>Starts a new from the given fragment.</p>
+              <p>Starts a new Activity from the given fragment.</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onStartActivityFromFragment(androidx.fragment.app.Fragment,android.content.Intent,int,android.os.Bundle)">onStartActivityFromFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;fragment,<br>&nbsp;&nbsp;&nbsp;&nbsp;Intent&nbsp;intent,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;requestCode,<br>&nbsp;&nbsp;&nbsp;&nbsp;Bundle&nbsp;options<br>)</code></div>
-              <p>Starts a new from the given fragment.</p>
+              <p>Starts a new Activity from the given fragment.</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onStartIntentSenderFromFragment(androidx.fragment.app.Fragment,android.content.IntentSender,int,android.content.Intent,int,int,int,android.os.Bundle)">onStartIntentSenderFromFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;fragment,<br>&nbsp;&nbsp;&nbsp;&nbsp;IntentSender&nbsp;intent,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;requestCode,<br>&nbsp;&nbsp;&nbsp;&nbsp;Intent&nbsp;fillInIntent,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;flagsMask,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;flagsValues,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;extraFlags,<br>&nbsp;&nbsp;&nbsp;&nbsp;Bundle&nbsp;options<br>)</code></div>
-              <p><strong>This method is deprecated.</strong> Have your FragmentHostCallback implement to allow Fragments to use  with .</p>
+              <p><strong>This method is deprecated.</strong> 
+                <p>Haveyour FragmentHostCallback implement ActivityResultRegistryOwnerto allow Fragments to use#androidx.activity.result.ActivityResultCallback, /PointingToDeclaration/&gt;Fragment#registerForActivityResult(ActivityResultContract, ActivityResultCallback)with StartIntentSenderForResult.</p>
+              </p>
             </td>
           </tr>
           <tr>
@@ -237,12 +241,12 @@
     <div><a name="onGetHost--"></a>
       <h3 class="api-name" id="onGetHost()">onGetHost</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;E&nbsp;<a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onGetHost()">onGetHost</a>()</pre>
-      <p>Return the object that's currently hosting the fragment. If a <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> is hosted by a <code><a href="/reference/androidx/fragment/app/FragmentActivity.html">FragmentActivity</a></code> , the object returned here should be the same object returned from <code><a href="/reference/androidx/fragment/app/Fragment.html#getActivity()">Fragment#getActivity()</a></code> .</p>
+      <p>Return the object that's currently hosting the fragment. If a <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> is hosted by a <code><a href="/reference/androidx/fragment/app/FragmentActivity.html">FragmentActivity</a></code>, the object returned here should be the same object returned from <code><a href="/reference/androidx/fragment/app/Fragment.html#getActivity()">Fragment#getActivity()</a></code>.</p>
     </div>
     <div><a name="onGetLayoutInflater--"></a>
       <h3 class="api-name" id="onGetLayoutInflater()">onGetLayoutInflater</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;LayoutInflater&nbsp;<a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onGetLayoutInflater()">onGetLayoutInflater</a>()</pre>
-      <p>Return a . See .</p>
+      <p>Return a LayoutInflater. See Activity#getLayoutInflater().</p>
     </div>
     <div><a name="onGetWindowAnimations--"></a>
       <h3 class="api-name" id="onGetWindowAnimations()">onGetWindowAnimations</h3>
@@ -262,8 +266,10 @@
     <div><a name="onRequestPermissionsFromFragment(androidx.fragment.app.Fragment, java.lang.String[], int)"></a><a name="onRequestPermissionsFromFragment-androidx.fragment.app.Fragment-java.lang.String[]-int-"></a>
       <h3 class="api-name" id="onRequestPermissionsFromFragment(androidx.fragment.app.Fragment,java.lang.String[],int)">onRequestPermissionsFromFragment</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onRequestPermissionsFromFragment(androidx.fragment.app.Fragment,java.lang.String[],int)">onRequestPermissionsFromFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;fragment,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/kotlin/Array.html">Array</a>&lt;<a href="/reference/java/lang/String.html">String</a>&gt;&nbsp;permissions,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;requestCode<br>)</pre>
-      <aside class="caution"><strong>This method is deprecated.</strong><br>Have your FragmentHostCallback implement to allow Fragments to use  with . This method will still be called when Fragments call the deprecated <code>requestPermissions()</code> method.</aside>
-      <p>Requests permissions from the given fragment. See </p>
+      <aside class="caution"><strong>This method is deprecated.</strong><br>
+        <p>Haveyour FragmentHostCallback implement ActivityResultRegistryOwnerto allow Fragments to use#androidx.activity.result.ActivityResultCallback, /PointingToDeclaration/&gt;Fragment#registerForActivityResult(ActivityResultContract, ActivityResultCallback)with RequestMultiplePermissions. This method will still be called when Fragmentscall the deprecated <code>requestPermissions()</code> method.</p>
+      </aside>
+      <p>Requests permissions from the given fragment. See FragmentActivity#requestPermissions(String[], int)</p>
     </div>
     <div><a name="onShouldSaveFragmentState-androidx.fragment.app.Fragment-"></a>
       <h3 class="api-name" id="onShouldSaveFragmentState(androidx.fragment.app.Fragment)">onShouldSaveFragmentState</h3>
@@ -273,23 +279,25 @@
     <div><a name="onShouldShowRequestPermissionRationale-java.lang.String-"></a>
       <h3 class="api-name" id="onShouldShowRequestPermissionRationale(java.lang.String)">onShouldShowRequestPermissionRationale</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onShouldShowRequestPermissionRationale(java.lang.String)">onShouldShowRequestPermissionRationale</a>(<a href="/reference/java/lang/String.html">String</a>&nbsp;permission)</pre>
-      <p>Checks whether to show permission rationale UI from a fragment. See </p>
+      <p>Checks whether to show permission rationale UI from a fragment. See FragmentActivity#shouldShowRequestPermissionRationale(String)</p>
     </div>
     <div><a name="onStartActivityFromFragment(androidx.fragment.app.Fragment, android.content.Intent, int)"></a><a name="onStartActivityFromFragment-androidx.fragment.app.Fragment-android.content.Intent-int-"></a>
       <h3 class="api-name" id="onStartActivityFromFragment(androidx.fragment.app.Fragment,android.content.Intent,int)">onStartActivityFromFragment</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onStartActivityFromFragment(androidx.fragment.app.Fragment,android.content.Intent,int)">onStartActivityFromFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;fragment,<br>&nbsp;&nbsp;&nbsp;&nbsp;Intent&nbsp;intent,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;requestCode<br>)</pre>
-      <p>Starts a new from the given fragment. See .</p>
+      <p>Starts a new Activity from the given fragment. See FragmentActivity#startActivityForResult(Intent, int).</p>
     </div>
     <div><a name="onStartActivityFromFragment(androidx.fragment.app.Fragment, android.content.Intent, int, android.os.Bundle)"></a><a name="onStartActivityFromFragment-androidx.fragment.app.Fragment-android.content.Intent-int-android.os.Bundle-"></a>
       <h3 class="api-name" id="onStartActivityFromFragment(androidx.fragment.app.Fragment,android.content.Intent,int,android.os.Bundle)">onStartActivityFromFragment</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onStartActivityFromFragment(androidx.fragment.app.Fragment,android.content.Intent,int,android.os.Bundle)">onStartActivityFromFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;fragment,<br>&nbsp;&nbsp;&nbsp;&nbsp;Intent&nbsp;intent,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;requestCode,<br>&nbsp;&nbsp;&nbsp;&nbsp;Bundle&nbsp;options<br>)</pre>
-      <p>Starts a new from the given fragment. See .</p>
+      <p>Starts a new Activity from the given fragment. See FragmentActivity#startActivityForResult(Intent, int, Bundle).</p>
     </div>
     <div><a name="onStartIntentSenderFromFragment(androidx.fragment.app.Fragment, android.content.IntentSender, int, android.content.Intent, int, int, int, android.os.Bundle)"></a><a name="onStartIntentSenderFromFragment-androidx.fragment.app.Fragment-android.content.IntentSender-int-android.content.Intent-int-int-int-android.os.Bundle-"></a>
       <h3 class="api-name" id="onStartIntentSenderFromFragment(androidx.fragment.app.Fragment,android.content.IntentSender,int,android.content.Intent,int,int,int,android.os.Bundle)">onStartIntentSenderFromFragment</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentHostCallback.html#onStartIntentSenderFromFragment(androidx.fragment.app.Fragment,android.content.IntentSender,int,android.content.Intent,int,int,int,android.os.Bundle)">onStartIntentSenderFromFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;fragment,<br>&nbsp;&nbsp;&nbsp;&nbsp;IntentSender&nbsp;intent,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;requestCode,<br>&nbsp;&nbsp;&nbsp;&nbsp;Intent&nbsp;fillInIntent,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;flagsMask,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;flagsValues,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;extraFlags,<br>&nbsp;&nbsp;&nbsp;&nbsp;Bundle&nbsp;options<br>)</pre>
-      <aside class="caution"><strong>This method is deprecated.</strong><br>Have your FragmentHostCallback implement to allow Fragments to use  with . This method will still be called when Fragments call the deprecated <code>startIntentSenderForResult()</code> method.</aside>
-      <p>Starts a new from the given fragment. See .</p>
+      <aside class="caution"><strong>This method is deprecated.</strong><br>
+        <p>Haveyour FragmentHostCallback implement ActivityResultRegistryOwnerto allow Fragments to use#androidx.activity.result.ActivityResultCallback, /PointingToDeclaration/&gt;Fragment#registerForActivityResult(ActivityResultContract, ActivityResultCallback)with StartIntentSenderForResult. This method will still be called when Fragmentscall the deprecated <code>startIntentSenderForResult()</code> method.</p>
+      </aside>
+      <p>Starts a new IntentSender from the given fragment. See Activity#startIntentSender(IntentSender, Intent, int, int, int, Bundle).</p>
     </div>
     <div><a name="onSupportInvalidateOptionsMenu--"></a>
       <h3 class="api-name" id="onSupportInvalidateOptionsMenu()">onSupportInvalidateOptionsMenu</h3>

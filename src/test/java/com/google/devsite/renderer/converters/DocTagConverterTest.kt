@@ -96,7 +96,7 @@ internal class DocTagConverterTest(
         """.render().documentation()
 
         val description = documentation.last() as DefaultDescription
-        val img = description.data.root.children.item() as Img
+        val img = description.data.root.children.first().children.item() as Img
 
         assertThat(img.params["href"]).isEqualTo("/path/to/img.jpg")
         assertThat(img.params["alt"]).isEqualTo("Alt text")
@@ -114,6 +114,31 @@ internal class DocTagConverterTest(
 
         assertThat(paramSummary.title()).isEqualTo("Parameters")
         assertThat(paramText.data.text).isEqualTo("a")
+    }
+
+    @Test
+    fun `@deprecated description works over multiple lines`() {
+        val documentation = """
+            |/**
+            | * Return the target fragment set by {@link #setTargetFragment}.
+            | *
+            | * @deprecated Instead of using a target fragment to pass results, use
+            | * {@link androidx.fragment.app.FragmentManager#setFragmentResult(java.lang.String,android.os.Bundle) FragmentManager#setFragmentResult(String, Bundle)} to deliver results to
+            | * {@link androidx.fragment.app.FragmentResultListener FragmentResultListener} instances registered by other fragments via
+            | * {@link androidx.fragment.app.FragmentManager#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener) FragmentManager#setFragmentResultListener(String, LifecycleOwner,
+            | * LastLine)}.
+            | */
+            | @Deprecated
+            |public void foo(){}
+        """.render(java = true)
+        val doc = documentation.documentation(doc = ::classFunctionDoc)
+        val function = doc.first() as DefaultDescription
+        assertThat(function.data.deprecation).isNotNull()
+        // Checking the root for LastLine is somewhat testing Dokka
+        // but this was broken in a previous version
+        assertThat(function.data.root.toString()).contains("LastLine")
+        // TODO (b/171570474)
+        assertThat(function.data.root.toString()).contains("Insteadof")
     }
 
     @Test

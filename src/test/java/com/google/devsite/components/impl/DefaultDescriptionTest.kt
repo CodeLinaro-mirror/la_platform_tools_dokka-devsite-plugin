@@ -64,7 +64,9 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         assertThat(output).isEqualTo(
             """
 <body>
-  <aside class="caution"><strong>This class is deprecated.</strong><br>Hello world!</aside>
+  <aside class="caution"><strong>This class is deprecated.</strong><br>
+    <p>Hello world!</p>
+  </aside>
 </body>
             """.trim()
         )
@@ -150,7 +152,9 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
     @Test
     fun `Deprecation summary renders renders correctly`() {
         val component = """
-            |/** Hello world! */
+            |/**
+            | * Hello world!
+            | */
             |class Foo
         """.render().description(
             summary = true,
@@ -160,14 +164,15 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         val output = createHTML().body {
             component.render(this)
         }.trim()
-
+// TODO(b/171570474) Work around for EOL space introduced by Dokka and is required to make the
+// test pass but, stripped by the IDE
         // language=html
         assertThat(output).isEqualTo(
-            """
-<body>
-  <p><strong>This class is deprecated.</strong> Hello world!</p>
-</body>
-            """.trim()
+"<body>\n" +
+"  <p><strong>This class is deprecated.</strong> \n" +
+"    <p>Hello world!</p>\n" +
+"  </p>\n" +
+"   </body>".trim()
         )
     }
 
@@ -574,9 +579,11 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
     @Test
     fun `Named link to type renders correctly`() {
         val component = """
-            |class Bar
+            |class BarIsVeryVeryVeryVeryLongNamed
             |
-            |/** [Special snowflake][Bar] is pretty cool. */
+            |/** [Special snowflake snowflake snowflake snowflake snowflake][BarIsVeryVeryVeryVeryLongNamed]
+            | * is pretty cool.
+            | */
             |class Foo
         """.render().description()
 
@@ -588,7 +595,7 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p><code><a href="/reference/androidx/example/Bar.html">Special snowflake</a></code> is pretty cool.</p>
+  <p><code><a href="/reference/androidx/example/BarIsVeryVeryVeryVeryLongNamed.html">Special snowflake snowflake snowflake snowflake snowflake</a></code> is pretty cool.</p>
 </body>
             """.trim()
         )

@@ -159,7 +159,7 @@ internal class DefaultDescription(
     private fun FlowContent.renderTags(tags: List<DocTag>, state: State) {
         for (tag in tags) {
             if (state.terminate) break
-
+            val link = tag.params["href"]
             when (tag) {
                 is Text -> if (data.summary) {
                     if (tag.body.endsWith(".") || tag.body.contains(". ")) {
@@ -169,17 +169,18 @@ internal class DefaultDescription(
                         +tag.body
                     }
                 } else {
-                    +tag.body
+                    if (tag.children.isEmpty()) {
+                        +tag.body
+                    } else {
+                        if (link == null) {
+                            renderTags(tag.children, state)
+                        } else {
+                            a(link) { +tag.body }
+                        }
+                    }
                 }
-                is P -> if (tag.children.any { it is P }) {
-                    // Dokka parsing leaves much to be wanted. In this case it adds pointless
-                    // paragraphs everywhere, so we have to try and inline them.
-                    // TODO(b/168237288): remove once Dokka stops generating extra p tags
-                    renderTags(tag.children, state)
-                } else {
-                    p { renderTags(tag.children, state) }
-                }
-                is A -> a(tag.params.getValue("href")) { renderTags(tag.children, state) }
+                is P -> p { renderTags(tag.children, state) }
+                is A -> a(link) { renderTags(tag.children, state) }
                 is B, is Strong -> b { renderTags(tag.children, state) }
                 Br -> br { renderTags(tag.children, state) }
                 is H3 -> h3 { renderTags(tag.children, state) }
@@ -208,7 +209,7 @@ internal class DefaultDescription(
                     renderTags(tag.children, state)
                 }
                 is BlockQuote -> blockQuote { renderTags(tag.children, state) }
-
+                is CustomDocTag -> { renderTags(tag.children, state) }
                 is Html, is Head, is Meta, is Header, is Title, is H1, is H2, is Footer, is IFrame,
                 is Main, is Menu, is Nav, is Index ->
                     throw NotImplementedError(
@@ -216,7 +217,7 @@ internal class DefaultDescription(
                     )
                 is Small, is Big, is Cite, is Dd, is Dfn, is Dir, is Font, is Frame, is FrameSet,
                 is Input, is Link, is Listing, is NoFrames, is Tt, is U, is Var, is Script,
-                is NoScript, is Section, is CustomDocTag, is Dl, is Dt ->
+                is NoScript, is Section, is Dl, is Dt ->
                     throw NotImplementedError("Unknown use case for ${tag.javaClass.simpleName}.")
                 is THead, is TBody, is Td, is TFoot, is Th, is Tr ->
                     error("Not in table context: ${tag.javaClass.simpleName}.")

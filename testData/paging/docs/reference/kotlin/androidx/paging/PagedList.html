@@ -21,9 +21,7 @@
             <tbody>
               <tr>
                 <td><code><a href="/reference/kotlin/androidx/paging/ContiguousPagedList.html">ContiguousPagedList</a></code></td>
-                <td width="100%">
-                  <p></p>
-                </td>
+                <td width="100%"></td>
               </tr>
             </tbody>
           </table>
@@ -40,7 +38,7 @@
               <tr>
                 <td><code><a href="/reference/kotlin/androidx/paging/InitialPagedList.html">InitialPagedList</a></code></td>
                 <td width="100%">
-                  <p>InitialPagedList is an empty placeholder that's sent at the front of a stream of <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
+                  <p>InitialPagedList is an empty placeholder that's sent at the front of a stream of <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>.</p>
                 </td>
               </tr>
             </tbody>
@@ -51,16 +49,16 @@
     <hr>
     <aside class="caution"><strong>This class is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
     <p>Lazy loading list that pages in immutable content from a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
-    <p>A <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> is a <code><a href="/reference/kotlin/kotlin/collections/List.html">List</a></code> which loads its data in chunks (pages) from a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>. Items can be accessed with <code><a href="/reference/kotlin/androidx/paging/PagedList.html#get(kotlin.Int)">get</a></code>, and further loading can be triggered with <code><a href="/reference/kotlin/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code>. To display a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>, see <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html">androidx.paging.PagedListAdapter</a></code>, which enables the binding of a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> to a androidx.recyclerview.widget.RecyclerView.</p>
+    <p>A <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is a <code><a href="/reference/kotlin/kotlin/collections/List.html">List</a></code> which loads its data in chunks (pages) from a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>. Items can be accessed with <code><a href="/reference/kotlin/androidx/paging/PagedList.html#get(kotlin.Int)">get</a></code>, and further loading can be triggered with <code><a href="/reference/kotlin/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code>. To display a <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>, see <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html">androidx.paging.PagedListAdapter</a></code>, which enables the binding of a <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> to a <a href="[androidx.recyclerview.widget.RecyclerView]">androidx.recyclerview.widget.RecyclerView</a>.</p>
     <h3> Loading Data</h3>
-    <p>All data in a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> is loaded from its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>. Creating a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> loads the first chunk of data from the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> immediately, and should for this reason be done on a background thread. The constructed <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> may then be passed to and used on the UI thread. This is done to prevent passing a list with no loaded content to the UI thread, which should generally not be presented to the user.</p>
-    <p>A <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> initially presents this first partial load as its content, and expands over time as content is loaded in. When <code><a href="/reference/kotlin/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code> is called, items will be loaded in near the passed list index. If placeholder <code>null</code>s are present in the list, they will be replaced as content is loaded. If not, newly loaded items will be inserted at the beginning or end of the list.</p>
-    <p><code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> can present data for an unbounded, infinite scrolling list, or a very large but countable list. Use <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code> to control how many items a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> loads, and when.</p>
-    <p>If you use <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">androidx.paging.LivePagedListBuilder</a></code> to get a androidx.lifecycle.LiveData, it will initialize <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>s on a background thread for you.</p>
+    <p>All data in a <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is loaded from its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>. Creating a <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> loads the first chunk of data from the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> immediately, and should for this reason be done on a background thread. The constructed <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> may then be passed to and used on the UI thread. This is done to prevent passing a list with no loaded content to the UI thread, which should generally not be presented to the user.</p>
+    <p>A <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> initially presents this first partial load as its content, and expands over time as content is loaded in. When <code><a href="/reference/kotlin/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code> is called, items will be loaded in near the passed list index. If placeholder <code>null</code>s are present in the list, they will be replaced as content is loaded. If not, newly loaded items will be inserted at the beginning or end of the list.</p>
+    <p><code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> can present data for an unbounded, infinite scrolling list, or a very large but countable list. Use <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code> to control how many items a <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> loads, and when.</p>
+    <p>If you use <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">androidx.paging.LivePagedListBuilder</a></code> to get a <a href="[androidx.lifecycle.LiveData]">androidx.lifecycle.LiveData</a>, it will initialize <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s on a background thread for you.</p>
     <h3> Placeholders</h3>
-    <p>There are two ways that <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> can represent its not-yet-loaded data - with or without <code>null</code> placeholders.</p>
-    <p>With placeholders, the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> is always the full size of the data set. <code>get(N)</code> returns the <code>N</code>th item in the data set, or <code>null</code> if its not yet loaded.</p>
-    <p>Without <code>null</code> placeholders, the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> is the sublist of data that has already been loaded. The size of the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> is the number of currently loaded items, and <code>get(N)</code> returns the <code>N</code>th <em>loaded</em> item. This is not necessarily the <code>N</code>th item in the data set.</p>
+    <p>There are two ways that <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> can represent its not-yet-loaded data - with or without <code>null</code> placeholders.</p>
+    <p>With placeholders, the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is always the full size of the data set. <code>get(N)</code> returns the <code>N</code>th item in the data set, or <code>null</code> if its not yet loaded.</p>
+    <p>Without <code>null</code> placeholders, the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is the sublist of data that has already been loaded. The size of the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is the number of currently loaded items, and <code>get(N)</code> returns the <code>N</code>th <em>loaded</em> item. This is not necessarily the <code>N</code>th item in the data set.</p>
     <p>Placeholders have several benefits:</p>
     <ul>
       <li>
@@ -73,7 +71,7 @@
     <p>They also have drawbacks:</p>
     <ul>
       <li>
-        <p>Your Adapter needs to account for <code>null</code> items. This often means providing default values in data you bind to a androidx.recyclerview.widget.RecyclerView.ViewHolder.</p>
+        <p>Your Adapter needs to account for <code>null</code> items. This often means providing default values in data you bind to a <a href="[androidx.recyclerview.widget.RecyclerView.ViewHolder]">androidx.recyclerview.widget.RecyclerView.ViewHolder</a>.</p>
       </li>
       <li>
         <p>They don't work well if your item views are of different sizes, as this will prevent loading items from cross-fading nicely.</p>
@@ -84,10 +82,10 @@
     </ul>
     <p>Placeholders are enabled by default, but can be disabled in two ways. They are disabled if the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> does not count its data set in its initial load, or if  <code>false</code> is passed to <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.Builder.html#setEnablePlaceholders(kotlin.Boolean)">PagedList.Config.Builder.setEnablePlaceholders</a></code> when building a <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code>.</p>
     <h3> Mutability and Snapshots</h3>
-    <p>A <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> is <em>mutable</em> while loading, or ready to load from its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>. As loads succeed, a mutable <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> will be updated via Runnables on the main thread. You can listen to these updates with a <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code>. (Note that <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html">androidx.paging .PagedListAdapter</a></code> will listen to these to signal RecyclerView about the updates/changes).</p>
-    <p>If a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> attempts to load from an invalid <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>, it will <code><a href="/reference/kotlin/androidx/paging/PagedList.html#detach()">detach</a></code> from the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>, meaning that it will no longer attempt to load data. It will return true from <code><a href="/reference/kotlin/androidx/paging/PagedList.html#isImmutable()">isImmutable</a></code>, and a new <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> / <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> pair must be created to load further data.</p>
-    <p>See <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> and <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">androidx.paging.LivePagedListBuilder</a></code> for how new <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>s are created to represent changed data.</p>
-    <p>A <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> snapshot is simply an immutable shallow copy of the current state of the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> as a <code>List</code>. It will reference the same inner items, and contain the same <code>null</code> placeholders, if present.</p>
+    <p>A <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is <em>mutable</em> while loading, or ready to load from its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>. As loads succeed, a mutable <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> will be updated via Runnables on the main thread. You can listen to these updates with a <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code>. (Note that <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html">androidx.paging .PagedListAdapter</a></code> will listen to these to signal RecyclerView about the updates/changes).</p>
+    <p>If a <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> attempts to load from an invalid <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>, it will <code><a href="/reference/kotlin/androidx/paging/PagedList.html#detach()">detach</a></code> from the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>, meaning that it will no longer attempt to load data. It will return true from <code><a href="/reference/kotlin/androidx/paging/PagedList.html#isImmutable()">isImmutable</a></code>, and a new <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> / <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> pair must be created to load further data.</p>
+    <p>See <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> and <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">androidx.paging.LivePagedListBuilder</a></code> for how new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s are created to represent changed data.</p>
+    <p>A <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> snapshot is simply an immutable shallow copy of the current state of the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> as a <code>List</code>. It will reference the same inner items, and contain the same <code>null</code> placeholders, if present.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <thead>
@@ -123,7 +121,7 @@
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/PagedList.Builder.html">PagedList.Builder</a></code></td>
             <td width="100%">
-              <p>Builder class for <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
+              <p>Builder class for <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -134,14 +132,12 @@
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/PagedList.Companion.html">PagedList.Companion</a></code></td>
-            <td width="100%">
-              <p></p>
-            </td>
+            <td width="100%"></td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
             <td width="100%">
-              <p>Configures how a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> loads content from its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
+              <p>Configures how a <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> loads content from its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -152,9 +148,7 @@
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/PagedList.LoadStateManager.html">PagedList.LoadStateManager</a></code></td>
-            <td width="100%">
-              <p></p>
-            </td>
+            <td width="100%"></td>
           </tr>
         </tbody>
       </table>
@@ -185,7 +179,7 @@
             <td><code>abstract <a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.html#isDetached()">isDetached</a></code></div>
-              <p>True if the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> has detached the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> it was loading from, and will no longer load new data.</p>
+              <p>True if the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> has detached the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> it was loading from, and will no longer load new data.</p>
             </td>
           </tr>
           <tr>
@@ -206,11 +200,11 @@
             <td><code><a href="/reference/kotlin/kotlin/Int.html">Int</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.html#loadedCount()">loadedCount</a></code></div>
-              <p>Returns the number of items loaded in the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
+              <p>Returns the number of items loaded in the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>.</p>
             </td>
           </tr>
           <tr>
-            <td><code>final <a href="/reference/kotlin/kotlin/Int.html">Int</a></code></td>
+            <td><code><a href="/reference/kotlin/kotlin/Int.html">Int</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.html#modCount()">modCount</a></code></div>
             </td>
@@ -219,7 +213,7 @@
             <td><code>open <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;*,&nbsp;T&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.html#pagingSource()">pagingSource</a></code></div>
-              <p>The <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> that provides data to this <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
+              <p>The <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> that provides data to this <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -265,21 +259,20 @@
             <td><code><a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.html#addWeakLoadStateListener(kotlin.Function2)">addWeakLoadStateListener</a>(listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>,&nbsp;<a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>)&nbsp;-&gt;&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a>)</code></div>
-              <p>Add a listener to observe the loading state of the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
+              <p>Add a listener to observe the loading state of the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract <a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.html#detach()">detach</a>()</code></div>
-              <p>Detach the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> from its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>, and attempt to load no more data.</p>
+              <p>Detach the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> from its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>, and attempt to load no more data.</p>
             </td>
           </tr>
           <tr>
             <td><code>abstract <a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.html#dispatchCurrentLoadState(kotlin.Function2)">dispatchCurrentLoadState</a>(callback:&nbsp;(<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>,&nbsp;<a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>)&nbsp;-&gt;&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a>)</code></div>
-              <p></p>
             </td>
           </tr>
           <tr>
@@ -293,7 +286,6 @@
             <td><code><a href="/reference/kotlin/androidx/paging/NullPaddedList.html">NullPaddedList</a>&lt;T&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.html#getNullPaddedList()">getNullPaddedList</a>()</code></div>
-              <p></p>
             </td>
           </tr>
           <tr>
@@ -314,21 +306,18 @@
             <td><code>abstract <a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.html#loadAroundInternal(kotlin.Int)">loadAroundInternal</a>(index:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>)</code></div>
-              <p></p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.html#notifyChanged(kotlin.Int,kotlin.Int)">notifyChanged</a>(position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,&nbsp;count:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>)</code></div>
-              <p></p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.html#notifyRemoved(kotlin.Int,kotlin.Int)">notifyRemoved</a>(position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,&nbsp;count:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>)</code></div>
-              <p></p>
             </td>
           </tr>
           <tr>
@@ -349,28 +338,26 @@
             <td><code>open <a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.html#retry()">retry</a>()</code></div>
-              <p>Retry any errors associated with this <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
+              <p>Retry any errors associated with this <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code>open <a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.html#setInitialLoadState(androidx.paging.LoadType,androidx.paging.LoadState)">setInitialLoadState</a>(loadType:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>,&nbsp;loadState:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>)</code></div>
-              <p></p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/kotlin/Unit.html">Unit</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.html#setRetryCallback(java.lang.Runnable)">setRetryCallback</a>(refreshRetryCallback:&nbsp;<a href="/reference/kotlin/java/lang/Runnable.html">Runnable</a>?)</code></div>
-              <p></p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;T&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.html#snapshot()">snapshot</a>()</code></div>
-              <p>Returns an immutable snapshot of the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> in its current state.</p>
+              <p>Returns an immutable snapshot of the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> in its current state.</p>
             </td>
           </tr>
         </tbody>
@@ -403,7 +390,6 @@
       <h3 class="api-name" id="dataSource()">dataSource</h3>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#dataSource()">dataSource</a>:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;*,&nbsp;T&gt;</pre>
       <aside class="caution"><strong>This property is deprecated.</strong><br>DataSource is deprecated and has been replaced by PagingSource. PagedList offers indirect ways of controlling fetch ('loadAround()', 'retry()') so that you should not need to access the DataSource/PagingSource.</aside>
-      <p></p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -415,7 +401,7 @@
             <tr>
               <td><code>IllegalStateException</code></td>
               <td width="100%">
-                <p>if this <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> was instantiated without a wrapping a backing <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code></p>
+                <p>if this <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> was instantiated without a wrapping a backing <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code></p>
               </td>
             </tr>
           </tbody>
@@ -425,7 +411,7 @@
     <div><a name="getIsDetached()"></a><a name="setIsDetached()"></a><a name="getIsDetached--"></a><a name="setIsDetached--"></a>
       <h3 class="api-name" id="isDetached()">isDetached</h3>
       <pre class="api-signature no-pretty-print">abstract&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#isDetached()">isDetached</a>:&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></pre>
-      <p>True if the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> has detached the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> it was loading from, and will no longer load new data.</p>
+      <p>True if the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> has detached the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> it was loading from, and will no longer load new data.</p>
       <p>A detached list is <code><a href="/reference/kotlin/androidx/paging/PagedList.html#isImmutable()">immutable</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -462,7 +448,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></code></td>
               <td width="100%">
-                <p><code>true</code> if the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> is immutable.</p>
+                <p><code>true</code> if the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is immutable.</p>
               </td>
             </tr>
           </tbody>
@@ -495,7 +481,7 @@
     <div><a name="getLoadedCount()"></a><a name="setLoadedCount()"></a><a name="getLoadedCount--"></a><a name="setLoadedCount--"></a>
       <h3 class="api-name" id="loadedCount()">loadedCount</h3>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#loadedCount()">loadedCount</a>:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></pre>
-      <p>Returns the number of items loaded in the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
+      <p>Returns the number of items loaded in the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>.</p>
       <p>Unlike <code><a href="/reference/kotlin/androidx/paging/PagedList.html#size()">size</a></code> this counts only loaded items, not placeholders.</p>
       <p>If placeholders are <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html#enablePlaceholders()">disabled</a></code>, this method is equivalent to <code><a href="/reference/kotlin/androidx/paging/PagedList.html#size()">size</a></code>.</p>
       <div class="devsite-table-wrapper">
@@ -525,9 +511,7 @@
           <tbody>
             <tr>
               <td><code><a href="/reference/kotlin/androidx/paging/PagedList.html#size()">size</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -535,12 +519,12 @@
     </div>
     <div><a name="getModCount()"></a><a name="setModCount()"></a><a name="getModCount--"></a><a name="setModCount--"></a>
       <h3 class="api-name" id="modCount()">modCount</h3>
-      <pre class="api-signature no-pretty-print">final&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#modCount()">modCount</a>:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></pre>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#modCount()">modCount</a>:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></pre>
     </div>
     <div><a name="getPagingSource()"></a><a name="setPagingSource()"></a><a name="getPagingSource--"></a><a name="setPagingSource--"></a>
       <h3 class="api-name" id="pagingSource()">pagingSource</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#pagingSource()">pagingSource</a>:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;*,&nbsp;T&gt;</pre>
-      <p>The <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> that provides data to this <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
+      <p>The <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> that provides data to this <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>.</p>
     </div>
     <div><a name="getPositionOffset()"></a><a name="setPositionOffset()"></a><a name="getPositionOffset--"></a><a name="setPositionOffset--"></a>
       <h3 class="api-name" id="positionOffset()">positionOffset</h3>
@@ -564,9 +548,7 @@
           <tbody>
             <tr>
               <td><code><a href="/reference/kotlin/androidx/paging/PagedList.html#loadedCount()">loadedCount</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -580,7 +562,7 @@
       <p>Adds a callback, and issues updates since the <code><a href="/reference/kotlin/androidx/paging/PagedList.html#previousSnapshot()">previousSnapshot</a></code> was created.</p>
       <p>If <code><a href="/reference/kotlin/androidx/paging/PagedList.html#previousSnapshot()">previousSnapshot</a></code> is passed, the <code><a href="/reference/kotlin/androidx/paging/PagedList.html#callback()">callback</a></code> will also immediately be dispatched any differences between the previous snapshot, and the current state. For example, if the previousSnapshot was of 5 nulls, 10 items, 5 nulls, and the current state was 5 nulls, 12 items, 3 nulls, the callback would immediately receive a call of<code>onChanged(14, 2)</code>.</p>
       <p>This allows an observer that's currently presenting a snapshot to catch up to the most recent version, including any changes that may have been made.</p>
-      <p>The callback is internally held as weak reference, so <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> doesn't hold a strong reference to its observer, such as a <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code>. If an adapter were held with a strong reference, it would be necessary to clear its <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> observer before it could be GC'd.</p>
+      <p>The callback is internally held as weak reference, so <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> doesn't hold a strong reference to its observer, such as a <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code>. If an adapter were held with a strong reference, it would be necessary to clear its <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> observer before it could be GC'd.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -614,9 +596,7 @@
           <tbody>
             <tr>
               <td><code><a href="/reference/kotlin/androidx/paging/PagedList.html#removeWeakCallback(androidx.paging.PagedList.Callback)">removeWeakCallback</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -626,7 +606,7 @@
       <h3 class="api-name" id="addWeakCallback(androidx.paging.PagedList.Callback)">addWeakCallback</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#addWeakCallback(androidx.paging.PagedList.Callback)">addWeakCallback</a>(callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
       <p>Adds a callback.</p>
-      <p>The callback is internally held as weak reference, so <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> doesn't hold a strong reference to its observer, such as a <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html">androidx.paging.PagedListAdapter</a></code>. If an adapter were held with a strong reference, it would be necessary to clear its <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> observer before it could be GC'd.</p>
+      <p>The callback is internally held as weak reference, so <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> doesn't hold a strong reference to its observer, such as a <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html">androidx.paging.PagedListAdapter</a></code>. If an adapter were held with a strong reference, it would be necessary to clear its <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> observer before it could be GC'd.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -654,9 +634,7 @@
           <tbody>
             <tr>
               <td><code><a href="/reference/kotlin/androidx/paging/PagedList.html#removeWeakCallback(androidx.paging.PagedList.Callback)">removeWeakCallback</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -665,7 +643,7 @@
     <div><a name="addWeakLoadStateListener-kotlin.Function2-"></a>
       <h3 class="api-name" id="addWeakLoadStateListener(kotlin.Function2)">addWeakLoadStateListener</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#addWeakLoadStateListener(kotlin.Function2)">addWeakLoadStateListener</a>(listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>,&nbsp;<a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>)&nbsp;-&gt;&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
-      <p>Add a listener to observe the loading state of the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
+      <p>Add a listener to observe the loading state of the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -693,9 +671,7 @@
           <tbody>
             <tr>
               <td><code><a href="/reference/kotlin/androidx/paging/PagedList.html#removeWeakLoadStateListener(kotlin.Function2)">removeWeakLoadStateListener</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -704,13 +680,12 @@
     <div><a name="detach--"></a>
       <h3 class="api-name" id="detach()">detach</h3>
       <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#detach()">detach</a>():&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
-      <p>Detach the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> from its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>, and attempt to load no more data.</p>
-      <p>This is called automatically when a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> is observed to be invalid, which is a signal to stop loading. The <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> will continue to present existing data, but will not initiate new loads.</p>
+      <p>Detach the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> from its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>, and attempt to load no more data.</p>
+      <p>This is called automatically when a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> is observed to be invalid, which is a signal to stop loading. The <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> will continue to present existing data, but will not initiate new loads.</p>
     </div>
     <div><a name="dispatchCurrentLoadState-kotlin.Function2-"></a>
       <h3 class="api-name" id="dispatchCurrentLoadState(kotlin.Function2)">dispatchCurrentLoadState</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#dispatchCurrentLoadState(kotlin.Function2)">dispatchCurrentLoadState</a>(callback:&nbsp;(<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>,&nbsp;<a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>)&nbsp;-&gt;&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
-      <p></p>
     </div>
     <div><a name="get-kotlin.Int-"></a>
       <h3 class="api-name" id="get(kotlin.Int)">get</h3>
@@ -760,9 +735,7 @@
           <tbody>
             <tr>
               <td><code><a href="/reference/kotlin/androidx/paging/PagedList.html#size()">size</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -771,7 +744,6 @@
     <div><a name="getNullPaddedList--"></a>
       <h3 class="api-name" id="getNullPaddedList()">getNullPaddedList</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#getNullPaddedList()">getNullPaddedList</a>():&nbsp;<a href="/reference/kotlin/androidx/paging/NullPaddedList.html">NullPaddedList</a>&lt;T&gt;</pre>
-      <p></p>
     </div>
     <div><a name="lastLoad--"></a>
       <h3 class="api-name" id="lastLoad()">lastLoad</h3>
@@ -821,17 +793,14 @@
     <div><a name="loadAroundInternal-kotlin.Int-"></a>
       <h3 class="api-name" id="loadAroundInternal(kotlin.Int)">loadAroundInternal</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#loadAroundInternal(kotlin.Int)">loadAroundInternal</a>(index:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
-      <p></p>
     </div>
     <div><a name="notifyChanged(kotlin.Int, kotlin.Int)"></a><a name="notifyChanged-kotlin.Int-kotlin.Int-"></a>
       <h3 class="api-name" id="notifyChanged(kotlin.Int,kotlin.Int)">notifyChanged</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#notifyChanged(kotlin.Int,kotlin.Int)">notifyChanged</a>(position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,&nbsp;count:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
-      <p></p>
     </div>
     <div><a name="notifyRemoved(kotlin.Int, kotlin.Int)"></a><a name="notifyRemoved-kotlin.Int-kotlin.Int-"></a>
       <h3 class="api-name" id="notifyRemoved(kotlin.Int,kotlin.Int)">notifyRemoved</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#notifyRemoved(kotlin.Int,kotlin.Int)">notifyRemoved</a>(position:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>,&nbsp;count:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
-      <p></p>
     </div>
     <div><a name="removeWeakCallback-androidx.paging.PagedList.Callback-"></a>
       <h3 class="api-name" id="removeWeakCallback(androidx.paging.PagedList.Callback)">removeWeakCallback</h3>
@@ -863,10 +832,8 @@
           </thead>
           <tbody>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/paging/PagedList.html#addWeakCallback(androidx.paging.PagedList.Callback)">addWeakCallback</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td><code><a href="/reference/kotlin/androidx/paging/PagedList.html#addWeakCallback(kotlin.collections.List,androidx.paging.PagedList.Callback)">addWeakCallback</a></code></td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -903,9 +870,7 @@
           <tbody>
             <tr>
               <td><code><a href="/reference/kotlin/androidx/paging/PagedList.html#addWeakLoadStateListener(kotlin.Function2)">addWeakLoadStateListener</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -914,7 +879,7 @@
     <div><a name="retry--"></a>
       <h3 class="api-name" id="retry()">retry</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#retry()">retry</a>():&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
-      <p>Retry any errors associated with this <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
+      <p>Retry any errors associated with this <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>.</p>
       <p>If for example a network <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> append timed out, calling this method will retry the failed append load.</p>
       <p>You can observe loading state via <code><a href="/reference/kotlin/androidx/paging/PagedList.html#addWeakLoadStateListener(kotlin.Function2)">addWeakLoadStateListener</a></code>, though generally this is done through the <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code> or <code><a href="/reference/kotlin/androidx/paging/AsyncPagedListDiffer.html">AsyncPagedListDiffer</a></code>.</p>
       <div class="devsite-table-wrapper">
@@ -927,15 +892,11 @@
           <tbody>
             <tr>
               <td><code><a href="/reference/kotlin/androidx/paging/PagedList.html#addWeakLoadStateListener(kotlin.Function2)">addWeakLoadStateListener</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td width="100%"></td>
             </tr>
             <tr>
               <td><code><a href="/reference/kotlin/androidx/paging/PagedList.html#removeWeakLoadStateListener(kotlin.Function2)">removeWeakLoadStateListener</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -944,18 +905,16 @@
     <div><a name="setInitialLoadState(androidx.paging.LoadType, androidx.paging.LoadState)"></a><a name="setInitialLoadState-androidx.paging.LoadType-androidx.paging.LoadState-"></a>
       <h3 class="api-name" id="setInitialLoadState(androidx.paging.LoadType,androidx.paging.LoadState)">setInitialLoadState</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#setInitialLoadState(androidx.paging.LoadType,androidx.paging.LoadState)">setInitialLoadState</a>(loadType:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>,&nbsp;loadState:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
-      <p></p>
     </div>
     <div><a name="setRetryCallback-java.lang.Runnable-"></a>
       <h3 class="api-name" id="setRetryCallback(java.lang.Runnable)">setRetryCallback</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#setRetryCallback(java.lang.Runnable)">setRetryCallback</a>(refreshRetryCallback:&nbsp;<a href="/reference/kotlin/java/lang/Runnable.html">Runnable</a>?):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
-      <p></p>
     </div>
     <div><a name="snapshot--"></a>
       <h3 class="api-name" id="snapshot()">snapshot</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html#snapshot()">snapshot</a>():&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;T&gt;</pre>
-      <p>Returns an immutable snapshot of the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> in its current state.</p>
-      <p>If this is immutable<code><a href="/reference/kotlin/androidx/paging/PagedList.html#isImmutable()">isImmutable</a></code> due to its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> being invalid, it will be returned.</p>
+      <p>Returns an immutable snapshot of the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> in its current state.</p>
+      <p>If this <a href="[is immutable]">is immutable</a><code><a href="/reference/kotlin/androidx/paging/PagedList.html#isImmutable()">isImmutable</a></code> due to its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> being invalid, it will be returned.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -967,7 +926,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;T&gt;</code></td>
               <td width="100%">
-                <p>Immutable snapshot of <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> data.</p>
+                <p>Immutable snapshot of <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> data.</p>
               </td>
             </tr>
           </tbody>

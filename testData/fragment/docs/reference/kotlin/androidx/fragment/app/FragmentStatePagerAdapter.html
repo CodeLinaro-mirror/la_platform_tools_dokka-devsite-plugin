@@ -13,11 +13,13 @@
       <pre>abstract class FragmentStatePagerAdapter</pre>
     </p>
     <hr>
-    <aside class="caution"><strong>This class is deprecated.</strong><br>Switch to and use instead.</aside>
-    <p>Implementation of that uses a <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code> to manage each page. This class also handles saving and restoring of fragment's state. </p>
+    <aside class="caution"><strong>This class is deprecated.</strong><br>
+      <p>Switchto androidx.viewpager2.widget.ViewPager2 and useandroidx.viewpager2.adapter.FragmentStateAdapter instead.</p>
+    </aside>
+    <p>Implementation of PagerAdapter that uses a <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code> to manage each page. This class also handles saving and restoring of fragment's state. </p>
     <p>This version of the pager is more useful when there are a large number of pages, working more like a list view. When pages are not visible to the user, their entire fragment may be destroyed, only keeping the saved state of that fragment. This allows the pager to hold on to much less memory associated with each visited page as compared to <code><a href="/reference/kotlin/androidx/fragment/app/FragmentPagerAdapter.html">FragmentPagerAdapter</a></code> at the cost of potentially more overhead when switching between pages. </p>
     <p>When using FragmentPagerAdapter the host ViewPager must have a valid ID set.</p>
-    <p>Subclasses only need to implement <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#getItem(int)">getItem</a></code> and to have a working adapter. </p>
+    <p>Subclasses only need to implement <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#getItem(int)">getItem</a></code> and getCount to have a working adapter. </p>
     <p>Here is an example implementation of a pager containing fragments of lists: {@sample frameworks/support/samples/Support4Demos/src/main/java/com/example/android/supportv4/app/FragmentStatePagerSupport.java * complete} </p>
     <p>The <code>R.layout.fragment_pager</code> resource of the top-level fragment is: {@sample frameworks/support/samples/Support4Demos/src/main/res/layout/fragment_pager.xml * complete} </p>
     <p>The <code>R.layout.fragment_pager_list</code> resource containing each individual fragment's layout is: {@sample frameworks/support/samples/Support4Demos/src/main/res/layout/fragment_pager_list.xml * complete}</p>
@@ -34,14 +36,16 @@
             <td><code><a href="/reference/kotlin/kotlin/Int.html">Int</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT()">BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT</a></code></div>
-              <p>Indicates that only the current fragment will be in the state.</p>
+              <p>Indicates that only the current fragment will be in the Lifecycle.State#RESUMED state.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/kotlin/Int.html">Int</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_SET_USER_VISIBLE_HINT()">BEHAVIOR_SET_USER_VISIBLE_HINT</a></code></div>
-              <p><strong>This property is deprecated.</strong> This behavior relies on the deprecated <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#setUserVisibleHint(boolean)">Fragment#setUserVisibleHint(boolean)</a></code> API.</p>
+              <p><strong>This property is deprecated.</strong> 
+                <p>Thisbehavior relies on the deprecated<code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#setUserVisibleHint(boolean)">Fragment#setUserVisibleHint(boolean)</a></code> API.</p>
+              </p>
             </td>
           </tr>
         </tbody>
@@ -58,13 +62,15 @@
           <tr>
             <td>
               <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager)">FragmentStatePagerAdapter</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>)</code></div>
-              <p><strong>This function is deprecated.</strong> use <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager,int)">FragmentStatePagerAdapter</a></code> with <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT()">BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT</a></code></p>
+              <p><strong>This function is deprecated.</strong> 
+                <p>use<code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager,int)">FragmentStatePagerAdapter</a></code> with<code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT()">BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT</a></code></p>
+              </p>
             </td>
           </tr>
           <tr>
             <td>
               <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager,int)">FragmentStatePagerAdapter</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;behavior:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>)</code></div>
-              <p>Constructor for <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html">FragmentStatePagerAdapter</a></code> .</p>
+              <p>Constructor for <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html">FragmentStatePagerAdapter</a></code>.</p>
             </td>
           </tr>
         </tbody>
@@ -140,7 +146,7 @@
     <div><a name="getBEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT()"></a><a name="setBEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT()"></a><a name="getBEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT--"></a><a name="setBEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT--"></a>
       <h3 class="api-name" id="BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT()">BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT</h3>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT()">BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT</a>:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></pre>
-      <p>Indicates that only the current fragment will be in the state. All other Fragments are capped at .</p>
+      <p>Indicates that only the current fragment will be in the Lifecycle.State#RESUMED state. All other Fragments are capped at Lifecycle.State#STARTED.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -160,7 +166,9 @@
     <div><a name="getBEHAVIOR_SET_USER_VISIBLE_HINT()"></a><a name="setBEHAVIOR_SET_USER_VISIBLE_HINT()"></a><a name="getBEHAVIOR_SET_USER_VISIBLE_HINT--"></a><a name="setBEHAVIOR_SET_USER_VISIBLE_HINT--"></a>
       <h3 class="api-name" id="BEHAVIOR_SET_USER_VISIBLE_HINT()">BEHAVIOR_SET_USER_VISIBLE_HINT</h3>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_SET_USER_VISIBLE_HINT()">BEHAVIOR_SET_USER_VISIBLE_HINT</a>:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></pre>
-      <aside class="caution"><strong>This property is deprecated.</strong><br>This behavior relies on the deprecated <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#setUserVisibleHint(boolean)">Fragment#setUserVisibleHint(boolean)</a></code> API. Use <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT()">BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT</a></code> to switch to its replacement, <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#setMaxLifecycle(androidx.fragment.app.Fragment,androidx.lifecycle.Lifecycle.State)">FragmentTransaction#setMaxLifecycle</a></code> .</aside>
+      <aside class="caution"><strong>This property is deprecated.</strong><br>
+        <p>Thisbehavior relies on the deprecated<code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#setUserVisibleHint(boolean)">Fragment#setUserVisibleHint(boolean)</a></code> API. Use<code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT()">BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT</a></code> to switch to its replacement,<code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#setMaxLifecycle(androidx.fragment.app.Fragment,androidx.lifecycle.Lifecycle.State)">FragmentTransaction#setMaxLifecycle</a></code>.</p>
+      </aside>
       <p>Indicates that <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#setUserVisibleHint(boolean)">Fragment#setUserVisibleHint(boolean)</a></code> will be called when the current fragment changes.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -182,8 +190,10 @@
     <div><a name="FragmentStatePagerAdapter-androidx.fragment.app.FragmentManager-"></a>
       <h3 class="api-name" id="FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager)">FragmentStatePagerAdapter</h3>
       <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager)">FragmentStatePagerAdapter</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>)</pre>
-      <aside class="caution"><strong>This function is deprecated.</strong><br>use <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager,int)">FragmentStatePagerAdapter</a></code> with <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT()">BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT</a></code></aside>
-      <p>Constructor for <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html">FragmentStatePagerAdapter</a></code> that sets the fragment manager for the adapter. This is the equivalent of calling <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager,int)">FragmentStatePagerAdapter</a></code> and passing in <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_SET_USER_VISIBLE_HINT()">BEHAVIOR_SET_USER_VISIBLE_HINT</a></code> . </p>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>
+        <p>use<code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager,int)">FragmentStatePagerAdapter</a></code> with<code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT()">BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT</a></code></p>
+      </aside>
+      <p>Constructor for <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html">FragmentStatePagerAdapter</a></code> that sets the fragment manager for the adapter. This is the equivalent of calling <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager,int)">FragmentStatePagerAdapter</a></code> and passing in <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_SET_USER_VISIBLE_HINT()">BEHAVIOR_SET_USER_VISIBLE_HINT</a></code>. </p>
       <p>Fragments will have <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#setUserVisibleHint(boolean)">Fragment#setUserVisibleHint(boolean)</a></code> called whenever the current Fragment changes.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -206,7 +216,7 @@
     <div><a name="FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager, int)"></a><a name="FragmentStatePagerAdapter-androidx.fragment.app.FragmentManager-int-"></a>
       <h3 class="api-name" id="FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager,int)">FragmentStatePagerAdapter</h3>
       <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager,int)">FragmentStatePagerAdapter</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;behavior:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a>)</pre>
-      <p>Constructor for <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html">FragmentStatePagerAdapter</a></code> . If <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT()">BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT</a></code> is passed in, then only the current Fragment is in the state, while all other fragments are capped at . If <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_SET_USER_VISIBLE_HINT()">BEHAVIOR_SET_USER_VISIBLE_HINT</a></code> is passed, all fragments are in the state and there will be callbacks to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#setUserVisibleHint(boolean)">Fragment#setUserVisibleHint(boolean)</a></code> .</p>
+      <p>Constructor for <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html">FragmentStatePagerAdapter</a></code>. If <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT()">BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT</a></code> is passed in, then only the current Fragment is in the Lifecycle.State#RESUMED state, while all other fragments are capped at Lifecycle.State#STARTED. If <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_SET_USER_VISIBLE_HINT()">BEHAVIOR_SET_USER_VISIBLE_HINT</a></code> is passed, all fragments are in the Lifecycle.State#RESUMED state and there will be callbacks to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#setUserVisibleHint(boolean)">Fragment#setUserVisibleHint(boolean)</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -224,7 +234,7 @@
             <tr>
               <td><code>behavior</code></td>
               <td width="100%">
-                <p>determines if only current fragments are in a resumed state Value is <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_SET_USER_VISIBLE_HINT()">BEHAVIOR_SET_USER_VISIBLE_HINT</a></code> , or <code><a href="/reference/kotlin/androidx/fragment/app/FragmentStatePagerAdapter.html#BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT()">BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT</a></code></p>
+                <p>determines if only current fragments are in a resumed stateValue is , or </p>
               </td>
             </tr>
           </tbody>

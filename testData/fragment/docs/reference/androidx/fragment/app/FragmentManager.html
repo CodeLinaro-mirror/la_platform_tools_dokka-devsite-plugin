@@ -13,8 +13,8 @@
       <pre>public abstract class FragmentManager implements <a href="/reference/androidx/fragment/app/FragmentResultOwner.html">FragmentResultOwner</a></pre>
     </p>
     <hr>
-    <p>Static library support version of the framework's . Used to write apps that run on platforms prior to Android 3.0. When running on Android 3.0 or above, this implementation is still used; it does not try to switch to the framework's implementation. See the framework <code><a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code> documentation for a class overview. </p>
-    <p>Your activity must derive from <code><a href="/reference/androidx/fragment/app/FragmentActivity.html">FragmentActivity</a></code> to use this. From such an activity, you can acquire the <code><a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code> by calling <code><a href="/reference/androidx/fragment/app/FragmentActivity.html#getSupportFragmentManager()">FragmentActivity#getSupportFragmentManager</a></code> .</p>
+    <p>Static library support version of the framework's android.app.FragmentManager. Used to write apps that run on platforms prior to Android 3.0. When running on Android 3.0 or above, this implementation is still used; it does not try to switch to the framework's implementation. See the framework <code><a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code> documentation for a class overview. </p>
+    <p>Your activity must derive from <code><a href="/reference/androidx/fragment/app/FragmentActivity.html">FragmentActivity</a></code> to use this. From such an activity, you can acquire the <code><a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code> by calling <code><a href="/reference/androidx/fragment/app/FragmentActivity.html#getSupportFragmentManager()">FragmentActivity#getSupportFragmentManager</a></code>.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -27,7 +27,7 @@
           <tr>
             <td><code><a href="/reference/androidx/fragment/app/FragmentManager.BackStackEntry.html">FragmentManager.BackStackEntry</a></code></td>
             <td width="100%">
-              <p>Representation of an entry on the fragment back stack, as created with <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#addToBackStack(java.lang.String)">FragmentTransaction#addToBackStack(String)</a></code> .</p>
+              <p>Representation of an entry on the fragment back stack, as created with <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#addToBackStack(java.lang.String)">FragmentTransaction#addToBackStack(String)</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -57,7 +57,7 @@
             <td><code>static&nbsp;final int</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#POP_BACK_STACK_INCLUSIVE()">POP_BACK_STACK_INCLUSIVE</a></code></div>
-              <p>Flag for <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a></code> and <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(int,int)">popBackStack</a></code> : If set, and the name or ID of a back stack entry has been supplied, then all matching entries will be consumed until one that doesn't match is found or the bottom of the stack is reached.</p>
+              <p>Flag for <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a></code> and <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(int,int)">popBackStack</a></code>: If set, and the name or ID of a back stack entry has been supplied, then all matching entries will be consumed until one that doesn't match is found or the bottom of the stack is reached.</p>
             </td>
           </tr>
         </tbody>
@@ -133,7 +133,9 @@
             <td><code>static void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#enableDebugLogging(boolean)">enableDebugLogging</a>(boolean&nbsp;enabled)</code></div>
-              <p><strong>This method is deprecated.</strong> FragmentManager now respects for debug logging, allowing you to use <code>adb shell setprop log.tag.FragmentManager VERBOSE</code>.</p>
+              <p><strong>This method is deprecated.</strong> 
+                <p>FragmentManagernow respects Log#isLoggable(String, int) for debuglogging, allowing you to use <code>adb shell setprop log.tag.FragmentManager VERBOSE</code>.</p>
+              </p>
             </td>
           </tr>
           <tr>
@@ -152,14 +154,14 @@
             <td><code>boolean</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a>()</code></div>
-              <p>After a <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a></code> is committed with <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#commit()">FragmentTransaction#commit</a></code> , it is scheduled to be executed asynchronously on the process's main thread.</p>
+              <p>After a <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a></code> is committed with <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#commit()">FragmentTransaction#commit</a></code>, it is scheduled to be executed asynchronously on the process's main thread.</p>
             </td>
           </tr>
           <tr>
             <td><code>static F</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#findFragment(android.view.View)">findFragment</a>(View&nbsp;view)</code></div>
-              <p>Find a <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> associated with the given .</p>
+              <p>Find a <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> associated with the given View.</p>
             </td>
           </tr>
           <tr>
@@ -194,7 +196,7 @@
             <td><code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#getFragment(android.os.Bundle,java.lang.String)">getFragment</a>(Bundle&nbsp;bundle,&nbsp;<a href="/reference/java/lang/String.html">String</a>&nbsp;key)</code></div>
-              <p>Retrieve the current Fragment instance for a reference previously placed with <code><a href="/reference/androidx/fragment/app/FragmentManager.html#putFragment(android.os.Bundle,java.lang.String,androidx.fragment.app.Fragment)">putFragment</a></code> .</p>
+              <p>Retrieve the current Fragment instance for a reference previously placed with <code><a href="/reference/androidx/fragment/app/FragmentManager.html#putFragment(android.os.Bundle,java.lang.String,androidx.fragment.app.Fragment)">putFragment</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -222,7 +224,7 @@
             <td><code>boolean</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#isDestroyed()">isDestroyed</a>()</code></div>
-              <p>Returns true if the final call has been made on the FragmentManager's Activity, so this instance is now dead.</p>
+              <p>Returns true if the final Activity.onDestroy() call has been made on the FragmentManager's Activity, so this instance is now dead.</p>
             </td>
           </tr>
           <tr>
@@ -257,21 +259,21 @@
             <td><code>boolean</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate()">popBackStackImmediate</a>()</code></div>
-              <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack()">popBackStack</a></code> , but performs the operation immediately inside of the call.</p>
+              <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack()">popBackStack</a></code>, but performs the operation immediately inside of the call.</p>
             </td>
           </tr>
           <tr>
             <td><code>boolean</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate(java.lang.String,int)">popBackStackImmediate</a>(<a href="/reference/java/lang/String.html">String</a>&nbsp;name,&nbsp;int&nbsp;flags)</code></div>
-              <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a></code> , but performs the operation immediately inside of the call.</p>
+              <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a></code>, but performs the operation immediately inside of the call.</p>
             </td>
           </tr>
           <tr>
             <td><code>boolean</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate(int,int)">popBackStackImmediate</a>(int&nbsp;id,&nbsp;int&nbsp;flags)</code></div>
-              <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(int,int)">popBackStack</a></code> , but performs the operation immediately inside of the call.</p>
+              <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(int,int)">popBackStack</a></code>, but performs the operation immediately inside of the call.</p>
             </td>
           </tr>
           <tr>
@@ -292,14 +294,14 @@
             <td><code>void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#removeFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener)">removeFragmentOnAttachListener</a>(<a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html">FragmentOnAttachListener</a>&nbsp;listener)</code></div>
-              <p>Remove a <code><a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html">FragmentOnAttachListener</a></code> that was previously added via <code><a href="/reference/androidx/fragment/app/FragmentManager.html#addFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener)">addFragmentOnAttachListener</a></code> .</p>
+              <p>Remove a <code><a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html">FragmentOnAttachListener</a></code> that was previously added via <code><a href="/reference/androidx/fragment/app/FragmentManager.html#addFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener)">addFragmentOnAttachListener</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td><code>void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#removeOnBackStackChangedListener(androidx.fragment.app.FragmentManager.OnBackStackChangedListener)">removeOnBackStackChangedListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.OnBackStackChangedListener.html">FragmentManager.OnBackStackChangedListener</a>&nbsp;listener<br>)</code></div>
-              <p>Remove a listener that was previously added with <code><a href="/reference/androidx/fragment/app/FragmentManager.html#addOnBackStackChangedListener(androidx.fragment.app.FragmentManager.OnBackStackChangedListener)">addOnBackStackChangedListener</a></code> .</p>
+              <p>Remove a listener that was previously added with <code><a href="/reference/androidx/fragment/app/FragmentManager.html#addOnBackStackChangedListener(androidx.fragment.app.FragmentManager.OnBackStackChangedListener)">addOnBackStackChangedListener</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -340,7 +342,7 @@
             <td><code>void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#unregisterFragmentLifecycleCallbacks(androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks)">unregisterFragmentLifecycleCallbacks</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html">FragmentManager.FragmentLifecycleCallbacks</a>&nbsp;cb<br>)</code></div>
-              <p>Unregisters a previously registered <code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html">FragmentLifecycleCallbacks</a></code> .</p>
+              <p>Unregisters a previously registered <code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html">FragmentLifecycleCallbacks</a></code>.</p>
             </td>
           </tr>
         </tbody>
@@ -350,7 +352,7 @@
     <div><a name="getPOP_BACK_STACK_INCLUSIVE()"></a><a name="setPOP_BACK_STACK_INCLUSIVE()"></a><a name="getPOP_BACK_STACK_INCLUSIVE--"></a><a name="setPOP_BACK_STACK_INCLUSIVE--"></a>
       <h3 class="api-name" id="POP_BACK_STACK_INCLUSIVE()">POP_BACK_STACK_INCLUSIVE</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#POP_BACK_STACK_INCLUSIVE()">POP_BACK_STACK_INCLUSIVE</a></pre>
-      <p>Flag for <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a></code> and <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(int,int)">popBackStack</a></code> : If set, and the name or ID of a back stack entry has been supplied, then all matching entries will be consumed until one that doesn't match is found or the bottom of the stack is reached. Otherwise, all entries up to but not including that entry will be removed.</p>
+      <p>Flag for <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a></code> and <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(int,int)">popBackStack</a></code>: If set, and the name or ID of a back stack entry has been supplied, then all matching entries will be consumed until one that doesn't match is found or the bottom of the stack is reached. Otherwise, all entries up to but not including that entry will be removed.</p>
     </div>
     <h2>Public constructors</h2>
     <div><a name="FragmentManager--"></a>
@@ -389,12 +391,12 @@
       <h3 class="api-name" id="beginTransaction()">beginTransaction</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a>&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#beginTransaction()">beginTransaction</a>()</pre>
       <p>Start a series of edit operations on the Fragments associated with this FragmentManager. </p>
-      <p>Note: A fragment transaction can only be created/committed prior to an activity saving its state. If you try to commit a transaction after (and prior to a following <code><a href="/reference/androidx/fragment/app/FragmentActivity.html#onStart()">FragmentActivity#onStart</a></code> or <code><a href="/reference/androidx/fragment/app/FragmentActivity.html#onResume()">FragmentActivity#onResume</a></code> , you will get an error. This is because the framework takes care of saving your current fragments in the state, and if changes are made after the state is saved then they will be lost.</p>
+      <p>Note: A fragment transaction can only be created/committed prior to an activity saving its state. If you try to commit a transaction after FragmentActivity#onSaveInstanceState (and prior to a following <code><a href="/reference/androidx/fragment/app/FragmentActivity.html#onStart()">FragmentActivity#onStart</a></code> or <code><a href="/reference/androidx/fragment/app/FragmentActivity.html#onResume()">FragmentActivity#onResume</a></code>, you will get an error. This is because the framework takes care of saving your current fragments in the state, and if changes are made after the state is saved then they will be lost.</p>
     </div>
     <div><a name="clearFragmentResult-java.lang.String-"></a>
       <h3 class="api-name" id="clearFragmentResult(java.lang.String)">clearFragmentResult</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#clearFragmentResult(java.lang.String)">clearFragmentResult</a>(<a href="/reference/java/lang/String.html">String</a>&nbsp;requestKey)</pre>
-      <p>Clears the stored result for the given requestKey. This clears any result that was previously set via <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a></code> that hasn't yet been delivered to a <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> .</p>
+      <p>Clears the stored result for the given requestKey. This clears any result that was previously set via <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a></code> that hasn't yet been delivered to a <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -416,7 +418,7 @@
     <div><a name="clearFragmentResultListener-java.lang.String-"></a>
       <h3 class="api-name" id="clearFragmentResultListener(java.lang.String)">clearFragmentResultListener</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#clearFragmentResultListener(java.lang.String)">clearFragmentResultListener</a>(<a href="/reference/java/lang/String.html">String</a>&nbsp;requestKey)</pre>
-      <p>Clears the stored <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for the given requestKey. This clears any <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> that was previously set via <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code> .</p>
+      <p>Clears the stored <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for the given requestKey. This clears any <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> that was previously set via <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -478,7 +480,9 @@
     <div><a name="enableDebugLogging-boolean-"></a>
       <h3 class="api-name" id="enableDebugLogging(boolean)">enableDebugLogging</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#enableDebugLogging(boolean)">enableDebugLogging</a>(boolean&nbsp;enabled)</pre>
-      <aside class="caution"><strong>This method is deprecated.</strong><br>FragmentManager now respects for debug logging, allowing you to use <code>adb shell setprop log.tag.FragmentManager VERBOSE</code>.</aside>
+      <aside class="caution"><strong>This method is deprecated.</strong><br>
+        <p>FragmentManagernow respects Log#isLoggable(String, int) for debuglogging, allowing you to use <code>adb shell setprop log.tag.FragmentManager VERBOSE</code>.</p>
+      </aside>
       <p>Control whether the framework's internal fragment manager debugging logs are turned on. If enabled, you will see output in logcat as the framework performs fragment operations.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -490,9 +494,7 @@
           <tbody>
             <tr>
               <td><code><a href="/reference/android/util/Log.html#isLoggable(String, int)">Log</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -530,7 +532,7 @@
     <div><a name="executePendingTransactions--"></a>
       <h3 class="api-name" id="executePendingTransactions()">executePendingTransactions</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a>()</pre>
-      <p>After a <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a></code> is committed with <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#commit()">FragmentTransaction#commit</a></code> , it is scheduled to be executed asynchronously on the process's main thread. If you want to immediately executing any such pending operations, you can call this function (only from the main thread) to do so. Note that all callbacks and other related behavior will be done from within this call, so be careful about where this is called from. </p>
+      <p>After a <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a></code> is committed with <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#commit()">FragmentTransaction#commit</a></code>, it is scheduled to be executed asynchronously on the process's main thread. If you want to immediately executing any such pending operations, you can call this function (only from the main thread) to do so. Note that all callbacks and other related behavior will be done from within this call, so be careful about where this is called from. </p>
       <p>If you are committing a single transaction that does not modify the fragment back stack, strongly consider using <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#commitNow()">FragmentTransaction#commitNow()</a></code> instead. This can help avoid unwanted side effects when other code in your app has pending committed transactions that expect different timing.</p>
       <p> This also forces the start of any postponed Transactions where <code><a href="/reference/androidx/fragment/app/Fragment.html#postponeEnterTransition()">Fragment#postponeEnterTransition()</a></code> has been called.</p>
       <div class="devsite-table-wrapper">
@@ -544,7 +546,7 @@
             <tr>
               <td><code>boolean</code></td>
               <td width="100%">
-                <p>Returns true if there were any pending transactions to be executed.</p>
+                <p>true if there were any pending transactions to beexecuted.</p>
               </td>
             </tr>
           </tbody>
@@ -554,7 +556,7 @@
     <div><a name="findFragment-android.view.View-"></a>
       <h3 class="api-name" id="findFragment(android.view.View)">findFragment</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;F&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#findFragment(android.view.View)">findFragment</a>(View&nbsp;view)</pre>
-      <p>Find a <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> associated with the given . This method will locate the <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> associated with this view. This is automatically populated for the View returned by <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">Fragment#onCreateView</a></code> and its children.</p>
+      <p>Find a <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> associated with the given View. This method will locate the <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> associated with this view. This is automatically populated for the View returned by <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">Fragment#onCreateView</a></code> and its children.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -566,7 +568,7 @@
             <tr>
               <td><code>F</code></td>
               <td width="100%">
-                <p>the locally scoped <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> to the given view</p>
+                <p>locally scoped to the given view</p>
               </td>
             </tr>
           </tbody>
@@ -601,7 +603,7 @@
               <td><code>@throws java.lang.IllegalStateException if the given view does not correspond with a
  * {@link androidx.fragment.app.Fragment Fragment}.</code></td>
               <td width="100%">
-                <p>java.lang.IllegalStateException if the given view does not correspond with a <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> .</p>
+                <p>if the given view does not correspond with a.</p>
               </td>
             </tr>
           </tbody>
@@ -623,7 +625,7 @@
             <tr>
               <td><code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
               <td width="100%">
-                <p>The fragment if found or null otherwise.</p>
+                <p>fragment if found or null otherwise.</p>
               </td>
             </tr>
           </tbody>
@@ -646,7 +648,7 @@
             <tr>
               <td><code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
               <td width="100%">
-                <p>The fragment if found or null otherwise.</p>
+                <p>fragment if found or null otherwise.</p>
               </td>
             </tr>
           </tbody>
@@ -683,7 +685,7 @@
     <div><a name="getFragment(android.os.Bundle, java.lang.String)"></a><a name="getFragment-android.os.Bundle-java.lang.String-"></a>
       <h3 class="api-name" id="getFragment(android.os.Bundle,java.lang.String)">getFragment</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#getFragment(android.os.Bundle,java.lang.String)">getFragment</a>(Bundle&nbsp;bundle,&nbsp;<a href="/reference/java/lang/String.html">String</a>&nbsp;key)</pre>
-      <p>Retrieve the current Fragment instance for a reference previously placed with <code><a href="/reference/androidx/fragment/app/FragmentManager.html#putFragment(android.os.Bundle,java.lang.String,androidx.fragment.app.Fragment)">putFragment</a></code> .</p>
+      <p>Retrieve the current Fragment instance for a reference previously placed with <code><a href="/reference/androidx/fragment/app/FragmentManager.html#putFragment(android.os.Bundle,java.lang.String,androidx.fragment.app.Fragment)">putFragment</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -695,7 +697,7 @@
             <tr>
               <td><code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
               <td width="100%">
-                <p>Returns the current Fragment instance that is associated with the given reference.</p>
+                <p>the current Fragment instance that is associated withthe given reference.</p>
               </td>
             </tr>
           </tbody>
@@ -729,7 +731,7 @@
       <h3 class="api-name" id="getFragmentFactory()">getFragmentFactory</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/fragment/app/FragmentFactory.html">FragmentFactory</a>&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#getFragmentFactory()">getFragmentFactory</a>()</pre>
       <p>Gets the current <code><a href="/reference/androidx/fragment/app/FragmentFactory.html">FragmentFactory</a></code> used to instantiate new Fragment instances. </p>
-      <p> If no factory has been explicitly set on this FragmentManager via <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">setFragmentFactory</a></code> , the FragmentFactory of the <code><a href="/reference/androidx/fragment/app/Fragment.html#getParentFragmentManager()">Fragment#getParentFragmentManager()</a></code> will be returned.</p>
+      <p> If no factory has been explicitly set on this FragmentManager via <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">setFragmentFactory</a></code>, the FragmentFactory of the <code><a href="/reference/androidx/fragment/app/Fragment.html#getParentFragmentManager()">Fragment#getParentFragmentManager()</a></code> will be returned.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -741,7 +743,7 @@
             <tr>
               <td><code><a href="/reference/androidx/fragment/app/FragmentFactory.html">FragmentFactory</a></code></td>
               <td width="100%">
-                <p>the current FragmentFactory</p>
+                <p>current FragmentFactory</p>
               </td>
             </tr>
           </tbody>
@@ -764,7 +766,7 @@
             <tr>
               <td><code><a href="/reference/java/util/List.html">List</a>&lt;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&gt;</code></td>
               <td width="100%">
-                <p>A list of all fragments that are added to the FragmentManager.</p>
+                <p>list of all fragments that are added to the FragmentManager.</p>
               </td>
             </tr>
           </tbody>
@@ -774,7 +776,7 @@
     <div><a name="getPrimaryNavigationFragment--"></a>
       <h3 class="api-name" id="getPrimaryNavigationFragment()">getPrimaryNavigationFragment</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#getPrimaryNavigationFragment()">getPrimaryNavigationFragment</a>()</pre>
-      <p>Return the currently active primary navigation fragment for this FragmentManager. The primary navigation fragment is set by fragment transactions using <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#setPrimaryNavigationFragment(androidx.fragment.app.Fragment)">FragmentTransaction#setPrimaryNavigationFragment(Fragment)</a></code> . </p>
+      <p>Return the currently active primary navigation fragment for this FragmentManager. The primary navigation fragment is set by fragment transactions using <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#setPrimaryNavigationFragment(androidx.fragment.app.Fragment)">FragmentTransaction#setPrimaryNavigationFragment(Fragment)</a></code>. </p>
       <p>The primary navigation fragment's <code><a href="/reference/androidx/fragment/app/Fragment.html#getChildFragmentManager()">Fragment#getChildFragmentManager()</a></code> will be called first to process delegated navigation actions such as <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack()">popBackStack</a></code> if no ID or transaction name is provided to pop to.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -787,7 +789,7 @@
             <tr>
               <td><code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
               <td width="100%">
-                <p>the fragment designated as the primary navigation fragment</p>
+                <p>fragment designated as the primary navigation fragment</p>
               </td>
             </tr>
           </tbody>
@@ -797,7 +799,7 @@
     <div><a name="isDestroyed--"></a>
       <h3 class="api-name" id="isDestroyed()">isDestroyed</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#isDestroyed()">isDestroyed</a>()</pre>
-      <p>Returns true if the final call has been made on the FragmentManager's Activity, so this instance is now dead.</p>
+      <p>Returns true if the final Activity.onDestroy() call has been made on the FragmentManager's Activity, so this instance is now dead.</p>
     </div>
     <div><a name="isStateSaved--"></a>
       <h3 class="api-name" id="isStateSaved()">isStateSaved</h3>
@@ -814,7 +816,7 @@
             <tr>
               <td><code>boolean</code></td>
               <td width="100%">
-                <p>true if this FragmentManager's state has already been saved by its host</p>
+                <p>if this FragmentManager's state has already been saved by its host</p>
               </td>
             </tr>
           </tbody>
@@ -841,13 +843,13 @@
             <tr>
               <td><code>name</code></td>
               <td width="100%">
-                <p>If non-null, this is the name of a previous back state to look for; if found, all states up to that state will be popped. The <code><a href="/reference/androidx/fragment/app/FragmentManager.html#POP_BACK_STACK_INCLUSIVE()">POP_BACK_STACK_INCLUSIVE</a></code> flag can be used to control whether the named state itself is popped. If null, only the top state is popped.</p>
+                <p>If non-null, this is the name of a previous back stateto look for; if found, all states up to that state will be popped. The flag can be used to control whetherthe named state itself is popped. If null, only the top state is popped.</p>
               </td>
             </tr>
             <tr>
               <td><code>flags</code></td>
               <td width="100%">
-                <p>Either 0 or <code><a href="/reference/androidx/fragment/app/FragmentManager.html#POP_BACK_STACK_INCLUSIVE()">POP_BACK_STACK_INCLUSIVE</a></code> .</p>
+                <p>Either 0 or .</p>
               </td>
             </tr>
           </tbody>
@@ -869,13 +871,13 @@
             <tr>
               <td><code>id</code></td>
               <td width="100%">
-                <p>Identifier of the stated to be popped. If no identifier exists, false is returned. The identifier is the number returned by <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#commit()">FragmentTransaction#commit()</a></code> . The <code><a href="/reference/androidx/fragment/app/FragmentManager.html#POP_BACK_STACK_INCLUSIVE()">POP_BACK_STACK_INCLUSIVE</a></code> flag can be used to control whether the named state itself is popped.</p>
+                <p>Identifier of the stated to be popped. If no identifier exists,false is returned.The identifier is the number returned by. The flag can be used to control whetherthe named state itself is popped.</p>
               </td>
             </tr>
             <tr>
               <td><code>flags</code></td>
               <td width="100%">
-                <p>Either 0 or <code><a href="/reference/androidx/fragment/app/FragmentManager.html#POP_BACK_STACK_INCLUSIVE()">POP_BACK_STACK_INCLUSIVE</a></code> .</p>
+                <p>Either 0 or .</p>
               </td>
             </tr>
           </tbody>
@@ -885,7 +887,7 @@
     <div><a name="popBackStackImmediate--"></a>
       <h3 class="api-name" id="popBackStackImmediate()">popBackStackImmediate</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate()">popBackStackImmediate</a>()</pre>
-      <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack()">popBackStack</a></code> , but performs the operation immediately inside of the call. This is like calling <code><a href="/reference/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a></code> afterwards without forcing the start of postponed Transactions.</p>
+      <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack()">popBackStack</a></code>, but performs the operation immediately inside of the call. This is like calling <code><a href="/reference/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a></code> afterwards without forcing the start of postponed Transactions.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -897,7 +899,7 @@
             <tr>
               <td><code>boolean</code></td>
               <td width="100%">
-                <p>Returns true if there was something popped, else false.</p>
+                <p>true if there was something popped, else false.</p>
               </td>
             </tr>
           </tbody>
@@ -907,7 +909,7 @@
     <div><a name="popBackStackImmediate(java.lang.String, int)"></a><a name="popBackStackImmediate-java.lang.String-int-"></a>
       <h3 class="api-name" id="popBackStackImmediate(java.lang.String,int)">popBackStackImmediate</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate(java.lang.String,int)">popBackStackImmediate</a>(<a href="/reference/java/lang/String.html">String</a>&nbsp;name,&nbsp;int&nbsp;flags)</pre>
-      <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a></code> , but performs the operation immediately inside of the call. This is like calling <code><a href="/reference/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a></code> afterwards without forcing the start of postponed Transactions.</p>
+      <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a></code>, but performs the operation immediately inside of the call. This is like calling <code><a href="/reference/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a></code> afterwards without forcing the start of postponed Transactions.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -919,7 +921,7 @@
             <tr>
               <td><code>boolean</code></td>
               <td width="100%">
-                <p>Returns true if there was something popped, else false.</p>
+                <p>true if there was something popped, else false.</p>
               </td>
             </tr>
           </tbody>
@@ -929,7 +931,7 @@
     <div><a name="popBackStackImmediate(int, int)"></a><a name="popBackStackImmediate-int-int-"></a>
       <h3 class="api-name" id="popBackStackImmediate(int,int)">popBackStackImmediate</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate(int,int)">popBackStackImmediate</a>(int&nbsp;id,&nbsp;int&nbsp;flags)</pre>
-      <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(int,int)">popBackStack</a></code> , but performs the operation immediately inside of the call. This is like calling <code><a href="/reference/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a></code> afterwards without forcing the start of postponed Transactions.</p>
+      <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(int,int)">popBackStack</a></code>, but performs the operation immediately inside of the call. This is like calling <code><a href="/reference/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a></code> afterwards without forcing the start of postponed Transactions.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -941,7 +943,7 @@
             <tr>
               <td><code>boolean</code></td>
               <td width="100%">
-                <p>Returns true if there was something popped, else false.</p>
+                <p>true if there was something popped, else false.</p>
               </td>
             </tr>
           </tbody>
@@ -1013,7 +1015,7 @@
     <div><a name="removeFragmentOnAttachListener-androidx.fragment.app.FragmentOnAttachListener-"></a>
       <h3 class="api-name" id="removeFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener)">removeFragmentOnAttachListener</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#removeFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener)">removeFragmentOnAttachListener</a>(<a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html">FragmentOnAttachListener</a>&nbsp;listener)</pre>
-      <p>Remove a <code><a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html">FragmentOnAttachListener</a></code> that was previously added via <code><a href="/reference/androidx/fragment/app/FragmentManager.html#addFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener)">addFragmentOnAttachListener</a></code> . It will no longer get called when a new Fragment is attached.</p>
+      <p>Remove a <code><a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html">FragmentOnAttachListener</a></code> that was previously added via <code><a href="/reference/androidx/fragment/app/FragmentManager.html#addFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener)">addFragmentOnAttachListener</a></code>. It will no longer get called when a new Fragment is attached.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1035,7 +1037,7 @@
     <div><a name="removeOnBackStackChangedListener-androidx.fragment.app.FragmentManager.OnBackStackChangedListener-"></a>
       <h3 class="api-name" id="removeOnBackStackChangedListener(androidx.fragment.app.FragmentManager.OnBackStackChangedListener)">removeOnBackStackChangedListener</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#removeOnBackStackChangedListener(androidx.fragment.app.FragmentManager.OnBackStackChangedListener)">removeOnBackStackChangedListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.OnBackStackChangedListener.html">FragmentManager.OnBackStackChangedListener</a>&nbsp;listener<br>)</pre>
-      <p>Remove a listener that was previously added with <code><a href="/reference/androidx/fragment/app/FragmentManager.html#addOnBackStackChangedListener(androidx.fragment.app.FragmentManager.OnBackStackChangedListener)">addOnBackStackChangedListener</a></code> .</p>
+      <p>Remove a listener that was previously added with <code><a href="/reference/androidx/fragment/app/FragmentManager.html#addOnBackStackChangedListener(androidx.fragment.app.FragmentManager.OnBackStackChangedListener)">addOnBackStackChangedListener</a></code>.</p>
     </div>
     <div><a name="saveFragmentInstanceState-androidx.fragment.app.Fragment-"></a>
       <h3 class="api-name" id="saveFragmentInstanceState(androidx.fragment.app.Fragment)">saveFragmentInstanceState</h3>
@@ -1057,7 +1059,7 @@
             <tr>
               <td><code><a href="/reference/androidx/fragment/app/Fragment.SavedState.html">Fragment.SavedState</a></code></td>
               <td width="100%">
-                <p>The generated state. This will be null if there was no interesting state created by the fragment.</p>
+                <p>generated state. This will be null if there was nointeresting state created by the fragment.</p>
               </td>
             </tr>
           </tbody>
@@ -1122,7 +1124,7 @@
     <div><a name="setFragmentResult(java.lang.String, android.os.Bundle)"></a><a name="setFragmentResult-java.lang.String-android.os.Bundle-"></a>
       <h3 class="api-name" id="setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a>(<a href="/reference/java/lang/String.html">String</a>&nbsp;requestKey,&nbsp;Bundle&nbsp;result)</pre>
-      <p>Sets the given result for the requestKey. This result will be delivered to a <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> that is called given to <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code> with the same requestKey. If no <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> with the same key is set or the Lifecycle associated with the listener is not at least , the result is stored until one becomes available, or <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResult(java.lang.String)">clearFragmentResult</a></code> is called with the same requestKey.</p>
+      <p>Sets the given result for the requestKey. This result will be delivered to a <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> that is called given to <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a></code> with the same requestKey. If no <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> with the same key is set or the Lifecycle associated with the listener is not at least STARTED, the result is stored until one becomes available, or <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResult(java.lang.String)">clearFragmentResult</a></code> is called with the same requestKey.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1150,7 +1152,7 @@
     <div><a name="setFragmentResultListener(java.lang.String, androidx.lifecycle.LifecycleOwner, androidx.fragment.app.FragmentResultListener)"></a><a name="setFragmentResultListener-java.lang.String-androidx.lifecycle.LifecycleOwner-androidx.fragment.app.FragmentResultListener-"></a>
       <h3 class="api-name" id="setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener)">setFragmentResultListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/java/lang/String.html">String</a>&nbsp;requestKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;LifecycleOwner&nbsp;lifecycleOwner,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a>&nbsp;listener<br>)</pre>
-      <p>Sets the <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for a given requestKey. Once the given is at least in the state, any results set by <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a></code> using the same requestKey will be delivered to the <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html#onFragmentResult(java.lang.String,android.os.Bundle)">FragmentResultListener#onFragmentResult(String, Bundle)</a></code> . The callback will remain active until the LifecycleOwner reaches the state or <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResultListener(java.lang.String)">clearFragmentResultListener</a></code> is called with the same requestKey.</p>
+      <p>Sets the <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html">FragmentResultListener</a></code> for a given requestKey. Once the given LifecycleOwner is at least in the STARTED state, any results set by <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#setFragmentResult(java.lang.String,android.os.Bundle)">setFragmentResult</a></code> using the same requestKey will be delivered to the <code><a href="/reference/androidx/fragment/app/FragmentResultListener.html#onFragmentResult(java.lang.String,android.os.Bundle)">FragmentResultListener#onFragmentResult(String, Bundle)</a></code>. The callback will remain active until the LifecycleOwner reaches the DESTROYED state or <code><a href="/reference/androidx/fragment/app/FragmentResultOwner.html#clearFragmentResultListener(java.lang.String)">clearFragmentResultListener</a></code> is called with the same requestKey.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1188,7 +1190,7 @@
     <div><a name="unregisterFragmentLifecycleCallbacks-androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks-"></a>
       <h3 class="api-name" id="unregisterFragmentLifecycleCallbacks(androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks)">unregisterFragmentLifecycleCallbacks</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#unregisterFragmentLifecycleCallbacks(androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks)">unregisterFragmentLifecycleCallbacks</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html">FragmentManager.FragmentLifecycleCallbacks</a>&nbsp;cb<br>)</pre>
-      <p>Unregisters a previously registered <code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html">FragmentLifecycleCallbacks</a></code> . If the callback was not previously registered this call has no effect. All registered callbacks will be automatically unregistered when this FragmentManager is destroyed.</p>
+      <p>Unregisters a previously registered <code><a href="/reference/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html">FragmentLifecycleCallbacks</a></code>. If the callback was not previously registered this call has no effect. All registered callbacks will be automatically unregistered when this FragmentManager is destroyed.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>

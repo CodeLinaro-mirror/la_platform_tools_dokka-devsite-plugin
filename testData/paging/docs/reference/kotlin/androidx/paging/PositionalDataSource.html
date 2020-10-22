@@ -33,7 +33,7 @@
     <hr>
     <aside class="caution"><strong>This class is deprecated.</strong><br>PositionalDataSource is deprecated and has been replaced by PagingSource</aside>
     <p>Position-based data loader for a fixed-size, countable data set, supporting fixed-size loads at arbitrary page positions.</p>
-    <p>Extend PositionalDataSource if you can load pages of a requested size at arbitrary positions, and provide a fixed item count. If your data source can't support loading arbitrary requested page sizes (e.g. when network page size constraints are only known at runtime), either use <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a></code> or <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a></code>, or pass the initial result with the two parameter <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int)">LoadInitialCallback.onResult</a></code>.</p>
+    <p>Extend PositionalDataSource if you can load pages of a requested size at arbitrary positions, and provide a fixed item count. If your data source can't support loading arbitrary requested page sizes (e.g. when network page size constraints are only known at runtime), either use <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a></code> or <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a></code>, or pass the initial result with the two parameter <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">LoadInitialCallback.onResult</a></code>.</p>
     <p>Room can generate a Factory of PositionalDataSources for you:</p>
     <pre class="prettyprint">@Dao<br>interface UserDao {<br>    @Query(&quot;SELECT * FROM user ORDER BY age DESC&quot;)<br>    public abstract DataSource.Factory&lt;Integer, User&gt; loadUsersByAgeDesc();<br>}</pre>
     <div class="devsite-table-wrapper">
@@ -64,9 +64,7 @@
         <tbody>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.Companion.html">PositionalDataSource.Companion</a></code></td>
-            <td width="100%">
-              <p></p>
-            </td>
+            <td width="100%"></td>
           </tr>
           <tr>
             <td><code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html">PositionalDataSource.LoadInitialCallback</a></code></td>
@@ -104,16 +102,9 @@
         </thead>
         <tbody>
           <tr>
-            <td><code>final <a href="/reference/kotlin/java/util/concurrent/atomic/AtomicBoolean.html">AtomicBoolean</a></code></td>
-            <td width="100%">
-              <div><code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#_invalid()">_invalid</a></code></div>
-            </td>
-          </tr>
-          <tr>
             <td><code>open <a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#isInvalid()">isInvalid</a></code></div>
-              <p></p>
             </td>
           </tr>
         </tbody>
@@ -189,14 +180,9 @@
       </table>
     </div>
     <h2>Public properties</h2>
-    <div><a name="get_invalid()"></a><a name="set_invalid()"></a><a name="get_invalid--"></a><a name="set_invalid--"></a>
-      <h3 class="api-name" id="_invalid()">_invalid</h3>
-      <pre class="api-signature no-pretty-print">final&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#_invalid()">_invalid</a>:&nbsp;<a href="/reference/kotlin/java/util/concurrent/atomic/AtomicBoolean.html">AtomicBoolean</a></pre>
-    </div>
     <div><a name="getIsInvalid()"></a><a name="setIsInvalid()"></a><a name="getIsInvalid--"></a><a name="setIsInvalid--"></a>
       <h3 class="api-name" id="isInvalid()">isInvalid</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#isInvalid()">isInvalid</a>:&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a></pre>
-      <p></p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -272,7 +258,7 @@
       <h3 class="api-name" id="loadRange(androidx.paging.PositionalDataSource.LoadRangeParams,androidx.paging.PositionalDataSource.LoadRangeCallback)">loadRange</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#loadRange(androidx.paging.PositionalDataSource.LoadRangeParams,androidx.paging.PositionalDataSource.LoadRangeCallback)">loadRange</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;params:&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadRangeParams.html">PositionalDataSource.LoadRangeParams</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;callback:&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadRangeCallback.html">PositionalDataSource.LoadRangeCallback</a>&lt;T&gt;<br>):&nbsp;<a href="/reference/kotlin/kotlin/Unit.html">Unit</a></pre>
       <p>Called to load a range of data from the DataSource.</p>
-      <p>This method is called to load additional pages from the DataSource after the <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html">LoadInitialCallback</a></code> passed to dispatchLoadInitial has initialized a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>.</p>
+      <p>This method is called to load additional pages from the DataSource after the <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html">LoadInitialCallback</a></code> passed to dispatchLoadInitial has initialized a <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>.</p>
       <p>Unlike <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#loadInitial(androidx.paging.PositionalDataSource.LoadInitialParams)">loadInitial</a></code>, this method must return the number of items requested, at the position requested.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -302,7 +288,7 @@
       <h3 class="api-name" id="map()">map</h3>
       <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#map()">map</a>(function:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T,&nbsp;V&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a>&lt;V&gt;</pre>
       <p>Applies the given function to each value emitted by the DataSource.</p>
-      <p>Same as <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code>, but operates on individual items.</p>
+      <p>Same as <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#mapByPage()">mapByPage</a></code>, but operates on individual items.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -352,22 +338,16 @@
           </thead>
           <tbody>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td><code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#mapByPage()">mapByPage</a></code></td>
+              <td width="100%"></td>
             </tr>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map(kotlin.Function1)">map</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map()">map</a></code></td>
+              <td width="100%"></td>
             </tr>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#mapByPage(kotlin.Function1)">mapByPage</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#mapByPage()">mapByPage</a></code></td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -377,8 +357,8 @@
       <h3 class="api-name" id="map(kotlin.Function1)">map</h3>
       <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#map(kotlin.Function1)">map</a>(function:&nbsp;(T)&nbsp;-&gt;&nbsp;V):&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a>&lt;V&gt;</pre>
       <p>Applies the given function to each value emitted by the DataSource.</p>
-      <p>An overload of <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#map(kotlin.Function1)">map</a></code> that accepts a kotlin function type.</p>
-      <p>Same as <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code>, but operates on individual items.</p>
+      <p>An overload of <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#map()">map</a></code> that accepts a kotlin function type.</p>
+      <p>Same as <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#mapByPage()">mapByPage</a></code>, but operates on individual items.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -428,16 +408,12 @@
           </thead>
           <tbody>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td><code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#mapByPage()">mapByPage</a></code></td>
+              <td width="100%"></td>
             </tr>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map(kotlin.Function1)">map</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map()">map</a></code></td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -447,7 +423,7 @@
       <h3 class="api-name" id="mapByPage()">mapByPage</h3>
       <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#mapByPage()">mapByPage</a>(function:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;T&gt;,&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;V&gt;&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a>&lt;V&gt;</pre>
       <p>Applies the given function to each value emitted by the DataSource.</p>
-      <p>Same as <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#map(kotlin.Function1)">map</a></code>, but allows for batch conversions.</p>
+      <p>Same as <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#map()">map</a></code>, but allows for batch conversions.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -497,22 +473,16 @@
           </thead>
           <tbody>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#map(kotlin.Function1)">map</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td><code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#map()">map</a></code></td>
+              <td width="100%"></td>
             </tr>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map(kotlin.Function1)">map</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map()">map</a></code></td>
+              <td width="100%"></td>
             </tr>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#mapByPage(kotlin.Function1)">mapByPage</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#mapByPage()">mapByPage</a></code></td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -522,8 +492,8 @@
       <h3 class="api-name" id="mapByPage(kotlin.Function1)">mapByPage</h3>
       <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a>(function:&nbsp;(<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;T&gt;)&nbsp;-&gt;&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;V&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a>&lt;V&gt;</pre>
       <p>Applies the given function to each value emitted by the DataSource.</p>
-      <p>An overload of <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a></code> that accepts a kotlin function type.</p>
-      <p>Same as <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#map(kotlin.Function1)">map</a></code>, but allows for batch conversions.</p>
+      <p>An overload of <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#mapByPage()">mapByPage</a></code> that accepts a kotlin function type.</p>
+      <p>Same as <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#map()">map</a></code>, but allows for batch conversions.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -573,22 +543,16 @@
           </thead>
           <tbody>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#map(kotlin.Function1)">map</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td><code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html#map()">map</a></code></td>
+              <td width="100%"></td>
             </tr>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map(kotlin.Function1)">map</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map()">map</a></code></td>
+              <td width="100%"></td>
             </tr>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#mapByPage(kotlin.Function1)">mapByPage</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#mapByPage()">mapByPage</a></code></td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>

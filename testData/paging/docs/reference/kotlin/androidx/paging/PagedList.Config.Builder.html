@@ -51,7 +51,7 @@
             <td><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagedList.Config.Builder.html#setEnablePlaceholders(kotlin.Boolean)">setEnablePlaceholders</a>(enablePlaceholders:&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a>)</code></div>
-              <p>Pass false to disable null placeholders in <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>s using this <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code>.</p>
+              <p>Pass false to disable null placeholders in <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s using this <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -139,9 +139,9 @@
     <div><a name="setEnablePlaceholders-kotlin.Boolean-"></a>
       <h3 class="api-name" id="setEnablePlaceholders(kotlin.Boolean)">setEnablePlaceholders</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.Builder.html#setEnablePlaceholders(kotlin.Boolean)">setEnablePlaceholders</a>(enablePlaceholders:&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
-      <p>Pass false to disable null placeholders in <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code>s using this <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code>.</p>
+      <p>Pass false to disable null placeholders in <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s using this <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code>.</p>
       <p>If not set, defaults to true.</p>
-      <p>A <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> will present null placeholders for not-yet-loaded content if two conditions are met:</p>
+      <p>A <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> will present null placeholders for not-yet-loaded content if two conditions are met:</p>
       <ol>
         <li>
           <p>Its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> can count all unloaded items (so that the number of nulls to present is known).</p>
@@ -152,7 +152,7 @@
       </ol>
       <p>Call <code>setEnablePlaceholders(false)</code> to ensure the receiver of the PagedList (often a <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html">androidx.paging.PagedListAdapter</a></code>) doesn't need to account for null items.</p>
       <p>If placeholders are disabled, not-yet-loaded content will not be present in the list. Paging will still occur, but as items are loaded or removed, they will be signaled as inserts to the <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code>.</p>
-      <p><code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html#onChanged(kotlin.Int,kotlin.Int)">PagedList.Callback.onChanged</a></code> will not be issued as part of loading, though a <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html">androidx.paging.PagedListAdapter</a></code> may still receive change events as a result of <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> diffing.</p>
+      <p><code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html#onChanged(kotlin.Int,kotlin.Int)">PagedList.Callback.onChanged</a></code> will not be issued as part of loading, though a <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html">androidx.paging.PagedListAdapter</a></code> may still receive change events as a result of <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> diffing.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -222,7 +222,7 @@
             <tr>
               <td><code>initialLoadSizeHint</code></td>
               <td width="100%">
-                <p>Number of items to load while initializing the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code></p>
+                <p>Number of items to load while initializing the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code></p>
               </td>
             </tr>
           </tbody>
@@ -235,7 +235,7 @@
       <p>Defines how many items to keep loaded at once.</p>
       <p>This can be used to cap the number of items kept in memory by dropping pages. This value is typically many pages so old pages are cached in case the user scrolls back.</p>
       <p>This value must be at least two times the <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.Builder.html#setPrefetchDistance(kotlin.Int)">prefetchDistance</a></code> plus the <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.Builder.html#setPageSize(kotlin.Int)">pageSize</a></code>). This constraint prevent loads from being continuously fetched and discarded due to prefetching.</p>
-      <p>The max size specified here best effort, not a guarantee. In practice, if <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.Builder.html#maxSize()">maxSize</a></code> is many times the page size, the number of items held by the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> will not grow above this number. Exceptions are made as necessary to guarantee:</p>
+      <p>The max size specified here best effort, not a guarantee. In practice, if <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.Builder.html#maxSize()">maxSize</a></code> is many times the page size, the number of items held by the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> will not grow above this number. Exceptions are made as necessary to guarantee:</p>
       <ul>
         <li>
           <p>Pages are never dropped until there are more than two pages loaded. Note that a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> may not be held strictly to <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html#pageSize()">requested pageSize</a></code>, so two pages may be larger than expected.</p>
@@ -289,15 +289,11 @@
           <tbody>
             <tr>
               <td><code><a href="/reference/kotlin/androidx/paging/PagedList.Config.Companion.html#MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td width="100%"></td>
             </tr>
             <tr>
               <td><code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html#maxSize()">maxSize</a></code></td>
-              <td width="100%">
-                <p></p>
-              </td>
+              <td width="100%"></td>
             </tr>
           </tbody>
         </table>
@@ -397,7 +393,7 @@
             <tr>
               <td><code>prefetchDistance</code></td>
               <td width="100%">
-                <p>Distance the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">PagedList</a></code> should prefetch.</p>
+                <p>Distance the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> should prefetch.</p>
               </td>
             </tr>
           </tbody>

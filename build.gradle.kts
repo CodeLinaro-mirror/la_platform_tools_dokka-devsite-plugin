@@ -34,7 +34,7 @@ application {
     mainClassName = "org.jetbrains.dokka.MainKt"
 }
 
-val dokkaVersion = "1.4.20-dev-4"
+val dokkaVersion = "1.4.10.2-dev-19"
 
 dependencies {
     compileOnly(kotlin("stdlib-jdk8"))
@@ -44,6 +44,7 @@ dependencies {
     implementation("org.jetbrains.dokka:dokka-base:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-cli:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-core:$dokkaVersion")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.1")
 
     testImplementation(kotlin("test"))
     testImplementation("junit:junit:4.12")
