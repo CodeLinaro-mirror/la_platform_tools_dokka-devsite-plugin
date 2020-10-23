@@ -33,6 +33,7 @@ import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.doc.Img
+import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -181,6 +182,33 @@ internal class DocTagConverterTest(
 
         assertThat(paramSummary.title()).isEqualTo("Throws")
         assertThat(paramText.data.text).isEqualTo("IllegalStateException")
+    }
+
+    @Test
+    fun `Throws table is present and correct`() {
+        val documentation = """
+            |/**
+            | * a normal comment
+            | *
+            | * @throws java.lang.IllegalStateException if the Dialog has not yet been created (before
+            | * onCreateDialog ) or has been destroyed (after onDestroyView .
+            | * @see toString
+            | */
+            |fun foo()
+        """.render().documentation()
+
+        val throwsTableSummary = documentation.first { (it as? SummaryList)?.title() == "Throws" }
+            as SummaryList
+        val throwsLeftColumn = throwsTableSummary.item().data.title as Raw
+        val throwsRightColumnTop = throwsTableSummary.item().data.description as Description
+        val throwsRightColumnText = (throwsRightColumnTop.data.root.children.first() as Text)
+
+        assertThat(throwsTableSummary.title()).isEqualTo("Throws")
+        assertThat(throwsLeftColumn.data.text).isEqualTo("java.lang.IllegalStateException")
+        assertThat(throwsRightColumnText.body).isEqualTo(
+            "if the Dialog has not yet been created (before onCreateDialog ) or has " +
+                "been destroyed (after onDestroyView ."
+        )
     }
 
     @Test
