@@ -32,6 +32,7 @@ internal interface Parameter : SymbolBase {
         result += data.annotations.sumBy { it.length() }
         result += data.lambdaParams.sumBy { it.length() }
         result += data.lambdaModifiers.sumBy { it.length }
+        result += data.modifiers.sumBy { it.length }
         result += data.primary.length()
         result += data.receiver?.length() ?: 0
         result += if (data.isLambda) 5 else 0
@@ -46,6 +47,7 @@ internal interface Parameter : SymbolBase {
         val receiver: SymbolBase? = null,
         val lambdaParams: List<SymbolBase> = emptyList(),
         val lambdaModifiers: List<String> = emptyList(),
+        val modifiers: List<String> = emptyList(),
         val primary: SymbolBase,
         val annotations: List<Annotation> = emptyList(),
         val defaultValue: String? = null

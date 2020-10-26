@@ -35,6 +35,7 @@ import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.doc.Img
 import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.model.properties.WithExtraProperties
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -184,6 +185,7 @@ internal class DocTagConverterTest(
         assertThat(paramText.data.text).isEqualTo("IllegalStateException")
     }
 
+    @Ignore("b/170397127")
     @Test
     fun `Throws table is present and correct`() {
         val documentation = """

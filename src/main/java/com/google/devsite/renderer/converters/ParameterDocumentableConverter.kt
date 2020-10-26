@@ -75,6 +75,7 @@ internal class ParameterDocumentableConverter(
                 proj = param.type,
                 name = param.name.orEmpty(),
                 defaultValue = defaultValue,
+                modifiers = param.getExtraModifiers().modifiersFor(ModifierHints(displayLanguage)),
                 annotations = param.annotations(),
                 nullable = param.annotations().isNullable()
             )
@@ -126,6 +127,7 @@ internal class ParameterDocumentableConverter(
         proj: Projection,
         name: String = "",
         defaultValue: String? = null,
+        modifiers: List<String> = emptyList(),
         annotations: List<Annotations.Annotation> = emptyList(),
         nullable: Boolean = false
     ): Parameter {
@@ -165,6 +167,7 @@ internal class ParameterDocumentableConverter(
                 receiver = receiver,
                 lambdaModifiers = lambdaModifiers,
                 lambdaParams = lambdaParams,
+                modifiers = modifiers,
                 primary = primaryType,
                 annotations = annotations.annotationComponents(
                     pathProvider,

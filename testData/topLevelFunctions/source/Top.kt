@@ -47,6 +47,7 @@ fun sadBoi(): Nothing = error("Ouch")
  *
  * @throws IllegalStateException because the world is broken
  * @param a choose your own adventure!
+ * @param c any number of ints
  * @return a list of... something?
  * @receiver what is even going on here
  * @param block Lots, and LOTS of lambdas. Oh, and suspending ones too.
@@ -57,6 +58,7 @@ fun sadBoi(): Nothing = error("Ouch")
 @Wassup("hello", ["world"])
 suspend inline fun <@Wassup T, R : @Wassup Number> (T.(@Wassup Int) -> List<@Wassup R>).foo(
     a: T,
+    vararg c: Int,
     crossinline stuff: @Wassup(a = "bar") () -> (() -> String?)? = { { "Nests." } },
     @Wassup block: suspend Set<Boolean>.(
         cache: Map<String?, List<T>>,

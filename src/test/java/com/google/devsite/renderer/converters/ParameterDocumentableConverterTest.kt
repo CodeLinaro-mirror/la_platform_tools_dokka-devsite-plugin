@@ -419,6 +419,28 @@ internal class ParameterDocumentableConverterTest(
         kotlinOnly { assertThat(typeName).isEqualTo("IntArray") }
     }
 
+    @Test
+    fun `Vararg modifier appears for param`() {
+        val param = """
+            |fun foo(vararg stuff: Int) = Unit
+        """.render().param()
+
+        assertThat(param.data.name).isEqualTo("stuff")
+        javaOnly { assertThat(param.data.modifiers).isEmpty() }
+        kotlinOnly { assertThat(param.data.modifiers.last()).isEqualTo("vararg") }
+    }
+
+    @Test
+    fun `Crossline modifier appears for param`() {
+        val param = """
+            |fun foo(crossinline stuff: () -> Unit) = Unit
+        """.render().param()
+
+        assertThat(param.data.name).isEqualTo("stuff")
+        javaOnly { assertThat(param.data.modifiers).isEmpty() }
+        kotlinOnly { assertThat(param.data.modifiers.last()).isEqualTo("crossinline") }
+    }
+
     private fun DModule.param(forSummary: Boolean = false): Parameter {
         val converter = ParameterDocumentableConverter(language, pathProvider())
         return converter.componentForParameter(parameterDoc(), forSummary)

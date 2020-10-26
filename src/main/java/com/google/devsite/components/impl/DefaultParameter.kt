@@ -75,6 +75,11 @@ internal class DefaultParameter(
                     +Entities.nbsp
                 }
 
+                for (modifier in data.modifiers) {
+                    +modifier
+                    +Entities.nbsp
+                }
+
                 data.primary.render(this)
 
                 if (data.defaultValue != null) {

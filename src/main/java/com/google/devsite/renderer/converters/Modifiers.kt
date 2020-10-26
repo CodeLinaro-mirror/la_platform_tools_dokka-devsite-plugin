@@ -29,11 +29,20 @@ internal fun <T> T.modifiers(): List<String>
           T : WithExtraProperties<*> {
     val visibilityModifiers = listOf(visibility.values.single().name)
     val baseModifiers = modifier.values.map { it.name }.filter { it.isNotEmpty() }
-    val extraModifiers = extra.allOfType<AdditionalModifiers>().flatMap { modifiers ->
-        modifiers.content.values.single().map { it.name }.filter { it.isNotEmpty() }
-    }
+    val extraModifiers = getExtraModifiers()
 
     return visibilityModifiers + extraModifiers + baseModifiers
+}
+
+/**
+ *  Returns a list of modifiers stored in the AdditionalModifiers extra field
+ *  i.e VarArg
+ */
+internal fun <T> T.getExtraModifiers(): List<String>
+    where T : WithExtraProperties<*> {
+    return extra.allOfType<AdditionalModifiers>().flatMap { modifiers ->
+        modifiers.content.values.single().map { it.name }.filter { it.isNotEmpty() }
+    } ?: emptyList()
 }
 
 /** @return true if the modifiers represent a constant symbol, false otherwise */
@@ -64,6 +73,7 @@ internal fun List<String>.modifiersFor(
             modifiers.remove("open")
             modifiers.remove("sealed")
             modifiers.remove("const")
+            modifiers.remove("vararg")
         }
         Language.KOTLIN -> {
             // Align default modifiers
