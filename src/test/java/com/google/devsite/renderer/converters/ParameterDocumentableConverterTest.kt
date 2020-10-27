@@ -441,6 +441,23 @@ internal class ParameterDocumentableConverterTest(
         kotlinOnly { assertThat(param.data.modifiers.last()).isEqualTo("crossinline") }
     }
 
+    @Test
+    fun `higher order param name appears for param`() {
+        val param = """
+            |fun foo(block: (factory: () -> String) -> Int) = Unit
+        """.render().param().data
+
+        assertThat(param.name).isEqualTo("block")
+        javaOnly {
+            assertNoLambdaStuff(param)
+        }
+        kotlinOnly {
+            assertThat(param.lambdaParams).hasSize(1)
+            val lambdaParam = param.lambdaParams.single() as Parameter
+            assertThat(lambdaParam.data.name).isEqualTo("factory")
+        }
+    }
+
     private fun DModule.param(forSummary: Boolean = false): Parameter {
         val converter = ParameterDocumentableConverter(language, pathProvider())
         return converter.componentForParameter(parameterDoc(), forSummary)

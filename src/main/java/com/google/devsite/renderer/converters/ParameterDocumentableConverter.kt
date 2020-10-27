@@ -159,11 +159,17 @@ internal class ParameterDocumentableConverter(
             emptyList()
         }
 
+        val paramName = if (isLambda && name.isEmpty()) {
+            proj.asTypeConstructor().presentableName
+        } else {
+            name
+        } ?: ""
+
         return DefaultParameter(
             Parameter.Params(
                 displayLanguage = Language.KOTLIN,
                 isLambda = isLambda,
-                name = name,
+                name = paramName,
                 receiver = receiver,
                 lambdaModifiers = lambdaModifiers,
                 lambdaParams = lambdaParams,
