@@ -18,6 +18,7 @@ package com.google.devsite.renderer.converters
 
 import com.google.devsite.renderer.Language
 import org.jetbrains.dokka.base.transformers.documentables.isException
+import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
@@ -42,6 +43,16 @@ internal val <T> WithChildren<T>.explodedChildren: List<T>
 internal fun DClasslike.name() = dri.classNames!!
 
 internal fun DClasslike.packageName() = dri.packageName!!
+
+private val baseClasses = listOf("kotlin.Any", "java.lang.Object", "kotlin.Enum",
+    "java.lang.Enum", "java.lang.annotation.Annotation")
+/**
+ * Returns true if this dri is from a build in base class like Any, Object, Enum, Annotation
+ */
+internal fun DRI.isFromBaseClass(): Boolean {
+    val classAndPackage = packageName?.plus(".").plus(classNames)
+    return baseClasses.contains(classAndPackage)
+}
 
 /** @return true if this is a nullable type, false otherwise */
 internal fun Projection.isNullable(): Boolean = when (this) {

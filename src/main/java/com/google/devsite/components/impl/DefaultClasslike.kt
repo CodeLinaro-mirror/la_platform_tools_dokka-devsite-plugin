@@ -47,6 +47,10 @@ internal class DefaultClasslike(
             summary.render(this)
         }
 
+        for (summary in data.inheritedTypes) {
+            summary.render(this)
+        }
+
         val symbolTypes = data.symbolTypes.filter { (_, symbolType) ->
             symbolType.symbols.isNotEmpty()
         }

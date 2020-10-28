@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package dokkatest.simple
+package com.google.devsite.components.table
 
-/**
- * Sample class 1
- */
-open class One(override val fore: String) : Four, Five() {
-    /** Property docs. */
-    val v = 0
+import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.components.Link
 
-    /** Function docs. */
-    fun w() = Unit
-}
+/** Represents the inherited symbols in an expandable summary. */
+internal interface InheritedSymbols : ContextFreeComponent {
+    val data: Params
 
-open class Five {
-    /** Five Function docs. */
-    fun fiveFunction() = Unit
+    class Params(
+        val header: RowComponent,
+        val inheritedSymbolSummaries: Map<Link, SummaryList>
+    )
 }

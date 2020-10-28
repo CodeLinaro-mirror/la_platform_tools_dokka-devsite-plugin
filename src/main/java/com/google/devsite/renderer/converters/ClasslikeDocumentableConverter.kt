@@ -21,6 +21,7 @@ import com.google.devsite.components.impl.DefaultClassHierarchy
 import com.google.devsite.components.impl.DefaultClassSignature
 import com.google.devsite.components.impl.DefaultClasslike
 import com.google.devsite.components.impl.DefaultDevsitePage
+import com.google.devsite.components.impl.DefaultInheritedSymbols
 import com.google.devsite.components.impl.DefaultRelatedSymbols
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableTitle
@@ -30,6 +31,7 @@ import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.ClassSignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.table.ClassHierarchy
+import com.google.devsite.components.table.InheritedSymbols
 import com.google.devsite.components.table.RelatedSymbols
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
@@ -40,6 +42,7 @@ import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.links.DRI
+import org.jetbrains.dokka.links.parent
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
@@ -67,6 +70,8 @@ internal class ClasslikeDocumentableConverter(
     suspend fun classlike(): DevsitePage = coroutineScope {
         val declaredFunctions = classlike.functions.myTypes().sortedBy { it.name }
         val declaredProperties = classlike.properties.myTypes().sortedBy { it.name }
+        val inheritedFunctions = classlike.functions.inheritedTypes()
+
         val declaredConstructors = (classlike as? WithConstructors)?.constructors.orEmpty()
             .sortedBy { it.parameters.size }
         val annotations = (classlike as? WithExtraProperties<*>)?.annotations().orEmpty()
@@ -123,6 +128,7 @@ internal class ClasslikeDocumentableConverter(
         val signature = async { computeSignature() }
         val hierarchy = async { computeHierarchy() }
         val relatedSymbols = async { findRelatedSymbols() }
+        val inheritedTypes = async { computeInheritedSymbols(inheritedFunctions) }
 
         val allSymbols = listOf(
             nestedTypesSummary.await() to Classlike.SymbolType(nestedTypesTitle(), emptyList()),
@@ -171,7 +177,8 @@ internal class ClasslikeDocumentableConverter(
                             classlike,
                             annotations = annotations
                         ),
-                        symbolTypes = allSymbols
+                        symbolTypes = allSymbols,
+                        inheritedTypes = inheritedTypes.await()
                     )
                 )
             )
@@ -201,7 +208,7 @@ internal class ClasslikeDocumentableConverter(
         )
     }
 
-    private fun functionsToSummary(name: String, functions: List<DFunction>): SummaryList {
+    private fun functionsToSummary(name: String? = null, functions: List<DFunction>): SummaryList {
         val modifierHints = ModifierHints(displayLanguage, isSummary = true, isInterface())
         val components = functions.map {
             functionConverter.summary(it, modifierHints)
@@ -209,12 +216,12 @@ internal class ClasslikeDocumentableConverter(
 
         return DefaultSummaryList(
             SummaryList.Params(
-                header = DefaultTableTitle(
+                header = name?.let { DefaultTableTitle(
                     TableTitle.Params(
                         title = name,
                         big = true
                     )
-                ),
+                ) },
                 items = components
             )
         )
@@ -337,6 +344,24 @@ internal class ClasslikeDocumentableConverter(
         return DefaultClassHierarchy(ClassHierarchy.Params(allLinks))
     }
 
+    /**
+     * Creates a list of InheritedSymbols from a list of DFunctions
+     */
+    private fun computeInheritedSymbols(symbols: List<DFunction>): List<InheritedSymbols> {
+        val inheritedSymbolMap = symbols.sortedBy { it.name }.groupBy { it.dri.parent }
+
+        val inheritedFunctionsSummary = inheritedSymbolMap.entries.associate { (dri, functions) ->
+            pathProvider.linkForReference(dri) to functionsToSummary(name = null, functions)
+        }
+
+        val inheritedFunctionHeader = DefaultTableTitle(
+            TableTitle.Params(inheritedMethodsTitle(), big = true)
+        )
+
+        return listOf(DefaultInheritedSymbols(
+            InheritedSymbols.Params(inheritedFunctionHeader, inheritedFunctionsSummary)))
+    }
+
     /** Finds the direct and indirect subclasses for this classlike, returning their component. */
     // We know our subclasses will always be DClasslikes
     @Suppress("UNCHECKED_CAST")
@@ -384,9 +409,18 @@ internal class ClasslikeDocumentableConverter(
      * Returns the list of declared symbols. That is, symbols directly owned by this class-like
      * and not found through the inheritance hierarchy.
      */
-    private fun <T : Documentable> List<T>.myTypes() = filter { function ->
-        classlike.packageName() == function.dri.packageName &&
-            classlike.name() == function.dri.classNames
+    private fun <T : Documentable> List<T>.myTypes() = filter { symbol ->
+        classlike.packageName() == symbol.dri.packageName &&
+            classlike.name() == symbol.dri.classNames
+    }
+
+    /**
+     * Returns the list of inherited symbols, not from Any or Object
+     */
+    private fun <T : Documentable> List<T>.inheritedTypes() = filterNot { symbol ->
+        (classlike.packageName() == symbol.dri.packageName &&
+            classlike.name() == symbol.dri.classNames) ||
+            symbol.dri.isFromBaseClass()
     }
 
     private fun isInterface() = classlike is DInterface
@@ -415,6 +449,7 @@ internal class ClasslikeDocumentableConverter(
     private fun constructorsTitle(): String = "constructors"
 
     private fun publicMethodsTitle() = "Public ${methodsTitle()}"
+    private fun inheritedMethodsTitle() = "Inherited ${methodsTitle()}"
     private fun protectedMethodsTitle() = "Protected ${methodsTitle()}"
     private fun methodsTitle(): String = when (displayLanguage) {
         Language.JAVA -> "methods"

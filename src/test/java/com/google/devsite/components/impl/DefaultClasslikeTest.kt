@@ -38,7 +38,8 @@ class DefaultClasslikeTest {
                 hierarchy = NoopClassHierarchy(shown = false),
                 relatedSymbols = NoopRelatedSymbols(shown = false),
                 description = emptyList(),
-                symbolTypes = emptyList()
+                symbolTypes = emptyList(),
+                inheritedTypes = emptyList()
             )
         )
 
@@ -66,7 +67,8 @@ class DefaultClasslikeTest {
                 hierarchy = NoopClassHierarchy(),
                 relatedSymbols = NoopRelatedSymbols(shown = false),
                 description = emptyList(),
-                symbolTypes = emptyList()
+                symbolTypes = emptyList(),
+                inheritedTypes = emptyList()
             )
         )
 
@@ -95,7 +97,8 @@ class DefaultClasslikeTest {
                 hierarchy = NoopClassHierarchy(shown = false),
                 relatedSymbols = NoopRelatedSymbols(),
                 description = emptyList(),
-                symbolTypes = emptyList()
+                symbolTypes = emptyList(),
+                inheritedTypes = emptyList()
             )
         )
 
@@ -124,7 +127,8 @@ class DefaultClasslikeTest {
                 hierarchy = NoopClassHierarchy(shown = false),
                 relatedSymbols = NoopRelatedSymbols(shown = false),
                 description = listOf(NoopDescription("Hello World!")),
-                symbolTypes = emptyList()
+                symbolTypes = emptyList(),
+                inheritedTypes = emptyList()
             )
         )
 
@@ -158,7 +162,8 @@ class DefaultClasslikeTest {
                         "Symbols",
                         listOf(NoopContextFreeComponent)
                     )
-                )
+                ),
+                inheritedTypes = emptyList()
             )
         )
 
