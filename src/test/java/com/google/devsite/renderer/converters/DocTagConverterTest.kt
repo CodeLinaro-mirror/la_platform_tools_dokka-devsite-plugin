@@ -172,45 +172,38 @@ internal class DocTagConverterTest(
     }
 
     @Test
-    fun `Full documentation has thrown exceptions`() {
+    fun `Full Kotlin documentation has thrown exceptions`() {
         val documentation = """
-            |/** @throws IllegalStateException blah */
+            |/** @throws IllegalStateException if it fails */
             |fun foo()
         """.render().documentation()
 
-        val paramSummary = documentation.last() as SummaryList
-        val paramText = paramSummary.item().data.title as Raw
+        val throwsSummary = documentation.first { (it as? SummaryList)?.title() == "Throws" }
+            as SummaryList
+        val throwsLeft = throwsSummary.item().data.title as Raw
+        val throwsRight = ((throwsSummary.item().data.description as Description)
+            .data.root.children.first().children.first() as Text)
 
-        assertThat(paramSummary.title()).isEqualTo("Throws")
-        assertThat(paramText.data.text).isEqualTo("IllegalStateException")
+        assertThat(throwsLeft.data.text).isEqualTo("IllegalStateException")
+        assertThat(throwsRight.body).isEqualTo("if it fails")
     }
 
-    @Ignore("b/170397127")
+    @Ignore
     @Test
-    fun `Throws table is present and correct`() {
+    fun `Full Java documentation has thrown exceptions`() {
         val documentation = """
-            |/**
-            | * a normal comment
-            | *
-            | * @throws java.lang.IllegalStateException if the Dialog has not yet been created (before
-            | * onCreateDialog ) or has been destroyed (after onDestroyView .
-            | * @see toString
-            | */
-            |fun foo()
-        """.render().documentation()
+            |/** @throws IllegalStateException if it fails */
+            |public void foo() {}
+        """.render(java = true).documentation(doc = ::classFunctionDoc)
 
-        val throwsTableSummary = documentation.first { (it as? SummaryList)?.title() == "Throws" }
+        val throwsSummary = documentation.first { (it as? SummaryList)?.title() == "Throws" }
             as SummaryList
-        val throwsLeftColumn = throwsTableSummary.item().data.title as Raw
-        val throwsRightColumnTop = throwsTableSummary.item().data.description as Description
-        val throwsRightColumnText = (throwsRightColumnTop.data.root.children.first() as Text)
+        val throwsLeft = throwsSummary.item().data.title as Raw
+        val throwsRight = ((throwsSummary.item().data.description as Description)
+            .data.root.children.first().children.first() as Text)
 
-        assertThat(throwsTableSummary.title()).isEqualTo("Throws")
-        assertThat(throwsLeftColumn.data.text).isEqualTo("java.lang.IllegalStateException")
-        assertThat(throwsRightColumnText.body).isEqualTo(
-            "if the Dialog has not yet been created (before onCreateDialog ) or has " +
-                "been destroyed (after onDestroyView ."
-        )
+        assertThat(throwsLeft.data.text).isEqualTo("IllegalStateException")
+        assertThat(throwsRight.body).isEqualTo("if it fails")
     }
 
     @Test
