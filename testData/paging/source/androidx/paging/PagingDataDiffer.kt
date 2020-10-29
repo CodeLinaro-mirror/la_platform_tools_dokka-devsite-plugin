@@ -42,7 +42,7 @@ abstract class PagingDataDiffer<T : Any>(
 ) {
     private var presenter: PagePresenter<T> = PagePresenter.initial()
     private var receiver: UiReceiver? = null
-    private val combinedLoadStates = MutableLoadStateCollection(hasRemoteState = false)
+    private val combinedLoadStates = MutableLoadStateCollection()
     private val loadStateListeners = CopyOnWriteArrayList<(CombinedLoadStates) -> Unit>()
     private val dataRefreshedListeners = CopyOnWriteArrayList<(isEmpty: Boolean) -> Unit>()
 
@@ -121,6 +121,8 @@ abstract class PagingDataDiffer<T : Any>(
     suspend fun collectFrom(pagingData: PagingData<T>) = collectFromRunner.runInIsolation {
         receiver = pagingData.receiver
 
+        // TODO: Validate only empty pages between separator pages and its dependent
+        //  pages.
         pagingData.flow.collect { event ->
             withContext<Unit>(mainDispatcher) {
                 if (event is PageEvent.Insert && event.loadType == REFRESH) {
@@ -151,7 +153,9 @@ abstract class PagingDataDiffer<T : Any>(
                     // list.
                     transformedLastAccessedIndex?.let { newIndex ->
                         lastAccessedIndex = newIndex
-                        receiver?.accessHint(newPresenter.presenterIndexToHint(newIndex))
+                        receiver?.accessHint(
+                            newPresenter.viewportHintForPresenterIndex(newIndex)
+                        )
                     }
                 } else {
                     if (postEvents()) {
@@ -170,10 +174,11 @@ abstract class PagingDataDiffer<T : Any>(
                     // If index points to a placeholder after transformations, resend it unless
                     // there are no more items to load.
                     if (event is PageEvent.Insert) {
-                        val prependDone = event.combinedLoadStates.prepend.endOfPaginationReached
+                        val prependDone =
+                            event.combinedLoadStates.prepend.endOfPaginationReached
                         val appendDone = event.combinedLoadStates.append.endOfPaginationReached
                         val canContinueLoading = !(event.loadType == PREPEND && prependDone) &&
-                                !(event.loadType == APPEND && appendDone)
+                            !(event.loadType == APPEND && appendDone)
 
                         if (!canContinueLoading) {
                             // Reset lastAccessedIndexUnfulfilled since endOfPaginationReached
@@ -182,12 +187,12 @@ abstract class PagingDataDiffer<T : Any>(
                         } else if (lastAccessedIndexUnfulfilled) {
                             val shouldResendHint =
                                 lastAccessedIndex < presenter.placeholdersBefore ||
-                                        lastAccessedIndex > presenter.placeholdersBefore +
-                                        presenter.storageCount
+                                    lastAccessedIndex > presenter.placeholdersBefore +
+                                    presenter.storageCount
 
                             if (shouldResendHint) {
                                 receiver?.accessHint(
-                                    presenter.presenterIndexToHint(lastAccessedIndex)
+                                    presenter.viewportHintForPresenterIndex(lastAccessedIndex)
                                 )
                             } else {
                                 // lastIndex fulfilled, so reset lastAccessedIndexUnfulfilled.
@@ -211,7 +216,7 @@ abstract class PagingDataDiffer<T : Any>(
         lastAccessedIndexUnfulfilled = true
         lastAccessedIndex = index
 
-        receiver?.accessHint(presenter.presenterIndexToHint(index))
+        receiver?.accessHint(presenter.viewportHintForPresenterIndex(index))
         return presenter.get(index)
     }
 
@@ -295,7 +300,7 @@ abstract class PagingDataDiffer<T : Any>(
      */
     @Deprecated(
         "dataRefreshFlow is now redundant with the information passed from loadStateFlow and " +
-                "getItemCount, and will be removed in a future alpha version"
+            "getItemCount, and will be removed in a future alpha version"
     )
     @ExperimentalPagingApi
     @OptIn(FlowPreview::class)
@@ -349,7 +354,7 @@ abstract class PagingDataDiffer<T : Any>(
      */
     @Deprecated(
         "dataRefreshListener is now redundant with the information passed from loadStateListener " +
-                "and getItemCount, and will be removed in a future alpha version"
+            "and getItemCount, and will be removed in a future alpha version"
     )
     @ExperimentalPagingApi
     fun addDataRefreshListener(listener: (isEmpty: Boolean) -> Unit) {
@@ -365,7 +370,7 @@ abstract class PagingDataDiffer<T : Any>(
      */
     @Deprecated(
         "dataRefreshListener is now redundant with the information passed from loadStateListener " +
-                "and getItemCount, and will be removed in a future alpha version"
+            "and getItemCount, and will be removed in a future alpha version"
     )
     @ExperimentalPagingApi
     fun removeDataRefreshListener(listener: (isEmpty: Boolean) -> Unit) {

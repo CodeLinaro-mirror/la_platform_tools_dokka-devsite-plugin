@@ -56,7 +56,7 @@
             <td><code><a href="/reference/kotlin/kotlin/Int.html">Int</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#jumpThreshold()">jumpThreshold</a></code></div>
-              <p>Threshold for number of items scrolled outside the bounds of loaded items to trigger invalidate.</p>
+              <p>Defines a threshold for the number of items scrolled outside the bounds of loaded items before Paging should give up on loading pages incrementally, and instead jump to the user's position by triggering REFRESH via invalidate.</p>
             </td>
           </tr>
           <tr>
@@ -118,11 +118,14 @@
       <h3 class="api-name" id="initialLoadSize()">initialLoadSize</h3>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.html#initialLoadSize()">initialLoadSize</a>:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></pre>
       <p>Defines requested load size for initial load from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>, typically larger than <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">pageSize</a></code>, so on first load data there's a large enough range of content loaded to cover small scrolls.</p>
+      <p>Note: <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#initialLoadSize()">initialLoadSize</a></code> is used to inform <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html#loadSize()">PagingSource.LoadParams.loadSize</a></code>, but is not enforced. A <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> may completely ignore this value and still return a valid initial <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code>.</p>
     </div>
     <div><a name="getJumpThreshold()"></a><a name="setJumpThreshold()"></a><a name="getJumpThreshold--"></a><a name="setJumpThreshold--"></a>
       <h3 class="api-name" id="jumpThreshold()">jumpThreshold</h3>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.html#jumpThreshold()">jumpThreshold</a>:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></pre>
-      <p>Threshold for number of items scrolled outside the bounds of loaded items to trigger invalidate. Defaults to <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.Companion.html#COUNT_UNDEFINED()">COUNT_UNDEFINED</a></code>, which disables invalidation due to scrolling large distances.</p>
+      <p>Defines a threshold for the number of items scrolled outside the bounds of loaded items before Paging should give up on loading pages incrementally, and instead jump to the user's position by triggering REFRESH via invalidate.</p>
+      <p>Defaults to <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.Companion.html#COUNT_UNDEFINED()">COUNT_UNDEFINED</a></code>, which disables invalidation due to scrolling large distances.</p>
+      <p>Note: In order to allow <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> to resume from the user's current scroll position after invalidation, <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">PagingSource.getRefreshKey</a></code> must be implemented.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -182,6 +185,7 @@
       <p>Should be several times the number of visible items onscreen.</p>
       <p>Configuring your page size depends on how your data is being loaded and used. Smaller page sizes improve memory usage, latency, and avoid GC churn. Larger pages generally improve loading throughput, to a point (avoid loading more than 2MB from SQLite at once, since it incurs extra cost).</p>
       <p>If you're loading data for very large, social-media style cards that take up most of a screen, and your database isn't a bottleneck, 10-20 may make sense. If you're displaying dozens of items in a tiled grid, which can present items during a scroll much more quickly, consider closer to 100.</p>
+      <p>Note: <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">pageSize</a></code> is used to inform <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html#loadSize()">PagingSource.LoadParams.loadSize</a></code>, but is not enforced. A <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> may completely ignore this value and still return a valid <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code>.</p>
     </div>
     <div><a name="getPrefetchDistance()"></a><a name="setPrefetchDistance()"></a><a name="getPrefetchDistance--"></a><a name="setPrefetchDistance--"></a>
       <h3 class="api-name" id="prefetchDistance()">prefetchDistance</h3>
