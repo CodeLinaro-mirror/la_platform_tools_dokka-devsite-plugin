@@ -82,6 +82,15 @@ esac
 
 CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
 
+# Pick the correct fullsdk for this OS.
+if [ $darwin == "true" ]; then
+    plat="darwin"
+else
+    plat="linux"
+fi
+
+# override JAVA_HOME, because CI machines have it and it points to very old JDK
+export JAVA_HOME="$APP_HOME/../../prebuilts/jdk/jdk11/$plat-x86"
 
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then
@@ -130,7 +139,7 @@ fi
 if [ "$cygwin" = "true" -o "$msys" = "true" ] ; then
     APP_HOME=`cygpath --path --mixed "$APP_HOME"`
     CLASSPATH=`cygpath --path --mixed "$CLASSPATH"`
-    
+
     JAVACMD=`cygpath --unix "$JAVACMD"`
 
     # We build the pattern for arguments to be converted via cygpath
