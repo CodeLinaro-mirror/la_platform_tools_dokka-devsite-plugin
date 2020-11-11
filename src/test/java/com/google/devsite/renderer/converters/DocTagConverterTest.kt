@@ -35,7 +35,6 @@ import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.doc.Img
 import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.model.properties.WithExtraProperties
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -139,8 +138,8 @@ internal class DocTagConverterTest(
         // Checking the root for LastLine is somewhat testing Dokka
         // but this was broken in a previous version
         assertThat(function.data.root.toString()).contains("LastLine")
-        // TODO (b/171570474)
-        assertThat(function.data.root.toString()).contains("Insteadof")
+        assertThat(function.data.root.toString()).contains("Instead of using")
+        assertThat(function.data.root.children.single().children.size).isEqualTo(7)
     }
 
     @Test
@@ -184,11 +183,10 @@ internal class DocTagConverterTest(
         val throwsRight = ((throwsSummary.item().data.description as Description)
             .data.root.children.first().children.first() as Text)
 
-        assertThat(throwsLeft.data.text).isEqualTo("IllegalStateException")
+        assertThat(throwsLeft.data.text).isEqualTo("java.lang.IllegalStateException")
         assertThat(throwsRight.body).isEqualTo("if it fails")
     }
 
-    @Ignore
     @Test
     fun `Full Java documentation has thrown exceptions`() {
         val documentation = """
@@ -202,7 +200,7 @@ internal class DocTagConverterTest(
         val throwsRight = ((throwsSummary.item().data.description as Description)
             .data.root.children.first().children.first() as Text)
 
-        assertThat(throwsLeft.data.text).isEqualTo("IllegalStateException")
+        assertThat(throwsLeft.data.text).isEqualTo("java.lang.IllegalStateException")
         assertThat(throwsRight.body).isEqualTo("if it fails")
     }
 
