@@ -16,4 +16,7 @@
 
 package dokkatest.alone
 
-fun foo() = ""
+fun noPlaceLikeHome() = ""
+
+@JvmSynthetic
+fun noPlaceLikeHomeExceptJava() = ""

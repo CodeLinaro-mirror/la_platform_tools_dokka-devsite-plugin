@@ -21,6 +21,7 @@ import com.google.devsite.components.pages.RedirectPage
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.ClasslikeDocumentableConverter
 import com.google.devsite.renderer.converters.PackageDocumentableConverter
+import com.google.devsite.renderer.converters.isSynthetic
 import com.google.devsite.renderer.converters.name
 import com.google.devsite.renderer.converters.packageName
 import com.google.devsite.renderer.impl.paths.DIR_INDEX_NAME
@@ -70,6 +71,9 @@ internal class PackageRenderer(
     }
 
     suspend fun writeClasslike(classlikeDoc: DClasslike) {
+        if (classlikeDoc.isSynthetic && displayLanguage == Language.KOTLIN) {
+            return
+        }
         val converter =
             ClasslikeDocumentableConverter(displayLanguage, classlikeDoc, pathProvider, docsHolder)
         val page = converter.classlike()

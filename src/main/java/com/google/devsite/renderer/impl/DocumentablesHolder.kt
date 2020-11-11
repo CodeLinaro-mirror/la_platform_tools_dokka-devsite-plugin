@@ -16,24 +16,33 @@
 
 package com.google.devsite.renderer.impl
 
+import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.explodedChildren
 import com.google.devsite.renderer.converters.isExceptionClass
 import com.google.devsite.renderer.converters.name
+import com.google.devsite.renderer.converters.withJavaSynthetic
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.jetbrains.dokka.links.DRI
+import org.jetbrains.dokka.links.withClass
 import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DEnum
+import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DPackage
+import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DTypeAlias
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.JavaModifier
+import org.jetbrains.dokka.model.JavaVisibility
+import org.jetbrains.dokka.model.WithSources
+import org.jetbrains.dokka.model.properties.PropertyContainer
 
 /**
  * Centralized place to retrieve documentables.
@@ -45,6 +54,7 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
 
     private val classlikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
     private val classes = mutableMapOf<DRI, Deferred<List<DClass>>>()
+    private val syntheticClasses = mutableMapOf<DRI, Deferred<List<DClass>>>()
     private val enums = mutableMapOf<DRI, Deferred<List<DEnum>>>()
     private val interfaces = mutableMapOf<DRI, Deferred<List<DInterface>>>()
     private val annotations = mutableMapOf<DRI, Deferred<List<DAnnotation>>>()
@@ -60,9 +70,11 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
         scope.apply {
             for (packageDoc in module.packages) {
                 val children = async { packageDoc.explodedChildren }
-
-                val classlikesList = async { computeClasslikes(children.await()) }
+                val syntheticClassList = async { computeSyntheticClasses(packageDoc) }
+                val classlikesList = async { computeClasslikes(children.await(),
+                    syntheticClassList.await()) }
                 val classList = async { computeClasses(children.await()) }
+
                 val enumList = async { computeEnums(children.await()) }
                 val interfaceList = async { computeInterfaces(children.await()) }
                 val annotationList = async { computeAnnotations(children.await()) }
@@ -71,6 +83,7 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
 
                 classlikes[packageDoc.dri] = classlikesList
                 classes[packageDoc.dri] = classList
+                syntheticClasses[packageDoc.dri] = syntheticClassList
                 enums[packageDoc.dri] = enumList
                 interfaces[packageDoc.dri] = interfaceList
                 annotations[packageDoc.dri] = annotationList
@@ -79,7 +92,7 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
             }
         }
 
-        allClasslikes = scope.async { computeClasslikes(module) }
+        allClasslikes = scope.async { computeClasslikes(module, syntheticClasses) }
         subclassGraph = scope.async { computeSubclassGraph(allClasslikes.await()) }
 
         nestedClasslikesJob = scope.launch {
@@ -106,8 +119,14 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
         return nestedClasslikes.getValue(classlike.dri).await()
     }
 
-    suspend fun classesFor(packageDoc: DPackage): List<DClass> =
-        classes.getValue(packageDoc.dri).await()
+    suspend fun classesFor(packageDoc: DPackage, displayLanguage: Language): List<DClass> {
+        if (displayLanguage == Language.JAVA) {
+            return (classes.getValue(packageDoc.dri).await() +
+                syntheticClasses.getValue(packageDoc.dri).await()).sortedBy { it.name() }
+            } else {
+            return classes.getValue(packageDoc.dri).await()
+        }
+    }
 
     suspend fun enumsFor(packageDoc: DPackage): List<DEnum> =
         enums.getValue(packageDoc.dri).await()
@@ -128,12 +147,19 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
         return module.packages.sortedBy { it.name }
     }
 
-    private suspend fun computeClasslikes(module: DModule): List<DClasslike> {
-        return computeClasslikes(module.packages.flatMap { classlikesFor(it) })
+    private suspend fun computeClasslikes(
+        module: DModule,
+        syntheticClasses: MutableMap<DRI, Deferred<List<DClass>>>
+    ): List<DClasslike> {
+        return computeClasslikes(module.packages.flatMap { classlikesFor(it) }) +
+            syntheticClasses.values.flatMap { it.await() }
     }
 
-    private fun computeClasslikes(docs: List<Documentable>): List<DClasslike> {
-        return docs.filterIsInstance<DClasslike>().sortedBy { it.name() }
+    private fun computeClasslikes(
+        docs: List<Documentable>,
+        syntheticClasses: List<DClass> = emptyList()
+    ): List<DClasslike> {
+        return (docs.filterIsInstance<DClasslike>() + syntheticClasses).sortedBy { it.name() }
     }
 
     private fun computeClasses(docs: List<Documentable>): List<DClass> {
@@ -141,6 +167,49 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
             it.name()
         }
     }
+
+    /** Computes the syntheticClasses from top level functions that are used to document Kotlin as
+     * Java
+     */
+    private fun computeSyntheticClasses(packageDoc: DPackage): List<DClass> {
+        return (packageDoc.functions as List<WithSources>)
+            .syntheticName()
+            .map { (syntheticClassName, nodes) ->
+                DClass(
+                    dri = packageDoc.dri.withClass(syntheticClassName),
+                    name = syntheticClassName,
+                    properties = nodes.filterIsInstance<DProperty>(),
+                    constructors = emptyList(),
+                    functions = nodes.filterIsInstance<DFunction>().map {
+                        it.withJavaSynthetic(syntheticClassName)
+                    }.sortedBy { it.name },
+                    classlikes = emptyList(),
+                    sources = emptyMap(),
+                    expectPresentInSet = null,
+                    visibility = packageDoc.sourceSets.map { it to JavaVisibility.Public }.toMap(),
+                    companion = null,
+                    generics = emptyList(),
+                    supertypes = emptyMap(),
+                    documentation = emptyMap(),
+                    modifier = packageDoc.sourceSets.map { it to JavaModifier.Final }.toMap(),
+                    sourceSets = packageDoc.sourceSets,
+                    isExpectActual = false,
+                    extra = PropertyContainer.empty()
+                )
+            }
+    }
+
+    /** Returns that name of the synthetic class that this function (WithSources) would be part of
+     * This method uses the filename with "Kt" appended
+     * TODO(b/173138586): this should be using @jvmname when that's fixed by JB
+     * **/
+    private fun <T : WithSources> List<T>.syntheticName() =
+        map { it.sources to it }
+            .groupBy({ (location, _) ->
+                location.let {
+                    it.entries.first().value.path.split("/").last().split(".").first() + "Kt"
+                }
+            }) { it.second }
 
     private fun computeEnums(docs: List<Documentable>): List<DEnum> {
         return docs.filterIsInstance<DEnum>().sortedBy { it.name() }

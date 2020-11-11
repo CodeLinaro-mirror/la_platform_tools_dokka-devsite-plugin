@@ -408,19 +408,32 @@ internal class ClasslikeDocumentableConverter(
     /**
      * Returns the list of declared symbols. That is, symbols directly owned by this class-like
      * and not found through the inheritance hierarchy.
+     *
+     * Class and package comparison isn't applicable for synthetic classes
      */
-    private fun <T : Documentable> List<T>.myTypes() = filter { symbol ->
-        classlike.packageName() == symbol.dri.packageName &&
-            classlike.name() == symbol.dri.classNames
+    private fun <T : Documentable> List<T>.myTypes(): List<T> {
+        if (classlike.isSynthetic) {
+            return this
+        }
+        return filter { symbol ->
+            (classlike.packageName() == symbol.dri.packageName &&
+                classlike.name() == symbol.dri.classNames)
+        }
     }
 
     /**
      * Returns the list of inherited symbols, not from Any or Object
+     * If class is synthetic there should be no inherited methods
      */
-    private fun <T : Documentable> List<T>.inheritedTypes() = filterNot { symbol ->
-        (classlike.packageName() == symbol.dri.packageName &&
-            classlike.name() == symbol.dri.classNames) ||
-            symbol.dri.isFromBaseClass()
+    private fun <T : Documentable> List<T>.inheritedTypes(): List<T> {
+        if (classlike.isSynthetic) {
+            return emptyList()
+        }
+        return filterNot { symbol ->
+            (classlike.packageName() == symbol.dri.packageName &&
+                classlike.name() == symbol.dri.classNames) ||
+                symbol.dri.isFromBaseClass()
+        }
     }
 
     private fun isInterface() = classlike is DInterface

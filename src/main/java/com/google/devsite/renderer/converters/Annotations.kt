@@ -86,7 +86,7 @@ private fun shouldDocumentAnnotation(annotation: Annotation, language: Language)
         (language == Language.JAVA || !isNullabilityAnnotation)
 }
 
-private fun AnnotationParameterValue.toComponent(): String = when (this) {
+internal fun AnnotationParameterValue.toComponent(): String = when (this) {
     is StringValue -> value
     is EnumValue -> enumName
     is ClassValue -> className

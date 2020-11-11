@@ -76,7 +76,7 @@ private fun recursivelyUpdateClasslikeSupertypesTree(
     classlikes: Map<DRI, DClasslike>,
     leaf: DClasslike = child
 ) {
-    if (child !is WithSupertypes) return
+    if (child !is WithSupertypes || child.supertypes.isEmpty()) return
 
     val supertypes = child.supertypes.values.single()
     for ((type, kind) in supertypes) {

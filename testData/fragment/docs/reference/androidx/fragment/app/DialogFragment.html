@@ -195,8 +195,7 @@
             <td><code>LayoutInflater</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/fragment/app/DialogFragment.html#onGetLayoutInflater(android.os.Bundle)">onGetLayoutInflater</a>(Bundle&nbsp;savedInstanceState)</code></div>
-              <p>{@inheritDoc} </p>
-              <p>If this is called from within <code><a href="/reference/androidx/fragment/app/DialogFragment.html#onCreateDialog(android.os.Bundle)">onCreateDialog</a></code>, the layout inflater from <code><a href="/reference/androidx/fragment/app/Fragment.html#onGetLayoutInflater(android.os.Bundle)">Fragment#onGetLayoutInflater(Bundle)</a></code>, without the dialog theme, will be returned.</p>
+              <p>Returns the LayoutInflater used to inflate Views of this Fragment.</p>
             </td>
           </tr>
           <tr>
@@ -352,7 +351,6 @@
                       <td><code>Factory</code></td>
                       <td width="100%">
                         <div><code><a href="/reference/androidx/fragment/app/Fragment.html#getDefaultViewModelProviderFactory()">getDefaultViewModelProviderFactory</a>()</code></div>
-                        <p>{@inheritDoc} </p>
                         <p>The <code><a href="/reference/androidx/fragment/app/Fragment.html#getArguments()">Fragment's arguments</a></code> when this is first called will be used as the defaults to any androidx.lifecycle.SavedStateHandle passed to a view model created using this factory.</p>
                       </td>
                     </tr>
@@ -404,7 +402,6 @@
                       <td><code>Lifecycle</code></td>
                       <td width="100%">
                         <div><code><a href="/reference/androidx/fragment/app/Fragment.html#getLifecycle()">getLifecycle</a>()</code></div>
-                        <p>{@inheritDoc} </p>
                         <p>Overriding this method is no longer supported and this method will be made <code>final</code> in a future version of Fragment.</p>
                       </td>
                     </tr>
@@ -863,7 +860,6 @@
                       <td><code>final ActivityResultLauncher&lt;I&gt;</code></td>
                       <td width="100%">
                         <div><code><a href="/reference/androidx/fragment/app/Fragment.html#registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">registerForActivityResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;ActivityResultContract&lt;I, O&gt;&nbsp;contract,<br>&nbsp;&nbsp;&nbsp;&nbsp;ActivityResultCallback&lt;O&gt;&nbsp;callback<br>)</code></div>
-                        <p>{@inheritDoc} </p>
                         <p>If the host of this fragment is an ActivityResultRegistryOwner the ActivityResultRegistry of the host will be used.</p>
                       </td>
                     </tr>
@@ -1191,11 +1187,15 @@ You must <code><a href="/reference/androidx/fragment/app/FragmentManager.html#se
           <tbody>
             <tr>
               <td><code><a href="/reference/androidx/fragment/app/DialogFragment.html#DialogFragment()">DialogFragment</a></code></td>
-              <td width="100%"><code><a href="/reference/androidx/fragment/app/DialogFragment.html#DialogFragment()">DialogFragment</a></code></td>
+              <td width="100%">
+                <p>#DialogFragment()</p>
+              </td>
             </tr>
             <tr>
               <td><code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code></td>
-              <td width="100%"><code><a href="/reference/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code></td>
+              <td width="100%">
+                <p>#onCreateView(LayoutInflater, ViewGroup, Bundle)</p>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -1226,7 +1226,9 @@ You must <code><a href="/reference/androidx/fragment/app/FragmentManager.html#se
           <tbody>
             <tr>
               <td><code><a href="/reference/androidx/fragment/app/DialogFragment.html#requireDialog()">requireDialog</a></code></td>
-              <td width="100%"><code><a href="/reference/androidx/fragment/app/DialogFragment.html#requireDialog()">requireDialog</a></code></td>
+              <td width="100%">
+                <p>#requireDialog()</p>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -1337,7 +1339,7 @@ You must <code><a href="/reference/androidx/fragment/app/FragmentManager.html#se
     <div><a name="onGetLayoutInflater-android.os.Bundle-"></a>
       <h3 class="api-name" id="onGetLayoutInflater(android.os.Bundle)">onGetLayoutInflater</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;LayoutInflater&nbsp;<a href="/reference/androidx/fragment/app/DialogFragment.html#onGetLayoutInflater(android.os.Bundle)">onGetLayoutInflater</a>(Bundle&nbsp;savedInstanceState)</pre>
-      <p>{@inheritDoc} </p>
+      <p>Returns the LayoutInflater used to inflate Views of this Fragment. The default implementation will throw an exception if the Fragment is not attached. </p>
       <p>If this is called from within <code><a href="/reference/androidx/fragment/app/DialogFragment.html#onCreateDialog(android.os.Bundle)">onCreateDialog</a></code>, the layout inflater from <code><a href="/reference/androidx/fragment/app/Fragment.html#onGetLayoutInflater(android.os.Bundle)">Fragment#onGetLayoutInflater(Bundle)</a></code>, without the dialog theme, will be returned.</p>
     </div>
     <div><a name="onSaveInstanceState-android.os.Bundle-"></a>
@@ -1426,7 +1428,9 @@ You must <code><a href="/reference/androidx/fragment/app/FragmentManager.html#se
           <tbody>
             <tr>
               <td><code><a href="/reference/androidx/fragment/app/DialogFragment.html#getDialog()">getDialog</a></code></td>
-              <td width="100%"><code><a href="/reference/androidx/fragment/app/DialogFragment.html#getDialog()">getDialog</a></code></td>
+              <td width="100%">
+                <p>#getDialog()</p>
+              </td>
             </tr>
           </tbody>
         </table>

@@ -1,0 +1,63 @@
+<html devsite="true">
+  <head>
+    <title>CachedPagingDataKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>CachedPagingDataKt</h1>
+{% setvar page_path %}androidx/paging/CachedPagingDataKt.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class CachedPagingDataKt</pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>static&nbsp;final <a href="/reference/kotlinx/coroutines/flow/Flow.html">Flow</a>&lt;<a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/androidx/paging/CachedPagingDataKt.html#cachedIn(kotlinx.coroutines.flow.Flow,kotlinx.coroutines.CoroutineScope)">cachedIn</a>(<a href="/reference/kotlinx/coroutines/flow/Flow.html">Flow</a>&lt;<a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;&nbsp;receiver,&nbsp;<a href="/reference/kotlinx/coroutines/CoroutineScope.html">CoroutineScope</a>&nbsp;scope)</code></div>
+              <p>Caches the <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> such that any downstream collection from this flow will share the same <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="cachedIn(kotlinx.coroutines.flow.Flow, kotlinx.coroutines.CoroutineScope)"></a><a name="cachedIn-kotlinx.coroutines.flow.Flow-kotlinx.coroutines.CoroutineScope-"></a>
+      <h3 class="api-name" id="cachedIn(kotlinx.coroutines.flow.Flow,kotlinx.coroutines.CoroutineScope)">cachedIn</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>public&nbsp;static&nbsp;final&nbsp;<a href="/reference/kotlinx/coroutines/flow/Flow.html">Flow</a>&lt;<a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;&nbsp;<a href="/reference/androidx/paging/CachedPagingDataKt.html#cachedIn(kotlinx.coroutines.flow.Flow,kotlinx.coroutines.CoroutineScope)">cachedIn</a>(<a href="/reference/kotlinx/coroutines/flow/Flow.html">Flow</a>&lt;<a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;&nbsp;receiver,&nbsp;<a href="/reference/kotlinx/coroutines/CoroutineScope.html">CoroutineScope</a>&nbsp;scope)</pre>
+      <p>Caches the <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> such that any downstream collection from this flow will share the same <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>.</p>
+      <p>The flow is kept active as long as the given <code><a href="/reference/androidx/paging/package-summary.html#scope()">scope</a></code> is active. To avoid leaks, make sure to use a <code><a href="/reference/androidx/paging/package-summary.html#scope()">scope</a></code> that is already managed (like a ViewModel scope) or manually cancel it when you don't need paging anymore.</p>
+      <p>A common use case for this caching is to cache <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> in a ViewModel. This can ensure that, upon configuration change (e.g. rotation), then new Activity will receive the existing data immediately rather than fetching it from scratch.</p>
+      <p>Calling <code><a href="/reference/androidx/paging/package-summary.html#cachedIn(kotlinx.coroutines.flow.Flow,kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> is required to allow calling <a href="[androidx.paging.AsyncPagingDataAdapter]">androidx.paging.AsyncPagingDataAdapter</a> on the same instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> emitted by <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code> or any of its transformed derivatives, as reloading data from scratch on the same generation of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is an unsupported operation.</p>
+      <p>Note that this does not turn the <code>Flow&lt;PagingData&gt;</code> into a hot stream. It won't execute any unnecessary code unless it is being collected.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>scope</code></td>
+              <td width="100%">
+                <p>The coroutine scope where this page cache will be kept alive.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

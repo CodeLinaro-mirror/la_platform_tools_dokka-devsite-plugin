@@ -269,6 +269,45 @@ internal class PackageDocumentableConverterTest(
     }
 
     @Test
+    fun `Package summary creates synthetic classes for top-level functions in Java`() {
+        val page = """
+            |fun foo()
+        """.render().page()
+
+        val summary = page.content<PackageSummary>()
+        val classes = summary.data.classes.items()
+
+        javaOnly {
+            assertThat(classes).hasSize(1)
+            val className = classes.item().link().name
+            assertThat(className).isEqualTo("TestKt")
+        }
+        kotlinOnly {
+            assertThat(classes).hasSize(0)
+        }
+    }
+
+    @Test
+    fun `Synthetic classes for top-level functions in Java use @JvmName`() {
+        val page = """
+            |@JvmName("bar")
+            |fun foo()
+            |
+            |fun apple()
+        """.render()
+
+        javaOnly {
+            val classes = runBlocking {
+                val holder = DocumentablesHolder(page, this)
+                holder.classesFor(page.packages.last(), language)
+            }
+            // testing first and last here is also asserting the alphabetical sort, after jvmname
+            assertThat(classes.last().functions.last().name).isEqualTo("bar")
+            assertThat(classes.last().functions.first().name).isEqualTo("apple")
+        }
+    }
+
+    @Test
     fun `Package summary creates components with sorted top-level functions`() {
         val page = """
             |fun b() = Unit

@@ -19,6 +19,7 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.renderer.Language
 import org.jetbrains.dokka.base.transformers.documentables.isException
 import org.jetbrains.dokka.links.DRI
+import org.jetbrains.dokka.links.withClass
 import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
@@ -28,10 +29,13 @@ import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DObject
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.ExtraModifiers
 import org.jetbrains.dokka.model.Nullable
 import org.jetbrains.dokka.model.Projection
 import org.jetbrains.dokka.model.Variance
 import org.jetbrains.dokka.model.WithChildren
+import org.jetbrains.dokka.model.properties.WithExtraProperties
+import org.jetbrains.dokka.model.toAdditionalModifiers
 
 /** Recursively expands all children. */
 internal val <T> WithChildren<T>.explodedChildren: List<T>
@@ -89,3 +93,36 @@ fun Documentable.stringForType(displayLanguage: Language): String = when (this) 
  */
 val DClass.isExceptionClass: Boolean
     get() = isException || functions.any { function -> function.dri.classNames == "Throwable" }
+
+// TODO(b/173138586) replace with something else when implementing JvmName
+val DClasslike.isSynthetic: Boolean
+    get() = name().endsWith("Kt")
+
+/**
+ * Converts a top level function to its representation under a Java synthetic class
+ * Replaces the dri to point to the synthetic class and applies the static modifier
+ */
+fun DFunction.withJavaSynthetic(syntheticClassName: String): DFunction {
+    val jvmName = jvmName() ?: name
+    return copy(
+        name = jvmName,
+        // this needs to be the dri IN the synthetic class
+        dri = dri.withClass(syntheticClassName),
+        // put the static modifier on functions in the synthetic class
+        extra = extra.addAll(sourceSets.map {
+            mapOf(it to setOf(ExtraModifiers.JavaOnlyModifiers.Static)).toAdditionalModifiers()
+        })
+    )
+}
+
+/**
+ * Returns the value of the @JvmName for this function if one exists or null
+ */
+fun WithExtraProperties<*>.jvmName(): String? {
+    val jvmNameAnnotation = annotations().filter { it.dri.classNames.equals("JvmName") }
+    return if (jvmNameAnnotation.isEmpty()) {
+        null
+    } else {
+        jvmNameAnnotation.first().params.getValue("name").toComponent().replace("\"", "")
+    }
+}
