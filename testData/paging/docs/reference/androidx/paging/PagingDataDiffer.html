@@ -23,17 +23,17 @@
         </thead>
         <tbody>
           <tr>
-            <td><code>final <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/java/lang/Boolean.html">Boolean</a>&gt;</code></td>
+            <td><code>final <a href="/reference/kotlinx/coroutines/flow/Flow.html">Flow</a>&lt;<a href="/reference/java/lang/Boolean.html">Boolean</a>&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingDataDiffer.html#dataRefreshFlow()">dataRefreshFlow</a></code></div>
               <p><strong>This field is deprecated.</strong> dataRefreshFlow is now redundant with the information passed from loadStateFlow and getItemCount, and will be removed in a future alpha version</p>
             </td>
           </tr>
           <tr>
-            <td><code>final <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;</code></td>
+            <td><code>final <a href="/reference/kotlinx/coroutines/flow/Flow.html">Flow</a>&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingDataDiffer.html#loadStateFlow()">loadStateFlow</a></code></div>
-              <p>A hot Flow of <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
+              <p>A hot <code><a href="/reference/kotlinx/coroutines/flow/Flow.html">Flow</a></code> of <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
             </td>
           </tr>
           <tr>
@@ -55,7 +55,7 @@
         <tbody>
           <tr>
             <td>
-              <div><code><a href="/reference/androidx/paging/PagingDataDiffer.html#PagingDataDiffer(androidx.paging.DifferCallback,)">PagingDataDiffer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/DifferCallback.html">DifferCallback</a>&nbsp;differCallback,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;mainDispatcher<br>)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagingDataDiffer.html#PagingDataDiffer(androidx.paging.DifferCallback,kotlinx.coroutines.CoroutineDispatcher)">PagingDataDiffer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/DifferCallback.html">DifferCallback</a>&nbsp;differCallback,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/kotlinx/coroutines/CoroutineDispatcher.html">CoroutineDispatcher</a>&nbsp;mainDispatcher<br>)</code></div>
             </td>
           </tr>
         </tbody>
@@ -156,14 +156,14 @@
     <h2>Public fields</h2>
     <div><a name="getDataRefreshFlow()"></a><a name="setDataRefreshFlow()"></a><a name="getDataRefreshFlow--"></a><a name="setDataRefreshFlow--"></a>
       <h3 class="api-name" id="dataRefreshFlow()">dataRefreshFlow</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a><br>@<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>public&nbsp;final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;<a href="/reference/androidx/paging/PagingDataDiffer.html#dataRefreshFlow()">dataRefreshFlow</a></pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a><br>@<a href="/reference/kotlin/OptIn.html">OptIn</a>(markerClass&nbsp;=&nbsp;[FlowPreview])<br>public&nbsp;final&nbsp;<a href="/reference/kotlinx/coroutines/flow/Flow.html">Flow</a>&lt;<a href="/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;<a href="/reference/androidx/paging/PagingDataDiffer.html#dataRefreshFlow()">dataRefreshFlow</a></pre>
       <aside class="caution"><strong>This field is deprecated.</strong><br>dataRefreshFlow is now redundant with the information passed from loadStateFlow and getItemCount, and will be removed in a future alpha version</aside>
-      <p>A <a href="[Flow]">Flow</a> of <code><a href="/reference/kotlin/Boolean.html">Boolean</a></code> that is emitted when new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> generations are submitted and displayed. The <code><a href="/reference/kotlin/Boolean.html">Boolean</a></code> that is emitted is <code>true</code> if the new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is empty, <code>false</code> otherwise.</p>
+      <p>A <code><a href="/reference/kotlinx/coroutines/flow/Flow.html">Flow</a></code> of <code><a href="/reference/kotlin/Boolean.html">Boolean</a></code> that is emitted when new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> generations are submitted and displayed. The <code><a href="/reference/kotlin/Boolean.html">Boolean</a></code> that is emitted is <code>true</code> if the new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is empty, <code>false</code> otherwise.</p>
     </div>
     <div><a name="getLoadStateFlow()"></a><a name="setLoadStateFlow()"></a><a name="getLoadStateFlow--"></a><a name="setLoadStateFlow--"></a>
       <h3 class="api-name" id="loadStateFlow()">loadStateFlow</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>public&nbsp;final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;&nbsp;<a href="/reference/androidx/paging/PagingDataDiffer.html#loadStateFlow()">loadStateFlow</a></pre>
-      <p>A hot <a href="[Flow]">Flow</a> of <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/OptIn.html">OptIn</a>(markerClass&nbsp;=&nbsp;[FlowPreview])<br>public&nbsp;final&nbsp;<a href="/reference/kotlinx/coroutines/flow/Flow.html">Flow</a>&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;&nbsp;<a href="/reference/androidx/paging/PagingDataDiffer.html#loadStateFlow()">loadStateFlow</a></pre>
+      <p>A hot <code><a href="/reference/kotlinx/coroutines/flow/Flow.html">Flow</a></code> of <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
       <p>This flow is conflated, so it buffers the last update to <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> and immediately delivers the current load states on collection.</p>
     </div>
     <div><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
@@ -171,9 +171,9 @@
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/paging/PagingDataDiffer.html#size()">size</a></pre>
     </div>
     <h2>Public constructors</h2>
-    <div><a name="PagingDataDiffer(androidx.paging.DifferCallback, )"></a><a name="PagingDataDiffer-androidx.paging.DifferCallback--"></a>
-      <h3 class="api-name" id="PagingDataDiffer(androidx.paging.DifferCallback,)">PagingDataDiffer</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/PagingDataDiffer.html#PagingDataDiffer(androidx.paging.DifferCallback,)">PagingDataDiffer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/DifferCallback.html">DifferCallback</a>&nbsp;differCallback,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;mainDispatcher<br>)</pre>
+    <div><a name="PagingDataDiffer(androidx.paging.DifferCallback, kotlinx.coroutines.CoroutineDispatcher)"></a><a name="PagingDataDiffer-androidx.paging.DifferCallback-kotlinx.coroutines.CoroutineDispatcher-"></a>
+      <h3 class="api-name" id="PagingDataDiffer(androidx.paging.DifferCallback,kotlinx.coroutines.CoroutineDispatcher)">PagingDataDiffer</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/PagingDataDiffer.html#PagingDataDiffer(androidx.paging.DifferCallback,kotlinx.coroutines.CoroutineDispatcher)">PagingDataDiffer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/DifferCallback.html">DifferCallback</a>&nbsp;differCallback,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/kotlinx/coroutines/CoroutineDispatcher.html">CoroutineDispatcher</a>&nbsp;mainDispatcher<br>)</pre>
     </div>
     <h2>Public methods</h2>
     <div><a name="addDataRefreshListener-kotlin.Function1-"></a>

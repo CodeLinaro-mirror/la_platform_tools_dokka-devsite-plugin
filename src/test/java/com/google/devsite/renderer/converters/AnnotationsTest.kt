@@ -24,7 +24,6 @@ import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.Annotations.Annotation
 import org.jetbrains.dokka.model.DModule
-import org.junit.Ignore
 import org.junit.Test
 import kotlin.Boolean
 import com.google.devsite.components.symbols.Annotation as AnnotationComponent
@@ -40,7 +39,6 @@ internal class AnnotationsTest : ConverterTestBase() {
         assertThat(annotations.components()).isEmpty()
     }
 
-    @Ignore // TODO(b/168667502): why isn't this on the classpath?
     @Test
     fun `JVM annotations are ignored`() {
         val annotations = """
