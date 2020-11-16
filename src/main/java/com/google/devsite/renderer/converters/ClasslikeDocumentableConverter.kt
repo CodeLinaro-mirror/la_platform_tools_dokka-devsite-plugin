@@ -44,6 +44,8 @@ import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.parent
 import org.jetbrains.dokka.model.DClasslike
+import org.jetbrains.dokka.model.DEnum
+import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DProperty
@@ -65,6 +67,8 @@ internal class ClasslikeDocumentableConverter(
         FunctionDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
     private val propertyConverter =
         PropertyDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
+    private val enumConverter =
+        EnumValueDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
 
     /** @return the classlike component */
     suspend fun classlike(): DevsitePage = coroutineScope {
@@ -83,10 +87,15 @@ internal class ClasslikeDocumentableConverter(
         declaredProperties = declaredProperties.sortedBy { it.name }
         inheritedFunctions = inheritedFunctions.sortedBy { it.name }
 
+        val enumValues = (classlike as? DEnum)?.entries.orEmpty().sortedBy { it.name }
+
         val declaredConstructors = (classlike as? WithConstructors)?.constructors.orEmpty()
             .sortedBy { it.parameters.size }
         val annotations = (classlike as? WithExtraProperties<*>)?.annotations().orEmpty()
 
+        val enumValuesSummary = async {
+            enumValuesToSummary(enumValuesTitle(), enumValues)
+        }
         val nestedTypesSummary = async {
             typesToSummary(docsHolder.classlikesFor(classlike))
         }
@@ -121,6 +130,8 @@ internal class ClasslikeDocumentableConverter(
             functionsToSummary(protectedMethodsTitle(), declaredFunctions.filter(::isProtected))
         }
 
+        val enumDetails =
+            async { enumValuesToDetail(enumValues) }
         val constants =
             async { propertiesToDetail(declaredProperties.constants()) }
         val publicProperties =
@@ -143,6 +154,10 @@ internal class ClasslikeDocumentableConverter(
 
         val allSymbols = listOf(
             nestedTypesSummary.await() to Classlike.SymbolType(nestedTypesTitle(), emptyList()),
+            enumValuesSummary.await() to Classlike.SymbolType(
+                enumValuesTitle(),
+                enumDetails.await()
+            ),
             constantsSummary.await() to Classlike.SymbolType(
                 constantsTitle(),
                 constants.await()
@@ -268,6 +283,22 @@ internal class ClasslikeDocumentableConverter(
         }
     }
 
+    private fun enumValuesToSummary(title: String, enumVals: List<DEnumEntry>): SummaryList {
+        val modifierHints = ModifierHints(displayLanguage, isSummary = true, false)
+        val components = enumVals.map { enumConverter.summary(it, modifierHints) }
+        return DefaultSummaryList(
+            SummaryList.Params(
+                header = DefaultTableTitle(
+                    TableTitle.Params(
+                        title = title,
+                        big = true
+                    )
+                ),
+                items = components
+            )
+        )
+    }
+
     private fun propertiesToSummary(name: String, properties: List<DProperty>): SummaryList {
         val modifierHints = ModifierHints(displayLanguage, isSummary = true, isInterface())
         val components = properties.map {
@@ -291,6 +322,13 @@ internal class ClasslikeDocumentableConverter(
         val modifierHints = ModifierHints(displayLanguage, isSummary = false, isInterface())
         return properties.map {
             propertyConverter.detail(it, modifierHints)
+        }
+    }
+
+    private fun enumValuesToDetail(enumValues: List<DEnumEntry>): List<SymbolDetail> {
+        val modifierHints = ModifierHints(displayLanguage, isSummary = false, isInterface())
+        return enumValues.map {
+            enumConverter.detail(it, modifierHints)
         }
     }
 
@@ -488,4 +526,5 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun constantsTitle() = "Constants"
+    private fun enumValuesTitle() = "Enum Values"
 }

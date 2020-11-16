@@ -17,6 +17,8 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.components.Description
+import com.google.devsite.components.Raw
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.SymbolSummary
@@ -34,6 +36,7 @@ import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DModule
+import org.jetbrains.dokka.model.doc.Text
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -323,8 +326,58 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(classlike.data.signature.data.implements.single().data.name).isEqualTo("A")
     }
 
-    private fun DModule.page(): DevsitePage {
-        val classlike = packages.single().classlikes.single { it.name() == "Foo" }
+    @Test
+    fun `Enum class is rendered and has enum values`() {
+        val page = """
+            |/**
+            | * class level docs
+            | */
+            |enum class AnEnumType {
+            |    /**
+            |     * content being refreshed, which can be a result of
+            |     * invalidation, refresh that may contain content updates, or the initial load.
+            |     */
+            |    REFRESH,
+            |    /**
+            |     * Load at the start
+            |     */
+            |    PREPEND,
+            |    /**
+            |     * Load at the end.
+            |     */
+            |    APPEND
+            |
+            |    fun foo()
+            |}
+        """.render().page(name = "AnEnumType")
+
+        val classlike = page.content<Classlike>()
+        val signature = classlike.data.signature.data
+        val description = (classlike.data.description.first() as Description)
+        val descriptionText = description.data.root.children.first().children.first() as Text
+
+        val enumTable = classlike.data.symbolTypes.first {
+            (it.first as? SummaryList)?.title() == "Enum Values" }.first.items(3) as List
+        val enumOne = enumTable[0].data
+        val enumTwo = enumTable[1].data
+        val enumThree = enumTable[2].data
+
+        assertThat(signature.type).isEqualTo("enum")
+        assertThat(descriptionText.body).isEqualTo("class level docs")
+
+        assertThat((enumOne.title as Raw).data.text).contains("APPEND")
+        assertThat((enumOne.description as Description).data.root.toString())
+            .contains("Load at the end.")
+        assertThat((enumTwo.title as Raw).data.text).contains("PREPEND")
+        assertThat((enumTwo.description as Description).data.root.toString())
+            .contains("Load at the start")
+        assertThat((enumThree.title as Raw).data.text).contains("REFRESH")
+        assertThat((enumThree.description as Description).data.root.toString())
+            .contains("result of invalidation")
+    }
+
+    private fun DModule.page(name: String = "Foo"): DevsitePage {
+        val classlike = packages.single().classlikes.single { it.name() == name }
         val holder = runBlocking { DocumentablesHolder(this@page, this) }
         val converter = ClasslikeDocumentableConverter(language, classlike, pathProvider(), holder)
         return runBlocking { converter.classlike() }

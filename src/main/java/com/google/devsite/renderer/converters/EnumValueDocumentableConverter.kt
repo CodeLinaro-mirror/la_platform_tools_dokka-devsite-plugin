@@ -1,0 +1,100 @@
+/*
+ * Copyright 2020 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.google.devsite.renderer.converters
+
+import com.google.devsite.components.Raw
+import com.google.devsite.components.impl.DefaultPropertySignature
+import com.google.devsite.components.impl.DefaultRaw
+import com.google.devsite.components.impl.DefaultSymbolDetail
+import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
+import com.google.devsite.components.symbols.PropertySignature
+import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.table.TwoPaneSummaryItem
+import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.impl.paths.FilePathProvider
+import org.jetbrains.dokka.model.DEnumEntry
+
+/** Converts documentable DEnumEntrys into EnumValue components. */
+internal class EnumValueDocumentableConverter(
+    private val displayLanguage: Language,
+    private val pathProvider: FilePathProvider,
+    private val javadocConverter: DocTagConverter
+) {
+    private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
+
+    /** @return the enum value summary component */
+    fun summary(enumValue: DEnumEntry, modifierHints: ModifierHints): TwoPaneSummaryItem {
+        val annotations = enumValue.annotations()
+        return DefaultTwoPaneSummaryItem(
+            TwoPaneSummaryItem.Params(
+                title = DefaultRaw(Raw.Params(enumValue.name)),
+                description = javadocConverter.summaryDescription(enumValue, annotations)
+            )
+        )
+    }
+
+    /** @return the enum detail component */
+    fun detail(enumValue: DEnumEntry, hints: ModifierHints): SymbolDetail {
+        val annotations = enumValue.annotations()
+        val projection = paramConverter.componentForProjection(
+            // We need to get a projection representation of the class of the DEnumEmtry
+            // Unfortunately, this is not stored straightforwardly in Jetbrains' architecture
+            // So we know that compareTo is T.compareTo(T other), so we can get the classlike of the
+            // DEnumEntry by looking at the parameter type of its compareTo method
+            enumValue.functions.first { it.name == "compareTo" }.parameters.single().type
+        )
+        return DefaultSymbolDetail(
+            SymbolDetail.Params(
+                displayLanguage = displayLanguage,
+                name = enumValue.name,
+                anchors = enumValue.generateAnchors(),
+                annotations = annotations.annotationComponents(
+                    pathProvider,
+                    displayLanguage,
+                    false
+                ),
+                modifiers = enumValue.getExtraModifiers().modifiersFor(hints),
+                returnType = projection,
+                symbolType = SymbolDetail.SymbolType.PROPERTY,
+                signature = enumValue.signature(false),
+                metadata = javadocConverter.metadata(
+                    doc = enumValue,
+                    returnType = projection,
+                    paramNames = listOf(),
+                    annotations = annotations
+                )
+            )
+        )
+    }
+
+    internal fun DEnumEntry.signature(isSummary: Boolean): PropertySignature {
+        return DefaultPropertySignature(
+            PropertySignature.Params(
+                // TODO(b/168136770): figure out path for default anchors
+                name = pathProvider.linkForReference(dri),
+                receiver = null
+            )
+        )
+    }
+
+    /** Returns anchors for this enum value. */
+    private fun DEnumEntry.generateAnchors(): LinkedHashSet<String> {
+        return linkedSetOf(
+            name
+        )
+    }
+}
