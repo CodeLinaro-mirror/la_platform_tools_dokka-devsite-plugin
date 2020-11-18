@@ -19,7 +19,6 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.renderer.Language
 import org.jetbrains.dokka.base.transformers.documentables.isException
 import org.jetbrains.dokka.links.DRI
-import org.jetbrains.dokka.links.withClass
 import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
@@ -100,6 +99,7 @@ val DClasslike.isSynthetic: Boolean
 
 /**
  * Converts a top level function to its representation under a Java synthetic class
+ * and with JvmName
  * Replaces the dri to point to the synthetic class and applies the static modifier
  */
 fun DFunction.withJavaSynthetic(syntheticClassName: String): DFunction {
@@ -107,14 +107,26 @@ fun DFunction.withJavaSynthetic(syntheticClassName: String): DFunction {
     return copy(
         name = jvmName,
         // this needs to be the dri IN the synthetic class
-        dri = dri.withClass(syntheticClassName),
+        dri = dri.copy(
+            classNames = syntheticClassName,
+            callable = dri.callable?.copy(name = jvmName)
+        ),
         // put the static modifier on functions in the synthetic class
         extra = extra.addAll(sourceSets.map {
             mapOf(it to setOf(ExtraModifiers.JavaOnlyModifiers.Static)).toAdditionalModifiers()
         })
     )
 }
-
+/**
+ * Converts a level function to its presentation with JvmName
+ */
+fun DFunction.withJvmName(): DFunction {
+val jvmName = jvmName() ?: return this
+    return copy(
+        name = jvmName,
+        dri = dri.copy(callable = dri.callable?.copy(name = jvmName))
+    )
+}
 /**
  * Returns the value of the @JvmName for this function if one exists or null
  */
@@ -126,3 +138,11 @@ fun WithExtraProperties<*>.jvmName(): String? {
         jvmNameAnnotation.first().params.getValue("name").toComponent().replace("\"", "")
     }
 }
+
+/**
+ * Filters out elements that are annotated with @JvmSynthetic
+ */
+fun <T> List<T>.filterOutJvmSynthetic(): List<T>
+    where T : WithExtraProperties<*> = this.filterNot {
+        it.annotations().any { it.dri.classNames.equals("JvmSynthetic") }
+    }

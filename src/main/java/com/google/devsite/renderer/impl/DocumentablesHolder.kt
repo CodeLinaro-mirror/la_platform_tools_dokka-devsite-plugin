@@ -18,6 +18,7 @@ package com.google.devsite.renderer.impl
 
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.explodedChildren
+import com.google.devsite.renderer.converters.filterOutJvmSynthetic
 import com.google.devsite.renderer.converters.isExceptionClass
 import com.google.devsite.renderer.converters.name
 import com.google.devsite.renderer.converters.withJavaSynthetic
@@ -172,12 +173,17 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
      * Java
      */
     private fun computeSyntheticClasses(packageDoc: DPackage): List<DClass> {
-        return (packageDoc.functions as List<WithSources>)
-            .syntheticName()
+        // functions that are JvmSynthetic are not accessible from Java so they should not appear
+        // in the documentation
+        val javaFunctions = packageDoc.functions.filterOutJvmSynthetic()
+        val javaProperties = packageDoc.properties.filterOutJvmSynthetic()
+        return (javaFunctions + javaProperties)
+            .mapToSyntheticNames()
             .map { (syntheticClassName, nodes) ->
                 DClass(
                     dri = packageDoc.dri.withClass(syntheticClassName),
                     name = syntheticClassName,
+                    // TODO (b/168340963) handle kotlin as java properties
                     properties = nodes.filterIsInstance<DProperty>(),
                     constructors = emptyList(),
                     functions = nodes.filterIsInstance<DFunction>().map {
@@ -199,11 +205,13 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
             }
     }
 
-    /** Returns that name of the synthetic class that this function (WithSources) would be part of
+    /** Returns a map from String name of synthetic class that this Function (WithSources) would be
+     * in to the Functions that are part of those classes
+     *
      * This method uses the filename with "Kt" appended
-     * TODO(b/173138586): this should be using @jvmname when that's fixed by JB
+     * TODO(b/173138586): this should be using @file:jvmname when that's fixed by JB
      * **/
-    private fun <T : WithSources> List<T>.syntheticName() =
+    private fun <T : WithSources> List<T>.mapToSyntheticNames() =
         map { it.sources to it }
             .groupBy({ (location, _) ->
                 location.let {

@@ -98,6 +98,54 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(summary.item().functionSummary().name()).isEqualTo("foo")
     }
 
+    @Test
+    fun `@jvmName functions get documented and sorted by correct name`() {
+        val page = """
+            |class Foo {
+            |    @JvmName("bar")
+            |    fun foo() = Unit
+            |
+            |    @JvmName("aar")
+            |    fun zoo() = Unit
+            |}
+        """.render().page()
+
+        javaOnly {
+            val classlike = page.content<Classlike>()
+            val (summary) = classlike.symbolsFor("Public functions", "Public methods")
+            assertThat(summary.items().first().functionSummary().name()).isEqualTo("aar")
+            assertThat(summary.items().last().functionSummary().name()).isEqualTo("bar")
+        }
+        kotlinOnly {
+            val classlike = page.content<Classlike>()
+            val (summary) = classlike.symbolsFor("Public functions", "Public methods")
+            assertThat(summary.items().first().functionSummary().name()).isEqualTo("foo")
+            assertThat(summary.items().last().functionSummary().name()).isEqualTo("zoo")
+        }
+    }
+
+    @Test
+    fun `@JvmSynthetic methods are not documented in java`() {
+        val page = """
+            |class Foo {
+            |    fun foo() = Unit
+            |
+            |    @JvmSynthetic
+            |    fun zoo() = Unit
+            |}
+        """.render().page()
+
+        val classlike = page.content<Classlike>()
+        val (summary) = classlike.symbolsFor("Public functions", "Public methods")
+
+        javaOnly {
+            assertThat(summary.items().size).isEqualTo(1)
+        }
+        kotlinOnly {
+            assertThat(summary.items().size).isEqualTo(2)
+        }
+    }
+
     @Ignore // TODO(b/165112358): foo doesn't show up in the dokka model
     @Test
     fun `Protected function gets documented`() {

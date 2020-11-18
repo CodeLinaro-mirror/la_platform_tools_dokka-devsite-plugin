@@ -68,9 +68,20 @@ internal class ClasslikeDocumentableConverter(
 
     /** @return the classlike component */
     suspend fun classlike(): DevsitePage = coroutineScope {
-        val declaredFunctions = classlike.functions.myTypes().sortedBy { it.name }
-        val declaredProperties = classlike.properties.myTypes().sortedBy { it.name }
-        val inheritedFunctions = classlike.functions.inheritedTypes()
+        var declaredFunctions = classlike.functions.myTypes()
+        var declaredProperties = classlike.properties.myTypes()
+        var inheritedFunctions = classlike.functions.inheritedTypes()
+
+        // Java documentation needs to respect @jvm* annotations
+        if (displayLanguage == Language.JAVA) {
+            declaredFunctions = declaredFunctions.filterOutJvmSynthetic().map { it.withJvmName() }
+            declaredProperties = declaredProperties.filterOutJvmSynthetic()
+            inheritedFunctions = inheritedFunctions.filterOutJvmSynthetic().map { it.withJvmName() }
+        }
+
+        declaredFunctions = declaredFunctions.sortedBy { it.name }
+        declaredProperties = declaredProperties.sortedBy { it.name }
+        inheritedFunctions = inheritedFunctions.sortedBy { it.name }
 
         val declaredConstructors = (classlike as? WithConstructors)?.constructors.orEmpty()
             .sortedBy { it.parameters.size }
