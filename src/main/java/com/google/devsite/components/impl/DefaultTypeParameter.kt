@@ -21,7 +21,7 @@ import com.google.devsite.renderer.Language
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
 
-/** Default implementation of a function parameter. */
+/** Default implementation of a function or class type parameter. */
 internal class DefaultTypeParameter(
     override val data: TypeParameter.Params
 ) : TypeParameter {
@@ -29,8 +29,10 @@ internal class DefaultTypeParameter(
         validate()
     }
 
-    override fun render(html: FlowContent) = html.run {
-        +"<"
+    override fun render(html: FlowContent) = render(html, true)
+
+    override fun render(html: FlowContent, angleBrackets: Boolean) = html.run {
+        if (angleBrackets) +"<"
         for (annotation in data.annotations) {
             annotation.render(this)
             +Entities.nbsp
@@ -73,7 +75,7 @@ internal class DefaultTypeParameter(
                 }
             }
         }
-        +">"
+        if (angleBrackets) +">"
     }
 
     override fun validate() {

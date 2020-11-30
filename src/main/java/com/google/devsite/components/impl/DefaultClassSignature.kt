@@ -17,6 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.symbols.ClassSignature
+import com.google.devsite.components.symbols.render
 import com.google.devsite.renderer.Language
 import kotlinx.html.FlowContent
 import kotlinx.html.pre
@@ -26,9 +27,12 @@ internal class DefaultClassSignature(
 ) : ClassSignature {
 
     override fun render(html: FlowContent) {
+
         html.run {
             pre {
                 +(data.modifiers + data.type + data.name).joinToString(separator = " ")
+
+                data.typeParameters.render(this)
 
                 when (data.displayLanguage) {
                     Language.JAVA -> {

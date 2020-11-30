@@ -126,6 +126,8 @@ internal class FunctionDocumentableConverter(
     private fun DFunction.signature(isSummary: Boolean): FunctionSignature {
         val receiver = receiver?.let { paramConverter.componentForParameter(it, isSummary) }
         val parameters = parameters.map { paramConverter.componentForParameter(it, isSummary) }
+        val typeParameters = this.generics.map {
+            paramConverter.componentForTypeParameter(it, isSummary) }
 
         return DefaultFunctionSignature(
             FunctionSignature.Params(
@@ -134,6 +136,7 @@ internal class FunctionDocumentableConverter(
                     Language.JAVA -> null
                     Language.KOTLIN -> receiver
                 },
+                typeParameters = typeParameters,
                 parameters = when (displayLanguage) {
                     Language.JAVA -> listOfNotNull(receiver) + parameters
                     Language.KOTLIN -> parameters

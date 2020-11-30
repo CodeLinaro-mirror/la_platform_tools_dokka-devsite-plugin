@@ -117,16 +117,18 @@ fun DFunction.withJavaSynthetic(syntheticClassName: String): DFunction {
         })
     )
 }
+
 /**
  * Converts a level function to its presentation with JvmName
  */
 fun DFunction.withJvmName(): DFunction {
-val jvmName = jvmName() ?: return this
+    val jvmName = jvmName() ?: return this
     return copy(
         name = jvmName,
         dri = dri.copy(callable = dri.callable?.copy(name = jvmName))
     )
 }
+
 /**
  * Returns the value of the @JvmName for this function if one exists or null
  */

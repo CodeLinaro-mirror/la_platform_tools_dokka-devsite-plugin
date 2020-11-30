@@ -52,6 +52,7 @@ import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.WithAbstraction
 import org.jetbrains.dokka.model.WithConstructors
+import org.jetbrains.dokka.model.WithGenerics
 import org.jetbrains.dokka.model.WithSupertypes
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 
@@ -67,6 +68,8 @@ internal class ClasslikeDocumentableConverter(
         FunctionDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
     private val propertyConverter =
         PropertyDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
+    private val paramConverter =
+        ParameterDocumentableConverter(displayLanguage, pathProvider)
     private val enumConverter =
         EnumValueDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
 
@@ -338,6 +341,11 @@ internal class ClasslikeDocumentableConverter(
         } else {
             emptyList()
         }
+        val typeParameters = if (classlike is WithGenerics) {
+            classlike.generics.map { paramConverter.componentForTypeParameter(it, false) }
+        } else {
+            emptyList()
+        }
 
         if (classlike !is WithSupertypes) {
             return DefaultClassSignature(ClassSignature.Params(
@@ -346,7 +354,9 @@ internal class ClasslikeDocumentableConverter(
                 type = classlike.stringForType(displayLanguage),
                 modifiers = modifiers,
                 implements = emptyList(),
-                extends = emptyList()))
+                extends = emptyList(),
+                typeParameters = typeParameters
+            ))
         }
 
         val extends = docsHolder.subclassGraph().getValue(classlike.dri).superClasses.map {
@@ -363,8 +373,9 @@ internal class ClasslikeDocumentableConverter(
             type = classlike.stringForType(displayLanguage),
             modifiers = modifiers,
             implements = implements,
-            extends = extends)
-        )
+            extends = extends,
+            typeParameters = typeParameters
+        ))
     }
 
     /** Walks up this class' type hierarchy and returns the hierarchy component. */

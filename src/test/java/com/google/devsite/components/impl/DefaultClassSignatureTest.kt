@@ -18,7 +18,9 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth
 import com.google.devsite.components.symbols.ClassSignature
+import com.google.devsite.components.symbols.TypeParameter
 import com.google.devsite.components.testing.NoopLink
+import com.google.devsite.components.testing.NoopSymbolType
 import com.google.devsite.renderer.Language
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
@@ -29,13 +31,18 @@ class DefaultClassSignatureTest {
     @Test
     fun `Class signature renders correctly in Java`() {
         val component = DefaultClassSignature(ClassSignature.Params(
-            Language.JAVA,
+            displayLanguage = Language.JAVA,
             name = "Foo",
             type = "class",
             modifiers = listOf("public", "abstract"),
             extends = listOf(NoopLink("Anyclass")),
-            implements = listOf(NoopLink("SomeInterface")))
-        )
+            implements = listOf(NoopLink("SomeInterface")),
+            typeParameters = listOf(DefaultTypeParameter(TypeParameter.Params(
+                displayLanguage = Language.KOTLIN,
+                name = "GenericType",
+                projections = listOf(NoopSymbolType("GenericSupertype"))
+            )))
+        ))
 
         val output = createHTML().body {
             component.render(this)
@@ -45,7 +52,7 @@ class DefaultClassSignatureTest {
         Truth.assertThat(output).isEqualTo(
             """
 <body>
-  <pre>public abstract class Foo extends Anyclass implements SomeInterface</pre>
+  <pre>public abstract class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; extends Anyclass implements SomeInterface</pre>
 </body>
             """.trim()
         )
@@ -54,13 +61,18 @@ class DefaultClassSignatureTest {
     @Test
     fun `Class signature renders correctly in Kotlin`() {
         val component = DefaultClassSignature(ClassSignature.Params(
-            Language.KOTLIN,
+            displayLanguage = Language.KOTLIN,
             name = "Foo",
             type = "class",
             modifiers = listOf("open"),
             extends = listOf(NoopLink("Anyclass")),
-            implements = listOf(NoopLink("SomeInterface")))
-        )
+            implements = listOf(NoopLink("SomeInterface")),
+            typeParameters = listOf(DefaultTypeParameter(TypeParameter.Params(
+                displayLanguage = Language.KOTLIN,
+                name = "GenericType",
+                projections = listOf(NoopSymbolType("GenericSupertype"))
+            )))
+        ))
 
         val output = createHTML().body {
             component.render(this)
@@ -70,7 +82,7 @@ class DefaultClassSignatureTest {
         Truth.assertThat(output).isEqualTo(
             """
 <body>
-  <pre>open class Foo : Anyclass, SomeInterface</pre>
+  <pre>open class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; : Anyclass, SomeInterface</pre>
 </body>
             """.trim()
         )

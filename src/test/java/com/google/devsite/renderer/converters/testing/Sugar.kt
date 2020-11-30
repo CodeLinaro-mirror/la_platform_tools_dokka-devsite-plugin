@@ -20,6 +20,7 @@ package com.google.devsite.renderer.converters.testing
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Component
+import com.google.devsite.components.Description
 import com.google.devsite.components.Link
 import com.google.devsite.components.pages.ClassIndex
 import com.google.devsite.components.pages.DevsitePage
@@ -29,9 +30,11 @@ import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.components.symbols.SymbolBase
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.SymbolType
+import com.google.devsite.components.symbols.TypeParameter
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
 import com.google.devsite.components.table.TwoPaneSummaryItem
+import org.jetbrains.dokka.model.doc.Text
 
 internal fun <T> Collection<T>.item(): T = items(1).single()
 
@@ -56,12 +59,21 @@ internal fun <T> DevsitePage.content(): T = data.content as T
 
 internal fun SummaryList.item() = item<TwoPaneSummaryItem>()
 internal fun SummaryList.items(size: Int? = null) = items<TwoPaneSummaryItem>(size)
+internal fun SummaryList.single() = items().single()
 internal fun SummaryList.size() = items().size
+internal fun SummaryList.title(): String = (data.header as TableTitle).data.title
 
 internal fun TwoPaneSummaryItem.link(): Link.Params = (data.title as Link).data
 internal fun TwoPaneSummaryItem.functionSummary() = data.description as SymbolSummary
+internal fun TwoPaneSummaryItem.name() = (this.data.title as Parameter).data.name
+internal fun TwoPaneSummaryItem.description() = (this.data.description as Description)
+
 internal fun SymbolSummary.name(): String = data.signature.data.name.data.name
-internal fun SummaryList.title(): String = (data.header as TableTitle).data.title
+
+internal fun Description.text() = (this.data.root.children.single().children.single() as Text).body
+
+internal fun TypeParameter.projectionName() = this.data.projections.single().link().name
+internal fun Parameter.generics() = this.data.primary.asType().data.generics
 
 internal fun SymbolBase.asType(): SymbolType = when (this) {
     is Parameter -> data.primary.asType()

@@ -17,6 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.symbols.FunctionSignature
+import com.google.devsite.components.symbols.render
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
 import kotlinx.html.br
@@ -28,6 +29,9 @@ internal class DefaultFunctionSignature(
     override val data: FunctionSignature.Params
 ) : FunctionSignature {
     override fun render(html: FlowContent) = html.run {
+        data.typeParameters.render(this)
+        if (data.typeParameters.isNotEmpty()) +" "
+
         if (data.receiver != null) {
             data.receiver.render(this)
             +"."
@@ -65,7 +69,7 @@ internal class DefaultFunctionSignature(
     /** Uses the estimated function size to guess if it will overflow. */
     private fun shouldBreak(): Boolean {
         val nameSize = data.name.length()
-        val allParams = listOfNotNull(data.receiver) + data.parameters
+        val allParams = data.typeParameters + listOfNotNull(data.receiver) + data.parameters
         val paramSize = allParams.sumBy { it.length() + 2 }
 
         val totalSize = nameSize + paramSize

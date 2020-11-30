@@ -30,6 +30,7 @@ internal interface ClassSignature : ContextFreeComponent {
         val type: String,
         val name: String,
         val implements: List<Link>,
-        val extends: List<Link>
+        val extends: List<Link>,
+        val typeParameters: List<TypeParameter>
     )
 }

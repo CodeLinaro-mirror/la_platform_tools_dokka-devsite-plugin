@@ -14,19 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components.symbols
-
-import com.google.devsite.components.Link
-
-/** Represents a function or method signature (aka just the name and params). */
-internal interface FunctionSignature : SymbolSignature {
-    override val data: Params
-
-    class Params(
-        override val name: Link,
-        override val receiver: Parameter? = null,
-        val typeParameters: List<TypeParameter> = emptyList(),
-        val parameters: List<Parameter> = emptyList(),
-        val isDeprecated: Boolean = false
-    ) : SymbolSignature.Params
-}
+/**
+ * Hello, I'm a package summary!
+ */
+package dokkatest.simple;

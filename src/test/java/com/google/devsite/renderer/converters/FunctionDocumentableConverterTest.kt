@@ -29,10 +29,12 @@ import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.asType
 import com.google.devsite.renderer.converters.testing.functionSummary
+import com.google.devsite.renderer.converters.testing.generics
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
+import com.google.devsite.renderer.converters.testing.projectionName
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
@@ -284,6 +286,20 @@ internal class FunctionDocumentableConverterTest(
         val summary = """
             |fun <T, U, V> foo() = Unit
         """.render().summary()
+    }
+
+    @Test
+    fun `Function signature component creates multiple inline generics`() {
+        val inlineGenerics = """
+            |fun <T: Number, U: List<String>, V: T> foo() = Unit
+        """.render().summary().functionSummary().signature().typeParameters
+
+        assertThat(inlineGenerics.map { it.data.name }).isEqualTo(listOf("T", "U", "V"))
+        assertThat(inlineGenerics[0].projectionName()).isEqualTo("Number")
+        assertThat(inlineGenerics[1].projectionName()).isEqualTo("List")
+        val generics = (inlineGenerics[1].data.projections.single() as Parameter).generics()
+        assertThat((generics.single() as Parameter).link().name).isEqualTo("String")
+        assertThat(inlineGenerics[2].projectionName()).isEqualTo("T")
     }
 
     @Test
