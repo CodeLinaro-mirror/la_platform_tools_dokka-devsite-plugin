@@ -49,7 +49,7 @@ internal class RootDocumentableConverter(
     private val pathProvider: FilePathProvider,
     private val docsHolder: DocumentablesHolder
 ) {
-    private val javadocConverter = DocTagConverter(displayLanguage, pathProvider)
+    private val javadocConverter = DocTagConverter(displayLanguage, pathProvider, docsHolder)
 
     /** @return the root component for the class index page */
     suspend fun classesPage(): DevsitePage {

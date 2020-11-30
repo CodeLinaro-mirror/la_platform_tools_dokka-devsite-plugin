@@ -20,14 +20,17 @@ import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultParameter
 import com.google.devsite.components.impl.DefaultSymbolType
+import com.google.devsite.components.impl.DefaultTypeParameter
 import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.components.symbols.SymbolBase
 import com.google.devsite.components.symbols.SymbolType
+import com.google.devsite.components.symbols.TypeParameter as DokkaTypeParameter
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.DParameter
+import org.jetbrains.dokka.model.DTypeParameter
 import org.jetbrains.dokka.model.DefaultValue
 import org.jetbrains.dokka.model.FunctionalTypeConstructor
 import org.jetbrains.dokka.model.GenericTypeConstructor
@@ -37,7 +40,7 @@ import org.jetbrains.dokka.model.PrimitiveJavaType
 import org.jetbrains.dokka.model.Projection
 import org.jetbrains.dokka.model.Star
 import org.jetbrains.dokka.model.TypeConstructor
-import org.jetbrains.dokka.model.TypeParameter
+import org.jetbrains.dokka.model.TypeParameter as UpstreamTypeParameter
 import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Variance
 import org.jetbrains.dokka.model.Void
@@ -81,6 +84,15 @@ internal class ParameterDocumentableConverter(
             )
         }
     }
+
+    fun componentForTypeParameter(
+        param: DTypeParameter,
+        isSummary: Boolean
+    ): DokkaTypeParameter = DefaultTypeParameter(DokkaTypeParameter.Params(
+        displayLanguage = displayLanguage,
+        name = param.variantTypeParameter.inner.name,
+        projections = param.bounds.map { componentForProjection(it) }
+    ))
 
     /**
      * Returns the component for a type projection.
@@ -193,8 +205,8 @@ internal class ParameterDocumentableConverter(
             null
         }
 
-        is GenericTypeConstructor, is TypeParameter, is PrimitiveJavaType, is UnresolvedBound,
-        Star, JavaObject, Void -> null
+        is GenericTypeConstructor, is UpstreamTypeParameter, is PrimitiveJavaType,
+        is UnresolvedBound, Star, JavaObject, Void -> null
         is Nullable -> inner.receiver()
         is Variance<*> -> inner.receiver()
         else -> error("Unknown bound: $this")
@@ -211,7 +223,7 @@ internal class ParameterDocumentableConverter(
 
         val generics: List<SymbolBase> = when (this) {
             is TypeConstructor -> projections.map { componentForProjection(it) }
-            is TypeParameter, is PrimitiveJavaType, is UnresolvedBound,
+            is UpstreamTypeParameter, is PrimitiveJavaType, is UnresolvedBound,
             Star, Void, JavaObject -> emptyList()
             else -> error("Unknown bound: $this")
         }
@@ -230,7 +242,7 @@ internal class ParameterDocumentableConverter(
      */
     private fun Projection.toLink(): Link = when (this) {
         is TypeConstructor -> pathProvider.linkForReference(dri)
-        is TypeParameter -> DefaultLink(
+        is UpstreamTypeParameter -> DefaultLink(
             Link.Params(
                 name = presentableName ?: name,
                 url = ""
@@ -277,8 +289,9 @@ internal class ParameterDocumentableConverter(
         }
         is Nullable -> inner.isLambda()
         is Variance<*> -> inner.isLambda()
-        is TypeParameter, is PrimitiveJavaType, is UnresolvedBound, Star, JavaObject, Void -> false
-        else -> error("Unknown bound: $this")
+        is UpstreamTypeParameter, is PrimitiveJavaType,
+        is UnresolvedBound, Star, JavaObject, Void -> false
+        else -> error("Unknown bound: $this of type ${this::class.java}")
     }
 
     /** Gets the type constructor of a *lambda param only*. */

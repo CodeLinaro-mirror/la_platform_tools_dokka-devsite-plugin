@@ -24,6 +24,7 @@ import com.google.devsite.components.Link
 import com.google.devsite.components.pages.ClassIndex
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.TableOfContents
+import com.google.devsite.components.symbols.Annotation
 import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.components.symbols.SymbolBase
 import com.google.devsite.components.symbols.SymbolSummary
@@ -55,6 +56,7 @@ internal fun <T> DevsitePage.content(): T = data.content as T
 
 internal fun SummaryList.item() = item<TwoPaneSummaryItem>()
 internal fun SummaryList.items(size: Int? = null) = items<TwoPaneSummaryItem>(size)
+internal fun SummaryList.size() = items().size
 
 internal fun TwoPaneSummaryItem.link(): Link.Params = (data.title as Link).data
 internal fun TwoPaneSummaryItem.functionSummary() = data.description as SymbolSummary
@@ -73,3 +75,4 @@ internal fun SymbolBase.link(): Link.Params = when (this) {
     is SymbolType -> data.type.data
     else -> error("Not supported: $this")
 }
+internal fun Annotation.link(): Link.Params = data.type.data

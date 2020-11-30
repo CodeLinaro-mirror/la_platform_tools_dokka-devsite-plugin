@@ -27,6 +27,7 @@ internal interface Description : ContextFreeComponent {
         val pathProvider: FilePathProvider,
         val root: DocTag,
         val summary: Boolean = false,
-        val deprecation: String? = null
+        val deprecation: String? = null,
+        val additionalDesc: DocTag? = null
     )
 }

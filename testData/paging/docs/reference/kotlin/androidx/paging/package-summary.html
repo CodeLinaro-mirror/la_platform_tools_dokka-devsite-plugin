@@ -634,31 +634,31 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>pageSize</code></td>
+              <td><code>pageSize:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></code></td>
               <td width="100%">
                 <p>Number of items loaded at once from the <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>prefetchDistance</code></td>
+              <td><code>prefetchDistance:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a> = pageSize</code></td>
               <td width="100%">
                 <p>Distance the PagedList should prefetch.</p>
               </td>
             </tr>
             <tr>
-              <td><code>enablePlaceholders</code></td>
+              <td><code>enablePlaceholders:&nbsp;<a href="/reference/kotlin/kotlin/Boolean.html">Boolean</a> = true</code></td>
               <td width="100%">
                 <p>False if null placeholders should be disabled.</p>
               </td>
             </tr>
             <tr>
-              <td><code>initialLoadSizeHint</code></td>
+              <td><code>initialLoadSizeHint:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a> = pageSize * PagedList.Config.Builder.DEFAULT_INITIAL_PAGE_MULTIPLIER</code></td>
               <td width="100%">
                 <p>Number of items to load while initializing the PagedList.</p>
               </td>
             </tr>
             <tr>
-              <td><code>maxSize</code></td>
+              <td><code>maxSize:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a> = PagedList.Config.MAX_SIZE_UNBOUNDED</code></td>
               <td width="100%">
                 <p>Maximum number of items to keep in memory, or <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.Companion.html#MAX_SIZE_UNBOUNDED()">PagedList.Config.MAX_SIZE_UNBOUNDED</a></code> to disable page dropping.</p>
               </td>
@@ -681,49 +681,49 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>Key</code></td>
+              <td><code>&lt;Key&nbsp;:&nbsp;<a href="/reference/kotlin/kotlin/Any.html">Any</a>&gt;</code></td>
               <td width="100%">
                 <p>Type of key used to load data from the <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>Value</code></td>
+              <td><code>&lt;Value&nbsp;:&nbsp;<a href="/reference/kotlin/kotlin/Any.html">Any</a>&gt;</code></td>
               <td width="100%">
                 <p>Type of items held and loaded by the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>dataSource</code></td>
+              <td><code>dataSource:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;Value&gt;</code></td>
               <td width="100%">
                 <p><code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code> the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> will load from.</p>
               </td>
             </tr>
             <tr>
-              <td><code>config</code></td>
+              <td><code>config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
               <td width="100%">
                 <p>Config that defines how the <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> loads data from its <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>notifyExecutor</code></td>
+              <td><code>notifyExecutor:&nbsp;<a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a></code></td>
               <td width="100%">
                 <p><code><a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a></code> that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI/main thread.</p>
               </td>
             </tr>
             <tr>
-              <td><code>fetchExecutor</code></td>
+              <td><code>fetchExecutor:&nbsp;<a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a></code></td>
               <td width="100%">
                 <p><code><a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a></code> used to fetch from <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
             <tr>
-              <td><code>boundaryCallback</code></td>
+              <td><code>boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null</code></td>
               <td width="100%">
                 <p><code><a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a></code> for listening to out-of-data events.</p>
               </td>
             </tr>
             <tr>
-              <td><code>initialKey</code></td>
+              <td><code>initialKey:&nbsp;Key? = null</code></td>
               <td width="100%">
                 <p><code><a href="/reference/kotlin/androidx/paging/package-summary.html#PagedList(androidx.paging.DataSource,androidx.paging.PagedList.Config,java.util.concurrent.Executor,java.util.concurrent.Executor,androidx.paging.PagedList.BoundaryCallback,kotlin.Any)">Key</a></code> the <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code> should load around as part of initialization.</p>
               </td>
@@ -756,7 +756,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>scope</code></td>
+              <td><code>scope:&nbsp;<a href="/reference/kotlin/kotlinx/coroutines/CoroutineScope.html">CoroutineScope</a></code></td>
               <td width="100%">
                 <p>The coroutine scope where this page cache will be kept alive.</p>
               </td>
@@ -780,7 +780,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>lifecycle</code></td>
+              <td><code>lifecycle:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
               <td width="100%">
                 <p>The <a href="[Lifecycle]">Lifecycle</a> where the page cache will be kept alive.</p>
               </td>
@@ -804,7 +804,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>scope</code></td>
+              <td><code>scope:&nbsp;<a href="/reference/kotlin/kotlinx/coroutines/CoroutineScope.html">CoroutineScope</a></code></td>
               <td width="100%">
                 <p>The <code><a href="/reference/kotlin/kotlinx/coroutines/CoroutineScope.html">CoroutineScope</a></code> where the page cache will be kept alive. Typically this would be a managed scope such as <code>ViewModel.viewModelScope</code>, which automatically cancels after the <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> stream is no longer needed. Otherwise, the provided <code><a href="/reference/kotlin/kotlinx/coroutines/CoroutineScope.html">CoroutineScope</a></code> must be manually cancelled to avoid memory leaks.</p>
               </td>
@@ -849,37 +849,37 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>config</code></td>
+              <td><code>config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
               <td width="100%">
                 <p>Paging configuration.</p>
               </td>
             </tr>
             <tr>
-              <td><code>initialLoadKey</code></td>
+              <td><code>initialLoadKey:&nbsp;Key? = null</code></td>
               <td width="100%">
                 <p>Initial load key passed to the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> / <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>boundaryCallback</code></td>
+              <td><code>boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null</code></td>
               <td width="100%">
                 <p>The boundary callback for listening to <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> load state.</p>
               </td>
             </tr>
             <tr>
-              <td><code>fetchScheduler</code></td>
+              <td><code>fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td width="100%">
                 <p><a href="[Scheduler]">Scheduler</a> used to fetch from <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
             <tr>
-              <td><code>notifyScheduler</code></td>
+              <td><code>notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td width="100%">
                 <p><a href="[Scheduler]">Scheduler</a> that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
               </td>
             </tr>
             <tr>
-              <td><code>backpressureStrategy</code></td>
+              <td><code>backpressureStrategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a> = BackpressureStrategy.LATEST</code></td>
               <td width="100%">
                 <p><a href="[BackpressureStrategy]">BackpressureStrategy</a> for the <a href="[Flowable]">Flowable</a> to use.</p>
               </td>
@@ -922,37 +922,37 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>pageSize</code></td>
+              <td><code>pageSize:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></code></td>
               <td width="100%">
                 <p>Page size.</p>
               </td>
             </tr>
             <tr>
-              <td><code>initialLoadKey</code></td>
+              <td><code>initialLoadKey:&nbsp;Key? = null</code></td>
               <td width="100%">
                 <p>Initial load key passed to the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> / <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>boundaryCallback</code></td>
+              <td><code>boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null</code></td>
               <td width="100%">
                 <p>The boundary callback for listening to <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> load state.</p>
               </td>
             </tr>
             <tr>
-              <td><code>fetchScheduler</code></td>
+              <td><code>fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td width="100%">
                 <p><a href="[Scheduler]">Scheduler</a> used to fetch from <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
             <tr>
-              <td><code>notifyScheduler</code></td>
+              <td><code>notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td width="100%">
                 <p><a href="[Scheduler]">Scheduler</a> that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
               </td>
             </tr>
             <tr>
-              <td><code>backpressureStrategy</code></td>
+              <td><code>backpressureStrategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a> = BackpressureStrategy.LATEST</code></td>
               <td width="100%">
                 <p><a href="[BackpressureStrategy]">BackpressureStrategy</a> for the <a href="[Flowable]">Flowable</a> to use.</p>
               </td>
@@ -995,37 +995,37 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>config</code></td>
+              <td><code>config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
               <td width="100%">
                 <p>Paging configuration.</p>
               </td>
             </tr>
             <tr>
-              <td><code>initialLoadKey</code></td>
+              <td><code>initialLoadKey:&nbsp;Key? = null</code></td>
               <td width="100%">
                 <p>Initial load key passed to the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> / <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>boundaryCallback</code></td>
+              <td><code>boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null</code></td>
               <td width="100%">
                 <p>The boundary callback for listening to <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> load state.</p>
               </td>
             </tr>
             <tr>
-              <td><code>fetchScheduler</code></td>
+              <td><code>fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td width="100%">
                 <p><a href="[Scheduler]">Scheduler</a> used to fetch from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
             <tr>
-              <td><code>notifyScheduler</code></td>
+              <td><code>notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td width="100%">
                 <p><a href="[Scheduler]">Scheduler</a> that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
               </td>
             </tr>
             <tr>
-              <td><code>backpressureStrategy</code></td>
+              <td><code>backpressureStrategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a> = BackpressureStrategy.LATEST</code></td>
               <td width="100%">
                 <p><a href="[BackpressureStrategy]">BackpressureStrategy</a> for the <a href="[Flowable]">Flowable</a> to use.</p>
               </td>
@@ -1068,37 +1068,37 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>pageSize</code></td>
+              <td><code>pageSize:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></code></td>
               <td width="100%">
                 <p>Page size.</p>
               </td>
             </tr>
             <tr>
-              <td><code>initialLoadKey</code></td>
+              <td><code>initialLoadKey:&nbsp;Key? = null</code></td>
               <td width="100%">
                 <p>Initial load key passed to the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> / <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>boundaryCallback</code></td>
+              <td><code>boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null</code></td>
               <td width="100%">
                 <p>The boundary callback for listening to <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> load state.</p>
               </td>
             </tr>
             <tr>
-              <td><code>fetchScheduler</code></td>
+              <td><code>fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td width="100%">
                 <p><a href="[Scheduler]">Scheduler</a> used to fetch from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
             <tr>
-              <td><code>notifyScheduler</code></td>
+              <td><code>notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td width="100%">
                 <p><a href="[Scheduler]">Scheduler</a> that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
               </td>
             </tr>
             <tr>
-              <td><code>backpressureStrategy</code></td>
+              <td><code>backpressureStrategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a> = BackpressureStrategy.LATEST</code></td>
               <td width="100%">
                 <p><a href="[BackpressureStrategy]">BackpressureStrategy</a> for the <a href="[Flowable]">Flowable</a> to use.</p>
               </td>
@@ -1141,25 +1141,25 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>config</code></td>
+              <td><code>config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
               <td width="100%">
                 <p>Paging configuration.</p>
               </td>
             </tr>
             <tr>
-              <td><code>initialLoadKey</code></td>
+              <td><code>initialLoadKey:&nbsp;Key? = null</code></td>
               <td width="100%">
                 <p>Initial load key passed to the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> / <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>boundaryCallback</code></td>
+              <td><code>boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null</code></td>
               <td width="100%">
                 <p>The boundary callback for listening to <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> load state.</p>
               </td>
             </tr>
             <tr>
-              <td><code>fetchExecutor</code></td>
+              <td><code>fetchExecutor:&nbsp;<a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a> = ArchTaskExecutor.getIOThreadExecutor()</code></td>
               <td width="100%">
                 <p><code><a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a></code> for fetching data from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s.</p>
               </td>
@@ -1198,25 +1198,25 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>pageSize</code></td>
+              <td><code>pageSize:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></code></td>
               <td width="100%">
                 <p>Page size.</p>
               </td>
             </tr>
             <tr>
-              <td><code>initialLoadKey</code></td>
+              <td><code>initialLoadKey:&nbsp;Key? = null</code></td>
               <td width="100%">
                 <p>Initial load key passed to the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> / <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>boundaryCallback</code></td>
+              <td><code>boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null</code></td>
               <td width="100%">
                 <p>The boundary callback for listening to <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> load state.</p>
               </td>
             </tr>
             <tr>
-              <td><code>fetchExecutor</code></td>
+              <td><code>fetchExecutor:&nbsp;<a href="/reference/kotlin/java/util/concurrent/Executor.html">Executor</a> = ArchTaskExecutor.getIOThreadExecutor()</code></td>
               <td width="100%">
                 <p>Executor for fetching data from DataSources.</p>
               </td>
@@ -1256,32 +1256,33 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>config</code></td>
+              <td><code>config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
               <td width="100%">
                 <p>Paging configuration.</p>
               </td>
             </tr>
             <tr>
-              <td><code>initialLoadKey</code></td>
+              <td><code>initialLoadKey:&nbsp;Key? = null</code></td>
               <td width="100%">
                 <p>Initial load key passed to the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> / <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>boundaryCallback</code></td>
+              <td><code>boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null</code></td>
               <td width="100%">
                 <p>The boundary callback for listening to <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> load state.</p>
               </td>
             </tr>
             <tr>
-              <td><code>coroutineScope</code></td>
+              <td><code>coroutineScope:&nbsp;<a href="/reference/kotlin/kotlinx/coroutines/CoroutineScope.html">CoroutineScope</a> = GlobalScope</code></td>
               <td width="100%">
                 <p>Set the <code><a href="/reference/kotlin/kotlinx/coroutines/CoroutineScope.html">CoroutineScope</a></code> that page loads should be launched within. The set <code><a href="/reference/kotlin/androidx/paging/package-summary.html#coroutineScope()">coroutineScope</a></code> allows a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> to cancel running load operations when the results are no longer needed - for example, when the containing activity is destroyed.</p>
                 <p>Defaults to <code><a href="/reference/kotlin/kotlinx/coroutines/GlobalScope.html">GlobalScope</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>fetchDispatcher</code></td>
+              <td><code>fetchDispatcher:&nbsp;<a href="/reference/kotlin/kotlinx/coroutines/CoroutineDispatcher.html">CoroutineDispatcher</a> = ArchTaskExecutor.getIOThreadExecutor()
+        .asCoroutineDispatcher()</code></td>
               <td width="100%">
                 <p><code><a href="/reference/kotlin/kotlinx/coroutines/CoroutineDispatcher.html">CoroutineDispatcher</a></code> for fetching data from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s.</p>
               </td>
@@ -1321,32 +1322,33 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>pageSize</code></td>
+              <td><code>pageSize:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></code></td>
               <td width="100%">
                 <p>Page size.</p>
               </td>
             </tr>
             <tr>
-              <td><code>initialLoadKey</code></td>
+              <td><code>initialLoadKey:&nbsp;Key? = null</code></td>
               <td width="100%">
                 <p>Initial load key passed to the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> / <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>boundaryCallback</code></td>
+              <td><code>boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null</code></td>
               <td width="100%">
                 <p>The boundary callback for listening to <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> load state.</p>
               </td>
             </tr>
             <tr>
-              <td><code>coroutineScope</code></td>
+              <td><code>coroutineScope:&nbsp;<a href="/reference/kotlin/kotlinx/coroutines/CoroutineScope.html">CoroutineScope</a> = GlobalScope</code></td>
               <td width="100%">
                 <p>Set the <code><a href="/reference/kotlin/kotlinx/coroutines/CoroutineScope.html">CoroutineScope</a></code> that page loads should be launched within. The set <code><a href="/reference/kotlin/androidx/paging/package-summary.html#coroutineScope()">coroutineScope</a></code> allows a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> to cancel running load operations when the results are no longer needed - for example, when the containing activity is destroyed.</p>
                 <p>Defaults to <code><a href="/reference/kotlin/kotlinx/coroutines/GlobalScope.html">GlobalScope</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>fetchDispatcher</code></td>
+              <td><code>fetchDispatcher:&nbsp;<a href="/reference/kotlin/kotlinx/coroutines/CoroutineDispatcher.html">CoroutineDispatcher</a> = ArchTaskExecutor.getIOThreadExecutor()
+        .asCoroutineDispatcher()</code></td>
               <td width="100%">
                 <p><code><a href="/reference/kotlin/kotlinx/coroutines/CoroutineDispatcher.html">CoroutineDispatcher</a></code> for fetching data from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s.</p>
               </td>
@@ -1385,31 +1387,31 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>config</code></td>
+              <td><code>config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
               <td width="100%">
                 <p>Paging configuration.</p>
               </td>
             </tr>
             <tr>
-              <td><code>initialLoadKey</code></td>
+              <td><code>initialLoadKey:&nbsp;Key? = null</code></td>
               <td width="100%">
                 <p>Initial load key passed to the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> / <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>boundaryCallback</code></td>
+              <td><code>boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null</code></td>
               <td width="100%">
                 <p>The boundary callback for listening to PagedList load state.</p>
               </td>
             </tr>
             <tr>
-              <td><code>fetchScheduler</code></td>
+              <td><code>fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td width="100%">
                 <p><a href="[Scheduler]">Scheduler</a> used to fetch from <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
             <tr>
-              <td><code>notifyScheduler</code></td>
+              <td><code>notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td width="100%">
                 <p><a href="[Scheduler]">Scheduler</a> that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
               </td>
@@ -1452,31 +1454,31 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>pageSize</code></td>
+              <td><code>pageSize:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></code></td>
               <td width="100%">
                 <p>Size of pages to load.</p>
               </td>
             </tr>
             <tr>
-              <td><code>initialLoadKey</code></td>
+              <td><code>initialLoadKey:&nbsp;Key? = null</code></td>
               <td width="100%">
                 <p>Initial load key passed to the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> / <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>boundaryCallback</code></td>
+              <td><code>boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null</code></td>
               <td width="100%">
                 <p>The boundary callback for listening to <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> load state.</p>
               </td>
             </tr>
             <tr>
-              <td><code>fetchScheduler</code></td>
+              <td><code>fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td width="100%">
                 <p><a href="[Scheduler]">Scheduler</a> used to fetch from <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
             <tr>
-              <td><code>notifyScheduler</code></td>
+              <td><code>notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td width="100%">
                 <p><a href="[Scheduler]">Scheduler</a> that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
               </td>
@@ -1519,31 +1521,31 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>config</code></td>
+              <td><code>config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
               <td width="100%">
                 <p>Paging configuration.</p>
               </td>
             </tr>
             <tr>
-              <td><code>initialLoadKey</code></td>
+              <td><code>initialLoadKey:&nbsp;Key? = null</code></td>
               <td width="100%">
                 <p>Initial load key passed to the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> / <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>boundaryCallback</code></td>
+              <td><code>boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null</code></td>
               <td width="100%">
                 <p>The boundary callback for listening to PagedList load state.</p>
               </td>
             </tr>
             <tr>
-              <td><code>fetchScheduler</code></td>
+              <td><code>fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td width="100%">
                 <p><a href="[Scheduler]">Scheduler</a> used to fetch from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
             <tr>
-              <td><code>notifyScheduler</code></td>
+              <td><code>notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td width="100%">
                 <p><a href="[Scheduler]">Scheduler</a> that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
               </td>
@@ -1586,31 +1588,31 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>pageSize</code></td>
+              <td><code>pageSize:&nbsp;<a href="/reference/kotlin/kotlin/Int.html">Int</a></code></td>
               <td width="100%">
                 <p>Size of pages to load.</p>
               </td>
             </tr>
             <tr>
-              <td><code>initialLoadKey</code></td>
+              <td><code>initialLoadKey:&nbsp;Key? = null</code></td>
               <td width="100%">
                 <p>Initial load key passed to the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> / <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>boundaryCallback</code></td>
+              <td><code>boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null</code></td>
               <td width="100%">
                 <p>The boundary callback for listening to <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> load state.</p>
               </td>
             </tr>
             <tr>
-              <td><code>fetchScheduler</code></td>
+              <td><code>fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td width="100%">
                 <p><a href="[Scheduler]">Scheduler</a> used to fetch from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
             <tr>
-              <td><code>notifyScheduler</code></td>
+              <td><code>notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td width="100%">
                 <p><a href="[Scheduler]">Scheduler</a> that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
               </td>

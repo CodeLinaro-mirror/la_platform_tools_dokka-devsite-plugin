@@ -151,6 +151,7 @@ internal class DefaultDescription(
                     strong { +data.deprecation }
                     br()
                     renderTags(data.root.children, State())
+                    data.additionalDesc?.let { renderTags(listOf(data.additionalDesc), State()) }
                 }
             }
         }

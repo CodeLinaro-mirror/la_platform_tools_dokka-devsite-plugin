@@ -43,7 +43,7 @@ internal class PackageDocumentableConverter(
     private val pathProvider: FilePathProvider,
     private val docsHolder: DocumentablesHolder
 ) {
-    private val javadocConverter = DocTagConverter(displayLanguage, pathProvider)
+    private val javadocConverter = DocTagConverter(displayLanguage, pathProvider, docsHolder)
     private val functionConverter =
         FunctionDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
     private val propertyConverter =

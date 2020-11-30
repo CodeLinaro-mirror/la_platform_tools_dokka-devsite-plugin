@@ -33,7 +33,9 @@ import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
+import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DModule
@@ -46,7 +48,6 @@ import org.junit.runners.Parameterized
 internal class FunctionDocumentableConverterTest(
     private val language: Language
 ) : ConverterTestBase(language) {
-    private val docConverter = DocTagConverter(language, pathProvider())
 
     @Test
     fun `Top level function summary component has correct default modifiers`() {
@@ -437,11 +438,15 @@ internal class FunctionDocumentableConverterTest(
         fromClass: Boolean = false,
         hints: ModifierHints = ModifierHints(language)
     ): TwoPaneSummaryItem {
+        val holder = runBlocking { DocumentablesHolder(this@summary, this) }
+        val docConverter = DocTagConverter(language, pathProvider(), holder)
         val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
         return converter.summary(function(fromClass), hints.copy(isSummary = true))
     }
 
     private fun DModule.summaryForConstructor(): SingleColumnSummaryItem {
+        val holder = runBlocking { DocumentablesHolder(this@summaryForConstructor, this) }
+        val docConverter = DocTagConverter(language, pathProvider(), holder)
         val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
         return converter.summaryForConstructor(function(fromConstructor = true))
     }
@@ -450,6 +455,8 @@ internal class FunctionDocumentableConverterTest(
         fromClass: Boolean = false,
         hints: ModifierHints = ModifierHints(language)
     ): SymbolDetail {
+        val holder = runBlocking { DocumentablesHolder(this@detail, this) }
+        val docConverter = DocTagConverter(language, pathProvider(), holder)
         val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
         return converter.detail(function(fromClass), hints)
     }

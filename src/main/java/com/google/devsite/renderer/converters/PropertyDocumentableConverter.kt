@@ -89,7 +89,6 @@ internal class PropertyDocumentableConverter(
 
     private fun DProperty.signature(isSummary: Boolean): PropertySignature {
         val receiver = receiver?.let { paramConverter.componentForParameter(it, isSummary) }
-
         return DefaultPropertySignature(
             PropertySignature.Params(
                 // TODO(b/168136770): figure out path for default anchors

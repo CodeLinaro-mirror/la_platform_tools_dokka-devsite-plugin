@@ -28,7 +28,9 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.asType
 import com.google.devsite.renderer.converters.testing.functionSummary
 import com.google.devsite.renderer.converters.testing.name
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
+import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DProperty
 import org.junit.Test
@@ -151,7 +153,8 @@ internal class PropertyDocumentableConverterTest(
         fromClass: Boolean = false,
         hints: ModifierHints = ModifierHints(language)
     ): TwoPaneSummaryItem {
-        val docConverter = DocTagConverter(language, pathProvider())
+        val holder = runBlocking { DocumentablesHolder(this@summary, this) }
+        val docConverter = DocTagConverter(language, pathProvider(), holder)
         val converter = PropertyDocumentableConverter(language, pathProvider(), docConverter)
         return converter.summary(property(fromClass), hints)
     }
@@ -160,7 +163,8 @@ internal class PropertyDocumentableConverterTest(
         fromClass: Boolean = false,
         hints: ModifierHints = ModifierHints(language)
     ): SymbolDetail {
-        val docConverter = DocTagConverter(language, pathProvider())
+        val holder = runBlocking { DocumentablesHolder(this@detail, this) }
+        val docConverter = DocTagConverter(language, pathProvider(), holder)
         val converter = PropertyDocumentableConverter(language, pathProvider(), docConverter)
         return converter.detail(property(fromClass), hints)
     }

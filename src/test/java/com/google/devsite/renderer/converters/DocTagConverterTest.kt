@@ -22,22 +22,34 @@ import com.google.devsite.components.Description
 import com.google.devsite.components.Raw
 import com.google.devsite.components.impl.DefaultDescription
 import com.google.devsite.components.impl.UndocumentedSymbolDescription
+import com.google.devsite.components.symbols.Parameter
+import com.google.devsite.components.symbols.SymbolType
+import com.google.devsite.components.symbols.TypeParameter
 import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TableTitle
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.testing.asType
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
+import com.google.devsite.renderer.converters.testing.size
 import com.google.devsite.renderer.converters.testing.title
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
+import kotlinx.coroutines.runBlocking
+import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.doc.Img
 import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.model.properties.WithExtraProperties
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
+import kotlin.test.assertFails
 
 @RunWith(Parameterized::class)
 internal class DocTagConverterTest(
@@ -88,6 +100,86 @@ internal class DocTagConverterTest(
     }
 
     @Test
+    fun `Class type parameters can be documented with @param`() {
+        val documentation = """
+            |/**
+            | * Hello World!
+            | * @param Bar A type of bar
+            | */
+            |class <Bar: String> Foo
+        """.render().documentation()
+
+        assertThat(documentation.size).isEqualTo(2)
+        val parameterTable = documentation.first { it is SummaryList } as SummaryList
+
+        assertThat((parameterTable.data.header as TableTitle).data.title).isEqualTo("Parameters")
+        val theParameter = parameterTable.data.items.single() as TwoPaneSummaryItem
+        val theTypeParameter = theParameter.data.title as TypeParameter
+        assertThat(theTypeParameter.data.name).isEqualTo("Bar")
+        val theProjection = (theTypeParameter.data.projections.single() as Parameter).data
+        assertThat((theProjection.primary as SymbolType).data.type.data.name).isEqualTo("String")
+        val theDescTag = (theParameter.data.description as Description).data.root.children.single()
+        assertThat((theDescTag.children.single() as Text).body).isEqualTo("A type of bar")
+    }
+
+    @Test
+    fun `Class property parameters can be documented with @param on the class`() {
+        val module = """
+            |/**
+            | * Hello World!
+            | * @param bar A vary bary name
+            | */
+            |class Foo(val bar: String) {
+            |
+            |}
+        """.render()
+
+        val propertyDoc = module.documentation(doc = { this.packages.single()
+            .classlikes.single().properties.single() }).single() as Description
+        val constructorDoc = module.documentation(doc = { (this.packages.single()
+            .classlikes.single() as DClass).constructors.single() }).single() as SummaryList
+
+        val propertyText = propertyDoc.data.root.children.single().children.single() as Text
+        assertThat(propertyText.body).isEqualTo("A vary bary name")
+
+        assertThat(constructorDoc.title()).isEqualTo("Parameters")
+        val constructorParam = constructorDoc.items().single().data
+        assertThat((constructorParam.title as Parameter).data.name).isEqualTo("bar")
+        val constructorDescs = (constructorParam.description as Description).data.root.children
+        val constructorDesc = constructorDescs.single().children.single()
+        assertThat((constructorDesc as Text).body).isEqualTo("A vary bary name")
+    }
+
+    @Ignore // @property not implemented
+    @Test
+    fun `Class property parameters can be documented with @property on the class`() {
+        val module = """
+            |/**
+            | * Hello World!
+            | * @property bar A vary bary name
+            | */
+            |class Foo(val bar: String) {
+            |
+            |}
+        """.render()
+
+        val propertyDoc = module.documentation(doc = { this.packages.single()
+            .classlikes.single().properties.single() }).single() as Description
+        val constructorDoc = module.documentation(doc = { (this.packages.single()
+            .classlikes.single() as DClass).constructors.single() }).single() as SummaryList
+
+        val propertyText = propertyDoc.data.root.children.single().children.single() as Text
+        assertThat(propertyText.body).isEqualTo("A vary bary name")
+
+        assertThat(constructorDoc.title()).isEqualTo("Parameters")
+        val constructorParam = constructorDoc.items().single().data
+        assertThat((constructorParam.title as Parameter).data.name).isEqualTo("bar")
+        val constructorDescs = (constructorParam.description as Description).data.root.children
+        val constructorDesc = constructorDescs.single().children.single()
+        assertThat((constructorDesc as Text).body).isEqualTo("A vary bary name")
+    }
+
+    @Test
     fun `Full documentation has img tag`() {
         val documentation = """
             |/**
@@ -111,10 +203,180 @@ internal class DocTagConverterTest(
         """.render().documentation()
 
         val paramSummary = documentation.last() as SummaryList
-        val paramText = paramSummary.item().data.title as Raw
+        val paramParam = paramSummary.item().data.title as Parameter
 
         assertThat(paramSummary.title()).isEqualTo("Parameters")
-        assertThat(paramText.data.text).isEqualTo("a")
+        assertThat(paramParam.data.name).isEqualTo("a")
+    }
+
+    @Test
+    fun `@param throws exception for invalid parameter`() {
+        assertFails {
+            """
+            |/**
+            | * @param NOT_A_REAL_PARAM aaaaaa
+            | */
+            |fun foo()
+            """.render().documentation()
+        }
+        assertFails { // for type params and property params
+            """
+            |/**
+            | * @param NOT_A_REAL_PARAM aaaaaa
+            | */
+            |class Foo { }
+            """.render().documentation()
+        }
+        assertFails { // for @param in the wrong place
+            """
+            |/**
+            | * @param NOT_A_REAL_PARAM aaaaaa
+            | */
+            |val foo = "bbb"
+            """.render().documentation()
+        }
+    }
+
+    @Ignore // @property not implemented
+    @Test
+    fun `@property throws exception for invalid property`() {
+        assertFails { // for property params documented as @property
+            """
+            |/**
+            | * @property NOT_A_REAL_PROPERTY aaaaaa
+            | */
+            |class Foo(NOT_A_REAL_PROPERTY: String) { }
+            """.render().documentation()
+        }
+        assertFails { // for property params documented as @property
+            """
+            |/**
+            | * @property NOT_A_REAL_PROPERTY aaaaaa
+            | */
+            |class Foo() { }
+            """.render().documentation()
+        }
+        assertFails { // for property params documented as @property
+            """
+            |class Foo() {
+            |   /**
+            |    * @property NO_PROPERTIES_HERE aaaaaa
+            |    */
+            |   fun doAThing()
+            |}
+            """.render().documentation()
+        }
+    }
+
+    @Test
+    fun `Full documentation parameters table has types`() {
+        val documentation = """
+            |/**
+            | * @param T a type
+            | */
+            |    interface PagedListListener<T : Any> {
+            |/**
+            | * Called after the current PagedList has been updated.
+            | *
+            | * @param previousList The previous list, may be null.
+            | * @param currentList The new current list, may be null.
+            | */
+            |fun onCurrentListChanged(
+            |    @Suppress("DEPRECATION") previousList: List<T>?,
+            |    @Suppress("DEPRECATION") currentList: List<T>?
+            |)
+            |}
+        """.render().documentation(::classFunctionDoc)
+        val paramTable = documentation.first { (it as? SummaryList)?.title() == "Parameters" }
+            as SummaryList
+        assertThat(paramTable.size()).isEqualTo(2)
+        val param0 = paramTable.items().first()
+        val param0Left = (param0.data.title as Parameter)
+        val param0LeftType = param0Left.data.primary.asType().data
+        val param0Right = (param0.data.description as Description).data.root.children.first()
+            .children.first() as Text
+        val param1 = paramTable.items().last()
+        val param1Left = (param1.data.title as Parameter)
+        val param1LeftType = param1Left.data.primary.asType().data
+        val param1Right = (param1.data.description as Description).data.root.children.first()
+            .children.first() as Text
+
+        assertThat(param0Left.data.name).isEqualTo("previousList")
+        assertThat(param0LeftType.type.data.name).isEqualTo("List")
+        assertThat(param0LeftType.generics.single().link().name).isEqualTo("T")
+        assertThat(param0Right.body).isEqualTo("The previous list, may be null.")
+        assertThat(param1Left.data.name).isEqualTo("currentList")
+        assertThat(param1LeftType.type.data.name).isEqualTo("List")
+        assertThat(param1LeftType.generics.single().link().name).isEqualTo("T")
+        assertThat(param1Right.body).isEqualTo("The new current list, may be null.")
+        javaOnly {
+            assertThat(param0Left.data.annotations.single().link().name).isEqualTo("Nullable")
+            assertThat(param1Left.data.annotations.single().link().name).isEqualTo("Nullable")
+        }
+        kotlinOnly {
+            assertThat(param0LeftType.nullable).isEqualTo(true)
+            assertThat(param1LeftType.nullable).isEqualTo(true)
+        }
+    }
+
+    @Test
+    fun `Parameter documentation works on generic and lambda types`() {
+        val documentation = """
+            |abstract class Factory<Key : Any, Value : Any> {
+            |    /**
+            |     * Applies the given function to each value emitted by DataSources produced by this Factory.
+            |     *
+            |     * Same as mapByPage, but operates on individual items.
+            |     *
+            |     * @param function Function that runs on each loaded item, returning items of a potentially
+            |     * new type.
+            |     * @param ToValue Type of items produced by the new DataSource, from the passed function.
+            |     * @return A new [Factory], which transforms items using the given function.
+            |     *
+            |     * @see mapByPage
+            |     * @see DataSource.map
+            |     * @see DataSource.mapByPage
+            |     */
+            |    open fun <ToValue : String> map(function: (Value) -> ToValue): Factory<Key, ToValue>
+            |}
+        """.render().documentation(doc = ::classFunctionDoc)
+        val paramTable = documentation.first {
+            (it as? SummaryList)?.title() == "Parameters" } as SummaryList
+
+        // We don't want Value and/or Key to appear listed as parameters for map().
+        assertThat(paramTable.size()).isEqualTo(2)
+
+        val param0 = paramTable.items().first()
+        val param0Left = (param0.data.title as Parameter)
+        val param0Right = (param0.data.description as Description).data.root.children.first()
+            .children.first() as Text
+        val param1 = paramTable.items().last()
+        val param1Left = (param1.data.title as TypeParameter)
+        val param1Right = (param1.data.description as Description).data.root.children.first()
+            .children.first() as Text
+
+        assertThat(param0Left.data.name).isEqualTo("function")
+        javaOnly {
+            val param0Type = (param0Left.data.primary as SymbolType).data
+            assertThat(param0Type.type.data.name).isEqualTo("Function1")
+            val param0LambdaTypes = param0Type.generics.map { it.link().name }
+            assertThat(param0LambdaTypes).isEqualTo(listOf("Value", "ToValue"))
+        }
+        kotlinOnly {
+            assertThat(param0Left.data.isLambda).isTrue()
+            assertThat(param0Left.data.receiver).isNull()
+            assertThat(param0Left.data.lambdaModifiers).isEmpty()
+            // The evaluation type of the lambda is ToValue
+            assertThat(param0Left.link().name).isEqualTo("ToValue")
+            val param0LambdaArgumentType = param0Left.data.lambdaParams.map { it.link().name }
+            assertThat(param0LambdaArgumentType).isEqualTo(listOf("Value"))
+        }
+        assertThat(param0Right.body).isEqualTo("Function that runs on each loaded item, " +
+            "returning items of a potentially new type.")
+        assertThat(param1Left.data.name).isEqualTo("ToValue")
+        assertThat(param1Left.data.projections.single().link().name).isEqualTo("String")
+        assertThat(param1Right.body).isEqualTo("Type of items produced by the new " +
+            "DataSource, from the passed function.")
     }
 
     @Test
@@ -150,10 +412,15 @@ internal class DocTagConverterTest(
         """.render().documentation()
 
         val paramSummary = documentation.last() as SummaryList
-        val paramText = paramSummary.item().data.title as Raw
+        val paramParam = (paramSummary.item().data.title as Parameter).data
 
         assertThat(paramSummary.title()).isEqualTo("Parameters")
-        assertThat(paramText.data.text).isEqualTo("receiver")
+        javaOnly {
+            assertThat(paramParam.name).isEqualTo("receiver")
+        }
+        kotlinOnly {
+            assertThat(paramParam.name).isEqualTo("")
+        }
     }
 
     @Test
@@ -346,12 +613,13 @@ internal class DocTagConverterTest(
         val params = paramSummary.items(3)
 
         for ((i, param) in params.withIndex()) {
-            assertThat((param.data.title as Raw).data.text).isEqualTo(expected[i])
+            assertThat((param.data.title as Parameter).data.name).isEqualTo(expected[i])
         }
     }
 
     private fun DModule.description(): Description {
-        val converter = DocTagConverter(language, pathProvider())
+        val holder = runBlocking { DocumentablesHolder(this@description, this) }
+        val converter = DocTagConverter(language, pathProvider(), holder)
         val doc = smartDoc(this)
         val annotations = (doc as? WithExtraProperties<*>)?.annotations().orEmpty()
         return converter.summaryDescription(doc, annotations)
@@ -361,7 +629,8 @@ internal class DocTagConverterTest(
         doc: DModule.() -> Documentable = ::smartDoc,
         paramNames: List<String> = emptyList()
     ): List<ContextFreeComponent> {
-        val converter = DocTagConverter(language, pathProvider())
+        val holder = runBlocking { DocumentablesHolder(this@documentation, this) }
+        val converter = DocTagConverter(language, pathProvider(), holder)
         return converter.metadata(
             doc(),
             returnType = NoopContextFreeComponent,
@@ -375,8 +644,12 @@ internal class DocTagConverterTest(
         return packageDoc.classlikes.singleOrNull() ?: packageDoc.functions.single()
     }
 
+    /**
+     * takes a DModule to it's only class' only method not inherited from Any
+     */
     private fun classFunctionDoc(module: DModule): Documentable {
-        return module.packages.single().classlikes.single().functions.single()
+        return module.packages.single().classlikes.single().functions.single {
+            !it.dri.isFromBaseClass() }
     }
 
     companion object {
