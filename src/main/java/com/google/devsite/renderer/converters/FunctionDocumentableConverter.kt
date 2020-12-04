@@ -114,7 +114,7 @@ internal class FunctionDocumentableConverter(
                 symbolType = type,
                 signature = function.signature(isSummary = false),
                 metadata = javadocConverter.metadata(
-                    doc = function,
+                    documentable = function,
                     returnType = returnType,
                     paramNames = listOf("receiver") + function.parameters.map { it.name!! },
                     annotations = annotations

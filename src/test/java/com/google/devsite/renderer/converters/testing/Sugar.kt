@@ -34,6 +34,7 @@ import com.google.devsite.components.symbols.TypeParameter
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
 import com.google.devsite.components.table.TwoPaneSummaryItem
+import org.jetbrains.dokka.model.doc.DocTag
 import org.jetbrains.dokka.model.doc.Text
 
 internal fun <T> Collection<T>.item(): T = items(1).single()
@@ -70,7 +71,16 @@ internal fun TwoPaneSummaryItem.description() = (this.data.description as Descri
 
 internal fun SymbolSummary.name(): String = data.signature.data.name.data.name
 
-internal fun Description.text() = (this.data.root.children.single().children.single() as Text).body
+internal fun Description.text(): String {
+    var result = ""
+    if (this.data.root.children.isNotEmpty())
+        result += this.data.root.deepText()
+    if (this.data.additionalDesc != null)
+        result += this.data.additionalDesc!!.deepText()
+    return result
+}
+
+private fun DocTag.deepText(): String = (this.children.single().children.single() as Text).body
 
 internal fun TypeParameter.projectionName() = this.data.projections.single().link().name
 internal fun Parameter.generics() = this.data.primary.asType().data.generics

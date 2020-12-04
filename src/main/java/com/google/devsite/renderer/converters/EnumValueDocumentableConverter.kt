@@ -72,7 +72,7 @@ internal class EnumValueDocumentableConverter(
                 symbolType = SymbolDetail.SymbolType.PROPERTY,
                 signature = enumValue.signature(false),
                 metadata = javadocConverter.metadata(
-                    doc = enumValue,
+                    documentable = enumValue,
                     returnType = projection,
                     paramNames = listOf(),
                     annotations = annotations

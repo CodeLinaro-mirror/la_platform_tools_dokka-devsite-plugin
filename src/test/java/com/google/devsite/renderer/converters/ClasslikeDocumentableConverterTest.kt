@@ -115,15 +115,38 @@ internal class ClasslikeDocumentableConverterTest(
 
         javaOnly {
             val classlike = page.content<Classlike>()
-            val (summary) = classlike.symbolsFor("Public functions", "Public methods")
+            val (summary) = classlike.symbolsFor("Public methods")
             assertThat(summary.items().first().functionSummary().name()).isEqualTo("aar")
             assertThat(summary.items().last().functionSummary().name()).isEqualTo("bar")
         }
         kotlinOnly {
             val classlike = page.content<Classlike>()
-            val (summary) = classlike.symbolsFor("Public functions", "Public methods")
+            val (summary) = classlike.symbolsFor("Public functions")
             assertThat(summary.items().first().functionSummary().name()).isEqualTo("foo")
             assertThat(summary.items().last().functionSummary().name()).isEqualTo("zoo")
+        }
+    }
+
+    @Test
+    fun `Properties are documented in sorted order`() {
+        val expected = listOf("a", "b", "c")
+        val documentation = """
+            |class Foo {
+            |   /** @property b b_doc */
+            |   public val b: String
+            |   /** @property c c_doc */
+            |   public val c: String
+            |   /** @property a a_doc */
+            |   public val a: String
+            |}
+        """.render().page()
+
+        val (propertiesSummary) = documentation.content<Classlike>()
+            .symbolsFor("Public fields", "Public properties")
+        val props = propertiesSummary.items(3)
+
+        for ((i, prop) in props.withIndex()) {
+            assertThat((prop.data.description as SymbolSummary).name()).isEqualTo(expected[i])
         }
     }
 

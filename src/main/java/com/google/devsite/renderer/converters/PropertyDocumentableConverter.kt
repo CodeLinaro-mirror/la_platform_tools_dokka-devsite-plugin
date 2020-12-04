@@ -78,7 +78,7 @@ internal class PropertyDocumentableConverter(
                 symbolType = SymbolDetail.SymbolType.PROPERTY,
                 signature = property.signature(isSummary = false),
                 metadata = javadocConverter.metadata(
-                    doc = property,
+                    documentable = property,
                     returnType = returnType,
                     paramNames = listOf("receiver"),
                     annotations = annotations

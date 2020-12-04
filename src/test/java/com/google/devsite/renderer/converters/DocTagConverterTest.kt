@@ -19,6 +19,7 @@ package com.google.devsite.renderer.converters
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.Description
+import com.google.devsite.components.Link
 import com.google.devsite.components.Raw
 import com.google.devsite.components.impl.DefaultDescription
 import com.google.devsite.components.impl.UndocumentedSymbolDescription
@@ -48,7 +49,6 @@ import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.doc.Img
 import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.model.properties.WithExtraProperties
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -154,7 +154,7 @@ internal class DocTagConverterTest(
         val propertyDoc = module.documentation(doc = { this.packages.single()
             .classlikes.single().properties.single() }).single() as Description
         val constructorDoc = module.documentation(doc = { (this.packages.single()
-            .classlikes.single() as DClass).constructors.single() }).single() as SummaryList
+            .classlikes.single() as DClass).constructors.single() }).last() as SummaryList
 
         assertThat(propertyDoc.text()).isEqualTo("A vary bary name")
 
@@ -163,7 +163,6 @@ internal class DocTagConverterTest(
         assertThat(constructorDoc.single().description().text()).isEqualTo("A vary bary name")
     }
 
-    @Ignore // @property not implemented
     @Test
     fun `Class property parameters can be documented with @property on the class`() {
         val module = """
@@ -178,14 +177,13 @@ internal class DocTagConverterTest(
 
         val propertyDoc = module.documentation(doc = { this.packages.single()
             .classlikes.single().properties.single() }).single() as Description
-        val constructorDoc = module.documentation(doc = { (this.packages.single()
-            .classlikes.single() as DClass).constructors.single() }).single() as SummaryList
-
+        // Upstream dokka does not propagate @property documentation on property parameters to the
+        // constructor. This may or may not be what we want.
+        assertFails {
+            val constructorDoc = module.documentation(doc = { (this.packages.single()
+                    .classlikes.single() as DClass).constructors.single() }).single() as SummaryList
+        }
         assertThat(propertyDoc.text()).isEqualTo("A vary bary name")
-
-        assertThat(constructorDoc.title()).isEqualTo("Parameters")
-        assertThat(constructorDoc.single().name()).isEqualTo("bar")
-        assertThat(constructorDoc.single().description().text()).isEqualTo("A vary bary name")
     }
 
     @Test
@@ -219,6 +217,30 @@ internal class DocTagConverterTest(
     }
 
     @Test
+    fun `Full documentation has properties`() {
+        val description = """
+            |/** @property bar a barber */
+            |val bar: String = "barbarbar
+        """.render().documentation(doc = { this.packages.single()
+            .properties.single() }).single() as Description
+
+        assertThat(description.text()).isEqualTo("a barber")
+    }
+
+    @Test
+    fun `Full class documentation has properties`() {
+        val description = """
+            |class Foo {
+            |   /** @property bar a barber */
+            |   val bar: String = "barbarbar
+            |}
+        """.render().documentation(doc = { this.packages.single().classlikes.single()
+            .properties.single() }).single() as Description
+
+        assertThat(description.text()).isEqualTo("a barber")
+    }
+
+    @Test
     fun `@param throws exception for invalid parameter`() {
         assertFails {
             """
@@ -246,10 +268,9 @@ internal class DocTagConverterTest(
         }
     }
 
-    @Ignore // @property not implemented
     @Test
     fun `@property throws exception for invalid property`() {
-        assertFails { // for property params documented as @property
+        assertFails { // @property on a parameter that is not a property
             """
             |/**
             | * @property NOT_A_REAL_PROPERTY aaaaaa
@@ -257,15 +278,15 @@ internal class DocTagConverterTest(
             |class Foo(NOT_A_REAL_PROPERTY: String) { }
             """.render().documentation()
         }
-        assertFails { // for property params documented as @property
+        assertFails { // there is no corresponding property
             """
             |/**
-            | * @property NOT_A_REAL_PROPERTY aaaaaa
+            | * @property NO_PROPERTIES_HERE aaaaaa
             | */
             |class Foo() { }
             """.render().documentation()
         }
-        assertFails { // for property params documented as @property
+        assertFails { // can't @property on a function
             """
             |class Foo() {
             |   /**
@@ -273,6 +294,21 @@ internal class DocTagConverterTest(
             |    */
             |   fun doAThing()
             |}
+            """.render().documentation(::classFunctionDoc)
+        }
+        assertFails { // can't @property on a function
+            """
+            |/**
+            | * @property NO_PROPERTIES_HERE aaaaaa
+            | */
+            |fun doAThing()
+            """.render().documentation()
+        }
+        assertFails { // @property must be on correct property
+            """
+            |/** @property a
+            |val b
+            |val a
             """.render().documentation()
         }
     }
@@ -375,6 +411,31 @@ internal class DocTagConverterTest(
         assertThat(param1Left.projectionName()).isEqualTo("String")
         assertThat(param1.description().text()).isEqualTo("Type of items produced by the " +
             "new DataSource, from the passed function.")
+
+        val seeAlsoTable = documentation.first {
+            (it as? SummaryList)?.title() == "See also" } as SummaryList
+        assertThat(seeAlsoTable.size()).isEqualTo(3)
+        assertThat(seeAlsoTable.items().map { (it.data.title as Link).data.name })
+            .isEqualTo(listOf("mapByPage", "DataSource.map", "DataSource.mapByPage"))
+}
+
+    @Test
+    fun `Copied from PagingData`() {
+        val documentation = """
+                |/**
+                | * Returns a [PagingData] containing only elements matching the given [predicate]
+                | *
+                | * @see filter
+                | */
+                |@JvmName("filter")
+                |@CheckResult
+                |fun filterSync(predicate: (T) -> Boolean): PagingData<T> = transform { event ->
+                |    event.filter { predicate(it) }
+                |}
+        """.render().documentation()
+        val seeAlsoTable = documentation.first {
+            (it as? SummaryList)?.title() == "See also" } as SummaryList
+        assertThat((seeAlsoTable.single().data.title as Link).data.name).isEqualTo("filter")
     }
 
     @Test

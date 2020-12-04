@@ -28,6 +28,7 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.asType
 import com.google.devsite.renderer.converters.testing.functionSummary
 import com.google.devsite.renderer.converters.testing.name
+import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
@@ -63,6 +64,18 @@ internal class PropertyDocumentableConverterTest(
         val property = summary.functionSummary()
 
         assertThat(property.name()).isEqualTo("iAmACoolProperty")
+    }
+
+    @Test
+    fun `Property summary component contains @property documentation`() {
+        val summary = """
+            |/** @property foo some_documentation */
+            |val foo
+        """.render().summary()
+
+        val property = summary.functionSummary()
+
+        assertThat(property.data.description.text()).isEqualTo("some_documentation")
     }
 
     @Test
