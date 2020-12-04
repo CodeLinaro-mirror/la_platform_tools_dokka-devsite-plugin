@@ -22,14 +22,18 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.isFromBaseClass
 import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
 import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
+import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.CoreExtensions
+import org.jetbrains.dokka.ExternalDocumentationLink
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.pages.ModulePageNode
 import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.plugability.DokkaPlugin
 import org.jetbrains.dokka.renderers.Renderer
 import org.jetbrains.dokka.testApi.testRunner.AbstractCoreTest
+import java.io.File
+import java.net.URL
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -76,9 +80,11 @@ internal abstract class ConverterTestBase(
         }
     }
 
-    protected fun pathProvider() = when (language) {
-        Language.JAVA -> DacJavaFilePathProvider("androidx")
-        Language.KOTLIN -> DacKotlinFilePathProvider("androidx")
+    protected fun pathProvider(
+        externalLocationProvider: ExternalDokkaLocationProvider? = null
+    ) = when (language) {
+        Language.JAVA -> DacJavaFilePathProvider("androidx", externalLocationProvider)
+        Language.KOTLIN -> DacKotlinFilePathProvider("androidx", externalLocationProvider)
     }
 
     protected fun javaOnly(block: () -> Unit) {
@@ -94,15 +100,28 @@ internal abstract class ConverterTestBase(
     }
 
     private fun testWithRootPageNode(sourceFiles: List<String>): DModule = runBlocking {
+        val externalLinks = mapOf(
+            "coroutines" to "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core",
+            "android" to "https://developer.android.com/reference",
+            "guava" to "https://guava.dev/releases/18.0/api/docs/package-list",
+            "kotlin" to "https://kotlinlang.org/api/latest/jvm/stdlib/"
+        ).map {
+            ExternalDocumentationLink(
+                url = URL(it.value),
+                packageListUrl = File("testData").toPath()
+                    .resolve("package-lists/${it.key}/package-list").toUri().toURL()
+            )
+        }
         val configuration = dokkaConfiguration {
             sourceSets {
                 sourceSet {
                     sourceRoots = listOf("src/main")
                     classpath = listOfNotNull(jvmStdlibPath, commonStdlibPath)
+                    externalDocumentationLinks = externalLinks
                 }
             }
+            offlineMode = true
         }
-
         suspendCoroutine { cont ->
             testInline(
                 sourceFiles.joinToString("\n\n"),

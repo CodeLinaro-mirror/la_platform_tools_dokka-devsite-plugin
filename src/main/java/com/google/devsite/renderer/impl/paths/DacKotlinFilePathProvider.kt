@@ -18,5 +18,6 @@ package com.google.devsite.renderer.impl.paths
 
 /** Creates file paths for DAC Kotlin consumption. */
 internal class DacKotlinFilePathProvider(
-    tenant: String
-) : DacFilePathProviderBase(tenant, "kotlin")
+    tenant: String,
+    locationProvider: ExternalDokkaLocationProvider? = null
+) : DacFilePathProviderBase(tenant, "kotlin", locationProvider = locationProvider)

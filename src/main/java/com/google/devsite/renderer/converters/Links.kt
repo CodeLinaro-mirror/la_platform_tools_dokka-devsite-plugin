@@ -41,14 +41,28 @@ internal fun FilePathProvider.linkForReference(dri: DRI): Link {
  * functions, and symbols within a type are supported.
  */
 internal fun FilePathProvider.forReference(dri: DRI): ReferencePath {
+
     val packageName = dri.packageName.orEmpty().ifBlank { "[JVM root]" }
     val className = dri.classNames
     val symbol = dri.callable
+
+    // if the DokkaLocationProvider can resolve the dri, then we accept that
+    locationProvider?.resolve(dri)?.let {
+        val text = symbol?.name ?: className ?: packageName
+        return ReferencePath(text, it)
+    }
 
     val (typeName, typeUrl) = if (className == null) {
         packageName to forType(packageName, PACKAGE_SUMMARY_NAME)
     } else {
         className to forType(packageName, className)
+    }
+
+    // Exclude specific packages from being linked.
+    // In the future we might want to only link to things we *know* we've generated docs for by
+    // passing around a collection of valid locations but that could have performance implications
+    if (nonDocumentablePackages.getOrDefault(packageName, false)) {
+        return ReferencePath(typeName, "")
     }
 
     return if (symbol == null) {
@@ -82,3 +96,7 @@ private fun TypeReference.name(): String = when (this) {
 }
 
 internal data class ReferencePath(val name: String, val url: String)
+
+private val nonDocumentablePackages = listOf(
+    "kotlin.jvm.functions"
+).associateWith { true }

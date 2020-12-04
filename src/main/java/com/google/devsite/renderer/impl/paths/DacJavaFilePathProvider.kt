@@ -17,4 +17,7 @@
 package com.google.devsite.renderer.impl.paths
 
 /** Creates file paths for DAC Java consumption. */
-internal class DacJavaFilePathProvider(tenant: String) : DacFilePathProviderBase(tenant)
+internal class DacJavaFilePathProvider(
+    tenant: String,
+    dlp: ExternalDokkaLocationProvider? = null
+) : DacFilePathProviderBase(tenant, locationProvider = dlp)

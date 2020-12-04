@@ -17,10 +17,11 @@
 package com.google.devsite.testing
 
 import com.google.common.truth.Truth.assertWithMessage
-import org.jetbrains.dokka.DokkaDefaults.suppress
+import org.jetbrains.dokka.ExternalDocumentationLink
 import org.jetbrains.dokka.PackageOptionsImpl
 import org.jetbrains.dokka.testApi.testRunner.AbstractCoreTest
 import java.io.File
+import java.net.URL
 
 /**
  * Full integration tests of source to html generation.
@@ -39,21 +40,35 @@ abstract class IntegrationTestBase : AbstractCoreTest() {
         val baseDir = "testData/$path"
         val sourceDir = "$baseDir/source"
 
+        val externalLinks = mapOf(
+            "coroutines" to "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core",
+            "android" to "https://developer.android.com/reference",
+            "guava" to "https://guava.dev/releases/18.0/api/docs/package-list",
+            "kotlin" to "https://kotlinlang.org/api/latest/jvm/stdlib/"
+        ).map {
+            ExternalDocumentationLink(
+                url = URL(it.value),
+                packageListUrl = File("testData").toPath()
+                    .resolve("package-lists/${it.key}/package-list").toUri().toURL()
+            )
+        }
         val configuration = dokkaConfiguration {
             sourceSets {
                 sourceSet {
                     val sources = File(sourceDir).absoluteFile
                     check(sources.isDirectory) { "$sources does not exist or is not a directory" }
                     sourceRoots = listOf(sources.absolutePath)
-                    classpath += listOfNotNull(jvmStdlibPath)
+                    classpath = listOfNotNull(jvmStdlibPath, commonStdlibPath)
                     perPackageOptions += PackageOptionsImpl(
                         matchingRegex = "androidx.annotation",
                         includeNonPublic = false,
                         reportUndocumented = false,
                         skipDeprecated = false,
                         suppress = true)
+                    externalDocumentationLinks = externalLinks
                 }
             }
+            offlineMode = true
         }
 
         val inferredTenant = File(sourceDir).listFiles().orEmpty()

@@ -17,7 +17,10 @@
 package com.google.devsite.renderer.impl.paths
 
 /** Creates relative file paths that have no knowledge of the containing website. */
-internal class RelativeFilePathProvider(tenant: String) : FilePathProvider {
+internal class RelativeFilePathProvider(
+    tenant: String,
+    override val locationProvider: ExternalDokkaLocationProvider? = null
+) : FilePathProvider {
     override val relative = this
 
     override val packageList = "$tenant/$MACHINE_PACKAGE_LIST_FILE"

@@ -34,7 +34,7 @@ class DevsitePlugin : DokkaPlugin() {
 
     val renderer by extending {
         CoreExtensions.renderer providing {
-            MultiLanguageRenderer(dokkaBase.querySingle { outputWriter })
+            MultiLanguageRenderer(it, dokkaBase.querySingle { outputWriter })
         } override dokkaBase.htmlRenderer
     }
 }

@@ -20,7 +20,9 @@ package com.google.devsite.renderer.impl.paths
 internal abstract class DacFilePathProviderBase(
     tenant: String,
     pathPrefix: String? = null,
-    final override val relative: FilePathProvider = RelativeFilePathProvider(tenant)
+    override val locationProvider: ExternalDokkaLocationProvider? = null,
+    final override val relative: FilePathProvider =
+        RelativeFilePathProvider(tenant, locationProvider)
 ) : FilePathProvider {
     private val dacPath = "/reference" + if (pathPrefix == null) "" else "/$pathPrefix"
 

@@ -17,6 +17,7 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.links.Callable
 import org.jetbrains.dokka.links.DRI
@@ -128,6 +129,48 @@ internal class LinksTest : ConverterTestBase() {
         val (name, url) = pathProvider().forReference(dri)
 
         assertThat(name).isEqualTo("foo")
+        assertPath(url, "androidx/example/Foo.html#foo()")
+    }
+
+    @Test
+    fun `Attempts to resolve link externally`() {
+        val enternalDri = DRI(
+            packageName = "external.example",
+            classNames = "Foo",
+            callable = Callable(name = "foo", params = emptyList())
+        )
+
+        val external = object : ExternalDokkaLocationProvider {
+            override fun resolve(dri: DRI): String? {
+                return when (dri.packageName!!) {
+                    "external.example" -> "http://non.com/external/example/${dri.classNames}.format"
+                    else -> null
+                }
+            }
+        }
+
+        val (_, url) = pathProvider(external).forReference(enternalDri)
+        assertThat(url).isEqualTo("http://non.com/external/example/Foo.format")
+    }
+
+    @Test
+    fun `Attempts to resolve link externally and falls back when it can't`() {
+        val internalDri = DRI(
+            packageName = "androidx.example",
+            classNames = "Foo",
+            callable = Callable(name = "foo", params = emptyList())
+        )
+
+        val external = object : ExternalDokkaLocationProvider {
+            override fun resolve(dri: DRI): String? {
+                return when (dri.packageName!!) {
+                    "external.example" -> "http://non.com/external/example/${dri.classNames}.format"
+                    else -> null
+                }
+            }
+        }
+
+        val (_, url) = pathProvider(external).forReference(internalDri)
         assertPath(url, "androidx/example/Foo.html#foo()")
     }
 }

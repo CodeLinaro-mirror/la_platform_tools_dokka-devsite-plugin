@@ -18,6 +18,10 @@ package com.google.devsite.renderer.impl.paths
 
 /** Converts various inputs to output file paths. */
 internal interface FilePathProvider {
+
+    /** The DokkaLocationProvider that is used to provide locations of external documentation */
+    val locationProvider: ExternalDokkaLocationProvider?
+
     /** Get this provider with only relative paths. */
     val relative: FilePathProvider
 

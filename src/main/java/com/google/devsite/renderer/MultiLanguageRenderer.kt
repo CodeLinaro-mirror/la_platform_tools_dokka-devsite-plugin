@@ -21,17 +21,22 @@ import com.google.devsite.renderer.impl.MetadataRenderer
 import com.google.devsite.renderer.impl.PackageRenderer
 import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
 import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
+import com.google.devsite.renderer.impl.paths.DefaultExternalDokkaLocationProvider
+import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.base.renderers.OutputWriter
+import org.jetbrains.dokka.base.resolvers.local.DokkaLocationProvider
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.pages.ModulePageNode
 import org.jetbrains.dokka.pages.RootPageNode
+import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.renderers.Renderer
 
 /** Composite renderer which outputs multiple languages (i.e. Java + Kotlin) */
 internal class MultiLanguageRenderer(
+    private val context: DokkaContext,
     private val outputWriter: OutputWriter
 ) : Renderer {
     private val tenant: String by lazy {
@@ -43,18 +48,23 @@ internal class MultiLanguageRenderer(
 
     override fun render(root: RootPageNode) {
         val module = (root as ModulePageNode).documentable as DModule
+        val locationProvider = DefaultExternalDokkaLocationProvider(
+            dokkaLocationProvider = DokkaLocationProvider(root, context)
+        )
 
         runBlocking(Dispatchers.Default) {
             val holder = DocumentablesHolder(module, this)
-
-            launch { renderJava(holder) }
-            launch { renderKotlin(holder) }
+            launch { renderJava(holder, locationProvider) }
+            launch { renderKotlin(holder, locationProvider) }
         }
     }
 
-    private suspend fun renderJava(holder: DocumentablesHolder) {
+    private suspend fun renderJava(
+        holder: DocumentablesHolder,
+        locationProvider: ExternalDokkaLocationProvider
+    ) {
         val language = Language.JAVA
-        val filePaths = DacJavaFilePathProvider(tenant)
+        val filePaths = DacJavaFilePathProvider(tenant, locationProvider)
         DevsiteRenderer(
             MetadataRenderer(outputWriter, filePaths, language, holder),
             PackageRenderer(outputWriter, filePaths, language, holder),
@@ -62,9 +72,12 @@ internal class MultiLanguageRenderer(
         ).render()
     }
 
-    private suspend fun renderKotlin(holder: DocumentablesHolder) {
+    private suspend fun renderKotlin(
+        holder: DocumentablesHolder,
+        locationProvider: ExternalDokkaLocationProvider
+    ) {
         val language = Language.KOTLIN
-        val filePaths = DacKotlinFilePathProvider(tenant)
+        val filePaths = DacKotlinFilePathProvider(tenant, locationProvider)
         DevsiteRenderer(
             MetadataRenderer(outputWriter, filePaths, language, holder),
             PackageRenderer(outputWriter, filePaths, language, holder),
