@@ -445,7 +445,6 @@
       <h3 class="api-name" id="map(kotlin.Function1)">map</h3>
       <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="/reference/kotlin/kotlin/Any.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#map(kotlin.Function1)">map</a>(function:&nbsp;(Value)&nbsp;-&gt;&nbsp;ToValue):&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
       <p>Applies the given function to each value emitted by the DataSource.</p>
-      <p>An overload of <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#map()">map</a></code> that accepts a kotlin function type.</p>
       <p>Same as <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#mapByPage()">mapByPage</a></code>, but operates on individual items.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -501,6 +500,10 @@
             </tr>
             <tr>
               <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map()">map</a></code></td>
+              <td width="100%"></td>
+            </tr>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#mapByPage()">mapByPage</a></code></td>
               <td width="100%"></td>
             </tr>
           </tbody>
@@ -580,7 +583,6 @@
       <h3 class="api-name" id="mapByPage(kotlin.Function1)">mapByPage</h3>
       <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="/reference/kotlin/kotlin/Any.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#mapByPage(kotlin.Function1)">mapByPage</a>(function:&nbsp;(<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;Value&gt;)&nbsp;-&gt;&nbsp;<a href="/reference/kotlin/kotlin/collections/List.html">List</a>&lt;ToValue&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
       <p>Applies the given function to each value emitted by the DataSource.</p>
-      <p>An overload of <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#mapByPage()">mapByPage</a></code> that accepts a kotlin function type.</p>
       <p>Same as <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#map()">map</a></code>, but allows for batch conversions.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -593,7 +595,7 @@
             <tr>
               <td><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
               <td width="100%">
-                <p>A new <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>, which transforms items using the given function.</p>
+                <p>A new DataSource, which transforms items using the given function.</p>
               </td>
             </tr>
           </tbody>
