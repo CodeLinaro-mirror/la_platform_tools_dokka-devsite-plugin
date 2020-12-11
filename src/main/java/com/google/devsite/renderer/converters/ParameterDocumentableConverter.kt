@@ -339,7 +339,7 @@ internal class ParameterDocumentableConverter(
                 typeConstructor.copy(projections = projections.map {
                     // Generics can't be true primitives in Java
                     it.rewriteKotlinPrimitivesForJava(mustBoxPrimitive = true)
-                })
+                }, dri = dri.possiblyAsJava())
             }
         }
         // Nullable types and variances can't be true primitives in Java

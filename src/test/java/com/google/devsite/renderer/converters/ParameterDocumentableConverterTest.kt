@@ -43,6 +43,33 @@ internal class ParameterDocumentableConverterTest(
         val paramType = param.data.primary.asType()
 
         assertThat(paramType.link().name).isEqualTo("String")
+
+        javaOnly {
+            assertThat(paramType.link().url).isEqualTo("/reference/java/lang/String.html")
+        }
+
+        kotlinOnly {
+            assertThat(paramType.link().url).isEqualTo("/reference/kotlin/kotlin/String.html")
+        }
+    }
+
+    @Test
+    fun `Parameter has correct type for Any`() {
+        val param = """
+            |fun foo(a: Any) = Unit
+        """.render().param()
+
+        val paramType = param.data.primary.asType()
+
+        javaOnly {
+            assertThat(paramType.link().name).isEqualTo("Object")
+            assertThat(paramType.link().url).isEqualTo("/reference/java/lang/Object.html")
+        }
+
+        kotlinOnly {
+            assertThat(paramType.link().name).isEqualTo("Any")
+            assertThat(paramType.link().url).isEqualTo("/reference/kotlin/kotlin/Any.html")
+        }
     }
 
     @Test

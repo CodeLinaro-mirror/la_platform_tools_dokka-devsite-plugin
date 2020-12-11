@@ -228,24 +228,58 @@ internal class FunctionDocumentableConverterTest(
         val function = summary.functionSummary()
         val signature = function.signature()
 
-        val param = when (language) {
-            Language.JAVA -> {
-                assertThat(signature.receiver).isNull()
-                signature.parameters.item()
-            }
-            Language.KOTLIN -> {
-                assertThat(signature.receiver).isNotNull()
-                signature.receiver!!
-            }
+        javaOnly {
+            assertThat(signature.receiver).isNull()
+            val param = signature.parameters.item()
+            assertNoLambdaStuff(param.data)
+
+            val type = param.data.primary
+            assertThat(type.link().name).isEqualTo("String")
+            assertThat(type.link().url).contains("java")
+            assertThat(param.data.name).isEqualTo("receiver")
         }
 
-        val type = param.data.primary
+        kotlinOnly {
+            assertThat(signature.receiver).isNotNull()
+            val param = signature.receiver!!
+            assertNoLambdaStuff(param.data)
 
-        assertNoLambdaStuff(param.data)
-        assertThat(type.link().name).isEqualTo("String")
-        when (language) {
-            Language.JAVA -> assertThat(param.data.name).isEqualTo("receiver")
-            Language.KOTLIN -> assertThat(param.data.name).isEmpty()
+            val type = param.data.primary
+            assertThat(type.link().name).isEqualTo("String")
+            assertThat(type.link().url).contains("kotlin")
+            assertThat(param.data.name).isEmpty()
+        }
+    }
+
+    @Test
+    fun `Function summary component creates extension receiver for proper type`() {
+        val summary = """
+            |fun Any.foo()
+        """.render().summary()
+
+        val function = summary.functionSummary()
+        val signature = function.signature()
+
+        javaOnly {
+            assertThat(signature.receiver).isNull()
+            val param = signature.parameters.item()
+            assertNoLambdaStuff(param.data)
+
+            val type = param.data.primary
+            assertThat(type.link().name).isEqualTo("Object")
+            assertThat(type.link().url).contains("java")
+            assertThat(param.data.name).isEqualTo("receiver")
+        }
+
+        kotlinOnly {
+            assertThat(signature.receiver).isNotNull()
+            val param = signature.receiver!!
+            assertNoLambdaStuff(param.data)
+
+            val type = param.data.primary
+            assertThat(type.link().name).isEqualTo("Any")
+            assertThat(type.link().url).contains("kotlin")
+            assertThat(param.data.name).isEmpty()
         }
     }
 

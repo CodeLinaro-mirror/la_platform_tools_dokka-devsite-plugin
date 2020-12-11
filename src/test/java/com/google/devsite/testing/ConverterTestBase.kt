@@ -72,7 +72,7 @@ internal abstract class ConverterTestBase(
             sourceSets {
                 sourceSet {
                     sourceRoots = listOf("src/main")
-                    classpath += listOfNotNull(jvmStdlibPath)
+                    classpath = listOfNotNull(jvmStdlibPath, commonStdlibPath)
                 }
             }
         }

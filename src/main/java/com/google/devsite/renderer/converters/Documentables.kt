@@ -19,6 +19,7 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.renderer.Language
 import org.jetbrains.dokka.base.transformers.documentables.isException
 import org.jetbrains.dokka.links.DRI
+import org.jetbrains.dokka.links.PointingToDeclaration
 import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
@@ -35,6 +36,9 @@ import org.jetbrains.dokka.model.Variance
 import org.jetbrains.dokka.model.WithChildren
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.model.toAdditionalModifiers
+import org.jetbrains.kotlin.builtins.jvm.JavaToKotlinClassMap
+import org.jetbrains.kotlin.name.ClassId
+import org.jetbrains.kotlin.name.FqName
 
 /** Recursively expands all children. */
 internal val <T> WithChildren<T>.explodedChildren: List<T>
@@ -148,3 +152,24 @@ fun <T> List<T>.filterOutJvmSynthetic(): List<T>
     where T : WithExtraProperties<*> = this.filterNot {
         it.annotations().any { it.dri.classNames.equals("JvmSynthetic") }
     }
+
+/**
+ * Uses the JavaToKotlinClassMap to possibly convert a dri to its Java equivalent
+ * https://kotlinlang.org/docs/reference/java-interop.html#mapped-types
+ */
+internal fun DRI.possiblyAsJava(): DRI {
+    val fullyQualifiedName = packageName?.let { "$it." } + classNames
+    // Use the fully qualified name to look up the class in the map
+    return JavaToKotlinClassMap.mapKotlinToJava(FqName(fullyQualifiedName).toUnsafe())?.let {
+        DRI(
+            packageName = it.packageFqName.asString(),
+            classNames = it.classNames(),
+            callable = this.callable,
+            extra = null,
+            target = PointingToDeclaration
+        )
+    } ?: this
+}
+
+private fun ClassId.classNames(): String =
+    shortClassName.identifier + (outerClassId?.classNames()?.let { ".$it" } ?: "")
