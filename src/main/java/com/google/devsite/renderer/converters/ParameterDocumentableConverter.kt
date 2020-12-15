@@ -68,8 +68,7 @@ internal class ParameterDocumentableConverter(
         Language.JAVA -> componentForJavaProjection(
             proj = param.type,
             name = param.name ?: "receiver",
-            annotations = param.annotations(),
-            nullable = param.type.isNullable()
+            annotations = param.annotations()
         )
         Language.KOTLIN -> {
             val defaultValue = param.extra.allOfType<DefaultValue>().singleOrNull()?.value
@@ -79,8 +78,7 @@ internal class ParameterDocumentableConverter(
                 name = param.name.orEmpty(),
                 defaultValue = defaultValue,
                 modifiers = param.getExtraModifiers().modifiersFor(ModifierHints(displayLanguage)),
-                annotations = param.annotations(),
-                nullable = param.annotations().isNullable()
+                annotations = param.annotations()
             )
         }
     }
@@ -109,17 +107,22 @@ internal class ParameterDocumentableConverter(
         annotations: List<Annotations.Annotation> = emptyList(),
         isReturnType: Boolean = false
     ): Parameter = when (displayLanguage) {
-        Language.JAVA -> componentForJavaProjection(proj, isReturnType = isReturnType)
-        Language.KOTLIN -> componentForKotlinProjection(proj, nullable = annotations.isNullable())
+        Language.JAVA -> componentForJavaProjection(
+            proj,
+            annotations = annotations,
+            isReturnType = isReturnType
+        )
+        Language.KOTLIN -> componentForKotlinProjection(proj, annotations = annotations)
     }
 
     private fun componentForJavaProjection(
         proj: Projection,
         name: String = "",
         annotations: List<Annotations.Annotation> = emptyList(),
-        nullable: Boolean = false,
         isReturnType: Boolean = false
     ): Parameter {
+        val nullable = proj.isNullable() || annotations.isNullable()
+
         return DefaultParameter(
             Parameter.Params(
                 isLambda = false,
@@ -140,17 +143,15 @@ internal class ParameterDocumentableConverter(
         name: String = "",
         defaultValue: String? = null,
         modifiers: List<String> = emptyList(),
-        annotations: List<Annotations.Annotation> = emptyList(),
-        nullable: Boolean = false
+        annotations: List<Annotations.Annotation> = emptyList()
     ): Parameter {
         val isLambda = proj.isLambda()
-
         val receiver = proj.receiver()
         val primaryType = if (isLambda) {
             // Get the return type of the lambda
             componentForKotlinProjection(proj.asTypeConstructor().projections.last())
         } else {
-            proj.toComponent(nullable = nullable)
+            proj.toComponent(nullable = annotations.isNullable())
         }
         val lambdaModifiers: List<String> = if (proj.isSuspend()) {
             listOf("suspend")
@@ -190,7 +191,7 @@ internal class ParameterDocumentableConverter(
                 annotations = annotations.annotationComponents(
                     pathProvider,
                     displayLanguage,
-                    nullable
+                    annotations.isNullable()
                 ),
                 defaultValue = defaultValue
             )

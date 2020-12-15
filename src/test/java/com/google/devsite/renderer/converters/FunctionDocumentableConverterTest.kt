@@ -39,7 +39,6 @@ import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DClass
-import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DModule
 import org.junit.Ignore
 import org.junit.Test
@@ -103,7 +102,7 @@ internal class FunctionDocumentableConverterTest(
             |abstract class Foo {
             |    protected open fun foo() = Unit
             |}
-        """.render().summary(fromClass = true)
+        """.render().summary()
 
         val returnz = summary.returnSummary()
 
@@ -116,7 +115,7 @@ internal class FunctionDocumentableConverterTest(
             |abstract class Foo {
             |    abstract fun foo()
             |}
-        """.render().summary(fromClass = true)
+        """.render().summary()
 
         val returnz = summary.returnSummary()
 
@@ -129,7 +128,7 @@ internal class FunctionDocumentableConverterTest(
             |class Foo {
             |    open fun foo() = Unit
             |}
-        """.render().summary(fromClass = true)
+        """.render().summary()
 
         val returnz = summary.returnSummary()
 
@@ -143,7 +142,7 @@ internal class FunctionDocumentableConverterTest(
             |interface Foo {
             |    fun foo()
             |}
-        """.render().summary(fromClass = true, ModifierHints(language, isInterface = true))
+        """.render().summary(ModifierHints(language, isInterface = true))
 
         val returnz = summary.returnSummary()
 
@@ -357,7 +356,7 @@ internal class FunctionDocumentableConverterTest(
         val summary = """
             |public void foo(
             |    boolean a, int b, double c, float d, short e, long f, char g, byte h) {}
-        """.render(java = true).summary(fromClass = true)
+        """.render(java = true).summary()
 
         val function = summary.functionSummary()
         val returnType = summary.returnSummary().type.link()
@@ -387,7 +386,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Function summary component understands Java object`() {
         val summary = """
             |public Object foo() {}
-        """.render(java = true).summary(fromClass = true)
+        """.render(java = true).summary()
 
         val returnType = summary.returnSummary().type.link()
 
@@ -425,15 +424,46 @@ internal class FunctionDocumentableConverterTest(
     }
 
     @Test
-    fun `Function detail component has nullability information`() {
-        val detail = """
-            |fun foo(): Unit? = Unit
+    fun `Function detail has nullability information in 4x Kotlin and Java`() {
+        val detailK = """
+            |fun foo(): Int? {}
         """.render().detail()
+        val detailJ = """
+            |public @Nullable Integer foo() {}
+        """.render(java = true).detail()
+        val detailJ2 = """
+            |@Nullable
+            |public Integer foo() {}
+        """.render(java = true).detail()
 
-        javaOnly { assertThat(detail.data.annotations).isNotEmpty() }
-        kotlinOnly {
-            assertThat(detail.data.annotations).isEmpty()
-            assertThat(detail.data.returnType.asType().data.nullable).isTrue()
+        for (detail in listOf(detailK, detailJ, detailJ2)) {
+            javaOnly { assertThat(detail.data.annotations).isNotEmpty() }
+            kotlinOnly {
+                assertThat(detail.data.annotations).isEmpty()
+                assertThat(detail.data.returnType.nullable).isTrue()
+            }
+        }
+    }
+
+    @Test
+    fun `Function summary has nullability information in 4x Kotlin and Java`() {
+        val summaryK = """
+            |fun foo(): Int? {}
+        """.render().summary().returnSummary().type
+        val summaryJ = """
+            |public @Nullable Integer foo() {}
+        """.render(java = true).summary().returnSummary().type
+        val summaryJ2 = """
+            |@Nullable
+            |public Integer foo() {}
+        """.render(java = true).summary().returnSummary().type
+
+        for (summary in listOf(summaryK, summaryJ, summaryJ2)) {
+            javaOnly { assertThat(summary.data.annotations).isNotEmpty() }
+            kotlinOnly {
+                assertThat(summary.data.annotations).isEmpty()
+                assertThat(summary.nullable).isTrue()
+            }
         }
     }
 
@@ -485,47 +515,31 @@ internal class FunctionDocumentableConverterTest(
     }
 
     private fun DModule.summary(
-        fromClass: Boolean = false,
         hints: ModifierHints = ModifierHints(language)
     ): TwoPaneSummaryItem {
         val holder = runBlocking { DocumentablesHolder(this@summary, this) }
         val docConverter = DocTagConverter(language, pathProvider(), holder)
         val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
-        return converter.summary(function(fromClass), hints.copy(isSummary = true))
+        return converter.summary(function()!!, hints.copy(isSummary = true))
     }
 
     private fun DModule.summaryForConstructor(): SingleColumnSummaryItem {
         val holder = runBlocking { DocumentablesHolder(this@summaryForConstructor, this) }
         val docConverter = DocTagConverter(language, pathProvider(), holder)
         val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
-        return converter.summaryForConstructor(function(fromConstructor = true))
+        return converter.summaryForConstructor(cstructor())
     }
 
     private fun DModule.detail(
-        fromClass: Boolean = false,
         hints: ModifierHints = ModifierHints(language)
     ): SymbolDetail {
         val holder = runBlocking { DocumentablesHolder(this@detail, this) }
         val docConverter = DocTagConverter(language, pathProvider(), holder)
         val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
-        return converter.detail(function(fromClass), hints)
+        return converter.detail(function()!!, hints)
     }
 
-    private fun DModule.function(
-        fromClass: Boolean = false,
-        fromConstructor: Boolean = false
-    ): DFunction {
-        val packageDoc = packages.single()
-
-        return if (fromConstructor) {
-            val clazz = packageDoc.classlikes.single() as DClass
-            clazz.constructors.single()
-        } else if (fromClass) {
-            packageDoc.classlikes.single().functions.single { it.name == "foo" }
-        } else {
-            packageDoc.functions.single()
-        }
-    }
+    private fun DModule.cstructor() = (classlike() as DClass).constructors.single()
 
     private fun Parameter.link(): Link.Params = data.primary.link()
 

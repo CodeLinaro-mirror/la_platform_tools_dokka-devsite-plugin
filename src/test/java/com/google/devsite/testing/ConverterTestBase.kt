@@ -19,6 +19,7 @@ package com.google.devsite.testing
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.DevsitePlugin
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.isFromBaseClass
 import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
 import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
 import kotlinx.coroutines.runBlocking
@@ -42,6 +43,31 @@ internal abstract class ConverterTestBase(
     } else {
         testWithRootPageNode(trimMargin())
     }
+
+    protected fun DModule.classlike() = packages.single().classlikes
+        .firstOrNull { it.name != "Nullable" }
+
+    protected fun DModule.function(name: String? = null) =
+        packages.single().functions.singleOrNull { it.name == name && !it.dri.isFromBaseClass() }
+            ?: classlike()?.functions?.singleOrNull { it.name == name && !it.dri.isFromBaseClass() }
+            ?: packages.single().functions.singleOrNull { !it.dri.isFromBaseClass() }
+            ?: classlike()?.functions?.singleOrNull { !it.dri.isFromBaseClass() }
+
+    protected fun DModule.functions() =
+        packages.single().functions.nullIfEmpty()
+            ?: classlike()?.functions
+
+    protected fun DModule.property(name: String? = null) =
+        packages.single().properties.singleOrNull { it.name == name }
+            ?: classlike()?.properties?.singleOrNull { it.name == name }
+            ?: packages.single().properties.singleOrNull()
+            ?: classlike()?.properties?.singleOrNull()
+
+    protected fun DModule.properties() =
+        packages.single().properties.nullIfEmpty()
+            ?: classlike()?.properties
+
+    private fun <E> List<E>.nullIfEmpty() = if (this.isNotEmpty()) this else null
 
     protected fun assertPath(actual: String, expected: String) {
         when (language) {
@@ -105,7 +131,7 @@ internal abstract class ConverterTestBase(
         val source = """
             |/src/main/java/androidx/example/Test.java
             |package androidx.example;
-            |
+            |annotation class Nullable
             |public class Test {
             |$sourceCode
             |}

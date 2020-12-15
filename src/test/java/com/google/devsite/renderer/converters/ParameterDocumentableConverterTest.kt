@@ -145,18 +145,23 @@ internal class ParameterDocumentableConverterTest(
         }
     }
 
-    @Test
+    @Test // TODO: upstream has problems with generic java parameters?
     fun `Parameter understands variance generics`() {
-        val param = """
+        val paramK = """
             |fun foo(a: Map<in String, out Double>)
         """.render().param()
+        val paramJ = """
+            |public void foo(Map<? super String, ? extends Double> a)
+        """.render(java = true).param()
 
-        val paramType = param.data.primary.asType()
-        val generic = paramType.data.generics.items(2)
+        for (param in listOf(paramK/*, paramJ*/)) {
+            val paramType = param.data.primary.asType()
+            val generic = paramType.data.generics.items(2)
 
-        // TODO(b/166530498): support variance
-        assertThat(generic.first().link().name).isEqualTo("String")
-        assertThat(generic.last().link().name).isEqualTo("Double")
+            // TODO(b/166530498): support variance
+            assertThat(generic.first().link().name).isEqualTo("String")
+            assertThat(generic.last().link().name).isEqualTo("Double")
+        }
     }
 
     @Test
@@ -376,16 +381,41 @@ internal class ParameterDocumentableConverterTest(
         assertThat(param.defaultValue).isNull()
     }
 
+    @Suppress("unused") // TODO: upstream dokka doesn't parse annotations on parameters, b/175612102
     @Test
-    fun `Parameter includes nullability information`() {
-        val param = """
-            |fun foo(foo: Int?)
+    fun `Parameter summaries include annotations in 4x Kotlin and Java`() {
+        val paramK = """
+            |fun foo(@Hello foo: Int) {}
         """.render().param(forSummary = true).data
+        val paramJ = """
+            |public void foo(@Hello int foo) {}
+        """.render(java = true).param(forSummary = true).data
 
-        javaOnly { assertThat(param.annotations).isNotEmpty() }
-        kotlinOnly {
-            assertThat(param.annotations).isEmpty()
-            assertThat(param.primary.asType().data.nullable).isTrue()
+        for (param in listOf(paramK/*, paramJ*/)) {
+            assertThat(param.annotations).isNotEmpty()
+        }
+    }
+
+    @Suppress("unused") // TODO: upstream dokka doesn't parse annotations on parameters, b/175612102
+    @Test
+    fun `Parameter summaries include nullability information in 4x Kotlin and Java`() {
+        val paramK = """
+            |fun foo(foo: Int?) {}
+        """.render().param(forSummary = true)
+        val paramJ = """
+            |public static void foo(@Nullable Integer foo) {}
+        """.render(java = true).param(forSummary = true)
+
+        for (param in listOf(paramK/*, paramJ*/)) {
+            kotlinOnly {
+                assertThat(param.data.annotations).isEmpty()
+                assertThat(param.nullable).isTrue()
+            }
+            javaOnly {
+                assertThat(param.data.annotations).isNotEmpty()
+                // Without this assertion, we end up with ? in as-java documentation
+                assertThat(param.data.primary.asType().data.nullable).isFalse()
+            }
         }
     }
 
@@ -424,47 +454,23 @@ internal class ParameterDocumentableConverterTest(
 
     @Test
     fun `Primative type from Java code has correct type in Java and Kotlin`() {
-        val module = """
+        val paramTypeJ = """
             |public void foo(int a) {}
-        """.render(java = true)
-
-        val converter = ParameterDocumentableConverter(language, pathProvider())
-        val paramType = converter.componentForParameter(
-            module.packages.single().classlikes.single().functions.single().parameters.single(),
-            false
-        )
-
-        javaOnly {
-            assertThat(paramType.link().name).isEqualTo("int")
-            assertThat(paramType.link().url).isEmpty()
-        }
-
-        kotlinOnly {
-            assertThat(paramType.link().name).isEqualTo("Int")
-            assertThat(paramType.link().url).isEqualTo("/reference/kotlin/kotlin/Int.html")
-        }
-    }
-
-    @Test
-    fun `Primative type from Kotlin code has correct type in Java and Kotlin`() {
-        val module = """
+        """.render(java = true).param()
+        val paramTypeK = """
             |fun foo(a: Int) = Unit
-        """.render()
+        """.render().param()
 
-        val converter = ParameterDocumentableConverter(language, pathProvider())
-        val paramType = converter.componentForParameter(
-            module.packages.single().functions.single().parameters.single(),
-            false
-        )
+        for (paramType in listOf(paramTypeJ, paramTypeK)) {
+            javaOnly {
+                assertThat(paramType.link().name).isEqualTo("int")
+                assertThat(paramType.link().url).isEmpty()
+            }
 
-        javaOnly {
-            assertThat(paramType.link().name).isEqualTo("int")
-            assertThat(paramType.link().url).isEmpty()
-        }
-
-        kotlinOnly {
-            assertThat(paramType.link().name).isEqualTo("Int")
-            assertThat(paramType.link().url).isEqualTo("/reference/kotlin/kotlin/Int.html")
+            kotlinOnly {
+                assertThat(paramType.link().name).isEqualTo("Int")
+                assertThat(paramType.link().url).isEqualTo("/reference/kotlin/kotlin/Int.html")
+            }
         }
     }
 
@@ -524,9 +530,7 @@ internal class ParameterDocumentableConverterTest(
         return converter.componentForParameter(parameterDoc(), forSummary)
     }
 
-    private fun DModule.parameterDoc(): DParameter {
-        return packages.single().functions.single().parameters.single()
-    }
+    private fun DModule.parameterDoc(): DParameter = function()!!.parameters.single()
 
     private fun assertNoLambdaStuff(data: Parameter.Params) {
         assertThat(data.isLambda).isFalse()

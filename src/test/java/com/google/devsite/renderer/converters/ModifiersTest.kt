@@ -201,10 +201,6 @@ internal class ModifiersTest : ConverterTestBase() {
     }
 
     private fun DModule.modifierz(): List<String> {
-        val packageDoc = packages.single()
-        val function = packageDoc.functions.singleOrNull()
-            ?: packageDoc.classlikes.single().functions.single { it.name == "foo" }
-
-        return function.modifiers()
+        return function("foo")!!.modifiers()
     }
 }

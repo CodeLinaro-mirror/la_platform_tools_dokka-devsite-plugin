@@ -294,7 +294,7 @@ internal class DocTagConverterTest(
             |    */
             |   fun doAThing()
             |}
-            """.render().documentation(::classFunctionDoc)
+            """.render().documentation()
         }
         assertFails { // can't @property on a function
             """
@@ -313,9 +313,9 @@ internal class DocTagConverterTest(
         }
     }
 
-    @Test
+    @Test // TODO: java parameters do not have annotations upstream: b/175612102
     fun `Full documentation parameters table has types`() {
-        val documentation = """
+        val documentationK = """
             |/**
             | * @param T a type
             | */
@@ -331,30 +331,49 @@ internal class DocTagConverterTest(
             |    @Suppress("DEPRECATION") currentList: List<T>?
             |)
             |}
-        """.render().documentation(::classFunctionDoc)
-        val paramTable = documentation.first { (it as? SummaryList)?.title() == "Parameters" }
-            as SummaryList
-        assertThat(paramTable.size()).isEqualTo(2)
-        val param0 = paramTable.items().first()
-        val param0Left = (param0.data.title as Parameter)
-        val param1 = paramTable.items().last()
-        val param1Left = (param1.data.title as Parameter)
+        """.render().documentation()
+        val documentationJ = """
+            |/**
+            | * @param T a type
+            | */
+            |    interface PagedListListener<T extends Object> {
+            |/**
+            | * Called after the current PagedList has been updated.
+            | *
+            | * @param previousList The previous list, may be null.
+            | * @param currentList The new current list, may be null.
+            | */
+            |void onCurrentListChanged(
+            |    @Suppress("DEPRECATION") @Nullable List<T> previousList,
+            |    @Suppress("DEPRECATION") @Nullable List<T> currentList
+            |)
+            |}
+        """.render(java = true).documentation()
+        for (documentation in listOf(documentationK/*, documentationJ*/)) {
+            val paramTable = documentation.first { (it as? SummaryList)?.title() == "Parameters" }
+                as SummaryList
+            assertThat(paramTable.size()).isEqualTo(2)
+            val param0 = paramTable.items().first()
+            val param0Left = (param0.data.title as Parameter)
+            val param1 = paramTable.items().last()
+            val param1Left = (param1.data.title as Parameter)
 
-        assertThat(param0.name()).isEqualTo("previousList")
-        assertThat(param0Left.link().name).isEqualTo("List")
-        assertThat(param0Left.generics().single().link().name).isEqualTo("T")
-        assertThat(param0.description().text()).isEqualTo("The previous list, may be null.")
-        assertThat(param1.name()).isEqualTo("currentList")
-        assertThat(param1Left.link().name).isEqualTo("List")
-        assertThat(param1Left.generics().single().link().name).isEqualTo("T")
-        assertThat(param1.description().text()).isEqualTo("The new current list, may be null.")
-        javaOnly {
-            assertThat(param0Left.data.annotations.single().link().name).isEqualTo("Nullable")
-            assertThat(param1Left.data.annotations.single().link().name).isEqualTo("Nullable")
-        }
-        kotlinOnly {
-            assertThat(param0Left.data.primary.asType().data.nullable).isEqualTo(true)
-            assertThat(param1Left.data.primary.asType().data.nullable).isEqualTo(true)
+            assertThat(param0.name()).isEqualTo("previousList")
+            assertThat(param0Left.link().name).isEqualTo("List")
+            assertThat(param0Left.generics().single().link().name).isEqualTo("T")
+            assertThat(param0.description().text()).isEqualTo("The previous list, may be null.")
+            assertThat(param1.name()).isEqualTo("currentList")
+            assertThat(param1Left.link().name).isEqualTo("List")
+            assertThat(param1Left.generics().single().link().name).isEqualTo("T")
+            assertThat(param1.description().text()).isEqualTo("The new current list, may be null.")
+            javaOnly {
+                assertThat(param0Left.data.annotations.single().link().name).isEqualTo("Nullable")
+                assertThat(param1Left.data.annotations.single().link().name).isEqualTo("Nullable")
+            }
+            kotlinOnly {
+                assertThat(param0Left.data.primary.asType().data.nullable).isEqualTo(true)
+                assertThat(param1Left.data.primary.asType().data.nullable).isEqualTo(true)
+            }
         }
     }
 
@@ -378,7 +397,7 @@ internal class DocTagConverterTest(
             |     */
             |    open fun <ToValue : String> map(function: (Value) -> ToValue): Factory<Key, ToValue>
             |}
-        """.render().documentation(doc = ::classFunctionDoc)
+        """.render().documentation()
         val paramTable = documentation.first {
             (it as? SummaryList)?.title() == "Parameters" } as SummaryList
 
@@ -439,6 +458,56 @@ internal class DocTagConverterTest(
     }
 
     @Test
+    fun `Documentation spacing works over multiple lines`() {
+        val documentationK = """
+            |/**
+            | * This is a multi-line documentation string. There is no space at the end of the
+            | * first line, but "the first" with no space should not appear in the final documentation.
+            | */
+            | fun foo(): String
+        """.render().documentation().first() as Description
+        val documentationJ = """
+            |/**
+            | * This is a multi-line documentation string. There is no space at the end of the
+            | * first line, but "the first" with no space should not appear in the final documentation.
+            | */
+            | public String foo()
+        """.render(java = true).documentation().first() as Description
+
+        for (documentation in listOf(documentationK, documentationJ)) {
+            assertThat("thefirst" in documentation.data.root.toString()).isFalse()
+        }
+    }
+
+    @Test
+    fun `Multiline doc from fragment, with formatting`() {
+        val module = """
+    |/**
+    | * Instantiates a Fragment's view.
+    | *
+    | * @param parent The parent that the created view will be placed
+    | * in; <em>note that this may be null</em>.
+    | * @param name Tag name to be inflated.
+    | * @param context The context the view is being created in.
+    | * @param attrs Inflation attributes as specified in XML file.
+    | *
+    | * @return view the newly created view
+    | */
+    |@Nullable
+    |public View onCreateView(@Nullable View parent, @NonNull String name, @NonNull Context context,
+    |                         @NonNull AttributeSet attrs) {
+    |    return mHost.mFragmentManager.getLayoutInflaterFactory()
+    |            .onCreateView(parent, name, context, attrs);
+    |}
+        """.render(java = true)
+        val paramDoc = (module.documentation(doc = {
+            this.function()!!.parameters.single { it.name == "parent" }
+        }).first() as Description).data.root
+
+        assertThat("placedin" in paramDoc.toString()).isFalse()
+    }
+
+    @Test
     fun `@deprecated description works over multiple lines`() {
         val documentation = """
             |/**
@@ -453,7 +522,7 @@ internal class DocTagConverterTest(
             | @Deprecated
             |public void foo(){}
         """.render(java = true)
-        val doc = documentation.documentation(doc = ::classFunctionDoc)
+        val doc = documentation.documentation()
         val function = doc.first() as DefaultDescription
         assertThat(function.data.deprecation).isNotNull()
         // Checking the root for LastLine is somewhat testing Dokka
@@ -518,7 +587,7 @@ internal class DocTagConverterTest(
         val documentation = """
             |/** @throws IllegalStateException if it fails */
             |public void foo() {}
-        """.render(java = true).documentation(doc = ::classFunctionDoc)
+        """.render(java = true).documentation()
 
         val throwsSummary = documentation.first { (it as? SummaryList)?.title() == "Throws" }
             as SummaryList
@@ -589,7 +658,7 @@ internal class DocTagConverterTest(
         val documentation = """
             |/** @see String#isEmpty() */
             |public void foo() {}
-        """.render(java = true).documentation(doc = ::classFunctionDoc)
+        """.render(java = true).documentation()
 
         val paramSummary = documentation.last() as SummaryList
         val paramText = paramSummary.item()
@@ -602,7 +671,7 @@ internal class DocTagConverterTest(
         val documentation = """
             |/** @see com.example.foo.Foo#bar() */
             |public void foo() {}
-        """.render(java = true).documentation(doc = ::classFunctionDoc)
+        """.render(java = true).documentation()
 
         val paramSummary = documentation.last() as SummaryList
         val paramText = paramSummary.item()
@@ -615,7 +684,7 @@ internal class DocTagConverterTest(
         val documentation = """
             |/** @see String */
             |public void foo() {}
-        """.render(java = true).documentation(doc = ::classFunctionDoc)
+        """.render(java = true).documentation()
 
         val paramSummary = documentation.last() as SummaryList
         val paramText = paramSummary.item()
@@ -628,7 +697,7 @@ internal class DocTagConverterTest(
         val documentation = """
             |/** @see com.example.foo.Foo */
             |public void foo() {}
-        """.render(java = true).documentation(doc = ::classFunctionDoc)
+        """.render(java = true).documentation()
 
         val paramSummary = documentation.last() as SummaryList
         val paramText = paramSummary.item()
@@ -698,23 +767,13 @@ internal class DocTagConverterTest(
     }
 
     private fun DModule.clazz(): DClass {
-        val topClass = this.packages.single().classlikes.single()
+        val topClass = this.classlike()!!
         if (topClass.classlikes.isNotEmpty()) return topClass.classlikes.single() as DClass
         return topClass as DClass
     }
 
     private fun smartDoc(module: DModule): Documentable {
-        val packageDoc = module.packages.single()
-
-        return packageDoc.classlikes.singleOrNull() ?: packageDoc.functions.single()
-    }
-
-    /**
-     * takes a DModule to it's only class' only method not inherited from Any
-     */
-    private fun classFunctionDoc(module: DModule): Documentable {
-        return module.packages.single().classlikes.single().functions.single {
-            !it.dri.isFromBaseClass() }
+        return module.function() ?: module.classlike()!!
     }
 
     companion object {

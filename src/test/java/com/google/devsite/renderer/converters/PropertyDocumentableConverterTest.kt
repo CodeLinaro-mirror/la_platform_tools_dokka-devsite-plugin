@@ -21,6 +21,8 @@ import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolDetail.SymbolType.PROPERTY
+import com.google.devsite.components.symbols.SymbolSignature
+import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.SymbolType
 import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.TwoPaneSummaryItem
@@ -33,7 +35,6 @@ import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DModule
-import org.jetbrains.dokka.model.DProperty
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -64,6 +65,49 @@ internal class PropertyDocumentableConverterTest(
         val property = summary.functionSummary()
 
         assertThat(property.name()).isEqualTo("iAmACoolProperty")
+    }
+
+    @Test
+    fun `Property summaries include nullability information in 4x Kotlin and Java`() {
+        val paramK = ("""
+            |val foo: Int? = null
+        """.render().summary().data.title as TypeSummary).data.type
+        val paramJ = ("""
+            |@Nullable Integer foo = null
+        """.render(java = true).summary().data.title as TypeSummary).data.type
+        val paramJ2 = ("""
+            |@Nullable
+            |Integer foo = null
+        """.render(java = true).summary().data.title as TypeSummary).data.type
+
+        for (param in listOf(paramK, paramJ, paramJ2)) {
+            javaOnly { assertThat(param.data.annotations).isNotEmpty() }
+            kotlinOnly {
+                assertThat(param.data.annotations).isEmpty()
+                assertThat(param.nullable).isTrue()
+            }
+        }
+    }
+
+    @Test
+    fun `Property details include nullability information in 4x Kotlin and Java`() {
+        val detailsK = """
+            |val foo: Int? = null
+        """.render().detail().data
+        val detailsJ = """
+            |@Nullable Integer foo = null
+        """.render(java = true).detail().data
+        val detailsJ2 = """
+            |@Nullable Integer foo = null
+        """.render(java = true).detail().data
+
+        for (details in listOf(detailsK, detailsJ, detailsJ2)) {
+            kotlinOnly {
+                assertThat(details.annotations).isEmpty()
+                assertThat(details.returnType.data.primary.asType().data.nullable).isTrue()
+            }
+            javaOnly { assertThat(details.annotations).isNotEmpty() }
+        }
     }
 
     @Test
@@ -163,39 +207,37 @@ internal class PropertyDocumentableConverterTest(
     }
 
     private fun DModule.summary(
-        fromClass: Boolean = false,
         hints: ModifierHints = ModifierHints(language)
     ): TwoPaneSummaryItem {
         val holder = runBlocking { DocumentablesHolder(this@summary, this) }
         val docConverter = DocTagConverter(language, pathProvider(), holder)
         val converter = PropertyDocumentableConverter(language, pathProvider(), docConverter)
-        return converter.summary(property(fromClass), hints)
+        return converter.summary(property()!!, hints)
     }
 
     private fun DModule.detail(
-        fromClass: Boolean = false,
         hints: ModifierHints = ModifierHints(language)
     ): SymbolDetail {
         val holder = runBlocking { DocumentablesHolder(this@detail, this) }
         val docConverter = DocTagConverter(language, pathProvider(), holder)
         val converter = PropertyDocumentableConverter(language, pathProvider(), docConverter)
-        return converter.detail(property(fromClass), hints)
+        return converter.detail(property()!!, hints)
     }
 
-    private fun DModule.property(fromClass: Boolean): DProperty {
-        val packageDoc = packages.single()
-
-        return if (fromClass) {
-            packageDoc.classlikes.single().properties.single { it.name == "foo" }
-        } else {
-            packageDoc.properties.single()
-        }
+    private fun DModule.signature(
+        hints: ModifierHints = ModifierHints(language)
+    ): SymbolSignature {
+        val holder = runBlocking { DocumentablesHolder(this@signature, this) }
+        val docConverter = DocTagConverter(language, pathProvider(), holder)
+        val converter = PropertyDocumentableConverter(language, pathProvider(), docConverter)
+        return converter.summary(property()!!, hints).signature()
     }
 
     private fun Parameter.link(): Link.Params = (data.primary as SymbolType).link()
     private fun SymbolType.link(): Link.Params = data.type.data
     private fun TwoPaneSummaryItem.returnSummary(): TypeSummary.Params =
         (data.title as TypeSummary).data
+    private fun TwoPaneSummaryItem.signature() = (data.description as SymbolSummary).data.signature
 
     companion object {
         @JvmStatic

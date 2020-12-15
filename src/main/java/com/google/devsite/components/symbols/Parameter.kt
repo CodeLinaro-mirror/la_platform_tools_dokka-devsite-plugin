@@ -52,4 +52,8 @@ internal interface Parameter : SymbolBase {
         val annotations: List<Annotation> = emptyList(),
         val defaultValue: String? = null
     )
+
+    val nullable: Boolean
+        get() = ((data.primary as? SymbolType)?.data?.nullable ?: false) ||
+            data.annotations.any { it.data.type.data.name == "Nullable" }
 }

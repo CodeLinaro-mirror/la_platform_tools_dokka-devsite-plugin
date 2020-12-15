@@ -24,6 +24,7 @@ import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.Annotations.Annotation
 import org.jetbrains.dokka.model.DModule
+import org.junit.Ignore
 import org.junit.Test
 import kotlin.Boolean
 import com.google.devsite.components.symbols.Annotation as AnnotationComponent
@@ -34,7 +35,7 @@ internal class AnnotationsTest : ConverterTestBase() {
         val annotations = """
             |@Suppress("abc")
             |fun foo() = Unit
-        """.render().annotations()
+        """.render().functionAnnotations()
 
         assertThat(annotations.components()).isEmpty()
     }
@@ -44,7 +45,7 @@ internal class AnnotationsTest : ConverterTestBase() {
         val annotations = """
             |@JvmName("bar")
             |fun foo() = Unit
-        """.render().annotations()
+        """.render().functionAnnotations()
 
         assertThat(annotations.components()).isEmpty()
     }
@@ -54,7 +55,7 @@ internal class AnnotationsTest : ConverterTestBase() {
         val annotations = """
             |@Deprecated("So long, farewell, auf wiedersehen, goodbye")
             |fun foo() = Unit
-        """.render().annotations()
+        """.render().functionAnnotations()
 
         assertThat(annotations.components()).isEmpty()
     }
@@ -64,7 +65,7 @@ internal class AnnotationsTest : ConverterTestBase() {
         val annotations = """
             |@Deprecated("So long, farewell, auf wiedersehen, goodbye")
             |fun foo() = Unit
-        """.render().annotations()
+        """.render().functionAnnotations()
 
         assertThat(annotations.isDeprecated()).isTrue()
     }
@@ -74,7 +75,7 @@ internal class AnnotationsTest : ConverterTestBase() {
         val annotation = """
             |@Deprecated("So long, farewell, auf wiedersehen, goodbye")
             |fun foo() = Unit
-        """.render().annotations().first()
+        """.render().functionAnnotations().first()
 
         assertThat(annotation.isDeprecated()).isTrue()
     }
@@ -84,7 +85,7 @@ internal class AnnotationsTest : ConverterTestBase() {
         val annotation = """
             |@FooAnnotation
             |fun foo() = Unit
-        """.render().annotations().first()
+        """.render().functionAnnotations().first()
 
         assertThat(annotation.isDeprecated()).isFalse()
     }
@@ -95,7 +96,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |annotation class Hello
             |@Hello
             |fun foo() = Unit
-        """.render().annotations()
+        """.render().functionAnnotations()
 
         val annotation = annotations.components().item()
 
@@ -104,40 +105,181 @@ internal class AnnotationsTest : ConverterTestBase() {
     }
 
     @Test
-    fun `Component has annotation value`() {
-        val annotations = """
-            |annotation class Hello(val foo: String)
+    fun `Method component has annotation and value in 4x Kotlin and Java`() {
+        val annotationsK = """
+            |annotation class Hello(val bar: String)
             |@Hello("abc")
+            |@Hello(bar = "baz")
             |fun foo() = Unit
-        """.render().annotations()
+        """.render().functionAnnotations()
+        val annotationsJ = """
+            |@Retention(RetentionPolicy.RUNTIME)
+            |@Target(ElementType.METHOD)
+            |public @interface Hello {
+            |    public String bar() default "";
+            |}
+            |@Hello("abc")
+            |@Hello(bar = "baz")
+            |public void foo() {}
+        """.render(java = true).functionAnnotations()
 
-        val annotation = annotations.components().item()
-        val parameter = annotation.data.parameters.item()
+        for (annotations in listOf(annotationsK, annotationsJ)) {
+            val annotationOne = annotations.components().first()
+            val parameterOne = annotationOne.data.parameters.item()
+            val annotationTwo = annotations.components().last()
+            val parameterTwo = annotationTwo.data.parameters.item()
 
-        assertThat(parameter.name).isEqualTo("foo")
-        assertThat(parameter.value).isEqualTo("\"abc\"")
+            // NOTE: "value" in java does not match "bar" in kotlin (in previous test)
+            if (annotations == annotationsK) assertThat(parameterOne.name).isEqualTo("bar")
+            else assertThat(parameterOne.name).isEqualTo("value")
+            assertThat(parameterOne.value).isEqualTo("\"abc\"")
+            assertThat(parameterTwo.name).isEqualTo("bar")
+            assertThat(parameterTwo.value).isEqualTo("\"baz\"")
+        }
     }
 
     @Test
-    fun `Nullability annotation is kept in Java`() {
-        val annotations = """
-            |annotation class Nullable
-            |@Nullable
-            |fun foo() = Unit
-        """.render().annotations()
+    fun `Property component has annotation and value in 4x Kotlin and Java`() {
+        val annotationsK = """
+            |annotation class Hello(val bar: String)
+            |@Hello("abc")
+            |@Hello(bar = "baz")
+            |val foo: String = "foofoo"
+        """.render().property()!!.annotations()
+        val annotationsJ = """
+            |@Retention(RetentionPolicy.RUNTIME)
+            |@Target(ElementType.FIELD)
+            |public @interface Hello {
+            |    public String bar() default "";
+            |}
+            |@Hello("abc")
+            |@Hello(bar = "baz")
+            |public String foo = "foofoo"
+        """.render(java = true).property()!!.annotations()
 
-        assertThat(annotations.components()).isNotEmpty()
+        for (annotations in listOf(annotationsK, annotationsJ)) {
+            val annotationOne = annotations.components().first()
+            val parameterOne = annotationOne.data.parameters.item()
+            val annotationTwo = annotations.components().last()
+            val parameterTwo = annotationTwo.data.parameters.item()
+
+            // NOTE: "value" in java does not match "bar" in kotlin (in previous test)
+            if (annotations == annotationsK) assertThat(parameterOne.name).isEqualTo("bar")
+            else assertThat(parameterOne.name).isEqualTo("value")
+            assertThat(parameterOne.value).isEqualTo("\"abc\"")
+            assertThat(parameterTwo.name).isEqualTo("bar")
+            assertThat(parameterTwo.value).isEqualTo("\"baz\"")
+        }
     }
 
+    // TODO: upstream dokka doesn't parse annotations on parameters, b/175612102
     @Test
-    fun `Nullability annotation is removed in Kotlin`() {
-        val annotations = """
+    fun `Parameter component has annotation and value in 4x Kotlin and Java`() {
+        val annotationsK = """
+            |annotation class Hello(val bar: String)
+            |fun foo(@Hello("abc") @Hello(bar = "baz") arg: String) = Unit
+        """.render().function()!!.parameters.single().annotations()
+        val annotationsJ = """
+            |@Retention(RetentionPolicy.RUNTIME)
+            |@Target(ElementType.PARAMETER)
+            |public @interface Hello {
+            |    public String bar() default "";
+            |}
+            |public void foo(@Hello("abc") @Hello(bar = "baz") String arg)
+        """.render(java = true).function()!!.parameters.single().annotations()
+
+        for (annotations in listOf(annotationsK/*, annotationsJ*/)) {
+            val annotationOne = annotations.components().first()
+            val parameterOne = annotationOne.data.parameters.item()
+            val annotationTwo = annotations.components().last()
+            val parameterTwo = annotationTwo.data.parameters.item()
+
+            if (annotations == annotationsK) assertThat(parameterOne.name).isEqualTo("bar")
+            else assertThat(parameterOne.name).isEqualTo("value")
+            assertThat(parameterOne.value).isEqualTo("\"abc\"")
+            assertThat(parameterTwo.name).isEqualTo("bar")
+            assertThat(parameterTwo.value).isEqualTo("\"baz\"")
+        }
+    }
+
+    @Ignore // TODO: upstream doesn't parse java or kotlin type parameters annotations, b/175612102
+    @Test
+    fun `Type parameter component has annotation and value in 4x Kotlin and Java`() {
+        val annotationsK = """
+            |annotation class Hello(val bar: String)
+            |fun <@Hello("abc") @Hello(bar = "baz") T> foo(arg: String): List<T>
+        """.render().function()!!.generics.single().annotations()
+        val annotationsJ = """
+            |@Retention(RetentionPolicy.RUNTIME)
+            |@Target(ElementType.TYPE_PARAMETER)
+            |public @interface Hello {
+            |    public String bar() default "";
+            |}
+            |public <@Hello("abc") @Hello(bar = "baz") T> List<T> foo()
+        """.render(java = true).function()!!.generics.single().annotations()
+
+        for (annotations in listOf(annotationsK/*, annotationsJ*/)) {
+            val annotationOne = annotations.components().first()
+            val parameterOne = annotationOne.data.parameters.item()
+            val annotationTwo = annotations.components().last()
+            val parameterTwo = annotationTwo.data.parameters.item()
+
+            if (annotations == annotationsK) assertThat(parameterOne.name).isEqualTo("bar")
+            else assertThat(parameterOne.name).isEqualTo("value")
+            assertThat(parameterOne.value).isEqualTo("\"abc\"")
+            assertThat(parameterTwo.name).isEqualTo("bar")
+            assertThat(parameterTwo.value).isEqualTo("\"baz\"")
+        }
+    }
+
+    // TODO: alter our representation so this test can be fully implemented.
+    /*
+    @Ignore // TODO: upstream doesn't parse java or kotlin type parameters annotations, b/175612102
+    @Test
+    fun `Type parameter type has annotation and value in 4x Kotlin and Java`() {
+        val annotationsK = """
+            |annotation class Hello(val bar: String)
+            |fun <T : @Hello("abc") @Hello(bar = "baz") String> foo(arg: String): List<T>
+        """.render().function()!!.generics.single().bounds.single().annotations()
+        val annotationsJ = """
+            |@Retention(RetentionPolicy.RUNTIME)
+            |@Target(ElementType.TYPE_PARAMETER)
+            |public @interface Hello {
+            |    public String bar() default "";
+            |}
+            |public <T extends @Hello("abc") @Hello(bar = "baz") String> List<T> foo()
+        """.render(java = true).function()!!.generics.single().bounds.single().annotations()
+
+        for (annotations in listOf(annotationsK/*, annotationsJ*/)) {
+            val annotationOne = annotations.components().first()
+            val parameterOne = annotationOne.data.parameters.item()
+            val annotationTwo = annotations.components().last()
+            val parameterTwo = annotationTwo.data.parameters.item()
+
+            if (annotations == annotationsK) assertThat(parameterOne.name).isEqualTo("bar")
+            else assertThat(parameterOne.name).isEqualTo("value")
+            assertThat (parameterOne.value).isEqualTo("\"abc\"")
+            assertThat(parameterTwo.name).isEqualTo("bar")
+            assertThat(parameterTwo.value).isEqualTo("\"baz\"")
+        }
+    }*/
+
+    @Test
+    fun `Nullability annotation is kept and discarded in Java and Kotlin as appropriate`() {
+        val annotationsJ = """
+            |@Nullable
+            |public Unit foo()
+        """.render(java = true).functionAnnotations()
+        val annotationsK = """
             |annotation class Nullable
             |@Nullable
             |fun foo() = Unit
-        """.render().annotations()
+        """.render().functionAnnotations()
 
-        assertThat(annotations.components(Language.KOTLIN)).isEmpty()
+        for (annotations in listOf(annotationsK, annotationsJ)) {
+            assertThat(annotations.components()).isNotEmpty()
+            assertThat(annotations.components(Language.KOTLIN)).isEmpty()
+        }
     }
 
     @Test
@@ -146,7 +288,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |annotation class Nullable
             |@Nullable
             |fun foo() = Unit
-        """.render().annotations()
+        """.render().functionAnnotations()
 
         assertThat(annotations.isNullable()).isTrue()
     }
@@ -174,12 +316,8 @@ internal class AnnotationsTest : ConverterTestBase() {
         assertThat(annotations).isEmpty()
     }
 
-    private fun DModule.annotations(): List<Annotation> {
-        val packageDoc = packages.single()
-        val function = packageDoc.functions.singleOrNull()
-            ?: packageDoc.classlikes.single().functions.single { it.name == "foo" }
-
-        return function.annotations()
+    private fun DModule.functionAnnotations(): List<Annotation> {
+        return function("foo")!!.annotations()
     }
 
     private fun List<Annotation>.components(

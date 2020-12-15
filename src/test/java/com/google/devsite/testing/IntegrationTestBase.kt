@@ -17,6 +17,8 @@
 package com.google.devsite.testing
 
 import com.google.common.truth.Truth.assertWithMessage
+import org.jetbrains.dokka.DokkaDefaults.suppress
+import org.jetbrains.dokka.PackageOptionsImpl
 import org.jetbrains.dokka.testApi.testRunner.AbstractCoreTest
 import java.io.File
 
@@ -26,6 +28,7 @@ import java.io.File
  * Html output results can be found in testData/
  */
 abstract class IntegrationTestBase : AbstractCoreTest() {
+
     /**
      * Reads sources and outputs from a directory, and validates based on them.
      *
@@ -43,6 +46,12 @@ abstract class IntegrationTestBase : AbstractCoreTest() {
                     check(sources.isDirectory) { "$sources does not exist or is not a directory" }
                     sourceRoots = listOf(sources.absolutePath)
                     classpath += listOfNotNull(jvmStdlibPath)
+                    perPackageOptions += PackageOptionsImpl(
+                        matchingRegex = "androidx.annotation",
+                        includeNonPublic = false,
+                        reportUndocumented = false,
+                        skipDeprecated = false,
+                        suppress = true)
                 }
             }
         }

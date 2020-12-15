@@ -15,14 +15,14 @@
  */
 
 package com.google.devsite.renderer.converters
-
+/*
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DModule
 import org.junit.Ignore
 import org.junit.Test
-
+*/
 /**
  * Tests derived from the sprint on old dokka.
  * These tests were originally generated when we noticed old dokka doing things wrong, fixed them,
@@ -31,7 +31,7 @@ import org.junit.Test
  *
  * These tests do not purely test dackka, they test some functionality of dokka.
  * However, that makes sense as they are not true unit tests, but format-agnostic parity tests.
- */
+ *//*
 // TODO: get all of these tests working, and un-ignore them
 internal class LegacyJavaTests : ConverterTestBase() {
     /**
@@ -79,3 +79,4 @@ internal class LegacyJavaTests : ConverterTestBase() {
     internal fun DModule.functions() = classes().flatMap { it -> it.functions }
     internal fun DModule.constructors() = classes().flatMap { it -> it.constructors }
 }
+*/
