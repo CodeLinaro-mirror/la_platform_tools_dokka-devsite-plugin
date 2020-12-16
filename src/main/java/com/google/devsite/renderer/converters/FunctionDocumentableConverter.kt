@@ -131,7 +131,11 @@ internal class FunctionDocumentableConverter(
 
         return DefaultFunctionSignature(
             FunctionSignature.Params(
-                name = pathProvider.linkForReference(dri),
+                name = pathProvider.linkForReference(
+                    when (displayLanguage) {
+                        Language.JAVA -> dri.possiblyAsJava()
+                        Language.KOTLIN -> dri
+                    }),
                 receiver = when (displayLanguage) {
                     Language.JAVA -> null
                     Language.KOTLIN -> receiver

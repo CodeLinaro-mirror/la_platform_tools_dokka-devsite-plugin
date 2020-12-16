@@ -423,15 +423,49 @@ internal class ParameterDocumentableConverterTest(
     }
 
     @Test
-    fun `Primitive type is mapped in Java`() {
-        val param = """
-            |fun foo(foo: Int)
-        """.render().param().data
+    fun `Primative type from Java code has correct type in Java and Kotlin`() {
+        val module = """
+            |public void foo(int a) {}
+        """.render(java = true)
 
-        val typeName = param.primary.asType().link().name
+        val converter = ParameterDocumentableConverter(language, pathProvider())
+        val paramType = converter.componentForParameter(
+            module.packages.single().classlikes.single().functions.single().parameters.single(),
+            false
+        )
 
-        javaOnly { assertThat(typeName).isEqualTo("int") }
-        kotlinOnly { assertThat(typeName).isEqualTo("Int") }
+        javaOnly {
+            assertThat(paramType.link().name).isEqualTo("int")
+            assertThat(paramType.link().url).isEmpty()
+        }
+
+        kotlinOnly {
+            assertThat(paramType.link().name).isEqualTo("Int")
+            assertThat(paramType.link().url).isEqualTo("/reference/kotlin/kotlin/Int.html")
+        }
+    }
+
+    @Test
+    fun `Primative type from Kotlin code has correct type in Java and Kotlin`() {
+        val module = """
+            |fun foo(a: Int) = Unit
+        """.render()
+
+        val converter = ParameterDocumentableConverter(language, pathProvider())
+        val paramType = converter.componentForParameter(
+            module.packages.single().functions.single().parameters.single(),
+            false
+        )
+
+        javaOnly {
+            assertThat(paramType.link().name).isEqualTo("int")
+            assertThat(paramType.link().url).isEmpty()
+        }
+
+        kotlinOnly {
+            assertThat(paramType.link().name).isEqualTo("Int")
+            assertThat(paramType.link().url).isEqualTo("/reference/kotlin/kotlin/Int.html")
+        }
     }
 
     @Test
