@@ -40,7 +40,7 @@ public class FragmentTabHost extends android.widget.TabHost implements android.w
  */
 
 @Deprecated
-public FragmentTabHost(android.content.Context context) { super((android.content.Context)null); throw new RuntimeException("Stub!"); }
+public FragmentTabHost(@androidx.annotation.NonNull android.content.Context context) { super((android.content.Context)null); throw new RuntimeException("Stub!"); }
 
 /**
  * @deprecated Use
@@ -49,7 +49,7 @@ public FragmentTabHost(android.content.Context context) { super((android.content
  */
 
 @Deprecated
-public FragmentTabHost(android.content.Context context, android.util.AttributeSet attrs) { super((android.content.Context)null); throw new RuntimeException("Stub!"); }
+public FragmentTabHost(@androidx.annotation.NonNull android.content.Context context, @androidx.annotation.Nullable android.util.AttributeSet attrs) { super((android.content.Context)null); throw new RuntimeException("Stub!"); }
 
 /**
  * @deprecated Use
@@ -69,7 +69,7 @@ public void setup() { throw new RuntimeException("Stub!"); }
  */
 
 @Deprecated
-public void setup(android.content.Context context, androidx.fragment.app.FragmentManager manager) { throw new RuntimeException("Stub!"); }
+public void setup(@androidx.annotation.NonNull android.content.Context context, @androidx.annotation.NonNull androidx.fragment.app.FragmentManager manager) { throw new RuntimeException("Stub!"); }
 
 /**
  * Set up the FragmentTabHost to use the given FragmentManager
@@ -80,7 +80,7 @@ public void setup(android.content.Context context, androidx.fragment.app.Fragmen
  */
 
 @Deprecated
-public void setup(android.content.Context context, androidx.fragment.app.FragmentManager manager, int containerId) { throw new RuntimeException("Stub!"); }
+public void setup(@androidx.annotation.NonNull android.content.Context context, @androidx.annotation.NonNull androidx.fragment.app.FragmentManager manager, int containerId) { throw new RuntimeException("Stub!"); }
 
 /**
  * @deprecated Use
@@ -89,7 +89,7 @@ public void setup(android.content.Context context, androidx.fragment.app.Fragmen
  */
 
 @Deprecated
-public void setOnTabChangedListener(android.widget.TabHost.OnTabChangeListener l) { throw new RuntimeException("Stub!"); }
+public void setOnTabChangedListener(@androidx.annotation.Nullable android.widget.TabHost.OnTabChangeListener l) { throw new RuntimeException("Stub!"); }
 
 /**
  * @deprecated Use
@@ -98,7 +98,7 @@ public void setOnTabChangedListener(android.widget.TabHost.OnTabChangeListener l
  */
 
 @Deprecated
-public void addTab(android.widget.TabHost.TabSpec tabSpec, java.lang.Class<?> clss, android.os.Bundle args) { throw new RuntimeException("Stub!"); }
+public void addTab(@androidx.annotation.NonNull android.widget.TabHost.TabSpec tabSpec, @androidx.annotation.NonNull java.lang.Class<?> clss, @androidx.annotation.Nullable android.os.Bundle args) { throw new RuntimeException("Stub!"); }
 
 /**
  * @deprecated Use
@@ -125,6 +125,7 @@ protected void onDetachedFromWindow() { throw new RuntimeException("Stub!"); }
  */
 
 @Deprecated
+@androidx.annotation.NonNull
 protected android.os.Parcelable onSaveInstanceState() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -143,6 +144,6 @@ protected void onRestoreInstanceState(android.os.Parcelable state) { throw new R
  */
 
 @Deprecated
-public void onTabChanged(java.lang.String tabId) { throw new RuntimeException("Stub!"); }
+public void onTabChanged(@androidx.annotation.Nullable java.lang.String tabId) { throw new RuntimeException("Stub!"); }
 }
 

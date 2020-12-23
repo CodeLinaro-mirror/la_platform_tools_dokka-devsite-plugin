@@ -34,6 +34,7 @@ public FragmentContainer() { throw new RuntimeException("Stub!"); }
  * view is not a child of this container.
  */
 
+@androidx.annotation.Nullable
 public abstract android.view.View onFindViewById(int id);
 
 /**
@@ -51,6 +52,7 @@ public abstract boolean onHasView();
  */
 
 @Deprecated
-public androidx.fragment.app.Fragment instantiate(android.content.Context context, java.lang.String className, android.os.Bundle arguments) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.Fragment instantiate(@androidx.annotation.NonNull android.content.Context context, @androidx.annotation.NonNull java.lang.String className, @androidx.annotation.Nullable android.os.Bundle arguments) { throw new RuntimeException("Stub!"); }
 }
 

@@ -108,7 +108,7 @@ public void setStyle(int style, int theme) { throw new RuntimeException("Stub!")
  * {@link androidx.fragment.app.FragmentTransaction#add(androidx.fragment.app.Fragment,java.lang.String) FragmentTransaction#add(Fragment, String)}.
  */
 
-public void show(androidx.fragment.app.FragmentManager manager, java.lang.String tag) { throw new RuntimeException("Stub!"); }
+public void show(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager manager, @androidx.annotation.Nullable java.lang.String tag) { throw new RuntimeException("Stub!"); }
 
 /**
  * Display the dialog, adding the fragment using an existing transaction
@@ -120,7 +120,7 @@ public void show(androidx.fragment.app.FragmentManager manager, java.lang.String
  * {@link androidx.fragment.app.FragmentTransaction#commit() FragmentTransaction#commit()}.
  */
 
-public int show(androidx.fragment.app.FragmentTransaction transaction, java.lang.String tag) { throw new RuntimeException("Stub!"); }
+public int show(@androidx.annotation.NonNull androidx.fragment.app.FragmentTransaction transaction, @androidx.annotation.Nullable java.lang.String tag) { throw new RuntimeException("Stub!"); }
 
 /**
  * Display the dialog, immediately adding the fragment to the given FragmentManager.  This
@@ -134,7 +134,7 @@ public int show(androidx.fragment.app.FragmentTransaction transaction, java.lang
  * {@link androidx.fragment.app.FragmentTransaction#add(androidx.fragment.app.Fragment,java.lang.String) FragmentTransaction#add(Fragment, String)}.
  */
 
-public void showNow(androidx.fragment.app.FragmentManager manager, java.lang.String tag) { throw new RuntimeException("Stub!"); }
+public void showNow(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager manager, @androidx.annotation.Nullable java.lang.String tag) { throw new RuntimeException("Stub!"); }
 
 /**
  * Dismiss the fragment and its dialog.  If the fragment was added to the
@@ -159,6 +159,7 @@ public void dismissAllowingStateLoss() { throw new RuntimeException("Stub!"); }
  * @see #requireDialog()
  */
 
+@androidx.annotation.Nullable
 public android.app.Dialog getDialog() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -169,6 +170,7 @@ public android.app.Dialog getDialog() { throw new RuntimeException("Stub!"); }
  * @see #getDialog()
  */
 
+@androidx.annotation.NonNull
 public final android.app.Dialog requireDialog() { throw new RuntimeException("Stub!"); }
 
 public int getTheme() { throw new RuntimeException("Stub!"); }
@@ -218,11 +220,11 @@ public void setShowsDialog(boolean showsDialog) { throw new RuntimeException("St
 
 public boolean getShowsDialog() { throw new RuntimeException("Stub!"); }
 
-public void onAttach(android.content.Context context) { throw new RuntimeException("Stub!"); }
+public void onAttach(@androidx.annotation.NonNull android.content.Context context) { throw new RuntimeException("Stub!"); }
 
 public void onDetach() { throw new RuntimeException("Stub!"); }
 
-public void onCreate(android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+public void onCreate(@androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
 /**
  * {@inheritDoc}
@@ -232,7 +234,8 @@ public void onCreate(android.os.Bundle savedInstanceState) { throw new RuntimeEx
  * {@link androidx.fragment.app.Fragment#onGetLayoutInflater(android.os.Bundle) Fragment#onGetLayoutInflater(Bundle)}, without the dialog theme, will be returned.
  */
 
-public android.view.LayoutInflater onGetLayoutInflater(android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public android.view.LayoutInflater onGetLayoutInflater(@androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
 /**
  * Override to build your own custom Dialog container.  This is typically
@@ -255,17 +258,18 @@ public android.view.LayoutInflater onGetLayoutInflater(android.os.Bundle savedIn
  * @return Return a new Dialog instance to be displayed by the Fragment.
  */
 
-public android.app.Dialog onCreateDialog(android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public android.app.Dialog onCreateDialog(@androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
-public void onCancel(android.content.DialogInterface dialog) { throw new RuntimeException("Stub!"); }
+public void onCancel(@androidx.annotation.NonNull android.content.DialogInterface dialog) { throw new RuntimeException("Stub!"); }
 
-public void onDismiss(android.content.DialogInterface dialog) { throw new RuntimeException("Stub!"); }
+public void onDismiss(@androidx.annotation.NonNull android.content.DialogInterface dialog) { throw new RuntimeException("Stub!"); }
 
-public void onViewStateRestored(android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+public void onViewStateRestored(@androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
 public void onStart() { throw new RuntimeException("Stub!"); }
 
-public void onSaveInstanceState(android.os.Bundle outState) { throw new RuntimeException("Stub!"); }
+public void onSaveInstanceState(@androidx.annotation.NonNull android.os.Bundle outState) { throw new RuntimeException("Stub!"); }
 
 public void onStop() { throw new RuntimeException("Stub!"); }
 

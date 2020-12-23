@@ -40,7 +40,7 @@ public interface FragmentResultOwner {
  * @param result the result to be passed to another fragment
  */
 
-public void setFragmentResult(java.lang.String requestKey, android.os.Bundle result);
+public void setFragmentResult(@androidx.annotation.NonNull java.lang.String requestKey, @androidx.annotation.NonNull android.os.Bundle result);
 
 /**
  * Clears the stored result for the given requestKey.
@@ -52,7 +52,7 @@ public void setFragmentResult(java.lang.String requestKey, android.os.Bundle res
  * @param requestKey key used to identify the result
  */
 
-public void clearFragmentResult(java.lang.String requestKey);
+public void clearFragmentResult(@androidx.annotation.NonNull java.lang.String requestKey);
 
 /**
  * Sets the {@link androidx.fragment.app.FragmentResultListener FragmentResultListener} for a given requestKey. Once the given
@@ -69,7 +69,7 @@ public void clearFragmentResult(java.lang.String requestKey);
  * @param listener listener for result changes
  */
 
-public void setFragmentResultListener(java.lang.String requestKey, androidx.lifecycle.LifecycleOwner lifecycleOwner, androidx.fragment.app.FragmentResultListener listener);
+public void setFragmentResultListener(@androidx.annotation.NonNull java.lang.String requestKey, @androidx.annotation.NonNull androidx.lifecycle.LifecycleOwner lifecycleOwner, @androidx.annotation.NonNull androidx.fragment.app.FragmentResultListener listener);
 
 /**
  * Clears the stored {@link androidx.fragment.app.FragmentResultListener FragmentResultListener} for the given requestKey.
@@ -80,6 +80,6 @@ public void setFragmentResultListener(java.lang.String requestKey, androidx.life
  * @param requestKey key used to identify the result
  */
 
-public void clearFragmentResultListener(java.lang.String requestKey);
+public void clearFragmentResultListener(@androidx.annotation.NonNull java.lang.String requestKey);
 }
 

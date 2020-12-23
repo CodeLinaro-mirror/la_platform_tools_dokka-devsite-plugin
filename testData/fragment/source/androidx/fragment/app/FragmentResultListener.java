@@ -41,6 +41,6 @@ public interface FragmentResultListener {
  * @param result result passed to the callback
  */
 
-public void onFragmentResult(java.lang.String requestKey, android.os.Bundle result);
+public void onFragmentResult(@androidx.annotation.NonNull java.lang.String requestKey, @androidx.annotation.NonNull android.os.Bundle result);
 }
 

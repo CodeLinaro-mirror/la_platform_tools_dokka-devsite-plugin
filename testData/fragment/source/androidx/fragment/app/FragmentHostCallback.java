@@ -62,7 +62,7 @@ import androidx.activity.result.ActivityResultCallback;
 @SuppressWarnings({"unchecked", "deprecation", "all"})
 public abstract class FragmentHostCallback<E> extends androidx.fragment.app.FragmentContainer {
 
-public FragmentHostCallback(android.content.Context context, android.os.Handler handler, int windowAnimations) { throw new RuntimeException("Stub!"); }
+public FragmentHostCallback(@androidx.annotation.NonNull android.content.Context context, @androidx.annotation.NonNull android.os.Handler handler, int windowAnimations) { throw new RuntimeException("Stub!"); }
 
 /**
  * Print internal state into the given stream.
@@ -74,19 +74,20 @@ public FragmentHostCallback(android.content.Context context, android.os.Handler 
  * @param args additional arguments to the dump request.
  */
 
-public void onDump(java.lang.String prefix, java.io.FileDescriptor fd, java.io.PrintWriter writer, java.lang.String[] args) { throw new RuntimeException("Stub!"); }
+public void onDump(@androidx.annotation.NonNull java.lang.String prefix, @androidx.annotation.Nullable java.io.FileDescriptor fd, @androidx.annotation.NonNull java.io.PrintWriter writer, @androidx.annotation.Nullable java.lang.String[] args) { throw new RuntimeException("Stub!"); }
 
 /**
  * Return {@code true} if the fragment's state needs to be saved.
  */
 
-public boolean onShouldSaveFragmentState(androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
+public boolean onShouldSaveFragmentState(@androidx.annotation.NonNull androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
 
 /**
  * Return a {@link android.view.LayoutInflater LayoutInflater}.
  * See {@link android.app.Activity#getLayoutInflater() Activity#getLayoutInflater()}.
  */
 
+@androidx.annotation.NonNull
 public android.view.LayoutInflater onGetLayoutInflater() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -95,6 +96,7 @@ public android.view.LayoutInflater onGetLayoutInflater() { throw new RuntimeExce
  * the same object returned from {@link androidx.fragment.app.Fragment#getActivity() Fragment#getActivity()}.
  */
 
+@androidx.annotation.Nullable
 public abstract E onGetHost();
 
 /**
@@ -109,14 +111,14 @@ public void onSupportInvalidateOptionsMenu() { throw new RuntimeException("Stub!
  * See {@link androidx.fragment.app.FragmentActivity#startActivityForResult(android.content.Intent,int) FragmentActivity#startActivityForResult(Intent, int)}.
  */
 
-public void onStartActivityFromFragment(androidx.fragment.app.Fragment fragment, android.content.Intent intent, int requestCode) { throw new RuntimeException("Stub!"); }
+public void onStartActivityFromFragment(@androidx.annotation.NonNull androidx.fragment.app.Fragment fragment, android.content.Intent intent, int requestCode) { throw new RuntimeException("Stub!"); }
 
 /**
  * Starts a new {@link android.app.Activity Activity} from the given fragment.
  * See {@link androidx.fragment.app.FragmentActivity#startActivityForResult(android.content.Intent,int,android.os.Bundle) FragmentActivity#startActivityForResult(Intent, int, Bundle)}.
  */
 
-public void onStartActivityFromFragment(androidx.fragment.app.Fragment fragment, android.content.Intent intent, int requestCode, android.os.Bundle options) { throw new RuntimeException("Stub!"); }
+public void onStartActivityFromFragment(@androidx.annotation.NonNull androidx.fragment.app.Fragment fragment, android.content.Intent intent, int requestCode, @androidx.annotation.Nullable android.os.Bundle options) { throw new RuntimeException("Stub!"); }
 
 /**
  * Starts a new {@link android.content.IntentSender IntentSender} from the given fragment.
@@ -130,7 +132,7 @@ public void onStartActivityFromFragment(androidx.fragment.app.Fragment fragment,
  */
 
 @Deprecated
-public void onStartIntentSenderFromFragment(androidx.fragment.app.Fragment fragment, android.content.IntentSender intent, int requestCode, android.content.Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags, android.os.Bundle options) throws android.content.IntentSender.SendIntentException { throw new RuntimeException("Stub!"); }
+public void onStartIntentSenderFromFragment(@androidx.annotation.NonNull androidx.fragment.app.Fragment fragment, android.content.IntentSender intent, int requestCode, @androidx.annotation.Nullable android.content.Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags, @androidx.annotation.Nullable android.os.Bundle options) throws android.content.IntentSender.SendIntentException { throw new RuntimeException("Stub!"); }
 
 /**
  * Requests permissions from the given fragment.
@@ -144,14 +146,14 @@ public void onStartIntentSenderFromFragment(androidx.fragment.app.Fragment fragm
  */
 
 @Deprecated
-public void onRequestPermissionsFromFragment(androidx.fragment.app.Fragment fragment, java.lang.String[] permissions, int requestCode) { throw new RuntimeException("Stub!"); }
+public void onRequestPermissionsFromFragment(@androidx.annotation.NonNull androidx.fragment.app.Fragment fragment, @androidx.annotation.NonNull java.lang.String[] permissions, int requestCode) { throw new RuntimeException("Stub!"); }
 
 /**
  * Checks whether to show permission rationale UI from a fragment.
  * See {@link androidx.fragment.app.FragmentActivity#shouldShowRequestPermissionRationale(java.lang.String) FragmentActivity#shouldShowRequestPermissionRationale(String)}
  */
 
-public boolean onShouldShowRequestPermissionRationale(java.lang.String permission) { throw new RuntimeException("Stub!"); }
+public boolean onShouldShowRequestPermissionRationale(@androidx.annotation.NonNull java.lang.String permission) { throw new RuntimeException("Stub!"); }
 
 /**
  * Return {@code true} if there are window animations.
@@ -165,6 +167,7 @@ public boolean onHasWindowAnimations() { throw new RuntimeException("Stub!"); }
 
 public int onGetWindowAnimations() { throw new RuntimeException("Stub!"); }
 
+@androidx.annotation.Nullable
 public android.view.View onFindViewById(int id) { throw new RuntimeException("Stub!"); }
 
 public boolean onHasView() { throw new RuntimeException("Stub!"); }

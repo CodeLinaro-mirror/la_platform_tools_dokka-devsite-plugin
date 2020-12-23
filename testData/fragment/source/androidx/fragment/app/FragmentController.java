@@ -43,12 +43,14 @@ private FragmentController() { throw new RuntimeException("Stub!"); }
  * Returns a {@link androidx.fragment.app.FragmentController FragmentController}.
  */
 
-public static androidx.fragment.app.FragmentController createController(androidx.fragment.app.FragmentHostCallback<?> callbacks) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public static androidx.fragment.app.FragmentController createController(@androidx.annotation.NonNull androidx.fragment.app.FragmentHostCallback<?> callbacks) { throw new RuntimeException("Stub!"); }
 
 /**
  * Returns a {@link androidx.fragment.app.FragmentManager FragmentManager} for this controller.
  */
 
+@androidx.annotation.NonNull
 public androidx.fragment.app.FragmentManager getSupportFragmentManager() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -67,7 +69,8 @@ public androidx.loader.app.LoaderManager getSupportLoaderManager() { throw new R
  * Returns a fragment with the given identifier.
  */
 
-public androidx.fragment.app.Fragment findFragmentByWho(java.lang.String who) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.Nullable
+public androidx.fragment.app.Fragment findFragmentByWho(@androidx.annotation.NonNull java.lang.String who) { throw new RuntimeException("Stub!"); }
 
 /**
  * Returns the number of active fragments.
@@ -79,6 +82,7 @@ public int getActiveFragmentsCount() { throw new RuntimeException("Stub!"); }
  * Returns the list of active fragments.
  */
 
+@androidx.annotation.NonNull
 public java.util.List<androidx.fragment.app.Fragment> getActiveFragments(java.util.List<androidx.fragment.app.Fragment> actives) { throw new RuntimeException("Stub!"); }
 
 /**
@@ -86,7 +90,7 @@ public java.util.List<androidx.fragment.app.Fragment> getActiveFragments(java.ut
  * attached before the FragmentManager can be used to manage Fragments.
  */
 
-public void attachHost(androidx.fragment.app.Fragment parent) { throw new RuntimeException("Stub!"); }
+public void attachHost(@androidx.annotation.Nullable androidx.fragment.app.Fragment parent) { throw new RuntimeException("Stub!"); }
 
 /**
  * Instantiates a Fragment's view.
@@ -100,7 +104,8 @@ public void attachHost(androidx.fragment.app.Fragment parent) { throw new Runtim
  * @return view the newly created view
  */
 
-public android.view.View onCreateView(android.view.View parent, java.lang.String name, android.content.Context context, android.util.AttributeSet attrs) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.Nullable
+public android.view.View onCreateView(@androidx.annotation.Nullable android.view.View parent, @androidx.annotation.NonNull java.lang.String name, @androidx.annotation.NonNull android.content.Context context, @androidx.annotation.NonNull android.util.AttributeSet attrs) { throw new RuntimeException("Stub!"); }
 
 /**
  * Marks the fragment state as unsaved. This allows for "state loss" detection.
@@ -114,6 +119,7 @@ public void noteStateNotSaved() { throw new RuntimeException("Stub!"); }
  * @see #restoreSaveState(Parcelable)
  */
 
+@androidx.annotation.Nullable
 public android.os.Parcelable saveAllState() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -126,7 +132,7 @@ public android.os.Parcelable saveAllState() { throw new RuntimeException("Stub!"
  */
 
 @Deprecated
-public void restoreAllState(android.os.Parcelable state, java.util.List<androidx.fragment.app.Fragment> nonConfigList) { throw new RuntimeException("Stub!"); }
+public void restoreAllState(@androidx.annotation.Nullable android.os.Parcelable state, @androidx.annotation.Nullable java.util.List<androidx.fragment.app.Fragment> nonConfigList) { throw new RuntimeException("Stub!"); }
 
 /**
  * Restores the saved state for all Fragments. The given FragmentManagerNonConfig are Fragment
@@ -138,7 +144,7 @@ public void restoreAllState(android.os.Parcelable state, java.util.List<androidx
  */
 
 @Deprecated
-public void restoreAllState(android.os.Parcelable state, androidx.fragment.app.FragmentManagerNonConfig nonConfig) { throw new RuntimeException("Stub!"); }
+public void restoreAllState(@androidx.annotation.Nullable android.os.Parcelable state, @androidx.annotation.Nullable androidx.fragment.app.FragmentManagerNonConfig nonConfig) { throw new RuntimeException("Stub!"); }
 
 /**
  * Restores the saved state for all Fragments.
@@ -147,7 +153,7 @@ public void restoreAllState(android.os.Parcelable state, androidx.fragment.app.F
  * @see #saveAllState()
  */
 
-public void restoreSaveState(android.os.Parcelable state) { throw new RuntimeException("Stub!"); }
+public void restoreSaveState(@androidx.annotation.Nullable android.os.Parcelable state) { throw new RuntimeException("Stub!"); }
 
 /**
  * Returns a list of Fragments that have opted to retain their instance across
@@ -158,6 +164,7 @@ public void restoreSaveState(android.os.Parcelable state) { throw new RuntimeExc
  */
 
 @Deprecated
+@androidx.annotation.Nullable
 public java.util.List<androidx.fragment.app.Fragment> retainNonConfig() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -169,6 +176,7 @@ public java.util.List<androidx.fragment.app.Fragment> retainNonConfig() { throw 
  */
 
 @Deprecated
+@androidx.annotation.Nullable
 public androidx.fragment.app.FragmentManagerNonConfig retainNestedNonConfig() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -296,7 +304,7 @@ public void dispatchPictureInPictureModeChanged(boolean isInPictureInPictureMode
  * @see androidx.fragment.app.Fragment#onConfigurationChanged(Configuration)
  */
 
-public void dispatchConfigurationChanged(android.content.res.Configuration newConfig) { throw new RuntimeException("Stub!"); }
+public void dispatchConfigurationChanged(@androidx.annotation.NonNull android.content.res.Configuration newConfig) { throw new RuntimeException("Stub!"); }
 
 /**
  * Lets all Fragments managed by the controller's FragmentManager
@@ -318,7 +326,7 @@ public void dispatchLowMemory() { throw new RuntimeException("Stub!"); }
  * @see androidx.fragment.app.Fragment#onCreateOptionsMenu(Menu, MenuInflater)
  */
 
-public boolean dispatchCreateOptionsMenu(android.view.Menu menu, android.view.MenuInflater inflater) { throw new RuntimeException("Stub!"); }
+public boolean dispatchCreateOptionsMenu(@androidx.annotation.NonNull android.view.Menu menu, @androidx.annotation.NonNull android.view.MenuInflater inflater) { throw new RuntimeException("Stub!"); }
 
 /**
  * Lets all Fragments managed by the controller's FragmentManager
@@ -329,7 +337,7 @@ public boolean dispatchCreateOptionsMenu(android.view.Menu menu, android.view.Me
  * @see androidx.fragment.app.Fragment#onPrepareOptionsMenu(Menu)
  */
 
-public boolean dispatchPrepareOptionsMenu(android.view.Menu menu) { throw new RuntimeException("Stub!"); }
+public boolean dispatchPrepareOptionsMenu(@androidx.annotation.NonNull android.view.Menu menu) { throw new RuntimeException("Stub!"); }
 
 /**
  * Sends an option item selection event to the Fragments managed by the
@@ -341,7 +349,7 @@ public boolean dispatchPrepareOptionsMenu(android.view.Menu menu) { throw new Ru
  * @see androidx.fragment.app.Fragment#onOptionsItemSelected(MenuItem)
  */
 
-public boolean dispatchOptionsItemSelected(android.view.MenuItem item) { throw new RuntimeException("Stub!"); }
+public boolean dispatchOptionsItemSelected(@androidx.annotation.NonNull android.view.MenuItem item) { throw new RuntimeException("Stub!"); }
 
 /**
  * Sends a context item selection event to the Fragments managed by the
@@ -353,7 +361,7 @@ public boolean dispatchOptionsItemSelected(android.view.MenuItem item) { throw n
  * @see androidx.fragment.app.Fragment#onContextItemSelected(MenuItem)
  */
 
-public boolean dispatchContextItemSelected(android.view.MenuItem item) { throw new RuntimeException("Stub!"); }
+public boolean dispatchContextItemSelected(@androidx.annotation.NonNull android.view.MenuItem item) { throw new RuntimeException("Stub!"); }
 
 /**
  * Lets all Fragments managed by the controller's FragmentManager
@@ -363,7 +371,7 @@ public boolean dispatchContextItemSelected(android.view.MenuItem item) { throw n
  * @see androidx.fragment.app.Fragment#onOptionsMenuClosed(Menu)
  */
 
-public void dispatchOptionsMenuClosed(android.view.Menu menu) { throw new RuntimeException("Stub!"); }
+public void dispatchOptionsMenuClosed(@androidx.annotation.NonNull android.view.Menu menu) { throw new RuntimeException("Stub!"); }
 
 /**
  * Execute any pending actions for the Fragments managed by the
@@ -432,6 +440,7 @@ public void reportLoaderStart() { throw new RuntimeException("Stub!"); }
  */
 
 @Deprecated
+@androidx.annotation.Nullable
 public androidx.collection.SimpleArrayMap<java.lang.String,androidx.loader.app.LoaderManager> retainLoaderNonConfig() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -453,6 +462,6 @@ public void restoreLoaderNonConfig(androidx.collection.SimpleArrayMap<java.lang.
  */
 
 @Deprecated
-public void dumpLoaders(java.lang.String prefix, java.io.FileDescriptor fd, java.io.PrintWriter writer, java.lang.String[] args) { throw new RuntimeException("Stub!"); }
+public void dumpLoaders(@androidx.annotation.NonNull java.lang.String prefix, @androidx.annotation.Nullable java.io.FileDescriptor fd, @androidx.annotation.NonNull java.io.PrintWriter writer, @androidx.annotation.Nullable java.lang.String[] args) { throw new RuntimeException("Stub!"); }
 }
 

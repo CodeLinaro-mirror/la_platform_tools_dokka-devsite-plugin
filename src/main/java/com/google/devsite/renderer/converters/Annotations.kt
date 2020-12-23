@@ -72,7 +72,8 @@ internal fun Annotation.isDeprecated(): Boolean = dri.classNames == "Deprecated"
 /** @return true if a developer would find this annotation useful, false otherwise */
 private fun shouldDocumentAnnotation(annotation: Annotation, language: Language): Boolean {
     // Not useful to developers
-    val isSuppressAnnotation = annotation.dri.classNames == "Suppress"
+    val isSuppressAnnotation = annotation.dri.classNames == "Suppress" ||
+        annotation.dri.classNames == "SuppressWarnings"
     val isKotlinJvmAnnotation = annotation.dri.packageName == "kotlin.jvm"
     // Surfaced separately
     val isDeprecatedAnnotation = annotation.isDeprecated()

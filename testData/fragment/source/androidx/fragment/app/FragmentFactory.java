@@ -44,7 +44,8 @@ public FragmentFactory() { throw new RuntimeException("Stub!"); }
  * normally expected to happen.
  */
 
-public static java.lang.Class<? extends androidx.fragment.app.Fragment> loadFragmentClass(java.lang.ClassLoader classLoader, java.lang.String className) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public static java.lang.Class<? extends androidx.fragment.app.Fragment> loadFragmentClass(@androidx.annotation.NonNull java.lang.ClassLoader classLoader, @androidx.annotation.NonNull java.lang.String className) { throw new RuntimeException("Stub!"); }
 
 /**
  * Create a new instance of a Fragment with the given class name. This uses
@@ -59,6 +60,7 @@ public static java.lang.Class<? extends androidx.fragment.app.Fragment> loadFrag
  * normally expected to happen.
  */
 
-public androidx.fragment.app.Fragment instantiate(java.lang.ClassLoader classLoader, java.lang.String className) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.Fragment instantiate(@androidx.annotation.NonNull java.lang.ClassLoader classLoader, @androidx.annotation.NonNull java.lang.String className) { throw new RuntimeException("Stub!"); }
 }
 

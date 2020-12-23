@@ -44,25 +44,29 @@ public FragmentTransaction() { throw new RuntimeException("Stub!"); }
  * Calls {@link #add(int,java.lang.Class,android.os.Bundle,java.lang.String)} with a 0 containerViewId.
  */
 
-public final androidx.fragment.app.FragmentTransaction add(java.lang.Class<? extends androidx.fragment.app.Fragment> fragmentClass, android.os.Bundle args, java.lang.String tag) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public final androidx.fragment.app.FragmentTransaction add(@androidx.annotation.NonNull java.lang.Class<? extends androidx.fragment.app.Fragment> fragmentClass, @androidx.annotation.Nullable android.os.Bundle args, @androidx.annotation.Nullable java.lang.String tag) { throw new RuntimeException("Stub!"); }
 
 /**
  * Calls {@link #add(int,androidx.fragment.app.Fragment,java.lang.String)} with a 0 containerViewId.
  */
 
-public androidx.fragment.app.FragmentTransaction add(androidx.fragment.app.Fragment fragment, java.lang.String tag) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.FragmentTransaction add(@androidx.annotation.NonNull androidx.fragment.app.Fragment fragment, @androidx.annotation.Nullable java.lang.String tag) { throw new RuntimeException("Stub!"); }
 
 /**
  * Calls {@link #add(int,java.lang.Class,android.os.Bundle,java.lang.String)} with a null tag.
  */
 
-public final androidx.fragment.app.FragmentTransaction add(int containerViewId, java.lang.Class<? extends androidx.fragment.app.Fragment> fragmentClass, android.os.Bundle args) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public final androidx.fragment.app.FragmentTransaction add(int containerViewId, @androidx.annotation.NonNull java.lang.Class<? extends androidx.fragment.app.Fragment> fragmentClass, @androidx.annotation.Nullable android.os.Bundle args) { throw new RuntimeException("Stub!"); }
 
 /**
  * Calls {@link #add(int,androidx.fragment.app.Fragment,java.lang.String)} with a null tag.
  */
 
-public androidx.fragment.app.FragmentTransaction add(int containerViewId, androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.FragmentTransaction add(int containerViewId, @androidx.annotation.NonNull androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
 
 /**
  * Add a fragment to the activity state.  This fragment may optionally
@@ -80,7 +84,8 @@ public androidx.fragment.app.FragmentTransaction add(int containerViewId, androi
  * @return Returns the same FragmentTransaction instance.
  */
 
-public final androidx.fragment.app.FragmentTransaction add(int containerViewId, java.lang.Class<? extends androidx.fragment.app.Fragment> fragmentClass, android.os.Bundle args, java.lang.String tag) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public final androidx.fragment.app.FragmentTransaction add(int containerViewId, @androidx.annotation.NonNull java.lang.Class<? extends androidx.fragment.app.Fragment> fragmentClass, @androidx.annotation.Nullable android.os.Bundle args, @androidx.annotation.Nullable java.lang.String tag) { throw new RuntimeException("Stub!"); }
 
 /**
  * Add a fragment to the activity state.  This fragment may optionally
@@ -97,19 +102,22 @@ public final androidx.fragment.app.FragmentTransaction add(int containerViewId, 
  * @return Returns the same FragmentTransaction instance.
  */
 
-public androidx.fragment.app.FragmentTransaction add(int containerViewId, androidx.fragment.app.Fragment fragment, java.lang.String tag) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.FragmentTransaction add(int containerViewId, @androidx.annotation.NonNull androidx.fragment.app.Fragment fragment, @androidx.annotation.Nullable java.lang.String tag) { throw new RuntimeException("Stub!"); }
 
 /**
  * Calls {@link #replace(int,java.lang.Class,android.os.Bundle,java.lang.String)} with a null tag.
  */
 
-public final androidx.fragment.app.FragmentTransaction replace(int containerViewId, java.lang.Class<? extends androidx.fragment.app.Fragment> fragmentClass, android.os.Bundle args) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public final androidx.fragment.app.FragmentTransaction replace(int containerViewId, @androidx.annotation.NonNull java.lang.Class<? extends androidx.fragment.app.Fragment> fragmentClass, @androidx.annotation.Nullable android.os.Bundle args) { throw new RuntimeException("Stub!"); }
 
 /**
  * Calls {@link #replace(int,androidx.fragment.app.Fragment,java.lang.String)} with a null tag.
  */
 
-public androidx.fragment.app.FragmentTransaction replace(int containerViewId, androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.FragmentTransaction replace(int containerViewId, @androidx.annotation.NonNull androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
 
 /**
  * Replace an existing fragment that was added to a container.  This is
@@ -129,7 +137,8 @@ public androidx.fragment.app.FragmentTransaction replace(int containerViewId, an
  * @return Returns the same FragmentTransaction instance.
  */
 
-public final androidx.fragment.app.FragmentTransaction replace(int containerViewId, java.lang.Class<? extends androidx.fragment.app.Fragment> fragmentClass, android.os.Bundle args, java.lang.String tag) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public final androidx.fragment.app.FragmentTransaction replace(int containerViewId, @androidx.annotation.NonNull java.lang.Class<? extends androidx.fragment.app.Fragment> fragmentClass, @androidx.annotation.Nullable android.os.Bundle args, @androidx.annotation.Nullable java.lang.String tag) { throw new RuntimeException("Stub!"); }
 
 /**
  * Replace an existing fragment that was added to a container.  This is
@@ -147,7 +156,8 @@ public final androidx.fragment.app.FragmentTransaction replace(int containerView
  * @return Returns the same FragmentTransaction instance.
  */
 
-public androidx.fragment.app.FragmentTransaction replace(int containerViewId, androidx.fragment.app.Fragment fragment, java.lang.String tag) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.FragmentTransaction replace(int containerViewId, @androidx.annotation.NonNull androidx.fragment.app.Fragment fragment, @androidx.annotation.Nullable java.lang.String tag) { throw new RuntimeException("Stub!"); }
 
 /**
  * Remove an existing fragment.  If it was added to a container, its view
@@ -158,7 +168,8 @@ public androidx.fragment.app.FragmentTransaction replace(int containerViewId, an
  * @return Returns the same FragmentTransaction instance.
  */
 
-public androidx.fragment.app.FragmentTransaction remove(androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.FragmentTransaction remove(@androidx.annotation.NonNull androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
 
 /**
  * Hides an existing fragment.  This is only relevant for fragments whose
@@ -170,7 +181,8 @@ public androidx.fragment.app.FragmentTransaction remove(androidx.fragment.app.Fr
  * @return Returns the same FragmentTransaction instance.
  */
 
-public androidx.fragment.app.FragmentTransaction hide(androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.FragmentTransaction hide(@androidx.annotation.NonNull androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
 
 /**
  * Shows a previously hidden fragment.  This is only relevant for fragments whose
@@ -182,7 +194,8 @@ public androidx.fragment.app.FragmentTransaction hide(androidx.fragment.app.Frag
  * @return Returns the same FragmentTransaction instance.
  */
 
-public androidx.fragment.app.FragmentTransaction show(androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.FragmentTransaction show(@androidx.annotation.NonNull androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
 
 /**
  * Detach the given fragment from the UI.  This is the same state as
@@ -196,7 +209,8 @@ public androidx.fragment.app.FragmentTransaction show(androidx.fragment.app.Frag
  * @return Returns the same FragmentTransaction instance.
  */
 
-public androidx.fragment.app.FragmentTransaction detach(androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.FragmentTransaction detach(@androidx.annotation.NonNull androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
 
 /**
  * Re-attach a fragment after it had previously been detached from
@@ -209,7 +223,8 @@ public androidx.fragment.app.FragmentTransaction detach(androidx.fragment.app.Fr
  * @return Returns the same FragmentTransaction instance.
  */
 
-public androidx.fragment.app.FragmentTransaction attach(androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.FragmentTransaction attach(@androidx.annotation.NonNull androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
 
 /**
  * Set a currently active fragment in this FragmentManager as the primary navigation fragment.
@@ -228,7 +243,8 @@ public androidx.fragment.app.FragmentTransaction attach(androidx.fragment.app.Fr
  * @return the same FragmentTransaction instance
  */
 
-public androidx.fragment.app.FragmentTransaction setPrimaryNavigationFragment(androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.FragmentTransaction setPrimaryNavigationFragment(@androidx.annotation.Nullable androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
 
 /**
  * Set a ceiling for the state of an active fragment in this FragmentManager. If fragment is
@@ -240,12 +256,16 @@ public androidx.fragment.app.FragmentTransaction setPrimaryNavigationFragment(an
  * provided fragment has already moved beyond {@link androidx.lifecycle.Lifecycle.State#INITIALIZED Lifecycle.State#INITIALIZED}, an
  * {@link java.lang.IllegalArgumentException IllegalArgumentException} will be thrown.</p>
  *
+ * <p>If the {@link androidx.lifecycle.Lifecycle.State#DESTROYED Lifecycle.State#DESTROYED} is passed in as the {@link androidx.lifecycle.Lifecycle.State Lifecycle.State} an
+ * {@link java.lang.IllegalArgumentException IllegalArgumentException} will be thrown.</p>
+ *
  * @param fragment the fragment to have it's state capped.
  * @param state the ceiling state for the fragment.
  * @return the same FragmentTransaction instance
  */
 
-public androidx.fragment.app.FragmentTransaction setMaxLifecycle(androidx.fragment.app.Fragment fragment, androidx.lifecycle.Lifecycle.State state) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.FragmentTransaction setMaxLifecycle(@androidx.annotation.NonNull androidx.fragment.app.Fragment fragment, @androidx.annotation.NonNull androidx.lifecycle.Lifecycle.State state) { throw new RuntimeException("Stub!"); }
 
 /**
  * @return <code>true</code> if this transaction contains no operations,
@@ -278,6 +298,7 @@ public boolean isEmpty() { throw new RuntimeException("Stub!"); }
  *             view of the fragment being removed or detached.
  */
 
+@androidx.annotation.NonNull
 public androidx.fragment.app.FragmentTransaction setCustomAnimations(int enter, int exit) { throw new RuntimeException("Stub!"); }
 
 /**
@@ -311,6 +332,7 @@ public androidx.fragment.app.FragmentTransaction setCustomAnimations(int enter, 
  *                {@link androidx.fragment.app.FragmentManager#popBackStack() FragmentManager#popBackStack()} or similar methods.
  */
 
+@androidx.annotation.NonNull
 public androidx.fragment.app.FragmentTransaction setCustomAnimations(int enter, int exit, int popEnter, int popExit) { throw new RuntimeException("Stub!"); }
 
 /**
@@ -326,7 +348,8 @@ public androidx.fragment.app.FragmentTransaction setCustomAnimations(int enter, 
  * @see androidx.fragment.app.Fragment#setSharedElementEnterTransition(Object)
  */
 
-public androidx.fragment.app.FragmentTransaction addSharedElement(android.view.View sharedElement, java.lang.String name) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.FragmentTransaction addSharedElement(@androidx.annotation.NonNull android.view.View sharedElement, @androidx.annotation.NonNull java.lang.String name) { throw new RuntimeException("Stub!"); }
 
 /**
  * Select a standard transition animation for this transaction.  May be
@@ -336,6 +359,7 @@ public androidx.fragment.app.FragmentTransaction addSharedElement(android.view.V
  * @param transition Value is {@link androidx.fragment.app.FragmentTransaction#TRANSIT_NONE}, {@link androidx.fragment.app.FragmentTransaction#TRANSIT_FRAGMENT_OPEN}, {@link androidx.fragment.app.FragmentTransaction#TRANSIT_FRAGMENT_CLOSE}, or {@link androidx.fragment.app.FragmentTransaction#TRANSIT_FRAGMENT_FADE}
  */
 
+@androidx.annotation.NonNull
 public androidx.fragment.app.FragmentTransaction setTransition(int transition) { throw new RuntimeException("Stub!"); }
 
 /**
@@ -346,6 +370,7 @@ public androidx.fragment.app.FragmentTransaction setTransition(int transition) {
  */
 
 @Deprecated
+@androidx.annotation.NonNull
 public androidx.fragment.app.FragmentTransaction setTransitionStyle(int styleRes) { throw new RuntimeException("Stub!"); }
 
 /**
@@ -360,7 +385,8 @@ public androidx.fragment.app.FragmentTransaction setTransitionStyle(int styleRes
  * @param name An optional name for this back stack state, or null.
  */
 
-public androidx.fragment.app.FragmentTransaction addToBackStack(java.lang.String name) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.FragmentTransaction addToBackStack(@androidx.annotation.Nullable java.lang.String name) { throw new RuntimeException("Stub!"); }
 
 /**
  * Returns true if this FragmentTransaction is allowed to be added to the back
@@ -378,6 +404,7 @@ public boolean isAddToBackStackAllowed() { throw new RuntimeException("Stub!"); 
  * has already been called, this method will throw IllegalStateException.
  */
 
+@androidx.annotation.NonNull
 public androidx.fragment.app.FragmentTransaction disallowAddToBackStack() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -390,6 +417,7 @@ public androidx.fragment.app.FragmentTransaction disallowAddToBackStack() { thro
  */
 
 @Deprecated
+@androidx.annotation.NonNull
 public androidx.fragment.app.FragmentTransaction setBreadCrumbTitle(int res) { throw new RuntimeException("Stub!"); }
 
 /**
@@ -401,7 +429,8 @@ public androidx.fragment.app.FragmentTransaction setBreadCrumbTitle(int res) { t
  */
 
 @Deprecated
-public androidx.fragment.app.FragmentTransaction setBreadCrumbTitle(java.lang.CharSequence text) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.FragmentTransaction setBreadCrumbTitle(@androidx.annotation.Nullable java.lang.CharSequence text) { throw new RuntimeException("Stub!"); }
 
 /**
  * Set the short title to show as a bread crumb when this transaction
@@ -413,6 +442,7 @@ public androidx.fragment.app.FragmentTransaction setBreadCrumbTitle(java.lang.Ch
  */
 
 @Deprecated
+@androidx.annotation.NonNull
 public androidx.fragment.app.FragmentTransaction setBreadCrumbShortTitle(int res) { throw new RuntimeException("Stub!"); }
 
 /**
@@ -424,7 +454,8 @@ public androidx.fragment.app.FragmentTransaction setBreadCrumbShortTitle(int res
  */
 
 @Deprecated
-public androidx.fragment.app.FragmentTransaction setBreadCrumbShortTitle(java.lang.CharSequence text) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.FragmentTransaction setBreadCrumbShortTitle(@androidx.annotation.Nullable java.lang.CharSequence text) { throw new RuntimeException("Stub!"); }
 
 /**
  * Sets whether or not to allow optimizing operations within and across
@@ -455,6 +486,7 @@ public androidx.fragment.app.FragmentTransaction setBreadCrumbShortTitle(java.la
  *                          operations on this transaction.
  */
 
+@androidx.annotation.NonNull
 public androidx.fragment.app.FragmentTransaction setReorderingAllowed(boolean reorderingAllowed) { throw new RuntimeException("Stub!"); }
 
 /**
@@ -462,6 +494,7 @@ public androidx.fragment.app.FragmentTransaction setReorderingAllowed(boolean re
  */
 
 @Deprecated
+@androidx.annotation.NonNull
 public androidx.fragment.app.FragmentTransaction setAllowOptimization(boolean allowOptimization) { throw new RuntimeException("Stub!"); }
 
 /**
@@ -486,7 +519,8 @@ public androidx.fragment.app.FragmentTransaction setAllowOptimization(boolean al
  * @throws java.lang.IllegalStateException if {@link #addToBackStack(java.lang.String)} has been called
  */
 
-public androidx.fragment.app.FragmentTransaction runOnCommit(java.lang.Runnable runnable) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public androidx.fragment.app.FragmentTransaction runOnCommit(@androidx.annotation.NonNull java.lang.Runnable runnable) { throw new RuntimeException("Stub!"); }
 
 /**
  * Schedules a commit of this transaction.  The commit does

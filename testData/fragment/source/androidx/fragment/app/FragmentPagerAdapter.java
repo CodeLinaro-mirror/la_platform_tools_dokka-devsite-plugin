@@ -78,7 +78,7 @@ public abstract class FragmentPagerAdapter extends androidx.viewpager.widget.Pag
  */
 
 @Deprecated
-public FragmentPagerAdapter(androidx.fragment.app.FragmentManager fm) { throw new RuntimeException("Stub!"); }
+public FragmentPagerAdapter(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm) { throw new RuntimeException("Stub!"); }
 
 /**
  * Constructor for {@link androidx.fragment.app.FragmentPagerAdapter FragmentPagerAdapter}.
@@ -95,29 +95,32 @@ public FragmentPagerAdapter(androidx.fragment.app.FragmentManager fm) { throw ne
  * Value is {@link androidx.fragment.app.FragmentPagerAdapter#BEHAVIOR_SET_USER_VISIBLE_HINT}, or {@link androidx.fragment.app.FragmentPagerAdapter#BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT}
  */
 
-public FragmentPagerAdapter(androidx.fragment.app.FragmentManager fm, int behavior) { throw new RuntimeException("Stub!"); }
+public FragmentPagerAdapter(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm, int behavior) { throw new RuntimeException("Stub!"); }
 
 /**
  * Return the Fragment associated with a specified position.
  */
 
+@androidx.annotation.NonNull
 public abstract androidx.fragment.app.Fragment getItem(int position);
 
-public void startUpdate(android.view.ViewGroup container) { throw new RuntimeException("Stub!"); }
+public void startUpdate(@androidx.annotation.NonNull android.view.ViewGroup container) { throw new RuntimeException("Stub!"); }
 
-public java.lang.Object instantiateItem(android.view.ViewGroup container, int position) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public java.lang.Object instantiateItem(@androidx.annotation.NonNull android.view.ViewGroup container, int position) { throw new RuntimeException("Stub!"); }
 
-public void destroyItem(android.view.ViewGroup container, int position, java.lang.Object object) { throw new RuntimeException("Stub!"); }
+public void destroyItem(@androidx.annotation.NonNull android.view.ViewGroup container, int position, @androidx.annotation.NonNull java.lang.Object object) { throw new RuntimeException("Stub!"); }
 
-public void setPrimaryItem(android.view.ViewGroup container, int position, java.lang.Object object) { throw new RuntimeException("Stub!"); }
+public void setPrimaryItem(@androidx.annotation.NonNull android.view.ViewGroup container, int position, @androidx.annotation.NonNull java.lang.Object object) { throw new RuntimeException("Stub!"); }
 
-public void finishUpdate(android.view.ViewGroup container) { throw new RuntimeException("Stub!"); }
+public void finishUpdate(@androidx.annotation.NonNull android.view.ViewGroup container) { throw new RuntimeException("Stub!"); }
 
-public boolean isViewFromObject(android.view.View view, java.lang.Object object) { throw new RuntimeException("Stub!"); }
+public boolean isViewFromObject(@androidx.annotation.NonNull android.view.View view, @androidx.annotation.NonNull java.lang.Object object) { throw new RuntimeException("Stub!"); }
 
+@androidx.annotation.Nullable
 public android.os.Parcelable saveState() { throw new RuntimeException("Stub!"); }
 
-public void restoreState(android.os.Parcelable state, java.lang.ClassLoader loader) { throw new RuntimeException("Stub!"); }
+public void restoreState(@androidx.annotation.Nullable android.os.Parcelable state, @androidx.annotation.Nullable java.lang.ClassLoader loader) { throw new RuntimeException("Stub!"); }
 
 /**
  * Return a unique identifier for the item at the given position.

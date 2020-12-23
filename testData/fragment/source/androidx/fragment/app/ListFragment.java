@@ -48,13 +48,14 @@ public ListFragment() { throw new RuntimeException("Stub!"); }
  * way to have the built-in indeterminant progress state be shown.
  */
 
-public android.view.View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.Nullable
+public android.view.View onCreateView(@androidx.annotation.NonNull android.view.LayoutInflater inflater, @androidx.annotation.Nullable android.view.ViewGroup container, @androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
 /**
  * Attach to list view once the view hierarchy has been created.
  */
 
-public void onViewCreated(android.view.View view, android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+public void onViewCreated(@androidx.annotation.NonNull android.view.View view, @androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
 /**
  * Detach from list view.
@@ -74,13 +75,13 @@ public void onDestroyView() { throw new RuntimeException("Stub!"); }
  * @param id The row id of the item that was clicked
  */
 
-public void onListItemClick(android.widget.ListView l, android.view.View v, int position, long id) { throw new RuntimeException("Stub!"); }
+public void onListItemClick(@androidx.annotation.NonNull android.widget.ListView l, @androidx.annotation.NonNull android.view.View v, int position, long id) { throw new RuntimeException("Stub!"); }
 
 /**
  * Provide the cursor for the list view.
  */
 
-public void setListAdapter(android.widget.ListAdapter adapter) { throw new RuntimeException("Stub!"); }
+public void setListAdapter(@androidx.annotation.Nullable android.widget.ListAdapter adapter) { throw new RuntimeException("Stub!"); }
 
 /**
  * Set the currently selected list item to the specified
@@ -107,6 +108,7 @@ public long getSelectedItemId() { throw new RuntimeException("Stub!"); }
  * Get the fragment's list view widget.
  */
 
+@androidx.annotation.NonNull
 public android.widget.ListView getListView() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -115,7 +117,7 @@ public android.widget.ListView getListView() { throw new RuntimeException("Stub!
  * shown, call this method to supply the text it should use.
  */
 
-public void setEmptyText(java.lang.CharSequence text) { throw new RuntimeException("Stub!"); }
+public void setEmptyText(@androidx.annotation.Nullable java.lang.CharSequence text) { throw new RuntimeException("Stub!"); }
 
 /**
  * Control whether the list is being displayed.  You can make it not
@@ -147,6 +149,7 @@ public void setListShownNoAnimation(boolean shown) { throw new RuntimeException(
  * @see #requireListAdapter()
  */
 
+@androidx.annotation.Nullable
 public android.widget.ListAdapter getListAdapter() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -156,6 +159,7 @@ public android.widget.ListAdapter getListAdapter() { throw new RuntimeException(
  * @see #getListAdapter()
  */
 
+@androidx.annotation.NonNull
 public final android.widget.ListAdapter requireListAdapter() { throw new RuntimeException("Stub!"); }
 }
 

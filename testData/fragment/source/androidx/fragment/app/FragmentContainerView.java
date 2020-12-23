@@ -89,21 +89,21 @@ import android.view.View;
 @SuppressWarnings({"unchecked", "deprecation", "all"})
 public final class FragmentContainerView extends android.widget.FrameLayout {
 
-public FragmentContainerView(android.content.Context context) { super((android.content.Context)null); throw new RuntimeException("Stub!"); }
+public FragmentContainerView(@androidx.annotation.NonNull android.content.Context context) { super((android.content.Context)null); throw new RuntimeException("Stub!"); }
 
 /**
  * Do not call this constructor directly. Doing so will result in an
  * {@link java.lang.UnsupportedOperationException UnsupportedOperationException}.
  */
 
-public FragmentContainerView(android.content.Context context, android.util.AttributeSet attrs) { super((android.content.Context)null); throw new RuntimeException("Stub!"); }
+public FragmentContainerView(@androidx.annotation.NonNull android.content.Context context, @androidx.annotation.Nullable android.util.AttributeSet attrs) { super((android.content.Context)null); throw new RuntimeException("Stub!"); }
 
 /**
  * Do not call this constructor directly. Doing so will result in an
  * {@link java.lang.UnsupportedOperationException UnsupportedOperationException}.
  */
 
-public FragmentContainerView(android.content.Context context, android.util.AttributeSet attrs, int defStyleAttr) { super((android.content.Context)null); throw new RuntimeException("Stub!"); }
+public FragmentContainerView(@androidx.annotation.NonNull android.content.Context context, @androidx.annotation.Nullable android.util.AttributeSet attrs, int defStyleAttr) { super((android.content.Context)null); throw new RuntimeException("Stub!"); }
 
 /**
  * When called, this method throws a {@link java.lang.UnsupportedOperationException UnsupportedOperationException} on APIs above 17.
@@ -120,7 +120,7 @@ public FragmentContainerView(android.content.Context context, android.util.Attri
  * @attr ref android.R.styleable#ViewGroup_animateLayoutChanges
  */
 
-public void setLayoutTransition(android.animation.LayoutTransition transition) { throw new RuntimeException("Stub!"); }
+public void setLayoutTransition(@androidx.annotation.Nullable android.animation.LayoutTransition transition) { throw new RuntimeException("Stub!"); }
 
 /**
  * {@inheritDoc}
@@ -129,25 +129,16 @@ public void setLayoutTransition(android.animation.LayoutTransition transition) {
  * @apiSince 20
  */
 
-public android.view.WindowInsets onApplyWindowInsets(android.view.WindowInsets insets) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public android.view.WindowInsets onApplyWindowInsets(@androidx.annotation.NonNull android.view.WindowInsets insets) { throw new RuntimeException("Stub!"); }
 
-protected void dispatchDraw(android.graphics.Canvas canvas) { throw new RuntimeException("Stub!"); }
+protected void dispatchDraw(@androidx.annotation.NonNull android.graphics.Canvas canvas) { throw new RuntimeException("Stub!"); }
 
-protected boolean drawChild(android.graphics.Canvas canvas, android.view.View child, long drawingTime) { throw new RuntimeException("Stub!"); }
+protected boolean drawChild(@androidx.annotation.NonNull android.graphics.Canvas canvas, @androidx.annotation.NonNull android.view.View child, long drawingTime) { throw new RuntimeException("Stub!"); }
 
-public void startViewTransition(android.view.View view) { throw new RuntimeException("Stub!"); }
+public void startViewTransition(@androidx.annotation.NonNull android.view.View view) { throw new RuntimeException("Stub!"); }
 
-public void endViewTransition(android.view.View view) { throw new RuntimeException("Stub!"); }
-
-/**
- * <p>FragmentContainerView will only allow views returned by a Fragment's
- * {@link androidx.fragment.app.Fragment#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) Fragment#onCreateView(LayoutInflater, ViewGroup, Bundle)}. Attempting to add any
- *  other view will result in an {@link java.lang.IllegalStateException IllegalStateException}.
- *
- * {@inheritDoc}
- */
-
-public void addView(android.view.View child, int index, android.view.ViewGroup.LayoutParams params) { throw new RuntimeException("Stub!"); }
+public void endViewTransition(@androidx.annotation.NonNull android.view.View view) { throw new RuntimeException("Stub!"); }
 
 /**
  * <p>FragmentContainerView will only allow views returned by a Fragment's
@@ -157,13 +148,23 @@ public void addView(android.view.View child, int index, android.view.ViewGroup.L
  * {@inheritDoc}
  */
 
-protected boolean addViewInLayout(android.view.View child, int index, android.view.ViewGroup.LayoutParams params, boolean preventRequestLayout) { throw new RuntimeException("Stub!"); }
+public void addView(@androidx.annotation.NonNull android.view.View child, int index, @androidx.annotation.Nullable android.view.ViewGroup.LayoutParams params) { throw new RuntimeException("Stub!"); }
+
+/**
+ * <p>FragmentContainerView will only allow views returned by a Fragment's
+ * {@link androidx.fragment.app.Fragment#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) Fragment#onCreateView(LayoutInflater, ViewGroup, Bundle)}. Attempting to add any
+ *  other view will result in an {@link java.lang.IllegalStateException IllegalStateException}.
+ *
+ * {@inheritDoc}
+ */
+
+protected boolean addViewInLayout(@androidx.annotation.NonNull android.view.View child, int index, @androidx.annotation.Nullable android.view.ViewGroup.LayoutParams params, boolean preventRequestLayout) { throw new RuntimeException("Stub!"); }
 
 public void removeViewAt(int index) { throw new RuntimeException("Stub!"); }
 
-public void removeViewInLayout(android.view.View view) { throw new RuntimeException("Stub!"); }
+public void removeViewInLayout(@androidx.annotation.NonNull android.view.View view) { throw new RuntimeException("Stub!"); }
 
-public void removeView(android.view.View view) { throw new RuntimeException("Stub!"); }
+public void removeView(@androidx.annotation.NonNull android.view.View view) { throw new RuntimeException("Stub!"); }
 
 public void removeViews(int start, int count) { throw new RuntimeException("Stub!"); }
 
@@ -171,6 +172,6 @@ public void removeViewsInLayout(int start, int count) { throw new RuntimeExcepti
 
 public void removeAllViewsInLayout() { throw new RuntimeException("Stub!"); }
 
-protected void removeDetachedView(android.view.View child, boolean animate) { throw new RuntimeException("Stub!"); }
+protected void removeDetachedView(@androidx.annotation.NonNull android.view.View child, boolean animate) { throw new RuntimeException("Stub!"); }
 }
 

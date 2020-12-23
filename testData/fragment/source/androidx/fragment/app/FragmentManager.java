@@ -64,6 +64,7 @@ public FragmentManager() { throw new RuntimeException("Stub!"); }
  * @param enabled Whether the new state manager should be enabled.
  */
 
+@androidx.fragment.app.FragmentStateManagerControl
 public static void enableNewStateManager(boolean enabled) { throw new RuntimeException("Stub!"); }
 
 /**
@@ -92,6 +93,7 @@ public static void enableDebugLogging(boolean enabled) { throw new RuntimeExcept
  * will be lost.</p>
  */
 
+@androidx.annotation.NonNull
 public androidx.fragment.app.FragmentTransaction beginTransaction() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -149,7 +151,7 @@ public boolean popBackStackImmediate() { throw new RuntimeException("Stub!"); }
  * @param flags Either 0 or {@link #POP_BACK_STACK_INCLUSIVE}.
  */
 
-public void popBackStack(java.lang.String name, int flags) { throw new RuntimeException("Stub!"); }
+public void popBackStack(@androidx.annotation.Nullable java.lang.String name, int flags) { throw new RuntimeException("Stub!"); }
 
 /**
  * Like {@link #popBackStack(java.lang.String,int)}, but performs the operation immediately
@@ -158,7 +160,7 @@ public void popBackStack(java.lang.String name, int flags) { throw new RuntimeEx
  * @return Returns true if there was something popped, else false.
  */
 
-public boolean popBackStackImmediate(java.lang.String name, int flags) { throw new RuntimeException("Stub!"); }
+public boolean popBackStackImmediate(@androidx.annotation.Nullable java.lang.String name, int flags) { throw new RuntimeException("Stub!"); }
 
 /**
  * Pop all back stack states up to the one with the given identifier.
@@ -197,28 +199,29 @@ public int getBackStackEntryCount() { throw new RuntimeException("Stub!"); }
  * entries start index 0 being the bottom of the stack.
  */
 
+@androidx.annotation.NonNull
 public androidx.fragment.app.FragmentManager.BackStackEntry getBackStackEntryAt(int index) { throw new RuntimeException("Stub!"); }
 
 /**
  * Add a new listener for changes to the fragment back stack.
  */
 
-public void addOnBackStackChangedListener(androidx.fragment.app.FragmentManager.OnBackStackChangedListener listener) { throw new RuntimeException("Stub!"); }
+public void addOnBackStackChangedListener(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager.OnBackStackChangedListener listener) { throw new RuntimeException("Stub!"); }
 
 /**
  * Remove a listener that was previously added with
  * {@link #addOnBackStackChangedListener(androidx.fragment.app.FragmentManager.OnBackStackChangedListener)}.
  */
 
-public void removeOnBackStackChangedListener(androidx.fragment.app.FragmentManager.OnBackStackChangedListener listener) { throw new RuntimeException("Stub!"); }
+public void removeOnBackStackChangedListener(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager.OnBackStackChangedListener listener) { throw new RuntimeException("Stub!"); }
 
-public final void setFragmentResult(java.lang.String requestKey, android.os.Bundle result) { throw new RuntimeException("Stub!"); }
+public final void setFragmentResult(@androidx.annotation.NonNull java.lang.String requestKey, @androidx.annotation.NonNull android.os.Bundle result) { throw new RuntimeException("Stub!"); }
 
-public final void clearFragmentResult(java.lang.String requestKey) { throw new RuntimeException("Stub!"); }
+public final void clearFragmentResult(@androidx.annotation.NonNull java.lang.String requestKey) { throw new RuntimeException("Stub!"); }
 
-public final void setFragmentResultListener(java.lang.String requestKey, androidx.lifecycle.LifecycleOwner lifecycleOwner, androidx.fragment.app.FragmentResultListener listener) { throw new RuntimeException("Stub!"); }
+public final void setFragmentResultListener(@androidx.annotation.NonNull java.lang.String requestKey, @androidx.annotation.NonNull androidx.lifecycle.LifecycleOwner lifecycleOwner, @androidx.annotation.NonNull androidx.fragment.app.FragmentResultListener listener) { throw new RuntimeException("Stub!"); }
 
-public final void clearFragmentResultListener(java.lang.String requestKey) { throw new RuntimeException("Stub!"); }
+public final void clearFragmentResultListener(@androidx.annotation.NonNull java.lang.String requestKey) { throw new RuntimeException("Stub!"); }
 
 /**
  * Put a reference to a fragment in a Bundle.  This Bundle can be
@@ -231,7 +234,7 @@ public final void clearFragmentResultListener(java.lang.String requestKey) { thr
  * @param fragment The Fragment whose reference is to be stored.
  */
 
-public void putFragment(android.os.Bundle bundle, java.lang.String key, androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
+public void putFragment(@androidx.annotation.NonNull android.os.Bundle bundle, @androidx.annotation.NonNull java.lang.String key, @androidx.annotation.NonNull androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
 
 /**
  * Retrieve the current Fragment instance for a reference previously
@@ -243,7 +246,8 @@ public void putFragment(android.os.Bundle bundle, java.lang.String key, androidx
  * the given reference.
  */
 
-public androidx.fragment.app.Fragment getFragment(android.os.Bundle bundle, java.lang.String key) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.Nullable
+public androidx.fragment.app.Fragment getFragment(@androidx.annotation.NonNull android.os.Bundle bundle, @androidx.annotation.NonNull java.lang.String key) { throw new RuntimeException("Stub!"); }
 
 /**
  * Find a {@link androidx.fragment.app.Fragment Fragment} associated with the given {@link android.view.View View}.
@@ -257,7 +261,8 @@ public androidx.fragment.app.Fragment getFragment(android.os.Bundle bundle, java
  * {@link androidx.fragment.app.Fragment Fragment}.
  */
 
-public static <F extends androidx.fragment.app.Fragment> F findFragment(android.view.View view) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public static <F extends androidx.fragment.app.Fragment> F findFragment(@androidx.annotation.NonNull android.view.View view) { throw new RuntimeException("Stub!"); }
 
 /**
  * Get a list of all fragments that are currently added to the FragmentManager.
@@ -271,6 +276,7 @@ public static <F extends androidx.fragment.app.Fragment> F findFragment(android.
  * @return A list of all fragments that are added to the FragmentManager.
  */
 
+@androidx.annotation.NonNull
 public java.util.List<androidx.fragment.app.Fragment> getFragments() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -296,7 +302,8 @@ public java.util.List<androidx.fragment.app.Fragment> getFragments() { throw new
  * interesting state created by the fragment.
  */
 
-public androidx.fragment.app.Fragment.SavedState saveFragmentInstanceState(androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.Nullable
+public androidx.fragment.app.Fragment.SavedState saveFragmentInstanceState(@androidx.annotation.NonNull androidx.fragment.app.Fragment fragment) { throw new RuntimeException("Stub!"); }
 
 /**
  * Returns true if the final {@link android.app.Activity#onDestroy() Activity.onDestroy()}
@@ -305,6 +312,7 @@ public androidx.fragment.app.Fragment.SavedState saveFragmentInstanceState(andro
 
 public boolean isDestroyed() { throw new RuntimeException("Stub!"); }
 
+@androidx.annotation.NonNull
 public java.lang.String toString() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -316,7 +324,7 @@ public java.lang.String toString() { throw new RuntimeException("Stub!"); }
  * @param args Additional arguments to the dump request.
  */
 
-public void dump(java.lang.String prefix, java.io.FileDescriptor fd, java.io.PrintWriter writer, java.lang.String[] args) { throw new RuntimeException("Stub!"); }
+public void dump(@androidx.annotation.NonNull java.lang.String prefix, @androidx.annotation.Nullable java.io.FileDescriptor fd, @androidx.annotation.NonNull java.io.PrintWriter writer, @androidx.annotation.Nullable java.lang.String[] args) { throw new RuntimeException("Stub!"); }
 
 /**
  * Finds a fragment that was identified by the given id either when inflated
@@ -327,6 +335,7 @@ public void dump(java.lang.String prefix, java.io.FileDescriptor fd, java.io.Pri
  * @return The fragment if found or null otherwise.
  */
 
+@androidx.annotation.Nullable
 public androidx.fragment.app.Fragment findFragmentById(int id) { throw new RuntimeException("Stub!"); }
 
 /**
@@ -342,7 +351,8 @@ public androidx.fragment.app.Fragment findFragmentById(int id) { throw new Runti
  * @return The fragment if found or null otherwise.
  */
 
-public androidx.fragment.app.Fragment findFragmentByTag(java.lang.String tag) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.Nullable
+public androidx.fragment.app.Fragment findFragmentByTag(@androidx.annotation.Nullable java.lang.String tag) { throw new RuntimeException("Stub!"); }
 
 /**
  * Returns {@code true} if the FragmentManager's state has already been saved
@@ -371,6 +381,7 @@ public boolean isStateSaved() { throw new RuntimeException("Stub!"); }
  * @return the fragment designated as the primary navigation fragment
  */
 
+@androidx.annotation.Nullable
 public androidx.fragment.app.Fragment getPrimaryNavigationFragment() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -384,7 +395,7 @@ public androidx.fragment.app.Fragment getPrimaryNavigationFragment() { throw new
  * @see #getFragmentFactory()
  */
 
-public void setFragmentFactory(androidx.fragment.app.FragmentFactory fragmentFactory) { throw new RuntimeException("Stub!"); }
+public void setFragmentFactory(@androidx.annotation.NonNull androidx.fragment.app.FragmentFactory fragmentFactory) { throw new RuntimeException("Stub!"); }
 
 /**
  * Gets the current {@link androidx.fragment.app.FragmentFactory FragmentFactory} used to instantiate new Fragment instances.
@@ -396,6 +407,7 @@ public void setFragmentFactory(androidx.fragment.app.FragmentFactory fragmentFac
  * @return the current FragmentFactory
  */
 
+@androidx.annotation.NonNull
 public androidx.fragment.app.FragmentFactory getFragmentFactory() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -407,7 +419,7 @@ public androidx.fragment.app.FragmentFactory getFragmentFactory() { throw new Ru
  * @param recursive true to automatically register this callback for all child FragmentManagers
  */
 
-public void registerFragmentLifecycleCallbacks(androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks cb, boolean recursive) { throw new RuntimeException("Stub!"); }
+public void registerFragmentLifecycleCallbacks(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks cb, boolean recursive) { throw new RuntimeException("Stub!"); }
 
 /**
  * Unregisters a previously registered {@link androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks FragmentLifecycleCallbacks}. If the callback
@@ -417,7 +429,7 @@ public void registerFragmentLifecycleCallbacks(androidx.fragment.app.FragmentMan
  * @param cb Callbacks to unregister
  */
 
-public void unregisterFragmentLifecycleCallbacks(androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks cb) { throw new RuntimeException("Stub!"); }
+public void unregisterFragmentLifecycleCallbacks(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks cb) { throw new RuntimeException("Stub!"); }
 
 /**
  * Add a {@link androidx.fragment.app.FragmentOnAttachListener FragmentOnAttachListener} that should receive a call to
@@ -427,7 +439,7 @@ public void unregisterFragmentLifecycleCallbacks(androidx.fragment.app.FragmentM
  * @param listener Listener to add
  */
 
-public void addFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener listener) { throw new RuntimeException("Stub!"); }
+public void addFragmentOnAttachListener(@androidx.annotation.NonNull androidx.fragment.app.FragmentOnAttachListener listener) { throw new RuntimeException("Stub!"); }
 
 /**
  * Remove a {@link androidx.fragment.app.FragmentOnAttachListener FragmentOnAttachListener} that was previously added via
@@ -437,7 +449,7 @@ public void addFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachLi
  * @param listener Listener to remove
  */
 
-public void removeFragmentOnAttachListener(androidx.fragment.app.FragmentOnAttachListener listener) { throw new RuntimeException("Stub!"); }
+public void removeFragmentOnAttachListener(@androidx.annotation.NonNull androidx.fragment.app.FragmentOnAttachListener listener) { throw new RuntimeException("Stub!"); }
 
 /**
  * Flag for {@link #popBackStack(java.lang.String,int)}
@@ -475,6 +487,7 @@ public int getId();
  * {@link androidx.fragment.app.FragmentTransaction#addToBackStack(java.lang.String) FragmentTransaction#addToBackStack(String)} when creating this entry.
  */
 
+@androidx.annotation.Nullable
 public java.lang.String getName();
 
 /**
@@ -505,6 +518,7 @@ public int getBreadCrumbShortTitleRes();
  */
 
 @Deprecated
+@androidx.annotation.Nullable
 public java.lang.CharSequence getBreadCrumbTitle();
 
 /**
@@ -515,6 +529,7 @@ public java.lang.CharSequence getBreadCrumbTitle();
  */
 
 @Deprecated
+@androidx.annotation.Nullable
 public java.lang.CharSequence getBreadCrumbShortTitle();
 }
 
@@ -538,7 +553,7 @@ public FragmentLifecycleCallbacks() { throw new RuntimeException("Stub!"); }
  * @param context Context that the Fragment is being attached to
  */
 
-public void onFragmentPreAttached(androidx.fragment.app.FragmentManager fm, androidx.fragment.app.Fragment f, android.content.Context context) { throw new RuntimeException("Stub!"); }
+public void onFragmentPreAttached(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm, @androidx.annotation.NonNull androidx.fragment.app.Fragment f, @androidx.annotation.NonNull android.content.Context context) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called after the fragment has been attached to its host. Its host will have had
@@ -549,7 +564,7 @@ public void onFragmentPreAttached(androidx.fragment.app.FragmentManager fm, andr
  * @param context Context that the Fragment was attached to
  */
 
-public void onFragmentAttached(androidx.fragment.app.FragmentManager fm, androidx.fragment.app.Fragment f, android.content.Context context) { throw new RuntimeException("Stub!"); }
+public void onFragmentAttached(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm, @androidx.annotation.NonNull androidx.fragment.app.Fragment f, @androidx.annotation.NonNull android.content.Context context) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called right before the fragment's {@link androidx.fragment.app.Fragment#onCreate(android.os.Bundle) Fragment#onCreate(Bundle)} method is called.
@@ -561,7 +576,7 @@ public void onFragmentAttached(androidx.fragment.app.FragmentManager fm, android
  * @param savedInstanceState Saved instance bundle from a previous instance
  */
 
-public void onFragmentPreCreated(androidx.fragment.app.FragmentManager fm, androidx.fragment.app.Fragment f, android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+public void onFragmentPreCreated(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm, @androidx.annotation.NonNull androidx.fragment.app.Fragment f, @androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called after the fragment has returned from the FragmentManager's call to
@@ -573,7 +588,7 @@ public void onFragmentPreCreated(androidx.fragment.app.FragmentManager fm, andro
  * @param savedInstanceState Saved instance bundle from a previous instance
  */
 
-public void onFragmentCreated(androidx.fragment.app.FragmentManager fm, androidx.fragment.app.Fragment f, android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+public void onFragmentCreated(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm, @androidx.annotation.NonNull androidx.fragment.app.Fragment f, @androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called after the fragment has returned from the FragmentManager's call to
@@ -592,7 +607,7 @@ public void onFragmentCreated(androidx.fragment.app.FragmentManager fm, androidx
  */
 
 @Deprecated
-public void onFragmentActivityCreated(androidx.fragment.app.FragmentManager fm, androidx.fragment.app.Fragment f, android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+public void onFragmentActivityCreated(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm, @androidx.annotation.NonNull androidx.fragment.app.Fragment f, @androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called after the fragment has returned a non-null view from the FragmentManager's
@@ -604,7 +619,7 @@ public void onFragmentActivityCreated(androidx.fragment.app.FragmentManager fm, 
  * @param savedInstanceState Saved instance bundle from a previous instance
  */
 
-public void onFragmentViewCreated(androidx.fragment.app.FragmentManager fm, androidx.fragment.app.Fragment f, android.view.View v, android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+public void onFragmentViewCreated(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm, @androidx.annotation.NonNull androidx.fragment.app.Fragment f, @androidx.annotation.NonNull android.view.View v, @androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called after the fragment has returned from the FragmentManager's call to
@@ -614,7 +629,7 @@ public void onFragmentViewCreated(androidx.fragment.app.FragmentManager fm, andr
  * @param f Fragment changing state
  */
 
-public void onFragmentStarted(androidx.fragment.app.FragmentManager fm, androidx.fragment.app.Fragment f) { throw new RuntimeException("Stub!"); }
+public void onFragmentStarted(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm, @androidx.annotation.NonNull androidx.fragment.app.Fragment f) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called after the fragment has returned from the FragmentManager's call to
@@ -624,7 +639,7 @@ public void onFragmentStarted(androidx.fragment.app.FragmentManager fm, androidx
  * @param f Fragment changing state
  */
 
-public void onFragmentResumed(androidx.fragment.app.FragmentManager fm, androidx.fragment.app.Fragment f) { throw new RuntimeException("Stub!"); }
+public void onFragmentResumed(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm, @androidx.annotation.NonNull androidx.fragment.app.Fragment f) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called after the fragment has returned from the FragmentManager's call to
@@ -634,7 +649,7 @@ public void onFragmentResumed(androidx.fragment.app.FragmentManager fm, androidx
  * @param f Fragment changing state
  */
 
-public void onFragmentPaused(androidx.fragment.app.FragmentManager fm, androidx.fragment.app.Fragment f) { throw new RuntimeException("Stub!"); }
+public void onFragmentPaused(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm, @androidx.annotation.NonNull androidx.fragment.app.Fragment f) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called after the fragment has returned from the FragmentManager's call to
@@ -644,7 +659,7 @@ public void onFragmentPaused(androidx.fragment.app.FragmentManager fm, androidx.
  * @param f Fragment changing state
  */
 
-public void onFragmentStopped(androidx.fragment.app.FragmentManager fm, androidx.fragment.app.Fragment f) { throw new RuntimeException("Stub!"); }
+public void onFragmentStopped(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm, @androidx.annotation.NonNull androidx.fragment.app.Fragment f) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called after the fragment has returned from the FragmentManager's call to
@@ -655,7 +670,7 @@ public void onFragmentStopped(androidx.fragment.app.FragmentManager fm, androidx
  * @param outState Saved state bundle for the fragment
  */
 
-public void onFragmentSaveInstanceState(androidx.fragment.app.FragmentManager fm, androidx.fragment.app.Fragment f, android.os.Bundle outState) { throw new RuntimeException("Stub!"); }
+public void onFragmentSaveInstanceState(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm, @androidx.annotation.NonNull androidx.fragment.app.Fragment f, @androidx.annotation.NonNull android.os.Bundle outState) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called after the fragment has returned from the FragmentManager's call to
@@ -665,7 +680,7 @@ public void onFragmentSaveInstanceState(androidx.fragment.app.FragmentManager fm
  * @param f Fragment changing state
  */
 
-public void onFragmentViewDestroyed(androidx.fragment.app.FragmentManager fm, androidx.fragment.app.Fragment f) { throw new RuntimeException("Stub!"); }
+public void onFragmentViewDestroyed(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm, @androidx.annotation.NonNull androidx.fragment.app.Fragment f) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called after the fragment has returned from the FragmentManager's call to
@@ -675,7 +690,7 @@ public void onFragmentViewDestroyed(androidx.fragment.app.FragmentManager fm, an
  * @param f Fragment changing state
  */
 
-public void onFragmentDestroyed(androidx.fragment.app.FragmentManager fm, androidx.fragment.app.Fragment f) { throw new RuntimeException("Stub!"); }
+public void onFragmentDestroyed(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm, @androidx.annotation.NonNull androidx.fragment.app.Fragment f) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called after the fragment has returned from the FragmentManager's call to
@@ -685,7 +700,7 @@ public void onFragmentDestroyed(androidx.fragment.app.FragmentManager fm, androi
  * @param f Fragment changing state
  */
 
-public void onFragmentDetached(androidx.fragment.app.FragmentManager fm, androidx.fragment.app.Fragment f) { throw new RuntimeException("Stub!"); }
+public void onFragmentDetached(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm, @androidx.annotation.NonNull androidx.fragment.app.Fragment f) { throw new RuntimeException("Stub!"); }
 }
 
 /**

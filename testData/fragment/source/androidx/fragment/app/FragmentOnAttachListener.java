@@ -43,6 +43,6 @@ public interface FragmentOnAttachListener {
  * @param fragment Fragment that just received a callback to {@link androidx.fragment.app.Fragment#onAttach(android.content.Context) Fragment#onAttach(Context)}
  */
 
-public void onAttachFragment(androidx.fragment.app.FragmentManager fragmentManager, androidx.fragment.app.Fragment fragment);
+public void onAttachFragment(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fragmentManager, @androidx.annotation.NonNull androidx.fragment.app.Fragment fragment);
 }
 

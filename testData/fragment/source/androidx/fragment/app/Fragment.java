@@ -18,9 +18,9 @@
 package androidx.fragment.app;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.os.Bundle;
 import android.view.ViewGroup;
+import android.view.LayoutInflater;
 import androidx.lifecycle.Lifecycle;
 import android.view.View;
 import androidx.lifecycle.LifecycleOwner;
@@ -29,8 +29,8 @@ import androidx.lifecycle.ViewModelStore;
 import android.content.Intent;
 import android.app.Activity;
 import androidx.loader.app.LoaderManager;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.ActivityResultCallback;
 import android.os.Handler;
 import android.content.IntentSender;
 import android.util.AttributeSet;
@@ -38,11 +38,11 @@ import android.animation.Animator;
 import android.view.animation.Animation;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.widget.AdapterView;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.view.ContextMenu;
 import android.view.View.OnCreateContextMenuListener;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.ContextMenu;
 import java.io.PrintWriter;
 import androidx.activity.result.ActivityResultRegistry;
 import androidx.activity.result.ActivityResultRegistryOwner;
@@ -116,6 +116,7 @@ public Fragment(int contentLayoutId) { throw new RuntimeException("Stub!"); }
  * <code>final</code> in a future version of Fragment.
  */
 
+@androidx.annotation.NonNull
 public androidx.lifecycle.Lifecycle getLifecycle() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -154,6 +155,7 @@ public androidx.lifecycle.Lifecycle getLifecycle() { throw new RuntimeException(
  * @throws java.lang.IllegalStateException if the {@link #getView() Fragment's View is null}.
  */
 
+@androidx.annotation.NonNull
 public androidx.lifecycle.LifecycleOwner getViewLifecycleOwner() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -169,6 +171,7 @@ public androidx.lifecycle.LifecycleOwner getViewLifecycleOwner() { throw new Run
  * @return A LiveData that changes in sync with {@link #getViewLifecycleOwner()}.
  */
 
+@androidx.annotation.NonNull
 public androidx.lifecycle.LiveData<androidx.lifecycle.LifecycleOwner> getViewLifecycleOwnerLiveData() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -182,6 +185,7 @@ public androidx.lifecycle.LiveData<androidx.lifecycle.LifecycleOwner> getViewLif
  * onAttach().
  */
 
+@androidx.annotation.NonNull
 public androidx.lifecycle.ViewModelStore getViewModelStore() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -192,8 +196,10 @@ public androidx.lifecycle.ViewModelStore getViewModelStore() { throw new Runtime
  * created using this factory.</p>
  */
 
+@androidx.annotation.NonNull
 public androidx.lifecycle.ViewModelProvider.Factory getDefaultViewModelProviderFactory() { throw new RuntimeException("Stub!"); }
 
+@androidx.annotation.NonNull
 public final androidx.savedstate.SavedStateRegistry getSavedStateRegistry() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -204,7 +210,8 @@ public final androidx.savedstate.SavedStateRegistry getSavedStateRegistry() { th
  */
 
 @Deprecated
-public static androidx.fragment.app.Fragment instantiate(android.content.Context context, java.lang.String fname) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public static androidx.fragment.app.Fragment instantiate(@androidx.annotation.NonNull android.content.Context context, @androidx.annotation.NonNull java.lang.String fname) { throw new RuntimeException("Stub!"); }
 
 /**
  * Create a new instance of a Fragment with the given class name.  This is
@@ -226,13 +233,14 @@ public static androidx.fragment.app.Fragment instantiate(android.content.Context
  */
 
 @Deprecated
-public static androidx.fragment.app.Fragment instantiate(android.content.Context context, java.lang.String fname, android.os.Bundle args) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public static androidx.fragment.app.Fragment instantiate(@androidx.annotation.NonNull android.content.Context context, @androidx.annotation.NonNull java.lang.String fname, @androidx.annotation.Nullable android.os.Bundle args) { throw new RuntimeException("Stub!"); }
 
 /**
  * Subclasses can not override equals().
  */
 
-public final boolean equals(java.lang.Object o) { throw new RuntimeException("Stub!"); }
+public final boolean equals(@androidx.annotation.Nullable java.lang.Object o) { throw new RuntimeException("Stub!"); }
 
 /**
  * Subclasses can not override hashCode().
@@ -240,6 +248,7 @@ public final boolean equals(java.lang.Object o) { throw new RuntimeException("St
 
 public final int hashCode() { throw new RuntimeException("Stub!"); }
 
+@androidx.annotation.NonNull
 public java.lang.String toString() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -254,6 +263,7 @@ public final int getId() { throw new RuntimeException("Stub!"); }
  * Get the tag name of the fragment, if specified.
  */
 
+@androidx.annotation.Nullable
 public final java.lang.String getTag() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -264,13 +274,14 @@ public final java.lang.String getTag() { throw new RuntimeException("Stub!"); }
  * if {@link #isStateSaved()} would return true.</p>
  */
 
-public void setArguments(android.os.Bundle args) { throw new RuntimeException("Stub!"); }
+public void setArguments(@androidx.annotation.Nullable android.os.Bundle args) { throw new RuntimeException("Stub!"); }
 
 /**
  * Return the arguments supplied when the fragment was instantiated,
  * if any.
  */
 
+@androidx.annotation.Nullable
 public final android.os.Bundle getArguments() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -280,6 +291,7 @@ public final android.os.Bundle getArguments() { throw new RuntimeException("Stub
  * @see #getArguments()
  */
 
+@androidx.annotation.NonNull
 public final android.os.Bundle requireArguments() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -301,7 +313,7 @@ public final boolean isStateSaved() { throw new RuntimeException("Stub!"); }
  * @param state The state the fragment should be restored from.
  */
 
-public void setInitialSavedState(androidx.fragment.app.Fragment.SavedState state) { throw new RuntimeException("Stub!"); }
+public void setInitialSavedState(@androidx.annotation.Nullable androidx.fragment.app.Fragment.SavedState state) { throw new RuntimeException("Stub!"); }
 
 /**
  * Optional target for this fragment.  This may be used, for example,
@@ -325,7 +337,7 @@ public void setInitialSavedState(androidx.fragment.app.Fragment.SavedState state
  */
 
 @Deprecated
-public void setTargetFragment(androidx.fragment.app.Fragment fragment, int requestCode) { throw new RuntimeException("Stub!"); }
+public void setTargetFragment(@androidx.annotation.Nullable androidx.fragment.app.Fragment fragment, int requestCode) { throw new RuntimeException("Stub!"); }
 
 /**
  * Return the target fragment set by {@link #setTargetFragment}.
@@ -338,6 +350,7 @@ public void setTargetFragment(androidx.fragment.app.Fragment fragment, int reque
  */
 
 @Deprecated
+@androidx.annotation.Nullable
 public final androidx.fragment.app.Fragment getTargetFragment() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -359,6 +372,7 @@ public final int getTargetRequestCode() { throw new RuntimeException("Stub!"); }
  * @see #requireContext()
  */
 
+@androidx.annotation.Nullable
 public android.content.Context getContext() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -368,6 +382,7 @@ public android.content.Context getContext() { throw new RuntimeException("Stub!"
  * @see #getContext()
  */
 
+@androidx.annotation.NonNull
 public final android.content.Context requireContext() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -378,6 +393,7 @@ public final android.content.Context requireContext() { throw new RuntimeExcepti
  * @see #requireActivity()
  */
 
+@androidx.annotation.Nullable
 public final androidx.fragment.app.FragmentActivity getActivity() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -388,6 +404,7 @@ public final androidx.fragment.app.FragmentActivity getActivity() { throw new Ru
  * @see #getActivity()
  */
 
+@androidx.annotation.NonNull
 public final androidx.fragment.app.FragmentActivity requireActivity() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -397,6 +414,7 @@ public final androidx.fragment.app.FragmentActivity requireActivity() { throw ne
  * @see #requireHost()
  */
 
+@androidx.annotation.Nullable
 public final java.lang.Object getHost() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -406,12 +424,14 @@ public final java.lang.Object getHost() { throw new RuntimeException("Stub!"); }
  * @see #getHost()
  */
 
+@androidx.annotation.NonNull
 public final java.lang.Object requireHost() { throw new RuntimeException("Stub!"); }
 
 /**
  * Return <code>requireActivity().getResources()</code>.
  */
 
+@androidx.annotation.NonNull
 public final android.content.res.Resources getResources() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -421,6 +441,7 @@ public final android.content.res.Resources getResources() { throw new RuntimeExc
  * @param resId Resource id for the CharSequence text
  */
 
+@androidx.annotation.NonNull
 public final java.lang.CharSequence getText(int resId) { throw new RuntimeException("Stub!"); }
 
 /**
@@ -430,6 +451,7 @@ public final java.lang.CharSequence getText(int resId) { throw new RuntimeExcept
  * @param resId Resource id for the string
  */
 
+@androidx.annotation.NonNull
 public final java.lang.String getString(int resId) { throw new RuntimeException("Stub!"); }
 
 /**
@@ -441,7 +463,8 @@ public final java.lang.String getString(int resId) { throw new RuntimeException(
  * @param formatArgs The format arguments that will be used for substitution.
  */
 
-public final java.lang.String getString(int resId, java.lang.Object... formatArgs) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public final java.lang.String getString(int resId, @androidx.annotation.Nullable java.lang.Object... formatArgs) { throw new RuntimeException("Stub!"); }
 
 /**
  * Return the FragmentManager for interacting with fragments associated
@@ -461,11 +484,12 @@ public final java.lang.String getString(int resId, java.lang.Object... formatArg
  */
 
 @Deprecated
+@androidx.annotation.Nullable
 public final androidx.fragment.app.FragmentManager getFragmentManager() { throw new RuntimeException("Stub!"); }
 
 /**
  * Return the FragmentManager for interacting with fragments associated
- * with this fragment's activity.  Note that this will available slightly
+ * with this fragment's activity.  Note that this will be available slightly
  * before {@link #getActivity()}, during the time from when the fragment is
  * placed in a {@link androidx.fragment.app.FragmentTransaction FragmentTransaction} until it is committed and
  * attached to its activity.
@@ -476,11 +500,12 @@ public final androidx.fragment.app.FragmentManager getFragmentManager() { throw 
  * @throws java.lang.IllegalStateException if not associated with a transaction or host.
  */
 
+@androidx.annotation.NonNull
 public final androidx.fragment.app.FragmentManager getParentFragmentManager() { throw new RuntimeException("Stub!"); }
 
 /**
  * Return the FragmentManager for interacting with fragments associated
- * with this fragment's activity.  Note that this will available slightly
+ * with this fragment's activity.  Note that this will be available slightly
  * before {@link #getActivity()}, during the time from when the fragment is
  * placed in a {@link androidx.fragment.app.FragmentTransaction FragmentTransaction} until it is committed and
  * attached to its activity.
@@ -496,6 +521,7 @@ public final androidx.fragment.app.FragmentManager getParentFragmentManager() { 
  */
 
 @Deprecated
+@androidx.annotation.NonNull
 public final androidx.fragment.app.FragmentManager requireFragmentManager() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -503,6 +529,7 @@ public final androidx.fragment.app.FragmentManager requireFragmentManager() { th
  * inside of this Fragment.
  */
 
+@androidx.annotation.NonNull
 public final androidx.fragment.app.FragmentManager getChildFragmentManager() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -510,6 +537,7 @@ public final androidx.fragment.app.FragmentManager getChildFragmentManager() { t
  * is attached directly to an Activity, returns null.
  */
 
+@androidx.annotation.Nullable
 public final androidx.fragment.app.Fragment getParentFragment() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -520,6 +548,7 @@ public final androidx.fragment.app.Fragment getParentFragment() { throw new Runt
  * @see #getParentFragment()
  */
 
+@androidx.annotation.NonNull
 public final androidx.fragment.app.Fragment requireParentFragment() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -696,6 +725,7 @@ public boolean getUserVisibleHint() { throw new RuntimeException("Stub!"); }
  */
 
 @Deprecated
+@androidx.annotation.NonNull
 public androidx.loader.app.LoaderManager getLoaderManager() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -710,7 +740,7 @@ public void startActivity(android.content.Intent intent) { throw new RuntimeExce
  * containing Activity.
  */
 
-public void startActivity(android.content.Intent intent, android.os.Bundle options) { throw new RuntimeException("Stub!"); }
+public void startActivity(android.content.Intent intent, @androidx.annotation.Nullable android.os.Bundle options) { throw new RuntimeException("Stub!"); }
 
 /**
  * Call {@link android.app.Activity#startActivityForResult(android.content.Intent,int) Activity#startActivityForResult(Intent, int)} from the fragment's
@@ -748,7 +778,7 @@ public void startActivityForResult(android.content.Intent intent, int requestCod
  */
 
 @Deprecated
-public void startActivityForResult(android.content.Intent intent, int requestCode, android.os.Bundle options) { throw new RuntimeException("Stub!"); }
+public void startActivityForResult(android.content.Intent intent, int requestCode, @androidx.annotation.Nullable android.os.Bundle options) { throw new RuntimeException("Stub!"); }
 
 /**
  * Call {@link android.app.Activity#startIntentSenderForResult(android.content.IntentSender,int,android.content.Intent,int,int,int,android.os.Bundle) Activity#startIntentSenderForResult(IntentSender, int, Intent, int, int, int,
@@ -775,7 +805,7 @@ public void startActivityForResult(android.content.Intent intent, int requestCod
  */
 
 @Deprecated
-public void startIntentSenderForResult(android.content.IntentSender intent, int requestCode, android.content.Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags, android.os.Bundle options) throws android.content.IntentSender.SendIntentException { throw new RuntimeException("Stub!"); }
+public void startIntentSenderForResult(android.content.IntentSender intent, int requestCode, @androidx.annotation.Nullable android.content.Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags, @androidx.annotation.Nullable android.os.Bundle options) throws android.content.IntentSender.SendIntentException { throw new RuntimeException("Stub!"); }
 
 /**
  * Receive the result from a previous call to
@@ -798,7 +828,7 @@ public void startIntentSenderForResult(android.content.IntentSender intent, int 
  */
 
 @Deprecated
-public void onActivityResult(int requestCode, int resultCode, android.content.Intent data) { throw new RuntimeException("Stub!"); }
+public void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable android.content.Intent data) { throw new RuntimeException("Stub!"); }
 
 /**
  * Requests permissions to be granted to this application. These permissions
@@ -862,7 +892,7 @@ public void onActivityResult(int requestCode, int resultCode, android.content.In
  */
 
 @Deprecated
-public final void requestPermissions(java.lang.String[] permissions, int requestCode) { throw new RuntimeException("Stub!"); }
+public final void requestPermissions(@androidx.annotation.NonNull java.lang.String[] permissions, int requestCode) { throw new RuntimeException("Stub!"); }
 
 /**
  * Callback for the result from requesting permissions. This method
@@ -888,7 +918,7 @@ public final void requestPermissions(java.lang.String[] permissions, int request
  */
 
 @Deprecated
-public void onRequestPermissionsResult(int requestCode, java.lang.String[] permissions, int[] grantResults) { throw new RuntimeException("Stub!"); }
+public void onRequestPermissionsResult(int requestCode, @androidx.annotation.NonNull java.lang.String[] permissions, @androidx.annotation.NonNull int[] grantResults) { throw new RuntimeException("Stub!"); }
 
 /**
  * Gets whether you should show UI with rationale before requesting a permission.
@@ -901,7 +931,7 @@ public void onRequestPermissionsResult(int requestCode, java.lang.String[] permi
  * @see #onRequestPermissionsResult(int, String[], int[])
  */
 
-public boolean shouldShowRequestPermissionRationale(java.lang.String permission) { throw new RuntimeException("Stub!"); }
+public boolean shouldShowRequestPermissionRationale(@androidx.annotation.NonNull java.lang.String permission) { throw new RuntimeException("Stub!"); }
 
 /**
  * Returns the LayoutInflater used to inflate Views of this Fragment. The default
@@ -912,7 +942,8 @@ public boolean shouldShowRequestPermissionRationale(java.lang.String permission)
  * @return The LayoutInflater used to inflate Views of this Fragment.
  */
 
-public android.view.LayoutInflater onGetLayoutInflater(android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public android.view.LayoutInflater onGetLayoutInflater(@androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
 /**
  * Returns the cached LayoutInflater used to inflate Views of this Fragment. If
@@ -926,6 +957,7 @@ public android.view.LayoutInflater onGetLayoutInflater(android.os.Bundle savedIn
  * @return The LayoutInflater used to inflate Views of this Fragment.
  */
 
+@androidx.annotation.NonNull
 public final android.view.LayoutInflater getLayoutInflater() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -970,7 +1002,7 @@ public final android.view.LayoutInflater getLayoutInflater() { throw new Runtime
  * a previous saved state, this is the state.
  */
 
-public void onInflate(android.content.Context context, android.util.AttributeSet attrs, android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+public void onInflate(@androidx.annotation.NonNull android.content.Context context, @androidx.annotation.NonNull android.util.AttributeSet attrs, @androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called when a fragment is being created as part of a view layout
@@ -980,7 +1012,7 @@ public void onInflate(android.content.Context context, android.util.AttributeSet
  */
 
 @Deprecated
-public void onInflate(android.app.Activity activity, android.util.AttributeSet attrs, android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+public void onInflate(@androidx.annotation.NonNull android.app.Activity activity, @androidx.annotation.NonNull android.util.AttributeSet attrs, @androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called when a fragment is attached as a child of this fragment.
@@ -999,14 +1031,14 @@ public void onInflate(android.app.Activity activity, android.util.AttributeSet a
  */
 
 @Deprecated
-public void onAttachFragment(androidx.fragment.app.Fragment childFragment) { throw new RuntimeException("Stub!"); }
+public void onAttachFragment(@androidx.annotation.NonNull androidx.fragment.app.Fragment childFragment) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called when a fragment is first attached to its context.
  * {@link #onCreate(android.os.Bundle)} will be called after this.
  */
 
-public void onAttach(android.content.Context context) { throw new RuntimeException("Stub!"); }
+public void onAttach(@androidx.annotation.NonNull android.content.Context context) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called when a fragment is first attached to its activity.
@@ -1016,7 +1048,7 @@ public void onAttach(android.content.Context context) { throw new RuntimeExcepti
  */
 
 @Deprecated
-public void onAttach(android.app.Activity activity) { throw new RuntimeException("Stub!"); }
+public void onAttach(@androidx.annotation.NonNull android.app.Activity activity) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called when a fragment loads an animation. Note that if
@@ -1034,6 +1066,7 @@ public void onAttach(android.app.Activity activity) { throw new RuntimeException
  *                 0 if neither was called. The value will depend on the current operation.
  */
 
+@androidx.annotation.Nullable
 public android.view.animation.Animation onCreateAnimation(int transit, boolean enter, int nextAnim) { throw new RuntimeException("Stub!"); }
 
 /**
@@ -1053,6 +1086,7 @@ public android.view.animation.Animation onCreateAnimation(int transit, boolean e
  *                 0 if neither was called. The value will depend on the current operation.
  */
 
+@androidx.annotation.Nullable
 public android.animation.Animator onCreateAnimator(int transit, boolean enter, int nextAnim) { throw new RuntimeException("Stub!"); }
 
 /**
@@ -1075,7 +1109,7 @@ public android.animation.Animator onCreateAnimator(int transit, boolean enter, i
  * a previous saved state, this is the state.
  */
 
-public void onCreate(android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+public void onCreate(@androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called to have the fragment instantiate its user interface view.
@@ -1101,7 +1135,8 @@ public void onCreate(android.os.Bundle savedInstanceState) { throw new RuntimeEx
  * @return Return the View for the fragment's UI, or null.
  */
 
-public android.view.View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.Nullable
+public android.view.View onCreateView(@androidx.annotation.NonNull android.view.LayoutInflater inflater, @androidx.annotation.Nullable android.view.ViewGroup container, @androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called immediately after {@link #onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)}
@@ -1114,7 +1149,7 @@ public android.view.View onCreateView(android.view.LayoutInflater inflater, andr
  * from a previous saved state as given here.
  */
 
-public void onViewCreated(android.view.View view, android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+public void onViewCreated(@androidx.annotation.NonNull android.view.View view, @androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
 /**
  * Get the root view for the fragment's layout (the one returned by {@link #onCreateView}),
@@ -1123,6 +1158,7 @@ public void onViewCreated(android.view.View view, android.os.Bundle savedInstanc
  * @return The fragment's root view, or null if it has no layout.
  */
 
+@androidx.annotation.Nullable
 public android.view.View getView() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -1132,6 +1168,7 @@ public android.view.View getView() { throw new RuntimeException("Stub!"); }
  * @see #getView()
  */
 
+@androidx.annotation.NonNull
 public final android.view.View requireView() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -1157,7 +1194,7 @@ public final android.view.View requireView() { throw new RuntimeException("Stub!
  */
 
 @Deprecated
-public void onActivityCreated(android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+public void onActivityCreated(@androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called when all saved state has been restored into the view hierarchy
@@ -1170,7 +1207,7 @@ public void onActivityCreated(android.os.Bundle savedInstanceState) { throw new 
  * a previous saved state, this is the state.
  */
 
-public void onViewStateRestored(android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
+public void onViewStateRestored(@androidx.annotation.Nullable android.os.Bundle savedInstanceState) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called when the Fragment is visible to the user.  This is generally
@@ -1208,7 +1245,7 @@ public void onResume() { throw new RuntimeException("Stub!"); }
  * @param outState Bundle in which to place your saved state.
  */
 
-public void onSaveInstanceState(android.os.Bundle outState) { throw new RuntimeException("Stub!"); }
+public void onSaveInstanceState(@androidx.annotation.NonNull android.os.Bundle outState) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called when the Fragment's activity changes from fullscreen mode to multi-window mode and
@@ -1229,7 +1266,7 @@ public void onMultiWindowModeChanged(boolean isInMultiWindowMode) { throw new Ru
 
 public void onPictureInPictureModeChanged(boolean isInPictureInPictureMode) { throw new RuntimeException("Stub!"); }
 
-public void onConfigurationChanged(android.content.res.Configuration newConfig) { throw new RuntimeException("Stub!"); }
+public void onConfigurationChanged(@androidx.annotation.NonNull android.content.res.Configuration newConfig) { throw new RuntimeException("Stub!"); }
 
 /**
  * Callback for when the primary navigation state of this Fragment has changed. This can be
@@ -1303,7 +1340,7 @@ public void onDetach() { throw new RuntimeException("Stub!"); }
  * @see #onOptionsItemSelected
  */
 
-public void onCreateOptionsMenu(android.view.Menu menu, android.view.MenuInflater inflater) { throw new RuntimeException("Stub!"); }
+public void onCreateOptionsMenu(@androidx.annotation.NonNull android.view.Menu menu, @androidx.annotation.NonNull android.view.MenuInflater inflater) { throw new RuntimeException("Stub!"); }
 
 /**
  * Prepare the Fragment host's standard options menu to be displayed.  This is
@@ -1320,7 +1357,7 @@ public void onCreateOptionsMenu(android.view.Menu menu, android.view.MenuInflate
  * @see #onCreateOptionsMenu
  */
 
-public void onPrepareOptionsMenu(android.view.Menu menu) { throw new RuntimeException("Stub!"); }
+public void onPrepareOptionsMenu(@androidx.annotation.NonNull android.view.Menu menu) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called when this fragment's option menu items are no longer being
@@ -1351,7 +1388,7 @@ public void onDestroyOptionsMenu() { throw new RuntimeException("Stub!"); }
  * @see #onCreateOptionsMenu
  */
 
-public boolean onOptionsItemSelected(android.view.MenuItem item) { throw new RuntimeException("Stub!"); }
+public boolean onOptionsItemSelected(@androidx.annotation.NonNull android.view.MenuItem item) { throw new RuntimeException("Stub!"); }
 
 /**
  * This hook is called whenever the options menu is being closed (either by the user canceling
@@ -1361,7 +1398,7 @@ public boolean onOptionsItemSelected(android.view.MenuItem item) { throw new Run
  *             onCreateOptionsMenu().
  */
 
-public void onOptionsMenuClosed(android.view.Menu menu) { throw new RuntimeException("Stub!"); }
+public void onOptionsMenuClosed(@androidx.annotation.NonNull android.view.Menu menu) { throw new RuntimeException("Stub!"); }
 
 /**
  * Called when a context menu for the {@code view} is about to be shown.
@@ -1381,7 +1418,7 @@ public void onOptionsMenuClosed(android.view.Menu menu) { throw new RuntimeExcep
  * {@inheritDoc}
  */
 
-public void onCreateContextMenu(android.view.ContextMenu menu, android.view.View v, android.view.ContextMenu.ContextMenuInfo menuInfo) { throw new RuntimeException("Stub!"); }
+public void onCreateContextMenu(@androidx.annotation.NonNull android.view.ContextMenu menu, @androidx.annotation.NonNull android.view.View v, @androidx.annotation.Nullable android.view.ContextMenu.ContextMenuInfo menuInfo) { throw new RuntimeException("Stub!"); }
 
 /**
  * Registers a context menu to be shown for the given view (multiple views
@@ -1394,7 +1431,7 @@ public void onCreateContextMenu(android.view.ContextMenu menu, android.view.View
  * @param view The view that should show a context menu.
  */
 
-public void registerForContextMenu(android.view.View view) { throw new RuntimeException("Stub!"); }
+public void registerForContextMenu(@androidx.annotation.NonNull android.view.View view) { throw new RuntimeException("Stub!"); }
 
 /**
  * Prevents a context menu to be shown for the given view. This method will
@@ -1404,7 +1441,7 @@ public void registerForContextMenu(android.view.View view) { throw new RuntimeEx
  * @param view The view that should stop showing a context menu.
  */
 
-public void unregisterForContextMenu(android.view.View view) { throw new RuntimeException("Stub!"); }
+public void unregisterForContextMenu(@androidx.annotation.NonNull android.view.View view) { throw new RuntimeException("Stub!"); }
 
 /**
  * This hook is called whenever an item in a context menu is selected. The
@@ -1424,7 +1461,7 @@ public void unregisterForContextMenu(android.view.View view) { throw new Runtime
  *         proceed, true to consume it here.
  */
 
-public boolean onContextItemSelected(android.view.MenuItem item) { throw new RuntimeException("Stub!"); }
+public boolean onContextItemSelected(@androidx.annotation.NonNull android.view.MenuItem item) { throw new RuntimeException("Stub!"); }
 
 /**
  * When custom transitions are used with Fragments, the enter transition callback
@@ -1434,7 +1471,7 @@ public boolean onContextItemSelected(android.view.MenuItem item) { throw new Run
  *                 when added not as a pop from the back stack.
  */
 
-public void setEnterSharedElementCallback(androidx.core.app.SharedElementCallback callback) { throw new RuntimeException("Stub!"); }
+public void setEnterSharedElementCallback(@androidx.annotation.Nullable androidx.core.app.SharedElementCallback callback) { throw new RuntimeException("Stub!"); }
 
 /**
  * When custom transitions are used with Fragments, the exit transition callback
@@ -1444,7 +1481,7 @@ public void setEnterSharedElementCallback(androidx.core.app.SharedElementCallbac
  *                 when added as a pop from the back stack.
  */
 
-public void setExitSharedElementCallback(androidx.core.app.SharedElementCallback callback) { throw new RuntimeException("Stub!"); }
+public void setExitSharedElementCallback(@androidx.annotation.Nullable androidx.core.app.SharedElementCallback callback) { throw new RuntimeException("Stub!"); }
 
 /**
  * Sets the Transition that will be used to move Views into the initial scene. The entering
@@ -1460,7 +1497,7 @@ public void setExitSharedElementCallback(androidx.core.app.SharedElementCallback
  *         {@link androidx.transition.Transition}.
  */
 
-public void setEnterTransition(java.lang.Object transition) { throw new RuntimeException("Stub!"); }
+public void setEnterTransition(@androidx.annotation.Nullable java.lang.Object transition) { throw new RuntimeException("Stub!"); }
 
 /**
  * Returns the Transition that will be used to move Views into the initial scene. The entering
@@ -1472,6 +1509,7 @@ public void setEnterTransition(java.lang.Object transition) { throw new RuntimeE
  * @return the Transition to use to move Views into the initial Scene.
  */
 
+@androidx.annotation.Nullable
 public java.lang.Object getEnterTransition() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -1490,7 +1528,7 @@ public java.lang.Object getEnterTransition() { throw new RuntimeException("Stub!
  *         {@link androidx.transition.Transition}.
  */
 
-public void setReturnTransition(java.lang.Object transition) { throw new RuntimeException("Stub!"); }
+public void setReturnTransition(@androidx.annotation.Nullable java.lang.Object transition) { throw new RuntimeException("Stub!"); }
 
 /**
  * Returns the Transition that will be used to move Views out of the scene when the Fragment is
@@ -1505,6 +1543,7 @@ public void setReturnTransition(java.lang.Object transition) { throw new Runtime
  *         is preparing to close due to popping the back stack.
  */
 
+@androidx.annotation.Nullable
 public java.lang.Object getReturnTransition() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -1523,7 +1562,7 @@ public java.lang.Object getReturnTransition() { throw new RuntimeException("Stub
  *          {@link androidx.transition.Transition}.
  */
 
-public void setExitTransition(java.lang.Object transition) { throw new RuntimeException("Stub!"); }
+public void setExitTransition(@androidx.annotation.Nullable java.lang.Object transition) { throw new RuntimeException("Stub!"); }
 
 /**
  * Returns the Transition that will be used to move Views out of the scene when the
@@ -1538,6 +1577,7 @@ public void setExitTransition(java.lang.Object transition) { throw new RuntimeEx
  *         is being closed not due to popping the back stack.
  */
 
+@androidx.annotation.Nullable
 public java.lang.Object getExitTransition() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -1556,7 +1596,7 @@ public java.lang.Object getExitTransition() { throw new RuntimeException("Stub!"
  *          {@link androidx.transition.Transition}.
  */
 
-public void setReenterTransition(java.lang.Object transition) { throw new RuntimeException("Stub!"); }
+public void setReenterTransition(@androidx.annotation.Nullable java.lang.Object transition) { throw new RuntimeException("Stub!"); }
 
 /**
  * Returns the Transition that will be used to move Views in to the scene when returning due
@@ -1570,6 +1610,7 @@ public void setReenterTransition(java.lang.Object transition) { throw new Runtim
  *                   previously-started Activity due to popping the back stack.
  */
 
+@androidx.annotation.Nullable
 public java.lang.Object getReenterTransition() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -1584,7 +1625,7 @@ public java.lang.Object getReenterTransition() { throw new RuntimeException("Stu
  *          {@link androidx.transition.Transition androidx.transition.Transition}.
  */
 
-public void setSharedElementEnterTransition(java.lang.Object transition) { throw new RuntimeException("Stub!"); }
+public void setSharedElementEnterTransition(@androidx.annotation.Nullable java.lang.Object transition) { throw new RuntimeException("Stub!"); }
 
 /**
  * Returns the Transition that will be used for shared elements transferred into the content
@@ -1596,6 +1637,7 @@ public void setSharedElementEnterTransition(java.lang.Object transition) { throw
  *                   Scene.
  */
 
+@androidx.annotation.Nullable
 public java.lang.Object getSharedElementEnterTransition() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -1613,7 +1655,7 @@ public java.lang.Object getSharedElementEnterTransition() { throw new RuntimeExc
  *          {@link androidx.transition.Transition androidx.transition.Transition}.
  */
 
-public void setSharedElementReturnTransition(java.lang.Object transition) { throw new RuntimeException("Stub!"); }
+public void setSharedElementReturnTransition(@androidx.annotation.Nullable java.lang.Object transition) { throw new RuntimeException("Stub!"); }
 
 /**
  * Return the Transition that will be used for shared elements transferred back during a
@@ -1628,6 +1670,7 @@ public void setSharedElementReturnTransition(java.lang.Object transition) { thro
  *                   Scene.
  */
 
+@androidx.annotation.Nullable
 public java.lang.Object getSharedElementReturnTransition() { throw new RuntimeException("Stub!"); }
 
 /**
@@ -1699,7 +1742,8 @@ public boolean getAllowReturnTransitionOverlap() { throw new RuntimeException("S
  * Calling postponeEnterTransition on Fragments with a null View will not postpone the
  * transition. Likewise, postponement only works if
  * {@link androidx.fragment.app.FragmentTransaction#setReorderingAllowed(boolean) FragmentTransaction#setReorderingAllowed(boolean)} is
- * enabled.
+ * enabled if you have called {@link androidx.fragment.app.FragmentManager#enableNewStateManager(boolean) FragmentManager#enableNewStateManager(boolean)} with
+ * <code>false</code>.
  *
  * @see android.app.Activity#postponeEnterTransition()
  * @see androidx.fragment.app.FragmentTransaction#setReorderingAllowed(boolean)
@@ -1730,7 +1774,8 @@ public void postponeEnterTransition() { throw new RuntimeException("Stub!"); }
  * Calling postponeEnterTransition on Fragments with a null View will not postpone the
  * transition. Likewise, postponement only works if
  * {@link androidx.fragment.app.FragmentTransaction#setReorderingAllowed(boolean) FragmentTransaction#setReorderingAllowed(boolean)} is
- * enabled.
+ * enabled if you have called {@link androidx.fragment.app.FragmentManager#enableNewStateManager(boolean) FragmentManager#enableNewStateManager(boolean)} with
+ * <code>false</code>.
  *
  * @param duration The length of the delay in {@code timeUnit} units
  * @param timeUnit The units of time for {@code duration}
@@ -1738,7 +1783,7 @@ public void postponeEnterTransition() { throw new RuntimeException("Stub!"); }
  * @see androidx.fragment.app.FragmentTransaction#setReorderingAllowed(boolean)
  */
 
-public final void postponeEnterTransition(long duration, java.util.concurrent.TimeUnit timeUnit) { throw new RuntimeException("Stub!"); }
+public final void postponeEnterTransition(long duration, @androidx.annotation.NonNull java.util.concurrent.TimeUnit timeUnit) { throw new RuntimeException("Stub!"); }
 
 /**
  * Begin postponed transitions after {@link #postponeEnterTransition()} was called.
@@ -1763,7 +1808,7 @@ public void startPostponedEnterTransition() { throw new RuntimeException("Stub!"
  * @param args additional arguments to the dump request.
  */
 
-public void dump(java.lang.String prefix, java.io.FileDescriptor fd, java.io.PrintWriter writer, java.lang.String[] args) { throw new RuntimeException("Stub!"); }
+public void dump(@androidx.annotation.NonNull java.lang.String prefix, @androidx.annotation.Nullable java.io.FileDescriptor fd, @androidx.annotation.NonNull java.io.PrintWriter writer, @androidx.annotation.Nullable java.lang.String[] args) { throw new RuntimeException("Stub!"); }
 
 /**
  * {@inheritDoc}
@@ -1774,9 +1819,11 @@ public void dump(java.lang.String prefix, java.io.FileDescriptor fd, java.io.Pri
  * registry of the Fragment's Activity.
  */
 
-public final <I, O> androidx.activity.result.ActivityResultLauncher<I> registerForActivityResult(androidx.activity.result.contract.ActivityResultContract<I,O> contract, androidx.activity.result.ActivityResultCallback<O> callback) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public final <I, O> androidx.activity.result.ActivityResultLauncher<I> registerForActivityResult(@androidx.annotation.NonNull androidx.activity.result.contract.ActivityResultContract<I,O> contract, @androidx.annotation.NonNull androidx.activity.result.ActivityResultCallback<O> callback) { throw new RuntimeException("Stub!"); }
 
-public final <I, O> androidx.activity.result.ActivityResultLauncher<I> registerForActivityResult(androidx.activity.result.contract.ActivityResultContract<I,O> contract, androidx.activity.result.ActivityResultRegistry registry, androidx.activity.result.ActivityResultCallback<O> callback) { throw new RuntimeException("Stub!"); }
+@androidx.annotation.NonNull
+public final <I, O> androidx.activity.result.ActivityResultLauncher<I> registerForActivityResult(@androidx.annotation.NonNull androidx.activity.result.contract.ActivityResultContract<I,O> contract, @androidx.annotation.NonNull androidx.activity.result.ActivityResultRegistry registry, @androidx.annotation.NonNull androidx.activity.result.ActivityResultCallback<O> callback) { throw new RuntimeException("Stub!"); }
 /**
  * Thrown by {@link androidx.fragment.app.FragmentFactory#instantiate(java.lang.ClassLoader,java.lang.String) FragmentFactory#instantiate(ClassLoader, String)} when
  * there is an instantiation failure.
@@ -1785,7 +1832,7 @@ public final <I, O> androidx.activity.result.ActivityResultLauncher<I> registerF
 @SuppressWarnings({"unchecked", "deprecation", "all"})
 public static class InstantiationException extends java.lang.RuntimeException {
 
-public InstantiationException(java.lang.String msg, java.lang.Exception cause) { throw new RuntimeException("Stub!"); }
+public InstantiationException(@androidx.annotation.NonNull java.lang.String msg, @androidx.annotation.Nullable java.lang.Exception cause) { throw new RuntimeException("Stub!"); }
 }
 
 /**
@@ -1800,9 +1847,9 @@ SavedState() { throw new RuntimeException("Stub!"); }
 
 public int describeContents() { throw new RuntimeException("Stub!"); }
 
-public void writeToParcel(android.os.Parcel dest, int flags) { throw new RuntimeException("Stub!"); }
+public void writeToParcel(@androidx.annotation.NonNull android.os.Parcel dest, int flags) { throw new RuntimeException("Stub!"); }
 
-public static final android.os.Parcelable.Creator<androidx.fragment.app.Fragment.SavedState> CREATOR;
+@androidx.annotation.NonNull public static final android.os.Parcelable.Creator<androidx.fragment.app.Fragment.SavedState> CREATOR;
 static { CREATOR = null; }
 }
 
