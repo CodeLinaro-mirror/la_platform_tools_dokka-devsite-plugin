@@ -33,7 +33,7 @@ import androidx.activity.result.ActivityResultCallback;
 
 /**
  * Base class for activities that want to use the support-based
- * {@link androidx.fragment.app.Fragment Fragment}.
+ * {@link androidx.fragment.app.Fragment Fragments}.
  *
  * <p>Known limitations:</p>
  * <ul>
@@ -310,7 +310,7 @@ public androidx.fragment.app.FragmentManager getSupportFragmentManager() { throw
 
 /**
  * @deprecated Use
- * {@link androidx.loader.app.LoaderManager#getInstance(androidx.lifecycle.LifecycleOwner) LoaderManager#getInstance(LifecycleOwner)}.
+ * {@link androidx.loader.app.LoaderManager#getInstance(androidx.lifecycle.LifecycleOwner) LoaderManager.getInstance(this)}.
  */
 
 @Deprecated

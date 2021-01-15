@@ -38,7 +38,7 @@ public class DialogFragment extends androidx.fragment.app.Fragment implements an
 
 /**
  * Constructor used by the default {@link androidx.fragment.app.FragmentFactory FragmentFactory}. You must
- * {@link androidx.fragment.app.FragmentManager#setFragmentFactory(androidx.fragment.app.FragmentFactory) FragmentManager#setFragmentFactory(FragmentFactory)}
+ * {@link androidx.fragment.app.FragmentManager#setFragmentFactory(androidx.fragment.app.FragmentFactory) set a custom FragmentFactory}
  * if you want to use a non-default constructor to ensure that your constructor
  * is called when the fragment is re-instantiated.
  *
@@ -68,7 +68,7 @@ public DialogFragment() { throw new RuntimeException("Stub!"); }
  * </pre>
  *
  * You must
- * {@link androidx.fragment.app.FragmentManager#setFragmentFactory(androidx.fragment.app.FragmentFactory) FragmentManager#setFragmentFactory(FragmentFactory)}
+ * {@link androidx.fragment.app.FragmentManager#setFragmentFactory(androidx.fragment.app.FragmentFactory) set a custom FragmentFactory}
  * if you want to use a non-default constructor to ensure that your constructor is called
  * when the fragment is re-instantiated.
  *
@@ -99,25 +99,25 @@ public void setStyle(int style, int theme) { throw new RuntimeException("Stub!")
 /**
  * Display the dialog, adding the fragment to the given FragmentManager.  This
  * is a convenience for explicitly creating a transaction, adding the
- * fragment to it with the given tag, and {@link androidx.fragment.app.FragmentTransaction#commit() FragmentTransaction#commit()} it.
+ * fragment to it with the given tag, and {@link androidx.fragment.app.FragmentTransaction#commit() committing} it.
  * This does <em>not</em> add the transaction to the fragment back stack.  When the fragment
  * is dismissed, a new transaction will be executed to remove it from
  * the activity.
  * @param manager The FragmentManager this fragment will be added to.
  * @param tag The tag for this fragment, as per
- * {@link androidx.fragment.app.FragmentTransaction#add(androidx.fragment.app.Fragment,java.lang.String) FragmentTransaction#add(Fragment, String)}.
+ * {@link androidx.fragment.app.FragmentTransaction#add(androidx.fragment.app.Fragment,java.lang.String) FragmentTransaction.add}.
  */
 
 public void show(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager manager, @androidx.annotation.Nullable java.lang.String tag) { throw new RuntimeException("Stub!"); }
 
 /**
  * Display the dialog, adding the fragment using an existing transaction
- * and then {@link androidx.fragment.app.FragmentTransaction#commit() FragmentTransaction#commit()} the transaction.
+ * and then {@link androidx.fragment.app.FragmentTransaction#commit() committing} the transaction.
  * @param transaction An existing transaction in which to add the fragment.
  * @param tag The tag for this fragment, as per
- * {@link androidx.fragment.app.FragmentTransaction#add(androidx.fragment.app.Fragment,java.lang.String) FragmentTransaction#add(Fragment, String)}.
+ * {@link androidx.fragment.app.FragmentTransaction#add(androidx.fragment.app.Fragment,java.lang.String) FragmentTransaction.add}.
  * @return Returns the identifier of the committed transaction, as per
- * {@link androidx.fragment.app.FragmentTransaction#commit() FragmentTransaction#commit()}.
+ * {@link androidx.fragment.app.FragmentTransaction#commit() FragmentTransaction.commit()}.
  */
 
 public int show(@androidx.annotation.NonNull androidx.fragment.app.FragmentTransaction transaction, @androidx.annotation.Nullable java.lang.String tag) { throw new RuntimeException("Stub!"); }
@@ -131,7 +131,7 @@ public int show(@androidx.annotation.NonNull androidx.fragment.app.FragmentTrans
  * the activity.
  * @param manager The FragmentManager this fragment will be added to.
  * @param tag The tag for this fragment, as per
- * {@link androidx.fragment.app.FragmentTransaction#add(androidx.fragment.app.Fragment,java.lang.String) FragmentTransaction#add(Fragment, String)}.
+ * {@link androidx.fragment.app.FragmentTransaction#add(androidx.fragment.app.Fragment,java.lang.String) FragmentTransaction.add}.
  */
 
 public void showNow(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager manager, @androidx.annotation.Nullable java.lang.String tag) { throw new RuntimeException("Stub!"); }
@@ -147,7 +147,7 @@ public void dismiss() { throw new RuntimeException("Stub!"); }
 
 /**
  * Version of {@link #dismiss()} that uses
- * {@link androidx.fragment.app.FragmentTransaction#commitAllowingStateLoss() FragmentTransaction#commitAllowingStateLoss()}. See linked
+ * {@link androidx.fragment.app.FragmentTransaction#commitAllowingStateLoss()  FragmentTransaction.commitAllowingStateLoss()}. See linked
  * documentation for further details.
  */
 
@@ -177,7 +177,7 @@ public int getTheme() { throw new RuntimeException("Stub!"); }
 
 /**
  * Control whether the shown Dialog is cancelable.  Use this instead of
- * directly calling {@link android.app.Dialog#setCancelable(boolean) Dialog#setCancelable(boolean)}, because DialogFragment needs to change
+ * directly calling {@link android.app.Dialog#setCancelable(boolean)  Dialog.setCancelable(boolean)}, because DialogFragment needs to change
  * its behavior based on this.
  *
  * @param cancelable If true, the dialog is cancelable.  The default
@@ -200,7 +200,7 @@ public boolean isCancelable() { throw new RuntimeException("Stub!"); }
  *
  * <p>This is normally set for you based on whether the fragment is
  * associated with a container view ID passed to
- * {@link androidx.fragment.app.FragmentTransaction#add(int,androidx.fragment.app.Fragment) FragmentTransaction#add(int, Fragment)}.
+ * {@link androidx.fragment.app.FragmentTransaction#add(int,androidx.fragment.app.Fragment) FragmentTransaction.add(int, Fragment)}.
  * If the fragment was added with a container, setShowsDialog will be
  * initialized to false; otherwise, it will be true.
  *
@@ -248,7 +248,7 @@ public android.view.LayoutInflater onGetLayoutInflater(@androidx.annotation.Null
  * default implementation simply instantiates and returns a {@link android.app.Dialog Dialog}
  * class.
  *
- * <p><em>Note: DialogFragment own the {@link android.app.Dialog#setOnCancelListener Dialog#setOnCancelListener} and {@link android.app.Dialog#setOnDismissListener Dialog#setOnDismissListener} callbacks.  You must not set them yourself.</em>
+ * <p><em>Note: DialogFragment own the {@link android.app.Dialog#setOnCancelListener  Dialog.setOnCancelListener} and {@link android.app.Dialog#setOnDismissListener  Dialog.setOnDismissListener} callbacks.  You must not set them yourself.</em>
  * To find out about these events, override {@link #onCancel(android.content.DialogInterface)}
  * and {@link #onDismiss(android.content.DialogInterface)}.</p>
  *

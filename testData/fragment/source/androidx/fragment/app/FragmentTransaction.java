@@ -70,16 +70,16 @@ public androidx.fragment.app.FragmentTransaction add(int containerViewId, @andro
 
 /**
  * Add a fragment to the activity state.  This fragment may optionally
- * also have its view (if {@link androidx.fragment.app.Fragment#onCreateView Fragment#onCreateView}
+ * also have its view (if {@link androidx.fragment.app.Fragment#onCreateView Fragment.onCreateView}
  * returns non-null) into a container view of the activity.
  *
  * @param containerViewId Optional identifier of the container this fragment is
  * to be placed in.  If 0, it will not be placed in a container.
  * @param fragmentClass The fragment to be added, created via the
- * {@link androidx.fragment.app.FragmentManager#getFragmentFactory() FragmentManager#getFragmentFactory()}.
+ * {@link androidx.fragment.app.FragmentManager#getFragmentFactory() FragmentManager's FragmentFactory}.
  * @param args Optional arguments to be set on the fragment.
  * @param tag Optional tag name for the fragment, to later retrieve the
- * fragment with {@link androidx.fragment.app.FragmentManager#findFragmentByTag(java.lang.String) FragmentManager#findFragmentByTag(String)}.
+ * fragment with {@link androidx.fragment.app.FragmentManager#findFragmentByTag(java.lang.String)  FragmentManager.findFragmentByTag(String)}.
  *
  * @return Returns the same FragmentTransaction instance.
  */
@@ -89,7 +89,7 @@ public final androidx.fragment.app.FragmentTransaction add(int containerViewId, 
 
 /**
  * Add a fragment to the activity state.  This fragment may optionally
- * also have its view (if {@link androidx.fragment.app.Fragment#onCreateView Fragment#onCreateView}
+ * also have its view (if {@link androidx.fragment.app.Fragment#onCreateView Fragment.onCreateView}
  * returns non-null) into a container view of the activity.
  *
  * @param containerViewId Optional identifier of the container this fragment is
@@ -97,7 +97,7 @@ public final androidx.fragment.app.FragmentTransaction add(int containerViewId, 
  * @param fragment The fragment to be added.  This fragment must not already
  * be added to the activity.
  * @param tag Optional tag name for the fragment, to later retrieve the
- * fragment with {@link androidx.fragment.app.FragmentManager#findFragmentByTag(java.lang.String) FragmentManager#findFragmentByTag(String)}.
+ * fragment with {@link androidx.fragment.app.FragmentManager#findFragmentByTag(java.lang.String)  FragmentManager.findFragmentByTag(String)}.
  *
  * @return Returns the same FragmentTransaction instance.
  */
@@ -129,10 +129,10 @@ public androidx.fragment.app.FragmentTransaction replace(int containerViewId, @a
  * @param containerViewId Identifier of the container whose fragment(s) are
  * to be replaced.
  * @param fragmentClass The new fragment to place in the container, created via the
- * {@link androidx.fragment.app.FragmentManager#getFragmentFactory() FragmentManager#getFragmentFactory()}.
+ * {@link androidx.fragment.app.FragmentManager#getFragmentFactory() FragmentManager's FragmentFactory}.
  * @param args Optional arguments to be set on the fragment.
  * @param tag Optional tag name for the fragment, to later retrieve the
- * fragment with {@link androidx.fragment.app.FragmentManager#findFragmentByTag(java.lang.String) FragmentManager#findFragmentByTag(String)}.
+ * fragment with {@link androidx.fragment.app.FragmentManager#findFragmentByTag(java.lang.String)  FragmentManager.findFragmentByTag(String)}.
  *
  * @return Returns the same FragmentTransaction instance.
  */
@@ -151,7 +151,7 @@ public final androidx.fragment.app.FragmentTransaction replace(int containerView
  * to be replaced.
  * @param fragment The new fragment to place in the container.
  * @param tag Optional tag name for the fragment, to later retrieve the
- * fragment with {@link androidx.fragment.app.FragmentManager#findFragmentByTag(java.lang.String) FragmentManager#findFragmentByTag(String)}.
+ * fragment with {@link androidx.fragment.app.FragmentManager#findFragmentByTag(java.lang.String)  FragmentManager.findFragmentByTag(String)}.
  *
  * @return Returns the same FragmentTransaction instance.
  */
@@ -230,7 +230,7 @@ public androidx.fragment.app.FragmentTransaction attach(@androidx.annotation.Non
  * Set a currently active fragment in this FragmentManager as the primary navigation fragment.
  *
  * <p>The primary navigation fragment's
- * {@link androidx.fragment.app.Fragment#getChildFragmentManager() Fragment#getChildFragmentManager()} will be called first
+ * {@link androidx.fragment.app.Fragment#getChildFragmentManager() child FragmentManager} will be called first
  * to process delegated navigation actions such as {@link androidx.fragment.app.FragmentManager#popBackStack() FragmentManager#popBackStack()}
  * if no ID or transaction name is provided to pop to. Navigation operations outside of the
  * fragment system may choose to delegate those actions to the primary navigation fragment

@@ -68,7 +68,7 @@ public class Fragment implements android.content.ComponentCallbacks, android.vie
 
 /**
  * Constructor used by the default {@link androidx.fragment.app.FragmentFactory FragmentFactory}. You must
- * {@link androidx.fragment.app.FragmentManager#setFragmentFactory(androidx.fragment.app.FragmentFactory) FragmentManager#setFragmentFactory(FragmentFactory)}
+ * {@link androidx.fragment.app.FragmentManager#setFragmentFactory(androidx.fragment.app.FragmentFactory) set a custom FragmentFactory}
  * if you want to use a non-default constructor to ensure that your constructor
  * is called when the fragment is re-instantiated.
  *
@@ -99,7 +99,7 @@ public Fragment() { throw new RuntimeException("Stub!"); }
  * </pre>
  *
  * You must
- * {@link androidx.fragment.app.FragmentManager#setFragmentFactory(androidx.fragment.app.FragmentFactory) FragmentManager#setFragmentFactory(FragmentFactory)}
+ * {@link androidx.fragment.app.FragmentManager#setFragmentFactory(androidx.fragment.app.FragmentFactory) set a custom FragmentFactory}
  * if you want to use a non-default constructor to ensure that your constructor is called
  * when the fragment is re-instantiated.
  *
@@ -122,17 +122,17 @@ public androidx.lifecycle.Lifecycle getLifecycle() { throw new RuntimeException(
 /**
  * Get a {@link androidx.lifecycle.LifecycleOwner LifecycleOwner} that represents the {@link #getView() Fragment's View}
  * lifecycle. In most cases, this mirrors the lifecycle of the Fragment itself, but in cases
- * of {@link androidx.fragment.app.FragmentTransaction#detach(androidx.fragment.app.Fragment) FragmentTransaction#detach(Fragment)} Fragments, the lifecycle of the
+ * of {@link androidx.fragment.app.FragmentTransaction#detach(androidx.fragment.app.Fragment) detached} Fragments, the lifecycle of the
  * Fragment can be considerably longer than the lifecycle of the View itself.
  * <p>
  * Namely, the lifecycle of the Fragment's View is:
  * <ol>
- * <li>{@link androidx.lifecycle.Lifecycle.Event#ON_CREATE Lifecycle.Event#ON_CREATE} after {@link #onViewStateRestored(android.os.Bundle)}</li>
- * <li>{@link androidx.lifecycle.Lifecycle.Event#ON_START Lifecycle.Event#ON_START} after {@link #onStart()}</li>
- * <li>{@link androidx.lifecycle.Lifecycle.Event#ON_RESUME Lifecycle.Event#ON_RESUME} after {@link #onResume()}</li>
- * <li>{@link androidx.lifecycle.Lifecycle.Event#ON_PAUSE Lifecycle.Event#ON_PAUSE} before {@link #onPause()}</li>
- * <li>{@link androidx.lifecycle.Lifecycle.Event#ON_STOP Lifecycle.Event#ON_STOP} before {@link #onStop()}</li>
- * <li>{@link androidx.lifecycle.Lifecycle.Event#ON_DESTROY Lifecycle.Event#ON_DESTROY} before {@link #onDestroyView()}</li>
+ * <li>{@link androidx.lifecycle.Lifecycle.Event#ON_CREATE created} after {@link #onViewStateRestored(android.os.Bundle)}</li>
+ * <li>{@link androidx.lifecycle.Lifecycle.Event#ON_START started} after {@link #onStart()}</li>
+ * <li>{@link androidx.lifecycle.Lifecycle.Event#ON_RESUME resumed} after {@link #onResume()}</li>
+ * <li>{@link androidx.lifecycle.Lifecycle.Event#ON_PAUSE paused} before {@link #onPause()}</li>
+ * <li>{@link androidx.lifecycle.Lifecycle.Event#ON_STOP stopped} before {@link #onStop()}</li>
+ * <li>{@link androidx.lifecycle.Lifecycle.Event#ON_DESTROY destroyed} before {@link #onDestroyView()}</li>
  * </ol>
  *
  * The first method where it is safe to access the view lifecycle is
@@ -308,7 +308,7 @@ public final boolean isStateSaved() { throw new RuntimeException("Stub!"); }
 /**
  * Set the initial saved state that this Fragment should restore itself
  * from when first being constructed, as returned by
- * {@link androidx.fragment.app.FragmentManager#saveFragmentInstanceState(androidx.fragment.app.Fragment) FragmentManager#saveFragmentInstanceState(Fragment)}.
+ * {@link androidx.fragment.app.FragmentManager#saveFragmentInstanceState(androidx.fragment.app.Fragment)  FragmentManager.saveFragmentInstanceState}.
  *
  * @param state The state the fragment should be restored from.
  */
@@ -319,7 +319,7 @@ public void setInitialSavedState(@androidx.annotation.Nullable androidx.fragment
  * Optional target for this fragment.  This may be used, for example,
  * if this fragment is being started by another, and when done wants to
  * give a result back to the first.  The target set here is retained
- * across instances via {@link androidx.fragment.app.FragmentManager#putFragment FragmentManager#putFragment}.
+ * across instances via {@link androidx.fragment.app.FragmentManager#putFragment  FragmentManager.putFragment()}.
  *
  * @param fragment The fragment that is the target of this one.
  * @param requestCode Optional request code, for convenience if you
@@ -559,7 +559,7 @@ public final boolean isAdded() { throw new RuntimeException("Stub!"); }
 
 /**
  * Return true if the fragment has been explicitly detached from the UI.
- * That is, {@link androidx.fragment.app.FragmentTransaction#detach(androidx.fragment.app.Fragment) FragmentTransaction#detach(Fragment)} has been used on it.
+ * That is, {@link androidx.fragment.app.FragmentTransaction#detach(androidx.fragment.app.Fragment)  FragmentTransaction.detach(Fragment)} has been used on it.
  */
 
 public final boolean isDetached() { throw new RuntimeException("Stub!"); }
@@ -721,7 +721,7 @@ public boolean getUserVisibleHint() { throw new RuntimeException("Stub!"); }
  * Return the LoaderManager for this fragment.
  *
  * @deprecated Use
- * {@link androidx.loader.app.LoaderManager#getInstance(androidx.lifecycle.LifecycleOwner) LoaderManager#getInstance(LifecycleOwner)}.
+ * {@link androidx.loader.app.LoaderManager#getInstance(androidx.lifecycle.LifecycleOwner) LoaderManager.getInstance(this)}.
  */
 
 @Deprecated
@@ -824,7 +824,7 @@ public void startIntentSenderForResult(android.content.IntentSender intent, int 
  * @deprecated use
  * {@link #registerForActivityResult(androidx.activity.result.contract.ActivityResultContract,androidx.activity.result.ActivityResultCallback)}
  * with the appropriate {@link androidx.activity.result.contract.ActivityResultContract ActivityResultContract} and handling the result in the
- * {@link androidx.activity.result.ActivityResultCallback#onActivityResult(java.lang.Object) ActivityResultCallback#onActivityResult(Object)}.
+ * {@link androidx.activity.result.ActivityResultCallback#onActivityResult(java.lang.Object) callback}.
  */
 
 @Deprecated
@@ -888,7 +888,7 @@ public void onActivityResult(int requestCode, int resultCode, @androidx.annotati
  * @deprecated use
  * {@link #registerForActivityResult(androidx.activity.result.contract.ActivityResultContract,androidx.activity.result.ActivityResultCallback)} passing
  * in a {@link androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions RequestMultiplePermissions} object for the {@link androidx.activity.result.contract.ActivityResultContract ActivityResultContract} and
- * handling the result in the {@link androidx.activity.result.ActivityResultCallback#onActivityResult(java.lang.Object) ActivityResultCallback#onActivityResult(Object)}.
+ * handling the result in the {@link androidx.activity.result.ActivityResultCallback#onActivityResult(java.lang.Object) callback}.
  */
 
 @Deprecated
@@ -914,7 +914,7 @@ public final void requestPermissions(@androidx.annotation.NonNull java.lang.Stri
  * @deprecated use
  * {@link #registerForActivityResult(androidx.activity.result.contract.ActivityResultContract,androidx.activity.result.ActivityResultCallback)} passing
  * in a {@link androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions RequestMultiplePermissions} object for the {@link androidx.activity.result.contract.ActivityResultContract ActivityResultContract} and
- * handling the result in the {@link androidx.activity.result.ActivityResultCallback#onActivityResult(java.lang.Object) ActivityResultCallback#onActivityResult(Object)}.
+ * handling the result in the {@link androidx.activity.result.ActivityResultCallback#onActivityResult(java.lang.Object) callback}.
  */
 
 @Deprecated
@@ -1211,7 +1211,7 @@ public void onViewStateRestored(@androidx.annotation.Nullable android.os.Bundle 
 
 /**
  * Called when the Fragment is visible to the user.  This is generally
- * tied to {@link android.app.Activity#onStart() Activity#onStart()} of the containing
+ * tied to {@link android.app.Activity#onStart() Activity.onStart} of the containing
  * Activity's lifecycle.
  */
 
@@ -1220,7 +1220,7 @@ public void onStart() { throw new RuntimeException("Stub!"); }
 /**
  * Called when the fragment is visible to the user and actively running.
  * This is generally
- * tied to {@link android.app.Activity#onResume() Activity#onResume()} of the containing
+ * tied to {@link android.app.Activity#onResume() Activity.onResume} of the containing
  * Activity's lifecycle.
  */
 
@@ -1235,7 +1235,7 @@ public void onResume() { throw new RuntimeException("Stub!"); }
  * {@link #onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)}, and
  * {@link #onViewCreated(android.view.View,android.os.Bundle)}.
  *
- * <p>This corresponds to {@link android.app.Activity#onSaveInstanceState(android.os.Bundle) Activity#onSaveInstanceState(Bundle)} and most of the discussion there
+ * <p>This corresponds to {@link android.app.Activity#onSaveInstanceState(android.os.Bundle)  Activity.onSaveInstanceState(Bundle)} and most of the discussion there
  * applies here as well.  Note however: <em>this method may be called
  * at any time before {@link #onDestroy()}</em>.  There are many situations
  * where a fragment may be mostly torn down (such as when placed on the
@@ -1284,7 +1284,7 @@ public void onPrimaryNavigationFragmentChanged(boolean isPrimaryNavigationFragme
 
 /**
  * Called when the Fragment is no longer resumed.  This is generally
- * tied to {@link android.app.Activity#onPause() Activity#onPause()} of the containing
+ * tied to {@link android.app.Activity#onPause() Activity.onPause} of the containing
  * Activity's lifecycle.
  */
 
@@ -1292,7 +1292,7 @@ public void onPause() { throw new RuntimeException("Stub!"); }
 
 /**
  * Called when the Fragment is no longer started.  This is generally
- * tied to {@link android.app.Activity#onStop() Activity#onStop()} of the containing
+ * tied to {@link android.app.Activity#onStop() Activity.onStop} of the containing
  * Activity's lifecycle.
  */
 
@@ -1330,7 +1330,7 @@ public void onDetach() { throw new RuntimeException("Stub!"); }
  * Initialize the contents of the Fragment host's standard options menu.  You
  * should place your menu items in to <var>menu</var>.  For this method
  * to be called, you must have first called {@link #setHasOptionsMenu}.  See
- * {@link android.app.Activity#onCreateOptionsMenu(android.view.Menu) Activity#onCreateOptionsMenu(Menu)}
+ * {@link android.app.Activity#onCreateOptionsMenu(android.view.Menu) Activity.onCreateOptionsMenu}
  * for more information.
  *
  * @param menu The options menu in which you place your items.
@@ -1347,7 +1347,7 @@ public void onCreateOptionsMenu(@androidx.annotation.NonNull android.view.Menu m
  * called right before the menu is shown, every time it is shown.  You can
  * use this method to efficiently enable/disable items or otherwise
  * dynamically modify the contents.  See
- * {@link android.app.Activity#onPrepareOptionsMenu(android.view.Menu) Activity#onPrepareOptionsMenu(Menu)}
+ * {@link android.app.Activity#onPrepareOptionsMenu(android.view.Menu) Activity.onPrepareOptionsMenu}
  * for more information.
  *
  * @param menu The options menu as last shown or first initialized by
@@ -1411,7 +1411,7 @@ public void onOptionsMenuClosed(@androidx.annotation.NonNull android.view.Menu m
  * item has been selected.
  * <p>
  * The default implementation calls up to
- * {@link android.app.Activity#onCreateContextMenu Activity#onCreateContextMenu}, though
+ * {@link android.app.Activity#onCreateContextMenu Activity.onCreateContextMenu}, though
  * you can not call this implementation if you don't want that behavior.
  * <p>
  * It is not safe to hold onto the context menu after this method returns.
@@ -1741,7 +1741,7 @@ public boolean getAllowReturnTransitionOverlap() { throw new RuntimeException("S
  * <p>
  * Calling postponeEnterTransition on Fragments with a null View will not postpone the
  * transition. Likewise, postponement only works if
- * {@link androidx.fragment.app.FragmentTransaction#setReorderingAllowed(boolean) FragmentTransaction#setReorderingAllowed(boolean)} is
+ * {@link androidx.fragment.app.FragmentTransaction#setReorderingAllowed(boolean) FragmentTransaction reordering} is
  * enabled if you have called {@link androidx.fragment.app.FragmentManager#enableNewStateManager(boolean) FragmentManager#enableNewStateManager(boolean)} with
  * <code>false</code>.
  *
@@ -1773,7 +1773,7 @@ public void postponeEnterTransition() { throw new RuntimeException("Stub!"); }
  * <p>
  * Calling postponeEnterTransition on Fragments with a null View will not postpone the
  * transition. Likewise, postponement only works if
- * {@link androidx.fragment.app.FragmentTransaction#setReorderingAllowed(boolean) FragmentTransaction#setReorderingAllowed(boolean)} is
+ * {@link androidx.fragment.app.FragmentTransaction#setReorderingAllowed(boolean) FragmentTransaction reordering} is
  * enabled if you have called {@link androidx.fragment.app.FragmentManager#enableNewStateManager(boolean) FragmentManager#enableNewStateManager(boolean)} with
  * <code>false</code>.
  *
@@ -1837,7 +1837,7 @@ public InstantiationException(@androidx.annotation.NonNull java.lang.String msg,
 
 /**
  * State information that has been retrieved from a fragment instance
- * through {@link androidx.fragment.app.FragmentManager#saveFragmentInstanceState(androidx.fragment.app.Fragment) FragmentManager#saveFragmentInstanceState(Fragment)}.
+ * through {@link androidx.fragment.app.FragmentManager#saveFragmentInstanceState(androidx.fragment.app.Fragment)  FragmentManager.saveFragmentInstanceState}.
  */
 
 @SuppressWarnings({"unchecked", "deprecation", "all"})

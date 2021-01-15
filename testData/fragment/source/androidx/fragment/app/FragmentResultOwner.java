@@ -59,7 +59,7 @@ public void clearFragmentResult(@androidx.annotation.NonNull java.lang.String re
  * {@link androidx.lifecycle.LifecycleOwner LifecycleOwner} is at least in the {@link androidx.lifecycle.Lifecycle.State#STARTED}
  * state, any results set by {@link #setFragmentResult(java.lang.String,android.os.Bundle)} using the same
  * requestKey will be delivered to the
- * {@link androidx.fragment.app.FragmentResultListener#onFragmentResult(java.lang.String,android.os.Bundle) FragmentResultListener#onFragmentResult(String, Bundle)}. The callback will
+ * {@link androidx.fragment.app.FragmentResultListener#onFragmentResult(java.lang.String,android.os.Bundle) callback}. The callback will
  * remain active until the LifecycleOwner reaches the
  * {@link androidx.lifecycle.Lifecycle.State#DESTROYED} state or
  * {@link #clearFragmentResultListener(java.lang.String)} is called with the same requestKey.

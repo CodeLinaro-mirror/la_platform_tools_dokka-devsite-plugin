@@ -443,7 +443,7 @@
     <div><a name="add(int, java.lang.Class&lt;? extends androidx.fragment.app.Fragment&gt;, android.os.Bundle, java.lang.String)"></a><a name="add-int-java.lang.Class&lt;? extends androidx.fragment.app.Fragment&gt;-android.os.Bundle-java.lang.String-"></a>
       <h3 class="api-name" id="add(int,java.lang.Class&lt;? extends androidx.fragment.app.Fragment&gt;,android.os.Bundle,java.lang.String)">add</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#add(int,java.lang.Class&lt;? extends androidx.fragment.app.Fragment&gt;,android.os.Bundle,java.lang.String)">add</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;containerViewId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;fragmentClass:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;args:&nbsp;Bundle,<br>&nbsp;&nbsp;&nbsp;&nbsp;tag:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a><br>):&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a></pre>
-      <p>Add a fragment to the activity state. This fragment may optionally also have its view (if <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">Fragment#onCreateView</a></code> returns non-null) into a container view of the activity.</p>
+      <p>Add a fragment to the activity state. This fragment may optionally also have its view (if <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">Fragment.onCreateView</a></code> returns non-null) into a container view of the activity.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -478,7 +478,7 @@
             <tr>
               <td><code>fragmentClass:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>&gt;</code></td>
               <td width="100%">
-                <p>The fragment to be added, created via the <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#getFragmentFactory()">FragmentManager#getFragmentFactory()</a></code>.</p>
+                <p>The fragment to be added, created via the <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#getFragmentFactory()">FragmentManager's FragmentFactory</a></code>.</p>
               </td>
             </tr>
             <tr>
@@ -490,7 +490,7 @@
             <tr>
               <td><code>tag:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
               <td width="100%">
-                <p>Optional tag name for the fragment, to later retrieve the fragment with <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#findFragmentByTag(java.lang.String)">FragmentManager#findFragmentByTag(String)</a></code>.</p>
+                <p>Optional tag name for the fragment, to later retrieve the fragment with <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#findFragmentByTag(java.lang.String)">FragmentManager.findFragmentByTag(String)</a></code>.</p>
               </td>
             </tr>
           </tbody>
@@ -500,7 +500,7 @@
     <div><a name="add(int, androidx.fragment.app.Fragment, java.lang.String)"></a><a name="add-int-androidx.fragment.app.Fragment-java.lang.String-"></a>
       <h3 class="api-name" id="add(int,androidx.fragment.app.Fragment,java.lang.String)">add</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#add(int,androidx.fragment.app.Fragment,java.lang.String)">add</a>(containerViewId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,&nbsp;tag:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>):&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a></pre>
-      <p>Add a fragment to the activity state. This fragment may optionally also have its view (if <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">Fragment#onCreateView</a></code> returns non-null) into a container view of the activity.</p>
+      <p>Add a fragment to the activity state. This fragment may optionally also have its view (if <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">Fragment.onCreateView</a></code> returns non-null) into a container view of the activity.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -541,7 +541,7 @@
             <tr>
               <td><code>tag:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
               <td width="100%">
-                <p>Optional tag name for the fragment, to later retrieve the fragment with <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#findFragmentByTag(java.lang.String)">FragmentManager#findFragmentByTag(String)</a></code>.</p>
+                <p>Optional tag name for the fragment, to later retrieve the fragment with <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#findFragmentByTag(java.lang.String)">FragmentManager.findFragmentByTag(String)</a></code>.</p>
               </td>
             </tr>
           </tbody>
@@ -915,7 +915,7 @@
             <tr>
               <td><code>fragmentClass:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>&gt;</code></td>
               <td width="100%">
-                <p>The new fragment to place in the container, created via the <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#getFragmentFactory()">FragmentManager#getFragmentFactory()</a></code>.</p>
+                <p>The new fragment to place in the container, created via the <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#getFragmentFactory()">FragmentManager's FragmentFactory</a></code>.</p>
               </td>
             </tr>
             <tr>
@@ -927,7 +927,7 @@
             <tr>
               <td><code>tag:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
               <td width="100%">
-                <p>Optional tag name for the fragment, to later retrieve the fragment with <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#findFragmentByTag(java.lang.String)">FragmentManager#findFragmentByTag(String)</a></code>.</p>
+                <p>Optional tag name for the fragment, to later retrieve the fragment with <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#findFragmentByTag(java.lang.String)">FragmentManager.findFragmentByTag(String)</a></code>.</p>
               </td>
             </tr>
           </tbody>
@@ -978,7 +978,7 @@
             <tr>
               <td><code>tag:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
               <td width="100%">
-                <p>Optional tag name for the fragment, to later retrieve the fragment with <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#findFragmentByTag(java.lang.String)">FragmentManager#findFragmentByTag(String)</a></code>.</p>
+                <p>Optional tag name for the fragment, to later retrieve the fragment with <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#findFragmentByTag(java.lang.String)">FragmentManager.findFragmentByTag(String)</a></code>.</p>
               </td>
             </tr>
           </tbody>
@@ -1251,7 +1251,7 @@
       <h3 class="api-name" id="setPrimaryNavigationFragment(androidx.fragment.app.Fragment)">setPrimaryNavigationFragment</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#setPrimaryNavigationFragment(androidx.fragment.app.Fragment)">setPrimaryNavigationFragment</a>(fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>):&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a></pre>
       <p>Set a currently active fragment in this FragmentManager as the primary navigation fragment. </p>
-      <p>The primary navigation fragment's <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#getChildFragmentManager()">Fragment#getChildFragmentManager()</a></code> will be called first to process delegated navigation actions such as <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#popBackStack()">FragmentManager#popBackStack()</a></code> if no ID or transaction name is provided to pop to. Navigation operations outside of the fragment system may choose to delegate those actions to the primary navigation fragment as returned by <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#getPrimaryNavigationFragment()">FragmentManager#getPrimaryNavigationFragment()</a></code>.</p>
+      <p>The primary navigation fragment's <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#getChildFragmentManager()">child FragmentManager</a></code> will be called first to process delegated navigation actions such as <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#popBackStack()">FragmentManager#popBackStack()</a></code> if no ID or transaction name is provided to pop to. Navigation operations outside of the fragment system may choose to delegate those actions to the primary navigation fragment as returned by <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#getPrimaryNavigationFragment()">FragmentManager#getPrimaryNavigationFragment()</a></code>.</p>
       <p>The fragment provided must currently be added to the FragmentManager to be set as a primary navigation fragment, or previously added as part of this transaction.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">

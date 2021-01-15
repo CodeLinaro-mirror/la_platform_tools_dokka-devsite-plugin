@@ -85,9 +85,9 @@ public static void enableDebugLogging(boolean enabled) { throw new RuntimeExcept
  *
  * <p>Note: A fragment transaction can only be created/committed prior
  * to an activity saving its state.  If you try to commit a transaction
- * after {@link androidx.fragment.app.FragmentActivity#onSaveInstanceState FragmentActivity#onSaveInstanceState}
- * (and prior to a following {@link androidx.fragment.app.FragmentActivity#onStart FragmentActivity#onStart}
- * or {@link androidx.fragment.app.FragmentActivity#onResume FragmentActivity#onResume}, you will get an error.
+ * after {@link androidx.fragment.app.FragmentActivity#onSaveInstanceState FragmentActivity.onSaveInstanceState()}
+ * (and prior to a following {@link androidx.fragment.app.FragmentActivity#onStart FragmentActivity.onStart}
+ * or {@link androidx.fragment.app.FragmentActivity#onResume FragmentActivity.onResume()}, you will get an error.
  * This is because the framework takes care of saving your current fragments
  * in the state, and if changes are made after the state is saved then they
  * will be lost.</p>
@@ -98,7 +98,7 @@ public androidx.fragment.app.FragmentTransaction beginTransaction() { throw new 
 
 /**
  * After a {@link androidx.fragment.app.FragmentTransaction FragmentTransaction} is committed with
- * {@link androidx.fragment.app.FragmentTransaction#commit FragmentTransaction#commit}, it
+ * {@link androidx.fragment.app.FragmentTransaction#commit FragmentTransaction.commit()}, it
  * is scheduled to be executed asynchronously on the process's main thread.
  * If you want to immediately executing any such pending operations, you
  * can call this function (only from the main thread) to do so.  Note that
@@ -171,7 +171,7 @@ public boolean popBackStackImmediate(@androidx.annotation.Nullable java.lang.Str
  * @param id Identifier of the stated to be popped. If no identifier exists,
  * false is returned.
  * The identifier is the number returned by
- * {@link androidx.fragment.app.FragmentTransaction#commit() FragmentTransaction#commit()}.  The
+ * {@link androidx.fragment.app.FragmentTransaction#commit() FragmentTransaction.commit()}.  The
  * {@link #POP_BACK_STACK_INCLUSIVE} flag can be used to control whether
  * the named state itself is popped.
  * @param flags Either 0 or {@link #POP_BACK_STACK_INCLUSIVE}.
@@ -374,7 +374,7 @@ public boolean isStateSaved() { throw new RuntimeException("Stub!"); }
  * {@link androidx.fragment.app.FragmentTransaction#setPrimaryNavigationFragment(androidx.fragment.app.Fragment) FragmentTransaction#setPrimaryNavigationFragment(Fragment)}.
  *
  * <p>The primary navigation fragment's
- * {@link androidx.fragment.app.Fragment#getChildFragmentManager() Fragment#getChildFragmentManager()} will be called first
+ * {@link androidx.fragment.app.Fragment#getChildFragmentManager() child FragmentManager} will be called first
  * to process delegated navigation actions such as {@link #popBackStack()} if no ID
  * or transaction name is provided to pop to.</p>
  *
@@ -388,7 +388,7 @@ public androidx.fragment.app.Fragment getPrimaryNavigationFragment() { throw new
  * Set a {@link androidx.fragment.app.FragmentFactory FragmentFactory} for this FragmentManager that will be used
  * to create new Fragment instances from this point onward.
  * <p>
- * The {@link androidx.fragment.app.Fragment#getChildFragmentManager() Fragment#getChildFragmentManager()} of all Fragments
+ * The {@link androidx.fragment.app.Fragment#getChildFragmentManager() child FragmentManager} of all Fragments
  * in this FragmentManager will also use this factory if one is not explicitly set.
  *
  * @param fragmentFactory the factory to use to create new Fragment instances
@@ -402,7 +402,7 @@ public void setFragmentFactory(@androidx.annotation.NonNull androidx.fragment.ap
  * <p>
  * If no factory has been explicitly set on this FragmentManager via
  * {@link #setFragmentFactory(androidx.fragment.app.FragmentFactory)}, the FragmentFactory of the
- * {@link androidx.fragment.app.Fragment#getParentFragmentManager() Fragment#getParentFragmentManager()} will be returned.
+ * {@link androidx.fragment.app.Fragment#getParentFragmentManager() parent FragmentManager} will be returned.
  *
  * @return the current FragmentFactory
  */
@@ -463,8 +463,8 @@ public void removeFragmentOnAttachListener(@androidx.annotation.NonNull androidx
 public static final int POP_BACK_STACK_INCLUSIVE = 1; // 0x1
 /**
  * Representation of an entry on the fragment back stack, as created
- * with {@link androidx.fragment.app.FragmentTransaction#addToBackStack(java.lang.String) FragmentTransaction#addToBackStack(String)}.  Entries can later be
- * retrieved with {@link androidx.fragment.app.FragmentManager#getBackStackEntryAt(int) FragmentManager#getBackStackEntryAt(int)}.
+ * with {@link androidx.fragment.app.FragmentTransaction#addToBackStack(java.lang.String)  FragmentTransaction.addToBackStack()}.  Entries can later be
+ * retrieved with {@link androidx.fragment.app.FragmentManager#getBackStackEntryAt(int)  FragmentManager.getBackStackEntryAt()}.
  *
  * <p>Note that you should never hold on to a BackStackEntry object;
  * the identifier as returned by {@link #getId} is the only thing that
@@ -484,7 +484,7 @@ public int getId();
 
 /**
  * Get the name that was supplied to
- * {@link androidx.fragment.app.FragmentTransaction#addToBackStack(java.lang.String) FragmentTransaction#addToBackStack(String)} when creating this entry.
+ * {@link androidx.fragment.app.FragmentTransaction#addToBackStack(java.lang.String)  FragmentTransaction.addToBackStack(String)} when creating this entry.
  */
 
 @androidx.annotation.Nullable

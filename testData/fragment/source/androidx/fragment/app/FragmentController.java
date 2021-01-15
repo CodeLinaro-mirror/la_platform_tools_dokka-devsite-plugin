@@ -266,7 +266,7 @@ public void dispatchDestroyView() { throw new RuntimeException("Stub!"); }
  * {@link androidx.lifecycle.ViewModelStore#clear()} is called prior to this method.
  * <p>
  * Otherwise, the FragmentManager will look to see if the
- * {@link androidx.fragment.app.FragmentHostCallback FragmentHostCallback} Context is an {@link android.app.Activity Activity}
+ * {@link androidx.fragment.app.FragmentHostCallback host's} Context is an {@link android.app.Activity Activity}
  * and if {@link android.app.Activity#isChangingConfigurations() Activity#isChangingConfigurations()} returns true. In only that case
  * will non configuration state be retained.
  * <p>Call when Fragments should be destroyed.
