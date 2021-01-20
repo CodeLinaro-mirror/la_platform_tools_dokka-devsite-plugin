@@ -63,9 +63,10 @@ internal fun List<Annotation>.isDeprecated(): Boolean = any { it.isDeprecated() 
 /** @return the complete list of annotations for this type */
 internal fun WithExtraProperties<*>.annotations(): List<Annotation> {
     return extra.allOfType<Annotations>().flatMap { annotations ->
-        annotations.content.values.single()
+        annotations.directAnnotations.values.singleOrNull() ?: emptyList()
     }
 }
+
 /** @return true if the `@Deprecated` annotation is present, false otherwise */
 internal fun Annotation.isDeprecated(): Boolean = dri.classNames == "Deprecated"
 
@@ -88,9 +89,9 @@ private fun shouldDocumentAnnotation(annotation: Annotation, language: Language)
 }
 
 internal fun AnnotationParameterValue.toComponent(): String = when (this) {
-    is StringValue -> value
-    is EnumValue -> enumName
-    is ClassValue -> className
-    is ArrayValue -> value.joinToString(prefix = "[", postfix = "]") { it.toComponent() }
-    is AnnotationValue -> TODO("Unknown use case.")
-}
+        is StringValue -> "\"$value\""
+        is EnumValue -> enumName
+        is ClassValue -> className
+        is ArrayValue -> value.joinToString(prefix = "[", postfix = "]") { it.toComponent() }
+        is AnnotationValue -> TODO("Unknown use case.")
+    }

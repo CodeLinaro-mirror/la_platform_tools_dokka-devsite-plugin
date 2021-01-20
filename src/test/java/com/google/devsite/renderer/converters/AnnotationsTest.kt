@@ -24,7 +24,6 @@ import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.Annotations.Annotation
 import org.jetbrains.dokka.model.DModule
-import org.junit.Ignore
 import org.junit.Test
 import kotlin.Boolean
 import com.google.devsite.components.symbols.Annotation as AnnotationComponent
@@ -172,7 +171,6 @@ internal class AnnotationsTest : ConverterTestBase() {
         }
     }
 
-    // TODO: upstream dokka doesn't parse annotations on parameters, b/175612102
     @Test
     fun `Parameter component has annotation and value in 4x Kotlin and Java`() {
         val annotationsK = """
@@ -188,7 +186,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |public void foo(@Hello("abc") @Hello(bar = "baz") String arg)
         """.render(java = true).function()!!.parameters.single().annotations()
 
-        for (annotations in listOf(annotationsK/*, annotationsJ*/)) {
+        for (annotations in listOf(annotationsK, annotationsJ)) {
             val annotationOne = annotations.components().first()
             val parameterOne = annotationOne.data.parameters.item()
             val annotationTwo = annotations.components().last()
@@ -202,7 +200,6 @@ internal class AnnotationsTest : ConverterTestBase() {
         }
     }
 
-    @Ignore // TODO: upstream doesn't parse java or kotlin type parameters annotations, b/175612102
     @Test
     fun `Type parameter component has annotation and value in 4x Kotlin and Java`() {
         val annotationsK = """
@@ -218,7 +215,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |public <@Hello("abc") @Hello(bar = "baz") T> List<T> foo()
         """.render(java = true).function()!!.generics.single().annotations()
 
-        for (annotations in listOf(annotationsK/*, annotationsJ*/)) {
+        for (annotations in listOf(annotationsK, annotationsJ)) {
             val annotationOne = annotations.components().first()
             val parameterOne = annotationOne.data.parameters.item()
             val annotationTwo = annotations.components().last()
@@ -258,7 +255,7 @@ internal class AnnotationsTest : ConverterTestBase() {
 
             if (annotations == annotationsK) assertThat(parameterOne.name).isEqualTo("bar")
             else assertThat(parameterOne.name).isEqualTo("value")
-            assertThat (parameterOne.value).isEqualTo("\"abc\"")
+            assertThat(parameterOne.value).isEqualTo("\"abc\"")
             assertThat(parameterTwo.name).isEqualTo("bar")
             assertThat(parameterTwo.value).isEqualTo("\"baz\"")
         }

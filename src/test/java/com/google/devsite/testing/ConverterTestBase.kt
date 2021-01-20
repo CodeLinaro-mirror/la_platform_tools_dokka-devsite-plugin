@@ -26,12 +26,14 @@ import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.ExternalDocumentationLink
+import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.pages.ModulePageNode
 import org.jetbrains.dokka.pages.RootPageNode
+import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.plugability.DokkaPlugin
 import org.jetbrains.dokka.renderers.Renderer
-import org.jetbrains.dokka.testApi.testRunner.AbstractCoreTest
+
 import java.io.File
 import java.net.URL
 import kotlin.coroutines.resume
@@ -39,7 +41,7 @@ import kotlin.coroutines.suspendCoroutine
 
 internal abstract class ConverterTestBase(
     private val language: Language = Language.JAVA
-) : AbstractCoreTest() {
+) : BaseAbstractTest() {
     protected fun List<String>.render(): DModule = testWithRootPageNode(this)
 
     protected fun String.render(java: Boolean = false): DModule = if (java) {
@@ -128,7 +130,7 @@ internal abstract class ConverterTestBase(
                 configuration,
                 pluginOverrides = listOf(NoopPlugin)
             ) {
-                renderingStage = { node, _ ->
+                renderingStage = { node: RootPageNode, _: DokkaContext ->
                     val module = (node as ModulePageNode).documentable as DModule
                     cont.resume(module)
                 }

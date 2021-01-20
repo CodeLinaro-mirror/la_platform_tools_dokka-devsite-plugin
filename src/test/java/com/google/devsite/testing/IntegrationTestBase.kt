@@ -19,7 +19,9 @@ package com.google.devsite.testing
 import com.google.common.truth.Truth.assertWithMessage
 import org.jetbrains.dokka.ExternalDocumentationLink
 import org.jetbrains.dokka.PackageOptionsImpl
-import org.jetbrains.dokka.testApi.testRunner.AbstractCoreTest
+import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
+import org.jetbrains.dokka.pages.RootPageNode
+import org.jetbrains.dokka.plugability.DokkaContext
 import java.io.File
 import java.net.URL
 
@@ -28,7 +30,7 @@ import java.net.URL
  *
  * Html output results can be found in testData/
  */
-abstract class IntegrationTestBase : AbstractCoreTest() {
+abstract class IntegrationTestBase : BaseAbstractTest() {
 
     /**
      * Reads sources and outputs from a directory, and validates based on them.
@@ -80,7 +82,7 @@ abstract class IntegrationTestBase : AbstractCoreTest() {
             configuration,
             pluginOverrides = listOf(writerPlugin)
         ) {
-            renderingStage = { _, _ ->
+            renderingStage = { _: RootPageNode, _: DokkaContext ->
                 verifyOutput(writerPlugin, "$baseDir/docs")
             }
         }

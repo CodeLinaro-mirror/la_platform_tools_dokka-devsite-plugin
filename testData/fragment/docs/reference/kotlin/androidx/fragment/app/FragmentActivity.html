@@ -55,7 +55,7 @@
           <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td width="100%">
-              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[])">dump</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;prefix:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;fd:&nbsp;<a href="https://developer.android.com/reference/java/io/FileDescriptor.html">FileDescriptor</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;writer:&nbsp;<a href="https://developer.android.com/reference/java/io/PrintWriter.html">PrintWriter</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;args:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&gt;<br>)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[])">dump</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;prefix:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;fd:&nbsp;<a href="https://developer.android.com/reference/java/io/FileDescriptor.html">FileDescriptor</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;writer:&nbsp;<a href="https://developer.android.com/reference/java/io/PrintWriter.html">PrintWriter</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;args:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&gt;?<br>)</code></div>
               <p>Print the Activity's state into the given stream.</p>
             </td>
           </tr>
@@ -101,7 +101,7 @@
           <tr>
             <td><code>View?</code></td>
             <td width="100%">
-              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onCreateView(android.view.View,java.lang.String,android.content.Context,android.util.AttributeSet)">onCreateView</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;parent:&nbsp;View,<br>&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;context:&nbsp;Context,<br>&nbsp;&nbsp;&nbsp;&nbsp;attrs:&nbsp;AttributeSet<br>)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onCreateView(android.view.View,java.lang.String,android.content.Context,android.util.AttributeSet)">onCreateView</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;parent:&nbsp;View?,<br>&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;context:&nbsp;Context,<br>&nbsp;&nbsp;&nbsp;&nbsp;attrs:&nbsp;AttributeSet<br>)</code></div>
             </td>
           </tr>
           <tr>
@@ -148,7 +148,7 @@
           <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
             <td width="100%">
-              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onPreparePanel(int,android.view.View,android.view.Menu)">onPreparePanel</a>(featureId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;view:&nbsp;View,&nbsp;menu:&nbsp;Menu)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onPreparePanel(int,android.view.View,android.view.Menu)">onPreparePanel</a>(featureId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;view:&nbsp;View?,&nbsp;menu:&nbsp;Menu)</code></div>
               <p>Dispatch onPrepareOptionsMenu() to fragments.</p>
             </td>
           </tr>
@@ -168,14 +168,14 @@
           <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td width="100%">
-              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#setEnterSharedElementCallback(androidx.core.app.SharedElementCallback)">setEnterSharedElementCallback</a>(callback:&nbsp;SharedElementCallback)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#setEnterSharedElementCallback(androidx.core.app.SharedElementCallback)">setEnterSharedElementCallback</a>(callback:&nbsp;SharedElementCallback?)</code></div>
               <p>When makeSceneTransitionAnimation was used to start an Activity, callbackwill be called to handle shared elements on the <em>launched</em> Activity.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td width="100%">
-              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#setExitSharedElementCallback(androidx.core.app.SharedElementCallback)">setExitSharedElementCallback</a>(listener:&nbsp;SharedElementCallback)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#setExitSharedElementCallback(androidx.core.app.SharedElementCallback)">setExitSharedElementCallback</a>(listener:&nbsp;SharedElementCallback?)</code></div>
               <p>When makeSceneTransitionAnimation was used to start an Activity, listenerwill be called to handle shared elements on the <em>launching</em> Activity.</p>
             </td>
           </tr>
@@ -189,14 +189,14 @@
           <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td width="100%">
-              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#startActivityFromFragment(androidx.fragment.app.Fragment,android.content.Intent,int,android.os.Bundle)">startActivityFromFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;intent:&nbsp;Intent,<br>&nbsp;&nbsp;&nbsp;&nbsp;requestCode:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;options:&nbsp;Bundle<br>)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#startActivityFromFragment(androidx.fragment.app.Fragment,android.content.Intent,int,android.os.Bundle)">startActivityFromFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;intent:&nbsp;Intent,<br>&nbsp;&nbsp;&nbsp;&nbsp;requestCode:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;options:&nbsp;Bundle?<br>)</code></div>
               <p>Called by Fragment.startActivityForResult() to implement its behavior.</p>
             </td>
           </tr>
           <tr>
             <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td width="100%">
-              <div><code><span><del><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#startIntentSenderFromFragment(androidx.fragment.app.Fragment,android.content.IntentSender,int,android.content.Intent,int,int,int,android.os.Bundle)">startIntentSenderFromFragment</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;intent:&nbsp;IntentSender,<br>&nbsp;&nbsp;&nbsp;&nbsp;requestCode:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;fillInIntent:&nbsp;Intent,<br>&nbsp;&nbsp;&nbsp;&nbsp;flagsMask:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;flagsValues:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;extraFlags:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;options:&nbsp;Bundle<br>)</code></div>
+              <div><code><span><del><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#startIntentSenderFromFragment(androidx.fragment.app.Fragment,android.content.IntentSender,int,android.content.Intent,int,int,int,android.os.Bundle)">startIntentSenderFromFragment</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;intent:&nbsp;IntentSender,<br>&nbsp;&nbsp;&nbsp;&nbsp;requestCode:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;fillInIntent:&nbsp;Intent?,<br>&nbsp;&nbsp;&nbsp;&nbsp;flagsMask:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;flagsValues:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;extraFlags:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;options:&nbsp;Bundle?<br>)</code></div>
               <p><strong>This function is deprecated.</strong> 
                 <p>Fragments should use <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">Fragment#registerForActivityResult(ActivityResultContract, ActivityResultCallback)</a></code> with the StartIntentSenderForResult contract.</p>
               </p>
@@ -276,7 +276,7 @@
     <h2>Public functions</h2>
     <div><a name="dump(java.lang.String, java.io.FileDescriptor, java.io.PrintWriter, java.lang.String[])"></a><a name="dump-java.lang.String-java.io.FileDescriptor-java.io.PrintWriter-java.lang.String[]-"></a>
       <h3 class="api-name" id="dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[])">dump</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[])">dump</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;prefix:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;fd:&nbsp;<a href="https://developer.android.com/reference/java/io/FileDescriptor.html">FileDescriptor</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;writer:&nbsp;<a href="https://developer.android.com/reference/java/io/PrintWriter.html">PrintWriter</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;args:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&gt;<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[])">dump</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;prefix:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;fd:&nbsp;<a href="https://developer.android.com/reference/java/io/FileDescriptor.html">FileDescriptor</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;writer:&nbsp;<a href="https://developer.android.com/reference/java/io/PrintWriter.html">PrintWriter</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;args:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&gt;?<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Print the Activity's state into the given stream. This gets invoked if you run &quot;adb shell dumpsys activity &quot;.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -293,7 +293,7 @@
               </td>
             </tr>
             <tr>
-              <td><code>fd:&nbsp;<a href="https://developer.android.com/reference/java/io/FileDescriptor.html">FileDescriptor</a></code></td>
+              <td><code>fd:&nbsp;<a href="https://developer.android.com/reference/java/io/FileDescriptor.html">FileDescriptor</a>?</code></td>
               <td width="100%">
                 <p>The raw file descriptor that the dump is being sent to.</p>
               </td>
@@ -305,7 +305,7 @@
               </td>
             </tr>
             <tr>
-              <td><code>args:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&gt;</code></td>
+              <td><code>args:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&gt;?</code></td>
               <td width="100%">
                 <p>additional arguments to the dump request.</p>
               </td>
@@ -347,7 +347,7 @@
     </div>
     <div><a name="onCreateView(android.view.View, java.lang.String, android.content.Context, android.util.AttributeSet)"></a><a name="onCreateView-android.view.View-java.lang.String-android.content.Context-android.util.AttributeSet-"></a>
       <h3 class="api-name" id="onCreateView(android.view.View,java.lang.String,android.content.Context,android.util.AttributeSet)">onCreateView</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onCreateView(android.view.View,java.lang.String,android.content.Context,android.util.AttributeSet)">onCreateView</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;parent:&nbsp;View,<br>&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;context:&nbsp;Context,<br>&nbsp;&nbsp;&nbsp;&nbsp;attrs:&nbsp;AttributeSet<br>):&nbsp;View?</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onCreateView(android.view.View,java.lang.String,android.content.Context,android.util.AttributeSet)">onCreateView</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;parent:&nbsp;View?,<br>&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;context:&nbsp;Context,<br>&nbsp;&nbsp;&nbsp;&nbsp;attrs:&nbsp;AttributeSet<br>):&nbsp;View?</pre>
     </div>
     <div><a name="onCreateView(java.lang.String, android.content.Context, android.util.AttributeSet)"></a><a name="onCreateView-java.lang.String-android.content.Context-android.util.AttributeSet-"></a>
       <h3 class="api-name" id="onCreateView(java.lang.String,android.content.Context,android.util.AttributeSet)">onCreateView</h3>
@@ -414,7 +414,7 @@
     </div>
     <div><a name="onPreparePanel(int, android.view.View, android.view.Menu)"></a><a name="onPreparePanel-int-android.view.View-android.view.Menu-"></a>
       <h3 class="api-name" id="onPreparePanel(int,android.view.View,android.view.Menu)">onPreparePanel</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onPreparePanel(int,android.view.View,android.view.Menu)">onPreparePanel</a>(featureId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;view:&nbsp;View,&nbsp;menu:&nbsp;Menu):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#onPreparePanel(int,android.view.View,android.view.Menu)">onPreparePanel</a>(featureId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;view:&nbsp;View?,&nbsp;menu:&nbsp;Menu):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
       <p>Dispatch onPrepareOptionsMenu() to fragments.</p>
     </div>
     <div><a name="onRequestPermissionsResult(int, java.lang.String[], int[])"></a><a name="onRequestPermissionsResult-int-java.lang.String[]-int[]-"></a>
@@ -428,7 +428,7 @@
     </div>
     <div><a name="setEnterSharedElementCallback-androidx.core.app.SharedElementCallback-"></a>
       <h3 class="api-name" id="setEnterSharedElementCallback(androidx.core.app.SharedElementCallback)">setEnterSharedElementCallback</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#setEnterSharedElementCallback(androidx.core.app.SharedElementCallback)">setEnterSharedElementCallback</a>(callback:&nbsp;SharedElementCallback):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#setEnterSharedElementCallback(androidx.core.app.SharedElementCallback)">setEnterSharedElementCallback</a>(callback:&nbsp;SharedElementCallback?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>When makeSceneTransitionAnimation was used to start an Activity, callbackwill be called to handle shared elements on the <em>launched</em> Activity. This requires Window#FEATURE_CONTENT_TRANSITIONS.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -439,7 +439,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>callback:&nbsp;SharedElementCallback</code></td>
+              <td><code>callback:&nbsp;SharedElementCallback?</code></td>
               <td width="100%">
                 <p>Used to manipulate shared element transitions on the launched Activity.</p>
               </td>
@@ -450,7 +450,7 @@
     </div>
     <div><a name="setExitSharedElementCallback-androidx.core.app.SharedElementCallback-"></a>
       <h3 class="api-name" id="setExitSharedElementCallback(androidx.core.app.SharedElementCallback)">setExitSharedElementCallback</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#setExitSharedElementCallback(androidx.core.app.SharedElementCallback)">setExitSharedElementCallback</a>(listener:&nbsp;SharedElementCallback):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#setExitSharedElementCallback(androidx.core.app.SharedElementCallback)">setExitSharedElementCallback</a>(listener:&nbsp;SharedElementCallback?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>When makeSceneTransitionAnimation was used to start an Activity, listenerwill be called to handle shared elements on the <em>launching</em> Activity. Most calls will only come when returning from the started Activity. This requires Window#FEATURE_CONTENT_TRANSITIONS.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -461,7 +461,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>listener:&nbsp;SharedElementCallback</code></td>
+              <td><code>listener:&nbsp;SharedElementCallback?</code></td>
               <td width="100%">
                 <p>Used to manipulate shared element transitions on the launching Activity.</p>
               </td>
@@ -506,7 +506,7 @@
     </div>
     <div><a name="startActivityFromFragment(androidx.fragment.app.Fragment, android.content.Intent, int, android.os.Bundle)"></a><a name="startActivityFromFragment-androidx.fragment.app.Fragment-android.content.Intent-int-android.os.Bundle-"></a>
       <h3 class="api-name" id="startActivityFromFragment(androidx.fragment.app.Fragment,android.content.Intent,int,android.os.Bundle)">startActivityFromFragment</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#startActivityFromFragment(androidx.fragment.app.Fragment,android.content.Intent,int,android.os.Bundle)">startActivityFromFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;intent:&nbsp;Intent,<br>&nbsp;&nbsp;&nbsp;&nbsp;requestCode:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;options:&nbsp;Bundle<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#startActivityFromFragment(androidx.fragment.app.Fragment,android.content.Intent,int,android.os.Bundle)">startActivityFromFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;intent:&nbsp;Intent,<br>&nbsp;&nbsp;&nbsp;&nbsp;requestCode:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;options:&nbsp;Bundle?<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Called by Fragment.startActivityForResult() to implement its behavior.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -535,7 +535,7 @@
               </td>
             </tr>
             <tr>
-              <td><code>options:&nbsp;Bundle</code></td>
+              <td><code>options:&nbsp;Bundle?</code></td>
               <td width="100%">
                 <p>Additional options for how the Activity should be started. See Context#startActivity(Intent, Bundle) for more details. This value may be null.</p>
               </td>
@@ -546,7 +546,7 @@
     </div>
     <div><a name="startIntentSenderFromFragment(androidx.fragment.app.Fragment, android.content.IntentSender, int, android.content.Intent, int, int, int, android.os.Bundle)"></a><a name="startIntentSenderFromFragment-androidx.fragment.app.Fragment-android.content.IntentSender-int-android.content.Intent-int-int-int-android.os.Bundle-"></a>
       <h3 class="api-name" id="startIntentSenderFromFragment(androidx.fragment.app.Fragment,android.content.IntentSender,int,android.content.Intent,int,int,int,android.os.Bundle)">startIntentSenderFromFragment</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<span><del><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#startIntentSenderFromFragment(androidx.fragment.app.Fragment,android.content.IntentSender,int,android.content.Intent,int,int,int,android.os.Bundle)">startIntentSenderFromFragment</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;intent:&nbsp;IntentSender,<br>&nbsp;&nbsp;&nbsp;&nbsp;requestCode:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;fillInIntent:&nbsp;Intent,<br>&nbsp;&nbsp;&nbsp;&nbsp;flagsMask:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;flagsValues:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;extraFlags:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;options:&nbsp;Bundle<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<span><del><a href="/reference/kotlin/androidx/fragment/app/FragmentActivity.html#startIntentSenderFromFragment(androidx.fragment.app.Fragment,android.content.IntentSender,int,android.content.Intent,int,int,int,android.os.Bundle)">startIntentSenderFromFragment</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fragment:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;intent:&nbsp;IntentSender,<br>&nbsp;&nbsp;&nbsp;&nbsp;requestCode:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;fillInIntent:&nbsp;Intent?,<br>&nbsp;&nbsp;&nbsp;&nbsp;flagsMask:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;flagsValues:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;extraFlags:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;options:&nbsp;Bundle?<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>
         <p>Fragments should use <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">Fragment#registerForActivityResult(ActivityResultContract, ActivityResultCallback)</a></code> with the StartIntentSenderForResult contract. This method will still be called when Fragments call the deprecated <code>startIntentSenderForResult()</code> method.</p>
       </aside>
@@ -578,7 +578,7 @@
               </td>
             </tr>
             <tr>
-              <td><code>fillInIntent:&nbsp;Intent</code></td>
+              <td><code>fillInIntent:&nbsp;Intent?</code></td>
               <td width="100%">
                 <p>If non-null, this will be provided as the intent parameter to IntentSender#sendIntent(Context, int, Intent, IntentSender.OnFinished, Handler). This value may be null.</p>
               </td>
@@ -602,7 +602,7 @@
               </td>
             </tr>
             <tr>
-              <td><code>options:&nbsp;Bundle</code></td>
+              <td><code>options:&nbsp;Bundle?</code></td>
               <td width="100%">
                 <p>Additional options for how the Activity should be started. See Context#startActivity(Intent, Bundle) for more details. This value may be null.</p>
               </td>
