@@ -44,10 +44,13 @@ internal abstract class ConverterTestBase(
 ) : BaseAbstractTest() {
     protected fun List<String>.render(): DModule = testWithRootPageNode(this)
 
-    protected fun String.render(java: Boolean = false): DModule = if (java) {
+    protected fun String.render(
+        java: Boolean = false,
+        fileUseAnnotation: String = ""
+    ): DModule = if (java) {
         testJavaWithRootPageNode(trimMargin())
     } else {
-        testWithRootPageNode(trimMargin())
+        testWithRootPageNode(trimMargin(), fileUseAnnotation)
     }
 
     protected fun DModule.classlike() = packages.single().classlikes
@@ -138,9 +141,10 @@ internal abstract class ConverterTestBase(
         }
     }
 
-    private fun testWithRootPageNode(sourceCode: String): DModule {
+    private fun testWithRootPageNode(sourceCode: String, fileUseAnnotation: String): DModule {
         val source = """
             |/src/main/kotlin/androidx/example/Test.kt
+            |$fileUseAnnotation
             |package androidx.example
             |
             |$sourceCode

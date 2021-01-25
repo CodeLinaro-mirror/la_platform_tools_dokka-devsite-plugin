@@ -308,6 +308,35 @@ internal class PackageDocumentableConverterTest(
     }
 
     @Test
+    fun `Synthetic classes for top-level functions use file JvmName appropriately`() {
+        val page = """
+        |
+        |fun foo()
+        |
+        """.render(fileUseAnnotation = "@file:JvmName(\"PagingRx\")")
+
+        javaOnly {
+            val classes = runBlocking {
+                val holder = DocumentablesHolder(page, this)
+                holder.classesFor(page.packages.last(), language)
+            }
+            assertThat(classes.last().name).isEqualTo("PagingRx")
+            assertThat(classes.last().dri.classNames).isEqualTo("PagingRx")
+
+            assertThat(classes.last().functions.last().name).isEqualTo("foo")
+            assertThat(classes.last().functions.last().dri.classNames).isEqualTo("PagingRx")
+        }
+
+        kotlinOnly {
+            val classes = runBlocking {
+                val holder = DocumentablesHolder(page, this)
+                holder.classesFor(page.packages.last(), language)
+            }
+            assertThat(classes).isEmpty()
+        }
+    }
+
+    @Test
     fun `Package summary creates components with sorted top-level functions`() {
         val page = """
             |fun b() = Unit

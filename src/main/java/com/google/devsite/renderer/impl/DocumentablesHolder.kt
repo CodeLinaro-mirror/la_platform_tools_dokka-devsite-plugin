@@ -20,6 +20,7 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.explodedChildren
 import com.google.devsite.renderer.converters.filterOutJvmSynthetic
 import com.google.devsite.renderer.converters.isExceptionClass
+import com.google.devsite.renderer.converters.jvmFileName
 import com.google.devsite.renderer.converters.name
 import com.google.devsite.renderer.converters.withJavaSynthetic
 import kotlinx.coroutines.CoroutineScope
@@ -44,6 +45,7 @@ import org.jetbrains.dokka.model.JavaModifier
 import org.jetbrains.dokka.model.JavaVisibility
 import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.properties.PropertyContainer
+import org.jetbrains.dokka.model.properties.WithExtraProperties
 
 /**
  * Centralized place to retrieve documentables.
@@ -208,13 +210,14 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
     /** Returns a map from String name of synthetic class that this Function (WithSources) would be
      * in to the Functions that are part of those classes
      *
-     * This method uses the filename with "Kt" appended
-     * TODO(b/173138586): this should be using @file:jvmname when that's fixed by JB
-     * **/
-    private fun <T : WithSources> List<T>.mapToSyntheticNames() =
+     * This method uses @file:JvmName if it exists or the filename with "Kt" appended
+     **/
+    private fun <T> List<T>.mapToSyntheticNames()
+        where T : WithSources, T : WithExtraProperties<*> =
         map { it.sources to it }
-            .groupBy({ (location, _) ->
-                location.let {
+            .groupBy({ (location, function) ->
+                function.jvmFileName()
+                ?: location.let {
                     it.entries.first().value.path.split("/").last().split(".").first() + "Kt"
                 }
             }) { it.second }

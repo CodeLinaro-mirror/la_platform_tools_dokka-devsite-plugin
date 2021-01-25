@@ -34,6 +34,7 @@ import org.jetbrains.dokka.model.Nullable
 import org.jetbrains.dokka.model.Projection
 import org.jetbrains.dokka.model.Variance
 import org.jetbrains.dokka.model.WithChildren
+import org.jetbrains.dokka.model.isJvmName
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.model.toAdditionalModifiers
 import org.jetbrains.kotlin.builtins.jvm.JavaToKotlinClassMap
@@ -137,12 +138,14 @@ fun DFunction.withJvmName(): DFunction {
  * Returns the value of the @JvmName for this function if one exists or null
  */
 fun WithExtraProperties<*>.jvmName(): String? {
-    val jvmNameAnnotation = annotations().filter { it.dri.classNames.equals("JvmName") }
-    return if (jvmNameAnnotation.isEmpty()) {
-        null
-    } else {
-        jvmNameAnnotation.first().params.getValue("name").toComponent().replace("\"", "")
-    }
+    return annotations().firstOrNull { it.isJvmName() }?.nameAsString()
+}
+
+/**
+ * Returns the value of the file:@JvmName if one exists or null
+ */
+fun WithExtraProperties<*>.jvmFileName(): String? {
+    return fileLevelAnnotations().firstOrNull { it.isJvmName() }?.nameAsString()
 }
 
 /**

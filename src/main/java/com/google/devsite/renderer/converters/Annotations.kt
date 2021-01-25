@@ -67,6 +67,13 @@ internal fun WithExtraProperties<*>.annotations(): List<Annotation> {
     }
 }
 
+/** @return the complete list of annotations for this type */
+internal fun WithExtraProperties<*>.fileLevelAnnotations(): List<Annotation> {
+    return extra.allOfType<Annotations>().flatMap { annotations ->
+        annotations.fileLevelAnnotations.values.singleOrNull() ?: emptyList()
+    }
+}
+
 /** @return true if the `@Deprecated` annotation is present, false otherwise */
 internal fun Annotation.isDeprecated(): Boolean = dri.classNames == "Deprecated"
 
@@ -95,3 +102,5 @@ internal fun AnnotationParameterValue.toComponent(): String = when (this) {
         is ArrayValue -> value.joinToString(prefix = "[", postfix = "]") { it.toComponent() }
         is AnnotationValue -> TODO("Unknown use case.")
     }
+
+internal fun Annotation.nameAsString(): String? = (params["name"] as? StringValue)?.value
