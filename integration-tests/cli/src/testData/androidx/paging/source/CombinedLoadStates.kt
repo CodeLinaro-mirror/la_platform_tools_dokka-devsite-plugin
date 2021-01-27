@@ -16,6 +16,8 @@
 
 package androidx.paging
 
+import androidx.annotation.RestrictTo
+
 /**
  * Collection of pagination [LoadState]s for both a [PagingSource], and [RemoteMediator].
  */
@@ -26,15 +28,42 @@ data class CombinedLoadStates(
     val source: LoadStates,
 
     /**
-     * [LoadStates] corresponding to loads from a [RemoteMediator], or `null` if RemoteMediator
+     * [LoadStates] corresponding to loads from a [RemoteMediator], or `null` if [RemoteMediator]
      * not present.
      */
     val mediator: LoadStates? = null
 ) {
+    /**
+     * Convenience for accessing [REFRESH][LoadType.REFRESH] [LoadState], which always defers to
+     * [LoadState] of [mediator] if it exists, otherwise equivalent to [LoadState] of [source].
+     *
+     * For use cases that require reacting to [LoadState] of [source] and [mediator]
+     * specifically, e.g., showing cached data when network loads via [mediator] fail,
+     * [LoadStates] exposed via [source] and [mediator] should be used directly.
+     */
     val refresh: LoadState = (mediator ?: source).refresh
+
+    /**
+     * Convenience for accessing [PREPEND][LoadType.PREPEND] [LoadState], which always defers to
+     * [LoadState] of [mediator] if it exists, otherwise equivalent to [LoadState] of [source].
+     *
+     * For use cases that require reacting to [LoadState] of [source] and [mediator]
+     * specifically, e.g., showing cached data when network loads via [mediator] fail,
+     * [LoadStates] exposed via [source] and [mediator] should be used directly.
+     */
     val prepend: LoadState = (mediator ?: source).prepend
+
+    /**
+     * Convenience for accessing [APPEND][LoadType.APPEND] [LoadState], which always defers to
+     * [LoadState] of [mediator] if it exists, otherwise equivalent to [LoadState] of [source].
+     *
+     * For use cases that require reacting to [LoadState] of [source] and [mediator]
+     * specifically, e.g., showing cached data when network loads via [mediator] fail,
+     * [LoadStates] exposed via [source] and [mediator] should be used directly.
+     */
     val append: LoadState = (mediator ?: source).append
 
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     inline fun forEach(op: (LoadType, Boolean, LoadState) -> Unit) {
         source.forEach { type, state ->
             op(type, false, state)

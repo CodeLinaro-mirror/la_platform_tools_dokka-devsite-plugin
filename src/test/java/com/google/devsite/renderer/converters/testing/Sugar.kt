@@ -75,8 +75,8 @@ internal fun Description.text(): String {
     var result = ""
     if (this.data.root.children.isNotEmpty())
         result += this.data.root.deepText()
-    if (this.data.additionalDesc != null)
-        result += this.data.additionalDesc!!.deepText()
+    if (this.data.selfTag != null)
+        result += this.data.selfTag!!.deepText()
     return result
 }
 

@@ -53,6 +53,90 @@
     <p>A <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> / <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> pair is a snapshot of the data set. A new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> / <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> must be created if an update occurs, such as a reorder, insert, delete, or content update occurs. A <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> must detect that it cannot continue loading its snapshot (for instance, when Database query notices a table being invalidated), and call <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code>. Then a new <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> / <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> pair would be created to represent data from the new state of the database query.</p>
     <h3> Presenting Data to UI</h3>
     <p>To present data loaded by a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to a <code>RecyclerView</code>, create an instance of <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code>, which provides a stream of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> that you may collect from and submit to a <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>.</p>
+    <pre class="prettyprint">/**
+ * Sample Page-Keyed PagingSource, which uses String tokens to load pages.
+ *
+ * Loads Items from network requests via Retrofit to a backend service.
+ */
+class MyPagingSource(
+    val myBackend: MyBackendService
+) : PagingSource&lt;String, Item&gt;() {
+    override suspend fun load(params: LoadParams&lt;String&gt;): LoadResult&lt;String, Item&gt; {
+        // Retrofit calls that return the body type throw either IOException for network
+        // failures, or HttpException for any non-2xx HTTP status codes. This code reports all
+        // errors to the UI, but you can inspect/wrap the exceptions to provide more context.
+        return try {
+            // Suspending network load via Retrofit. This doesn't need to be wrapped in a
+            // withContext(Dispatcher.IO) { ... } block since Retrofit's Coroutine
+            // CallAdapter dispatches on a worker thread.
+            val response = myBackend.searchItems(params.key)
+            LoadResult.Page(
+                data = response.items,
+                prevKey = response.prev,
+                nextKey = response.next
+            )
+        } catch (e: IOException) {
+            LoadResult.Error(e)
+        } catch (e: HttpException) {
+            LoadResult.Error(e)
+        }
+    }
+
+    override fun getRefreshKey(state: PagingState&lt;String, Item&gt;): String? {
+        return state.anchorPosition?.let { state.closestItemToPosition(it)?.id }
+    }
+}</pre>
+    <pre class="prettyprint">/**
+ * Sample Page-Indexed PagingSource, which uses Int page number to load pages.
+ *
+ * Loads Items from network requests via Retrofit to a backend service.
+ *
+ * Note that the key type is Int, since we're using page number to load a page.
+ */
+class MyPagingSource(
+    val myBackend: MyBackendService
+) : PagingSource&lt;Int, Item&gt;() {
+    override suspend fun load(params: LoadParams&lt;Int&gt;): LoadResult&lt;Int, Item&gt; {
+
+        // Retrofit calls that return the body type throw either IOException for network
+        // failures, or HttpException for any non-2xx HTTP status codes. This code reports all
+        // errors to the UI, but you can inspect/wrap the exceptions to provide more context.
+        return try {
+            // Key may be null during a refresh, if no explicit key is passed into Pager
+            // construction. Use 0 as default, because our API is indexed started at index 0
+            val pageNumber = params.key ?: 0
+
+            // Suspending network load via Retrofit. This doesn't need to be wrapped in a
+            // withContext(Dispatcher.IO) { ... } block since Retrofit's Coroutine
+            // CallAdapter dispatches on a worker thread.
+            val response = myBackend.searchItems(pageNumber)
+
+            // Since 0 is the lowest page number, return null to signify no more pages should
+            // be loaded before it.
+            val prevKey = if (pageNumber &gt; 0) pageNumber - 1 else null
+
+            // This API defines that it's out of data when a page returns empty. When out of
+            // data, we return `null` to signify no more pages should be loaded
+            val nextKey = if (response.items.isNotEmpty()) pageNumber + 1 else null
+            LoadResult.Page(
+                data = response.items,
+                prevKey = prevKey,
+                nextKey = nextKey
+            )
+        } catch (e: IOException) {
+            LoadResult.Error(e)
+        } catch (e: HttpException) {
+            LoadResult.Error(e)
+        }
+    }
+
+    override fun getRefreshKey(state: PagingState&lt;Int, Item&gt;): Int? {
+        return state.anchorPosition?.let {
+            state.closestPageToPosition(it)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(it)?.nextKey?.minus(1)
+        }
+    }
+}</pre>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <thead>

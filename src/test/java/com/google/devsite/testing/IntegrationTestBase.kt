@@ -38,7 +38,7 @@ abstract class IntegrationTestBase : BaseAbstractTest() {
      * Sources are located at testData/$path/source
      * outputs are located at testData/$path/docs
      */
-    fun verifyDirectory(path: String) {
+    fun verifyDirectory(path: String, sampleLocations: List<String> = emptyList()) {
         val baseDir = "testData/$path"
         val sourceDir = "$baseDir/source"
 
@@ -68,6 +68,7 @@ abstract class IntegrationTestBase : BaseAbstractTest() {
                         skipDeprecated = false,
                         suppress = true)
                     externalDocumentationLinks = externalLinks
+                    samples = sampleLocations.map { "$baseDir/$it" }
                 }
             }
             offlineMode = true

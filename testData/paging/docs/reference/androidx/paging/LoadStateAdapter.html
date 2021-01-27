@@ -17,6 +17,48 @@
     <p>By default will use one shared <a href="[RecyclerView.Adapter.getItemViewType]">RecyclerView.Adapter.getItemViewType</a> for all items.</p>
     <p>By default, both <code><a href="/reference/androidx/paging/LoadState.Loading.html">LoadState.Loading</a></code> and <code><a href="/reference/androidx/paging/LoadState.Error.html">LoadState.Error</a></code> are presented as adapter items, other states are not. To configure this, override <code><a href="/reference/androidx/paging/LoadStateAdapter.html#displayLoadStateAsItem(androidx.paging.LoadState)">displayLoadStateAsItem</a></code>.</p>
     <p>To present this Adapter as a header and or footer alongside your <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>, see <code><a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">PagingDataAdapter.withLoadStateHeaderAndFooter</a></code>, or use <a href="[androidx.recyclerview.widget.ConcatAdapter]">androidx.recyclerview.widget.ConcatAdapter</a> directly to concatenate Adapters.</p>
+    <pre class="prettyprint">class LoadStateViewHolder(
+    parent: ViewGroup,
+    retry: () -&gt; Unit
+) : RecyclerView.ViewHolder(
+    LayoutInflater.from(parent.context)
+        .inflate(R.layout.load_state_item, parent, false)
+) {
+    private val progressBar: ProgressBar = itemView.findViewById(R.id.progress_bar)
+    private val errorMsg: TextView = itemView.findViewById(R.id.error_msg)
+    private val retry: Button = itemView.findViewById&lt;Button&gt;(R.id.retry_button)
+        .also { it.setOnClickListener { retry.invoke() } }
+
+    fun bind(loadState: LoadState) {
+        if (loadState is LoadState.Error) {
+            errorMsg.text = loadState.error.localizedMessage
+        }
+        progressBar.visibility = toVisibility(loadState is LoadState.Loading)
+        retry.visibility = toVisibility(loadState !is LoadState.Loading)
+        errorMsg.visibility = toVisibility(loadState !is LoadState.Loading)
+    }
+
+    private fun toVisibility(constraint: Boolean): Int = if (constraint) {
+        View.VISIBLE
+    } else {
+        View.GONE
+    }
+}
+
+/**
+ * Adapter which displays a loading spinner when `state = LoadState.Loading`, and an error
+ * message and retry button when `state is LoadState.Error`.
+ */
+class MyLoadStateAdapter(
+    private val retry: () -&gt; Unit
+) : LoadStateAdapter&lt;LoadStateViewHolder&gt;() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState) =
+        LoadStateViewHolder(parent, retry)
+
+    override fun onBindViewHolder(holder: LoadStateViewHolder, loadState: LoadState) =
+        holder.bind(loadState)
+}</pre>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <thead>

@@ -794,6 +794,19 @@ internal class DocTagConverterTest(
         }
     }
 
+    @Test
+    fun `@sample annotation in kotlin fails if the target samples doesn't exist`() {
+        val documentation = """
+            |/**
+            | * a very foo description
+            | *
+            | * @sample foo.samples.fooSample
+            | */
+            |fun foo(a: String, b: String, c: String)
+        """.trimIndent()
+        assertFails { documentation.render().documentation() }
+    }
+
     private fun DModule.description(): Description {
         val holder = runBlocking { DocumentablesHolder(this@description, this) }
         val converter = DocTagConverter(language, pathProvider(), holder)

@@ -165,6 +165,22 @@
       <pre class="api-signature no-pretty-print">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[FlowPreview])<br>val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#loadStateFlow()">loadStateFlow</a>:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[FlowPreview])&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;</pre>
       <p>A hot <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
       <p>This flow is conflated, so it buffers the last update to <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> and immediately delivers the current load states on collection.</p>
+      <pre class="prettyprint">val adapter = UserPagingAdapter()
+lifecycleScope.launch {
+    adapter.loadStateFlow
+        .map { it.refresh }
+        .distinctUntilChanged()
+        .collectLatest {
+            // show a retry button outside the list when refresh hits an error
+            retryButton.isVisible = it is LoadState.Error
+
+            // swipeRefreshLayout displays whether refresh is occurring
+            swipeRefreshLayout.isRefreshing = it is LoadState.Loading
+
+            // show an empty state over the list when loading initially, before items are loaded
+            emptyState.isVisible = it is LoadState.Loading &amp;&amp; adapter.itemCount == 0
+        }
+}</pre>
     </div>
     <div><a name="getSize()"></a><a name="setSize()"></a><a name="getSize--"></a><a name="setSize--"></a>
       <h3 class="api-name" id="size()">size</h3>
@@ -219,6 +235,17 @@
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#addLoadStateListener(kotlin.Function1)">addLoadStateListener</a>(listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>)&nbsp;-&gt;&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Add a <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener to observe the loading state of the current <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
       <p>As new <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> generations are submitted and displayed, the listener will be notified to reflect the current <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code>.</p>
+      <pre class="prettyprint">val adapter = UserPagingAdapter()
+adapter.addLoadStateListener {
+    // show a retry button outside the list when refresh hits an error
+    retryButton.isVisible = it.refresh is LoadState.Error
+
+    // swipeRefreshLayout displays whether refresh is occurring
+    swipeRefreshLayout.isRefreshing = it.refresh is LoadState.Loading
+
+    // show an empty state over the list when loading initially, before items are loaded
+    emptyState.isVisible = it.refresh is LoadState.Loading &amp;&amp; adapter.itemCount == 0
+}</pre>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -365,6 +392,25 @@
       <p>Refresh the data presented by this <code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html">PagingDataDiffer</a></code>.</p>
       <p><code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#refresh()">refresh</a></code> triggers the creation of a new <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> with a new instance of <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> to represent an updated snapshot of the backing dataset. If a <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> is set, calling <code><a href="/reference/kotlin/androidx/paging/PagingDataDiffer.html#refresh()">refresh</a></code> will also trigger a call to <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">RemoteMediator.load</a></code> with <code><a href="/reference/kotlin/androidx/paging/LoadType.REFRESH.html">LoadType</a></code> to allow <code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> to check for updates to the dataset backing <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
       <p>Note: This API is intended for UI-driven refresh signals, such as swipe-to-refresh. Invalidation due repository-layer signals, such as DB-updates, should instead use <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#invalidate()">PagingSource.invalidate</a></code>.</p>
+      <pre class="prettyprint">class MyActivity : AppCompatActivity() {
+    private lateinit var binding: MyActivityBinding
+    private val pagingAdapter = UserPagingAdapter()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = MyActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.recyclerView.adapter = pagingAdapter
+        pagingAdapter.addLoadStateListener { loadStates -&gt;
+            binding.swipeRefreshLayout.isRefreshing = loadStates.refresh is LoadState.Loading
+        }
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            pagingAdapter.refresh()
+        }
+    }
+}</pre>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>

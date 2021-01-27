@@ -359,11 +359,11 @@ internal class ClasslikeDocumentableConverter(
             ))
         }
 
-        val extends = docsHolder.subclassGraph().getValue(classlike.dri).superClasses.map {
+        val extends = docsHolder.classGraph().getValue(classlike.dri).superClasses.map {
             pathProvider.linkForReference(it.dri)
         }
 
-        val implements = docsHolder.subclassGraph().getValue(classlike.dri).interfaces.map {
+        val implements = docsHolder.classGraph().getValue(classlike.dri).interfaces.map {
             pathProvider.linkForReference(it.dri)
         }
 
@@ -384,7 +384,7 @@ internal class ClasslikeDocumentableConverter(
             return DefaultClassHierarchy(ClassHierarchy.Params(parents = emptyList()))
         }
 
-        val parents = docsHolder.subclassGraph().getValue(classlike.dri).superClasses
+        val parents = docsHolder.classGraph().getValue(classlike.dri).superClasses
         if (parents.isEmpty()) {
             // Don't show the hierarchy if this class only extends Any/Object
             return DefaultClassHierarchy(ClassHierarchy.Params(parents = emptyList()))
@@ -426,9 +426,9 @@ internal class ClasslikeDocumentableConverter(
     // We know our subclasses will always be DClasslikes
     @Suppress("UNCHECKED_CAST")
     private suspend fun findRelatedSymbols(): RelatedSymbols {
-        val subclasses = docsHolder.subclassGraph().getValue(classlike.dri)
-        val directSubclasses = subclasses.direct
-        val indirectSubclasses = subclasses.indirect
+        val classNode = docsHolder.classGraph().getValue(classlike.dri)
+        val directSubclasses = classNode.directSubClasses
+        val indirectSubclasses = classNode.indirectSubClasses
 
         return DefaultRelatedSymbols(
             RelatedSymbols.Params(

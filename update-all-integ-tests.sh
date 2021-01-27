@@ -7,3 +7,4 @@ rm -rf testData/innerClasses/docs && cp -r build/docs/testData/innerClasses/docs
 rm -rf testData/paging/docs && cp -r build/docs/testData/paging/docs testData/paging/docs
 rm -rf testData/simple/docs && cp -r build/docs/testData/simple/docs testData/simple/docs
 rm -rf testData/topLevelFunctions/docs && cp -r build/docs/testData/topLevelFunctions/docs testData/topLevelFunctions/docs
+rm -rf testData/sampleAnnotation/docs && cp -r build/docs/testData/sampleAnnotation/docs testData/sampleAnnotation/docs

@@ -135,7 +135,7 @@ internal class DefaultDescription(
 ) : Description {
     override fun render(html: FlowContent) = html.run {
         if (data.deprecation == null) {
-            renderTags(listOf(data.root), State())
+            renderContent()
         } else {
             if (data.summary) {
 
@@ -143,7 +143,7 @@ internal class DefaultDescription(
                 p {
                     strong { +data.deprecation }
                     +" "
-                    renderTags(data.root.children, State())
+                    renderContent()
                 }
             } else {
 
@@ -151,8 +151,20 @@ internal class DefaultDescription(
                 aside("caution") {
                     strong { +data.deprecation }
                     br()
-                    renderTags(data.root.children, State())
-                    data.additionalDesc?.let { renderTags(listOf(data.additionalDesc), State()) }
+                    renderContent()
+                }
+            }
+        }
+    }
+
+    // The actual code to render a description; should be called after deprecation is handled
+    private fun FlowContent.renderContent() {
+        renderTags(data.root.children, State())
+        renderTags(listOfNotNull(data.selfTag), State())
+        if (!data.summary) {
+            data.samples.forEach {
+                pre("prettyprint") {
+                    +it
                 }
             }
         }

@@ -32,6 +32,41 @@
     </div>
     <hr>
     <p>Success result object for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code>.</p>
+    <pre class="prettyprint">// One common method of pagination is to use next (and optionally previous) tokens.
+// The below code shows you how to
+data class NetworkResponseObject(
+    val items: List&lt;Item&gt;,
+    val next: String,
+    val approximateItemsRemaining: Int
+)
+
+// The following shows how you use convert such a response loaded in PagingSource.load() to
+// a Page, which can be returned from that method
+fun NetworkResponseObject.toPage() = LoadResult.Page(
+    data = items,
+    prevKey = null, // this implementation can only append, can't load a prepend
+    nextKey = next, // next token will be the params.key of a subsequent append load
+    itemsAfter = approximateItemsRemaining
+)</pre>
+    <pre class="prettyprint">// If you load by page number, the response may not define how to load the next page.
+data class NetworkResponseObject(
+    val items: List&lt;Item&gt;
+)
+
+// The following shows how you use the current page number (e.g., the current key in
+// PagingSource.load() to convert a response into a Page, which can be returned from that method
+fun NetworkResponseObject.toPage(pageNumber: Int): LoadResult.Page&lt;Int, Item&gt; {
+    return LoadResult.Page(
+        data = items,
+        // Since 0 is the lowest page number, return null to signify no more pages
+        // should be loaded before it.
+        prevKey = if (pageNumber &gt; 0) pageNumber - 1 else null,
+        // This API defines that it's out of data when a page returns empty. When out of
+        // data, we return `null` to signify no more pages should be loaded
+        // If the response instead
+        nextKey = if (items.isNotEmpty()) pageNumber + 1 else null
+    )
+}</pre>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">

@@ -22,12 +22,15 @@ import com.google.devsite.renderer.converters.filterOutJvmSynthetic
 import com.google.devsite.renderer.converters.isExceptionClass
 import com.google.devsite.renderer.converters.jvmFileName
 import com.google.devsite.renderer.converters.name
+import com.google.devsite.renderer.converters.setUpAnalysis
 import com.google.devsite.renderer.converters.withJavaSynthetic
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import org.jetbrains.dokka.DokkaConfiguration
+import org.jetbrains.dokka.analysis.EnvironmentAndFacade
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.withClass
 import org.jetbrains.dokka.model.DAnnotation
@@ -46,13 +49,18 @@ import org.jetbrains.dokka.model.JavaVisibility
 import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.model.properties.WithExtraProperties
+import org.jetbrains.dokka.plugability.DokkaContext
 
 /**
  * Centralized place to retrieve documentables.
  *
  * All doc rewriting should occur here.
  */
-internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
+internal class DocumentablesHolder(
+    module: DModule,
+    scope: CoroutineScope,
+    context: DokkaContext? = null
+) {
     private val packages = scope.async { computePackages(module) }
 
     private val classlikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
@@ -67,7 +75,8 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
     private val allClasslikes: Deferred<List<DClasslike>>
     private val nestedClasslikesJob: Job
     private val nestedClasslikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
-    private val subclassGraph: Deferred<Map<DRI, Subclasses>>
+    private val classGraph: Deferred<Map<DRI, ClassNode>>
+    private val analysisMap: Deferred<Map<DokkaConfiguration.DokkaSourceSet, EnvironmentAndFacade>>
 
     init {
         scope.apply {
@@ -95,8 +104,10 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
             }
         }
 
+        analysisMap = scope.async { context?.let { setUpAnalysis(context) } ?: mapOf() }
+
         allClasslikes = scope.async { computeClasslikes(module, syntheticClasses) }
-        subclassGraph = scope.async { computeSubclassGraph(allClasslikes.await()) }
+        classGraph = scope.async { computeClassGraph(allClasslikes.await()) }
 
         nestedClasslikesJob = scope.launch {
             for (classlike in allClasslikes.await()) {
@@ -112,7 +123,10 @@ internal class DocumentablesHolder(module: DModule, scope: CoroutineScope) {
 
     suspend fun allClasslikes(): List<DClasslike> = allClasslikes.await()
 
-    suspend fun subclassGraph(): Map<DRI, Subclasses> = subclassGraph.await()
+    suspend fun classGraph(): Map<DRI, ClassNode> = classGraph.await()
+
+    suspend fun analysisMap(): Map<DokkaConfiguration.DokkaSourceSet, EnvironmentAndFacade> =
+        analysisMap.await()
 
     suspend fun classlikesFor(packageDoc: DPackage): List<DClasslike> =
         classlikes.getValue(packageDoc.dri).await()

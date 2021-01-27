@@ -75,7 +75,8 @@ sourceSets.test {
     java.srcDirs(
         "testData/innerClasses/source",
         "testData/simple/source",
-        "testData/topLevelFunctions/source"
+        "testData/topLevelFunctions/source",
+        "testData/sampleAnnotation/source"
     )
 }
 

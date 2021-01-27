@@ -41,6 +41,45 @@
       <p>A common use case for this caching is to cache <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> in a ViewModel. This can ensure that, upon configuration change (e.g. rotation), then new Activity will receive the existing data immediately rather than fetching it from scratch.</p>
       <p>Calling <code><a href="/reference/androidx/paging/package-summary.html#cachedIn(kotlinx.coroutines.flow.Flow,kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> is required to allow calling <a href="[androidx.paging.AsyncPagingDataAdapter]">androidx.paging.AsyncPagingDataAdapter</a> on the same instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> emitted by <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code> or any of its transformed derivatives, as reloading data from scratch on the same generation of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is an unsupported operation.</p>
       <p>Note that this does not turn the <code>Flow&lt;PagingData&gt;</code> into a hot stream. It won't execute any unnecessary code unless it is being collected.</p>
+      <pre class="prettyprint">
+import androidx.activity.viewModels
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import androidx.paging.map
+
+class MyViewModel : ViewModel() {
+    val flow = Pager(
+        config = PagingConfig(pageSize = 40),
+        pagingSourceFactory = pagingSourceFactory
+    ).flow
+        // Loads and transformations before the cachedIn operation will be cached, so that
+        // multiple observers get the same data. This is true either for simultaneous
+        // observers, or e.g. an Activity re-subscribing after being recreated
+        .cachedIn(viewModelScope)
+}
+
+class MyActivity : AppCompatActivity() {
+    val pagingAdapter = MyPagingAdapter()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val viewModel by viewModels&lt;MyViewModel&gt;()
+
+        lifecycleScope.launch {
+            viewModel.flow
+                // Any transformations after the ViewModel's cachedIn step will not be cached,
+                // and will instead by re-run immediately on Activity re-creation.
+                .map { pagingData -&gt;
+                    // example un-cached transformation
+                    pagingData.map { UiModel(it) }
+                }
+                .collectLatest {
+                    pagingAdapter.submitData(it)
+                }
+        }
+    }
+}</pre>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>

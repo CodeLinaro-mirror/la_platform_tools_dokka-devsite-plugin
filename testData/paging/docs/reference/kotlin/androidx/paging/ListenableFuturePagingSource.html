@@ -32,6 +32,48 @@
     </div>
     <hr>
     <p><a href="[ListenableFuture]">ListenableFuture</a>-based compatibility wrapper around <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>'s suspending APIs.</p>
+    <pre class="prettyprint">class MyListenableFuturePagingSource(
+    val myBackend: GuavaBackendService,
+    val searchTerm: String
+) : ListenableFuturePagingSource&lt;String, Item&gt;() {
+    override fun loadFuture(
+        params: LoadParams&lt;String&gt;
+    ): ListenableFuture&lt;LoadResult&lt;String, Item&gt;&gt; {
+        return myBackend
+            .searchUsers(
+                searchTerm = searchTerm,
+                pageKey = params.key
+            )
+            .transform&lt;LoadResult&lt;String, Item&gt;&gt;(
+                { response -&gt;
+                    LoadResult.Page(
+                        data = response!!.items,
+                        prevKey = response.prev,
+                        nextKey = response.next
+                    )
+                },
+                networkExecutor
+            )
+            // Retrofit calls that return the body type throw either IOException for
+            // network failures, or HttpException for any non-2xx HTTP status codes.
+            // This code reports all errors to the UI, but you can inspect/wrap the
+            // exceptions to provide more context.
+            .catching(
+                IOException::class.java,
+                { t: IOException? -&gt; LoadResult.Error(t!!) },
+                networkExecutor
+            )
+            .catching(
+                HttpException::class.java,
+                { t: HttpException? -&gt; LoadResult.Error(t!!) },
+                networkExecutor
+            )
+    }
+
+    override fun getRefreshKey(state: PagingState&lt;String, Item&gt;): String? {
+        return state.anchorPosition?.let { state.closestItemToPosition(it)?.id }
+    }
+}</pre>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">

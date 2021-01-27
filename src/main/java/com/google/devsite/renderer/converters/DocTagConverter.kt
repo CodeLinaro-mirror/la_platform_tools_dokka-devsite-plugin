@@ -54,6 +54,7 @@ import org.jetbrains.dokka.model.doc.Constructor
 import org.jetbrains.dokka.model.doc.CustomTagWrapper
 import org.jetbrains.dokka.model.doc.Deprecated
 import org.jetbrains.dokka.model.doc.Description
+import org.jetbrains.dokka.model.doc.DocTag
 import org.jetbrains.dokka.model.doc.DocumentationLink
 import org.jetbrains.dokka.model.doc.NamedTagWrapper
 import org.jetbrains.dokka.model.doc.P
@@ -78,7 +79,8 @@ internal class DocTagConverter(
     private val pathProvider: FilePathProvider,
     private val docsHolder: DocumentablesHolder
 ) {
-    private val classGraph = runBlocking { docsHolder.subclassGraph() }
+    private val classGraph = runBlocking { docsHolder.classGraph() }
+    private val analysisMap = runBlocking { docsHolder.analysisMap() }
     private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
 
     /** @return the hand-written javadoc */
@@ -130,7 +132,7 @@ internal class DocTagConverter(
                 is Return -> returnType(tags as List<Return>, checkNotNull(returnType))
                 is Throws -> throws(tags as List<Throws>)
                 is See -> see(tags as List<See>)
-                is Sample -> null // TODO("b/163811276: sample")
+                is Sample -> null // Samples are handled in the description
                 is Property -> throw RuntimeException("Should have been consumed in description!")
                 is CustomTagWrapper -> null // TODO("b/163811276: custom tag wrapper")
                 is Since -> TODO("b/163811276: since")
@@ -329,20 +331,37 @@ internal class DocTagConverter(
      */
     private fun Documentable.getDescription(summary: Boolean): DescriptionComponent {
         val normalDescription = find<Description>()
+        val selfTag = tags().filter { (it as? NamedTagWrapper)?.name == name }.strictSingleOrNull()
         // There can be multiple tags like this, but they are all duplicates produced upstream
-        val tag = tags().firstOrNull { (it as? NamedTagWrapper)?.name == name }
 
-        return if (tag != null && normalDescription == null) description(tag, summary)
-        else if (tag != null) description(normalDescription!!, summary, additionalDesc = tag)
-        else if (normalDescription == null) UndocumentedSymbolDescription()
-        else description(normalDescription, summary)
+        val samples = tags().filterIsInstance<Sample>().map { tag ->
+            val dri = tag.name
+
+            // TODO: fix this to allow KMP to work. Currently asserts single-platform. b/181224204
+            val sourceSet = sourceSets.single()
+
+            val facade = analysisMap[sourceSet]?.facade
+                ?: throw RuntimeException("Cannot resolve facade for ${sourceSet.sourceSetID}")
+            val psiElement = fqNameToPsiElement(facade, dri)
+                ?: throw RuntimeException("Cannot find PsiElement corresponding to $dri")
+
+            val imports = processImports(psiElement)
+            val body = processBody(psiElement)
+
+            imports + body
+        }
+
+        return if (normalDescription == null && selfTag == null) UndocumentedSymbolDescription()
+        else if (normalDescription == null) description(selfTag!!, summary)
+        else description(normalDescription, summary, null, selfTag?.root, samples)
     }
 
     private fun description(
         tag: TagWrapper,
         summary: Boolean = false,
         deprecation: String? = null,
-        additionalDesc: TagWrapper? = null
+        selfTag: DocTag? = null,
+        samples: List<String> = emptyList()
     ): DescriptionComponent {
         return DefaultDescription(
             DescriptionComponent.Params(
@@ -350,7 +369,8 @@ internal class DocTagConverter(
                 tag.root,
                 summary,
                 deprecation,
-                additionalDesc?.root
+                selfTag,
+                samples
             )
         )
     }

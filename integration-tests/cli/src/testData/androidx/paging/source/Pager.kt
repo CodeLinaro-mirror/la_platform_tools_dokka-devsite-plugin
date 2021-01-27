@@ -41,6 +41,7 @@ class Pager<Key : Any, Value : Any>
 @JvmOverloads constructor(
     config: PagingConfig,
     initialKey: Key? = null,
+    @OptIn(ExperimentalPagingApi::class)
     remoteMediator: RemoteMediator<Key, Value>? = null,
     pagingSourceFactory: () -> PagingSource<Key, Value>
 ) {

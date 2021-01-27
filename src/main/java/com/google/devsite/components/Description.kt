@@ -28,6 +28,7 @@ internal interface Description : ContextFreeComponent {
         val root: DocTag,
         val summary: Boolean = false,
         val deprecation: String? = null,
-        val additionalDesc: DocTag? = null
+        val selfTag: DocTag? = null,
+        val samples: List<String> = emptyList()
     )
 }

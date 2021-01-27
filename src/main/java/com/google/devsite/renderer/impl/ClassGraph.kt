@@ -27,25 +27,25 @@ import java.util.TreeSet
  * Generate of graph of type dependencies.
  *
  * This returns the type inheritance of the given [classlikes] as a graph. That is, each DRI is
- * associated with its complete list of subclasses and parents.
+ * associated with itself and its complete list of subclasses and parents.
  */
-internal fun computeSubclassGraph(classlikes: List<DClasslike>): Map<DRI, Subclasses> {
+internal fun computeClassGraph(classlikes: List<DClasslike>): Map<DRI, ClassNode> {
     val drisToClasslikes = classlikes.associateBy { it.dri }
-    val subclasses: Map<DRI, MutableSubclasses> = classlikes.associate { classlike ->
-        classlike.dri to MutableSubclasses(classlike)
+    val classGraph: Map<DRI, MutableClassNode> = classlikes.associate { classlike ->
+        classlike.dri to MutableClassNode(classlike)
     }
 
     for (classlike in classlikes) {
-        recursivelyUpdateClasslikeSupertypesTree(classlike, subclasses, drisToClasslikes)
+        recursivelyUpdateClasslikeSupertypesTree(classlike, classGraph, drisToClasslikes)
     }
 
     // TODO(b/168956053): remove drisToClasslikes.getValue(it) once dokka has cheap hashCode impl
-    return subclasses.mapValues { (_, level) ->
-        Subclasses(
+    return classGraph.mapValues { (_, level) ->
+        ClassNode(
             self = level.self,
-            all = level.all.map { drisToClasslikes.getValue(it) },
-            direct = level.direct.map { drisToClasslikes.getValue(it) },
-            indirect = level.indirect.map { drisToClasslikes.getValue(it) },
+            allSubClasses = level.allSubClasses.map { drisToClasslikes.getValue(it) },
+            directSubClasses = level.directSubClasses.map { drisToClasslikes.getValue(it) },
+            indirectSubClasses = level.indirectSubClasses.map { drisToClasslikes.getValue(it) },
             superClasses = level.superClasses.map { drisToClasslikes.getValue(it) },
             interfaces = level.interfaces.map { drisToClasslikes.getValue(it) }
         )
@@ -53,7 +53,7 @@ internal fun computeSubclassGraph(classlikes: List<DClasslike>): Map<DRI, Subcla
 }
 
 /**
- * Updates the [subclasses] by traversing the supertype tree using [classlikes]. [leaf] will not
+ * Updates the [classNode]s by traversing the supertype tree using [classlikes]. [leaf] will not
  * change so it can be added to every parent's subclasses. The recursion occurs on [child].
  *
  * We must recursively traverse the hierarchy graph bottom up because Dokka only provides direct
@@ -62,7 +62,7 @@ internal fun computeSubclassGraph(classlikes: List<DClasslike>): Map<DRI, Subcla
  * bottom up (what this method does).
  *
  * @param child the current classlike who's supertypes we will be traversing
- * @param subclasses the mutable type relation graph to be updated. [child] will be added to the set
+ * @param classGraph the mutable type relation graph to be updated. [child] will be added to the set
  * direct subclasses for each of [child]'s supertypes. Similarly, [leaf] will be added to the set of
  * all subclasses for each of [child]'s supertypes. If [child] and [leaf] aren't the same (i.e. two
  * edges away from each other: A -> B -> C), we add [leaf] to the set of indirect subclasses for
@@ -73,7 +73,7 @@ internal fun computeSubclassGraph(classlikes: List<DClasslike>): Map<DRI, Subcla
  */
 private fun recursivelyUpdateClasslikeSupertypesTree(
     child: DClasslike,
-    subclasses: Map<DRI, MutableSubclasses>,
+    classGraph: Map<DRI, MutableClassNode>,
     classlikes: Map<DRI, DClasslike>,
     leaf: DClasslike = child
 ) {
@@ -81,7 +81,7 @@ private fun recursivelyUpdateClasslikeSupertypesTree(
 
     val supertypes = child.supertypes.values.single()
     for ((type, kind) in supertypes) {
-        subclasses[type.dri]?.let { (_, all, direct, indirect) ->
+        classGraph[type.dri]?.let { (_, all, direct, indirect) ->
             all.add(leaf.dri)
             direct.add(child.dri)
             if (child !== leaf) indirect.add(leaf.dri)
@@ -94,34 +94,34 @@ private fun recursivelyUpdateClasslikeSupertypesTree(
         // packages to the proper base URL.
         val supertype = classlikes[type.dri]
         if (supertype != null) {
-            recursivelyUpdateClasslikeSupertypesTree(supertype, subclasses, classlikes, leaf)
+            recursivelyUpdateClasslikeSupertypesTree(supertype, classGraph, classlikes, leaf)
 
             if (kind == JavaClassKindTypes.CLASS || kind == KotlinClassKindTypes.CLASS) {
-                subclasses.getValue(leaf.dri).superClasses.add(supertype.dri)
+                classGraph.getValue(leaf.dri).superClasses.add(supertype.dri)
             }
 
             if (kind == JavaClassKindTypes.INTERFACE || kind == KotlinClassKindTypes.INTERFACE) {
-                subclasses.getValue(leaf.dri).interfaces.add(supertype.dri)
+                classGraph.getValue(leaf.dri).interfaces.add(supertype.dri)
             }
         }
     }
 }
 
-internal data class Subclasses(
+internal data class ClassNode(
     val self: DClasslike,
-    val all: List<DClasslike>,
-    val direct: List<DClasslike>,
-    val indirect: List<DClasslike>,
+    val allSubClasses: List<DClasslike>,
+    val directSubClasses: List<DClasslike>,
+    val indirectSubClasses: List<DClasslike>,
     val superClasses: List<DClasslike>,
     val interfaces: List<DClasslike>
 )
 
 // TODO(b/168956053): Use DClasslike directly once dokka has cheap hashCode impl
-private data class MutableSubclasses(
+private data class MutableClassNode(
     val self: DClasslike,
-    val all: MutableSet<DRI> = TreeSet(classComparator),
-    val direct: MutableSet<DRI> = TreeSet(classComparator),
-    val indirect: MutableSet<DRI> = TreeSet(classComparator),
+    val allSubClasses: MutableSet<DRI> = TreeSet(classComparator),
+    val directSubClasses: MutableSet<DRI> = TreeSet(classComparator),
+    val indirectSubClasses: MutableSet<DRI> = TreeSet(classComparator),
     val superClasses: MutableList<DRI> = mutableListOf(),
     val interfaces: MutableList<DRI> = mutableListOf()
 ) {

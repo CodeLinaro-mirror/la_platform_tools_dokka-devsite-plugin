@@ -53,7 +53,7 @@ internal class MultiLanguageRenderer(
         )
 
         runBlocking(Dispatchers.Default) {
-            val holder = DocumentablesHolder(module, this)
+            val holder = DocumentablesHolder(module, this, context)
             launch { renderJava(holder, locationProvider) }
             launch { renderKotlin(holder, locationProvider) }
         }

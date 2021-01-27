@@ -128,7 +128,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             val annotationTwo = annotations.components().last()
             val parameterTwo = annotationTwo.data.parameters.item()
 
-            // NOTE: "value" in java does not match "bar" in kotlin (in previous test)
+            // NOTE: "value" in java does not match "bar" in kotlin
             if (annotations == annotationsK) assertThat(parameterOne.name).isEqualTo("bar")
             else assertThat(parameterOne.name).isEqualTo("value")
             assertThat(parameterOne.value).isEqualTo("\"abc\"")
@@ -162,7 +162,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             val annotationTwo = annotations.components().last()
             val parameterTwo = annotationTwo.data.parameters.item()
 
-            // NOTE: "value" in java does not match "bar" in kotlin (in previous test)
+            // NOTE: "value" in java does not match "bar" in kotlin
             if (annotations == annotationsK) assertThat(parameterOne.name).isEqualTo("bar")
             else assertThat(parameterOne.name).isEqualTo("value")
             assertThat(parameterOne.value).isEqualTo("\"abc\"")

@@ -33,6 +33,39 @@
     <hr>
     <p>Error result object for <code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code>.</p>
     <p>This return type indicates an expected, recoverable error (such as a network load failure). This failure will be forwarded to the UI as a <code><a href="/reference/androidx/paging/LoadState.Error.html">LoadState.Error</a></code>, and may be retried.</p>
+    <pre class="prettyprint">/**
+ * Sample Page-Keyed PagingSource, which uses String tokens to load pages.
+ *
+ * Loads Items from network requests via Retrofit to a backend service.
+ */
+class MyPagingSource(
+    val myBackend: MyBackendService
+) : PagingSource&lt;String, Item&gt;() {
+    override suspend fun load(params: LoadParams&lt;String&gt;): LoadResult&lt;String, Item&gt; {
+        // Retrofit calls that return the body type throw either IOException for network
+        // failures, or HttpException for any non-2xx HTTP status codes. This code reports all
+        // errors to the UI, but you can inspect/wrap the exceptions to provide more context.
+        return try {
+            // Suspending network load via Retrofit. This doesn't need to be wrapped in a
+            // withContext(Dispatcher.IO) { ... } block since Retrofit's Coroutine
+            // CallAdapter dispatches on a worker thread.
+            val response = myBackend.searchItems(params.key)
+            LoadResult.Page(
+                data = response.items,
+                prevKey = response.prev,
+                nextKey = response.next
+            )
+        } catch (e: IOException) {
+            LoadResult.Error(e)
+        } catch (e: HttpException) {
+            LoadResult.Error(e)
+        }
+    }
+
+    override fun getRefreshKey(state: PagingState&lt;String, Item&gt;): String? {
+        return state.anchorPosition?.let { state.closestItemToPosition(it)?.id }
+    }
+}</pre>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
