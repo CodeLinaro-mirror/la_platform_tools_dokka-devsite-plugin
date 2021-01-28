@@ -137,6 +137,22 @@ internal class FunctionDocumentableConverterTest(
     }
 
     @Test
+    fun `Function summary abstract before suspend`() {
+        val summary = """
+            |class Foo {
+            |    abstract suspend fun foo(): Unit
+            |}
+        """.render().summary()
+
+        val returnz = summary.returnSummary()
+
+        kotlinOnly {
+            assertThat(returnz.modifiers).containsExactly("abstract", "suspend").inOrder()
+        }
+        javaOnly { assertThat(returnz.modifiers).containsExactly("abstract") }
+    }
+
+    @Test
     fun `Function summary component in interface has abstract modifiers`() {
         val summary = """
             |interface Foo {

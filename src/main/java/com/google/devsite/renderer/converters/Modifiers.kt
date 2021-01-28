@@ -90,6 +90,7 @@ internal fun List<String>.modifiersFor(
 
             // Not useful
             modifiers.remove("override")
+            modifiers.sortBy { m -> modifierOrder.indexOf(m) }
         }
     }
 
@@ -100,6 +101,25 @@ internal fun List<String>.modifiersFor(
 
     return modifiers
 }
+
+/**
+ * Kotlin modifier order
+ * (from https://kotlinlang.org/docs/reference/coding-conventions.html#modifiers)
+ */
+val modifierOrder = listOf(
+    // visibility (one of)
+    "public", "protected", "private", "internal",
+    // Multi-platform (one of)
+    "expect", "actual",
+    // Extensibility (one of)
+    "final", "open", "abstract", "sealed", "const",
+    // Other (could be more than one)
+    "external", "override", "lateinit", "tailrec", "vararg", "suspend", "inner",
+    // Types (one of)
+    "enum", "annotation", "fun",
+    // More (could be more than one)
+    "companion", "inline", "infix", "operator", "data"
+)
 
 /**
  * Provides modifier hints for what should be shown in the documentation.
