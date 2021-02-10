@@ -17,7 +17,6 @@
 package com.google.devsite.integration
 
 import com.google.devsite.testing.IntegrationTestBase
-import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -39,7 +38,6 @@ class BasicTest : IntegrationTestBase() {
         verifyDirectory("innerClasses")
     }
 
-    @Ignore // TODO: b/172000585 flaky test due to random failures in hashing
     @Test
     fun `Validate prod AndroidX fragment lib`() {
         verifyDirectory("fragment")
