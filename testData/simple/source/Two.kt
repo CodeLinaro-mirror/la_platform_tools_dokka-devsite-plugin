@@ -18,6 +18,7 @@ package dokkatest.simple
 
 /**
  * Sample interface 2
+ * ## Two is One Big Deal
  */
 interface Two {
     val x: One

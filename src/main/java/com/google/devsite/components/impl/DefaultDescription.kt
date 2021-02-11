@@ -35,6 +35,7 @@ import kotlinx.html.code
 import kotlinx.html.del
 import kotlinx.html.div
 import kotlinx.html.em
+import kotlinx.html.h2
 import kotlinx.html.h3
 import kotlinx.html.h4
 import kotlinx.html.h5
@@ -184,6 +185,7 @@ internal class DefaultDescription(
                 is A -> a(link) { renderTags(tag.children, state) }
                 is B, is Strong -> b { renderTags(tag.children, state) }
                 Br -> br { renderTags(tag.children, state) }
+                is H2 -> h2 { renderTags(tag.children, state) }
                 is H3 -> h3 { renderTags(tag.children, state) }
                 is H4 -> h4 { renderTags(tag.children, state) }
                 is H5 -> h5 { renderTags(tag.children, state) }
@@ -211,7 +213,7 @@ internal class DefaultDescription(
                 }
                 is BlockQuote -> blockQuote { renderTags(tag.children, state) }
                 is CustomDocTag -> { renderTags(tag.children, state) }
-                is Html, is Head, is Meta, is Header, is Title, is H1, is H2, is Footer, is IFrame,
+                is Html, is Head, is Meta, is Header, is Title, is H1, is Footer, is IFrame,
                 is Main, is Menu, is Nav, is Index ->
                     throw NotImplementedError(
                         "Inline HTML pages are not supported: ${tag.javaClass.simpleName}."
