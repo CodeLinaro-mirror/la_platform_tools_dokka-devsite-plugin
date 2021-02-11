@@ -525,6 +525,18 @@ internal class ParameterDocumentableConverterTest(
         }
     }
 
+    @Test
+    fun `params that are type aliases appear as aliases`() {
+        val param = """
+            |typealias MyString = String
+            |fun foo(name: MyString) = Unit
+        """.render().param().data
+
+        assertThat(param.name).isEqualTo("name")
+        val typeName = param.primary.asType().link().name
+        assertThat(typeName).isEqualTo("String")
+    }
+
     private fun DModule.param(forSummary: Boolean = false): Parameter {
         val converter = ParameterDocumentableConverter(language, pathProvider())
         return converter.componentForParameter(parameterDoc(), forSummary)

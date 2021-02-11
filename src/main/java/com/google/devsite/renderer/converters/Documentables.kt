@@ -28,6 +28,7 @@ import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DObject
 import org.jetbrains.dokka.model.DProperty
+import org.jetbrains.dokka.model.DTypeAlias
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.ExtraModifiers
 import org.jetbrains.dokka.model.Nullable
@@ -87,6 +88,7 @@ fun Documentable.stringForType(displayLanguage: Language): String = when (this) 
         Language.KOTLIN -> "property"
     }
     is DObject -> "object"
+    is DTypeAlias -> "type alias"
     else -> error("Unsupported type: $this")
 }
 
