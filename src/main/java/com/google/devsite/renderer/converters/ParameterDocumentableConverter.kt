@@ -39,6 +39,7 @@ import org.jetbrains.dokka.model.Nullable
 import org.jetbrains.dokka.model.PrimitiveJavaType
 import org.jetbrains.dokka.model.Projection
 import org.jetbrains.dokka.model.Star
+import org.jetbrains.dokka.model.TypeAliased
 import org.jetbrains.dokka.model.TypeConstructor
 import org.jetbrains.dokka.model.TypeParameter as UpstreamTypeParameter
 import org.jetbrains.dokka.model.UnresolvedBound
@@ -210,6 +211,7 @@ internal class ParameterDocumentableConverter(
         is UnresolvedBound, Star, JavaObject, Void -> null
         is Nullable -> inner.receiver()
         is Variance<*> -> inner.receiver()
+        is TypeAliased -> inner.receiver()
         else -> error("Unknown bound: $this")
     }
 
@@ -220,6 +222,10 @@ internal class ParameterDocumentableConverter(
         }
         if (this is Nullable) {
             return inner.toComponent(nullable = displayLanguage == Language.KOTLIN)
+        }
+
+        if (this is TypeAliased) {
+            return inner.toComponent()
         }
 
         val generics: List<SymbolBase> = when (this) {
@@ -290,6 +296,7 @@ internal class ParameterDocumentableConverter(
         }
         is Nullable -> inner.isLambda()
         is Variance<*> -> inner.isLambda()
+        is TypeAliased -> inner.isLambda()
         is UpstreamTypeParameter, is PrimitiveJavaType,
         is UnresolvedBound, Star, JavaObject, Void -> false
         else -> error("Unknown bound: $this of type ${this::class.java}")
@@ -299,6 +306,7 @@ internal class ParameterDocumentableConverter(
     private fun Projection.asTypeConstructor(): TypeConstructor = when (this) {
         is Variance<*> -> inner.asTypeConstructor()
         is Nullable -> inner.asTypeConstructor()
+        is TypeAliased -> inner.asTypeConstructor()
         else -> this as TypeConstructor
     }
 
