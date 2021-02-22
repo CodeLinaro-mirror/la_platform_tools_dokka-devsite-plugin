@@ -164,6 +164,27 @@ internal class DocTagConverterTest(
     }
 
     @Test
+    fun `Interface property parameters can be documented with @property on the class`() {
+        val module = """
+            |/**
+            | * Hello World!
+            | * @property bar A vary bary name
+            | */
+            |interface Foo(val bar: String)
+        """.render()
+
+        val propertyDoc = module.documentation(doc = { this.packages.single()
+            .classlikes.single().properties.single() }).single() as Description
+        // Upstream dokka does not propagate @property documentation on property parameters to the
+        // constructor. This may or may not be what we want.
+        assertFails {
+            val constructorDoc = module.documentation(doc = { (this.packages.single()
+                .classlikes.single() as DClass).constructors.single() }).single() as SummaryList
+        }
+        assertThat(propertyDoc.text()).isEqualTo("A vary bary name")
+    }
+
+    @Test
     fun `Class property parameters can be documented with @property on the class`() {
         val module = """
             |/**

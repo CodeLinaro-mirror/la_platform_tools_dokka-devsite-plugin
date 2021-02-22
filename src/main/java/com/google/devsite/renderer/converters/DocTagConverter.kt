@@ -40,7 +40,6 @@ import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.parent
 import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.Callable
-import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DParameter
@@ -203,9 +202,9 @@ internal class DocTagConverter(
                 throw RuntimeException("Invalid to apply @param to a ${documentable::class.java}")
             }
         } else if (tags.first() is Property) {
-            // A DClass with property parameters documented with @property may have Parameter tags
-            // In such a case, none of these tags should become docs *on the DClass itself*
-            if (documentable is DClass) {
+            // A DClasslike with property parameters documented with @property may have Parameter tags
+            // In such a case, none of these tags should become docs *on the DClasslike itself*
+            if (documentable is DClasslike) {
                 val possibleTrueReferents = documentable.properties.map { it.name }
                 assert(tags.names().all { it in possibleTrueReferents })
                 return emptyList()
