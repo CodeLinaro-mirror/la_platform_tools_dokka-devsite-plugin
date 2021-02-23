@@ -185,6 +185,34 @@ internal class DocTagConverterTest(
     }
 
     @Test
+    fun `@constructor is ignored`() {
+        val withAnnotation = """
+            |/**
+            | * The amount by which the text is shifted up or down from current the baseline.
+            | * @constructor
+            | */
+            |class BaselineShift(val multiplier: Float) {}
+        """.render()
+
+        val withoutAnnotation = """
+            |/**
+            | * The amount by which the text is shifted up or down from current the baseline.
+            | */
+            |class BaselineShift(val multiplier: Float) {}
+        """.render()
+
+        // TODO(b/180525239) Implement @constructor and fix this test
+
+        val withAnnotationDoc = withAnnotation.documentation(doc = { this.packages.single()
+            .classlikes.single() }).single() as Description
+
+        val withoutAnnotationDoc = withoutAnnotation.documentation(doc = { this.packages.single()
+            .classlikes.single() }).single() as Description
+
+        assertThat(withoutAnnotationDoc.text()).isEqualTo(withAnnotationDoc.text())
+    }
+
+    @Test
     fun `Class property parameters can be documented with @property on the class`() {
         val module = """
             |/**
