@@ -24,6 +24,7 @@ import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DEnum
+import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DObject
@@ -78,6 +79,7 @@ fun Documentable.stringForType(displayLanguage: Language): String = when (this) 
     is DClass -> "class"
     is DInterface -> "interface"
     is DEnum -> "enum"
+    is DEnumEntry -> "enum value"
     is DAnnotation -> "annotation"
     is DFunction -> when (displayLanguage) {
         Language.JAVA -> "method"
