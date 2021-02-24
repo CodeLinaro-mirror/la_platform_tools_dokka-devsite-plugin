@@ -134,7 +134,7 @@ internal class DocTagConverter(
                 is Property -> throw RuntimeException("Should have been consumed in description!")
                 is CustomTagWrapper -> null // TODO("b/163811276: custom tag wrapper")
                 is Since -> TODO("b/163811276: since")
-                is Constructor -> TODO("b/163811276: constructor")
+                is Constructor -> null // TODO("b/180525239: constructor")
                 // Documented separately above
                 is Description, is Deprecated, is Receiver -> null
                 // Don't care ;)
