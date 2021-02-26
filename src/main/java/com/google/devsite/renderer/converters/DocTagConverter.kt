@@ -37,7 +37,6 @@ import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.links.DRI
-import org.jetbrains.dokka.links.parent
 import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.Callable
 import org.jetbrains.dokka.model.DClasslike
@@ -175,7 +174,9 @@ internal class DocTagConverter(
                 val genericNames = generics.map { it.name }
                 val invalidNames = tags.names().filter { it !in genericNames }
                 if (invalidNames.isEmpty()) return tags
-                // enforce that the propagated documentation makes sense somewhere
+                // enforce that the propagated documentation makes sense somewhere. Specifically,
+                // documentation that is primarily aimed at a constructor may wind up on the DClass
+                // if the parameter being documented is a primary constructor property parameter
                 val possibleTrueReferents = documentable.properties.map { it.name } +
                     if (documentable is WithConstructors) {
                         for (constructor in documentable.constructors) {
@@ -193,13 +194,8 @@ internal class DocTagConverter(
                 val genericNames = generics.map { it.name }
                 val invalidNames = tags.names().filter {
                     it !in genericNames && it != documentable.name }
-                if (invalidNames.isEmpty()) return tags
-                // enforce that the propagated documentation makes sense somewhere
-                val parentClasslike = classGraph.getValue(documentable.dri.parent)
-                val parentDocNames = parentClasslike.self.documentation.values.single().children
-                    .filterIsInstance<Param>().map { it.name }
-                assert(invalidNames.all { it in parentDocNames })
-                return tags.filter { ungenerify((it as Param).name) in genericNames }
+                assert(invalidNames.isEmpty())
+                return tags
             } else if (documentable !is DFunction) {
                 throw RuntimeException("Invalid to apply @param to a ${documentable::class.java}")
             }
@@ -210,19 +206,8 @@ internal class DocTagConverter(
                 val possibleTrueReferents = documentable.properties.map { it.name }
                 assert(tags.names().all { it in possibleTrueReferents })
                 return emptyList()
-            }
-            // Property parameters may be validly documented as @property
-            // The ugly part here is in that case, all property parameters' docs are propagated to
-            // every property parameter.
-            else if (documentable is DParameter || documentable is DProperty) {
-                val invalidNames = tags.names().filter { it != documentable.name }
-                if (invalidNames.isNotEmpty()) {
-                    val parentClasslike = classGraph.getValue(documentable.dri.parent)
-                    val parentDocNames = parentClasslike.self.properties.map { it.name }
-                    assert(invalidNames.all { it in parentDocNames })
-                }
-                // sometimes these property parameters can wind up duplicating the correct doc
-                return tags.filter { (it as NamedTagWrapper).name == documentable.name }.take(1)
+            } else if (documentable is DParameter || documentable is DProperty) {
+                return tags
             } else {
                 throw RuntimeException("Invalid to apply @property to ${documentable::class.java}")
             }
