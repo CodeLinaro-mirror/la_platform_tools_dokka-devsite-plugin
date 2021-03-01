@@ -71,16 +71,10 @@ internal fun TwoPaneSummaryItem.description() = (this.data.description as Descri
 
 internal fun SymbolSummary.name(): String = data.signature.data.name.data.name
 
-internal fun Description.text(): String {
-    var result = ""
-    if (this.data.root.children.isNotEmpty())
-        result += this.data.root.deepText()
-    if (this.data.selfTag != null)
-        result += this.data.selfTag!!.deepText()
-    return result
-}
+internal fun Description.text() = this.data.components.joinToString(" ") { it.deepText() }
 
-private fun DocTag.deepText(): String = (this.children.single().children.single() as Text).body
+private fun DocTag.deepText(): String = (this as? Text)?.body
+    ?: children.joinToString(" ") { it.deepText() }
 
 internal fun TypeParameter.projectionName() = this.data.projections.single().link().name
 internal fun Parameter.generics() = this.data.primary.asType().data.generics

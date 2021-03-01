@@ -25,10 +25,8 @@ internal interface Description : ContextFreeComponent {
 
     class Params(
         val pathProvider: FilePathProvider,
-        val root: DocTag,
+        val components: List<DocTag> = emptyList(),
         val summary: Boolean = false,
-        val deprecation: String? = null,
-        val selfTag: DocTag? = null,
-        val samples: List<String> = emptyList()
+        val deprecation: String? = null
     )
 }

@@ -676,7 +676,7 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         deprecation: String? = null
     ): DefaultDescription {
         val tag = packages.single().classlikes.single { it.name == "Foo" }.tag()
-        return DefaultDescription(Params(pathProvider(), tag, summary, deprecation))
+        return DefaultDescription(Params(pathProvider(), tag.children, summary, deprecation))
     }
 
     private fun Documentable.tag() =

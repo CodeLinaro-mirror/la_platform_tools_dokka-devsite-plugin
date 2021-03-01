@@ -1,0 +1,325 @@
+<html devsite="true">
+  <head>
+    <title>dokkatest.sampleAnnotation.dokkatest.samples</title>
+{% setvar book_path %}/reference/kotlin/dokkatest/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>dokkatest.sampleAnnotation.dokkatest.samples</h1>
+{% setvar page_path %}dokkatest/sampleAnnotation/dokkatest/samples/package-summary.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <h2>Top-level functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <tbody>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/dokkatest/sampleAnnotation/dokkatest/samples/package-summary.html#TabRow(kotlin.Int,kotlin.String,kotlin.String,kotlin.String,kotlin.Function1,kotlin.Function0,kotlin.Function0)">TabRow</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;selectedTabIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;backgroundColor:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentColor:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;indicator:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;)&nbsp;-&gt;&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;divider:&nbsp;()&nbsp;-&gt;&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;tabs:&nbsp;()&nbsp;-&gt;&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p>A TabRow contains a row of Tabs, and displays an indicator underneath the currently selected tab.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Top-level functions</h2>
+    <div><a name="TabRow(kotlin.Int, kotlin.String, kotlin.String, kotlin.String, kotlin.Function1, kotlin.Function0, kotlin.Function0)"></a><a name="TabRow-kotlin.Int-kotlin.String-kotlin.String-kotlin.String-kotlin.Function1-kotlin.Function0-kotlin.Function0-"></a>
+      <h3 class="api-name" id="TabRow(kotlin.Int,kotlin.String,kotlin.String,kotlin.String,kotlin.Function1,kotlin.Function0,kotlin.Function0)">TabRow</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/dokkatest/sampleAnnotation/dokkatest/samples/package-summary.html#TabRow(kotlin.Int,kotlin.String,kotlin.String,kotlin.String,kotlin.Function1,kotlin.Function0,kotlin.Function0)">TabRow</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;selectedTabIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;modifier:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> = &quot;Modifier&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;backgroundColor:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> = &quot;MaterialTheme.colors.primarySurface&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;contentColor:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> = &quot;contentColorFor(backgroundColor)&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;indicator:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;)&nbsp;-&gt;&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = { tabPositions -&gt;
+        listOf(
+            listOf(tabPositions[selectedTabIndex])
+        )
+    },<br>&nbsp;&nbsp;&nbsp;&nbsp;divider:&nbsp;()&nbsp;-&gt;&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = {
+        listOf&lt;Unit&gt;()
+    },<br>&nbsp;&nbsp;&nbsp;&nbsp;tabs:&nbsp;()&nbsp;-&gt;&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>A TabRow contains a row of <a href="[Tab]">Tab</a>s, and displays an indicator underneath the currently selected tab. A TabRow places its tabs evenly spaced along the entire row, with each tab taking up an equal amount of space. See <a href="[ScrollableTabRow]">ScrollableTabRow</a> for a tab row that does not enforce equal size, and allows scrolling to tabs that do not fit on screen.</p>
+      <p>A simple example with text tabs looks like:</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Tab
+import androidx.compose.material.TabRow
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+var state by remember { mutableStateOf(0) }
+val titles = listOf(&quot;TAB 1&quot;, &quot;TAB 2&quot;, &quot;TAB 3 WITH LOTS OF TEXT&quot;)
+Column {
+    TabRow(selectedTabIndex = state) {
+        titles.forEachIndexed { index, title -&gt;
+            Tab(
+                text = { Text(title) },
+                selected = state == index,
+                onClick = { state = index }
+            )
+        }
+    }
+    Text(
+        modifier = Modifier.align(Alignment.CenterHorizontally),
+        text = &quot;Text tab ${state + 1} selected&quot;,
+        style = MaterialTheme.typography.body1
+    )
+}</pre>
+      <p>You can also provide your own custom tab, such as:</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.TabRow
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+var state by remember { mutableStateOf(0) }
+val titles = listOf(&quot;TAB 1&quot;, &quot;TAB 2&quot;, &quot;TAB 3&quot;)
+Column {
+    TabRow(selectedTabIndex = state) {
+        titles.forEachIndexed { index, title -&gt;
+            FancyTab(title = title, onClick = { state = index }, selected = (index == state))
+        }
+    }
+    Text(
+        modifier = Modifier.align(Alignment.CenterHorizontally),
+        text = &quot;Fancy tab ${state + 1} selected&quot;,
+        style = MaterialTheme.typography.body1
+    )
+}</pre>
+      <p>Where the custom tab itself could look like:</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Tab
+import androidx.compose.material.Text
+
+Tab(selected, onClick) {
+    Column(
+        Modifier.padding(10.dp).height(50.dp).fillMaxWidth(),
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
+        Box(
+            Modifier.size(10.dp)
+                .align(Alignment.CenterHorizontally)
+                .background(color = if (selected) Color.Red else Color.White)
+        )
+        Text(
+            text = title,
+            style = MaterialTheme.typography.body1,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
+    }
+}</pre>
+      <p>As well as customizing the tab, you can also provide a custom <code><a href="/reference/kotlin/dokkatest/sampleAnnotation/dokkatest/samples/package-summary.html#indicator()">indicator</a></code>, to customize the indicator displayed for a tab. <code><a href="/reference/kotlin/dokkatest/sampleAnnotation/dokkatest/samples/package-summary.html#indicator()">indicator</a></code> will be placed to fill the entire TabRow, so it should internally take care of sizing and positioning the indicator to match changes to <code><a href="/reference/kotlin/dokkatest/sampleAnnotation/dokkatest/samples/package-summary.html#selectedTabIndex()">selectedTabIndex</a></code>.</p>
+      <p>For example, given an indicator that draws a rounded rectangle near the edges of the <a href="[Tab]">Tab</a>:</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+
+// Draws a rounded rectangular with border around the Tab, with a 5.dp padding from the edges
+// Color is passed in as a parameter [color]
+Box(
+    modifier
+        .padding(5.dp)
+        .fillMaxSize()
+        .border(BorderStroke(2.dp, color), RoundedCornerShape(5.dp))
+)</pre>
+      <p>We can reuse <a href="[TabRowDefaults.tabIndicatorOffset]">TabRowDefaults.tabIndicatorOffset</a> and just provide this indicator, as we aren't changing how the size and position of the indicator changes between tabs:</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Tab
+import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
+import androidx.compose.material.TabRow
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+var state by remember { mutableStateOf(0) }
+val titles = listOf(&quot;TAB 1&quot;, &quot;TAB 2&quot;, &quot;TAB 3&quot;)
+
+// Reuse the default offset animation modifier, but use our own indicator
+val indicator = @Composable { tabPositions: List&lt;TabPosition&gt; -&gt;
+    FancyIndicator(Color.White, Modifier.tabIndicatorOffset(tabPositions[state]))
+}
+
+Column {
+    TabRow(
+        selectedTabIndex = state,
+        indicator = indicator
+    ) {
+        titles.forEachIndexed { index, title -&gt;
+            Tab(
+                text = { Text(title) },
+                selected = state == index,
+                onClick = { state = index }
+            )
+        }
+    }
+    Text(
+        modifier = Modifier.align(Alignment.CenterHorizontally),
+        text = &quot;Fancy indicator tab ${state + 1} selected&quot;,
+        style = MaterialTheme.typography.body1
+    )
+}</pre>
+      <p>You may also want to use a custom transition, to allow you to dynamically change the appearance of the indicator as it animates between tabs, such as changing its color or size. <code><a href="/reference/kotlin/dokkatest/sampleAnnotation/dokkatest/samples/package-summary.html#indicator()">indicator</a></code> is stacked on top of the entire TabRow, so you just need to provide a custom transition that animates the offset of the indicator from the start of the TabRow. For example, take the following example that uses a transition to animate the offset, width, and color of the same FancyIndicator from before, also adding a physics based 'spring' effect to the indicator in the direction of motion:</p>
+      <pre class="prettyprint">
+import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.animateDp
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.updateTransition
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
+
+val colors = listOf(Color.Yellow, Color.Red, Color.Green)
+val transition = updateTransition(selectedTabIndex)
+val indicatorStart by transition.animateDp(
+    transitionSpec = {
+        // Handle directionality here, if we are moving to the right, we
+        // want the right side of the indicator to move faster, if we are
+        // moving to the left, we want the left side to move faster.
+        if (initialState &lt; targetState) {
+            spring(dampingRatio = 1f, stiffness = 50f)
+        } else {
+            spring(dampingRatio = 1f, stiffness = 1000f)
+        }
+    }
+) {
+    tabPositions[it].left
+}
+
+val indicatorEnd by transition.animateDp(
+    transitionSpec = {
+        // Handle directionality here, if we are moving to the right, we
+        // want the right side of the indicator to move faster, if we are
+        // moving to the left, we want the left side to move faster.
+        if (initialState &lt; targetState) {
+            spring(dampingRatio = 1f, stiffness = 1000f)
+        } else {
+            spring(dampingRatio = 1f, stiffness = 50f)
+        }
+    }
+) {
+    tabPositions[it].right
+}
+
+val indicatorColor by transition.animateColor {
+    colors[it % colors.size]
+}
+
+FancyIndicator(
+    // Pass the current color to the indicator
+    indicatorColor,
+    modifier = Modifier
+        // Fill up the entire TabRow, and place the indicator at the start
+        .fillMaxSize()
+        .wrapContentSize(align = Alignment.BottomStart)
+        // Apply an offset from the start to correctly position the indicator around the tab
+        .offset(x = indicatorStart)
+        // Make the width of the indicator follow the animated width as we move between tabs
+        .width(indicatorEnd - indicatorStart)
+)</pre>
+      <p>We can now just pass this indicator directly to TabRow:</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Tab
+import androidx.compose.material.TabRow
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+var state by remember { mutableStateOf(0) }
+val titles = listOf(&quot;TAB 1&quot;, &quot;TAB 2&quot;, &quot;TAB 3&quot;)
+
+val indicator = @Composable { tabPositions: List&lt;TabPosition&gt; -&gt;
+    FancyAnimatedIndicator(tabPositions = tabPositions, selectedTabIndex = state)
+}
+
+Column {
+    TabRow(
+        selectedTabIndex = state,
+        indicator = indicator
+    ) {
+        titles.forEachIndexed { index, title -&gt;
+            Tab(
+                text = { Text(title) },
+                selected = state == index,
+                onClick = { state = index }
+            )
+        }
+    }
+    Text(
+        modifier = Modifier.align(Alignment.CenterHorizontally),
+        text = &quot;Fancy transition tab ${state + 1} selected&quot;,
+        style = MaterialTheme.typography.body1
+    )
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>selectedTabIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td width="100%">
+                <p>the index of the currently selected tab</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>modifier:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> = &quot;Modifier&quot;</code></td>
+              <td width="100%">
+                <p>optional <a href="[Modifier]">Modifier</a> for this TabRow</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>backgroundColor:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> = &quot;MaterialTheme.colors.primarySurface&quot;</code></td>
+              <td width="100%">
+                <p>The background color for the TabRow. Use <a href="[Color.Transparent]">Color.Transparent</a> to have no color.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>contentColor:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> = &quot;contentColorFor(backgroundColor)&quot;</code></td>
+              <td width="100%">
+                <p>The preferred content color provided by this TabRow to its children. Defaults to either the matching content color for <code><a href="/reference/kotlin/dokkatest/sampleAnnotation/dokkatest/samples/package-summary.html#backgroundColor()">backgroundColor</a></code>, or if <code><a href="/reference/kotlin/dokkatest/sampleAnnotation/dokkatest/samples/package-summary.html#backgroundColor()">backgroundColor</a></code> is not a color from the theme, this will keep the same value set above this TabRow.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>indicator:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>&gt;)&nbsp;-&gt;&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = { tabPositions -&gt;
+        listOf(
+            listOf(tabPositions[selectedTabIndex])
+        )
+    }</code></td>
+              <td width="100%">
+                <p>the indicator that represents which tab is currently selected. By default this will be a <a href="[TabRowDefaults.Indicator]">TabRowDefaults.Indicator</a>, using a <a href="[TabRowDefaults.tabIndicatorOffset]">TabRowDefaults.tabIndicatorOffset</a> modifier to animate its position. Note that this indicator will be forced to fill up the entire TabRow, so you should use <a href="[TabRowDefaults.tabIndicatorOffset]">TabRowDefaults.tabIndicatorOffset</a> or similar to animate the actual drawn indicator inside this space, and provide an offset from the start.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>divider:&nbsp;()&nbsp;-&gt;&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = {
+        listOf&lt;Unit&gt;()
+    }</code></td>
+              <td width="100%">
+                <p>the divider displayed at the bottom of the TabRow. This provides a layer of separation between the TabRow and the content displayed underneath.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>tabs:&nbsp;()&nbsp;-&gt;&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td width="100%">
+                <p>the tabs inside this TabRow. Typically this will be multiple <a href="[Tab]">Tab</a>s. Each element inside this lambda will be measured and placed evenly across the TabRow, each taking up equal space.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

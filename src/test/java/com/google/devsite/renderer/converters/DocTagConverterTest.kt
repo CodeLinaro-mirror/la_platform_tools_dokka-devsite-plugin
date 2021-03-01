@@ -245,7 +245,7 @@ internal class DocTagConverterTest(
         """.render().documentation()
 
         val description = documentation.last() as DefaultDescription
-        val img = description.data.root.children.first().children.item() as Img
+        val img = description.data.components.first().children.item() as Img
 
         assertThat(img.params["href"]).isEqualTo("/path/to/img.jpg")
         assertThat(img.params["alt"]).isEqualTo("Alt text")
@@ -524,7 +524,7 @@ internal class DocTagConverterTest(
         """.render(java = true).documentation().first() as Description
 
         for (documentation in listOf(documentationK, documentationJ)) {
-            assertThat("thefirst" in documentation.data.root.toString()).isFalse()
+            assertThat("thefirst" in documentation.text()).isFalse()
         }
     }
 
@@ -549,11 +549,11 @@ internal class DocTagConverterTest(
     |            .onCreateView(parent, name, context, attrs);
     |}
         """.render(java = true)
-        val paramDoc = (module.documentation(doc = {
+        val paramDocText = (module.documentation(doc = {
             this.function()!!.parameters.single { it.name == "parent" }
-        }).first() as Description).data.root
+        }).first() as Description).text()
 
-        assertThat("placedin" in paramDoc.toString()).isFalse()
+        assertThat("placedin" in paramDocText).isFalse()
     }
 
     @Test
@@ -572,13 +572,13 @@ internal class DocTagConverterTest(
             |public void foo(){}
         """.render(java = true)
         val doc = documentation.documentation()
-        val function = doc.first() as DefaultDescription
-        assertThat(function.data.deprecation).isNotNull()
+        val functionDesc = doc.first() as DefaultDescription
+        assertThat(functionDesc.data.deprecation).isNotNull()
         // Checking the root for LastLine is somewhat testing Dokka
         // but this was broken in a previous version
-        assertThat(function.data.root.toString()).contains("LastLine")
-        assertThat(function.data.root.toString()).contains("Instead of using")
-        assertThat(function.data.root.children.single().children.size).isEqualTo(7)
+        assertThat(functionDesc.text()).contains("LastLine")
+        assertThat(functionDesc.text()).contains("Instead of using")
+        assertThat(functionDesc.data.components.single().children.size).isEqualTo(7)
     }
 
     @Test
@@ -625,7 +625,7 @@ internal class DocTagConverterTest(
             as SummaryList
         val throwsLeft = throwsSummary.item().data.title as Raw
         val throwsRight = ((throwsSummary.item().data.description as Description)
-            .data.root.children.first().children.first() as Text)
+            .data.components.first().children.first() as Text)
 
         assertThat(throwsLeft.data.text).contains("IllegalStateException")
         assertThat(throwsRight.body).isEqualTo("if it fails")
@@ -642,7 +642,7 @@ internal class DocTagConverterTest(
             as SummaryList
         val throwsLeft = throwsSummary.item().data.title as Raw
         val throwsRight = ((throwsSummary.item().data.description as Description)
-            .data.root.children.first().children.first() as Text)
+            .data.components.first().children.first() as Text)
 
         assertThat(throwsLeft.data.text).isEqualTo("java.lang.IllegalStateException")
         assertThat(throwsRight.body).isEqualTo("if it fails")

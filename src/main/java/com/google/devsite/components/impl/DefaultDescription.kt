@@ -135,36 +135,25 @@ internal class DefaultDescription(
 ) : Description {
     override fun render(html: FlowContent) = html.run {
         if (data.deprecation == null) {
-            renderContent()
+            if (data.summary) {
+                renderTags(data.components.take(1), State())
+            } else {
+                renderTags(data.components, State())
+            }
         } else {
             if (data.summary) {
-
                 // Displays the deprecation message in a table cell (e.g. class summary table)
                 p {
                     strong { +data.deprecation }
                     +" "
-                    renderContent()
+                    renderTags(data.components.take(1), State())
                 }
             } else {
-
                 // Displays the deprecation message in notice box with "caution" styling
                 aside("caution") {
                     strong { +data.deprecation }
                     br()
-                    renderContent()
-                }
-            }
-        }
-    }
-
-    // The actual code to render a description; should be called after deprecation is handled
-    private fun FlowContent.renderContent() {
-        renderTags(data.root.children, State())
-        renderTags(listOfNotNull(data.selfTag), State())
-        if (!data.summary) {
-            data.samples.forEach {
-                pre("prettyprint") {
-                    +it
+                    renderTags(data.components, State())
                 }
             }
         }

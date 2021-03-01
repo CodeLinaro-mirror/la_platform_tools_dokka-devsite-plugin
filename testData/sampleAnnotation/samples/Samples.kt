@@ -17,6 +17,8 @@
 package dokkatest.sampleAnnotation.samples
 
 import androidx.annotation.Sampled
+import androidx.notARealLibrary.Thingy1
+import androidx.anotherFakeLibrary.FooFooFoo
 
 @Sampled
 fun FunctionContainingClassSample() {
@@ -28,5 +30,13 @@ fun FunctionContainingClassSample() {
         override fun toString(): String {
             return "ahahahaha"
         }
+
+        val weAreUsingThingy1 = Thingy1()
+
     }
+}
+
+@Sampled
+fun AnotherSampleInTheSameFile() {
+    val weAreUsingFooFooFoo by lazy { FooFooFoo() }
 }

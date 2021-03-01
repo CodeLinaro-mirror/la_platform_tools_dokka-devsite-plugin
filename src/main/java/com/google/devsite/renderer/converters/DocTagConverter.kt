@@ -49,6 +49,7 @@ import org.jetbrains.dokka.model.StringValue
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.WithGenerics
 import org.jetbrains.dokka.model.doc.Author
+import org.jetbrains.dokka.model.doc.CodeBlock
 import org.jetbrains.dokka.model.doc.Constructor
 import org.jetbrains.dokka.model.doc.CustomTagWrapper
 import org.jetbrains.dokka.model.doc.Deprecated
@@ -315,47 +316,53 @@ internal class DocTagConverter(
      * Also applies to @param documentation that should become a description, i.e. property params
      */
     private fun Documentable.getDescription(summary: Boolean): DescriptionComponent {
-        val normalDescription = find<Description>()
-        val selfTag = tags().filter { (it as? NamedTagWrapper)?.name == name }.strictSingleOrNull()
-        // There can be multiple tags like this, but they are all duplicates produced upstream
+        val components = mutableListOf<DocTag>()
+        tags().forEach {
+            when (it) {
+                is Description -> components.addAll(it.children)
+                is Sample -> {
+                    val dri = it.name
 
-        val samples = tags().filterIsInstance<Sample>().map { tag ->
-            val dri = tag.name
+                    // TODO: fix this to allow KMP to work. Currently asserts single-platform. b/181224204
+                    val sourceSet = sourceSets.single()
 
-            // TODO: fix this to allow KMP to work. Currently asserts single-platform. b/181224204
-            val sourceSet = sourceSets.single()
+                    val facade = analysisMap[sourceSet]?.facade
+                        ?: throw RuntimeException("Cannot resolve facade: ${sourceSet.sourceSetID}")
+                    val psiElement = fqNameToPsiElement(facade, dri)
+                        ?: throw RuntimeException("Cannot find PsiElement corresponding to $dri")
 
-            val facade = analysisMap[sourceSet]?.facade
-                ?: throw RuntimeException("Cannot resolve facade for ${sourceSet.sourceSetID}")
-            val psiElement = fqNameToPsiElement(facade, dri)
-                ?: throw RuntimeException("Cannot find PsiElement corresponding to $dri")
+                    val imports = processImports(psiElement)
+                    val body = processBody(psiElement)
 
-            val imports = processImports(psiElement)
-            val body = processBody(psiElement)
-
-            imports + body
+                    components.add(CodeBlock(listOf(Text(imports + body))))
+                    components.addAll(it.children)
+                }
+                is NamedTagWrapper -> if (it.name == name) components.add(it.root)
+            }
         }
-
-        return if (normalDescription == null && selfTag == null) UndocumentedSymbolDescription()
-        else if (normalDescription == null) description(selfTag!!, summary)
-        else description(normalDescription, summary, null, selfTag?.root, samples)
+        if (components.isEmpty()) return UndocumentedSymbolDescription()
+        return description(components, summary, null)
     }
 
     private fun description(
-        tag: TagWrapper,
+        soleComponent: TagWrapper,
         summary: Boolean = false,
-        deprecation: String? = null,
-        selfTag: DocTag? = null,
-        samples: List<String> = emptyList()
+        deprecation: String? = null
+    ): DescriptionComponent {
+        return description(soleComponent.children, summary, deprecation)
+    }
+
+    private fun description(
+        components: List<DocTag> = emptyList(),
+        summary: Boolean = false,
+        deprecation: String? = null
     ): DescriptionComponent {
         return DefaultDescription(
             DescriptionComponent.Params(
                 pathProvider,
-                tag.root,
+                components,
                 summary,
-                deprecation,
-                selfTag,
-                samples
+                deprecation
             )
         )
     }
@@ -367,7 +374,7 @@ internal class DocTagConverter(
         annotations: List<Annotations.Annotation>
     ): DescriptionComponent? {
         val deprecation = findDeprecation(documentable, annotations) ?: return null
-        return description(deprecation, summary, deprecation = documentable.deprecationText())
+        return description(deprecation.children, summary, documentable.deprecationText())
     }
 
     /**

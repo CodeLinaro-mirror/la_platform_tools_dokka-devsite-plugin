@@ -31,12 +31,12 @@ import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
+import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.renderer.converters.testing.title
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DModule
-import org.jetbrains.dokka.model.doc.Text
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -400,26 +400,26 @@ internal class ClasslikeDocumentableConverterTest(
             val classlike = page.content<Classlike>()
             val signature = classlike.data.signature.data
             val description = (classlike.data.description.first() as Description)
-            val descriptionText = description.data.root.children.first().children.first() as Text
 
             val enumTable = classlike.data.symbolTypes.first {
-                (it.first as? SummaryList)?.title() == "Enum Values" }.first.items(3) as List
+                (it.first as? SummaryList)?.title() == "Enum Values"
+            }.first.items(3) as List
             val enumOne = enumTable[0].data
             val enumTwo = enumTable[1].data
             val enumThree = enumTable[2].data
 
             assertThat(signature.type).isEqualTo("enum")
-            assertThat(descriptionText.body).isEqualTo("class level docs")
+            assertThat(description.text()).isEqualTo("class level docs")
 
             assertThat((enumOne.title as Raw).data.text).contains("APPEND")
-            assertThat((enumOne.description as Description).data.root.toString())
+            assertThat((enumOne.description as Description).text())
                 .contains("Load at the end.")
             assertThat((enumTwo.title as Raw).data.text).contains("PREPEND")
-            assertThat((enumTwo.description as Description).data.root.toString())
+            assertThat((enumTwo.description as Description).text())
                 .contains("Load at the start")
             assertThat((enumThree.title as Raw).data.text).contains("REFRESH")
-            if (page == pageK) { // TODO: javadoc gets merged to "ofinvalidation". b/181656409
-                assertThat((enumThree.description as Description).data.root.toString())
+            if (page == pageK) { // TODO: fix. Result in java has "result ofinvalidation"
+                assertThat((enumThree.description as Description).text())
                     .contains("result of invalidation")
             }
         }

@@ -21,6 +21,10 @@ package dokkatest.sampleAnnotation
  * top-level extension property docs
  *
  * @sample dokkatest.sampleAnnotation.samples.FunctionContainingClassSample
+ *
+ * and after some text, we have another sample
+ *
+ * @sample dokkatest.sampleAnnotation.samples.AnotherSampleInTheSameFile
  */
 val List<String>.topLevelExtensionProperty get() = Pair(10f, 20f)
 
