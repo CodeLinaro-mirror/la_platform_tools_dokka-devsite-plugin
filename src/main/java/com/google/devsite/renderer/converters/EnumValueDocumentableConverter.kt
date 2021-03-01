@@ -27,6 +27,7 @@ import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.DEnumEntry
+import org.jetbrains.dokka.model.GenericTypeConstructor
 
 /** Converts documentable DEnumEntrys into EnumValue components. */
 internal class EnumValueDocumentableConverter(
@@ -55,7 +56,9 @@ internal class EnumValueDocumentableConverter(
             // Unfortunately, this is not stored straightforwardly in Jetbrains' architecture
             // So we know that compareTo is T.compareTo(T other), so we can get the classlike of the
             // DEnumEntry by looking at the parameter type of its compareTo method
-            enumValue.functions.first { it.name == "compareTo" }.parameters.single().type
+            enumValue.functions.firstOrNull() { it.name == "compareTo" }?.parameters?.single()?.type
+                // TODO: this fallback method for java does not support complex types b/181562639
+                ?: GenericTypeConstructor(enumValue.dri, emptyList())
         )
         return DefaultSymbolDetail(
             SymbolDetail.Params(

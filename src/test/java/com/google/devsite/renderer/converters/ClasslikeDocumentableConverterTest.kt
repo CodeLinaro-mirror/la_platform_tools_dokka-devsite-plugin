@@ -350,8 +350,8 @@ internal class ClasslikeDocumentableConverterTest(
     }
 
     @Test
-    fun `Enum class is rendered and has enum values`() {
-        val page = """
+    fun `Enum class is rendered and has enum values with types in 4x Kotlin and Java`() {
+        val pageK = """
             |/**
             | * class level docs
             | */
@@ -373,34 +373,60 @@ internal class ClasslikeDocumentableConverterTest(
             |    fun foo()
             |}
         """.render().page(name = "AnEnumType")
+        val pageJ = """
+            |/**
+            | * class level docs
+            | */
+            |public enum AnEnumType {
+            |    /**
+            |     * content being refreshed, which can be a result of
+            |     * invalidation, refresh that may contain content updates, or the initial load.
+            |     */
+            |    REFRESH,
+            |    /**
+            |     * Load at the start
+            |     */
+            |    PREPEND,
+            |    /**
+            |     * Load at the end.
+            |     */
+            |    APPEND
+            |
+            |    fun foo()
+            |}
+        """.render(java = true).page(name = "AnEnumType")
 
-        val classlike = page.content<Classlike>()
-        val signature = classlike.data.signature.data
-        val description = (classlike.data.description.first() as Description)
-        val descriptionText = description.data.root.children.first().children.first() as Text
+        for (page in listOf(pageK, pageJ)) {
+            val classlike = page.content<Classlike>()
+            val signature = classlike.data.signature.data
+            val description = (classlike.data.description.first() as Description)
+            val descriptionText = description.data.root.children.first().children.first() as Text
 
-        val enumTable = classlike.data.symbolTypes.first {
-            (it.first as? SummaryList)?.title() == "Enum Values" }.first.items(3) as List
-        val enumOne = enumTable[0].data
-        val enumTwo = enumTable[1].data
-        val enumThree = enumTable[2].data
+            val enumTable = classlike.data.symbolTypes.first {
+                (it.first as? SummaryList)?.title() == "Enum Values" }.first.items(3) as List
+            val enumOne = enumTable[0].data
+            val enumTwo = enumTable[1].data
+            val enumThree = enumTable[2].data
 
-        assertThat(signature.type).isEqualTo("enum")
-        assertThat(descriptionText.body).isEqualTo("class level docs")
+            assertThat(signature.type).isEqualTo("enum")
+            assertThat(descriptionText.body).isEqualTo("class level docs")
 
-        assertThat((enumOne.title as Raw).data.text).contains("APPEND")
-        assertThat((enumOne.description as Description).data.root.toString())
-            .contains("Load at the end.")
-        assertThat((enumTwo.title as Raw).data.text).contains("PREPEND")
-        assertThat((enumTwo.description as Description).data.root.toString())
-            .contains("Load at the start")
-        assertThat((enumThree.title as Raw).data.text).contains("REFRESH")
-        assertThat((enumThree.description as Description).data.root.toString())
-            .contains("result of invalidation")
+            assertThat((enumOne.title as Raw).data.text).contains("APPEND")
+            assertThat((enumOne.description as Description).data.root.toString())
+                .contains("Load at the end.")
+            assertThat((enumTwo.title as Raw).data.text).contains("PREPEND")
+            assertThat((enumTwo.description as Description).data.root.toString())
+                .contains("Load at the start")
+            assertThat((enumThree.title as Raw).data.text).contains("REFRESH")
+            if (page == pageK) { // TODO: javadoc gets merged to "ofinvalidation". b/181656409
+                assertThat((enumThree.description as Description).data.root.toString())
+                    .contains("result of invalidation")
+            }
+        }
     }
 
     private fun DModule.page(name: String = "Foo"): DevsitePage {
-        val classlike = packages.single().classlikes.single { it.name() == name }
+        val classlike = explicitClasslike(name)!!
         val holder = runBlocking { DocumentablesHolder(this@page, this) }
         val converter = ClasslikeDocumentableConverter(language, classlike, pathProvider(), holder)
         return runBlocking { converter.classlike() }

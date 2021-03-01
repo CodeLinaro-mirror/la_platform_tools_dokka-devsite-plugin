@@ -56,6 +56,11 @@ internal abstract class ConverterTestBase(
     protected fun DModule.classlike() = packages.single().classlikes
         .firstOrNull { it.name != "Nullable" }
 
+    protected fun DModule.explicitClasslike(name: String? = null) =
+        packages.single().classlikes.singleOrNull { it.name == name }
+            ?: classlike()?.classlikes?.singleOrNull { it.name == name }
+            ?: classlike()
+
     protected fun DModule.function(name: String? = null) =
         packages.single().functions.singleOrNull { it.name == name && !it.dri.isFromBaseClass() }
             ?: classlike()?.functions?.singleOrNull { it.name == name && !it.dri.isFromBaseClass() }
