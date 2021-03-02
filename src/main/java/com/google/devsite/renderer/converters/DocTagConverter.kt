@@ -46,6 +46,7 @@ import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DTypeParameter
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.StringValue
+import org.jetbrains.dokka.model.WithChildren
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.WithGenerics
 import org.jetbrains.dokka.model.doc.Author
@@ -71,6 +72,7 @@ import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.model.doc.Throws
 import org.jetbrains.dokka.model.doc.Version
 import org.jetbrains.dokka.utilities.cast
+import java.io.File
 import com.google.devsite.components.Description as DescriptionComponent
 
 /** Extracts the hand written documentation from documentables into the correct components. */
@@ -319,7 +321,12 @@ internal class DocTagConverter(
         val components = mutableListOf<DocTag>()
         tags().forEach {
             when (it) {
-                is Description -> components.addAll(it.children)
+                is Description -> {
+                    it.children.forEach { child ->
+                        recursivelyConsiderPsAndTextsForJavaSamples(
+                            child, components, this.sourceSets.single().samples)
+                    }
+                }
                 is Sample -> {
                     val dri = it.name
 
@@ -342,6 +349,37 @@ internal class DocTagConverter(
         }
         if (components.isEmpty()) return UndocumentedSymbolDescription()
         return description(components, summary, null)
+    }
+
+    private fun recursivelyConsiderPsAndTextsForJavaSamples(
+        root: DocTag,
+        components: MutableList<DocTag>,
+        samples: Set<File>
+    ) {
+        if ("@sample" !in root.text()) components.add(root)
+        else {
+            when (root) {
+                is Text -> {
+                    val parts = root.body.split("{", "}")
+                    for (part in parts) {
+                        if ("@sample" !in part) {
+                            if (part.isNotBlank()) components.add(Text(part.trim()))
+                        } else components.add(convertTextToJavaSample(Text(part.trim()), samples))
+                    }
+                }
+                is P -> {
+                    for (child in root.children) {
+                        recursivelyConsiderPsAndTextsForJavaSamples(child, components, samples)
+                    }
+                }
+                // Having non-text components on the same line as a samples is not supported
+                else -> throw RuntimeException("considered invalid type ${root::class} for sample")
+            }
+        }
+    }
+
+    private fun WithChildren<DocTag>.text(): String {
+        return if (this is Text) this.body else children.joinToString(" ") { it.text() }
     }
 
     private fun description(

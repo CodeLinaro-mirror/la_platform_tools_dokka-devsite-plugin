@@ -22,6 +22,8 @@ import org.jetbrains.dokka.analysis.AnalysisEnvironment
 import org.jetbrains.dokka.analysis.DokkaMessageCollector
 import org.jetbrains.dokka.analysis.DokkaResolutionFacade
 import org.jetbrains.dokka.analysis.EnvironmentAndFacade
+import org.jetbrains.dokka.model.doc.CodeBlock
+import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.kotlin.idea.kdoc.resolveKDocSampleLink
 import org.jetbrains.kotlin.name.FqName
@@ -37,6 +39,7 @@ import org.jetbrains.kotlin.resolve.DescriptorToSourceUtils
 import org.jetbrains.kotlin.resolve.ImportPath
 import org.jetbrains.kotlin.utils.PathUtil
 import org.jetbrains.kotlin.utils.addIfNotNull
+import java.io.File
 
 /**
  * This invokes the EnvironmentAndFacade object to turn a DRI
@@ -164,3 +167,48 @@ internal fun setUpAnalysis(context: DokkaContext) = context.configuration.source
         EnvironmentAndFacade(environment, facade)
     }
 }.toMap()
+
+internal fun convertTextToJavaSample(block: Text, samples: Set<File>): CodeBlock {
+    val sampleLine = block.body
+        .trim().removePrefix("{").removeSuffix("}")
+        // Upstream inserts "*"s on line breaks within the { }
+        .split(" ").filter { it.isNotEmpty() && it != "*" }
+    assert(sampleLine[0] == "@sample")
+    // Note that this ignores most of the path, in favor of only using
+    // the name, and using the sourceSet's declared samples
+    val fileName = sampleLine[1].split("/").last()
+    val whatSamples = sampleLine[2]
+    val sampleFiles = samples.allFiles()
+    val resolvedFile = sampleFiles.single { it.name == fileName }
+    val sampleText = extractCodeBlockFromFile(resolvedFile, whatSamples)
+    return CodeBlock(listOf(Text(sampleText)))
+}
+
+private fun Iterable<File>.allFiles() = this.map { it.allFiles() }.flatten()
+private fun File.allFiles(): List<File> = if (this.isFile) listOf(this) else
+    listFiles()!!.asIterable().allFiles()
+
+/**
+ * Extracts sample code from a file (probably a java or xml file).
+ * Takes all lines between BEGIN_INCLUDE(block_to_take) and END_INCLUDE(block_to_take)
+ * Reduces all indents to that of the first line
+ */
+internal fun extractCodeBlockFromFile(sampleFile: File, blockToTake: String): String {
+    var result = "\n"
+    var inBlock = false
+    var indentSize = -1
+    sampleFile.readLines().forEach { line ->
+        if ("END_INCLUDE($blockToTake)" in line) return result
+        if (inBlock) {
+            if (indentSize == -1) indentSize = indentSize(line)
+            result += line.removePrefix(" ".repeat(indentSize)) + "\n"
+        }
+        if ("BEGIN_INCLUDE($blockToTake)" in line) inBlock = true
+    }
+    throw RuntimeException("No END_INCLUDE($blockToTake) in ${sampleFile.name} sample!")
+}
+
+/**
+ * The number of spaces before the first non-space character on this line
+ */
+private fun indentSize(it: String) = (it.length - it.trimStart().length).coerceAtLeast(0)

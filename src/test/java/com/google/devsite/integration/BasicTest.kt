@@ -40,7 +40,7 @@ class BasicTest : IntegrationTestBase() {
 
     @Test
     fun `Validate prod AndroidX fragment lib`() {
-        verifyDirectory("fragment")
+        verifyDirectory("fragment", sampleLocations = listOf("samples"))
     }
 
     @Test

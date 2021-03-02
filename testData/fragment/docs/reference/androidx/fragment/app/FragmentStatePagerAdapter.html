@@ -20,9 +20,180 @@
     <p>This version of the pager is more useful when there are a large number of pages, working more like a list view. When pages are not visible to the user, their entire fragment may be destroyed, only keeping the saved state of that fragment. This allows the pager to hold on to much less memory associated with each visited page as compared to <code><a href="/reference/androidx/fragment/app/FragmentPagerAdapter.html">FragmentPagerAdapter</a></code> at the cost of potentially more overhead when switching between pages. </p>
     <p>When using FragmentPagerAdapter the host ViewPager must have a valid ID set.</p>
     <p>Subclasses only need to implement <code><a href="/reference/androidx/fragment/app/FragmentStatePagerAdapter.html#getItem(int)">getItem</a></code> and getCount to have a working adapter. </p>
-    <p>Here is an example implementation of a pager containing fragments of lists: {@sample frameworks/support/samples/Support4Demos/src/main/java/com/example/android/supportv4/app/FragmentStatePagerSupport.java * complete} </p>
-    <p>The <code>R.layout.fragment_pager</code> resource of the top-level fragment is: {@sample frameworks/support/samples/Support4Demos/src/main/res/layout/fragment_pager.xml * complete} </p>
-    <p>The <code>R.layout.fragment_pager_list</code> resource containing each individual fragment's layout is: {@sample frameworks/support/samples/Support4Demos/src/main/res/layout/fragment_pager_list.xml * complete}</p>
+Here is an example implementation of a pager containing fragments of lists:
+    <pre class="prettyprint">
+public class FragmentStatePagerSupport extends FragmentActivity {
+    static final int NUM_ITEMS = 10;
+
+    MyAdapter mAdapter;
+
+    ViewPager mPager;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_pager);
+
+        mAdapter = new MyAdapter(getSupportFragmentManager());
+
+        mPager = (ViewPager)findViewById(R.id.pager);
+        mPager.setAdapter(mAdapter);
+
+        // Watch for button clicks.
+        Button button = (Button)findViewById(R.id.goto_first);
+        button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPager.setCurrentItem(0);
+            }
+        });
+        button = (Button)findViewById(R.id.goto_last);
+        button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPager.setCurrentItem(NUM_ITEMS-1);
+            }
+        });
+    }
+
+    public static class MyAdapter extends FragmentStatePagerAdapter {
+        public MyAdapter(FragmentManager fm) {
+            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        }
+
+        @Override
+        public int getCount() {
+            return NUM_ITEMS;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return ArrayListFragment.newInstance(position);
+        }
+    }
+
+    public static class ArrayListFragment extends ListFragment {
+        int mNum;
+
+        /**
+         * Create a new instance of CountingFragment, providing &quot;num&quot;
+         * as an argument.
+         */
+        static ArrayListFragment newInstance(int num) {
+            ArrayListFragment f = new ArrayListFragment();
+
+            // Supply num input as an argument.
+            Bundle args = new Bundle();
+            args.putInt(&quot;num&quot;, num);
+            f.setArguments(args);
+
+            return f;
+        }
+
+        /**
+         * When creating, retrieve this instance's number from its arguments.
+         */
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            mNum = getArguments() != null ? getArguments().getInt(&quot;num&quot;) : 1;
+        }
+
+        /**
+         * The Fragment's UI is just a simple text view showing its
+         * instance number.
+         */
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View v = inflater.inflate(R.layout.fragment_pager_list, container, false);
+            View tv = v.findViewById(R.id.text);
+            ((TextView)tv).setText(&quot;Fragment #&quot; + mNum);
+            return v;
+        }
+
+        @Override
+        public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            setListAdapter(new ArrayAdapter&lt;String&gt;(getActivity(),
+                    android.R.layout.simple_list_item_1, Cheeses.sCheeseStrings));
+        }
+
+        @Override
+        public void onListItemClick(ListView l, View v, int position, long id) {
+            Log.i(&quot;FragmentList&quot;, &quot;Item clicked: &quot; + id);
+        }
+    }
+}
+</pre>
+The <code>R.layout.fragment_pager</code>resource of the top-level fragment is:
+    <pre class="prettyprint">
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+              android:orientation=&quot;vertical&quot; android:padding=&quot;4dip&quot;
+              android:gravity=&quot;center_horizontal&quot;
+              android:layout_width=&quot;match_parent&quot; android:layout_height=&quot;match_parent&quot;&gt;
+
+    &lt;androidx.viewpager.widget.ViewPager
+            android:id=&quot;@+id/pager&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;0px&quot;
+            android:layout_weight=&quot;1&quot;&gt;
+    &lt;/androidx.viewpager.widget.ViewPager&gt;
+
+    &lt;LinearLayout android:orientation=&quot;horizontal&quot;
+                  android:gravity=&quot;center&quot; android:measureWithLargestChild=&quot;true&quot;
+                  android:layout_width=&quot;match_parent&quot; android:layout_height=&quot;wrap_content&quot;
+                  android:layout_weight=&quot;0&quot;&gt;
+        &lt;Button android:id=&quot;@+id/goto_first&quot;
+                android:layout_width=&quot;wrap_content&quot; android:layout_height=&quot;wrap_content&quot;
+                android:text=&quot;@string/first&quot;&gt;
+        &lt;/Button&gt;
+        &lt;Button android:id=&quot;@+id/goto_last&quot;
+                android:layout_width=&quot;wrap_content&quot; android:layout_height=&quot;wrap_content&quot;
+                android:text=&quot;@string/last&quot;&gt;
+        &lt;/Button&gt;
+    &lt;/LinearLayout&gt;
+&lt;/LinearLayout&gt;
+</pre>
+The <code>R.layout.fragment_pager_list</code>resource containing each individual fragment's layout is:
+    <pre class="prettyprint">
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+              android:orientation=&quot;vertical&quot;
+              android:layout_width=&quot;match_parent&quot;
+              android:layout_height=&quot;match_parent&quot;
+              android:background=&quot;@android:drawable/gallery_thumb&quot;&gt;
+
+    &lt;TextView android:id=&quot;@+id/text&quot;
+              android:layout_width=&quot;match_parent&quot; android:layout_height=&quot;wrap_content&quot;
+              android:gravity=&quot;center_vertical|center_horizontal&quot;
+              android:textAppearance=&quot;?android:attr/textAppearanceMedium&quot;
+              android:text=&quot;@string/hello_world&quot;/&gt;
+
+    &lt;!-- The frame layout is here since we will be showing either
+    the empty view or the list view.  --&gt;
+    &lt;FrameLayout
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;0dip&quot;
+            android:layout_weight=&quot;1&quot; &gt;
+        &lt;!-- Here is the list. Since we are using a ListActivity, we
+             have to call it &quot;@android:id/list&quot; so ListActivity will
+             find it --&gt;
+        &lt;ListView android:id=&quot;@android:id/list&quot;
+                  android:layout_width=&quot;match_parent&quot;
+                  android:layout_height=&quot;match_parent&quot;
+                  android:drawSelectorOnTop=&quot;false&quot;/&gt;
+
+        &lt;!-- Here is the view to show if the list is empty --&gt;
+        &lt;TextView android:id=&quot;@android:id/empty&quot;
+                  android:layout_width=&quot;match_parent&quot;
+                  android:layout_height=&quot;match_parent&quot;
+                  android:textAppearance=&quot;?android:attr/textAppearanceMedium&quot;
+                  android:text=&quot;No items.&quot;/&gt;
+
+    &lt;/FrameLayout&gt;
+
+&lt;/LinearLayout&gt;
+</pre>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">

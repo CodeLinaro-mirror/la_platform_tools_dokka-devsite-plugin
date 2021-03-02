@@ -2344,13 +2344,99 @@ The first method where it is safe to access the view lifecycle is <code><a href=
       <p>Called when a fragment is being created as part of a view layout inflation, typically from setting the content view of an activity. This may be called immediately after the fragment is created from a <code><a href="/reference/androidx/fragment/app/FragmentContainerView.html">FragmentContainerView</a></code> in a layout file. Note this is <em>before</em>the fragment's <code><a href="/reference/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code> has been called; all you should do here is parse the attributes and save them away. </p>
       <p>This is called <em>the first time</em> the fragment is inflated. If it is being inflated into a new instance with saved state, this method will not be called a second time for the restored state fragment.</p>
       <p>Here is a typical implementation of a fragment that can take parameters both through attributes supplied here as well from <code><a href="/reference/androidx/fragment/app/Fragment.html#getArguments()">getArguments</a></code>:</p>
- {@sample frameworks/support/samples/Support4Demos/src/main/java/com/example/android/supportv4/app/FragmentArgumentsSupport.java * fragment} 
+      <pre class="prettyprint">
+public static class MyFragment extends Fragment {
+    CharSequence mLabel;
+
+    /**
+     * Create a new instance of MyFragment that will be initialized
+     * with the given arguments.
+     */
+    static MyFragment newInstance(CharSequence label) {
+        MyFragment f = new MyFragment();
+        Bundle b = new Bundle();
+        b.putCharSequence(&quot;label&quot;, label);
+        f.setArguments(b);
+        return f;
+    }
+
+    /**
+     * Parse attributes during inflation from a view hierarchy into the
+     * arguments we handle.
+     */
+    @Override
+    public void onInflate(@NonNull Context context, @NonNull AttributeSet attrs,
+                          @Nullable Bundle savedInstanceState) {
+        super.onInflate(context, attrs, savedInstanceState);
+
+        TypedArray a = context.obtainStyledAttributes(attrs,
+                R.styleable.FragmentArguments);
+        mLabel = a.getText(R.styleable.FragmentArguments_android_label);
+        a.recycle();
+    }
+
+    /**
+     * During creation, if arguments have been supplied to the fragment
+     * then parse those out.
+     */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle args = getArguments();
+        if (args != null) {
+            CharSequence label = args.getCharSequence(&quot;label&quot;);
+            if (label != null) {
+                mLabel = label;
+            }
+        }
+    }
+
+    /**
+     * Create the view for this fragment, using the arguments given to it.
+     */
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.hello_world, container, false);
+        View tv = v.findViewById(R.id.text);
+        ((TextView)tv).setText(mLabel != null ? mLabel : &quot;(no label)&quot;);
+        ViewCompat.setBackground(
+                tv, ContextCompat.getDrawable(getContext(), android.R.drawable.gallery_thumb));
+        return v;
+    }
+}
+</pre>
       <p>Note that parsing the XML attributes uses a &quot;styleable&quot; resource. The declaration for the styleable used here is:</p>
- {@sample frameworks/support/samples/Support4Demos/src/main/res/values/attrs.xml fragment_arguments} 
+      <pre class="prettyprint">
+&lt;declare-styleable name=&quot;FragmentArguments&quot;&gt;
+    &lt;attr name=&quot;android:label&quot; /&gt;
+&lt;/declare-styleable&gt;
+</pre>
       <p>The fragment can then be declared within its activity's content layout through a tag like this:</p>
- {@sample frameworks/support/samples/Support4Demos/src/main/res/layout/fragment_arguments_support.xml from_attributes} 
+      <pre class="prettyprint">
+&lt;androidx.fragment.app.FragmentContainerView
+        class=&quot;com.example.android.supportv4.app.FragmentArgumentsSupport$MyFragment&quot;
+        android:id=&quot;@+id/embedded&quot;
+        android:layout_width=&quot;0px&quot; android:layout_height=&quot;wrap_content&quot;
+        android:layout_weight=&quot;1&quot;
+        android:label=&quot;@string/fragment_arguments_embedded&quot; /&gt;
+</pre>
       <p>This fragment can also be created dynamically from arguments given at runtime in the arguments Bundle; here is an example of doing so at creation of the containing activity:</p>
- {@sample frameworks/support/samples/Support4Demos/src/main/java/com/example/android/supportv4/app/FragmentArgumentsSupport.java * create}
+      <pre class="prettyprint">
+@Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.fragment_arguments_support);
+
+    if (savedInstanceState == null) {
+        // First-time init; create fragment to embed in activity.
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment newFragment = MyFragment.newInstance(&quot;From Arguments&quot;);
+        ft.add(R.id.created, newFragment);
+        ft.commit();
+    }
+}
+</pre>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
