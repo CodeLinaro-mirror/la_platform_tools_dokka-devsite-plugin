@@ -73,11 +73,11 @@ internal class PropertyDocumentableConverterTest(
             |val foo: Int? = null
         """.render().summary().data.title as TypeSummary).data.type
         val paramJ = ("""
-            |@Nullable Integer foo = null
+            |@Nullable public Integer foo = null
         """.render(java = true).summary().data.title as TypeSummary).data.type
         val paramJ2 = ("""
             |@Nullable
-            |Integer foo = null
+            |public Integer foo = null
         """.render(java = true).summary().data.title as TypeSummary).data.type
 
         for (param in listOf(paramK, paramJ, paramJ2)) {
@@ -95,10 +95,11 @@ internal class PropertyDocumentableConverterTest(
             |val foo: Int? = null
         """.render().detail().data
         val detailsJ = """
-            |@Nullable Integer foo = null
+            |@Nullable public Integer foo = null
         """.render(java = true).detail().data
         val detailsJ2 = """
-            |@Nullable Integer foo = null
+            |@Nullable
+            |public Integer foo = null
         """.render(java = true).detail().data
 
         for (details in listOf(detailsK, detailsJ, detailsJ2)) {

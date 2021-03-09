@@ -381,22 +381,25 @@ internal class ParameterDocumentableConverterTest(
         assertThat(param.defaultValue).isNull()
     }
 
-    @Suppress("unused") // TODO: upstream dokka doesn't parse annotations on parameters, b/175612102
     @Test
     fun `Parameter summaries include annotations in 4x Kotlin and Java`() {
         val paramK = """
-            |fun foo(@Hello foo: Int) {}
+            |annotation class Stuff
+            |fun foo(@Stuff kotlinFoo: Int) {}
         """.render().param(forSummary = true).data
         val paramJ = """
-            |public void foo(@Hello int foo) {}
+            |@Target({PARAMETER})
+            |public @interface Stuff {
+            |}
+            |public void foo(@Stuff int javaFoo) {};
         """.render(java = true).param(forSummary = true).data
 
-        for (param in listOf(paramK/*, paramJ*/)) {
-            assertThat(param.annotations).isNotEmpty()
+        for (param in listOf(paramK, paramJ)) {
+            assertThat(param.annotations.size).isEqualTo(1)
+            assertThat(param.annotations.single().data.type.data.name).contains("Stuff")
         }
     }
 
-    @Suppress("unused") // TODO: upstream dokka doesn't parse annotations on parameters, b/175612102
     @Test
     fun `Parameter summaries include nullability information in 4x Kotlin and Java`() {
         val paramK = """
@@ -406,7 +409,7 @@ internal class ParameterDocumentableConverterTest(
             |public static void foo(@Nullable Integer foo) {}
         """.render(java = true).param(forSummary = true)
 
-        for (param in listOf(paramK/*, paramJ*/)) {
+        for (param in listOf(paramK, paramJ)) {
             kotlinOnly {
                 assertThat(param.data.annotations).isEmpty()
                 assertThat(param.nullable).isTrue()

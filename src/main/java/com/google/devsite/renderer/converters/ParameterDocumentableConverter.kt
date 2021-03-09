@@ -207,7 +207,7 @@ internal class ParameterDocumentableConverter(
         }
 
         is GenericTypeConstructor, is UpstreamTypeParameter, is PrimitiveJavaType,
-        is UnresolvedBound, Star, JavaObject, Void -> null
+        is UnresolvedBound, is JavaObject, Star, Void -> null
         is Nullable -> inner.receiver()
         is Variance<*> -> inner.receiver()
         is TypeAliased -> inner.receiver()
@@ -230,7 +230,7 @@ internal class ParameterDocumentableConverter(
         val generics: List<SymbolBase> = when (this) {
             is TypeConstructor -> projections.map { componentForProjection(it) }
             is UpstreamTypeParameter, is PrimitiveJavaType, is UnresolvedBound,
-            Star, Void, JavaObject -> emptyList()
+            is JavaObject, Star, Void -> emptyList()
             else -> error("Unknown bound: $this")
         }
 
@@ -267,7 +267,7 @@ internal class ParameterDocumentableConverter(
             Language.JAVA -> DefaultLink(Link.Params(name = "void", url = ""))
             Language.KOTLIN -> pathProvider.linkForReference(DRI("kotlin", "Unit"))
         }
-        JavaObject -> when (displayLanguage) {
+        is JavaObject -> when (displayLanguage) {
             Language.JAVA -> pathProvider.linkForReference(DRI("java.lang", "Object"))
             Language.KOTLIN -> pathProvider.linkForReference(DRI("kotlin", "Any"))
         }
@@ -297,7 +297,7 @@ internal class ParameterDocumentableConverter(
         is Variance<*> -> inner.isLambda()
         is TypeAliased -> inner.isLambda()
         is UpstreamTypeParameter, is PrimitiveJavaType,
-        is UnresolvedBound, Star, JavaObject, Void -> false
+        is UnresolvedBound, is JavaObject, Star, Void -> false
         else -> error("Unknown bound: $this of type ${this::class.java}")
     }
 

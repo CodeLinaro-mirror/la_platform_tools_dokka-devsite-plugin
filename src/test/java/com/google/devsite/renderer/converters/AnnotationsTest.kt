@@ -24,6 +24,8 @@ import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.Annotations.Annotation
 import org.jetbrains.dokka.model.DModule
+import org.jetbrains.dokka.model.Nullable
+import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.junit.Test
 import kotlin.Boolean
 import com.google.devsite.components.symbols.Annotation as AnnotationComponent
@@ -229,43 +231,43 @@ internal class AnnotationsTest : ConverterTestBase() {
         }
     }
 
-    // TODO: alter our representation so this test can be fully implemented.
-    /*
-    @Ignore // TODO: upstream doesn't parse java or kotlin type parameters annotations, b/175612102
     @Test
     fun `Type parameter type has annotation and value in 4x Kotlin and Java`() {
-        val annotationsK = """
+        val boundsKotlin = """
             |annotation class Hello(val bar: String)
-            |fun <T : @Hello("abc") @Hello(bar = "baz") String> foo(arg: String): List<T>
-        """.render().function()!!.generics.single().bounds.single().annotations()
-        val annotationsJ = """
+            |fun <T : @Hello("baz") String> foo(arg: String): List<T>
+        """.render().function()!!.generics.single().bounds.single() as WithExtraProperties<*>
+        val wrapper = """
             |@Retention(RetentionPolicy.RUNTIME)
-            |@Target(ElementType.TYPE_PARAMETER)
+            |@Target(ElementType.TYPE_USE)
             |public @interface Hello {
             |    public String bar() default "";
             |}
-            |public <T extends @Hello("abc") @Hello(bar = "baz") String> List<T> foo()
-        """.render(java = true).function()!!.generics.single().bounds.single().annotations()
+            |public <T extends @Hello(bar = "baz") String> List<T> foo() {
+            |    return null;
+            |}
+        """.render(java = true).function()!!.generics.single().bounds.single() as Nullable
+        val boundsJava = wrapper.inner as WithExtraProperties<*>
 
-        for (annotations in listOf(annotationsK/*, annotationsJ*/)) {
+        for (annotations in listOf(boundsKotlin.annotations(), boundsJava.annotations())) {
             val annotationOne = annotations.components().first()
             val parameterOne = annotationOne.data.parameters.item()
-            val annotationTwo = annotations.components().last()
-            val parameterTwo = annotationTwo.data.parameters.item()
 
-            if (annotations == annotationsK) assertThat(parameterOne.name).isEqualTo("bar")
-            else assertThat(parameterOne.name).isEqualTo("value")
-            assertThat(parameterOne.value).isEqualTo("\"abc\"")
-            assertThat(parameterTwo.name).isEqualTo("bar")
-            assertThat(parameterTwo.value).isEqualTo("\"baz\"")
+            assertThat(parameterOne.name).isEqualTo("bar")
+            assertThat(parameterOne.value).isEqualTo("\"baz\"")
         }
-    }*/
+    }
 
     @Test
     fun `Nullability annotation is kept and discarded in Java and Kotlin as appropriate`() {
         val annotationsJ = """
+            |/**
+            | * Stuff
+            | */
             |@Nullable
-            |public Unit foo()
+            |public String foo() {
+            |   return null;
+            |}
         """.render(java = true).functionAnnotations()
         val annotationsK = """
             |annotation class Nullable

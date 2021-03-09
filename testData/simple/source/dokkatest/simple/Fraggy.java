@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 
-class Fraggy {
+public class Fraggy {
 
     /**
      * (this is a real function, vastly simplified from the source in Fragment.java)

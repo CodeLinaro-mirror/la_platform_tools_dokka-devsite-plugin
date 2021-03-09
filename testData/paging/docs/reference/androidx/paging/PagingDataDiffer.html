@@ -208,7 +208,7 @@ lifecycleScope.launch {
             <tr>
               <td><code>Function1&lt;<a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
               <td width="100%">
-                <p>called whenever a new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is submitted and displayed. <code>true</code> is passed to the <code><a href="/reference/androidx/paging/PagingDataDiffer.html#listener()">listener</a></code> if the new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is empty, <code>false</code> otherwise.</p>
+                <p>called whenever a new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is submitted and displayed. <code>true</code> is passed to the <code><a href="/reference/androidx/paging/PagingDataDiffer.html#addDataRefreshListener(kotlin.Function1)">listener</a></code> if the new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is empty, <code>false</code> otherwise.</p>
               </td>
             </tr>
           </tbody>
@@ -315,7 +315,7 @@ adapter.addLoadStateListener {
             <tr>
               <td><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;T</code></td>
               <td width="100%">
-                <p>The presented item at position <code><a href="/reference/androidx/paging/PagingDataDiffer.html#index()">index</a></code>, <code>null</code> if it is a placeholder.</p>
+                <p>The presented item at position <code><a href="/reference/androidx/paging/PagingDataDiffer.html#get(kotlin.Int)">index</a></code>, <code>null</code> if it is a placeholder.</p>
               </td>
             </tr>
           </tbody>
@@ -354,7 +354,7 @@ adapter.addLoadStateListener {
             <tr>
               <td><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;T</code></td>
               <td width="100%">
-                <p>The presented item at position <code><a href="/reference/androidx/paging/PagingDataDiffer.html#index()">index</a></code>, <code>null</code> if it is a placeholder</p>
+                <p>The presented item at position <code><a href="/reference/androidx/paging/PagingDataDiffer.html#peek(kotlin.Int)">index</a></code>, <code>null</code> if it is a placeholder</p>
               </td>
             </tr>
           </tbody>
@@ -379,7 +379,7 @@ adapter.addLoadStateListener {
             <tr>
               <td><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Integer.html">Integer</a></code></td>
               <td width="100%">
-                <p>Transformed result of <code><a href="/reference/androidx/paging/PagingDataDiffer.html#lastAccessedIndex()">lastAccessedIndex</a></code> as an index of <code><a href="/reference/androidx/paging/PagingDataDiffer.html#newList()">newList</a></code> using the diff result between <code><a href="/reference/androidx/paging/PagingDataDiffer.html#previousList()">previousList</a></code> and <code><a href="/reference/androidx/paging/PagingDataDiffer.html#newList()">newList</a></code>. Null if <code><a href="/reference/androidx/paging/PagingDataDiffer.html#newList()">newList</a></code> or <code><a href="/reference/androidx/paging/PagingDataDiffer.html#previousList()">previousList</a></code> lists are empty, where it does not make sense to transform <code><a href="/reference/androidx/paging/PagingDataDiffer.html#lastAccessedIndex()">lastAccessedIndex</a></code>.</p>
+                <p>Transformed result of <code><a href="/reference/androidx/paging/PagingDataDiffer.html#presentNewList(androidx.paging.NullPaddedList,androidx.paging.NullPaddedList,androidx.paging.CombinedLoadStates,kotlin.Int)">lastAccessedIndex</a></code> as an index of <code><a href="/reference/androidx/paging/PagingDataDiffer.html#presentNewList(androidx.paging.NullPaddedList,androidx.paging.NullPaddedList,androidx.paging.CombinedLoadStates,kotlin.Int)">newList</a></code> using the diff result between <code><a href="/reference/androidx/paging/PagingDataDiffer.html#presentNewList(androidx.paging.NullPaddedList,androidx.paging.NullPaddedList,androidx.paging.CombinedLoadStates,kotlin.Int)">previousList</a></code> and <code><a href="/reference/androidx/paging/PagingDataDiffer.html#presentNewList(androidx.paging.NullPaddedList,androidx.paging.NullPaddedList,androidx.paging.CombinedLoadStates,kotlin.Int)">newList</a></code>. Null if <code><a href="/reference/androidx/paging/PagingDataDiffer.html#presentNewList(androidx.paging.NullPaddedList,androidx.paging.NullPaddedList,androidx.paging.CombinedLoadStates,kotlin.Int)">newList</a></code> or <code><a href="/reference/androidx/paging/PagingDataDiffer.html#presentNewList(androidx.paging.NullPaddedList,androidx.paging.NullPaddedList,androidx.paging.CombinedLoadStates,kotlin.Int)">previousList</a></code> lists are empty, where it does not make sense to transform <code><a href="/reference/androidx/paging/PagingDataDiffer.html#presentNewList(androidx.paging.NullPaddedList,androidx.paging.NullPaddedList,androidx.paging.CombinedLoadStates,kotlin.Int)">lastAccessedIndex</a></code>.</p>
               </td>
             </tr>
           </tbody>

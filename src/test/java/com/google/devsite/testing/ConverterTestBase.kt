@@ -166,7 +166,9 @@ internal abstract class ConverterTestBase(
         val source = """
             |/src/main/java/androidx/example/Test.java
             |package androidx.example;
-            |annotation class Nullable
+            |@Target({METHOD, PARAMETER, FIELD, LOCAL_VARIABLE, ANNOTATION_TYPE, PACKAGE})
+            |public @interface Nullable {
+            |}
             |public class Test {
             |$sourceCode
             |}

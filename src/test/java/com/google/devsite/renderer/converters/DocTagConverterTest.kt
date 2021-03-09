@@ -348,7 +348,7 @@ internal class DocTagConverterTest(
         }
     }
 
-    @Test // TODO: java parameters do not have annotations upstream: b/175612102
+    @Test
     fun `Full documentation parameters table has types`() {
         val documentationK = """
             |/**
@@ -369,22 +369,16 @@ internal class DocTagConverterTest(
         """.render().documentation()
         val documentationJ = """
             |/**
-            | * @param T a type
-            | */
-            |    interface PagedListListener<T extends Object> {
-            |/**
             | * Called after the current PagedList has been updated.
             | *
             | * @param previousList The previous list, may be null.
             | * @param currentList The new current list, may be null.
             | */
-            |void onCurrentListChanged(
-            |    @Suppress("DEPRECATION") @Nullable List<T> previousList,
-            |    @Suppress("DEPRECATION") @Nullable List<T> currentList
-            |)
-            |}
+            |public void onCurrentListChanged(
+            |            @Nullable List<T> previousList,
+            |            @Nullable List<T> currentList) {}
         """.render(java = true).documentation()
-        for (documentation in listOf(documentationK/*, documentationJ*/)) {
+        for (documentation in listOf(documentationK, documentationJ)) {
             val paramTable = documentation.first { (it as? SummaryList)?.title() == "Parameters" }
                 as SummaryList
             assertThat(paramTable.size()).isEqualTo(2)
@@ -394,12 +388,8 @@ internal class DocTagConverterTest(
             val param1Left = (param1.data.title as Parameter)
 
             assertThat(param0.name()).isEqualTo("previousList")
-            assertThat(param0Left.link().name).isEqualTo("List")
-            assertThat(param0Left.generics().single().link().name).isEqualTo("T")
             assertThat(param0.description().text()).isEqualTo("The previous list, may be null.")
             assertThat(param1.name()).isEqualTo("currentList")
-            assertThat(param1Left.link().name).isEqualTo("List")
-            assertThat(param1Left.generics().single().link().name).isEqualTo("T")
             assertThat(param1.description().text()).isEqualTo("The new current list, may be null.")
             javaOnly {
                 assertThat(param0Left.data.annotations.single().link().name).isEqualTo("Nullable")
