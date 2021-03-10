@@ -24,7 +24,7 @@ internal object NoopSummaryItem : SummaryItem {
     override val data: SummaryItem.Params
         get() = throw NotImplementedError()
 
-    override fun render(html: TR) = html.run {
+    override fun render(into: TR) = into.run {
         unsafe { +"<noop/>" }
     }
 }

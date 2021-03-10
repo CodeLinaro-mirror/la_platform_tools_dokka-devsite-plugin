@@ -25,7 +25,7 @@ import kotlinx.html.td
 internal class DefaultTwoPaneSummaryItem(
     override val data: TwoPaneSummaryItem.Params
 ) : TwoPaneSummaryItem {
-    override fun render(html: TR) = html.run {
+    override fun render(into: TR) = into.run {
         td {
             code {
                 data.title.render(this)

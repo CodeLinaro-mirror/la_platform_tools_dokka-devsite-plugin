@@ -26,7 +26,7 @@ import kotlinx.html.p
 internal class DefaultClasslike(
     override val data: Classlike.Params
 ) : Classlike {
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         p {
             data.signature.render(this)
         }

@@ -31,7 +31,7 @@ import kotlinx.html.unsafe
 internal class DefaultRedirectPage(
     override val data: RedirectPage.Params
 ) : RedirectPage {
-    override fun render(html: HTML) = html.run {
+    override fun render(into: HTML) = into.run {
         head {
             meta(charset = "utf-8")
             meta(content = "0; url=${data.url}") {

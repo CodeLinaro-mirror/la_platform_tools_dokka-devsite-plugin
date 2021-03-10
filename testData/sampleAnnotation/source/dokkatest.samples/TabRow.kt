@@ -97,5 +97,7 @@ fun TabRow(
     },
     tabs:  () -> Unit
 ) {
-    throw RuntimeException("Very unimplemented stub")
+    throw RuntimeException("Very unimplemented stub; $modifier, $backgroundColor, $contentColor," +
+        indicator.toString() + divider.toString() + tabs.toString()
+    )
 }

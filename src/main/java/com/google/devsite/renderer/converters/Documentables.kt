@@ -28,6 +28,7 @@ import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DObject
+import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DTypeAlias
 import org.jetbrains.dokka.model.Documentable
@@ -91,6 +92,7 @@ fun Documentable.stringForType(displayLanguage: Language): String = when (this) 
     }
     is DObject -> "object"
     is DTypeAlias -> "type alias"
+    is DParameter -> "parameter"
     else -> error("Unsupported type: $this")
 }
 

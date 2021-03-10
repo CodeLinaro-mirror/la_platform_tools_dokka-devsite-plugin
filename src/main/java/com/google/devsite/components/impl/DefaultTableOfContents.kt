@@ -22,7 +22,7 @@ import com.google.devsite.components.pages.TableOfContents
 internal class DefaultTableOfContents(
     override val data: TableOfContents.Params
 ) : TableOfContents {
-    override fun render(text: StringBuilder) = text.run {
+    override fun render(into: StringBuilder) = into.run {
         appendLine("toc:")
 
         appendLine("- title: \"Class Index\"")

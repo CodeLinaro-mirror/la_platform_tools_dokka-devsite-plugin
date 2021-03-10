@@ -24,7 +24,7 @@ internal class NoopRelatedSymbols(private val shown: Boolean = true) : RelatedSy
     override val data: RelatedSymbols.Params
         get() = throw NotImplementedError()
 
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         if (shown) {
             div { +"Related symbols" }
         }

@@ -296,14 +296,14 @@
         <table class="responsive">
           <thead>
             <tr>
-              <th colspan="2">Returns</th>
+              <th colspan="2">Parameters</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</code></td>
+              <td><code>boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;?</code></td>
               <td width="100%">
-                <p>this</p>
+                <p>The boundary callback for listening to PagedList load state.</p>
               </td>
             </tr>
           </tbody>
@@ -313,14 +313,14 @@
         <table class="responsive">
           <thead>
             <tr>
-              <th colspan="2">Parameters</th>
+              <th colspan="2">Returns</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><code>boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;?</code></td>
+              <td><code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</code></td>
               <td width="100%">
-                <p>The boundary callback for listening to PagedList load state.</p>
+                <p>this</p>
               </td>
             </tr>
           </tbody>
@@ -336,23 +336,6 @@
         <table class="responsive">
           <thead>
             <tr>
-              <th colspan="2">Returns</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</code></td>
-              <td width="100%">
-                <p>this</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
               <th colspan="2">Parameters</th>
             </tr>
           </thead>
@@ -364,13 +347,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div><a name="setFetchExecutor-java.util.concurrent.Executor-"></a>
-      <h3 class="api-name" id="setFetchExecutor(java.util.concurrent.Executor)">setFetchExecutor</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#setFetchExecutor(java.util.concurrent.Executor)">setFetchExecutor</a>(fetchExecutor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a>):&nbsp;<a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</pre>
-      <p>Sets <code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> used for background fetching of <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, and the pages within.</p>
-      <p>The library will wrap this as a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">kotlinx.coroutines.CoroutineDispatcher</a></code>.</p>
-      <p>If not set, defaults to a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-executor-coroutine-dispatcher/index.html">ExecutorCoroutineDispatcher</a></code> backed by <a href="[ArchTaskExecutor.getIOThreadExecutor]">ArchTaskExecutor.getIOThreadExecutor</a>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -388,6 +364,13 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div><a name="setFetchExecutor-java.util.concurrent.Executor-"></a>
+      <h3 class="api-name" id="setFetchExecutor(java.util.concurrent.Executor)">setFetchExecutor</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#setFetchExecutor(java.util.concurrent.Executor)">setFetchExecutor</a>(fetchExecutor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a>):&nbsp;<a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</pre>
+      <p>Sets <code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> used for background fetching of <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, and the pages within.</p>
+      <p>The library will wrap this as a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">kotlinx.coroutines.CoroutineDispatcher</a></code>.</p>
+      <p>If not set, defaults to a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-executor-coroutine-dispatcher/index.html">ExecutorCoroutineDispatcher</a></code> backed by <a href="[ArchTaskExecutor.getIOThreadExecutor]">ArchTaskExecutor.getIOThreadExecutor</a>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -405,12 +388,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div><a name="setInitialLoadKey-kotlin.Any-"></a>
-      <h3 class="api-name" id="setInitialLoadKey(kotlin.Any)">setInitialLoadKey</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#setInitialLoadKey(kotlin.Any)">setInitialLoadKey</a>(key:&nbsp;Key?):&nbsp;<a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</pre>
-      <p>First loading key passed to the first PagedList/DataSource.</p>
-      <p>When a new PagedList/DataSource pair is created after the first, it acquires a load key from the previous generation so that data is loaded around the position already being observed.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -428,6 +405,12 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div><a name="setInitialLoadKey-kotlin.Any-"></a>
+      <h3 class="api-name" id="setInitialLoadKey(kotlin.Any)">setInitialLoadKey</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#setInitialLoadKey(kotlin.Any)">setInitialLoadKey</a>(key:&nbsp;Key?):&nbsp;<a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</pre>
+      <p>First loading key passed to the first PagedList/DataSource.</p>
+      <p>When a new PagedList/DataSource pair is created after the first, it acquires a load key from the previous generation so that data is loaded around the position already being observed.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -440,6 +423,23 @@
               <td><code>key:&nbsp;Key?</code></td>
               <td width="100%">
                 <p>Initial load key passed to the first PagedList/DataSource.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</code></td>
+              <td width="100%">
+                <p>this</p>
               </td>
             </tr>
           </tbody>

@@ -140,76 +140,55 @@ internal class DocTagConverterTest(
     }
 
     @Test
-    fun `Class property parameters can be documented with @param on the class`() {
+    fun `Property parameter docs propagate correctly`() {
+        // Property parameters are kotlin-exclusive
         val module = """
             |/**
-            | * Hello World!
-            | * @param bar A vary bary name
+            | * Class docs
+            | * @property bar AtPropertyParameter docs
+            | * @param bar AtParameterProperty docs
             | */
-            |class Foo(val bar: String) {
+            |class Foo(val bar: String)
+        """.render()
+
+        val propDoc = module.documentation({ this.property()!! }).single() as Description
+        val classDoc = module.documentation({ this.clazz() }).single() as Description
+        val constructorDoc = module.documentation({ this.constructor() })
+        val conParamDoc = module.documentation({ this.constructor().parameters.single() }).single()
+
+        // An odd propagation system, but it seems to work out to properly document everything?
+        assertThat((propDoc).text()).isEqualTo("AtPropertyParameter docs")
+        assertThat((classDoc).text()).isEqualTo("Class docs")
+        assertThat(constructorDoc.size).isEqualTo(2)
+        assertThat(constructorDoc.first()).isInstanceOf(UndocumentedSymbolDescription::class.java)
+        assertThat((constructorDoc.last() as SummaryList).title()).isEqualTo("Parameters")
+        assertThat((constructorDoc.last() as SummaryList).single().name()).isEqualTo("bar")
+        assertThat((constructorDoc.last() as SummaryList).single().description().text())
+            .isEqualTo("AtParameterProperty docs")
+        assertThat((conParamDoc as Description).text()).isEqualTo("AtPropertyParameter docs")
+    }
+
+    @Test
+    fun `@constructor docs are applied`() {
+        val withAnnotation = """
+            |/**
+            | * The amount by which the text is shifted up or down from current the baseline.
+            | * @constructor Primary constructor docs
+            | */
+            |class BaselineShift(val multiplier: Float) {
+            |   /** Secondary constructor docs */
+            |   constructor(multiplier: Int) : this(multiplier)
             |
             |}
         """.render()
 
-        val propertyDoc = module.documentation(doc = { this.packages.single()
-            .classlikes.single().properties.single() }).single() as Description
-        val constructorDoc = module.documentation(doc = { (this.packages.single()
-            .classlikes.single() as DClass).constructors.single() }).last() as SummaryList
+        val constructorDoc1 = withAnnotation.documentation({ this.constructors().first() })
+            .single() as Description
+        val constructorDoc2 = withAnnotation.documentation({ this.constructors().last() })
+            .single() as Description
 
-        assertThat(propertyDoc.text()).isEqualTo("A vary bary name")
-
-        assertThat(constructorDoc.title()).isEqualTo("Parameters")
-        assertThat(constructorDoc.single().name()).isEqualTo("bar")
-        assertThat(constructorDoc.single().description().text()).isEqualTo("A vary bary name")
-    }
-
-    @Test
-    fun `Interface property parameters can be documented with @property on the class`() {
-        val module = """
-            |/**
-            | * Hello World!
-            | * @property bar A vary bary name
-            | */
-            |interface Foo(val bar: String)
-        """.render()
-
-        val propertyDoc = module.documentation(doc = { this.packages.single()
-            .classlikes.single().properties.single() }).single() as Description
-        // Upstream dokka does not propagate @property documentation on property parameters to the
-        // constructor. This may or may not be what we want.
-        assertFails {
-            val constructorDoc = module.documentation(doc = { (this.packages.single()
-                .classlikes.single() as DClass).constructors.single() }).single() as SummaryList
-        }
-        assertThat(propertyDoc.text()).isEqualTo("A vary bary name")
-    }
-
-    @Test
-    fun `@constructor is ignored`() {
-        val withAnnotation = """
-            |/**
-            | * The amount by which the text is shifted up or down from current the baseline.
-            | * @constructor
-            | */
-            |class BaselineShift(val multiplier: Float) {}
-        """.render()
-
-        val withoutAnnotation = """
-            |/**
-            | * The amount by which the text is shifted up or down from current the baseline.
-            | */
-            |class BaselineShift(val multiplier: Float) {}
-        """.render()
-
-        // TODO(b/180525239) Implement @constructor and fix this test
-
-        val withAnnotationDoc = withAnnotation.documentation(doc = { this.packages.single()
-            .classlikes.single() }).single() as Description
-
-        val withoutAnnotationDoc = withoutAnnotation.documentation(doc = { this.packages.single()
-            .classlikes.single() }).single() as Description
-
-        assertThat(withoutAnnotationDoc.text()).isEqualTo(withAnnotationDoc.text())
+        assertThat(constructorDoc1.text()).isEqualTo("Secondary constructor docs")
+        assertThat(constructorDoc2.text()).isEqualTo("Primary constructor docs")
     }
 
     @Test
@@ -217,6 +196,7 @@ internal class DocTagConverterTest(
         val module = """
             |/**
             | * Hello World!
+            | * @param baz Buzzbuzzbuzz
             | * @property bar A vary bary name
             | */
             |class Foo(val bar: String) {
@@ -224,31 +204,37 @@ internal class DocTagConverterTest(
             |}
         """.render()
 
-        val propertyDoc = module.documentation(doc = { this.packages.single()
-            .classlikes.single().properties.single() }).single() as Description
+        val propertyDoc = module.documentation({ this.property("bar")!! })
+        // Upstream dokka does not propagates @param documentation on property parameters to the
+        // property. We think this is what we want.
+        assertThat((propertyDoc.single() as Description).text()).isEqualTo("A vary bary name")
         // Upstream dokka does not propagate @property documentation on property parameters to the
-        // constructor. This may or may not be what we want.
-        assertFails {
-            val constructorDoc = module.documentation(doc = { (this.packages.single()
-                    .classlikes.single() as DClass).constructors.single() }).single() as SummaryList
-        }
-        assertThat(propertyDoc.text()).isEqualTo("A vary bary name")
+        // constructor. We think this is what we want.
+        assertFails { val constructorDoc = module.documentation({ this.constructor() }) }
     }
 
-    @Test
-    fun `Full documentation has img tag`() {
-        val documentation = """
+    @Test // TODO(b/182457595): fix img tags in javadoc
+    fun `Full documentation has img tag in 4x Kotlin and Java`() {
+        val documentationK = """
             |/**
             | ![Alt text](/path/to/img.jpg)
             |*/
             |fun foo(a: Int)
         """.render().documentation()
+        val documentationJ = """
+            |/**
+            | * <img src="/path/to/img.jpg" alt="Alt text"/>
+            | */
+            |public fun foo(Integer a)
+        """.render(java = true).documentation()
 
-        val description = documentation.last() as DefaultDescription
-        val img = description.data.components.first().children.item() as Img
+        for (documentation in listOf(/*documentationJ,*/ documentationK)) {
+            val description = documentation.last() as DefaultDescription
+            val img = description.data.components.first().children.item() as Img
 
-        assertThat(img.params["href"]).isEqualTo("/path/to/img.jpg")
-        assertThat(img.params["alt"]).isEqualTo("Alt text")
+            assertThat(img.params["href"]).isEqualTo("/path/to/img.jpg")
+            assertThat(img.params["alt"]).isEqualTo("Alt text")
+        }
     }
 
     @Test
@@ -807,12 +793,11 @@ internal class DocTagConverterTest(
         assertFails { documentation.render().documentation() }
     }
 
-    private fun DModule.description(): Description {
+    private fun DModule.description(doc: DModule.() -> Documentable = ::smartDoc): Description {
         val holder = runBlocking { DocumentablesHolder(this@description, this) }
         val converter = DocTagConverter(language, pathProvider(), holder)
-        val doc = smartDoc(this)
-        val annotations = (doc as? WithExtraProperties<*>)?.annotations().orEmpty()
-        return converter.summaryDescription(doc, annotations)
+        val annotations = (this.doc() as? WithExtraProperties<*>)?.annotations().orEmpty()
+        return converter.summaryDescription(this.doc(), annotations)
     }
 
     private fun DModule.documentation(

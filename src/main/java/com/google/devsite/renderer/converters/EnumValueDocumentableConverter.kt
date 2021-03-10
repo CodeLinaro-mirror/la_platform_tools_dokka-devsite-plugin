@@ -38,7 +38,7 @@ internal class EnumValueDocumentableConverter(
     private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
 
     /** @return the enum value summary component */
-    fun summary(enumValue: DEnumEntry, modifierHints: ModifierHints): TwoPaneSummaryItem {
+    fun summary(enumValue: DEnumEntry): TwoPaneSummaryItem {
         val annotations = enumValue.annotations()
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
@@ -73,7 +73,7 @@ internal class EnumValueDocumentableConverter(
                 modifiers = enumValue.getExtraModifiers().modifiersFor(hints),
                 returnType = projection,
                 symbolType = SymbolDetail.SymbolType.PROPERTY,
-                signature = enumValue.signature(false),
+                signature = enumValue.signature(),
                 metadata = javadocConverter.metadata(
                     documentable = enumValue,
                     returnType = projection,
@@ -84,7 +84,7 @@ internal class EnumValueDocumentableConverter(
         )
     }
 
-    internal fun DEnumEntry.signature(isSummary: Boolean): PropertySignature {
+    internal fun DEnumEntry.signature(): PropertySignature {
         return DefaultPropertySignature(
             PropertySignature.Params(
                 // TODO(b/168136770): figure out path for default anchors

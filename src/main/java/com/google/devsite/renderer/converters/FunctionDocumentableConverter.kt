@@ -127,7 +127,7 @@ internal class FunctionDocumentableConverter(
         val receiver = receiver?.let { paramConverter.componentForParameter(it, isSummary) }
         val parameters = parameters.map { paramConverter.componentForParameter(it, isSummary) }
         val typeParameters = this.generics.map {
-            paramConverter.componentForTypeParameter(it, isSummary) }
+            paramConverter.componentForTypeParameter(it) }
 
         return DefaultFunctionSignature(
             FunctionSignature.Params(

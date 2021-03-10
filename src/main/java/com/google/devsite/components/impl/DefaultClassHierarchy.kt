@@ -30,7 +30,7 @@ import kotlin.math.max
 internal class DefaultClassHierarchy(
     override val data: ClassHierarchy.Params
 ) : ClassHierarchy {
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         if (data.parents.isEmpty()) return
 
         div("devsite-table-wrapper") {

@@ -24,5 +24,5 @@ import kotlinx.html.Tag
  */
 internal interface HtmlComponent<T : Tag> : Component<T> {
     /** Render this component's data into [html]. */
-    override fun render(html: T)
+    override fun render(into: T)
 }

@@ -24,7 +24,7 @@ import kotlinx.html.FlowContent
 internal class DefaultTypeSummary(
     override val data: TypeSummary.Params
 ) : TypeSummary {
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         for (modifier in data.modifiers) {
             +modifier
             if (modifier === data.modifiers.last()) +" " else +Entities.nbsp

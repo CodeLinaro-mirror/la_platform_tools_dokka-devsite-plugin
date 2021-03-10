@@ -24,7 +24,7 @@ import kotlinx.html.FlowContent
 internal class DefaultSymbolType(
     override val data: SymbolType.Params
 ) : SymbolType {
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         data.type.render(this)
         if (data.generics.isNotEmpty()) {
             +"<"

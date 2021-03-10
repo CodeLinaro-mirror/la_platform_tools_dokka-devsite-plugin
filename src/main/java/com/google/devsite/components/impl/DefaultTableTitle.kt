@@ -25,7 +25,7 @@ import kotlinx.html.unsafe
 internal class DefaultTableTitle(
     override val data: TableTitle.Params
 ) : TableTitle {
-    override fun render(html: TR) = html.run {
+    override fun render(into: TR) = into.run {
         th {
             attributes["colspan"] = "2"
 

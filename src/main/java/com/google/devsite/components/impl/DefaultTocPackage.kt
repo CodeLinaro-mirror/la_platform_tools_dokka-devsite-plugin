@@ -22,7 +22,7 @@ import com.google.devsite.components.symbols.TocPackage
 internal class DefaultTocPackage(
     override val data: TocPackage.Params
 ) : TocPackage {
-    override fun render(text: StringBuilder) = text.run {
+    override fun render(into: StringBuilder) = into.run {
         appendLine("- title: \"${data.name}\"")
         appendLine("  path: \"${data.packageUrl}\"")
         appendLine()

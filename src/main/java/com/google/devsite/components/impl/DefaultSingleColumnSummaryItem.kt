@@ -24,7 +24,7 @@ import kotlinx.html.td
 internal class DefaultSingleColumnSummaryItem(
     override val data: SingleColumnSummaryItem.Params
 ) : SingleColumnSummaryItem {
-    override fun render(html: TR) = html.run {
+    override fun render(into: TR) = into.run {
         td {
             data.description.render(this)
         }

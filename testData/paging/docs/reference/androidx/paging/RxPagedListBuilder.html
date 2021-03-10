@@ -260,14 +260,14 @@
         <table class="responsive">
           <thead>
             <tr>
-              <th colspan="2">Returns</th>
+              <th colspan="2">Parameters</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><code><a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</code></td>
+              <td><code><a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;backpressureStrategy</code></td>
               <td width="100%">
-                <p>The <a href="[Flowable]">Flowable</a> of PagedLists</p>
+                <p>BackpressureStrategy for the <a href="[Flowable]">Flowable</a> to use.</p>
               </td>
             </tr>
           </tbody>
@@ -277,14 +277,14 @@
         <table class="responsive">
           <thead>
             <tr>
-              <th colspan="2">Parameters</th>
+              <th colspan="2">Returns</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><code><a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;backpressureStrategy</code></td>
+              <td><code><a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</code></td>
               <td width="100%">
-                <p>BackpressureStrategy for the <a href="[Flowable]">Flowable</a> to use.</p>
+                <p>The <a href="[Flowable]">Flowable</a> of PagedLists</p>
               </td>
             </tr>
           </tbody>
@@ -325,23 +325,6 @@
         <table class="responsive">
           <thead>
             <tr>
-              <th colspan="2">Returns</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code><a href="/reference/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</code></td>
-              <td width="100%">
-                <p>this</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
               <th colspan="2">Parameters</th>
             </tr>
           </thead>
@@ -355,13 +338,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div><a name="setFetchScheduler-Scheduler-"></a>
-      <h3 class="api-name" id="setFetchScheduler(Scheduler)">setFetchScheduler</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a>&lt;Key,&nbsp;Value&gt;&nbsp;<a href="/reference/androidx/paging/RxPagedListBuilder.html#setFetchScheduler(Scheduler)">setFetchScheduler</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;scheduler)</pre>
-      <p>Sets scheduler which will be used for background fetching of PagedLists, as well as on-demand fetching of pages inside.</p>
-      <p>If not set, defaults to the Arch components I/O thread pool.</p>
-      <p>The built <a href="[Observable]">Observable</a> / <a href="[Flowable]">Flowable</a> will be subscribed on this scheduler.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -379,6 +355,13 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div><a name="setFetchScheduler-Scheduler-"></a>
+      <h3 class="api-name" id="setFetchScheduler(Scheduler)">setFetchScheduler</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a>&lt;Key,&nbsp;Value&gt;&nbsp;<a href="/reference/androidx/paging/RxPagedListBuilder.html#setFetchScheduler(Scheduler)">setFetchScheduler</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;scheduler)</pre>
+      <p>Sets scheduler which will be used for background fetching of PagedLists, as well as on-demand fetching of pages inside.</p>
+      <p>If not set, defaults to the Arch components I/O thread pool.</p>
+      <p>The built <a href="[Observable]">Observable</a> / <a href="[Flowable]">Flowable</a> will be subscribed on this scheduler.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -396,12 +379,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div><a name="setInitialLoadKey-kotlin.Any-"></a>
-      <h3 class="api-name" id="setInitialLoadKey(kotlin.Any)">setInitialLoadKey</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a>&lt;Key,&nbsp;Value&gt;&nbsp;<a href="/reference/androidx/paging/RxPagedListBuilder.html#setInitialLoadKey(kotlin.Any)">setInitialLoadKey</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;Key&nbsp;key)</pre>
-      <p>First loading key passed to the first PagedList/DataSource.</p>
-      <p>When a new PagedList/DataSource pair is created after the first, it acquires a load key from the previous generation so that data is loaded around the position already being observed.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -419,6 +396,12 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div><a name="setInitialLoadKey-kotlin.Any-"></a>
+      <h3 class="api-name" id="setInitialLoadKey(kotlin.Any)">setInitialLoadKey</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a>&lt;Key,&nbsp;Value&gt;&nbsp;<a href="/reference/androidx/paging/RxPagedListBuilder.html#setInitialLoadKey(kotlin.Any)">setInitialLoadKey</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;Key&nbsp;key)</pre>
+      <p>First loading key passed to the first PagedList/DataSource.</p>
+      <p>When a new PagedList/DataSource pair is created after the first, it acquires a load key from the previous generation so that data is loaded around the position already being observed.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -436,13 +419,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div><a name="setNotifyScheduler-Scheduler-"></a>
-      <h3 class="api-name" id="setNotifyScheduler(Scheduler)">setNotifyScheduler</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a>&lt;Key,&nbsp;Value&gt;&nbsp;<a href="/reference/androidx/paging/RxPagedListBuilder.html#setNotifyScheduler(Scheduler)">setNotifyScheduler</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;scheduler)</pre>
-      <p>Sets scheduler which will be used for observing new PagedLists, as well as loading updates within the PagedLists.</p>
-      <p>If not set, defaults to the UI thread.</p>
-      <p>The built <a href="[Observable]">Observable</a> / <a href="[Flowable]">Flowable</a> will be observed on this scheduler, so that the thread receiving PagedLists will also receive the internal updates to the PagedList.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -460,6 +436,13 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div><a name="setNotifyScheduler-Scheduler-"></a>
+      <h3 class="api-name" id="setNotifyScheduler(Scheduler)">setNotifyScheduler</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a>&lt;Key,&nbsp;Value&gt;&nbsp;<a href="/reference/androidx/paging/RxPagedListBuilder.html#setNotifyScheduler(Scheduler)">setNotifyScheduler</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;scheduler)</pre>
+      <p>Sets scheduler which will be used for observing new PagedLists, as well as loading updates within the PagedLists.</p>
+      <p>If not set, defaults to the UI thread.</p>
+      <p>The built <a href="[Observable]">Observable</a> / <a href="[Flowable]">Flowable</a> will be observed on this scheduler, so that the thread receiving PagedLists will also receive the internal updates to the PagedList.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -472,6 +455,23 @@
               <td><code><a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;scheduler</code></td>
               <td width="100%">
                 <p>Scheduler that receives PagedList updates, and where <code><a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI/main thread.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</code></td>
+              <td width="100%">
+                <p>this</p>
               </td>
             </tr>
           </tbody>

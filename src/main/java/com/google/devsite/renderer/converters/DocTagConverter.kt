@@ -229,7 +229,7 @@ internal class DocTagConverter(
         allOptions.putAll(dParams.map {
             it.name!! to paramConverter.componentForParameter(it, false) })
         allOptions.putAll(dGenerics.map {
-            it.name to paramConverter.componentForTypeParameter(it, false) })
+            it.name to paramConverter.componentForTypeParameter(it) })
         if (documentable is Callable && documentable.receiver != null)
             allOptions[documentable.receiver!!.name ?: "receiver"] =
                 paramConverter.componentForParameter(documentable.receiver!!, false)

@@ -21,7 +21,7 @@ import kotlinx.html.FlowContent
 import kotlinx.html.div
 
 internal object NoopContextFreeComponent : ContextFreeComponent {
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         div { +"noop" }
     }
 }

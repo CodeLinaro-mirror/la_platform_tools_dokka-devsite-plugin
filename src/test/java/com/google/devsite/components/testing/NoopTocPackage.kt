@@ -22,7 +22,7 @@ internal object NoopTocPackage : TocPackage {
     override val data: TocPackage.Params
         get() = throw NotImplementedError()
 
-    override fun render(text: StringBuilder) {
-        text.appendLine("noop")
+    override fun render(into: StringBuilder) {
+        into.appendLine("noop")
     }
 }

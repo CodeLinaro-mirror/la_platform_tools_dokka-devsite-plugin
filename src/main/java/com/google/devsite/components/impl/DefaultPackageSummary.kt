@@ -27,7 +27,7 @@ import kotlinx.html.h2
 internal class DefaultPackageSummary(
     override val data: PackageSummary.Params
 ) : PackageSummary {
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         for (detail in data.description) {
             detail.render(this)
         }

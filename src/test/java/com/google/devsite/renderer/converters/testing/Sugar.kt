@@ -26,6 +26,7 @@ import com.google.devsite.components.pages.ClassIndex
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.TableOfContents
 import com.google.devsite.components.symbols.Annotation
+import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.components.symbols.SymbolBase
 import com.google.devsite.components.symbols.SymbolSummary
@@ -67,9 +68,10 @@ internal fun SummaryList.title(): String = (data.header as TableTitle).data.titl
 internal fun TwoPaneSummaryItem.link(): Link.Params = (data.title as Link).data
 internal fun TwoPaneSummaryItem.functionSummary() = data.description as SymbolSummary
 internal fun TwoPaneSummaryItem.name() = (this.data.title as Parameter).data.name
-internal fun TwoPaneSummaryItem.description() = (this.data.description as Description)
+internal fun TwoPaneSummaryItem.description() = data.description as Description
 
 internal fun SymbolSummary.name(): String = data.signature.data.name.data.name
+internal fun SymbolSummary.signature() = (data.signature as FunctionSignature).data
 
 internal fun Description.text() = this.data.components.joinToString(" ") { it.deepText() }
 

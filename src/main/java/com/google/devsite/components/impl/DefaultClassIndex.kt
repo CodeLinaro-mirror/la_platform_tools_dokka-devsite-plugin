@@ -30,7 +30,7 @@ import kotlinx.html.unsafe
 internal class DefaultClassIndex(
     override val data: ClassIndex.Params
 ) : ClassIndex {
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         p {
             +"These are all the API classes. See all "
             a(data.packagesUrl) {

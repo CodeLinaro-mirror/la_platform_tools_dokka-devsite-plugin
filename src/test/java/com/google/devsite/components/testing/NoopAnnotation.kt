@@ -23,7 +23,7 @@ internal class NoopAnnotation(private val text: String) : Annotation {
     override val data: Annotation.Params
         get() = throw NotImplementedError()
 
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         +text
     }
 

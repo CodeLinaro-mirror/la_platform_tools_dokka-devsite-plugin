@@ -23,7 +23,7 @@ import kotlinx.html.FlowContent
 internal class DefaultPropertySignature(
     override val data: PropertySignature.Params
 ) : PropertySignature {
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         if (data.receiver != null) {
             data.receiver.render(this)
             +"."

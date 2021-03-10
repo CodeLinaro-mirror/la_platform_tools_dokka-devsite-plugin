@@ -26,7 +26,7 @@ internal class NoopParameter(
     override val data: Parameter.Params
         get() = throw NotImplementedError()
 
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         +text
     }
 

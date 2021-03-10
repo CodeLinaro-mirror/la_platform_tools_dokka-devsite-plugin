@@ -25,7 +25,7 @@ import kotlinx.html.div
 internal class DefaultSymbolSummary(
     override val data: SymbolSummary.Params
 ) : SymbolSummary {
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         div {
             code {
                 data.signature.render(this)

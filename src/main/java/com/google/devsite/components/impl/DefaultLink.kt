@@ -24,7 +24,7 @@ import kotlinx.html.a
 internal class DefaultLink(
     override val data: Link.Params
 ) : Link {
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         if (data.url.isEmpty()) {
             +data.name
         } else {

@@ -133,7 +133,7 @@ import org.jetbrains.dokka.model.doc.Var
 internal class DefaultDescription(
     override val data: Description.Params
 ) : Description {
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         if (data.deprecation == null) {
             if (data.summary) {
                 renderTags(data.components.take(1), State())

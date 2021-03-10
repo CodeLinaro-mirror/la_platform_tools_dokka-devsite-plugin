@@ -31,10 +31,10 @@ import kotlinx.html.unsafe
 internal class DefaultInheritedSymbols(
     override val data: InheritedSymbols.Params
 ) : InheritedSymbols {
-    override fun render(html: FlowContent) {
+    override fun render(into: FlowContent) {
         if (data.inheritedSymbolSummaries.isEmpty()) return
 
-        html.run {
+        into.run {
             div("devsite-table-wrapper") {
                 table("responsive") {
                     attributes["id"] = "inhmethods"

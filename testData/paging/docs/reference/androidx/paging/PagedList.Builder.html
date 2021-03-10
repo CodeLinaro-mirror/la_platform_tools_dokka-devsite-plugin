@@ -325,14 +325,14 @@
         <table class="responsive">
           <thead>
             <tr>
-              <th colspan="2">Returns</th>
+              <th colspan="2">Parameters</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><code><a href="/reference/androidx/paging/PagedList.Builder.html">PagedList.Builder</a>&lt;Key,&nbsp;Value&gt;</code></td>
+              <td><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="/reference/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;&nbsp;boundaryCallback</code></td>
               <td width="100%">
-                <p>this</p>
+                <p><code><a href="/reference/androidx/paging/PagedList.BoundaryCallback.html">BoundaryCallback</a></code> for listening to out-of-data events.</p>
               </td>
             </tr>
           </tbody>
@@ -342,14 +342,14 @@
         <table class="responsive">
           <thead>
             <tr>
-              <th colspan="2">Parameters</th>
+              <th colspan="2">Returns</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="/reference/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;&nbsp;boundaryCallback</code></td>
+              <td><code><a href="/reference/androidx/paging/PagedList.Builder.html">PagedList.Builder</a>&lt;Key,&nbsp;Value&gt;</code></td>
               <td width="100%">
-                <p><code><a href="/reference/androidx/paging/PagedList.BoundaryCallback.html">BoundaryCallback</a></code> for listening to out-of-data events.</p>
+                <p>this</p>
               </td>
             </tr>
           </tbody>
@@ -366,23 +366,6 @@
         <table class="responsive">
           <thead>
             <tr>
-              <th colspan="2">Returns</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code><a href="/reference/androidx/paging/PagedList.Builder.html">PagedList.Builder</a>&lt;Key,&nbsp;Value&gt;</code></td>
-              <td width="100%">
-                <p>this</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
               <th colspan="2">Parameters</th>
             </tr>
           </thead>
@@ -394,12 +377,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div><a name="setFetchDispatcher-kotlinx.coroutines.CoroutineDispatcher-"></a>
-      <h3 class="api-name" id="setFetchDispatcher(kotlinx.coroutines.CoroutineDispatcher)">setFetchDispatcher</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/PagedList.Builder.html">PagedList.Builder</a>&lt;Key,&nbsp;Value&gt;&nbsp;<a href="/reference/androidx/paging/PagedList.Builder.html#setFetchDispatcher(kotlinx.coroutines.CoroutineDispatcher)">setFetchDispatcher</a>(<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a>&nbsp;fetchDispatcher)</pre>
-      <p>The <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> used to fetch additional pages from the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
-      <p>Does not affect initial load, which will be done immediately on whichever thread the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is created on.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -417,6 +394,12 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div><a name="setFetchDispatcher-kotlinx.coroutines.CoroutineDispatcher-"></a>
+      <h3 class="api-name" id="setFetchDispatcher(kotlinx.coroutines.CoroutineDispatcher)">setFetchDispatcher</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/PagedList.Builder.html">PagedList.Builder</a>&lt;Key,&nbsp;Value&gt;&nbsp;<a href="/reference/androidx/paging/PagedList.Builder.html#setFetchDispatcher(kotlinx.coroutines.CoroutineDispatcher)">setFetchDispatcher</a>(<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a>&nbsp;fetchDispatcher)</pre>
+      <p>The <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> used to fetch additional pages from the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
+      <p>Does not affect initial load, which will be done immediately on whichever thread the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is created on.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -434,13 +417,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div><a name="setFetchExecutor-java.util.concurrent.Executor-"></a>
-      <h3 class="api-name" id="setFetchExecutor(java.util.concurrent.Executor)">setFetchExecutor</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/PagedList.Builder.html">PagedList.Builder</a>&lt;Key,&nbsp;Value&gt;&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.Builder.html#setFetchExecutor(java.util.concurrent.Executor)">setFetchExecutor</a></del></span>(<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a>&nbsp;fetchExecutor)</pre>
-      <aside class="caution"><strong>This method is deprecated.</strong><br>Passing an executor will cause it get wrapped as a CoroutineDispatcher, consider passing a CoroutineDispatcher directly</aside>
-      <p>The <code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> used to fetch additional pages from the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
-      <p>Does not affect initial load, which will be done immediately on whichever thread the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is created on.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -458,6 +434,13 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div><a name="setFetchExecutor-java.util.concurrent.Executor-"></a>
+      <h3 class="api-name" id="setFetchExecutor(java.util.concurrent.Executor)">setFetchExecutor</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/PagedList.Builder.html">PagedList.Builder</a>&lt;Key,&nbsp;Value&gt;&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.Builder.html#setFetchExecutor(java.util.concurrent.Executor)">setFetchExecutor</a></del></span>(<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a>&nbsp;fetchExecutor)</pre>
+      <aside class="caution"><strong>This method is deprecated.</strong><br>Passing an executor will cause it get wrapped as a CoroutineDispatcher, consider passing a CoroutineDispatcher directly</aside>
+      <p>The <code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> used to fetch additional pages from the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
+      <p>Does not affect initial load, which will be done immediately on whichever thread the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is created on.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -475,11 +458,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div><a name="setInitialKey-kotlin.Any-"></a>
-      <h3 class="api-name" id="setInitialKey(kotlin.Any)">setInitialKey</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/PagedList.Builder.html">PagedList.Builder</a>&lt;Key,&nbsp;Value&gt;&nbsp;<a href="/reference/androidx/paging/PagedList.Builder.html#setInitialKey(kotlin.Any)">setInitialKey</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;Key&nbsp;initialKey)</pre>
-      <p>Sets the initial key the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> should load around as part of initialization.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -497,6 +475,11 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div><a name="setInitialKey-kotlin.Any-"></a>
+      <h3 class="api-name" id="setInitialKey(kotlin.Any)">setInitialKey</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/PagedList.Builder.html">PagedList.Builder</a>&lt;Key,&nbsp;Value&gt;&nbsp;<a href="/reference/androidx/paging/PagedList.Builder.html#setInitialKey(kotlin.Any)">setInitialKey</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;Key&nbsp;initialKey)</pre>
+      <p>Sets the initial key the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> should load around as part of initialization.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -514,11 +497,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div><a name="setNotifyDispatcher-kotlinx.coroutines.CoroutineDispatcher-"></a>
-      <h3 class="api-name" id="setNotifyDispatcher(kotlinx.coroutines.CoroutineDispatcher)">setNotifyDispatcher</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/PagedList.Builder.html">PagedList.Builder</a>&lt;Key,&nbsp;Value&gt;&nbsp;<a href="/reference/androidx/paging/PagedList.Builder.html#setNotifyDispatcher(kotlinx.coroutines.CoroutineDispatcher)">setNotifyDispatcher</a>(<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a>&nbsp;notifyDispatcher)</pre>
-      <p>The <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> defining where page loading updates are dispatched.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -536,6 +514,11 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div><a name="setNotifyDispatcher-kotlinx.coroutines.CoroutineDispatcher-"></a>
+      <h3 class="api-name" id="setNotifyDispatcher(kotlinx.coroutines.CoroutineDispatcher)">setNotifyDispatcher</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/PagedList.Builder.html">PagedList.Builder</a>&lt;Key,&nbsp;Value&gt;&nbsp;<a href="/reference/androidx/paging/PagedList.Builder.html#setNotifyDispatcher(kotlinx.coroutines.CoroutineDispatcher)">setNotifyDispatcher</a>(<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a>&nbsp;notifyDispatcher)</pre>
+      <p>The <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> defining where page loading updates are dispatched.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -553,12 +536,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div><a name="setNotifyExecutor-java.util.concurrent.Executor-"></a>
-      <h3 class="api-name" id="setNotifyExecutor(java.util.concurrent.Executor)">setNotifyExecutor</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/PagedList.Builder.html">PagedList.Builder</a>&lt;Key,&nbsp;Value&gt;&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.Builder.html#setNotifyExecutor(java.util.concurrent.Executor)">setNotifyExecutor</a></del></span>(<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a>&nbsp;notifyExecutor)</pre>
-      <aside class="caution"><strong>This method is deprecated.</strong><br>Passing an executor will cause it get wrapped as a CoroutineDispatcher, consider passing a CoroutineDispatcher directly</aside>
-      <p>The <code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> defining where page loading updates are dispatched.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -576,6 +553,12 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div><a name="setNotifyExecutor-java.util.concurrent.Executor-"></a>
+      <h3 class="api-name" id="setNotifyExecutor(java.util.concurrent.Executor)">setNotifyExecutor</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/PagedList.Builder.html">PagedList.Builder</a>&lt;Key,&nbsp;Value&gt;&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.Builder.html#setNotifyExecutor(java.util.concurrent.Executor)">setNotifyExecutor</a></del></span>(<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a>&nbsp;notifyExecutor)</pre>
+      <aside class="caution"><strong>This method is deprecated.</strong><br>Passing an executor will cause it get wrapped as a CoroutineDispatcher, consider passing a CoroutineDispatcher directly</aside>
+      <p>The <code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> defining where page loading updates are dispatched.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -588,6 +571,23 @@
               <td><code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a>&nbsp;notifyExecutor</code></td>
               <td width="100%">
                 <p><code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> that receives <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the ui/main thread.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/PagedList.Builder.html">PagedList.Builder</a>&lt;Key,&nbsp;Value&gt;</code></td>
+              <td width="100%">
+                <p>this</p>
               </td>
             </tr>
           </tbody>

@@ -29,7 +29,7 @@ internal class DefaultTypeParameter(
         validate()
     }
 
-    override fun render(html: FlowContent) = render(html, true)
+    override fun render(into: FlowContent) = render(into, true)
 
     override fun render(html: FlowContent, angleBrackets: Boolean) = html.run {
         if (angleBrackets) +"<"

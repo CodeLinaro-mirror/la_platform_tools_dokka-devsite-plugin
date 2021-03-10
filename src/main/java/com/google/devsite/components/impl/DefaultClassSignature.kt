@@ -26,9 +26,9 @@ internal class DefaultClassSignature(
     override val data: ClassSignature.Params
 ) : ClassSignature {
 
-    override fun render(html: FlowContent) {
+    override fun render(into: FlowContent) {
 
-        html.run {
+        into.run {
             pre {
                 +(data.modifiers + data.type + data.name).joinToString(separator = " ")
 

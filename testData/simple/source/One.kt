@@ -18,8 +18,13 @@ package dokkatest.simple
 
 /**
  * Sample class 1
+ * @constructor Primary constructor docs
  */
 open class One(override val fore: String) : Four, Five() {
+
+    /** Secondary constructor docs */
+    constructor(blarg: Int) : this("$blarg")
+
     /** Property docs. */
     val v = 0
 

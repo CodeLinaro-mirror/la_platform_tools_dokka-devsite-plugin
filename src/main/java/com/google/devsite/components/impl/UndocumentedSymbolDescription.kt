@@ -25,5 +25,5 @@ internal class UndocumentedSymbolDescription : Description {
         get() = error("Unused")
 
     // Do nothing
-    override fun render(html: FlowContent) = Unit
+    override fun render(into: FlowContent) = Unit
 }

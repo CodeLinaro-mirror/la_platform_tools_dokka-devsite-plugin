@@ -16,8 +16,11 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolDetail.SymbolType
+import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TableTitle
 import com.google.devsite.renderer.Language
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
@@ -31,7 +34,7 @@ import kotlinx.html.pre
 internal class DefaultSymbolDetail(
     override val data: SymbolDetail.Params
 ) : SymbolDetail {
-    override fun render(html: FlowContent) = html.div {
+    override fun render(into: FlowContent) = into.div {
         for (anchor in data.anchors.drop(1)) {
             a { attributes["name"] = anchor }
         }
@@ -75,8 +78,24 @@ internal class DefaultSymbolDetail(
             }
         }
 
-        for (detail in data.metadata) {
+        for (detail in data.metadata.sortedBy { descriptionSorter(it) }) {
             detail.render(this)
         }
+    }
+}
+
+private fun descriptionSorter(component: ContextFreeComponent): Int {
+    return when (component) {
+        is SummaryList -> {
+            val tableName = (component.data.header as TableTitle).data.title
+            when (tableName) {
+                "Parameters" -> 1
+                "Returns" -> 2
+                "Throws" -> 3
+                "See also" -> 4
+                else -> 5 // Unknown tables go at the end
+            }
+        } // Parameters Table > Returns Table
+        else -> 0 // Preserve input order for all other cases, and put them before the tables
     }
 }

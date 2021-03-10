@@ -28,7 +28,7 @@ import kotlinx.html.unsafe
 internal class DefaultRelatedSymbols(
     override val data: RelatedSymbols.Params
 ) : RelatedSymbols {
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         renderRelatedSymbolsFor(data.directSubclasses, data.directSummary, "direct")
         renderRelatedSymbolsFor(data.indirectSubclasses, data.indirectSummary, "indirect")
     }

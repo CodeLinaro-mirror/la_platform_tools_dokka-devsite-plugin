@@ -28,7 +28,7 @@ import kotlinx.html.unsafe
 internal class DefaultFunctionSignature(
     override val data: FunctionSignature.Params
 ) : FunctionSignature {
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         data.typeParameters.render(this)
         if (data.typeParameters.isNotEmpty()) +" "
 
@@ -45,7 +45,7 @@ internal class DefaultFunctionSignature(
             // Manually declare <del> instead
             span {
                 unsafe { +"<del>" }
-                data.name.render(html)
+                data.name.render(into)
                 unsafe { +"</del>" }
             }
         } else {

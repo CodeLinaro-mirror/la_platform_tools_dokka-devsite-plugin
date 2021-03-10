@@ -24,7 +24,7 @@ internal class NoopClassHierarchy(private val shown: Boolean = true) : ClassHier
     override val data: ClassHierarchy.Params
         get() = throw NotImplementedError()
 
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         if (shown) {
             div { +"Class hierarchy" }
         }

@@ -287,8 +287,7 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun enumValuesToSummary(title: String, enumVals: List<DEnumEntry>): SummaryList {
-        val modifierHints = ModifierHints(displayLanguage, isSummary = true, false)
-        val components = enumVals.map { enumConverter.summary(it, modifierHints) }
+        val components = enumVals.map { enumConverter.summary(it) }
         return DefaultSummaryList(
             SummaryList.Params(
                 header = DefaultTableTitle(
@@ -342,7 +341,7 @@ internal class ClasslikeDocumentableConverter(
             emptyList()
         }
         val typeParameters = if (classlike is WithGenerics) {
-            classlike.generics.map { paramConverter.componentForTypeParameter(it, false) }
+            classlike.generics.map { paramConverter.componentForTypeParameter(it) }
         } else {
             emptyList()
         }

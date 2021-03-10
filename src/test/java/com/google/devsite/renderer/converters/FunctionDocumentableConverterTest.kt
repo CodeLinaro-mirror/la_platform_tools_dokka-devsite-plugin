@@ -18,7 +18,6 @@ package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Link
-import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolDetail.SymbolType
@@ -35,6 +34,7 @@ import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.projectionName
+import com.google.devsite.renderer.converters.testing.signature
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
@@ -313,28 +313,17 @@ internal class FunctionDocumentableConverterTest(
         assertThat(paramType.link().name).isEqualTo("String")
     }
 
-    @Ignore // TODO(b/168270546): figure out inline generics
     @Test
     fun `Function summary component creates inline generics`() {
         val summary = """
-            |fun <T> foo() = Unit
+            |fun <T: Number, U> foo() = Unit
         """.render().summary()
-    }
-
-    @Ignore // TODO(b/168270546): figure out inline generics
-    @Test
-    fun `Function summary component creates inline generics extending class`() {
-        val summary = """
-            |fun <T: Number> foo() = Unit
-        """.render().summary()
-    }
-
-    @Ignore // TODO(b/168270546): figure out inline generics
-    @Test
-    fun `Function summary component creates multiple inline generics`() {
-        val summary = """
-            |fun <T, U, V> foo() = Unit
-        """.render().summary()
+        val typeParams = summary.functionSummary().signature().typeParameters
+        assertThat(typeParams.first().data.name).isEqualTo("T")
+        assertThat(typeParams.first().projectionName()).isEqualTo("Number")
+        assertThat(typeParams.last().data.name).isEqualTo("U")
+        kotlinOnly { assertThat(typeParams.last().projectionName()).isEqualTo("Any") }
+        javaOnly { assertThat(typeParams.last().projectionName()).isEqualTo("Object") }
     }
 
     @Test
@@ -558,9 +547,6 @@ internal class FunctionDocumentableConverterTest(
     private fun DModule.cstructor() = (classlike() as DClass).constructors.single()
 
     private fun Parameter.link(): Link.Params = data.primary.link()
-
-    private fun SymbolSummary.signature(): FunctionSignature.Params =
-        (data.signature as FunctionSignature).data
 
     private fun SymbolSummary.param(): Parameter = signature().parameters.item()
 

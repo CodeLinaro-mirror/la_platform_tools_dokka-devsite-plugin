@@ -28,6 +28,7 @@ import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.ExternalDocumentationLink
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.model.DModule
+import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.pages.ModulePageNode
 import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.plugability.DokkaContext
@@ -66,6 +67,10 @@ internal abstract class ConverterTestBase(
             ?: classlike()?.functions?.singleOrNull { it.name == name && !it.dri.isFromBaseClass() }
             ?: packages.single().functions.singleOrNull { !it.dri.isFromBaseClass() }
             ?: classlike()?.functions?.singleOrNull { !it.dri.isFromBaseClass() }
+
+    protected fun DModule.constructor() = constructors().single()
+
+    protected fun DModule.constructors() = (classlike() as DClass).constructors
 
     protected fun DModule.functions() =
         packages.single().functions.nullIfEmpty()

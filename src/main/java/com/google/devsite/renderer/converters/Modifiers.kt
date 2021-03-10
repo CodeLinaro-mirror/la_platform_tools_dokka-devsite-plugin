@@ -42,7 +42,7 @@ internal fun <T> T.getExtraModifiers(): List<String>
     where T : WithExtraProperties<*> {
     return extra.allOfType<AdditionalModifiers>().flatMap { modifiers ->
         modifiers.content.values.single().map { it.name }.filter { it.isNotEmpty() }
-    } ?: emptyList()
+    }
 }
 
 /** @return true if the modifiers represent a constant symbol, false otherwise */

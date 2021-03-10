@@ -20,7 +20,7 @@ import com.google.devsite.components.ContextFreeComponent
 import kotlinx.html.FlowContent
 
 class PlainTextOutput(private val text: String) : ContextFreeComponent {
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         +text
     }
 }

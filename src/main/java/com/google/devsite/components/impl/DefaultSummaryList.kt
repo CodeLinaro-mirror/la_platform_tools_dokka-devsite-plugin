@@ -28,7 +28,7 @@ import kotlinx.html.tr
 internal class DefaultSummaryList(
     override val data: SummaryList.Params
 ) : SummaryList {
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         if (!hasContent()) return
 
         div("devsite-table-wrapper") {

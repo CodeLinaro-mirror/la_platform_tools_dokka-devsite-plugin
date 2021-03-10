@@ -85,8 +85,7 @@ internal class ParameterDocumentableConverter(
     }
 
     fun componentForTypeParameter(
-        param: DTypeParameter,
-        isSummary: Boolean
+        param: DTypeParameter
     ): DokkaTypeParameter = DefaultTypeParameter(DokkaTypeParameter.Params(
         displayLanguage = displayLanguage,
         name = param.variantTypeParameter.inner.name,

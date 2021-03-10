@@ -29,7 +29,7 @@ import kotlinx.html.unsafe
 internal class DefaultDevsitePage(
     override val data: DevsitePage.Params
 ) : DevsitePage {
-    override fun render(html: HTML) = html.run {
+    override fun render(into: HTML) = into.run {
         attributes["devsite"] = "true"
         head {
             title { +data.title }

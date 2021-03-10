@@ -31,6 +31,7 @@ import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
+import com.google.devsite.renderer.converters.testing.projectionName
 import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.renderer.converters.testing.title
 import com.google.devsite.renderer.impl.DocumentablesHolder
@@ -423,6 +424,19 @@ internal class ClasslikeDocumentableConverterTest(
                     .contains("result of invalidation")
             }
         }
+    }
+
+    @Test
+    fun `Class component creates inline generics`() {
+        val page = """
+            |class <T: Number, U> foo() {}
+        """.render().page()
+        val typeParams = page.content<Classlike>().data.signature.data.typeParameters
+        assertThat(typeParams.first().data.name).isEqualTo("T")
+        assertThat(typeParams.first().projectionName()).isEqualTo("Number")
+        assertThat(typeParams.last().data.name).isEqualTo("U")
+        kotlinOnly { assertThat(typeParams.last().projectionName()).isEqualTo("Any") }
+        javaOnly { assertThat(typeParams.last().projectionName()).isEqualTo("Object") }
     }
 
     private fun DModule.page(name: String = "Foo"): DevsitePage {

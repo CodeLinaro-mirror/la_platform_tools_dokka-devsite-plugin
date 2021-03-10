@@ -24,7 +24,7 @@ internal class NoopDescription(private val text: String) : Description {
     override val data: Description.Params
         get() = throw NotImplementedError()
 
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         p { +text }
     }
 }

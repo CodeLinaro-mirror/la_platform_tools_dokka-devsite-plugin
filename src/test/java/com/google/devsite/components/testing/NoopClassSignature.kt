@@ -18,13 +18,12 @@ package com.google.devsite.components.testing
 
 import com.google.devsite.components.symbols.ClassSignature
 import kotlinx.html.FlowContent
-import kotlinx.html.div
 
 internal class NoopClassSignature(private val shown: Boolean = true) : ClassSignature {
     override val data: ClassSignature.Params
         get() = throw NotImplementedError()
 
-    override fun render(html: FlowContent) = html.run {
+    override fun render(into: FlowContent) = into.run {
         if (shown) {
             +"Signature"
         }
