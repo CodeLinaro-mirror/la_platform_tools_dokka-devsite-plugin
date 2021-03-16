@@ -45,7 +45,9 @@ class BasicTest : IntegrationTestBase() {
 
     @Test
     fun `Validate prod AndroidX paging lib`() {
-        verifyDirectory("paging", sampleLocations = listOf("samples"))
+        verifyDirectory("paging",
+            sampleLocations = listOf("samples"),
+            includeFiles = listOf("metadata.md"))
     }
 
     @Test
