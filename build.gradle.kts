@@ -25,7 +25,7 @@ repositories {
 }
 
 plugins {
-    kotlin("jvm") version "1.4.0"
+    kotlin("jvm") version "1.4.30"
     id("com.github.johnrengelman.shadow") version "4.0.4"
     id("application")
 }
@@ -34,7 +34,7 @@ application {
     mainClassName = "org.jetbrains.dokka.MainKt"
 }
 
-val dokkaVersion = "1.4.20.2-dev-64"
+val dokkaVersion = "1.4.30-dev-75"
 
 dependencies {
     compileOnly(kotlin("stdlib-jdk8"))
