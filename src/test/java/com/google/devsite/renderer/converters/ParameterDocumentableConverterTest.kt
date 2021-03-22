@@ -24,6 +24,8 @@ import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.testing.ConverterTestBase
+import junit.framework.Assert.assertFalse
+import junit.framework.Assert.assertTrue
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DParameter
 import org.junit.Test
@@ -174,6 +176,32 @@ internal class ParameterDocumentableConverterTest(
 
         assertThat(paramType.link().name).isEqualTo("T")
         assertThat(paramType.link().url).isEmpty()
+    }
+
+    @Test
+    fun `Nullability on parameters is rendered correctly in 4x Kotlin and Java`() {
+        val functionK = """
+            |fun foo(a: String, b: String?)
+        """.render()
+        val functionJ = """
+            |public void foo(@NonNull String a, @Nullable String b)
+        """.render(java = true)
+        for (function in listOf(functionK, functionJ)) {
+            val paramA = function.param("a")
+            val paramB = function.param("b")
+            assertFalse(paramA.nullable)
+            assertTrue(paramB.nullable)
+            kotlinOnly { // Kotlin uses ? and default-nonnull instead of annotations
+                assertThat(paramA.data.annotations).isEmpty()
+                assertThat(paramB.data.annotations).isEmpty()
+            }
+            javaOnly {
+                if (function != functionK) { // Kotlin-as-Java doesn't generate @NonNull b/170652047
+                    assertThat(paramA.data.annotations.single().link().name).isEqualTo("NonNull")
+                }
+                assertThat(paramB.data.annotations.single().link().name).isEqualTo("Nullable")
+            }
+        }
     }
 
     @Test
@@ -540,12 +568,13 @@ internal class ParameterDocumentableConverterTest(
         assertThat(typeName).isEqualTo("String")
     }
 
-    private fun DModule.param(forSummary: Boolean = false): Parameter {
+    private fun DModule.param(name: String = "foo", forSummary: Boolean = false): Parameter {
         val converter = ParameterDocumentableConverter(language, pathProvider())
-        return converter.componentForParameter(parameterDoc(), forSummary)
+        return converter.componentForParameter(parameterDoc(name), forSummary)
     }
 
-    private fun DModule.parameterDoc(): DParameter = function()!!.parameters.single()
+    private fun DModule.parameterDoc(name: String = "foo"): DParameter =
+        function()!!.parameters.singleOrNull { it.name == name } ?: function()!!.parameters.single()
 
     private fun assertNoLambdaStuff(data: Parameter.Params) {
         assertThat(data.isLambda).isFalse()

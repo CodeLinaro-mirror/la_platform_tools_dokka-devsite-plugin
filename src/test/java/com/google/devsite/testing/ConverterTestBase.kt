@@ -55,7 +55,7 @@ internal abstract class ConverterTestBase(
     }
 
     protected fun DModule.classlike() = packages.single().classlikes
-        .firstOrNull { it.name != "Nullable" }
+        .firstOrNull { it.name !in listOf("Nullable", "NonNull") }
 
     protected fun DModule.explicitClasslike(name: String? = null) =
         packages.single().classlikes.singleOrNull { it.name == name }
@@ -168,6 +168,9 @@ internal abstract class ConverterTestBase(
             |package androidx.example;
             |@Target({METHOD, PARAMETER, FIELD, LOCAL_VARIABLE, ANNOTATION_TYPE, PACKAGE})
             |public @interface Nullable {
+            |}
+            |@Target({METHOD, PARAMETER, FIELD, LOCAL_VARIABLE, ANNOTATION_TYPE, PACKAGE})
+            |public @interface NonNull {
             |}
             |public class Test {
             |$sourceCode
