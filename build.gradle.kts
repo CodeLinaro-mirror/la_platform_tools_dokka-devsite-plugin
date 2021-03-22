@@ -63,7 +63,7 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<ShadowJar> {
-    archiveBaseName.set("dokka-devsite-plugin-full")
+    archiveBaseName.set("dackka")
     archiveClassifier.set(null as String?)
     archiveVersion.set(null as String?)
     isZip64 = true
