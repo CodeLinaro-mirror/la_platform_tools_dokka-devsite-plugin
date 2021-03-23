@@ -36,7 +36,9 @@ import kotlinx.coroutines.rx2.asObservable
  * An [Observable] of [PagingData], which mirrors the stream provided by [Pager.flow], but exposes
  * it as an [Observable].
  */
-@OptIn(ExperimentalCoroutinesApi::class)
+// Both annotations are needed here see: https://youtrack.jetbrains.com/issue/KT-45227
+@ExperimentalCoroutinesApi
+@get:ExperimentalCoroutinesApi
 val <Key : Any, Value : Any> Pager<Key, Value>.observable: Observable<PagingData<Value>>
     get() = flow
         .conflate()
@@ -46,7 +48,9 @@ val <Key : Any, Value : Any> Pager<Key, Value>.observable: Observable<PagingData
  * A [Flowable] of [PagingData], which mirrors the stream provided by [Pager.flow], but exposes
  * it as a [Flowable].
  */
-@OptIn(ExperimentalCoroutinesApi::class)
+// Both annotations are needed here see: https://youtrack.jetbrains.com/issue/KT-45227
+@ExperimentalCoroutinesApi
+@get:ExperimentalCoroutinesApi
 val <Key : Any, Value : Any> Pager<Key, Value>.flowable: Flowable<PagingData<Value>>
     get() = flow
         .conflate()
@@ -57,7 +61,7 @@ val <Key : Any, Value : Any> Pager<Key, Value>.flowable: Flowable<PagingData<Val
  *
  * [cachedIn] multicasts pages loaded and transformed by a [PagingData], allowing multiple
  * observers on the same instance of [PagingData] to receive the same events, avoiding redundant
- * work, but comes at the cost of buffering those events in memory.
+ * work, but comes at the cost of buffering those pages in memory.
  *
  * Calling [cachedIn] is required to allow calling
  * [submitData][androidx.paging.AsyncPagingDataAdapter] on the same instance of [PagingData]
@@ -69,7 +73,7 @@ val <Key : Any, Value : Any> Pager<Key, Value>.flowable: Flowable<PagingData<Val
  * the [PagingData] stream is no longer needed. Otherwise, the provided [CoroutineScope] must be
  * manually cancelled to avoid memory leaks.
  */
-@OptIn(ExperimentalCoroutinesApi::class)
+@ExperimentalCoroutinesApi
 fun <T : Any> Observable<PagingData<T>>.cachedIn(scope: CoroutineScope): Observable<PagingData<T>> {
     return toFlowable(BackpressureStrategy.LATEST)
         .asFlow()
@@ -82,7 +86,7 @@ fun <T : Any> Observable<PagingData<T>>.cachedIn(scope: CoroutineScope): Observa
  *
  * [cachedIn] multicasts pages loaded and transformed by a [PagingData], allowing multiple
  * observers on the same instance of [PagingData] to receive the same events, avoiding redundant
- * work, but comes at the cost of buffering those events in memory.
+ * work, but comes at the cost of buffering those pages in memory.
  *
  * Calling [cachedIn] is required to allow calling
  * [submitData][androidx.paging.AsyncPagingDataAdapter] on the same instance of [PagingData]
@@ -94,7 +98,7 @@ fun <T : Any> Observable<PagingData<T>>.cachedIn(scope: CoroutineScope): Observa
  * the [PagingData] stream is no longer needed. Otherwise, the provided [CoroutineScope] must be
  * manually cancelled to avoid memory leaks.
  */
-@OptIn(ExperimentalCoroutinesApi::class)
+@ExperimentalCoroutinesApi
 fun <T : Any> Flowable<PagingData<T>>.cachedIn(scope: CoroutineScope): Flowable<PagingData<T>> {
     return asFlow()
         .cachedIn(scope)

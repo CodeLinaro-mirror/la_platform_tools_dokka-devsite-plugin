@@ -39,12 +39,18 @@ internal sealed class PageEvent<T : Any> {
     ) : PageEvent<T>() {
         init {
             require(loadType == APPEND || placeholdersBefore >= 0) {
-                "Append state defining placeholdersBefore must be > 0, but was" +
+                "Prepend insert defining placeholdersBefore must be > 0, but was" +
                     " $placeholdersBefore"
             }
             require(loadType == PREPEND || placeholdersAfter >= 0) {
-                "Prepend state defining placeholdersAfter must be > 0, but was" +
+                "Append insert defining placeholdersAfter must be > 0, but was" +
                     " $placeholdersAfter"
+            }
+            require(loadType != REFRESH || pages.isNotEmpty()) {
+                "Cannot create a REFRESH Insert event with no TransformablePages as this could " +
+                    "permanently stall pagination. Note that this check does not prevent empty " +
+                    "LoadResults and is instead usually an indication of an internal error in " +
+                    "Paging itself."
             }
         }
 
@@ -114,7 +120,13 @@ internal sealed class PageEvent<T : Any> {
                 placeholdersBefore: Int,
                 placeholdersAfter: Int,
                 combinedLoadStates: CombinedLoadStates
-            ) = Insert(REFRESH, pages, placeholdersBefore, placeholdersAfter, combinedLoadStates)
+            ) = Insert(
+                REFRESH,
+                pages,
+                placeholdersBefore,
+                placeholdersAfter,
+                combinedLoadStates,
+            )
 
             fun <T : Any> Prepend(
                 pages: List<TransformablePage<T>>,
@@ -133,16 +145,19 @@ internal sealed class PageEvent<T : Any> {
              *
              * Note - has no remote state, so remote state may be added over time
              */
-            val EMPTY_REFRESH_LOCAL = Refresh<Any>(
-                pages = listOf(),
+            val EMPTY_REFRESH_LOCAL: Insert<Any> = Refresh(
+                pages = listOf(TransformablePage.EMPTY_INITIAL_PAGE),
                 placeholdersBefore = 0,
                 placeholdersAfter = 0,
                 combinedLoadStates = CombinedLoadStates(
+                    refresh = LoadState.NotLoading.Incomplete,
+                    prepend = LoadState.NotLoading.Complete,
+                    append = LoadState.NotLoading.Complete,
                     source = LoadStates(
                         refresh = LoadState.NotLoading.Incomplete,
                         prepend = LoadState.NotLoading.Complete,
-                        append = LoadState.NotLoading.Complete
-                    )
+                        append = LoadState.NotLoading.Complete,
+                    ),
                 )
             )
         }
@@ -178,6 +193,14 @@ internal sealed class PageEvent<T : Any> {
         val loadState: LoadState // TODO: consider using full state object here
     ) : PageEvent<T>() {
         init {
+            // endOfPaginationReached for local refresh is driven by null values in next/prev keys.
+            require(
+                loadType != REFRESH || fromMediator || loadState !is LoadState.NotLoading ||
+                    !loadState.endOfPaginationReached
+            ) {
+                "LoadStateUpdate for local REFRESH may not set endOfPaginationReached = true"
+            }
+
             require(canDispatchWithoutInsert(loadState, fromMediator)) {
                 "LoadStateUpdates cannot be used to dispatch NotLoading unless it is from remote" +
                     " mediator and remote mediator reached end of pagination."
@@ -192,8 +215,7 @@ internal sealed class PageEvent<T : Any> {
              * This prevents multiple related RV animations from happening simultaneously
              */
             internal fun canDispatchWithoutInsert(loadState: LoadState, fromMediator: Boolean) =
-                loadState is LoadState.Loading || loadState is LoadState.Error ||
-                    (loadState.endOfPaginationReached && fromMediator)
+                loadState is LoadState.Loading || loadState is LoadState.Error || fromMediator
         }
     }
 

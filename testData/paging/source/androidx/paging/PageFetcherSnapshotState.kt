@@ -27,16 +27,19 @@ import androidx.paging.PageEvent.Insert.Companion.Refresh
 import androidx.paging.PagingConfig.Companion.MAX_SIZE_UNBOUNDED
 import androidx.paging.PagingSource.LoadResult.Page
 import androidx.paging.PagingSource.LoadResult.Page.Companion.COUNT_UNDEFINED
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
 /**
  * Internal state of [PageFetcherSnapshot] whose updates can be consumed as a [Flow] of [PageEvent].
+ *
+ * Note: This class is not thread-safe and must be guarded by a lock!
  */
-internal class PageFetcherSnapshotState<Key : Any, Value : Any>(
+internal class PageFetcherSnapshotState<Key : Any, Value : Any> private constructor(
     private val config: PagingConfig
 ) {
     private val _pages = mutableListOf<Page<Key, Value>>()
@@ -81,12 +84,18 @@ internal class PageFetcherSnapshotState<Key : Any, Value : Any>(
             }
         }
 
-    internal var prependLoadId = 0
-        private set
-    internal var appendLoadId = 0
-        private set
-    private val prependLoadIdCh = Channel<Int>(Channel.CONFLATED)
-    private val appendLoadIdCh = Channel<Int>(Channel.CONFLATED)
+    // Load generation ids used to respect cancellation in cases where suspending code continues to
+    // run even after cancellation.
+    private var prependGenerationId = 0
+    private var appendGenerationId = 0
+    private val prependGenerationIdCh = Channel<Int>(Channel.CONFLATED)
+    private val appendGenerationIdCh = Channel<Int>(Channel.CONFLATED)
+
+    internal fun generationId(loadType: LoadType): Int = when (loadType) {
+        REFRESH -> throw IllegalArgumentException("Cannot get loadId for loadType: REFRESH")
+        PREPEND -> prependGenerationId
+        APPEND -> appendGenerationId
+    }
 
     /**
      * Cache previous ViewportHint which triggered any failed PagingSource APPEND / PREPEND that
@@ -94,20 +103,19 @@ internal class PageFetcherSnapshotState<Key : Any, Value : Any>(
      * two different ways to trigger.
      */
     internal val failedHintsByLoadType = mutableMapOf<LoadType, ViewportHint>()
+
     // only the local load states
     internal var sourceLoadStates = LoadStates.IDLE
         private set
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     fun consumePrependGenerationIdAsFlow(): Flow<Int> {
-        return prependLoadIdCh.consumeAsFlow()
-            .onStart { prependLoadIdCh.offer(prependLoadId) }
+        return prependGenerationIdCh.consumeAsFlow()
+            .onStart { prependGenerationIdCh.offer(prependGenerationId) }
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     fun consumeAppendGenerationIdAsFlow(): Flow<Int> {
-        return appendLoadIdCh.consumeAsFlow()
-            .onStart { appendLoadIdCh.offer(appendLoadId) }
+        return appendGenerationIdCh.consumeAsFlow()
+            .onStart { appendGenerationIdCh.offer(appendGenerationId) }
     }
 
     fun setSourceLoadState(type: LoadType, newState: LoadState): Boolean {
@@ -141,24 +149,33 @@ internal class PageFetcherSnapshotState<Key : Any, Value : Any>(
                 placeholdersBefore = placeholdersBefore,
                 placeholdersAfter = placeholdersAfter,
                 combinedLoadStates = CombinedLoadStates(
+                    refresh = sourceLoadStates.refresh,
+                    prepend = sourceLoadStates.prepend,
+                    append = sourceLoadStates.append,
                     source = sourceLoadStates,
-                    mediator = null
+                    mediator = null,
                 )
             )
             PREPEND -> Prepend(
                 pages = pages,
                 placeholdersBefore = placeholdersBefore,
                 combinedLoadStates = CombinedLoadStates(
+                    refresh = sourceLoadStates.refresh,
+                    prepend = sourceLoadStates.prepend,
+                    append = sourceLoadStates.append,
                     source = sourceLoadStates,
-                    mediator = null
+                    mediator = null,
                 )
             )
             APPEND -> Append(
                 pages = pages,
                 placeholdersAfter = placeholdersAfter,
                 combinedLoadStates = CombinedLoadStates(
+                    refresh = sourceLoadStates.refresh,
+                    prepend = sourceLoadStates.prepend,
+                    append = sourceLoadStates.append,
                     source = sourceLoadStates,
-                    mediator = null
+                    mediator = null,
                 )
             )
         }
@@ -183,7 +200,7 @@ internal class PageFetcherSnapshotState<Key : Any, Value : Any>(
                 check(pages.isNotEmpty()) { "should've received an init before prepend" }
 
                 // Skip this insert if it is the result of a cancelled job due to page drop
-                if (loadId != prependLoadId) return false
+                if (loadId != prependGenerationId) return false
 
                 _pages.add(0, page)
                 initialPageIndex++
@@ -200,7 +217,7 @@ internal class PageFetcherSnapshotState<Key : Any, Value : Any>(
                 check(pages.isNotEmpty()) { "should've received an init before append" }
 
                 // Skip this insert if it is the result of a cancelled job due to page drop
-                if (loadId != appendLoadId) return false
+                if (loadId != appendGenerationId) return false
 
                 _pages.add(page)
                 placeholdersAfter = if (page.itemsAfter == COUNT_UNDEFINED) {
@@ -233,16 +250,16 @@ internal class PageFetcherSnapshotState<Key : Any, Value : Any>(
 
                 placeholdersBefore = event.placeholdersRemaining
 
-                prependLoadId++
-                prependLoadIdCh.offer(prependLoadId)
+                prependGenerationId++
+                prependGenerationIdCh.offer(prependGenerationId)
             }
             APPEND -> {
                 repeat(event.pageCount) { _pages.removeAt(pages.size - 1) }
 
                 placeholdersAfter = event.placeholdersRemaining
 
-                appendLoadId++
-                appendLoadIdCh.offer(appendLoadId)
+                appendGenerationId++
+                appendGenerationIdCh.offer(appendGenerationId)
             }
             else -> throw IllegalArgumentException("cannot drop ${event.loadType}")
         }
@@ -312,7 +329,7 @@ internal class PageFetcherSnapshotState<Key : Any, Value : Any>(
         }
     }
 
-    internal fun currentPagingState(viewportHint: ViewportHint?) = PagingState<Key, Value>(
+    internal fun currentPagingState(viewportHint: ViewportHint.Access?) = PagingState<Key, Value>(
         pages = pages.toList(),
         anchorPosition = viewportHint?.let { hint ->
             // Translate viewportHint to anchorPosition based on fetcher state (pre-transformation),
@@ -369,4 +386,23 @@ internal class PageFetcherSnapshotState<Key : Any, Value : Any>(
         config = config,
         leadingPlaceholderCount = placeholdersBefore
     )
+
+    /**
+     * Wrapper for [PageFetcherSnapshotState], which protects access behind a [Mutex] to prevent
+     * race scenarios.
+     */
+    internal class Holder<Key : Any, Value : Any>(
+        private val config: PagingConfig
+    ) {
+        private val lock = Mutex()
+        private val state = PageFetcherSnapshotState<Key, Value>(config)
+
+        suspend inline fun <T> withLock(
+            block: (state: PageFetcherSnapshotState<Key, Value>) -> T
+        ): T {
+            return lock.withLock {
+                block(state)
+            }
+        }
+    }
 }

@@ -54,40 +54,7 @@
     <h3> Presenting Data to UI</h3>
     <p>To present data loaded by a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to a <code>RecyclerView</code>, create an instance of <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code>, which provides a stream of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> that you may collect from and submit to a <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>.</p>
     <pre class="prettyprint">/**
- * Sample Page-Keyed PagingSource, which uses String tokens to load pages.
- *
- * Loads Items from network requests via Retrofit to a backend service.
- */
-class MyPagingSource(
-    val myBackend: MyBackendService
-) : PagingSource&lt;String, Item&gt;() {
-    override suspend fun load(params: LoadParams&lt;String&gt;): LoadResult&lt;String, Item&gt; {
-        // Retrofit calls that return the body type throw either IOException for network
-        // failures, or HttpException for any non-2xx HTTP status codes. This code reports all
-        // errors to the UI, but you can inspect/wrap the exceptions to provide more context.
-        return try {
-            // Suspending network load via Retrofit. This doesn't need to be wrapped in a
-            // withContext(Dispatcher.IO) { ... } block since Retrofit's Coroutine
-            // CallAdapter dispatches on a worker thread.
-            val response = myBackend.searchItems(params.key)
-            LoadResult.Page(
-                data = response.items,
-                prevKey = response.prev,
-                nextKey = response.next
-            )
-        } catch (e: IOException) {
-            LoadResult.Error(e)
-        } catch (e: HttpException) {
-            LoadResult.Error(e)
-        }
-    }
-
-    override fun getRefreshKey(state: PagingState&lt;String, Item&gt;): String? {
-        return state.anchorPosition?.let { state.closestItemToPosition(it)?.id }
-    }
-}</pre>
-    <pre class="prettyprint">/**
- * Sample Page-Indexed PagingSource, which uses Int page number to load pages.
+ * Sample page-keyed PagingSource, which uses Int page number to load pages.
  *
  * Loads Items from network requests via Retrofit to a backend service.
  *
@@ -135,6 +102,39 @@ class MyPagingSource(
             state.closestPageToPosition(it)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(it)?.nextKey?.minus(1)
         }
+    }
+}</pre>
+    <pre class="prettyprint">/**
+ * Sample item-keyed [PagingSource], which uses String tokens to load pages.
+ *
+ * Loads Items from network requests via Retrofit to a backend service.
+ */
+class MyPagingSource(
+    val myBackend: MyBackendService
+) : PagingSource&lt;String, Item&gt;() {
+    override suspend fun load(params: LoadParams&lt;String&gt;): LoadResult&lt;String, Item&gt; {
+        // Retrofit calls that return the body type throw either IOException for network
+        // failures, or HttpException for any non-2xx HTTP status codes. This code reports all
+        // errors to the UI, but you can inspect/wrap the exceptions to provide more context.
+        return try {
+            // Suspending network load via Retrofit. This doesn't need to be wrapped in a
+            // withContext(Dispatcher.IO) { ... } block since Retrofit's Coroutine
+            // CallAdapter dispatches on a worker thread.
+            val response = myBackend.searchItems(params.key)
+            LoadResult.Page(
+                data = response.items,
+                prevKey = response.prev,
+                nextKey = response.next
+            )
+        } catch (e: IOException) {
+            LoadResult.Error(e)
+        } catch (e: HttpException) {
+            LoadResult.Error(e)
+        }
+    }
+
+    override fun getRefreshKey(state: PagingState&lt;String, Item&gt;): String? {
+        return state.anchorPosition?.let { state.closestItemToPosition(it)?.id }
     }
 }</pre>
     <div class="devsite-table-wrapper">
@@ -290,14 +290,14 @@ class MyPagingSource(
         </thead>
         <tbody>
           <tr>
-            <td><code>@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a>&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;Key</code></td>
+            <td><code>abstract @<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;Key</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a>(<a href="/reference/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;&nbsp;state)</code></div>
-              <p>Request a refresh key given the current <code><a href="/reference/androidx/paging/PagingState.html">PagingState</a></code> of the associated <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> used to present loaded data from this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
+              <p>Provide a <code><a href="/reference/androidx/paging/PagingSource.html">Key</a></code> used for the initial <code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> for the next <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> due to invalidation of this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
             </td>
           </tr>
           <tr>
-            <td><code>void</code></td>
+            <td><code>final void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a>()</code></div>
               <p>Signal the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to stop loading.</p>
@@ -392,17 +392,49 @@ class MyPagingSource(
     <h2>Public methods</h2>
     <div><a name="getRefreshKey-androidx.paging.PagingState-"></a>
       <h3 class="api-name" id="getRefreshKey(androidx.paging.PagingState)">getRefreshKey</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a><br>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a><br>public&nbsp;@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a>&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;Key&nbsp;<a href="/reference/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a>(<a href="/reference/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;&nbsp;state)</pre>
-      <p>Request a refresh key given the current <code><a href="/reference/androidx/paging/PagingState.html">PagingState</a></code> of the associated <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> used to present loaded data from this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
-      <p>The <code><a href="/reference/androidx/paging/PagingSource.html">Key</a></code> returned by this method is used to populate the <code><a href="/reference/androidx/paging/PagingSource.LoadParams.html#key()">LoadParams.key</a></code> for load requests of type <code><a href="/reference/androidx/paging/LoadType.REFRESH.html">REFRESH</a></code>.</p>
-      <p>For example, if items are loaded based on position, and keys are positions, <code><a href="/reference/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a></code> should return the position of the item.</p>
-      <p>Alternately, if items contain a key used to load, get the key from the item in the page at index <code><a href="/reference/androidx/paging/PagingState.html#anchorPosition()">PagingState.anchorPosition</a></code>.</p>
-      <p>If this operation cannot be supported (generally, because keys cannot be reused across refresh) return <code>null</code> - this is the default behavior.</p>
-      <p>Note: This method is guaranteed to only be called if the initial load succeeds and the list of loaded pages is not empty. In the case where a refresh is triggered before the initial load succeeds or it errors out, the initial key passed to <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code> will be used.</p>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a><br>public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;Key&nbsp;<a href="/reference/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a>(<a href="/reference/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;&nbsp;state)</pre>
+      <p>Provide a <code><a href="/reference/androidx/paging/PagingSource.html">Key</a></code> used for the initial <code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> for the next <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> due to invalidation of this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>. The <code><a href="/reference/androidx/paging/PagingSource.html">Key</a></code> is provided to <code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> via <code><a href="/reference/androidx/paging/PagingSource.LoadParams.html#key()">LoadParams.key</a></code>.</p>
+      <p>The <code><a href="/reference/androidx/paging/PagingSource.html">Key</a></code> returned by this method should cause <code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> to load enough items to fill the viewport around the last accessed position, allowing the next generation to transparently animate in. The last accessed position can be retrieved via <code><a href="/reference/androidx/paging/PagingState.html#anchorPosition()">state.anchorPosition</a></code>, which is typically the top-most or bottom-most item in the viewport due to access being triggered by binding items as they scroll into view.</p>
+      <p>For example, if items are loaded based on integer position keys, you can return <code><a href="/reference/androidx/paging/PagingState.html#anchorPosition()">state.anchorPosition</a></code>.</p>
+      <p>Alternately, if items contain a key used to load, get the key from the item in the page at index <code><a href="/reference/androidx/paging/PagingState.html#anchorPosition()">state.anchorPosition</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;&nbsp;state</code></td>
+              <td width="100%">
+                <p><code><a href="/reference/androidx/paging/PagingState.html">PagingState</a></code> of the currently fetched data, which includes the most recently accessed position in the list via <code><a href="/reference/androidx/paging/PagingState.html#anchorPosition()">PagingState.anchorPosition</a></code>.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;Key</code></td>
+              <td width="100%">
+                <p><code><a href="/reference/androidx/paging/PagingSource.html">Key</a></code> passed to <code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> after invalidation used for initial load of the next generation. The <code><a href="/reference/androidx/paging/PagingSource.html">Key</a></code> returned by <code><a href="/reference/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a></code> should load pages centered around user's current viewport. If the correct <code><a href="/reference/androidx/paging/PagingSource.html">Key</a></code> cannot be determined, <code>null</code> can be returned to allow <code><a href="/reference/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> decide what default key to use.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div><a name="invalidate--"></a>
       <h3 class="api-name" id="invalidate()">invalidate</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a>()</pre>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a>()</pre>
       <p>Signal the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to stop loading.</p>
       <p>This method is idempotent. i.e., If <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code> has already been called, subsequent calls to this method should have no effect.</p>
     </div>

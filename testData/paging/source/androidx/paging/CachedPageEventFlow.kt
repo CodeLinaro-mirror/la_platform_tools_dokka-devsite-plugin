@@ -19,12 +19,10 @@ package androidx.paging
 import androidx.annotation.VisibleForTesting
 import androidx.paging.multicast.Multicaster
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ClosedSendChannelException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.emitAll
@@ -42,7 +40,6 @@ import java.util.concurrent.atomic.AtomicBoolean
  * An intermediate flow producer that flattens previous page events and gives any new downstream
  * just those events instead of the full history.
  */
-@OptIn(ExperimentalCoroutinesApi::class)
 internal class CachedPageEventFlow<T : Any>(
     src: Flow<PageEvent<T>>,
     scope: CoroutineScope
@@ -81,7 +78,7 @@ internal class CachedPageEventFlow<T : Any>(
         multicastedSrc.close()
     }
 
-    val downstreamFlow = channelFlow {
+    val downstreamFlow = simpleChannelFlow<PageEvent<T>> {
         // get a new snapshot. this will immediately hook us to the upstream channel
         val snapshot = pageController.createTemporaryDownstream()
         var lastReceivedHistoryIndex = Int.MIN_VALUE
@@ -141,7 +138,6 @@ private class TemporaryDownstream<T : Any> {
      */
     private val historyChannel: Channel<IndexedValue<PageEvent<T>>> = Channel(Channel.UNLIMITED)
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     fun consumeHistory() = historyChannel.consumeAsFlow()
 
     /**

@@ -181,11 +181,8 @@ internal class DocTagConverter(
                 // documentation that is primarily aimed at a constructor may wind up on the DClass
                 // if the parameter being documented is a primary constructor property parameter
                 val possibleTrueReferents = documentable.properties.map { it.name } +
-                    if (documentable is WithConstructors) {
-                        for (constructor in documentable.constructors) {
-                            constructor.parameters.map { it.name!! }
-                        }
-                    } else emptyList<String>()
+                    (documentable as? WithConstructors)?.constructors?.map { constructor ->
+                        constructor.parameters.map { it.name!! } }?.flatten().orEmpty()
                 assert(invalidNames.all { it in possibleTrueReferents })
                 // Use only documentation for type parameters in the parameter documentation table
                 return tags.filter { ungenerify((it as Param).name) in genericNames }
