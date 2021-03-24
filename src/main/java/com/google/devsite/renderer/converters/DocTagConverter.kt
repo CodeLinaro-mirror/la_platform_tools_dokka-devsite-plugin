@@ -81,7 +81,6 @@ internal class DocTagConverter(
     private val pathProvider: FilePathProvider,
     private val docsHolder: DocumentablesHolder
 ) {
-    private val classGraph = runBlocking { docsHolder.classGraph() }
     private val analysisMap = runBlocking { docsHolder.analysisMap() }
     private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
 
@@ -149,7 +148,13 @@ internal class DocTagConverter(
         return listOfNotNull(deprecation, description, *tables.toTypedArray())
     }
 
-    private fun List<TagWrapper>.names() = this.map { ungenerify((it as NamedTagWrapper).name) }
+    // Turn both "E" and "<E>" to "E"
+    private fun ungenerify(name: String): String {
+        if (name.startsWith('<') && name.endsWith('>')) return name.drop(1).dropLast(1)
+        return name
+    }
+    private fun TagWrapper.name() = ungenerify((this as NamedTagWrapper).name)
+    private fun List<TagWrapper>.names() = this.map { it.name() }
 
     /* Tags, in particular for property parameters, are propagated multiple times in upstream.
      * For example, @param t t_doc class Foo(val t) has Parameter(t, t_doc) duplicated many times.
@@ -172,47 +177,67 @@ internal class DocTagConverter(
             }
 
             // Handle parameter properties, e.g. class AClass<Gen>(val propParam)
-            // doc is DClasslike. DClasslike's only valid @params are type params
-            if (documentable is DClasslike) {
-                val genericNames = generics.map { it.name }
-                val invalidNames = tags.names().filter { it !in genericNames }
-                if (invalidNames.isEmpty()) return tags
-                // enforce that the propagated documentation makes sense somewhere. Specifically,
-                // documentation that is primarily aimed at a constructor may wind up on the DClass
-                // if the parameter being documented is a primary constructor property parameter
-                val possibleTrueReferents = documentable.properties.map { it.name } +
-                    (documentable as? WithConstructors)?.constructors?.map { constructor ->
-                        constructor.parameters.map { it.name!! } }?.flatten().orEmpty()
-                assert(invalidNames.all { it in possibleTrueReferents })
-                // Use only documentation for type parameters in the parameter documentation table
-                return tags.filter { ungenerify((it as Param).name) in genericNames }
-            }
-            // doc is Property. It is possible that a parameter property is documented on the class
-            // as @param. That doc should be used as though it were @property. Handled there.
-            // Properties can also have @param documentation for type parameters
-            else if (documentable is DProperty) {
-                val genericNames = generics.map { it.name }
-                val invalidNames = tags.names().filter {
-                    it !in genericNames && it != documentable.name }
-                assert(invalidNames.isEmpty())
-                return tags
-            } else if (documentable !is DFunction) {
-                throw RuntimeException("Invalid to apply @param to a ${documentable::class.java}")
+            when (documentable) {
+                // doc is DClasslike. DClasslike's only valid @params are type params
+                is DClasslike -> {
+                    val genericNames = generics.map { it.name }
+                    val invalidNames = tags.names().filter { it !in genericNames }
+                    if (invalidNames.isEmpty()) return tags
+                    // Enforce that the propagated documentation makes sense somewhere. Specifically
+                    // documentation primarily aimed at a constructor may wind up on the DClass
+                    // if the parameter being documented is a primary constructor property parameter
+                    invalidNames.toSet().subtract(documentable.properties.map { it.name } +
+                        (documentable as? WithConstructors)?.constructors?.map { constructor ->
+                            constructor.parameters.map { it.name!! } }?.flatten().orEmpty())
+                    logComponentNotFoundWarning("@param", invalidNames, documentable)
+                    // Use only docs for type parameters in the parameter documentation table
+                    return tags.filter { it.name() in genericNames }
+                }
+                // doc is Property. It is possible that a parameter property is documented on the
+                // class as @param. That doc is used as though it were @property. Handled there.
+                // Properties can also have @param documentation for type parameters
+                is DProperty -> {
+                    val genericNames = generics.map { it.name }
+                    val invalidNames = tags.names().filter {
+                        it !in genericNames && it != documentable.name }
+                    logComponentNotFoundWarning("@param", invalidNames, documentable)
+                    return tags
+                }
+                is DFunction -> {}
+                else ->
+                    throw RuntimeException("Can't apply @param to a ${documentable::class.java}")
             }
         } else if (tags.first() is Property) {
-            // A DClasslike with property parameters documented with @property may have Parameter tags
+            // A DClasslike with @property applying to property parameters may have Parameter tags
             // In such a case, none of these tags should become docs *on the DClasslike itself*
-            if (documentable is DClasslike) {
-                val possibleTrueReferents = documentable.properties.map { it.name }
-                assert(tags.names().all { it in possibleTrueReferents })
-                return emptyList()
-            } else if (documentable is DParameter || documentable is DProperty) {
-                return tags
-            } else {
-                throw RuntimeException("Invalid to apply @property to ${documentable::class.java}")
+            return when (documentable) {
+                is DClasslike -> {
+                    logComponentNotFoundWarning(
+                        "@property",
+                        tags.names().toSet().subtract(documentable.properties.map { it.name }),
+                        documentable
+                    )
+                    emptyList()
+                }
+                is DParameter, is DProperty -> tags
+                else ->
+                    throw RuntimeException("Can't apply @property to ${documentable::class.java}")
             }
         }
         return tags
+    }
+
+    private fun logComponentNotFoundWarning(
+        componentType: String,
+        components: Iterable<String>,
+        containingComponent: Documentable
+    ) {
+        if (components.none()) return
+        val warning = "WARNING: unable to find what is referred to by" +
+            components.map { "\n\t$componentType $it" }.joinToString() +
+            "\nin ${containingComponent::class.simpleName} ${containingComponent.name}" +
+            "\nDid you make a typo? Are you trying to refer to something not visible to users?"
+        println(warning)
     }
 
     private fun params(
@@ -232,7 +257,7 @@ internal class DocTagConverter(
                 paramConverter.componentForParameter(documentable.receiver!!, false)
 
         val params = tags.map { tag ->
-            val title = allOptions[ungenerify(tag.name)]!!
+            val title = allOptions[tag.name()]!!
             DefaultTwoPaneSummaryItem(
                 TwoPaneSummaryItem.Params(
                     title = title,
@@ -247,12 +272,6 @@ internal class DocTagConverter(
                 items = params as List<SummaryItem>
             )
         )
-    }
-
-    // Turn both "E" and "<E>" to "E"
-    private fun ungenerify(name: String): String {
-        if (name.startsWith('<') && name.endsWith('>')) return name.drop(1).dropLast(1)
-        return name
     }
 
     private fun returnType(tags: List<Return>, returnType: ContextFreeComponent): SummaryList {
