@@ -216,7 +216,7 @@ internal class DefaultDescription(
                 }
                 is BlockQuote -> blockQuote { renderTags(tag.children, state) }
                 is CustomDocTag -> { renderTags(tag.children, state) }
-                is Html, is Head, is Meta, is Header, is Title, is H1, is Footer, is IFrame,
+                is Html, is Head, is Meta, is Header, is Title, is Footer, is IFrame,
                 is Main, is Menu, is Nav, is Index ->
                     throw NotImplementedError(
                         "Inline HTML pages are not supported: ${tag.javaClass.simpleName}."
