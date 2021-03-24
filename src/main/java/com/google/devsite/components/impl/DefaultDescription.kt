@@ -35,6 +35,7 @@ import kotlinx.html.code
 import kotlinx.html.del
 import kotlinx.html.div
 import kotlinx.html.em
+import kotlinx.html.h1
 import kotlinx.html.h2
 import kotlinx.html.h3
 import kotlinx.html.h4
@@ -186,6 +187,7 @@ internal class DefaultDescription(
                 is A -> a(link) { renderTags(tag.children, state) }
                 is B, is Strong -> b { renderTags(tag.children, state) }
                 Br -> br { renderTags(tag.children, state) }
+                is H1 -> h1 { renderTags(tag.children, state) }
                 is H2 -> h2 { renderTags(tag.children, state) }
                 is H3 -> h3 { renderTags(tag.children, state) }
                 is H4 -> h4 { renderTags(tag.children, state) }
