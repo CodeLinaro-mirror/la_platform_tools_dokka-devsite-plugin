@@ -52,6 +52,8 @@ import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
+import java.io.ByteArrayOutputStream
+import java.io.PrintStream
 import kotlin.test.assertFails
 
 @RunWith(Parameterized::class)
@@ -281,8 +283,10 @@ internal class DocTagConverterTest(
         val description = """
             |/** @property bar a barber */
             |val bar: String = "barbarbar
-        """.render().documentation(doc = { this.packages.single()
-            .properties.single() }).single() as Description
+        """.render().documentation(doc = {
+            this.packages.single()
+                .properties.single()
+        }).single() as Description
 
         assertThat(description.text()).isEqualTo("a barber")
     }
@@ -294,8 +298,10 @@ internal class DocTagConverterTest(
             |   /** @property bar a barber */
             |   val bar: String = "barbarbar
             |}
-        """.render().documentation(doc = { this.packages.single().classlikes.single()
-            .properties.single() }).single() as Description
+        """.render().documentation(doc = {
+            this.packages.single().classlikes.single()
+                .properties.single()
+        }).single() as Description
 
         assertThat(description.text()).isEqualTo("a barber")
     }
@@ -310,14 +316,21 @@ internal class DocTagConverterTest(
             |fun foo()
             """.render().documentation()
         }
-        assertFails { // for type params and property params
-            """
-            |/**
-            | * @param NOT_A_REAL_PARAM aaaaaa
-            | */
-            |class Foo { }
-            """.render().documentation()
-        }
+        val standardOut = System.out
+        val outputStreamCaptor = ByteArrayOutputStream()
+        System.setOut(PrintStream(outputStreamCaptor))
+        """
+        |/**
+        | * @param NOT_A_REAL_PARAM aaaaaa
+        | */
+        |class Foo { }
+        """.render().documentation() // for type params and property params
+        val expected = "WARNING: unable to find what is referred to by" +
+            "\n\t@param NOT_A_REAL_PARAM" +
+            "\nin DClass Foo" +
+            "\nDid you make a typo? Are you trying to refer to something not visible to users?"
+        assertThat(outputStreamCaptor.toString()).contains(expected)
+        System.setOut(standardOut)
         assertFails { // for @param in the wrong place
             """
             |/**
@@ -330,23 +343,33 @@ internal class DocTagConverterTest(
 
     @Test
     fun `@property throws exception for invalid property`() {
-        assertFails { // @property on a parameter that is not a property
-            """
-            |/**
-            | * @property NOT_A_REAL_PROPERTY aaaaaa
-            | */
-            |class Foo(NOT_A_REAL_PROPERTY: String) { }
-            """.render().documentation()
-        }
-        assertFails { // there is no corresponding property
-            """
-            |/**
-            | * @property NO_PROPERTIES_HERE aaaaaa
-            | */
-            |class Foo() { }
-            """.render().documentation()
-        }
-        assertFails { // can't @property on a function
+        val standardOut = System.out
+        val outputStreamCaptor = ByteArrayOutputStream()
+        System.setOut(PrintStream(outputStreamCaptor))
+        """
+        |/**
+        | * @property NOT_A_REAL_PROPERTY aaaaaa
+        | */
+        |class Foo(NOT_A_REAL_PROPERTY: String) { }
+        """.render().documentation()
+        var expected = "WARNING: unable to find what is referred to by" +
+            "\n\t@property NOT_A_REAL_PROPERTY" +
+            "\nin DClass Foo" +
+            "\nDid you make a typo? Are you trying to refer to something not visible to users?"
+        assertThat(outputStreamCaptor.toString()).contains(expected)
+        System.setOut(PrintStream(outputStreamCaptor))
+        """
+        |/**
+        | * @property NO_PROPERTIES_HERE aaaaaa
+        | */
+        |class Foo() { }
+        """.render().documentation()
+        expected = "WARNING: unable to find what is referred to by" +
+            "\n\t@property NO_PROPERTIES_HERE" +
+            "\nin DClass Foo" +
+            "\nDid you make a typo? Are you trying to refer to something not visible to users?"
+        assertThat(outputStreamCaptor.toString()).contains(expected)
+        assertFails {
             """
             |class Foo() {
             |   /**
@@ -354,23 +377,24 @@ internal class DocTagConverterTest(
             |    */
             |   fun doAThing()
             |}
-            """.render().documentation()
+            """.render().documentation() // can't @property on a function
         }
-        assertFails { // can't @property on a function
+        assertFails {
             """
             |/**
             | * @property NO_PROPERTIES_HERE aaaaaa
             | */
             |fun doAThing()
-            """.render().documentation()
+            """.render().documentation() // can't @property on a function
         }
-        assertFails { // @property must be on correct property
+        assertFails {
             """
             |/** @property a
             |val b
             |val a
-            """.render().documentation()
+            """.render().documentation() // @property must be on correct property
         }
+        System.setOut(standardOut)
     }
 
     @Test
@@ -475,11 +499,13 @@ internal class DocTagConverterTest(
             assertThat(param0LambdaArgumentType).isEqualTo(listOf("Value"))
         }
         assertThat(param0.description().text()).isEqualTo("Function that runs on each " +
-            "loaded item, returning items of a potentially new type.")
+                "loaded item, returning items of a potentially new type."
+        )
         assertThat(param1Left.data.name).isEqualTo("ToValue")
         assertThat(param1Left.projectionName()).isEqualTo("String")
         assertThat(param1.description().text()).isEqualTo("Type of items produced by the " +
-            "new DataSource, from the passed function.")
+                "new DataSource, from the passed function."
+        )
 
         val seeAlsoTable = documentation.first {
             (it as? SummaryList)?.title() == "See also" } as SummaryList
