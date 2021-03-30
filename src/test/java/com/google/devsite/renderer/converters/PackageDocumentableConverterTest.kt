@@ -23,7 +23,7 @@ import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.content
-import com.google.devsite.renderer.converters.testing.functionSummary
+import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
@@ -346,8 +346,8 @@ internal class PackageDocumentableConverterTest(
         val summary = page.content<PackageSummary>()
         val topLevels = summary.data.topLevelFunctionsSummary.items(2)
 
-        assertThat(topLevels.first().functionSummary().name()).isEqualTo("a")
-        assertThat(topLevels.last().functionSummary().name()).isEqualTo("b")
+        assertThat(topLevels.first().summary().name()).isEqualTo("a")
+        assertThat(topLevels.last().summary().name()).isEqualTo("b")
     }
 
     @Test
@@ -375,8 +375,8 @@ internal class PackageDocumentableConverterTest(
         val summary = page.content<PackageSummary>()
         val extensions = summary.data.extensionFunctionsSummary.items(2)
 
-        assertThat(extensions.first().functionSummary().name()).isEqualTo("a")
-        assertThat(extensions.last().functionSummary().name()).isEqualTo("b")
+        assertThat(extensions.first().summary().name()).isEqualTo("a")
+        assertThat(extensions.last().summary().name()).isEqualTo("b")
     }
 
     private fun DModule.page(): DevsitePage {
@@ -386,7 +386,7 @@ internal class PackageDocumentableConverterTest(
         return runBlocking { converter.summaryPage() }
     }
 
-    private fun SummaryList.function(): SymbolSummary = item().functionSummary()
+    private fun SummaryList.function(): SymbolSummary = item().summary()
 
     companion object {
         @JvmStatic

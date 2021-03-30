@@ -28,7 +28,7 @@ import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.asType
-import com.google.devsite.renderer.converters.testing.functionSummary
+import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.renderer.impl.DocumentablesHolder
@@ -62,7 +62,7 @@ internal class PropertyDocumentableConverterTest(
             |val iAmACoolProperty
         """.render().summary()
 
-        val property = summary.functionSummary()
+        val property = summary.summary()
 
         assertThat(property.name()).isEqualTo("iAmACoolProperty")
     }
@@ -118,7 +118,7 @@ internal class PropertyDocumentableConverterTest(
             |val foo
         """.render().summary()
 
-        val property = summary.functionSummary()
+        val property = summary.summary()
 
         assertThat(property.data.description.text()).isEqualTo("some_documentation")
     }
@@ -129,7 +129,7 @@ internal class PropertyDocumentableConverterTest(
             |val <T : Number> List<T>.foo
         """.render().summary()
 
-        val property = summary.functionSummary()
+        val property = summary.summary()
         val signature = property.data.signature
 
         assertPath(

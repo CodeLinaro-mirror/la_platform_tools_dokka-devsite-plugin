@@ -27,7 +27,7 @@ import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.asType
-import com.google.devsite.renderer.converters.testing.functionSummary
+import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.converters.testing.generics
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
@@ -229,7 +229,7 @@ internal class FunctionDocumentableConverterTest(
             |fun iAmACoolFunction()
         """.render().summary()
 
-        val function = summary.functionSummary()
+        val function = summary.summary()
 
         assertThat(function.name()).isEqualTo("iAmACoolFunction")
     }
@@ -240,7 +240,7 @@ internal class FunctionDocumentableConverterTest(
             |fun String.foo()
         """.render().summary()
 
-        val function = summary.functionSummary()
+        val function = summary.summary()
         val signature = function.signature()
 
         javaOnly {
@@ -272,7 +272,7 @@ internal class FunctionDocumentableConverterTest(
             |fun Any.foo()
         """.render().summary()
 
-        val function = summary.functionSummary()
+        val function = summary.summary()
         val signature = function.signature()
 
         javaOnly {
@@ -304,7 +304,7 @@ internal class FunctionDocumentableConverterTest(
             |fun foo(a: String)
         """.render().summary()
 
-        val function = summary.functionSummary()
+        val function = summary.summary()
         val param = function.param()
         val paramType = param.data.primary
 
@@ -318,7 +318,7 @@ internal class FunctionDocumentableConverterTest(
         val summary = """
             |fun <T: Number, U> foo() = Unit
         """.render().summary()
-        val typeParams = summary.functionSummary().signature().typeParameters
+        val typeParams = summary.summary().signature().typeParameters
         assertThat(typeParams.first().data.name).isEqualTo("T")
         assertThat(typeParams.first().projectionName()).isEqualTo("Number")
         assertThat(typeParams.last().data.name).isEqualTo("U")
@@ -330,7 +330,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Function signature component creates multiple inline generics`() {
         val inlineGenerics = """
             |fun <T: Number, U: List<String>, V: T> foo() = Unit
-        """.render().summary().functionSummary().signature().typeParameters
+        """.render().summary().summary().signature().typeParameters
 
         assertThat(inlineGenerics.map { it.data.name }).isEqualTo(listOf("T", "U", "V"))
         assertThat(inlineGenerics[0].projectionName()).isEqualTo("Number")
@@ -346,7 +346,7 @@ internal class FunctionDocumentableConverterTest(
             |fun <T : Number> List<String>.foo(t: T, a: Map<String, Int>, block: String.(Float) -> Double) = Unit
         """.render().summary()
 
-        val function = summary.functionSummary()
+        val function = summary.summary()
         val signature = function.data.signature
 
         assertPath(
@@ -363,7 +363,7 @@ internal class FunctionDocumentableConverterTest(
             |    boolean a, int b, double c, float d, short e, long f, char g, byte h) {}
         """.render(java = true).summary()
 
-        val function = summary.functionSummary()
+        val function = summary.summary()
         val returnType = summary.returnSummary().type.link()
         val signature = function.signature()
 

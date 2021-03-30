@@ -32,6 +32,7 @@ import com.google.devsite.components.symbols.SymbolBase
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.SymbolType
 import com.google.devsite.components.symbols.TypeParameter
+import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
 import com.google.devsite.components.table.TwoPaneSummaryItem
@@ -61,14 +62,19 @@ internal fun <T> DevsitePage.content(): T = data.content as T
 
 internal fun SummaryList.item() = item<TwoPaneSummaryItem>()
 internal fun SummaryList.items(size: Int? = null) = items<TwoPaneSummaryItem>(size)
+internal fun SummaryList.sItems(size: Int? = null) = items<SingleColumnSummaryItem>(size)
 internal fun SummaryList.single() = items().single()
 internal fun SummaryList.size() = items().size
 internal fun SummaryList.title(): String = (data.header as TableTitle).data.title
 
 internal fun TwoPaneSummaryItem.link(): Link.Params = (data.title as Link).data
-internal fun TwoPaneSummaryItem.functionSummary() = data.description as SymbolSummary
-internal fun TwoPaneSummaryItem.name() = (this.data.title as Parameter).data.name
-internal fun TwoPaneSummaryItem.description() = data.description as Description
+internal fun TwoPaneSummaryItem.summary() = data.description as SymbolSummary
+internal fun TwoPaneSummaryItem.name(): String = (this.data.title as? Parameter)?.data?.name
+    ?: (this.data.description as SymbolSummary).name()
+internal fun TwoPaneSummaryItem.description() = (data.description as? Description)
+    ?: (data.description as SymbolSummary).data.description
+internal fun SingleColumnSummaryItem.description() = (data.description as? Description)
+    ?: (data.description as SymbolSummary).data.description
 
 internal fun SymbolSummary.name(): String = data.signature.data.name.data.name
 internal fun SymbolSummary.signature() = (data.signature as FunctionSignature).data

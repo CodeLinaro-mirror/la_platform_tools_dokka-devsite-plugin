@@ -21,17 +21,19 @@ import com.google.devsite.components.Description
 import com.google.devsite.components.Raw
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.DevsitePage
+import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.content
-import com.google.devsite.renderer.converters.testing.functionSummary
+import com.google.devsite.renderer.converters.testing.description
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.projectionName
+import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.renderer.converters.testing.title
 import com.google.devsite.renderer.impl.DocumentablesHolder
@@ -99,7 +101,7 @@ internal class ClasslikeDocumentableConverterTest(
         val classlike = page.content<Classlike>()
         val (summary) = classlike.symbolsFor("Public functions", "Public methods")
 
-        assertThat(summary.item().functionSummary().name()).isEqualTo("foo")
+        assertThat(summary.item().summary().name()).isEqualTo("foo")
     }
 
     @Test
@@ -117,14 +119,14 @@ internal class ClasslikeDocumentableConverterTest(
         javaOnly {
             val classlike = page.content<Classlike>()
             val (summary) = classlike.symbolsFor("Public methods")
-            assertThat(summary.items().first().functionSummary().name()).isEqualTo("aar")
-            assertThat(summary.items().last().functionSummary().name()).isEqualTo("bar")
+            assertThat(summary.items().first().summary().name()).isEqualTo("aar")
+            assertThat(summary.items().last().summary().name()).isEqualTo("bar")
         }
         kotlinOnly {
             val classlike = page.content<Classlike>()
             val (summary) = classlike.symbolsFor("Public functions")
-            assertThat(summary.items().first().functionSummary().name()).isEqualTo("foo")
-            assertThat(summary.items().last().functionSummary().name()).isEqualTo("zoo")
+            assertThat(summary.items().first().summary().name()).isEqualTo("foo")
+            assertThat(summary.items().last().summary().name()).isEqualTo("zoo")
         }
     }
 
@@ -185,7 +187,7 @@ internal class ClasslikeDocumentableConverterTest(
         val classlike = page.content<Classlike>()
         val (summary) = classlike.symbolsFor("Protected functions", "Protected methods")
 
-        assertThat(summary.item().functionSummary().name()).isEqualTo("foo")
+        assertThat(summary.item().summary().name()).isEqualTo("foo")
     }
 
     @Test
@@ -199,7 +201,7 @@ internal class ClasslikeDocumentableConverterTest(
         val classlike = page.content<Classlike>()
         val (summary) = classlike.symbolsFor("Public properties", "Public fields")
 
-        assertThat(summary.item().functionSummary().name()).isEqualTo("foo")
+        assertThat(summary.item().summary().name()).isEqualTo("foo")
     }
 
     @Ignore // TODO(b/165112358): foo doesn't show up in the dokka model
@@ -214,7 +216,7 @@ internal class ClasslikeDocumentableConverterTest(
         val classlike = page.content<Classlike>()
         val (summary) = classlike.symbolsFor("Protected properties", "Protected fields")
 
-        assertThat(summary.item().functionSummary().name()).isEqualTo("foo")
+        assertThat(summary.item().summary().name()).isEqualTo("foo")
     }
 
     @Test
@@ -426,6 +428,188 @@ internal class ClasslikeDocumentableConverterTest(
         }
     }
 
+    // TODO: patch upstream dokka to support kotlin inherit docs b/184361891
+    @Test // TODO: add tests and support for kotlin inheriting from java and vice versa
+    fun `Class component inherits docs from same language in 4x Kotlin and Java`() {
+        val pagesK = """
+            | /** docs for foo */
+            |class foo() {
+            |    /** dew it */
+            |    fun doit() {}
+            |    /** thunderous applause */
+            |    open val democracy = false
+            |}
+            |class bar() : foo {
+            |    override fun doit() {}
+            |    override val democracy = true
+            |}
+            | /** overriding docs for baz */
+            |class baz() : foo {
+            |    /** overriding function docs */
+            |    override fun doit() {}
+            |    /** KotOR */
+            |    override val democracy = true
+            |}
+        """.render()
+        val pagesJ = """
+            |public class foo() {
+            |    /** dew it */
+            |    public void doit() {}
+            |}
+            |public class bar() extends foo {
+            |    /** {@inheritdoc} */
+            |    override public void doit() {}
+            |}
+            |public class baz() extends foo {
+            |    /** overriding function docs */
+            |    override public void doit() {}
+            |}
+        """.render(java = true) // Java {@inheritdoc} does not support classes & properties
+        for (pages in listOf(pagesK, pagesJ)) {
+            val fooClass = pages.page("foo").content<Classlike>()
+            val barClass = pages.page("bar").content<Classlike>()
+            val bazClass = pages.page("baz").content<Classlike>()
+
+            // Function description inheritance does not work properly
+            val fooDoit = fooClass.methodSymbols().first.items().single()
+            val fooDoitDocs = fooDoit.summary().data.description.text()
+            val barDoit = barClass.methodSymbols().first.items().single()
+            val barDoitDocs = barDoit.summary().data.description.text()
+            val bazDoit = bazClass.methodSymbols().first.items().single()
+            val bazDoitDocs = bazDoit.summary().data.description.text()
+
+            assertThat(fooDoitDocs).isEqualTo("dew it")
+            // assertThat(barDoitDocs).isEqualTo("dew it")
+            // assertThat(bazDoitDocs).isEqualTo("overriding function docs")
+
+            if (pages == pagesK) {
+                // overriding class docs is maybe something we want in kotlin, but is not jdoc spec
+                val fooDescription = (fooClass.data.description.first() as Description)
+                val barDescription = (barClass.data.description.first() as Description)
+                val bazDescription = (bazClass.data.description.first() as Description)
+                assertThat(fooDescription.text()).isEqualTo("docs for foo")
+                // assertThat(barDescription.text()).isEqualTo("docs for foo")
+                assertThat(bazDescription.text()).isEqualTo("overriding docs for baz")
+
+                // overriding properties is kotlin-only, and working
+                val fooDemocracy = fooClass.propertySymbols().first.items().single().summary()
+                assertThat(fooDemocracy.data.description.text()).isEqualTo("thunderous applause")
+                val barDemocracy = barClass.propertySymbols().first.items().single().summary()
+                assertThat(barDemocracy.data.description.text()).isEqualTo("thunderous applause")
+                val bazDemocracy = bazClass.propertySymbols().first.items().single().summary()
+                assertThat(bazDemocracy.data.description.text()).isEqualTo("KotOR")
+            }
+        }
+    }
+
+    @Ignore // TODO: patch upstream dokka to implement kotlin documentation inheritance b/184361891
+    @Test // TODO: add @constructor doc inheritance tests once that is implemented
+    fun `Property parameter documentation inherits properly`() {
+        val pages = """
+            |/**
+            | * @param param1 param1_docs
+            | * @property property1 property1_docs
+            | */
+            |class supclaz(val param1: String, val property1: Int) {}
+            |/**
+            | * @param param2 param2_docs
+            | * @property property2 property2_docs
+            | */
+            |interface interfaz(val param2: String, val property2: Int) {}
+            |/**
+            | * @param param3 param3_docs
+            | * @property property3 property3_docs
+            | */
+            |sealed class sealclaz(internal val param3: String, protected val property3: Int) {}
+            |class foo(param1: String, property1: Int, param2: String, property2: Int): supclaz(param1, property1), interfaz(param2, property2)
+            |/**
+            | * @param param1 override_param1_docs
+            | * @param param2 override_param2_docs
+            | * @property property1 override_property1_docs
+            | * @property property2 override_property2_docs
+            | */
+            |class baz(param1: String, property1: Int, param2: String, property2: Int): supclaz(param1, property1), interfaz(param2, property2)
+            |class bar(param3: String, property3: Int): sealclaz(param3, property3)
+        """.render()
+        val fooClass = pages.page("foo").content<Classlike>()
+        val pparam1docs = fooClass.propertySymbol("param1").description()
+        val pparam2docs = fooClass.propertySymbol("param2").description()
+        val prop1docs = fooClass.propertySymbol("property1").description()
+        val prop2docs = fooClass.propertySymbol("property2").description()
+        val param1docs = ((fooClass.symbolsFor("Public constructors").second
+            .symbols.single() as SymbolDetail).data.metadata[1] as SummaryList)
+            .items().single { it.name() == "param1" }.description()
+        val param2docs = ((fooClass.symbolsFor("Public constructors").second
+            .symbols.single() as SymbolDetail).data.metadata[1] as SummaryList)
+            .items().single { it.name() == "param2" }.description()
+        assertThat(pparam1docs.text()).isEqualTo("param1_docs")
+        assertThat(prop1docs.text()).isEqualTo("property1_docs")
+        assertThat(pparam2docs.text()).isEqualTo("param2_docs")
+        assertThat(prop2docs.text()).isEqualTo("property2_docs")
+        assertThat(param1docs.text()).isEqualTo("param1_docs")
+        assertThat(param2docs.text()).isEqualTo("param2_docs")
+        val bazClass = pages.page("baz").content<Classlike>()
+        val zpparam1docs = bazClass.propertySymbol("param1").description()
+        val zpparam2docs = bazClass.propertySymbol("param2").description()
+        val zprop1docs = bazClass.propertySymbol("property1").description()
+        val zprop2docs = bazClass.propertySymbol("property2").description()
+        val zparam1docs = ((bazClass.symbolsFor("Public constructors").second
+            .symbols.single() as SymbolDetail).data.metadata[1] as SummaryList)
+            .items().single { it.name() == "param1" }.description()
+        val zparam2docs = ((bazClass.symbolsFor("Public constructors").second
+            .symbols.single() as SymbolDetail).data.metadata[1] as SummaryList)
+            .items().single { it.name() == "param2" }.description()
+        assertThat(zpparam1docs.text()).isEqualTo("override_param1_docs")
+        assertThat(zprop1docs.text()).isEqualTo("override_property1_docs")
+        assertThat(zpparam2docs.text()).isEqualTo("override_param2_docs")
+        assertThat(zprop2docs.text()).isEqualTo("override_property2_docs")
+        assertThat(zparam1docs.text()).isEqualTo("override_param1_docs")
+        assertThat(zparam2docs.text()).isEqualTo("override_param2_docs")
+        val barClass = pages.page("bar").content<Classlike>()
+        // TODO: patch upstream? dokka to support inheriting documentation on hidden components
+        val pparam3docs = barClass.propertySymbol("param3").description()
+        val prop3docs = barClass.propertySymbol("property3").description()
+        val param3docs = ((barClass.symbolsFor("Public constructors").second
+            .symbols.single() as SymbolDetail).data.metadata[1] as SummaryList)
+            .items().single { it.name() == "param3" }.description()
+        assertThat(pparam3docs.text()).isEqualTo("param3_docs")
+        assertThat(prop3docs.text()).isEqualTo("property3_docs")
+        assertThat(param3docs.text()).isEqualTo("param3_docs")
+    }
+
+    @Test // TODO: add tests and support for language-interleaving inheritance hierarchies
+    fun `Level-jumping doc inheritance works in 4x Kotlin and Java`() {
+        val pageK = """
+            | /** docs for foo */
+            |class foo() {
+            |    /** dew it */
+            |    fun doit() {}
+            |}
+            |class bar() : foo {}
+            | /** overriding docs for baz */
+            |class baz() : bar {
+            |    override fun doit() {}
+            |}
+        """.render().page("baz")
+        val pageJ = """
+            | /** docs for foo */
+            |public class foo() {
+            |    /** dew it */
+            |    public void doit() {}
+            |}
+            |public class bar() extends foo {}
+            | /** overriding docs for baz */
+            |public class baz() extends bar {
+            |    /** {@inheritdoc} */
+            |    override public void doit() {}
+            |}
+        """.render(java = true).page("baz")
+        for (page in listOf(pageJ, pageK)) {
+            val doit = page.content<Classlike>().methodSymbols().first.items().single()
+            assertThat(doit.summary().data.description.text()).isEqualTo("dew it")
+        }
+    }
+
     @Test
     fun `Class component creates inline generics`() {
         val page = """
@@ -451,6 +635,20 @@ internal class ClasslikeDocumentableConverterTest(
     ) = data.symbolTypes.single { (summary, _) ->
         summary.title() in types
     }
+
+    private fun Classlike.methodSymbols(): Pair<SummaryList, Classlike.SymbolType> =
+        symbolsFor(if (language == Language.KOTLIN) "Public functions" else "Public methods")
+
+    private fun Classlike.methodSymbol(name: String = "foo") =
+        methodSymbols().first.items().singleOrNull { it.name() == name }
+            ?: methodSymbols().first.items().single()
+
+    private fun Classlike.propertySymbols(): Pair<SummaryList, Classlike.SymbolType> =
+        symbolsFor(if (language == Language.KOTLIN) "Public properties" else "Public fields")
+
+    private fun Classlike.propertySymbol(name: String = "foo") =
+        propertySymbols().first.items().singleOrNull { it.name() == name }
+            ?: propertySymbols().first.items().single()
 
     private fun SummaryList.constructor() =
         (data.items.item() as SingleColumnSummaryItem).data.description as SymbolSummary
