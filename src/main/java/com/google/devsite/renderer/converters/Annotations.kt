@@ -38,8 +38,11 @@ internal fun List<Annotation>.annotationComponents(
     nullable: Boolean
 ): List<AnnotationComponent> {
     val injectedAnnotations = mutableListOf<Annotation>()
-    if (nullable && !isNullable()) {
+    if (nullable && displayLanguage == Language.JAVA && !isNullable()) {
         injectedAnnotations += Annotation(DRI("androidx.annotation", "Nullable"), emptyMap())
+    }
+    if (!nullable && displayLanguage == Language.JAVA && !isNonNull()) {
+        injectedAnnotations += Annotation(DRI("androidx.annotation", "NonNull"), emptyMap())
     }
 
     return (this + injectedAnnotations).filter { annotation ->
@@ -56,6 +59,8 @@ internal fun List<Annotation>.annotationComponents(
 
 /** @return true if the `@Nullable` annotation is present, false otherwise */
 internal fun List<Annotation>.isNullable(): Boolean = any { it.dri.classNames == "Nullable" }
+
+internal fun List<Annotation>.isNonNull(): Boolean = any { it.dri.classNames == "NonNull" }
 
 /** @return true if the `@Deprecated` annotation is present, false otherwise */
 internal fun List<Annotation>.isDeprecated(): Boolean = any { it.isDeprecated() }

@@ -25,7 +25,6 @@ import com.google.devsite.components.Link
 import com.google.devsite.components.pages.ClassIndex
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.TableOfContents
-import com.google.devsite.components.symbols.Annotation
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.components.symbols.SymbolBase
@@ -38,6 +37,7 @@ import com.google.devsite.components.table.TableTitle
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import org.jetbrains.dokka.model.doc.DocTag
 import org.jetbrains.dokka.model.doc.Text
+import com.google.devsite.components.symbols.Annotation as AnnotationComponent
 
 internal fun <T> Collection<T>.item(): T = items(1).single()
 
@@ -99,4 +99,6 @@ internal fun SymbolBase.link(): Link.Params = when (this) {
     is SymbolType -> data.type.data
     else -> error("Not supported: $this")
 }
-internal fun Annotation.link(): Link.Params = data.type.data
+internal fun AnnotationComponent.link(): Link.Params = data.type.data
+
+internal fun List<AnnotationComponent>.exceptNonNull() = this.filter { it.link().name != "NonNull" }

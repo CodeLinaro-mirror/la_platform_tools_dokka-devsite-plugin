@@ -20,6 +20,7 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.asType
+import com.google.devsite.renderer.converters.testing.exceptNonNull
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
@@ -196,9 +197,7 @@ internal class ParameterDocumentableConverterTest(
                 assertThat(paramB.data.annotations).isEmpty()
             }
             javaOnly {
-                if (function != functionK) { // Kotlin-as-Java doesn't generate @NonNull b/170652047
-                    assertThat(paramA.data.annotations.single().link().name).isEqualTo("NonNull")
-                }
+                assertThat(paramA.data.annotations.single().link().name).isEqualTo("NonNull")
                 assertThat(paramB.data.annotations.single().link().name).isEqualTo("Nullable")
             }
         }
@@ -411,20 +410,19 @@ internal class ParameterDocumentableConverterTest(
 
     @Test
     fun `Parameter summaries include annotations in 4x Kotlin and Java`() {
-        val paramK = """
+        val annotK = """
             |annotation class Stuff
             |fun foo(@Stuff kotlinFoo: Int) {}
-        """.render().param(forSummary = true).data
-        val paramJ = """
+        """.render().param(forSummary = true).data.annotations
+        val annotJ = """
             |@Target({PARAMETER})
             |public @interface Stuff {
             |}
             |public void foo(@Stuff int javaFoo) {};
-        """.render(java = true).param(forSummary = true).data
+        """.render(java = true).param(forSummary = true).data.annotations
 
-        for (param in listOf(paramK, paramJ)) {
-            assertThat(param.annotations.size).isEqualTo(1)
-            assertThat(param.annotations.single().data.type.data.name).contains("Stuff")
+        for (annot in listOf(annotK, annotJ)) {
+            assertThat(annot.exceptNonNull().single().data.type.data.name).contains("Stuff")
         }
     }
 

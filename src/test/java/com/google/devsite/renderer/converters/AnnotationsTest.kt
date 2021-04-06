@@ -19,6 +19,7 @@ package com.google.devsite.renderer.converters
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Link
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.testing.exceptNonNull
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.links.DRI
@@ -38,7 +39,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |fun foo() = Unit
         """.render().functionAnnotations()
 
-        assertThat(annotations.components()).isEmpty()
+        assertThat(annotations.components().exceptNonNull()).isEmpty()
     }
 
     @Test
@@ -48,7 +49,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |fun foo() = Unit
         """.render().functionAnnotations()
 
-        assertThat(annotations.components()).isEmpty()
+        assertThat(annotations.components().exceptNonNull()).isEmpty()
     }
 
     @Test
@@ -58,7 +59,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |fun foo() = Unit
         """.render().functionAnnotations()
 
-        assertThat(annotations.components()).isEmpty()
+        assertThat(annotations.components().exceptNonNull()).isEmpty()
     }
 
     @Test
@@ -99,7 +100,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |fun foo() = Unit
         """.render().functionAnnotations()
 
-        val annotation = annotations.components().item()
+        val annotation = annotations.components().exceptNonNull().item()
 
         assertThat(annotation.link().name).isEqualTo("Hello")
         assertPath(annotation.link().url, "androidx/example/Hello.html")
@@ -125,9 +126,9 @@ internal class AnnotationsTest : ConverterTestBase() {
         """.render(java = true).functionAnnotations()
 
         for (annotations in listOf(annotationsK, annotationsJ)) {
-            val annotationOne = annotations.components().first()
+            val annotationOne = annotations.components().exceptNonNull().first()
             val parameterOne = annotationOne.data.parameters.item()
-            val annotationTwo = annotations.components().last()
+            val annotationTwo = annotations.components().exceptNonNull().last()
             val parameterTwo = annotationTwo.data.parameters.item()
 
             // NOTE: "value" in java does not match "bar" in kotlin
@@ -159,9 +160,9 @@ internal class AnnotationsTest : ConverterTestBase() {
         """.render(java = true).property()!!.annotations()
 
         for (annotations in listOf(annotationsK, annotationsJ)) {
-            val annotationOne = annotations.components().first()
+            val annotationOne = annotations.components().exceptNonNull().first()
             val parameterOne = annotationOne.data.parameters.item()
-            val annotationTwo = annotations.components().last()
+            val annotationTwo = annotations.components().exceptNonNull().last()
             val parameterTwo = annotationTwo.data.parameters.item()
 
             // NOTE: "value" in java does not match "bar" in kotlin
@@ -189,9 +190,9 @@ internal class AnnotationsTest : ConverterTestBase() {
         """.render(java = true).function()!!.parameters.single().annotations()
 
         for (annotations in listOf(annotationsK, annotationsJ)) {
-            val annotationOne = annotations.components().first()
+            val annotationOne = annotations.components().exceptNonNull().first()
             val parameterOne = annotationOne.data.parameters.item()
-            val annotationTwo = annotations.components().last()
+            val annotationTwo = annotations.components().exceptNonNull().last()
             val parameterTwo = annotationTwo.data.parameters.item()
 
             if (annotations == annotationsK) assertThat(parameterOne.name).isEqualTo("bar")
@@ -218,9 +219,9 @@ internal class AnnotationsTest : ConverterTestBase() {
         """.render(java = true).function()!!.generics.single().annotations()
 
         for (annotations in listOf(annotationsK, annotationsJ)) {
-            val annotationOne = annotations.components().first()
+            val annotationOne = annotations.components().exceptNonNull().first()
             val parameterOne = annotationOne.data.parameters.item()
-            val annotationTwo = annotations.components().last()
+            val annotationTwo = annotations.components().exceptNonNull().last()
             val parameterTwo = annotationTwo.data.parameters.item()
 
             if (annotations == annotationsK) assertThat(parameterOne.name).isEqualTo("bar")

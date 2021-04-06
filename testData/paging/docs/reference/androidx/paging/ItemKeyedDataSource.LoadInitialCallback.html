@@ -78,9 +78,9 @@
         </thead>
         <tbody>
           <tr>
-            <td><code>abstract void</code></td>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void</code></td>
             <td width="100%">
-              <div><code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</a>(<a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;Value&gt;&nbsp;data,&nbsp;int&nbsp;position,&nbsp;int&nbsp;totalCount)</code></div>
+              <div><code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;Value&gt;&nbsp;data,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;int&nbsp;totalCount<br>)</code></div>
               <p>Called to pass initial load state from a DataSource.</p>
             </td>
           </tr>
@@ -101,9 +101,9 @@
                 <table class="responsive">
                   <tbody>
                     <tr>
-                      <td><code>abstract void</code></td>
+                      <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void</code></td>
                       <td width="100%">
-                        <div><code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List)">onResult</a>(<a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;Value&gt;&nbsp;data)</code></div>
+                        <div><code><a href="/reference/androidx/paging/ItemKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List)">onResult</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;Value&gt;&nbsp;data)</code></div>
                         <p>Called to pass loaded data from a DataSource.</p>
                       </td>
                     </tr>
@@ -118,7 +118,7 @@
     <h2>Public constructors</h2>
     <div><a name="LoadInitialCallback--"></a>
       <h3 class="api-name" id="LoadInitialCallback()">LoadInitialCallback</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;&lt;Value&nbsp;extends&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#LoadInitialCallback()">LoadInitialCallback</a>()</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;&lt;Value&nbsp;extends&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#LoadInitialCallback()">LoadInitialCallback</a>()</pre>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -140,7 +140,7 @@
     <h2>Public methods</h2>
     <div><a name="onResult(kotlin.collections.List, kotlin.Int, kotlin.Int)"></a><a name="onResult-kotlin.collections.List-kotlin.Int-kotlin.Int-"></a>
       <h3 class="api-name" id="onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;void&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</a>(<a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;Value&gt;&nbsp;data,&nbsp;int&nbsp;position,&nbsp;int&nbsp;totalCount)</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialCallback.html#onResult(kotlin.collections.List,kotlin.Int,kotlin.Int)">onResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;Value&gt;&nbsp;data,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;int&nbsp;position,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;int&nbsp;totalCount<br>)</pre>
       <p>Called to pass initial load state from a DataSource.</p>
       <p>Call this method from your DataSource's <code>loadInitial</code> function to return data, and inform how many placeholders should be shown before and after. If counting is cheap to compute (for example, if a network load returns the information regardless), it's recommended to pass data back through this method.</p>
       <p>It is always valid to pass a different amount of data than what is requested. Pass an empty list if there is no more data to load.</p>
@@ -153,19 +153,19 @@
           </thead>
           <tbody>
             <tr>
-              <td><code><a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;Value&gt;&nbsp;data</code></td>
+              <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;Value&gt;&nbsp;data</code></td>
               <td width="100%">
                 <p>List of items loaded from the DataSource. If this is empty, the DataSource is treated as empty, and no further loads will occur.</p>
               </td>
             </tr>
             <tr>
-              <td><code>int&nbsp;position</code></td>
+              <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;int&nbsp;position</code></td>
               <td width="100%">
                 <p>Position of the item at the front of the list. If there are <code>N</code> items before the items in data that can be loaded from this DataSource, pass <code>N</code>.</p>
               </td>
             </tr>
             <tr>
-              <td><code>int&nbsp;totalCount</code></td>
+              <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;int&nbsp;totalCount</code></td>
               <td width="100%">
                 <p>Total number of items that may be returned from this <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>. Includes the number in the initial <code>data</code> parameter as well as any items that can be loaded in front or behind of <code>data</code>.</p>
               </td>

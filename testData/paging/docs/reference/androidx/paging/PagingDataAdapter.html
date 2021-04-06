@@ -10,7 +10,7 @@
 {% setvar can_switch %}1{% endsetvar %}
 {% include "reference/_java_switcher2.md" %}
     <p>
-      <pre>public abstract class PagingDataAdapter&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</pre>
+      <pre>public abstract class PagingDataAdapter&lt;T&nbsp;extends&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</pre>
     </p>
     <hr>
     <p><a href="[RecyclerView.Adapter]">RecyclerView.Adapter</a> base class for presenting paged data from <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>s in a <a href="[RecyclerView]">RecyclerView</a>.</p>
@@ -49,14 +49,14 @@ class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATO
         </thead>
         <tbody>
           <tr>
-            <td><code>final @<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a>&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;</code></td>
+            <td><code>final @<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a>&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#dataRefreshFlow()">dataRefreshFlow</a></code></div>
               <p><strong>This field is deprecated.</strong> dataRefreshFlow is now redundant with the information passed from loadStateFlow and getItemCount, and will be removed in a future alpha version</p>
             </td>
           </tr>
           <tr>
-            <td><code>final @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[FlowPreview])&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;</code></td>
+            <td><code>final @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[FlowPreview])&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#loadStateFlow()">loadStateFlow</a></code></div>
               <p>A hot <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
@@ -75,7 +75,7 @@ class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATO
         <tbody>
           <tr>
             <td>
-              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/PagingDataAdapter.html#PagingDataAdapter(DiffUtil.ItemCallback&lt;T&gt;,kotlinx.coroutines.CoroutineDispatcher,kotlinx.coroutines.CoroutineDispatcher)">PagingDataAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T&gt;&nbsp;diffCallback,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a>&nbsp;mainDispatcher,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a>&nbsp;workerDispatcher<br>)</code></div>
+              <div><code>&lt;T&nbsp;extends&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/PagingDataAdapter.html#PagingDataAdapter(DiffUtil.ItemCallback&lt;T&gt;,kotlinx.coroutines.CoroutineDispatcher,kotlinx.coroutines.CoroutineDispatcher)">PagingDataAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;T&gt;&nbsp;diffCallback,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a>&nbsp;mainDispatcher,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a>&nbsp;workerDispatcher<br>)</code></div>
             </td>
           </tr>
         </tbody>
@@ -90,106 +90,106 @@ class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATO
         </thead>
         <tbody>
           <tr>
-            <td><code>final @<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a>&nbsp;void</code></td>
+            <td><code>final @<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a>&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void</code></td>
             <td width="100%">
-              <div><code><span><del><a href="/reference/androidx/paging/PagingDataAdapter.html#addDataRefreshListener(kotlin.Function1)">addDataRefreshListener</a></del></span>(Function1&lt;<a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagingDataAdapter.html#addDataRefreshListener(kotlin.Function1)">addDataRefreshListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
               <p><strong>This method is deprecated.</strong> dataRefreshListener is now redundant with the information passed from loadStateListener and getItemCount, and will be removed in a future alpha version</p>
             </td>
           </tr>
           <tr>
-            <td><code>final void</code></td>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void</code></td>
             <td width="100%">
-              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#addLoadStateListener(kotlin.Function1)">addLoadStateListener</a>(Function1&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#addLoadStateListener(kotlin.Function1)">addLoadStateListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
               <p>Add a <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener to observe the loading state of the current <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>.</p>
             </td>
           </tr>
           <tr>
-            <td><code><a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#getItemCount()">getItemCount</a>()</code></div>
             </td>
           </tr>
           <tr>
-            <td><code>final long</code></td>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;long</code></td>
             <td width="100%">
-              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#getItemId(kotlin.Int)">getItemId</a>(int&nbsp;position)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#getItemId(kotlin.Int)">getItemId</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;int&nbsp;position)</code></div>
               <p>Note: <code><a href="/reference/androidx/paging/PagingDataAdapter.html#getItemId(kotlin.Int)">getItemId</a></code> is final, because stable IDs are unnecessary and therefore unsupported.</p>
             </td>
           </tr>
           <tr>
-            <td><code>final <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
             <td width="100%">
-              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#peek(kotlin.Int)">peek</a>(@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a>&nbsp;int&nbsp;index)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#peek(kotlin.Int)">peek</a>(@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a>&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;int&nbsp;index)</code></div>
               <p>Returns the presented item at the specified position, without notifying Paging of the item access that would normally trigger page loads.</p>
             </td>
           </tr>
           <tr>
-            <td><code>final void</code></td>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#refresh()">refresh</a>()</code></div>
               <p>Refresh the data presented by this <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>.</p>
             </td>
           </tr>
           <tr>
-            <td><code>final @<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a>&nbsp;void</code></td>
+            <td><code>final @<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a>&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void</code></td>
             <td width="100%">
-              <div><code><span><del><a href="/reference/androidx/paging/PagingDataAdapter.html#removeDataRefreshListener(kotlin.Function1)">removeDataRefreshListener</a></del></span>(Function1&lt;<a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener)</code></div>
+              <div><code><span><del><a href="/reference/androidx/paging/PagingDataAdapter.html#removeDataRefreshListener(kotlin.Function1)">removeDataRefreshListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
               <p><strong>This method is deprecated.</strong> dataRefreshListener is now redundant with the information passed from loadStateListener and getItemCount, and will be removed in a future alpha version</p>
             </td>
           </tr>
           <tr>
-            <td><code>final void</code></td>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void</code></td>
             <td width="100%">
-              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</a>(Function1&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
               <p>Remove a previously registered <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener.</p>
             </td>
           </tr>
           <tr>
-            <td><code>final void</code></td>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#retry()">retry</a>()</code></div>
               <p>Retry any failed load requests that would result in a <code><a href="/reference/androidx/paging/LoadState.Error.html">LoadState.Error</a></code> update to this <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>.</p>
             </td>
           </tr>
           <tr>
-            <td><code>final <a href="/reference/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a>&lt;T&gt;</code></td>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;T&gt;</code></td>
             <td width="100%">
               <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#snapshot()">snapshot</a>()</code></div>
               <p>Returns a new <code><a href="/reference/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a></code> representing the currently presented items, including any placeholders if they are enabled.</p>
             </td>
           </tr>
           <tr>
-            <td><code>final void</code></td>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void</code></td>
             <td width="100%">
-              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a>(<a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&nbsp;pagingData)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;T&gt;&nbsp;pagingData)</code></div>
               <p>Present a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> until it is invalidated by a call to <code><a href="/reference/androidx/paging/PagingDataAdapter.html#refresh()">refresh</a></code> or <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">PagingSource.invalidate</a></code>.</p>
             </td>
           </tr>
           <tr>
-            <td><code>final void</code></td>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void</code></td>
             <td width="100%">
-              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(Lifecycle,androidx.paging.PagingData)">submitData</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;lifecycle,&nbsp;<a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&nbsp;pagingData)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(Lifecycle,androidx.paging.PagingData)">submitData</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;lifecycle,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;T&gt;&nbsp;pagingData<br>)</code></div>
               <p>Present a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> until it is either invalidated or another call to <code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a></code> is made.</p>
             </td>
           </tr>
           <tr>
-            <td><code>final <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
             <td width="100%">
-              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</a>(<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;?&gt;&nbsp;footer)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;?&gt;&nbsp;footer)</code></div>
               <p>Create a ConcatAdapter with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadState.html">LoadType.PREPEND</a></code> as a list item at the start of the presented list.</p>
             </td>
           </tr>
           <tr>
-            <td><code>final <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
             <td width="100%">
-              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</a>(<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;?&gt;&nbsp;header)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;?&gt;&nbsp;header)</code></div>
               <p>Create a ConcatAdapter with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadState.html">LoadType.APPEND</a></code> as a list item at the end of the presented list.</p>
             </td>
           </tr>
           <tr>
-            <td><code>final <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
             <td width="100%">
-              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;?&gt;&nbsp;header,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;?&gt;&nbsp;footer<br>)</code></div>
+              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;?&gt;&nbsp;header,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;?&gt;&nbsp;footer<br>)</code></div>
               <p>Create a ConcatAdapter with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadType.PREPEND.html">LoadType.PREPEND</a></code> and <code><a href="/reference/androidx/paging/LoadState.html">LoadType.APPEND</a></code>s as list items at the start and end respectively.</p>
             </td>
           </tr>
@@ -199,25 +199,25 @@ class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATO
     <h2>Public fields</h2>
     <div><a name="getDataRefreshFlow()"></a><a name="setDataRefreshFlow()"></a><a name="getDataRefreshFlow--"></a><a name="setDataRefreshFlow--"></a>
       <h3 class="api-name" id="dataRefreshFlow()">dataRefreshFlow</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a>&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#dataRefreshFlow()">dataRefreshFlow</a></pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a><br>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a>&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#dataRefreshFlow()">dataRefreshFlow</a></pre>
       <aside class="caution"><strong>This field is deprecated.</strong><br>dataRefreshFlow is now redundant with the information passed from loadStateFlow and getItemCount, and will be removed in a future alpha version</aside>
       <p>A <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code> that is emitted when new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> generations are submitted and displayed. The <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code> that is emitted is <code>true</code> if the new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is empty, <code>false</code> otherwise.</p>
     </div>
     <div><a name="getLoadStateFlow()"></a><a name="setLoadStateFlow()"></a><a name="getLoadStateFlow--"></a><a name="setLoadStateFlow--"></a>
       <h3 class="api-name" id="loadStateFlow()">loadStateFlow</h3>
-      <pre class="api-signature no-pretty-print">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[FlowPreview])<br>public&nbsp;final&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[FlowPreview])&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#loadStateFlow()">loadStateFlow</a></pre>
+      <pre class="api-signature no-pretty-print">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[FlowPreview])<br>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[FlowPreview])&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#loadStateFlow()">loadStateFlow</a></pre>
       <p>A hot <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
       <p>This flow is conflated, so it buffers the last update to <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> and immediately delivers the current load states on collection.</p>
     </div>
     <h2>Public constructors</h2>
     <div><a name="PagingDataAdapter(DiffUtil.ItemCallback&lt;T&gt;, kotlinx.coroutines.CoroutineDispatcher, kotlinx.coroutines.CoroutineDispatcher)"></a><a name="PagingDataAdapter-DiffUtil.ItemCallback&lt;T&gt;-kotlinx.coroutines.CoroutineDispatcher-kotlinx.coroutines.CoroutineDispatcher-"></a>
       <h3 class="api-name" id="PagingDataAdapter(DiffUtil.ItemCallback&lt;T&gt;,kotlinx.coroutines.CoroutineDispatcher,kotlinx.coroutines.CoroutineDispatcher)">PagingDataAdapter</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/PagingDataAdapter.html#PagingDataAdapter(DiffUtil.ItemCallback&lt;T&gt;,kotlinx.coroutines.CoroutineDispatcher,kotlinx.coroutines.CoroutineDispatcher)">PagingDataAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T&gt;&nbsp;diffCallback,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a>&nbsp;mainDispatcher,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a>&nbsp;workerDispatcher<br>)</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;&lt;T&nbsp;extends&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/PagingDataAdapter.html#PagingDataAdapter(DiffUtil.ItemCallback&lt;T&gt;,kotlinx.coroutines.CoroutineDispatcher,kotlinx.coroutines.CoroutineDispatcher)">PagingDataAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;T&gt;&nbsp;diffCallback,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a>&nbsp;mainDispatcher,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a>&nbsp;workerDispatcher<br>)</pre>
     </div>
     <h2>Public methods</h2>
     <div><a name="addDataRefreshListener-kotlin.Function1-"></a>
       <h3 class="api-name" id="addDataRefreshListener(kotlin.Function1)">addDataRefreshListener</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a>&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagingDataAdapter.html#addDataRefreshListener(kotlin.Function1)">addDataRefreshListener</a></del></span>(Function1&lt;<a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener)</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a><br>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a>&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagingDataAdapter.html#addDataRefreshListener(kotlin.Function1)">addDataRefreshListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
       <aside class="caution"><strong>This method is deprecated.</strong><br>dataRefreshListener is now redundant with the information passed from loadStateListener and getItemCount, and will be removed in a future alpha version</aside>
       <p>Add a listener to observe new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> generations.</p>
       <div class="devsite-table-wrapper">
@@ -229,7 +229,7 @@ class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATO
           </thead>
           <tbody>
             <tr>
-              <td><code>Function1&lt;<a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+              <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
               <td width="100%">
                 <p>called whenever a new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is submitted and displayed. <code>true</code> is passed to the <code><a href="/reference/androidx/paging/PagingDataAdapter.html#addDataRefreshListener(kotlin.Function1)">listener</a></code> if the new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is empty, <code>false</code> otherwise.</p>
               </td>
@@ -255,7 +255,7 @@ class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATO
     </div>
     <div><a name="addLoadStateListener-kotlin.Function1-"></a>
       <h3 class="api-name" id="addLoadStateListener(kotlin.Function1)">addLoadStateListener</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#addLoadStateListener(kotlin.Function1)">addLoadStateListener</a>(Function1&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener)</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#addLoadStateListener(kotlin.Function1)">addLoadStateListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
       <p>Add a <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener to observe the loading state of the current <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>.</p>
       <p>As new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> generations are submitted and displayed, the listener will be notified to reflect the current <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code>.</p>
       <pre class="prettyprint">val adapter = UserPagingAdapter()
@@ -278,7 +278,7 @@ adapter.addLoadStateListener {
           </thead>
           <tbody>
             <tr>
-              <td><code>Function1&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+              <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
               <td width="100%">
                 <p><code><a href="/reference/androidx/paging/LoadStates.html">LoadStates</a></code> listener to receive updates.</p>
               </td>
@@ -304,17 +304,17 @@ adapter.addLoadStateListener {
     </div>
     <div><a name="getItemCount--"></a>
       <h3 class="api-name" id="getItemCount()">getItemCount</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#getItemCount()">getItemCount</a>()</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#getItemCount()">getItemCount</a>()</pre>
     </div>
     <div><a name="getItemId-kotlin.Int-"></a>
       <h3 class="api-name" id="getItemId(kotlin.Int)">getItemId</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;long&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#getItemId(kotlin.Int)">getItemId</a>(int&nbsp;position)</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;long&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#getItemId(kotlin.Int)">getItemId</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;int&nbsp;position)</pre>
       <p>Note: <code><a href="/reference/androidx/paging/PagingDataAdapter.html#getItemId(kotlin.Int)">getItemId</a></code> is final, because stable IDs are unnecessary and therefore unsupported.</p>
       <p><code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>'s async diffing means that efficient change animations are handled for you, without the performance drawbacks of <a href="[RecyclerView.Adapter.notifyDataSetChanged]">RecyclerView.Adapter.notifyDataSetChanged</a>. Instead, the diffCallback parameter of the <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code> serves the same functionality - informing the adapter and <a href="[RecyclerView]">RecyclerView</a> how items are changed and moved.</p>
     </div>
     <div><a name="peek-kotlin.Int-"></a>
       <h3 class="api-name" id="peek(kotlin.Int)">peek</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#peek(kotlin.Int)">peek</a>(@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a>&nbsp;int&nbsp;index)</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#peek(kotlin.Int)">peek</a>(@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a>&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;int&nbsp;index)</pre>
       <p>Returns the presented item at the specified position, without notifying Paging of the item access that would normally trigger page loads.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -325,7 +325,7 @@ adapter.addLoadStateListener {
           </thead>
           <tbody>
             <tr>
-              <td><code>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a>&nbsp;int&nbsp;index</code></td>
+              <td><code>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a>&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;int&nbsp;index</code></td>
               <td width="100%">
                 <p>Index of the presented item to return, including placeholders.</p>
               </td>
@@ -342,7 +342,7 @@ adapter.addLoadStateListener {
           </thead>
           <tbody>
             <tr>
-              <td><code><a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+              <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
               <td width="100%">
                 <p>The presented item at position <code><a href="/reference/androidx/paging/PagingDataAdapter.html#peek(kotlin.Int)">index</a></code>, <code>null</code> if it is a placeholder.</p>
               </td>
@@ -353,7 +353,7 @@ adapter.addLoadStateListener {
     </div>
     <div><a name="refresh--"></a>
       <h3 class="api-name" id="refresh()">refresh</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#refresh()">refresh</a>()</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#refresh()">refresh</a>()</pre>
       <p>Refresh the data presented by this <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>.</p>
       <p><code><a href="/reference/androidx/paging/PagingDataAdapter.html#refresh()">refresh</a></code> triggers the creation of a new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> with a new instance of <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> to represent an updated snapshot of the backing dataset. If a <code><a href="/reference/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> is set, calling <code><a href="/reference/androidx/paging/PagingDataAdapter.html#refresh()">refresh</a></code> will also trigger a call to <code><a href="/reference/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">RemoteMediator.load</a></code> with <code><a href="/reference/androidx/paging/LoadType.REFRESH.html">LoadType</a></code> to allow <code><a href="/reference/androidx/paging/RemoteMediator.html">RemoteMediator</a></code> to check for updates to the dataset backing <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
       <p>Note: This API is intended for UI-driven refresh signals, such as swipe-to-refresh. Invalidation due repository-layer signals, such as DB-updates, should instead use <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">PagingSource.invalidate</a></code>.</p>
@@ -394,7 +394,7 @@ adapter.addLoadStateListener {
     </div>
     <div><a name="removeDataRefreshListener-kotlin.Function1-"></a>
       <h3 class="api-name" id="removeDataRefreshListener(kotlin.Function1)">removeDataRefreshListener</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a>&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagingDataAdapter.html#removeDataRefreshListener(kotlin.Function1)">removeDataRefreshListener</a></del></span>(Function1&lt;<a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener)</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a><br>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a>&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagingDataAdapter.html#removeDataRefreshListener(kotlin.Function1)">removeDataRefreshListener</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
       <aside class="caution"><strong>This method is deprecated.</strong><br>dataRefreshListener is now redundant with the information passed from loadStateListener and getItemCount, and will be removed in a future alpha version</aside>
       <p>Remove a previously registered listener for new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> generations.</p>
       <div class="devsite-table-wrapper">
@@ -406,7 +406,7 @@ adapter.addLoadStateListener {
           </thead>
           <tbody>
             <tr>
-              <td><code>Function1&lt;<a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+              <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
               <td width="100%">
                 <p>Previously registered listener.</p>
               </td>
@@ -432,7 +432,7 @@ adapter.addLoadStateListener {
     </div>
     <div><a name="removeLoadStateListener-kotlin.Function1-"></a>
       <h3 class="api-name" id="removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</a>(Function1&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener)</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</pre>
       <p>Remove a previously registered <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -443,7 +443,7 @@ adapter.addLoadStateListener {
           </thead>
           <tbody>
             <tr>
-              <td><code>Function1&lt;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+              <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
               <td width="100%">
                 <p>Previously registered listener.</p>
               </td>
@@ -469,7 +469,7 @@ adapter.addLoadStateListener {
     </div>
     <div><a name="retry--"></a>
       <h3 class="api-name" id="retry()">retry</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#retry()">retry</a>()</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#retry()">retry</a>()</pre>
       <p>Retry any failed load requests that would result in a <code><a href="/reference/androidx/paging/LoadState.Error.html">LoadState.Error</a></code> update to this <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>.</p>
       <p>Unlike <code><a href="/reference/androidx/paging/PagingDataAdapter.html#refresh()">refresh</a></code>, this does not invalidate <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>, it only retries failed loads within the same generation of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>.</p>
       <p><code><a href="/reference/androidx/paging/LoadState.Error.html">LoadState.Error</a></code> can be generated from two types of load requests:</p>
@@ -484,12 +484,12 @@ adapter.addLoadStateListener {
     </div>
     <div><a name="snapshot--"></a>
       <h3 class="api-name" id="snapshot()">snapshot</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a>&lt;T&gt;&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#snapshot()">snapshot</a>()</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;T&gt;&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#snapshot()">snapshot</a>()</pre>
       <p>Returns a new <code><a href="/reference/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a></code> representing the currently presented items, including any placeholders if they are enabled.</p>
     </div>
     <div><a name="submitData-androidx.paging.PagingData-"></a>
       <h3 class="api-name" id="submitData(androidx.paging.PagingData)">submitData</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a>(<a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&nbsp;pagingData)</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;T&gt;&nbsp;pagingData)</pre>
       <p>Present a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> until it is invalidated by a call to <code><a href="/reference/androidx/paging/PagingDataAdapter.html#refresh()">refresh</a></code> or <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">PagingSource.invalidate</a></code>.</p>
       <p><code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a></code> should be called on the same <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> where updates will be dispatched to UI, typically <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html">Dispatchers.Main</a></code> (this is done for you if you use <code>lifecycleScope.launch {}</code>).</p>
       <p>This method is typically used when collecting from a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> produced by <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code>. For RxJava or LiveData support, use the non-suspending overload of <code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a></code>, which accepts a <a href="[Lifecycle]">Lifecycle</a>.</p>
@@ -532,7 +532,7 @@ class MyFlowActivity : AppCompatActivity() {
     </div>
     <div><a name="submitData(Lifecycle, androidx.paging.PagingData)"></a><a name="submitData-Lifecycle-androidx.paging.PagingData-"></a>
       <h3 class="api-name" id="submitData(Lifecycle,androidx.paging.PagingData)">submitData</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(Lifecycle,androidx.paging.PagingData)">submitData</a>(<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;lifecycle,&nbsp;<a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&nbsp;pagingData)</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(Lifecycle,androidx.paging.PagingData)">submitData</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;lifecycle,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;T&gt;&nbsp;pagingData<br>)</pre>
       <p>Present a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> until it is either invalidated or another call to <code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a></code> is made.</p>
       <p>This method is typically used when observing a RxJava or LiveData stream produced by <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code>. For <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> support, use the suspending overload of <code><a href="/reference/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a></code>, which automates cancellation via <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> instead of relying of <a href="[Lifecycle]">Lifecycle</a>.</p>
       <pre class="prettyprint">
@@ -590,7 +590,7 @@ class MyRxJava2Activity : AppCompatActivity() {
     </div>
     <div><a name="withLoadStateFooter-androidx.paging.LoadStateAdapter-"></a>
       <h3 class="api-name" id="withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</a>(<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;?&gt;&nbsp;footer)</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;?&gt;&nbsp;footer)</pre>
       <p>Create a <a href="[ConcatAdapter]">ConcatAdapter</a> with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadState.html">LoadType.PREPEND</a></code> as a list item at the start of the presented list.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -618,7 +618,7 @@ class MyRxJava2Activity : AppCompatActivity() {
     </div>
     <div><a name="withLoadStateHeader-androidx.paging.LoadStateAdapter-"></a>
       <h3 class="api-name" id="withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</a>(<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;?&gt;&nbsp;header)</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;?&gt;&nbsp;header)</pre>
       <p>Create a <a href="[ConcatAdapter]">ConcatAdapter</a> with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadState.html">LoadType.APPEND</a></code> as a list item at the end of the presented list.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -646,7 +646,7 @@ class MyRxJava2Activity : AppCompatActivity() {
     </div>
     <div><a name="withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter, androidx.paging.LoadStateAdapter)"></a><a name="withLoadStateHeaderAndFooter-androidx.paging.LoadStateAdapter-androidx.paging.LoadStateAdapter-"></a>
       <h3 class="api-name" id="withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;?&gt;&nbsp;header,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;?&gt;&nbsp;footer<br>)</pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;?&gt;&nbsp;header,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;?&gt;&nbsp;footer<br>)</pre>
       <p>Create a <a href="[ConcatAdapter]">ConcatAdapter</a> with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadType.PREPEND.html">LoadType.PREPEND</a></code> and <code><a href="/reference/androidx/paging/LoadState.html">LoadType.APPEND</a></code>s as list items at the start and end respectively.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
