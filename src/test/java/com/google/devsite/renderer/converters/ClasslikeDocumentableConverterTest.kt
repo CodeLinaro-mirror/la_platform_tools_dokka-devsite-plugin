@@ -428,7 +428,6 @@ internal class ClasslikeDocumentableConverterTest(
         }
     }
 
-    // TODO: patch upstream dokka to support kotlin inherit docs b/184361891
     @Test // TODO: add tests and support for kotlin inheriting from java and vice versa
     fun `Class component inherits docs from same language in 4x Kotlin and Java`() {
         val pagesK = """
@@ -452,17 +451,19 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render()
         val pagesJ = """
-            |public class foo() {
+            |public class foo {
             |    /** dew it */
             |    public void doit() {}
             |}
-            |public class bar() extends foo {
-            |    /** {@inheritdoc} */
-            |    override public void doit() {}
+            |public class bar extends foo {
+            |    /** {@inheritDoc} */
+            |    @Override
+            |    public void doit() {}
             |}
-            |public class baz() extends foo {
+            |public class baz extends foo {
             |    /** overriding function docs */
-            |    override public void doit() {}
+            |    @Override
+            |    public void doit() {}
             |}
         """.render(java = true) // Java {@inheritdoc} does not support classes & properties
         for (pages in listOf(pagesK, pagesJ)) {
@@ -479,8 +480,8 @@ internal class ClasslikeDocumentableConverterTest(
             val bazDoitDocs = bazDoit.summary().data.description.text()
 
             assertThat(fooDoitDocs).isEqualTo("dew it")
-            // assertThat(barDoitDocs).isEqualTo("dew it")
-            // assertThat(bazDoitDocs).isEqualTo("overriding function docs")
+            assertThat(barDoitDocs).isEqualTo("dew it")
+            assertThat(bazDoitDocs).isEqualTo("overriding function docs")
 
             if (pages == pagesK) {
                 // overriding class docs is maybe something we want in kotlin, but is not jdoc spec
