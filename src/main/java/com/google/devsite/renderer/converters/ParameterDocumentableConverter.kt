@@ -89,7 +89,7 @@ internal class ParameterDocumentableConverter(
     ): DokkaTypeParameter = DefaultTypeParameter(DokkaTypeParameter.Params(
         displayLanguage = displayLanguage,
         name = param.variantTypeParameter.inner.name,
-        projections = param.bounds.map { componentForProjection(it) }
+        projections = param.bounds.map { componentForProjection(it, injectAtNonNull = false) }
     ))
 
     /**
@@ -105,12 +105,14 @@ internal class ParameterDocumentableConverter(
     fun componentForProjection(
         proj: Projection,
         annotations: List<Annotations.Annotation> = emptyList(),
-        isReturnType: Boolean = false
+        isReturnType: Boolean = false,
+        injectAtNonNull: Boolean = true
     ): Parameter = when (displayLanguage) {
         Language.JAVA -> componentForJavaProjection(
             proj,
             annotations = annotations,
-            isReturnType = isReturnType
+            isReturnType = isReturnType,
+            injectAtNonNull = injectAtNonNull
         )
         Language.KOTLIN -> componentForKotlinProjection(proj, annotations = annotations)
     }
@@ -119,7 +121,8 @@ internal class ParameterDocumentableConverter(
         proj: Projection,
         name: String = "",
         annotations: List<Annotations.Annotation> = emptyList(),
-        isReturnType: Boolean = false
+        isReturnType: Boolean = false,
+        injectAtNonNull: Boolean = true
     ): Parameter {
         val nullable = proj.isNullable() || annotations.isNullable()
 
@@ -131,7 +134,8 @@ internal class ParameterDocumentableConverter(
                 annotations = annotations.annotationComponents(
                     pathProvider,
                     displayLanguage,
-                    nullable
+                    nullable,
+                    injectAtNonNull = injectAtNonNull
                 ),
                 displayLanguage = Language.JAVA
             )

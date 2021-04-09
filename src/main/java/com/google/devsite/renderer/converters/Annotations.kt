@@ -35,13 +35,14 @@ import com.google.devsite.components.symbols.Annotation as AnnotationComponent
 internal fun List<Annotation>.annotationComponents(
     pathProvider: FilePathProvider,
     displayLanguage: Language,
-    nullable: Boolean
+    nullable: Boolean,
+    injectAtNonNull: Boolean = true
 ): List<AnnotationComponent> {
     val injectedAnnotations = mutableListOf<Annotation>()
     if (nullable && displayLanguage == Language.JAVA && !isNullable()) {
         injectedAnnotations += Annotation(DRI("androidx.annotation", "Nullable"), emptyMap())
     }
-    if (!nullable && displayLanguage == Language.JAVA && !isNonNull()) {
+    if (!nullable && displayLanguage == Language.JAVA && !isNonNull() && injectAtNonNull) {
         injectedAnnotations += Annotation(DRI("androidx.annotation", "NonNull"), emptyMap())
     }
 

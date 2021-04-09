@@ -197,7 +197,9 @@ internal class ParameterDocumentableConverterTest(
                 assertThat(paramB.data.annotations).isEmpty()
             }
             javaOnly {
-                assertThat(paramA.data.annotations.single().link().name).isEqualTo("NonNull")
+                if (function != functionK) { // Kotlin-as-Java *types only* don't generate @NonNull
+                    assertThat(paramA.data.annotations.single().link().name).isEqualTo("NonNull")
+                }
                 assertThat(paramB.data.annotations.single().link().name).isEqualTo("Nullable")
             }
         }
