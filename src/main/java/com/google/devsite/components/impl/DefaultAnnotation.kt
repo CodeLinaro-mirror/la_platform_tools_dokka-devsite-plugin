@@ -17,7 +17,6 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.symbols.Annotation
-import kotlinx.html.Entities
 import kotlinx.html.FlowContent
 
 /** Default implementation of an annotation. */
@@ -27,22 +26,6 @@ internal class DefaultAnnotation(
     override fun render(into: FlowContent) = into.run {
         +"@"
         data.type.render(this)
-
-        if (data.parameters.isNotEmpty()) {
-            +"("
-            for (param in data.parameters) {
-                +param.name
-                +Entities.nbsp
-                +"="
-                +Entities.nbsp
-                +param.value
-
-                if (param !== data.parameters.last()) {
-                    +","
-                    +Entities.nbsp
-                }
-            }
-            +")"
-        }
+        if (data.parameters.isNotEmpty()) data.parameters.render(into, false)
     }
 }

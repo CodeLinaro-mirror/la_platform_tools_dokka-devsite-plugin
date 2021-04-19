@@ -17,6 +17,13 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.impl.DefaultAnnotation
+import com.google.devsite.components.impl.DefaultAnnotationValueAnnotationParameter
+import com.google.devsite.components.impl.DefaultArrayValueAnnotationParameter
+import com.google.devsite.components.impl.DefaultNamedValueAnnotationParameter
+import com.google.devsite.components.symbols.AnnotationParameter
+import com.google.devsite.components.symbols.AnnotationValueAnnotationParameter
+import com.google.devsite.components.symbols.ArrayValueAnnotationParameter
+import com.google.devsite.components.symbols.NamedValueAnnotationParameter
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.links.DRI
@@ -29,6 +36,8 @@ import org.jetbrains.dokka.model.ClassValue
 import org.jetbrains.dokka.model.EnumValue
 import org.jetbrains.dokka.model.StringValue
 import org.jetbrains.dokka.model.properties.WithExtraProperties
+import kotlin.Boolean
+import kotlin.String
 import com.google.devsite.components.symbols.Annotation as AnnotationComponent
 
 /** @return the components for the provided dokka model annotations */
@@ -48,14 +57,15 @@ internal fun List<Annotation>.annotationComponents(
 
     return (this + injectedAnnotations).filter { annotation ->
         shouldDocumentAnnotation(annotation, displayLanguage)
-    }.map { annotation ->
-        val type = pathProvider.linkForReference(annotation.dri)
-        val params = annotation.params.map { (name, contents) ->
-            AnnotationComponent.Parameter(name, contents.toComponent())
-        }
+    }.map { annotation -> annotation.toDackkaAnnotation(pathProvider) }
+}
 
-        DefaultAnnotation(AnnotationComponent.Params(type, params))
+private fun Annotation.toDackkaAnnotation(pathProvider: FilePathProvider): AnnotationComponent {
+    val type = pathProvider.linkForReference(dri)
+    val params = params.map { (name, contents) ->
+        contents.toComponent(name, pathProvider)
     }
+    return DefaultAnnotation(AnnotationComponent.Params(type, params))
 }
 
 /** @return true if the `@Nullable` annotation is present, false otherwise */
@@ -101,12 +111,28 @@ private fun shouldDocumentAnnotation(annotation: Annotation, language: Language)
         (language == Language.JAVA || !isNullabilityAnnotation)
 }
 
-internal fun AnnotationParameterValue.toComponent(): String = when (this) {
-        is StringValue -> "\"$value\""
-        is EnumValue -> enumName
-        is ClassValue -> className
-        is ArrayValue -> value.joinToString(prefix = "[", postfix = "]") { it.toComponent() }
-        is AnnotationValue -> TODO("Unknown use case.")
-    }
+internal fun AnnotationParameterValue.toComponent(
+    name: String? = null,
+    pathProvider: FilePathProvider
+): AnnotationParameter = when (this) {
+    is StringValue -> DefaultNamedValueAnnotationParameter(
+        NamedValueAnnotationParameter.Params(name, "\"$value\""))
+    is EnumValue -> DefaultNamedValueAnnotationParameter(
+        NamedValueAnnotationParameter.Params(name, enumName))
+    is ClassValue -> DefaultNamedValueAnnotationParameter(
+        NamedValueAnnotationParameter.Params(name, className))
+    is ArrayValue -> DefaultArrayValueAnnotationParameter(
+        ArrayValueAnnotationParameter.Params(
+            name,
+            innerAnnotationParameters = value.map { it.toComponent(pathProvider = pathProvider) }
+        )
+    )
+    is AnnotationValue -> DefaultAnnotationValueAnnotationParameter(
+        AnnotationValueAnnotationParameter.Params(
+            name,
+            annotationValue = annotation.toDackkaAnnotation(pathProvider)
+        )
+    )
+}
 
 internal fun Annotation.nameAsString(): String? = (params["name"] as? StringValue)?.value

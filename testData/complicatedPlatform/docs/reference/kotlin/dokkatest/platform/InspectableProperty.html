@@ -1,0 +1,291 @@
+<html devsite="true">
+  <head>
+    <title>InspectableProperty</title>
+{% setvar book_path %}/reference/kotlin/dokkatest/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>InspectableProperty</h1>
+{% setvar page_path %}dokkatest/platform/InspectableProperty.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>annotation InspectableProperty</pre>
+    </p>
+    <hr>
+    <p>Marks a getter of a property on an inspectable node. This annotation is inherited by default. If a child class doesn't add it to a getter, but a parent class does, the property will be inspected, even if the child overrides the definition of the getter. If a child class defines a property of the same name of a property on the parent but on a different getter, the inspector will use the child's getter when inspecting instances of the child, and the parent's otherwise.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">See also</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code><a href="/reference/kotlin//InspectionCompanion.html#mapProperties(PropertyMapper)">InspectionCompanion</a></code></td>
+            <td width="100%">
+              <p>InspectionCompanion#mapProperties(PropertyMapper)</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin//InspectionCompanion.html#readProperties(Object, PropertyReader)">InspectionCompanion</a></code></td>
+            <td width="100%">
+              <p>InspectionCompanion#readProperties(Object, PropertyReader)</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.EnumEntry.html">InspectableProperty.EnumEntry</a></code></td>
+            <td width="100%">
+              <p>One entry in an enumeration packed into a primitive {int}.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.FlagEntry.html">InspectableProperty.FlagEntry</a></code></td>
+            <td width="100%">
+              <p>One flag value of many that may be packed into a primitive {int}.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.ValueType.html">InspectableProperty.ValueType</a></code></td>
+            <td width="100%">
+              <p>The type of value packed into a primitive {int}.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#attributeId()">attributeId</a>()</code></div>
+              <p>If the property is inflated from XML, the resource ID of its XML attribute.If left as {ID_NULL}, and <code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#hasAttributeId()">hasAttributeId</a></code> is true, the attribute ID will beinferred from <code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#name()">name</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="/reference/kotlin/dokkatest/platform/InspectableProperty.EnumEntry.html">InspectableProperty.EnumEntry</a>&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#enumMapping()">enumMapping</a>()</code></div>
+              <p>For enumerations packed into primitive {int} properties, map the values to string names.Note that <code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#enumMapping()">enumMapping</a></code> cannot be used simultaneously with <code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#flagMapping()">flagMapping</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="/reference/kotlin/dokkatest/platform/InspectableProperty.FlagEntry.html">InspectableProperty.FlagEntry</a>&gt;</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#flagMapping()">flagMapping</a>()</code></div>
+              <p>For flags packed into primitive {int} properties, model the string names of the flags.Note that <code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#flagMapping()">flagMapping</a></code> cannot be used simultaneously with <code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#enumMapping()">enumMapping</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#hasAttributeId()">hasAttributeId</a>()</code></div>
+              <p>If this property has an attribute ID.Set to false if the annotated property does not have an attribute ID, that is, it is notinflated from an XML attribute.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#name()">name</a>()</code></div>
+              <p>The name of the property.If left empty (the default), the property name will be inferred from the name of the gettermethod.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract <a href="/reference/kotlin/dokkatest/platform/InspectableProperty.ValueType.html">InspectableProperty.ValueType</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#valueType()">valueType</a>()</code></div>
+              <p>Specify how to interpret a value type packed into a primitive integer.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="attributeId--"></a>
+      <h3 class="api-name" id="attributeId()">attributeId</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#attributeId()">attributeId</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+      <p>If the property is inflated from XML, the resource ID of its XML attribute.If left as {ID_NULL}, and <code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#hasAttributeId()">hasAttributeId</a></code> is true, the attribute ID will beinferred from <code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#name()">name</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td width="100%">
+                <p>The attribute ID of the property or ID_NULL</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="enumMapping--"></a>
+      <h3 class="api-name" id="enumMapping()">enumMapping</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#enumMapping()">enumMapping</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="/reference/kotlin/dokkatest/platform/InspectableProperty.EnumEntry.html">InspectableProperty.EnumEntry</a>&gt;</pre>
+      <p>For enumerations packed into primitive {int} properties, map the values to string names.Note that <code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#enumMapping()">enumMapping</a></code> cannot be used simultaneously with <code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#flagMapping()">flagMapping</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="/reference/kotlin/dokkatest/platform/InspectableProperty.EnumEntry.html">InspectableProperty.EnumEntry</a>&gt;</code></td>
+              <td width="100%">
+                <p>An array of <code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.EnumEntry.html">EnumEntry</a></code>, empty if not applicable</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="https://developer.android.com/reference/android/annotation/IntDef.html">IntDef</a></code></td>
+              <td width="100%"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="flagMapping--"></a>
+      <h3 class="api-name" id="flagMapping()">flagMapping</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#flagMapping()">flagMapping</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="/reference/kotlin/dokkatest/platform/InspectableProperty.FlagEntry.html">InspectableProperty.FlagEntry</a>&gt;</pre>
+      <p>For flags packed into primitive {int} properties, model the string names of the flags.Note that <code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#flagMapping()">flagMapping</a></code> cannot be used simultaneously with <code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#enumMapping()">enumMapping</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="/reference/kotlin/dokkatest/platform/InspectableProperty.FlagEntry.html">InspectableProperty.FlagEntry</a>&gt;</code></td>
+              <td width="100%">
+                <p>An array of <code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.FlagEntry.html">FlagEntry</a></code>, empty if not applicable</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="https://developer.android.com/reference/android/annotation/IntDef.html">IntDef</a></code></td>
+              <td width="100%"></td>
+            </tr>
+            <tr>
+              <td><code>IntFlagMapping</code></td>
+              <td width="100%"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="hasAttributeId--"></a>
+      <h3 class="api-name" id="hasAttributeId()">hasAttributeId</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#hasAttributeId()">hasAttributeId</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <p>If this property has an attribute ID.Set to false if the annotated property does not have an attribute ID, that is, it is notinflated from an XML attribute. This will prevent the automatic inference of the attributeID if <code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#attributeId()">attributeId</a></code> is set to ID_NULL.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+              <td width="100%">
+                <p>Whether to infer an attribute ID if not supplied</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="name--"></a>
+      <h3 class="api-name" id="name()">name</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#name()">name</a>():&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a></pre>
+      <p>The name of the property.If left empty (the default), the property name will be inferred from the name of the gettermethod.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+              <td width="100%">
+                <p>The name of the property.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="valueType--"></a>
+      <h3 class="api-name" id="valueType()">valueType</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/dokkatest/platform/InspectableProperty.html#valueType()">valueType</a>():&nbsp;<a href="/reference/kotlin/dokkatest/platform/InspectableProperty.ValueType.html">InspectableProperty.ValueType</a></pre>
+      <p>Specify how to interpret a value type packed into a primitive integer.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.ValueType.html">InspectableProperty.ValueType</a></code></td>
+              <td width="100%">
+                <p>A <code><a href="/reference/kotlin/dokkatest/platform/InspectableProperty.ValueType.html">ValueType</a></code></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

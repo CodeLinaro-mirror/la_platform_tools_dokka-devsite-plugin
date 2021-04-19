@@ -1,0 +1,118 @@
+<html devsite="true">
+  <head>
+    <title>ViewDebug.HierarchyHandler</title>
+{% setvar book_path %}/reference/dokkatest/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>ViewDebug.HierarchyHandler</h1>
+{% setvar page_path %}dokkatest/platform/ViewDebug.HierarchyHandler.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>interface ViewDebug.HierarchyHandler</pre>
+    </p>
+    <hr>
+    <p>Allows a View to inject custom children into HierarchyViewer. For example,WebView uses this to add its internal layer tree as a child to itself</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/dokkatest/platform/ViewDebug.HierarchyHandler.html#dumpViewHierarchyWithProperties(java.io.BufferedWriter,int)">dumpViewHierarchyWithProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/io/BufferedWriter.html">BufferedWriter</a>&nbsp;out,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;int&nbsp;level<br>)</code></div>
+              <p>Dumps custom children to hierarchy viewer.See ViewDebug.dumpViewWithProperties(Context, View, BufferedWriter, int)for the formatAn empty implementation should simply do nothing</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;View</code></td>
+            <td width="100%">
+              <div><code><a href="/reference/dokkatest/platform/ViewDebug.HierarchyHandler.html#findHierarchyView(java.lang.String,int)">findHierarchyView</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;className,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;int&nbsp;hashCode)</code></div>
+              <p>Returns a View to enable grabbing screenshots from custom childrenreturned in dumpViewHierarchyWithProperties.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="dumpViewHierarchyWithProperties(java.io.BufferedWriter, int)"></a><a name="dumpViewHierarchyWithProperties-java.io.BufferedWriter-int-"></a>
+      <h3 class="api-name" id="dumpViewHierarchyWithProperties(java.io.BufferedWriter,int)">dumpViewHierarchyWithProperties</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;void&nbsp;<a href="/reference/dokkatest/platform/ViewDebug.HierarchyHandler.html#dumpViewHierarchyWithProperties(java.io.BufferedWriter,int)">dumpViewHierarchyWithProperties</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/io/BufferedWriter.html">BufferedWriter</a>&nbsp;out,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;int&nbsp;level<br>)</pre>
+      <p>Dumps custom children to hierarchy viewer.See ViewDebug.dumpViewWithProperties(Context, View, BufferedWriter, int)for the formatAn empty implementation should simply do nothing</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/io/BufferedWriter.html">BufferedWriter</a>&nbsp;out</code></td>
+              <td width="100%">
+                <p>The output writer</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;int&nbsp;level</code></td>
+              <td width="100%">
+                <p>The indentation level</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="findHierarchyView(java.lang.String, int)"></a><a name="findHierarchyView-java.lang.String-int-"></a>
+      <h3 class="api-name" id="findHierarchyView(java.lang.String,int)">findHierarchyView</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;View&nbsp;<a href="/reference/dokkatest/platform/ViewDebug.HierarchyHandler.html#findHierarchyView(java.lang.String,int)">findHierarchyView</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;className,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;int&nbsp;hashCode)</pre>
+      <p>Returns a View to enable grabbing screenshots from custom childrenreturned in dumpViewHierarchyWithProperties.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;className</code></td>
+              <td width="100%">
+                <p>The className of the view to find</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;int&nbsp;hashCode</code></td>
+              <td width="100%">
+                <p>The hashCode of the view to find</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a>&nbsp;View</code></td>
+              <td width="100%">
+                <p>the View to capture from, or null if not found</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,284 @@
+<html devsite="true">
+  <head>
+    <title>ViewDebug</title>
+{% setvar book_path %}/reference/kotlin/dokkatest/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>ViewDebug</h1>
+{% setvar page_path %}dokkatest/platform/ViewDebug.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>class ViewDebug</pre>
+    </p>
+    <hr>
+    <p>Various debugging/tracing tools related to View and the view hierarchy.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.CapturedViewProperty.html">ViewDebug.CapturedViewProperty</a></code></td>
+            <td width="100%">
+              <p>This annotation can be used to mark fields and methods to be dumped whenthe view is captured.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.ExportedProperty.html">ViewDebug.ExportedProperty</a></code></td>
+            <td width="100%">
+              <p>This annotation can be used to mark fields and methods to be dumped bythe view server.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.FlagToString.html">ViewDebug.FlagToString</a></code></td>
+            <td width="100%">
+              <p>Defines a mapping from a flag to a String.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.HierarchyHandler.html">ViewDebug.HierarchyHandler</a></code></td>
+            <td width="100%">
+              <p>Allows a View to inject custom children into HierarchyViewer.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.HierarchyTraceType.html">ViewDebug.HierarchyTraceType</a></code></td>
+            <td width="100%">
+              <p><strong>This enum is deprecated.</strong> 
+                <p>This enum is now unused</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.IntToString.html">ViewDebug.IntToString</a></code></td>
+            <td width="100%">
+              <p>Defines a mapping from an int value to a String.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.RecyclerTraceType.html">ViewDebug.RecyclerTraceType</a></code></td>
+            <td width="100%">
+              <p><strong>This enum is deprecated.</strong> 
+                <p>This enum is now unused</p>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Constants</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.html#DEBUG_DRAG()">DEBUG_DRAG</a></code></div>
+              <p>Enables detailed logging of drag/drop operations.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.html#DEBUG_POSITIONING()">DEBUG_POSITIONING</a></code></div>
+              <p>Enables detailed logging of task positioning operations.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.html#REMOTE_COMMAND_DUMP_ENCODED()">REMOTE_COMMAND_DUMP_ENCODED</a></code></div>
+              <p>Similar to REMOTE_COMMAND_DUMP but uses ViewHierarchyEncoder instead of flat text</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.html#TRACE_HIERARCHY()">TRACE_HIERARCHY</a></code></div>
+              <p><strong>This property is deprecated.</strong> 
+                <p>This flag is now unused</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.html#TRACE_RECYCLER()">TRACE_RECYCLER</a></code></div>
+              <p><strong>This property is deprecated.</strong> 
+                <p>This flag is now unused</p>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code><a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.html#flagsToString(java.lang.Class&lt;?&gt;,java.lang.String,int)">flagsToString</a>(clazz:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;,&nbsp;field:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>,&nbsp;flags:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Converts a set of flags from a field that is mapped with <code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.FlagToString.html">FlagToString</a></code> to its stringrepresentation.</p>
+            </td>
+          </tr>
+          <tr>
+            <td><code><a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td width="100%">
+              <div><code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.html#intToString(java.lang.Class&lt;?&gt;,java.lang.String,int)">intToString</a>(clazz:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;,&nbsp;field:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>,&nbsp;integer:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <p>Converts an integer from a field that is mapped with <code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.IntToString.html">IntToString</a></code> to its stringrepresentation.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Constants</h2>
+    <div><a name="getDEBUG_DRAG()"></a><a name="setDEBUG_DRAG()"></a><a name="getDEBUG_DRAG--"></a><a name="setDEBUG_DRAG--"></a>
+      <h3 class="api-name" id="DEBUG_DRAG()">DEBUG_DRAG</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/dokkatest/platform/ViewDebug.html#DEBUG_DRAG()">DEBUG_DRAG</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <p>Enables detailed logging of drag/drop operations.</p>
+    </div>
+    <div><a name="getDEBUG_POSITIONING()"></a><a name="setDEBUG_POSITIONING()"></a><a name="getDEBUG_POSITIONING--"></a><a name="setDEBUG_POSITIONING--"></a>
+      <h3 class="api-name" id="DEBUG_POSITIONING()">DEBUG_POSITIONING</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/dokkatest/platform/ViewDebug.html#DEBUG_POSITIONING()">DEBUG_POSITIONING</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <p>Enables detailed logging of task positioning operations.</p>
+    </div>
+    <div><a name="getREMOTE_COMMAND_DUMP_ENCODED()"></a><a name="setREMOTE_COMMAND_DUMP_ENCODED()"></a><a name="getREMOTE_COMMAND_DUMP_ENCODED--"></a><a name="setREMOTE_COMMAND_DUMP_ENCODED--"></a>
+      <h3 class="api-name" id="REMOTE_COMMAND_DUMP_ENCODED()">REMOTE_COMMAND_DUMP_ENCODED</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/dokkatest/platform/ViewDebug.html#REMOTE_COMMAND_DUMP_ENCODED()">REMOTE_COMMAND_DUMP_ENCODED</a>:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a></pre>
+      <p>Similar to REMOTE_COMMAND_DUMP but uses ViewHierarchyEncoder instead of flat text</p>
+    </div>
+    <div><a name="getTRACE_HIERARCHY()"></a><a name="setTRACE_HIERARCHY()"></a><a name="getTRACE_HIERARCHY--"></a><a name="setTRACE_HIERARCHY--"></a>
+      <h3 class="api-name" id="TRACE_HIERARCHY()">TRACE_HIERARCHY</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/dokkatest/platform/ViewDebug.html#TRACE_HIERARCHY()">TRACE_HIERARCHY</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <aside class="caution"><strong>This property is deprecated.</strong><br>
+        <p>This flag is now unused</p>
+      </aside>
+    </div>
+    <div><a name="getTRACE_RECYCLER()"></a><a name="setTRACE_RECYCLER()"></a><a name="getTRACE_RECYCLER--"></a><a name="setTRACE_RECYCLER--"></a>
+      <h3 class="api-name" id="TRACE_RECYCLER()">TRACE_RECYCLER</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/dokkatest/platform/ViewDebug.html#TRACE_RECYCLER()">TRACE_RECYCLER</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <aside class="caution"><strong>This property is deprecated.</strong><br>
+        <p>This flag is now unused</p>
+      </aside>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="flagsToString(java.lang.Class&lt;?&gt;, java.lang.String, int)"></a><a name="flagsToString-java.lang.Class&lt;?&gt;-java.lang.String-int-"></a>
+      <h3 class="api-name" id="flagsToString(java.lang.Class&lt;?&gt;,java.lang.String,int)">flagsToString</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/dokkatest/platform/ViewDebug.html#flagsToString(java.lang.Class&lt;?&gt;,java.lang.String,int)">flagsToString</a>(clazz:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;,&nbsp;field:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>,&nbsp;flags:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a></pre>
+      <p>Converts a set of flags from a field that is mapped with <code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.FlagToString.html">FlagToString</a></code> to its stringrepresentation.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>clazz:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</code></td>
+              <td width="100%">
+                <p>The class the field is defined on.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>field:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+              <td width="100%">
+                <p>The field on which the <code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.ExportedProperty.html">ExportedProperty</a></code> is defined on.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>flags:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td width="100%">
+                <p>The flags to convert.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+              <td width="100%">
+                <p>The flags converted into their string representations.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="intToString(java.lang.Class&lt;?&gt;, java.lang.String, int)"></a><a name="intToString-java.lang.Class&lt;?&gt;-java.lang.String-int-"></a>
+      <h3 class="api-name" id="intToString(java.lang.Class&lt;?&gt;,java.lang.String,int)">intToString</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/dokkatest/platform/ViewDebug.html#intToString(java.lang.Class&lt;?&gt;,java.lang.String,int)">intToString</a>(clazz:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;,&nbsp;field:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>,&nbsp;integer:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a></pre>
+      <p>Converts an integer from a field that is mapped with <code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.IntToString.html">IntToString</a></code> to its stringrepresentation.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>clazz:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</code></td>
+              <td width="100%">
+                <p>The class the field is defined on.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>field:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+              <td width="100%">
+                <p>The field on which the <code><a href="/reference/kotlin/dokkatest/platform/ViewDebug.ExportedProperty.html">ExportedProperty</a></code> is defined on.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>integer:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td width="100%">
+                <p>The value to convert.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code><a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+              <td width="100%">
+                <p>The value converted into its string representation.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

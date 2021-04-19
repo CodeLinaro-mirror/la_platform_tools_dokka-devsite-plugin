@@ -17,8 +17,8 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.symbols.Annotation.Parameter
 import com.google.devsite.components.symbols.Annotation.Params
+import com.google.devsite.components.symbols.NamedValueAnnotationParameter
 import com.google.devsite.components.testing.NoopLink
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
@@ -46,7 +46,8 @@ class DefaultAnnotationTest {
         val component = DefaultAnnotation(
             Params(
                 type = NoopLink("Foo"),
-                parameters = listOf(Parameter("a", "value"))
+                parameters = listOf(DefaultNamedValueAnnotationParameter(
+                    NamedValueAnnotationParameter.Params("a", "value")))
             )
         )
 
@@ -68,8 +69,10 @@ class DefaultAnnotationTest {
             Params(
                 type = NoopLink("Foo"),
                 parameters = listOf(
-                    Parameter("a", "value"),
-                    Parameter("another", "value")
+                    DefaultNamedValueAnnotationParameter(
+                        NamedValueAnnotationParameter.Params("a", "value")),
+                    DefaultNamedValueAnnotationParameter(
+                        NamedValueAnnotationParameter.Params("another", "value"))
                 )
             )
         )

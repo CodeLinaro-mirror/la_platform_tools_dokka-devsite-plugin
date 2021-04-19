@@ -54,4 +54,9 @@ class BasicTest : IntegrationTestBase() {
     fun `Validate @sample`() {
         verifyDirectory("sampleAnnotation", sampleLocations = listOf("samples"))
     }
+
+    @Test
+    fun `Validate complicated Platform files`() {
+        verifyDirectory("complicatedPlatform")
+    }
 }

@@ -16,6 +16,7 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.render
 import kotlinx.html.Entities
@@ -51,19 +52,7 @@ internal class DefaultFunctionSignature(
         } else {
             data.name.render(this)
         }
-        +"("
-        if (shouldBreak) br()
-        for (parameter in data.parameters) {
-            if (shouldBreak) repeat(4) { +Entities.nbsp }
-            parameter.render(this)
-
-            if (parameter !== data.parameters.last()) {
-                +","
-                if (shouldBreak) br() else +Entities.nbsp
-            }
-        }
-        if (shouldBreak) br()
-        +")"
+        data.parameters.render(into, shouldBreak)
     }
 
     /** Uses the estimated function size to guess if it will overflow. */
@@ -75,4 +64,24 @@ internal class DefaultFunctionSignature(
         val totalSize = nameSize + paramSize
         return totalSize >= 70
     }
+}
+
+internal fun List<ContextFreeComponent>.render(
+    into: FlowContent,
+    shouldBreak: Boolean = false,
+    brackets: String = "()"
+) = into.run {
+    +brackets[0].toString()
+    if (shouldBreak) br()
+    for (parameter in this@render) {
+        if (shouldBreak) repeat(4) { +Entities.nbsp }
+        parameter.render(this)
+
+        if (parameter !== last()) {
+            +","
+            if (shouldBreak) br() else +Entities.nbsp
+        }
+    }
+    if (shouldBreak) br()
+    +brackets[1].toString()
 }

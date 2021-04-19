@@ -18,6 +18,8 @@ package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Link
+import com.google.devsite.components.symbols.name
+import com.google.devsite.components.symbols.value
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.exceptNonNull
 import com.google.devsite.renderer.converters.testing.item
