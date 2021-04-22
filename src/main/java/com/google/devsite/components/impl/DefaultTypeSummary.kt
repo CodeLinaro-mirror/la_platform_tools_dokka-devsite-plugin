@@ -16,8 +16,8 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.render
 import com.google.devsite.components.symbols.TypeSummary
-import kotlinx.html.Entities
 import kotlinx.html.FlowContent
 
 /** Default implementation of a type summary. */
@@ -25,11 +25,7 @@ internal class DefaultTypeSummary(
     override val data: TypeSummary.Params
 ) : TypeSummary {
     override fun render(into: FlowContent) = into.run {
-        for (modifier in data.modifiers) {
-            +modifier
-            if (modifier === data.modifiers.last()) +" " else +Entities.nbsp
-        }
-
-        data.type.render(this)
+        data.modifiers.render(into, terminator = { +" " })
+        data.type.render(into)
     }
 }

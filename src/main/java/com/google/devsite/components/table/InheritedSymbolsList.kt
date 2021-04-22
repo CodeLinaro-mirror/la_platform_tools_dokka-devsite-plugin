@@ -20,11 +20,13 @@ import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.Link
 
 /** Represents the inherited symbols in an expandable summary. */
-internal interface InheritedSymbols : ContextFreeComponent {
+internal interface InheritedSymbolsList : ContextFreeComponent {
     val data: Params
 
     class Params(
         val header: RowComponent,
         val inheritedSymbolSummaries: Map<Link, SummaryList>
     )
+
+    fun hasContent() = data.inheritedSymbolSummaries.isNotEmpty()
 }

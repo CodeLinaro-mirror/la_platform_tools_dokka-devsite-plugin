@@ -16,8 +16,9 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.ShouldBreak
+import com.google.devsite.components.render
 import com.google.devsite.components.symbols.ClassSignature
-import com.google.devsite.components.symbols.render
 import com.google.devsite.renderer.Language
 import kotlinx.html.FlowContent
 import kotlinx.html.pre
@@ -26,43 +27,20 @@ internal class DefaultClassSignature(
     override val data: ClassSignature.Params
 ) : ClassSignature {
 
-    override fun render(into: FlowContent) {
+    override fun render(into: FlowContent) = into.run {
+        pre {
+            +(data.modifiers + data.type + data.name).joinToString(separator = " ")
 
-        into.run {
-            pre {
-                +(data.modifiers + data.type + data.name).joinToString(separator = " ")
+            data.typeParameters.render(into, ShouldBreak.NO, brackets = "<>")
 
-                data.typeParameters.render(this)
-
-                when (data.displayLanguage) {
-                    Language.JAVA -> {
-                        for ((i, value) in data.extends.withIndex()) {
-                            if (i == 0) {
-                                +" extends "
-                            } else {
-                                +", "
-                            }
-                            value.render(this)
-                        }
-                        for ((i, value) in data.implements.withIndex()) {
-                            if (i == 0) {
-                                +" implements "
-                            } else {
-                                +", "
-                            }
-                            value.render(this)
-                        }
-                    }
-                    Language.KOTLIN -> {
-                        for ((i, value) in (data.extends + data.implements).withIndex()) {
-                            if (i == 0) {
-                                +" : "
-                            } else {
-                                +", "
-                            }
-                            value.render(this)
-                        }
-                    }
+            when (data.displayLanguage) {
+                Language.JAVA -> {
+                    data.extends.render(into, ShouldBreak.MAYBE, header = { +" extends " })
+                    data.implements.render(into, ShouldBreak.MAYBE, header = { +" implements " })
+                }
+                Language.KOTLIN -> {
+                    (data.extends + data.implements)
+                        .render(into, ShouldBreak.MAYBE, header = { +" : " })
                 }
             }
         }

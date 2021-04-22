@@ -16,8 +16,9 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.ShouldBreak
+import com.google.devsite.components.render
 import com.google.devsite.components.symbols.SymbolType
-import kotlinx.html.Entities
 import kotlinx.html.FlowContent
 
 /** Default implementation of a function parameter type. */
@@ -27,15 +28,7 @@ internal class DefaultSymbolType(
     override fun render(into: FlowContent) = into.run {
         data.type.render(this)
         if (data.generics.isNotEmpty()) {
-            +"<"
-            for (generic in data.generics) {
-                generic.render(this)
-                if (generic !== data.generics.last()) {
-                    +","
-                    +Entities.nbsp
-                }
-            }
-            +">"
+            data.generics.render(into, ShouldBreak.NO, brackets = "<>")
         }
         if (data.nullable) +"?"
     }

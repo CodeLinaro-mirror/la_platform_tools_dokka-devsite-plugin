@@ -16,6 +16,8 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.ShouldBreak
+import com.google.devsite.components.render
 import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.renderer.Language
 import kotlinx.html.Entities
@@ -32,14 +34,11 @@ internal class DefaultParameter(
     }
 
     override fun render(into: FlowContent) = into.run {
-        for (annotation in data.annotations) {
-            annotation.render(this)
-            +" "
-        }
+        data.annotations.render(into, ShouldBreak.MAYBE, separator = "", terminator = { +" " })
 
         when (data.displayLanguage) {
             Language.JAVA -> {
-                data.primary.render(this)
+                data.primary.render(into)
                 if (data.name.isNotEmpty()) {
                     +Entities.nbsp
                     +data.name
@@ -52,36 +51,21 @@ internal class DefaultParameter(
                     +Entities.nbsp
                 }
 
-                for (modifier in data.lambdaModifiers) {
-                    +modifier
-                    +Entities.nbsp
-                }
+                data.lambdaModifiers.render(into, terminator = { +Entities.nbsp })
 
                 if (data.receiver != null) {
-                    data.receiver.render(this)
+                    data.receiver.render(into)
                     +"."
                 }
 
-                if (data.isLambda) +"("
-                for (type in data.lambdaParams) {
-                    type.render(this)
-                    if (type !== data.lambdaParams.last()) {
-                        +", "
-                    }
-                }
                 if (data.isLambda) {
-                    +")"
+                    data.lambdaParams.render(into, ShouldBreak.MAYBE, brackets = "()")
                     +" "
-                    nobr {
-                        +"->"
-                    }
+                    nobr { +"->" }
                     +" "
                 }
 
-                for (modifier in data.modifiers) {
-                    +modifier
-                    +Entities.nbsp
-                }
+                data.modifiers.render(into, terminator = { +Entities.nbsp })
 
                 data.primary.render(this)
 

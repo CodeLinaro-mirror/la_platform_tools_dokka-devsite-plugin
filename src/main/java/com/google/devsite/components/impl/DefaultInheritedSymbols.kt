@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.table.InheritedSymbols
+import com.google.devsite.components.table.InheritedSymbolsList
 import kotlinx.html.FlowContent
 import kotlinx.html.div
 import kotlinx.html.span
@@ -29,8 +29,8 @@ import kotlinx.html.unsafe
 
 /** Default implementation of inherited symbols. */
 internal class DefaultInheritedSymbols(
-    override val data: InheritedSymbols.Params
-) : InheritedSymbols {
+    override val data: InheritedSymbolsList.Params
+) : InheritedSymbolsList {
     override fun render(into: FlowContent) {
         if (data.inheritedSymbolSummaries.isEmpty()) return
 

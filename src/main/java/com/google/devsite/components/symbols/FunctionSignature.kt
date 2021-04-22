@@ -17,9 +17,10 @@
 package com.google.devsite.components.symbols
 
 import com.google.devsite.components.Link
+import com.google.devsite.components.Sizeable
 
 /** Represents a function or method signature (aka just the name and params). */
-internal interface FunctionSignature : SymbolSignature {
+internal interface FunctionSignature : SymbolSignature, Sizeable {
     override val data: Params
 
     class Params(
@@ -29,4 +30,12 @@ internal interface FunctionSignature : SymbolSignature {
         val parameters: List<Parameter> = emptyList(),
         val isDeprecated: Boolean = false
     ) : SymbolSignature.Params
+
+    override fun length(): Int {
+        val nameSize = data.name.length()
+        val allParams = data.typeParameters + listOfNotNull(data.receiver) + data.parameters
+        val paramSize = allParams.sumBy { it.length() + 2 }
+
+        return nameSize + paramSize
+    }
 }

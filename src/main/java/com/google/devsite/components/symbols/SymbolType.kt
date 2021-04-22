@@ -32,6 +32,7 @@ internal interface SymbolType : SymbolBase {
     class Params(
         val type: Link,
         val nullable: Boolean = false,
-        val generics: List<SymbolBase> = emptyList()
+        val generics: List<SymbolBase> = emptyList(),
+        val annotations: List<Annotation> = emptyList()
     )
 }

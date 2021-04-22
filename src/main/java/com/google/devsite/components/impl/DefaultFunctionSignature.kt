@@ -16,12 +16,11 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.components.ShouldBreak
+import com.google.devsite.components.render
+import com.google.devsite.components.shouldBreak
 import com.google.devsite.components.symbols.FunctionSignature
-import com.google.devsite.components.symbols.render
-import kotlinx.html.Entities
 import kotlinx.html.FlowContent
-import kotlinx.html.br
 import kotlinx.html.span
 import kotlinx.html.unsafe
 
@@ -30,17 +29,15 @@ internal class DefaultFunctionSignature(
     override val data: FunctionSignature.Params
 ) : FunctionSignature {
     override fun render(into: FlowContent) = into.run {
-        data.typeParameters.render(this)
+        data.typeParameters.render(this, brackets = "<>", shouldBreak = ShouldBreak.NO)
         if (data.typeParameters.isNotEmpty()) +" "
 
         if (data.receiver != null) {
             data.receiver.render(this)
             +"."
         }
-        val shouldBreak = shouldBreak()
 
         if (data.isDeprecated) {
-
             // Bug in kotlinx: <del> tag adds a new line before and after using it
             // https://github.com/Kotlin/kotlinx.html/issues/113
             // Manually declare <del> instead
@@ -52,36 +49,10 @@ internal class DefaultFunctionSignature(
         } else {
             data.name.render(this)
         }
-        data.parameters.render(into, shouldBreak)
+        data.parameters.render(
+            into,
+            this@DefaultFunctionSignature.shouldBreak(),
+            brackets = "()"
+        )
     }
-
-    /** Uses the estimated function size to guess if it will overflow. */
-    private fun shouldBreak(): Boolean {
-        val nameSize = data.name.length()
-        val allParams = data.typeParameters + listOfNotNull(data.receiver) + data.parameters
-        val paramSize = allParams.sumBy { it.length() + 2 }
-
-        val totalSize = nameSize + paramSize
-        return totalSize >= 70
-    }
-}
-
-internal fun List<ContextFreeComponent>.render(
-    into: FlowContent,
-    shouldBreak: Boolean = false,
-    brackets: String = "()"
-) = into.run {
-    +brackets[0].toString()
-    if (shouldBreak) br()
-    for (parameter in this@render) {
-        if (shouldBreak) repeat(4) { +Entities.nbsp }
-        parameter.render(this)
-
-        if (parameter !== last()) {
-            +","
-            if (shouldBreak) br() else +Entities.nbsp
-        }
-    }
-    if (shouldBreak) br()
-    +brackets[1].toString()
 }

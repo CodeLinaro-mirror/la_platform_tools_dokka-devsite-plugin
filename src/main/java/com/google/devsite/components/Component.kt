@@ -16,8 +16,79 @@
 
 package com.google.devsite.components
 
+import com.google.devsite.components.symbols.TypeParameter
+import kotlinx.html.Entities
+import kotlinx.html.FlowContent
+import kotlinx.html.br
+
 /** A component renders some data into a UI container. */
 internal interface Component<T> {
     /** Render this component's data into the container. */
     fun render(into: T)
 }
+
+internal fun List<Component<FlowContent>>.render(
+    into: FlowContent,
+    shouldBreak: ShouldBreak = ShouldBreak.MAYBE,
+    separator: String? = ",",
+    brackets: String = "",
+    header: (() -> Unit)? = null,
+    terminator: (() -> Unit)? = null
+) = into.run {
+    if (isEmpty() && brackets != "()") return@run // do not print empty brackets except fun() parens
+    if (header != null) header()
+    if (brackets != "") +brackets[0].toString()
+    if (shouldBreak == ShouldBreak.AND_INDENT) br()
+    for (parameter in this@render) {
+        if (shouldBreak == ShouldBreak.AND_INDENT) repeat(4) { +Entities.nbsp }
+        // Group type parameters within a single set of <>s, rather than each making their own
+        if (parameter is TypeParameter) parameter.render(this, false)
+        else parameter.render(this)
+
+        if (parameter !== last() && separator != null) { // null separator -> no separation/spaces
+            +separator
+            when (shouldBreak) {
+                ShouldBreak.YES, ShouldBreak.AND_INDENT -> { br() }
+                ShouldBreak.MAYBE -> { +" " }
+                ShouldBreak.NO -> { +Entities.nbsp }
+            }
+        }
+    }
+    if (shouldBreak == ShouldBreak.YES || shouldBreak == ShouldBreak.AND_INDENT) br()
+    if (brackets != "") +brackets[1].toString()
+    if (terminator != null) terminator()
+}
+
+internal fun List<String>.render(
+    into: FlowContent,
+    nbsp: Boolean = true,
+    separator: String = "",
+    header: (() -> Unit)? = null,
+    terminator: (() -> Unit)? = null
+) = into.run {
+    if (isEmpty()) return@run
+    if (header != null) header()
+    for (string in this@render) {
+        +string
+        if (string != last()) {
+            +separator
+            if (nbsp) +Entities.nbsp else +" "
+        }
+    }
+    if (terminator != null) terminator()
+}
+
+internal enum class ShouldBreak {
+    YES, //   Manually break
+    AND_INDENT, // Manually break and indent
+    MAYBE, // Use spaces instead of nbsps. If it breaks, it breaks
+    NO //     Do not break line. nbsps everywhere
+}
+
+/** Infer from the length of the Sizeable whether to explicitly break the line */
+internal fun Sizeable.shouldBreak() =
+    if (length() < ASSUMED_MINIMUM_LINE_LENGTH) ShouldBreak.NO
+    else ShouldBreak.AND_INDENT
+
+/** We assume that the two-column tables will be more than 70 chars long, but not far more */
+private val ASSUMED_MINIMUM_LINE_LENGTH = 70

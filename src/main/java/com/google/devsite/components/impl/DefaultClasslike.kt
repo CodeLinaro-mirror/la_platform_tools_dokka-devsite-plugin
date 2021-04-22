@@ -17,6 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.pages.Classlike
+import com.google.devsite.components.render
 import kotlinx.html.FlowContent
 import kotlinx.html.h2
 import kotlinx.html.hr
@@ -32,34 +33,16 @@ internal class DefaultClasslike(
         }
         data.hierarchy.render(this)
         data.relatedSymbols.render(this)
-
         hr()
-
-        for (detail in data.description) {
-            detail.render(this)
-        }
-
+        data.description.render(into, separator = null)
         h2 {
             +"Summary"
         }
+        data.symbolTypes.map { it.first }.filter { it.hasContent() }.render(into, separator = null)
+        data.inheritedTypes.filter { it.hasContent() }.render(into, separator = null)
 
-        for ((summary, _) in data.symbolTypes) {
-            summary.render(this)
-        }
-
-        for (summary in data.inheritedTypes) {
-            summary.render(this)
-        }
-
-        val symbolTypes = data.symbolTypes.filter { (_, symbolType) ->
-            symbolType.symbols.isNotEmpty()
-        }
-        for ((_, symbolType) in symbolTypes) {
-            h2 { +symbolType.title }
-
-            for (symbol in symbolType.symbols) {
-                symbol.render(this)
-            }
+        for (symbolType in data.symbolTypes.map { it.second }) {
+            symbolType.symbols.render(into, separator = null, header = { h2 { +symbolType.title } })
         }
     }
 }

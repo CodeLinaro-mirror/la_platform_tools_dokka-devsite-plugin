@@ -18,7 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth
 import com.google.devsite.components.Link
-import com.google.devsite.components.table.InheritedSymbols
+import com.google.devsite.components.table.InheritedSymbolsList
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
 import com.google.devsite.components.testing.NoopLink
@@ -38,7 +38,7 @@ class DefaultInheritedSymbolsTest {
 
         val component = DefaultInheritedSymbols(
 
-            InheritedSymbols.Params(
+            InheritedSymbolsList.Params(
                 header = DefaultTableTitle(
                     TableTitle.Params("Inherited Methods", big = true)),
                 inheritedSymbolSummaries = inheritedSymbols
@@ -84,7 +84,7 @@ class DefaultInheritedSymbolsTest {
     fun `Empty inherited symbols table renders correctly `() {
 
         val component = DefaultInheritedSymbols(
-            InheritedSymbols.Params(
+            InheritedSymbolsList.Params(
                 header = DefaultTableTitle(
                     TableTitle.Params("Inherited Methods", big = true)),
                 inheritedSymbolSummaries = HashMap<Link, SummaryList>()
