@@ -27,13 +27,12 @@ internal class DefaultTwoPaneSummaryItem(
 ) : TwoPaneSummaryItem {
     override fun render(into: TR) = into.run {
         td {
+            attributes["width"] = "40%"
             code {
                 data.title.render(this)
             }
         }
         td {
-            attributes["width"] = "100%"
-
             data.description.render(this)
         }
     }
