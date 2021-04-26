@@ -82,9 +82,9 @@ internal fun Callable.anchor(
     separator: String = ",",
     close: String = ")"
 ): String {
-    val allParams = listOfNotNull(receiver) + params
-    val signature = allParams.joinToString(separator) { it.name() }
-    return "$name$open$signature$close"
+    val receiverStr = if (receiver == null) "" else "$open${receiver!!.name()}$close."
+    val signature = params.joinToString(separator) { it.name() }
+    return "$receiverStr$name$open$signature$close"
 }
 
 private fun TypeReference.name(): String = when (this) {

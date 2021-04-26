@@ -115,7 +115,7 @@ internal class LinksTest : ConverterTestBase() {
         val (name, url) = pathProvider().forReference(dri)
 
         assertThat(name).isEqualTo("foo")
-        assertPath(url, "androidx/example/package-summary.html#foo(kotlin.String,kotlin.Int)")
+        assertPath(url, "androidx/example/package-summary.html#(kotlin.String).foo(kotlin.Int)")
     }
 
     @Test

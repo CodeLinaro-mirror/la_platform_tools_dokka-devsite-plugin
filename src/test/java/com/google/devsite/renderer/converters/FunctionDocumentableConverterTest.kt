@@ -352,7 +352,8 @@ internal class FunctionDocumentableConverterTest(
         assertPath(
             signature.data.name.data.url,
             "androidx/example/package-summary.html#" +
-                "foo(kotlin.collections.List,kotlin.Number,kotlin.collections.Map,kotlin.Function2)"
+                "(kotlin.collections.List)" +
+                ".foo(kotlin.Number,kotlin.collections.Map,kotlin.Function2)"
         )
     }
 
@@ -506,9 +507,10 @@ internal class FunctionDocumentableConverterTest(
         """.render().detail()
 
         assertThat(detail.data.anchors).containsExactly(
-            "foo(kotlin.collections.List,kotlin.Number,kotlin.collections.Map,kotlin.Function2)",
-            "foo(kotlin.collections.List, kotlin.Number, kotlin.collections.Map, kotlin.Function2)",
-            "foo-kotlin.collections.List-kotlin.Number-kotlin.collections.Map-kotlin.Function2-"
+            "(kotlin.collections.List).foo(kotlin.Number,kotlin.collections.Map,kotlin.Function2)",
+            "(kotlin.collections.List)" +
+                ".foo(kotlin.Number, kotlin.collections.Map, kotlin.Function2)",
+            "-kotlin.collections.List-.foo-kotlin.Number-kotlin.collections.Map-kotlin.Function2-"
         )
     }
 

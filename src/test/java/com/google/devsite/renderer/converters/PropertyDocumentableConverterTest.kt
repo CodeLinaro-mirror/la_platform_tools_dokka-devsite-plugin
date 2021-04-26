@@ -134,7 +134,7 @@ internal class PropertyDocumentableConverterTest(
 
         assertPath(
             signature.data.name.data.url,
-            "androidx/example/package-summary.html#foo(kotlin.collections.List)"
+            "androidx/example/package-summary.html#(kotlin.collections.List).foo()"
         )
     }
 
@@ -199,11 +199,11 @@ internal class PropertyDocumentableConverterTest(
         """.render().detail()
 
         assertThat(detail.data.anchors).containsExactly(
-            "foo(kotlin.collections.List)",
-            "getFoo(kotlin.collections.List)",
-            "setFoo(kotlin.collections.List)",
-            "getFoo-kotlin.collections.List-",
-            "setFoo-kotlin.collections.List-"
+            "(kotlin.collections.List).foo()",
+            "(kotlin.collections.List).getFoo()",
+            "(kotlin.collections.List).setFoo()",
+            "-kotlin.collections.List-.getFoo--",
+            "-kotlin.collections.List-.setFoo--"
         )
     }
 
