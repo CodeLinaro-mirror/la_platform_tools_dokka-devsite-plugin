@@ -134,7 +134,7 @@ internal class ClasslikeDocumentableConverter(
         }
 
         val enumDetails =
-            async { enumValuesToDetail(enumValues) }
+            async { enumValuesToDetail(classlike as? DEnum, enumValues) }
         val constants =
             async { propertiesToDetail(declaredProperties.constants()) }
         val publicProperties =
@@ -327,10 +327,16 @@ internal class ClasslikeDocumentableConverter(
         }
     }
 
-    private fun enumValuesToDetail(enumValues: List<DEnumEntry>): List<SymbolDetail> {
+    private fun enumValuesToDetail(
+        dEnum: DEnum?,
+        enumValues: List<DEnumEntry>
+    ): List<SymbolDetail> {
+        if (dEnum == null) {
+            return emptyList()
+        }
         val modifierHints = ModifierHints(displayLanguage, isSummary = false, isInterface())
         return enumValues.map {
-            enumConverter.detail(it, modifierHints)
+            enumConverter.detail(dEnum, it, modifierHints)
         }
     }
 

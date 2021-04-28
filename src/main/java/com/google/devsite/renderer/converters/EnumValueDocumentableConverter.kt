@@ -26,6 +26,7 @@ import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import org.jetbrains.dokka.model.DEnum
 import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.GenericTypeConstructor
 
@@ -49,16 +50,10 @@ internal class EnumValueDocumentableConverter(
     }
 
     /** @return the enum detail component */
-    fun detail(enumValue: DEnumEntry, hints: ModifierHints): SymbolDetail {
+    fun detail(dEnum: DEnum, enumValue: DEnumEntry, hints: ModifierHints): SymbolDetail {
         val annotations = enumValue.annotations()
         val projection = paramConverter.componentForProjection(
-            // We need to get a projection representation of the class of the DEnumEmtry
-            // Unfortunately, this is not stored straightforwardly in Jetbrains' architecture
-            // So we know that compareTo is T.compareTo(T other), so we can get the classlike of the
-            // DEnumEntry by looking at the parameter type of its compareTo method
-            enumValue.functions.firstOrNull() { it.name == "compareTo" }?.parameters?.single()?.type
-                // TODO: this fallback method for java does not support complex types b/181562639
-                ?: GenericTypeConstructor(enumValue.dri, emptyList())
+            GenericTypeConstructor(dEnum.dri, emptyList())
         )
         return DefaultSymbolDetail(
             SymbolDetail.Params(

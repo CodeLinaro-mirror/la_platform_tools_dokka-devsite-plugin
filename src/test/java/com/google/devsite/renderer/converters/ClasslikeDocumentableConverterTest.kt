@@ -404,9 +404,10 @@ internal class ClasslikeDocumentableConverterTest(
             val signature = classlike.data.signature.data
             val description = (classlike.data.description.first() as Description)
 
-            val enumTable = classlike.data.symbolTypes.first {
+            val (enumSummary, enumDetails) = classlike.data.symbolTypes.first {
                 (it.first as? SummaryList)?.title() == "Enum Values"
-            }.first.items(3) as List
+            }
+            val enumTable = enumSummary.items(3) as List
             val enumOne = enumTable[0].data
             val enumTwo = enumTable[1].data
             val enumThree = enumTable[2].data
@@ -425,6 +426,10 @@ internal class ClasslikeDocumentableConverterTest(
                 assertThat((enumThree.description as Description).text())
                     .contains("result of invalidation")
             }
+
+            val enumName = enumDetails.symbols[0] as SymbolDetail
+            val returnType = enumName.data.returnType.link()
+            assertThat(returnType.name).endsWith("AnEnumType")
         }
     }
 
