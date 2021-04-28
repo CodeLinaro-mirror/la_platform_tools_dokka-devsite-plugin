@@ -34,11 +34,11 @@ application {
     mainClassName = "org.jetbrains.dokka.MainKt"
 }
 
-val dokkaVersion = "1.4.30-dev-75"
+val dokkaVersion = "1.4.32"
 
 dependencies {
     compileOnly(kotlin("stdlib-jdk8"))
-    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.3.9")
 
     implementation("org.jetbrains.dokka:dokka-base-test-utils:$dokkaVersion")
