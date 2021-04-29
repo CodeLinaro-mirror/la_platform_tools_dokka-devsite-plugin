@@ -67,7 +67,7 @@ tasks.withType<ShadowJar> {
     archiveClassifier.set(null as String?)
     archiveVersion.set(null as String?)
     isZip64 = true
-    destinationDirectory.set(project.buildDir)
+    destinationDirectory.set(getDistributionDirectory())
 }
 
 sourceSets.test {
