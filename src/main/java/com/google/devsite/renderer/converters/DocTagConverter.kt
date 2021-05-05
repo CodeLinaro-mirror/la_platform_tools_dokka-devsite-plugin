@@ -181,12 +181,12 @@ internal class DocTagConverter(
                 // doc is DClasslike. DClasslike's only valid @params are type params
                 is DClasslike -> {
                     val genericNames = generics.map { it.name }
-                    val invalidNames = tags.names().filter { it !in genericNames }
+                    val invalidNames = tags.names().filter { it !in genericNames }.toMutableSet()
                     if (invalidNames.isEmpty()) return tags
                     // Enforce that the propagated documentation makes sense somewhere. Specifically
                     // documentation primarily aimed at a constructor may wind up on the DClass
                     // if the parameter being documented is a primary constructor property parameter
-                    invalidNames.toSet().subtract(documentable.properties.map { it.name } +
+                    invalidNames.removeAll(documentable.properties.map { it.name } +
                         (documentable as? WithConstructors)?.constructors?.map { constructor ->
                             constructor.parameters.map { it.name!! } }?.flatten().orEmpty())
                     logComponentNotFoundWarning("@param", invalidNames, documentable)

@@ -834,6 +834,63 @@ internal class DocTagConverterTest(
         assertFails { documentation.render().documentation() }
     }
 
+    @Test
+    fun `Verify that several real code samples don't give warnings`() {
+        val standardOut = System.out
+        val outputStreamCaptor = ByteArrayOutputStream()
+        System.setOut(PrintStream(outputStreamCaptor))
+        val module = """
+            |/**
+            | * DSL for constructing a new [DynamicGraphNavigator.DynamicNavGraph]
+            | *
+            | * @param provider [NavigatorProvider] to use.
+            | * @param id NavGraph id.
+            | * @param startDestination Id start destination in the graph
+            | */
+            |@NavDestinationDsl
+            |public class DynamicNavGraphBuilder(
+            |    provider: NavigatorProvider,
+            |    @IdRes id: Int,
+            |    @IdRes private var startDestination: Int
+            |) {}
+            |
+            |    /**
+            |     * ParcelableArrayType is used for [NavArgument]s which hold arrays of Parcelables.
+            |     *
+            |     * Null values are supported.
+            |     * Default values in Navigation XML files are not supported.
+            |     *
+            |     * @param type the type of Parcelable component class of the array
+            |     */
+            |    public class ParcelableArrayType<D : Parcelable>(type: Class<D>) : NavType<Array<D>?>(true) {
+            |        /**
+            |         * Constructs a NavType that supports arrays of a given Parcelable type.
+            |         */
+            |        init {
+            |            require(Parcelable::class.java.isAssignableFrom(type)) {
+            |                "            type            | does not implement Parcelable."
+            |            }
+            |            val arrayType: Class<Array<D>> = try {
+            |                @Suppress("UNCHECKED_CAST")
+            |                Class.forName("[L            |type.name            |;") as Class<Array<D>>
+            |            } catch (e: ClassNotFoundException) {
+            |                throw RuntimeException(e) // should never happen
+            |            }
+            |            this.arrayType = arrayType
+            |        }
+            | }
+        """.trimIndent().render()
+        val holder = runBlocking { DocumentablesHolder(module, this) }
+        val classConverter1 = ClasslikeDocumentableConverter(language,
+            module.explicitClasslike("DynamicNavGraphBuilder")!!, pathProvider(), holder)
+        val documentedClass1 = runBlocking { classConverter1.classlike() }
+        val classConverter2 = ClasslikeDocumentableConverter(language,
+            module.explicitClasslike("ParcelableArrayType")!!, pathProvider(), holder)
+        val documentedClass2 = runBlocking { classConverter2.classlike() }
+        assertThat(outputStreamCaptor.toString()).doesNotContain("WARNING")
+        System.setOut(standardOut)
+    }
+
     private fun DModule.description(doc: DModule.() -> Documentable = ::smartDoc): Description {
         val holder = runBlocking { DocumentablesHolder(this@description, this) }
         val converter = DocTagConverter(language, pathProvider(), holder)
