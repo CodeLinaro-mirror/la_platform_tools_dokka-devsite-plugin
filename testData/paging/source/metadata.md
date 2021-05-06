@@ -5,6 +5,8 @@ Paging is a very good library. This text is added by metadata.md
 # Package androidx.paging
 
 Contains assorted useful stuff for paging things.
+* <a href="https://developer.android.com/topic/libraries/architecture/paging" target="_blank">Paging architecture</a>.
+
 You'll enjoy [DataSource] a bunch.
 
 ## Level 2 heading

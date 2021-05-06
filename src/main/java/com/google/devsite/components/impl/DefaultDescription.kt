@@ -59,6 +59,7 @@ import kotlinx.html.th
 import kotlinx.html.thead
 import kotlinx.html.tr
 import kotlinx.html.ul
+
 import org.jetbrains.dokka.model.doc.A
 import org.jetbrains.dokka.model.doc.B
 import org.jetbrains.dokka.model.doc.Big
@@ -164,17 +165,26 @@ internal class DefaultDescription(
         for (tag in tags) {
             if (state.terminate) break
             val link = tag.params["href"]
+            val isHtml = tag.params["content-type"] == "html"
             when (tag) {
                 is Text -> if (data.summary) {
                     if (tag.body.endsWith(".") || tag.body.contains(". ")) {
                         +tag.body.replaceAfter(". ", "").trimEnd()
                         state.terminate = true
                     } else {
-                        +tag.body
+                        if (isHtml) {
+                            consumer.onTagContentUnsafe { raw(tag.body) }
+                        } else {
+                            +tag.body
+                        }
                     }
                 } else {
                     if (tag.children.isEmpty()) {
-                        +tag.body
+                        if (isHtml) {
+                            consumer.onTagContentUnsafe { raw(tag.body) }
+                        } else {
+                            +tag.body
+                        }
                     } else {
                         if (link == null) {
                             renderTags(tag.children, state)
