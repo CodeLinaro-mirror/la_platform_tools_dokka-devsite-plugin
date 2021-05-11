@@ -24,7 +24,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListUpdateCallback
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -50,15 +49,25 @@ class AsyncPagingDataDiffer<T : Any> @JvmOverloads constructor(
     @Suppress("MemberVisibilityCanBePrivate") // synthetic access
     internal val differCallback = object : DifferCallback {
         override fun onInserted(position: Int, count: Int) {
-            updateCallback.onInserted(position, count)
+            // Ignore if count == 0 as it makes this event a no-op.
+            if (count > 0) {
+                updateCallback.onInserted(position, count)
+            }
         }
 
-        override fun onRemoved(position: Int, count: Int) =
-            updateCallback.onRemoved(position, count)
+        override fun onRemoved(position: Int, count: Int) {
+            // Ignore if count == 0 as it makes this event a no-op.
+            if (count > 0) {
+                updateCallback.onRemoved(position, count)
+            }
+        }
 
         override fun onChanged(position: Int, count: Int) {
-            // NOTE: pass a null payload to convey null -> item, or item -> null
-            updateCallback.onChanged(position, count, null)
+            // Ignore if count == 0 as it makes this event a no-op.
+            if (count > 0) {
+                // NOTE: pass a null payload to convey null -> item, or item -> null
+                updateCallback.onChanged(position, count, null)
+            }
         }
     }
 
@@ -71,15 +80,18 @@ class AsyncPagingDataDiffer<T : Any> @JvmOverloads constructor(
             previousList: NullPaddedList<T>,
             newList: NullPaddedList<T>,
             newCombinedLoadStates: CombinedLoadStates,
-            lastAccessedIndex: Int
+            lastAccessedIndex: Int,
+            onListPresentable: () -> Unit,
         ) = when {
             // fast path for no items -> some items
             previousList.size == 0 -> {
+                onListPresentable()
                 differCallback.onInserted(0, newList.size)
                 null
             }
             // fast path for some items -> no items
             newList.size == 0 -> {
+                onListPresentable()
                 differCallback.onRemoved(0, previousList.size)
                 null
             }
@@ -87,6 +99,7 @@ class AsyncPagingDataDiffer<T : Any> @JvmOverloads constructor(
                 val diffResult = withContext(workerDispatcher) {
                     previousList.computeDiff(newList, diffCallback)
                 }
+                onListPresentable()
                 previousList.dispatchDiff(updateCallback, newList, diffResult)
                 previousList.transformAnchorIndex(
                     diffResult = diffResult,
@@ -231,7 +244,7 @@ class AsyncPagingDataDiffer<T : Any> @JvmOverloads constructor(
      * Get the number of items currently presented by this Differ. This value can be directly
      * returned to [androidx.recyclerview.widget.RecyclerView.Adapter.getItemCount].
      *
-     * @return Number of items being presented.
+     * @return Number of items being presented, including placeholders.
      */
     val itemCount: Int
         get() = differBase.size
@@ -245,7 +258,6 @@ class AsyncPagingDataDiffer<T : Any> @JvmOverloads constructor(
      *
      * @sample androidx.paging.samples.loadStateFlowSample
      */
-    @OptIn(FlowPreview::class)
     val loadStateFlow: Flow<CombinedLoadStates> = differBase.loadStateFlow
 
     /**
@@ -272,53 +284,5 @@ class AsyncPagingDataDiffer<T : Any> @JvmOverloads constructor(
      */
     fun removeLoadStateListener(listener: (CombinedLoadStates) -> Unit) {
         differBase.removeLoadStateListener(listener)
-    }
-
-    /**
-     * A [Flow] of [Boolean] that is emitted when new [PagingData] generations are submitted and
-     * displayed. The [Boolean] that is emitted is `true` if the new [PagingData] is empty,
-     * `false` otherwise.
-     */
-    @Suppress("DEPRECATION")
-    @Deprecated(
-        "dataRefreshFlow is now redundant with the information passed from loadStateFlow and " +
-                "getItemCount, and will be removed in a future alpha version"
-    )
-    @ExperimentalPagingApi
-    val dataRefreshFlow: Flow<Boolean> = differBase.dataRefreshFlow
-
-    /**
-     * Add a listener to observe new [PagingData] generations.
-     *
-     * @param listener called whenever a new [PagingData] is submitted and displayed. `true` is
-     * passed to the [listener] if the new [PagingData] is empty, `false` otherwise.
-     *
-     * @see removeDataRefreshListener
-     */
-    @Deprecated(
-        "dataRefreshListener is now redundant with the information passed from loadStateListener " +
-                "and getItemCount, and will be removed in a future alpha version"
-    )
-    @ExperimentalPagingApi
-    fun addDataRefreshListener(listener: (isEmpty: Boolean) -> Unit) {
-        @Suppress("DEPRECATION")
-        differBase.addDataRefreshListener(listener)
-    }
-
-    /**
-     * Remove a previously registered listener for new [PagingData] generations.
-     *
-     * @param listener Previously registered listener.
-     *
-     * @see addDataRefreshListener
-     */
-    @Deprecated(
-        "dataRefreshListener is now redundant with the information passed from loadStateListener " +
-                "and getItemCount, and will be removed in a future alpha version"
-    )
-    @ExperimentalPagingApi
-    fun removeDataRefreshListener(listener: (isEmpty: Boolean) -> Unit) {
-        @Suppress("DEPRECATION")
-        differBase.removeDataRefreshListener(listener)
     }
 }

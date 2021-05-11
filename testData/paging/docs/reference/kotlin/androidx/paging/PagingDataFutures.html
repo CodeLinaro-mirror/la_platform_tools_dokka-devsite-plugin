@@ -1,0 +1,250 @@
+<html devsite="true">
+  <head>
+    <title>PagingDataFutures</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>PagingDataFutures</h1>
+{% setvar page_path %}androidx/paging/PagingDataFutures.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>class PagingDataFutures</pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/paging/PagingDataFutures.html#(androidx.paging.PagingData).filter(AsyncFunction&lt;T, Boolean&gt;,java.util.concurrent.Executor)">filter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;predicate:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a><br>)</code></div>
+              <p>Returns a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> containing only elements matching the given <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).filterAsync(AsyncFunction&lt;T, Boolean&gt;,java.util.concurrent.Executor)">predicate</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;R&gt;</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/paging/PagingDataFutures.html#(androidx.paging.PagingData).flatMap(AsyncFunction&lt;T, Iterable&lt;R&gt;&gt;,java.util.concurrent.Executor)">flatMap</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;transform:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">Iterable</a>&lt;R&gt;&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a><br>)</code></div>
+              <p>Returns a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> of all elements returned from applying the given <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).flatMapAsync(AsyncFunction&lt;T, Iterable&lt;R&gt;&gt;,java.util.concurrent.Executor)">transform</a></code> to each element, as it is loaded.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;R&gt;</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;R,&nbsp;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/paging/PagingDataFutures.html#(androidx.paging.PagingData).insertSeparators(AsyncFunction&lt;AdjacentItems&lt;T&gt;, R?&gt;,java.util.concurrent.Executor)">insertSeparators</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;generator:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/AdjacentItems.html">AdjacentItems</a>&lt;T&gt;,&nbsp;R?&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a><br>)</code></div>
+              <p>Returns a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> containing each original element, with an optional separator generated by <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertSeparatorsAsync(AsyncFunction&lt;AdjacentItems&lt;T&gt;, R?&gt;,java.util.concurrent.Executor)">generator</a></code>, given the elements before and after (or null, in boundary conditions).</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;R&gt;</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/paging/PagingDataFutures.html#(androidx.paging.PagingData).map(AsyncFunction&lt;T, R&gt;,java.util.concurrent.Executor)">map</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;transform:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T,&nbsp;R&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a><br>)</code></div>
+              <p>Returns a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> containing the result of applying the given <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).mapAsync(AsyncFunction&lt;T, R&gt;,java.util.concurrent.Executor)">transform</a></code> to each element, as it is loaded.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="(androidx.paging.PagingData).filter(AsyncFunction&lt;T, Boolean&gt;, java.util.concurrent.Executor)"></a><a name="-androidx.paging.PagingData-.filter-AsyncFunction&lt;T, Boolean&gt;-java.util.concurrent.Executor-"></a>
+      <h3 class="api-name" id="(androidx.paging.PagingData).filter(AsyncFunction&lt;T, Boolean&gt;,java.util.concurrent.Executor)">filter</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/paging/PagingDataFutures.html#(androidx.paging.PagingData).filter(AsyncFunction&lt;T, Boolean&gt;,java.util.concurrent.Executor)">filter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;predicate:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a><br>):&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;</pre>
+      <p>Returns a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> containing only elements matching the given <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).filterAsync(AsyncFunction&lt;T, Boolean&gt;,java.util.concurrent.Executor)">predicate</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>predicate:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</code></td>
+              <td>
+                <p><a href="[AsyncFunction]">AsyncFunction</a> returning <code>false</code> for unmatched items which should be filtered.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code></td>
+              <td>
+                <p><code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> to run the <a href="[AsyncFunction]">AsyncFunction</a> in.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="(androidx.paging.PagingData).flatMap(AsyncFunction&lt;T, Iterable&lt;R&gt;&gt;, java.util.concurrent.Executor)"></a><a name="-androidx.paging.PagingData-.flatMap-AsyncFunction&lt;T, Iterable&lt;R&gt;&gt;-java.util.concurrent.Executor-"></a>
+      <h3 class="api-name" id="(androidx.paging.PagingData).flatMap(AsyncFunction&lt;T, Iterable&lt;R&gt;&gt;,java.util.concurrent.Executor)">flatMap</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/paging/PagingDataFutures.html#(androidx.paging.PagingData).flatMap(AsyncFunction&lt;T, Iterable&lt;R&gt;&gt;,java.util.concurrent.Executor)">flatMap</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;transform:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">Iterable</a>&lt;R&gt;&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a><br>):&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;R&gt;</pre>
+      <p>Returns a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> of all elements returned from applying the given <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).flatMapAsync(AsyncFunction&lt;T, Iterable&lt;R&gt;&gt;,java.util.concurrent.Executor)">transform</a></code> to each element, as it is loaded.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>transform:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">Iterable</a>&lt;R&gt;&gt;</code></td>
+              <td>
+                <p><a href="[AsyncFunction]">AsyncFunction</a> to transform an item of type <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).flatMapAsync(AsyncFunction&lt;T, Iterable&lt;R&gt;&gt;,java.util.concurrent.Executor)">T</a></code> a list of items of type <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).flatMapAsync(AsyncFunction&lt;T, Iterable&lt;R&gt;&gt;,java.util.concurrent.Executor)">R</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code></td>
+              <td>
+                <p><code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> to run the <a href="[AsyncFunction]">AsyncFunction</a> in.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="(androidx.paging.PagingData).insertSeparators(AsyncFunction&lt;AdjacentItems&lt;T&gt;, R?&gt;, java.util.concurrent.Executor)"></a><a name="-androidx.paging.PagingData-.insertSeparators-AsyncFunction&lt;AdjacentItems&lt;T&gt;, R?&gt;-java.util.concurrent.Executor-"></a>
+      <h3 class="api-name" id="(androidx.paging.PagingData).insertSeparators(AsyncFunction&lt;AdjacentItems&lt;T&gt;, R?&gt;,java.util.concurrent.Executor)">insertSeparators</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;R,&nbsp;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/paging/PagingDataFutures.html#(androidx.paging.PagingData).insertSeparators(AsyncFunction&lt;AdjacentItems&lt;T&gt;, R?&gt;,java.util.concurrent.Executor)">insertSeparators</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;generator:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/AdjacentItems.html">AdjacentItems</a>&lt;T&gt;,&nbsp;R?&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a><br>):&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;R&gt;</pre>
+      <p>Returns a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> containing each original element, with an optional separator generated by <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).insertSeparatorsAsync(AsyncFunction&lt;AdjacentItems&lt;T&gt;, R?&gt;,java.util.concurrent.Executor)">generator</a></code>, given the elements before and after (or null, in boundary conditions).</p>
+      <p>Note that this transform is applied asynchronously, as pages are loaded. Potential separators between pages are only computed once both pages are loaded.</p>
+      <pre class="prettyprint">
+import androidx.paging.insertSeparatorsAsync
+import androidx.paging.rxjava2.insertSeparatorsAsync
+
+/*
+ * Create letter separators in an alphabetically sorted list.
+ *
+ * For example, if the input is:
+ *     &quot;apple&quot;, &quot;apricot&quot;, &quot;banana&quot;, &quot;carrot&quot;
+ *
+ * The operator would output:
+ *     &quot;A&quot;, &quot;apple&quot;, &quot;apricot&quot;, &quot;B&quot;, &quot;banana&quot;, &quot;C&quot;, &quot;carrot&quot;
+ */
+pagingDataStream.map { pagingData -&gt;
+    // map outer stream, so we can perform transformations on each paging generation
+    pagingData.insertSeparatorsAsync(
+        AsyncFunction&lt;AdjacentItems&lt;String&gt;, String?&gt; {
+            Futures.submit(
+                Callable&lt;String?&gt; {
+                    val (before, after) = it!!
+                    if (after != null &amp;&amp; before?.first() != after.first()) {
+                        // separator - after is first item that starts with its first letter
+                        after.first().toUpperCase().toString()
+                    } else {
+                        // no separator - either end of list, or first letters of before/after are the same
+                        null
+                    }
+                },
+                executor
+            )
+        },
+        executor
+    )
+}</pre>
+      <pre class="prettyprint">
+import androidx.paging.insertSeparatorsAsync
+import androidx.paging.map
+import androidx.paging.rxjava2.insertSeparatorsAsync
+
+open class UiModel
+data class ItemUiModel(val item: Item) : UiModel()
+data class SeparatorUiModel(val char: Char) : UiModel()
+
+/*
+ * Create letter separators in an alphabetically sorted list of Items, with UiModel objects.
+ *
+ * For example, if the input is (each an `Item`):
+ *     &quot;apple&quot;, &quot;apricot&quot;, &quot;banana&quot;, &quot;carrot&quot;
+ *
+ * The operator would output a list of UiModels corresponding to:
+ *     &quot;A&quot;, &quot;apple&quot;, &quot;apricot&quot;, &quot;B&quot;, &quot;banana&quot;, &quot;C&quot;, &quot;carrot&quot;
+ */
+pagingDataStream.map { pagingData -&gt;
+    // map outer stream, so we can perform transformations on each paging generation
+    pagingData
+        .map { item -&gt;
+            ItemUiModel(item) // convert items in stream to ItemUiModel
+        }
+        .insertSeparatorsAsync(
+            AsyncFunction&lt;AdjacentItems&lt;ItemUiModel&gt;, UiModel?&gt; {
+                Futures.submit(
+                    Callable&lt;UiModel&gt; {
+                        val (before, after) = it!!
+                        if (after != null &amp;&amp;
+                            before?.item?.label?.first() != after.item.label.first()
+                        ) {
+                            // separator - after is first item that starts with its first letter
+                            SeparatorUiModel(after.item.label.first().toUpperCase())
+                        } else {
+                            // no separator - either end of list, or first letters of before/after are the same
+                            null
+                        }
+                    },
+                    executor
+                )
+            },
+            executor
+        )
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>generator:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/AdjacentItems.html">AdjacentItems</a>&lt;T&gt;,&nbsp;R?&gt;</code></td>
+              <td>
+                <p><a href="[AsyncFunction]">AsyncFunction</a> used to generate separator between two <code><a href="/reference/kotlin/androidx/paging/AdjacentItems.html">AdjacentItems</a></code> or the header or footer if either <code><a href="/reference/kotlin/androidx/paging/AdjacentItems.html#before()">AdjacentItems.before</a></code> or <code><a href="/reference/kotlin/androidx/paging/AdjacentItems.html#after()">AdjacentItems.after</a></code> is <code>null</code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code></td>
+              <td>
+                <p><code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> to run the <a href="[AsyncFunction]">AsyncFunction</a> in.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="(androidx.paging.PagingData).map(AsyncFunction&lt;T, R&gt;, java.util.concurrent.Executor)"></a><a name="-androidx.paging.PagingData-.map-AsyncFunction&lt;T, R&gt;-java.util.concurrent.Executor-"></a>
+      <h3 class="api-name" id="(androidx.paging.PagingData).map(AsyncFunction&lt;T, R&gt;,java.util.concurrent.Executor)">map</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/paging/PagingDataFutures.html#(androidx.paging.PagingData).map(AsyncFunction&lt;T, R&gt;,java.util.concurrent.Executor)">map</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;transform:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T,&nbsp;R&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a><br>):&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;R&gt;</pre>
+      <p>Returns a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> containing the result of applying the given <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).mapAsync(AsyncFunction&lt;T, R&gt;,java.util.concurrent.Executor)">transform</a></code> to each element, as it is loaded.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>transform:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T,&nbsp;R&gt;</code></td>
+              <td>
+                <p><a href="[AsyncFunction]">AsyncFunction</a> to transform an item of type <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).mapAsync(AsyncFunction&lt;T, R&gt;,java.util.concurrent.Executor)">T</a></code> to <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).mapAsync(AsyncFunction&lt;T, R&gt;,java.util.concurrent.Executor)">R</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code></td>
+              <td>
+                <p><code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> to run the <a href="[AsyncFunction]">AsyncFunction</a> in.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

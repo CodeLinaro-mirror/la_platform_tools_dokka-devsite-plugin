@@ -18,14 +18,16 @@ package androidx.paging
 
 import androidx.annotation.IntRange
 import androidx.lifecycle.Lifecycle
+import androidx.paging.LoadState.NotLoading
 import androidx.paging.LoadType.REFRESH
 import androidx.recyclerview.widget.AdapterListUpdateCallback
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.ALLOW
+import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.PREVENT
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -46,6 +48,14 @@ import kotlinx.coroutines.flow.Flow
  * compute fine grained updates as updated content in the form of new PagingData objects are
  * received.
  *
+ * *State Restoration*: To be able to restore [RecyclerView] state (e.g. scroll position) after a
+ * configuration change / application recreate, [PagingDataAdapter] calls
+ * [RecyclerView.Adapter.setStateRestorationPolicy] with
+ * [RecyclerView.Adapter.StateRestorationPolicy.PREVENT] upon initialization and waits for the
+ * first page to load before allowing state restoration.
+ * Any other call to [RecyclerView.Adapter.setStateRestorationPolicy] by the application will
+ * disable this logic and will rely on the user set value.
+ *
  * @sample androidx.paging.samples.pagingDataAdapterSample
  */
 abstract class PagingDataAdapter<T : Any, VH : RecyclerView.ViewHolder> @JvmOverloads constructor(
@@ -53,12 +63,63 @@ abstract class PagingDataAdapter<T : Any, VH : RecyclerView.ViewHolder> @JvmOver
     mainDispatcher: CoroutineDispatcher = Dispatchers.Main,
     workerDispatcher: CoroutineDispatcher = Dispatchers.Default
 ) : RecyclerView.Adapter<VH>() {
+
+    /**
+     * Track whether developer called [setStateRestorationPolicy] or not to decide whether the
+     * automated state restoration should apply or not.
+     */
+    private var userSetRestorationPolicy = false
+
+    override fun setStateRestorationPolicy(strategy: StateRestorationPolicy) {
+        userSetRestorationPolicy = true
+        super.setStateRestorationPolicy(strategy)
+    }
+
     private val differ = AsyncPagingDataDiffer(
         diffCallback = diffCallback,
         updateCallback = AdapterListUpdateCallback(this),
         mainDispatcher = mainDispatcher,
         workerDispatcher = workerDispatcher
     )
+
+    init {
+        // Wait on state restoration until the first insert event.
+        super.setStateRestorationPolicy(PREVENT)
+
+        fun considerAllowingStateRestoration() {
+            if (stateRestorationPolicy == PREVENT && !userSetRestorationPolicy) {
+                this@PagingDataAdapter.stateRestorationPolicy = ALLOW
+            }
+        }
+
+        // Watch for adapter insert before triggering state restoration. This is almost redundant
+        // with loadState below, but can handle cached case.
+        @Suppress("LeakingThis")
+        registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                considerAllowingStateRestoration()
+                unregisterAdapterDataObserver(this)
+                super.onItemRangeInserted(positionStart, itemCount)
+            }
+        })
+
+        // Watch for loadState update before triggering state restoration. This is almost
+        // redundant with data observer above, but can handle empty page case.
+        addLoadStateListener(object : Function1<CombinedLoadStates, Unit> {
+            // Ignore the first event we get, which is always the initial state, since we only
+            // want to observe for Insert events.
+            private var ignoreNextEvent = true
+
+            override fun invoke(loadStates: CombinedLoadStates) {
+                if (ignoreNextEvent) {
+                    ignoreNextEvent = false
+                } else if (loadStates.source.refresh is NotLoading) {
+                    considerAllowingStateRestoration()
+                    removeLoadStateListener(this)
+                }
+            }
+        })
+    }
 
     /**
      * Note: [getItemId] is final, because stable IDs are unnecessary and therefore unsupported.
@@ -70,6 +131,19 @@ abstract class PagingDataAdapter<T : Any, VH : RecyclerView.ViewHolder> @JvmOver
      */
     final override fun getItemId(position: Int): Long {
         return super.getItemId(position)
+    }
+
+    /**
+     * Stable ids are unsupported by [PagingDataAdapter]. Calling this method is an error and will
+     * result in an [UnsupportedOperationException].
+     *
+     * @param hasStableIds Whether items in data set have unique identifiers or not.
+     *
+     * @throws UnsupportedOperationException Always thrown, since this is unsupported by
+     * [PagingDataAdapter].
+     */
+    final override fun setHasStableIds(hasStableIds: Boolean) {
+        throw UnsupportedOperationException("Stable ids are unsupported on PagingDataAdapter.")
     }
 
     /**
@@ -184,7 +258,6 @@ abstract class PagingDataAdapter<T : Any, VH : RecyclerView.ViewHolder> @JvmOver
      * This flow is conflated, so it buffers the last update to [CombinedLoadStates] and
      * immediately delivers the current load states on collection.
      */
-    @OptIn(FlowPreview::class)
     val loadStateFlow: Flow<CombinedLoadStates> = differ.loadStateFlow
 
     /**
@@ -214,7 +287,7 @@ abstract class PagingDataAdapter<T : Any, VH : RecyclerView.ViewHolder> @JvmOver
 
     /**
      * Create a [ConcatAdapter] with the provided [LoadStateAdapter]s displaying the
-     * [LoadType.APPEND] [LoadState] as a list item at the end of the presented list.
+     * [LoadType.PREPEND] [LoadState] as a list item at the end of the presented list.
      *
      * @see LoadStateAdapter
      * @see withLoadStateHeaderAndFooter
@@ -231,7 +304,7 @@ abstract class PagingDataAdapter<T : Any, VH : RecyclerView.ViewHolder> @JvmOver
 
     /**
      * Create a [ConcatAdapter] with the provided [LoadStateAdapter]s displaying the
-     * [LoadType.PREPEND] [LoadState] as a list item at the start of the presented list.
+     * [LoadType.APPEND] [LoadState] as a list item at the start of the presented list.
      *
      * @see LoadStateAdapter
      * @see withLoadStateHeaderAndFooter
@@ -264,53 +337,5 @@ abstract class PagingDataAdapter<T : Any, VH : RecyclerView.ViewHolder> @JvmOver
             footer.loadState = loadStates.append
         }
         return ConcatAdapter(header, this, footer)
-    }
-
-    /**
-     * A [Flow] of [Boolean] that is emitted when new [PagingData] generations are submitted and
-     * displayed. The [Boolean] that is emitted is `true` if the new [PagingData] is empty,
-     * `false` otherwise.
-     */
-    @Suppress("DEPRECATION")
-    @Deprecated(
-        "dataRefreshFlow is now redundant with the information passed from loadStateFlow and " +
-                "getItemCount, and will be removed in a future alpha version"
-    )
-    @ExperimentalPagingApi
-    val dataRefreshFlow: Flow<Boolean> = differ.dataRefreshFlow
-
-    /**
-     * Add a listener to observe new [PagingData] generations.
-     *
-     * @param listener called whenever a new [PagingData] is submitted and displayed. `true` is
-     * passed to the [listener] if the new [PagingData] is empty, `false` otherwise.
-     *
-     * @see removeDataRefreshListener
-     */
-    @Deprecated(
-        "dataRefreshListener is now redundant with the information passed from loadStateListener " +
-                "and getItemCount, and will be removed in a future alpha version"
-    )
-    @ExperimentalPagingApi
-    fun addDataRefreshListener(listener: (isEmpty: Boolean) -> Unit) {
-        @Suppress("DEPRECATION")
-        differ.addDataRefreshListener(listener)
-    }
-
-    /**
-     * Remove a previously registered listener for new [PagingData] generations.
-     *
-     * @param listener Previously registered listener.
-     *
-     * @see addDataRefreshListener
-     */
-    @Deprecated(
-        "dataRefreshListener is now redundant with the information passed from loadStateListener " +
-                "and getItemCount, and will be removed in a future alpha version"
-    )
-    @ExperimentalPagingApi
-    fun removeDataRefreshListener(listener: (isEmpty: Boolean) -> Unit) {
-        @Suppress("DEPRECATION")
-        differ.removeDataRefreshListener(listener)
     }
 }
