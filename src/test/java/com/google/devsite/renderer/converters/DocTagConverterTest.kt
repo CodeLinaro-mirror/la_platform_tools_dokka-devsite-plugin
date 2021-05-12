@@ -49,6 +49,7 @@ import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.doc.Img
 import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.model.properties.WithExtraProperties
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -166,6 +167,44 @@ internal class DocTagConverterTest(
         }
     }
 
+    @Test // NOTE: upstream dokka does not support @param <Baz> documentation style in kotlin
+    fun `Function type parameters can be documented with @param with or without angle brackets`() {
+        val documentationK = """
+            |/**
+            | * Hello World!
+            | * @param Bar A type of bar
+            | * @param Baz Bazzy baz
+            | * @blamaram Wam wham
+            | */
+            |fun <Bar: String, Baz> foo(): List<Bar>
+        """.render().documentation(doc = { this.function("foo")!! })
+        val documentationJ = """
+            |/**
+            | * Hello World!
+            | * @param Bar A type of bar
+            | * @param <Baz> Bazzy baz
+            | */
+            |public <Bar extends String, Baz> List<Bar> foo() {
+            |}
+        """.render(java = true).documentation(doc = { this.function("foo")!! })
+
+        for (documentation in listOf(documentationK, documentationJ)) {
+            val params = documentation.first {
+                (it as? SummaryList)?.title() == "Parameters" } as SummaryList
+
+            assertThat(params.size()).isEqualTo(2)
+            val barParam = params.items().first().data
+            val bazParam = params.items().last().data
+            val barTypeParam = barParam.title as TypeParameter
+            assertThat(barTypeParam.data.name).isEqualTo("Bar")
+            assertThat(barTypeParam.projectionName()).isEqualTo("String")
+            assertThat((barParam.description as Description).text()).isEqualTo("A type of bar")
+            val bazTypeParam = bazParam.title as TypeParameter
+            assertThat(bazTypeParam.data.name).isEqualTo("Baz")
+            assertThat((bazParam.description as Description).text()).isEqualTo("Bazzy baz")
+        }
+    }
+
     @Test
     fun `Property parameter docs propagate correctly`() {
         // Property parameters are kotlin-exclusive
@@ -264,18 +303,67 @@ internal class DocTagConverterTest(
         }
     }
 
-    @Test
-    fun `Full documentation has params`() {
-        val documentation = """
-            |/** @param a blah */
-            |fun foo(a: Int)
+    @Test // Developers sometimes use white space to line up documentation
+    fun `Parameter documentation works and ignores whitespace`() {
+        val documentationK = """
+            |/**
+            | * @param a blah
+            | * @param b        bblargh
+            | */
+            |fun foo(a: Int, b: String)
         """.render().documentation()
+        val documentationJ = """
+            |/**
+            | * @param a blah
+            | * @param b        bblargh
+            | */
+            |public void foo(Int a, String b)
+        """.render(java = true).documentation()
 
-        val paramSummary = documentation.last() as SummaryList
-        val paramParam = paramSummary.item().data.title as Parameter
+        for (documentation in listOf(documentationK, documentationJ)) {
+            val paramSummary = documentation.last() as SummaryList
+            assertThat(paramSummary.items().size).isEqualTo(2)
+            val param1 = paramSummary.items().first().data.title as Parameter
+            val param2 = paramSummary.items().last().data.title as Parameter
 
-        assertThat(paramSummary.title()).isEqualTo("Parameters")
-        assertThat(paramParam.data.name).isEqualTo("a")
+            assertThat(paramSummary.title()).isEqualTo("Parameters")
+            assertThat(param1.data.name).isEqualTo("a")
+            assertThat(param2.data.name).isEqualTo("b")
+        }
+    }
+
+    @Ignore // Upstream dokka does not support inheriting docs from hidden components
+    @Test
+    fun `Sealed class constructor docs inherit`() {
+        val rendered = """
+            |/**
+            | * @param foo seele_foo_docs
+            | */
+            |sealed class Seele(foo: String) {
+            |   /**
+            |    * seele_constructor_docs
+            |    */
+            |   constructor {}
+            |}
+            |class Ba: Seele
+        """.render()
+        // sealed classes have hidden constructors
+        assertThat((rendered.explicitClasslike("Seele") as DClass).constructors.isEmpty())
+
+        val constructorDoc = rendered.documentation(
+            { (this.explicitClasslike("Ba")!! as DClass).constructors.single() })
+        val conParamDoc = rendered.documentation(
+            { (this.explicitClasslike("Ba")!! as DClass).constructors.single().parameters.single() }
+        ).single()
+
+        assertThat(constructorDoc.size).isEqualTo(2)
+        assertThat((constructorDoc.first() as Description).text())
+            .isEqualTo("seele_constructor_docs")
+        assertThat((constructorDoc.last() as SummaryList).title()).isEqualTo("Parameters")
+        assertThat((constructorDoc.last() as SummaryList).single().name()).isEqualTo("foo")
+        assertThat((constructorDoc.last() as SummaryList).single().description().text())
+            .isEqualTo("seele_foo_docs")
+        assertThat((conParamDoc as Description).text()).isEqualTo("seele_foo_docs")
     }
 
     @Test
