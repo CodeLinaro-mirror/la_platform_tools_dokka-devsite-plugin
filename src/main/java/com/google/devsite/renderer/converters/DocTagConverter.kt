@@ -257,6 +257,10 @@ internal class DocTagConverter(
                 paramConverter.componentForParameter(documentable.receiver!!, false)
 
         val params = tags.map { tag ->
+            if (allOptions[tag.name()] == null) {
+                throw RuntimeException("Unable to find what is referred to by \"@param " +
+                    "${tag.name()}\" in ${documentable::class.simpleName} ${documentable.name}")
+            }
             val title = allOptions[tag.name()]!!
             DefaultTwoPaneSummaryItem(
                 TwoPaneSummaryItem.Params(
