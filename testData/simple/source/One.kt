@@ -35,4 +35,12 @@ open class One(override val fore: String) : Four, Five() {
 open class Five {
     /** Five Function docs. */
     fun fiveFunction() = Unit
+
+    open fun thisShouldShowUpKt() = 0
+
+    /** @suppress */
+    open fun thisShouldNotShowUpKt() = 0
+
+    /** @hide */
+    open fun thisShouldProbablyShowUpItsKotlinHiddenWithTheDoclavaMethod() = 0
 }

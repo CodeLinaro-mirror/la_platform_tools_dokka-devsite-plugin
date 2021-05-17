@@ -619,7 +619,7 @@ internal class ClasslikeDocumentableConverterTest(
     @Test
     fun `Class component creates inline generics`() {
         val page = """
-            |class <T: Number, U> foo() {}
+            |class Foo<T: Number, U>() {}
         """.render().page()
         val typeParams = page.content<Classlike>().data.signature.data.typeParameters
         assertThat(typeParams.first().data.name).isEqualTo("T")
@@ -630,7 +630,7 @@ internal class ClasslikeDocumentableConverterTest(
     }
 
     private fun DModule.page(name: String = "Foo"): DevsitePage {
-        val classlike = explicitClasslike(name)!!
+        val classlike = explicitClasslike(name)
         val holder = runBlocking { DocumentablesHolder(this@page, this) }
         val converter = ClasslikeDocumentableConverter(language, classlike, pathProvider(), holder)
         return runBlocking { converter.classlike() }

@@ -29,6 +29,7 @@ import org.jetbrains.dokka.ExternalDocumentationLink
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DClass
+import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.pages.ModulePageNode
 import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.plugability.DokkaContext
@@ -57,10 +58,12 @@ internal abstract class ConverterTestBase(
     protected fun DModule.classlike() = packages.single().classlikes
         .firstOrNull { it.name !in listOf("Nullable", "NonNull") }
 
-    protected fun DModule.explicitClasslike(name: String? = null) =
-        packages.single().classlikes.singleOrNull { it.name == name }
-            ?: classlike()?.classlikes?.singleOrNull { it.name == name }
-            ?: classlike()
+    protected fun DModule.explicitClasslike(name: String) =
+        packages.single().classlikes.mapNotNull { it.explicitClasslike(name) }.single()
+
+    private fun DClasslike.explicitClasslike(name: String): DClasslike? =
+        if (this.name == name) this
+        else this.classlikes.mapNotNull { it.explicitClasslike(name) }.singleOrNull()
 
     protected fun DModule.function(name: String? = null) =
         packages.single().functions.singleOrNull { it.name == name && !it.dri.isFromBaseClass() }

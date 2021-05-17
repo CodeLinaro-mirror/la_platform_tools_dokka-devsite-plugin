@@ -96,13 +96,11 @@ internal fun Annotation.isDeprecated(): Boolean = dri.classNames == "Deprecated"
 /** @return true if a developer would find this annotation useful, false otherwise */
 private fun shouldDocumentAnnotation(annotation: Annotation, language: Language): Boolean {
     // Not useful to developers
-    val isSuppressAnnotation = annotation.dri.classNames == "Suppress" ||
-        annotation.dri.classNames == "SuppressWarnings"
+    val isSuppressAnnotation = annotation.dri.classNames in SUPPRESSION_ANNOTATION_NAMES
     val isKotlinJvmAnnotation = annotation.dri.packageName == "kotlin.jvm"
     // Surfaced separately
     val isDeprecatedAnnotation = annotation.isDeprecated()
-    val isNullabilityAnnotation = annotation.dri.classNames == "NonNull" ||
-        annotation.dri.classNames == "Nullable"
+    val isNullabilityAnnotation = annotation.dri.classNames in NULLABILITY_ANNOTATION_NAMES
 
     return !isSuppressAnnotation &&
         !isKotlinJvmAnnotation &&
@@ -110,6 +108,9 @@ private fun shouldDocumentAnnotation(annotation: Annotation, language: Language)
         // Keep nullability annotations for Java
         (language == Language.JAVA || !isNullabilityAnnotation)
 }
+
+private val SUPPRESSION_ANNOTATION_NAMES = listOf("Suppress", "SuppressWarnings", "SuppressLint")
+private val NULLABILITY_ANNOTATION_NAMES = listOf("NonNull", "Nullable")
 
 internal fun AnnotationParameterValue.toComponent(
     name: String? = null,

@@ -43,9 +43,11 @@ import com.google.devsite.renderer.converters.testing.title
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
+import org.jetbrains.dokka.links.Callable
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.doc.DocumentationLink
 import org.jetbrains.dokka.model.doc.Img
 import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.model.properties.WithExtraProperties
@@ -641,6 +643,23 @@ internal class DocTagConverterTest(
         for (documentation in listOf(documentationK, documentationJ)) {
             assertThat("thefirst" in documentation.text()).isFalse()
         }
+    }
+
+    @Test
+    fun `Test several odd link choices`() {
+        val documentation = """
+            |/**
+            | * Does bar on [this]
+            | */
+            |fun Foo.bar() {}
+        """.render().documentation().first() as Description
+        val docChildren = documentation.data.components.single().children
+        assertThat(docChildren.size).isEqualTo(2)
+        val link = (docChildren.last() as DocumentationLink)
+        assertThat((link.children.single() as Text).body).isEqualTo("this")
+        assertThat(link.dri.packageName).isEqualTo("androidx.example")
+        assertThat(link.dri.classNames).isEqualTo(null)
+        assertThat((link.dri.callable as Callable).name).isEqualTo("<this>")
     }
 
     @Test

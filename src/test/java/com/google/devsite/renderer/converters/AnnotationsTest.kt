@@ -37,7 +37,10 @@ internal class AnnotationsTest : ConverterTestBase() {
     @Test
     fun `@Suppress annotations are ignored`() {
         val annotations = """
+            |annotation class SuppressLint(val bar: String = "This is part of Lint, not Kotlin")
             |@Suppress("abc")
+            |@SuppressLint("123")
+            |@SuppressWarnings("do re mi")
             |fun foo() = Unit
         """.render().functionAnnotations()
 

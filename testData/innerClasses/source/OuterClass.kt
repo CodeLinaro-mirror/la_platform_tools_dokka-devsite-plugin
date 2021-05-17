@@ -37,7 +37,11 @@ abstract class OuterClass {
     }
 
     /** I'm at the bottom of the hierarchy. */
-    class Leaf : InnerClass()
+    class Leaf : InnerClass() {
+        companion object {
+            fun staticLeafCompanionMethod() = "Bud"
+        }
+    }
 
     /** I offer choices. */
     enum class InnerEnum {

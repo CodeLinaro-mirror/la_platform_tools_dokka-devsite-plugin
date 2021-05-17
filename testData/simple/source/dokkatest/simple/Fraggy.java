@@ -38,4 +38,9 @@ public class Fraggy {
         @NotNull final List<O> callback) {
         return new ArrayList<I>();
     }
+    public int thisShouldShowUp() {return 0;}
+    /** @hide */
+    public int thisShouldNotShowUpButSadlyDoclavaHideDoesntWorkInDackka() {return 0;}
+    /** @suppress */
+    public int thisShouldProbablyShowUpItsJavaHiddenWithTheKotlinMethod() {return 0;}
 }
