@@ -96,8 +96,12 @@ internal class FunctionDocumentableConverter(
         type: SymbolDetail.SymbolType
     ): SymbolDetail {
         val annotations = function.annotations()
-        val returnType =
-            paramConverter.componentForProjection(function.type, annotations, isReturnType = true)
+        val returnType = paramConverter.componentForProjection(
+            function.type,
+            annotations,
+            isReturnType = true,
+            showNullability = false
+        )
 
         return DefaultSymbolDetail(
             SymbolDetail.Params(

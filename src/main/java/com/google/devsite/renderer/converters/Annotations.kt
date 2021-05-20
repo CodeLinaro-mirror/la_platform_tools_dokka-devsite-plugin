@@ -45,18 +45,18 @@ internal fun List<Annotation>.annotationComponents(
     pathProvider: FilePathProvider,
     displayLanguage: Language,
     nullable: Boolean,
-    injectAtNonNull: Boolean = true
+    showNullability: Boolean = true
 ): List<AnnotationComponent> {
     val injectedAnnotations = mutableListOf<Annotation>()
-    if (nullable && displayLanguage == Language.JAVA && !isNullable()) {
+    if (nullable && displayLanguage == Language.JAVA && !isNullable() && showNullability) {
         injectedAnnotations += Annotation(DRI("androidx.annotation", "Nullable"), emptyMap())
     }
-    if (!nullable && displayLanguage == Language.JAVA && !isNonNull() && injectAtNonNull) {
+    if (!nullable && displayLanguage == Language.JAVA && !isNonNull() && showNullability) {
         injectedAnnotations += Annotation(DRI("androidx.annotation", "NonNull"), emptyMap())
     }
 
     return (this + injectedAnnotations).filter { annotation ->
-        shouldDocumentAnnotation(annotation, displayLanguage)
+        shouldDocumentAnnotation(annotation, displayLanguage, showNullability)
     }.map { annotation -> annotation.toDackkaAnnotation(pathProvider) }
 }
 
@@ -94,7 +94,11 @@ internal fun WithExtraProperties<*>.fileLevelAnnotations(): List<Annotation> {
 internal fun Annotation.isDeprecated(): Boolean = dri.classNames == "Deprecated"
 
 /** @return true if a developer would find this annotation useful, false otherwise */
-private fun shouldDocumentAnnotation(annotation: Annotation, language: Language): Boolean {
+private fun shouldDocumentAnnotation(
+    annotation: Annotation,
+    language: Language,
+    showNullability: Boolean = true
+): Boolean {
     // Not useful to developers
     val isSuppressAnnotation = annotation.dri.classNames in SUPPRESSION_ANNOTATION_NAMES
     val isKotlinJvmAnnotation = annotation.dri.packageName == "kotlin.jvm"
@@ -105,8 +109,8 @@ private fun shouldDocumentAnnotation(annotation: Annotation, language: Language)
     return !isSuppressAnnotation &&
         !isKotlinJvmAnnotation &&
         !isDeprecatedAnnotation &&
-        // Keep nullability annotations for Java
-        (language == Language.JAVA || !isNullabilityAnnotation)
+        // Keep nullability annotations for Java, if we should show nullability
+        ((language == Language.JAVA && showNullability) || !isNullabilityAnnotation)
 }
 
 private val SUPPRESSION_ANNOTATION_NAMES = listOf("Suppress", "SuppressWarnings", "SuppressLint")

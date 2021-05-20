@@ -89,7 +89,7 @@ internal class ParameterDocumentableConverter(
     ): DokkaTypeParameter = DefaultTypeParameter(DokkaTypeParameter.Params(
         displayLanguage = displayLanguage,
         name = param.variantTypeParameter.inner.name,
-        projections = param.bounds.map { componentForProjection(it, injectAtNonNull = false) }
+        projections = param.bounds.map { componentForProjection(it, showNullability = false) }
     ))
 
     /**
@@ -106,15 +106,29 @@ internal class ParameterDocumentableConverter(
         proj: Projection,
         annotations: List<Annotations.Annotation> = emptyList(),
         isReturnType: Boolean = false,
-        injectAtNonNull: Boolean = true
+        showNullability: Boolean = true
     ): Parameter = when (displayLanguage) {
         Language.JAVA -> componentForJavaProjection(
             proj,
             annotations = annotations,
             isReturnType = isReturnType,
-            injectAtNonNull = injectAtNonNull
+            showNullability = showNullability
         )
         Language.KOTLIN -> componentForKotlinProjection(proj, annotations = annotations)
+    }
+
+    private fun Projection.typeIsNullableAtAll() = when (this) {
+        is TypeConstructor -> {
+            val className = dri.classNames.orEmpty()
+            !(dri.packageName == "kotlin" &&
+                // kotlin types we convert to java primitives don't get nullability
+                (className in kotlinPrimitives ||
+                    // Nothing is converted to void, so nullability isn't useful
+                    className == "Nothing" ||
+                    // Unit can be nullable, but that information is basically always useless
+                    className == "Unit"))
+        }
+        else -> true
     }
 
     private fun componentForJavaProjection(
@@ -122,7 +136,7 @@ internal class ParameterDocumentableConverter(
         name: String = "",
         annotations: List<Annotations.Annotation> = emptyList(),
         isReturnType: Boolean = false,
-        injectAtNonNull: Boolean = true
+        showNullability: Boolean = true
     ): Parameter {
         val nullable = proj.isNullable() || annotations.isNullable()
 
@@ -135,7 +149,7 @@ internal class ParameterDocumentableConverter(
                     pathProvider,
                     displayLanguage,
                     nullable,
-                    injectAtNonNull = injectAtNonNull
+                    showNullability = showNullability && proj.typeIsNullableAtAll()
                 ),
                 displayLanguage = Language.JAVA
             )

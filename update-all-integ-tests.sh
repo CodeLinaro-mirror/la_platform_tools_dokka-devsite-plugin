@@ -8,3 +8,4 @@ rm -rf testData/paging/docs && cp -r build/docs/testData/paging/docs testData/pa
 rm -rf testData/simple/docs && cp -r build/docs/testData/simple/docs testData/simple/docs
 rm -rf testData/topLevelFunctions/docs && cp -r build/docs/testData/topLevelFunctions/docs testData/topLevelFunctions/docs
 rm -rf testData/sampleAnnotation/docs && cp -r build/docs/testData/sampleAnnotation/docs testData/sampleAnnotation/docs
+rm -rf testData/complicatedPlatform/docs && cp -r build/docs/testData/complicatedPlatform/docs testData/complicatedPlatform/docs

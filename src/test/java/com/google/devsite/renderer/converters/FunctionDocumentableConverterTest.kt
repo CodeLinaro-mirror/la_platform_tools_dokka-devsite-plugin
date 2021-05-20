@@ -27,14 +27,15 @@ import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.asType
-import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.converters.testing.generics
+import com.google.devsite.renderer.converters.testing.isAtNullable
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.projectionName
 import com.google.devsite.renderer.converters.testing.signature
+import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
@@ -443,10 +444,15 @@ internal class FunctionDocumentableConverterTest(
         """.render(java = true).detail()
 
         for (detail in listOf(detailK, detailJ, detailJ2)) {
-            javaOnly { assertThat(detail.data.annotations).isNotEmpty() }
+            val functionAnnotations = detail.data.annotations
+            val returnType = detail.data.returnType
+            javaOnly {
+                assertThat(functionAnnotations.any { it.isAtNullable }).isTrue()
+                assertThat(returnType.data.annotations.any { it.isAtNullable }).isFalse()
+            }
             kotlinOnly {
-                assertThat(detail.data.annotations).isEmpty()
-                assertThat(detail.data.returnType.nullable).isTrue()
+                assertThat(functionAnnotations).isEmpty()
+                assertThat(returnType.nullable).isTrue()
             }
         }
     }

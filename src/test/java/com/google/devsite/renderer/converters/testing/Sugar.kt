@@ -100,5 +100,6 @@ internal fun SymbolBase.link(): Link.Params = when (this) {
     else -> error("Not supported: $this")
 }
 internal fun AnnotationComponent.link(): Link.Params = data.type.data
+internal val AnnotationComponent.isAtNullable get() = this.link().name == "Nullable"
 
 internal fun List<AnnotationComponent>.exceptNonNull() = this.filter { it.link().name != "NonNull" }

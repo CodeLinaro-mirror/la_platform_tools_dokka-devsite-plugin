@@ -206,6 +206,21 @@ internal class ParameterDocumentableConverterTest(
     }
 
     @Test
+    fun `Java primitive types do not have nullability injected`() {
+        val function = """
+            |fun foo (a: Int, b: Unit, c: Nothing)
+        """.render()
+        val paramA = function.param("a")
+        val paramB = function.param("b")
+        val paramC = function.param("c")
+        assertThat(paramA.data.annotations).isEmpty()
+        // Unit can be nullable, but that information is basically never useful
+        assertThat(paramB.data.annotations).isEmpty()
+        // Nothing is always null, but @Nullable is not useful
+        assertThat(paramC.data.annotations).isEmpty()
+    }
+
+    @Test
     fun `Parameter understands factory lambda`() {
         val param = """
             |fun foo(a: () -> Unit)
