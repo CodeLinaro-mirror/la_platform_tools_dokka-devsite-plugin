@@ -32,6 +32,7 @@ import kotlinx.html.html
 import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.base.renderers.OutputWriter
 import org.jetbrains.dokka.model.DClasslike
+import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
 
 /** Renders docs for a single package, including the summary and each symbol. */
@@ -70,12 +71,18 @@ internal class PackageRenderer(
         )
     }
 
-    suspend fun writeClasslike(classlikeDoc: DClasslike) {
+    suspend fun writeClasslike(classlikeDoc: DClasslike, classExtensionFunctions: List<DFunction>) {
         if (classlikeDoc.isSynthetic && displayLanguage == Language.KOTLIN) {
             return
         }
         val converter =
-            ClasslikeDocumentableConverter(displayLanguage, classlikeDoc, pathProvider, docsHolder)
+            ClasslikeDocumentableConverter(
+                displayLanguage,
+                classlikeDoc,
+                pathProvider,
+                docsHolder,
+                classExtensionFunctions
+            )
         val page = converter.classlike()
         val classlike = createHTML().html {
             page.render(this)

@@ -103,6 +103,24 @@
         </tbody>
       </table>
     </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/kotlin/androidx/paging/compose/LazyPagingItems.html">LazyPagingItems</a>&lt;T&gt;</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;.<a href="/reference/kotlin/androidx/paging/compose/package-summary.html#(kotlinx.coroutines.flow.Flow).collectAsLazyPagingItems()">collectAsLazyPagingItems</a>()</code></div>
+              <p>Collects values from this <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> and represents them inside a <code><a href="/reference/kotlin/androidx/paging/compose/LazyPagingItems.html">LazyPagingItems</a></code> instance.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <h2>Public properties</h2>
     <div><a name="getItemCount()"></a><a name="setItemCount()"></a><a name="getItemCount--"></a><a name="setItemCount--"></a>
       <h3 class="api-name" id="itemCount()">itemCount</h3>
@@ -234,6 +252,62 @@
       <h3 class="api-name" id="snapshot()">snapshot</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/compose/LazyPagingItems.html#snapshot()">snapshot</a>():&nbsp;<a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a>&lt;T&gt;</pre>
       <p>Returns a new <code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a></code> representing the currently presented items, including any placeholders if they are enabled.</p>
+    </div>
+    <h2>Extension functions</h2>
+    <div><a name="-kotlinx.coroutines.flow.Flow-.collectAsLazyPagingItems--"></a>
+      <h3 class="api-name" id="(kotlinx.coroutines.flow.Flow).collectAsLazyPagingItems()">collectAsLazyPagingItems</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;.<a href="/reference/kotlin/androidx/paging/compose/package-summary.html#(kotlinx.coroutines.flow.Flow).collectAsLazyPagingItems()">collectAsLazyPagingItems</a>():&nbsp;@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/kotlin/androidx/paging/compose/LazyPagingItems.html">LazyPagingItems</a>&lt;T&gt;</pre>
+      <p>Collects values from this <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> and represents them inside a <code><a href="/reference/kotlin/androidx/paging/compose/LazyPagingItems.html">LazyPagingItems</a></code> instance. The <code><a href="/reference/kotlin/androidx/paging/compose/LazyPagingItems.html">LazyPagingItems</a></code> instance can be used by the <code><a href="/reference/kotlin/androidx/paging/compose/package-summary.html#(LazyListScope).items(androidx.paging.compose.LazyPagingItems,kotlin.Function2)">items</a></code> and <code><a href="/reference/kotlin/androidx/paging/compose/package-summary.html#(LazyListScope).itemsIndexed(androidx.paging.compose.LazyPagingItems,kotlin.Function3)">itemsIndexed</a></code> methods from <a href="[LazyListScope]">LazyListScope</a> in order to display the data obtained from a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.runtime.remember
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemsIndexed
+
+val myBackend = remember { MyBackend() }
+
+val pager = remember {
+    Pager(
+        PagingConfig(
+            pageSize = myBackend.DataBatchSize,
+            enablePlaceholders = true,
+            maxSize = 200
+        )
+    ) { myBackend.getAllData() }
+}
+
+val lazyPagingItems = pager.flow.collectAsLazyPagingItems()
+
+LazyColumn {
+    if (lazyPagingItems.loadState.refresh == LoadState.Loading) {
+        item {
+            Text(
+                text = &quot;Waiting for items to load from the backend&quot;,
+                modifier = Modifier.fillMaxWidth()
+                    .wrapContentWidth(Alignment.CenterHorizontally)
+            )
+        }
+    }
+
+    itemsIndexed(lazyPagingItems) { index, item -&gt;
+        Text(&quot;Index=$index: $item&quot;, fontSize = 20.sp)
+    }
+
+    if (lazyPagingItems.loadState.append == LoadState.Loading) {
+        item {
+            CircularProgressIndicator(
+                modifier = Modifier.fillMaxWidth()
+                    .wrapContentWidth(Alignment.CenterHorizontally)
+            )
+        }
+    }
+}</pre>
     </div>
   </body>
 </html>

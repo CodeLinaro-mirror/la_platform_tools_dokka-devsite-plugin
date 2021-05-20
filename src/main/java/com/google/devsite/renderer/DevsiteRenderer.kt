@@ -21,7 +21,9 @@ import com.google.devsite.renderer.impl.MetadataRenderer
 import com.google.devsite.renderer.impl.PackageRenderer
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
+import org.jetbrains.dokka.model.GenericTypeConstructor
 
 internal class DevsiteRenderer(
     private val rootFileRenderer: MetadataRenderer,
@@ -46,8 +48,31 @@ internal class DevsiteRenderer(
     private suspend fun writePackage(packageDoc: DPackage) = coroutineScope {
         launch { packageRenderer.writeIndex(packageDoc) }
         launch { packageRenderer.writePackageSummary(packageDoc) }
+
+        // Iterate through the package's functions and create map of each class to its associated
+        // extension functions
+        val extensionFunctionsMapping = HashMap<String, MutableList<DFunction>>()
+        packageDoc.functions.forEach { function ->
+            if (function.receiver != null) {
+                try {
+                    val genericTypeConstructor = function.type as GenericTypeConstructor
+                    val className = genericTypeConstructor.dri.classNames.toString()
+                    val list = extensionFunctionsMapping.getOrDefault(className, mutableListOf())
+                    list.add(function)
+                    extensionFunctionsMapping[className] = list
+                } catch (_: ClassCastException) {
+                    // Can't cast function.type; skip to next function
+                }
+            }
+        }
+
         for (clazz in docsHolder.classlikesFor(packageDoc)) {
-            launch { packageRenderer.writeClasslike(clazz) }
+            launch {
+                packageRenderer.writeClasslike(
+                    clazz,
+                    extensionFunctionsMapping.getOrDefault(clazz.name, emptyList())
+                )
+            }
         }
     }
 }

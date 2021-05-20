@@ -61,7 +61,8 @@ internal class ClasslikeDocumentableConverter(
     private val displayLanguage: Language,
     private val classlike: DClasslike,
     private val pathProvider: FilePathProvider,
-    private val docsHolder: DocumentablesHolder
+    private val docsHolder: DocumentablesHolder,
+    private val classExtensionFunctions: List<DFunction> = emptyList()
 ) {
     private val javadocConverter = DocTagConverter(displayLanguage, pathProvider, docsHolder)
     private val functionConverter =
@@ -155,7 +156,7 @@ internal class ClasslikeDocumentableConverter(
         val relatedSymbols = async { findRelatedSymbols() }
         val inheritedTypes = async { computeInheritedSymbols(inheritedFunctions) }
 
-        val allSymbols = listOf(
+        val allSymbols = mutableListOf(
             nestedTypesSummary.await() to Classlike.SymbolType(nestedTypesTitle(), emptyList()),
             enumValuesSummary.await() to Classlike.SymbolType(
                 enumValuesTitle(),
@@ -190,6 +191,23 @@ internal class ClasslikeDocumentableConverter(
                 protectedFunctions.await()
             )
         )
+
+        // Render extension functions only on Kotlin refdoc pages
+        if (displayLanguage == Language.KOTLIN && classExtensionFunctions.isNotEmpty()) {
+            val declaredExtensionFunctions = classExtensionFunctions.sortedBy { it.name }
+            val extensionFunctionsSummary = async {
+                functionsToSummary(extensionFunctionsTitle(), declaredExtensionFunctions)
+            }
+            val extensionFunctions =
+                async { functionsToDetail(declaredExtensionFunctions) }
+
+            allSymbols.add(
+                extensionFunctionsSummary.await() to Classlike.SymbolType(
+                    extensionFunctionsTitle(),
+                    extensionFunctions.await()
+                )
+            )
+        }
 
         DefaultDevsitePage(
             DevsitePage.Params(
@@ -543,4 +561,5 @@ internal class ClasslikeDocumentableConverter(
 
     private fun constantsTitle() = "Constants"
     private fun enumValuesTitle() = "Enum Values"
+    private fun extensionFunctionsTitle() = "Extension functions"
 }
