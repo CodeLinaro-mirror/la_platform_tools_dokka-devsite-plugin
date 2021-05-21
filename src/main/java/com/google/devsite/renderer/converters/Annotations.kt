@@ -98,12 +98,15 @@ private fun shouldDocumentAnnotation(annotation: Annotation, language: Language)
     // Not useful to developers
     val isSuppressAnnotation = annotation.dri.classNames in SUPPRESSION_ANNOTATION_NAMES
     val isKotlinJvmAnnotation = annotation.dri.packageName == "kotlin.jvm"
+    val isCheckResultAnnotation = annotation.dri.classNames == "CheckResult"
+
     // Surfaced separately
     val isDeprecatedAnnotation = annotation.isDeprecated()
     val isNullabilityAnnotation = annotation.dri.classNames in NULLABILITY_ANNOTATION_NAMES
 
     return !isSuppressAnnotation &&
         !isKotlinJvmAnnotation &&
+        !isCheckResultAnnotation &&
         !isDeprecatedAnnotation &&
         // Keep nullability annotations for Java
         (language == Language.JAVA || !isNullabilityAnnotation)
