@@ -516,7 +516,8 @@ internal class FunctionDocumentableConverterTest(
             "(kotlin.collections.List).foo(kotlin.Number,kotlin.collections.Map,kotlin.Function2)",
             "(kotlin.collections.List)" +
                 ".foo(kotlin.Number, kotlin.collections.Map, kotlin.Function2)",
-            "-kotlin.collections.List-.foo-kotlin.Number-kotlin.collections.Map-kotlin.Function2-"
+            "-kotlin.collections.List-.foo-kotlin.Number-kotlin.collections.Map-kotlin.Function2-",
+            "foo"
         )
     }
 

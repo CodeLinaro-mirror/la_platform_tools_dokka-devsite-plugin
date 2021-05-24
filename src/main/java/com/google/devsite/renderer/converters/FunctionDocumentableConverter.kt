@@ -159,16 +159,18 @@ internal class FunctionDocumentableConverter(
      * preference.
      *
      * The different types are:
-     * - `foo(int,int)`
-     * - `foo(int, int)`
-     * - `foo-int-int-`
+     * - `(caller).fooBar(int,int)`
+     * - `(caller).fooBar(int, int)`
+     * - `-caller-.fooBar-int-int-`
+     * - `foobar`
      */
     private fun generateCompatAnchors(function: DFunction): LinkedHashSet<String> {
         val callable = function.dri.callable!!
         return linkedSetOf(
             callable.anchor(),
             callable.anchor(separator = ", "),
-            callable.anchor("-", "-", "-")
+            callable.anchor("-", "-", "-"),
+            callable.name.toLowerCase()
         )
     }
 }

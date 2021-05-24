@@ -197,12 +197,12 @@ class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATO
       <p>This flow is conflated, so it buffers the last update to <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> and immediately delivers the current load states on collection.</p>
     </div>
     <h2>Public constructors</h2>
-    <div><a name="PagingDataAdapter(DiffUtil.ItemCallback&lt;T&gt;, kotlinx.coroutines.CoroutineDispatcher, kotlinx.coroutines.CoroutineDispatcher)"></a><a name="PagingDataAdapter-DiffUtil.ItemCallback&lt;T&gt;-kotlinx.coroutines.CoroutineDispatcher-kotlinx.coroutines.CoroutineDispatcher-"></a>
+    <div><a name="PagingDataAdapter(DiffUtil.ItemCallback&lt;T&gt;, kotlinx.coroutines.CoroutineDispatcher, kotlinx.coroutines.CoroutineDispatcher)"></a><a name="PagingDataAdapter-DiffUtil.ItemCallback&lt;T&gt;-kotlinx.coroutines.CoroutineDispatcher-kotlinx.coroutines.CoroutineDispatcher-"></a><a name="pagingdataadapter"></a>
       <h3 class="api-name" id="PagingDataAdapter(DiffUtil.ItemCallback&lt;T&gt;,kotlinx.coroutines.CoroutineDispatcher,kotlinx.coroutines.CoroutineDispatcher)">PagingDataAdapter</h3>
       <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;VH&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#PagingDataAdapter(DiffUtil.ItemCallback&lt;T&gt;,kotlinx.coroutines.CoroutineDispatcher,kotlinx.coroutines.CoroutineDispatcher)">PagingDataAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;diffCallback:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;mainDispatcher:&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a> = Dispatchers.Main,<br>&nbsp;&nbsp;&nbsp;&nbsp;workerDispatcher:&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a> = Dispatchers.Default<br>)</pre>
     </div>
     <h2>Public functions</h2>
-    <div><a name="addLoadStateListener-kotlin.Function1-"></a>
+    <div><a name="addLoadStateListener-kotlin.Function1-"></a><a name="addloadstatelistener"></a>
       <h3 class="api-name" id="addLoadStateListener(kotlin.Function1)">addLoadStateListener</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#addLoadStateListener(kotlin.Function1)">addLoadStateListener</a>(listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>)&nbsp;-&gt;&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Add a <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener to observe the loading state of the current <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
@@ -251,17 +251,17 @@ adapter.addLoadStateListener {
         </table>
       </div>
     </div>
-    <div><a name="getItemCount--"></a>
+    <div><a name="getItemCount--"></a><a name="getitemcount"></a>
       <h3 class="api-name" id="getItemCount()">getItemCount</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#getItemCount()">getItemCount</a>():&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
     </div>
-    <div><a name="getItemId-kotlin.Int-"></a>
+    <div><a name="getItemId-kotlin.Int-"></a><a name="getitemid"></a>
       <h3 class="api-name" id="getItemId(kotlin.Int)">getItemId</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#getItemId(kotlin.Int)">getItemId</a>(position:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
       <p>Note: <code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#getItemId(kotlin.Int)">getItemId</a></code> is final, because stable IDs are unnecessary and therefore unsupported.</p>
       <p><code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>'s async diffing means that efficient change animations are handled for you, without the performance drawbacks of <a href="[RecyclerView.Adapter.notifyDataSetChanged]">RecyclerView.Adapter.notifyDataSetChanged</a>. Instead, the diffCallback parameter of the <code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code> serves the same functionality - informing the adapter and <a href="[RecyclerView]">RecyclerView</a> how items are changed and moved.</p>
     </div>
-    <div><a name="peek-kotlin.Int-"></a>
+    <div><a name="peek-kotlin.Int-"></a><a name="peek"></a>
       <h3 class="api-name" id="peek(kotlin.Int)">peek</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#peek(kotlin.Int)">peek</a>(@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a>&nbsp;index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
       <p>Returns the presented item at the specified position, without notifying Paging of the item access that would normally trigger page loads.</p>
@@ -300,7 +300,7 @@ adapter.addLoadStateListener {
         </table>
       </div>
     </div>
-    <div><a name="refresh--"></a>
+    <div><a name="refresh--"></a><a name="refresh"></a>
       <h3 class="api-name" id="refresh()">refresh</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#refresh()">refresh</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Refresh the data presented by this <code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>.</p>
@@ -341,7 +341,7 @@ adapter.addLoadStateListener {
         </table>
       </div>
     </div>
-    <div><a name="removeLoadStateListener-kotlin.Function1-"></a>
+    <div><a name="removeLoadStateListener-kotlin.Function1-"></a><a name="removeloadstatelistener"></a>
       <h3 class="api-name" id="removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</a>(listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>)&nbsp;-&gt;&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Remove a previously registered <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener.</p>
@@ -378,7 +378,7 @@ adapter.addLoadStateListener {
         </table>
       </div>
     </div>
-    <div><a name="retry--"></a>
+    <div><a name="retry--"></a><a name="retry"></a>
       <h3 class="api-name" id="retry()">retry</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#retry()">retry</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Retry any failed load requests that would result in a <code><a href="/reference/kotlin/androidx/paging/LoadState.Error.html">LoadState.Error</a></code> update to this <code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>.</p>
@@ -393,7 +393,7 @@ adapter.addLoadStateListener {
         </li>
       </ul>
     </div>
-    <div><a name="setHasStableIds-kotlin.Boolean-"></a>
+    <div><a name="setHasStableIds-kotlin.Boolean-"></a><a name="sethasstableids"></a>
       <h3 class="api-name" id="setHasStableIds(kotlin.Boolean)">setHasStableIds</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#setHasStableIds(kotlin.Boolean)">setHasStableIds</a>(hasStableIds:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Stable ids are unsupported by <code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code>. Calling this method is an error and will result in an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unsupported-operation-exception/index.html">UnsupportedOperationException</a></code>.</p>
@@ -432,16 +432,16 @@ adapter.addLoadStateListener {
         </table>
       </div>
     </div>
-    <div><a name="setStateRestorationPolicy-StateRestorationPolicy-"></a>
+    <div><a name="setStateRestorationPolicy-StateRestorationPolicy-"></a><a name="setstaterestorationpolicy"></a>
       <h3 class="api-name" id="setStateRestorationPolicy(StateRestorationPolicy)">setStateRestorationPolicy</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#setStateRestorationPolicy(StateRestorationPolicy)">setStateRestorationPolicy</a>(strategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
     </div>
-    <div><a name="snapshot--"></a>
+    <div><a name="snapshot--"></a><a name="snapshot"></a>
       <h3 class="api-name" id="snapshot()">snapshot</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#snapshot()">snapshot</a>():&nbsp;<a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a>&lt;T&gt;</pre>
       <p>Returns a new <code><a href="/reference/kotlin/androidx/paging/ItemSnapshotList.html">ItemSnapshotList</a></code> representing the currently presented items, including any placeholders if they are enabled.</p>
     </div>
-    <div><a name="submitData-androidx.paging.PagingData-"></a>
+    <div><a name="submitData-androidx.paging.PagingData-"></a><a name="submitdata"></a>
       <h3 class="api-name" id="submitData(androidx.paging.PagingData)">submitData</h3>
       <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a>(pagingData:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Present a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> until it is invalidated by a call to <code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#refresh()">refresh</a></code> or <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#invalidate()">PagingSource.invalidate</a></code>.</p>
@@ -484,7 +484,7 @@ class MyFlowActivity : AppCompatActivity() {
         </table>
       </div>
     </div>
-    <div><a name="submitData(Lifecycle, androidx.paging.PagingData)"></a><a name="submitData-Lifecycle-androidx.paging.PagingData-"></a>
+    <div><a name="submitData(Lifecycle, androidx.paging.PagingData)"></a><a name="submitData-Lifecycle-androidx.paging.PagingData-"></a><a name="submitdata"></a>
       <h3 class="api-name" id="submitData(Lifecycle,androidx.paging.PagingData)">submitData</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#submitData(Lifecycle,androidx.paging.PagingData)">submitData</a>(lifecycle:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,&nbsp;pagingData:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Present a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> until it is either invalidated or another call to <code><a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#submitData(androidx.paging.PagingData)">submitData</a></code> is made.</p>
@@ -542,7 +542,7 @@ class MyRxJava2Activity : AppCompatActivity() {
         </table>
       </div>
     </div>
-    <div><a name="withLoadStateFooter-androidx.paging.LoadStateAdapter-"></a>
+    <div><a name="withLoadStateFooter-androidx.paging.LoadStateAdapter-"></a><a name="withloadstatefooter"></a>
       <h3 class="api-name" id="withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</a>(footer:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
       <p>Create a <a href="[ConcatAdapter]">ConcatAdapter</a> with the provided <code><a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadType.APPEND</a></code> as a list item at the start of the presented list.</p>
@@ -570,7 +570,7 @@ class MyRxJava2Activity : AppCompatActivity() {
         </table>
       </div>
     </div>
-    <div><a name="withLoadStateHeader-androidx.paging.LoadStateAdapter-"></a>
+    <div><a name="withLoadStateHeader-androidx.paging.LoadStateAdapter-"></a><a name="withloadstateheader"></a>
       <h3 class="api-name" id="withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</a>(header:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
       <p>Create a <a href="[ConcatAdapter]">ConcatAdapter</a> with the provided <code><a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadType.PREPEND</a></code> as a list item at the end of the presented list.</p>
@@ -598,7 +598,7 @@ class MyRxJava2Activity : AppCompatActivity() {
         </table>
       </div>
     </div>
-    <div><a name="withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter, androidx.paging.LoadStateAdapter)"></a><a name="withLoadStateHeaderAndFooter-androidx.paging.LoadStateAdapter-androidx.paging.LoadStateAdapter-"></a>
+    <div><a name="withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter, androidx.paging.LoadStateAdapter)"></a><a name="withLoadStateHeaderAndFooter-androidx.paging.LoadStateAdapter-androidx.paging.LoadStateAdapter-"></a><a name="withloadstateheaderandfooter"></a>
       <h3 class="api-name" id="withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingDataAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;header:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;footer:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;<br>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
       <p>Create a <a href="[ConcatAdapter]">ConcatAdapter</a> with the provided <code><a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/kotlin/androidx/paging/LoadType.PREPEND.html">LoadType.PREPEND</a></code> and <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadType.APPEND</a></code>s as list items at the start and end respectively.</p>

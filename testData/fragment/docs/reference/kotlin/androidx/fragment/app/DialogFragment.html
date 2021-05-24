@@ -1158,14 +1158,14 @@
       <p>Style for <code><a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#setStyle(int,int)">setStyle</a></code>: don't include a title area.</p>
     </div>
     <h2>Public constructors</h2>
-    <div><a name="DialogFragment--"></a>
+    <div><a name="DialogFragment--"></a><a name="dialogfragment"></a>
       <h3 class="api-name" id="DialogFragment()">DialogFragment</h3>
       <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#DialogFragment()">DialogFragment</a>()</pre>
       <p>Constructor used by the default <code><a href="/reference/kotlin/androidx/fragment/app/FragmentFactory.html">FragmentFactory</a></code>. You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">set a custom FragmentFactory</a></code> if you want to use a non-default constructor to ensure that your constructor is called when the fragment is re-instantiated. </p>
       <p>It is strongly recommended to supply arguments with <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#setArguments(android.os.Bundle)">setArguments</a></code> and later retrieved by the Fragment with <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#getArguments()">getArguments</a></code>. These arguments are automatically saved and restored alongside the Fragment. </p>
       <p>Applications should generally not implement a constructor. Prefer <code><a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onAttach(android.content.Context)">onAttach</a></code> instead. It is the first place application code can run where the fragment is ready to be used - the point where the fragment is actually associated with its context.</p>
     </div>
-    <div><a name="DialogFragment-int-"></a>
+    <div><a name="DialogFragment-int-"></a><a name="dialogfragment"></a>
       <h3 class="api-name" id="DialogFragment(int)">DialogFragment</h3>
       <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#DialogFragment(int)">DialogFragment</a>(contentLayoutId:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</pre>
       <p>Alternate constructor that can be called from your default, no argument constructor to provide a default layout that will be inflated by <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code>. </p>
@@ -1201,17 +1201,17 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
       </div>
     </div>
     <h2>Public functions</h2>
-    <div><a name="dismiss--"></a>
+    <div><a name="dismiss--"></a><a name="dismiss"></a>
       <h3 class="api-name" id="dismiss()">dismiss</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#dismiss()">dismiss</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Dismiss the fragment and its dialog. If the fragment was added to the back stack, all back stack state up to and including this entry will be popped. Otherwise, a new transaction will be committed to remove the fragment.</p>
     </div>
-    <div><a name="dismissAllowingStateLoss--"></a>
+    <div><a name="dismissAllowingStateLoss--"></a><a name="dismissallowingstateloss"></a>
       <h3 class="api-name" id="dismissAllowingStateLoss()">dismissAllowingStateLoss</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#dismissAllowingStateLoss()">dismissAllowingStateLoss</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Version of <code><a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#dismiss()">dismiss</a></code> that uses <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commitAllowingStateLoss()">FragmentTransaction.commitAllowingStateLoss()</a></code>. See linked documentation for further details.</p>
     </div>
-    <div><a name="getDialog--"></a>
+    <div><a name="getDialog--"></a><a name="getdialog"></a>
       <h3 class="api-name" id="getDialog()">getDialog</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#getDialog()">getDialog</a>():&nbsp;Dialog?</pre>
       <p>Return the Dialog this fragment is currently controlling.</p>
@@ -1233,30 +1233,30 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
         </table>
       </div>
     </div>
-    <div><a name="getShowsDialog--"></a>
+    <div><a name="getShowsDialog--"></a><a name="getshowsdialog"></a>
       <h3 class="api-name" id="getShowsDialog()">getShowsDialog</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#getShowsDialog()">getShowsDialog</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
       <p>Return the current value of <code><a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#setShowsDialog(boolean)">setShowsDialog</a></code>.</p>
     </div>
-    <div><a name="getTheme--"></a>
+    <div><a name="getTheme--"></a><a name="gettheme"></a>
       <h3 class="api-name" id="getTheme()">getTheme</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#getTheme()">getTheme</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
     </div>
-    <div><a name="isCancelable--"></a>
+    <div><a name="isCancelable--"></a><a name="iscancelable"></a>
       <h3 class="api-name" id="isCancelable()">isCancelable</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#isCancelable()">isCancelable</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
       <p>Return the current value of <code><a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#setCancelable(boolean)">setCancelable</a></code>.</p>
     </div>
-    <div><a name="onAttach-android.content.Context-"></a>
+    <div><a name="onAttach-android.content.Context-"></a><a name="onattach"></a>
       <h3 class="api-name" id="onAttach(android.content.Context)">onAttach</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onAttach(android.content.Context)">onAttach</a>(context:&nbsp;Context):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Called when a fragment is first attached to its context. <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code> will be called after this.</p>
     </div>
-    <div><a name="onCancel-android.content.DialogInterface-"></a>
+    <div><a name="onCancel-android.content.DialogInterface-"></a><a name="oncancel"></a>
       <h3 class="api-name" id="onCancel(android.content.DialogInterface)">onCancel</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onCancel(android.content.DialogInterface)">onCancel</a>(dialog:&nbsp;DialogInterface):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
     </div>
-    <div><a name="onCreate-android.os.Bundle-"></a>
+    <div><a name="onCreate-android.os.Bundle-"></a><a name="oncreate"></a>
       <h3 class="api-name" id="onCreate(android.os.Bundle)">onCreate</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onCreate(android.os.Bundle)">onCreate</a>(savedInstanceState:&nbsp;Bundle?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Called to do initial creation of a fragment. This is called after <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onAttach(android.app.Activity)">onAttach</a></code> and before <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code>. </p>
@@ -1280,7 +1280,7 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
         </table>
       </div>
     </div>
-    <div><a name="onCreateDialog-android.os.Bundle-"></a>
+    <div><a name="onCreateDialog-android.os.Bundle-"></a><a name="oncreatedialog"></a>
       <h3 class="api-name" id="onCreateDialog(android.os.Bundle)">onCreateDialog</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onCreateDialog(android.os.Bundle)">onCreateDialog</a>(savedInstanceState:&nbsp;Bundle?):&nbsp;Dialog</pre>
       <p>Override to build your own custom Dialog container. This is typically used to show an AlertDialog instead of a generic Dialog; when doing so, <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> does not need to be implemented since the AlertDialog takes care of its own content. </p>
@@ -1321,27 +1321,27 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
         </table>
       </div>
     </div>
-    <div><a name="onDestroyView--"></a>
+    <div><a name="onDestroyView--"></a><a name="ondestroyview"></a>
       <h3 class="api-name" id="onDestroyView()">onDestroyView</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onDestroyView()">onDestroyView</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Remove dialog.</p>
     </div>
-    <div><a name="onDetach--"></a>
+    <div><a name="onDetach--"></a><a name="ondetach"></a>
       <h3 class="api-name" id="onDetach()">onDetach</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onDetach()">onDetach</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Called when the fragment is no longer attached to its activity. This is called after <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onDestroy()">onDestroy</a></code>.</p>
     </div>
-    <div><a name="onDismiss-android.content.DialogInterface-"></a>
+    <div><a name="onDismiss-android.content.DialogInterface-"></a><a name="ondismiss"></a>
       <h3 class="api-name" id="onDismiss(android.content.DialogInterface)">onDismiss</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onDismiss(android.content.DialogInterface)">onDismiss</a>(dialog:&nbsp;DialogInterface):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
     </div>
-    <div><a name="onGetLayoutInflater-android.os.Bundle-"></a>
+    <div><a name="onGetLayoutInflater-android.os.Bundle-"></a><a name="ongetlayoutinflater"></a>
       <h3 class="api-name" id="onGetLayoutInflater(android.os.Bundle)">onGetLayoutInflater</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onGetLayoutInflater(android.os.Bundle)">onGetLayoutInflater</a>(savedInstanceState:&nbsp;Bundle?):&nbsp;LayoutInflater</pre>
       <p>Returns the LayoutInflater used to inflate Views of this Fragment. The default implementation will throw an exception if the Fragment is not attached. </p>
       <p>If this is called from within <code><a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onCreateDialog(android.os.Bundle)">onCreateDialog</a></code>, the layout inflater from <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onGetLayoutInflater(android.os.Bundle)">Fragment#onGetLayoutInflater(Bundle)</a></code>, without the dialog theme, will be returned.</p>
     </div>
-    <div><a name="onSaveInstanceState-android.os.Bundle-"></a>
+    <div><a name="onSaveInstanceState-android.os.Bundle-"></a><a name="onsaveinstancestate"></a>
       <h3 class="api-name" id="onSaveInstanceState(android.os.Bundle)">onSaveInstanceState</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onSaveInstanceState(android.os.Bundle)">onSaveInstanceState</a>(outState:&nbsp;Bundle):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Called to ask the fragment to save its current dynamic state, so it can later be reconstructed in a new instance if its process is restarted. If a new instance of the fragment later needs to be created, the data you place in the Bundle here will be available in the Bundle given to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code>, <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code>, and <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onViewCreated(android.view.View,android.os.Bundle)">onViewCreated</a></code>. </p>
@@ -1364,17 +1364,17 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
         </table>
       </div>
     </div>
-    <div><a name="onStart--"></a>
+    <div><a name="onStart--"></a><a name="onstart"></a>
       <h3 class="api-name" id="onStart()">onStart</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onStart()">onStart</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Called when the Fragment is visible to the user. This is generally tied to Activity.onStart of the containing Activity's lifecycle.</p>
     </div>
-    <div><a name="onStop--"></a>
+    <div><a name="onStop--"></a><a name="onstop"></a>
       <h3 class="api-name" id="onStop()">onStop</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onStop()">onStop</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Called when the Fragment is no longer started. This is generally tied to Activity.onStop of the containing Activity's lifecycle.</p>
     </div>
-    <div><a name="onViewStateRestored-android.os.Bundle-"></a>
+    <div><a name="onViewStateRestored-android.os.Bundle-"></a><a name="onviewstaterestored"></a>
       <h3 class="api-name" id="onViewStateRestored(android.os.Bundle)">onViewStateRestored</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onViewStateRestored(android.os.Bundle)">onViewStateRestored</a>(savedInstanceState:&nbsp;Bundle?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Called when all saved state has been restored into the view hierarchy of the fragment. This can be used to do initialization based on saved state that you are letting the view hierarchy track itself, such as whether check box widgets are currently checked. This is called after <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onViewCreated(android.view.View,android.os.Bundle)">onViewCreated</a></code> and before <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onStart()">onStart</a></code>.</p>
@@ -1396,7 +1396,7 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
         </table>
       </div>
     </div>
-    <div><a name="requireDialog--"></a>
+    <div><a name="requireDialog--"></a><a name="requiredialog"></a>
       <h3 class="api-name" id="requireDialog()">requireDialog</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#requireDialog()">requireDialog</a>():&nbsp;Dialog</pre>
       <p>Return the Dialog this fragment is currently controlling.</p>
@@ -1435,7 +1435,7 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
         </table>
       </div>
     </div>
-    <div><a name="setCancelable-boolean-"></a>
+    <div><a name="setCancelable-boolean-"></a><a name="setcancelable"></a>
       <h3 class="api-name" id="setCancelable(boolean)">setCancelable</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#setCancelable(boolean)">setCancelable</a>(cancelable:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Control whether the shown Dialog is cancelable. Use this instead of directly calling Dialog.setCancelable(boolean), because DialogFragment needs to change its behavior based on this.</p>
@@ -1457,7 +1457,7 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
         </table>
       </div>
     </div>
-    <div><a name="setShowsDialog-boolean-"></a>
+    <div><a name="setShowsDialog-boolean-"></a><a name="setshowsdialog"></a>
       <h3 class="api-name" id="setShowsDialog(boolean)">setShowsDialog</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#setShowsDialog(boolean)">setShowsDialog</a>(showsDialog:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Controls whether this fragment should be shown in a dialog. If not set, no Dialog will be created and the fragment's view hierarchy will thus not be added to it. This allows you to instead use it as a normal fragment (embedded inside of its activity). </p>
@@ -1481,7 +1481,7 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
         </table>
       </div>
     </div>
-    <div><a name="setStyle(int, int)"></a><a name="setStyle-int-int-"></a>
+    <div><a name="setStyle(int, int)"></a><a name="setStyle-int-int-"></a><a name="setstyle"></a>
       <h3 class="api-name" id="setStyle(int,int)">setStyle</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#setStyle(int,int)">setStyle</a>(style:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;theme:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Call to customize the basic appearance and behavior of the fragment's dialog. This can be used for some common dialog behaviors, taking care of selecting flags, theme, and other options for you. The same effect can be achieve by manually setting Dialog and Window attributes yourself. Calling this after the fragment's Dialog is created will have no effect.</p>
@@ -1509,7 +1509,7 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
         </table>
       </div>
     </div>
-    <div><a name="show(androidx.fragment.app.FragmentManager, java.lang.String)"></a><a name="show-androidx.fragment.app.FragmentManager-java.lang.String-"></a>
+    <div><a name="show(androidx.fragment.app.FragmentManager, java.lang.String)"></a><a name="show-androidx.fragment.app.FragmentManager-java.lang.String-"></a><a name="show"></a>
       <h3 class="api-name" id="show(androidx.fragment.app.FragmentManager,java.lang.String)">show</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#show(androidx.fragment.app.FragmentManager,java.lang.String)">show</a>(manager:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;tag:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Display the dialog, adding the fragment to the given FragmentManager. This is a convenience for explicitly creating a transaction, adding the fragment to it with the given tag, and <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commit()">committing</a></code> it. This does <em>not</em> add the transaction to the fragment back stack. When the fragment is dismissed, a new transaction will be executed to remove it from the activity.</p>
@@ -1537,7 +1537,7 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
         </table>
       </div>
     </div>
-    <div><a name="show(androidx.fragment.app.FragmentTransaction, java.lang.String)"></a><a name="show-androidx.fragment.app.FragmentTransaction-java.lang.String-"></a>
+    <div><a name="show(androidx.fragment.app.FragmentTransaction, java.lang.String)"></a><a name="show-androidx.fragment.app.FragmentTransaction-java.lang.String-"></a><a name="show"></a>
       <h3 class="api-name" id="show(androidx.fragment.app.FragmentTransaction,java.lang.String)">show</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#show(androidx.fragment.app.FragmentTransaction,java.lang.String)">show</a>(transaction:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html">FragmentTransaction</a>,&nbsp;tag:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
       <p>Display the dialog, adding the fragment using an existing transaction and then <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commit()">committing</a></code> the transaction.</p>
@@ -1582,7 +1582,7 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
         </table>
       </div>
     </div>
-    <div><a name="showNow(androidx.fragment.app.FragmentManager, java.lang.String)"></a><a name="showNow-androidx.fragment.app.FragmentManager-java.lang.String-"></a>
+    <div><a name="showNow(androidx.fragment.app.FragmentManager, java.lang.String)"></a><a name="showNow-androidx.fragment.app.FragmentManager-java.lang.String-"></a><a name="shownow"></a>
       <h3 class="api-name" id="showNow(androidx.fragment.app.FragmentManager,java.lang.String)">showNow</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#showNow(androidx.fragment.app.FragmentManager,java.lang.String)">showNow</a>(manager:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;tag:&nbsp;<a href="https://developer.android.com/reference/java/lang/String.html">String</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Display the dialog, immediately adding the fragment to the given FragmentManager. This is a convenience for explicitly creating a transaction, adding the fragment to it with the given tag, and calling <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#commitNow()">FragmentTransaction#commitNow()</a></code>. This does <em>not</em> add the transaction to the fragment back stack. When the fragment is dismissed, a new transaction will be executed to remove it from the activity.</p>
