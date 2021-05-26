@@ -37,4 +37,10 @@ class DevsitePlugin : DokkaPlugin() {
             MultiLanguageRenderer(it, dokkaBase.querySingle { outputWriter })
         } override dokkaBase.htmlRenderer
     }
+
+    val hideFilter by extending {
+        dokkaBase.preMergeDocumentableTransformer providing {
+            HideTagDocumentableFilter(it)
+        } order { before(dokkaBase.emptyPackagesFilter) }
+    }
 }

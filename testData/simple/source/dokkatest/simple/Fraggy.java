@@ -40,7 +40,7 @@ public class Fraggy {
     }
     public int thisShouldShowUp() {return 0;}
     /** @hide */
-    public int thisShouldNotShowUpButSadlyDoclavaHideDoesntWorkInDackka() {return 0;}
+    public int thisShouldNotShow() {return 0;}
     /** @suppress */
-    public int thisShouldProbablyShowUpItsJavaHiddenWithTheKotlinMethod() {return 0;}
+    public int thisShouldShowUpItsJavaHiddenWithTheKotlinMethod() {return 0;}
 }

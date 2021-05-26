@@ -42,5 +42,5 @@ open class Five {
     open fun thisShouldNotShowUpKt() = 0
 
     /** @hide */
-    open fun thisShouldProbablyShowUpItsKotlinHiddenWithTheDoclavaMethod() = 0
+    open fun thisShouldNotShowUpItsKotlinHiddenWithTheAtHideWhichWeExplicitlyImplemented() = 0
 }
