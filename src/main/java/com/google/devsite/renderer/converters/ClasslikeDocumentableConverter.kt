@@ -165,32 +165,61 @@ internal class ClasslikeDocumentableConverter(
             constantsSummary.await() to Classlike.SymbolType(
                 constantsTitle(),
                 constants.await()
-            ),
-            publicPropertiesSummary.await() to Classlike.SymbolType(
-                publicPropertiesTitle(),
-                publicProperties.await()
-            ),
-            protectedPropertiesSummary.await() to Classlike.SymbolType(
-                protectedPropertiesTitle(),
-                protectedProperties.await()
-            ),
-            publicConstructorsSummary.await() to Classlike.SymbolType(
-                publicConstructorsTitle(),
-                publicConstructors.await()
-            ),
-            protectedConstructorsSummary.await() to Classlike.SymbolType(
-                protectedConstructorsTitle(),
-                protectedConstructors.await()
-            ),
-            publicFunctionsSummary.await() to Classlike.SymbolType(
-                publicMethodsTitle(),
-                publicFunctions.await()
-            ),
-            protectedFunctionsSummary.await() to Classlike.SymbolType(
-                protectedMethodsTitle(),
-                protectedFunctions.await()
             )
         )
+
+        // fields appear before constructors in Java docs
+        if (displayLanguage == Language.JAVA) {
+            allSymbols.addAll(
+                listOf(
+                    publicPropertiesSummary.await() to Classlike.SymbolType(
+                        publicPropertiesTitle(),
+                        publicProperties.await()
+                    ),
+                    protectedPropertiesSummary.await() to Classlike.SymbolType(
+                        protectedPropertiesTitle(),
+                        protectedProperties.await()
+                    )
+                )
+            )
+        }
+
+        allSymbols.addAll(
+            listOf(
+                publicConstructorsSummary.await() to Classlike.SymbolType(
+                    publicConstructorsTitle(),
+                    publicConstructors.await()
+                ),
+                protectedConstructorsSummary.await() to Classlike.SymbolType(
+                    protectedConstructorsTitle(),
+                    protectedConstructors.await()
+                ),
+                publicFunctionsSummary.await() to Classlike.SymbolType(
+                    publicMethodsTitle(),
+                    publicFunctions.await()
+                ),
+                protectedFunctionsSummary.await() to Classlike.SymbolType(
+                    protectedMethodsTitle(),
+                    protectedFunctions.await()
+                )
+            )
+        )
+
+        // properties are the last page section in kotlin docs
+        if (displayLanguage == Language.KOTLIN) {
+            allSymbols.addAll(
+                listOf(
+                    publicPropertiesSummary.await() to Classlike.SymbolType(
+                        publicPropertiesTitle(),
+                        publicProperties.await()
+                    ),
+                    protectedPropertiesSummary.await() to Classlike.SymbolType(
+                        protectedPropertiesTitle(),
+                        protectedProperties.await()
+                    )
+                )
+            )
+        }
 
         // Render extension functions only on Kotlin refdoc pages
         if (displayLanguage == Language.KOTLIN && classExtensionFunctions.isNotEmpty()) {

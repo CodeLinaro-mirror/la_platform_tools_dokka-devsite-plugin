@@ -165,7 +165,7 @@ class DefaultPackageSummaryTest {
     }
 
     @Test
-    fun `Package summary with all class-likes renders correctly`() {
+    fun `Package summary for Java with all class-likes renders correctly`() {
         val component = createPackageSummary(
             interfaces = NoopSummaryList(),
             classes = NoopSummaryList(),
@@ -193,6 +193,8 @@ class DefaultPackageSummaryTest {
         assertThat(output).isEqualTo(
             """
 <div>
+  <h2>Annotations</h2>
+  <div>noop</div>
   <h2>Interfaces</h2>
   <div>noop</div>
   <h2>Classes</h2>
@@ -200,8 +202,6 @@ class DefaultPackageSummaryTest {
   <h2>Enums</h2>
   <div>noop</div>
   <h2>Exceptions</h2>
-  <div>noop</div>
-  <h2>Annotations</h2>
   <div>noop</div>
 </div>
             """.trim()
@@ -359,23 +359,23 @@ class DefaultPackageSummaryTest {
 <div>
   <h2>Constants summary</h2>
   <div>noop</div>
-  <h2>Top-level properties summary</h2>
-  <div>noop</div>
   <h2>Top-level functions summary</h2>
-  <div>noop</div>
-  <h2>Extension properties summary</h2>
   <div>noop</div>
   <h2>Extension functions summary</h2>
   <div>noop</div>
-  <h2>Constants</h2>
+  <h2>Top-level properties summary</h2>
   <div>noop</div>
-  <h2>Top-level properties</h2>
+  <h2>Extension properties summary</h2>
+  <div>noop</div>
+  <h2>Constants</h2>
   <div>noop</div>
   <h2>Top-level functions</h2>
   <div>noop</div>
-  <h2>Extension properties</h2>
-  <div>noop</div>
   <h2>Extension functions</h2>
+  <div>noop</div>
+  <h2>Top-level properties</h2>
+  <div>noop</div>
+  <h2>Extension properties</h2>
   <div>noop</div>
 </div>
             """.trim()

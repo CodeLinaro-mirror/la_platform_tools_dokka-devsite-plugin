@@ -32,26 +32,39 @@ internal class DefaultPackageSummary(
             detail.render(this)
         }
 
-        renderSummary(data.interfaces, "Interfaces")
-        renderSummary(data.classes, "Classes")
-        renderSummary(data.enums, "Enums")
-        renderSummary(data.exceptions, "Exceptions")
-        renderSummary(data.annotations, "Annotations")
+        // The reason for checking display language here is to match the ordering of the page
+        // sections of existing docs.
+        when (data.displayLanguage) {
+            Language.JAVA -> {
+                renderSummary(data.annotations, "Annotations")
+                renderSummary(data.interfaces, "Interfaces")
+                renderSummary(data.classes, "Classes")
+                renderSummary(data.enums, "Enums")
+                renderSummary(data.exceptions, "Exceptions")
+            }
+            Language.KOTLIN -> {
+                renderSummary(data.interfaces, "Interfaces")
+                renderSummary(data.classes, "Classes")
+                renderSummary(data.exceptions, "Exceptions")
+                renderSummary(data.annotations, "Annotations")
+                renderSummary(data.enums, "Enums")
+            }
+        }
 
         if (data.displayLanguage == Language.KOTLIN) {
             renderSummary(data.typeAliases, "Type aliases")
 
             renderSummary(data.topLevelConstantsSummary, "Constants summary")
-            renderSummary(data.topLevelPropertiesSummary, "Top-level properties summary")
             renderSummary(data.topLevelFunctionsSummary, "Top-level functions summary")
-            renderSummary(data.extensionPropertiesSummary, "Extension properties summary")
             renderSummary(data.extensionFunctionsSummary, "Extension functions summary")
+            renderSummary(data.topLevelPropertiesSummary, "Top-level properties summary")
+            renderSummary(data.extensionPropertiesSummary, "Extension properties summary")
 
             renderDetails(data.topLevelConstants, "Constants")
-            renderDetails(data.topLevelProperties, "Top-level properties")
             renderDetails(data.topLevelFunctions, "Top-level functions")
-            renderDetails(data.extensionProperties, "Extension properties")
             renderDetails(data.extensionFunctions, "Extension functions")
+            renderDetails(data.topLevelProperties, "Top-level properties")
+            renderDetails(data.extensionProperties, "Extension properties")
         }
     }
 

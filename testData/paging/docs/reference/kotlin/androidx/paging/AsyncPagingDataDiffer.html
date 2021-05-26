@@ -20,31 +20,6 @@
       <table class="responsive">
         <thead>
           <tr>
-            <th colspan="2"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/AsyncPagingDataDiffer.html#itemCount()">itemCount</a></code></div>
-              <p>Get the number of items currently presented by this Differ.</p>
-            </td>
-          </tr>
-          <tr>
-            <td width="40%"><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/AsyncPagingDataDiffer.html#loadStateFlow()">loadStateFlow</a></code></div>
-              <p>A hot <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <thead>
-          <tr>
             <th colspan="2"><h3>Public constructors</h3></th>
           </tr>
         </thead>
@@ -131,50 +106,30 @@
         </tbody>
       </table>
     </div>
-    <h2>Public properties</h2>
-    <div><a name="getItemCount()"></a><a name="setItemCount()"></a><a name="getItemCount--"></a><a name="setItemCount--"></a>
-      <h3 class="api-name" id="itemCount()">itemCount</h3>
-      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/AsyncPagingDataDiffer.html#itemCount()">itemCount</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-      <p>Get the number of items currently presented by this Differ. This value can be directly returned to <a href="[androidx.recyclerview.widget.RecyclerView.Adapter.getItemCount]">androidx.recyclerview.widget.RecyclerView.Adapter.getItemCount</a>.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="2">Returns</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-              <td>
-                <p>Number of items being presented, including placeholders.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div><a name="getLoadStateFlow()"></a><a name="setLoadStateFlow()"></a><a name="getLoadStateFlow--"></a><a name="setLoadStateFlow--"></a>
-      <h3 class="api-name" id="loadStateFlow()">loadStateFlow</h3>
-      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/AsyncPagingDataDiffer.html#loadStateFlow()">loadStateFlow</a>:&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;</pre>
-      <p>A hot <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
-      <p>This flow is conflated, so it buffers the last update to <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> and immediately delivers the current load states on collection.</p>
-      <pre class="prettyprint">val adapter = UserPagingAdapter()
-lifecycleScope.launch {
-    adapter.loadStateFlow
-        .map { it.refresh }
-        .distinctUntilChanged()
-        .collectLatest {
-            // show a retry button outside the list when refresh hits an error
-            retryButton.isVisible = it is LoadState.Error
-
-            // swipeRefreshLayout displays whether refresh is occurring
-            swipeRefreshLayout.isRefreshing = it is LoadState.Loading
-
-            // show an empty state over the list when loading initially, before items are loaded
-            emptyState.isVisible = it is LoadState.Loading &amp;&amp; adapter.itemCount == 0
-        }
-}</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/AsyncPagingDataDiffer.html#itemCount()">itemCount</a></code></div>
+              <p>Get the number of items currently presented by this Differ.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/AsyncPagingDataDiffer.html#loadStateFlow()">loadStateFlow</a></code></div>
+              <p>A hot <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <h2>Public constructors</h2>
     <div><a name="AsyncPagingDataDiffer(DiffUtil.ItemCallback&lt;T&gt;, ListUpdateCallback, kotlinx.coroutines.CoroutineDispatcher, kotlinx.coroutines.CoroutineDispatcher)"></a><a name="AsyncPagingDataDiffer-DiffUtil.ItemCallback&lt;T&gt;-ListUpdateCallback-kotlinx.coroutines.CoroutineDispatcher-kotlinx.coroutines.CoroutineDispatcher-"></a><a name="asyncpagingdatadiffer"></a>
@@ -455,6 +410,51 @@ adapter.addLoadStateListener {
           </tbody>
         </table>
       </div>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getItemCount()"></a><a name="setItemCount()"></a><a name="getItemCount--"></a><a name="setItemCount--"></a>
+      <h3 class="api-name" id="itemCount()">itemCount</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/AsyncPagingDataDiffer.html#itemCount()">itemCount</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+      <p>Get the number of items currently presented by this Differ. This value can be directly returned to <a href="[androidx.recyclerview.widget.RecyclerView.Adapter.getItemCount]">androidx.recyclerview.widget.RecyclerView.Adapter.getItemCount</a>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <p>Number of items being presented, including placeholders.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="getLoadStateFlow()"></a><a name="setLoadStateFlow()"></a><a name="getLoadStateFlow--"></a><a name="setLoadStateFlow--"></a>
+      <h3 class="api-name" id="loadStateFlow()">loadStateFlow</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/AsyncPagingDataDiffer.html#loadStateFlow()">loadStateFlow</a>:&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>&gt;</pre>
+      <p>A hot <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
+      <p>This flow is conflated, so it buffers the last update to <code><a href="/reference/kotlin/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> and immediately delivers the current load states on collection.</p>
+      <pre class="prettyprint">val adapter = UserPagingAdapter()
+lifecycleScope.launch {
+    adapter.loadStateFlow
+        .map { it.refresh }
+        .distinctUntilChanged()
+        .collectLatest {
+            // show a retry button outside the list when refresh hits an error
+            retryButton.isVisible = it is LoadState.Error
+
+            // swipeRefreshLayout displays whether refresh is occurring
+            swipeRefreshLayout.isRefreshing = it is LoadState.Loading
+
+            // show an empty state over the list when loading initially, before items are loaded
+            emptyState.isVisible = it is LoadState.Loading &amp;&amp; adapter.itemCount == 0
+        }
+}</pre>
     </div>
   </body>
 </html>

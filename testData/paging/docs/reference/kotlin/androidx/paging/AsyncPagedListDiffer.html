@@ -59,31 +59,6 @@
       <table class="responsive">
         <thead>
           <tr>
-            <th colspan="2"><h3>Public properties</h3></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td width="40%"><code>open <a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?</code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/AsyncPagedListDiffer.html#currentList()">currentList</a></code></div>
-              <p>Returns the PagedList currently being displayed by the differ.</p>
-            </td>
-          </tr>
-          <tr>
-            <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-            <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/AsyncPagedListDiffer.html#itemCount()">itemCount</a></code></div>
-              <p>Get the number of items currently presented by this Differ.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <thead>
-          <tr>
             <th colspan="2"><h3>Public constructors</h3></th>
           </tr>
         </thead>
@@ -176,51 +151,30 @@
         </tbody>
       </table>
     </div>
-    <h2>Public properties</h2>
-    <div><a name="getCurrentList()"></a><a name="setCurrentList()"></a><a name="getCurrentList--"></a><a name="setCurrentList--"></a>
-      <h3 class="api-name" id="currentList()">currentList</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/AsyncPagedListDiffer.html#currentList()">currentList</a>:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?</pre>
-      <p>Returns the PagedList currently being displayed by the differ.</p>
-      <p>This is not necessarily the most recent list passed to <code><a href="/reference/kotlin/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a></code>, because a diff is computed asynchronously between the new list and the current list before updating the currentList value. May be <code>null</code> if no <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is being presented.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="2">Returns</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?</code></td>
-              <td>
-                <p>The list currently being displayed, may be <code>null</code>.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div><a name="getItemCount()"></a><a name="setItemCount()"></a><a name="getItemCount--"></a><a name="setItemCount--"></a>
-      <h3 class="api-name" id="itemCount()">itemCount</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/AsyncPagedListDiffer.html#itemCount()">itemCount</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-      <p>Get the number of items currently presented by this Differ. This value can be directly returned to <a href="[RecyclerView.Adapter.getItemCount]">RecyclerView.Adapter.getItemCount</a>.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="2">Returns</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-              <td>
-                <p>Number of items being presented.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>open <a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/AsyncPagedListDiffer.html#currentList()">currentList</a></code></div>
+              <p>Returns the PagedList currently being displayed by the differ.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/AsyncPagedListDiffer.html#itemCount()">itemCount</a></code></div>
+              <p>Get the number of items currently presented by this Differ.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <h2>Public constructors</h2>
     <div><a name="AsyncPagedListDiffer(RecyclerView.Adapter&lt;*&gt;, DiffUtil.ItemCallback&lt;T&gt;)"></a><a name="AsyncPagedListDiffer-RecyclerView.Adapter&lt;*&gt;-DiffUtil.ItemCallback&lt;T&gt;-"></a><a name="asyncpagedlistdiffer"></a>
@@ -623,6 +577,52 @@
               <td width="40%"><code>kotlin.IllegalStateException</code></td>
               <td>
                 <p>if previous PagedList wasn't snapshotted correctly.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getCurrentList()"></a><a name="setCurrentList()"></a><a name="getCurrentList--"></a><a name="setCurrentList--"></a>
+      <h3 class="api-name" id="currentList()">currentList</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/AsyncPagedListDiffer.html#currentList()">currentList</a>:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?</pre>
+      <p>Returns the PagedList currently being displayed by the differ.</p>
+      <p>This is not necessarily the most recent list passed to <code><a href="/reference/kotlin/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a></code>, because a diff is computed asynchronously between the new list and the current list before updating the currentList value. May be <code>null</code> if no <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is being presented.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?</code></td>
+              <td>
+                <p>The list currently being displayed, may be <code>null</code>.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="getItemCount()"></a><a name="setItemCount()"></a><a name="getItemCount--"></a><a name="setItemCount--"></a>
+      <h3 class="api-name" id="itemCount()">itemCount</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/AsyncPagedListDiffer.html#itemCount()">itemCount</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+      <p>Get the number of items currently presented by this Differ. This value can be directly returned to <a href="[RecyclerView.Adapter.getItemCount]">RecyclerView.Adapter.getItemCount</a>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <p>Number of items being presented.</p>
               </td>
             </tr>
           </tbody>
