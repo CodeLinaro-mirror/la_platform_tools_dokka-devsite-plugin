@@ -79,10 +79,10 @@ internal fun SingleColumnSummaryItem.description() = (data.description as? Descr
 internal fun SymbolSummary.name(): String = data.signature.data.name.data.name
 internal fun SymbolSummary.signature() = (data.signature as FunctionSignature).data
 
-internal fun Description.text() = this.data.components.joinToString(" ") { it.deepText() }
+internal fun Description.text() = this.data.components.joinToString(" ") { it.text() }
 
-private fun DocTag.deepText(): String = (this as? Text)?.body
-    ?: children.joinToString(" ") { it.deepText() }
+internal fun DocTag.text(): String = (this as? Text)?.body
+    ?: children.joinToString(" ") { it.text() }
 
 internal fun TypeParameter.projectionName() = this.data.projections.single().link().name
 internal fun Parameter.generics() = this.data.primary.asType().data.generics

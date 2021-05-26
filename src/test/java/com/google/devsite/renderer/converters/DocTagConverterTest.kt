@@ -43,6 +43,8 @@ import com.google.devsite.renderer.converters.testing.title
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
+import kotlinx.html.body
+import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.links.Callable
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DModule
@@ -120,16 +122,48 @@ internal class DocTagConverterTest(
         }*/
     }
 
-    @Test
-    fun `Full documentation has description`() {
-        val documentation = """
-            |/** Hello World! */
+    @Test // This test largely serves to highlight https://github.com/Kotlin/dokka/issues/1939
+    fun `Full summary and description work with multiline in 4x Kotlin and Java`() {
+        val moduleK = """
+            |/**
+            | * Hello World! Docs with period issue, e.g.&nbsp;this.
+            | *
+            | * A second line of desc. A third line of desc.
+            | */
             |class Foo
-        """.render().documentation()
+        """.render()
+        val moduleJ = """
+            |/**
+            | * Hello World! Docs with period issue, e.g.&nbsp;this.
+            | *
+            | * A second line of desc. A third line of desc.
+            | */
+            |public class Foo() {}
+        """.render(java = true)
 
-        val description = documentation.item() as Description
+        for (module in listOf(moduleJ, moduleK)) {
+            val summary = module.description(doc = { this.clazz() })
+            assertThat(summary.data.summary).isTrue()
 
-        assertThat(description.data.summary).isFalse()
+            val detail = module.documentation(doc = { this.clazz() }).item() as Description
+            assertThat(detail.data.summary).isFalse()
+            val space = if (module == moduleK) "&amp;nbsp;" else " "
+            val separator = if (module == moduleK) "</p>\n  <p>" else " "
+            assertThat(detail.render()).isEqualTo(
+                """
+<body>
+  <p>Hello World! Docs with period issue, e.g.${space}this.${separator}A second line of desc. A third line of desc.</p>
+</body>
+            """.trim()
+            )
+
+            val dComponents = detail.data.components
+            val sComponents = summary.data.components
+            for (components in listOf(dComponents, sComponents)) {
+                val size = if (module == moduleJ) 1 else 2
+                assertThat(components.size).isEqualTo(size)
+            }
+        }
     }
 
     @Test // NOTE: upstream dokka does not support @param <Baz> documentation style in kotlin
@@ -1027,6 +1061,10 @@ internal class DocTagConverterTest(
     private fun smartDoc(module: DModule): Documentable {
         return module.function() ?: module.classlike()!!
     }
+
+    private fun ContextFreeComponent.render() = createHTML().body {
+        this@render.render(this)
+    }.trim()
 
     companion object {
         @JvmStatic
