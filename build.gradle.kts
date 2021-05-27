@@ -86,6 +86,7 @@ val zipTask = project.tasks.register<Zip>("zipResultsOf${name.capitalize()}") {
 }
 
 tasks.withType<Test> {
+    maxHeapSize = "1g"
     maxParallelForks = Runtime.getRuntime().availableProcessors()
     testLogging.events = hashSetOf(
         TestLogEvent.FAILED,
