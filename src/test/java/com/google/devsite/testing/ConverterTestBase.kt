@@ -77,7 +77,8 @@ internal abstract class ConverterTestBase(
 
     protected fun DModule.functions() =
         packages.single().functions.nullIfEmpty()
-            ?: classlike()?.functions
+            ?: classlike()?.functions?.nullIfEmpty()
+            ?: classlike()?.classlikes?.single()?.functions // Go down another layer for java
 
     protected fun DModule.property(name: String? = null) =
         packages.single().properties.singleOrNull { it.name == name }

@@ -154,17 +154,30 @@ internal class FunctionDocumentableConverterTest(
     }
 
     @Test
-    fun `Function summary component in interface has abstract modifiers`() {
-        val summary = """
+    fun `Function summary component in interface has abstract modifiers when appropriate`() {
+        val summariesK = """
             |interface Foo {
             |    fun foo()
+            |    fun bar() = "default implementation"
             |}
-        """.render().summary(ModifierHints(language, isInterface = true))
+        """.render().summaries(ModifierHints(language, isInterface = true))
+        val summariesJ = """
+            |public interface Foo {
+            |    public void foo();
+            |    public default void bar() {return "default implementation"; }
+            |}
+        """.render(java = true).summaries(ModifierHints(language, isInterface = true))
 
-        val returnz = summary.returnSummary()
-
-        kotlinOnly { assertThat(returnz.modifiers).isEmpty() }
-        javaOnly { assertThat(returnz.modifiers).containsExactly("abstract") }
+        for (summaries in listOf(summariesK, summariesJ)) {
+            val fooReturnz = summaries["foo"]!!.returnSummary()
+            javaOnly { assertThat(fooReturnz.modifiers).containsExactly("abstract") }
+            kotlinOnly { assertThat(fooReturnz.modifiers).isEmpty() }
+            val barReturnz = summaries["bar"]!!.returnSummary()
+            javaOnly { assertThat(barReturnz.modifiers).isEmpty() }
+            kotlinOnly {
+                if (summaries == summariesJ) assertThat(barReturnz.modifiers).isEmpty()
+                else assertThat(barReturnz.modifiers).containsExactly("open") }
+        }
     }
 
     @Test
@@ -531,10 +544,18 @@ internal class FunctionDocumentableConverterTest(
     private fun DModule.summary(
         hints: ModifierHints = ModifierHints(language)
     ): TwoPaneSummaryItem {
-        val holder = runBlocking { DocumentablesHolder(this@summary, this) }
+        return summaries(hints).values.single()
+    }
+
+    private fun DModule.summaries(
+        hints: ModifierHints = ModifierHints(language)
+    ): Map<String, TwoPaneSummaryItem> {
+        val holder = runBlocking { DocumentablesHolder(this@summaries, this) }
         val docConverter = DocTagConverter(language, pathProvider(), holder)
         val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
-        return converter.summary(function()!!, hints.copy(isSummary = true))
+        return functions()!!.map {
+            it.name to converter.summary(it, hints.copy(isSummary = true))
+        }.toMap()
     }
 
     private fun DModule.summaryForConstructor(): SingleColumnSummaryItem {
