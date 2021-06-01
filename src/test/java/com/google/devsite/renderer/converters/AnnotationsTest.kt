@@ -18,6 +18,7 @@ package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Link
+import com.google.devsite.components.symbols.NamedValueAnnotationParameter
 import com.google.devsite.components.symbols.name
 import com.google.devsite.components.symbols.value
 import com.google.devsite.renderer.Language
@@ -333,6 +334,20 @@ internal class AnnotationsTest : ConverterTestBase() {
         val annotations = emptyList<Annotation>().components(Language.KOTLIN, forcedNullable = true)
 
         assertThat(annotations).isEmpty()
+    }
+
+    @Test
+    fun `Long annotation parameter values are parsed correctly`() {
+        val annotationsKt = """
+            |@Target([AnnotationTarget.VALUE_PARAMETER])
+            |annotation class Foo(bar: Long)
+
+            |fun baz(@Foo(bar = 100) arg: Long): Long = 1
+        """.render().function()!!.parameters.single().annotations()
+        val paramValue = annotationsKt.components().first().data.parameters.single()
+        val data = (paramValue as NamedValueAnnotationParameter).data
+        assertThat(data.name).isEqualTo("bar")
+        assertThat(data.value).isEqualTo("100")
     }
 
     private fun DModule.functionAnnotations(): List<Annotation> {

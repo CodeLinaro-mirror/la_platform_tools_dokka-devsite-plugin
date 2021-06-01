@@ -123,8 +123,22 @@ internal fun AnnotationParameterValue.toComponent(
     name: String? = null,
     pathProvider: FilePathProvider
 ): AnnotationParameter = when (this) {
-    is StringValue -> DefaultNamedValueAnnotationParameter(
-        NamedValueAnnotationParameter.Params(name, "\"$value\""))
+    is StringValue -> {
+        // Check for values which are probably actually Long and not String so that we can
+        // clean up the appended '.toLong()' from them. We can't do the same for integers because
+        // the do not have 'toInt()' appended to them and are indistinguishable from strings of
+        // integer values, e.g. "100".
+        //
+        // This check is necessary because Dokka treats number annotation parameter values as strings.
+        // Tracked here: https://github.com/Kotlin/dokka/issues/1950
+        if (isProbablyLong()) {
+            DefaultNamedValueAnnotationParameter(
+                NamedValueAnnotationParameter.Params(name, cleanedLongValue()))
+        } else {
+            DefaultNamedValueAnnotationParameter(
+                NamedValueAnnotationParameter.Params(name, "\"$value\""))
+        }
+    }
     is EnumValue -> DefaultNamedValueAnnotationParameter(
         NamedValueAnnotationParameter.Params(name, enumName))
     is ClassValue -> DefaultNamedValueAnnotationParameter(
@@ -144,3 +158,8 @@ internal fun AnnotationParameterValue.toComponent(
 }
 
 internal fun Annotation.nameAsString(): String? = (params["name"] as? StringValue)?.value
+
+private const val LONG_ANNO_PARAM_SUFFIX = ".toLong()"
+
+private fun StringValue.isProbablyLong(): Boolean = value.endsWith(LONG_ANNO_PARAM_SUFFIX)
+private fun StringValue.cleanedLongValue(): String = value.removeSuffix(LONG_ANNO_PARAM_SUFFIX)
