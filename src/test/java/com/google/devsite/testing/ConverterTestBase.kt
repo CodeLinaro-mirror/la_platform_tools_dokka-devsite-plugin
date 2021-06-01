@@ -20,6 +20,7 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.DevsitePlugin
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.isFromBaseClass
+import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
 import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
 import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
@@ -100,10 +101,13 @@ internal abstract class ConverterTestBase(
     }
 
     protected fun pathProvider(
-        externalLocationProvider: ExternalDokkaLocationProvider? = null
+        externalLocationProvider: ExternalDokkaLocationProvider? = null,
+        classGraph: ClassGraph = emptyMap()
     ) = when (language) {
-        Language.JAVA -> DacJavaFilePathProvider("androidx", externalLocationProvider)
-        Language.KOTLIN -> DacKotlinFilePathProvider("androidx", externalLocationProvider)
+        Language.JAVA ->
+            DacJavaFilePathProvider("androidx", externalLocationProvider, classGraph)
+        Language.KOTLIN ->
+            DacKotlinFilePathProvider("androidx", externalLocationProvider, classGraph)
     }
 
     protected fun javaOnly(block: () -> Unit) {

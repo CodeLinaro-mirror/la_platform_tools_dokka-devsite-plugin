@@ -16,13 +16,16 @@
 
 package com.google.devsite.renderer.impl.paths
 
+import com.google.devsite.renderer.impl.ClassGraph
+
 /** Directory structure tailored for d.android.com. */
 internal abstract class DacFilePathProviderBase(
     tenant: String,
     pathPrefix: String? = null,
     override val locationProvider: ExternalDokkaLocationProvider? = null,
+    override val classGraph: ClassGraph,
     final override val relative: FilePathProvider =
-        RelativeFilePathProvider(tenant, locationProvider)
+        RelativeFilePathProvider(tenant, locationProvider, classGraph)
 ) : FilePathProvider {
     private val dacPath = "/reference" + if (pathPrefix == null) "" else "/$pathPrefix"
 

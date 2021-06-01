@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer
 
+import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.MetadataRenderer
 import com.google.devsite.renderer.impl.PackageRenderer
@@ -54,17 +55,19 @@ internal class MultiLanguageRenderer(
 
         runBlocking(Dispatchers.Default) {
             val holder = DocumentablesHolder(module, this, context)
-            launch { renderJava(holder, locationProvider) }
-            launch { renderKotlin(holder, locationProvider) }
+            val classGraph = holder.classGraph()
+            launch { renderJava(holder, locationProvider, classGraph) }
+            launch { renderKotlin(holder, locationProvider, classGraph) }
         }
     }
 
     private suspend fun renderJava(
         holder: DocumentablesHolder,
-        locationProvider: ExternalDokkaLocationProvider
+        locationProvider: ExternalDokkaLocationProvider,
+        classGraph: ClassGraph
     ) {
         val language = Language.JAVA
-        val filePaths = DacJavaFilePathProvider(tenant, locationProvider)
+        val filePaths = DacJavaFilePathProvider(tenant, locationProvider, classGraph)
         DevsiteRenderer(
             MetadataRenderer(outputWriter, filePaths, language, holder),
             PackageRenderer(outputWriter, filePaths, language, holder),
@@ -74,10 +77,11 @@ internal class MultiLanguageRenderer(
 
     private suspend fun renderKotlin(
         holder: DocumentablesHolder,
-        locationProvider: ExternalDokkaLocationProvider
+        locationProvider: ExternalDokkaLocationProvider,
+        classGraph: ClassGraph
     ) {
         val language = Language.KOTLIN
-        val filePaths = DacKotlinFilePathProvider(tenant, locationProvider)
+        val filePaths = DacKotlinFilePathProvider(tenant, locationProvider, classGraph)
         DevsiteRenderer(
             MetadataRenderer(outputWriter, filePaths, language, holder),
             PackageRenderer(outputWriter, filePaths, language, holder),

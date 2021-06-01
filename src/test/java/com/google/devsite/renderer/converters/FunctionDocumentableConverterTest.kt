@@ -545,8 +545,13 @@ internal class FunctionDocumentableConverterTest(
         hints: ModifierHints = ModifierHints(language)
     ): TwoPaneSummaryItem {
         val holder = runBlocking { DocumentablesHolder(this@summary, this) }
-        val docConverter = DocTagConverter(language, pathProvider(), holder)
-        val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val classGraph = runBlocking { holder.classGraph() }
+        val docConverter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
+        val converter = FunctionDocumentableConverter(
+            language,
+            pathProvider(classGraph = classGraph),
+            docConverter
+        )
         return converter.summary(this.doc(), hints.copy(isSummary = true))
     }
 
@@ -554,8 +559,13 @@ internal class FunctionDocumentableConverterTest(
         hints: ModifierHints = ModifierHints(language)
     ): Map<String, TwoPaneSummaryItem> {
         val holder = runBlocking { DocumentablesHolder(this@functionSummaries, this) }
-        val docConverter = DocTagConverter(language, pathProvider(), holder)
-        val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val classGraph = runBlocking { holder.classGraph() }
+        val docConverter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
+        val converter = FunctionDocumentableConverter(
+            language,
+            pathProvider(classGraph = classGraph),
+            docConverter
+        )
         return functions()!!.map {
             it.name to converter.summary(it, hints.copy(isSummary = true))
         }.toMap()
@@ -566,8 +576,13 @@ internal class FunctionDocumentableConverterTest(
         hints: ModifierHints = ModifierHints(language)
     ): SymbolDetail {
         val holder = runBlocking { DocumentablesHolder(this@detail, this) }
-        val docConverter = DocTagConverter(language, pathProvider(), holder)
-        val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        val classGraph = runBlocking { holder.classGraph() }
+        val docConverter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
+        val converter = FunctionDocumentableConverter(
+            language,
+            pathProvider(classGraph = classGraph),
+            docConverter
+        )
         return converter.detail(this.doc(), hints)
     }
 

@@ -674,7 +674,12 @@ internal class ClasslikeDocumentableConverterTest(
     private fun DModule.page(name: String = "Foo"): DevsitePage {
         val classlike = explicitClasslike(name)
         val holder = runBlocking { DocumentablesHolder(this@page, this) }
-        val converter = ClasslikeDocumentableConverter(language, classlike, pathProvider(), holder)
+        val classGraph = runBlocking { holder.classGraph() }
+        val converter = ClasslikeDocumentableConverter(
+            language,
+            classlike,
+            pathProvider(classGraph = classGraph),
+            holder)
         return runBlocking { converter.classlike() }
     }
 

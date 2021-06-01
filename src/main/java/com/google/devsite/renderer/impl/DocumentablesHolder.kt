@@ -51,6 +51,7 @@ import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.plugability.DokkaContext
 
+internal typealias ClassGraph = Map<DRI, ClassNode>
 /**
  * Centralized place to retrieve documentables.
  *
@@ -75,7 +76,7 @@ internal class DocumentablesHolder(
     private val allClasslikes: Deferred<List<DClasslike>>
     private val nestedClasslikesJob: Job
     private val nestedClasslikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
-    private val classGraph: Deferred<Map<DRI, ClassNode>>
+    private val classGraph: Deferred<ClassGraph>
     private val analysisMap: Deferred<Map<DokkaConfiguration.DokkaSourceSet, EnvironmentAndFacade>>
 
     init {

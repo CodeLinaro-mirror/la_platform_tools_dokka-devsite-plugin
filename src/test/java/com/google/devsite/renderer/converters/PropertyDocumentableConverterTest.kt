@@ -211,8 +211,13 @@ internal class PropertyDocumentableConverterTest(
         hints: ModifierHints = ModifierHints(language)
     ): TwoPaneSummaryItem {
         val holder = runBlocking { DocumentablesHolder(this@summary, this) }
-        val docConverter = DocTagConverter(language, pathProvider(), holder)
-        val converter = PropertyDocumentableConverter(language, pathProvider(), docConverter)
+        val classGraph = runBlocking { holder.classGraph() }
+        val docConverter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
+        val converter = PropertyDocumentableConverter(
+            language,
+            pathProvider(classGraph = classGraph),
+            docConverter
+        )
         return converter.summary(property()!!, hints)
     }
 
@@ -220,8 +225,13 @@ internal class PropertyDocumentableConverterTest(
         hints: ModifierHints = ModifierHints(language)
     ): SymbolDetail {
         val holder = runBlocking { DocumentablesHolder(this@detail, this) }
-        val docConverter = DocTagConverter(language, pathProvider(), holder)
-        val converter = PropertyDocumentableConverter(language, pathProvider(), docConverter)
+        val classGraph = runBlocking { holder.classGraph() }
+        val docConverter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
+        val converter = PropertyDocumentableConverter(
+            language,
+            pathProvider(classGraph = classGraph),
+            docConverter
+        )
         return converter.detail(property()!!, hints)
     }
 
@@ -229,8 +239,13 @@ internal class PropertyDocumentableConverterTest(
         hints: ModifierHints = ModifierHints(language)
     ): SymbolSignature {
         val holder = runBlocking { DocumentablesHolder(this@signature, this) }
-        val docConverter = DocTagConverter(language, pathProvider(), holder)
-        val converter = PropertyDocumentableConverter(language, pathProvider(), docConverter)
+        val classGraph = runBlocking { holder.classGraph() }
+        val docConverter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
+        val converter = PropertyDocumentableConverter(
+            language,
+            pathProvider(classGraph = classGraph),
+            docConverter
+        )
         return converter.summary(property()!!, hints).signature()
     }
 

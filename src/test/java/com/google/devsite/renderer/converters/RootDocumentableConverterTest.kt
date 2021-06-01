@@ -385,7 +385,12 @@ internal class RootDocumentableConverterTest(
         check(!(forClasses && forPackages)) { "Must choose 1." }
 
         val holder = runBlocking { DocumentablesHolder(this@page, this) }
-        val converter = RootDocumentableConverter(language, pathProvider(), holder)
+        val classGraph = runBlocking { holder.classGraph() }
+        val converter = RootDocumentableConverter(
+            language,
+            pathProvider(classGraph = classGraph),
+            holder
+        )
         return when {
             forClasses -> runBlocking { converter.classesPage() }
             forPackages -> runBlocking { converter.packagesPage() }
@@ -395,7 +400,12 @@ internal class RootDocumentableConverterTest(
 
     private fun DModule.toc(): TableOfContents {
         val holder = runBlocking { DocumentablesHolder(this@toc, this) }
-        val converter = RootDocumentableConverter(language, pathProvider(), holder)
+        val classGraph = runBlocking { holder.classGraph() }
+        val converter = RootDocumentableConverter(
+            language,
+            pathProvider(classGraph = classGraph),
+            holder
+        )
         return runBlocking { converter.tocPage() }
     }
 
