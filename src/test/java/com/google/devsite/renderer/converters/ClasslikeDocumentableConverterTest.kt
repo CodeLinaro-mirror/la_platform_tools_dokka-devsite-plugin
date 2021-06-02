@@ -629,6 +629,48 @@ internal class ClasslikeDocumentableConverterTest(
         javaOnly { assertThat(typeParams.last().projectionName()).isEqualTo("Object") }
     }
 
+    @Test
+    fun `Class component creates all symbols in the correct order`() {
+        val page = "class Foo {}".render().page()
+        val symbolTypes = page
+            .content<Classlike>()
+            .data
+            .symbolTypes
+            .map { it.second.title }
+
+        javaOnly {
+            assertThat(symbolTypes).isEqualTo(
+                listOf(
+                    "Nested types",
+                    "Enum Values",
+                    "Constants",
+                    "Public fields",
+                    "Protected fields",
+                    "Public constructors",
+                    "Protected constructors",
+                    "Public methods",
+                    "Protected methods"
+                )
+            )
+        }
+
+        kotlinOnly {
+            assertThat(symbolTypes).isEqualTo(
+                listOf(
+                    "Nested types",
+                    "Enum Values",
+                    "Constants",
+                    "Public constructors",
+                    "Protected constructors",
+                    "Public functions",
+                    "Protected functions",
+                    "Public properties",
+                    "Protected properties"
+                )
+            )
+        }
+    }
+
     private fun DModule.page(name: String = "Foo"): DevsitePage {
         val classlike = explicitClasslike(name)
         val holder = runBlocking { DocumentablesHolder(this@page, this) }
