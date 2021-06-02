@@ -87,7 +87,7 @@ private fun recursivelyUpdateClasslikeSupertypesTree(
             if (child !== leaf) indirect.add(leaf.dri)
         }
 
-        // TODO Support external types
+        // TODO Support external types b/170124934
         // type.dri is not found in classlikes if it isn't from this package (or invocation?)
         // external types like stdlib appear in the supertypes but we filter them out by forcing
         // the use of classlikes here. This could just be DRI based and we'd connect the external

@@ -339,17 +339,56 @@ internal class ClasslikeDocumentableConverterTest(
     }
 
     @Test
-    fun `Class signature appears with extends and implements`() {
-        val page = """
+    fun `Class signature appears with extends and implements for internal types in 4x`() {
+        val pageK = """
             |interface A
             |abstract class B
             |class Foo : A, B
-        """.render().page()
+        """.render().page("Foo")
+        val pageJ = """
+            |public interface A {}
+            |public abstract class B {}
+            |public class Foo extends Test.B implements Test.A {}
+        """.render(java = true).page("Foo")
 
-        val classlike = page.content<Classlike>()
-        assertThat(classlike.data.signature.data.type).isEqualTo("class")
-        assertThat(classlike.data.signature.data.extends.single().data.name).isEqualTo("B")
-        assertThat(classlike.data.signature.data.implements.single().data.name).isEqualTo("A")
+        for (page in listOf(pageJ, pageK)) {
+            val prefix = if (page == pageK) "" else "Test."
+            val classSignature = page.content<Classlike>().data.signature.data
+            assertThat(classSignature.type).isEqualTo("class")
+            assertThat(classSignature.extends.single().data.name).isEqualTo("${prefix}B")
+            assertThat(classSignature.implements.single().data.name).isEqualTo("${prefix}A")
+        }
+    }
+
+    @Ignore // b/170124934
+    @Test
+    fun `Class signature appears with extends or implements for external types in 4x`() {
+        val pageExternalK = """
+            |/**
+            | * An implementation of [Lazy] used by [android.app.Activity.navArgs] and
+            | * [androidx.fragment.app.Fragment.navArgs].
+            | *
+            | * [argumentProducer] is a lambda that will be called during initialization to provide
+            | * arguments to construct an [Args] instance via reflection.
+            | */
+            |public class NavArgsLazy<Args : String>(
+            |    private val navArgsClass: KClass<Args>,
+            |    private val argumentProducer: () -> Bundle
+            |) : Lazy<Args> {
+        """.render().page(name = "NavArgsLazy")
+        val pageExternalJ = """
+            |public class JavaArgsLazy<Args extends String>() implements Lazy<Args> {}
+        """.render(java = true).page(name = "NavArgsLazy")
+    }
+
+    @Ignore // Upstream bug: https://github.com/Kotlin/dokka/issues/1953
+    @Test
+    fun `Primary constructor can be @suppress-ed without hiding the class itself`() {
+        val page = """
+            |public class BenchmarkState
+            |    /** @suppress */ @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP) constructor() {
+            |}
+        """.render().page("BenchmarkState")
     }
 
     @Test
