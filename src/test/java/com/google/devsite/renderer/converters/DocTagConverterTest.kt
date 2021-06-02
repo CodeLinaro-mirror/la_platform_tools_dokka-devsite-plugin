@@ -315,6 +315,26 @@ internal class DocTagConverterTest(
         assertFails { val constructorDoc = module.documentation({ this.constructor() }) }
     }
 
+    @Test
+    fun `Property parameter can be @suppress-ed as property only`() {
+        val module = """
+            |/**
+            | * @param context context_docs
+            | */
+            |public open class NavController(
+            |    /** @suppress */
+            |    @get:RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+            |    public val context: Context
+            |) {
+        """.render()
+        assertThat(module.properties()).isEmpty()
+        assertThat(module.constructor().parameters.single().name).isEqualTo("context")
+        val constructorParams = module.documentation({ this.constructor() })[1] as SummaryList
+        assertThat(constructorParams.title()).isEqualTo("Parameters")
+        assertThat(constructorParams.item().name()).isEqualTo("context")
+        assertThat(constructorParams.item().description().text()).isEqualTo("context_docs")
+    }
+
     @Test // TODO(b/182457595): fix img tags in javadoc
     fun `Full documentation has img tag in 4x Kotlin and Java`() {
         val documentationK = """
@@ -1058,6 +1078,7 @@ internal class DocTagConverterTest(
         return topClass as DClass
     }
 
+    /** In case you aren't explicit, our best guess at what you want docs for. */
     private fun smartDoc(module: DModule): Documentable {
         return module.function() ?: module.classlike()!!
     }

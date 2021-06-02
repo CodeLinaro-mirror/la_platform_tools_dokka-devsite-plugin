@@ -23,7 +23,6 @@ import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolDetail.SymbolType
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeSummary
-import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.asType
@@ -39,7 +38,7 @@ import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
-import org.jetbrains.dokka.model.DClass
+import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DModule
 import org.junit.Ignore
 import org.junit.Test
@@ -160,13 +159,13 @@ internal class FunctionDocumentableConverterTest(
             |    fun foo()
             |    fun bar() = "default implementation"
             |}
-        """.render().summaries(ModifierHints(language, isInterface = true))
+        """.render().functionSummaries(ModifierHints(language, isInterface = true))
         val summariesJ = """
             |public interface Foo {
             |    public void foo();
             |    public default void bar() {return "default implementation"; }
             |}
-        """.render(java = true).summaries(ModifierHints(language, isInterface = true))
+        """.render(java = true).functionSummaries(ModifierHints(language, isInterface = true))
 
         for (summaries in listOf(summariesK, summariesJ)) {
             val fooReturnz = summaries["foo"]!!.returnSummary()
@@ -215,7 +214,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Function summary component handles constructors`() {
         val summary = """
             |class MyClass
-        """.render().summaryForConstructor()
+        """.render().summary()
 
         val constructor = summary.data.description as SymbolSummary
 
@@ -542,15 +541,19 @@ internal class FunctionDocumentableConverterTest(
     }
 
     private fun DModule.summary(
+        doc: DModule.() -> DFunction = ::smartDoc,
         hints: ModifierHints = ModifierHints(language)
     ): TwoPaneSummaryItem {
-        return summaries(hints).values.single()
+        val holder = runBlocking { DocumentablesHolder(this@summary, this) }
+        val docConverter = DocTagConverter(language, pathProvider(), holder)
+        val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
+        return converter.summary(this.doc(), hints.copy(isSummary = true))
     }
 
-    private fun DModule.summaries(
+    private fun DModule.functionSummaries(
         hints: ModifierHints = ModifierHints(language)
     ): Map<String, TwoPaneSummaryItem> {
-        val holder = runBlocking { DocumentablesHolder(this@summaries, this) }
+        val holder = runBlocking { DocumentablesHolder(this@functionSummaries, this) }
         val docConverter = DocTagConverter(language, pathProvider(), holder)
         val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
         return functions()!!.map {
@@ -558,23 +561,20 @@ internal class FunctionDocumentableConverterTest(
         }.toMap()
     }
 
-    private fun DModule.summaryForConstructor(): SingleColumnSummaryItem {
-        val holder = runBlocking { DocumentablesHolder(this@summaryForConstructor, this) }
-        val docConverter = DocTagConverter(language, pathProvider(), holder)
-        val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
-        return converter.summaryForConstructor(cstructor())
-    }
-
     private fun DModule.detail(
+        doc: DModule.() -> DFunction = ::smartDoc,
         hints: ModifierHints = ModifierHints(language)
     ): SymbolDetail {
         val holder = runBlocking { DocumentablesHolder(this@detail, this) }
         val docConverter = DocTagConverter(language, pathProvider(), holder)
         val converter = FunctionDocumentableConverter(language, pathProvider(), docConverter)
-        return converter.detail(function()!!, hints)
+        return converter.detail(this.doc(), hints)
     }
 
-    private fun DModule.cstructor() = (classlike() as DClass).constructors.single()
+    /** In case you aren't explicit, our best guess at what you want docs for. */
+    private fun smartDoc(module: DModule): DFunction {
+        return module.function() ?: module.constructor()
+    }
 
     private fun Parameter.link(): Link.Params = data.primary.link()
 
