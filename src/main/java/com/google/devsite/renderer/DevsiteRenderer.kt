@@ -32,8 +32,29 @@ internal class DevsiteRenderer(
 ) {
     suspend fun render() {
         writeRootMetadata()
+
+        // Iterate through the all packages and create map of each class to its associated
+        // extension functions
+        val extensionFunctionsMapping = HashMap<String, MutableList<DFunction>>()
+        docsHolder.packages().forEach { packageDoc ->
+            packageDoc.functions.forEach { function ->
+                if (function.receiver != null) {
+                    try {
+                        val genericTypeConstructor = function.type as GenericTypeConstructor
+                        val className = genericTypeConstructor.dri.classNames.toString()
+                        val list =
+                            extensionFunctionsMapping.getOrDefault(className, mutableListOf())
+                        list.add(function)
+                        extensionFunctionsMapping[className] = list
+                    } catch (_: ClassCastException) {
+                        // Can't cast function.type; skip to next function
+                    }
+                }
+            }
+        }
+
         for (packageDoc in docsHolder.packages()) {
-            writePackage(packageDoc)
+            writePackage(packageDoc, extensionFunctionsMapping)
         }
     }
 
@@ -45,26 +66,12 @@ internal class DevsiteRenderer(
         launch { rootFileRenderer.writeToc() }
     }
 
-    private suspend fun writePackage(packageDoc: DPackage) = coroutineScope {
+    private suspend fun writePackage(
+        packageDoc: DPackage,
+        extensionFunctionsMapping: HashMap<String, MutableList<DFunction>>
+    ) = coroutineScope {
         launch { packageRenderer.writeIndex(packageDoc) }
         launch { packageRenderer.writePackageSummary(packageDoc) }
-
-        // Iterate through the package's functions and create map of each class to its associated
-        // extension functions
-        val extensionFunctionsMapping = HashMap<String, MutableList<DFunction>>()
-        packageDoc.functions.forEach { function ->
-            if (function.receiver != null) {
-                try {
-                    val genericTypeConstructor = function.type as GenericTypeConstructor
-                    val className = genericTypeConstructor.dri.classNames.toString()
-                    val list = extensionFunctionsMapping.getOrDefault(className, mutableListOf())
-                    list.add(function)
-                    extensionFunctionsMapping[className] = list
-                } catch (_: ClassCastException) {
-                    // Can't cast function.type; skip to next function
-                }
-            }
-        }
 
         for (clazz in docsHolder.classlikesFor(packageDoc)) {
             launch {
