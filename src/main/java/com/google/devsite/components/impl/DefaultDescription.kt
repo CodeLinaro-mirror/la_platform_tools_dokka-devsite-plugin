@@ -17,7 +17,6 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.Description
-import com.google.devsite.renderer.converters.forReference
 import kotlinx.html.FlowContent
 import kotlinx.html.OL
 import kotlinx.html.TABLE

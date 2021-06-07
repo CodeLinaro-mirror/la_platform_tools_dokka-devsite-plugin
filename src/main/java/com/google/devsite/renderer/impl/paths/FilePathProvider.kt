@@ -16,6 +16,18 @@
 
 package com.google.devsite.renderer.impl.paths
 
+import com.google.devsite.components.Link
+import com.google.devsite.components.impl.DefaultLink
+import com.google.devsite.renderer.converters.anchor
+import com.google.devsite.renderer.impl.ClassGraph
+import org.jetbrains.dokka.links.DRI
+import org.jetbrains.dokka.model.DEnumEntry
+import org.jetbrains.dokka.model.Documentable
+
+private val NON_DOCUMENTABLE_PACKAGES = listOf(
+    "kotlin.jvm.functions"
+).associateWith { true }
+
 /** Converts various inputs to output file paths. */
 internal interface FilePathProvider {
 
@@ -43,6 +55,107 @@ internal interface FilePathProvider {
     /** The _book.yaml file, responsible for the sidebar nav. */
     val book: String
 
+    val classGraph: ClassGraph
+
     /** @return the path of a class-like type */
     fun forType(packageName: String, name: String): String
+
+    /** @see forReference */
+    fun linkForReference(dri: DRI): Link {
+        val ref = forReference(dri)
+        return DefaultLink(Link.Params(ref.name, ref.url))
+    }
+
+    /**
+     * Creates a deep link to a symbol or type. Links to packages, class-likes, top-level/extension
+     * functions, and symbols within a type are supported.
+     */
+    fun forReference(dri: DRI): ReferencePath {
+        val documentable = findInClassGraph(dri)
+        val packageName = dri.packageName.orEmpty().ifBlank { "[JVM root]" }
+        val className = dri.classNames
+        val outerClassName = getOuterClassName(className)
+        val innerClassName = documentable?.name
+        val symbol = dri.callable
+        val isInnerClassEnumEntry = documentable is DEnumEntry
+
+        // if the DokkaLocationProvider can resolve the dri, then we accept that
+        locationProvider?.resolve(dri)?.let {
+            val text = symbol?.name ?: className ?: packageName
+            return ReferencePath(text, it)
+        }
+
+        val (typeName, typeUrl) = if (className == null) {
+            packageName to forType(packageName, PACKAGE_SUMMARY_NAME)
+        } else {
+            className to forType(packageName, className)
+        }
+
+        // Exclude specific packages from being linked.
+        // In the future we might want to only link to things we *know* we've generated docs for by
+        // passing around a collection of valid locations but that could have performance implications
+        if (NON_DOCUMENTABLE_PACKAGES.getOrDefault(packageName, false)) {
+            return ReferencePath(typeName, "")
+        }
+
+        // if we have an enum value instead of an inner class, we need a link to the enum class
+        // (Foo) without the value (Foo.ENUM) and append the enum value as a hash.
+        // For example, /Foo#ENUM instead /Foo.ENUM
+        if (isInnerClassEnumEntry && innerClassName != null && outerClassName != null) {
+            val outerTypeUrl = forType(packageName, outerClassName)
+            return ReferencePath(typeName, "$outerTypeUrl#$innerClassName")
+        }
+
+        return if (symbol == null) {
+            ReferencePath(typeName, typeUrl)
+        } else {
+            ReferencePath(symbol.name, "$typeUrl#${symbol.anchor()}")
+        }
+    }
+
+    /**
+     * Recursively searches the class graph for a [Documentable] with the given [DRI] and returns
+     * it if found, and returns null if it does not exist. Useful for finding anything that is not
+     * at the top level.
+     */
+    fun findInClassGraph(dri: DRI): Documentable? {
+        val outer = classGraph[dri]
+        if (outer != null) {
+            return outer.self
+        }
+        return classGraph.values.mapNotNull { classNode ->
+            classNode.self.getChild(dri)
+        }.firstOrNull()
+    }
+
+    private fun Documentable.getChild(targetDRI: DRI): Documentable? {
+        if (dri == targetDRI) {
+            return this
+        }
+        children.forEach {
+            val child = it.getChild(targetDRI)
+            if (child != null) {
+                return child
+            }
+        }
+        return null
+    }
+
+    data class ReferencePath(val name: String, val url: String)
+
+    /**
+     * Removes the innermost class from a list if it exists
+     *
+     * Outer.Inner -> Outer
+     * A.B.C -> A.B
+     * MyClass -> MyClass
+     */
+    private fun getOuterClassName(className: String?): String? {
+        val classNames = className?.split(".") ?: emptyList()
+        return if (classNames.size > 1) {
+            classNames.dropLast(1).joinToString(".")
+        } else {
+            className
+        }
+    }
 }

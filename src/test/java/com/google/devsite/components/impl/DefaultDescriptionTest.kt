@@ -18,7 +18,9 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Description.Params
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
+import kotlinx.coroutines.runBlocking
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.model.DModule
@@ -676,7 +678,17 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         deprecation: String? = null
     ): DefaultDescription {
         val tag = packages.single().classlikes.single { it.name == "Foo" }.tag()
-        return DefaultDescription(Params(pathProvider(), tag.children, summary, deprecation))
+        val classGraph = runBlocking {
+            DocumentablesHolder(this@description, this).classGraph()
+        }
+        return DefaultDescription(
+            Params(
+                pathProvider(classGraph = classGraph),
+                tag.children,
+                summary,
+                deprecation
+            )
+        )
     }
 
     private fun Documentable.tag() =

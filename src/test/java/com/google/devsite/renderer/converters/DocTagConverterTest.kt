@@ -1042,11 +1042,18 @@ internal class DocTagConverterTest(
             | }
         """.trimIndent().render()
         val holder = runBlocking { DocumentablesHolder(module, this) }
+        val classGraph = runBlocking { holder.classGraph() }
         val classConverter1 = ClasslikeDocumentableConverter(language,
-            module.explicitClasslike("DynamicNavGraphBuilder")!!, pathProvider(), holder)
+            module.explicitClasslike("DynamicNavGraphBuilder")!!,
+            pathProvider(classGraph = classGraph),
+            holder
+        )
         val documentedClass1 = runBlocking { classConverter1.classlike() }
         val classConverter2 = ClasslikeDocumentableConverter(language,
-            module.explicitClasslike("ParcelableArrayType")!!, pathProvider(), holder)
+            module.explicitClasslike(
+                "ParcelableArrayType")!!,
+            pathProvider(classGraph = classGraph),
+            holder)
         val documentedClass2 = runBlocking { classConverter2.classlike() }
         assertThat(outputStreamCaptor.toString()).doesNotContain("WARNING")
         System.setOut(standardOut)
@@ -1054,7 +1061,8 @@ internal class DocTagConverterTest(
 
     private fun DModule.description(doc: DModule.() -> Documentable = ::smartDoc): Description {
         val holder = runBlocking { DocumentablesHolder(this@description, this) }
-        val converter = DocTagConverter(language, pathProvider(), holder)
+        val classGraph = runBlocking { holder.classGraph() }
+        val converter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
         val annotations = (this.doc() as? WithExtraProperties<*>)?.annotations().orEmpty()
         return converter.summaryDescription(this.doc(), annotations)
     }
@@ -1064,7 +1072,8 @@ internal class DocTagConverterTest(
         paramNames: List<String> = emptyList()
     ): List<ContextFreeComponent> {
         val holder = runBlocking { DocumentablesHolder(this@documentation, this) }
-        val converter = DocTagConverter(language, pathProvider(), holder)
+        val classGraph = runBlocking { holder.classGraph() }
+        val converter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
         return converter.metadata(
             doc(),
             returnType = NoopContextFreeComponent,

@@ -24,9 +24,11 @@ import com.google.devsite.renderer.converters.testing.exceptNonNull
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import junit.framework.Assert.assertFalse
 import junit.framework.Assert.assertTrue
+import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DParameter
 import org.junit.Test
@@ -584,7 +586,13 @@ internal class ParameterDocumentableConverterTest(
     }
 
     private fun DModule.param(name: String = "foo", forSummary: Boolean = false): Parameter {
-        val converter = ParameterDocumentableConverter(language, pathProvider())
+        val classGraph = runBlocking {
+            DocumentablesHolder(this@param, this).classGraph()
+        }
+        val converter = ParameterDocumentableConverter(
+            language,
+            pathProvider(classGraph = classGraph)
+        )
         return converter.componentForParameter(parameterDoc(name), forSummary)
     }
 

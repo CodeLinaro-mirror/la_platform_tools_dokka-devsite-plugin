@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The Android Open Source Project
+ * Copyright 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
-package com.google.devsite.renderer.converters
+package com.google.devsite.renderer.impl.paths
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
+import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.links.Callable
+import org.junit.Test
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.TypeConstructor
-import org.junit.Test
 
-internal class LinksTest : ConverterTestBase() {
+internal class FilePathProviderTest : ConverterTestBase() {
+
     @Test
     fun `Root package has correct link`() {
         val dri = DRI()
@@ -133,6 +135,28 @@ internal class LinksTest : ConverterTestBase() {
     }
 
     @Test
+    fun `Enum class values have the correct link`() {
+        val module = """
+            class Outer {
+                 enum class Inner {
+                     FOO
+                 }
+            }
+        """.trimIndent().render()
+        val classGraph = runBlocking { DocumentablesHolder(module, this).classGraph() }
+        val dri = DRI(
+            packageName = "androidx.example",
+            classNames = "Outer.Inner.FOO",
+            callable = null
+        )
+
+        val (name, url) = pathProvider(classGraph = classGraph).forReference(dri)
+
+        assertThat(name).isEqualTo("Outer.Inner.FOO")
+        assertPath(url, "androidx/example/Outer.Inner.html#FOO")
+    }
+
+    @Test
     fun `Attempts to resolve link externally`() {
         val enternalDri = DRI(
             packageName = "external.example",
@@ -172,5 +196,64 @@ internal class LinksTest : ConverterTestBase() {
 
         val (_, url) = pathProvider(external).forReference(internalDri)
         assertPath(url, "androidx/example/Foo.html#foo()")
+    }
+
+    @Test
+    fun `findInClassGraph finds top level documentable by DRI`() {
+        val module = """
+            |class Foo {}
+        """.trimIndent().render()
+        val classGraph = runBlocking { DocumentablesHolder(module, this).classGraph() }
+        val dri = DRI(
+            packageName = "androidx.example",
+            classNames = "Foo",
+            callable = null
+        )
+        val actual = pathProvider(
+            externalLocationProvider = null,
+            classGraph = classGraph
+        ).findInClassGraph(dri)?.name
+        val expected = "Foo"
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @Test
+    fun `findInClassGraph finds nested documentable by DRI`() {
+        val module = """
+            |class Outer {
+            |    class Inner {}
+            |}
+        """.trimIndent().render()
+        val classGraph = runBlocking { DocumentablesHolder(module, this).classGraph() }
+        val dri = DRI(
+            packageName = "androidx.example",
+            classNames = "Outer.Inner",
+            callable = null
+        )
+        val actual = pathProvider(
+            externalLocationProvider = null,
+            classGraph = classGraph
+        ).findInClassGraph(dri)?.name
+        val expected = "Inner"
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @Test
+    fun `findInClassGraph finds deeply nested documentable by DRI`() {
+        val module = """
+            |class A { class B { class C { class D {} } } }
+        """.trimIndent().render()
+        val classGraph = runBlocking { DocumentablesHolder(module, this).classGraph() }
+        val dri = DRI(
+            packageName = "androidx.example",
+            classNames = "A.B.C.D",
+            callable = null
+        )
+        val actual = pathProvider(
+            externalLocationProvider = null,
+            classGraph = classGraph
+        ).findInClassGraph(dri)?.name
+        val expected = "D"
+        assertThat(actual).isEqualTo(expected)
     }
 }
