@@ -18,6 +18,7 @@ package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Link
+import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolDetail.SymbolType
@@ -44,6 +45,7 @@ import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
+import kotlin.test.assertFails
 
 @RunWith(Parameterized::class)
 internal class FunctionDocumentableConverterTest(
@@ -413,6 +415,23 @@ internal class FunctionDocumentableConverterTest(
         kotlinOnly { assertThat(returnType.name).isEqualTo("Any") }
     }
 
+    @Test // b/190477978 Patch upstream to generate default java constructor
+    fun `Function summary component exists for (default) constructors`() {
+        val summaryK = """
+            |class Foo
+        """.render().summary()
+        val constructor = summaryK.data.description as SymbolSummary
+        assertThat(constructor.name()).isEqualTo("Foo")
+
+        assertFails {
+            val jjj = """
+            |public class Foo {}
+            """.render(java = true)
+            val summaryJ = jjj.summary()
+            // val constructor = summaryJ.data.description as SymbolSummary
+        }
+    }
+
     @Test
     fun `Function detail component has correct name`() {
         val detail = """
@@ -531,6 +550,38 @@ internal class FunctionDocumentableConverterTest(
             "-kotlin.collections.List-.foo-kotlin.Number-kotlin.collections.Map-kotlin.Function2-",
             "foo"
         )
+    }
+
+    @Test
+    fun `Constructor details and summary do not contain @NonNull in 4x Java and Kotlin`() {
+        val moduleK = """
+            |class Foo {
+            |   constructor() {}
+            |}
+        """.render()
+        val moduleJ = """
+            |public class Foo {
+            |   public Foo() {}
+            |}
+        """.render(java = true)
+
+        val summaryK = moduleK.summary()
+        val summaryJ = moduleJ.summary()
+        for (summary in listOf(summaryJ, summaryK)) {
+            val annotations = (summary.data.title as TypeSummary).data.type.data.annotations
+            assertThat(annotations).isEmpty()
+        }
+
+        val detailK = moduleK.detail()
+        val detailJ = moduleJ.detail()
+        for (detail in listOf(detailJ, detailK)) {
+            val returnAnnotations = detail.data.returnType.data.annotations
+            val annotations = detail.data.annotations
+            val signature = detail.data.signature as FunctionSignature
+            assertThat(returnAnnotations.isEmpty())
+            assertThat(annotations).isEmpty()
+            assertThat(signature.data.receiver).isNull()
+        }
     }
 
     private fun assertNoLambdaStuff(data: Parameter.Params) {

@@ -49,9 +49,11 @@ internal class FunctionDocumentableConverter(
                     TypeSummary.Params(
                         modifiers = function.modifiers().modifiersFor(hints),
                         type = paramConverter.componentForProjection(
-                            function.type,
-                            annotations,
-                            isReturnType = true
+                            proj = function.type,
+                            annotations = annotations,
+                            isReturnType = true,
+                            showNullability = !function.isConstructor
+
                         )
                     )
                 ),
@@ -103,15 +105,23 @@ internal class FunctionDocumentableConverter(
             showNullability = false
         )
 
+        // So far I've only seen this in unit tests where we use the wrong entry point into
+        // FunctionDocumentableConverter, but it's possible it could happen in other ways.
+        if (function.isConstructor != (type == SymbolDetail.SymbolType.CONSTRUCTOR)) {
+            println("WARNING: constructor ${function.dri} is not being parsed correctly")
+        }
+
         return DefaultSymbolDetail(
             SymbolDetail.Params(
                 displayLanguage = displayLanguage,
                 name = function.name,
                 anchors = generateCompatAnchors(function),
                 annotations = annotations.annotationComponents(
-                    pathProvider,
-                    displayLanguage,
-                    function.type.isNullable()
+                    pathProvider = pathProvider,
+                    displayLanguage = displayLanguage,
+                    nullable = function.type.isNullable(),
+                    showNullability = !function.isConstructor &&
+                        type != SymbolDetail.SymbolType.CONSTRUCTOR
                 ),
                 modifiers = function.modifiers().modifiersFor(hints),
                 returnType = returnType,

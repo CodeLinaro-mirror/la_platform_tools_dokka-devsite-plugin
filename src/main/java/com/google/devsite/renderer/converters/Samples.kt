@@ -173,7 +173,8 @@ internal fun convertTextToJavaSample(block: Text, samples: Set<File>): CodeBlock
         .trim().removePrefix("{").removeSuffix("}")
         // Upstream inserts "*"s on line breaks within the { }
         .split(" ").filter { it.isNotEmpty() && it != "*" }
-    assert(sampleLine[0] == "@sample")
+    if (sampleLine[0] != "@sample") throw RuntimeException("invalid first line of " +
+        "purported sample block: \"${sampleLine[0]}\"; expected to be \"@sample\"")
     // Note that this ignores most of the path, in favor of only using
     // the name, and using the sourceSet's declared samples
     val fileName = sampleLine[1].split("/").last()

@@ -33,6 +33,7 @@ import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.projectionName
+import com.google.devsite.renderer.converters.testing.size
 import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.renderer.converters.testing.title
@@ -44,6 +45,7 @@ import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
+import kotlin.test.assertFails
 
 @RunWith(Parameterized::class)
 internal class ClasslikeDocumentableConverterTest(
@@ -381,14 +383,31 @@ internal class ClasslikeDocumentableConverterTest(
         """.render(java = true).page(name = "NavArgsLazy")
     }
 
-    @Ignore // Upstream bug: https://github.com/Kotlin/dokka/issues/1953
     @Test
     fun `Primary constructor can be @suppress-ed without hiding the class itself`() {
-        val page = """
+        // Primary constructor suppression is broken upstream
+        // https://github.com/Kotlin/dokka/issues/1953
+        val modulePrimary = """
             |public class BenchmarkState
-            |    /** @suppress */ @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP) constructor() {
+            |    /** @suppress */
+            |    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+            |    constructor(val foo: String) {
             |}
-        """.render().page("BenchmarkState")
+        """.render()
+        assertFails {
+            val page = modulePrimary.page("BenchmarkState")
+        }
+        // We can convert to equivalent secondary constructor and it works
+        val moduleSecondary = """
+            |public class BenchmarkState {
+            |    val foo: String
+            |    /** @suppress */
+            |    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+            |    constructor(foo: String) { this.foo = foo }
+            |}
+        """.render()
+        val page = moduleSecondary.page("BenchmarkState").content<Classlike>()
+        assertThat(page.symbolsFor("Public constructors").first.size()).isEqualTo(0)
     }
 
     @Test
@@ -493,7 +512,10 @@ internal class ClasslikeDocumentableConverterTest(
             |    /** KotOR */
             |    override val democracy = true
             |}
-        """.render()
+            |class maz() : foo {
+            |   /** {@inheritDoc} */
+            |   override fun doit() {}
+            |}        """.render()
         val pagesJ = """
             |public class foo {
             |    /** dew it */
@@ -543,6 +565,12 @@ internal class ClasslikeDocumentableConverterTest(
                 assertThat(barDemocracy.data.description.text()).isEqualTo("thunderous applause")
                 val bazDemocracy = bazClass.propertySymbols().first.items().single().summary()
                 assertThat(bazDemocracy.data.description.text()).isEqualTo("KotOR")
+
+                // Using {@inheritDoc} in kotlin is wrong
+                val mazClass = pages.page("maz").content<Classlike>()
+                val mazDoit = mazClass.methodSymbols().first.items().single()
+                val mazDoitDocs = mazDoit.summary().data.description.text()
+                assertThat(mazDoitDocs).isNotEqualTo("dew it")
             }
         }
     }

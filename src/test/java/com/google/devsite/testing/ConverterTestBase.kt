@@ -74,7 +74,8 @@ internal abstract class ConverterTestBase(
 
     protected fun DModule.constructor() = constructors().single()
 
-    protected fun DModule.constructors() = (classlike() as DClass).constructors
+    protected fun DModule.constructors() = (classlike() as? DClass)?.constructors?.nullIfEmpty()
+        ?: (classlike()?.classlikes?.single() as DClass).constructors
 
     protected fun DModule.functions() =
         packages.single().functions.nullIfEmpty()
