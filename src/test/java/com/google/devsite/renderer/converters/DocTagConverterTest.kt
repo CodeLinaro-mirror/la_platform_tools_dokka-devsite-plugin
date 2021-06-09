@@ -1040,7 +1040,7 @@ internal class DocTagConverterTest(
             |            this.arrayType = arrayType
             |        }
             | }
-        """.trimIndent().render()
+        """.render()
         val holder = runBlocking { DocumentablesHolder(module, this) }
         val classGraph = runBlocking { holder.classGraph() }
         val classConverter1 = ClasslikeDocumentableConverter(language,
@@ -1057,6 +1057,28 @@ internal class DocTagConverterTest(
         val documentedClass2 = runBlocking { classConverter2.classlike() }
         assertThat(outputStreamCaptor.toString()).doesNotContain("WARNING")
         System.setOut(standardOut)
+    }
+
+    @Test
+    fun `Test @return on property parameters`() {
+        val module = """
+            |public class Foo private constructor(
+            |   /**
+            |    * The arguments used for this entry
+            |    * @return The arguments used when this entry was created
+            |    *
+            |    */
+            |   @set:RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+            |   public var arguments: List<String>? = null
+            |) {}
+        """.render()
+        val documentation = module.documentation({ this.property("arguments")!! })
+        val description = (documentation.first() as Description).text()
+        assertThat(description == "The arguments used for this entry")
+        val table = (documentation.last() as SummaryList)
+        assertThat(table.title()).isEqualTo("Returns")
+        val tableEntry = table.item().description().text()
+        assertThat(tableEntry).isEqualTo("The arguments used when this entry was created")
     }
 
     private fun DModule.description(doc: DModule.() -> Documentable = ::smartDoc): Description {
