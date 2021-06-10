@@ -20,6 +20,8 @@ import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.renderer.Language
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
+import kotlinx.html.HTMLTag
+import kotlinx.html.unsafe
 
 /** Default implementation of a function parameter. */
 internal class DefaultParameter(
@@ -32,7 +34,7 @@ internal class DefaultParameter(
     override fun render(into: FlowContent) = into.run {
         for (annotation in data.annotations) {
             annotation.render(this)
-            +Entities.nbsp
+            +" "
         }
 
         when (data.displayLanguage) {
@@ -64,15 +66,16 @@ internal class DefaultParameter(
                 for (type in data.lambdaParams) {
                     type.render(this)
                     if (type !== data.lambdaParams.last()) {
-                        +","
-                        +Entities.nbsp
+                        +", "
                     }
                 }
                 if (data.isLambda) {
                     +")"
-                    +Entities.nbsp
-                    +"->"
-                    +Entities.nbsp
+                    +" "
+                    nobr {
+                        +"->"
+                    }
+                    +" "
                 }
 
                 for (modifier in data.modifiers) {
@@ -103,4 +106,17 @@ internal class DefaultParameter(
             "Lambda params don't make sense outside a lambda."
         }
     }
+}
+
+/**
+ * Recreates the functionality of non-standard <nobr> tag, used to prevent browser from inserting
+ * line breaks in the given content to render.
+ */
+private fun FlowContent.nobr(render: HTMLTag.() -> Unit) {
+    if (this !is HTMLTag) {
+        return
+    }
+    unsafe { +"<span style=\"white-space: nowrap;\">" }
+    render()
+    unsafe { +"</span>" }
 }
