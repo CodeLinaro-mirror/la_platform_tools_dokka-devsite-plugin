@@ -27,12 +27,6 @@ import java.util.concurrent.Executor;
 import io.reactivex.Flowable;
 import kotlin.NotImplementedError;
 
-/**
- * NOTE - MANUALLY COPIED SAMPLE
- *
- * Since @sample from kdoc doesn't support Java, this code must manually kept in sync with
- * the `PagingDataTransforms.insertSeparators` method
- */
 @SuppressWarnings({"unused", "WeakerAccess"})
 class InsertSeparatorsJavaSample {
 
@@ -47,6 +41,7 @@ class InsertSeparatorsJavaSample {
     @SuppressLint("CheckResult")
     @SuppressWarnings({"unused", "ResultOfMethodCallIgnored", "RxReturnValueIgnored"})
     public void insertSeparatorsSample() {
+        //BEGIN_INCLUDE(insertSeparators)
         /*
          * Create letter separators in an alphabetically sorted list.
          *
@@ -72,5 +67,6 @@ class InsertSeparatorsJavaSample {
                                 return null;
                             }
                         }));
+        //END_INCLUDE(insertSeparators)
     }
 }

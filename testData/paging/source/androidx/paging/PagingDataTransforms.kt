@@ -147,9 +147,6 @@ public fun <T : R, R : Any> PagingData<T>.insertSeparators(
     )
 }
 
-// NOTE: samples in the doc below are manually imported from Java code in the samples
-// project, since Java cannot be linked with @sample.
-// DO NOT CHANGE THE BELOW COMMENT WITHOUT MAKING THE CORRESPONDING CHANGE IN `samples/`
 /**
  *
  * Returns a [PagingData] containing each original element, with an optional separator
@@ -161,83 +158,9 @@ public fun <T : R, R : Any> PagingData<T>.insertSeparators(
  *
  * **Kotlin callers should instead use the suspending extension function variant of
  * insertSeparators**
- *
- * ```
- * /*
- *  * Create letter separators in an alphabetically sorted list.
- *  *
- *  * For example, if the input is:
- *  *     "apple", "apricot", "banana", "carrot"
- *  *
- *  * The operator would output:
- *  *     "A", "apple", "apricot", "B", "banana", "C", "carrot"
- *  */
- * pagingDataStream.map(pagingData ->
- *         // map outer stream, so we can perform transformations on each paging generation
- *         PagingDataTransforms.insertSeparators(pagingData, bgExecutor,
- *                 (@Nullable String before, @Nullable String after) -> {
- *                     if (after != null && (before == null
- *                             || before.charAt(0) != after.charAt(0))) {
- *                         // separator - after is first item that starts with its first
- *                         // letter
- *                         return Character.toString(
- *                                 Character.toUpperCase(after.charAt(0)));
- *                     } else {
- *                         // no separator - either end of list, or first
- *                         // letters of items are the same
- *                         return null;
- *                     }
- *                 }));
- *
- * /*
- *  * Create letter separators in an alphabetically sorted list of Items, with UiModel
- *  * objects.
- *  *
- *  * For example, if the input is (each an `Item`):
- *  *     "apple", "apricot", "banana", "carrot"
- *  *
- *  * The operator would output a list of UiModels corresponding to:
- *  *     "A", "apple", "apricot", "B", "banana", "C", "carrot"
- *  */
- * pagingDataStream.map(itemPagingData -> {
- *     // map outer stream, so we can perform transformations on each paging generation
- *
- *     // first convert items in stream to UiModel.Item
- *     PagingData<UiModel.ItemModel> itemModelPagingData = PagingDataTransforms.map(
- *             itemPagingData, bgExecutor, UiModel.ItemModel::new);
- *
- *     // Now insert UiModel.Separators, which makes the PagingData of generic type UiModel
- *     return PagingDataTransforms.insertSeparators(
- *             itemModelPagingData, bgExecutor,
- *             (@Nullable UiModel.ItemModel before, @Nullable UiModel.ItemModel after) -> {
- *                 if (after != null && (before == null
- *                         || before.item.label.charAt(0) != after.item.label.charAt(0))) {
- *                     // separator - after is first item that starts with its first letter
- *                     return new UiModel.SeparatorModel(
- *                             Character.toUpperCase(after.item.label.charAt(0)));
- *                 } else {
- *                     // no separator - either end of list, or first
- *                     // letters of items are the same
- *                     return null;
- *                 }
- *             });
- * });
- *
- * public class UiModel {
- *     static class ItemModel extends UiModel {
- *         public Item item;
- *         ItemModel(Item item) {
- *             this.item = item;
- *         }
- *     }
- *     static class SeparatorModel extends UiModel {
- *         public char character;
- *         SeparatorModel(char character) {
- *             this.character = character;
- *         }
- *     }
- * }
- * ```
+ * {@sample dotdotdot/InsertSeparatorsJavaSample.java insertSeparators}
+ * {@sample dotdotdot/InsertSeparatorsJavaUiModelSample.java insertSeparators}
+ * {@sample dotdotdot/UiModel.java uiModel}
  *
  * @param terminalSeparatorType [TerminalSeparatorType] used to configure when the header and
  * footer are added.

@@ -16,13 +16,8 @@
 
 package androidx.paging.samples.java;
 
-/**
- * NOTE - MANUALLY COPIED SAMPLE
- *
- * Since @sample from kdoc doesn't support Java, this code must manually kept in sync with
- * the @JvmStatic `PagingData.insertSeparators` method
- */
 @SuppressWarnings({"WeakerAccess", "unused"})
+//BEGIN_INCLUDE(uiModel)
 public class UiModel {
     public UiModel() {}
 
@@ -41,3 +36,4 @@ public class UiModel {
         }
     }
 }
+//END_INCLUDE(uiModel)
