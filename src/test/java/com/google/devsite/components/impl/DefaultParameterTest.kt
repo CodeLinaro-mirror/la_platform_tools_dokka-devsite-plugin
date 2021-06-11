@@ -138,7 +138,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>@Really&nbsp;@Special&nbsp;number:&nbsp;Int</div>
+<div>@Really @Special number:&nbsp;Int</div>
             """.trim()
         )
     }
@@ -162,7 +162,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>@Really&nbsp;@Special&nbsp;int&nbsp;number</div>
+<div>@Really @Special int&nbsp;number</div>
             """.trim()
         )
     }
@@ -244,7 +244,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>block:&nbsp;()&nbsp;-&gt;&nbsp;Unit</div>
+<div>block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> Unit</div>
             """.trim()
         )
     }
@@ -268,7 +268,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>number:&nbsp;Int.()&nbsp;-&gt;&nbsp;Int</div>
+<div>number:&nbsp;Int.() <span style="white-space: nowrap;">-&gt;</span> Int</div>
             """.trim()
         )
     }
@@ -292,7 +292,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>number:&nbsp;(Int,&nbsp;String)&nbsp;-&gt;&nbsp;Int</div>
+<div>number:&nbsp;(Int, String) <span style="white-space: nowrap;">-&gt;</span> Int</div>
             """.trim()
         )
     }
@@ -317,7 +317,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>number:&nbsp;Boolean.(String)&nbsp;-&gt;&nbsp;Int</div>
+<div>number:&nbsp;Boolean.(String) <span style="white-space: nowrap;">-&gt;</span> Int</div>
             """.trim()
         )
     }
@@ -342,7 +342,7 @@ class DefaultParameterTest {
         // language=html
         assertThat(output).isEqualTo(
             """
-<div>number:&nbsp;suspend&nbsp;(String)&nbsp;-&gt;&nbsp;Int</div>
+<div>number:&nbsp;suspend&nbsp;(String) <span style="white-space: nowrap;">-&gt;</span> Int</div>
             """.trim()
         )
     }
