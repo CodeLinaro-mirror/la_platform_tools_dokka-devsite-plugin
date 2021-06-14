@@ -35,6 +35,8 @@ import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.ExtraModifiers
 import org.jetbrains.dokka.model.Nullable
 import org.jetbrains.dokka.model.Projection
+import org.jetbrains.dokka.model.TypeConstructor
+import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Variance
 import org.jetbrains.dokka.model.WithChildren
 import org.jetbrains.dokka.model.isJvmName
@@ -139,6 +141,23 @@ fun DFunction.withJvmName(): DFunction {
         dri = dri.copy(callable = dri.callable?.copy(name = jvmName))
     )
 }
+
+/**
+ * [Comparator] which sorts [DFunction] by name, then number of params, and then params names if
+ * necessary.
+ */
+fun functionSignatureComparator(): Comparator<DFunction> = compareBy(
+    { it.name },
+    { it.parameters.size },
+    { it.signatureAsString() }
+)
+
+private fun DFunction.signatureAsString() =
+    "$name(${parameters.joinToString(separator = ", ") { it.paramAsString() }})"
+
+private fun DParameter.paramAsString() =
+    "${name ?: ""}: " +
+    "${(type as? UnresolvedBound)?.name ?: (type as? TypeConstructor)?.dri?.classNames}"
 
 /**
  * Returns the value of the @JvmName for this function if one exists or null

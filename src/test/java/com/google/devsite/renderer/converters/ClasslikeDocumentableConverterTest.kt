@@ -21,6 +21,7 @@ import com.google.devsite.components.Description
 import com.google.devsite.components.Raw
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.DevsitePage
+import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.table.SingleColumnSummaryItem
@@ -681,6 +682,45 @@ internal class ClasslikeDocumentableConverterTest(
             val doit = page.content<Classlike>().methodSymbols().first.items().single()
             assertThat(doit.summary().data.description.text()).isEqualTo("dew it")
         }
+    }
+
+    @Test
+    fun `Inherited methods are sorted by name and arity`() {
+        val childClass = """
+            |class Parent() {
+            |    fun b(input: Int, zinput2: Int) {}
+            |    fun c() {}
+            |    fun a() {}
+            |    fun b(input: Int, input2: Int) {}
+            |    fun b() {}
+            |    fun b(input: Int) {}
+            |}
+            |class Child() : Parent {}
+        """.render().page("Child").content<Classlike>()
+        val inheritedSummary = childClass.data.inheritedTypes.single().data.inheritedSymbolSummaries
+        val inheritedMethods = inheritedSummary.entries.single().value.data.items
+        val inheritedMethodSignatures = inheritedMethods.map {
+            (it.data.description as SymbolSummary).data.signature as FunctionSignature
+        }
+        assertThat(inheritedMethodSignatures.map { it.data.name.data.name }).isEqualTo(
+            listOf("a", "b", "b", "b", "b", "c")
+        )
+        assertThat(inheritedMethodSignatures.map { it.data.parameters.size }).isEqualTo(
+            listOf(0, 0, 1, 2, 2, 0)
+        )
+        val paramNames = inheritedMethodSignatures.map {
+            it.data.parameters.map { it.data.name }
+        }
+        assertThat(paramNames).isEqualTo(
+            listOf(
+                listOf(),
+                listOf(),
+                listOf("input"),
+                listOf("input", "input2"),
+                listOf("input", "zinput2"),
+                listOf()
+            )
+        )
     }
 
     @Test

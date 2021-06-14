@@ -460,8 +460,10 @@ internal class ClasslikeDocumentableConverter(
      * Creates a list of InheritedSymbols from a list of DFunctions
      */
     private fun computeInheritedSymbols(symbols: List<DFunction>): List<InheritedSymbols> {
-        val inheritedSymbolMap = symbols.sortedBy { it.name }.groupBy { it.dri.parent }
-
+        val inheritedSymbolMap = symbols
+            .sortedWith(comparator = functionSignatureComparator())
+            .groupBy { it.dri.parent }
+            .toSortedMap(compareBy { it.classNames })
         val inheritedFunctionsSummary = inheritedSymbolMap.entries.associate { (dri, functions) ->
             pathProvider.linkForReference(dri) to functionsToSummary(name = null, functions)
         }
