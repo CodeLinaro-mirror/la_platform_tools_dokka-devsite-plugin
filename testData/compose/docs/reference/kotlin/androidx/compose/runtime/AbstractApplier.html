@@ -1,0 +1,286 @@
+<html devsite="true">
+  <head>
+    <title>AbstractApplier</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>AbstractApplier</h1>
+{% setvar page_path %}androidx/compose/runtime/AbstractApplier.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>abstract class AbstractApplier&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; : <a href="/reference/kotlin/androidx/compose/runtime/Applier.html">Applier</a></pre>
+    </p>
+    <hr>
+    <p>An abstract <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html">Applier</a></code> implementation.</p>
+    <pre class="prettyprint">
+import androidx.compose.runtime.Composition
+import androidx.compose.runtime.ComposeNode
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+// Provided we have a tree with a node base type like the following
+abstract class Node {
+    val children = mutableListOf&lt;Node&gt;()
+}
+
+// We would implement an Applier class like the following, which would teach compose how to
+// manage a tree of Nodes.
+class NodeApplier(root: Node) : AbstractApplier&lt;Node&gt;(root) {
+    override fun insertTopDown(index: Int, instance: Node) {
+        current.children.add(index, instance)
+    }
+
+    override fun insertBottomUp(index: Int, instance: Node) {
+        // Ignored as the tree is built top-down.
+    }
+
+    override fun remove(index: Int, count: Int) {
+        current.children.remove(index, count)
+    }
+
+    override fun move(from: Int, to: Int, count: Int) {
+        current.children.move(from, to, count)
+    }
+
+    override fun onClear() {
+        root.children.clear()
+    }
+}
+
+// A function like the following could be created to create a composition provided a root Node.
+fun Node.setContent(
+    parent: CompositionContext,
+    content: @Composable () -&gt; Unit
+): Composition {
+    return Composition(NodeApplier(this), parent).apply {
+        setContent(content)
+    }
+}
+
+// assuming we have Node sub-classes like &quot;TextNode&quot; and &quot;GroupNode&quot;
+class TextNode : Node() {
+    var text: String = &quot;&quot;
+    var onClick: () -&gt; Unit = {}
+}
+class GroupNode : Node()
+
+// Composable equivalents could be created
+@Composable fun Text(text: String, onClick: () -&gt; Unit = {}) {
+    ComposeNode&lt;TextNode, NodeApplier&gt;(::TextNode) {
+        set(text) { this.text = it }
+        set(onClick) { this.onClick = it }
+    }
+}
+
+@Composable fun Group(content: @Composable () -&gt; Unit) {
+    ComposeNode&lt;GroupNode, NodeApplier&gt;(::GroupNode, {}, content)
+}
+
+// and then a sample tree could be composed:
+fun runApp(root: GroupNode, parent: CompositionContext) {
+    root.setContent(parent) {
+        var count by remember { mutableStateOf(0) }
+        Group {
+            Text(&quot;Count: $count&quot;)
+            Text(&quot;Increment&quot;) { count++ }
+        }
+    }
+}</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">See also</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html">Applier</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html">Composition</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html">Composer</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">ComposeNode</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#AbstractApplier(kotlin.Any)">AbstractApplier</a>(root:&nbsp;T)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>final <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#clear()">clear</a>()</code></div>
+              <p>Move to the root and remove all nodes from the root, preparing both this <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html">Applier</a></code> and its root to be used as the target of a new composition in the future.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">down</a>(node:&nbsp;T)</code></div>
+              <p>Indicates that the applier is getting traversed &quot;down&quot; the tree.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#up()">up</a>()</code></div>
+              <p>Indicates that the applier is getting traversed &quot;up&quot; the tree.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>open T</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code></div>
+              <p>The node that operations will be applied on at any given time.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>T</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#root()">root</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="/reference/kotlin/androidx/compose/runtime/Applier.html">Applier</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody>
+                    <tr>
+                      <td width="40%"><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;instance:&nbsp;T)</code></div>
+                        <p>Indicates that <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">instance</a></code> should be inserted as a child of <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#current()">current</a></code> at <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">index</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;instance:&nbsp;T)</code></div>
+                        <p>Indicates that <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">instance</a></code> should be inserted as a child to <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#current()">current</a></code> at <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">index</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">move</a>(from:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;to:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;count:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                        <p>Indicates that <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">count</a></code> children of <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#current()">current</a></code> should be moved from index <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">from</a></code> to index <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">to</a></code>.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#onBeginChanges()">onBeginChanges</a>()</code></div>
+                        <p>Called when the <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html">Composer</a></code> is about to begin applying changes using this applier.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#onEndChanges()">onEndChanges</a>()</code></div>
+                        <p>Called when the <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html">Composer</a></code> is finished applying changes using this applier.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#remove(kotlin.Int,kotlin.Int)">remove</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;count:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                        <p>Indicates that the children of <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#current()">current</a></code> from <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#remove(kotlin.Int,kotlin.Int)">index</a></code> to <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#remove(kotlin.Int,kotlin.Int)">index</a></code> + <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html#remove(kotlin.Int,kotlin.Int)">count</a></code> should be removed.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="AbstractApplier-kotlin.Any-"></a><a name="abstractapplier"></a>
+      <h3 class="api-name" id="AbstractApplier(kotlin.Any)">AbstractApplier</h3>
+      <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#AbstractApplier(kotlin.Any)">AbstractApplier</a>(root:&nbsp;T)</pre>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="clear--"></a><a name="clear"></a>
+      <h3 class="api-name" id="clear()">clear</h3>
+      <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#clear()">clear</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Move to the root and remove all nodes from the root, preparing both this <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html">Applier</a></code> and its root to be used as the target of a new composition in the future.</p>
+    </div>
+    <div><a name="down-kotlin.Any-"></a><a name="down"></a>
+      <h3 class="api-name" id="down(kotlin.Any)">down</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">down</a>(node:&nbsp;T):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Indicates that the applier is getting traversed &quot;down&quot; the tree. When this gets called, <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">node</a></code> is expected to be a child of <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code>, and after this operation, <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">node</a></code> is expected to be the new <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code>.</p>
+    </div>
+    <div><a name="up--"></a><a name="up"></a>
+      <h3 class="api-name" id="up()">up</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#up()">up</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Indicates that the applier is getting traversed &quot;up&quot; the tree. After this operation completes, the <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code> should return the &quot;parent&quot; of the <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code> node at the beginning of this operation.</p>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getCurrent()"></a><a name="setCurrent()"></a><a name="getCurrent--"></a><a name="setCurrent--"></a>
+      <h3 class="api-name" id="current()">current</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a>:&nbsp;T</pre>
+      <p>The node that operations will be applied on at any given time. It is expected that the value of this property will change as <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">down</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#up()">up</a></code> are called.</p>
+    </div>
+    <div><a name="getRoot()"></a><a name="setRoot()"></a><a name="getRoot--"></a><a name="setRoot--"></a>
+      <h3 class="api-name" id="root()">root</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#root()">root</a>:&nbsp;T</pre>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,137 @@
+<html devsite="true">
+  <head>
+    <title>InfiniteAnimationPolicy</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>InfiniteAnimationPolicy</h1>
+{% setvar page_path %}androidx/compose/animation/core/InfiniteAnimationPolicy.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>interface InfiniteAnimationPolicy</pre>
+    </p>
+    <hr>
+    <p>Provides a policy that will be applied to animations that get their frame time from <code><a href="/reference/androidx/compose/animation/core/package-summary.html#withInfiniteAnimationFrameNanos(kotlin.Function1)">withInfiniteAnimationFrameNanos</a></code> or <code><a href="/reference/androidx/compose/animation/core/package-summary.html#withInfiniteAnimationFrameMillis(kotlin.Function1)">withInfiniteAnimationFrameMillis</a></code>. This can be used to intervene in infinite animations to make them finite, for example by cancelling such coroutines.</p>
+    <p>By default no policy is installed, except in instrumented tests that use <a href="[androidx.compose.ui.test.junit4.ComposeTestRule]">androidx.compose.ui.test.junit4.ComposeTestRule</a>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/animation/core/InfiniteAnimationPolicy.Key.html">InfiniteAnimationPolicy.Key</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key/index.html">CoroutineContext.Key</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/InfiniteAnimationPolicy.html#key()">key</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
+            <td>
+              <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/InfiniteAnimationPolicy.html#onInfiniteOperation(kotlin.coroutines.SuspendFunction0)">onInfiniteOperation</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function0/index.html">SuspendFunction0</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;block)</code></div>
+              <p>Call this to apply the policy on the given suspending <code><a href="/reference/androidx/compose/animation/core/InfiniteAnimationPolicy.html#onInfiniteOperation(kotlin.coroutines.SuspendFunction0)">block</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">CoroutineContext.Element</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody>
+                    <tr>
+                      <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R</code></td>
+                      <td>
+                        <div><code>&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/fold.html">fold</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&nbsp;initial,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">CoroutineContext.Element</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;operation<br>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> E</code></td>
+                      <td>
+                        <div><code>&lt;E&nbsp;extends&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">CoroutineContext.Element</a>&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/get.html">get</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key/index.html">CoroutineContext.Key</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> E&gt;&nbsp;key<br>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/minus-key.html">minusKey</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key/index.html">CoroutineContext.Key</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;key)</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody>
+                    <tr>
+                      <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/plus.html">plus</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>&nbsp;context)</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public fields</h2>
+    <div><a name="getKey()"></a><a name="setKey()"></a><a name="getKey--"></a><a name="setKey--"></a>
+      <h3 class="api-name" id="key()">key</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key/index.html">CoroutineContext.Key</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;<a href="/reference/androidx/compose/animation/core/InfiniteAnimationPolicy.html#key()">key</a></pre>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="onInfiniteOperation-kotlin.coroutines.SuspendFunction0-"></a><a name="oninfiniteoperation"></a>
+      <h3 class="api-name" id="onInfiniteOperation(kotlin.coroutines.SuspendFunction0)">onInfiniteOperation</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;R&nbsp;&lt;R&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/InfiniteAnimationPolicy.html#onInfiniteOperation(kotlin.coroutines.SuspendFunction0)">onInfiniteOperation</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function0/index.html">SuspendFunction0</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> R&gt;&nbsp;block)</pre>
+      <p>Call this to apply the policy on the given suspending <code><a href="/reference/androidx/compose/animation/core/InfiniteAnimationPolicy.html#onInfiniteOperation(kotlin.coroutines.SuspendFunction0)">block</a></code>. Execution of the block is determined by the policy implementation. For example, a test policy could decide not to run the block, or trace its execution.</p>
+      <p>The block is intended to be part of and will therefore be treated as an infinite animation, one that after returning from <code><a href="/reference/androidx/compose/animation/core/InfiniteAnimationPolicy.html#onInfiniteOperation(kotlin.coroutines.SuspendFunction0)">onInfiniteOperation</a></code> will call it again. If the block is not part of an infinite animation, the policy will still be applied.</p>
+    </div>
+  </body>
+</html>

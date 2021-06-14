@@ -1,0 +1,337 @@
+<html devsite="true">
+  <head>
+    <title>AnimationState</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>AnimationState</h1>
+{% setvar page_path %}androidx/compose/animation/core/AnimationState.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>class AnimationState&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; : <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> contains the necessary information to indicate the state of an animation. Once an <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> is constructed, it can only be updated/mutated by animations. If there's a need to mutate some of the fields of an <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code>, consider using <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).copy(kotlin.Any,androidx.compose.animation.core.AnimationVector,kotlin.Long,kotlin.Long,kotlin.Boolean)">copy</a></code> functions.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#AnimationState(androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector,kotlin.Long,kotlin.Long,kotlin.Boolean)">AnimationState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocityVector:&nbsp;V?,<br>&nbsp;&nbsp;&nbsp;&nbsp;lastFrameTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;finishedTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;isRunning:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#finishedTimeNanos()">finishedTimeNanos</a></code></div>
+              <p>The time when the animation finished successfully in the <code><a href="https://developer.android.com/reference/java/lang/System.html#nanoTime()">System.nanoTime</a></code> timebase.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#isRunning()">isRunning</a></code></div>
+              <p>Indicates whether the animation is currently running.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#lastFrameTimeNanos()">lastFrameTimeNanos</a></code></div>
+              <p>Last frame time of the animation.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#typeConverter()">typeConverter</a></code></div>
+              <p><code><a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code> to convert type <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">T</a></code> from and to <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code></p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>open T</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#value()">value</a></code></div>
+              <p>Current value of the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>T</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#velocity()">velocity</a></code></div>
+              <p>Velocity of type <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">T</a></code>, converted from <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#velocityVector()">velocityVector</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>V</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#velocityVector()">velocityVector</a></code></div>
+              <p>Current velocity vector of the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a>&lt;T,&nbsp;V&gt;</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a>&lt;T,&nbsp;V&gt;.<a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).copy(kotlin.Any,androidx.compose.animation.core.AnimationVector,kotlin.Long,kotlin.Long,kotlin.Boolean)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;velocityVector:&nbsp;V?,<br>&nbsp;&nbsp;&nbsp;&nbsp;lastFrameTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;finishedTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;isRunning:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+              <p>Creates a new <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> from a given <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector1D.html">AnimationVector1D</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector1D.html">AnimationVector1D</a>&gt;.<a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).copy(kotlin.Float,kotlin.Float,kotlin.Long,kotlin.Long,kotlin.Boolean)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;velocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;lastFrameTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;finishedTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;isRunning:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><br>)</code></div>
+              <p>Creates a new <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> of Float <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).copy(kotlin.Float,kotlin.Float,kotlin.Long,kotlin.Long,kotlin.Boolean)">value</a></code> type from a given <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> of the same type.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="AnimationState(androidx.compose.animation.core.TwoWayConverter, kotlin.Any, androidx.compose.animation.core.AnimationVector, kotlin.Long, kotlin.Long, kotlin.Boolean)"></a><a name="AnimationState-androidx.compose.animation.core.TwoWayConverter-kotlin.Any-androidx.compose.animation.core.AnimationVector-kotlin.Long-kotlin.Long-kotlin.Boolean-"></a><a name="animationstate"></a>
+      <h3 class="api-name" id="AnimationState(androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector,kotlin.Long,kotlin.Long,kotlin.Boolean)">AnimationState</h3>
+      <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#AnimationState(androidx.compose.animation.core.TwoWayConverter,kotlin.Any,androidx.compose.animation.core.AnimationVector,kotlin.Long,kotlin.Long,kotlin.Boolean)">AnimationState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocityVector:&nbsp;V? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;lastFrameTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = AnimationConstants.UnspecifiedTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;finishedTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = AnimationConstants.UnspecifiedTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;isRunning:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<br>)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;</code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code> to convert type <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">T</a></code> from and to <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code></p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>initialValue:&nbsp;T</code></td>
+              <td>
+                <p>initial value of the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code></p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>initialVelocityVector:&nbsp;V? = null</code></td>
+              <td>
+                <p>initial velocity of the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code>, null (i.e. no velocity)     by default.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>lastFrameTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = AnimationConstants.UnspecifiedTime</code></td>
+              <td>
+                <p>last frame time of the animation, <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationConstants.html#UnspecifiedTime()">AnimationConstants.UnspecifiedTime</a></code>     by default</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>finishedTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = AnimationConstants.UnspecifiedTime</code></td>
+              <td>
+                <p>the time that the animation finished successfully,     <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationConstants.html#UnspecifiedTime()">AnimationConstants.UnspecifiedTime</a></code> until then</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>isRunning:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false</code></td>
+              <td>
+                <p>whether the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> is currently being updated by an animation.     False by default</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getFinishedTimeNanos()"></a><a name="setFinishedTimeNanos()"></a><a name="getFinishedTimeNanos--"></a><a name="setFinishedTimeNanos--"></a>
+      <h3 class="api-name" id="finishedTimeNanos()">finishedTimeNanos</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#finishedTimeNanos()">finishedTimeNanos</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
+      <p>The time when the animation finished successfully in the <code><a href="https://developer.android.com/reference/java/lang/System.html#nanoTime()">System.nanoTime</a></code> timebase.</p>
+      <p>If the animation has never finished (i.e. currently running, interrupted, or never started), this will be <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationConstants.html#UnspecifiedTime()">AnimationConstants.UnspecifiedTime</a></code>, unless specified otherwise in <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> constructor.</p>
+    </div>
+    <div><a name="getIsRunning()"></a><a name="setIsRunning()"></a><a name="getIsRunning--"></a><a name="setIsRunning--"></a>
+      <h3 class="api-name" id="isRunning()">isRunning</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#isRunning()">isRunning</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <p>Indicates whether the animation is currently running.</p>
+    </div>
+    <div><a name="getLastFrameTimeNanos()"></a><a name="setLastFrameTimeNanos()"></a><a name="getLastFrameTimeNanos--"></a><a name="setLastFrameTimeNanos--"></a>
+      <h3 class="api-name" id="lastFrameTimeNanos()">lastFrameTimeNanos</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#lastFrameTimeNanos()">lastFrameTimeNanos</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
+      <p>Last frame time of the animation.</p>
+      <p>If the animation has never started, this will be <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationConstants.html#UnspecifiedTime()">AnimationConstants.UnspecifiedTime</a></code>, unless specified otherwise in the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> constructor. <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#lastFrameTimeNanos()">lastFrameTimeNanos</a></code> is the frame time when the animation is last updated, in the <code><a href="https://developer.android.com/reference/java/lang/System.html#nanoTime()">System.nanoTime</a></code> timebase. It is also used for starting a sequential animation in <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">AnimationState.animateTo</a></code>. This allows the sequential animation to set its start time to when the previous animation is interrupted or finished.</p>
+    </div>
+    <div><a name="getTypeConverter()"></a><a name="setTypeConverter()"></a><a name="getTypeConverter--"></a><a name="setTypeConverter--"></a>
+      <h3 class="api-name" id="typeConverter()">typeConverter</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#typeConverter()">typeConverter</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;</pre>
+      <p><code><a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code> to convert type <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">T</a></code> from and to <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code></p>
+    </div>
+    <div><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
+      <h3 class="api-name" id="value()">value</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#value()">value</a>:&nbsp;T</pre>
+      <p>Current value of the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code>.</p>
+    </div>
+    <div><a name="getVelocity()"></a><a name="setVelocity()"></a><a name="getVelocity--"></a><a name="setVelocity--"></a>
+      <h3 class="api-name" id="velocity()">velocity</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#velocity()">velocity</a>:&nbsp;T</pre>
+      <p>Velocity of type <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">T</a></code>, converted from <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#velocityVector()">velocityVector</a></code>.</p>
+    </div>
+    <div><a name="getVelocityVector()"></a><a name="setVelocityVector()"></a><a name="getVelocityVector--"></a><a name="setVelocityVector--"></a>
+      <h3 class="api-name" id="velocityVector()">velocityVector</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html#velocityVector()">velocityVector</a>:&nbsp;V</pre>
+      <p>Current velocity vector of the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code>.</p>
+    </div>
+    <h2>Extension functions</h2>
+    <div><a name="(androidx.compose.animation.core.AnimationState).copy(kotlin.Any, androidx.compose.animation.core.AnimationVector, kotlin.Long, kotlin.Long, kotlin.Boolean)"></a><a name="-androidx.compose.animation.core.AnimationState-.copy-kotlin.Any-androidx.compose.animation.core.AnimationVector-kotlin.Long-kotlin.Long-kotlin.Boolean-"></a><a name="copy"></a>
+      <h3 class="api-name" id="(androidx.compose.animation.core.AnimationState).copy(kotlin.Any,androidx.compose.animation.core.AnimationVector,kotlin.Long,kotlin.Long,kotlin.Boolean)">copy</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a>&lt;T,&nbsp;V&gt;.<a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).copy(kotlin.Any,androidx.compose.animation.core.AnimationVector,kotlin.Long,kotlin.Long,kotlin.Boolean)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;T = this.value,<br>&nbsp;&nbsp;&nbsp;&nbsp;velocityVector:&nbsp;V? = this.velocityVector.copy(),<br>&nbsp;&nbsp;&nbsp;&nbsp;lastFrameTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = this.lastFrameTimeNanos,<br>&nbsp;&nbsp;&nbsp;&nbsp;finishedTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = this.finishedTimeNanos,<br>&nbsp;&nbsp;&nbsp;&nbsp;isRunning:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = this.isRunning<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a>&lt;T,&nbsp;V&gt;</pre>
+      <p>Creates a new <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> from a given <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code>. This function allows some of the fields to be different in the new <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>value:&nbsp;T = this.value</code></td>
+              <td>
+                <p>value of the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code>, using the value of the given <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> by     default</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>velocityVector:&nbsp;V? = this.velocityVector.copy()</code></td>
+              <td>
+                <p>velocity of the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code>, using the velocity of the given     <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> by default.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>lastFrameTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = this.lastFrameTimeNanos</code></td>
+              <td>
+                <p>last frame time of the animation, same as the given <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> by     default</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>finishedTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = this.finishedTimeNanos</code></td>
+              <td>
+                <p>the time that the animation finished successfully,     <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationConstants.html#UnspecifiedTime()">AnimationConstants.UnspecifiedTime</a></code> until then. Default value is the     same as the given <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>isRunning:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = this.isRunning</code></td>
+              <td>
+                <p>whether the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> is currently being updated by an animation.     Same as the given <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> by default</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a>&lt;T,&nbsp;V&gt;</code></td>
+              <td>
+                <p>A new <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> instance copied from the given instance, with some fields     optionally altered</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="(androidx.compose.animation.core.AnimationState).copy(kotlin.Float, kotlin.Float, kotlin.Long, kotlin.Long, kotlin.Boolean)"></a><a name="-androidx.compose.animation.core.AnimationState-.copy-kotlin.Float-kotlin.Float-kotlin.Long-kotlin.Long-kotlin.Boolean-"></a><a name="copy"></a>
+      <h3 class="api-name" id="(androidx.compose.animation.core.AnimationState).copy(kotlin.Float,kotlin.Float,kotlin.Long,kotlin.Long,kotlin.Boolean)">copy</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector1D.html">AnimationVector1D</a>&gt;.<a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).copy(kotlin.Float,kotlin.Float,kotlin.Long,kotlin.Long,kotlin.Boolean)">copy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = this.value,<br>&nbsp;&nbsp;&nbsp;&nbsp;velocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = this.velocityVector.value,<br>&nbsp;&nbsp;&nbsp;&nbsp;lastFrameTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = this.lastFrameTimeNanos,<br>&nbsp;&nbsp;&nbsp;&nbsp;finishedTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = this.finishedTimeNanos,<br>&nbsp;&nbsp;&nbsp;&nbsp;isRunning:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = this.isRunning<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector1D.html">AnimationVector1D</a>&gt;</pre>
+      <p>Creates a new <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> of Float <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).copy(kotlin.Float,kotlin.Float,kotlin.Long,kotlin.Long,kotlin.Boolean)">value</a></code> type from a given <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> of the same type. This function allows some of the fields to be different in the new <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = this.value</code></td>
+              <td>
+                <p>value of the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code>, using the value of the given <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> by     default</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>velocity:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a> = this.velocityVector.value</code></td>
+              <td>
+                <p>velocity of the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code>, using the velocity of the given     <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> by default.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>lastFrameTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = this.lastFrameTimeNanos</code></td>
+              <td>
+                <p>last frame time of the animation, same as the given <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> by     default</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>finishedTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a> = this.finishedTimeNanos</code></td>
+              <td>
+                <p>the time that the animation finished successfully, same as the given     <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> by default.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>isRunning:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = this.isRunning</code></td>
+              <td>
+                <p>whether the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> is currently being updated by an animation.     Same as the given <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> by default</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector1D.html">AnimationVector1D</a>&gt;</code></td>
+              <td>
+                <p>A new <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code> instance copied from the given instance, with some fields     optionally altered</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

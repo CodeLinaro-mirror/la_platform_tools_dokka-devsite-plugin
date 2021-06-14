@@ -1,0 +1,185 @@
+<html devsite="true">
+  <head>
+    <title>androidx.compose.runtime.snapshots</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>androidx.compose.runtime.snapshots</h1>
+{% setvar page_path %}androidx/compose/runtime/snapshots/package-summary.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <h2>Interfaces</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/ObserverHandle.html">ObserverHandle</a></code></td>
+            <td>
+              <p>The type returned by observer registration methods that unregisters the observer when it is disposed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html">SnapshotMutableState</a></code></td>
+            <td>
+              <p>A mutable value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html#value()">value</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function, the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> will be subscribed to changes of that value.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a></code></td>
+            <td>
+              <p>Interface implemented by all snapshot aware state objects.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Classes</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a></code></td>
+            <td>
+              <p>A snapshot of the values return by mutable states and other state objects.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code></td>
+            <td>
+              <p>A snapshot of the values return by mutable states and other state objects.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotApplyResult.html">SnapshotApplyResult</a></code></td>
+            <td>
+              <p>The result of a applying a mutable snapshot.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotApplyResult.Failure.html">SnapshotApplyResult.Failure</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateList.html">SnapshotStateList</a></code></td>
+            <td>
+              <p>An implementation of <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a></code> that can be observed and snapshot.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateMap.html">SnapshotStateMap</a></code></td>
+            <td>
+              <p>An implementation of <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a></code> that can be observed and snapshot.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateObserver.html">SnapshotStateObserver</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a></code></td>
+            <td>
+              <p>Snapshot local value of a state object.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Exceptions</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotApplyConflictException.html">SnapshotApplyConflictException</a></code></td>
+            <td>
+              <p>An exception that is thrown when <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotApplyResult.html#check()">SnapshotApplyResult.check</a></code> is called on a result of a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">MutableSnapshot.apply</a></code> that fails to apply.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Extension functions summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <tbody>
+          <tr>
+            <td width="40%"><code>T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&gt; T.<a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).readable(androidx.compose.runtime.snapshots.StateObject)">readable</a>(state:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a>)</code></div>
+              <p>Return the current readable state record for the current snapshot.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&gt; T.<a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).readable(androidx.compose.runtime.snapshots.StateObject,androidx.compose.runtime.snapshots.Snapshot)">readable</a>(state:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a>,&nbsp;snapshot:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>)</code></div>
+              <p>Return the current readable state record for the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).readable(androidx.compose.runtime.snapshots.StateObject,androidx.compose.runtime.snapshots.Snapshot)">snapshot</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>inline R</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>,&nbsp;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; T.<a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).withCurrent(kotlin.Function1)">withCurrent</a>(block:&nbsp;(r) <span style="white-space: nowrap;">-&gt;</span> R)</code></div>
+              <p>Provides a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).withCurrent(kotlin.Function1)">block</a></code> with the current record, without notifying any read observers.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>inline R</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>,&nbsp;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; T.<a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).writable(androidx.compose.runtime.snapshots.StateObject,androidx.compose.runtime.snapshots.Snapshot,kotlin.Function1)">writable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;snapshot:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;T.() <span style="white-space: nowrap;">-&gt;</span> R<br>)</code></div>
+              <p>Call <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).writable(androidx.compose.runtime.snapshots.StateObject,androidx.compose.runtime.snapshots.Snapshot,kotlin.Function1)">block</a></code> with a writable state record for <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).writable(androidx.compose.runtime.snapshots.StateObject,androidx.compose.runtime.snapshots.Snapshot,kotlin.Function1)">snapshot</a></code> of the given record.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>inline R</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>,&nbsp;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; T.<a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).writable(androidx.compose.runtime.snapshots.StateObject,kotlin.Function1)">writable</a>(state:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a>,&nbsp;block:&nbsp;T.() <span style="white-space: nowrap;">-&gt;</span> R)</code></div>
+              <p>Call <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).writable(androidx.compose.runtime.snapshots.StateObject,kotlin.Function1)">block</a></code> with a writable state record for the given record.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Extension functions</h2>
+    <div><a name="-androidx.compose.runtime.snapshots.StateRecord-.readable-androidx.compose.runtime.snapshots.StateObject-"></a><a name="readable"></a>
+      <h3 class="api-name" id="(androidx.compose.runtime.snapshots.StateRecord).readable(androidx.compose.runtime.snapshots.StateObject)">readable</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&gt; T.<a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).readable(androidx.compose.runtime.snapshots.StateObject)">readable</a>(state:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a>):&nbsp;T</pre>
+      <p>Return the current readable state record for the current snapshot. It is assumed that <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#&lt;this&gt;()">this</a></code> is the first record of <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).readable(androidx.compose.runtime.snapshots.StateObject)">state</a></code></p>
+    </div>
+    <div><a name="(androidx.compose.runtime.snapshots.StateRecord).readable(androidx.compose.runtime.snapshots.StateObject, androidx.compose.runtime.snapshots.Snapshot)"></a><a name="-androidx.compose.runtime.snapshots.StateRecord-.readable-androidx.compose.runtime.snapshots.StateObject-androidx.compose.runtime.snapshots.Snapshot-"></a><a name="readable"></a>
+      <h3 class="api-name" id="(androidx.compose.runtime.snapshots.StateRecord).readable(androidx.compose.runtime.snapshots.StateObject,androidx.compose.runtime.snapshots.Snapshot)">readable</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&gt; T.<a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).readable(androidx.compose.runtime.snapshots.StateObject,androidx.compose.runtime.snapshots.Snapshot)">readable</a>(state:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a>,&nbsp;snapshot:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>):&nbsp;T</pre>
+      <p>Return the current readable state record for the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).readable(androidx.compose.runtime.snapshots.StateObject,androidx.compose.runtime.snapshots.Snapshot)">snapshot</a></code>. It is assumed that <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#&lt;this&gt;()">this</a></code> is the first record of <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).readable(androidx.compose.runtime.snapshots.StateObject,androidx.compose.runtime.snapshots.Snapshot)">state</a></code></p>
+    </div>
+    <div><a name="-androidx.compose.runtime.snapshots.StateRecord-.withCurrent-kotlin.Function1-"></a><a name="withcurrent"></a>
+      <h3 class="api-name" id="(androidx.compose.runtime.snapshots.StateRecord).withCurrent(kotlin.Function1)">withCurrent</h3>
+      <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>,&nbsp;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; T.<a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).withCurrent(kotlin.Function1)">withCurrent</a>(block:&nbsp;(r) <span style="white-space: nowrap;">-&gt;</span> R):&nbsp;R</pre>
+      <p>Provides a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).withCurrent(kotlin.Function1)">block</a></code> with the current record, without notifying any read observers.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#readable(androidx.compose.runtime.snapshots.StateRecord,kotlin.Int,androidx.compose.runtime.snapshots.SnapshotIdSet)">readable</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="(androidx.compose.runtime.snapshots.StateRecord).writable(androidx.compose.runtime.snapshots.StateObject, androidx.compose.runtime.snapshots.Snapshot, kotlin.Function1)"></a><a name="-androidx.compose.runtime.snapshots.StateRecord-.writable-androidx.compose.runtime.snapshots.StateObject-androidx.compose.runtime.snapshots.Snapshot-kotlin.Function1-"></a><a name="writable"></a>
+      <h3 class="api-name" id="(androidx.compose.runtime.snapshots.StateRecord).writable(androidx.compose.runtime.snapshots.StateObject,androidx.compose.runtime.snapshots.Snapshot,kotlin.Function1)">writable</h3>
+      <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>,&nbsp;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; T.<a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).writable(androidx.compose.runtime.snapshots.StateObject,androidx.compose.runtime.snapshots.Snapshot,kotlin.Function1)">writable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;snapshot:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;T.() <span style="white-space: nowrap;">-&gt;</span> R<br>):&nbsp;R</pre>
+      <p>Call <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).writable(androidx.compose.runtime.snapshots.StateObject,androidx.compose.runtime.snapshots.Snapshot,kotlin.Function1)">block</a></code> with a writable state record for <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).writable(androidx.compose.runtime.snapshots.StateObject,androidx.compose.runtime.snapshots.Snapshot,kotlin.Function1)">snapshot</a></code> of the given record. It is assumed that this is called for the first state record in a state object. If the snapshot is read-only calling this will throw.</p>
+    </div>
+    <div><a name="(androidx.compose.runtime.snapshots.StateRecord).writable(androidx.compose.runtime.snapshots.StateObject, kotlin.Function1)"></a><a name="-androidx.compose.runtime.snapshots.StateRecord-.writable-androidx.compose.runtime.snapshots.StateObject-kotlin.Function1-"></a><a name="writable"></a>
+      <h3 class="api-name" id="(androidx.compose.runtime.snapshots.StateRecord).writable(androidx.compose.runtime.snapshots.StateObject,kotlin.Function1)">writable</h3>
+      <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>,&nbsp;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; T.<a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).writable(androidx.compose.runtime.snapshots.StateObject,kotlin.Function1)">writable</a>(state:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html">StateObject</a>,&nbsp;block:&nbsp;T.() <span style="white-space: nowrap;">-&gt;</span> R):&nbsp;R</pre>
+      <p>Call <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#(androidx.compose.runtime.snapshots.StateRecord).writable(androidx.compose.runtime.snapshots.StateObject,kotlin.Function1)">block</a></code> with a writable state record for the given record. It is assumed that this is called for the first state record in a state object. A record is writable if it was created in the current mutable snapshot.</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,231 @@
+<html devsite="true">
+  <head>
+    <title>Recomposer</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>Recomposer</h1>
+{% setvar page_path %}androidx/compose/runtime/Recomposer.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>class Recomposer : <a href="/reference/kotlin/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></pre>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="jd-inheritance-table">
+        <tbody>
+          <tr>
+            <td colspan="3"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a></td>
+          </tr>
+          <tr>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="2"><a href="/reference/kotlin/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="1"><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <p>The scheduler for performing recomposition and applying updates to one or more <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html">Composition</a></code>s.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.Companion.html">Recomposer.Companion</a></code></td>
+            <td>
+              <p>hack: the companion object is thread local in Kotlin/Native to avoid freezing <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.Companion.html#_runningRecomposers()">_runningRecomposers</a></code> with the current memory model.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.State.html">Recomposer.State</a></code></td>
+            <td>
+              <p>Valid operational states of a <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#Recomposer(kotlin.coroutines.CoroutineContext)">Recomposer</a>(effectCoroutineContext:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/RecomposerInfo.html">RecomposerInfo</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#asRecomposerInfo()">asRecomposerInfo</a>()</code></div>
+              <p>Obtain a read-only <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposerInfo.html">RecomposerInfo</a></code> for this <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#awaitIdle()">awaitIdle</a>()</code></div>
+              <p>Suspends until the currently pending recomposition frame is complete.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#cancel()">cancel</a>()</code></div>
+              <p>Permanently shut down this <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> for future use.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#close()">close</a>()</code></div>
+              <p>Close this <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#join()">join</a>()</code></div>
+              <p>Await the completion of a <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#cancel()">cancel</a></code> operation.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#runRecomposeAndApplyChanges()">runRecomposeAndApplyChanges</a>()</code></div>
+              <p>Await the invalidation of any associated <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html">Composer</a></code>s, recompose them, and apply their changes to their associated <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html">Composition</a></code>s if recomposition is successful.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>suspend @<a href="/reference/kotlin/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#runRecomposeConcurrentlyAndApplyChanges(kotlin.coroutines.CoroutineContext)">runRecomposeConcurrentlyAndApplyChanges</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;recomposeCoroutineContext:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a><br>)</code></div>
+              <p>Await the invalidation of any associated <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html">Composer</a></code>s, recompose them, and apply their changes to their associated <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html">Composition</a></code>s if recomposition is successful.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#changeCount()">changeCount</a></code></div>
+              <p>This is a running count of the number of times the recomposer awoke and applied changes to one or more composers.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#hasPendingWork()">hasPendingWork</a></code></div>
+              <p><code>true</code> if this <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> has any pending work scheduled, regardless of whether or not it is currently <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#runRecomposeAndApplyChanges()">running</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/compose/runtime/Recomposer.State.html">Recomposer.State</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#state()">state</a></code></div>
+              <p>The current <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.State.html">State</a></code> of this <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="Recomposer-kotlin.coroutines.CoroutineContext-"></a><a name="recomposer"></a>
+      <h3 class="api-name" id="Recomposer(kotlin.coroutines.CoroutineContext)">Recomposer</h3>
+      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#Recomposer(kotlin.coroutines.CoroutineContext)">Recomposer</a>(effectCoroutineContext:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>)</pre>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="asRecomposerInfo--"></a><a name="asrecomposerinfo"></a>
+      <h3 class="api-name" id="asRecomposerInfo()">asRecomposerInfo</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#asRecomposerInfo()">asRecomposerInfo</a>():&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/RecomposerInfo.html">RecomposerInfo</a></pre>
+      <p>Obtain a read-only <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposerInfo.html">RecomposerInfo</a></code> for this <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>.</p>
+    </div>
+    <div><a name="awaitIdle--"></a><a name="awaitidle"></a>
+      <h3 class="api-name" id="awaitIdle()">awaitIdle</h3>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#awaitIdle()">awaitIdle</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Suspends until the currently pending recomposition frame is complete. Any recomposition for this recomposer triggered by actions before this call begins will be complete and applied (if recomposition was successful) when this call returns.</p>
+      <p>If <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#runRecomposeAndApplyChanges()">runRecomposeAndApplyChanges</a></code> is not currently running the <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> is considered idle and this method will not suspend.</p>
+    </div>
+    <div><a name="cancel--"></a><a name="cancel"></a>
+      <h3 class="api-name" id="cancel()">cancel</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#cancel()">cancel</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Permanently shut down this <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> for future use. All ongoing recompositions will stop, new composer invalidations with this <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> at the root will no longer occur, and any <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#LaunchedEffect(kotlin.coroutines.SuspendFunction1)">LaunchedEffect</a></code>s currently running in compositions managed by this <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> will be cancelled. Any <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#rememberCoroutineScope(kotlin.Function0)">rememberCoroutineScope</a></code> scopes from compositions managed by this <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> will also be cancelled. See <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#join()">join</a></code> to await the completion of all of these outstanding tasks.</p>
+    </div>
+    <div><a name="close--"></a><a name="close"></a>
+      <h3 class="api-name" id="close()">close</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#close()">close</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Close this <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>. Once all effects launched by managed compositions complete, any active call to <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#runRecomposeAndApplyChanges()">runRecomposeAndApplyChanges</a></code> will return normally and this <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> will be <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.State.html#ShutDown">State.ShutDown</a></code>. See <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#join()">join</a></code> to await the completion of all of these outstanding tasks.</p>
+    </div>
+    <div><a name="join--"></a><a name="join"></a>
+      <h3 class="api-name" id="join()">join</h3>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#join()">join</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Await the completion of a <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#cancel()">cancel</a></code> operation.</p>
+    </div>
+    <div><a name="runRecomposeAndApplyChanges--"></a><a name="runrecomposeandapplychanges"></a>
+      <h3 class="api-name" id="runRecomposeAndApplyChanges()">runRecomposeAndApplyChanges</h3>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#runRecomposeAndApplyChanges()">runRecomposeAndApplyChanges</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Await the invalidation of any associated <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html">Composer</a></code>s, recompose them, and apply their changes to their associated <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html">Composition</a></code>s if recomposition is successful.</p>
+      <p>While <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#runRecomposeAndApplyChanges()">runRecomposeAndApplyChanges</a></code> is running, <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#awaitIdle()">awaitIdle</a></code> will suspend until there are no more invalid composers awaiting recomposition.</p>
+      <p>This method will not return unless the <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> is <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#close()">close</a></code>d and all effects in managed compositions complete. Unhandled failure exceptions from child coroutines will be thrown by this method.</p>
+    </div>
+    <div><a name="runRecomposeConcurrentlyAndApplyChanges-kotlin.coroutines.CoroutineContext-"></a><a name="runrecomposeconcurrentlyandapplychanges"></a>
+      <h3 class="api-name" id="runRecomposeConcurrentlyAndApplyChanges(kotlin.coroutines.CoroutineContext)">runRecomposeConcurrentlyAndApplyChanges</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a><br>suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#runRecomposeConcurrentlyAndApplyChanges(kotlin.coroutines.CoroutineContext)">runRecomposeConcurrentlyAndApplyChanges</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;recomposeCoroutineContext:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a><br>):&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Await the invalidation of any associated <code><a href="/reference/kotlin/androidx/compose/runtime/Composer.html">Composer</a></code>s, recompose them, and apply their changes to their associated <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html">Composition</a></code>s if recomposition is successful.</p>
+      <p>While <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#runRecomposeConcurrentlyAndApplyChanges(kotlin.coroutines.CoroutineContext)">runRecomposeConcurrentlyAndApplyChanges</a></code> is running, <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#awaitIdle()">awaitIdle</a></code> will suspend until there are no more invalid composers awaiting recomposition.</p>
+      <p>Recomposition of invalidated composers will occur in <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#runRecomposeConcurrentlyAndApplyChanges(kotlin.coroutines.CoroutineContext)">recomposeCoroutineContext</a></code>. <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#runRecomposeConcurrentlyAndApplyChanges(kotlin.coroutines.CoroutineContext)">recomposeCoroutineContext</a></code> must not contain a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html">Job</a></code>.</p>
+      <p>This method will not return unless the <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> is <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#close()">close</a></code>d and all effects in managed compositions complete. Unhandled failure exceptions from child coroutines will be thrown by this method.</p>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getChangeCount()"></a><a name="setChangeCount()"></a><a name="getChangeCount--"></a><a name="setChangeCount--"></a>
+      <h3 class="api-name" id="changeCount()">changeCount</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#changeCount()">changeCount</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
+      <p>This is a running count of the number of times the recomposer awoke and applied changes to one or more composers. This count is unaffected if the composer awakes and recomposed but composition did not produce changes to apply.</p>
+    </div>
+    <div><a name="getHasPendingWork()"></a><a name="setHasPendingWork()"></a><a name="getHasPendingWork--"></a><a name="setHasPendingWork--"></a>
+      <h3 class="api-name" id="hasPendingWork()">hasPendingWork</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#hasPendingWork()">hasPendingWork</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <p><code>true</code> if this <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> has any pending work scheduled, regardless of whether or not it is currently <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#runRecomposeAndApplyChanges()">running</a></code>.</p>
+    </div>
+    <div><a name="getState()"></a><a name="setState()"></a><a name="getState--"></a><a name="setState--"></a>
+      <h3 class="api-name" id="state()">state</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#state()">state</a>:&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="/reference/kotlin/androidx/compose/runtime/Recomposer.State.html">Recomposer.State</a>&gt;</pre>
+      <p>The current <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.State.html">State</a></code> of this <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>. See each <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.State.html">State</a></code> value for its meaning.</p>
+    </div>
+  </body>
+</html>

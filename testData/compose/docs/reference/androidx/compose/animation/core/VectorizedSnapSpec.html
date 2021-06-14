@@ -1,0 +1,256 @@
+<html devsite="true">
+  <head>
+    <title>VectorizedSnapSpec</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>VectorizedSnapSpec</h1>
+{% setvar page_path %}androidx/compose/animation/core/VectorizedSnapSpec.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class VectorizedSnapSpec&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; implements <a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a>, <a href="/reference/androidx/compose/animation/core/VectorizedFiniteAnimationSpec.html">VectorizedFiniteAnimationSpec</a>, <a href="/reference/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html">VectorizedDurationBasedAnimationSpec</a></pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/androidx/compose/animation/core/VectorizedSnapSpec.html">VectorizedSnapSpec</a></code> immediately snaps the animating value to the end value.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/VectorizedSnapSpec.html#delayMillis()">delayMillis</a></code></div>
+              <p>the amount of time (in milliseconds) that the animation should wait before it     starts.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/VectorizedSnapSpec.html#durationMillis()">durationMillis</a></code></div>
+              <p>duration is the amount of time while animation is not yet finished.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/VectorizedSnapSpec.html#isInfinite()">isInfinite</a></code></div>
+              <p>Whether or not the <code><a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> specifies an infinite animation.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code>&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/VectorizedSnapSpec.html#VectorizedSnapSpec(kotlin.Int)">VectorizedSnapSpec</a>(int&nbsp;delayMillis)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/VectorizedSnapSpec.html#getValueFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getValueFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;playTimeNanos,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialVelocity<br>)</code></div>
+              <p>Calculates the value of the animation at given the playtime, with the provided start/end values, and start velocity.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/VectorizedSnapSpec.html#getVelocityFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getVelocityFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;playTimeNanos,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialVelocity<br>)</code></div>
+              <p>Calculates the velocity of the animation at given the playtime, with the provided start/end values, and start velocity.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="/reference/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html">VectorizedDurationBasedAnimationSpec</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody>
+                    <tr>
+                      <td width="40%"><code>long</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html#getDurationNanos(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getDurationNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialVelocity<br>)</code></div>
+                        <p>Calculates the duration of an animation.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody>
+                    <tr>
+                      <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html#getEndVelocity(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getEndVelocity</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialVelocity<br>)</code></div>
+                        <p>Calculates the end velocity of the animation with the provided start/end values, and start velocity.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public fields</h2>
+    <div><a name="getDelayMillis()"></a><a name="setDelayMillis()"></a><a name="getDelayMillis--"></a><a name="setDelayMillis--"></a>
+      <h3 class="api-name" id="delayMillis()">delayMillis</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;int&nbsp;<a href="/reference/androidx/compose/animation/core/VectorizedSnapSpec.html#delayMillis()">delayMillis</a></pre>
+      <p>the amount of time (in milliseconds) that the animation should wait before it     starts. Defaults to 0.</p>
+    </div>
+    <div><a name="getDurationMillis()"></a><a name="setDurationMillis()"></a><a name="getDurationMillis--"></a><a name="setDurationMillis--"></a>
+      <h3 class="api-name" id="durationMillis()">durationMillis</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;int&nbsp;<a href="/reference/androidx/compose/animation/core/VectorizedSnapSpec.html#durationMillis()">durationMillis</a></pre>
+      <p>duration is the amount of time while animation is not yet finished.</p>
+    </div>
+    <div><a name="getIsInfinite()"></a><a name="setIsInfinite()"></a><a name="getIsInfinite--"></a><a name="setIsInfinite--"></a>
+      <h3 class="api-name" id="isInfinite()">isInfinite</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/animation/core/VectorizedSnapSpec.html#isInfinite()">isInfinite</a></pre>
+      <p>Whether or not the <code><a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> specifies an infinite animation. That is, one that will not finish by itself, one that needs an external action to stop. For examples, an indeterminate progress bar, which will only stop when it is removed from the composition.</p>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="VectorizedSnapSpec-kotlin.Int-"></a><a name="vectorizedsnapspec"></a>
+      <h3 class="api-name" id="VectorizedSnapSpec(kotlin.Int)">VectorizedSnapSpec</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/VectorizedSnapSpec.html#VectorizedSnapSpec(kotlin.Int)">VectorizedSnapSpec</a>(int&nbsp;delayMillis)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>int&nbsp;delayMillis</code></td>
+              <td>
+                <p>the amount of time (in milliseconds) that the animation should wait before it     starts. Defaults to 0.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="getValueFromNanos(kotlin.Long, androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector)"></a><a name="getValueFromNanos-kotlin.Long-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-"></a><a name="getvaluefromnanos"></a>
+      <h3 class="api-name" id="getValueFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getValueFromNanos</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;V&nbsp;<a href="/reference/androidx/compose/animation/core/VectorizedSnapSpec.html#getValueFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getValueFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;playTimeNanos,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialVelocity<br>)</pre>
+      <p>Calculates the value of the animation at given the playtime, with the provided start/end values, and start velocity.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>long&nbsp;playTimeNanos</code></td>
+              <td>
+                <p>time since the start of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialValue</code></td>
+              <td>
+                <p>start value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;targetValue</code></td>
+              <td>
+                <p>end value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialVelocity</code></td>
+              <td>
+                <p>start velocity of the animation</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="getVelocityFromNanos(kotlin.Long, androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector)"></a><a name="getVelocityFromNanos-kotlin.Long-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-"></a><a name="getvelocityfromnanos"></a>
+      <h3 class="api-name" id="getVelocityFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getVelocityFromNanos</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;V&nbsp;<a href="/reference/androidx/compose/animation/core/VectorizedSnapSpec.html#getVelocityFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getVelocityFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;playTimeNanos,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialVelocity<br>)</pre>
+      <p>Calculates the velocity of the animation at given the playtime, with the provided start/end values, and start velocity.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>long&nbsp;playTimeNanos</code></td>
+              <td>
+                <p>time since the start of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialValue</code></td>
+              <td>
+                <p>start value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;targetValue</code></td>
+              <td>
+                <p>end value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;initialVelocity</code></td>
+              <td>
+                <p>start velocity of the animation</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

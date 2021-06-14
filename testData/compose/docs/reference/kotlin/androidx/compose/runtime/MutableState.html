@@ -1,0 +1,116 @@
+<html devsite="true">
+  <head>
+    <title>MutableState</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>MutableState</h1>
+{% setvar page_path %}androidx/compose/runtime/MutableState.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>interface MutableState&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; : <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html">ProduceStateScope</a>, <a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html">SnapshotMutableState</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <tbody>
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html">ProduceStateScope</a></code></td>
+                <td>
+                  <p>Receiver scope for use with <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html">SnapshotMutableState</a></code></td>
+                <td>
+                  <p>A mutable value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotMutableState.html#value()">value</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function, the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> will be subscribed to changes of that value.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>A mutable value holder where reads to the <code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#value()">value</a></code> property during the execution of a <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function, the current <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> will be subscribed to changes of that value. When the <code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#value()">value</a></code> property is written to and changed, a recomposition of any subscribed <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code>s will be scheduled. If <code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#value()">value</a></code> is written to with the same value, no recompositions will be scheduled.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">See also</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">mutableStateOf</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>operator T</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component1()">component1</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>operator (T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component2()">component2</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>T</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#value()">value</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="component1--"></a><a name="component1"></a>
+      <h3 class="api-name" id="component1()">component1</h3>
+      <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component1()">component1</a>():&nbsp;T</pre>
+    </div>
+    <div><a name="component2--"></a><a name="component2"></a>
+      <h3 class="api-name" id="component2()">component2</h3>
+      <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component2()">component2</a>():&nbsp;(T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
+      <h3 class="api-name" id="value()">value</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#value()">value</a>:&nbsp;T</pre>
+    </div>
+  </body>
+</html>

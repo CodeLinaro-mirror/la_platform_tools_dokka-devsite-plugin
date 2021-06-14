@@ -1,0 +1,90 @@
+<html devsite="true">
+  <head>
+    <title>ScrollableStateKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>ScrollableStateKt</h1>
+{% setvar page_path %}androidx/compose/foundation/gestures/ScrollableStateKt.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class ScrollableStateKt</pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/gestures/ScrollableStateKt.html#ScrollableState(kotlin.Function1)">ScrollableState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;consumeScrollDelta<br>)</code></div>
+              <p>Default implementation of <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> interface that contains necessary information about the ongoing fling and provides smooth scrolling capabilities.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>static&nbsp;final @<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/gestures/ScrollableStateKt.html#rememberScrollableState(kotlin.Function1)">rememberScrollableState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;consumeScrollDelta<br>)</code></div>
+              <p>Create and remember the default implementation of <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> interface that contains necessary information about the ongoing fling and provides smooth scrolling capabilities.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="ScrollableState-kotlin.Function1-"></a><a name="scrollablestate"></a>
+      <h3 class="api-name" id="ScrollableState(kotlin.Function1)">ScrollableState</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;static&nbsp;final&nbsp;<a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a>&nbsp;<a href="/reference/androidx/compose/foundation/gestures/ScrollableStateKt.html#ScrollableState(kotlin.Function1)">ScrollableState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;consumeScrollDelta<br>)</pre>
+      <p>Default implementation of <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> interface that contains necessary information about the ongoing fling and provides smooth scrolling capabilities.</p>
+      <p>This is the simplest way to set up a <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">scrollable</a></code> modifier. When constructing this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code>, you must provide a <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#ScrollableState(kotlin.Function1)">consumeScrollDelta</a></code> lambda, which will be invoked whenever scroll happens (by gesture input, by smooth scrolling, by flinging or nested scroll) with the delta in pixels. The amount of scrolling delta consumed must be returned from this lambda to ensure proper nested scrolling behaviour.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;consumeScrollDelta</code></td>
+              <td>
+                <p>callback invoked when drag/fling/smooth scrolling occurs. The callback receives the delta in pixels. Callers should update their state in this lambda and return the amount of delta consumed</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="rememberScrollableState-kotlin.Function1-"></a><a name="rememberscrollablestate"></a>
+      <h3 class="api-name" id="rememberScrollableState(kotlin.Function1)">rememberScrollableState</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a>&nbsp;<a href="/reference/androidx/compose/foundation/gestures/ScrollableStateKt.html#rememberScrollableState(kotlin.Function1)">rememberScrollableState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;consumeScrollDelta<br>)</pre>
+      <p>Create and remember the default implementation of <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> interface that contains necessary information about the ongoing fling and provides smooth scrolling capabilities.</p>
+      <p>This is the simplest way to set up a <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">scrollable</a></code> modifier. When constructing this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code>, you must provide a <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#rememberScrollableState(kotlin.Function1)">consumeScrollDelta</a></code> lambda, which will be invoked whenever scroll happens (by gesture input, by smooth scrolling, by flinging or nested scroll) with the delta in pixels. The amount of scrolling delta consumed must be returned from this lambda to ensure proper nested scrolling behaviour.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;consumeScrollDelta</code></td>
+              <td>
+                <p>callback invoked when drag/fling/smooth scrolling occurs. The callback receives the delta in pixels. Callers should update their state in this lambda and return the amount of delta consumed</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,218 @@
+<html devsite="true">
+  <head>
+    <title>Snapshot</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>Snapshot</h1>
+{% setvar page_path %}androidx/compose/runtime/snapshots/Snapshot.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>sealed class Snapshot</pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <tbody>
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a></code></td>
+                <td>
+                  <p>A snapshot of the values return by mutable states and other state objects.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>A snapshot of the values return by mutable states and other state objects. All state object will have the same value in the snapshot as they had when the snapshot was created unless they are explicitly changed in the snapshot.</p>
+    <p>To enter a snapshot call <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code>. The snapshot is the current snapshot as returned by <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#currentSnapshot()">currentSnapshot</a></code> until the control returns from the lambda (or until a nested <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code> is called). All state objects will return the values associated with this snapshot, locally in the thread, until <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code> returns. All other threads are unaffected.</p>
+    <p>Snapshots can be nested by calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#takeNestedSnapshot(kotlin.Function1)">takeNestedSnapshot</a></code>.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">See also</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#takeSnapshot(kotlin.Function1)">takeSnapshot</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#takeMutableSnapshot(kotlin.Function1,kotlin.Function1)">takeMutableSnapshot</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">mutableStateOf</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#mutableStateListOf()">mutableStateListOf</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#mutableStateMapOf()">mutableStateMapOf</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html">Snapshot.Companion</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#dispose()">dispose</a>()</code></div>
+              <p>Dispose the snapshot.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>inline T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T)</code></div>
+              <p>Enter the snapshot.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#hasPendingChanges()">hasPendingChanges</a>()</code></div>
+              <p>Whether there are any pending changes in this snapshot.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract <a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#takeNestedSnapshot(kotlin.Function1)">takeNestedSnapshot</a>(readObserver:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Take a snapshot of the state values in this snapshot.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#id()">id</a></code></div>
+              <p>The snapshot id of the snapshot.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#readOnly()">readOnly</a></code></div>
+              <p>True if any change to a state object in this snapshot will throw.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract <a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#root()">root</a></code></div>
+              <p>The root snapshot for this snapshot.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="dispose--"></a><a name="dispose"></a>
+      <h3 class="api-name" id="dispose()">dispose</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#dispose()">dispose</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Dispose the snapshot. Neglecting to dispose a snapshot will result in difficult to diagnose memory leaks as it indirectly causes all state objects to maintain its value for the un-disposed snapshot.</p>
+    </div>
+    <div><a name="enter-kotlin.Function0-"></a><a name="enter"></a>
+      <h3 class="api-name" id="enter(kotlin.Function0)">enter</h3>
+      <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T):&nbsp;T</pre>
+      <p>Enter the snapshot. In <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">block</a></code> all state objects have the value associated with this snapshot. The value of <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/package-summary.html#currentSnapshot()">currentSnapshot</a></code> will be this snapshot until this <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">block</a></code> returns or a nested call to <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">enter</a></code> is called. When <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">block</a></code> returns, the previous current snapshot is restored if there was one.</p>
+      <p>All changes to state object inside <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">block</a></code> are isolated to this snapshot and are not visible to other snapshot or as global state. If this is a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#readOnly()">readOnly</a></code> snapshot, any changes to state objects will throw an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>.</p>
+      <p>For a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a></code>, changes made to a snapshot inside <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#enter(kotlin.Function0)">block</a></code> can be applied atomically to the global state (or to its parent snapshot if it is a nested snapshot) by calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">MutableSnapshot.apply</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">mutableStateOf</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#mutableStateListOf()">mutableStateListOf</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#mutableStateMapOf()">mutableStateMapOf</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="hasPendingChanges--"></a><a name="haspendingchanges"></a>
+      <h3 class="api-name" id="hasPendingChanges()">hasPendingChanges</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#hasPendingChanges()">hasPendingChanges</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <p>Whether there are any pending changes in this snapshot. These changes are not visible until the snapshot is applied.</p>
+    </div>
+    <div><a name="takeNestedSnapshot-kotlin.Function1-"></a><a name="takenestedsnapshot"></a>
+      <h3 class="api-name" id="takeNestedSnapshot(kotlin.Function1)">takeNestedSnapshot</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#takeNestedSnapshot(kotlin.Function1)">takeNestedSnapshot</a>(readObserver:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = null):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></pre>
+      <p>Take a snapshot of the state values in this snapshot. The resulting <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code> is read-only. All nested snapshots need to be disposed by calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#dispose()">dispose</a></code> before resources associated with this snapshot can be collected. Nested snapshots are still valid after the parent has been disposed.</p>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getId()"></a><a name="setId()"></a><a name="getId--"></a><a name="setId--"></a>
+      <h3 class="api-name" id="id()">id</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#id()">id</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+      <p>The snapshot id of the snapshot. This is a unique number from a monotonically increasing value for each snapshot taken.</p>
+    </div>
+    <div><a name="getReadOnly()"></a><a name="setReadOnly()"></a><a name="getReadOnly--"></a><a name="setReadOnly--"></a>
+      <h3 class="api-name" id="readOnly()">readOnly</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#readOnly()">readOnly</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <p>True if any change to a state object in this snapshot will throw.</p>
+    </div>
+    <div><a name="getRoot()"></a><a name="setRoot()"></a><a name="getRoot--"></a><a name="setRoot--"></a>
+      <h3 class="api-name" id="root()">root</h3>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#root()">root</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></pre>
+      <p>The root snapshot for this snapshot. For non-nested snapshots this is always <code>this</code>. For nested snapshot it is the parent's <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html#root()">root</a></code>.</p>
+    </div>
+  </body>
+</html>

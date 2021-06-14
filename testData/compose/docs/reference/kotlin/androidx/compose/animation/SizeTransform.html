@@ -1,0 +1,106 @@
+<html devsite="true">
+  <head>
+    <title>SizeTransform</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>SizeTransform</h1>
+{% setvar page_path %}androidx/compose/animation/SizeTransform.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>interface SizeTransform</pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html">SizeTransform</a></code> defines how to transform from one size to another when the size of the content changes. When <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#clip()">clip</a></code> is true, the content will be clipped to the animation size. <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(IntSize,IntSize)">createAnimationSpec</a></code> specifies the animation spec for the size animation based on the initial and target size.</p>
+    <pre class="prettyprint">
+import androidx.compose.animation.SizeTransform
+import androidx.compose.animation.core.keyframes
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.with
+import androidx.compose.ui.unit.IntSize
+
+// enum class CartState { Expanded, Collapsed }
+val transitionSpec: AnimatedContentScope&lt;CartState&gt;.() -&gt; ContentTransform =
+    {
+        // Fade in with a delay so that it starts after fade out
+        fadeIn(animationSpec = tween(150, delayMillis = 150))
+            .with(fadeOut(animationSpec = tween(150)))
+            .using(
+                SizeTransform { initialSize, targetSize -&gt;
+                    // Using different SizeTransform for different state change
+                    if (CartState.Collapsed isTransitioningTo CartState.Expanded) {
+                        keyframes {
+                            durationMillis = 500
+                            // Animate to full target width and by 200px in height at 150ms
+                            IntSize(targetSize.width, initialSize.height + 200) at 150
+                        }
+                    } else {
+                        keyframes {
+                            durationMillis = 500
+                            // Animate 1/2 the height without changing the width at 150ms.
+                            // The width and rest of the height will be animated in the
+                            // timeframe between 150ms and duration (i.e. 500ms)
+                            IntSize(
+                                initialSize.width,
+                                (initialSize.height + targetSize.height) / 2
+                            ) at 150
+                        }
+                    }
+                }
+            )
+    }</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(IntSize,IntSize)">createAnimationSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initialSize:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;targetSize:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>)</code></div>
+              <p>This allows <code><a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a></code> to be defined based on the <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(IntSize,IntSize)">initialSize</a></code> before the size animation and the <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(IntSize,IntSize)">targetSize</a></code> of the animation.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#clip()">clip</a></code></div>
+              <p>Whether the content should be clipped using the animated size.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="createAnimationSpec(IntSize, IntSize)"></a><a name="createAnimationSpec-IntSize-IntSize-"></a><a name="createanimationspec"></a>
+      <h3 class="api-name" id="createAnimationSpec(IntSize,IntSize)">createAnimationSpec</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(IntSize,IntSize)">createAnimationSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initialSize:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;targetSize:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&gt;</pre>
+      <p>This allows <code><a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a></code> to be defined based on the <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(IntSize,IntSize)">initialSize</a></code> before the size animation and the <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#createAnimationSpec(IntSize,IntSize)">targetSize</a></code> of the animation.</p>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getClip()"></a><a name="setClip()"></a><a name="getClip--"></a><a name="setClip--"></a>
+      <h3 class="api-name" id="clip()">clip</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html#clip()">clip</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <p>Whether the content should be clipped using the animated size.</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<html devsite="true">
+  <head>
+    <title>TransformableState</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>TransformableState</h1>
+{% setvar page_path %}androidx/compose/foundation/gestures/TransformableState.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>interface TransformableState</pre>
+    </p>
+    <hr>
+    <p>State of <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(Modifier).transformable(androidx.compose.foundation.gestures.TransformableState,kotlin.Boolean,kotlin.Boolean)">transformable</a></code>. Allows for a granular control of how different gesture transformations are consumed by the user as well as to write custom transformation methods using <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformableState.html#transform(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">transform</a></code> suspend function.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformableState.html#transform(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">transform</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;transformPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformScope.html">TransformScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p>Call this function to take control of transformations and gain the ability to send transform events via <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformScope.html#transformBy(kotlin.Float,Offset,kotlin.Float)">TransformScope.transformBy</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformableState.html#isTransformInProgress()">isTransformInProgress</a></code></div>
+              <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformableState.html">TransformableState</a></code> is currently transforming by gesture or programmatically or not.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="transform(androidx.compose.foundation.MutatePriority, kotlin.coroutines.SuspendFunction1)"></a><a name="transform-androidx.compose.foundation.MutatePriority-kotlin.coroutines.SuspendFunction1-"></a><a name="transform"></a>
+      <h3 class="api-name" id="transform(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">transform</h3>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformableState.html#transform(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">transform</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;transformPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a> = MutatePriority.Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformScope.html">TransformScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Call this function to take control of transformations and gain the ability to send transform events via <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformScope.html#transformBy(kotlin.Float,Offset,kotlin.Float)">TransformScope.transformBy</a></code>. All actions that change zoom, pan or rotation values must be performed within a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformableState.html#transform(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">transform</a></code> block (even if they don't call any other methods on this object) in order to guarantee that mutual exclusion is enforced.</p>
+      <p>If <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformableState.html#transform(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">transform</a></code> is called from elsewhere with the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformableState.html#transform(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">transformPriority</a></code> higher or equal to ongoing transform, ongoing transform will be canceled.</p>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getIsTransformInProgress()"></a><a name="setIsTransformInProgress()"></a><a name="getIsTransformInProgress--"></a><a name="setIsTransformInProgress--"></a>
+      <h3 class="api-name" id="isTransformInProgress()">isTransformInProgress</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformableState.html#isTransformInProgress()">isTransformInProgress</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/TransformableState.html">TransformableState</a></code> is currently transforming by gesture or programmatically or not.</p>
+    </div>
+  </body>
+</html>

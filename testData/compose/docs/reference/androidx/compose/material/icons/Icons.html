@@ -1,0 +1,96 @@
+<html devsite="true">
+  <head>
+    <title>Icons</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>Icons</h1>
+{% setvar page_path %}androidx/compose/material/icons/Icons.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>object Icons</pre>
+    </p>
+    <hr>
+    <p><a href="https://material.io/design/iconography/system-icons.html" class="external" target="_blank">Material Design system icons</a> as seen on <a href="https://fonts.google.com/icons" class="external" target="_blank">Google Fonts</a>.</p>
+    <p><img alt="Iconography image" src="https://developer.android.com/images/reference/androidx/compose/material/icons/iconography.png"></p>
+    <p>There are five distinct icon themes: <code><a href="/reference/androidx/compose/material/icons/Icons.Filled.html">Filled</a></code>, <code><a href="/reference/androidx/compose/material/icons/Icons.Outlined.html">Outlined</a></code>, <code><a href="/reference/androidx/compose/material/icons/Icons.Rounded.html">Rounded</a></code>, <code><a href="/reference/androidx/compose/material/icons/Icons.TwoTone.html">TwoTone</a></code>, and <code><a href="/reference/androidx/compose/material/icons/Icons.Sharp.html">Sharp</a></code>. Each theme contains the same icons, but with a distinct visual style. You should typically choose one theme and use it across your application for consistency. For example, you may want to use a property or a typealias to refer to a specific theme, so it can be accessed in a semantically meaningful way from inside other composables.</p>
+    <pre class="prettyprint">val MyAppIcons = Icons.Rounded
+SomeComposable(icon = MyAppIcons.Menu)</pre>
+    <p>Icons maintain the same names defined by Material, but with their snake_case name converted to PascalCase. For example: add_alarm becomes AddAlarm.</p>
+    <p>Note: Icons that start with a number, such as <code>360</code>, are prefixed with a '_', becoming '_360'.</p>
+    <p>To draw an icon, you can use an <code><a href="/reference/androidx/compose/material/package-summary.html#Icon(ImageVector,kotlin.String,Modifier,Color)">androidx.compose.material.Icon</a></code>. This component applies tint and provides layout size matching the icon.</p>
+    <pre class="prettyprint">
+import androidx.compose.material.Icon
+
+Icon(Icons.Rounded.Menu, contentDescription = &quot;Localized description&quot;)</pre>
+    <p>Note that only the most commonly used icons are provided by default. You can add a dependency on androidx.compose.material:material-icons-extended to access every icon, but note that due to the very large size of this dependency you should make sure to use R8 / ProGuard to remove unused icons from your application.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/material/icons/Icons.Filled.html">Icons.Filled</a></code></td>
+            <td>
+              <p><a href="https://material.io/resources/icons/?style=baseline">Filled icons</a> (previously the only available theme, also known as the baseline theme) are the default icon theme.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/material/icons/Icons.Outlined.html">Icons.Outlined</a></code></td>
+            <td>
+              <p><a href="https://material.io/resources/icons/?style=outline">Outlined icons</a> make use of a thin stroke and empty space inside for a lighter appearance.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/material/icons/Icons.Rounded.html">Icons.Rounded</a></code></td>
+            <td>
+              <p><a href="https://material.io/resources/icons/?style=round">Rounded icons</a> use a corner radius that pairs well with brands that use heavier typography, curved logos, or circular elements to express their style.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/material/icons/Icons.Sharp.html">Icons.Sharp</a></code></td>
+            <td>
+              <p><a href="https://material.io/resources/icons/?style=sharp">Sharp icons</a> display corners with straight edges, for a crisp style that remains legible even at smaller scales.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/material/icons/Icons.TwoTone.html">Icons.TwoTone</a></code></td>
+            <td>
+              <p><a href="https://material.io/resources/icons/?style=twotone">Two-Tone icons</a> display corners with straight edges, for a crisp style that remains legible even at smaller scales.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material/icons/Icons.Filled.html">Icons.Filled</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material/icons/Icons.html#Default()">Default</a></code></div>
+              <p>Alias for <code><a href="/reference/androidx/compose/material/icons/Icons.Filled.html">Filled</a></code>, the baseline icon theme.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public fields</h2>
+    <div><a name="getDefault()"></a><a name="setDefault()"></a><a name="getDefault--"></a><a name="setDefault--"></a>
+      <h3 class="api-name" id="Default()">Default</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/material/icons/Icons.Filled.html">Icons.Filled</a>&nbsp;<a href="/reference/androidx/compose/material/icons/Icons.html#Default()">Default</a></pre>
+      <p>Alias for <code><a href="/reference/androidx/compose/material/icons/Icons.Filled.html">Filled</a></code>, the baseline icon theme.</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,220 @@
+<html devsite="true">
+  <head>
+    <title>Transition</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>Transition</h1>
+{% setvar page_path %}androidx/compose/animation/core/Transition.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class Transition&lt;S&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/androidx/compose/animation/core/Transition.html">Transition</a></code> manages all the child animations on a state level. Child animations can be created in a declarative way using <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).animateFloat(kotlin.Function1,kotlin.String,kotlin.Function1)">Transition.animateFloat</a></code>, <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).animateValue(androidx.compose.animation.core.TwoWayConverter,kotlin.Function1,kotlin.String,kotlin.Function1)">Transition.animateValue</a></code>, <code><a href="/reference/androidx/compose/animation/package-summary.html#(androidx.compose.animation.core.Transition).animateColor(kotlin.Function1,kotlin.String,kotlin.Function1)">animateColor</a></code> etc. When the <code><a href="/reference/androidx/compose/animation/core/Transition.html#targetState()">targetState</a></code> changes, <code><a href="/reference/androidx/compose/animation/core/Transition.html">Transition</a></code> will automatically start or adjust course for all its child animations to animate to the new target values defined for each animation.</p>
+    <p>After arriving at <code><a href="/reference/androidx/compose/animation/core/Transition.html#targetState()">targetState</a></code>, <code><a href="/reference/androidx/compose/animation/core/Transition.html">Transition</a></code> will be triggered to run if any child animation changes its target value (due to their dynamic target calculation logic, such as theme-dependent values).</p>
+    <pre class="prettyprint">
+import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.updateTransition
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.input.pointer.pointerInput
+
+// enum class ComponentState { Pressed, Released }
+var useRed by remember { mutableStateOf(false) }
+var toState by remember { mutableStateOf(ComponentState.Released) }
+val modifier = Modifier.pointerInput(Unit) {
+    detectTapGestures(
+        onPress = {
+            toState = ComponentState.Pressed
+            tryAwaitRelease()
+            toState = ComponentState.Released
+        }
+    )
+}
+
+// Defines a transition of `ComponentState`, and updates the transition when the provided
+// [targetState] changes. The tran
+// sition will run all of the child animations towards the new
+// [targetState] in response to the [targetState] change.
+val transition: Transition&lt;ComponentState&gt; = updateTransition(targetState = toState)
+// Defines a float animation as a child animation the transition. The current animation value
+// can be read from the returned State&lt;Float&gt;.
+val scale: Float by transition.animateFloat(
+    // Defines a transition spec that uses the same low-stiffness spring for *all*
+    // transitions of this float, no matter what the target is.
+    transitionSpec = { spring(stiffness = 50f) }
+) { state -&gt;
+    // This code block declares a mapping from state to value.
+    if (state == ComponentState.Pressed) 3f else 1f
+}
+
+// Defines a color animation as a child animation of the transition.
+val color: Color by transition.animateColor(
+    transitionSpec = {
+        when {
+            ComponentState.Pressed isTransitioningTo ComponentState.Released -&gt;
+                // Uses spring for the transition going from pressed to released
+                spring(stiffness = 50f)
+            else -&gt;
+                // Uses tween for all the other transitions. (In this case there is
+                // only one other transition. i.e. released -&gt; pressed.)
+                tween(durationMillis = 500)
+        }
+    }
+) { state -&gt;
+    when (state) {
+        // Similar to the float animation, we need to declare the target values
+        // for each state. In this code block we can access theme colors.
+        ComponentState.Pressed -&gt; MaterialTheme.colors.primary
+        // We can also have the target value depend on other mutableStates,
+        // such as `useRed` here. Whenever the target value changes, transition
+        // will automatically animate to the new value even if it has already
+        // arrived at its target state.
+        ComponentState.Released -&gt; if (useRed) Color.Red else MaterialTheme.colors.secondary
+    }
+}
+Column {
+    Button(
+        modifier = Modifier.padding(10.dp).align(Alignment.CenterHorizontally),
+        onClick = { useRed = !useRed }
+    ) {
+        Text(&quot;Change Color&quot;)
+    }
+    Box(
+        modifier.fillMaxSize().wrapContentSize(Alignment.Center)
+            .size((100 * scale).dp).background(color)
+    )
+}</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">See also</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">updateTransition</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).animateFloat(kotlin.Function1,kotlin.String,kotlin.Function1)">animateFloat</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.Transition).animateValue(androidx.compose.animation.core.TwoWayConverter,kotlin.Function1,kotlin.String,kotlin.Function1)">animateValue</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/animation/package-summary.html#(androidx.compose.animation.core.Transition).animateColor(kotlin.Function1,kotlin.String,kotlin.Function1)">animateColor</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/animation/core/Transition.Segment.html">Transition.Segment</a></code></td>
+            <td>
+              <p><code><a href="/reference/androidx/compose/animation/core/Transition.Segment.html">Segment</a></code> holds <code><a href="/reference/androidx/compose/animation/core/Transition.Segment.html#initialState()">initialState</a></code> and <code><a href="/reference/androidx/compose/animation/core/Transition.Segment.html#targetState()">targetState</a></code>, which are the beginning and end of a transition.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> S</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/Transition.html#currentState()">currentState</a></code></div>
+              <p>Current state of the transition.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/Transition.html#isRunning()">isRunning</a></code></div>
+              <p>Indicates whether there is any animation running in the transition.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/Transition.html#label()">label</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/Transition.Segment.html">Transition.Segment</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> S&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/Transition.html#segment()">segment</a></code></div>
+              <p><code><a href="/reference/androidx/compose/animation/core/Transition.html#segment()">segment</a></code> contains the initial state and the target state of the currently on-going transition.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> S</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/Transition.html#targetState()">targetState</a></code></div>
+              <p>Target state of the transition.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public fields</h2>
+    <div><a name="getCurrentState()"></a><a name="setCurrentState()"></a><a name="getCurrentState--"></a><a name="setCurrentState--"></a>
+      <h3 class="api-name" id="currentState()">currentState</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> S&nbsp;<a href="/reference/androidx/compose/animation/core/Transition.html#currentState()">currentState</a></pre>
+      <p>Current state of the transition. This will always be the initialState of the transition until the transition is finished. Once the transition is finished, <code><a href="/reference/androidx/compose/animation/core/Transition.html#currentState()">currentState</a></code> will be set to <code><a href="/reference/androidx/compose/animation/core/Transition.html#targetState()">targetState</a></code>. <code><a href="/reference/androidx/compose/animation/core/Transition.html#currentState()">currentState</a></code> is backed by a <code><a href="/reference/androidx/compose/runtime/MutableState.html">MutableState</a></code>.</p>
+    </div>
+    <div><a name="getIsRunning()"></a><a name="setIsRunning()"></a><a name="getIsRunning--"></a><a name="setIsRunning--"></a>
+      <h3 class="api-name" id="isRunning()">isRunning</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/animation/core/Transition.html#isRunning()">isRunning</a></pre>
+      <p>Indicates whether there is any animation running in the transition.</p>
+    </div>
+    <div><a name="getLabel()"></a><a name="setLabel()"></a><a name="getLabel--"></a><a name="setLabel--"></a>
+      <h3 class="api-name" id="label()">label</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/animation/core/Transition.html#label()">label</a></pre>
+    </div>
+    <div><a name="getSegment()"></a><a name="setSegment()"></a><a name="getSegment--"></a><a name="setSegment--"></a>
+      <h3 class="api-name" id="segment()">segment</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/Transition.Segment.html">Transition.Segment</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> S&gt;&nbsp;<a href="/reference/androidx/compose/animation/core/Transition.html#segment()">segment</a></pre>
+      <p><code><a href="/reference/androidx/compose/animation/core/Transition.html#segment()">segment</a></code> contains the initial state and the target state of the currently on-going transition.</p>
+    </div>
+    <div><a name="getTargetState()"></a><a name="setTargetState()"></a><a name="getTargetState--"></a><a name="setTargetState--"></a>
+      <h3 class="api-name" id="targetState()">targetState</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> S&nbsp;<a href="/reference/androidx/compose/animation/core/Transition.html#targetState()">targetState</a></pre>
+      <p>Target state of the transition. This will be read by all child animations to determine their most up-to-date target values.</p>
+    </div>
+  </body>
+</html>

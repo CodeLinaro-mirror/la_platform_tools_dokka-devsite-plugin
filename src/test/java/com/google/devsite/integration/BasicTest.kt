@@ -39,6 +39,11 @@ class BasicTest : IntegrationTestBase() {
     }
 
     @Test
+    fun `Validate prod AndroidX compose lib`() {
+        verifyDirectory("compose", sampleLocations = listOf("samples"))
+    }
+
+    @Test
     fun `Validate prod AndroidX fragment lib`() {
         verifyDirectory("fragment", sampleLocations = listOf("samples"))
     }

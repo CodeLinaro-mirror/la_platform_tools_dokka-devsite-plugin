@@ -1,0 +1,296 @@
+<html devsite="true">
+  <head>
+    <title>LazyListState</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>LazyListState</h1>
+{% setvar page_path %}androidx/compose/foundation/lazy/LazyListState.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class LazyListState implements <a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></pre>
+    </p>
+    <hr>
+    <p>A state object that can be hoisted to control and observe scrolling</p>
+    <p>In most cases, this will be created via <code><a href="/reference/androidx/compose/foundation/lazy/package-summary.html#rememberLazyListState(kotlin.Int,kotlin.Int)">rememberLazyListState</a></code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.Companion.html">LazyListState.Companion</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#firstVisibleItemIndex()">firstVisibleItemIndex</a></code></div>
+              <p>The index of the first item that is visible</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#firstVisibleItemScrollOffset()">firstVisibleItemScrollOffset</a></code></div>
+              <p>The scroll offset of the first visible item.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#interactionSource()">interactionSource</a></code></div>
+              <p><code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code> that will be used to dispatch drag events when this list is being dragged.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#isScrollInProgress()">isScrollInProgress</a></code></div>
+              <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling by gesture, fling or programmatically or not.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html">LazyListLayoutInfo</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#layoutInfo()">layoutInfo</a></code></div>
+              <p>The object of <code><a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html">LazyListLayoutInfo</a></code> calculated during the last layout pass.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#LazyListState(kotlin.Int,kotlin.Int)">LazyListState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;firstVisibleItemIndex,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;firstVisibleItemScrollOffset<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#animateScrollToItem(kotlin.Int,kotlin.Int)">animateScrollToItem</a>(int&nbsp;index,&nbsp;int&nbsp;scrollOffset)</code></div>
+              <p>Animate (smooth scroll) to the given item.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#dispatchRawDelta(kotlin.Float)">dispatchRawDelta</a>(float&nbsp;delta)</code></div>
+              <p>Dispatch scroll delta in pixels avoiding all scroll related mechanisms.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[ExperimentalFoundationApi]) void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/MutatePriority.html">MutatePriority</a>&nbsp;scrollPriority,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function1/index.html">SuspendFunction1</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</code></div>
+              <p>Call this function to take control of scrolling and gain the ability to send scroll events via <code><a href="/reference/androidx/compose/foundation/gestures/ScrollScope.html#scrollBy(kotlin.Float)">ScrollScope.scrollBy</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[ExperimentalFoundationApi]) void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#scrollToItem(kotlin.Int,kotlin.Int)">scrollToItem</a>(int&nbsp;index,&nbsp;int&nbsp;scrollOffset)</code></div>
+              <p>Instantly brings the item at <code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#scrollToItem(kotlin.Int,kotlin.Int)">index</a></code> to the top of the viewport, offset by <code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#scrollToItem(kotlin.Int,kotlin.Int)">scrollOffset</a></code> pixels.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public fields</h2>
+    <div><a name="getFirstVisibleItemIndex()"></a><a name="setFirstVisibleItemIndex()"></a><a name="getFirstVisibleItemIndex--"></a><a name="setFirstVisibleItemIndex--"></a>
+      <h3 class="api-name" id="firstVisibleItemIndex()">firstVisibleItemIndex</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#firstVisibleItemIndex()">firstVisibleItemIndex</a></pre>
+      <p>The index of the first item that is visible</p>
+    </div>
+    <div><a name="getFirstVisibleItemScrollOffset()"></a><a name="setFirstVisibleItemScrollOffset()"></a><a name="getFirstVisibleItemScrollOffset--"></a><a name="setFirstVisibleItemScrollOffset--"></a>
+      <h3 class="api-name" id="firstVisibleItemScrollOffset()">firstVisibleItemScrollOffset</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#firstVisibleItemScrollOffset()">firstVisibleItemScrollOffset</a></pre>
+      <p>The scroll offset of the first visible item. Scrolling forward is positive - i.e., the amount that the item is offset backwards</p>
+    </div>
+    <div><a name="getInteractionSource()"></a><a name="setInteractionSource()"></a><a name="getInteractionSource--"></a><a name="setInteractionSource--"></a>
+      <h3 class="api-name" id="interactionSource()">interactionSource</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#interactionSource()">interactionSource</a></pre>
+      <p><code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code> that will be used to dispatch drag events when this list is being dragged. If you want to know whether the fling (or animated scroll) is in progress, use <code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#isScrollInProgress()">isScrollInProgress</a></code>.</p>
+    </div>
+    <div><a name="getIsScrollInProgress()"></a><a name="setIsScrollInProgress()"></a><a name="getIsScrollInProgress--"></a><a name="setIsScrollInProgress--"></a>
+      <h3 class="api-name" id="isScrollInProgress()">isScrollInProgress</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#isScrollInProgress()">isScrollInProgress</a></pre>
+      <p>Whether this <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling by gesture, fling or programmatically or not.</p>
+    </div>
+    <div><a name="getLayoutInfo()"></a><a name="setLayoutInfo()"></a><a name="getLayoutInfo--"></a><a name="setLayoutInfo--"></a>
+      <h3 class="api-name" id="layoutInfo()">layoutInfo</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html">LazyListLayoutInfo</a>&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#layoutInfo()">layoutInfo</a></pre>
+      <p>The object of <code><a href="/reference/androidx/compose/foundation/lazy/LazyListLayoutInfo.html">LazyListLayoutInfo</a></code> calculated during the last layout pass. For example, you can use it to calculate what items are currently visible.</p>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="LazyListState(kotlin.Int, kotlin.Int)"></a><a name="LazyListState-kotlin.Int-kotlin.Int-"></a><a name="lazyliststate"></a>
+      <h3 class="api-name" id="LazyListState(kotlin.Int,kotlin.Int)">LazyListState</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#LazyListState(kotlin.Int,kotlin.Int)">LazyListState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;firstVisibleItemIndex,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;firstVisibleItemScrollOffset<br>)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>int&nbsp;firstVisibleItemIndex</code></td>
+              <td>
+                <p>the initial value for <code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#firstVisibleItemIndex()">LazyListState.firstVisibleItemIndex</a></code></p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>int&nbsp;firstVisibleItemScrollOffset</code></td>
+              <td>
+                <p>the initial value for <code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#firstVisibleItemScrollOffset()">LazyListState.firstVisibleItemScrollOffset</a></code></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="animateScrollToItem(kotlin.Int, kotlin.Int)"></a><a name="animateScrollToItem-kotlin.Int-kotlin.Int-"></a><a name="animatescrolltoitem"></a>
+      <h3 class="api-name" id="animateScrollToItem(kotlin.Int,kotlin.Int)">animateScrollToItem</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#animateScrollToItem(kotlin.Int,kotlin.Int)">animateScrollToItem</a>(int&nbsp;index,&nbsp;int&nbsp;scrollOffset)</pre>
+      <p>Animate (smooth scroll) to the given item.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>int&nbsp;index</code></td>
+              <td>
+                <p>the index to which to scroll</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>int&nbsp;scrollOffset</code></td>
+              <td>
+                <p>the offset that the item should end up after the scroll (same as <code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#scrollToItem(kotlin.Int,kotlin.Int)">scrollToItem</a></code>) - note that positive offset refers to forward scroll, so in a top-to-bottom list, positive offset will scroll the item further upward (taking it partly offscreen)</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="dispatchRawDelta-kotlin.Float-"></a><a name="dispatchrawdelta"></a>
+      <h3 class="api-name" id="dispatchRawDelta(kotlin.Float)">dispatchRawDelta</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;float&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#dispatchRawDelta(kotlin.Float)">dispatchRawDelta</a>(float&nbsp;delta)</pre>
+      <p>Dispatch scroll delta in pixels avoiding all scroll related mechanisms.</p>
+      <p><b>NOTE:</b> unlike <code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code>, dispatching any delta with this method won't trigger nested scroll, won't stop ongoing scroll/drag animation and will bypass scrolling of any priority. This method will also ignore <code>reverseDirection</code> and other parameters set in scrollable.</p>
+      <p>This method is used internally for nested scrolling dispatch and other low level operations, allowing implementers of <code><a href="/reference/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> influence the consumption as suits them. Manually dispatching delta via this method will likely result in a bad user experience, you must prefer <code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> method over this one.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>float&nbsp;delta</code></td>
+              <td>
+                <p>amount of scroll dispatched in the nested scroll process</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>float</code></td>
+              <td>
+                <p>the amount of delta consumed</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="scroll(androidx.compose.foundation.MutatePriority, kotlin.coroutines.SuspendFunction1)"></a><a name="scroll-androidx.compose.foundation.MutatePriority-kotlin.coroutines.SuspendFunction1-"></a><a name="scroll"></a>
+      <h3 class="api-name" id="scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</h3>
+      <pre class="api-signature no-pretty-print">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[ExperimentalFoundationApi])<br>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[ExperimentalFoundationApi]) void&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/MutatePriority.html">MutatePriority</a>&nbsp;scrollPriority,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-suspend-function1/index.html">SuspendFunction1</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
+      <p>Call this function to take control of scrolling and gain the ability to send scroll events via <code><a href="/reference/androidx/compose/foundation/gestures/ScrollScope.html#scrollBy(kotlin.Float)">ScrollScope.scrollBy</a></code>. All actions that change the logical scroll position must be performed within a <code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> block (even if they don't call any other methods on this object) in order to guarantee that mutual exclusion is enforced.</p>
+      <p>Cancels the currently running scroll, if any, and suspends until the cancellation is complete.</p>
+      <p>If <code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> is called from elsewhere, this will be canceled.</p>
+    </div>
+    <div><a name="scrollToItem(kotlin.Int, kotlin.Int)"></a><a name="scrollToItem-kotlin.Int-kotlin.Int-"></a><a name="scrolltoitem"></a>
+      <h3 class="api-name" id="scrollToItem(kotlin.Int,kotlin.Int)">scrollToItem</h3>
+      <pre class="api-signature no-pretty-print">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[ExperimentalFoundationApi])<br>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[ExperimentalFoundationApi]) void&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#scrollToItem(kotlin.Int,kotlin.Int)">scrollToItem</a>(int&nbsp;index,&nbsp;int&nbsp;scrollOffset)</pre>
+      <p>Instantly brings the item at <code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#scrollToItem(kotlin.Int,kotlin.Int)">index</a></code> to the top of the viewport, offset by <code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#scrollToItem(kotlin.Int,kotlin.Int)">scrollOffset</a></code> pixels.</p>
+      <p>Cancels the currently running scroll, if any, and suspends until the cancellation is complete.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>int&nbsp;index</code></td>
+              <td>
+                <p>the data index to snap to. Must be between 0 and the number of elements.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>int&nbsp;scrollOffset</code></td>
+              <td>
+                <p>the number of pixels past the start of the item to snap to. Must not be negative.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

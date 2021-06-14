@@ -1,0 +1,224 @@
+<html devsite="true">
+  <head>
+    <title>VectorizedDecayAnimationSpec</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>VectorizedDecayAnimationSpec</h1>
+{% setvar page_path %}androidx/compose/animation/core/VectorizedDecayAnimationSpec.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>interface VectorizedDecayAnimationSpec&lt;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt;</pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html">VectorizedDecayAnimationSpec</a></code>s are stateless vector based decay animation specifications. They do not assume any starting/ending conditions. Nor do they manage a lifecycle. All it stores is the configuration that is particular to the type of the decay animation: friction multiplier for <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#exponentialDecay(kotlin.Float,kotlin.Float)">exponentialDecay</a></code>. Its stateless nature allows the same <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html">VectorizedDecayAnimationSpec</a></code> to be reused by a few different running animations with different starting and ending values.</p>
+    <p>Since <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html">VectorizedDecayAnimationSpec</a></code>s are stateless, it requires starting value/velocity and ending value to be passed in, along with playtime, to calculate the value or velocity at that time. Play time here is the progress of the animation in terms of milliseconds, where 0 means the start of the animation and <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html#getDurationNanos(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getDurationNanos</a></code> returns the play time for the end of the animation.</p>
+    <p><b>Note</b>: For use cases where the starting values/velocity and ending values aren't expected to change, it is recommended to use <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code> that caches these static values and hence does not require them to be supplied in the value/velocity calculation.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">See also</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html#getDurationNanos(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getDurationNanos</a>(initialValue:&nbsp;V,&nbsp;initialVelocity:&nbsp;V)</code></div>
+              <p>Returns the duration of the decay animation, in nanoseconds.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>V</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html#getTargetValue(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getTargetValue</a>(initialValue:&nbsp;V,&nbsp;initialVelocity:&nbsp;V)</code></div>
+              <p>Returns the target value of the animation based on the initial condition of the animation ( i.e.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>V</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html#getValueFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getValueFromNanos</a>(playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,&nbsp;initialValue:&nbsp;V,&nbsp;initialVelocity:&nbsp;V)</code></div>
+              <p>Returns the value of the animation at the given time.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>V</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html#getVelocityFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getVelocityFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;V<br>)</code></div>
+              <p>Returns the velocity of the animation at the given time.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html#absVelocityThreshold()">absVelocityThreshold</a></code></div>
+              <p>This is the absolute value of a velocity threshold, below which the animation is considered finished.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="getDurationNanos(androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector)"></a><a name="getDurationNanos-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-"></a><a name="getdurationnanos"></a>
+      <h3 class="api-name" id="getDurationNanos(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getDurationNanos</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html#getDurationNanos(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getDurationNanos</a>(initialValue:&nbsp;V,&nbsp;initialVelocity:&nbsp;V):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
+      <p>Returns the duration of the decay animation, in nanoseconds.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>initialValue:&nbsp;V</code></td>
+              <td>
+                <p>initialValue value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>initialVelocity:&nbsp;V</code></td>
+              <td>
+                <p>initialValue velocity of the animation</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="getTargetValue(androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector)"></a><a name="getTargetValue-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-"></a><a name="gettargetvalue"></a>
+      <h3 class="api-name" id="getTargetValue(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getTargetValue</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html#getTargetValue(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getTargetValue</a>(initialValue:&nbsp;V,&nbsp;initialVelocity:&nbsp;V):&nbsp;V</pre>
+      <p>Returns the target value of the animation based on the initial condition of the animation ( i.e. initial value and initial velocity).</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>initialValue:&nbsp;V</code></td>
+              <td>
+                <p>The initial value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>initialVelocity:&nbsp;V</code></td>
+              <td>
+                <p>The initial velocity of the animation</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="getValueFromNanos(kotlin.Long, androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector)"></a><a name="getValueFromNanos-kotlin.Long-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-"></a><a name="getvaluefromnanos"></a>
+      <h3 class="api-name" id="getValueFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getValueFromNanos</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html#getValueFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getValueFromNanos</a>(playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,&nbsp;initialValue:&nbsp;V,&nbsp;initialVelocity:&nbsp;V):&nbsp;V</pre>
+      <p>Returns the value of the animation at the given time.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+              <td>
+                <p>The time elapsed in milliseconds since the initialValue of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>initialValue:&nbsp;V</code></td>
+              <td>
+                <p>The initialValue value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>initialVelocity:&nbsp;V</code></td>
+              <td>
+                <p>The initialValue velocity of the animation</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="getVelocityFromNanos(kotlin.Long, androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector)"></a><a name="getVelocityFromNanos-kotlin.Long-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-"></a><a name="getvelocityfromnanos"></a>
+      <h3 class="api-name" id="getVelocityFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getVelocityFromNanos</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html#getVelocityFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getVelocityFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;V<br>):&nbsp;V</pre>
+      <p>Returns the velocity of the animation at the given time.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+              <td>
+                <p>The time elapsed in milliseconds since the initialValue of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>initialValue:&nbsp;V</code></td>
+              <td>
+                <p>The initialValue value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>initialVelocity:&nbsp;V</code></td>
+              <td>
+                <p>The initialValue velocity of the animation</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getAbsVelocityThreshold()"></a><a name="setAbsVelocityThreshold()"></a><a name="getAbsVelocityThreshold--"></a><a name="setAbsVelocityThreshold--"></a>
+      <h3 class="api-name" id="absVelocityThreshold()">absVelocityThreshold</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html#absVelocityThreshold()">absVelocityThreshold</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+      <p>This is the absolute value of a velocity threshold, below which the animation is considered finished.</p>
+    </div>
+  </body>
+</html>

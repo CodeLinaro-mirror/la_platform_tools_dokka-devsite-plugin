@@ -1,0 +1,121 @@
+<html devsite="true">
+  <head>
+    <title>ProduceStateScope</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>ProduceStateScope</h1>
+{% setvar page_path %}androidx/compose/runtime/ProduceStateScope.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>interface ProduceStateScope&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; : <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>, <a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></pre>
+    </p>
+    <hr>
+    <p>Receiver scope for use with <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-nothing/index.html">Nothing</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#awaitDispose(kotlin.Function0)">awaitDispose</a>(onDispose:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Await the disposal of this producer whether it left the composition, the source changed, or an error occurred.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#coroutineContext()">coroutineContext</a></code></div>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>T</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#value()">value</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">MutableState</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody>
+                    <tr>
+                      <td width="40%"><code>operator T</code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component1()">component1</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>operator (T) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/MutableState.html#component2()">component2</a>()</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="awaitDispose-kotlin.Function0-"></a><a name="awaitdispose"></a>
+      <h3 class="api-name" id="awaitDispose(kotlin.Function0)">awaitDispose</h3>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#awaitDispose(kotlin.Function0)">awaitDispose</a>(onDispose:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-nothing/index.html">Nothing</a></pre>
+      <p>Await the disposal of this producer whether it left the composition, the source changed, or an error occurred. Always runs <code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#awaitDispose(kotlin.Function0)">onDispose</a></code> before resuming.</p>
+      <p>This method is useful when configuring callback-based state producers that do not suspend, for example:</p>
+      <pre class="prettyprint">
+import androidx.compose.runtime.produceState
+
+val currentPerson by produceState&lt;Person?&gt;(null, viewModel) {
+    val disposable = viewModel.registerPersonObserver { person -&gt;
+        value = person
+    }
+
+    awaitDispose {
+        disposable.dispose()
+    }
+}</pre>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getCoroutineContext()"></a><a name="setCoroutineContext()"></a><a name="getCoroutineContext--"></a><a name="setCoroutineContext--"></a>
+      <h3 class="api-name" id="coroutineContext()">coroutineContext</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#coroutineContext()">coroutineContext</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></pre>
+    </div>
+    <div><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
+      <h3 class="api-name" id="value()">value</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#value()">value</a>:&nbsp;T</pre>
+    </div>
+  </body>
+</html>

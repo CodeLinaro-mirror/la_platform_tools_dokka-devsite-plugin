@@ -1,0 +1,280 @@
+<html devsite="true">
+  <head>
+    <title>TargetBasedAnimation</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>TargetBasedAnimation</h1>
+{% setvar page_path %}androidx/compose/animation/core/TargetBasedAnimation.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>class TargetBasedAnimation&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; : <a href="/reference/kotlin/androidx/compose/animation/core/Animation.html">Animation</a></pre>
+    </p>
+    <hr>
+    <p>This is a convenient animation wrapper class that works for all target based animations, i.e. animations that has a pre-defined end value, unlike decay.</p>
+    <p>It assumes that the starting value and velocity, as well as ending value do not change throughout the animation, and cache these values. This caching enables much more convenient query for animation value and velocity (where only playtime needs to be passed into the methods).</p>
+    <p><b>Note</b>: When interruptions happen to the <code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html">TargetBasedAnimation</a></code>, a new instance should be created that use the current value and velocity as the starting conditions. This type of interruption handling is the default behavior for both <code><a href="/reference/kotlin/androidx/compose/animation/core/Animatable.html">Animatable</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code>. Consider using those APIs for the interruption handling, as well as built-in animation lifecycle management.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">See also</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#updateTransition(kotlin.Any,kotlin.String)">updateTransition</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/Animatable.html">Animatable</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#TargetBasedAnimation(androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any,androidx.compose.animation.core.AnimationVector)">TargetBasedAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocityVector:&nbsp;V?<br>)</code></div>
+              <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html">TargetBasedAnimation</a></code> with the given start/end conditions of the animation, and the provided <code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#&lt;init&gt;(androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any,androidx.compose.animation.core.AnimationVector)">animationSpec</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>open T</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#getValueFromNanos(kotlin.Long)">getValueFromNanos</a>(playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>)</code></div>
+              <p>Returns the value of the animation at the given play time.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>open V</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#getVelocityVectorFromNanos(kotlin.Long)">getVelocityVectorFromNanos</a>(playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>)</code></div>
+              <p>Returns the velocity (in <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> form) of the animation at the given play time.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#durationNanos()">durationNanos</a></code></div>
+              <p>This amount of time in nanoseconds that the animation will run before it finishes</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>T</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#initialValue()">initialValue</a></code></div>
+              <p>the start value of the animation</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#isInfinite()">isInfinite</a></code></div>
+              <p>Whether or not the <code><a href="/reference/kotlin/androidx/compose/animation/core/Animation.html">Animation</a></code> represents an infinite animation.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>open T</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#targetValue()">targetValue</a></code></div>
+              <p>the end value of the animation</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>open <a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#typeConverter()">typeConverter</a></code></div>
+              <p>the <code><a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code> that is used to convert animation type <code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html">T</a></code> from/to <code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html">V</a></code></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="/reference/kotlin/androidx/compose/animation/core/Animation.html">Animation</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/animation/core/Animation.html#isFinishedFromNanos(kotlin.Long)">isFinishedFromNanos</a>(playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>)</code></div>
+                        <p>Returns whether the animation is finished at the given play time.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="TargetBasedAnimation(androidx.compose.animation.core.AnimationSpec, androidx.compose.animation.core.TwoWayConverter, kotlin.Any, kotlin.Any, androidx.compose.animation.core.AnimationVector)"></a><a name="TargetBasedAnimation-androidx.compose.animation.core.AnimationSpec-androidx.compose.animation.core.TwoWayConverter-kotlin.Any-kotlin.Any-androidx.compose.animation.core.AnimationVector-"></a><a name="targetbasedanimation"></a>
+      <h3 class="api-name" id="TargetBasedAnimation(androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any,androidx.compose.animation.core.AnimationVector)">TargetBasedAnimation</h3>
+      <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#TargetBasedAnimation(androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any,androidx.compose.animation.core.AnimationVector)">TargetBasedAnimation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;T,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocityVector:&nbsp;V? = null<br>)</pre>
+      <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html">TargetBasedAnimation</a></code> with the given start/end conditions of the animation, and the provided <code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#&lt;init&gt;(androidx.compose.animation.core.AnimationSpec,androidx.compose.animation.core.TwoWayConverter,kotlin.Any,kotlin.Any,androidx.compose.animation.core.AnimationVector)">animationSpec</a></code>.</p>
+      <p>The resulting <code><a href="/reference/kotlin/androidx/compose/animation/core/Animation.html">Animation</a></code> assumes that the start value and velocity, as well as end value do not change throughout the animation, and cache these values. This caching enables much more convenient query for animation value and velocity (where only playtime needs to be passed into the methods).</p>
+      <p><b>Note</b>: When interruptions happen to the <code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html">TargetBasedAnimation</a></code>, a new instance should be created that use the current value and velocity as the starting conditions. This type of interruption handling is the default behavior for both <code><a href="/reference/kotlin/androidx/compose/animation/core/Animatable.html">Animatable</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/core/Transition.html">Transition</a></code>. Consider using those APIs for the interruption handling, as well as built-in animation lifecycle management.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;T&gt;</code></td>
+              <td>
+                <p>the <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a></code> that will be used to calculate value/velocity</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>typeConverter:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;</code></td>
+              <td>
+                <p>the <code><a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code> that is used to convert animation type <code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html">T</a></code> from/to <code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html">V</a></code></p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>initialValue:&nbsp;T</code></td>
+              <td>
+                <p>the start value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>targetValue:&nbsp;T</code></td>
+              <td>
+                <p>the end value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>initialVelocityVector:&nbsp;V? = null</code></td>
+              <td>
+                <p>the start velocity vector, null by default (meaning 0 velocity).</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="getValueFromNanos-kotlin.Long-"></a><a name="getvaluefromnanos"></a>
+      <h3 class="api-name" id="getValueFromNanos(kotlin.Long)">getValueFromNanos</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#getValueFromNanos(kotlin.Long)">getValueFromNanos</a>(playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>):&nbsp;T</pre>
+      <p>Returns the value of the animation at the given play time.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+              <td>
+                <p>the play time that is used to determine the value of the animation.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="getVelocityVectorFromNanos-kotlin.Long-"></a><a name="getvelocityvectorfromnanos"></a>
+      <h3 class="api-name" id="getVelocityVectorFromNanos(kotlin.Long)">getVelocityVectorFromNanos</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#getVelocityVectorFromNanos(kotlin.Long)">getVelocityVectorFromNanos</a>(playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>):&nbsp;V</pre>
+      <p>Returns the velocity (in <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> form) of the animation at the given play time.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+              <td>
+                <p>the play time that is used to calculate the velocity of the animation.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getDurationNanos()"></a><a name="setDurationNanos()"></a><a name="getDurationNanos--"></a><a name="setDurationNanos--"></a>
+      <h3 class="api-name" id="durationNanos()">durationNanos</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#durationNanos()">durationNanos</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
+      <p>This amount of time in nanoseconds that the animation will run before it finishes</p>
+    </div>
+    <div><a name="getInitialValue()"></a><a name="setInitialValue()"></a><a name="getInitialValue--"></a><a name="setInitialValue--"></a>
+      <h3 class="api-name" id="initialValue()">initialValue</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#initialValue()">initialValue</a>:&nbsp;T</pre>
+      <p>the start value of the animation</p>
+    </div>
+    <div><a name="getIsInfinite()"></a><a name="setIsInfinite()"></a><a name="getIsInfinite--"></a><a name="setIsInfinite--"></a>
+      <h3 class="api-name" id="isInfinite()">isInfinite</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#isInfinite()">isInfinite</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <p>Whether or not the <code><a href="/reference/kotlin/androidx/compose/animation/core/Animation.html">Animation</a></code> represents an infinite animation. That is, one that will not finish by itself, one that needs an external action to stop. For examples, an indeterminate progress bar, which will only stop when it is removed from the composition.</p>
+    </div>
+    <div><a name="getTargetValue()"></a><a name="setTargetValue()"></a><a name="getTargetValue--"></a><a name="setTargetValue--"></a>
+      <h3 class="api-name" id="targetValue()">targetValue</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#targetValue()">targetValue</a>:&nbsp;T</pre>
+      <p>the end value of the animation</p>
+    </div>
+    <div><a name="getTypeConverter()"></a><a name="setTypeConverter()"></a><a name="getTypeConverter--"></a><a name="setTypeConverter--"></a>
+      <h3 class="api-name" id="typeConverter()">typeConverter</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html#typeConverter()">typeConverter</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;T,&nbsp;V&gt;</pre>
+      <p>the <code><a href="/reference/kotlin/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code> that is used to convert animation type <code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html">T</a></code> from/to <code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html">V</a></code></p>
+    </div>
+  </body>
+</html>

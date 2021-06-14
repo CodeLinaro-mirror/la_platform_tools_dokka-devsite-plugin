@@ -1,0 +1,177 @@
+<html devsite="true">
+  <head>
+    <title>InfiniteRepeatableSpec</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>InfiniteRepeatableSpec</h1>
+{% setvar page_path %}androidx/compose/animation/core/InfiniteRepeatableSpec.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class InfiniteRepeatableSpec&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; implements <a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a></pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html">InfiniteRepeatableSpec</a></code> repeats the provided <code><a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#animation()">animation</a></code> infinite amount of times. It will never naturally finish. This means the animation will only be stopped via some form of manual cancellation. When used with transition or other animation composables, the infinite animations will stop when the composable is removed from the compose tree.</p>
+    <p>For non-infinite repeating animations, consider <code><a href="/reference/androidx/compose/animation/core/RepeatableSpec.html">RepeatableSpec</a></code>.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">See also</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/animation/core/package-summary.html#infiniteRepeatable(androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode)">infiniteRepeatable</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#animation()">animation</a></code></div>
+              <p>the <code><a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a></code> to be repeated</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#repeatMode()">repeatMode</a></code></div>
+              <p>whether animation should repeat by starting from the beginning (i.e.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#InfiniteRepeatableSpec(androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode)">InfiniteRepeatableSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;animation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a>&nbsp;repeatMode<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#equals(kotlin.Any)">equals</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#hashCode()">hashCode</a>()</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;</code></td>
+            <td>
+              <div><code>&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#vectorize(androidx.compose.animation.core.TwoWayConverter)">vectorize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;converter<br>)</code></div>
+              <p>Creates a <code><a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> with the given <code><a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public fields</h2>
+    <div><a name="getAnimation()"></a><a name="setAnimation()"></a><a name="getAnimation--"></a><a name="setAnimation--"></a>
+      <h3 class="api-name" id="animation()">animation</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#animation()">animation</a></pre>
+      <p>the <code><a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a></code> to be repeated</p>
+    </div>
+    <div><a name="getRepeatMode()"></a><a name="setRepeatMode()"></a><a name="getRepeatMode--"></a><a name="setRepeatMode--"></a>
+      <h3 class="api-name" id="repeatMode()">repeatMode</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a>&nbsp;<a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#repeatMode()">repeatMode</a></pre>
+      <p>whether animation should repeat by starting from the beginning (i.e.     <code><a href="/reference/androidx/compose/animation/core/RepeatMode.html#Restart">RepeatMode.Restart</a></code>) or from the end (i.e. <code><a href="/reference/androidx/compose/animation/core/RepeatMode.html#Reverse">RepeatMode.Reverse</a></code>)</p>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="InfiniteRepeatableSpec(androidx.compose.animation.core.DurationBasedAnimationSpec, androidx.compose.animation.core.RepeatMode)"></a><a name="InfiniteRepeatableSpec-androidx.compose.animation.core.DurationBasedAnimationSpec-androidx.compose.animation.core.RepeatMode-"></a><a name="infiniterepeatablespec"></a>
+      <h3 class="api-name" id="InfiniteRepeatableSpec(androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode)">InfiniteRepeatableSpec</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#InfiniteRepeatableSpec(androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode)">InfiniteRepeatableSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;animation,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a>&nbsp;repeatMode<br>)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;animation</code></td>
+              <td>
+                <p>the <code><a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a></code> to be repeated</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a>&nbsp;repeatMode</code></td>
+              <td>
+                <p>whether animation should repeat by starting from the beginning (i.e.     <code><a href="/reference/androidx/compose/animation/core/RepeatMode.html#Restart">RepeatMode.Restart</a></code>) or from the end (i.e. <code><a href="/reference/androidx/compose/animation/core/RepeatMode.html#Reverse">RepeatMode.Reverse</a></code>)</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="equals-kotlin.Any-"></a><a name="equals"></a>
+      <h3 class="api-name" id="equals(kotlin.Any)">equals</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#equals(kotlin.Any)">equals</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</pre>
+    </div>
+    <div><a name="hashCode--"></a><a name="hashcode"></a>
+      <h3 class="api-name" id="hashCode()">hashCode</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;int&nbsp;<a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#hashCode()">hashCode</a>()</pre>
+    </div>
+    <div><a name="vectorize-androidx.compose.animation.core.TwoWayConverter-"></a><a name="vectorize"></a>
+      <h3 class="api-name" id="vectorize(androidx.compose.animation.core.TwoWayConverter)">vectorize</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;<a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html#vectorize(androidx.compose.animation.core.TwoWayConverter)">vectorize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;converter<br>)</pre>
+      <p>Creates a <code><a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> with the given <code><a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code>.</p>
+      <p>The underlying animation system operates on <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>s. <code><a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html">T</a></code> will be converted to <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> to animate. <code><a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> describes how the converted <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> should be animated. E.g. The animation could simply interpolate between the start and end values (i.e.<code><a href="/reference/androidx/compose/animation/core/TweenSpec.html">TweenSpec</a></code>), or apply spring physics to produce the motion (i.e. <code><a href="/reference/androidx/compose/animation/core/SpringSpec.html">SpringSpec</a></code>), etc)</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;converter</code></td>
+              <td>
+                <p>converts the type <code><a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html">T</a></code> from and to <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> type</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

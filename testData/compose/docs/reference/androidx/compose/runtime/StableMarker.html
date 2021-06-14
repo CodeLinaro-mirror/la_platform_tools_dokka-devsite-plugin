@@ -1,0 +1,75 @@
+<html devsite="true">
+  <head>
+    <title>StableMarker</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>StableMarker</h1>
+{% setvar page_path %}androidx/compose/runtime/StableMarker.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>annotation StableMarker</pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/androidx/compose/runtime/StableMarker.html">StableMarker</a></code> marks an annotation as indicating a type is stable. A stable type obeys the following assumptions,</p>
+    <ol>
+      <li>
+        <p>The result of <code><a href="/reference/androidx/compose/runtime/StableMarker.html#equals(kotlin.Any)">equals</a></code> will always return the same result for the same two instances.</p>
+      </li>
+      <li>
+        <p>When a public property of the type changes, composition will be notified.</p>
+      </li>
+      <li>
+        <p>All public property types are stable.</p>
+      </li>
+    </ol>
+    <p>A type that is immutable obeys the above assumptions because the public values will never change. The <code><a href="/reference/androidx/compose/runtime/Immutable.html">Immutable</a></code> annotation is provided to mark immutable types as stable.</p>
+    <p>An object whose public properties do not change but is not immutable (for example, it has private mutable state or uses property delegation to a <code><a href="/reference/androidx/compose/runtime/MutableState.html">MutableState</a></code> object, but is otherwise immutable), should use the <code><a href="/reference/androidx/compose/runtime/Stable.html">Stable</a></code> annotation.</p>
+    <p>Mutable object that do not notify composition when they changed should not be marked as stable.</p>
+    <p>When all types passed as parameters to a <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> function are marked as stable then the parameter values are compared for equality based on positional memoization and the call is skipped if all the values are the equal to the previous call.</p>
+    <p>Primitive value types (such as Int, Float, etc), String and enum types are considered, a priori, stable.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">See also</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/Immutable.html">Immutable</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/Stable.html">Stable</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/StableMarker.html#StableMarker()">StableMarker</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="StableMarker--"></a><a name="stablemarker"></a>
+      <h3 class="api-name" id="StableMarker()">StableMarker</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/runtime/StableMarker.html#StableMarker()">StableMarker</a>()</pre>
+    </div>
+  </body>
+</html>

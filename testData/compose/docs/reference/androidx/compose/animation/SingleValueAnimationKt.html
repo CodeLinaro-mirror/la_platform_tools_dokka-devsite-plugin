@@ -1,0 +1,144 @@
+<html devsite="true">
+  <head>
+    <title>SingleValueAnimationKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>SingleValueAnimationKt</h1>
+{% setvar page_path %}androidx/compose/animation/SingleValueAnimationKt.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class SingleValueAnimationKt</pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationVector4D.html">AnimationVector4D</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/SingleValueAnimationKt.html#Animatable(Color)">Animatable</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;initialValue)</code></div>
+              <p>This <code><a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a></code> function creates a Color value holder that automatically animates its value when the value is changed via <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">animateTo</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>static&nbsp;final @<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/SingleValueAnimationKt.html#animateColorAsState(Color,androidx.compose.animation.core.AnimationSpec,kotlin.Function1)">animateColorAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&gt;&nbsp;animationSpec,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;finishedListener<br>)</code></div>
+              <p>Fire-and-forget animation function for Color.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="Animatable-Color-"></a><a name="animatable"></a>
+      <h3 class="api-name" id="Animatable(Color)">Animatable</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;static&nbsp;final&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationVector4D.html">AnimationVector4D</a>&gt;&nbsp;<a href="/reference/androidx/compose/animation/SingleValueAnimationKt.html#Animatable(Color)">Animatable</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;initialValue)</pre>
+      <p>This <code><a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a></code> function creates a Color value holder that automatically animates its value when the value is changed via <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">animateTo</a></code>. <code><a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a></code> supports value change during an ongoing value change animation. When that happens, a new animation will transition <code><a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a></code> from its current value (i.e. value at the point of interruption) to the new target. This ensures that the value change is <em>always</em> continuous using <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">animateTo</a></code>. If <code><a href="/reference/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code> animation (i.e. default animation) is used with <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">animateTo</a></code>, the velocity change will be guaranteed to be continuous as well.</p>
+      <p>Unlike <code><a href="/reference/androidx/compose/animation/core/AnimationState.html">AnimationState</a></code>, <code><a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a></code> ensures mutual exclusiveness on its animation. To do so, when a new animation is started via <code><a href="/reference/androidx/compose/animation/core/package-summary.html#(androidx.compose.animation.core.AnimationState).animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Boolean,kotlin.Function1)">animateTo</a></code> (or <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animateDecay(kotlin.Float,kotlin.Float,androidx.compose.animation.core.FloatDecayAnimationSpec,kotlin.Function2)">animateDecay</a></code>), any ongoing animation job will be cancelled via a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-cancellation-exception/index.html">CancellationException</a></code>.</p>
+      <p><code><a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a></code> also supports animating data types other than <a href="[Color]">Color</a>, such as Floats and generic types. See <code><a href="/reference/androidx/compose/animation/core/Animatable.html">androidx.compose.animation.core.Animatable</a></code> for other variants.</p>
+      <pre class="prettyprint">
+import androidx.compose.animation.Animatable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
+
+@Composable
+fun animate(
+    targetValue: Color,
+    animationSpec: AnimationSpec&lt;Color&gt;,
+    onFinished: (Color) -&gt; Unit
+): Color {
+    // Creates an Animatable of Color, and remembers it.
+    val color = remember { Animatable(targetValue) }
+    val finishedListener = rememberUpdatedState(onFinished)
+    // Launches a new coroutine whenever the target value or animation spec has changed. This
+    // automatically cancels the previous job/animation.
+    LaunchedEffect(targetValue, animationSpec) {
+        color.animateTo(targetValue, animationSpec)
+        // Invokes finished listener. This line will not be executed if the job gets canceled
+        // halfway through an animation.
+        finishedListener.value(targetValue)
+    }
+    return color.value
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;initialValue</code></td>
+              <td>
+                <p>initial value of the <code><a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a></code></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="animateColorAsState(Color, androidx.compose.animation.core.AnimationSpec, kotlin.Function1)"></a><a name="animateColorAsState-Color-androidx.compose.animation.core.AnimationSpec-kotlin.Function1-"></a><a name="animatecolorasstate"></a>
+      <h3 class="api-name" id="animateColorAsState(Color,androidx.compose.animation.core.AnimationSpec,kotlin.Function1)">animateColorAsState</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&gt;&nbsp;<a href="/reference/androidx/compose/animation/SingleValueAnimationKt.html#animateColorAsState(Color,androidx.compose.animation.core.AnimationSpec,kotlin.Function1)">animateColorAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&gt;&nbsp;animationSpec,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;finishedListener<br>)</pre>
+      <p>Fire-and-forget animation function for <a href="[Color]">Color</a>. This Composable function is overloaded for different parameter types such as <a href="[Dp]">Dp</a>, <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code>, <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code>, <a href="[Size]">Size</a>, <a href="[Offset]">Offset</a>, etc. When the provided <code><a href="/reference/androidx/compose/animation/package-summary.html#animateColorAsState(Color,androidx.compose.animation.core.AnimationSpec,kotlin.Function1)">targetValue</a></code> is changed, the animation will run automatically. If there is already an animation in-flight when <code><a href="/reference/androidx/compose/animation/package-summary.html#animateColorAsState(Color,androidx.compose.animation.core.AnimationSpec,kotlin.Function1)">targetValue</a></code> changes, the on-going animation will adjust course to animate towards the new target value.</p>
+      <p><code><a href="/reference/androidx/compose/animation/package-summary.html#animateColorAsState(Color,androidx.compose.animation.core.AnimationSpec,kotlin.Function1)">animateColorAsState</a></code> returns a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> object. The value of the state object will continuously be updated by the animation until the animation finishes.</p>
+      <p>Note, <code><a href="/reference/androidx/compose/animation/package-summary.html#animateColorAsState(Color,androidx.compose.animation.core.AnimationSpec,kotlin.Function1)">animateColorAsState</a></code> cannot be canceled/stopped without removing this composable function from the tree. See <code><a href="/reference/androidx/compose/animation/package-summary.html#Animatable(Color)">Animatable</a></code> for cancelable animations.</p>
+      <pre class="prettyprint">
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+
+@Composable
+fun ColorAnimation(primary: Boolean) {
+    // Animates to primary or secondary color, depending on whether [primary] is true
+    // [animateState] returns the current animation value in a State&lt;Color&gt; in this example. We
+    // use the State&lt;Color&gt; object as a property delegate here.
+    val color: Color by animateColorAsState(
+        if (primary) MaterialTheme.colors.primary else MaterialTheme.colors.secondary
+    )
+    Box(modifier = Modifier.background(color))
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;targetValue</code></td>
+              <td>
+                <p>Target value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&gt;&nbsp;animationSpec</code></td>
+              <td>
+                <p>The animation that will be used to change the value through time,     <code><a href="/reference/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code> by default</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;finishedListener</code></td>
+              <td>
+                <p>An optional listener to get notified when the animation is finished.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

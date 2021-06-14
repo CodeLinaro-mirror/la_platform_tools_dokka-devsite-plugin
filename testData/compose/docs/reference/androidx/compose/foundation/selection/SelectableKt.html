@@ -1,0 +1,202 @@
+<html devsite="true">
+  <head>
+    <title>SelectableKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>SelectableKt</h1>
+{% setvar page_path %}androidx/compose/foundation/selection/SelectableKt.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class SelectableKt</pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/selection/SelectableKt.html#(Modifier).selectable(kotlin.Boolean,kotlin.Boolean,Role,kotlin.Function0)">selectable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;selected,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;enabled,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;role,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onClick<br>)</code></div>
+              <p>Configure component to be selectable, usually as a part of a mutually exclusive group, where only one item can be selected at any point in time.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/selection/SelectableKt.html#(Modifier).selectable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.foundation.Indication,kotlin.Boolean,Role,kotlin.Function0)">selectable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;selected,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>&nbsp;interactionSource,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/androidx/compose/foundation/Indication.html">Indication</a>&nbsp;indication,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;enabled,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;role,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onClick<br>)</code></div>
+              <p>Configure component to be selectable, usually as a part of a mutually exclusive group, where only one item can be selected at any point in time.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="(Modifier).selectable(kotlin.Boolean, kotlin.Boolean, Role, kotlin.Function0)"></a><a name="-Modifier-.selectable-kotlin.Boolean-kotlin.Boolean-Role-kotlin.Function0-"></a><a name="selectable"></a>
+      <h3 class="api-name" id="(Modifier).selectable(kotlin.Boolean,kotlin.Boolean,Role,kotlin.Function0)">selectable</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;static&nbsp;final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/compose/foundation/selection/SelectableKt.html#(Modifier).selectable(kotlin.Boolean,kotlin.Boolean,Role,kotlin.Function0)">selectable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;selected,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;enabled,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;role,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onClick<br>)</pre>
+      <p>Configure component to be selectable, usually as a part of a mutually exclusive group, where only one item can be selected at any point in time. A typical example of mutually exclusive set is a RadioGroup or a row of Tabs. To ensure correct accessibility behavior, make sure to pass <a href="[Modifier.selectableGroup]">Modifier.selectableGroup</a> modifier into the RadioGroup or the row.</p>
+      <p>If you want to make an item support on/off capabilities without being part of a set, consider using <a href="[Modifier.toggleable]">Modifier.toggleable</a></p>
+      <p>This version has no <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> or <code><a href="/reference/androidx/compose/foundation/Indication.html">Indication</a></code> parameters, default indication from <code><a href="/reference/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> will be used. To specify <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> or <code><a href="/reference/androidx/compose/foundation/Indication.html">Indication</a></code>, use another overload.</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+val option1 = Color.Red
+val option2 = Color.Blue
+var selectedOption by remember { mutableStateOf(option1) }
+Column {
+    Text(&quot;Selected: $selectedOption&quot;)
+    Row {
+        listOf(option1, option2).forEach { color -&gt;
+            val selected = selectedOption == color
+            Box(
+                Modifier
+                    .size(100.dp)
+                    .background(color = color)
+                    .selectable(
+                        selected = selected,
+                        onClick = { selectedOption = color }
+                    )
+            )
+        }
+    }
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>boolean&nbsp;selected</code></td>
+              <td>
+                <p>whether or not this item is selected in a mutually exclusion set</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>boolean&nbsp;enabled</code></td>
+              <td>
+                <p>whether or not this <code><a href="/reference/androidx/compose/foundation/selection/package-summary.html#(Modifier).selectable(kotlin.Boolean,kotlin.Boolean,Role,kotlin.Function0)">selectable</a></code> will handle input events and appear enabled from a semantics perspective</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;role</code></td>
+              <td>
+                <p>the type of user interface element. Accessibility services might use this to describe the element or do customizations</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onClick</code></td>
+              <td>
+                <p>callback to invoke when this item is clicked</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="(Modifier).selectable(kotlin.Boolean, androidx.compose.foundation.interaction.MutableInteractionSource, androidx.compose.foundation.Indication, kotlin.Boolean, Role, kotlin.Function0)"></a><a name="-Modifier-.selectable-kotlin.Boolean-androidx.compose.foundation.interaction.MutableInteractionSource-androidx.compose.foundation.Indication-kotlin.Boolean-Role-kotlin.Function0-"></a><a name="selectable"></a>
+      <h3 class="api-name" id="(Modifier).selectable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.foundation.Indication,kotlin.Boolean,Role,kotlin.Function0)">selectable</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;static&nbsp;final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/compose/foundation/selection/SelectableKt.html#(Modifier).selectable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.foundation.Indication,kotlin.Boolean,Role,kotlin.Function0)">selectable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;selected,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>&nbsp;interactionSource,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/androidx/compose/foundation/Indication.html">Indication</a>&nbsp;indication,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;enabled,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;role,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onClick<br>)</pre>
+      <p>Configure component to be selectable, usually as a part of a mutually exclusive group, where only one item can be selected at any point in time. A typical example of mutually exclusive set is a RadioGroup or a row of Tabs. To ensure correct accessibility behavior, make sure to pass <a href="[Modifier.selectableGroup]">Modifier.selectableGroup</a> modifier into the RadioGroup or the row.</p>
+      <p>If you want to make an item support on/off capabilities without being part of a set, consider using <a href="[Modifier.toggleable]">Modifier.toggleable</a></p>
+      <p>This version requires both <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> and <code><a href="/reference/androidx/compose/foundation/Indication.html">Indication</a></code> to work properly. Use another overload if you don't need these parameters.</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+val option1 = Color.Red
+val option2 = Color.Blue
+var selectedOption by remember { mutableStateOf(option1) }
+Column {
+    Text(&quot;Selected: $selectedOption&quot;)
+    Row {
+        listOf(option1, option2).forEach { color -&gt;
+            val selected = selectedOption == color
+            Box(
+                Modifier
+                    .size(100.dp)
+                    .background(color = color)
+                    .selectable(
+                        selected = selected,
+                        onClick = { selectedOption = color }
+                    )
+            )
+        }
+    }
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>boolean&nbsp;selected</code></td>
+              <td>
+                <p>whether or not this item is selected in a mutually exclusion set</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a>&nbsp;interactionSource</code></td>
+              <td>
+                <p><code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> that will be used to emit press events when this selectable is being pressed.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/androidx/compose/foundation/Indication.html">Indication</a>&nbsp;indication</code></td>
+              <td>
+                <p>indication to be shown when the modified element is pressed. By default, the indication from <code><a href="/reference/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> will be used. Set to <code>null</code> to show no indication, or current value from <code><a href="/reference/androidx/compose/foundation/package-summary.html#LocalIndication()">LocalIndication</a></code> to show theme default</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>boolean&nbsp;enabled</code></td>
+              <td>
+                <p>whether or not this <code><a href="/reference/androidx/compose/foundation/selection/package-summary.html#(Modifier).selectable(kotlin.Boolean,kotlin.Boolean,Role,kotlin.Function0)">selectable</a></code> will handle input events and appear enabled from a semantics perspective</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;role</code></td>
+              <td>
+                <p>the type of user interface element. Accessibility services might use this to describe the element or do customizations</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;onClick</code></td>
+              <td>
+                <p>callback to invoke when this item is clicked</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

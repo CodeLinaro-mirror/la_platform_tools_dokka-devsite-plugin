@@ -1,0 +1,62 @@
+<html devsite="true">
+  <head>
+    <title>DecayAnimationSpec</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>DecayAnimationSpec</h1>
+{% setvar page_path %}androidx/compose/animation/core/DecayAnimationSpec.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>interface DecayAnimationSpec&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a></code> stores the specification of an animation, including 1) the data type to be animated, and 2) the animation configuration (i.e. <code><a href="/reference/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html">VectorizedDecayAnimationSpec</a></code>) that will be used once the data (of type <code><a href="/reference/androidx/compose/animation/core/DecayAnimationSpec.html">T</a></code>) has been converted to <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>.</p>
+    <p>Any type <code><a href="/reference/androidx/compose/animation/core/DecayAnimationSpec.html">T</a></code> can be animated by the system as long as a <code><a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code> is supplied to convert the data type <code><a href="/reference/androidx/compose/animation/core/DecayAnimationSpec.html">T</a></code> from and to an <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>. There are a number of converters available out of the box. For example, to animate <a href="[androidx.compose.ui.unit.IntOffset]">androidx.compose.ui.unit.IntOffset</a> the system uses <a href="[IntOffset.Companion.VectorConverter]">IntOffset.Companion.VectorConverter</a> to convert the object to <code><a href="/reference/androidx/compose/animation/core/AnimationVector2D.html">AnimationVector2D</a></code>, so that both x and y dimensions are animated independently with separate velocity tracking. This enables multidimensional objects to be animated in a true multi-dimensional way. It is particularly useful for smoothly handling animation interruptions (such as when the target changes during the animation).</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html">VectorizedDecayAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;</code></td>
+            <td>
+              <div><code>&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/DecayAnimationSpec.html#vectorize(androidx.compose.animation.core.TwoWayConverter)">vectorize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;typeConverter<br>)</code></div>
+              <p>Creates a <code><a href="/reference/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html">VectorizedDecayAnimationSpec</a></code> with the given <code><a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="vectorize-androidx.compose.animation.core.TwoWayConverter-"></a><a name="vectorize"></a>
+      <h3 class="api-name" id="vectorize(androidx.compose.animation.core.TwoWayConverter)">vectorize</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;<a href="/reference/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html">VectorizedDecayAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/DecayAnimationSpec.html#vectorize(androidx.compose.animation.core.TwoWayConverter)">vectorize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;typeConverter<br>)</pre>
+      <p>Creates a <code><a href="/reference/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html">VectorizedDecayAnimationSpec</a></code> with the given <code><a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code>.</p>
+      <p>The underlying animation system operates on <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>s. <code><a href="/reference/androidx/compose/animation/core/DecayAnimationSpec.html">T</a></code> will be converted to <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> to animate. <code><a href="/reference/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html">VectorizedDecayAnimationSpec</a></code> describes how the converted <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> should be animated.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;typeConverter</code></td>
+              <td>
+                <p>converts the type <code><a href="/reference/androidx/compose/animation/core/DecayAnimationSpec.html">T</a></code> from and to <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> type</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

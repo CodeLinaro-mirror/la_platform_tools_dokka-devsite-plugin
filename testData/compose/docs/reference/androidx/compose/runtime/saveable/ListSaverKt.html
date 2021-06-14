@@ -1,0 +1,53 @@
+<html devsite="true">
+  <head>
+    <title>ListSaverKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>ListSaverKt</h1>
+{% setvar page_path %}androidx/compose/runtime/saveable/ListSaverKt.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class ListSaverKt</pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/saveable/Saver.html">Saver</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Original,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</code></td>
+            <td>
+              <div><code>&lt;Original&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;Saveable&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/saveable/ListSaverKt.html#listSaver(kotlin.Function2,kotlin.Function1)">listSaver</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/saveable/SaverScope.html">SaverScope</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> value,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Saveable&gt;&gt;&nbsp;save,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Saveable&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Original&gt;&nbsp;restore<br>)</code></div>
+              <p>The <code><a href="/reference/androidx/compose/runtime/saveable/Saver.html">Saver</a></code> implementation which allows to represent your <code><a href="/reference/androidx/compose/runtime/saveable/package-summary.html#listSaver(kotlin.Function2,kotlin.Function1)">Original</a></code> class as a list of <code><a href="/reference/androidx/compose/runtime/saveable/package-summary.html#listSaver(kotlin.Function2,kotlin.Function1)">Saveable</a></code> values.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="listSaver(kotlin.Function2, kotlin.Function1)"></a><a name="listSaver-kotlin.Function2-kotlin.Function1-"></a><a name="listsaver"></a>
+      <h3 class="api-name" id="listSaver(kotlin.Function2,kotlin.Function1)">listSaver</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;static&nbsp;final&nbsp;<a href="/reference/androidx/compose/runtime/saveable/Saver.html">Saver</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Original,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;&lt;Original&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;Saveable&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/saveable/ListSaverKt.html#listSaver(kotlin.Function2,kotlin.Function1)">listSaver</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/saveable/SaverScope.html">SaverScope</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> value,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Saveable&gt;&gt;&nbsp;save,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Saveable&gt;,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Original&gt;&nbsp;restore<br>)</pre>
+      <p>The <code><a href="/reference/androidx/compose/runtime/saveable/Saver.html">Saver</a></code> implementation which allows to represent your <code><a href="/reference/androidx/compose/runtime/saveable/package-summary.html#listSaver(kotlin.Function2,kotlin.Function1)">Original</a></code> class as a list of <code><a href="/reference/androidx/compose/runtime/saveable/package-summary.html#listSaver(kotlin.Function2,kotlin.Function1)">Saveable</a></code> values.</p>
+      <p>What types can be saved is defined by <code><a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.html">SaveableStateRegistry</a></code>, by default everything which can be stored in the Bundle class can be saved.</p>
+      <p>You can use it as a parameter for <code><a href="/reference/androidx/compose/runtime/saveable/package-summary.html#rememberSaveable(kotlin.Array,androidx.compose.runtime.saveable.Saver,kotlin.String,kotlin.Function0)">rememberSaveable</a></code>.</p>
+      <pre class="prettyprint">
+import androidx.compose.runtime.saveable.listSaver
+
+data class Size(val x: Int, val y: Int)
+
+val sizeSaver = listSaver&lt;Size, Int&gt;(
+    save = { listOf(it.x, it.y) },
+    restore = { Size(it[0], it[1]) }
+)</pre>
+    </div>
+  </body>
+</html>

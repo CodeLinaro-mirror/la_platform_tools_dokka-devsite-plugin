@@ -1,0 +1,44 @@
+<html devsite="true">
+  <head>
+    <title>Recomposer.Companion</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>Recomposer.Companion</h1>
+{% setvar page_path %}androidx/compose/runtime/Recomposer.Companion.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>object Recomposer.Companion</pre>
+    </p>
+    <hr>
+    <p>hack: the companion object is thread local in Kotlin/Native to avoid freezing <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.Companion.html#_runningRecomposers()">_runningRecomposers</a></code> with the current memory model. As a side effect, recomposers are now forced to be single threaded in Kotlin/Native targets.</p>
+    <p>This annotation WILL BE REMOVED with the new memory model of Kotlin/Native.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/index.html">StateFlow</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="/reference/kotlin/androidx/compose/runtime/RecomposerInfo.html">RecomposerInfo</a>&gt;&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.Companion.html#runningRecomposers()">runningRecomposers</a></code></div>
+              <p>An observable <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a></code> of <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposerInfo.html">RecomposerInfo</a></code>s for currently <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#runRecomposeAndApplyChanges()">running</a></code><code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>s.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getRunningRecomposers()"></a><a name="setRunningRecomposers()"></a><a name="getRunningRecomposers--"></a><a name="setRunningRecomposers--"></a>
+      <h3 class="api-name" id="runningRecomposers()">runningRecomposers</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/Recomposer.Companion.html#runningRecomposers()">runningRecomposers</a>:&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/index.html">StateFlow</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="/reference/kotlin/androidx/compose/runtime/RecomposerInfo.html">RecomposerInfo</a>&gt;&gt;</pre>
+      <p>An observable <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a></code> of <code><a href="/reference/kotlin/androidx/compose/runtime/RecomposerInfo.html">RecomposerInfo</a></code>s for currently <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#runRecomposeAndApplyChanges()">running</a></code><code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>s. Emitted sets are immutable.</p>
+    </div>
+  </body>
+</html>

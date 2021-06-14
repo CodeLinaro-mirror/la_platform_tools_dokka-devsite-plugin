@@ -1,0 +1,69 @@
+<html devsite="true">
+  <head>
+    <title>ContentAlphaKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>ContentAlphaKt</h1>
+{% setvar page_path %}androidx/compose/material/ContentAlphaKt.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class ContentAlphaKt</pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/material/package-summary.html#LocalContentAlpha()">LocalContentAlpha</a></code></div>
+              <p>CompositionLocal containing the preferred content alpha for a given position in the hierarchy.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public fields</h2>
+    <div><a name="getLocalContentAlpha()"></a><a name="setLocalContentAlpha()"></a><a name="getLocalContentAlpha--"></a><a name="setLocalContentAlpha--"></a>
+      <h3 class="api-name" id="LocalContentAlpha()">LocalContentAlpha</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>&gt;&nbsp;<a href="/reference/androidx/compose/material/package-summary.html#LocalContentAlpha()">LocalContentAlpha</a></pre>
+      <p>CompositionLocal containing the preferred content alpha for a given position in the hierarchy. This alpha is used for text and iconography (<code><a href="/reference/androidx/compose/material/package-summary.html#Text(kotlin.String,Modifier,Color,TextUnit,FontStyle,FontWeight,FontFamily,TextUnit,TextDecoration,TextAlign,TextUnit,TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.Function1,TextStyle)">Text</a></code> and <code><a href="/reference/androidx/compose/material/package-summary.html#Icon(ImageVector,kotlin.String,Modifier,Color)">Icon</a></code>) to emphasize / de-emphasize different parts of a component. See the Material guide on <a href="https://material.io/design/color/text-legibility.html">Text Legibility</a> for more information on alpha levels used by text and iconography.</p>
+      <p>See <code><a href="/reference/androidx/compose/material/ContentAlpha.html">ContentAlpha</a></code> for the default levels used by most Material components.</p>
+      <p><code><a href="/reference/androidx/compose/material/MaterialTheme.html">MaterialTheme</a></code> sets this to <code><a href="/reference/androidx/compose/material/ContentAlpha.html#high()">ContentAlpha.high</a></code> by default, as this is the default alpha for body text.</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Text
+import androidx.compose.runtime.CompositionLocalProvider
+
+// Note the alpha values listed below are the values for light theme. The values are slightly
+// different in dark theme to provide proper contrast against the background.
+Column {
+    Text(
+        &quot;No content alpha applied - uses the default content alpha set by MaterialTheme - &quot; +
+            &quot;87% alpha&quot;
+    )
+    CompositionLocalProvider(LocalContentAlpha provides 1.00f) {
+        Text(&quot;1.00f alpha applied - 100% alpha&quot;)
+    }
+    CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.high) {
+        Text(&quot;High content alpha applied - 87% alpha&quot;)
+    }
+    CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+        Text(&quot;Medium content alpha applied - 60% alpha&quot;)
+    }
+    CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.disabled) {
+        Text(&quot;Disabled content alpha applied - 38% alpha&quot;)
+    }
+}</pre>
+    </div>
+  </body>
+</html>

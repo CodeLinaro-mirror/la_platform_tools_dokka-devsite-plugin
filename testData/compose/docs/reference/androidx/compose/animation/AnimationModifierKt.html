@@ -1,0 +1,102 @@
+<html devsite="true">
+  <head>
+    <title>AnimationModifierKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>AnimationModifierKt</h1>
+{% setvar page_path %}androidx/compose/animation/AnimationModifierKt.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class AnimationModifierKt</pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>static&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/AnimationModifierKt.html#(Modifier).animateContentSize(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function2)">animateContentSize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&gt;&nbsp;animationSpec,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;finishedListener<br>)</code></div>
+              <p>This modifier animates its own size when its child modifier (or the child composable if it is already at the tail of the chain) changes size.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="(Modifier).animateContentSize(androidx.compose.animation.core.FiniteAnimationSpec, kotlin.Function2)"></a><a name="-Modifier-.animateContentSize-androidx.compose.animation.core.FiniteAnimationSpec-kotlin.Function2-"></a><a name="animatecontentsize"></a>
+      <h3 class="api-name" id="(Modifier).animateContentSize(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function2)">animateContentSize</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;static&nbsp;final&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/compose/animation/AnimationModifierKt.html#(Modifier).animateContentSize(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function2)">animateContentSize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&gt;&nbsp;animationSpec,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;finishedListener<br>)</pre>
+      <p>This modifier animates its own size when its child modifier (or the child composable if it is already at the tail of the chain) changes size. This allows the parent modifier to observe a smooth size change, resulting in an overall continuous visual change.</p>
+      <p>A <code><a href="/reference/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a></code> can be optionally specified for the size change animation. By default, <code><a href="/reference/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code> will be used.</p>
+      <p>An optional <code><a href="/reference/androidx/compose/animation/package-summary.html#(Modifier).animateContentSize(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function2)">finishedListener</a></code> can be supplied to get notified when the size change animation is finished. Since the content size change can be dynamic in many cases, both initial value and target value (i.e. final size) will be passed to the <code><a href="/reference/androidx/compose/animation/package-summary.html#(Modifier).animateContentSize(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function2)">finishedListener</a></code>. <b>Note:</b> if the animation is interrupted, the initial value will be the size at the point of interruption. This is intended to help determine the direction of the size change (i.e. expand or collapse in x and y dimensions).</p>
+      <pre class="prettyprint">
+import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+val shortText = &quot;Hi&quot;
+val longText = &quot;Very long text\nthat spans across\nmultiple lines&quot;
+var short by remember { mutableStateOf(true) }
+Box(
+    modifier = Modifier
+        .background(
+            Color.Blue,
+            RoundedCornerShape(15.dp)
+        )
+        .clickable { short = !short }
+        .padding(20.dp)
+        .wrapContentSize()
+        .animateContentSize()
+) {
+    Text(
+        if (short) {
+            shortText
+        } else {
+            longText
+        },
+        style = LocalTextStyle.current.copy(color = Color.White)
+    )
+}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&gt;&nbsp;animationSpec</code></td>
+              <td>
+                <p>a finite animation that will be used to animate size change, <code><a href="/reference/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code> by     default</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> Function2&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;finishedListener</code></td>
+              <td>
+                <p>an optional listener to be called when the content change animation is     completed.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

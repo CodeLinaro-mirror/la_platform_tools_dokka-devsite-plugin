@@ -1,0 +1,150 @@
+<html devsite="true">
+  <head>
+    <title>StateObject</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>StateObject</h1>
+{% setvar page_path %}androidx/compose/runtime/snapshots/StateObject.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>interface StateObject</pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateList.html">SnapshotStateList</a>, <a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateMap.html">SnapshotStateMap</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <tbody>
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateList.html">SnapshotStateList</a></code></td>
+                <td>
+                  <p>An implementation of <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a></code> that can be observed and snapshot.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateMap.html">SnapshotStateMap</a></code></td>
+                <td>
+                  <p>An implementation of <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a></code> that can be observed and snapshot.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>Interface implemented by all snapshot aware state objects. Used by this module to maintain the state records of a state object.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>open <a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>?</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">mergeRecords</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;previous:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;current:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;applied:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a><br>)</code></div>
+              <p>Produce a merged state based on the conflicting state changes.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#prependStateRecord(androidx.compose.runtime.snapshots.StateRecord)">prependStateRecord</a>(value:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>)</code></div>
+              <p>Add a new state record to the beginning of a list.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#firstStateRecord()">firstStateRecord</a></code></div>
+              <p>The first state record in a linked list of state records.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="mergeRecords(androidx.compose.runtime.snapshots.StateRecord, androidx.compose.runtime.snapshots.StateRecord, androidx.compose.runtime.snapshots.StateRecord)"></a><a name="mergeRecords-androidx.compose.runtime.snapshots.StateRecord-androidx.compose.runtime.snapshots.StateRecord-androidx.compose.runtime.snapshots.StateRecord-"></a><a name="mergerecords"></a>
+      <h3 class="api-name" id="mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">mergeRecords</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">mergeRecords</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;previous:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;current:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;applied:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a><br>):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>?</pre>
+      <p>Produce a merged state based on the conflicting state changes.</p>
+      <p>This method must not modify any of the records received and should treat the state records as immutable, even the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">applied</a></code> record.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>previous:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a></code></td>
+              <td>
+                <p>the state record that was used to create the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">applied</a></code> record and is a state that also (though indirectly) produced the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">current</a></code> record.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>current:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a></code></td>
+              <td>
+                <p>the state record of the parent snapshot or global state.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>applied:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a></code></td>
+              <td>
+                <p>the state record that is being applied of the parent snapshot or global state.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>?</code></td>
+              <td>
+                <p>the modified state or <code>null</code> if the values cannot be merged. If the states cannot be merged the current apply will fail. Any of the parameters can be returned as a result. If it is not one of the parameter values then it <em>must</em> be a new value that is created by calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html#create()">StateRecord.create</a></code> on one of the records passed and then can be modified to have the merged value before being returned. If a new record is returned <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">MutableSnapshot.apply</a></code> will update the internal snapshot id and call <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#prependStateRecord(androidx.compose.runtime.snapshots.StateRecord)">prependStateRecord</a></code> if the record is used.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="prependStateRecord-androidx.compose.runtime.snapshots.StateRecord-"></a><a name="prependstaterecord"></a>
+      <h3 class="api-name" id="prependStateRecord(androidx.compose.runtime.snapshots.StateRecord)">prependStateRecord</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#prependStateRecord(androidx.compose.runtime.snapshots.StateRecord)">prependStateRecord</a>(value:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Add a new state record to the beginning of a list. After this call <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#firstStateRecord()">firstStateRecord</a></code> should be <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#prependStateRecord(androidx.compose.runtime.snapshots.StateRecord)">value</a></code>.</p>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getFirstStateRecord()"></a><a name="setFirstStateRecord()"></a><a name="getFirstStateRecord--"></a><a name="setFirstStateRecord--"></a>
+      <h3 class="api-name" id="firstStateRecord()">firstStateRecord</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#firstStateRecord()">firstStateRecord</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a></pre>
+      <p>The first state record in a linked list of state records.</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,129 @@
+<html devsite="true">
+  <head>
+    <title>AnimationResult</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>AnimationResult</h1>
+{% setvar page_path %}androidx/compose/animation/core/AnimationResult.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class AnimationResult&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt;</pre>
+    </p>
+    <hr>
+    <p>AnimationResult contains information about an animation at the end of the animation. <code><a href="/reference/androidx/compose/animation/core/AnimationResult.html#endState()">endState</a></code> captures the value/velocity/frame time, etc of the animation at its last frame. It can be useful for starting another animation to continue the velocity from the previously interrupted animation. <code><a href="/reference/androidx/compose/animation/core/AnimationResult.html#endReason()">endReason</a></code> describes why the animation ended, it could be either of the following:</p>
+    <ul>
+      <li>
+        <p><code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#Finished">Finished</a></code>, when the animation finishes successfully without any interruption</p>
+      </li>
+      <li>
+        <p><code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#BoundReached">BoundReached</a></code> If the animation reaches the either <code><a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">lowerBound</a></code> or     <code><a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">upperBound</a></code> in any dimension, the animation will end with     <code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#BoundReached">BoundReached</a></code> being the end reason.</p>
+      </li>
+    </ul>
+    <pre class="prettyprint">
+import androidx.compose.animation.core.exponentialDecay
+import androidx.compose.ui.geometry.Offset
+
+suspend fun CoroutineScope.animateBouncingOffBounds(
+    animatable: Animatable&lt;Offset, *&gt;,
+    flingVelocity: Offset,
+    parentSize: Size
+) {
+    launch {
+        var startVelocity = flingVelocity
+        // Set bounds for the animation, so that when it reaches bounds it will stop
+        // immediately. We can then inspect the returned `AnimationResult` and decide whether
+        // we should start another animation.
+        animatable.updateBounds(Offset(0f, 0f), Offset(parentSize.width, parentSize.height))
+        do {
+            val result = animatable.animateDecay(startVelocity, exponentialDecay())
+            // Copy out the end velocity of the previous animation.
+            startVelocity = result.endState.velocity
+
+            // Negate the velocity for the dimension that hits the bounds, to create a
+            // bouncing off the bounds effect.
+            with(animatable) {
+                if (value.x == upperBound?.x || value.x == lowerBound?.x) {
+                    // x dimension hits bounds
+                    startVelocity = startVelocity.copy(x = -startVelocity.x)
+                }
+                if (value.y == upperBound?.y || value.y == lowerBound?.y) {
+                    // y dimension hits bounds
+                    startVelocity = startVelocity.copy(y = -startVelocity.y)
+                }
+            }
+            // Repeat the animation until the animation ends for reasons other than hitting
+            // bounds, e.g. if `stop()` is called, or preempted by another animation.
+        } while (result.endReason == AnimationEndReason.BoundReached)
+    }
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationEndReason.html">AnimationEndReason</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/AnimationResult.html#endReason()">endReason</a></code></div>
+              <p>The reason why the animation has ended.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationState.html">AnimationState</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/AnimationResult.html#endState()">endState</a></code></div>
+              <p>The state of the animation in its last frame before it's canceled or reset.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/AnimationResult.html#AnimationResult(androidx.compose.animation.core.AnimationState,androidx.compose.animation.core.AnimationEndReason)">AnimationResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationState.html">AnimationState</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;endState,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationEndReason.html">AnimationEndReason</a>&nbsp;endReason<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public fields</h2>
+    <div><a name="getEndReason()"></a><a name="setEndReason()"></a><a name="getEndReason--"></a><a name="setEndReason--"></a>
+      <h3 class="api-name" id="endReason()">endReason</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationEndReason.html">AnimationEndReason</a>&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationResult.html#endReason()">endReason</a></pre>
+      <p>The reason why the animation has ended. Could be either of the following:</p>
+      <ul>
+        <li>
+          <p><code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#Finished">Finished</a></code>, when the animation finishes successfully without any interruption</p>
+        </li>
+        <li>
+          <p><code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#BoundReached">BoundReached</a></code> If the animation reaches the either <code><a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">lowerBound</a></code> or     <code><a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">upperBound</a></code> in any dimension, the animation will end with     <code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#BoundReached">BoundReached</a></code> being the end reason.</p>
+        </li>
+      </ul>
+    </div>
+    <div><a name="getEndState()"></a><a name="setEndState()"></a><a name="getEndState--"></a><a name="setEndState--"></a>
+      <h3 class="api-name" id="endState()">endState</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationState.html">AnimationState</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationResult.html#endState()">endState</a></pre>
+      <p>The state of the animation in its last frame before it's canceled or reset. This captures the animation value/velocity/frame time, etc at the point of interruption, or before the velocity is reset when the animation finishes successfully.</p>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="AnimationResult(androidx.compose.animation.core.AnimationState, androidx.compose.animation.core.AnimationEndReason)"></a><a name="AnimationResult-androidx.compose.animation.core.AnimationState-androidx.compose.animation.core.AnimationEndReason-"></a><a name="animationresult"></a>
+      <h3 class="api-name" id="AnimationResult(androidx.compose.animation.core.AnimationState,androidx.compose.animation.core.AnimationEndReason)">AnimationResult</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/AnimationResult.html#AnimationResult(androidx.compose.animation.core.AnimationState,androidx.compose.animation.core.AnimationEndReason)">AnimationResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationState.html">AnimationState</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;endState,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationEndReason.html">AnimationEndReason</a>&nbsp;endReason<br>)</pre>
+    </div>
+  </body>
+</html>

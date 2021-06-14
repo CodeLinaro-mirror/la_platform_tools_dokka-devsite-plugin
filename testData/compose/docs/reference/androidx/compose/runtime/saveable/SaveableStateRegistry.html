@@ -1,0 +1,172 @@
+<html devsite="true">
+  <head>
+    <title>SaveableStateRegistry</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>SaveableStateRegistry</h1>
+{% setvar page_path %}androidx/compose/runtime/saveable/SaveableStateRegistry.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>interface SaveableStateRegistry</pre>
+    </p>
+    <hr>
+    <p>Allows components to save and restore their state using the saved instance state mechanism.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.Entry.html">SaveableStateRegistry.Entry</a></code></td>
+            <td>
+              <p>The registry entry which you get when you use <code><a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.html#registerProvider(kotlin.String,kotlin.Function0)">registerProvider</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>abstract boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.html#canBeSaved(kotlin.Any)">canBeSaved</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;value)</code></div>
+              <p>Returns true if the value can be saved using this Registry.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.html#consumeRestored(kotlin.String)">consumeRestored</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;key)</code></div>
+              <p>Returns the restored value for the given key.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.html#performSave()">performSave</a>()</code></div>
+              <p>Executes all the registered value providers and combines these values into a map.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.Entry.html">SaveableStateRegistry.Entry</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.html#registerProvider(kotlin.String,kotlin.Function0)">registerProvider</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;valueProvider<br>)</code></div>
+              <p>Registers the value provider.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="canBeSaved-kotlin.Any-"></a><a name="canbesaved"></a>
+      <h3 class="api-name" id="canBeSaved(kotlin.Any)">canBeSaved</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.html#canBeSaved(kotlin.Any)">canBeSaved</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;value)</pre>
+      <p>Returns true if the value can be saved using this Registry. The default implementation will return true if this value can be stored in Bundle.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;value</code></td>
+              <td>
+                <p>The value which we want to save using this Registry</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="consumeRestored-kotlin.String-"></a><a name="consumerestored"></a>
+      <h3 class="api-name" id="consumeRestored(kotlin.String)">consumeRestored</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a><br>public&nbsp;abstract&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;<a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.html#consumeRestored(kotlin.String)">consumeRestored</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;key)</pre>
+      <p>Returns the restored value for the given key. Once being restored the value is cleared, so you can't restore the same key twice.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;key</code></td>
+              <td>
+                <p>Key used to save the value</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="performSave--"></a><a name="performsave"></a>
+      <h3 class="api-name" id="performSave()">performSave</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;<a href="https://developer.android.com/reference/java/util/Map.html">Map</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&gt;&nbsp;<a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.html#performSave()">performSave</a>()</pre>
+      <p>Executes all the registered value providers and combines these values into a map. We have a list of values for each key as it is allowed to have multiple providers for the same key.</p>
+    </div>
+    <div><a name="registerProvider(kotlin.String, kotlin.Function0)"></a><a name="registerProvider-kotlin.String-kotlin.Function0-"></a><a name="registerprovider"></a>
+      <h3 class="api-name" id="registerProvider(kotlin.String,kotlin.Function0)">registerProvider</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;<a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.Entry.html">SaveableStateRegistry.Entry</a>&nbsp;<a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.html#registerProvider(kotlin.String,kotlin.Function0)">registerProvider</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;valueProvider<br>)</pre>
+      <p>Registers the value provider.</p>
+      <p>There are could be multiple providers registered for the same <code><a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.html#registerProvider(kotlin.String,kotlin.Function0)">key</a></code>. In this case the order in which they were registered matters.</p>
+      <p>Say we registered two providers for the key. One provides &quot;1&quot;, second provides &quot;2&quot;. <code><a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.html#performSave()">performSave</a></code> in this case will have listOf(&quot;1&quot;, &quot;2) as a value for the key in the map. And later, when the registry will be recreated with the previously saved values, the first execution of <code><a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.html#consumeRestored(kotlin.String)">consumeRestored</a></code> would consume &quot;1&quot; and the second one &quot;2&quot;.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;key</code></td>
+              <td>
+                <p>Key to use for storing the value</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;valueProvider</code></td>
+              <td>
+                <p>Provides the current value, to be executed when <code><a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.html#performSave()">performSave</a></code> will be triggered to collect all the registered values</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="/reference/androidx/compose/runtime/saveable/SaveableStateRegistry.Entry.html">SaveableStateRegistry.Entry</a></code></td>
+              <td>
+                <p>the registry entry which you can use to unregister the provider</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,245 @@
+<html devsite="true">
+  <head>
+    <title>MutableInteractionSource</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>MutableInteractionSource</h1>
+{% setvar page_path %}androidx/compose/foundation/interaction/MutableInteractionSource.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>interface MutableInteractionSource implements <a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></pre>
+    </p>
+    <hr>
+    <p>MutableInteractionSource represents a stream of <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s corresponding to events emitted by a component. These <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s can be used to change how components appear in different states, such as when a component is pressed or dragged.</p>
+    <p>Lower level interaction APIs such as <code><a href="/reference/androidx/compose/foundation/package-summary.html#(Modifier).clickable(kotlin.Boolean,kotlin.String,Role,kotlin.Function0)">androidx.compose.foundation.clickable</a></code> and <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(Modifier).draggable(androidx.compose.foundation.gestures.DraggableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean,kotlin.coroutines.SuspendFunction2,kotlin.coroutines.SuspendFunction2,kotlin.Boolean)">androidx.compose.foundation.gestures.draggable</a></code> have an <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> parameter, which allows you to hoist an <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> and combine multiple interactions into one event stream.</p>
+    <p>MutableInteractionSource exposes <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#emit(androidx.compose.foundation.interaction.Interaction)">emit</a></code> and <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#tryEmit(androidx.compose.foundation.interaction.Interaction)">tryEmit</a></code> functions. These emit the provided <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code> to the underlying <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">interactions</a></code>, allowing consumers to react to these new <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s.</p>
+    <p>An instance of MutableInteractionSource can be created by using the <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> factory function. This instance should be <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code>ed before it is passed to other components that consume it.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">See also</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#interactions()">interactions</a></code></div>
+              <p><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> representing the stream of all <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s emitted through this <code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#emit(androidx.compose.foundation.interaction.Interaction)">emit</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a>&nbsp;interaction)</code></div>
+              <p>Emits <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#emit(androidx.compose.foundation.interaction.Interaction)">interaction</a></code> into <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#interactions()">interactions</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#tryEmit(androidx.compose.foundation.interaction.Interaction)">tryEmit</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a>&nbsp;interaction)</code></div>
+              <p>Tries to emit <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#tryEmit(androidx.compose.foundation.interaction.Interaction)">interaction</a></code> into <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#interactions()">interactions</a></code> without suspending.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public fields</h2>
+    <div><a name="getInteractions()"></a><a name="setInteractions()"></a><a name="getInteractions--"></a><a name="setInteractions--"></a>
+      <h3 class="api-name" id="interactions()">interactions</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a>&gt;&nbsp;<a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#interactions()">interactions</a></pre>
+      <p><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> representing the stream of all <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s emitted through this <code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code>. This can be used to see <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s emitted in order, and with additional metadata, such as the press position for <code><a href="/reference/androidx/compose/foundation/interaction/PressInteraction.Press.html">PressInteraction.Press</a></code>.</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.foundation.indication
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.Text
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
+
+// Hoist the MutableInteractionSource that we will provide to interactions
+val interactionSource = remember { MutableInteractionSource() }
+
+// Provide the MutableInteractionSource instances to the interactions we want to observe state
+// changes for
+val draggable = Modifier.draggable(
+    interactionSource = interactionSource,
+    orientation = Orientation.Horizontal,
+    state = rememberDraggableState { /* update some business state here */ }
+)
+
+val clickable = Modifier.clickable(
+    interactionSource = interactionSource,
+    // This component is a compound component where part of it is clickable and part of it is
+    // draggable. As a result we want to show indication for the _whole_ component, and not
+    // just for clickable area. We set `null` indication here and provide an explicit
+    // Modifier.indication instance later that will draw indication for the whole component.
+    indication = null
+) { /* update some business state here */ }
+
+// SnapshotStateList we will use to track incoming Interactions in the order they are emitted
+val interactions = remember { mutableStateListOf&lt;Interaction&gt;() }
+
+// Collect Interactions - if they are new, add them to `interactions`. If they represent stop /
+// cancel events for existing Interactions, remove them from `interactions` so it will only
+// contain currently active `interactions`.
+LaunchedEffect(interactionSource) {
+    interactionSource.interactions.collect { interaction -&gt;
+        when (interaction) {
+            is PressInteraction.Press -&gt; interactions.add(interaction)
+            is PressInteraction.Release -&gt; interactions.remove(interaction.press)
+            is PressInteraction.Cancel -&gt; interactions.remove(interaction.press)
+            is DragInteraction.Start -&gt; interactions.add(interaction)
+            is DragInteraction.Stop -&gt; interactions.remove(interaction.start)
+            is DragInteraction.Cancel -&gt; interactions.remove(interaction.start)
+        }
+    }
+}
+
+// Display some text based on the most recent Interaction stored in `interactions`
+val text = when (interactions.lastOrNull()) {
+    is DragInteraction.Start -&gt; &quot;Dragged&quot;
+    is PressInteraction.Press -&gt; &quot;Pressed&quot;
+    else -&gt; &quot;No state&quot;
+}
+
+Column(
+    Modifier
+        .fillMaxSize()
+        .wrapContentSize()
+) {
+    Row(
+        // Draw indication for the whole component, based on the Interactions dispatched by
+        // our hoisted MutableInteractionSource
+        Modifier.indication(
+            interactionSource = interactionSource,
+            indication = LocalIndication.current
+        )
+    ) {
+        Box(
+            Modifier
+                .size(width = 240.dp, height = 80.dp)
+                .then(clickable)
+                .border(BorderStroke(3.dp, Color.Blue))
+                .padding(3.dp)
+        ) {
+            val pressed = interactions.any { it is PressInteraction.Press }
+            Text(
+                text = if (pressed) &quot;Pressed&quot; else &quot;Not pressed&quot;,
+                style = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
+                modifier = Modifier.fillMaxSize().wrapContentSize()
+            )
+        }
+        Box(
+            Modifier
+                .size(width = 240.dp, height = 80.dp)
+                .then(draggable)
+                .border(BorderStroke(3.dp, Color.Red))
+                .padding(3.dp)
+        ) {
+            val dragged = interactions.any { it is DragInteraction.Start }
+            Text(
+                text = if (dragged) &quot;Dragged&quot; else &quot;Not dragged&quot;,
+                style = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
+                modifier = Modifier.fillMaxSize().wrapContentSize()
+            )
+        }
+    }
+    Text(
+        text = text,
+        style = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
+        modifier = Modifier.fillMaxSize().wrapContentSize()
+    )
+}</pre>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="emit-androidx.compose.foundation.interaction.Interaction-"></a><a name="emit"></a>
+      <h3 class="api-name" id="emit(androidx.compose.foundation.interaction.Interaction)">emit</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#emit(androidx.compose.foundation.interaction.Interaction)">emit</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a>&nbsp;interaction)</pre>
+      <p>Emits <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#emit(androidx.compose.foundation.interaction.Interaction)">interaction</a></code> into <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#interactions()">interactions</a></code>. This method is not thread-safe and should not be invoked concurrently.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#tryEmit(androidx.compose.foundation.interaction.Interaction)">tryEmit</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="tryEmit-androidx.compose.foundation.interaction.Interaction-"></a><a name="tryemit"></a>
+      <h3 class="api-name" id="tryEmit(androidx.compose.foundation.interaction.Interaction)">tryEmit</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#tryEmit(androidx.compose.foundation.interaction.Interaction)">tryEmit</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a>&nbsp;interaction)</pre>
+      <p>Tries to emit <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#tryEmit(androidx.compose.foundation.interaction.Interaction)">interaction</a></code> into <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#interactions()">interactions</a></code> without suspending. It returns <code>true</code> if the value was emitted successfully.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#emit(androidx.compose.foundation.interaction.Interaction)">emit</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

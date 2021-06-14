@@ -1,0 +1,119 @@
+<html devsite="true">
+  <head>
+    <title>SaveableStateHolder</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>SaveableStateHolder</h1>
+{% setvar page_path %}androidx/compose/runtime/saveable/SaveableStateHolder.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>interface SaveableStateHolder</pre>
+    </p>
+    <hr>
+    <p>Allows to save the state defined with <code><a href="/reference/kotlin/androidx/compose/runtime/saveable/package-summary.html#rememberSaveable(kotlin.Array,androidx.compose.runtime.saveable.Saver,kotlin.String,kotlin.Function0)">rememberSaveable</a></code> for the subtree before disposing it to make it possible to compose it back next time with the restored state. It allows different navigation patterns to keep the ui state like scroll position for the currently not composed screens from the backstack.</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
+
+@Composable
+fun &lt;T : Any&gt; Navigation(
+    currentScreen: T,
+    modifier: Modifier = Modifier,
+    content: @Composable (T) -&gt; Unit
+) {
+    // create SaveableStateHolder.
+    val saveableStateHolder = rememberSaveableStateHolder()
+    Box(modifier) {
+        // Wrap the content representing the `currentScreen` inside `SaveableStateProvider`.
+        // Here you can also add a screen switch animation like Crossfade where during the
+        // animation multiple screens will be displayed at the same time.
+        saveableStateHolder.SaveableStateProvider(currentScreen) {
+            content(currentScreen)
+        }
+    }
+}
+
+Column {
+    var screen by rememberSaveable { mutableStateOf(&quot;screen1&quot;) }
+    Row(horizontalArrangement = Arrangement.SpaceEvenly) {
+        Button(onClick = { screen = &quot;screen1&quot; }) {
+            Text(&quot;Go to screen1&quot;)
+        }
+        Button(onClick = { screen = &quot;screen2&quot; }) {
+            Text(&quot;Go to screen2&quot;)
+        }
+    }
+    Navigation(screen, Modifier.fillMaxSize()) { currentScreen -&gt;
+        if (currentScreen == &quot;screen1&quot;) {
+            Screen1()
+        } else {
+            Screen2()
+        }
+    }
+}</pre>
+    <p>The content should be composed using <code><a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateHolder.html#SaveableStateProvider(kotlin.Any,kotlin.Function0)">SaveableStateProvider</a></code> while providing a key representing this content. Next time <code><a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateHolder.html#SaveableStateProvider(kotlin.Any,kotlin.Function0)">SaveableStateProvider</a></code> will be used with the same key its state will be restored.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateHolder.html#SaveableStateProvider(kotlin.Any,kotlin.Function0)">SaveableStateProvider</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;content:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Put your content associated with a <code><a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateHolder.html#SaveableStateProvider(kotlin.Any,kotlin.Function0)">key</a></code> inside the <code><a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateHolder.html#SaveableStateProvider(kotlin.Any,kotlin.Function0)">content</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateHolder.html#removeState(kotlin.Any)">removeState</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)</code></div>
+              <p>Removes the saved state associated with the passed <code><a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateHolder.html#removeState(kotlin.Any)">key</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="SaveableStateProvider(kotlin.Any, kotlin.Function0)"></a><a name="SaveableStateProvider-kotlin.Any-kotlin.Function0-"></a><a name="saveablestateprovider"></a>
+      <h3 class="api-name" id="SaveableStateProvider(kotlin.Any,kotlin.Function0)">SaveableStateProvider</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateHolder.html#SaveableStateProvider(kotlin.Any,kotlin.Function0)">SaveableStateProvider</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;content:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Put your content associated with a <code><a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateHolder.html#SaveableStateProvider(kotlin.Any,kotlin.Function0)">key</a></code> inside the <code><a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateHolder.html#SaveableStateProvider(kotlin.Any,kotlin.Function0)">content</a></code>. This will automatically save all the states defined with <code><a href="/reference/kotlin/androidx/compose/runtime/saveable/package-summary.html#rememberSaveable(kotlin.Array,androidx.compose.runtime.saveable.Saver,kotlin.String,kotlin.Function0)">rememberSaveable</a></code> before disposing the content and will restore the states when you compose with this key again.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a></code></td>
+              <td>
+                <p>to be used for saving and restoring the states for the subtree. Note that on Android you can only use types which can be stored inside the Bundle.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="removeState-kotlin.Any-"></a><a name="removestate"></a>
+      <h3 class="api-name" id="removeState(kotlin.Any)">removeState</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateHolder.html#removeState(kotlin.Any)">removeState</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Removes the saved state associated with the passed <code><a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateHolder.html#removeState(kotlin.Any)">key</a></code>.</p>
+    </div>
+  </body>
+</html>

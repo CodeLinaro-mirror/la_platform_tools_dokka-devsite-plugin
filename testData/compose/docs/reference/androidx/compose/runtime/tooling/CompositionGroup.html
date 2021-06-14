@@ -1,0 +1,104 @@
+<html devsite="true">
+  <head>
+    <title>CompositionGroup</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>CompositionGroup</h1>
+{% setvar page_path %}androidx/compose/runtime/tooling/CompositionGroup.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>interface CompositionGroup implements <a href="/reference/androidx/compose/runtime/tooling/CompositionData.html">CompositionData</a></pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a></code> is a group of data slots tracked independently by composition. These groups correspond to flow control branches (such as if statements and function calls) as well as emitting of a node to the tree.</p>
+    <p>This interface is not intended to be used directly and is provided to allow the tools API to have access to data tracked during composition. The tools API should be used instead which provides a more usable interpretation of the slot table.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Iterable.html">Iterable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#compositionGroups()">compositionGroups</a></code></div>
+              <p>Iterate the composition data in the group.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Iterable.html">Iterable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#data()">data</a></code></div>
+              <p>The data stored in the slot table for this group.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#isEmpty()">isEmpty</a></code></div>
+              <p>Returns true if no composition data has been collected.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#key()">key</a></code></div>
+              <p>A value used to identify the group within its siblings and is typically a compiler generated integer but can be an object if the <code><a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#key()">key</a></code> composable is used.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#node()">node</a></code></div>
+              <p>If the group represents a node this returns a non-null value which is the node that was emitted for the group.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#sourceInfo()">sourceInfo</a></code></div>
+              <p>Information recorded by the compiler to help tooling identify the source that generated the group.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public fields</h2>
+    <div><a name="getCompositionGroups()"></a><a name="setCompositionGroups()"></a><a name="getCompositionGroups--"></a><a name="setCompositionGroups--"></a>
+      <h3 class="api-name" id="compositionGroups()">compositionGroups</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Iterable.html">Iterable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a>&gt;&nbsp;<a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#compositionGroups()">compositionGroups</a></pre>
+      <p>Iterate the composition data in the group.  The composition data is structured as a tree of values that corresponds to the call graph of the functions that produced the tree. Interspersed are groups that represents the nodes themselves.</p>
+    </div>
+    <div><a name="getData()"></a><a name="setData()"></a><a name="getData--"></a><a name="setData--"></a>
+      <h3 class="api-name" id="data()">data</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Iterable.html">Iterable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;<a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#data()">data</a></pre>
+      <p>The data stored in the slot table for this group. This information includes the values stored for parameters that are checked for change, any value passed as a parameter for <a href="[remember]">remember</a> and the last value returned by <a href="[remember]">remember</a>, etc.</p>
+    </div>
+    <div><a name="getIsEmpty()"></a><a name="setIsEmpty()"></a><a name="getIsEmpty--"></a><a name="setIsEmpty--"></a>
+      <h3 class="api-name" id="isEmpty()">isEmpty</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#isEmpty()">isEmpty</a></pre>
+      <p>Returns true if no composition data has been collected. This occurs when the first composition into this composition data has not completed yet or, if it is a group, it doesn't contain any child groups.</p>
+    </div>
+    <div><a name="getKey()"></a><a name="setKey()"></a><a name="getKey--"></a><a name="setKey--"></a>
+      <h3 class="api-name" id="key()">key</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;<a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#key()">key</a></pre>
+      <p>A value used to identify the group within its siblings and is typically a compiler generated integer but can be an object if the <code><a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#key()">key</a></code> composable is used.</p>
+    </div>
+    <div><a name="getNode()"></a><a name="setNode()"></a><a name="getNode--"></a><a name="setNode--"></a>
+      <h3 class="api-name" id="node()">node</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a><br>public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;<a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#node()">node</a></pre>
+      <p>If the group represents a node this returns a non-null value which is the node that was emitted for the group.</p>
+    </div>
+    <div><a name="getSourceInfo()"></a><a name="setSourceInfo()"></a><a name="getSourceInfo--"></a><a name="setSourceInfo--"></a>
+      <h3 class="api-name" id="sourceInfo()">sourceInfo</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a><br>public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;<a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#sourceInfo()">sourceInfo</a></pre>
+      <p>Information recorded by the compiler to help tooling identify the source that generated the group. The format of this string is internal and is interpreted by the tools API which translates this information into source file name and offsets.</p>
+    </div>
+  </body>
+</html>

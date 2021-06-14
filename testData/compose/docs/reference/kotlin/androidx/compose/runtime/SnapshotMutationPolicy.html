@@ -1,0 +1,126 @@
+<html devsite="true">
+  <head>
+    <title>SnapshotMutationPolicy</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>SnapshotMutationPolicy</h1>
+{% setvar page_path %}androidx/compose/runtime/SnapshotMutationPolicy.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>interface SnapshotMutationPolicy&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
+    </p>
+    <hr>
+    <p>A policy to control how the result of <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">mutableStateOf</a></code> report and merge changes to the state object.</p>
+    <p>A mutation policy can be passed as an parameter to <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">mutableStateOf</a></code>, and <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#compositionLocalOf(androidx.compose.runtime.SnapshotMutationPolicy,kotlin.Function0)">compositionLocalOf</a></code>.</p>
+    <p>Typically, one of the stock policies should be used such as <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#referentialEqualityPolicy()">referentialEqualityPolicy</a></code>, <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#structuralEqualityPolicy()">structuralEqualityPolicy</a></code>, or <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#neverEqualPolicy()">neverEqualPolicy</a></code>. However, a custom mutation policy can be created by implementing this interface, such as a counter policy,</p>
+    <pre class="prettyprint">
+import androidx.compose.runtime.mutableStateOf
+
+/**
+ * A policy that treats an `MutableState&lt;Int&gt;` as a counter. Changing the value to the same
+ * integer value will not be considered a change. When snapshots are applied the changes made by
+ * the applying snapshot are added together with changes of other snapshots. Changes to a
+ * [MutableState] with a counterPolicy will never cause an apply conflict.
+ *
+ * As the name implies, this is useful when counting things, such as tracking the amount of
+ * a resource consumed or produced while in a snapshot. For example, if snapshot A produces 10
+ * things and snapshot B produces 20 things, the result of applying both A and B should be that
+ * 30 things were produced.
+ */
+fun counterPolicy(): SnapshotMutationPolicy&lt;Int&gt; = object : SnapshotMutationPolicy&lt;Int&gt; {
+    override fun equivalent(a: Int, b: Int): Boolean = a == b
+    override fun merge(previous: Int, current: Int, applied: Int) =
+        current + (applied - previous)
+}
+
+val state = mutableStateOf(0, counterPolicy())
+val snapshot1 = Snapshot.takeMutableSnapshot()
+val snapshot2 = Snapshot.takeMutableSnapshot()
+try {
+    snapshot1.enter { state.value += 10 }
+    snapshot2.enter { state.value += 20 }
+    snapshot1.apply().check()
+    snapshot2.apply().check()
+} finally {
+    snapshot1.dispose()
+    snapshot2.dispose()
+}
+
+// State is now equals 30 as the changes made in the snapshots are added together.</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html#equivalent(kotlin.Any,kotlin.Any)">equivalent</a>(a:&nbsp;T,&nbsp;b:&nbsp;T)</code></div>
+              <p>Determine if setting a state value's are equivalent and should be treated as equal.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>open T?</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">merge</a>(previous:&nbsp;T,&nbsp;current:&nbsp;T,&nbsp;applied:&nbsp;T)</code></div>
+              <p>Merge conflicting changes in snapshots.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="equivalent(kotlin.Any, kotlin.Any)"></a><a name="equivalent-kotlin.Any-kotlin.Any-"></a><a name="equivalent"></a>
+      <h3 class="api-name" id="equivalent(kotlin.Any,kotlin.Any)">equivalent</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html#equivalent(kotlin.Any,kotlin.Any)">equivalent</a>(a:&nbsp;T,&nbsp;b:&nbsp;T):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <p>Determine if setting a state value's are equivalent and should be treated as equal. If <code><a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html#equivalent(kotlin.Any,kotlin.Any)">equivalent</a></code> returns <code>true</code> the new value is not considered a change.</p>
+    </div>
+    <div><a name="merge(kotlin.Any, kotlin.Any, kotlin.Any)"></a><a name="merge-kotlin.Any-kotlin.Any-kotlin.Any-"></a><a name="merge"></a>
+      <h3 class="api-name" id="merge(kotlin.Any,kotlin.Any,kotlin.Any)">merge</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">merge</a>(previous:&nbsp;T,&nbsp;current:&nbsp;T,&nbsp;applied:&nbsp;T):&nbsp;T?</pre>
+      <p>Merge conflicting changes in snapshots. This is only called if <code><a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">current</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">applied</a></code> are not <code><a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html#equivalent(kotlin.Any,kotlin.Any)">equivalent</a></code>. If a valid merged value can be calculated then it should be returned.</p>
+      <p>For example, if the state object holds an immutable data class with multiple fields, and <code><a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">applied</a></code> has changed fields that are unmodified by <code><a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">current</a></code> it might be valid to return a new copy of the data class that combines that changes from both <code><a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">current</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/SnapshotMutationPolicy.html#merge(kotlin.Any,kotlin.Any,kotlin.Any)">applied</a></code> allowing a snapshot to apply that would have otherwise failed.</p>
+      <pre class="prettyprint">
+import androidx.compose.runtime.mutableStateOf
+
+/**
+ * A policy that treats an `MutableState&lt;Int&gt;` as a counter. Changing the value to the same
+ * integer value will not be considered a change. When snapshots are applied the changes made by
+ * the applying snapshot are added together with changes of other snapshots. Changes to a
+ * [MutableState] with a counterPolicy will never cause an apply conflict.
+ *
+ * As the name implies, this is useful when counting things, such as tracking the amount of
+ * a resource consumed or produced while in a snapshot. For example, if snapshot A produces 10
+ * things and snapshot B produces 20 things, the result of applying both A and B should be that
+ * 30 things were produced.
+ */
+fun counterPolicy(): SnapshotMutationPolicy&lt;Int&gt; = object : SnapshotMutationPolicy&lt;Int&gt; {
+    override fun equivalent(a: Int, b: Int): Boolean = a == b
+    override fun merge(previous: Int, current: Int, applied: Int) =
+        current + (applied - previous)
+}
+
+val state = mutableStateOf(0, counterPolicy())
+val snapshot1 = Snapshot.takeMutableSnapshot()
+val snapshot2 = Snapshot.takeMutableSnapshot()
+try {
+    snapshot1.enter { state.value += 10 }
+    snapshot2.enter { state.value += 20 }
+    snapshot1.apply().check()
+    snapshot2.apply().check()
+} finally {
+    snapshot1.dispose()
+    snapshot2.dispose()
+}
+
+// State is now equals 30 as the changes made in the snapshots are added together.</pre>
+    </div>
+  </body>
+</html>

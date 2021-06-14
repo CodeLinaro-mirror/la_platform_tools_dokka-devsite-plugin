@@ -1,0 +1,269 @@
+<html devsite="true">
+  <head>
+    <title>VectorizedRepeatableSpec</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>VectorizedRepeatableSpec</h1>
+{% setvar page_path %}androidx/compose/animation/core/VectorizedRepeatableSpec.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>class VectorizedRepeatableSpec&lt;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; : <a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a>, <a href="/reference/kotlin/androidx/compose/animation/core/VectorizedFiniteAnimationSpec.html">VectorizedFiniteAnimationSpec</a></pre>
+    </p>
+    <hr>
+    <p>This animation takes another <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html">VectorizedDurationBasedAnimationSpec</a></code> and plays it <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedRepeatableSpec.html#iterations()">iterations</a></code> times. For infinitely repeating animation spec, <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedInfiniteRepeatableSpec.html">VectorizedInfiniteRepeatableSpec</a></code> is recommended.</p>
+    <p><b>Note</b>: When repeating in the <code><a href="/reference/kotlin/androidx/compose/animation/core/RepeatMode.html#Reverse">RepeatMode.Reverse</a></code> mode, it's highly recommended to have an <b>odd</b> number of iterations. Otherwise, the animation may jump to the end value when it finishes the last iteration.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code>&lt;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/VectorizedRepeatableSpec.html#VectorizedRepeatableSpec(kotlin.Int,androidx.compose.animation.core.VectorizedDurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode)">VectorizedRepeatableSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;iterations:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animation:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html">VectorizedDurationBasedAnimationSpec</a>&lt;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;repeatMode:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a><br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedRepeatableSpec.html#getDurationNanos(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getDurationNanos</a>(initialValue:&nbsp;V,&nbsp;targetValue:&nbsp;V,&nbsp;initialVelocity:&nbsp;V)</code></div>
+              <p>Calculates the duration of an animation.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>open V</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedRepeatableSpec.html#getValueFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getValueFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;V<br>)</code></div>
+              <p>Calculates the value of the animation at given the playtime, with the provided start/end values, and start velocity.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>open V</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedRepeatableSpec.html#getVelocityFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getVelocityFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;V<br>)</code></div>
+              <p>Calculates the velocity of the animation at given the playtime, with the provided start/end values, and start velocity.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedRepeatableSpec.html#isInfinite()">isInfinite</a></code></div>
+              <p>Whether or not the <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> specifies an infinite animation.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody>
+                    <tr>
+                      <td width="40%"><code>open V</code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html#getEndVelocity(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getEndVelocity</a>(initialValue:&nbsp;V,&nbsp;targetValue:&nbsp;V,&nbsp;initialVelocity:&nbsp;V)</code></div>
+                        <p>Calculates the end velocity of the animation with the provided start/end values, and start velocity.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="VectorizedRepeatableSpec(kotlin.Int, androidx.compose.animation.core.VectorizedDurationBasedAnimationSpec, androidx.compose.animation.core.RepeatMode)"></a><a name="VectorizedRepeatableSpec-kotlin.Int-androidx.compose.animation.core.VectorizedDurationBasedAnimationSpec-androidx.compose.animation.core.RepeatMode-"></a><a name="vectorizedrepeatablespec"></a>
+      <h3 class="api-name" id="VectorizedRepeatableSpec(kotlin.Int,androidx.compose.animation.core.VectorizedDurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode)">VectorizedRepeatableSpec</h3>
+      <pre class="api-signature no-pretty-print">&lt;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/kotlin/androidx/compose/animation/core/VectorizedRepeatableSpec.html#VectorizedRepeatableSpec(kotlin.Int,androidx.compose.animation.core.VectorizedDurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode)">VectorizedRepeatableSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;iterations:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animation:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html">VectorizedDurationBasedAnimationSpec</a>&lt;V&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;repeatMode:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a> = RepeatMode.Restart<br>)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>iterations:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td>
+                <p>the count of iterations. Should be at least 1.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>animation:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html">VectorizedDurationBasedAnimationSpec</a>&lt;V&gt;</code></td>
+              <td>
+                <p>the <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> describing each repetition iteration.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>repeatMode:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a> = RepeatMode.Restart</code></td>
+              <td>
+                <p>whether animation should repeat by starting from the beginning (i.e.     <code><a href="/reference/kotlin/androidx/compose/animation/core/RepeatMode.html#Restart">RepeatMode.Restart</a></code>) or from the end (i.e. <code><a href="/reference/kotlin/androidx/compose/animation/core/RepeatMode.html#Reverse">RepeatMode.Reverse</a></code>)</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="getDurationNanos(androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector)"></a><a name="getDurationNanos-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-"></a><a name="getdurationnanos"></a>
+      <h3 class="api-name" id="getDurationNanos(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getDurationNanos</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedRepeatableSpec.html#getDurationNanos(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getDurationNanos</a>(initialValue:&nbsp;V,&nbsp;targetValue:&nbsp;V,&nbsp;initialVelocity:&nbsp;V):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
+      <p>Calculates the duration of an animation. For duration-based animations, this will return the pre-defined duration. For physics-based animations, the duration will be estimated based on the physics configuration (such as spring stiffness, damping ratio, visibility threshold) as well as the <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedRepeatableSpec.html#getDurationNanos(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">initialValue</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedRepeatableSpec.html#getDurationNanos(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">targetValue</a></code> values, and <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedRepeatableSpec.html#getDurationNanos(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">initialVelocity</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>initialValue:&nbsp;V</code></td>
+              <td>
+                <p>start value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>targetValue:&nbsp;V</code></td>
+              <td>
+                <p>end value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>initialVelocity:&nbsp;V</code></td>
+              <td>
+                <p>start velocity of the animation</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="getValueFromNanos(kotlin.Long, androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector)"></a><a name="getValueFromNanos-kotlin.Long-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-"></a><a name="getvaluefromnanos"></a>
+      <h3 class="api-name" id="getValueFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getValueFromNanos</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedRepeatableSpec.html#getValueFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getValueFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;V<br>):&nbsp;V</pre>
+      <p>Calculates the value of the animation at given the playtime, with the provided start/end values, and start velocity.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+              <td>
+                <p>time since the start of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>initialValue:&nbsp;V</code></td>
+              <td>
+                <p>start value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>targetValue:&nbsp;V</code></td>
+              <td>
+                <p>end value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>initialVelocity:&nbsp;V</code></td>
+              <td>
+                <p>start velocity of the animation</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="getVelocityFromNanos(kotlin.Long, androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector)"></a><a name="getVelocityFromNanos-kotlin.Long-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-"></a><a name="getvelocityfromnanos"></a>
+      <h3 class="api-name" id="getVelocityFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getVelocityFromNanos</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedRepeatableSpec.html#getVelocityFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getVelocityFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;V<br>):&nbsp;V</pre>
+      <p>Calculates the velocity of the animation at given the playtime, with the provided start/end values, and start velocity.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+              <td>
+                <p>time since the start of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>initialValue:&nbsp;V</code></td>
+              <td>
+                <p>start value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>targetValue:&nbsp;V</code></td>
+              <td>
+                <p>end value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>initialVelocity:&nbsp;V</code></td>
+              <td>
+                <p>start velocity of the animation</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getIsInfinite()"></a><a name="setIsInfinite()"></a><a name="getIsInfinite--"></a><a name="setIsInfinite--"></a>
+      <h3 class="api-name" id="isInfinite()">isInfinite</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedRepeatableSpec.html#isInfinite()">isInfinite</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <p>Whether or not the <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> specifies an infinite animation. That is, one that will not finish by itself, one that needs an external action to stop. For examples, an indeterminate progress bar, which will only stop when it is removed from the composition.</p>
+    </div>
+  </body>
+</html>

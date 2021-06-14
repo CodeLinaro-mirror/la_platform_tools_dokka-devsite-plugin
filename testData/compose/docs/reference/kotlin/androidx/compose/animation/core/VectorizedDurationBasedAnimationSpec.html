@@ -1,0 +1,192 @@
+<html devsite="true">
+  <head>
+    <title>VectorizedDurationBasedAnimationSpec</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>VectorizedDurationBasedAnimationSpec</h1>
+{% setvar page_path %}androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>interface VectorizedDurationBasedAnimationSpec&lt;V&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; : <a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a>, <a href="/reference/kotlin/androidx/compose/animation/core/VectorizedFiniteAnimationSpec.html">VectorizedFiniteAnimationSpec</a></pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedKeyframesSpec.html">VectorizedKeyframesSpec</a>, <a href="/reference/kotlin/androidx/compose/animation/core/VectorizedSnapSpec.html">VectorizedSnapSpec</a>, <a href="/reference/kotlin/androidx/compose/animation/core/VectorizedTweenSpec.html">VectorizedTweenSpec</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <tbody>
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedKeyframesSpec.html">VectorizedKeyframesSpec</a></code></td>
+                <td>
+                  <p><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedKeyframesSpec.html">VectorizedKeyframesSpec</a></code> class manages the animation based on the values defined at different timestamps in the duration of the animation (i.e.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedSnapSpec.html">VectorizedSnapSpec</a></code></td>
+                <td>
+                  <p><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedSnapSpec.html">VectorizedSnapSpec</a></code> immediately snaps the animating value to the end value.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedTweenSpec.html">VectorizedTweenSpec</a></code></td>
+                <td>
+                  <p><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedTweenSpec.html">VectorizedTweenSpec</a></code> animates a <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> value by interpolating the start and end value, in the given <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedTweenSpec.html#durationMillis()">durationMillis</a></code> using the given <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedTweenSpec.html#easing()">easing</a></code> curve.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>Base class for <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code>s that are based on a fixed <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html#durationMillis()">durationMillis</a></code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html#getDurationNanos(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getDurationNanos</a>(initialValue:&nbsp;V,&nbsp;targetValue:&nbsp;V,&nbsp;initialVelocity:&nbsp;V)</code></div>
+              <p>Calculates the duration of an animation.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html#delayMillis()">delayMillis</a></code></div>
+              <p>delay defines the amount of time that animation can be delayed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html#durationMillis()">durationMillis</a></code></div>
+              <p>duration is the amount of time while animation is not yet finished.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html#isInfinite()">isInfinite</a></code></div>
+              <p>Whether or not the <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> specifies an infinite animation.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody>
+                    <tr>
+                      <td width="40%"><code>open V</code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html#getEndVelocity(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getEndVelocity</a>(initialValue:&nbsp;V,&nbsp;targetValue:&nbsp;V,&nbsp;initialVelocity:&nbsp;V)</code></div>
+                        <p>Calculates the end velocity of the animation with the provided start/end values, and start velocity.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>V</code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html#getValueFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getValueFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;V<br>)</code></div>
+                        <p>Calculates the value of the animation at given the playtime, with the provided start/end values, and start velocity.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>V</code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html#getVelocityFromNanos(kotlin.Long,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getVelocityFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;playTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;targetValue:&nbsp;V,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialVelocity:&nbsp;V<br>)</code></div>
+                        <p>Calculates the velocity of the animation at given the playtime, with the provided start/end values, and start velocity.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="getDurationNanos(androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector, androidx.compose.animation.core.AnimationVector)"></a><a name="getDurationNanos-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-androidx.compose.animation.core.AnimationVector-"></a><a name="getdurationnanos"></a>
+      <h3 class="api-name" id="getDurationNanos(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getDurationNanos</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html#getDurationNanos(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">getDurationNanos</a>(initialValue:&nbsp;V,&nbsp;targetValue:&nbsp;V,&nbsp;initialVelocity:&nbsp;V):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></pre>
+      <p>Calculates the duration of an animation. For duration-based animations, this will return the pre-defined duration. For physics-based animations, the duration will be estimated based on the physics configuration (such as spring stiffness, damping ratio, visibility threshold) as well as the <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html#getDurationNanos(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">initialValue</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html#getDurationNanos(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">targetValue</a></code> values, and <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html#getDurationNanos(androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector,androidx.compose.animation.core.AnimationVector)">initialVelocity</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>initialValue:&nbsp;V</code></td>
+              <td>
+                <p>start value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>targetValue:&nbsp;V</code></td>
+              <td>
+                <p>end value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>initialVelocity:&nbsp;V</code></td>
+              <td>
+                <p>start velocity of the animation</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getDelayMillis()"></a><a name="setDelayMillis()"></a><a name="getDelayMillis--"></a><a name="setDelayMillis--"></a>
+      <h3 class="api-name" id="delayMillis()">delayMillis</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html#delayMillis()">delayMillis</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+      <p>delay defines the amount of time that animation can be delayed.</p>
+    </div>
+    <div><a name="getDurationMillis()"></a><a name="setDurationMillis()"></a><a name="getDurationMillis--"></a><a name="setDurationMillis--"></a>
+      <h3 class="api-name" id="durationMillis()">durationMillis</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html#durationMillis()">durationMillis</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+      <p>duration is the amount of time while animation is not yet finished.</p>
+    </div>
+    <div><a name="getIsInfinite()"></a><a name="setIsInfinite()"></a><a name="getIsInfinite--"></a><a name="setIsInfinite--"></a>
+      <h3 class="api-name" id="isInfinite()">isInfinite</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html#isInfinite()">isInfinite</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <p>Whether or not the <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> specifies an infinite animation. That is, one that will not finish by itself, one that needs an external action to stop. For examples, an indeterminate progress bar, which will only stop when it is removed from the composition.</p>
+    </div>
+  </body>
+</html>

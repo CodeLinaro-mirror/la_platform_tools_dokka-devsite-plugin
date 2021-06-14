@@ -1,0 +1,70 @@
+<html devsite="true">
+  <head>
+    <title>LazyItemScope</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>LazyItemScope</h1>
+{% setvar page_path %}androidx/compose/foundation/lazy/LazyItemScope.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>interface LazyItemScope</pre>
+    </p>
+    <hr>
+    <p>Receiver scope being used by the item content parameter of LazyColumn/Row.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxHeight(kotlin.Float)">fillParentMaxHeight</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;receiver,&nbsp;float&nbsp;fraction)</code></div>
+              <p>Have the content fill the Constraints.maxHeight of the incoming measurement constraints by setting the Constraints.minHeight to be equal to the Constraints.maxHeight multiplied by <code><a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxHeight(kotlin.Float)">fraction</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxSize(kotlin.Float)">fillParentMaxSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;receiver,&nbsp;float&nbsp;fraction)</code></div>
+              <p>Have the content fill the Constraints.maxWidth and Constraints.maxHeight of the parent measurement constraints by setting the Constraints.minWidth to be equal to the Constraints.maxWidth multiplied by <code><a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxSize(kotlin.Float)">fraction</a></code> and the Constraints.minHeight to be equal to the Constraints.maxHeight multiplied by <code><a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxSize(kotlin.Float)">fraction</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxWidth(kotlin.Float)">fillParentMaxWidth</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;receiver,&nbsp;float&nbsp;fraction)</code></div>
+              <p>Have the content fill the Constraints.maxWidth of the parent measurement constraints by setting the Constraints.minWidth to be equal to the Constraints.maxWidth multiplied by <code><a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxWidth(kotlin.Float)">fraction</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="-Modifier-.fillParentMaxHeight-kotlin.Float-"></a><a name="fillparentmaxheight"></a>
+      <h3 class="api-name" id="(Modifier).fillParentMaxHeight(kotlin.Float)">fillParentMaxHeight</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxHeight(kotlin.Float)">fillParentMaxHeight</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;receiver,&nbsp;float&nbsp;fraction)</pre>
+      <p>Have the content fill the <a href="[Constraints.maxHeight]">Constraints.maxHeight</a> of the incoming measurement constraints by setting the <a href="[Constraints.minHeight]">Constraints.minHeight</a> to be equal to the <a href="[Constraints.maxHeight]">Constraints.maxHeight</a> multiplied by <code><a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxHeight(kotlin.Float)">fraction</a></code>. Note that, by default, the <code><a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxHeight(kotlin.Float)">fraction</a></code> is 1, so the modifier will make the content fill the whole parent height. <code><a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxHeight(kotlin.Float)">fraction</a></code> must be between <code>0</code> and <code>1</code>.</p>
+      <p>Regular <a href="[Modifier.fillMaxHeight]">Modifier.fillMaxHeight</a> can't work inside the scrolling vertically layouts as the items are measured with <a href="[Constraints.Infinity]">Constraints.Infinity</a> as the constraints for the main axis.</p>
+    </div>
+    <div><a name="-Modifier-.fillParentMaxSize-kotlin.Float-"></a><a name="fillparentmaxsize"></a>
+      <h3 class="api-name" id="(Modifier).fillParentMaxSize(kotlin.Float)">fillParentMaxSize</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxSize(kotlin.Float)">fillParentMaxSize</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;receiver,&nbsp;float&nbsp;fraction)</pre>
+      <p>Have the content fill the <a href="[Constraints.maxWidth]">Constraints.maxWidth</a> and <a href="[Constraints.maxHeight]">Constraints.maxHeight</a> of the parent measurement constraints by setting the <a href="[Constraints.minWidth]">Constraints.minWidth</a> to be equal to the <a href="[Constraints.maxWidth]">Constraints.maxWidth</a> multiplied by <code><a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxSize(kotlin.Float)">fraction</a></code> and the <a href="[Constraints.minHeight]">Constraints.minHeight</a> to be equal to the <a href="[Constraints.maxHeight]">Constraints.maxHeight</a> multiplied by <code><a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxSize(kotlin.Float)">fraction</a></code>. Note that, by default, the <code><a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxSize(kotlin.Float)">fraction</a></code> is 1, so the modifier will make the content fill the whole available space. <code><a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxSize(kotlin.Float)">fraction</a></code> must be between <code>0</code> and <code>1</code>.</p>
+      <p>Regular <a href="[Modifier.fillMaxSize]">Modifier.fillMaxSize</a> can't work inside the scrolling layouts as the items are measured with <a href="[Constraints.Infinity]">Constraints.Infinity</a> as the constraints for the main axis.</p>
+    </div>
+    <div><a name="-Modifier-.fillParentMaxWidth-kotlin.Float-"></a><a name="fillparentmaxwidth"></a>
+      <h3 class="api-name" id="(Modifier).fillParentMaxWidth(kotlin.Float)">fillParentMaxWidth</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;<a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxWidth(kotlin.Float)">fillParentMaxWidth</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;receiver,&nbsp;float&nbsp;fraction)</pre>
+      <p>Have the content fill the <a href="[Constraints.maxWidth]">Constraints.maxWidth</a> of the parent measurement constraints by setting the <a href="[Constraints.minWidth]">Constraints.minWidth</a> to be equal to the <a href="[Constraints.maxWidth]">Constraints.maxWidth</a> multiplied by <code><a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxWidth(kotlin.Float)">fraction</a></code>. Note that, by default, the <code><a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxWidth(kotlin.Float)">fraction</a></code> is 1, so the modifier will make the content fill the whole parent width. <code><a href="/reference/androidx/compose/foundation/lazy/LazyItemScope.html#(Modifier).fillParentMaxWidth(kotlin.Float)">fraction</a></code> must be between <code>0</code> and <code>1</code>.</p>
+      <p>Regular <a href="[Modifier.fillMaxWidth]">Modifier.fillMaxWidth</a> can't work inside the scrolling horizontally layouts as the items are measured with <a href="[Constraints.Infinity]">Constraints.Infinity</a> as the constraints for the main axis.</p>
+    </div>
+  </body>
+</html>

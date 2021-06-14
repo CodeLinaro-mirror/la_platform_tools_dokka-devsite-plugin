@@ -1,0 +1,167 @@
+<html devsite="true">
+  <head>
+    <title>ProvidableCompositionLocal</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>ProvidableCompositionLocal</h1>
+{% setvar page_path %}androidx/compose/runtime/ProvidableCompositionLocal.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public abstract class ProvidableCompositionLocal&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; extends <a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></pre>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="jd-inheritance-table">
+        <tbody>
+          <tr>
+            <td colspan="3"><a href="https://developer.android.com/reference/java/lang/Object.html">Object</a></td>
+          </tr>
+          <tr>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="2"><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="1"><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <p>A <code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a></code> can be used in <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> to provide values.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">See also</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/package-summary.html#compositionLocalOf(androidx.compose.runtime.SnapshotMutationPolicy,kotlin.Function0)">compositionLocalOf</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/package-summary.html#staticCompositionLocalOf(kotlin.Function0)">staticCompositionLocalOf</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>final @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[InternalComposeApi]) @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html#current()">current</a></code></div>
+              <p>Return the value provided by the nearest <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> component that invokes, directly or indirectly, the composable function that uses this property.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>infix&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidedValue.html">ProvidedValue</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html#provides(kotlin.Any)">provides</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value)</code></div>
+              <p>Associates a <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> key to a value in a call to <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>infix&nbsp;final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/ProvidedValue.html">ProvidedValue</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html#providesDefault(kotlin.Any)">providesDefault</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value)</code></div>
+              <p>Associates a <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> key to a value in a call to <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> if the key does not already have an associated value.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public fields</h2>
+    <div><a name="getCurrent()"></a><a name="setCurrent()"></a><a name="getCurrent--"></a><a name="setCurrent--"></a>
+      <h3 class="api-name" id="current()">current</h3>
+      <pre class="api-signature no-pretty-print">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[InternalComposeApi])<br>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[InternalComposeApi]) @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html#current()">current</a></pre>
+      <p>Return the value provided by the nearest <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> component that invokes, directly or indirectly, the composable function that uses this property.</p>
+      <pre class="prettyprint">@Composable
+fun UserPhoto() {
+    val user = ActiveUser.current
+    ProfileIcon(src = user.profilePhotoUrl)
+}</pre>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="provides-kotlin.Any-"></a><a name="provides"></a>
+      <h3 class="api-name" id="provides(kotlin.Any)">provides</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;infix&nbsp;final&nbsp;<a href="/reference/androidx/compose/runtime/ProvidedValue.html">ProvidedValue</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html#provides(kotlin.Any)">provides</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value)</pre>
+      <p>Associates a <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> key to a value in a call to <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td width="40%"><code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="providesDefault-kotlin.Any-"></a><a name="providesdefault"></a>
+      <h3 class="api-name" id="providesDefault(kotlin.Any)">providesDefault</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;infix&nbsp;final&nbsp;<a href="/reference/androidx/compose/runtime/ProvidedValue.html">ProvidedValue</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html#providesDefault(kotlin.Any)">providesDefault</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value)</pre>
+      <p>Associates a <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> key to a value in a call to <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> if the key does not already have an associated value.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td width="40%"><code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

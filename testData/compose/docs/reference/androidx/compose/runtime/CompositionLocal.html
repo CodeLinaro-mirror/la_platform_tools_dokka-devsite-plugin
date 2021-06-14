@@ -1,0 +1,94 @@
+<html devsite="true">
+  <head>
+    <title>CompositionLocal</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>CompositionLocal</h1>
+{% setvar page_path %}androidx/compose/runtime/CompositionLocal.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public class CompositionLocal&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <tbody>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a></code></td>
+                <td>
+                  <p>A <code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a></code> can be used in <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> to provide values.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>Compose passes data through the composition tree explicitly through means of parameters to composable functions. This is often times the simplest and best way to have data flow through the tree.</p>
+    <p>Sometimes this model can be cumbersome or break down for data that is needed by lots of components, or when components need to pass data between one another but keep that implementation detail private. For these cases, <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code>s can be used as an implicit way to have data flow through a composition.</p>
+    <p><code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code>s by their nature are hierarchical. They make sense when the value of the <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> needs to be scoped to a particular sub-hierarchy of the composition.</p>
+    <p>One must create a <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> instance, which can be referenced by the consumers statically. <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> instances themselves hold no data, and can be thought of as a type-safe identifier for the data being passed down a tree. <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> factory functions take a single parameter: a factory to create a default value in cases where a <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> is used without a Provider. If this is a situation you would rather not handle, you can throw an error in this factory.</p>
+    <pre class="prettyprint">
+import androidx.compose.runtime.compositionLocalOf
+
+val ActiveUser = compositionLocalOf&lt;User&gt; { error(&quot;No active user found!&quot;) }</pre>
+    <p>Somewhere up the tree, a <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> component can be used, which provides a value for the <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code>. This would often be at the &quot;root&quot; of a tree, but could be anywhere, and can also be used in multiple places to override the provided value for a sub-tree.</p>
+    <pre class="prettyprint">
+import androidx.compose.runtime.CompositionLocalProvider
+
+@Composable
+fun App(user: User) {
+    CompositionLocalProvider(ActiveUser provides user) {
+        SomeScreen()
+    }
+}</pre>
+    <p>Intermediate components do not need to know about the <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> value, and can have zero dependencies on it. For example, <code>SomeScreen</code> might look like this:</p>
+    <pre class="prettyprint">@Composable
+fun SomeScreen() {
+    UserPhoto()
+}</pre>
+    <p>Finally, a component that wishes to consume the <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> value can use the <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html#current()">current</a></code> property of the <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code> key which returns the current value of the <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code>, and subscribes the component to changes of it.</p>
+    <pre class="prettyprint">@Composable
+fun UserPhoto() {
+    val user = ActiveUser.current
+    ProfileIcon(src = user.profilePhotoUrl)
+}</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>final @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[InternalComposeApi]) @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/runtime/CompositionLocal.html#current()">current</a></code></div>
+              <p>Return the value provided by the nearest <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> component that invokes, directly or indirectly, the composable function that uses this property.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public fields</h2>
+    <div><a name="getCurrent()"></a><a name="setCurrent()"></a><a name="getCurrent--"></a><a name="setCurrent--"></a>
+      <h3 class="api-name" id="current()">current</h3>
+      <pre class="api-signature no-pretty-print">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[InternalComposeApi])<br>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-opt-in/index.html">OptIn</a>(markerClass&nbsp;=&nbsp;[InternalComposeApi]) @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/runtime/CompositionLocal.html#current()">current</a></pre>
+      <p>Return the value provided by the nearest <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> component that invokes, directly or indirectly, the composable function that uses this property.</p>
+      <pre class="prettyprint">@Composable
+fun UserPhoto() {
+    val user = ActiveUser.current
+    ProfileIcon(src = user.profilePhotoUrl)
+}</pre>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,311 @@
+<html devsite="true">
+  <head>
+    <title>androidx.compose.runtime</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>androidx.compose.runtime</h1>
+{% setvar page_path %}androidx/compose/runtime/package-summary.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <h2>Annotations</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/CheckResult.html">CheckResult</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code></td>
+            <td>
+              <p><code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> functions are the fundamental building blocks of an application built with Compose.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a></code></td>
+            <td>
+              <p>This will prevent composable calls from happening inside of the function that it applies to.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/ExperimentalComposeApi.html">ExperimentalComposeApi</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/ExplicitGroupsComposable.html">ExplicitGroupsComposable</a></code></td>
+            <td>
+              <p>This annotation can be applied to <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> functions so that no groups will be generated in the body of the function it annotates.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/Immutable.html">Immutable</a></code></td>
+            <td>
+              <p><code><a href="/reference/androidx/compose/runtime/Immutable.html">Immutable</a></code> can be used to mark class as producing immutable instances.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/NoLiveLiterals.html">NoLiveLiterals</a></code></td>
+            <td>
+              <p>This annotation is used to indicate to the Compose Compiler to not attempt to generate live literals inside the scope of the declaration it is applied to, even when the live literals code generation is turned on.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/NonRestartableComposable.html">NonRestartableComposable</a></code></td>
+            <td>
+              <p>This annotation can be applied to <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> functions in order to prevent code from being generated which allow this function's execution to be skipped or restarted.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/ReadOnlyComposable.html">ReadOnlyComposable</a></code></td>
+            <td>
+              <p>This annotation can be applied to <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> functions so that no group will be generated around the body of the function it annotates.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/Stable.html">Stable</a></code></td>
+            <td>
+              <p>Stable is used to communicate some guarantees to the compose compiler about how a certain type or function will behave.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/StableMarker.html">StableMarker</a></code></td>
+            <td>
+              <p><code><a href="/reference/androidx/compose/runtime/StableMarker.html">StableMarker</a></code> marks an annotation as indicating a type is stable.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/TestOnly.html">TestOnly</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Interfaces</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code></td>
+            <td>
+              <p>An Applier is responsible for applying the tree-based operations that get emitted during a composition.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/Composer.html">Composer</a></code></td>
+            <td>
+              <p>Composer is the interface that is targeted by the Compose Kotlin compiler plugin and used by code generation helpers.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/Composition.html">Composition</a></code></td>
+            <td>
+              <p>A composition object is usually constructed for you, and returned from an API that is used to initially compose a UI.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a></code></td>
+            <td>
+              <p>A controlled composition is a <code><a href="/reference/androidx/compose/runtime/Composition.html">Composition</a></code> that can be directly controlled by the caller.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/DisposableEffectResult.html">DisposableEffectResult</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></code></td>
+            <td>
+              <p>Provides a time source for display frames and the ability to perform an action on the next frame.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/MutableState.html">MutableState</a></code></td>
+            <td>
+              <p>A mutable value holder where reads to the <code><a href="/reference/androidx/compose/runtime/MutableState.html#value()">value</a></code> property during the execution of a <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> function, the current <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> will be subscribed to changes of that value.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/ProduceStateScope.html">ProduceStateScope</a></code></td>
+            <td>
+              <p>Receiver scope for use with <code><a href="/reference/androidx/compose/runtime/package-summary.html#produceState(kotlin.Any,kotlin.coroutines.SuspendFunction1)">produceState</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code></td>
+            <td>
+              <p>Represents a recomposable scope or section of the composition hierarchy.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/RecomposerInfo.html">RecomposerInfo</a></code></td>
+            <td>
+              <p>Read-only information about a <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/RememberObserver.html">RememberObserver</a></code></td>
+            <td>
+              <p>Objects implementing this interface are notified when they are initially used in a composition and when they are no longer being used.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/ScopeUpdateScope.html">ScopeUpdateScope</a></code></td>
+            <td>
+              <p>Internal compose compiler plugin API that is used to update the function the composer will call to recompose a recomposition scope.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/SnapshotMutationPolicy.html">SnapshotMutationPolicy</a></code></td>
+            <td>
+              <p>A policy to control how the result of <code><a href="/reference/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">mutableStateOf</a></code> report and merge changes to the state object.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/State.html">State</a></code></td>
+            <td>
+              <p>A value holder where reads to the <code><a href="/reference/androidx/compose/runtime/State.html#value()">value</a></code> property during the execution of a <code><a href="/reference/androidx/compose/runtime/Composable.html">Composable</a></code> function, the current <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code> will be subscribed to changes of that value.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Classes</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/AbstractApplier.html">AbstractApplier</a></code></td>
+            <td>
+              <p>An abstract <code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code> implementation.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/ActualAndroidKt.html">ActualAndroidKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/AtomicReference.html">AtomicReference</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/BroadcastFrameClock.html">BroadcastFrameClock</a></code></td>
+            <td>
+              <p>A simple frame clock.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/ComposablesKt.html">ComposablesKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/ComposerKt.html">ComposerKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></code> is an opaque type that is used to logically &quot;link&quot; two compositions together.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/CompositionKt.html">CompositionKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code></td>
+            <td>
+              <p>Compose passes data through the composition tree explicitly through means of parameters to composable functions.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/CompositionLocalKt.html">CompositionLocalKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/DisposableEffectScope.html">DisposableEffectScope</a></code></td>
+            <td>
+              <p>Receiver scope for <code><a href="/reference/androidx/compose/runtime/package-summary.html#DisposableEffect(kotlin.Function1)">DisposableEffect</a></code> that offers the <code><a href="/reference/androidx/compose/runtime/DisposableEffectScope.html#onDispose(kotlin.Function0)">onDispose</a></code> clause that should be the last statement in any call to <code><a href="/reference/androidx/compose/runtime/package-summary.html#DisposableEffect(kotlin.Function1)">DisposableEffect</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/EffectsKt.html">EffectsKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/ExpectKt.html">ExpectKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/MonotonicFrameClockKt.html">MonotonicFrameClockKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html">PausableMonotonicFrameClock</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></code> wrapper that can be <code><a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#pause()">pause</a></code>d and <code><a href="/reference/androidx/compose/runtime/PausableMonotonicFrameClock.html#resume()">resume</a></code>d.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a></code></td>
+            <td>
+              <p>A <code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html">ProvidableCompositionLocal</a></code> can be used in <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> to provide values.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/ProvidedValue.html">ProvidedValue</a></code></td>
+            <td>
+              <p>An instance to hold a value provided by <code><a href="/reference/androidx/compose/runtime/package-summary.html#CompositionLocalProvider(kotlin.Array,kotlin.Function0)">CompositionLocalProvider</a></code> and is created by the <code><a href="/reference/androidx/compose/runtime/ProvidableCompositionLocal.html#provides(kotlin.Any)">ProvidableCompositionLocal.provides</a></code> infixed operator.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code></td>
+            <td>
+              <p>The scheduler for performing recomposition and applying updates to one or more <code><a href="/reference/androidx/compose/runtime/Composition.html">Composition</a></code>s.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/RecomposerKt.html">RecomposerKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/SkippableUpdater.html">SkippableUpdater</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/SnapshotStateKt.html">SnapshotStateKt</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/Updater.html">Updater</a></code></td>
+            <td>
+              <p>A helper receiver scope class used by <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">ComposeNode</a></code> to help write code to initialized and update a node.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Enums</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/androidx/compose/runtime/Recomposer.State.html">Recomposer.State</a></code></td>
+            <td>
+              <p>Valid operational states of a <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

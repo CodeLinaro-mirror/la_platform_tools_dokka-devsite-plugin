@@ -1,0 +1,84 @@
+<html devsite="true">
+  <head>
+    <title>SelectionContainerKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>SelectionContainerKt</h1>
+{% setvar page_path %}androidx/compose/foundation/text/selection/SelectionContainerKt.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class SelectionContainerKt</pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>static&nbsp;final @<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/text/selection/SelectionContainerKt.html#DisableSelection(kotlin.Function0)">DisableSelection</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content)</code></div>
+              <p>Disables text selection for it's direct or indirection children.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>static&nbsp;final @<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/text/selection/SelectionContainerKt.html#SelectionContainer(Modifier,kotlin.Function0)">SelectionContainer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</code></div>
+              <p>Enables text selection for it's direct or indirection children.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="DisableSelection-kotlin.Function0-"></a><a name="disableselection"></a>
+      <h3 class="api-name" id="DisableSelection(kotlin.Function0)">DisableSelection</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> void&nbsp;<a href="/reference/androidx/compose/foundation/text/selection/SelectionContainerKt.html#DisableSelection(kotlin.Function0)">DisableSelection</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content)</pre>
+      <p>Disables text selection for it's direct or indirection children. To use this, simply add this to wrap one or more text composables.</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Text
+import androidx.compose.foundation.text.selection.DisableSelection
+import androidx.compose.foundation.text.selection.SelectionContainer
+
+SelectionContainer {
+    Column {
+        Text(&quot;Text 1&quot;)
+
+        DisableSelection {
+            Text(&quot;Text 2&quot;)
+            Text(&quot;טקסט 3&quot;)
+        }
+
+        Text(&quot;Text 3&quot;)
+    }
+}</pre>
+    </div>
+    <div><a name="SelectionContainer(Modifier, kotlin.Function0)"></a><a name="SelectionContainer-Modifier-kotlin.Function0-"></a><a name="selectioncontainer"></a>
+      <h3 class="api-name" id="SelectionContainer(Modifier,kotlin.Function0)">SelectionContainer</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> void&nbsp;<a href="/reference/androidx/compose/foundation/text/selection/SelectionContainerKt.html#SelectionContainer(Modifier,kotlin.Function0)">SelectionContainer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</pre>
+      <p>Enables text selection for it's direct or indirection children.</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Text
+import androidx.compose.foundation.text.selection.SelectionContainer
+
+SelectionContainer {
+    Column {
+        Text(&quot;Text 1&quot;)
+        Text(&quot;Text 2&quot;)
+        Text(&quot;טקסט 3&quot;)
+    }
+}</pre>
+    </div>
+  </body>
+</html>

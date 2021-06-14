@@ -1,0 +1,55 @@
+<html devsite="true">
+  <head>
+    <title>PressGestureScope</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>PressGestureScope</h1>
+{% setvar page_path %}androidx/compose/foundation/gestures/PressGestureScope.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>interface PressGestureScope</pre>
+    </p>
+    <hr>
+    <p>Receiver scope for <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(PointerInputScope).detectTapGestures(kotlin.Function1,kotlin.Function1,kotlin.coroutines.SuspendFunction2,kotlin.Function1)">detectTapGestures</a></code>'s <code>onPress</code> lambda. This offers two methods to allow waiting for the press to be released.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>abstract void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/gestures/PressGestureScope.html#awaitRelease()">awaitRelease</a>()</code></div>
+              <p>Waits for the press to be released before returning.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract boolean</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/gestures/PressGestureScope.html#tryAwaitRelease()">tryAwaitRelease</a>()</code></div>
+              <p>Waits for the press to be released before returning.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="awaitRelease--"></a><a name="awaitrelease"></a>
+      <h3 class="api-name" id="awaitRelease()">awaitRelease</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/gestures/PressGestureScope.html#awaitRelease()">awaitRelease</a>()</pre>
+      <p>Waits for the press to be released before returning. If the gesture was canceled by motion being consumed by another gesture, <code><a href="/reference/androidx/compose/foundation/gestures/GestureCancellationException.html">GestureCancellationException</a></code> will be thrown.</p>
+    </div>
+    <div><a name="tryAwaitRelease--"></a><a name="tryawaitrelease"></a>
+      <h3 class="api-name" id="tryAwaitRelease()">tryAwaitRelease</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/gestures/PressGestureScope.html#tryAwaitRelease()">tryAwaitRelease</a>()</pre>
+      <p>Waits for the press to be released before returning. If the press was released, <code>true</code> is returned, or if the gesture was canceled by motion being consumed by another gesture, <code>false</code> is returned .</p>
+    </div>
+  </body>
+</html>

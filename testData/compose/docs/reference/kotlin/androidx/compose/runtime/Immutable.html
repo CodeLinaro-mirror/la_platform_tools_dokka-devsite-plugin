@@ -1,0 +1,88 @@
+<html devsite="true">
+  <head>
+    <title>Immutable</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>Immutable</h1>
+{% setvar page_path %}androidx/compose/runtime/Immutable.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>annotation Immutable</pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/kotlin/androidx/compose/runtime/Immutable.html">Immutable</a></code> can be used to mark class as producing immutable instances. The immutability of the class is not validated and is a promise by the type that all publicly accessible properties and fields will not change after the instance is constructed. This is a stronger promise than <code>val</code> as it promises that the value will never change not only that values cannot be changed through a setter.</p>
+    <p><code><a href="/reference/kotlin/androidx/compose/runtime/Immutable.html">Immutable</a></code> is used by composition which enables composition optimizations that can be performed based on the assumption that values read from the type will not change.  See <code><a href="/reference/kotlin/androidx/compose/runtime/StableMarker.html">StableMarker</a></code> for additional details.</p>
+    <p><code>data</code> classes that only contain <code>val</code> properties that do not have custom getters can safely be marked as <code><a href="/reference/kotlin/androidx/compose/runtime/Immutable.html">Immutable</a></code> if the types of properties are either primitive types or also <code><a href="/reference/kotlin/androidx/compose/runtime/Immutable.html">Immutable</a></code>:</p>
+    <pre class="prettyprint">
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.Text
+
+@Immutable
+data class Person(val name: String, val phoneNumber: String)
+
+@Composable
+fun PersonView(person: Person) {
+    Column {
+        Row {
+            Text(&quot;Name: &quot;)
+            Text(person.name)
+        }
+        Row {
+            Text(&quot;Phone: &quot;)
+            Text(person.phoneNumber)
+        }
+    }
+}
+
+@Composable
+fun PeopleView(people: List&lt;Person&gt;) {
+    Column {
+        for (person in people) {
+            PersonView(person)
+        }
+    }
+}</pre>
+    <p>Marking <code>Person</code> immutable allows calls the <code>PersonView</code><code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function to be skipped if it is the same <code>person</code> as it was during the last composition.</p>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2">See also</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/StableMarker.html">StableMarker</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/Immutable.html#Immutable()">Immutable</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="Immutable--"></a><a name="immutable"></a>
+      <h3 class="api-name" id="Immutable()">Immutable</h3>
+      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/runtime/Immutable.html#Immutable()">Immutable</a>()</pre>
+    </div>
+  </body>
+</html>

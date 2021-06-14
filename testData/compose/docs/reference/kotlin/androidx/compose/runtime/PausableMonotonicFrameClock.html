@@ -1,0 +1,181 @@
+<html devsite="true">
+  <head>
+    <title>PausableMonotonicFrameClock</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>PausableMonotonicFrameClock</h1>
+{% setvar page_path %}androidx/compose/runtime/PausableMonotonicFrameClock.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_kotlin_switcher2.md" %}
+    <p>
+      <pre>class PausableMonotonicFrameClock : <a href="/reference/kotlin/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></pre>
+    </p>
+    <hr>
+    <p>A <code><a href="/reference/kotlin/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></code> wrapper that can be <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#pause()">pause</a></code>d and <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#resume()">resume</a></code>d.</p>
+    <p>A paused clock will not dispatch <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> events until it is resumed. Pausing a clock does <b>not</b> stop or change the frame times reported to <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> calls; the clock times reported will always remain consistent with <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#frameClock()">frameClock</a></code>.</p>
+    <p><code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html">PausableMonotonicFrameClock</a></code> should be used in cases where frames should not be produced under some conditions, such as when a window hosting a UI is not currently visible. As clock times are not altered from the source <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#frameClock()">frameClock</a></code>, animations in progress may be fully complete by the time the clock is resumed and a new frame is produced.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#PausableMonotonicFrameClock(androidx.compose.runtime.MonotonicFrameClock)">PausableMonotonicFrameClock</a>(frameClock:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#pause()">pause</a>()</code></div>
+              <p>Pause the generation of frames.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#resume()">resume</a>()</code></div>
+              <p>Resume the generation of frames.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>open&nbsp;suspend R</code></td>
+            <td>
+              <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a>(onFrame:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>) <span style="white-space: nowrap;">-&gt;</span> R)</code></div>
+              <p>Suspends until a new frame is requested, immediately invokes <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code> with the frame time in nanoseconds in the calling context of frame dispatch, then resumes with the result from <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#isPaused()">isPaused</a></code></div>
+              <p><code>true</code> if this clock is currently <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#pause()">paused</a></code> or <code>false</code> if this clock is currently <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#resume()">resumed</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key/index.html">CoroutineContext.Key</a>&lt;*&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#key()">key</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">CoroutineContext.Element</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody>
+                    <tr>
+                      <td width="40%"><code>open R</code></td>
+                      <td>
+                        <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/fold.html">fold</a>(initial:&nbsp;R,&nbsp;operation:&nbsp;(R, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">CoroutineContext.Element</a>) <span style="white-space: nowrap;">-&gt;</span> R)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open&nbsp;operator E?</code></td>
+                      <td>
+                        <div><code>&lt;E&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">CoroutineContext.Element</a>&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/get.html">get</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key/index.html">CoroutineContext.Key</a>&lt;E&gt;)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/minus-key.html">minusKey</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key/index.html">CoroutineContext.Key</a>&lt;*&gt;)</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody>
+                    <tr>
+                      <td width="40%"><code>open&nbsp;operator <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
+                      <td>
+                        <div><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/plus.html">plus</a>(context:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a>)</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="PausableMonotonicFrameClock-androidx.compose.runtime.MonotonicFrameClock-"></a><a name="pausablemonotonicframeclock"></a>
+      <h3 class="api-name" id="PausableMonotonicFrameClock(androidx.compose.runtime.MonotonicFrameClock)">PausableMonotonicFrameClock</h3>
+      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#PausableMonotonicFrameClock(androidx.compose.runtime.MonotonicFrameClock)">PausableMonotonicFrameClock</a>(frameClock:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a>)</pre>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="pause--"></a><a name="pause"></a>
+      <h3 class="api-name" id="pause()">pause</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#pause()">pause</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Pause the generation of frames. Pausing a clock that is already paused has no effect. While the clock is paused any calls to <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> will suspend until the clock is resumed before delegating to the wrapped <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#frameClock()">frameClock</a></code>'s <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> method. Call <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#resume()">resume</a></code> to resume generating frames.</p>
+    </div>
+    <div><a name="resume--"></a><a name="resume"></a>
+      <h3 class="api-name" id="resume()">resume</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#resume()">resume</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Resume the generation of frames. Any queued calls to <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> will resume and delegate to the wrapped <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#frameClock()">frameClock</a></code>'s <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> method.</p>
+    </div>
+    <div><a name="withFrameNanos-kotlin.Function1-"></a><a name="withframenanos"></a>
+      <h3 class="api-name" id="withFrameNanos(kotlin.Function1)">withFrameNanos</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;suspend&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a>(onFrame:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>) <span style="white-space: nowrap;">-&gt;</span> R):&nbsp;R</pre>
+      <p>Suspends until a new frame is requested, immediately invokes <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code> with the frame time in nanoseconds in the calling context of frame dispatch, then resumes with the result from <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code>.</p>
+      <p><code>frameTimeNanos</code> should be used when calculating animation time deltas from frame to frame as it may be normalized to the target time for the frame, not necessarily a direct, &quot;now&quot; value.</p>
+      <p>The time base of the value provided by <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> is implementation defined. Time values provided are monotonically increasing; after a call to <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> completes it must not provide the same value again for a subsequent call.</p>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getIsPaused()"></a><a name="setIsPaused()"></a><a name="getIsPaused--"></a><a name="setIsPaused--"></a>
+      <h3 class="api-name" id="isPaused()">isPaused</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#isPaused()">isPaused</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+      <p><code>true</code> if this clock is currently <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#pause()">paused</a></code> or <code>false</code> if this clock is currently <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#resume()">resumed</a></code>. A PausableMonotonicFrameClock is not paused at construction time.</p>
+    </div>
+    <div><a name="getKey()"></a><a name="setKey()"></a><a name="getKey--"></a><a name="setKey--"></a>
+      <h3 class="api-name" id="key()">key</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#key()">key</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-key/index.html">CoroutineContext.Key</a>&lt;*&gt;</pre>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,141 @@
+<html devsite="true">
+  <head>
+    <title>InlineTextContentKt</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>InlineTextContentKt</h1>
+{% setvar page_path %}androidx/compose/foundation/text/InlineTextContentKt.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class InlineTextContentKt</pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>static&nbsp;final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/foundation/text/InlineTextContentKt.html#(AnnotatedString.Builder).appendInlineContent(kotlin.String,kotlin.String)">appendInlineContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;id,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;alternateText<br>)</code></div>
+              <p>Used to insert composables into the text layout.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="(AnnotatedString.Builder).appendInlineContent(kotlin.String, kotlin.String)"></a><a name="-AnnotatedString.Builder-.appendInlineContent-kotlin.String-kotlin.String-"></a><a name="appendinlinecontent"></a>
+      <h3 class="api-name" id="(AnnotatedString.Builder).appendInlineContent(kotlin.String,kotlin.String)">appendInlineContent</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/text/InlineTextContentKt.html#(AnnotatedString.Builder).appendInlineContent(kotlin.String,kotlin.String)">appendInlineContent</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;id,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;alternateText<br>)</pre>
+      <p>Used to insert composables into the text layout. This method can be used together with the inlineContent parameter of <code><a href="/reference/androidx/compose/foundation/text/package-summary.html#BasicText(kotlin.String,Modifier,TextStyle,kotlin.Function1,TextOverflow,kotlin.Boolean,kotlin.Int)">BasicText</a></code>. It will append the <code><a href="/reference/androidx/compose/foundation/text/package-summary.html#(AnnotatedString.Builder).appendInlineContent(kotlin.String,kotlin.String)">alternateText</a></code> to this <a href="[AnnotatedString]">AnnotatedString</a> and also mark this range of text to be replaced by a composable. <code><a href="/reference/androidx/compose/foundation/text/package-summary.html#BasicText(kotlin.String,Modifier,TextStyle,kotlin.Function1,TextOverflow,kotlin.Boolean,kotlin.Int)">BasicText</a></code> will try to find an <code><a href="/reference/androidx/compose/foundation/text/InlineTextContent.html">InlineTextContent</a></code> in the map defined by inlineContent whose key equals to <code><a href="/reference/androidx/compose/foundation/text/package-summary.html#(AnnotatedString.Builder).appendInlineContent(kotlin.String,kotlin.String)">id</a></code>, and it will use the <code><a href="/reference/androidx/compose/foundation/text/InlineTextContent.html#children()">InlineTextContent.children</a></code> to replace this range of text.</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.InlineTextContent
+import androidx.compose.foundation.text.appendInlineContent
+import androidx.compose.ui.text.Placeholder
+import androidx.compose.ui.text.buildAnnotatedString
+
+val myId = &quot;inlineContent&quot;
+val text = buildAnnotatedString {
+    append(&quot;Hello&quot;)
+    // Append a placeholder string &quot;[myBox]&quot; and attach an annotation &quot;inlineContent&quot; on it.
+    appendInlineContent(myId, &quot;[myBox]&quot;)
+}
+
+val inlineContent = mapOf(
+    Pair(
+        // This tells the [CoreText] to replace the placeholder string &quot;[myBox]&quot; by
+        // the composable given in the [InlineTextContent] object.
+        myId,
+        InlineTextContent(
+            // Placeholder tells text layout the expected size and vertical alignment of
+            // children composable.
+            Placeholder(
+                width = 0.5.em,
+                height = 0.5.em,
+                placeholderVerticalAlign = PlaceholderVerticalAlign.AboveBaseline
+            )
+        ) {
+            // This [Box] will fill maximum size, which is specified by the [Placeholder]
+            // above. Notice the width and height in [Placeholder] are specified in TextUnit,
+            // and are converted into pixel by text layout.
+            Box(modifier = Modifier.fillMaxSize().background(color = Color.Red))
+        }
+    )
+)
+
+BasicText(text = text, inlineContent = inlineContent)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;id</code></td>
+              <td>
+                <p>The id used to look up the <code><a href="/reference/androidx/compose/foundation/text/InlineTextContent.html">InlineTextContent</a></code>, it is referred by the inlineContent parameter of <code><a href="/reference/androidx/compose/foundation/text/package-summary.html#BasicText(kotlin.String,Modifier,TextStyle,kotlin.Function1,TextOverflow,kotlin.Boolean,kotlin.Int)">BasicText</a></code> to replace the <code><a href="/reference/androidx/compose/foundation/text/package-summary.html#(AnnotatedString.Builder).appendInlineContent(kotlin.String,kotlin.String)">alternateText</a></code> to the corresponding composable.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;alternateText</code></td>
+              <td>
+                <p>The text to be replaced by the inline content. It's displayed when the inlineContent parameter of <code><a href="/reference/androidx/compose/foundation/text/package-summary.html#BasicText(kotlin.String,Modifier,TextStyle,kotlin.Function1,TextOverflow,kotlin.Boolean,kotlin.Int)">BasicText</a></code> doesn't contain <code><a href="/reference/androidx/compose/foundation/text/package-summary.html#(AnnotatedString.Builder).appendInlineContent(kotlin.String,kotlin.String)">id</a></code>. Accessibility features will also use this text to describe the inline content.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Throws</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>kotlin.IllegalArgumentException</code></td>
+              <td>
+                <p>if <code><a href="/reference/androidx/compose/foundation/text/package-summary.html#(AnnotatedString.Builder).appendInlineContent(kotlin.String,kotlin.String)">alternateText</a></code> has zero length.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="/reference/androidx/compose/foundation/text/InlineTextContent.html">InlineTextContent</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td width="40%"><code><a href="/reference/androidx/compose/foundation/text/package-summary.html#BasicText(kotlin.String,Modifier,TextStyle,kotlin.Function1,TextOverflow,kotlin.Boolean,kotlin.Int)">BasicText</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

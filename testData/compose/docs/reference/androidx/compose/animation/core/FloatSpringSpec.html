@@ -1,0 +1,322 @@
+<html devsite="true">
+  <head>
+    <title>FloatSpringSpec</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>FloatSpringSpec</h1>
+{% setvar page_path %}androidx/compose/animation/core/FloatSpringSpec.html{% endsetvar %}
+{% setvar can_switch %}1{% endsetvar %}
+{% include "reference/_java_switcher2.md" %}
+    <p>
+      <pre>public final class FloatSpringSpec implements <a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>, <a href="/reference/androidx/compose/animation/core/FloatAnimationSpec.html">FloatAnimationSpec</a></pre>
+    </p>
+    <hr>
+    <p><code><a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html">FloatSpringSpec</a></code> animation uses a spring animation to animate a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code> value. Its configuration can be tuned via adjusting the spring parameters, namely damping ratio and stiffness.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html#dampingRatio()">dampingRatio</a></code></div>
+              <p>damping ratio of the spring.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html#stiffness()">stiffness</a></code></div>
+              <p>Stiffness of the spring.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html#FloatSpringSpec(kotlin.Float,kotlin.Float,kotlin.Float)">FloatSpringSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;dampingRatio,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;stiffness,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;visibilityThreshold<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>long</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html#getDurationNanos(kotlin.Float,kotlin.Float,kotlin.Float)">getDurationNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialVelocity<br>)</code></div>
+              <p>Calculates the duration of an animation.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html#getEndVelocity(kotlin.Float,kotlin.Float,kotlin.Float)">getEndVelocity</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialVelocity<br>)</code></div>
+              <p>Calculates the end velocity of the animation with the provided start/end values, and start velocity.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html#getValueFromNanos(kotlin.Long,kotlin.Float,kotlin.Float,kotlin.Float)">getValueFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;playTimeNanos,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialVelocity<br>)</code></div>
+              <p>Calculates the value of the animation at given the playtime, with the provided start/end values, and start velocity.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>float</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html#getVelocityFromNanos(kotlin.Long,kotlin.Float,kotlin.Float,kotlin.Float)">getVelocityFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;playTimeNanos,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialVelocity<br>)</code></div>
+              <p>Calculates the velocity of the animation at given the playtime, with the provided start/end values, and start velocity.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="/reference/androidx/compose/animation/core/FloatAnimationSpec.html">FloatAnimationSpec</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody>
+                    <tr>
+                      <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/VectorizedFloatAnimationSpec.html">VectorizedFloatAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;</code></td>
+                      <td>
+                        <div><code>&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/FloatAnimationSpec.html#vectorize(androidx.compose.animation.core.TwoWayConverter)">vectorize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Float.html">Float</a>,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;converter<br>)</code></div>
+                        <p>Create an <code><a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> that animates <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> from a <code><a href="/reference/androidx/compose/animation/core/FloatAnimationSpec.html">FloatAnimationSpec</a></code>.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public fields</h2>
+    <div><a name="getDampingRatio()"></a><a name="setDampingRatio()"></a><a name="getDampingRatio--"></a><a name="setDampingRatio--"></a>
+      <h3 class="api-name" id="dampingRatio()">dampingRatio</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html#dampingRatio()">dampingRatio</a></pre>
+      <p>damping ratio of the spring. Defaults to <code><a href="/reference/androidx/compose/animation/core/Spring.html#DampingRatioNoBouncy()">Spring.DampingRatioNoBouncy</a></code></p>
+    </div>
+    <div><a name="getStiffness()"></a><a name="setStiffness()"></a><a name="getStiffness--"></a><a name="setStiffness--"></a>
+      <h3 class="api-name" id="stiffness()">stiffness</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;float&nbsp;<a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html#stiffness()">stiffness</a></pre>
+      <p>Stiffness of the spring. Defaults to <code><a href="/reference/androidx/compose/animation/core/Spring.html#StiffnessMedium()">Spring.StiffnessMedium</a></code></p>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="FloatSpringSpec(kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="FloatSpringSpec-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="floatspringspec"></a>
+      <h3 class="api-name" id="FloatSpringSpec(kotlin.Float,kotlin.Float,kotlin.Float)">FloatSpringSpec</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html#FloatSpringSpec(kotlin.Float,kotlin.Float,kotlin.Float)">FloatSpringSpec</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;dampingRatio,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;stiffness,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;visibilityThreshold<br>)</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>float&nbsp;dampingRatio</code></td>
+              <td>
+                <p>damping ratio of the spring. Defaults to <code><a href="/reference/androidx/compose/animation/core/Spring.html#DampingRatioNoBouncy()">Spring.DampingRatioNoBouncy</a></code></p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>float&nbsp;stiffness</code></td>
+              <td>
+                <p>Stiffness of the spring. Defaults to <code><a href="/reference/androidx/compose/animation/core/Spring.html#StiffnessMedium()">Spring.StiffnessMedium</a></code></p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>float&nbsp;visibilityThreshold</code></td>
+              <td>
+                <p>The value threshold such that the animation is no longer     significant. e.g. 1px for translation animations. Defaults to     <code><a href="/reference/androidx/compose/animation/core/Spring.html#DefaultDisplacementThreshold()">Spring.DefaultDisplacementThreshold</a></code></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="getDurationNanos(kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="getDurationNanos-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="getdurationnanos"></a>
+      <h3 class="api-name" id="getDurationNanos(kotlin.Float,kotlin.Float,kotlin.Float)">getDurationNanos</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;long&nbsp;<a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html#getDurationNanos(kotlin.Float,kotlin.Float,kotlin.Float)">getDurationNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialVelocity<br>)</pre>
+      <p>Calculates the duration of an animation. For duration-based animations, this will return the pre-defined duration. For physics-based animations, the duration will be estimated based on the physics configuration (such as spring stiffness, damping ratio, visibility threshold) as well as the <code><a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html#getDurationNanos(kotlin.Float,kotlin.Float,kotlin.Float)">initialValue</a></code>, <code><a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html#getDurationNanos(kotlin.Float,kotlin.Float,kotlin.Float)">targetValue</a></code> values, and <code><a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html#getDurationNanos(kotlin.Float,kotlin.Float,kotlin.Float)">initialVelocity</a></code>.</p>
+      <p><b>Note</b>: this may be a computation that is expensive - especially with spring based animations</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>float&nbsp;initialValue</code></td>
+              <td>
+                <p>start value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>float&nbsp;targetValue</code></td>
+              <td>
+                <p>end value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>float&nbsp;initialVelocity</code></td>
+              <td>
+                <p>start velocity of the animation</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="getEndVelocity(kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="getEndVelocity-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="getendvelocity"></a>
+      <h3 class="api-name" id="getEndVelocity(kotlin.Float,kotlin.Float,kotlin.Float)">getEndVelocity</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;float&nbsp;<a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html#getEndVelocity(kotlin.Float,kotlin.Float,kotlin.Float)">getEndVelocity</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialVelocity<br>)</pre>
+      <p>Calculates the end velocity of the animation with the provided start/end values, and start velocity. For duration-based animations, end velocity will be the velocity of the animation at the duration time. This is also the default assumption. However, for spring animations, the transient trailing velocity will be snapped to zero.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>float&nbsp;initialValue</code></td>
+              <td>
+                <p>start value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>float&nbsp;targetValue</code></td>
+              <td>
+                <p>end value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>float&nbsp;initialVelocity</code></td>
+              <td>
+                <p>start velocity of the animation</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="getValueFromNanos(kotlin.Long, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="getValueFromNanos-kotlin.Long-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="getvaluefromnanos"></a>
+      <h3 class="api-name" id="getValueFromNanos(kotlin.Long,kotlin.Float,kotlin.Float,kotlin.Float)">getValueFromNanos</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;float&nbsp;<a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html#getValueFromNanos(kotlin.Long,kotlin.Float,kotlin.Float,kotlin.Float)">getValueFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;playTimeNanos,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialVelocity<br>)</pre>
+      <p>Calculates the value of the animation at given the playtime, with the provided start/end values, and start velocity.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>long&nbsp;playTimeNanos</code></td>
+              <td>
+                <p>time since the start of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>float&nbsp;initialValue</code></td>
+              <td>
+                <p>start value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>float&nbsp;targetValue</code></td>
+              <td>
+                <p>end value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>float&nbsp;initialVelocity</code></td>
+              <td>
+                <p>start velocity of the animation</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="getVelocityFromNanos(kotlin.Long, kotlin.Float, kotlin.Float, kotlin.Float)"></a><a name="getVelocityFromNanos-kotlin.Long-kotlin.Float-kotlin.Float-kotlin.Float-"></a><a name="getvelocityfromnanos"></a>
+      <h3 class="api-name" id="getVelocityFromNanos(kotlin.Long,kotlin.Float,kotlin.Float,kotlin.Float)">getVelocityFromNanos</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;float&nbsp;<a href="/reference/androidx/compose/animation/core/FloatSpringSpec.html#getVelocityFromNanos(kotlin.Long,kotlin.Float,kotlin.Float,kotlin.Float)">getVelocityFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;playTimeNanos,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;initialVelocity<br>)</pre>
+      <p>Calculates the velocity of the animation at given the playtime, with the provided start/end values, and start velocity.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>long&nbsp;playTimeNanos</code></td>
+              <td>
+                <p>time since the start of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>float&nbsp;initialValue</code></td>
+              <td>
+                <p>start value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>float&nbsp;targetValue</code></td>
+              <td>
+                <p>end value of the animation</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>float&nbsp;initialVelocity</code></td>
+              <td>
+                <p>start velocity of the animation</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
