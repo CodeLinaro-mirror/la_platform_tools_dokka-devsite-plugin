@@ -257,8 +257,25 @@ internal class ClasslikeDocumentableConverterTest(
 
         val classlike = page.content<Classlike>()
         val (summary) = classlike.symbolsFor("Nested types")
-
         assertThat(summary.item().link().name).isEqualTo("Foo.Bar")
+    }
+
+    @Test
+    fun `Companion objects are documented in Java but not Kotlin because they're inlined`() {
+        val page = """
+            |class Foo {
+            |    companion object Bar
+            |}
+        """.render().page()
+
+        val classlike = page.content<Classlike>()
+        val (summary) = classlike.symbolsFor("Nested types")
+        kotlinOnly {
+            assertThat(summary.items()).hasSize(0)
+        }
+        javaOnly {
+            assertThat(summary.item().link().name).isEqualTo("Foo.Bar")
+        }
     }
 
     @Test
@@ -767,6 +784,7 @@ internal class ClasslikeDocumentableConverterTest(
                     "Nested types",
                     "Enum Values",
                     "Constants",
+                    "Companion functions",
                     "Public constructors",
                     "Protected constructors",
                     "Public functions",
@@ -775,6 +793,73 @@ internal class ClasslikeDocumentableConverterTest(
                     "Protected properties"
                 )
             )
+        }
+    }
+
+    @Test
+    fun `classlike companion methods are included in Kotlin and not Java`() {
+        val page = """
+            |class Foo {
+            |  companion object {
+            |    fun bar() = Unit
+            |    fun baz() = Unit
+            |  }
+            |}
+        """.render().page()
+
+        val classlike = page.content<Classlike>()
+        val companionFunctions = classlike.data.symbolTypes.find {
+            it.second.title == "Companion functions"
+        }?.first?.data?.items ?: emptyList()
+        kotlinOnly {
+            assertThat(companionFunctions).hasSize(2)
+        }
+        javaOnly {
+            assertThat(companionFunctions).isEmpty()
+        }
+    }
+
+    @Test
+    fun `Static and companion functions are treated correctly in both languages`() {
+        val pageK = """
+            |class Foo {
+            |  companion object {
+            |    fun bar() = Unit
+            |  }
+            |}
+        """.render().page()
+
+        val pageJ = """
+            |public class Foo {
+            |  public static void foo() {}
+            |}
+        """.render(java = true).page()
+
+        val kotlinClasslike = pageK.content<Classlike>()
+        val javaClasslike = pageJ.content<Classlike>()
+
+        val (kotlinNestedTypeSummary) = kotlinClasslike.symbolsFor("Nested types")
+
+        val publicJavaMethods = javaClasslike.methodSymbols()
+        val staticJavaMethod = publicJavaMethods.first.items().single().summary()
+        val staticMethodName = staticJavaMethod.data.signature.data.name.data.name
+
+        val companionFunctions = kotlinClasslike.data.symbolTypes.find {
+            it.second.title == "Companion functions"
+        }?.first?.data?.items ?: emptyList()
+
+        // can see java static methods in both languages
+        assertThat(staticMethodName).isEqualTo("foo")
+
+        kotlinOnly {
+            // nested companion object is not documented because it is inlined
+            assertThat(kotlinNestedTypeSummary.items()).hasSize(0)
+            assertThat(companionFunctions).hasSize(1)
+        }
+        javaOnly {
+            // nested companion object is documented but companion functions are not inlined
+            assertThat(kotlinNestedTypeSummary.items()).hasSize(1)
+            assertThat(companionFunctions).hasSize(0)
         }
     }
 
