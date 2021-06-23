@@ -1,11 +1,27 @@
 #!/bin/bash -e
 
-./gradlew --continue :test --tests="com.google.devsite.integration.*" $@ && exit 0 || printf "\n-----------\nUpdating..."
+echo "Running tests to update data in build directory..."
 
-rm -rf testData/fragment/docs && cp -r build/docs/testData/fragment/docs testData/fragment/docs
-rm -rf testData/innerClasses/docs && cp -r build/docs/testData/innerClasses/docs testData/innerClasses/docs
-rm -rf testData/paging/docs && cp -r build/docs/testData/paging/docs testData/paging/docs
-rm -rf testData/simple/docs && cp -r build/docs/testData/simple/docs testData/simple/docs
-rm -rf testData/topLevelFunctions/docs && cp -r build/docs/testData/topLevelFunctions/docs testData/topLevelFunctions/docs
-rm -rf testData/sampleAnnotation/docs && cp -r build/docs/testData/sampleAnnotation/docs testData/sampleAnnotation/docs
-rm -rf testData/complicatedPlatform/docs && cp -r build/docs/testData/complicatedPlatform/docs testData/complicatedPlatform/docs
+# re-run tasks here because gradle may consider the task "up to date" even though the source files have changed
+function run_tests() {
+  ./gradlew --continue --rerun-tasks :test --tests="com.google.devsite.integration.BasicTest" $@
+}
+
+if run_tests $@ ; then
+   echo "Test data is already up to date."
+   exit 0
+fi
+
+echo "Updating test data..."
+
+for dir in testData/*
+do
+    [[ "$dir" =~ package-lists ]] && continue
+    if [ -d "$dir" ]; then
+        baseDir=$(basename "$dir")
+        echo "Updating test files for $dir..."
+        rm -rf "testData/${baseDir}/docs" && cp -r "build/docs/testData/${baseDir}/docs" "testData/${baseDir}/docs"
+    fi
+done
+
+echo "Test data successfully updated."
