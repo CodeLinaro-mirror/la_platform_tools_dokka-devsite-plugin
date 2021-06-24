@@ -34,7 +34,7 @@ application {
     mainClassName = "org.jetbrains.dokka.MainKt"
 }
 
-val dokkaVersion = "1.4.32"
+val dokkaVersion = "1.5.0-dev-104"
 
 dependencies {
     compileOnly(kotlin("stdlib-jdk8"))

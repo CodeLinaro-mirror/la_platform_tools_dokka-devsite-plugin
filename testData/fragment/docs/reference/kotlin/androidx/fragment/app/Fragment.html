@@ -209,7 +209,7 @@
             <td width="40%"><code>Lifecycle</code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#getLifecycle()">getLifecycle</a>()</code></div>
-              <p>Overriding this method is no longer supported and this method will be made <code>final</code> in a future version of Fragment.</p>
+              <p> Overriding this method is no longer supported and this method will be made <code>final</code> in a future version of Fragment.</p>
             </td>
           </tr>
           <tr>
@@ -729,7 +729,7 @@
             <td width="40%"><code>ActivityResultLauncher&lt;I&gt;</code></td>
             <td>
               <div><code>&lt;I,&nbsp;O&gt; <a href="/reference/kotlin/androidx/fragment/app/Fragment.html#registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">registerForActivityResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;contract:&nbsp;ActivityResultContract&lt;I, O&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;callback:&nbsp;ActivityResultCallback&lt;O&gt;<br>)</code></div>
-              <p>If the host of this fragment is an ActivityResultRegistryOwner the ActivityResultRegistry of the host will be used.</p>
+              <p> If the host of this fragment is an ActivityResultRegistryOwner the ActivityResultRegistry of the host will be used.</p>
             </td>
           </tr>
           <tr>
@@ -1019,7 +1019,7 @@
   }
 }
 </pre>
-You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">set a custom FragmentFactory</a></code> if you want to use a non-default constructor to ensure that your constructor is called when the fragment is re-instantiated.
+ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">set a custom FragmentFactory</a></code> if you want to use a non-default constructor to ensure that your constructor is called when the fragment is re-instantiated.
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1294,7 +1294,7 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
       <h3 class="api-name" id="getLayoutInflater()">getLayoutInflater</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html#getLayoutInflater()">getLayoutInflater</a>():&nbsp;LayoutInflater</pre>
       <p>Returns the cached LayoutInflater used to inflate Views of this Fragment. If <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onGetLayoutInflater(android.os.Bundle)">onGetLayoutInflater</a></code> has not been called <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onGetLayoutInflater(android.os.Bundle)">onGetLayoutInflater</a></code> will be called with a <code>{@code null}</code> argument and that value will be cached. </p>
-      <p>The cached LayoutInflater will be replaced immediately prior to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> and cleared immediately after <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onDetach()">onDetach</a></code>.</p>
+      <p> The cached LayoutInflater will be replaced immediately prior to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> and cleared immediately after <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onDetach()">onDetach</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1316,7 +1316,7 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
     <div><a name="getLifecycle--"></a><a name="getlifecycle"></a>
       <h3 class="api-name" id="getLifecycle()">getLifecycle</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html#getLifecycle()">getLifecycle</a>():&nbsp;Lifecycle</pre>
-      <p>Overriding this method is no longer supported and this method will be made <code>final</code> in a future version of Fragment.</p>
+      <p> Overriding this method is no longer supported and this method will be made <code>final</code> in a future version of Fragment.</p>
     </div>
     <div><a name="getLoaderManager--"></a><a name="getloadermanager"></a>
       <h3 class="api-name" id="getLoaderManager()">getLoaderManager</h3>
@@ -1653,7 +1653,7 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
       <h3 class="api-name" id="getViewLifecycleOwner()">getViewLifecycleOwner</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html#getViewLifecycleOwner()">getViewLifecycleOwner</a>():&nbsp;LifecycleOwner</pre>
       <p>Get a LifecycleOwner that represents the <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#getView()">Fragment's View</a></code> lifecycle. In most cases, this mirrors the lifecycle of the Fragment itself, but in cases of <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#detach(androidx.fragment.app.Fragment)">detached</a></code> Fragments, the lifecycle of the Fragment can be considerably longer than the lifecycle of the View itself. </p>
-      <p>Namely, the lifecycle of the Fragment's View is: </p>
+      <p> Namely, the lifecycle of the Fragment's View is: </p>
       <ol>
         <li>created after <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onViewStateRestored(android.os.Bundle)">onViewStateRestored</a></code></li>
         <li>started after <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onStart()">onStart</a></code></li>
@@ -1662,10 +1662,10 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
         <li>stopped before <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onStop()">onStop</a></code></li>
         <li>destroyed before <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onDestroyView()">onDestroyView</a></code></li>
       </ol>
-The first method where it is safe to access the view lifecycle is <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> under the condition that you must return a non-null view (an IllegalStateException will be thrown if you access the view lifecycle but don't return a non-null view). 
+ The first method where it is safe to access the view lifecycle is <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> under the condition that you must return a non-null view (an IllegalStateException will be thrown if you access the view lifecycle but don't return a non-null view). 
       <p>The view lifecycle remains valid through the call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onDestroyView()">onDestroyView</a></code>, after which <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#getView()">getView</a></code> will return null, the view lifecycle will be destroyed, and this method will throw an IllegalStateException. Consider using <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#getViewLifecycleOwnerLiveData()">getViewLifecycleOwnerLiveData</a></code> or <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#runOnCommit(java.lang.Runnable)">FragmentTransaction#runOnCommit(Runnable)</a></code> to receive a callback for when the Fragment's view lifecycle is available. </p>
-      <p>This should only be called on the main thread. </p>
-      <p>Overriding this method is no longer supported and this method will be made <code>final</code> in a future version of Fragment.</p>
+      <p> This should only be called on the main thread. </p>
+      <p> Overriding this method is no longer supported and this method will be made <code>final</code> in a future version of Fragment.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1705,8 +1705,8 @@ The first method where it is safe to access the view lifecycle is <code><a href=
       <h3 class="api-name" id="getViewLifecycleOwnerLiveData()">getViewLifecycleOwnerLiveData</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html#getViewLifecycleOwnerLiveData()">getViewLifecycleOwnerLiveData</a>():&nbsp;LiveData&lt;LifecycleOwner&gt;</pre>
       <p>Retrieve a LiveData which allows you to observe the <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#getViewLifecycleOwner()">lifecycle of the Fragment's View</a></code>. </p>
-      <p>This will be set to the new LifecycleOwner after <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> returns a non-null View and will set to null after <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onDestroyView()">onDestroyView</a></code>. </p>
-      <p>Overriding this method is no longer supported and this method will be made <code>final</code> in a future version of Fragment.</p>
+      <p> This will be set to the new LifecycleOwner after <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> returns a non-null View and will set to null after <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onDestroyView()">onDestroyView</a></code>. </p>
+      <p> Overriding this method is no longer supported and this method will be made <code>final</code> in a future version of Fragment.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1729,7 +1729,7 @@ The first method where it is safe to access the view lifecycle is <code><a href=
       <h3 class="api-name" id="getViewModelStore()">getViewModelStore</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html#getViewModelStore()">getViewModelStore</a>():&nbsp;ViewModelStore</pre>
       <p>Returns the ViewModelStore associated with this Fragment </p>
-      <p>Overriding this method is no longer supported and this method will be made <code>final</code> in a future version of Fragment.</p>
+      <p> Overriding this method is no longer supported and this method will be made <code>final</code> in a future version of Fragment.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1867,7 +1867,7 @@ The first method where it is safe to access the view lifecycle is <code><a href=
     <div><a name="isInLayout--"></a><a name="isinlayout"></a>
       <h3 class="api-name" id="isInLayout()">isInLayout</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html#isInLayout()">isInLayout</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-      <p>Return true if the layout is included as part of an activity view hierarchy via the &lt;fragment&gt; tag. This will always be true when fragments are created through the &lt;fragment&gt; tag, <em>except</em>in the case where an old fragment is restored from a previous state and it does not appear in the layout of the current state.</p>
+      <p>Return true if the layout is included as part of an activity view hierarchy via the &lt;fragment&gt; tag. This will always be true when fragments are created through the &lt;fragment&gt; tag, <em>except</em> in the case where an old fragment is restored from a previous state and it does not appear in the layout of the current state.</p>
     </div>
     <div><a name="isRemoving--"></a><a name="isremoving"></a>
       <h3 class="api-name" id="isRemoving()">isRemoving</h3>
@@ -2015,8 +2015,8 @@ The first method where it is safe to access the view lifecycle is <code><a href=
       <h3 class="api-name" id="onContextItemSelected(android.view.MenuItem)">onContextItemSelected</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onContextItemSelected(android.view.MenuItem)">onContextItemSelected</a>(item:&nbsp;MenuItem):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
       <p>This hook is called whenever an item in a context menu is selected. The default implementation simply returns false to have the normal processing happen (calling the item's Runnable or sending a message to its Handler as appropriate). You can use this method for any items for which you would like to do processing without those other facilities. </p>
-      <p>Use MenuItem#getMenuInfo() to get extra information set by the View that added this menu item. </p>
-      <p>Derived classes should call through to the base class for it to perform the default menu handling.</p>
+      <p> Use MenuItem#getMenuInfo() to get extra information set by the View that added this menu item. </p>
+      <p> Derived classes should call through to the base class for it to perform the default menu handling.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -2148,9 +2148,9 @@ The first method where it is safe to access the view lifecycle is <code><a href=
       <h3 class="api-name" id="onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu.ContextMenuInfo)">onCreateContextMenu</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu.ContextMenuInfo)">onCreateContextMenu</a>(menu:&nbsp;ContextMenu,&nbsp;v:&nbsp;View,&nbsp;menuInfo:&nbsp;ContextMenuInfo?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Called when a context menu for the <code>{@code view}</code> is about to be shown. Unlike <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateOptionsMenu(android.view.Menu,android.view.MenuInflater)">onCreateOptionsMenu</a></code>, this will be called every time the context menu is about to be shown and should be populated for the view (or item inside the view for AdapterView subclasses, this can be found in the <code>{@code menuInfo}</code>)). </p>
-      <p>Use <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onContextItemSelected(android.view.MenuItem)">onContextItemSelected</a></code> to know when an item has been selected. </p>
-      <p>The default implementation calls up to Activity.onCreateContextMenu, though you can not call this implementation if you don't want that behavior. </p>
-      <p>It is not safe to hold onto the context menu after this method returns.</p>
+      <p> Use <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onContextItemSelected(android.view.MenuItem)">onContextItemSelected</a></code> to know when an item has been selected. </p>
+      <p> The default implementation calls up to Activity.onCreateContextMenu, though you can not call this implementation if you don't want that behavior. </p>
+      <p> It is not safe to hold onto the context menu after this method returns.</p>
     </div>
     <div><a name="onCreateOptionsMenu(android.view.Menu, android.view.MenuInflater)"></a><a name="onCreateOptionsMenu-android.view.Menu-android.view.MenuInflater-"></a><a name="oncreateoptionsmenu"></a>
       <h3 class="api-name" id="onCreateOptionsMenu(android.view.Menu,android.view.MenuInflater)">onCreateOptionsMenu</h3>
@@ -2341,7 +2341,7 @@ The first method where it is safe to access the view lifecycle is <code><a href=
     <div><a name="onInflate(android.content.Context, android.util.AttributeSet, android.os.Bundle)"></a><a name="onInflate-android.content.Context-android.util.AttributeSet-android.os.Bundle-"></a><a name="oninflate"></a>
       <h3 class="api-name" id="onInflate(android.content.Context,android.util.AttributeSet,android.os.Bundle)">onInflate</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onInflate(android.content.Context,android.util.AttributeSet,android.os.Bundle)">onInflate</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;context:&nbsp;Context,<br>&nbsp;&nbsp;&nbsp;&nbsp;attrs:&nbsp;AttributeSet,<br>&nbsp;&nbsp;&nbsp;&nbsp;savedInstanceState:&nbsp;Bundle?<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Called when a fragment is being created as part of a view layout inflation, typically from setting the content view of an activity. This may be called immediately after the fragment is created from a <code><a href="/reference/kotlin/androidx/fragment/app/FragmentContainerView.html">FragmentContainerView</a></code> in a layout file. Note this is <em>before</em>the fragment's <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code> has been called; all you should do here is parse the attributes and save them away. </p>
+      <p>Called when a fragment is being created as part of a view layout inflation, typically from setting the content view of an activity. This may be called immediately after the fragment is created from a <code><a href="/reference/kotlin/androidx/fragment/app/FragmentContainerView.html">FragmentContainerView</a></code> in a layout file. Note this is <em>before</em> the fragment's <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code> has been called; all you should do here is parse the attributes and save them away. </p>
       <p>This is called <em>the first time</em> the fragment is inflated. If it is being inflated into a new instance with saved state, this method will not be called a second time for the restored state fragment.</p>
       <p>Here is a typical implementation of a fragment that can take parameters both through attributes supplied here as well from <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#getArguments()">getArguments</a></code>:</p>
       <pre class="prettyprint">
@@ -2821,10 +2821,10 @@ public static class MyFragment extends Fragment {
       <h3 class="api-name" id="postponeEnterTransition()">postponeEnterTransition</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html#postponeEnterTransition()">postponeEnterTransition</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Postpone the entering Fragment transition until <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#startPostponedEnterTransition()">startPostponedEnterTransition</a></code> or <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">FragmentManager#executePendingTransactions()</a></code> has been called. </p>
-      <p>This method gives the Fragment the ability to delay Fragment animations until all data is loaded. Until then, the added, shown, and attached Fragments will be INVISIBLE and removed, hidden, and detached Fragments won't be have their Views removed. The transaction runs when all postponed added Fragments in the transaction have called <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#startPostponedEnterTransition()">startPostponedEnterTransition</a></code>. </p>
-      <p>This method should be called before being added to the FragmentTransaction or in <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code>, <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code>, or <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code>}. <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#startPostponedEnterTransition()">startPostponedEnterTransition</a></code> must be called to allow the Fragment to start the transitions. </p>
-      <p>When a FragmentTransaction is started that may affect a postponed FragmentTransaction, based on which containers are in their operations, the postponed FragmentTransaction will have its start triggered. The early triggering may result in faulty or nonexistent animations in the postponed transaction. FragmentTransactions that operate only on independent containers will not interfere with each other's postponement. </p>
-      <p>Calling postponeEnterTransition on Fragments with a null View will not postpone the transition. Likewise, postponement only works if <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#setReorderingAllowed(boolean)">FragmentTransaction reordering</a></code> is enabled if you have called <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#enableNewStateManager(boolean)">FragmentManager#enableNewStateManager(boolean)</a></code> with <code>false</code>.</p>
+      <p> This method gives the Fragment the ability to delay Fragment animations until all data is loaded. Until then, the added, shown, and attached Fragments will be INVISIBLE and removed, hidden, and detached Fragments won't be have their Views removed. The transaction runs when all postponed added Fragments in the transaction have called <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#startPostponedEnterTransition()">startPostponedEnterTransition</a></code>. </p>
+      <p> This method should be called before being added to the FragmentTransaction or in <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code>, <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code>, or <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code>}. <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#startPostponedEnterTransition()">startPostponedEnterTransition</a></code> must be called to allow the Fragment to start the transitions. </p>
+      <p> When a FragmentTransaction is started that may affect a postponed FragmentTransaction, based on which containers are in their operations, the postponed FragmentTransaction will have its start triggered. The early triggering may result in faulty or nonexistent animations in the postponed transaction. FragmentTransactions that operate only on independent containers will not interfere with each other's postponement. </p>
+      <p> Calling postponeEnterTransition on Fragments with a null View will not postpone the transition. Likewise, postponement only works if <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#setReorderingAllowed(boolean)">FragmentTransaction reordering</a></code> is enabled if you have called <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#enableNewStateManager(boolean)">FragmentManager#enableNewStateManager(boolean)</a></code> with <code>false</code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -2853,10 +2853,10 @@ public static class MyFragment extends Fragment {
       <h3 class="api-name" id="postponeEnterTransition(long,java.util.concurrent.TimeUnit)">postponeEnterTransition</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html#postponeEnterTransition(long,java.util.concurrent.TimeUnit)">postponeEnterTransition</a>(duration:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>,&nbsp;timeUnit:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/TimeUnit.html">TimeUnit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Postpone the entering Fragment transition for a given amount of time and then call <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#startPostponedEnterTransition()">startPostponedEnterTransition</a></code>. </p>
-      <p>This method gives the Fragment the ability to delay Fragment animations for a given amount of time. Until then, the added, shown, and attached Fragments will be INVISIBLE and removed, hidden, and detached Fragments won't be have their Views removed. The transaction runs when all postponed added Fragments in the transaction have called <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#startPostponedEnterTransition()">startPostponedEnterTransition</a></code>. </p>
-      <p>This method should be called before being added to the FragmentTransaction or in <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code>, <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code>, or <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code>}. </p>
-      <p>When a FragmentTransaction is started that may affect a postponed FragmentTransaction, based on which containers are in their operations, the postponed FragmentTransaction will have its start triggered. The early triggering may result in faulty or nonexistent animations in the postponed transaction. FragmentTransactions that operate only on independent containers will not interfere with each other's postponement. </p>
-      <p>Calling postponeEnterTransition on Fragments with a null View will not postpone the transition. Likewise, postponement only works if <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#setReorderingAllowed(boolean)">FragmentTransaction reordering</a></code> is enabled if you have called <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#enableNewStateManager(boolean)">FragmentManager#enableNewStateManager(boolean)</a></code> with <code>false</code>.</p>
+      <p> This method gives the Fragment the ability to delay Fragment animations for a given amount of time. Until then, the added, shown, and attached Fragments will be INVISIBLE and removed, hidden, and detached Fragments won't be have their Views removed. The transaction runs when all postponed added Fragments in the transaction have called <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#startPostponedEnterTransition()">startPostponedEnterTransition</a></code>. </p>
+      <p> This method should be called before being added to the FragmentTransaction or in <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code>, <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code>, or <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code>}. </p>
+      <p> When a FragmentTransaction is started that may affect a postponed FragmentTransaction, based on which containers are in their operations, the postponed FragmentTransaction will have its start triggered. The early triggering may result in faulty or nonexistent animations in the postponed transaction. FragmentTransactions that operate only on independent containers will not interfere with each other's postponement. </p>
+      <p> Calling postponeEnterTransition on Fragments with a null View will not postpone the transition. Likewise, postponement only works if <code><a href="/reference/kotlin/androidx/fragment/app/FragmentTransaction.html#setReorderingAllowed(boolean)">FragmentTransaction reordering</a></code> is enabled if you have called <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#enableNewStateManager(boolean)">FragmentManager#enableNewStateManager(boolean)</a></code> with <code>false</code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -2907,7 +2907,7 @@ public static class MyFragment extends Fragment {
     <div><a name="registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;, androidx.activity.result.ActivityResultCallback&lt;O&gt;)"></a><a name="registerForActivityResult-androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;-androidx.activity.result.ActivityResultCallback&lt;O&gt;-"></a><a name="registerforactivityresult"></a>
       <h3 class="api-name" id="registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">registerForActivityResult</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;I,&nbsp;O&gt; <a href="/reference/kotlin/androidx/fragment/app/Fragment.html#registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">registerForActivityResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;contract:&nbsp;ActivityResultContract&lt;I, O&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;callback:&nbsp;ActivityResultCallback&lt;O&gt;<br>):&nbsp;ActivityResultLauncher&lt;I&gt;</pre>
-      <p>If the host of this fragment is an ActivityResultRegistryOwner the ActivityResultRegistry of the host will be used. Otherwise, this will use the registry of the Fragment's Activity.</p>
+      <p> If the host of this fragment is an ActivityResultRegistryOwner the ActivityResultRegistry of the host will be used. Otherwise, this will use the registry of the Fragment's Activity.</p>
     </div>
     <div><a name="registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;, androidx.activity.result.ActivityResultRegistry, androidx.activity.result.ActivityResultCallback&lt;O&gt;)"></a><a name="registerForActivityResult-androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;-androidx.activity.result.ActivityResultRegistry-androidx.activity.result.ActivityResultCallback&lt;O&gt;-"></a><a name="registerforactivityresult"></a>
       <h3 class="api-name" id="registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultRegistry,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">registerForActivityResult</h3>
@@ -2959,13 +2959,13 @@ public static class MyFragment extends Fragment {
         <p>use <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">registerForActivityResult</a></code> passing in a RequestMultiplePermissions object for the ActivityResultContract and handling the result in the callback.</p>
       </aside>
       <p>Requests permissions to be granted to this application. These permissions must be requested in your manifest, they should not be granted to your app, and they should have protection level  #PROTECTION_DANGEROUS dangerous, regardless whether they are declared by the platform or a third-party app. </p>
-      <p>Normal permissions PROTECTION_NORMAL are granted at install time if requested in the manifest. Signature permissions PROTECTION_SIGNATURE are granted at install time if requested in the manifest and the signature of your app matches the signature of the app declaring the permissions. </p>
-      <p>Call <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#shouldShowRequestPermissionRationale(java.lang.String)">shouldShowRequestPermissionRationale</a></code> before calling this API to check if the system recommends to show a rationale dialog before asking for a permission. </p>
-      <p>If your app does not have the requested permissions the user will be presented with UI for accepting them. After the user has accepted or rejected the requested permissions you will receive a callback on <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onRequestPermissionsResult(int,java.lang.String[],int[])"></a></code> reporting whether the permissions were granted or not. </p>
-      <p>Note that requesting a permission does not guarantee it will be granted and your app should be able to run without having this permission. </p>
-      <p>This method may start an activity allowing the user to choose which permissions to grant and which to reject. Hence, you should be prepared that your activity may be paused and resumed. Further, granting some permissions may require a restart of you application. In such a case, the system will recreate the activity stack before delivering the result to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onRequestPermissionsResult(int,java.lang.String[],int[])"></a></code>. </p>
-      <p>When checking whether you have a permission you should use . </p>
-      <p>Calling this API for permissions already granted to your app would show UI to the user to decided whether the app can still hold these permissions. This can be useful if the way your app uses the data guarded by the permissions changes significantly. </p>
+      <p> Normal permissions PROTECTION_NORMAL are granted at install time if requested in the manifest. Signature permissions PROTECTION_SIGNATURE are granted at install time if requested in the manifest and the signature of your app matches the signature of the app declaring the permissions. </p>
+      <p> Call <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#shouldShowRequestPermissionRationale(java.lang.String)">shouldShowRequestPermissionRationale</a></code> before calling this API to check if the system recommends to show a rationale dialog before asking for a permission. </p>
+      <p> If your app does not have the requested permissions the user will be presented with UI for accepting them. After the user has accepted or rejected the requested permissions you will receive a callback on <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onRequestPermissionsResult(int,java.lang.String[],int[])"></a></code> reporting whether the permissions were granted or not. </p>
+      <p> Note that requesting a permission does not guarantee it will be granted and your app should be able to run without having this permission. </p>
+      <p> This method may start an activity allowing the user to choose which permissions to grant and which to reject. Hence, you should be prepared that your activity may be paused and resumed. Further, granting some permissions may require a restart of you application. In such a case, the system will recreate the activity stack before delivering the result to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onRequestPermissionsResult(int,java.lang.String[],int[])"></a></code>. </p>
+      <p> When checking whether you have a permission you should use . </p>
+      <p> Calling this API for permissions already granted to your app would show UI to the user to decided whether the app can still hold these permissions. This can be useful if the way your app uses the data guarded by the permissions changes significantly. </p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -3526,7 +3526,7 @@ public static class MyFragment extends Fragment {
       <ul>
         <li><code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onDestroy()">onDestroy</a></code> will not be called (but <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onDetach()">onDetach</a></code> still will be, because the fragment is being detached from its current activity). </li>
         <li><code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code> will not be called since the fragment is not being re-created. </li>
-        <li><code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onAttach(android.app.Activity)">onAttach</a></code> and <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onActivityCreated(android.os.Bundle)">onActivityCreated</a></code><b>will</b>still be called. </li>
+        <li><code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onAttach(android.app.Activity)">onAttach</a></code> and <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onActivityCreated(android.os.Bundle)">onActivityCreated</a></code><b>will</b> still be called. </li>
       </ul>
       <div class="devsite-table-wrapper">
         <table class="responsive">

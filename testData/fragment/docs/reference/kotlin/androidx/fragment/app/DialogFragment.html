@@ -402,7 +402,7 @@
                       <td width="40%"><code>Lifecycle</code></td>
                       <td>
                         <div><code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#getLifecycle()">getLifecycle</a>()</code></div>
-                        <p>Overriding this method is no longer supported and this method will be made <code>final</code> in a future version of Fragment.</p>
+                        <p> Overriding this method is no longer supported and this method will be made <code>final</code> in a future version of Fragment.</p>
                       </td>
                     </tr>
                     <tr>
@@ -859,7 +859,7 @@
                       <td width="40%"><code>ActivityResultLauncher&lt;I&gt;</code></td>
                       <td>
                         <div><code>&lt;I,&nbsp;O&gt; <a href="/reference/kotlin/androidx/fragment/app/Fragment.html#registerForActivityResult(androidx.activity.result.contract.ActivityResultContract&lt;I,O&gt;,androidx.activity.result.ActivityResultCallback&lt;O&gt;)">registerForActivityResult</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;contract:&nbsp;ActivityResultContract&lt;I, O&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;callback:&nbsp;ActivityResultCallback&lt;O&gt;<br>)</code></div>
-                        <p>If the host of this fragment is an ActivityResultRegistryOwner the ActivityResultRegistry of the host will be used.</p>
+                        <p> If the host of this fragment is an ActivityResultRegistryOwner the ActivityResultRegistry of the host will be used.</p>
                       </td>
                     </tr>
                     <tr>
@@ -1175,7 +1175,7 @@
   }
 }
 </pre>
-You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">set a custom FragmentFactory</a></code> if you want to use a non-default constructor to ensure that your constructor is called when the fragment is re-instantiated.
+ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">set a custom FragmentFactory</a></code> if you want to use a non-default constructor to ensure that your constructor is called when the fragment is re-instantiated.
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1285,7 +1285,7 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onCreateDialog(android.os.Bundle)">onCreateDialog</a>(savedInstanceState:&nbsp;Bundle?):&nbsp;Dialog</pre>
       <p>Override to build your own custom Dialog container. This is typically used to show an AlertDialog instead of a generic Dialog; when doing so, <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code> does not need to be implemented since the AlertDialog takes care of its own content. </p>
       <p>This method will be called after <code><a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onCreate(android.os.Bundle)">onCreate</a></code> and immediately before <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code>. The default implementation simply instantiates and returns a Dialog class. </p>
-      <p><em>Note: DialogFragment own the Dialog.setOnCancelListener and Dialog.setOnDismissListener callbacks. You must not set them yourself.</em>To find out about these events, override <code><a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onCancel(android.content.DialogInterface)">onCancel</a></code> and <code><a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onDismiss(android.content.DialogInterface)">onDismiss</a></code>.</p>
+      <p><em>Note: DialogFragment own the Dialog.setOnCancelListener and Dialog.setOnDismissListener callbacks. You must not set them yourself.</em> To find out about these events, override <code><a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onCancel(android.content.DialogInterface)">onCancel</a></code> and <code><a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onDismiss(android.content.DialogInterface)">onDismiss</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1339,7 +1339,7 @@ You must <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.
       <h3 class="api-name" id="onGetLayoutInflater(android.os.Bundle)">onGetLayoutInflater</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onGetLayoutInflater(android.os.Bundle)">onGetLayoutInflater</a>(savedInstanceState:&nbsp;Bundle?):&nbsp;LayoutInflater</pre>
       <p>Returns the LayoutInflater used to inflate Views of this Fragment. The default implementation will throw an exception if the Fragment is not attached. </p>
-      <p>If this is called from within <code><a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onCreateDialog(android.os.Bundle)">onCreateDialog</a></code>, the layout inflater from <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onGetLayoutInflater(android.os.Bundle)">Fragment#onGetLayoutInflater(Bundle)</a></code>, without the dialog theme, will be returned.</p>
+      <p> If this is called from within <code><a href="/reference/kotlin/androidx/fragment/app/DialogFragment.html#onCreateDialog(android.os.Bundle)">onCreateDialog</a></code>, the layout inflater from <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onGetLayoutInflater(android.os.Bundle)">Fragment#onGetLayoutInflater(Bundle)</a></code>, without the dialog theme, will be returned.</p>
     </div>
     <div><a name="onSaveInstanceState-android.os.Bundle-"></a><a name="onsaveinstancestate"></a>
       <h3 class="api-name" id="onSaveInstanceState(android.os.Bundle)">onSaveInstanceState</h3>
