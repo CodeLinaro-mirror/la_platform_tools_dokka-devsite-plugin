@@ -43,6 +43,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.parent
+import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DEnum
 import org.jetbrains.dokka.model.DEnumEntry
@@ -79,6 +80,7 @@ internal class ClasslikeDocumentableConverter(
         var declaredFunctions = classlike.functions.myTypes()
         var declaredProperties = classlike.properties.myTypes()
         var inheritedFunctions = classlike.functions.inheritedTypes()
+        var companionFunctions = classlike.companionFunctions()
 
         // Java documentation needs to respect @jvm* annotations
         if (displayLanguage == Language.JAVA) {
@@ -90,6 +92,7 @@ internal class ClasslikeDocumentableConverter(
         declaredFunctions = declaredFunctions.sortedBy { it.name }
         declaredProperties = declaredProperties.sortedBy { it.name }
         inheritedFunctions = inheritedFunctions.sortedBy { it.name }
+        companionFunctions = companionFunctions.sortedBy { it.name }
 
         val enumValues = (classlike as? DEnum)?.entries.orEmpty().sortedBy { it.name }
 
@@ -133,6 +136,9 @@ internal class ClasslikeDocumentableConverter(
         val protectedFunctionsSummary = async {
             functionsToSummary(protectedMethodsTitle(), declaredFunctions.filter(::isProtected))
         }
+        val companionFunctionsSummary = async {
+            functionsToSummary(companionFunctionsTitle(), companionFunctions.filter(::isPublic))
+        }
 
         val enumDetails =
             async { enumValuesToDetail(classlike as? DEnum, enumValues) }
@@ -150,6 +156,8 @@ internal class ClasslikeDocumentableConverter(
             async { functionsToDetail(declaredFunctions.filter(::isPublic)) }
         val protectedFunctions =
             async { functionsToDetail(declaredFunctions.filter(::isProtected)) }
+        val companionFunctionsDetail =
+            async { functionsToDetail(companionFunctions.filter(::isPublic)) }
 
         val signature = async { computeSignature() }
         val hierarchy = async { computeHierarchy() }
@@ -167,6 +175,14 @@ internal class ClasslikeDocumentableConverter(
                 constants.await()
             )
         )
+        if (displayLanguage == Language.KOTLIN) {
+            allSymbols.add(
+                companionFunctionsSummary.await() to Classlike.SymbolType(
+                    companionFunctionsTitle(),
+                    companionFunctionsDetail.await()
+                )
+            )
+        }
 
         // fields appear before constructors in Java docs
         if (displayLanguage == Language.JAVA) {
@@ -262,7 +278,12 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun typesToSummary(classlikes: List<Documentable>): SummaryList {
-        val components = classlikes.map { classlike ->
+        val components = when (displayLanguage) {
+            // When displaying Kotlin pages, companion functions will be inlined and the link to the
+            // companion object can be omitted.
+            Language.KOTLIN -> classlikes.withoutCompanion()
+            else -> classlikes
+        }.map { classlike ->
             DefaultTwoPaneSummaryItem(
                 TwoPaneSummaryItem.Params(
                     title = pathProvider.linkForReference(classlike.dri),
@@ -530,10 +551,17 @@ internal class ClasslikeDocumentableConverter(
             return this
         }
         return filter { symbol ->
-            (classlike.packageName() == symbol.dri.packageName &&
-                classlike.name() == symbol.dri.classNames)
+            classlike.packageName() == symbol.dri.packageName && hasMatchingClassName(symbol)
         }
     }
+
+    private fun hasMatchingClassName(symbol: Documentable) = (
+        classlike.name() == symbol.dri.classNames ||
+        (classlike as? DClass)?.companion?.name() == symbol.dri.classNames
+    )
+
+    private fun DClasslike.companionFunctions(): List<DFunction> =
+        (this as? DClass)?.companion?.functions?.myTypes() ?: emptyList()
 
     /**
      * Returns the list of inherited symbols, not from Any or Object
@@ -549,6 +577,12 @@ internal class ClasslikeDocumentableConverter(
                 symbol.dri.isFromBaseClass()
         }
     }
+
+    /**
+     * Returns all [Documentable]s from the list which are not the companion object of [classlike]
+     */
+    private fun List<Documentable>.withoutCompanion(): List<Documentable> =
+        filterNot { it.dri == (classlike as? DClass)?.companion?.dri }
 
     private fun isInterface() = classlike is DInterface
 
@@ -593,4 +627,5 @@ internal class ClasslikeDocumentableConverter(
     private fun constantsTitle() = "Constants"
     private fun enumValuesTitle() = "Enum Values"
     private fun extensionFunctionsTitle() = "Extension functions"
+    private fun companionFunctionsTitle(): String = "Companion ${methodsTitle()}"
 }
