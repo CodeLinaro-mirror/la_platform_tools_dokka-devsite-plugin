@@ -148,7 +148,7 @@ internal class FunctionDocumentableConverter(
                 name = pathProvider.linkForReference(
                     when (displayLanguage) {
                         Language.JAVA -> dri.possiblyAsJava()
-                        Language.KOTLIN -> dri
+                        Language.KOTLIN -> dri.possiblyAsKotlin()
                     }),
                 receiver = when (displayLanguage) {
                     Language.JAVA -> null

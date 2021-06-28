@@ -198,6 +198,23 @@ internal fun DRI.possiblyAsJava(): DRI {
         )
     } ?: this
 }
+/**
+ * Uses the JavaToKotlinClassMap to possibly convert a dri to its Kotlin equivalent
+ * https://kotlinlang.org/docs/reference/java-interop.html#mapped-types
+ */
+internal fun DRI.possiblyAsKotlin(): DRI {
+    val fullyQualifiedName = packageName?.let { "$it." } + classNames
+    // Use the fully qualified name to look up the class in the map
+    return JavaToKotlinClassMap.mapJavaToKotlin(FqName(fullyQualifiedName))?.let {
+        DRI(
+            packageName = it.packageFqName.asString(),
+            classNames = it.classNames(),
+            callable = this.callable,
+            extra = null,
+            target = PointingToDeclaration
+        )
+    } ?: this
+}
 
 private fun ClassId.classNames(): String =
     shortClassName.identifier + (outerClassId?.classNames()?.let { ".$it" } ?: "")

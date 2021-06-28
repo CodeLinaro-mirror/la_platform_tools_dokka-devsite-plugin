@@ -156,6 +156,28 @@ internal class ParameterDocumentableConverter(
         )
     }
 
+    /**
+     * Tries to convert the [Projection] to it's Kotlin equivalent if it exists. Becuse this method
+     * is called thousands of times, we memoize the results in [toKotlinTypeMemo].
+     */
+    private fun Projection.possiblyAsKotlin(): Projection {
+        if (toKotlinTypeMemo.containsKey(this)) {
+            return toKotlinTypeMemo[this]!!
+        }
+        val result = when (this) {
+            is FunctionalTypeConstructor, is GenericTypeConstructor -> {
+                (this as TypeConstructor).copy(
+                    projections = projections.map { it.possiblyAsKotlin() },
+                    dri = dri.possiblyAsKotlin()
+                )
+            }
+            is Variance<*> -> inner.possiblyAsKotlin()
+            else -> this
+        }
+        toKotlinTypeMemo[this] = result
+        return result
+    }
+
     private fun componentForKotlinProjection(
         proj: Projection,
         name: String = "",
@@ -163,15 +185,16 @@ internal class ParameterDocumentableConverter(
         modifiers: List<String> = emptyList(),
         annotations: List<Annotations.Annotation> = emptyList()
     ): Parameter {
-        val isLambda = proj.isLambda()
-        val receiver = proj.receiver()
+        val projKotlin = proj.possiblyAsKotlin()
+        val isLambda = projKotlin.isLambda()
+        val receiver = projKotlin.receiver()
         val primaryType = if (isLambda) {
             // Get the return type of the lambda
-            componentForKotlinProjection(proj.asTypeConstructor().projections.last())
+            componentForKotlinProjection(projKotlin.asTypeConstructor().projections.last())
         } else {
-            proj.toComponent(nullable = annotations.isNullable())
+            projKotlin.toComponent(nullable = annotations.isNullable())
         }
-        val lambdaModifiers: List<String> = if (proj.isSuspend()) {
+        val lambdaModifiers: List<String> = if (projKotlin.isSuspend()) {
             listOf("suspend")
         } else {
             emptyList()
@@ -179,7 +202,7 @@ internal class ParameterDocumentableConverter(
 
         val lambdaParams: List<Parameter> = if (isLambda) {
             // Always ignore the return type of the lambda since that's handled by primaryType.
-            val lambdaProjections = proj.asTypeConstructor().projections.dropLast(1)
+            val lambdaProjections = projKotlin.asTypeConstructor().projections.dropLast(1)
             if (receiver == null) {
                 lambdaProjections.map(::componentForKotlinProjection)
             } else {
@@ -191,7 +214,7 @@ internal class ParameterDocumentableConverter(
         }
 
         val paramName = if (isLambda && name.isEmpty()) {
-            proj.asTypeConstructor().presentableName
+            projKotlin.asTypeConstructor().presentableName
         } else {
             name
         } ?: ""
@@ -399,5 +422,6 @@ internal class ParameterDocumentableConverter(
             "FloatArray",
             "DoubleArray"
         )
+        private val toKotlinTypeMemo = mutableMapOf<Projection, Projection>()
     }
 }

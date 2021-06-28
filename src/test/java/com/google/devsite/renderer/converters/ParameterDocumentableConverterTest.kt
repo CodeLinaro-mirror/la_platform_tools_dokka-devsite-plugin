@@ -31,6 +31,7 @@ import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DParameter
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -501,7 +502,7 @@ internal class ParameterDocumentableConverterTest(
     }
 
     @Test
-    fun `Primative type from Java code has correct type in Java and Kotlin`() {
+    fun `Primitive type from Java code has correct type in Java and Kotlin`() {
         val paramTypeJ = """
             |public void foo(int a) {}
         """.render(java = true).param()
@@ -583,6 +584,51 @@ internal class ParameterDocumentableConverterTest(
         assertThat(param.name).isEqualTo("name")
         val typeName = param.primary.asType().link().name
         assertThat(typeName).isEqualTo("String")
+    }
+
+    @Test
+    fun `Kotlin docs for java sources use kotlin types when available`() {
+        val paramK = """
+            |fun foo(a: String) = Unit
+        """.render().param()
+
+        val paramJ = """
+            |public void foo(String foo) {}
+        """.render(java = true).param()
+
+        for (param in listOf(paramJ, paramK)) {
+            val paramType = param.data.primary.asType()
+
+            assertThat(paramType.link().name).isEqualTo("String")
+
+            javaOnly {
+                assertThat(paramType.link().url).isEqualTo("/reference/java/lang/String.html")
+            }
+
+            kotlinOnly {
+                assertThat(paramType.link().url).isEqualTo("/reference/kotlin/kotlin/String.html")
+            }
+        }
+    }
+
+    // b/177591246 Typed arrays are not handled as part of [JavaToKotlinClassMap] and need to be
+    // handled manually
+    @Ignore
+    @Test
+    fun `Kotlin docs for java sources use kotlin types for arrays`() {
+        val paramTypeJ = """
+            |public void foo(int[] a) {}
+        """.render(java = true).param().data
+        val paramTypeK = """
+             |fun foo(foo: IntArray)
+        """.render().param().data
+
+        for (paramType in listOf(paramTypeJ, paramTypeK)) {
+            val typeName = paramType.primary.asType().link().name
+
+            javaOnly { assertThat(typeName).isEqualTo("int[]") }
+            kotlinOnly { assertThat(typeName).isEqualTo("IntArray") }
+        }
     }
 
     private fun DModule.param(name: String = "foo", forSummary: Boolean = false): Parameter {
