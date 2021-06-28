@@ -81,7 +81,7 @@ internal class ClasslikeDocumentableConverter(
         var declaredProperties = classlike.properties.myTypes()
         var inheritedFunctions = classlike.functions.inheritedTypes()
         var companionFunctions = classlike.companionFunctions()
-
+        var companionProperties = classlike.companionProperties()
         // Java documentation needs to respect @jvm* annotations
         if (displayLanguage == Language.JAVA) {
             declaredFunctions = declaredFunctions.filterOutJvmSynthetic().map { it.withJvmName() }
@@ -93,6 +93,7 @@ internal class ClasslikeDocumentableConverter(
         declaredProperties = declaredProperties.sortedBy { it.name }
         inheritedFunctions = inheritedFunctions.sortedBy { it.name }
         companionFunctions = companionFunctions.sortedBy { it.name }
+        companionProperties = companionProperties.sortedBy { it.name }
 
         val enumValues = (classlike as? DEnum)?.entries.orEmpty().sortedBy { it.name }
 
@@ -136,8 +137,29 @@ internal class ClasslikeDocumentableConverter(
         val protectedFunctionsSummary = async {
             functionsToSummary(protectedMethodsTitle(), declaredFunctions.filter(::isProtected))
         }
-        val companionFunctionsSummary = async {
-            functionsToSummary(companionFunctionsTitle(), companionFunctions.filter(::isPublic))
+        val publicCompanionFunctionsSummary = async {
+            functionsToSummary(
+                publicCompanionFunctionsTitle(),
+                companionFunctions.filter(::isPublic)
+            )
+        }
+        val protectedCompanionFunctionsSummary = async {
+            functionsToSummary(
+                protectedCompanionFunctionsTitle(),
+                companionFunctions.filter(::isProtected)
+            )
+        }
+        val publicCompanionPropertiesSummary = async {
+            propertiesToSummary(
+                publicCompanionPropertiesTitle(),
+                companionProperties.filter(::isPublic)
+            )
+        }
+        val protectedCompanionPropertiesSummary = async {
+            propertiesToSummary(
+                protectedCompanionPropertiesTitle(),
+                companionProperties.filter(::isPublic)
+            )
         }
 
         val enumDetails =
@@ -156,8 +178,14 @@ internal class ClasslikeDocumentableConverter(
             async { functionsToDetail(declaredFunctions.filter(::isPublic)) }
         val protectedFunctions =
             async { functionsToDetail(declaredFunctions.filter(::isProtected)) }
-        val companionFunctionsDetail =
+        val publicCompanionFunctionsDetail =
             async { functionsToDetail(companionFunctions.filter(::isPublic)) }
+        val protectedCompanionFunctionsDetail =
+            async { functionsToDetail(companionFunctions.filter(::isProtected)) }
+        val publicCompanionPropertiesDetail =
+            async { propertiesToDetail(companionProperties.filter(::isPublic)) }
+        val protectedCompanionPropertiesDetail =
+            async { propertiesToDetail(companionProperties.filter(::isProtected)) }
 
         val signature = async { computeSignature() }
         val hierarchy = async { computeHierarchy() }
@@ -176,10 +204,24 @@ internal class ClasslikeDocumentableConverter(
             )
         )
         if (displayLanguage == Language.KOTLIN) {
-            allSymbols.add(
-                companionFunctionsSummary.await() to Classlike.SymbolType(
-                    companionFunctionsTitle(),
-                    companionFunctionsDetail.await()
+            allSymbols.addAll(
+                listOf(
+                    publicCompanionFunctionsSummary.await() to Classlike.SymbolType(
+                        publicCompanionFunctionsTitle(),
+                        publicCompanionFunctionsDetail.await()
+                    ),
+                    protectedCompanionFunctionsSummary.await() to Classlike.SymbolType(
+                        protectedCompanionFunctionsTitle(),
+                        protectedCompanionFunctionsDetail.await()
+                    ),
+                    publicCompanionPropertiesSummary.await() to Classlike.SymbolType(
+                        publicCompanionPropertiesTitle(),
+                        publicCompanionPropertiesDetail.await()
+                    ),
+                    protectedCompanionPropertiesSummary.await() to Classlike.SymbolType(
+                        protectedCompanionPropertiesTitle(),
+                        protectedCompanionPropertiesDetail.await()
+                    )
                 )
             )
         }
@@ -563,6 +605,9 @@ internal class ClasslikeDocumentableConverter(
     private fun DClasslike.companionFunctions(): List<DFunction> =
         (this as? DClass)?.companion?.functions?.myTypes() ?: emptyList()
 
+    private fun DClasslike.companionProperties(): List<DProperty> =
+        (this as? DClass)?.companion?.properties?.myTypes() ?: emptyList()
+
     /**
      * Returns the list of inherited symbols, not from Any or Object
      * If class is synthetic there should be no inherited methods
@@ -627,5 +672,12 @@ internal class ClasslikeDocumentableConverter(
     private fun constantsTitle() = "Constants"
     private fun enumValuesTitle() = "Enum Values"
     private fun extensionFunctionsTitle() = "Extension functions"
-    private fun companionFunctionsTitle(): String = "Companion ${methodsTitle()}"
+    private fun companionFunctionsTitle(): String = "companion ${methodsTitle()}"
+    private fun companionPropertiesTitle(): String = "companion ${propertiesTitle()}"
+    private fun publicCompanionFunctionsTitle(): String = "Public ${companionFunctionsTitle()}"
+    private fun protectedCompanionFunctionsTitle(): String =
+        "Protected ${companionFunctionsTitle()}"
+    private fun publicCompanionPropertiesTitle(): String = "Public ${companionPropertiesTitle()}"
+    private fun protectedCompanionPropertiesTitle(): String =
+        "Protected ${companionPropertiesTitle()}"
 }

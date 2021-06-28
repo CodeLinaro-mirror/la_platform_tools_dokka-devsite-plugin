@@ -784,7 +784,10 @@ internal class ClasslikeDocumentableConverterTest(
                     "Nested types",
                     "Enum Values",
                     "Constants",
-                    "Companion functions",
+                    "Public companion functions",
+                    "Protected companion functions",
+                    "Public companion properties",
+                    "Protected companion properties",
                     "Public constructors",
                     "Protected constructors",
                     "Public functions",
@@ -797,7 +800,7 @@ internal class ClasslikeDocumentableConverterTest(
     }
 
     @Test
-    fun `classlike companion methods are included in Kotlin and not Java`() {
+    fun `classlike companion functions are included in Kotlin and not Java`() {
         val page = """
             |class Foo {
             |  companion object {
@@ -808,9 +811,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.content<Classlike>()
-        val companionFunctions = classlike.data.symbolTypes.find {
-            it.second.title == "Companion functions"
-        }?.first?.data?.items ?: emptyList()
+        val companionFunctions = classlike.symbolsItemsFor("Public companion functions")
         kotlinOnly {
             assertThat(companionFunctions).hasSize(2)
         }
@@ -819,47 +820,109 @@ internal class ClasslikeDocumentableConverterTest(
         }
     }
 
+    @Ignore // TODO(b/165112358): protected `bar` doesn't show up in the dokka model
     @Test
-    fun `Static and companion functions are treated correctly in both languages`() {
-        val pageK = """
+    fun `protected companion functions are included in Kotlin and not Java`() {
+        val page = """
             |class Foo {
             |  companion object {
-            |    fun bar() = Unit
+            |    protected fun bar() = Unit
             |  }
             |}
         """.render().page()
 
-        val pageJ = """
+        val classlike = page.content<Classlike>()
+        val companionFunctions = classlike.symbolsItemsFor("Protected companion functions")
+        kotlinOnly {
+            assertThat(companionFunctions).hasSize(1)
+        }
+        javaOnly {
+            assertThat(companionFunctions).isEmpty()
+        }
+    }
+
+    @Test
+    fun `classlike companion properties are included in Kotlin and not Java`() {
+        val page = """
+            |class Foo {
+            |  companion object {
+            |    val bar: List<String> = emptyList()
+            |    protected val baz: Int = 1
+            |  }
+            |}
+        """.render().page()
+
+        val classlike = page.content<Classlike>()
+
+        val publicCompanionProperties = classlike
+            .symbolsItemsFor("Public companion properties")
+        val protectedCompanionProperties = classlike
+            .symbolsItemsFor("Protected companion properties")
+        kotlinOnly {
+            assertThat(publicCompanionProperties).hasSize(1)
+            assertThat(protectedCompanionProperties).hasSize(1)
+        }
+        javaOnly {
+            assertThat(publicCompanionProperties).hasSize(0)
+            assertThat(protectedCompanionProperties).hasSize(0)
+        }
+    }
+
+    @Test
+    fun `Static and companion functions are treated correctly in both languages`() {
+        val moduleK = """
+            |class Foo {
+            |  companion object {
+            |    val baz: Int = 1
+            |    fun bar() = Unit
+            |  }
+            |}
+        """.render()
+        val pageK = moduleK.page()
+
+        val moduleJ = """
             |public class Foo {
             |  public static void foo() {}
+            |  public static String bar = "bar"
             |}
-        """.render(java = true).page()
+        """.render(java = true)
+        val pageJ = moduleJ.page()
 
         val kotlinClasslike = pageK.content<Classlike>()
         val javaClasslike = pageJ.content<Classlike>()
+        val companionClassK = runCatching { moduleK.page("Companion") }.getOrNull()
 
         val (kotlinNestedTypeSummary) = kotlinClasslike.symbolsFor("Nested types")
 
         val publicJavaMethods = javaClasslike.methodSymbols()
-        val staticJavaMethod = publicJavaMethods.first.items().single().summary()
-        val staticMethodName = staticJavaMethod.data.signature.data.name.data.name
+        val publicJavaFields = javaClasslike.propertySymbols()
+        val staticJavaMethod = (publicJavaMethods.second.symbols.single() as SymbolDetail).data
+        val staticJavaField = (publicJavaFields.second.symbols.single() as SymbolDetail).data
 
-        val companionFunctions = kotlinClasslike.data.symbolTypes.find {
-            it.second.title == "Companion functions"
-        }?.first?.data?.items ?: emptyList()
+        val companionFunctions = kotlinClasslike.symbolsItemsFor("Public companion functions")
+        val companionProperties = kotlinClasslike.symbolsItemsFor("Public companion properties")
+
+        // Companion class is included in both modules
+        assertThat(companionClassK).isNotNull()
 
         // can see java static methods in both languages
-        assertThat(staticMethodName).isEqualTo("foo")
+        assertThat(staticJavaMethod.name).isEqualTo("foo")
+        assertThat(staticJavaField.name).isEqualTo("bar")
 
+        // can find kotlin companion method in both languages
         kotlinOnly {
             // nested companion object is not documented because it is inlined
             assertThat(kotlinNestedTypeSummary.items()).hasSize(0)
             assertThat(companionFunctions).hasSize(1)
+            assertThat(companionProperties).hasSize(1)
         }
         javaOnly {
             // nested companion object is documented but companion functions are not inlined
             assertThat(kotlinNestedTypeSummary.items()).hasSize(1)
             assertThat(companionFunctions).hasSize(0)
+            assertThat(companionProperties).hasSize(0)
+            assertThat(staticJavaMethod.modifiers).contains("static")
+            assertThat(staticJavaField.modifiers).contains("static")
         }
     }
 
@@ -880,6 +943,12 @@ internal class ClasslikeDocumentableConverterTest(
     ) = data.symbolTypes.single { (summary, _) ->
         summary.title() in types
     }
+
+    private fun Classlike.symbolsItemsFor(
+        vararg types: String
+    ) = runCatching {
+        symbolsFor(*types).first.data.items
+    }.getOrNull() ?: emptyList()
 
     private fun Classlike.methodSymbols(): Pair<SummaryList, Classlike.SymbolType> =
         symbolsFor(if (language == Language.KOTLIN) "Public functions" else "Public methods")

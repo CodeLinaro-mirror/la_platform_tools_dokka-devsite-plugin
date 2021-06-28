@@ -70,7 +70,7 @@
       <table class="responsive">
         <thead>
           <tr>
-            <th colspan="2"><h3>Companion functions</h3></th>
+            <th colspan="2"><h3>Public companion functions</h3></th>
           </tr>
         </thead>
         <tbody>
@@ -150,6 +150,42 @@
       <table class="responsive">
         <thead>
           <tr>
+            <th colspan="2"><h3>Public companion properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#current()">current</a></code></div>
+              <p>Return the thread's active snapshot.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Protected companion properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#current()">current</a></code></div>
+              <p>Return the thread's active snapshot.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
             <th colspan="2"><h3>Public functions</h3></th>
           </tr>
         </thead>
@@ -217,7 +253,7 @@
         </tbody>
       </table>
     </div>
-    <h2>Companion functions</h2>
+    <h2>Public companion functions</h2>
     <div><a name="global-kotlin.Function0-"></a><a name="global"></a>
       <h3 class="api-name" id="global(kotlin.Function0)">global</h3>
       <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#global(kotlin.Function0)">global</a>(block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> T):&nbsp;T</pre>
@@ -448,6 +484,12 @@
       <p>Take a <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html">MutableSnapshot</a></code> and run <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">block</a></code> within it. When <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">block</a></code> returns successfully, attempt to <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">MutableSnapshot.apply</a></code> the snapshot. Returns the result of <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">block</a></code> or throws <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotApplyConflictException.html">SnapshotApplyConflictException</a></code> if snapshot changes attempted by <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">block</a></code> could not be applied.</p>
       <p>Prior to returning, any changes made to snapshot state (e.g. state holders returned by <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">androidx.compose.runtime.mutableStateOf</a></code> are not visible to other threads. When <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">withMutableSnapshot</a></code> returns successfully those changes will be made visible to other threads  and any snapshot observers (e.g. <code><a href="/reference/kotlin/androidx/compose/runtime/package-summary.html#snapshotFlow(kotlin.Function0)">androidx.compose.runtime.snapshotFlow</a></code>) will be notified of changes.</p>
       <p><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">block</a></code> must not suspend if <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#withMutableSnapshot(kotlin.Function0)">withMutableSnapshot</a></code> is called from a suspend function.</p>
+    </div>
+    <h2>Public companion properties</h2>
+    <div><a name="getCurrent()"></a><a name="setCurrent()"></a><a name="getCurrent--"></a><a name="setCurrent--"></a>
+      <h3 class="api-name" id="current()">current</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.Companion.html#current()">current</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/Snapshot.html">Snapshot</a></pre>
+      <p>Return the thread's active snapshot. If no thread snapshot is active then the current global snapshot is used.</p>
     </div>
     <h2>Public functions</h2>
     <div><a name="dispose--"></a><a name="dispose"></a>
