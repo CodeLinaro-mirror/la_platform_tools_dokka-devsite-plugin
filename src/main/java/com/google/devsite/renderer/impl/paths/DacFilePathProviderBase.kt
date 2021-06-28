@@ -17,6 +17,7 @@
 package com.google.devsite.renderer.impl.paths
 
 import com.google.devsite.renderer.impl.ClassGraph
+import com.google.devsite.renderer.impl.DocumentablesGraph
 
 /** Directory structure tailored for d.android.com. */
 internal abstract class DacFilePathProviderBase(
@@ -24,8 +25,9 @@ internal abstract class DacFilePathProviderBase(
     pathPrefix: String? = null,
     override val locationProvider: ExternalDokkaLocationProvider? = null,
     override val classGraph: ClassGraph,
+    override val documentablesGraph: DocumentablesGraph,
     final override val relative: FilePathProvider =
-        RelativeFilePathProvider(tenant, locationProvider, classGraph)
+        RelativeFilePathProvider(tenant, locationProvider, classGraph, documentablesGraph)
 ) : FilePathProvider {
     private val dacPath = "/reference" + if (pathPrefix == null) "" else "/$pathPrefix"
 

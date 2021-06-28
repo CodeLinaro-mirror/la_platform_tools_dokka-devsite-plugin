@@ -199,7 +199,7 @@ internal class FilePathProviderTest : ConverterTestBase() {
     }
 
     @Test
-    fun `findInClassGraph finds top level documentable by DRI`() {
+    fun `findInDocumentablesGraph finds top level documentable by DRI`() {
         val module = """
             |class Foo {}
         """.trimIndent().render()
@@ -212,13 +212,13 @@ internal class FilePathProviderTest : ConverterTestBase() {
         val actual = pathProvider(
             externalLocationProvider = null,
             classGraph = classGraph
-        ).findInClassGraph(dri)?.name
+        ).findInDocumentablesGraph(dri)?.name
         val expected = "Foo"
         assertThat(actual).isEqualTo(expected)
     }
 
     @Test
-    fun `findInClassGraph finds nested documentable by DRI`() {
+    fun `findInDocumentablesGraph finds nested documentable by DRI`() {
         val module = """
             |class Outer {
             |    class Inner {}
@@ -233,13 +233,13 @@ internal class FilePathProviderTest : ConverterTestBase() {
         val actual = pathProvider(
             externalLocationProvider = null,
             classGraph = classGraph
-        ).findInClassGraph(dri)?.name
+        ).findInDocumentablesGraph(dri)?.name
         val expected = "Inner"
         assertThat(actual).isEqualTo(expected)
     }
 
     @Test
-    fun `findInClassGraph finds deeply nested documentable by DRI`() {
+    fun `findInDocumentablesGraph finds deeply nested documentable by DRI`() {
         val module = """
             |class A { class B { class C { class D {} } } }
         """.trimIndent().render()
@@ -252,7 +252,7 @@ internal class FilePathProviderTest : ConverterTestBase() {
         val actual = pathProvider(
             externalLocationProvider = null,
             classGraph = classGraph
-        ).findInClassGraph(dri)?.name
+        ).findInDocumentablesGraph(dri)?.name
         val expected = "D"
         assertThat(actual).isEqualTo(expected)
     }

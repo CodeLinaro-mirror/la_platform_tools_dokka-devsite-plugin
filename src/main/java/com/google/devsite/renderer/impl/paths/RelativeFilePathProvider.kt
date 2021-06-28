@@ -17,12 +17,14 @@
 package com.google.devsite.renderer.impl.paths
 
 import com.google.devsite.renderer.impl.ClassGraph
+import com.google.devsite.renderer.impl.DocumentablesGraph
 
 /** Creates relative file paths that have no knowledge of the containing website. */
 internal class RelativeFilePathProvider(
     tenant: String,
     override val locationProvider: ExternalDokkaLocationProvider? = null,
-    override val classGraph: ClassGraph
+    override val classGraph: ClassGraph,
+    override val documentablesGraph: DocumentablesGraph
 ) : FilePathProvider {
     override val relative = this
 

@@ -20,6 +20,7 @@ import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.renderer.converters.anchor
 import com.google.devsite.renderer.impl.ClassGraph
+import com.google.devsite.renderer.impl.DocumentablesGraph
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.Documentable
@@ -57,6 +58,8 @@ internal interface FilePathProvider {
 
     val classGraph: ClassGraph
 
+    val documentablesGraph: DocumentablesGraph
+
     /** @return the path of a class-like type */
     fun forType(packageName: String, name: String): String
 
@@ -71,7 +74,7 @@ internal interface FilePathProvider {
      * functions, and symbols within a type are supported.
      */
     fun forReference(dri: DRI): ReferencePath {
-        val documentable = findInClassGraph(dri)
+        val documentable = findInDocumentablesGraph(dri)
         val packageName = dri.packageName.orEmpty().ifBlank { "[JVM root]" }
         val className = dri.classNames
         val outerClassName = getOuterClassName(className)
@@ -114,31 +117,10 @@ internal interface FilePathProvider {
     }
 
     /**
-     * Recursively searches the class graph for a [Documentable] with the given [DRI] and returns
-     * it if found, and returns null if it does not exist. Useful for finding anything that is not
-     * at the top level.
+     * Returns a [Documentable] with the given [DRI] if it exists, else null.
      */
-    fun findInClassGraph(dri: DRI): Documentable? {
-        val outer = classGraph[dri]
-        if (outer != null) {
-            return outer.self
-        }
-        return classGraph.values.mapNotNull { classNode ->
-            classNode.self.getChild(dri)
-        }.firstOrNull()
-    }
-
-    private fun Documentable.getChild(targetDRI: DRI): Documentable? {
-        if (dri == targetDRI) {
-            return this
-        }
-        children.forEach {
-            val child = it.getChild(targetDRI)
-            if (child != null) {
-                return child
-            }
-        }
-        return null
+    fun findInDocumentablesGraph(dri: DRI): Documentable? {
+        return documentablesGraph.get(dri)
     }
 
     data class ReferencePath(val name: String, val url: String)

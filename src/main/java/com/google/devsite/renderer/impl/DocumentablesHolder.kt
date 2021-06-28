@@ -51,7 +51,6 @@ import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.plugability.DokkaContext
 
-internal typealias ClassGraph = Map<DRI, ClassNode>
 /**
  * Centralized place to retrieve documentables.
  *
@@ -77,6 +76,7 @@ internal class DocumentablesHolder(
     private val nestedClasslikesJob: Job
     private val nestedClasslikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
     private val classGraph: Deferred<ClassGraph>
+    private val documentablesGraph: Deferred<DocumentablesGraph>
     private val analysisMap: Deferred<Map<DokkaConfiguration.DokkaSourceSet, EnvironmentAndFacade>>
 
     init {
@@ -109,6 +109,7 @@ internal class DocumentablesHolder(
 
         allClasslikes = scope.async { computeClasslikes(module, syntheticClasses) }
         classGraph = scope.async { computeClassGraph(allClasslikes.await()) }
+        documentablesGraph = scope.async { computeDocumentablesGraph(classGraph.await()) }
 
         nestedClasslikesJob = scope.launch {
             for (classlike in allClasslikes.await()) {
@@ -125,6 +126,8 @@ internal class DocumentablesHolder(
     suspend fun allClasslikes(): List<DClasslike> = allClasslikes.await()
 
     suspend fun classGraph(): Map<DRI, ClassNode> = classGraph.await()
+
+    suspend fun documentablesGraph(): Map<DRI, Documentable> = documentablesGraph.await()
 
     suspend fun analysisMap(): Map<DokkaConfiguration.DokkaSourceSet, EnvironmentAndFacade> =
         analysisMap.await()

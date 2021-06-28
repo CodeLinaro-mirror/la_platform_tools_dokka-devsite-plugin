@@ -18,10 +18,14 @@ package com.google.devsite.renderer.impl
 
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.DClasslike
+import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.JavaClassKindTypes
 import org.jetbrains.dokka.model.KotlinClassKindTypes
 import org.jetbrains.dokka.model.WithSupertypes
 import java.util.TreeSet
+
+internal typealias ClassGraph = Map<DRI, ClassNode>
+internal typealias DocumentablesGraph = Map<DRI, Documentable>
 
 /**
  * Generate of graph of type dependencies.
@@ -29,7 +33,7 @@ import java.util.TreeSet
  * This returns the type inheritance of the given [classlikes] as a graph. That is, each DRI is
  * associated with itself and its complete list of subclasses and parents.
  */
-internal fun computeClassGraph(classlikes: List<DClasslike>): Map<DRI, ClassNode> {
+internal fun computeClassGraph(classlikes: List<DClasslike>): ClassGraph {
     val drisToClasslikes = classlikes.associateBy { it.dri }
     val classGraph: Map<DRI, MutableClassNode> = classlikes.associate { classlike ->
         classlike.dri to MutableClassNode(classlike)
@@ -50,6 +54,29 @@ internal fun computeClassGraph(classlikes: List<DClasslike>): Map<DRI, ClassNode
             interfaces = level.interfaces.map { drisToClasslikes.getValue(it) }
         )
     }
+}
+
+/**
+ * Generates a map that allows looking up each Documentable by its DRI
+ */
+internal fun computeDocumentablesGraph(classGraph: ClassGraph): DocumentablesGraph {
+
+    // helper function for adding a Documentable to a graph
+    fun addToDocumentablesGraph(graph: MutableMap<DRI, Documentable>, documentable: Documentable) {
+        if (!graph.containsKey(documentable.dri)) {
+            graph.put(documentable.dri, documentable)
+            for (child in documentable.children) {
+                addToDocumentablesGraph(graph, child)
+            }
+        }
+    }
+
+    // add each class to the graph, and recurse
+    val result = mutableMapOf<DRI, Documentable>()
+    for (documentable in classGraph.values) {
+        addToDocumentablesGraph(result, documentable.self)
+    }
+    return result
 }
 
 /**

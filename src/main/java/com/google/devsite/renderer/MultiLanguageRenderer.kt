@@ -17,6 +17,7 @@
 package com.google.devsite.renderer
 
 import com.google.devsite.renderer.impl.ClassGraph
+import com.google.devsite.renderer.impl.DocumentablesGraph
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.MetadataRenderer
 import com.google.devsite.renderer.impl.PackageRenderer
@@ -56,18 +57,21 @@ internal class MultiLanguageRenderer(
         runBlocking(Dispatchers.Default) {
             val holder = DocumentablesHolder(module, this, context)
             val classGraph = holder.classGraph()
-            launch { renderJava(holder, locationProvider, classGraph) }
-            launch { renderKotlin(holder, locationProvider, classGraph) }
+            val documentablesGraph = holder.documentablesGraph()
+            launch { renderJava(holder, locationProvider, classGraph, documentablesGraph) }
+            launch { renderKotlin(holder, locationProvider, classGraph, documentablesGraph) }
         }
     }
 
     private suspend fun renderJava(
         holder: DocumentablesHolder,
         locationProvider: ExternalDokkaLocationProvider,
-        classGraph: ClassGraph
+        classGraph: ClassGraph,
+        documentablesGraph: DocumentablesGraph
     ) {
         val language = Language.JAVA
-        val filePaths = DacJavaFilePathProvider(tenant, locationProvider, classGraph)
+        val filePaths = DacJavaFilePathProvider(tenant, locationProvider, classGraph,
+            documentablesGraph)
         DevsiteRenderer(
             MetadataRenderer(outputWriter, filePaths, language, holder),
             PackageRenderer(outputWriter, filePaths, language, holder),
@@ -78,10 +82,12 @@ internal class MultiLanguageRenderer(
     private suspend fun renderKotlin(
         holder: DocumentablesHolder,
         locationProvider: ExternalDokkaLocationProvider,
-        classGraph: ClassGraph
+        classGraph: ClassGraph,
+        documentablesGraph: DocumentablesGraph
     ) {
         val language = Language.KOTLIN
-        val filePaths = DacKotlinFilePathProvider(tenant, locationProvider, classGraph)
+        val filePaths = DacKotlinFilePathProvider(tenant, locationProvider, classGraph,
+            documentablesGraph)
         DevsiteRenderer(
             MetadataRenderer(outputWriter, filePaths, language, holder),
             PackageRenderer(outputWriter, filePaths, language, holder),

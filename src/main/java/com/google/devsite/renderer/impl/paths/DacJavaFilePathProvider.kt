@@ -17,10 +17,13 @@
 package com.google.devsite.renderer.impl.paths
 
 import com.google.devsite.renderer.impl.ClassGraph
+import com.google.devsite.renderer.impl.DocumentablesGraph
 
 /** Creates file paths for DAC Java consumption. */
 internal class DacJavaFilePathProvider(
     tenant: String,
     dlp: ExternalDokkaLocationProvider? = null,
-    classGraph: ClassGraph
-) : DacFilePathProviderBase(tenant, locationProvider = dlp, classGraph = classGraph)
+    classGraph: ClassGraph,
+    documentablesGraph: DocumentablesGraph
+) : DacFilePathProviderBase(tenant, locationProvider = dlp, classGraph = classGraph,
+        documentablesGraph = documentablesGraph)

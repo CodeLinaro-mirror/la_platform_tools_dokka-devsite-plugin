@@ -21,9 +21,11 @@ import com.google.devsite.DevsitePlugin
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.isFromBaseClass
 import com.google.devsite.renderer.impl.ClassGraph
+import com.google.devsite.renderer.impl.computeDocumentablesGraph
 import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
 import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
 import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
+import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.ExternalDocumentationLink
@@ -104,11 +106,16 @@ internal abstract class ConverterTestBase(
     protected fun pathProvider(
         externalLocationProvider: ExternalDokkaLocationProvider? = null,
         classGraph: ClassGraph = emptyMap()
-    ) = when (language) {
-        Language.JAVA ->
-            DacJavaFilePathProvider("androidx", externalLocationProvider, classGraph)
-        Language.KOTLIN ->
-            DacKotlinFilePathProvider("androidx", externalLocationProvider, classGraph)
+    ): FilePathProvider {
+        val documentablesGraph = computeDocumentablesGraph(classGraph)
+        return when (language) {
+            Language.JAVA ->
+                DacJavaFilePathProvider("androidx", externalLocationProvider, classGraph,
+                    documentablesGraph)
+            Language.KOTLIN ->
+                DacKotlinFilePathProvider("androidx", externalLocationProvider, classGraph,
+                    documentablesGraph)
+        }
     }
 
     protected fun javaOnly(block: () -> Unit) {
