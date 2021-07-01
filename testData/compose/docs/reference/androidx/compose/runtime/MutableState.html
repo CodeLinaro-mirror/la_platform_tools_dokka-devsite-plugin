@@ -95,6 +95,24 @@
         </tbody>
       </table>
     </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>final void</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/SnapshotStateKt.html">SnapshotStateKt</a>.<a href="/reference/androidx/compose/runtime/package-summary.html#(androidx.compose.runtime.MutableState).setValue(kotlin.Any,kotlin.reflect.KProperty,kotlin.Any)">setValue</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/MutableState.html">MutableState</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;thisObj,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html">KProperty</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;property,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value<br>)</code></div>
+              <p>Permits property delegation of <code>var</code>s using <code>by</code> for <code><a href="/reference/androidx/compose/runtime/MutableState.html">MutableState</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <h2>Public fields</h2>
     <div><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
       <h3 class="api-name" id="value()">value</h3>
@@ -108,6 +126,24 @@
     <div><a name="component2--"></a><a name="component2"></a>
       <h3 class="api-name" id="component2()">component2</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;<a href="/reference/androidx/compose/runtime/MutableState.html#component2()">component2</a>()</pre>
+    </div>
+    <h2>Extension functions</h2>
+    <div><a name="(androidx.compose.runtime.MutableState).setValue(kotlin.Any, kotlin.reflect.KProperty, kotlin.Any)"></a><a name="-androidx.compose.runtime.MutableState-.setValue-kotlin.Any-kotlin.reflect.KProperty-kotlin.Any-"></a><a name="setvalue"></a>
+      <h3 class="api-name" id="(androidx.compose.runtime.MutableState).setValue(kotlin.Any,kotlin.reflect.KProperty,kotlin.Any)">SnapshotStateKt.setValue</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/SnapshotStateKt.html">SnapshotStateKt</a>.<a href="/reference/androidx/compose/runtime/package-summary.html#(androidx.compose.runtime.MutableState).setValue(kotlin.Any,kotlin.reflect.KProperty,kotlin.Any)">setValue</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/MutableState.html">MutableState</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;thisObj,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html">KProperty</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;property,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;value<br>)</pre>
+      <p>Permits property delegation of <code>var</code>s using <code>by</code> for <code><a href="/reference/androidx/compose/runtime/MutableState.html">MutableState</a></code>.</p>
+      <pre class="prettyprint">
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+var count by remember { mutableStateOf(0) }
+
+Text(text = &quot;You clicked $count times&quot;)
+Button(onClick = { count = count + 1 }) {
+    Text(&quot;Click me&quot;)
+}</pre>
     </div>
   </body>
 </html>

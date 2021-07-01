@@ -406,6 +406,24 @@
         </tbody>
       </table>
     </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposerKt.html">ComposerKt</a>.<a href="/reference/androidx/compose/runtime/package-summary.html#(androidx.compose.runtime.Composer).cache(kotlin.Boolean,kotlin.Function0)">cache</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Composer.html">Composer</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;invalid,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block<br>)</code></div>
+              <p>A Compose compiler plugin API.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <h2>Public fields</h2>
     <div><a name="getApplier()"></a><a name="setApplier()"></a><a name="getApplier--"></a><a name="setApplier--"></a>
       <h3 class="api-name" id="applier()">applier</h3>
@@ -1368,6 +1386,13 @@
       <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a> void&nbsp;<a href="/reference/androidx/compose/runtime/Composer.html#useNode()">useNode</a>()</pre>
       <p>A Compose compiler plugin API. DO NOT call directly.</p>
       <p>Report that the node is still being used. This will be called in the same location as the corresponding <code><a href="/reference/androidx/compose/runtime/Composer.html#createNode(kotlin.Function0)">createNode</a></code> when <code><a href="/reference/androidx/compose/runtime/Composer.html#inserting()">inserting</a></code> is <code>false</code>.</p>
+    </div>
+    <h2>Extension functions</h2>
+    <div><a name="(androidx.compose.runtime.Composer).cache(kotlin.Boolean, kotlin.Function0)"></a><a name="-androidx.compose.runtime.Composer-.cache-kotlin.Boolean-kotlin.Function0-"></a><a name="cache"></a>
+      <h3 class="api-name" id="(androidx.compose.runtime.Composer).cache(kotlin.Boolean,kotlin.Function0)">ComposerKt.cache</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a><br>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/compose/runtime/ComposeCompilerApi.html">ComposeCompilerApi</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposerKt.html">ComposerKt</a>.<a href="/reference/androidx/compose/runtime/package-summary.html#(androidx.compose.runtime.Composer).cache(kotlin.Boolean,kotlin.Function0)">cache</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Composer.html">Composer</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;invalid,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block<br>)</pre>
+      <p>A Compose compiler plugin API. DO NOT call directly.</p>
+      <p>Cache, that is remember, a value in the composition data of a composition. This is used to implement <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code> and used by the compiler plugin to generate more efficient calls to <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code> when it determines these optimizations are safe.</p>
     </div>
   </body>
 </html>

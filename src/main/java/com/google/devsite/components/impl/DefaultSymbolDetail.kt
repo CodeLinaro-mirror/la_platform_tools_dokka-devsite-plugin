@@ -42,6 +42,10 @@ internal class DefaultSymbolDetail(
 
         h3("api-name") {
             data.anchors.firstOrNull()?.let { attributes["id"] = it }
+            if (data.displayLanguage == Language.JAVA && data.extFunctionClass != null) {
+                +data.extFunctionClass
+                +"."
+            }
             +data.name
         }
         pre("api-signature no-pretty-print") {

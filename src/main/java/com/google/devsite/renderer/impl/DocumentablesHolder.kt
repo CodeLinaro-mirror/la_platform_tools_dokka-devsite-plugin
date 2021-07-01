@@ -20,8 +20,8 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.explodedChildren
 import com.google.devsite.renderer.converters.filterOutJvmSynthetic
 import com.google.devsite.renderer.converters.isExceptionClass
-import com.google.devsite.renderer.converters.jvmFileName
 import com.google.devsite.renderer.converters.name
+import com.google.devsite.renderer.converters.nameForSyntheticClass
 import com.google.devsite.renderer.converters.setUpAnalysis
 import com.google.devsite.renderer.converters.withJavaSynthetic
 import kotlinx.coroutines.CoroutineScope
@@ -267,12 +267,7 @@ internal class DocumentablesHolder(
     private fun <T> List<T>.mapToSyntheticNames()
         where T : WithSources, T : WithExtraProperties<*> =
         map { it.sources to it }
-            .groupBy({ (location, function) ->
-                function.jvmFileName()
-                ?: location.let {
-                    it.entries.first().value.path.split("/").last().split(".").first() + "Kt"
-                }
-            }) { it.second }
+            .groupBy({ (_, function) -> nameForSyntheticClass(function) }) { it.second }
 
     private fun computeEnums(docs: List<Documentable>): List<DEnum> {
         return docs.filterIsInstance<DEnum>().sortedBy { it.name() }

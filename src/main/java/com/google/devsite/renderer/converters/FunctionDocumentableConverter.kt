@@ -17,14 +17,18 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.impl.DefaultFunctionSignature
+import com.google.devsite.components.impl.DefaultParameter
 import com.google.devsite.components.impl.DefaultSingleColumnSummaryItem
 import com.google.devsite.components.impl.DefaultSymbolDetail
 import com.google.devsite.components.impl.DefaultSymbolSummary
+import com.google.devsite.components.impl.DefaultSymbolType
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultTypeSummary
 import com.google.devsite.components.symbols.FunctionSignature
+import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.symbols.SymbolType
 import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.TwoPaneSummaryItem
@@ -132,7 +136,8 @@ internal class FunctionDocumentableConverter(
                     returnType = returnType,
                     paramNames = listOf("receiver") + function.parameters.map { it.name!! },
                     annotations = annotations
-                )
+                ),
+                extFunctionClass = function.receiver?.let { nameForSyntheticClass(function) }
             )
         )
     }
@@ -151,7 +156,7 @@ internal class FunctionDocumentableConverter(
                         Language.KOTLIN -> dri.possiblyAsKotlin()
                     }),
                 receiver = when (displayLanguage) {
-                    Language.JAVA -> null
+                    Language.JAVA -> receiver?.let { extFunctionClass() }
                     Language.KOTLIN -> receiver
                 },
                 typeParameters = typeParameters,
@@ -181,6 +186,21 @@ internal class FunctionDocumentableConverter(
             callable.anchor(separator = ", "),
             callable.anchor("-", "-", "-"),
             callable.name.toLowerCase()
+        )
+    }
+
+    private fun DFunction.extFunctionClass(): Parameter {
+        return DefaultParameter(
+            Parameter.Params(
+                displayLanguage = displayLanguage,
+                isLambda = false,
+                name = "",
+                primary = DefaultSymbolType(
+                    SymbolType.Params(
+                        type = pathProvider.linkForReference(driForSyntheticClass())
+                    )
+                )
+            )
         )
     }
 }

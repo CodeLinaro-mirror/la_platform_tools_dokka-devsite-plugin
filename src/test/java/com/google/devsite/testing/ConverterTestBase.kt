@@ -64,7 +64,7 @@ internal abstract class ConverterTestBase(
         .firstOrNull { it.name !in listOf("Nullable", "NonNull") }
 
     protected fun DModule.explicitClasslike(name: String) =
-        packages.single().classlikes.mapNotNull { it.explicitClasslike(name) }.single()
+        packages.flatMap { it.classlikes }.mapNotNull { it.explicitClasslike(name) }.single()
 
     private fun DClasslike.explicitClasslike(name: String): DClasslike? =
         if (this.name == name) this

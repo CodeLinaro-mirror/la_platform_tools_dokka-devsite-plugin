@@ -259,14 +259,12 @@ internal class FunctionDocumentableConverterTest(
         val signature = function.signature()
 
         javaOnly {
-            assertThat(signature.receiver).isNull()
-            val param = signature.parameters.item()
+            assertThat(signature.receiver).isNotNull()
+            val param = signature.receiver!!
             assertNoLambdaStuff(param.data)
 
             val type = param.data.primary
-            assertThat(type.link().name).isEqualTo("String")
-            assertThat(type.link().url).contains("java")
-            assertThat(param.data.name).isEqualTo("receiver")
+            assertThat(type.link().name).isEqualTo("TestKt")
         }
 
         kotlinOnly {
@@ -291,14 +289,13 @@ internal class FunctionDocumentableConverterTest(
         val signature = function.signature()
 
         javaOnly {
-            assertThat(signature.receiver).isNull()
-            val param = signature.parameters.item()
+            assertThat(signature.receiver).isNotNull()
+            val param = signature.receiver!!
             assertNoLambdaStuff(param.data)
 
             val type = param.data.primary
-            assertThat(type.link().name).isEqualTo("Object")
-            assertThat(type.link().url).contains("java")
-            assertThat(param.data.name).isEqualTo("receiver")
+            assertThat(type.link().name).isEqualTo("TestKt")
+            assertThat(type.link().url).contains("androidx")
         }
 
         kotlinOnly {

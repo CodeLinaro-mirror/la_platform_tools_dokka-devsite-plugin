@@ -32,7 +32,8 @@ internal interface SymbolDetail : ContextFreeComponent {
         val returnType: Parameter,
         val symbolType: SymbolType,
         val signature: SymbolSignature,
-        val metadata: List<ContextFreeComponent>
+        val metadata: List<ContextFreeComponent>,
+        val extFunctionClass: String? = null
     )
 
     /** Holds the Kotlin keywords for various symbol types. */

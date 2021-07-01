@@ -96,10 +96,49 @@
         </tbody>
       </table>
     </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/SnapshotStateKt.html">SnapshotStateKt</a>.<a href="/reference/androidx/compose/runtime/package-summary.html#(androidx.compose.runtime.State).getValue(kotlin.Any,kotlin.reflect.KProperty)">getValue</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;thisObj,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html">KProperty</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;property<br>)</code></div>
+              <p>Permits property delegation of <code>val</code>s using <code>by</code> for <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <h2>Public fields</h2>
     <div><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
       <h3 class="api-name" id="value()">value</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/runtime/State.html#value()">value</a></pre>
+    </div>
+    <h2>Extension functions</h2>
+    <div><a name="(androidx.compose.runtime.State).getValue(kotlin.Any, kotlin.reflect.KProperty)"></a><a name="-androidx.compose.runtime.State-.getValue-kotlin.Any-kotlin.reflect.KProperty-"></a><a name="getvalue"></a>
+      <h3 class="api-name" id="(androidx.compose.runtime.State).getValue(kotlin.Any,kotlin.reflect.KProperty)">SnapshotStateKt.getValue</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/SnapshotStateKt.html">SnapshotStateKt</a>.<a href="/reference/androidx/compose/runtime/package-summary.html#(androidx.compose.runtime.State).getValue(kotlin.Any,kotlin.reflect.KProperty)">getValue</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;thisObj,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html">KProperty</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;property<br>)</pre>
+      <p>Permits property delegation of <code>val</code>s using <code>by</code> for <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code>.</p>
+      <pre class="prettyprint">
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.Text
+
+// Composable function that manages a subscription to a data source, returning it as State
+@Composable
+fun observeSampleData(): State&lt;String&gt; = TODO()
+
+// Subscription is managed here, but currentValue is not read yet
+val currentValue by observeSampleData()
+
+Row {
+    // This scope will recompose when currentValue changes
+    Text(&quot;Data: $currentValue&quot;)
+}</pre>
     </div>
   </body>
 </html>

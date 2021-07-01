@@ -323,14 +323,6 @@ internal class ParameterDocumentableConverter(
         else -> error("Unknown bound: $this")
     }
 
-    private fun Projection.isSuspend(): Boolean = when (this) {
-        is FunctionalTypeConstructor -> {
-            this.isSuspendable
-        }
-        is Nullable -> inner.isSuspend()
-        is Variance<*> -> inner.isSuspend()
-        else -> false
-    }
     /** Determine whether or not a param is a lambda using the kotlin function type. */
     private fun Projection.isLambda(): Boolean = when (this) {
         is TypeConstructor -> {
@@ -427,4 +419,13 @@ internal class ParameterDocumentableConverter(
         )
         private val toKotlinTypeMemo = ConcurrentHashMap<Projection, Projection>()
     }
+}
+
+internal fun Projection.isSuspend(): Boolean = when (this) {
+    is FunctionalTypeConstructor -> {
+        this.isSuspendable
+    }
+    is Nullable -> inner.isSuspend()
+    is Variance<*> -> inner.isSuspend()
+    else -> false
 }

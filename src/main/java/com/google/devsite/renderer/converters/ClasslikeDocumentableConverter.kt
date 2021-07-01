@@ -279,19 +279,28 @@ internal class ClasslikeDocumentableConverter(
             )
         }
 
-        // Render extension functions only on Kotlin refdoc pages
-        if (displayLanguage == Language.KOTLIN && classExtensionFunctions.isNotEmpty()) {
-            val declaredExtensionFunctions = classExtensionFunctions.sortedBy { it.name }
-            val extensionFunctionsSummary = async {
-                functionsToSummary(extensionFunctionsTitle(), declaredExtensionFunctions)
+        if (classExtensionFunctions.isNotEmpty()) {
+            var extensionFunctions = classExtensionFunctions
+                // Sort by the class the extension function came from first so they will be grouped
+                // together in a logical way
+                .sortedBy { nameForSyntheticClass(it) + it.name }
+            if (displayLanguage == Language.JAVA) {
+                extensionFunctions = extensionFunctions.filterNot {
+                    it.isSuspendFunction()
+                }
             }
-            val extensionFunctions =
-                async { functionsToDetail(declaredExtensionFunctions) }
+            val extensionFunctionsSummary = async {
+                functionsToSummary(
+                    extensionFunctionsTitle(),
+                    extensionFunctions
+                )
+            }
+            val extensionFunctionsDetail = async { functionsToDetail(extensionFunctions) }
 
             allSymbols.add(
                 extensionFunctionsSummary.await() to Classlike.TitledList(
                     extensionFunctionsTitle(),
-                    extensionFunctions.await()
+                    extensionFunctionsDetail.await()
                 )
             )
         }
@@ -645,6 +654,13 @@ internal class ClasslikeDocumentableConverter(
         val modifiers = property.modifiers()
         return "protected" in modifiers && !isConstant(modifiers)
     }
+
+    /**
+     * Returns true if function is a suspend function itself, or takes a suspend function as a
+     * parameter.
+     */
+    private fun DFunction.isSuspendFunction() =
+        type.isSuspend() || parameters.any { it.type.isSuspend() }
 
     private fun List<DProperty>.constants() = filter { isConstant(it.modifiers()) }
 

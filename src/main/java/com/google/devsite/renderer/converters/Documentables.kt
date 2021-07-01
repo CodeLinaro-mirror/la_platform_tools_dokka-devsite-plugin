@@ -39,6 +39,7 @@ import org.jetbrains.dokka.model.TypeConstructor
 import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Variance
 import org.jetbrains.dokka.model.WithChildren
+import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.isJvmName
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.model.toAdditionalModifiers
@@ -172,6 +173,16 @@ fun WithExtraProperties<*>.jvmName(): String? {
 fun WithExtraProperties<*>.jvmFileName(): String? {
     return fileLevelAnnotations().firstOrNull { it.isJvmName() }?.nameAsString()
 }
+/**
+ * Returns the value of the file:@JvmName if one exists or null
+ */
+fun <T> nameForSyntheticClass(entry: T): String where T : WithSources, T : WithExtraProperties<*> {
+    return entry.jvmFileName() ?: entry.sources.let {
+        it.entries.first().value.path.split("/").last().split(".").first() + "Kt"
+    }
+}
+
+fun DFunction.driForSyntheticClass() = DRI(dri.packageName, nameForSyntheticClass(this))
 
 /**
  * Filters out elements that are annotated with @JvmSynthetic

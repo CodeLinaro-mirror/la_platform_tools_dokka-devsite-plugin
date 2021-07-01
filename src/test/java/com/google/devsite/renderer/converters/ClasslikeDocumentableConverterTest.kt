@@ -927,7 +927,7 @@ internal class ClasslikeDocumentableConverterTest(
     }
 
     @Test
-    fun `Extension functions are included on Kotlin pages`() {
+    fun `Extension functions are included on Java and Kotlin pages`() {
         val src = """
             |class Foo {
             |}
@@ -935,15 +935,81 @@ internal class ClasslikeDocumentableConverterTest(
             |fun Foo.baz() = Unit
         """
         val classlike = src.render().page().content<Classlike>()
-        val extFunctions = runCatching {
-            classlike.symbolsFor("Extension functions")
-        }.getOrNull()
-        kotlinOnly {
-            assertThat(extFunctions?.first?.data?.items).hasSize(2)
+        val extFunctions = classlike.symbolsFor("Extension functions")
+        assertThat(extFunctions.first.data.items).hasSize(2)
+    }
+
+    @Test
+    fun `Extension functions are ordered by the package they come from`() {
+        val src = listOf(
+            """
+                |/src/main/kotlin/androidx/example/Foo.kt
+                |package foo
+                |class Foo {
+                |}
+            """,
+            """
+                |/src/main/kotlin/androidx/example/Second.kt
+                |package second
+                |
+                |import foo.Foo
+                |
+                |fun Foo.baz() = Unit
+            """,
+            """
+                |/src/main/kotlin/androidx/example/First.kt
+                |package first
+                |
+                |import foo.Foo
+                |
+                |fun Foo.zab() = Unit
+            """
+        )
+        val classlike = src.render().page().content<Classlike>()
+        val extFunctions = classlike.symbolsFor("Extension functions")
+        val extFunctionClasses = extFunctions.second.symbols.map {
+            (it as? SymbolDetail)?.data?.extFunctionClass
         }
-        javaOnly {
-            assertThat(extFunctions).isNull()
+        assertThat(extFunctionClasses).isEqualTo(listOf("FirstKt", "SecondKt"))
+    }
+
+    @Test
+    fun `Extension functions respect @JvmName for packages`() {
+        val src = listOf(
+            """
+                |/src/main/kotlin/androidx/example/Foo.kt
+                |package foo
+                |class Foo {
+                |}
+            """,
+            """
+                |/src/main/kotlin/androidx/example/Second.kt
+                |
+                |@file:JvmName("SecondJvm")
+                |package second
+                |
+                |import foo.Foo
+                |
+                |fun Foo.baz() = Unit
+            """,
+            """
+                |/src/main/kotlin/androidx/example/First.kt
+                |
+                |@file:JvmName("FirstJvm")
+                |package first
+                |
+                |
+                |import foo.Foo
+                |
+                |fun Foo.zab() = Unit
+            """
+        )
+        val classlike = src.render().page().content<Classlike>()
+        val extFunctions = classlike.symbolsFor("Extension functions")
+        val extFunctionClasses = extFunctions.second.symbols.map {
+            (it as? SymbolDetail)?.data?.extFunctionClass
         }
+        assertThat(extFunctionClasses).isEqualTo(listOf("FirstJvm", "SecondJvm"))
     }
 
     private fun DModule.page(name: String = "Foo"): DevsitePage {

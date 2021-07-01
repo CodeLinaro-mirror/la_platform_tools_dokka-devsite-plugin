@@ -343,4 +343,36 @@ class DefaultSymbolDetailTest {
             """.trim()
         )
     }
+
+    @Test
+    fun `Function with extension function package renders correctly`() {
+        val component = DefaultSymbolDetail(
+            Params(
+                displayLanguage = Language.JAVA,
+                name = "foo",
+                anchors = linkedSetOf(),
+                returnType = NoopParameter("void"),
+                symbolType = SymbolType.FUNCTION,
+                signature = NoopFunctionSignature("foo()"),
+                metadata = emptyList(),
+                extFunctionClass = "MyClassKt"
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>
+  <div>
+    <h3 class="api-name">MyClassKt.foo</h3>
+    <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
+  </div>
+</div>
+            """.trim()
+        )
+    }
 }
