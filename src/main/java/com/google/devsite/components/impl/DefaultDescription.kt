@@ -236,7 +236,8 @@ internal class DefaultDescription(
                     throw NotImplementedError("Unknown use case for ${tag.javaClass.simpleName}.")
                 is THead, is TBody, is Td, is TFoot, is Th, is Tr ->
                     error("Not in table context: ${tag.javaClass.simpleName}.")
-                is Li -> error("Not in list context: ${tag.javaClass.simpleName}.")
+                is Li -> error("Not in list context: ${tag.javaClass.simpleName}. The <li> tag " +
+                    "must be contained in a parent element (such as <ol>, <ul>, or <menu>).")
             }
         }
     }
