@@ -180,7 +180,11 @@ internal fun convertTextToJavaSample(block: Text, samples: Set<File>): CodeBlock
     val fileName = sampleLine[1].split("/").last()
     val whatSamples = sampleLine[2]
     val sampleFiles = samples.allFiles()
-    val resolvedFile = sampleFiles.single { it.name == fileName }
+    val resolvedFile = sampleFiles.singleOrNull { it.name == fileName }
+    if (resolvedFile == null) {
+        throw RuntimeException("Unable to find the sample file $fileName in the samples directory" +
+            " ${sampleFiles.map { it.path }.reduce { acc, s -> acc.commonPrefixWith(s) }}")
+    }
     val sampleText = extractCodeBlockFromFile(resolvedFile, whatSamples)
     return CodeBlock(listOf(Text(sampleText)))
 }
