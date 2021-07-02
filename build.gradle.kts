@@ -76,7 +76,12 @@ sourceSets.test {
         "testData/innerClasses/source",
         "testData/simple/source",
         "testData/topLevelFunctions/source",
+        "testData/inheritance/source",
         "testData/sampleAnnotation/source"
+        //"testData/fragment/source", // These integration tests aren't valid code because they
+        //"testData/paging/source",   // have missing dependencies
+        //"testData/compose/source",
+        //"testData/complicatedPlatform/source"
     )
 }
 

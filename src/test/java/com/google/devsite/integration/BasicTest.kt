@@ -64,4 +64,9 @@ class BasicTest : IntegrationTestBase() {
     fun `Validate complicated Platform files`() {
         verifyDirectory("complicatedPlatform")
     }
+
+    @Test
+    fun `Validate inheritance tests`() {
+        verifyDirectory("inheritance")
+    }
 }
