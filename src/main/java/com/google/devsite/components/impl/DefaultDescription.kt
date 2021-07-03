@@ -293,6 +293,9 @@ internal class DefaultDescription(
                 } else {
                     td { renderTags(tag.children, state) }
                 }
+                // <th> is being converted to Text class
+                // TODO(b/193096057): determine root cause
+                is Text -> th { +tag.body }
                 else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
             }
         }

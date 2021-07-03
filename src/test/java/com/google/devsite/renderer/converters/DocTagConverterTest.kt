@@ -166,6 +166,92 @@ internal class DocTagConverterTest(
         }
     }
 
+    @Test // b/192714584
+    fun `th tag can be nested in a tr tag (with a thead tag)`() {
+        val module = """
+            |/**
+            | * This is a table with a thead tag.
+            | * <table>
+            | *     <thead>
+            | *         <tr>
+            | *             <th>FooHead1</th>
+            | *             <th>BarHead1</th>
+            | *         </tr>
+            | *     </thead>
+            | *     <tr>
+            | *         <td>FooCell1</td>
+            | *         <td>BarCell1</td>
+            | *     </tr>
+            | * </table>
+            | */
+            |public class Foo() {}
+        """.render(java = true)
+
+        val detail = module.documentation(doc = { this.clazz() }).item() as Description
+        assertThat(detail.render()).isEqualTo(
+            """
+<body>
+  <p>This is a table with a thead tag. </p>
+  <table>
+    <thead>
+      <tr>
+        <th>FooHead1</th>
+        <th>BarHead1</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>FooCell1</td>
+        <td>BarCell1</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+            """.trim()
+        )
+    }
+
+    @Test // b/192714584
+    fun `th tag can be nested in a tr tag (without a thead tag)`() {
+        val module = """
+            |/**
+            | * This is a table without a thead tag.
+            | * <table>
+            | *     <tr>
+            | *         <th>FooHead2</th>
+            | *         <th>BarHead2</th>
+            | *     </tr>
+            | *     <tr>
+            | *         <td>FooCell2</td>
+            | *         <td>BarCell2</td>
+            | *     </tr>
+            | * </table>
+            | */
+            |public class Foo() {}
+        """.render(java = true)
+
+        val detail = module.documentation(doc = { this.clazz() }).item() as Description
+        assertThat(detail.render()).isEqualTo(
+            """
+<body>
+  <p>This is a table without a thead tag. </p>
+  <table>
+    <tbody>
+      <tr>
+        <th>FooHead2</th>
+        <th>BarHead2</th>
+      </tr>
+      <tr>
+        <td>FooCell2</td>
+        <td>BarCell2</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+            """.trim()
+        )
+    }
+
     @Test // NOTE: upstream dokka does not support @param <Baz> documentation style in kotlin
     fun `Class type parameters can be documented with @param with or without angle brackets`() {
         val documentationK = """
