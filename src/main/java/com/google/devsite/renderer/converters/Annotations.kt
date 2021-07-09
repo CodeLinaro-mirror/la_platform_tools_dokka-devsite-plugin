@@ -99,18 +99,19 @@ private fun shouldDocumentAnnotation(
     language: Language,
     showNullability: Boolean = true
 ): Boolean {
+    val name = annotation.dri.classNames
     // Not useful to developers
-    val isSuppressAnnotation = annotation.dri.classNames in SUPPRESSION_ANNOTATION_NAMES
+    val isSuppressAnnotation = name in SUPPRESSION_ANNOTATION_NAMES
     val isKotlinJvmAnnotation = annotation.dri.packageName == "kotlin.jvm"
-    val isCheckResultAnnotation = annotation.dri.classNames == "CheckResult"
+    val isExplicitlyBannedAnnotation = name in EXPLICITLY_BANNED_ANNOTATION_NAMES
 
     // Surfaced separately
     val isDeprecatedAnnotation = annotation.isDeprecated()
-    val isNullabilityAnnotation = annotation.dri.classNames in NULLABILITY_ANNOTATION_NAMES
+    val isNullabilityAnnotation = name in NULLABILITY_ANNOTATION_NAMES
 
     return !isSuppressAnnotation &&
         !isKotlinJvmAnnotation &&
-        !isCheckResultAnnotation &&
+        !isExplicitlyBannedAnnotation &&
         !isDeprecatedAnnotation &&
         // Keep nullability annotations for Java, if we should show nullability
         ((language == Language.JAVA && showNullability) || !isNullabilityAnnotation)
@@ -118,6 +119,16 @@ private fun shouldDocumentAnnotation(
 
 private val SUPPRESSION_ANNOTATION_NAMES = listOf("Suppress", "SuppressWarnings", "SuppressLint")
 private val NULLABILITY_ANNOTATION_NAMES = listOf("NonNull", "Nullable")
+private val EXPLICITLY_BANNED_ANNOTATION_NAMES = listOf(
+    // This information is compose runtime implementation details; not useful for most
+    // and those who would want it should be looking at source
+    "Stable", "Immutable", "ReadOnlyComposable",
+    // This opt-in requirement is non-propagating so developers don't need to know about it
+    // https://kotlinlang.org/docs/opt-in-requirements.html#non-propagating-opt-in
+    "OptIn",
+    // This annotation is used mostly in paging, and was removed at the request of the paging team
+    "CheckResult"
+)
 
 internal fun AnnotationParameterValue.toComponent(
     name: String? = null,
