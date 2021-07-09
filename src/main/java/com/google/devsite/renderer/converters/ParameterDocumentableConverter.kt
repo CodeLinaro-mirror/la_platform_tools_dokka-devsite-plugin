@@ -45,6 +45,7 @@ import org.jetbrains.dokka.model.TypeParameter as UpstreamTypeParameter
 import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Variance
 import org.jetbrains.dokka.model.Void
+import java.util.concurrent.ConcurrentHashMap
 
 /** Converts parameter and parameter-likes into their components. */
 internal class ParameterDocumentableConverter(
@@ -157,25 +158,24 @@ internal class ParameterDocumentableConverter(
     }
 
     /**
-     * Tries to convert the [Projection] to it's Kotlin equivalent if it exists. Becuse this method
+     * Tries to convert the [Projection] to it's Kotlin equivalent if it exists. Because this method
      * is called thousands of times, we memoize the results in [toKotlinTypeMemo].
      */
     private fun Projection.possiblyAsKotlin(): Projection {
-        if (toKotlinTypeMemo.containsKey(this)) {
-            return toKotlinTypeMemo[this]!!
+        return toKotlinTypeMemo.getOrPut(this) {
+            innerPossiblyAsKotlin()
         }
-        val result = when (this) {
-            is FunctionalTypeConstructor, is GenericTypeConstructor -> {
-                (this as TypeConstructor).copy(
-                    projections = projections.map { it.possiblyAsKotlin() },
-                    dri = dri.possiblyAsKotlin()
-                )
-            }
-            is Variance<*> -> inner.possiblyAsKotlin()
-            else -> this
+    }
+
+    private fun Projection.innerPossiblyAsKotlin(): Projection = when (this) {
+        is FunctionalTypeConstructor, is GenericTypeConstructor -> {
+            (this as TypeConstructor).copy(
+                projections = projections.map { it.possiblyAsKotlin() },
+                dri = dri.possiblyAsKotlin()
+            )
         }
-        toKotlinTypeMemo[this] = result
-        return result
+        is Variance<*> -> inner.possiblyAsKotlin()
+        else -> this
     }
 
     private fun componentForKotlinProjection(
@@ -422,6 +422,6 @@ internal class ParameterDocumentableConverter(
             "FloatArray",
             "DoubleArray"
         )
-        private val toKotlinTypeMemo = mutableMapOf<Projection, Projection>()
+        private val toKotlinTypeMemo = ConcurrentHashMap<Projection, Projection>()
     }
 }
