@@ -22,6 +22,9 @@ import org.jetbrains.dokka.PackageOptionsImpl
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.plugability.DokkaContext
+import org.jetbrains.dokka.testApi.logger.TestLogger
+import org.jetbrains.dokka.utilities.DokkaConsoleLogger
+import org.jetbrains.dokka.utilities.LoggingLevel
 import java.io.File
 import java.net.URL
 
@@ -30,8 +33,9 @@ import java.net.URL
  *
  * Html output results can be found in testData/
  */
-abstract class IntegrationTestBase : BaseAbstractTest() {
-
+abstract class IntegrationTestBase : BaseAbstractTest(
+    logger = TestLogger(DokkaConsoleLogger(LoggingLevel.WARN))
+) {
     /**
      * Reads sources and outputs from a directory, and validates based on them.
      *

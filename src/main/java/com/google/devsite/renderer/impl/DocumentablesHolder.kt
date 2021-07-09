@@ -50,6 +50,8 @@ import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.plugability.DokkaContext
+import org.jetbrains.dokka.utilities.DokkaConsoleLogger
+import org.jetbrains.dokka.utilities.LoggingLevel
 
 /**
  * Centralized place to retrieve documentables.
@@ -78,6 +80,8 @@ internal class DocumentablesHolder(
     private val classGraph: Deferred<ClassGraph>
     private val documentablesGraph: Deferred<DocumentablesGraph>
     private val analysisMap: Deferred<Map<DokkaConfiguration.DokkaSourceSet, EnvironmentAndFacade>>
+
+    internal val logger = context?.logger ?: DokkaConsoleLogger(LoggingLevel.WARN)
 
     init {
         scope.apply {

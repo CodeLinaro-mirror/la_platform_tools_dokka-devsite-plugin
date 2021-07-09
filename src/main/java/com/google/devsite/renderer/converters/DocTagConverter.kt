@@ -233,11 +233,11 @@ internal class DocTagConverter(
         containingComponent: Documentable
     ) {
         if (components.none()) return
-        val warning = "WARNING: unable to find what is referred to by" +
+        val warning = "Unable to find what is referred to by" +
             components.map { "\n\t$componentType $it" }.joinToString() +
             "\nin ${containingComponent::class.simpleName} ${containingComponent.name}" +
             "\nDid you make a typo? Are you trying to refer to something not visible to users?"
-        println(warning)
+        docsHolder.logger?.warn(warning)
     }
 
     private fun params(

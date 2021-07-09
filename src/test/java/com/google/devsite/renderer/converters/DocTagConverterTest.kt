@@ -555,7 +555,7 @@ internal class DocTagConverterTest(
         | */
         |class Foo { }
         """.render().documentation() // for type params and property params
-        val expected = "WARNING: unable to find what is referred to by" +
+        val expected = "WARN: Unable to find what is referred to by" +
             "\n\t@param NOT_A_REAL_PARAM" +
             "\nin DClass Foo" +
             "\nDid you make a typo? Are you trying to refer to something not visible to users?"
@@ -582,7 +582,7 @@ internal class DocTagConverterTest(
         | */
         |class Foo(NOT_A_REAL_PROPERTY: String) { }
         """.render().documentation()
-        var expected = "WARNING: unable to find what is referred to by" +
+        var expected = "WARN: Unable to find what is referred to by" +
             "\n\t@property NOT_A_REAL_PROPERTY" +
             "\nin DClass Foo" +
             "\nDid you make a typo? Are you trying to refer to something not visible to users?"
@@ -594,7 +594,7 @@ internal class DocTagConverterTest(
         | */
         |class Foo() { }
         """.render().documentation()
-        expected = "WARNING: unable to find what is referred to by" +
+        expected = "WARN: Unable to find what is referred to by" +
             "\n\t@property NO_PROPERTIES_HERE" +
             "\nin DClass Foo" +
             "\nDid you make a typo? Are you trying to refer to something not visible to users?"

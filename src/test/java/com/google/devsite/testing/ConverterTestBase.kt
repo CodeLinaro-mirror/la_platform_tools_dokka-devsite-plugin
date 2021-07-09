@@ -38,6 +38,8 @@ import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.plugability.DokkaPlugin
 import org.jetbrains.dokka.renderers.Renderer
+import org.jetbrains.dokka.utilities.DokkaConsoleLogger
+import org.jetbrains.dokka.utilities.LoggingLevel
 
 import java.io.File
 import java.net.URL
@@ -157,7 +159,8 @@ internal abstract class ConverterTestBase(
             testInline(
                 sourceFiles.joinToString("\n\n"),
                 configuration,
-                pluginOverrides = listOf(NoopPlugin)
+                pluginOverrides = listOf(NoopPlugin),
+                loggerForTest = DokkaConsoleLogger(LoggingLevel.WARN)
             ) {
                 renderingStage = { node: RootPageNode, _: DokkaContext ->
                     val module = (node as ModulePageNode).documentable as DModule
