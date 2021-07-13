@@ -25,6 +25,7 @@ import org.jetbrains.dokka.analysis.EnvironmentAndFacade
 import org.jetbrains.dokka.model.doc.CodeBlock
 import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.plugability.DokkaContext
+import org.jetbrains.dokka.utilities.DokkaLogger
 import org.jetbrains.kotlin.idea.kdoc.resolveKDocSampleLink
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
@@ -168,25 +169,31 @@ internal fun setUpAnalysis(context: DokkaContext) = context.configuration.source
     }
 }.toMap()
 
-internal fun convertTextToJavaSample(block: Text, samples: Set<File>): CodeBlock {
+internal fun convertTextToJavaSample(
+    block: Text,
+    samples: Set<File>,
+    logger: DokkaLogger
+): CodeBlock {
     val sampleLine = block.body
         .trim().removePrefix("{").removeSuffix("}")
         // Upstream inserts "*"s on line breaks within the { }
         .split(" ").filter { it.isNotEmpty() && it != "*" }
     if (sampleLine[0] != "@sample") throw RuntimeException("invalid first line of " +
         "purported sample block: \"${sampleLine[0]}\"; expected to be \"@sample\"")
-    // Note that this ignores most of the path, in favor of only using
-    // the name, and using the sourceSet's declared samples
-    val fileName = sampleLine[1].split("/").last()
+    val filePath = sampleLine[1]
     val whatSamples = sampleLine[2]
     val sampleFiles = samples.allFiles()
-    val resolvedFile = sampleFiles.singleOrNull { it.name == fileName }
-    if (resolvedFile == null) {
-        throw RuntimeException("Unable to find the sample file $fileName in the samples directory" +
-            " ${sampleFiles.map { it.path }.reduce { acc, s -> acc.commonPrefixWith(s) }}")
+    var resolvedFile = sampleFiles.filter { it.absolutePath.contains(filePath) }
+    if (resolvedFile.isEmpty()) {
+        logger.warn("Failed samples resolution-by-path for $filePath, falling back to by-name")
+        resolvedFile = sampleFiles.filter { it.name == filePath.split("/").last() }
     }
-    val sampleText = extractCodeBlockFromFile(resolvedFile, whatSamples)
-    return CodeBlock(listOf(Text(sampleText)))
+    return when (resolvedFile.size) {
+        0 -> throw RuntimeException("Unable to find the sample file $filePath in the samples " +
+            "directory ${sampleFiles.map { it.path }.reduce { acc, s -> acc.commonPrefixWith(s) }}")
+        1 -> CodeBlock(listOf(Text(extractCodeBlockFromFile(resolvedFile.single(), whatSamples))))
+        else -> throw RuntimeException("Somehow, multiple files with path $filePath were found.")
+    }
 }
 
 private fun Iterable<File>.allFiles() = this.map { it.allFiles() }.flatten()

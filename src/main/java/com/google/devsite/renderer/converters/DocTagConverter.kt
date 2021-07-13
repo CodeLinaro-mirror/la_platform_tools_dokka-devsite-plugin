@@ -384,7 +384,8 @@ internal class DocTagConverter(
                     for (part in parts) {
                         if ("@sample" !in part) {
                             if (part.isNotBlank()) components.add(Text(part.trim()))
-                        } else components.add(convertTextToJavaSample(Text(part.trim()), samples))
+                        } else components.add(
+                            convertTextToJavaSample(Text(part.trim()), samples, docsHolder.logger))
                     }
                 }
                 is P -> {
