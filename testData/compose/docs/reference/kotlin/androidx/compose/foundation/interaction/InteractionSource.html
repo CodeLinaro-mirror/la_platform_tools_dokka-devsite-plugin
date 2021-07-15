@@ -256,6 +256,38 @@ Column(
         </tbody>
       </table>
     </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>.<a href="/reference/kotlin/androidx/compose/foundation/interaction/package-summary.html#(androidx.compose.foundation.interaction.InteractionSource).collectIsDraggedAsState()">collectIsDraggedAsState</a>()</code></div>
+              <p>Subscribes to this <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> and returns a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> representing whether this component is dragged or not.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>.<a href="/reference/kotlin/androidx/compose/foundation/interaction/package-summary.html#(androidx.compose.foundation.interaction.InteractionSource).collectIsFocusedAsState()">collectIsFocusedAsState</a>()</code></div>
+              <p>Subscribes to this <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> and returns a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> representing whether this component is focused or not.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>.<a href="/reference/kotlin/androidx/compose/foundation/interaction/package-summary.html#(androidx.compose.foundation.interaction.InteractionSource).collectIsPressedAsState()">collectIsPressedAsState</a>()</code></div>
+              <p>Subscribes to this <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> and returns a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> representing whether this component is pressed or not.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <h2>Public properties</h2>
     <div><a name="getInteractions()"></a><a name="setInteractions()"></a><a name="getInteractions--"></a><a name="setInteractions--"></a>
       <h3 class="api-name" id="interactions()">interactions</h3>
@@ -375,6 +407,76 @@ Column(
         modifier = Modifier.fillMaxSize().wrapContentSize()
     )
 }</pre>
+    </div>
+    <h2>Extension functions</h2>
+    <div><a name="-androidx.compose.foundation.interaction.InteractionSource-.collectIsDraggedAsState--"></a><a name="collectisdraggedasstate"></a>
+      <h3 class="api-name" id="(androidx.compose.foundation.interaction.InteractionSource).collectIsDraggedAsState()">collectIsDraggedAsState</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>.<a href="/reference/kotlin/androidx/compose/foundation/interaction/package-summary.html#(androidx.compose.foundation.interaction.InteractionSource).collectIsDraggedAsState()">collectIsDraggedAsState</a>():&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</pre>
+      <p>Subscribes to this <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> and returns a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> representing whether this component is dragged or not.</p>
+      <p><code><a href="/reference/kotlin/androidx/compose/foundation/interaction/DragInteraction.html">DragInteraction</a></code> is typically set by interactions such as <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(Modifier).draggable(androidx.compose.foundation.gestures.DraggableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean,kotlin.coroutines.SuspendFunction2,kotlin.coroutines.SuspendFunction2,kotlin.Boolean)">androidx.compose.foundation.gestures.draggable</a></code> and <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">androidx.compose.foundation.gestures.scrollable</a></code>, and higher level components such as <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/package-summary.html#LazyRow(Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,Alignment.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Function1)">androidx.compose.foundation.lazy.LazyRow</a></code>, available through <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#interactionSource()">androidx.compose.foundation.lazy.LazyListState.interactionSource</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> representing whether this component is being dragged or not</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="-androidx.compose.foundation.interaction.InteractionSource-.collectIsFocusedAsState--"></a><a name="collectisfocusedasstate"></a>
+      <h3 class="api-name" id="(androidx.compose.foundation.interaction.InteractionSource).collectIsFocusedAsState()">collectIsFocusedAsState</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>.<a href="/reference/kotlin/androidx/compose/foundation/interaction/package-summary.html#(androidx.compose.foundation.interaction.InteractionSource).collectIsFocusedAsState()">collectIsFocusedAsState</a>():&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</pre>
+      <p>Subscribes to this <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> and returns a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> representing whether this component is focused or not.</p>
+      <p><code><a href="/reference/kotlin/androidx/compose/foundation/interaction/FocusInteraction.html">FocusInteraction</a></code> is typically set by <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(Modifier).focusable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource)">androidx.compose.foundation.focusable</a></code> and focusable components, such as <code><a href="/reference/kotlin/androidx/compose/foundation/text/package-summary.html#BasicTextField(kotlin.String,kotlin.Function1,Modifier,kotlin.Boolean,kotlin.Boolean,TextStyle,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,VisualTransformation,kotlin.Function1,androidx.compose.foundation.interaction.MutableInteractionSource,Brush,kotlin.Function1)">androidx.compose.foundation.text.BasicTextField</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> representing whether this component is being focused or not</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="-androidx.compose.foundation.interaction.InteractionSource-.collectIsPressedAsState--"></a><a name="collectispressedasstate"></a>
+      <h3 class="api-name" id="(androidx.compose.foundation.interaction.InteractionSource).collectIsPressedAsState()">collectIsPressedAsState</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>.<a href="/reference/kotlin/androidx/compose/foundation/interaction/package-summary.html#(androidx.compose.foundation.interaction.InteractionSource).collectIsPressedAsState()">collectIsPressedAsState</a>():&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</pre>
+      <p>Subscribes to this <code><a href="/reference/kotlin/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> and returns a <code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> representing whether this component is pressed or not.</p>
+      <p><code><a href="/reference/kotlin/androidx/compose/foundation/interaction/PressInteraction.html">PressInteraction</a></code> is typically set by <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(Modifier).clickable(kotlin.Boolean,kotlin.String,Role,kotlin.Function0)">androidx.compose.foundation.clickable</a></code> and clickable higher level components, such as buttons.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/runtime/State.html">State</a></code> representing whether this component is being pressed or not</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </body>
 </html>

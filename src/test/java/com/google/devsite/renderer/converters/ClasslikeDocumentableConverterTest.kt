@@ -926,15 +926,38 @@ internal class ClasslikeDocumentableConverterTest(
         }
     }
 
+    @Test
+    fun `Extension functions are included on Kotlin pages`() {
+        val src = """
+            |class Foo {
+            |}
+            |fun Foo.bar() = Unit
+            |fun Foo.baz() = Unit
+        """
+        val classlike = src.render().page().content<Classlike>()
+        val extFunctions = runCatching {
+            classlike.symbolsFor("Extension functions")
+        }.getOrNull()
+        kotlinOnly {
+            assertThat(extFunctions?.first?.data?.items).hasSize(2)
+        }
+        javaOnly {
+            assertThat(extFunctions).isNull()
+        }
+    }
+
     private fun DModule.page(name: String = "Foo"): DevsitePage {
         val classlike = explicitClasslike(name)
         val holder = runBlocking { DocumentablesHolder(this@page, this) }
         val classGraph = runBlocking { holder.classGraph() }
+        val extFunctionMap = runBlocking { holder.extensionFunctionMap() }
         val converter = ClasslikeDocumentableConverter(
             language,
             classlike,
             pathProvider(classGraph = classGraph),
-            holder)
+            holder,
+            extFunctionMap.getOrDefault(name, emptyList())
+        )
         return runBlocking { converter.classlike() }
     }
 

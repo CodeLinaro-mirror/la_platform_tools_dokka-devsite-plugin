@@ -44,6 +44,7 @@ import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DTypeAlias
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.GenericTypeConstructor
 import org.jetbrains.dokka.model.JavaModifier
 import org.jetbrains.dokka.model.JavaVisibility
 import org.jetbrains.dokka.model.WithSources
@@ -167,6 +168,32 @@ internal class DocumentablesHolder(
 
     suspend fun exceptionsFor(packageDoc: DPackage): List<DClass> =
         exceptions.getValue(packageDoc.dri).await()
+
+    /**
+     * Iterate through the all packages and create map of each class to its associated
+     * extension functions.
+     */
+    suspend fun extensionFunctionMap(): HashMap<String, MutableList<DFunction>> {
+        val extensionFunctionsMapping = HashMap<String, MutableList<DFunction>>()
+        packages().forEach { packageDoc ->
+            packageDoc.functions.forEach { function ->
+                val receiver = function.receiver
+                if (receiver != null) {
+                    try {
+                        val genericTypeConstructor = receiver.type as GenericTypeConstructor
+                        val className = genericTypeConstructor.dri.classNames.toString()
+                        val list =
+                            extensionFunctionsMapping.getOrDefault(className, mutableListOf())
+                        list.add(function)
+                        extensionFunctionsMapping[className] = list
+                    } catch (_: ClassCastException) {
+                        // Can't cast function.type; skip to next function
+                    }
+                }
+            }
+        }
+        return extensionFunctionsMapping
+    }
 
     private fun computePackages(module: DModule): List<DPackage> {
         return module.packages.sortedBy { it.name }

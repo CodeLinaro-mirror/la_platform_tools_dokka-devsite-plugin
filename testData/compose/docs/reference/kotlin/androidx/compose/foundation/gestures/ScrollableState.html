@@ -102,6 +102,38 @@
         </tbody>
       </table>
     </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.ScrollableState).animateScrollBy(kotlin.Float,androidx.compose.animation.core.AnimationSpec)">animateScrollBy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt;<br>)</code></div>
+              <p>Scroll by <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.ScrollableState).animateScrollBy(kotlin.Float,androidx.compose.animation.core.AnimationSpec)">value</a></code> pixels with animation.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.ScrollableState).scrollBy(kotlin.Float)">scrollBy</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>)</code></div>
+              <p>Jump instantly by <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.ScrollableState).scrollBy(kotlin.Float)">value</a></code> pixels.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.ScrollableState).stopScroll(androidx.compose.foundation.MutatePriority)">stopScroll</a>(scrollPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a>)</code></div>
+              <p>Stop and suspend until any ongoing animation, smooth scrolling, fling, or any other scroll occurring via <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">ScrollableState.scroll</a></code> is terminated.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <h2>Public functions</h2>
     <div><a name="dispatchRawDelta-kotlin.Float-"></a><a name="dispatchrawdelta"></a>
       <h3 class="api-name" id="dispatchRawDelta(kotlin.Float)">dispatchRawDelta</h3>
@@ -155,6 +187,132 @@
       <h3 class="api-name" id="isScrollInProgress()">isScrollInProgress</h3>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#isScrollInProgress()">isScrollInProgress</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
       <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling by gesture, fling or programmatically or not.</p>
+    </div>
+    <h2>Extension functions</h2>
+    <div><a name="(androidx.compose.foundation.gestures.ScrollableState).animateScrollBy(kotlin.Float, androidx.compose.animation.core.AnimationSpec)"></a><a name="-androidx.compose.foundation.gestures.ScrollableState-.animateScrollBy-kotlin.Float-androidx.compose.animation.core.AnimationSpec-"></a><a name="animatescrollby"></a>
+      <h3 class="api-name" id="(androidx.compose.foundation.gestures.ScrollableState).animateScrollBy(kotlin.Float,androidx.compose.animation.core.AnimationSpec)">animateScrollBy</h3>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.ScrollableState).animateScrollBy(kotlin.Float,androidx.compose.animation.core.AnimationSpec)">animateScrollBy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt; = spring()<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+      <p>Scroll by <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.ScrollableState).animateScrollBy(kotlin.Float,androidx.compose.animation.core.AnimationSpec)">value</a></code> pixels with animation.</p>
+      <p>Cancels the currently running scroll, if any, and suspends until the cancellation is complete.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <p>number of pixels to scroll by</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt; = spring()</code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a></code> to be used for this scrolling</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <p>the amount of scroll consumed</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="-androidx.compose.foundation.gestures.ScrollableState-.scrollBy-kotlin.Float-"></a><a name="scrollby"></a>
+      <h3 class="api-name" id="(androidx.compose.foundation.gestures.ScrollableState).scrollBy(kotlin.Float)">scrollBy</h3>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.ScrollableState).scrollBy(kotlin.Float)">scrollBy</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
+      <p>Jump instantly by <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.ScrollableState).scrollBy(kotlin.Float)">value</a></code> pixels.</p>
+      <p>Cancels the currently running scroll, if any, and suspends until the cancellation is complete.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <p>number of pixels to scroll by</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+              <td>
+                <p>the amount of scroll consumed</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.ScrollableState).animateScrollBy(kotlin.Float,androidx.compose.animation.core.AnimationSpec)">animateScrollBy</a></code></td>
+              <td>
+                <p>for an animated version</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="-androidx.compose.foundation.gestures.ScrollableState-.stopScroll-androidx.compose.foundation.MutatePriority-"></a><a name="stopscroll"></a>
+      <h3 class="api-name" id="(androidx.compose.foundation.gestures.ScrollableState).stopScroll(androidx.compose.foundation.MutatePriority)">stopScroll</h3>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.ScrollableState).stopScroll(androidx.compose.foundation.MutatePriority)">stopScroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;scrollPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a> = MutatePriority.Default<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Stop and suspend until any ongoing animation, smooth scrolling, fling, or any other scroll occurring via <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">ScrollableState.scroll</a></code> is terminated.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>scrollPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a> = MutatePriority.Default</code></td>
+              <td>
+                <p>scrolls that run with this priority or lower will be stopped</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </body>
 </html>
