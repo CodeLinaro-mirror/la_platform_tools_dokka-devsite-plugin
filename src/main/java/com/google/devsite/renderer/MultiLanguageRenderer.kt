@@ -48,6 +48,25 @@ internal class MultiLanguageRenderer(
         }
     }
 
+    // Set of packages that Dackka will exclude for both Java and Kotlin refdoc generation
+    private val excludedPackagesForBoth: Set<String> by lazy {
+        System.getenv("DACKKA_EXCLUDED_PACKAGES")?.split(",")?.toSet() ?: emptySet()
+    }
+
+    // Set of packages that Dackka will exclude for Java refdoc generation, which includes
+    // packages specified in `excludedPackagesForBoth`
+    private val excludedPackagesForJava: Set<String> by lazy {
+        excludedPackagesForBoth +
+            (System.getenv("DACKKA_EXCLUDED_PACKAGES_JAVA")?.split(",")?.toSet() ?: emptySet())
+    }
+
+    // Set of packages that Dackka will exclude for Java refdoc generation, which includes
+    // packages specified in `excludedPackagesForBoth`
+    private val excludedPackagesForKotlin: Set<String> by lazy {
+        excludedPackagesForBoth +
+            (System.getenv("DACKKA_EXCLUDED_PACKAGES_KOTLIN")?.split(",")?.toSet() ?: emptySet())
+    }
+
     override fun render(root: RootPageNode) {
         val module = (root as ModulePageNode).documentable as DModule
         val locationProvider = DefaultExternalDokkaLocationProvider(
@@ -55,11 +74,15 @@ internal class MultiLanguageRenderer(
         )
 
         runBlocking(Dispatchers.Default) {
-            val holder = DocumentablesHolder(module, this, context)
-            val classGraph = holder.classGraph()
-            val documentablesGraph = holder.documentablesGraph()
-            launch { renderJava(holder, locationProvider, classGraph, documentablesGraph) }
-            launch { renderKotlin(holder, locationProvider, classGraph, documentablesGraph) }
+            val jHolder = DocumentablesHolder(module, this, context, excludedPackagesForJava)
+            val jClassGraph = jHolder.classGraph()
+            val jDocumentablesGraph = jHolder.documentablesGraph()
+            val kHolder = DocumentablesHolder(module, this, context, excludedPackagesForKotlin)
+            val kClassGraph = kHolder.classGraph()
+            val kDocumentablesGraph = kHolder.documentablesGraph()
+
+            launch { renderJava(jHolder, locationProvider, jClassGraph, jDocumentablesGraph) }
+            launch { renderKotlin(kHolder, locationProvider, kClassGraph, kDocumentablesGraph) }
         }
     }
 
