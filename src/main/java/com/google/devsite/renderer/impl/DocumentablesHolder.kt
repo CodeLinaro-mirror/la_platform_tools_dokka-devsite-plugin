@@ -62,7 +62,8 @@ import org.jetbrains.dokka.utilities.LoggingLevel
 internal class DocumentablesHolder(
     module: DModule,
     scope: CoroutineScope,
-    context: DokkaContext? = null
+    context: DokkaContext? = null,
+    private val excludedPackages: Set<String> = emptySet()
 ) {
     private val packages = scope.async { computePackages(module) }
 
@@ -196,7 +197,9 @@ internal class DocumentablesHolder(
     }
 
     private fun computePackages(module: DModule): List<DPackage> {
-        return module.packages.sortedBy { it.name }
+        return module.packages
+            .sortedBy { it.name }
+            .filterNot { excludedPackages.contains(it.packageName) }
     }
 
     private suspend fun computeClasslikes(
