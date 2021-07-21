@@ -52,9 +52,6 @@ class DefaultDevsitePageTest {
   </head>
   <body>
     <h1>Page Title</h1>
-{% setvar page_path %}page.html{% endsetvar %}
-{% setvar can_switch %}1{% endsetvar %}
-{% include "reference/_java_switcher2.md" %}
     <div>noop</div>
   </body>
 </html>
@@ -89,9 +86,6 @@ class DefaultDevsitePageTest {
   </head>
   <body>
     <h1>Page Title</h1>
-{% setvar page_path %}page.html{% endsetvar %}
-{% setvar can_switch %}1{% endsetvar %}
-{% include "reference/_kotlin_switcher2.md" %}
     <div>noop</div>
   </body>
 </html>

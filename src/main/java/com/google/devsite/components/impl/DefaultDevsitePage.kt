@@ -17,7 +17,6 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.pages.DevsitePage
-import com.google.devsite.renderer.Language
 import kotlinx.html.HTML
 import kotlinx.html.body
 import kotlinx.html.h1
@@ -39,14 +38,6 @@ internal class DefaultDevsitePage(
 
         body {
             h1 { +data.title }
-
-            unsafe { +"{% setvar page_path %}${data.path}{% endsetvar %}\n" }
-            unsafe { +"{% setvar can_switch %}1{% endsetvar %}\n" }
-            when (data.displayLanguage) {
-                Language.JAVA -> unsafe { +"{% include \"reference/_java_switcher2.md\" %}\n" }
-                Language.KOTLIN -> unsafe { +"{% include \"reference/_kotlin_switcher2.md\" %}\n" }
-            }
-
             data.content.render(this)
         }
     }
