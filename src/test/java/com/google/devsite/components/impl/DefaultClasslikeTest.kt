@@ -158,7 +158,7 @@ class DefaultClasslikeTest {
                 relatedSymbols = NoopRelatedSymbols(shown = false),
                 description = emptyList(),
                 symbolTypes = listOf(
-                    NoopSummaryList() to Classlike.SymbolType(
+                    NoopSummaryList() to Classlike.TitledList(
                         "Symbols",
                         listOf(NoopContextFreeComponent)
                     )

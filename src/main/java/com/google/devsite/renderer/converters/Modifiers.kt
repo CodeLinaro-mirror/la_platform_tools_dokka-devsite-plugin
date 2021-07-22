@@ -47,7 +47,7 @@ internal fun <T> T.getExtraModifiers(): List<String>
 
 /** @return true if the modifiers represent a constant symbol, false otherwise */
 internal fun isConstant(modifiers: List<String>) =
-    "const" in modifiers || "static" in modifiers && "final" in modifiers
+    "const" in modifiers || ("static" in modifiers && "final" in modifiers)
 
 /** Returns a filtered and re-written list of modifiers. */
 internal fun List<String>.modifiersFor(
@@ -60,13 +60,14 @@ internal fun List<String>.modifiersFor(
             // Rewrite known modifiers
             if ("const" in modifiers) {
                 modifiers.add("static")
-                modifiers.add("final")
+                if ("final" !in modifiers) modifiers.add("final") // this happens for `const val`
             }
 
             // These modifiers don't exist in Java
             modifiers.remove("suspend")
             modifiers.remove("inline")
             modifiers.remove("noinline")
+            modifiers.remove("crossinline")
             modifiers.remove("reified")
             modifiers.remove("operator")
             modifiers.remove("override")
@@ -112,7 +113,7 @@ val modifierOrder = listOf(
     // Multi-platform (one of)
     "expect", "actual",
     // Extensibility (one of)
-    "final", "open", "abstract", "sealed", "const",
+    "final", "open", "abstract", "sealed", "const", "static",
     // Other (could be more than one)
     "external", "override", "lateinit", "tailrec", "vararg", "suspend", "inner",
     // Types (one of)

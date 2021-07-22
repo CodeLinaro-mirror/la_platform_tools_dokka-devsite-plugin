@@ -973,14 +973,14 @@ internal class ClasslikeDocumentableConverterTest(
         symbolsFor(*types).first.data.items
     }.getOrNull() ?: emptyList()
 
-    private fun Classlike.methodSymbols(): Pair<SummaryList, Classlike.SymbolType> =
+    private fun Classlike.methodSymbols(): Pair<SummaryList, Classlike.TitledList> =
         symbolsFor(if (language == Language.KOTLIN) "Public functions" else "Public methods")
 
     private fun Classlike.methodSymbol(name: String = "foo") =
         methodSymbols().first.items().singleOrNull { it.name() == name }
             ?: methodSymbols().first.items().single()
 
-    private fun Classlike.propertySymbols(): Pair<SummaryList, Classlike.SymbolType> =
+    private fun Classlike.propertySymbols(): Pair<SummaryList, Classlike.TitledList> =
         symbolsFor(if (language == Language.KOTLIN) "Public properties" else "Public fields")
 
     private fun Classlike.propertySymbol(name: String = "foo") =

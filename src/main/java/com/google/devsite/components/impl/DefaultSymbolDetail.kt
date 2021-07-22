@@ -17,6 +17,8 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.components.ShouldBreak
+import com.google.devsite.components.render
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolDetail.SymbolType
 import com.google.devsite.components.table.SummaryList
@@ -25,7 +27,6 @@ import com.google.devsite.renderer.Language
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
 import kotlinx.html.a
-import kotlinx.html.br
 import kotlinx.html.div
 import kotlinx.html.h3
 import kotlinx.html.pre
@@ -41,19 +42,11 @@ internal class DefaultSymbolDetail(
 
         h3("api-name") {
             data.anchors.firstOrNull()?.let { attributes["id"] = it }
-
             +data.name
         }
         pre("api-signature no-pretty-print") {
-            for (annotation in data.annotations) {
-                annotation.render(this)
-                br()
-            }
-
-            for (modifier in data.modifiers) {
-                +modifier
-                +Entities.nbsp
-            }
+            data.annotations.render(into, ShouldBreak.YES, separator = "")
+            data.modifiers.render(this, terminator = { +Entities.nbsp })
 
             when (data.displayLanguage) {
                 Language.JAVA -> {
@@ -78,9 +71,7 @@ internal class DefaultSymbolDetail(
             }
         }
 
-        for (detail in data.metadata.sortedBy { descriptionSorter(it) }) {
-            detail.render(this)
-        }
+        data.metadata.sortedBy { descriptionSorter(it) }.render(this, separator = null)
     }
 }
 

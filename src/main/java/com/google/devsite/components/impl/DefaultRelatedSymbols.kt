@@ -17,6 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.Link
+import com.google.devsite.components.render
 import com.google.devsite.components.table.RelatedSymbols
 import com.google.devsite.components.table.SummaryList
 import kotlinx.html.FlowContent
@@ -48,20 +49,12 @@ internal class DefaultRelatedSymbols(
 
                 div("showalways") {
                     attributes["id"] = "subclasses-$relatedness"
-
-                    for (type in subclasses) {
-                        type.render(this)
-
-                        if (type !== subclasses.last()) {
-                            +", "
-                        }
-                    }
+                    subclasses.render(this)
                 }
             }
 
             div {
                 attributes["id"] = "subclasses-$relatedness-summary"
-
                 summary.render(this)
             }
 

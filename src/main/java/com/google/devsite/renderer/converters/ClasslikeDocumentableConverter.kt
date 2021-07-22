@@ -31,7 +31,7 @@ import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.ClassSignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.table.ClassHierarchy
-import com.google.devsite.components.table.InheritedSymbols
+import com.google.devsite.components.table.InheritedSymbolsList
 import com.google.devsite.components.table.RelatedSymbols
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
@@ -193,12 +193,12 @@ internal class ClasslikeDocumentableConverter(
         val inheritedTypes = async { computeInheritedSymbols(inheritedFunctions) }
 
         val allSymbols = mutableListOf(
-            nestedTypesSummary.await() to Classlike.SymbolType(nestedTypesTitle(), emptyList()),
-            enumValuesSummary.await() to Classlike.SymbolType(
+            nestedTypesSummary.await() to Classlike.TitledList(nestedTypesTitle(), emptyList()),
+            enumValuesSummary.await() to Classlike.TitledList(
                 enumValuesTitle(),
                 enumDetails.await()
             ),
-            constantsSummary.await() to Classlike.SymbolType(
+            constantsSummary.await() to Classlike.TitledList(
                 constantsTitle(),
                 constants.await()
             )
@@ -206,19 +206,19 @@ internal class ClasslikeDocumentableConverter(
         if (displayLanguage == Language.KOTLIN) {
             allSymbols.addAll(
                 listOf(
-                    publicCompanionFunctionsSummary.await() to Classlike.SymbolType(
+                    publicCompanionFunctionsSummary.await() to Classlike.TitledList(
                         publicCompanionFunctionsTitle(),
                         publicCompanionFunctionsDetail.await()
                     ),
-                    protectedCompanionFunctionsSummary.await() to Classlike.SymbolType(
+                    protectedCompanionFunctionsSummary.await() to Classlike.TitledList(
                         protectedCompanionFunctionsTitle(),
                         protectedCompanionFunctionsDetail.await()
                     ),
-                    publicCompanionPropertiesSummary.await() to Classlike.SymbolType(
+                    publicCompanionPropertiesSummary.await() to Classlike.TitledList(
                         publicCompanionPropertiesTitle(),
                         publicCompanionPropertiesDetail.await()
                     ),
-                    protectedCompanionPropertiesSummary.await() to Classlike.SymbolType(
+                    protectedCompanionPropertiesSummary.await() to Classlike.TitledList(
                         protectedCompanionPropertiesTitle(),
                         protectedCompanionPropertiesDetail.await()
                     )
@@ -230,11 +230,11 @@ internal class ClasslikeDocumentableConverter(
         if (displayLanguage == Language.JAVA) {
             allSymbols.addAll(
                 listOf(
-                    publicPropertiesSummary.await() to Classlike.SymbolType(
+                    publicPropertiesSummary.await() to Classlike.TitledList(
                         publicPropertiesTitle(),
                         publicProperties.await()
                     ),
-                    protectedPropertiesSummary.await() to Classlike.SymbolType(
+                    protectedPropertiesSummary.await() to Classlike.TitledList(
                         protectedPropertiesTitle(),
                         protectedProperties.await()
                     )
@@ -244,19 +244,19 @@ internal class ClasslikeDocumentableConverter(
 
         allSymbols.addAll(
             listOf(
-                publicConstructorsSummary.await() to Classlike.SymbolType(
+                publicConstructorsSummary.await() to Classlike.TitledList(
                     publicConstructorsTitle(),
                     publicConstructors.await()
                 ),
-                protectedConstructorsSummary.await() to Classlike.SymbolType(
+                protectedConstructorsSummary.await() to Classlike.TitledList(
                     protectedConstructorsTitle(),
                     protectedConstructors.await()
                 ),
-                publicFunctionsSummary.await() to Classlike.SymbolType(
+                publicFunctionsSummary.await() to Classlike.TitledList(
                     publicMethodsTitle(),
                     publicFunctions.await()
                 ),
-                protectedFunctionsSummary.await() to Classlike.SymbolType(
+                protectedFunctionsSummary.await() to Classlike.TitledList(
                     protectedMethodsTitle(),
                     protectedFunctions.await()
                 )
@@ -267,11 +267,11 @@ internal class ClasslikeDocumentableConverter(
         if (displayLanguage == Language.KOTLIN) {
             allSymbols.addAll(
                 listOf(
-                    publicPropertiesSummary.await() to Classlike.SymbolType(
+                    publicPropertiesSummary.await() to Classlike.TitledList(
                         publicPropertiesTitle(),
                         publicProperties.await()
                     ),
-                    protectedPropertiesSummary.await() to Classlike.SymbolType(
+                    protectedPropertiesSummary.await() to Classlike.TitledList(
                         protectedPropertiesTitle(),
                         protectedProperties.await()
                     )
@@ -289,7 +289,7 @@ internal class ClasslikeDocumentableConverter(
                 async { functionsToDetail(declaredExtensionFunctions) }
 
             allSymbols.add(
-                extensionFunctionsSummary.await() to Classlike.SymbolType(
+                extensionFunctionsSummary.await() to Classlike.TitledList(
                     extensionFunctionsTitle(),
                     extensionFunctions.await()
                 )
@@ -522,7 +522,7 @@ internal class ClasslikeDocumentableConverter(
     /**
      * Creates a list of InheritedSymbols from a list of DFunctions
      */
-    private fun computeInheritedSymbols(symbols: List<DFunction>): List<InheritedSymbols> {
+    private fun computeInheritedSymbols(symbols: List<DFunction>): List<InheritedSymbolsList> {
         val inheritedSymbolMap = symbols
             .sortedWith(comparator = functionSignatureComparator())
             .groupBy { it.dri.parent }
@@ -536,7 +536,7 @@ internal class ClasslikeDocumentableConverter(
         )
 
         return listOf(DefaultInheritedSymbols(
-            InheritedSymbols.Params(inheritedFunctionHeader, inheritedFunctionsSummary)))
+            InheritedSymbolsList.Params(inheritedFunctionHeader, inheritedFunctionsSummary)))
     }
 
     /** Finds the direct and indirect subclasses for this classlike, returning their component. */

@@ -16,9 +16,11 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.ShouldBreak
+import com.google.devsite.components.render
 import com.google.devsite.components.symbols.TypeParameter
 import com.google.devsite.renderer.Language
-import kotlinx.html.Entities
+import kotlinx.html.Entities.nbsp
 import kotlinx.html.FlowContent
 
 /** Default implementation of a function or class type parameter. */
@@ -31,51 +33,28 @@ internal class DefaultTypeParameter(
 
     override fun render(into: FlowContent) = render(into, true)
 
-    override fun render(html: FlowContent, angleBrackets: Boolean) = html.run {
-        if (angleBrackets) +"<"
-        for (annotation in data.annotations) {
-            annotation.render(this)
-            +Entities.nbsp
-        }
+    /**
+     * When rendering a single type param, e.g. in the left column of the parameters table, wrap <>s
+     * When rendering a list of type params, group all within a single <>. Handled in List.render()
+     */
+    override fun render(into: FlowContent, angleBrackets: Boolean) = into.run {
+        if (angleBrackets) { +"<" }
+        data.annotations.render(into, ShouldBreak.NO, separator = "", terminator = { +nbsp })
         when (data.displayLanguage) {
             Language.JAVA -> {
                 +data.name
-                if (data.projections.isNotEmpty()) {
-                    +Entities.nbsp
-                    // TODO: handle "implements"
-                    +"extends"
-                    for (projection in data.projections.dropLast(1)) {
-                        +Entities.nbsp
-                        projection.render(this)
-                        +","
-                    }
-                    +Entities.nbsp
-                    data.projections.last().render(this)
-                }
+                // TODO: handle "implements"
+                data.projections.render(into, ShouldBreak.NO,
+                    header = { +nbsp; +"extends"; +nbsp; })
             }
             Language.KOTLIN -> {
                 +data.name
-
-                for (modifier in data.modifiers) {
-                    +modifier
-                    +Entities.nbsp
-                }
-
-                if (data.projections.isNotEmpty()) {
-                    +Entities.nbsp
-                    +":"
-                    // TODO: handle in/out
-                    for (projection in data.projections.dropLast(1)) {
-                        +Entities.nbsp
-                        projection.render(this)
-                        +","
-                    }
-                    +Entities.nbsp
-                    data.projections.last().render(this)
-                }
+                data.modifiers.render(into)
+                // TODO: handle in/out
+                data.projections.render(into, ShouldBreak.NO, header = { +nbsp; +":"; +nbsp })
             }
         }
-        if (angleBrackets) +">"
+        if (angleBrackets) { +">" }
     }
 
     override fun validate() {

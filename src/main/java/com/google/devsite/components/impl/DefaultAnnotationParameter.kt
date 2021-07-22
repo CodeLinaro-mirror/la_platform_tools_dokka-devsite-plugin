@@ -16,6 +16,8 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.ShouldBreak
+import com.google.devsite.components.render
 import com.google.devsite.components.symbols.AnnotationValueAnnotationParameter
 import com.google.devsite.components.symbols.ArrayValueAnnotationParameter
 import com.google.devsite.components.symbols.NamedValueAnnotationParameter
@@ -45,7 +47,7 @@ internal class DefaultArrayValueAnnotationParameter(
 ) : ArrayValueAnnotationParameter {
     override fun render(into: FlowContent) = into.run {
         data.name.render(into)
-        data.innerAnnotationParameters.render(into, brackets = "[]")
+        data.innerAnnotationParameters.render(into, brackets = "[]", shouldBreak = ShouldBreak.NO)
     }
 }
 

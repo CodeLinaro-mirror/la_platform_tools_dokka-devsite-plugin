@@ -16,6 +16,8 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.ShouldBreak
+import com.google.devsite.components.render
 import com.google.devsite.components.symbols.Annotation
 import kotlinx.html.FlowContent
 
@@ -26,6 +28,7 @@ internal class DefaultAnnotation(
     override fun render(into: FlowContent) = into.run {
         +"@"
         data.type.render(this)
-        if (data.parameters.isNotEmpty()) data.parameters.render(into, false)
+        // "()" displays even if there are no elements
+        data.parameters.render(into, brackets = "() ", shouldBreak = ShouldBreak.NO)
     }
 }

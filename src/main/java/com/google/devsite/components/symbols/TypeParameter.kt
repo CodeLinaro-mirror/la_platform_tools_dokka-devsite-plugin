@@ -17,9 +17,7 @@
 package com.google.devsite.components.symbols
 
 import com.google.devsite.renderer.Language
-import kotlinx.html.Entities
 import kotlinx.html.FlowContent
-import org.jetbrains.kotlin.utils.addToStdlib.ifNotEmpty
 
 /** Represents a generic type parameter. */
 internal interface TypeParameter : SymbolBase {
@@ -38,7 +36,7 @@ internal interface TypeParameter : SymbolBase {
         return result
     }
 
-    fun render(html: FlowContent, angleBrackets: Boolean)
+    fun render(into: FlowContent, angleBrackets: Boolean)
 
     class Params(
         val displayLanguage: Language,
@@ -48,10 +46,3 @@ internal interface TypeParameter : SymbolBase {
         val annotations: List<Annotation> = emptyList()
     )
 }
-
-internal fun List<TypeParameter>.render(html: FlowContent) = ifNotEmpty { html.run {
-    +"<"
-    dropLast(1).forEach { it.render(html, false).also { +","; +Entities.nbsp } }
-    lastOrNull()?.render(html, false)
-    +">"
-} }

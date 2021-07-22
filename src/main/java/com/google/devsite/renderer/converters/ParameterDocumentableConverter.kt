@@ -70,6 +70,7 @@ internal class ParameterDocumentableConverter(
         Language.JAVA -> componentForJavaProjection(
             proj = param.type,
             name = param.name ?: "receiver",
+            modifiers = param.getExtraModifiers().modifiersFor(ModifierHints(Language.JAVA)),
             annotations = param.annotations()
         )
         Language.KOTLIN -> {
@@ -79,7 +80,7 @@ internal class ParameterDocumentableConverter(
                 proj = param.type,
                 name = param.name.orEmpty(),
                 defaultValue = defaultValue,
-                modifiers = param.getExtraModifiers().modifiersFor(ModifierHints(displayLanguage)),
+                modifiers = param.getExtraModifiers().modifiersFor(ModifierHints(Language.KOTLIN)),
                 annotations = param.annotations()
             )
         }
@@ -135,6 +136,7 @@ internal class ParameterDocumentableConverter(
     private fun componentForJavaProjection(
         proj: Projection,
         name: String = "",
+        modifiers: List<String> = emptyList(),
         annotations: List<Annotations.Annotation> = emptyList(),
         isReturnType: Boolean = false,
         showNullability: Boolean = true
@@ -146,6 +148,7 @@ internal class ParameterDocumentableConverter(
                 isLambda = false,
                 name = name,
                 primary = proj.rewriteKotlinPrimitivesForJava(isReturnType).toComponent(),
+                modifiers = modifiers,
                 annotations = annotations.annotationComponents(
                     pathProvider,
                     displayLanguage,
