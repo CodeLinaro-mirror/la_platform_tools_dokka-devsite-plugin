@@ -54,7 +54,7 @@ dependencies {
 }
 
 group = "com.google.devsite"
-version = "0.0.8" // This is appended to archiveBaseName in the ShadowJar task.
+version = "0.0.9" // This is appended to archiveBaseName in the ShadowJar task.
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
