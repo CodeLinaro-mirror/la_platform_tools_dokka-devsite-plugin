@@ -537,8 +537,8 @@ internal class DocTagConverterTest(
     }
 
     @Test
-    fun `@param throws exception for invalid parameter`() {
-        assertFails {
+    fun `@param throws exception or prints warning for invalid parameter`() {
+        val exception = assertFails {
             """
             |/**
             | * @param NOT_A_REAL_PARAM aaaaaa
@@ -546,6 +546,7 @@ internal class DocTagConverterTest(
             |fun foo()
             """.render().documentation()
         }
+        assertThat(exception.localizedMessage).contains("in Test.kt")
         val standardOut = System.out
         val outputStreamCaptor = ByteArrayOutputStream()
         System.setOut(PrintStream(outputStreamCaptor))

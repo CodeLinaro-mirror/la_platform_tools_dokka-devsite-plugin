@@ -259,7 +259,9 @@ internal class DocTagConverter(
         val params = tags.map { tag ->
             if (allOptions[tag.name()] == null) {
                 throw RuntimeException("Unable to find what is referred to by \"@param " +
-                    "${tag.name()}\" in ${documentable::class.simpleName} ${documentable.name}")
+                    "${tag.name()}\" in ${documentable::class.simpleName} ${documentable.name} in" +
+                    " ${documentable.sourceSets.single().sourceRoots.single()
+                        .getCodeFileDescendant()}")
             }
             val title = allOptions[tag.name()]!!
             DefaultTwoPaneSummaryItem(
@@ -277,6 +279,11 @@ internal class DocTagConverter(
             )
         )
     }
+
+    private fun File.getCodeFileDescendant(): String =
+        if (this.extension.toLowerCase() in listOf("java", "kt", "js")) this.name
+        else this.listFiles()?.singleOrNull()?.getCodeFileDescendant()
+            ?: "(ERROR: unable to detect source file for this code)"
 
     private fun returnType(tags: List<Return>, returnType: ContextFreeComponent): SummaryList {
         val params = tags.map { tag ->
