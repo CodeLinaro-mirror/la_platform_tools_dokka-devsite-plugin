@@ -11,9 +11,9 @@
     </p>
     <hr>
     <aside class="caution"><strong>This class is deprecated.</strong><br>AsyncPagedListDiffer is deprecated and has been replaced by AsyncPagingDataDiffer</aside>
-    <p>Helper object for mapping a <code><a href="/reference/androidx/paging/PagedList.html">androidx.paging.PagedList</a></code> into a <a href="[androidx.recyclerview.widget.RecyclerView.Adapter]">androidx.recyclerview.widget.RecyclerView.Adapter</a>.</p>
+    <p>Helper object for mapping a <code><a href="/reference/androidx/paging/PagedList.html">androidx.paging.PagedList</a></code> into a androidx.recyclerview.widget.RecyclerView.Adapter.</p>
     <p>For simplicity, the <code><a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code> wrapper class can often be used instead of the differ directly. This diff class is exposed for complex cases, and where overriding an adapter base class to support paging isn't convenient.</p>
-    <p>When consuming a <a href="[LiveData]">LiveData</a> of PagedList, you can observe updates and dispatch them directly to <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a></code>. The AsyncPagedListDiffer then can present this updating data set simply for an adapter. It listens to PagedList loading callbacks, and uses DiffUtil on a background thread to compute updates as new PagedLists are received.</p>
+    <p>When consuming a LiveData of PagedList, you can observe updates and dispatch them directly to <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a></code>. The AsyncPagedListDiffer then can present this updating data set simply for an adapter. It listens to PagedList loading callbacks, and uses DiffUtil on a background thread to compute updates as new PagedLists are received.</p>
     <p>It provides a simple list-like API with <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#getItem(kotlin.Int)">getItem</a></code> and <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#itemCount()">itemCount</a></code> for an adapter to acquire and present data objects.</p>
     <p>A complete usage pattern with Room would look like this:</p>
     <pre class="prettyprint">@Dao<br>interface UserDao {<br>    @Query(&quot;SELECT * FROM user ORDER BY lastName ASC&quot;)<br>    public abstract DataSource.Factory&lt;Integer, User&gt; usersByLastName();<br>}<br><br>class MyViewModel extends ViewModel {<br>    public final LiveData&lt;PagedList&lt;User&gt;&gt; usersList;<br>    public MyViewModel(UserDao userDao) {<br>        usersList = new LivePagedListBuilder&lt;&gt;(<br>        userDao.usersByLastName(), /* page size */20).build();<br>    }<br>}<br><br>class MyActivity extends AppCompatActivity {<br>    @Override<br>    public void onCreate(Bundle savedState) {<br>        super.onCreate(savedState);<br>        MyViewModel viewModel = new ViewModelProvider(this).get(MyViewModel.class);<br>        RecyclerView recyclerView = findViewById(R.id.user_list);<br>        final UserAdapter adapter = new UserAdapter();<br>        viewModel.usersList.observe(this, pagedList -&gt; adapter.submitList(pagedList));<br>        recyclerView.setAdapter(adapter);<br>    }<br>}<br><br>class UserAdapter extends RecyclerView.Adapter&amp;lt;UserViewHolder&gt; {<br>    private final AsyncPagedListDiffer&amp;lt;User&gt; differ =<br>            new AsyncPagedListDiffer(this, DIFF_CALLBACK);<br>    @Override<br>    public int getItemCount() {<br>        return differ.getItemCount();<br>    }<br>    public void submitList(PagedList&amp;lt;User&gt; pagedList) {<br>        differ.submitList(pagedList);<br>    }<br>    @Override<br>    public void onBindViewHolder(UserViewHolder holder, int position) {<br>        User user = differ.getItem(position);<br>        if (user != null) {<br>            holder.bindTo(user);<br>        } else {<br>            // Null defines a placeholder item - AsyncPagedListDiffer will automatically<br>            // invalidate this row when the actual object is loaded from the database<br>            holder.clear();<br>        }<br>    }<br>    public static final DiffUtil.ItemCallback&amp;lt;User&gt; DIFF_CALLBACK =<br>            new DiffUtil.ItemCallback&amp;lt;User&gt;() {<br>        @Override<br>        public boolean areItemsTheSame(<br>            @NonNull User oldUser, @NonNull User newUser) {<br>            // User properties may have changed if reloaded from the DB, but ID is fixed<br>            return oldUser.getId() == newUser.getId();<br>        }<br>        @Override<br>        public boolean areContentsTheSame(@NonNull User oldUser, @NonNull User newUser) {<br>            // NOTE: if you use equals, your object must properly override Object#equals()<br>            // Incorrectly returning false here will result in too many animations.<br>            return oldUser.equals(newUser);<br>        }<br>    }<br>}</pre>
@@ -200,7 +200,7 @@
     <div><a name="getItemCount()"></a><a name="setItemCount()"></a><a name="getItemCount--"></a><a name="setItemCount--"></a>
       <h3 class="api-name" id="itemCount()">itemCount</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;int&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#itemCount()">itemCount</a></pre>
-      <p>Get the number of items currently presented by this Differ. This value can be directly returned to <a href="[RecyclerView.Adapter.getItemCount]">RecyclerView.Adapter.getItemCount</a>.</p>
+      <p>Get the number of items currently presented by this Differ. This value can be directly returned to RecyclerView.Adapter.getItemCount.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -243,7 +243,7 @@
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;diffCallback</code></td>
               <td>
-                <p>The <a href="[DiffUtil.ItemCallback]">DiffUtil.ItemCallback</a> instance to compare items in the list.</p>
+                <p>The DiffUtil.ItemCallback instance to compare items in the list.</p>
               </td>
             </tr>
           </tbody>
@@ -392,7 +392,7 @@
             <tr>
               <td width="40%"><code>int&nbsp;index</code></td>
               <td>
-                <p>Index of item to get, must be &gt;= 0, and &lt; <code>getItemCount</code>.</p>
+                <p>Index of item to get, must be >= 0, and <<code>getItemCount</code>.</p>
               </td>
             </tr>
           </tbody>
@@ -560,7 +560,7 @@
       <h3 class="api-name" id="submitList(androidx.paging.PagedList)">submitList</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;void&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList)">submitList</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList)</pre>
       <p>Pass a new <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> to the differ.</p>
-      <p>If a PagedList is already present, a diff will be computed asynchronously on a background thread. When the diff is computed, it will be applied (dispatched to the <a href="[ListUpdateCallback]">ListUpdateCallback</a>), and the new PagedList will be swapped in as the <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#currentList()">currentList</a></code>.</p>
+      <p>If a PagedList is already present, a diff will be computed asynchronously on a background thread. When the diff is computed, it will be applied (dispatched to the ListUpdateCallback), and the new PagedList will be swapped in as the <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#currentList()">currentList</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -583,7 +583,7 @@
       <h3 class="api-name" id="submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;void&nbsp;<a href="/reference/androidx/paging/AsyncPagedListDiffer.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/androidx/paging/PagedList.html">PagedList</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagedList,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>&nbsp;commitCallback<br>)</pre>
       <p>Pass a new PagedList to the differ.</p>
-      <p>If a PagedList is already present, a diff will be computed asynchronously on a background thread. When the diff is computed, it will be applied (dispatched to the <a href="[ListUpdateCallback]">ListUpdateCallback</a>), and the new PagedList will be swapped in as the <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#currentList()">current list</a></code>.</p>
+      <p>If a PagedList is already present, a diff will be computed asynchronously on a background thread. When the diff is computed, it will be applied (dispatched to the ListUpdateCallback), and the new PagedList will be swapped in as the <code><a href="/reference/androidx/paging/AsyncPagedListDiffer.html#currentList()">current list</a></code>.</p>
       <p>The commit callback can be used to know when the PagedList is committed, but note that it may not be executed. If PagedList B is submitted immediately after PagedList A, and is committed directly, the callback associated with PagedList A will not be run.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">

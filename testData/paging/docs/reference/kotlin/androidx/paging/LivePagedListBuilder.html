@@ -11,7 +11,7 @@
     </p>
     <hr>
     <aside class="caution"><strong>This class is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
-    <p>Builder for <code>LiveData&lt;PagedList&gt;</code> for Java users, given a <code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">androidx.paging.DataSource.Factory</a></code> and a <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html">androidx.paging.PagedList.Config</a></code>.</p>
+    <p>Builder for <code>LiveData</code> for Java users, given a <code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">androidx.paging.DataSource.Factory</a></code> and a <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html">androidx.paging.PagedList.Config</a></code>.</p>
     <p>The required parameters are in the constructor, so you can simply construct and build, or optionally enable extra features (such as initial load key, or BoundaryCallback).</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -99,7 +99,7 @@
             <td width="40%"><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#build()">build</a>()</code></div>
-              <p>Constructs the <code>LiveData&lt;PagedList&gt;</code>.</p>
+              <p>Constructs the <code>LiveData</code>.</p>
             </td>
           </tr>
           <tr>
@@ -212,7 +212,7 @@
               <td>
                 <p><code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> factory providing <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> generations.</p>
                 <p>The returned <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> should invalidate itself if the snapshot is no longer valid. If a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> becomes invalid, the only way to query more data is to create a new <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> by invoking the supplied <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#&lt;init&gt;(kotlin.Function0,androidx.paging.PagedList.Config)">pagingSourceFactory</a></code>.</p>
-                <p><code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#&lt;init&gt;(kotlin.Function0,androidx.paging.PagedList.Config)">pagingSourceFactory</a></code> will invoked to construct a new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> and <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> when the current <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> is invalidated, and pass the new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> through the <code>LiveData&lt;PagedList&gt;</code> to observers.</p>
+                <p><code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#&lt;init&gt;(kotlin.Function0,androidx.paging.PagedList.Config)">pagingSourceFactory</a></code> will invoked to construct a new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> and <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> when the current <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> is invalidated, and pass the new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> through the <code>LiveData</code> to observers.</p>
               </td>
             </tr>
             <tr>
@@ -245,7 +245,7 @@
               <td>
                 <p><code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> factory providing <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> generations.</p>
                 <p>The returned <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> should invalidate itself if the snapshot is no longer valid. If a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> becomes invalid, the only way to query more data is to create a new <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> by invoking the supplied <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#&lt;init&gt;(kotlin.Function0,kotlin.Int)">pagingSourceFactory</a></code>.</p>
-                <p><code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#&lt;init&gt;(kotlin.Function0,kotlin.Int)">pagingSourceFactory</a></code> will invoked to construct a new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> and <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> when the current <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> is invalidated, and pass the new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> through the <code>LiveData&lt;PagedList&gt;</code> to observers.</p>
+                <p><code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#&lt;init&gt;(kotlin.Function0,kotlin.Int)">pagingSourceFactory</a></code> will invoked to construct a new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> and <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> when the current <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> is invalidated, and pass the new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> through the <code>LiveData</code> to observers.</p>
               </td>
             </tr>
             <tr>
@@ -262,8 +262,8 @@
     <div><a name="build--"></a><a name="build"></a>
       <h3 class="api-name" id="build()">build</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#build()">build</a>():&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
-      <p>Constructs the <code>LiveData&lt;PagedList&gt;</code>.</p>
-      <p>No work (such as loading) is done immediately, the creation of the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is deferred until the <a href="[LiveData]">LiveData</a> is observed.</p>
+      <p>Constructs the <code>LiveData</code>.</p>
+      <p>No work (such as loading) is done immediately, the creation of the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is deferred until the LiveData is observed.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -275,7 +275,7 @@
             <tr>
               <td width="40%"><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</code></td>
               <td>
-                <p>The <a href="[LiveData]">LiveData</a> of <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s</p>
+                <p>The LiveData of <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s</p>
               </td>
             </tr>
           </tbody>
@@ -288,7 +288,7 @@
       <p>Sets a <code><a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">androidx.paging.PagedList.BoundaryCallback</a></code> on each PagedList created, typically used to load additional data from network when paging from local storage.</p>
       <p>Pass a <code><a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a></code> to listen to when the PagedList runs out of data to load. If this method is not called, or <code>null</code> is passed, you will not be notified when each <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> runs out of data to provide to its <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>.</p>
       <p>If you are paging from a DataSource.Factory backed by local storage, you can set a BoundaryCallback to know when there is no more information to page from local storage. This is useful to page from the network when local storage is a cache of network data.</p>
-      <p>Note that when using a BoundaryCallback with a <code>LiveData&lt;PagedList&gt;</code>, method calls on the callback may be dispatched multiple times - one for each PagedList/DataSource pair. If loading network data from a BoundaryCallback, you should prevent multiple dispatches of the same method from triggering multiple simultaneous network loads.</p>
+      <p>Note that when using a BoundaryCallback with a <code>LiveData</code>, method calls on the callback may be dispatched multiple times - one for each PagedList/DataSource pair. If loading network data from a BoundaryCallback, you should prevent multiple dispatches of the same method from triggering multiple simultaneous network loads.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -367,7 +367,7 @@
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html#setFetchExecutor(java.util.concurrent.Executor)">setFetchExecutor</a>(fetchExecutor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a>):&nbsp;<a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</pre>
       <p>Sets <code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> used for background fetching of <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, and the pages within.</p>
       <p>The library will wrap this as a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">kotlinx.coroutines.CoroutineDispatcher</a></code>.</p>
-      <p>If not set, defaults to a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-executor-coroutine-dispatcher/index.html">ExecutorCoroutineDispatcher</a></code> backed by <a href="[ArchTaskExecutor.getIOThreadExecutor]">ArchTaskExecutor.getIOThreadExecutor</a>.</p>
+      <p>If not set, defaults to a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-executor-coroutine-dispatcher/index.html">ExecutorCoroutineDispatcher</a></code> backed by ArchTaskExecutor.getIOThreadExecutor.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>

@@ -792,8 +792,8 @@
       <p>Caches the <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> such that any downstream collection from this flow will share the same <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
       <p>The flow is kept active as long as the given <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">scope</a></code> is active. To avoid leaks, make sure to use a <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">scope</a></code> that is already managed (like a ViewModel scope) or manually cancel it when you don't need paging anymore.</p>
       <p>A common use case for this caching is to cache <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> in a ViewModel. This can ensure that, upon configuration change (e.g. rotation), then new Activity will receive the existing data immediately rather than fetching it from scratch.</p>
-      <p>Calling <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> is required to allow calling <a href="[androidx.paging.AsyncPagingDataAdapter]">androidx.paging.AsyncPagingDataAdapter</a> on the same instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> emitted by <code><a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a></code> or any of its transformed derivatives, as reloading data from scratch on the same generation of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> is an unsupported operation.</p>
-      <p>Note that this does not turn the <code>Flow&lt;PagingData&gt;</code> into a hot stream. It won't execute any unnecessary code unless it is being collected.</p>
+      <p>Calling <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> is required to allow calling androidx.paging.AsyncPagingDataAdapter on the same instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> emitted by <code><a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a></code> or any of its transformed derivatives, as reloading data from scratch on the same generation of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> is an unsupported operation.</p>
+      <p>Note that this does not turn the <code>Flow</code> into a hot stream. It won't execute any unnecessary code unless it is being collected.</p>
       <pre class="prettyprint">
 import androidx.activity.viewModels
 import androidx.paging.Pager
@@ -854,9 +854,9 @@ class MyActivity : AppCompatActivity() {
     <div><a name="-LiveData&lt;PagingData&lt;T&gt;&gt;-.cachedIn-Lifecycle-"></a><a name="cachedin"></a>
       <h3 class="api-name" id="(LiveData&lt;PagingData&lt;T&gt;&gt;).cachedIn(Lifecycle)">cachedIn</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;.<a href="/reference/kotlin/androidx/paging/package-summary.html#(LiveData&lt;PagingData&lt;T&gt;&gt;).cachedIn(Lifecycle)">cachedIn</a>(lifecycle:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
-      <p>Operator which caches a <a href="[LiveData]">LiveData</a> of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> within the scope of a <a href="[Lifecycle]">Lifecycle</a>.</p>
+      <p>Operator which caches a LiveData of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> within the scope of a Lifecycle.</p>
       <p><code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> multicasts pages loaded and transformed by a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>, allowing multiple observers on the same instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> to receive the same events, avoiding redundant work, but comes at the cost of buffering those pages in memory.</p>
-      <p>Calling <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> is required to allow calling <a href="[androidx.paging.AsyncPagingDataAdapter]">androidx.paging.AsyncPagingDataAdapter</a> on the same instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> emitted by <code><a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a></code> or any of its transformed derivatives, as reloading data from scratch on the same generation of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> is an unsupported operation.</p>
+      <p>Calling <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> is required to allow calling androidx.paging.AsyncPagingDataAdapter on the same instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> emitted by <code><a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a></code> or any of its transformed derivatives, as reloading data from scratch on the same generation of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> is an unsupported operation.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -868,7 +868,7 @@ class MyActivity : AppCompatActivity() {
             <tr>
               <td width="40%"><code>lifecycle:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
               <td>
-                <p>The <a href="[Lifecycle]">Lifecycle</a> where the page cache will be kept alive.</p>
+                <p>The Lifecycle where the page cache will be kept alive.</p>
               </td>
             </tr>
           </tbody>
@@ -878,9 +878,9 @@ class MyActivity : AppCompatActivity() {
     <div><a name="-LiveData&lt;PagingData&lt;T&gt;&gt;-.cachedIn-ViewModel-"></a><a name="cachedin"></a>
       <h3 class="api-name" id="(LiveData&lt;PagingData&lt;T&gt;&gt;).cachedIn(ViewModel)">cachedIn</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;.<a href="/reference/kotlin/androidx/paging/package-summary.html#(LiveData&lt;PagingData&lt;T&gt;&gt;).cachedIn(ViewModel)">cachedIn</a>(viewModel:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
-      <p>Operator which caches a <a href="[LiveData]">LiveData</a> of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> within the scope of a <a href="[ViewModel]">ViewModel</a>.</p>
+      <p>Operator which caches a LiveData of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> within the scope of a ViewModel.</p>
       <p><code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> multicasts pages loaded and transformed by a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>, allowing multiple observers on the same instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> to receive the same events, avoiding redundant work, but comes at the cost of buffering those pages in memory.</p>
-      <p>Calling <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> is required to allow calling <a href="[androidx.paging.AsyncPagingDataAdapter]">androidx.paging.AsyncPagingDataAdapter</a> on the same instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> emitted by <code><a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a></code> or any of its transformed derivatives, as reloading data from scratch on the same generation of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> is an unsupported operation.</p>
+      <p>Calling <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> is required to allow calling androidx.paging.AsyncPagingDataAdapter on the same instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> emitted by <code><a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a></code> or any of its transformed derivatives, as reloading data from scratch on the same generation of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> is an unsupported operation.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -892,7 +892,7 @@ class MyActivity : AppCompatActivity() {
             <tr>
               <td width="40%"><code>viewModel:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
               <td>
-                <p>The <a href="[ViewModel]">ViewModel</a> whose <a href="[viewModelScope]">viewModelScope</a> will dictate how long the page cache will be kept alive.</p>
+                <p>The ViewModel whose viewModelScope will dictate how long the page cache will be kept alive.</p>
               </td>
             </tr>
           </tbody>
@@ -902,9 +902,9 @@ class MyActivity : AppCompatActivity() {
     <div><a name="-LiveData&lt;PagingData&lt;T&gt;&gt;-.cachedIn-kotlinx.coroutines.CoroutineScope-"></a><a name="cachedin"></a>
       <h3 class="api-name" id="(LiveData&lt;PagingData&lt;T&gt;&gt;).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;T&gt;&gt;.<a href="/reference/kotlin/androidx/paging/package-summary.html#(LiveData&lt;PagingData&lt;T&gt;&gt;).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a>(scope:&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
-      <p>Operator which caches a <a href="[LiveData]">LiveData</a> of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> within a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code>.</p>
+      <p>Operator which caches a LiveData of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> within a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code>.</p>
       <p><code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> multicasts pages loaded and transformed by a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>, allowing multiple observers on the same instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> to receive the same events, avoiding redundant work, but comes at the cost of buffering those pages in memory.</p>
-      <p>Calling <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> is required to allow calling <a href="[androidx.paging.AsyncPagingDataAdapter]">androidx.paging.AsyncPagingDataAdapter</a> on the same instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> emitted by <code><a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a></code> or any of its transformed derivatives, as reloading data from scratch on the same generation of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> is an unsupported operation.</p>
+      <p>Calling <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> is required to allow calling androidx.paging.AsyncPagingDataAdapter on the same instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> emitted by <code><a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a></code> or any of its transformed derivatives, as reloading data from scratch on the same generation of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> is an unsupported operation.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -948,13 +948,13 @@ class MyActivity : AppCompatActivity() {
             <tr>
               <td width="40%"><code>predicate:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;</code></td>
               <td>
-                <p><a href="[AsyncFunction]">AsyncFunction</a> returning <code>false</code> for unmatched items which should be filtered.</p>
+                <p>AsyncFunction returning <code>false</code> for unmatched items which should be filtered.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code></td>
               <td>
-                <p><code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> to run the <a href="[AsyncFunction]">AsyncFunction</a> in.</p>
+                <p><code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> to run the AsyncFunction in.</p>
               </td>
             </tr>
           </tbody>
@@ -986,13 +986,13 @@ class MyActivity : AppCompatActivity() {
             <tr>
               <td width="40%"><code>transform:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html">Iterable</a>&lt;R&gt;&gt;</code></td>
               <td>
-                <p><a href="[AsyncFunction]">AsyncFunction</a> to transform an item of type <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).flatMapAsync(AsyncFunction&lt;T, Iterable&lt;R&gt;&gt;,java.util.concurrent.Executor)">T</a></code> a list of items of type <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).flatMapAsync(AsyncFunction&lt;T, Iterable&lt;R&gt;&gt;,java.util.concurrent.Executor)">R</a></code>.</p>
+                <p>AsyncFunction to transform an item of type <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).flatMapAsync(AsyncFunction&lt;T, Iterable&lt;R&gt;&gt;,java.util.concurrent.Executor)">T</a></code> a list of items of type <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).flatMapAsync(AsyncFunction&lt;T, Iterable&lt;R&gt;&gt;,java.util.concurrent.Executor)">R</a></code>.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code></td>
               <td>
-                <p><code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> to run the <a href="[AsyncFunction]">AsyncFunction</a> in.</p>
+                <p><code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> to run the AsyncFunction in.</p>
               </td>
             </tr>
           </tbody>
@@ -1388,13 +1388,13 @@ pagingDataStream.map { pagingData -&gt;
             <tr>
               <td width="40%"><code>generator:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/AdjacentItems.html">AdjacentItems</a>&lt;T&gt;,&nbsp;R?&gt;</code></td>
               <td>
-                <p><a href="[AsyncFunction]">AsyncFunction</a> used to generate separator between two <code><a href="/reference/kotlin/androidx/paging/AdjacentItems.html">AdjacentItems</a></code> or the header or footer if either <code><a href="/reference/kotlin/androidx/paging/AdjacentItems.html#before()">AdjacentItems.before</a></code> or <code><a href="/reference/kotlin/androidx/paging/AdjacentItems.html#after()">AdjacentItems.after</a></code> is <code>null</code>.</p>
+                <p>AsyncFunction used to generate separator between two <code><a href="/reference/kotlin/androidx/paging/AdjacentItems.html">AdjacentItems</a></code> or the header or footer if either <code><a href="/reference/kotlin/androidx/paging/AdjacentItems.html#before()">AdjacentItems.before</a></code> or <code><a href="/reference/kotlin/androidx/paging/AdjacentItems.html#after()">AdjacentItems.after</a></code> is <code>null</code>.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code></td>
               <td>
-                <p><code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> to run the <a href="[AsyncFunction]">AsyncFunction</a> in.</p>
+                <p><code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> to run the AsyncFunction in.</p>
               </td>
             </tr>
           </tbody>
@@ -1441,13 +1441,13 @@ pagingDataStream.map { pagingData -&gt;
             <tr>
               <td width="40%"><code>transform:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T,&nbsp;R&gt;</code></td>
               <td>
-                <p><a href="[AsyncFunction]">AsyncFunction</a> to transform an item of type <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).mapAsync(AsyncFunction&lt;T, R&gt;,java.util.concurrent.Executor)">T</a></code> to <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).mapAsync(AsyncFunction&lt;T, R&gt;,java.util.concurrent.Executor)">R</a></code>.</p>
+                <p>AsyncFunction to transform an item of type <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).mapAsync(AsyncFunction&lt;T, R&gt;,java.util.concurrent.Executor)">T</a></code> to <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.PagingData).mapAsync(AsyncFunction&lt;T, R&gt;,java.util.concurrent.Executor)">R</a></code>.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>executor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code></td>
               <td>
-                <p><code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> to run the <a href="[AsyncFunction]">AsyncFunction</a> in.</p>
+                <p><code><a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a></code> to run the AsyncFunction in.</p>
               </td>
             </tr>
           </tbody>
@@ -1458,8 +1458,8 @@ pagingDataStream.map { pagingData -&gt;
       <h3 class="api-name" id="(androidx.paging.DataSource.Factory).toFlowable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">toFlowable</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;Value&gt;.<span><del><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toFlowable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">toFlowable</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;backpressureStrategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a> = BackpressureStrategy.LATEST<br>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
-      <p>Constructs a <code>Flowable&lt;PagedList&gt;</code>, from this <code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code>, convenience for <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code>.</p>
-      <p>The returned <a href="[Flowable]">Flowable</a> will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toFlowable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">fetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toFlowable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">notifyScheduler</a></code>, and will dispatch new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, as well as their updates to that scheduler.</p>
+      <p>Constructs a <code>Flowable</code>, from this <code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code>, convenience for <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code>.</p>
+      <p>The returned Flowable will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toFlowable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">fetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toFlowable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">notifyScheduler</a></code>, and will dispatch new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, as well as their updates to that scheduler.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1489,19 +1489,19 @@ pagingDataStream.map { pagingData -&gt;
             <tr>
               <td width="40%"><code>fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td>
-                <p><a href="[Scheduler]">Scheduler</a> used to fetch from <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
+                <p>Scheduler used to fetch from <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td>
-                <p><a href="[Scheduler]">Scheduler</a> that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
+                <p>Scheduler that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>backpressureStrategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a> = BackpressureStrategy.LATEST</code></td>
               <td>
-                <p><a href="[BackpressureStrategy]">BackpressureStrategy</a> for the <a href="[Flowable]">Flowable</a> to use.</p>
+                <p>BackpressureStrategy for the Flowable to use.</p>
               </td>
             </tr>
           </tbody>
@@ -1531,8 +1531,8 @@ pagingDataStream.map { pagingData -&gt;
       <h3 class="api-name" id="(androidx.paging.DataSource.Factory).toFlowable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">toFlowable</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;Value&gt;.<span><del><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toFlowable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">toFlowable</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;backpressureStrategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a> = BackpressureStrategy.LATEST<br>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
-      <p>Constructs a <code>Flowable&lt;PagedList&gt;</code>, from this <code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code>, convenience for <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code>.</p>
-      <p>The returned <a href="[Flowable]">Flowable</a> will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toFlowable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">fetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toFlowable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">notifyScheduler</a></code>, and will dispatch new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, as well as their updates to that scheduler.</p>
+      <p>Constructs a <code>Flowable</code>, from this <code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code>, convenience for <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code>.</p>
+      <p>The returned Flowable will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toFlowable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">fetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toFlowable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">notifyScheduler</a></code>, and will dispatch new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, as well as their updates to that scheduler.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1562,19 +1562,19 @@ pagingDataStream.map { pagingData -&gt;
             <tr>
               <td width="40%"><code>fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td>
-                <p><a href="[Scheduler]">Scheduler</a> used to fetch from <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
+                <p>Scheduler used to fetch from <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td>
-                <p><a href="[Scheduler]">Scheduler</a> that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
+                <p>Scheduler that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>backpressureStrategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a> = BackpressureStrategy.LATEST</code></td>
               <td>
-                <p><a href="[BackpressureStrategy]">BackpressureStrategy</a> for the <a href="[Flowable]">Flowable</a> to use.</p>
+                <p>BackpressureStrategy for the Flowable to use.</p>
               </td>
             </tr>
           </tbody>
@@ -1604,8 +1604,8 @@ pagingDataStream.map { pagingData -&gt;
       <h3 class="api-name" id="(kotlin.Function0).toFlowable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">toFlowable</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; () <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;.<span><del><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toFlowable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">toFlowable</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;backpressureStrategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a> = BackpressureStrategy.LATEST<br>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
-      <p>Constructs a <code>Flowable&lt;PagedList&gt;</code>, from this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> factory, convenience for <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code>.</p>
-      <p>The returned <a href="[Flowable]">Flowable</a> will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toFlowable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">fetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toFlowable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">notifyScheduler</a></code>, and will dispatch new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, as well as their updates to that scheduler.</p>
+      <p>Constructs a <code>Flowable</code>, from this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> factory, convenience for <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code>.</p>
+      <p>The returned Flowable will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toFlowable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">fetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toFlowable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">notifyScheduler</a></code>, and will dispatch new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, as well as their updates to that scheduler.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1635,19 +1635,19 @@ pagingDataStream.map { pagingData -&gt;
             <tr>
               <td width="40%"><code>fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td>
-                <p><a href="[Scheduler]">Scheduler</a> used to fetch from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
+                <p>Scheduler used to fetch from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td>
-                <p><a href="[Scheduler]">Scheduler</a> that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
+                <p>Scheduler that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>backpressureStrategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a> = BackpressureStrategy.LATEST</code></td>
               <td>
-                <p><a href="[BackpressureStrategy]">BackpressureStrategy</a> for the <a href="[Flowable]">Flowable</a> to use.</p>
+                <p>BackpressureStrategy for the Flowable to use.</p>
               </td>
             </tr>
           </tbody>
@@ -1677,8 +1677,8 @@ pagingDataStream.map { pagingData -&gt;
       <h3 class="api-name" id="(kotlin.Function0).toFlowable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">toFlowable</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; () <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;.<span><del><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toFlowable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">toFlowable</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;backpressureStrategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a> = BackpressureStrategy.LATEST<br>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
-      <p>Constructs a <code>Flowable&lt;PagedList&gt;</code>, from this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> factory, convenience for <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code>.</p>
-      <p>The returned <a href="[Flowable]">Flowable</a> will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toFlowable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">fetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toFlowable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">notifyScheduler</a></code>, and will dispatch new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, as well as their updates to that scheduler.</p>
+      <p>Constructs a <code>Flowable</code>, from this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> factory, convenience for <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code>.</p>
+      <p>The returned Flowable will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toFlowable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">fetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toFlowable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler,BackpressureStrategy)">notifyScheduler</a></code>, and will dispatch new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, as well as their updates to that scheduler.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1708,19 +1708,19 @@ pagingDataStream.map { pagingData -&gt;
             <tr>
               <td width="40%"><code>fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td>
-                <p><a href="[Scheduler]">Scheduler</a> used to fetch from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
+                <p>Scheduler used to fetch from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td>
-                <p><a href="[Scheduler]">Scheduler</a> that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
+                <p>Scheduler that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>backpressureStrategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a> = BackpressureStrategy.LATEST</code></td>
               <td>
-                <p><a href="[BackpressureStrategy]">BackpressureStrategy</a> for the <a href="[Flowable]">Flowable</a> to use.</p>
+                <p>BackpressureStrategy for the Flowable to use.</p>
               </td>
             </tr>
           </tbody>
@@ -1750,8 +1750,8 @@ pagingDataStream.map { pagingData -&gt;
       <h3 class="api-name" id="(androidx.paging.DataSource.Factory).toLiveData(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,java.util.concurrent.Executor)">toLiveData</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;Value&gt;.<span><del><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toLiveData(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,java.util.concurrent.Executor)">toLiveData</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;fetchExecutor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a> = ArchTaskExecutor.getIOThreadExecutor()<br>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
-      <p>Constructs a <code>LiveData&lt;PagedList&gt;</code>, from this <code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code>, convenience for <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a></code>.</p>
-      <p>No work (such as loading) is done immediately, the creation of the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is deferred until the <a href="[LiveData]">LiveData</a> is observed.</p>
+      <p>Constructs a <code>LiveData</code>, from this <code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code>, convenience for <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a></code>.</p>
+      <p>No work (such as loading) is done immediately, the creation of the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is deferred until the LiveData is observed.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1807,8 +1807,8 @@ pagingDataStream.map { pagingData -&gt;
       <h3 class="api-name" id="(androidx.paging.DataSource.Factory).toLiveData(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,java.util.concurrent.Executor)">toLiveData</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;Value&gt;.<span><del><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toLiveData(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,java.util.concurrent.Executor)">toLiveData</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;fetchExecutor:&nbsp;<a href="https://developer.android.com/reference/java/util/concurrent/Executor.html">Executor</a> = ArchTaskExecutor.getIOThreadExecutor()<br>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
-      <p>Constructs a <code>LiveData&lt;PagedList&gt;</code>, from this <code>DataSource.Factory</code>, convenience for <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a></code>.</p>
-      <p>No work (such as loading) is done immediately, the creation of the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is deferred until the <a href="[LiveData]">LiveData</a> is observed.</p>
+      <p>Constructs a <code>LiveData</code>, from this <code>DataSource.Factory</code>, convenience for <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a></code>.</p>
+      <p>No work (such as loading) is done immediately, the creation of the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is deferred until the LiveData is observed.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1865,8 +1865,8 @@ pagingDataStream.map { pagingData -&gt;
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; () <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;.<span><del><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toLiveData(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,kotlinx.coroutines.CoroutineScope,kotlinx.coroutines.CoroutineDispatcher)">toLiveData</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;coroutineScope:&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a> = GlobalScope,<br>&nbsp;&nbsp;&nbsp;&nbsp;fetchDispatcher:&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a> = ArchTaskExecutor.getIOThreadExecutor()
         .asCoroutineDispatcher()<br>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
-      <p>Constructs a <code>LiveData&lt;PagedList&gt;</code>, from this PagingSource factory, convenience for <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a></code>.</p>
-      <p>No work (such as loading) is done immediately, the creation of the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is deferred until the <a href="[LiveData]">LiveData</a> is observed.</p>
+      <p>Constructs a <code>LiveData</code>, from this PagingSource factory, convenience for <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a></code>.</p>
+      <p>No work (such as loading) is done immediately, the creation of the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is deferred until the LiveData is observed.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1931,8 +1931,8 @@ pagingDataStream.map { pagingData -&gt;
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; () <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;.<span><del><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toLiveData(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,kotlinx.coroutines.CoroutineScope,kotlinx.coroutines.CoroutineDispatcher)">toLiveData</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;coroutineScope:&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a> = GlobalScope,<br>&nbsp;&nbsp;&nbsp;&nbsp;fetchDispatcher:&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a> = ArchTaskExecutor.getIOThreadExecutor()
         .asCoroutineDispatcher()<br>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
-      <p>Constructs a <code>LiveData&lt;PagedList&gt;</code>, from this PagingSource factory, convenience for <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a></code>.</p>
-      <p>No work (such as loading) is done immediately, the creation of the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is deferred until the <a href="[LiveData]">LiveData</a> is observed.</p>
+      <p>Constructs a <code>LiveData</code>, from this PagingSource factory, convenience for <code><a href="/reference/kotlin/androidx/paging/LivePagedListBuilder.html">LivePagedListBuilder</a></code>.</p>
+      <p>No work (such as loading) is done immediately, the creation of the first <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> is deferred until the LiveData is observed.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1996,8 +1996,8 @@ pagingDataStream.map { pagingData -&gt;
       <h3 class="api-name" id="(androidx.paging.DataSource.Factory).toObservable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">toObservable</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;Value&gt;.<span><del><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toObservable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">toObservable</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null<br>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
-      <p>Constructs a <code>Observable&lt;PagedList&gt;</code> from this <code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code>, convenience for <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code>.</p>
-      <p>The returned <a href="[Observable]">Observable</a> will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toObservable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">fetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toObservable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">notifyScheduler</a></code>, and will dispatch new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, as well as their updates to that scheduler.</p>
+      <p>Constructs a <code>Observable</code> from this <code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code>, convenience for <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code>.</p>
+      <p>The returned Observable will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toObservable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">fetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toObservable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">notifyScheduler</a></code>, and will dispatch new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, as well as their updates to that scheduler.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -2027,13 +2027,13 @@ pagingDataStream.map { pagingData -&gt;
             <tr>
               <td width="40%"><code>fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td>
-                <p><a href="[Scheduler]">Scheduler</a> used to fetch from <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
+                <p>Scheduler used to fetch from <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td>
-                <p><a href="[Scheduler]">Scheduler</a> that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
+                <p>Scheduler that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
               </td>
             </tr>
           </tbody>
@@ -2063,8 +2063,8 @@ pagingDataStream.map { pagingData -&gt;
       <h3 class="api-name" id="(androidx.paging.DataSource.Factory).toObservable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">toObservable</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;Value&gt;.<span><del><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toObservable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">toObservable</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null<br>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
-      <p>Constructs a <code>Observable&lt;PagedList&gt;</code> from this <code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code>, convenience for <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code>.</p>
-      <p>The returned <a href="[Observable]">Observable</a> will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toObservable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">fetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toObservable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">notifyScheduler</a></code>, and will dispatch new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, as well as their updates to that scheduler.</p>
+      <p>Constructs a <code>Observable</code> from this <code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code>, convenience for <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code>.</p>
+      <p>The returned Observable will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toObservable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">fetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.DataSource.Factory).toObservable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">notifyScheduler</a></code>, and will dispatch new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, as well as their updates to that scheduler.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -2094,13 +2094,13 @@ pagingDataStream.map { pagingData -&gt;
             <tr>
               <td width="40%"><code>fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td>
-                <p><a href="[Scheduler]">Scheduler</a> used to fetch from <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
+                <p>Scheduler used to fetch from <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td>
-                <p><a href="[Scheduler]">Scheduler</a> that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
+                <p>Scheduler that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
               </td>
             </tr>
           </tbody>
@@ -2130,8 +2130,8 @@ pagingDataStream.map { pagingData -&gt;
       <h3 class="api-name" id="(kotlin.Function0).toObservable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">toObservable</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; () <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;.<span><del><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toObservable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">toObservable</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null<br>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
-      <p>Constructs a <code>Observable&lt;PagedList&gt;</code> from this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> factory, convenience for <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code>.</p>
-      <p>The returned <a href="[Observable]">Observable</a> will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toObservable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">fetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toObservable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">notifyScheduler</a></code>, and will dispatch new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, as well as their updates to that scheduler.</p>
+      <p>Constructs a <code>Observable</code> from this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> factory, convenience for <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code>.</p>
+      <p>The returned Observable will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toObservable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">fetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toObservable(androidx.paging.PagedList.Config,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">notifyScheduler</a></code>, and will dispatch new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, as well as their updates to that scheduler.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -2161,13 +2161,13 @@ pagingDataStream.map { pagingData -&gt;
             <tr>
               <td width="40%"><code>fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td>
-                <p><a href="[Scheduler]">Scheduler</a> used to fetch from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
+                <p>Scheduler used to fetch from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td>
-                <p><a href="[Scheduler]">Scheduler</a> that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
+                <p>Scheduler that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
               </td>
             </tr>
           </tbody>
@@ -2197,8 +2197,8 @@ pagingDataStream.map { pagingData -&gt;
       <h3 class="api-name" id="(kotlin.Function0).toObservable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">toObservable</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; () <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;.<span><del><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toObservable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">toObservable</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null<br>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
-      <p>Constructs a <code>Observable&lt;PagedList&gt;</code> from this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> factory, convenience for <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code>.</p>
-      <p>The returned <a href="[Observable]">Observable</a> will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toObservable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">fetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toObservable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">notifyScheduler</a></code>, and will dispatch new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, as well as their updates to that scheduler.</p>
+      <p>Constructs a <code>Observable</code> from this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> factory, convenience for <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code>.</p>
+      <p>The returned Observable will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toObservable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">fetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/package-summary.html#(kotlin.Function0).toObservable(kotlin.Int,kotlin.Any,androidx.paging.PagedList.BoundaryCallback,Scheduler,Scheduler)">notifyScheduler</a></code>, and will dispatch new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>s, as well as their updates to that scheduler.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -2228,13 +2228,13 @@ pagingDataStream.map { pagingData -&gt;
             <tr>
               <td width="40%"><code>fetchScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td>
-                <p><a href="[Scheduler]">Scheduler</a> used to fetch from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
+                <p>Scheduler used to fetch from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>s, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>notifyScheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>? = null</code></td>
               <td>
-                <p><a href="[Scheduler]">Scheduler</a> that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
+                <p>Scheduler that receives <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI / main thread.</p>
               </td>
             </tr>
           </tbody>
@@ -2264,7 +2264,7 @@ pagingDataStream.map { pagingData -&gt;
     <div><a name="(androidx.paging.Pager).getLiveData()"></a><a name="(androidx.paging.Pager).setLiveData()"></a><a name="-androidx.paging.Pager-.getLiveData--"></a><a name="-androidx.paging.Pager-.setLiveData--"></a>
       <h3 class="api-name" id="(androidx.paging.Pager).liveData()">liveData</h3>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a>&lt;Key,&nbsp;Value&gt;.<a href="/reference/kotlin/androidx/paging/package-summary.html#(androidx.paging.Pager).liveData()">liveData</a>:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;Value&gt;&gt;</pre>
-      <p>A <a href="[LiveData]">LiveData</a> of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>, which mirrors the stream provided by <code><a href="/reference/kotlin/androidx/paging/Pager.html#flow()">Pager.flow</a></code>, but exposes it as a <a href="[LiveData]">LiveData</a>.</p>
+      <p>A LiveData of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>, which mirrors the stream provided by <code><a href="/reference/kotlin/androidx/paging/Pager.html#flow()">Pager.flow</a></code>, but exposes it as a LiveData.</p>
     </div>
   </body>
 </html>

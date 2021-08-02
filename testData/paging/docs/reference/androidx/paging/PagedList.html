@@ -12,12 +12,12 @@
     <hr>
     <aside class="caution"><strong>This class is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
     <p>Lazy loading list that pages in immutable content from a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
-    <p>A <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a></code> which loads its data in chunks (pages) from a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>. Items can be accessed with <code><a href="/reference/androidx/paging/PagedList.html#get(kotlin.Int)">get</a></code>, and further loading can be triggered with <code><a href="/reference/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code>. To display a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>, see <code><a href="/reference/androidx/paging/PagedListAdapter.html">androidx.paging.PagedListAdapter</a></code>, which enables the binding of a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> to a <a href="[androidx.recyclerview.widget.RecyclerView]">androidx.recyclerview.widget.RecyclerView</a>.</p>
+    <p>A <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is a <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a></code> which loads its data in chunks (pages) from a <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>. Items can be accessed with <code><a href="/reference/androidx/paging/PagedList.html#get(kotlin.Int)">get</a></code>, and further loading can be triggered with <code><a href="/reference/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code>. To display a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>, see <code><a href="/reference/androidx/paging/PagedListAdapter.html">androidx.paging.PagedListAdapter</a></code>, which enables the binding of a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> to a androidx.recyclerview.widget.RecyclerView.</p>
     <h3> Loading Data</h3>
     <p>All data in a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is loaded from its <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>. Creating a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> loads the first chunk of data from the <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> immediately, and should for this reason be done on a background thread. The constructed <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> may then be passed to and used on the UI thread. This is done to prevent passing a list with no loaded content to the UI thread, which should generally not be presented to the user.</p>
     <p>A <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> initially presents this first partial load as its content, and expands over time as content is loaded in. When <code><a href="/reference/androidx/paging/PagedList.html#loadAround(kotlin.Int)">loadAround</a></code> is called, items will be loaded in near the passed list index. If placeholder <code>null</code>s are present in the list, they will be replaced as content is loaded. If not, newly loaded items will be inserted at the beginning or end of the list.</p>
     <p><code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> can present data for an unbounded, infinite scrolling list, or a very large but countable list. Use <code><a href="/reference/androidx/paging/PagedList.Config.html">PagedList.Config</a></code> to control how many items a <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> loads, and when.</p>
-    <p>If you use <code><a href="/reference/androidx/paging/LivePagedListBuilder.html">androidx.paging.LivePagedListBuilder</a></code> to get a <a href="[androidx.lifecycle.LiveData]">androidx.lifecycle.LiveData</a>, it will initialize <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>s on a background thread for you.</p>
+    <p>If you use <code><a href="/reference/androidx/paging/LivePagedListBuilder.html">androidx.paging.LivePagedListBuilder</a></code> to get a androidx.lifecycle.LiveData, it will initialize <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code>s on a background thread for you.</p>
     <h3> Placeholders</h3>
     <p>There are two ways that <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> can represent its not-yet-loaded data - with or without <code>null</code> placeholders.</p>
     <p>With placeholders, the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> is always the full size of the data set. <code>get(N)</code> returns the <code>N</code>th item in the data set, or <code>null</code> if its not yet loaded.</p>
@@ -34,7 +34,7 @@
     <p>They also have drawbacks:</p>
     <ul>
       <li>
-        <p>Your Adapter needs to account for <code>null</code> items. This often means providing default values in data you bind to a <a href="[androidx.recyclerview.widget.RecyclerView.ViewHolder]">androidx.recyclerview.widget.RecyclerView.ViewHolder</a>.</p>
+        <p>Your Adapter needs to account for <code>null</code> items. This often means providing default values in data you bind to a androidx.recyclerview.widget.RecyclerView.ViewHolder.</p>
       </li>
       <li>
         <p>They don't work well if your item views are of different sizes, as this will prevent loading items from cross-fading nicely.</p>
@@ -862,7 +862,7 @@
             <tr>
               <td width="40%"><code>int&nbsp;index</code></td>
               <td>
-                <p>Index in the loaded item list. Must be &gt;= 0, and &lt; <code><a href="/reference/androidx/paging/PagedList.html#size()">size</a></code></p>
+                <p>Index in the loaded item list. Must be >= 0, and <<code><a href="/reference/androidx/paging/PagedList.html#size()">size</a></code></p>
               </td>
             </tr>
           </tbody>
@@ -1044,7 +1044,7 @@
       <h3 class="api-name" id="snapshot()">snapshot</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;<a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/paging/PagedList.html#snapshot()">snapshot</a>()</pre>
       <p>Returns an immutable snapshot of the <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> in its current state.</p>
-      <p>If this <a href="[is immutable]">is immutable</a><code><a href="/reference/androidx/paging/PagedList.html#isImmutable()">isImmutable</a></code> due to its <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> being invalid, it will be returned.</p>
+      <p>If this is immutable<code><a href="/reference/androidx/paging/PagedList.html#isImmutable()">isImmutable</a></code> due to its <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> being invalid, it will be returned.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>

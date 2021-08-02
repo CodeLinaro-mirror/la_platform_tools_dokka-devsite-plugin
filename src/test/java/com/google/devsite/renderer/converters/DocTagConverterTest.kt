@@ -60,6 +60,7 @@ import org.junit.runners.Parameterized
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 import kotlin.test.assertFails
+import kotlin.text.Typography.nbsp
 
 @RunWith(Parameterized::class)
 internal class DocTagConverterTest(
@@ -122,7 +123,10 @@ internal class DocTagConverterTest(
         }*/
     }
 
-    @Test // This test largely serves to highlight https://github.com/Kotlin/dokka/issues/1939
+    /**
+     * This test largely serves as a regression test for https://github.com/Kotlin/dokka/issues/1939
+     */
+    @Test
     fun `Full summary and description work with multiline in 4x Kotlin and Java`() {
         val moduleK = """
             |/**
@@ -147,12 +151,11 @@ internal class DocTagConverterTest(
 
             val detail = module.documentation(doc = { this.clazz() }).item() as Description
             assertThat(detail.data.summary).isFalse()
-            val space = if (module == moduleK) "&amp;nbsp;" else " "
             val separator = if (module == moduleK) "</p>\n  <p>" else " "
             assertThat(detail.render()).isEqualTo(
                 """
 <body>
-  <p>Hello World! Docs with period issue, e.g.${space}this.${separator}A second line of desc. A third line of desc.</p>
+  <p>Hello World! Docs with period issue, e.g.${nbsp}this.${separator}A second line of desc. A third line of desc.</p>
 </body>
             """.trim()
             )

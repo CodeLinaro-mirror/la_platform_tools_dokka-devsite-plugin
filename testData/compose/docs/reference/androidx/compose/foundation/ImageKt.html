@@ -47,15 +47,15 @@
     <div><a name="Image(ImageBitmap, kotlin.String, Modifier, Alignment, ContentScale, kotlin.Float, ColorFilter)"></a><a name="Image-ImageBitmap-kotlin.String-Modifier-Alignment-ContentScale-kotlin.Float-ColorFilter-"></a><a name="image"></a>
       <h3 class="api-name" id="Image(ImageBitmap,kotlin.String,Modifier,Alignment,ContentScale,kotlin.Float,ColorFilter)">Image</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> void&nbsp;<a href="/reference/androidx/compose/foundation/ImageKt.html#Image(ImageBitmap,kotlin.String,Modifier,Alignment,ContentScale,kotlin.Float,ColorFilter)">Image</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;bitmap,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;contentDescription,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;alignment,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;contentScale,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;alpha,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;colorFilter<br>)</pre>
-      <p>A composable that lays out and draws a given <a href="[ImageBitmap]">ImageBitmap</a>. This will attempt to size the composable according to the <a href="[ImageBitmap]">ImageBitmap</a>'s given width and height. However, an optional <a href="[Modifier]">Modifier</a> parameter can be provided to adjust sizing or draw additional content (ex. background). Any unspecified dimension will leverage the <a href="[ImageBitmap]">ImageBitmap</a>'s size as a minimum constraint.</p>
-      <p>The following sample shows basic usage of an Image composable to position and draw an <a href="[ImageBitmap]">ImageBitmap</a> on screen</p>
+      <p>A composable that lays out and draws a given ImageBitmap. This will attempt to size the composable according to the ImageBitmap's given width and height. However, an optional Modifier parameter can be provided to adjust sizing or draw additional content (ex. background). Any unspecified dimension will leverage the ImageBitmap's size as a minimum constraint.</p>
+      <p>The following sample shows basic usage of an Image composable to position and draw an ImageBitmap on screen</p>
       <pre class="prettyprint">
 import androidx.compose.foundation.Image
 
 val ImageBitmap = createTestImage()
 // Lays out and draws an image sized to the dimensions of the ImageBitmap
 Image(bitmap = ImageBitmap, contentDescription = &quot;Localized description&quot;)</pre>
-      <p>For use cases that require drawing a rectangular subset of the <a href="[ImageBitmap]">ImageBitmap</a> consumers can use overload that consumes a <a href="[Painter]">Painter</a> parameter shown in this sample</p>
+      <p>For use cases that require drawing a rectangular subset of the ImageBitmap consumers can use overload that consumes a Painter parameter shown in this sample</p>
       <pre class="prettyprint">
 import androidx.compose.foundation.Image
 import androidx.compose.ui.graphics.painter.BitmapPainter
@@ -83,13 +83,13 @@ Image(
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;bitmap</code></td>
               <td>
-                <p>The <a href="[ImageBitmap]">ImageBitmap</a> to draw</p>
+                <p>The ImageBitmap to draw</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;contentDescription</code></td>
               <td>
-                <p>text used by accessibility services to describe what this image represents. This should always be provided unless this image is used for decorative purposes, and does not represent a meaningful action that a user can take. This text should be localized, such as by using <a href="[androidx.compose.ui.res.stringResource]">androidx.compose.ui.res.stringResource</a> or similar</p>
+                <p>text used by accessibility services to describe what this image represents. This should always be provided unless this image is used for decorative purposes, and does not represent a meaningful action that a user can take. This text should be localized, such as by using androidx.compose.ui.res.stringResource or similar</p>
               </td>
             </tr>
             <tr>
@@ -101,25 +101,25 @@ Image(
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;alignment</code></td>
               <td>
-                <p>Optional alignment parameter used to place the <a href="[ImageBitmap]">ImageBitmap</a> in the given bounds defined by the width and height</p>
+                <p>Optional alignment parameter used to place the ImageBitmap in the given bounds defined by the width and height</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;contentScale</code></td>
               <td>
-                <p>Optional scale parameter used to determine the aspect ratio scaling to be used if the bounds are a different size from the intrinsic size of the <a href="[ImageBitmap]">ImageBitmap</a></p>
+                <p>Optional scale parameter used to determine the aspect ratio scaling to be used if the bounds are a different size from the intrinsic size of the ImageBitmap</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>float&nbsp;alpha</code></td>
               <td>
-                <p>Optional opacity to be applied to the <a href="[ImageBitmap]">ImageBitmap</a> when it is rendered onscreen</p>
+                <p>Optional opacity to be applied to the ImageBitmap when it is rendered onscreen</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;colorFilter</code></td>
               <td>
-                <p>Optional ColorFilter to apply for the <a href="[ImageBitmap]">ImageBitmap</a> when it is rendered onscreen</p>
+                <p>Optional ColorFilter to apply for the ImageBitmap when it is rendered onscreen</p>
               </td>
             </tr>
           </tbody>
@@ -129,7 +129,7 @@ Image(
     <div><a name="Image(ImageVector, kotlin.String, Modifier, Alignment, ContentScale, kotlin.Float, ColorFilter)"></a><a name="Image-ImageVector-kotlin.String-Modifier-Alignment-ContentScale-kotlin.Float-ColorFilter-"></a><a name="image"></a>
       <h3 class="api-name" id="Image(ImageVector,kotlin.String,Modifier,Alignment,ContentScale,kotlin.Float,ColorFilter)">Image</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> void&nbsp;<a href="/reference/androidx/compose/foundation/ImageKt.html#Image(ImageVector,kotlin.String,Modifier,Alignment,ContentScale,kotlin.Float,ColorFilter)">Image</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;imageVector,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;contentDescription,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;alignment,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;contentScale,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;alpha,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;colorFilter<br>)</pre>
-      <p>A composable that lays out and draws a given <a href="[ImageVector]">ImageVector</a>. This will attempt to size the composable according to the <a href="[ImageVector]">ImageVector</a>'s given width and height. However, an optional <a href="[Modifier]">Modifier</a> parameter can be provided to adjust sizing or draw additional content (ex. background). Any unspecified dimension will leverage the <a href="[ImageVector]">ImageVector</a>'s size as a minimum constraint.</p>
+      <p>A composable that lays out and draws a given ImageVector. This will attempt to size the composable according to the ImageVector's given width and height. However, an optional Modifier parameter can be provided to adjust sizing or draw additional content (ex. background). Any unspecified dimension will leverage the ImageVector's size as a minimum constraint.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -141,13 +141,13 @@ Image(
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;imageVector</code></td>
               <td>
-                <p>The <a href="[ImageVector]">ImageVector</a> to draw</p>
+                <p>The ImageVector to draw</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;contentDescription</code></td>
               <td>
-                <p>text used by accessibility services to describe what this image represents. This should always be provided unless this image is used for decorative purposes, and does not represent a meaningful action that a user can take. This text should be localized, such as by using <a href="[androidx.compose.ui.res.stringResource]">androidx.compose.ui.res.stringResource</a> or similar</p>
+                <p>text used by accessibility services to describe what this image represents. This should always be provided unless this image is used for decorative purposes, and does not represent a meaningful action that a user can take. This text should be localized, such as by using androidx.compose.ui.res.stringResource or similar</p>
               </td>
             </tr>
             <tr>
@@ -159,25 +159,25 @@ Image(
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;alignment</code></td>
               <td>
-                <p>Optional alignment parameter used to place the <a href="[ImageVector]">ImageVector</a> in the given bounds defined by the width and height</p>
+                <p>Optional alignment parameter used to place the ImageVector in the given bounds defined by the width and height</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;contentScale</code></td>
               <td>
-                <p>Optional scale parameter used to determine the aspect ratio scaling to be used if the bounds are a different size from the intrinsic size of the <a href="[ImageVector]">ImageVector</a></p>
+                <p>Optional scale parameter used to determine the aspect ratio scaling to be used if the bounds are a different size from the intrinsic size of the ImageVector</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>float&nbsp;alpha</code></td>
               <td>
-                <p>Optional opacity to be applied to the <a href="[ImageVector]">ImageVector</a> when it is rendered onscreen</p>
+                <p>Optional opacity to be applied to the ImageVector when it is rendered onscreen</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;colorFilter</code></td>
               <td>
-                <p>Optional ColorFilter to apply for the <a href="[ImageVector]">ImageVector</a> when it is rendered onscreen</p>
+                <p>Optional ColorFilter to apply for the ImageVector when it is rendered onscreen</p>
               </td>
             </tr>
           </tbody>
@@ -187,8 +187,8 @@ Image(
     <div><a name="Image(Painter, kotlin.String, Modifier, Alignment, ContentScale, kotlin.Float, ColorFilter)"></a><a name="Image-Painter-kotlin.String-Modifier-Alignment-ContentScale-kotlin.Float-ColorFilter-"></a><a name="image"></a>
       <h3 class="api-name" id="Image(Painter,kotlin.String,Modifier,Alignment,ContentScale,kotlin.Float,ColorFilter)">Image</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> void&nbsp;<a href="/reference/androidx/compose/foundation/ImageKt.html#Image(Painter,kotlin.String,Modifier,Alignment,ContentScale,kotlin.Float,ColorFilter)">Image</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;painter,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;contentDescription,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;modifier,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;alignment,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;contentScale,<br>&nbsp;&nbsp;&nbsp;&nbsp;float&nbsp;alpha,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;colorFilter<br>)</pre>
-      <p>Creates a composable that lays out and draws a given <a href="[Painter]">Painter</a>. This will attempt to size the composable according to the <a href="[Painter]">Painter</a>'s intrinsic size. However, an optional <a href="[Modifier]">Modifier</a> parameter can be provided to adjust sizing or draw additional content (ex. background)</p>
-      <p><b>NOTE</b> a Painter might not have an intrinsic size, so if no LayoutModifier is provided as part of the Modifier chain this might size the <code><a href="/reference/androidx/compose/foundation/package-summary.html#Image(ImageBitmap,kotlin.String,Modifier,Alignment,ContentScale,kotlin.Float,ColorFilter)">Image</a></code> composable to a width and height of zero and will not draw any content. This can happen for Painter implementations that always attempt to fill the bounds like <a href="[ColorPainter]">ColorPainter</a></p>
+      <p>Creates a composable that lays out and draws a given Painter. This will attempt to size the composable according to the Painter's intrinsic size. However, an optional Modifier parameter can be provided to adjust sizing or draw additional content (ex. background)</p>
+      <p><b>NOTE</b> a Painter might not have an intrinsic size, so if no LayoutModifier is provided as part of the Modifier chain this might size the <code><a href="/reference/androidx/compose/foundation/package-summary.html#Image(ImageBitmap,kotlin.String,Modifier,Alignment,ContentScale,kotlin.Float,ColorFilter)">Image</a></code> composable to a width and height of zero and will not draw any content. This can happen for Painter implementations that always attempt to fill the bounds like ColorPainter</p>
       <pre class="prettyprint">
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
@@ -229,7 +229,7 @@ Image(
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;contentDescription</code></td>
               <td>
-                <p>text used by accessibility services to describe what this image represents. This should always be provided unless this image is used for decorative purposes, and does not represent a meaningful action that a user can take. This text should be localized, such as by using <a href="[androidx.compose.ui.res.stringResource]">androidx.compose.ui.res.stringResource</a> or similar</p>
+                <p>text used by accessibility services to describe what this image represents. This should always be provided unless this image is used for decorative purposes, and does not represent a meaningful action that a user can take. This text should be localized, such as by using androidx.compose.ui.res.stringResource or similar</p>
               </td>
             </tr>
             <tr>
@@ -241,25 +241,25 @@ Image(
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;alignment</code></td>
               <td>
-                <p>Optional alignment parameter used to place the <a href="[Painter]">Painter</a> in the given bounds defined by the width and height.</p>
+                <p>Optional alignment parameter used to place the Painter in the given bounds defined by the width and height.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;contentScale</code></td>
               <td>
-                <p>Optional scale parameter used to determine the aspect ratio scaling to be used if the bounds are a different size from the intrinsic size of the <a href="[Painter]">Painter</a></p>
+                <p>Optional scale parameter used to determine the aspect ratio scaling to be used if the bounds are a different size from the intrinsic size of the Painter</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>float&nbsp;alpha</code></td>
               <td>
-                <p>Optional opacity to be applied to the <a href="[Painter]">Painter</a> when it is rendered onscreen the default renders the <a href="[Painter]">Painter</a> completely opaque</p>
+                <p>Optional opacity to be applied to the Painter when it is rendered onscreen the default renders the Painter completely opaque</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;colorFilter</code></td>
               <td>
-                <p>Optional colorFilter to apply for the <a href="[Painter]">Painter</a> when it is rendered onscreen</p>
+                <p>Optional colorFilter to apply for the Painter when it is rendered onscreen</p>
               </td>
             </tr>
           </tbody>

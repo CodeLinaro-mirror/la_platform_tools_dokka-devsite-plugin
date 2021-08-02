@@ -10,7 +10,7 @@
       <pre>public final class AsyncPagingDataDiffer&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</pre>
     </p>
     <hr>
-    <p>Helper class for mapping a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> into a <a href="[androidx.recyclerview.widget.RecyclerView.Adapter]">androidx.recyclerview.widget.RecyclerView.Adapter</a>.</p>
+    <p>Helper class for mapping a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> into a androidx.recyclerview.widget.RecyclerView.Adapter.</p>
     <p>For simplicity, <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code> can often be used in place of this class. <code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html">AsyncPagingDataDiffer</a></code> is exposed for complex cases, and where overriding <code><a href="/reference/androidx/paging/PagingDataAdapter.html">PagingDataAdapter</a></code> to support paging isn't convenient.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
@@ -132,7 +132,7 @@
     <div><a name="getItemCount()"></a><a name="setItemCount()"></a><a name="getItemCount--"></a><a name="setItemCount--"></a>
       <h3 class="api-name" id="itemCount()">itemCount</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#itemCount()">itemCount</a></pre>
-      <p>Get the number of items currently presented by this Differ. This value can be directly returned to <a href="[androidx.recyclerview.widget.RecyclerView.Adapter.getItemCount]">androidx.recyclerview.widget.RecyclerView.Adapter.getItemCount</a>.</p>
+      <p>Get the number of items currently presented by this Differ. This value can be directly returned to androidx.recyclerview.widget.RecyclerView.Adapter.getItemCount.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -244,7 +244,7 @@ adapter.addLoadStateListener {
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) int&nbsp;index</code></td>
               <td>
-                <p>Index of item to get, must be &gt;= 0, and &lt; <code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#itemCount()">itemCount</a></code></p>
+                <p>Index of item to get, must be >= 0, and <<code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#itemCount()">itemCount</a></code></p>
               </td>
             </tr>
           </tbody>
@@ -410,7 +410,7 @@ adapter.addLoadStateListener {
       <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#submitData(androidx.paging.PagingData)">submitData</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagingData)</pre>
       <p>Present a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> until it is invalidated by a call to <code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#refresh()">refresh</a></code> or <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">PagingSource.invalidate</a></code>.</p>
       <p><code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#submitData(androidx.paging.PagingData)">submitData</a></code> should be called on the same <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> where updates will be dispatched to UI, typically <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html">Dispatchers.Main</a></code>. (this is done for you if you use <code>lifecycleScope.launch {}</code>).</p>
-      <p>This method is typically used when collecting from a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> produced by <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code>. For RxJava or LiveData support, use the non-suspending overload of <code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#submitData(androidx.paging.PagingData)">submitData</a></code>, which accepts a <a href="[Lifecycle]">Lifecycle</a>.</p>
+      <p>This method is typically used when collecting from a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> produced by <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code>. For RxJava or LiveData support, use the non-suspending overload of <code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#submitData(androidx.paging.PagingData)">submitData</a></code>, which accepts a Lifecycle.</p>
       <p>Note: This method suspends while it is actively presenting page loads from a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>, until the <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is invalidated. Although cancellation will propagate to this call automatically, collecting from a <code><a href="/reference/androidx/paging/Pager.html#flow()">Pager.flow</a></code> with the intention of presenting the most up-to-date representation of your backing dataset should typically be done using <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/index.html">collectLatest</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -432,7 +432,7 @@ adapter.addLoadStateListener {
       <h3 class="api-name" id="submitData(Lifecycle,androidx.paging.PagingData)">submitData</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#submitData(Lifecycle,androidx.paging.PagingData)">submitData</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;lifecycle,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagingData<br>)</pre>
       <p>Present a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> until it is either invalidated or another call to <code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#submitData(androidx.paging.PagingData)">submitData</a></code> is made.</p>
-      <p>This method is typically used when observing a RxJava or LiveData stream produced by <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code>. For <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> support, use the suspending overload of <code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#submitData(androidx.paging.PagingData)">submitData</a></code>, which automates cancellation via <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> instead of relying of <a href="[Lifecycle]">Lifecycle</a>.</p>
+      <p>This method is typically used when observing a RxJava or LiveData stream produced by <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code>. For <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> support, use the suspending overload of <code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#submitData(androidx.paging.PagingData)">submitData</a></code>, which automates cancellation via <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> instead of relying of Lifecycle.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
