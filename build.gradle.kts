@@ -51,6 +51,8 @@ dependencies {
     testImplementation("junit:junit:4.12")
     testImplementation("com.google.truth:truth:1.0.1")
     testImplementation("org.jetbrains.dokka:dokka-test-api:$dokkaVersion")
+    testImplementation("org.mockito:mockito-inline:3.11.2")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
 }
 
 group = "com.google.devsite"
