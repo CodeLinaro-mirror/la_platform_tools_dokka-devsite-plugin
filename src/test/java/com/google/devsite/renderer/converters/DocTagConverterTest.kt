@@ -1171,6 +1171,47 @@ internal class DocTagConverterTest(
         assertThat(tableEntry).isEqualTo("The arguments used when this entry was created")
     }
 
+@Test // TODO: fix upstream b/195524451 https://github.com/Kotlin/dokka/issues/1911
+    fun `from ExoPlayer2, @link split across lines works`() {
+        val documentation = """
+        |public @interface Mega {
+        |   /**
+        |    * Reason why playback is suppressed even though {@link #getPlayWhenReady()} is {@code true}. One
+        |    * of {@link #PLAYBACK_SUPPRESSION_REASON_NONE} or {@link
+        |    * #PLAYBACK_SUPPRESSION_REASON_TRANSIENT_AUDIO_FOCUS_LOSS}.
+        |    */
+        |   @Documented
+        |   @Retention(RetentionPolicy.SOURCE)
+        |   @IntDef({
+        |       PLAYBACK_SUPPRESSION_REASON_NONE,
+        |       PLAYBACK_SUPPRESSION_REASON_TRANSIENT_AUDIO_FOCUS_LOSS
+        |   })
+        |   @interface PlaybackSuppressionReason {}
+        |   /** Playback is not suppressed. */
+        |   int PLAYBACK_SUPPRESSION_REASON_NONE = 0;
+        |   /** Playback is suppressed due to transient audio focus loss. */
+        |   int PLAYBACK_SUPPRESSION_REASON_TRANSIENT_AUDIO_FOCUS_LOSS = 1;
+        |}
+        """.render(java = true)
+            .documentation({ this.explicitClasslike("PlaybackSuppressionReason") })
+        val components = (documentation.single() as Description).data.components.single().children
+        val link1 = components[5] as DocumentationLink
+        val link2 = components[7] as DocumentationLink
+
+        assertThat(link1.dri.packageName).isEqualTo("androidx.example")
+        assertThat(link2.dri.packageName).isEqualTo("androidx.example")
+        assertThat(link1.dri.classNames).isEqualTo("Test.Mega")
+        assertThat(link2.dri.classNames).isEqualTo("Test.Mega")
+        assertThat(link1.dri.callable!!.name).isEqualTo("PLAYBACK_SUPPRESSION_REASON_NONE")
+        assertThat(link2.dri.callable!!.name)
+            .isEqualTo("PLAYBACK_SUPPRESSION_REASON_TRANSIENT_AUDIO_FOCUS_LOSS")
+
+        assertThat(link1.text()).isEqualTo("PLAYBACK_SUPPRESSION_REASON_NONE")
+        // TODO: broken b/195524451 https://github.com/Kotlin/dokka/issues/1911
+        // assertThat(link2.text())
+        //    .isEqualTo("PLAYBACK_SUPPRESSION_REASON_TRANSIENT_AUDIO_FOCUS_LOSS")
+    }
+
     private fun DModule.description(doc: DModule.() -> Documentable = ::smartDoc): Description {
         val holder = runBlocking { DocumentablesHolder(this@description, this) }
         val classGraph = runBlocking { holder.classGraph() }

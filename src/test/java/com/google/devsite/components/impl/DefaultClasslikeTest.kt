@@ -52,8 +52,6 @@ class DefaultClasslikeTest {
             """
 <body>
   <p>Signature</p>
-  <hr>
-  <h2>Summary</h2>
 </body>
             """.trim()
         )
@@ -82,8 +80,6 @@ class DefaultClasslikeTest {
 <body>
   <p>Signature</p>
   <div>Class hierarchy</div>
-  <hr>
-  <h2>Summary</h2>
 </body>
             """.trim()
         )
@@ -112,8 +108,6 @@ class DefaultClasslikeTest {
 <body>
   <p>Signature</p>
   <div>Related symbols</div>
-  <hr>
-  <h2>Summary</h2>
 </body>
             """.trim()
         )
@@ -143,7 +137,6 @@ class DefaultClasslikeTest {
   <p>Signature</p>
   <hr>
   <p>Hello World!</p>
-  <h2>Summary</h2>
 </body>
             """.trim()
         )
@@ -176,7 +169,6 @@ class DefaultClasslikeTest {
             """
 <body>
   <p>Signature</p>
-  <hr>
   <h2>Summary</h2>
   <div>noop</div>
   <h2>Symbols</h2>

@@ -33,13 +33,12 @@ internal class DefaultClasslike(
         }
         data.hierarchy.render(this)
         data.relatedSymbols.render(this)
-        hr()
-        data.description.render(into, separator = null)
-        h2 {
-            +"Summary"
-        }
-        data.symbolTypes.map { it.first }.filter { it.hasContent() }.render(into, separator = null)
-        data.inheritedTypes.filter { it.hasContent() }.render(into, separator = null)
+        data.description.render(into, separator = null, header = { hr() })
+
+        val allSummarySections =
+            data.symbolTypes.map { it.first }.filter { it.hasContent() } +
+            data.inheritedTypes.filter { it.hasContent() }
+        allSummarySections.render(into, separator = null, header = { h2 { +"Summary" } })
 
         for (symbolType in data.symbolTypes.map { it.second }) {
             symbolType.symbols.render(into, separator = null, header = { h2 { +symbolType.title } })

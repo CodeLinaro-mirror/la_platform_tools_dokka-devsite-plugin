@@ -248,25 +248,31 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         )
     }
 
-    @Test
-    fun `Inline code renders correctly`() {
-        val component = """
+    @Test // TODO: Fails in java: b/195519791 https://github.com/Kotlin/dokka/issues/1564
+    fun `Inline code renders correctly in 4x Kotlin and Java`() {
+        val componentK = """
             |/** The `Boolean` type has two possible values: `true` or `false`. */
             |class Foo
         """.render().description()
+        val componentJ = """
+            |/** The {@code Boolean} type has two possible values: {@code true} or {@code false}. */
+            |public class Foo
+        """.render(java = true).description()
 
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
+        for (component in listOf(/*componentJ,*/ componentK)) {
+            val output = createHTML().body {
+                component.render(this)
+            }.trim()
 
-        // language=html
-        assertThat(output).isEqualTo(
-            """
+            // language=html
+            assertThat(output).isEqualTo(
+                """
 <body>
   <p>The <code>Boolean</code> type has two possible values: <code>true</code> or <code>false</code>.</p>
 </body>
             """.trim()
-        )
+            )
+        }
     }
 
     @Test
@@ -677,7 +683,7 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         summary: Boolean = false,
         deprecation: String? = null
     ): DefaultDescription {
-        val tag = packages.single().classlikes.single { it.name == "Foo" }.tag()
+        val tag = explicitClasslike("Foo").tag()
         val classGraph = runBlocking {
             DocumentablesHolder(this@description, this).classGraph()
         }

@@ -1012,6 +1012,39 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(extFunctionClasses).isEqualTo(listOf("FirstJvm", "SecondJvm"))
     }
 
+    @Ignore // TODO: b/195529157
+    @Test
+    fun `Annotation types with no parameters have no default constructors`() {
+        // parameterless annotations are invoked as `@NonNull` not `@NonNull()`
+        val documentationJ = """
+        |public @interface Mega {
+        |   /**
+        |    * Reason why playback is suppressed even though {@link #getPlayWhenReady()} is {@code true}. One
+        |    * of {@link #PLAYBACK_SUPPRESSION_REASON_NONE} or {@link
+        |    * #PLAYBACK_SUPPRESSION_REASON_TRANSIENT_AUDIO_FOCUS_LOSS}.
+        |    */
+        |   @Documented
+        |   @Retention(RetentionPolicy.SOURCE)
+        |   @interface PlaybackSuppressionReason {}
+        |}
+        """.render(java = true).page("PlaybackSuppressionReason").content<Classlike>()
+        val documentationK = """
+        |public annotation class Mega {
+        |   /**
+        |    * Reason why playback is suppressed even though {@link #getPlayWhenReady()} is {@code true}. One
+        |    * of {@link #PLAYBACK_SUPPRESSION_REASON_NONE} or {@link
+        |    * #PLAYBACK_SUPPRESSION_REASON_TRANSIENT_AUDIO_FOCUS_LOSS}.
+        |    */
+        |   annotation class PlaybackSuppressionReason {}
+        |}
+        """.render().page("PlaybackSuppressionReason").content<Classlike>()
+
+        for (documentation in listOf(documentationJ, documentationK)) {
+            val constructors = documentation.symbolsFor("public constructors")
+            assertThat(constructors.first.size()).isEqualTo(0)
+        }
+    }
+
     private fun DModule.page(name: String = "Foo"): DevsitePage {
         val classlike = explicitClasslike(name)
         val holder = runBlocking { DocumentablesHolder(this@page, this) }
