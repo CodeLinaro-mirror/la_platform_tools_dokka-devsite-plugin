@@ -20,55 +20,81 @@
     </ul>
  Below is a sample of a simple database. 
     <pre class="prettyprint">// File: Song.java
-<code>{@literal @}</code>Entity
+
+      <pre class="prettyprint">@</pre>
+Entity
 public class User {
-  <code>{@literal @}</code>PrimaryKey
+  
+      <pre class="prettyprint">@</pre>
+PrimaryKey
   private int id;
   private String name;
-  <code>{@literal @}</code>ColumnInfo(name = &quot;release_year&quot;)
+  
+      <pre class="prettyprint">@</pre>
+ColumnInfo(name = &quot;release_year&quot;)
   private int releaseYear;
   // getters and setters are ignored for brevity but they are required for Room to work.
 }
 // File: SongDao.java
-<code>{@literal @}</code>Dao
+
+      <pre class="prettyprint">@</pre>
+Dao
 public interface SongDao {
-  <code>{@literal @}</code>Query(&quot;SELECT * FROM song&quot;)
+  
+      <pre class="prettyprint">@</pre>
+Query(&quot;SELECT * FROM song&quot;)
   List&lt;Song&gt; loadAll();
-  <code>{@literal @}</code>Query(&quot;SELECT * FROM song WHERE id IN (:songIds)&quot;)
+  
+      <pre class="prettyprint">@</pre>
+Query(&quot;SELECT * FROM song WHERE id IN (:songIds)&quot;)
   List&lt;Song&gt; loadAllBySongId(int... songIds);
-  <code>{@literal @}</code>Query(&quot;SELECT * FROM song WHERE name LIKE :name AND release_year = :year LIMIT 1&quot;)
+  
+      <pre class="prettyprint">@</pre>
+Query(&quot;SELECT * FROM song WHERE name LIKE :name AND release_year = :year LIMIT 1&quot;)
   Song loadOneByNameAndReleaseYear(String first, int year);
-  <code>{@literal @}</code>Insert
+  
+      <pre class="prettyprint">@</pre>
+Insert
   void insertAll(Song... songs);
-  <code>{@literal @}</code>Delete
+  
+      <pre class="prettyprint">@</pre>
+Delete
   void delete(Song song);
 }
 // File: MusicDatabase.java
-<code>{@literal @}</code>Database(entities = {Song.java})
+
+      <pre class="prettyprint">@</pre>
+Database(entities = {Song.java})
 public abstract class MusicDatabase extends RoomDatabase {
   public abstract SongDao userDao();
 }
 </pre>
- You can create an instance of <code>{@code MusicDatabase}</code> as follows: 
+ You can create an instance of <code>MusicDatabase</code> as follows: 
     <pre class="prettyprint">MusicDatabase db = Room
     .databaseBuilder(getApplicationContext(), MusicDatabase.class, &quot;database-name&quot;)
     .build();
 </pre>
  Since Room verifies your queries at compile time, it also detects information about which tables are accessed by the query or what columns are present in the response. 
     <p> You can observe a particular table for changes using the InvalidationTracker class which you can acquire via  RoomDatabase.getInvalidationTracker. </p>
-    <p> For convenience, Room allows you to return LiveData from Query methods. It will automatically observe the related tables as long as the <code>{@code LiveData}</code> has active observers. </p>
+    <p> For convenience, Room allows you to return LiveData from Query methods. It will automatically observe the related tables as long as the <code>LiveData</code> has active observers. </p>
     <pre class="prettyprint">// This live data will automatically dispatch changes as the database changes.
-<code>{@literal @}</code>Query(&quot;SELECT * FROM song ORDER BY name LIMIT 5&quot;)
+
+      <pre class="prettyprint">@</pre>
+Query(&quot;SELECT * FROM song ORDER BY name LIMIT 5&quot;)
 LiveData&lt;Song&gt; loadFirstFiveSongs();
 </pre>
     <p> You can also return arbitrary data objects from your query results as long as the fields in the object match the list of columns in the query response. This makes it very easy to write applications that drive the UI from persistent storage. </p>
     <pre class="prettyprint">class IdAndSongHeader {
   int id;
-  <code>{@literal @}</code>ColumnInfo(name = &quot;header&quot;)
+  
+      <pre class="prettyprint">@</pre>
+ColumnInfo(name = &quot;header&quot;)
   String header;
 }
 // DAO
-<code>{@literal @}</code>Query(&quot;SELECT id, name || '-' || release_year AS header FROM user&quot;)
+
+      <pre class="prettyprint">@</pre>
+Query(&quot;SELECT id, name || '-' || release_year AS header FROM user&quot;)
 public IdAndSongHeader[] loadSongHeaders();
 </pre>
  If there is a mismatch between the query result and the POJO, Room will print a warning during compilation. 

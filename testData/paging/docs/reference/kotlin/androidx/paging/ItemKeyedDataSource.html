@@ -267,7 +267,7 @@
       <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#getKey(kotlin.Any)">getKey</a>(item:&nbsp;Value):&nbsp;Key</pre>
       <p>Return a key associated with the given item.</p>
       <p>If your ItemKeyedDataSource is loading from a source that is sorted and loaded by a unique integer ID, you would return <code>item.getID()</code> here. This key can then be passed to <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadBefore(androidx.paging.ItemKeyedDataSource.LoadParams)">loadBefore</a></code> or <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadAfter(androidx.paging.ItemKeyedDataSource.LoadParams)">loadAfter</a></code> to load additional items adjacent to the item passed to this function.</p>
-      <p>If your key is more complex, such as when you're sorting by name, then resolving collisions with integer ID, you'll need to return both. In such a case you would use a wrapper class, such as <code>Pair</code> or, in Kotlin, <code>data class Key(val name: String, val id: Int)</code></p>
+      <p>If your key is more complex, such as when you're sorting by name, then resolving collisions with integer ID, you'll need to return both. In such a case you would use a wrapper class, such as <code>Pair&lt;String, Integer&gt;</code> or, in Kotlin, <code>data class Key(val name: String, val id: Int)</code></p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>

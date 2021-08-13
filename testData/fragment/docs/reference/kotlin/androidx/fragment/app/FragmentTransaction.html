@@ -1291,8 +1291,8 @@
       <p>Sets whether or not to allow optimizing operations within and across transactions. This will remove redundant operations, eliminating operations that cancel. For example, if two transactions are executed together, one that adds a fragment A and the next replaces it with fragment B, the operations will cancel and only fragment B will be added. That means that fragment A may not go through the creation/destruction lifecycle. </p>
       <p> The side effect of removing redundant operations is that fragments may have state changes out of the expected order. For example, one transaction adds fragment A, a second adds fragment B, then a third removes fragment A. Without removing the redundant operations, fragment B could expect that while it is being created, fragment A will also exist because fragment A will be removed after fragment B was added. With removing redundant operations, fragment B cannot expect fragment A to exist when it has been created because fragment A's add/remove will be optimized out. </p>
       <p> It can also reorder the state changes of Fragments to allow for better Transitions. Added Fragments may have <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">Fragment#onCreate(Bundle)</a></code> called before replaced Fragments have <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onDestroy()">Fragment#onDestroy()</a></code> called. </p>
-      <p><code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#postponeEnterTransition()">Fragment#postponeEnterTransition()</a></code> requires <code>{@code setReorderingAllowed(true)}</code>. </p>
-      <p> The default is <code>{@code false}</code>.</p>
+      <p><code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#postponeEnterTransition()">Fragment#postponeEnterTransition()</a></code> requires <code>setReorderingAllowed(true)</code>. </p>
+      <p> The default is <code>false</code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -1304,7 +1304,7 @@
             <tr>
               <td width="40%"><code>reorderingAllowed:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
               <td>
-                <p><code>{@code true}</code> to enable optimizing out redundant operations or <code>{@code false}</code> to disable optimizing out redundant operations on this transaction.</p>
+                <p><code>true</code> to enable optimizing out redundant operations or <code>false</code> to disable optimizing out redundant operations on this transaction.</p>
               </td>
             </tr>
           </tbody>

@@ -11,7 +11,7 @@
     </p>
     <hr>
     <p>Factory for DataSources.</p>
-    <p>Data-loading systems of an application or library can implement this interface to allow <code>LiveData</code>s to be created. For example, Room can provide a <code><a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code> for a given SQL query:</p>
+    <p>Data-loading systems of an application or library can implement this interface to allow <code>LiveData&lt;PagedList&gt;</code>s to be created. For example, Room can provide a <code><a href="/reference/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code> for a given SQL query:</p>
     <pre class="prettyprint">@Dao<br>interface UserDao {<br>    @Query(&quot;SELECT * FROM user ORDER BY lastName ASC&quot;)<br>    public abstract DataSource.Factory&lt;Integer, User&gt; usersByLastName();<br>}</pre>
     <p>In the above sample, <code>Integer</code> is used because it is the <code>Key</code> type of PositionalDataSource. Currently, Room uses the <code>LIMIT</code>/<code>OFFSET</code> SQL keywords to page a large query with a PositionalDataSource.</p>
     <div class="devsite-table-wrapper">
@@ -130,7 +130,7 @@
       <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;<a href="/reference/androidx/paging/DataSource.html">DataSource</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;<a href="/reference/androidx/paging/DataSource.Factory.html#create()">create</a>()</pre>
       <p>Create a <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>.</p>
       <p>The <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code> should invalidate itself if the snapshot is no longer valid. If a <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code> becomes invalid, the only way to query more data is to create a new <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code> from the Factory.</p>
-      <p><code><a href="/reference/androidx/paging/LivePagedListBuilder.html">androidx.paging.LivePagedListBuilder</a></code> for example will construct a new PagedList and DataSource when the current DataSource is invalidated, and pass the new PagedList through the <code>LiveData</code> to observers.</p>
+      <p><code><a href="/reference/androidx/paging/LivePagedListBuilder.html">androidx.paging.LivePagedListBuilder</a></code> for example will construct a new PagedList and DataSource when the current DataSource is invalidated, and pass the new PagedList through the <code>LiveData&lt;PagedList&gt;</code> to observers.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
