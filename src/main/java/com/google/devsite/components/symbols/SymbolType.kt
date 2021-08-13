@@ -17,6 +17,7 @@
 package com.google.devsite.components.symbols
 
 import com.google.devsite.components.Link
+import com.google.devsite.renderer.Language
 
 /** Represents a symbol type such as function parameter types. */
 internal interface SymbolType : SymbolBase {
@@ -30,9 +31,10 @@ internal interface SymbolType : SymbolBase {
     }
 
     class Params(
+        val displayLanguage: Language,
         val type: Link,
         val nullable: Boolean = false,
         val generics: List<SymbolBase> = emptyList(),
-        val annotations: List<Annotation> = emptyList()
+        val annotationComponents: List<AnnotationComponent> = emptyList()
     )
 }

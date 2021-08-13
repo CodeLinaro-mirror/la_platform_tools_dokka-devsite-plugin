@@ -29,7 +29,7 @@ internal interface TypeParameter : SymbolBase {
     override fun length(): Int {
         var result = data.name.length
 
-        result += data.annotations.sumBy { it.length() }
+        result += data.annotationComponents.sumBy { it.length() }
         result += data.modifiers.sumBy { it.length }
         result += data.projections.sumBy { it.length() }
 
@@ -43,6 +43,6 @@ internal interface TypeParameter : SymbolBase {
         val name: String,
         val modifiers: List<String> = emptyList(),
         val projections: List<SymbolBase>,
-        val annotations: List<Annotation> = emptyList()
+        val annotationComponents: List<AnnotationComponent> = emptyList()
     )
 }

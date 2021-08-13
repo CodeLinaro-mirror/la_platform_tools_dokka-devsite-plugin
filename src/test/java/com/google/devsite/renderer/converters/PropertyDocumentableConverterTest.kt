@@ -20,7 +20,7 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.components.symbols.SymbolDetail
-import com.google.devsite.components.symbols.SymbolDetail.SymbolType.PROPERTY
+import com.google.devsite.components.symbols.SymbolDetail.SymbolKind.PROPERTY
 import com.google.devsite.components.symbols.SymbolSignature
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.SymbolType
@@ -81,9 +81,9 @@ internal class PropertyDocumentableConverterTest(
         """.render(java = true).summary().data.title as TypeSummary).data.type
 
         for (param in listOf(paramK, paramJ, paramJ2)) {
-            javaOnly { assertThat(param.data.annotations).isNotEmpty() }
+            javaOnly { assertThat(param.data.annotationComponents).isNotEmpty() }
             kotlinOnly {
-                assertThat(param.data.annotations).isEmpty()
+                assertThat(param.data.annotationComponents).isEmpty()
                 assertThat(param.nullable).isTrue()
             }
         }
@@ -104,10 +104,10 @@ internal class PropertyDocumentableConverterTest(
 
         for (details in listOf(detailsK, detailsJ, detailsJ2)) {
             kotlinOnly {
-                assertThat(details.annotations).isEmpty()
-                assertThat(details.returnType.data.primary.asType().data.nullable).isTrue()
+                assertThat(details.annotationComponents).isEmpty()
+                assertThat(details.returnType.data.type.asType().data.nullable).isTrue()
             }
-            javaOnly { assertThat(details.annotations).isNotEmpty() }
+            javaOnly { assertThat(details.annotationComponents).isNotEmpty() }
         }
     }
 
@@ -153,7 +153,7 @@ internal class PropertyDocumentableConverterTest(
             |val foo
         """.render().detail()
 
-        assertThat(detail.data.symbolType).isEqualTo(PROPERTY)
+        assertThat(detail.data.symbolKind).isEqualTo(PROPERTY)
     }
 
     @Test
@@ -176,7 +176,7 @@ internal class PropertyDocumentableConverterTest(
             |@Hello val foo: String
         """.render().detail()
 
-        assertThat(detail.data.annotations).isNotEmpty()
+        assertThat(detail.data.annotationComponents).isNotEmpty()
     }
 
     @Test
@@ -185,9 +185,9 @@ internal class PropertyDocumentableConverterTest(
             |val foo: String? = null
         """.render().detail()
 
-        javaOnly { assertThat(detail.data.annotations).isNotEmpty() }
+        javaOnly { assertThat(detail.data.annotationComponents).isNotEmpty() }
         kotlinOnly {
-            assertThat(detail.data.annotations).isEmpty()
+            assertThat(detail.data.annotationComponents).isEmpty()
             assertThat(detail.data.returnType.asType().data.nullable).isTrue()
         }
     }
@@ -249,7 +249,7 @@ internal class PropertyDocumentableConverterTest(
         return converter.summary(property()!!, hints).signature()
     }
 
-    private fun Parameter.link(): Link.Params = (data.primary as SymbolType).link()
+    private fun Parameter.link(): Link.Params = (data.type as SymbolType).link()
     private fun SymbolType.link(): Link.Params = data.type.data
     private fun TwoPaneSummaryItem.returnSummary(): TypeSummary.Params =
         (data.title as TypeSummary).data

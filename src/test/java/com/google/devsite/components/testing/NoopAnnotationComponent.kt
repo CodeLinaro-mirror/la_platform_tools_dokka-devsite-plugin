@@ -14,21 +14,18 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components.impl
+package com.google.devsite.components.testing
 
-import com.google.devsite.components.ShouldBreak
-import com.google.devsite.components.render
-import com.google.devsite.components.symbols.Annotation
+import com.google.devsite.components.symbols.AnnotationComponent
 import kotlinx.html.FlowContent
 
-/** Default implementation of an annotation. */
-internal class DefaultAnnotation(
-    override val data: Annotation.Params
-) : Annotation {
+internal class NoopAnnotationComponent(private val text: String) : AnnotationComponent {
+    override val data: AnnotationComponent.Params
+        get() = throw NotImplementedError()
+
     override fun render(into: FlowContent) = into.run {
-        +"@"
-        data.type.render(this)
-        // "()" displays even if there are no elements
-        data.parameters.render(into, brackets = "() ", shouldBreak = ShouldBreak.NO)
+        +text
     }
+
+    override fun length() = text.length
 }

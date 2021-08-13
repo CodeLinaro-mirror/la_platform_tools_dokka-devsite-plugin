@@ -17,17 +17,17 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.symbols.Annotation.Params
+import com.google.devsite.components.symbols.AnnotationComponent.Params
 import com.google.devsite.components.symbols.NamedValueAnnotationParameter
 import com.google.devsite.components.testing.NoopLink
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
 import org.junit.Test
 
-class DefaultAnnotationTest {
+class DefaultAnnotationComponentTest {
     @Test
     fun `Annotation with no params renders correctly`() {
-        val component = DefaultAnnotation(Params(NoopLink("Foo")))
+        val component = DefaultAnnotationComponent(Params(NoopLink("Foo")))
 
         val output = createHTML().div {
             component.render(this)
@@ -43,7 +43,7 @@ class DefaultAnnotationTest {
 
     @Test
     fun `Annotation with one param renders correctly`() {
-        val component = DefaultAnnotation(
+        val component = DefaultAnnotationComponent(
             Params(
                 type = NoopLink("Foo"),
                 parameters = listOf(DefaultNamedValueAnnotationParameter(
@@ -65,7 +65,7 @@ class DefaultAnnotationTest {
 
     @Test
     fun `Annotation with multiple params renders correctly`() {
-        val component = DefaultAnnotation(
+        val component = DefaultAnnotationComponent(
             Params(
                 type = NoopLink("Foo"),
                 parameters = listOf(

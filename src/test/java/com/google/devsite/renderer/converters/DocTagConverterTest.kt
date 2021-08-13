@@ -675,12 +675,12 @@ internal class DocTagConverterTest(
             assertThat(param1.name()).isEqualTo("currentList")
             assertThat(param1.description().text()).isEqualTo("The new current list, may be null.")
             javaOnly {
-                assertThat(param0Left.data.annotations.single().link().name).isEqualTo("Nullable")
-                assertThat(param1Left.data.annotations.single().link().name).isEqualTo("Nullable")
+                assertThat(param0Left.data.annotationComponents.single().name).isEqualTo("Nullable")
+                assertThat(param1Left.data.annotationComponents.single().name).isEqualTo("Nullable")
             }
             kotlinOnly {
-                assertThat(param0Left.data.primary.asType().data.nullable).isEqualTo(true)
-                assertThat(param1Left.data.primary.asType().data.nullable).isEqualTo(true)
+                assertThat(param0Left.data.type.asType().data.nullable).isEqualTo(true)
+                assertThat(param1Left.data.type.asType().data.nullable).isEqualTo(true)
             }
         }
     }

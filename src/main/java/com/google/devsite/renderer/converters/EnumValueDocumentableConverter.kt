@@ -60,14 +60,14 @@ internal class EnumValueDocumentableConverter(
                 displayLanguage = displayLanguage,
                 name = enumValue.name,
                 anchors = enumValue.generateAnchors(),
-                annotations = annotations.annotationComponents(
+                annotationComponents = annotations.annotationComponents(
                     pathProvider,
                     displayLanguage,
                     false
                 ),
                 modifiers = enumValue.getExtraModifiers().modifiersFor(hints),
                 returnType = projection,
-                symbolType = SymbolDetail.SymbolType.PROPERTY,
+                symbolKind = SymbolDetail.SymbolKind.PROPERTY,
                 signature = enumValue.signature(),
                 metadata = javadocConverter.metadata(
                     documentable = enumValue,

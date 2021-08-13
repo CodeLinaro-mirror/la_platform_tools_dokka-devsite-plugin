@@ -21,7 +21,7 @@ import com.google.devsite.components.Link
 import com.google.devsite.components.Sizeable
 
 /** Represents an annotation. */
-internal interface Annotation : ContextFreeComponent, Sizeable {
+internal interface AnnotationComponent : ContextFreeComponent, Sizeable {
     val data: Params
 
     override fun length(): Int {
@@ -35,4 +35,7 @@ internal interface Annotation : ContextFreeComponent, Sizeable {
         val type: Link,
         val parameters: List<AnnotationParameter> = emptyList()
     )
+
+    val name: String
+        get() = data.type.data.name
 }

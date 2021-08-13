@@ -20,6 +20,7 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.symbols.SymbolType.Params
 import com.google.devsite.components.testing.NoopLink
 import com.google.devsite.components.testing.NoopSymbolType
+import com.google.devsite.renderer.Language
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -29,6 +30,7 @@ class DefaultSymbolTypeTest {
     fun `Simple parameter type renders correctly`() {
         val component = DefaultSymbolType(
             Params(
+                displayLanguage = Language.KOTLIN,
                 type = NoopLink("Int")
             )
         )
@@ -49,6 +51,7 @@ class DefaultSymbolTypeTest {
     fun `Simple nullable parameter type renders correctly`() {
         val component = DefaultSymbolType(
             Params(
+                displayLanguage = Language.KOTLIN,
                 type = NoopLink("Int"),
                 nullable = true
             )
@@ -70,6 +73,7 @@ class DefaultSymbolTypeTest {
     fun `Parameter type with one generic renders correctly`() {
         val component = DefaultSymbolType(
             Params(
+                displayLanguage = Language.KOTLIN,
                 type = NoopLink("List"),
                 generics = listOf(NoopSymbolType("String"))
             )
@@ -91,6 +95,7 @@ class DefaultSymbolTypeTest {
     fun `Nullable parameter type with one generic renders correctly`() {
         val component = DefaultSymbolType(
             Params(
+                displayLanguage = Language.KOTLIN,
                 type = NoopLink("List"),
                 nullable = true,
                 generics = listOf(NoopSymbolType("String"))
@@ -113,6 +118,7 @@ class DefaultSymbolTypeTest {
     fun `Parameter type with multiple generics renders correctly`() {
         val component = DefaultSymbolType(
             Params(
+                displayLanguage = Language.KOTLIN,
                 type = NoopLink("Map"),
                 generics = listOf(NoopSymbolType("String"), NoopSymbolType("Int"))
             )

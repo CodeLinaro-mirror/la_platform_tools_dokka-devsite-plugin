@@ -39,11 +39,11 @@ internal interface AnnotationValueAnnotationParameter : AnnotationParameter {
 
     override fun length(): Int {
         val nameSize = (data.name?.length?.plus(3)) ?: 0 // " = "
-        val valueSize = data.annotationValue.length()
+        val valueSize = data.annotationComponentValue.length()
         return nameSize + valueSize
     }
 
-    class Params(val name: String?, val annotationValue: Annotation)
+    class Params(val name: String?, val annotationComponentValue: AnnotationComponent)
 }
 
 internal interface ArrayValueAnnotationParameter : AnnotationParameter {
@@ -69,7 +69,7 @@ internal val AnnotationParameter.name: String
 /** This is expected to be used as e.g. assertThat(parameter.value).isEqualTo("a string") */
 internal val AnnotationParameter.value: Any
     get() = when (this) {
-        is AnnotationValueAnnotationParameter -> this.data.annotationValue
+        is AnnotationValueAnnotationParameter -> this.data.annotationComponentValue
         is ArrayValueAnnotationParameter -> this.data.innerAnnotationParameters
         is NamedValueAnnotationParameter -> this.data.value
         else -> throw RuntimeException("impossible subtype of AnnotationParameter")

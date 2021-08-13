@@ -29,11 +29,11 @@ internal interface Parameter : SymbolBase {
         var result = data.name.length
 
         result += data.defaultValue?.length ?: 0
-        result += data.annotations.sumBy { it.length() }
+        result += data.annotationComponents.sumBy { it.length() }
         result += data.lambdaParams.sumBy { it.length() }
         result += data.lambdaModifiers.sumBy { it.length }
         result += data.modifiers.sumBy { it.length }
-        result += data.primary.length()
+        result += data.type.length()
         result += data.receiver?.length() ?: 0
         result += if (data.isLambda) 5 else 0
 
@@ -48,12 +48,12 @@ internal interface Parameter : SymbolBase {
         val lambdaParams: List<SymbolBase> = emptyList(),
         val lambdaModifiers: List<String> = emptyList(),
         val modifiers: List<String> = emptyList(),
-        val primary: SymbolBase,
-        val annotations: List<Annotation> = emptyList(),
+        val type: SymbolBase,
+        val annotationComponents: List<AnnotationComponent> = emptyList(),
         val defaultValue: String? = null
     )
 
     val nullable: Boolean
-        get() = ((data.primary as? SymbolType)?.data?.nullable ?: false) ||
-            data.annotations.any { it.data.type.data.name == "Nullable" }
+        get() = ((data.type as? SymbolType)?.data?.nullable ?: false) ||
+            data.annotationComponents.any { it.data.type.data.name == "Nullable" }
 }

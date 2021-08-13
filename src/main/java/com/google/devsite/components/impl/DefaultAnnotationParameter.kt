@@ -38,7 +38,7 @@ internal class DefaultAnnotationValueAnnotationParameter(
 ) : AnnotationValueAnnotationParameter {
     override fun render(into: FlowContent) = into.run {
         data.name.render(into)
-        data.annotationValue.render(into)
+        data.annotationComponentValue.render(into)
     }
 }
 

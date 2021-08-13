@@ -68,14 +68,14 @@ internal class PropertyDocumentableConverter(
                 displayLanguage = displayLanguage,
                 name = property.name,
                 anchors = property.generateAnchors(),
-                annotations = annotations.annotationComponents(
+                annotationComponents = annotations.annotationComponents(
                     pathProvider,
                     displayLanguage,
                     property.type.isNullable()
                 ),
                 modifiers = property.modifiers().modifiersFor(hints),
                 returnType = returnType,
-                symbolType = SymbolDetail.SymbolType.PROPERTY,
+                symbolKind = SymbolDetail.SymbolKind.PROPERTY,
                 signature = property.signature(isSummary = false),
                 metadata = javadocConverter.metadata(
                     documentable = property,

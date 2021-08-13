@@ -16,7 +16,6 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.render
 import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.renderer.Language
@@ -34,11 +33,11 @@ internal class DefaultParameter(
     }
 
     override fun render(into: FlowContent) = into.run {
-        data.annotations.render(into, ShouldBreak.MAYBE, separator = "", terminator = { +" " })
+        data.annotationComponents.render(into, separator = "", terminator = { +" " })
 
         when (data.displayLanguage) {
             Language.JAVA -> {
-                data.primary.render(into)
+                data.type.render(into)
                 if (data.name.isNotEmpty()) {
                     +Entities.nbsp
                     +data.name
@@ -59,7 +58,7 @@ internal class DefaultParameter(
                 }
 
                 if (data.isLambda) {
-                    data.lambdaParams.render(into, ShouldBreak.MAYBE, brackets = "()")
+                    data.lambdaParams.render(into, brackets = "()")
                     +" "
                     nobr { +"->" }
                     +" "
@@ -67,7 +66,7 @@ internal class DefaultParameter(
 
                 data.modifiers.render(into, terminator = { +Entities.nbsp })
 
-                data.primary.render(this)
+                data.type.render(this)
 
                 if (data.defaultValue != null) {
                     +" = ${data.defaultValue}"

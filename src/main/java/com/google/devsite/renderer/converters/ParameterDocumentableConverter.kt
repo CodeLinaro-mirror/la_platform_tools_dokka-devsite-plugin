@@ -147,9 +147,9 @@ internal class ParameterDocumentableConverter(
             Parameter.Params(
                 isLambda = false,
                 name = name,
-                primary = proj.rewriteKotlinPrimitivesForJava(isReturnType).toComponent(),
+                type = proj.rewriteKotlinPrimitivesForJava(isReturnType).toComponent(),
                 modifiers = modifiers,
-                annotations = annotations.annotationComponents(
+                annotationComponents = annotations.annotationComponents(
                     pathProvider,
                     displayLanguage,
                     nullable,
@@ -231,8 +231,8 @@ internal class ParameterDocumentableConverter(
                 lambdaModifiers = lambdaModifiers,
                 lambdaParams = lambdaParams,
                 modifiers = modifiers,
-                primary = primaryType,
-                annotations = annotations.annotationComponents(
+                type = primaryType,
+                annotationComponents = annotations.annotationComponents(
                     pathProvider,
                     displayLanguage,
                     annotations.isNullable()
@@ -280,6 +280,7 @@ internal class ParameterDocumentableConverter(
 
         return DefaultSymbolType(
             SymbolType.Params(
+                displayLanguage = displayLanguage,
                 type = toLink(),
                 nullable,
                 generics

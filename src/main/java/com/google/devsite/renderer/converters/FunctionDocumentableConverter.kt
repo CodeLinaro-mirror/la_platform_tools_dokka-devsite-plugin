@@ -87,19 +87,19 @@ internal class FunctionDocumentableConverter(
 
     /** @return the function detail component */
     fun detail(function: DFunction, hints: ModifierHints): SymbolDetail {
-        return detail(function, hints, SymbolDetail.SymbolType.FUNCTION)
+        return detail(function, hints, SymbolDetail.SymbolKind.FUNCTION)
     }
 
     /** @return the constructor detail component */
     fun detailForConstructor(function: DFunction, hints: ModifierHints): SymbolDetail {
-        return detail(function, hints, SymbolDetail.SymbolType.CONSTRUCTOR)
+        return detail(function, hints, SymbolDetail.SymbolKind.CONSTRUCTOR)
     }
 
     /** @return the symbol detail component */
     private fun detail(
         function: DFunction,
         hints: ModifierHints,
-        type: SymbolDetail.SymbolType
+        kind: SymbolDetail.SymbolKind
     ): SymbolDetail {
         val annotations = function.annotations()
         val returnType = paramConverter.componentForProjection(
@@ -111,7 +111,7 @@ internal class FunctionDocumentableConverter(
 
         // So far I've only seen this in unit tests where we use the wrong entry point into
         // FunctionDocumentableConverter, but it's possible it could happen in other ways.
-        if (function.isConstructor != (type == SymbolDetail.SymbolType.CONSTRUCTOR)) {
+        if (function.isConstructor != (kind == SymbolDetail.SymbolKind.CONSTRUCTOR)) {
             println("WARNING: constructor ${function.dri} is not being parsed correctly")
         }
 
@@ -120,16 +120,16 @@ internal class FunctionDocumentableConverter(
                 displayLanguage = displayLanguage,
                 name = function.name,
                 anchors = generateCompatAnchors(function),
-                annotations = annotations.annotationComponents(
+                annotationComponents = annotations.annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
                     nullable = function.type.isNullable(),
                     showNullability = !function.isConstructor &&
-                        type != SymbolDetail.SymbolType.CONSTRUCTOR
+                        kind != SymbolDetail.SymbolKind.CONSTRUCTOR
                 ),
                 modifiers = function.modifiers().modifiersFor(hints),
                 returnType = returnType,
-                symbolType = type,
+                symbolKind = kind,
                 signature = function.signature(isSummary = false),
                 metadata = javadocConverter.metadata(
                     documentable = function,
@@ -195,8 +195,9 @@ internal class FunctionDocumentableConverter(
                 displayLanguage = displayLanguage,
                 isLambda = false,
                 name = "",
-                primary = DefaultSymbolType(
+                type = DefaultSymbolType(
                     SymbolType.Params(
+                        displayLanguage = displayLanguage,
                         type = pathProvider.linkForReference(driForSyntheticClass())
                     )
                 )

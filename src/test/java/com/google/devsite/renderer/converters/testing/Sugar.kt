@@ -25,6 +25,7 @@ import com.google.devsite.components.Link
 import com.google.devsite.components.pages.ClassIndex
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.TableOfContents
+import com.google.devsite.components.symbols.AnnotationComponent
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.components.symbols.SymbolBase
@@ -37,7 +38,6 @@ import com.google.devsite.components.table.TableTitle
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import org.jetbrains.dokka.model.doc.DocTag
 import org.jetbrains.dokka.model.doc.Text
-import com.google.devsite.components.symbols.Annotation as AnnotationComponent
 
 internal fun <T> Collection<T>.item(): T = items(1).single()
 
@@ -85,17 +85,17 @@ internal fun DocTag.text(): String = (this as? Text)?.body
     ?: children.joinToString(" ") { it.text() }
 
 internal fun TypeParameter.projectionName() = this.data.projections.single().link().name
-internal fun Parameter.generics() = this.data.primary.asType().data.generics
+internal fun Parameter.generics() = this.data.type.asType().data.generics
 
 internal fun SymbolBase.asType(): SymbolType = when (this) {
-    is Parameter -> data.primary.asType()
+    is Parameter -> data.type.asType()
     is SymbolType -> this
     else -> error("Not supported: $this")
 }
 
 internal fun SymbolType.link(): Link.Params = data.type.data
 internal fun SymbolBase.link(): Link.Params = when (this) {
-    is Parameter -> data.primary.asType().link()
+    is Parameter -> data.type.asType().link()
     is SymbolType -> data.type.data
     else -> error("Not supported: $this")
 }

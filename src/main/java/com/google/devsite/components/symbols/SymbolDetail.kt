@@ -27,17 +27,17 @@ internal interface SymbolDetail : ContextFreeComponent {
         val displayLanguage: Language,
         val name: String,
         val anchors: LinkedHashSet<String>,
-        val annotations: List<Annotation> = emptyList(),
+        val annotationComponents: List<AnnotationComponent> = emptyList(),
         val modifiers: List<String> = emptyList(),
         val returnType: Parameter,
-        val symbolType: SymbolType,
+        val symbolKind: SymbolKind,
         val signature: SymbolSignature,
         val metadata: List<ContextFreeComponent>,
         val extFunctionClass: String? = null
     )
 
     /** Holds the Kotlin keywords for various symbol types. */
-    enum class SymbolType(val keyword: String) {
+    enum class SymbolKind(val keyword: String) {
         PROPERTY("val"),
         FUNCTION("fun"),
         CONSTRUCTOR("")

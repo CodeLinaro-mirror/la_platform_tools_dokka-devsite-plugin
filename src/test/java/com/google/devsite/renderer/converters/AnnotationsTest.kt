@@ -18,6 +18,7 @@ package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Link
+import com.google.devsite.components.symbols.AnnotationComponent
 import com.google.devsite.components.symbols.NamedValueAnnotationParameter
 import com.google.devsite.components.symbols.name
 import com.google.devsite.components.symbols.value
@@ -31,8 +32,6 @@ import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.Nullable
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.junit.Test
-import kotlin.Boolean
-import com.google.devsite.components.symbols.Annotation as AnnotationComponent
 
 internal class AnnotationsTest : ConverterTestBase() {
     @Test

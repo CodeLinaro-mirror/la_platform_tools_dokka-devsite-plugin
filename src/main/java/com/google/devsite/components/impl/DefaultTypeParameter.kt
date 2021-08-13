@@ -39,7 +39,8 @@ internal class DefaultTypeParameter(
      */
     override fun render(into: FlowContent, angleBrackets: Boolean) = into.run {
         if (angleBrackets) { +"<" }
-        data.annotations.render(into, ShouldBreak.NO, separator = "", terminator = { +nbsp })
+        data.annotationComponents
+            .render(into, ShouldBreak.NO, separator = "", terminator = { +nbsp })
         when (data.displayLanguage) {
             Language.JAVA -> {
                 +data.name

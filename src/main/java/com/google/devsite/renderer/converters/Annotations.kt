@@ -16,10 +16,11 @@
 
 package com.google.devsite.renderer.converters
 
-import com.google.devsite.components.impl.DefaultAnnotation
+import com.google.devsite.components.impl.DefaultAnnotationComponent
 import com.google.devsite.components.impl.DefaultAnnotationValueAnnotationParameter
 import com.google.devsite.components.impl.DefaultArrayValueAnnotationParameter
 import com.google.devsite.components.impl.DefaultNamedValueAnnotationParameter
+import com.google.devsite.components.symbols.AnnotationComponent
 import com.google.devsite.components.symbols.AnnotationParameter
 import com.google.devsite.components.symbols.AnnotationValueAnnotationParameter
 import com.google.devsite.components.symbols.ArrayValueAnnotationParameter
@@ -37,9 +38,6 @@ import org.jetbrains.dokka.model.EnumValue
 import org.jetbrains.dokka.model.LiteralValue
 import org.jetbrains.dokka.model.StringValue
 import org.jetbrains.dokka.model.properties.WithExtraProperties
-import kotlin.Boolean
-import kotlin.String
-import com.google.devsite.components.symbols.Annotation as AnnotationComponent
 
 /** @return the components for the provided dokka model annotations */
 internal fun List<Annotation>.annotationComponents(
@@ -66,7 +64,7 @@ private fun Annotation.toDackkaAnnotation(pathProvider: FilePathProvider): Annot
     val params = params.map { (name, contents) ->
         contents.toComponent(name, pathProvider)
     }
-    return DefaultAnnotation(AnnotationComponent.Params(type, params))
+    return DefaultAnnotationComponent(AnnotationComponent.Params(type, params))
 }
 
 /** @return true if the `@Nullable` annotation is present, false otherwise */
@@ -153,7 +151,7 @@ internal fun AnnotationParameterValue.toComponent(
     is AnnotationValue -> DefaultAnnotationValueAnnotationParameter(
         AnnotationValueAnnotationParameter.Params(
             name,
-            annotationValue = annotation.toDackkaAnnotation(pathProvider)
+            annotationComponentValue = annotation.toDackkaAnnotation(pathProvider)
         )
     )
 }

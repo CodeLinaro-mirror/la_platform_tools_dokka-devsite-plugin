@@ -20,7 +20,7 @@ import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.render
 import com.google.devsite.components.symbols.SymbolDetail
-import com.google.devsite.components.symbols.SymbolDetail.SymbolType
+import com.google.devsite.components.symbols.SymbolDetail.SymbolKind
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
 import com.google.devsite.renderer.Language
@@ -49,12 +49,12 @@ internal class DefaultSymbolDetail(
             +data.name
         }
         pre("api-signature no-pretty-print") {
-            data.annotations.render(into, ShouldBreak.YES, separator = "")
+            data.annotationComponents.render(into, ShouldBreak.YES, separator = "")
             data.modifiers.render(this, terminator = { +Entities.nbsp })
 
             when (data.displayLanguage) {
                 Language.JAVA -> {
-                    if (data.symbolType != SymbolType.CONSTRUCTOR) {
+                    if (data.symbolKind != SymbolKind.CONSTRUCTOR) {
                         data.returnType.render(this)
                         +Entities.nbsp
                     }
@@ -62,11 +62,11 @@ internal class DefaultSymbolDetail(
                     data.signature.render(this)
                 }
                 Language.KOTLIN -> {
-                    +data.symbolType.keyword
-                    if (data.symbolType != SymbolType.CONSTRUCTOR) +Entities.nbsp
+                    +data.symbolKind.keyword
+                    if (data.symbolKind != SymbolKind.CONSTRUCTOR) +Entities.nbsp
                     data.signature.render(this)
 
-                    if (data.symbolType != SymbolType.CONSTRUCTOR) {
+                    if (data.symbolKind != SymbolKind.CONSTRUCTOR) {
                         +":"
                         +Entities.nbsp
                         data.returnType.render(this)

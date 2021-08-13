@@ -21,7 +21,7 @@ import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.components.symbols.SymbolDetail
-import com.google.devsite.components.symbols.SymbolDetail.SymbolType
+import com.google.devsite.components.symbols.SymbolDetail.SymbolKind
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.TwoPaneSummaryItem
@@ -263,7 +263,7 @@ internal class FunctionDocumentableConverterTest(
             val param = signature.receiver!!
             assertNoLambdaStuff(param.data)
 
-            val type = param.data.primary
+            val type = param.data.type
             assertThat(type.link().name).isEqualTo("TestKt")
         }
 
@@ -272,7 +272,7 @@ internal class FunctionDocumentableConverterTest(
             val param = signature.receiver!!
             assertNoLambdaStuff(param.data)
 
-            val type = param.data.primary
+            val type = param.data.type
             assertThat(type.link().name).isEqualTo("String")
             assertThat(type.link().url).contains("kotlin")
             assertThat(param.data.name).isEmpty()
@@ -293,7 +293,7 @@ internal class FunctionDocumentableConverterTest(
             val param = signature.receiver!!
             assertNoLambdaStuff(param.data)
 
-            val type = param.data.primary
+            val type = param.data.type
             assertThat(type.link().name).isEqualTo("TestKt")
             assertThat(type.link().url).contains("androidx")
         }
@@ -303,7 +303,7 @@ internal class FunctionDocumentableConverterTest(
             val param = signature.receiver!!
             assertNoLambdaStuff(param.data)
 
-            val type = param.data.primary
+            val type = param.data.type
             assertThat(type.link().name).isEqualTo("Any")
             assertThat(type.link().url).contains("kotlin")
             assertThat(param.data.name).isEmpty()
@@ -318,7 +318,7 @@ internal class FunctionDocumentableConverterTest(
 
         val function = summary.summary()
         val param = function.param()
-        val paramType = param.data.primary
+        val paramType = param.data.type
 
         assertNoLambdaStuff(param.data)
         assertThat(param.data.name).isEqualTo("a")
@@ -386,7 +386,7 @@ internal class FunctionDocumentableConverterTest(
             val expected =
                 listOf("boolean", "int", "double", "float", "short", "long", "char", "byte")
             for ((i, param) in signature.parameters.withIndex()) {
-                assertThat(param.data.primary.link().name).isEqualTo(expected[i])
+                assertThat(param.data.type.link().name).isEqualTo(expected[i])
             }
         }
         kotlinOnly {
@@ -395,7 +395,7 @@ internal class FunctionDocumentableConverterTest(
             val expected =
                 listOf("Boolean", "Int", "Double", "Float", "Short", "Long", "Char", "Byte")
             for ((i, param) in signature.parameters.withIndex()) {
-                assertThat(param.data.primary.link().name).isEqualTo(expected[i])
+                assertThat(param.data.type.link().name).isEqualTo(expected[i])
             }
         }
     }
@@ -455,7 +455,7 @@ internal class FunctionDocumentableConverterTest(
             |@Hello fun foo() = Unit
         """.render().detail()
 
-        assertThat(detail.data.annotations).isNotEmpty()
+        assertThat(detail.data.annotationComponents).isNotEmpty()
     }
 
     @Test
@@ -472,11 +472,11 @@ internal class FunctionDocumentableConverterTest(
         """.render(java = true).detail()
 
         for (detail in listOf(detailK, detailJ, detailJ2)) {
-            val functionAnnotations = detail.data.annotations
+            val functionAnnotations = detail.data.annotationComponents
             val returnType = detail.data.returnType
             javaOnly {
                 assertThat(functionAnnotations.any { it.isAtNullable }).isTrue()
-                assertThat(returnType.data.annotations.any { it.isAtNullable }).isFalse()
+                assertThat(returnType.data.annotationComponents.any { it.isAtNullable }).isFalse()
             }
             kotlinOnly {
                 assertThat(functionAnnotations).isEmpty()
@@ -499,9 +499,9 @@ internal class FunctionDocumentableConverterTest(
         """.render(java = true).summary().returnSummary().type
 
         for (summary in listOf(summaryK, summaryJ, summaryJ2)) {
-            javaOnly { assertThat(summary.data.annotations).isNotEmpty() }
+            javaOnly { assertThat(summary.data.annotationComponents).isNotEmpty() }
             kotlinOnly {
-                assertThat(summary.data.annotations).isEmpty()
+                assertThat(summary.data.annotationComponents).isEmpty()
                 assertThat(summary.nullable).isTrue()
             }
         }
@@ -513,7 +513,7 @@ internal class FunctionDocumentableConverterTest(
             |fun foo()
         """.render().detail()
 
-        assertThat(detail.data.symbolType).isEqualTo(SymbolType.FUNCTION)
+        assertThat(detail.data.symbolKind).isEqualTo(SymbolKind.FUNCTION)
     }
 
     @Test
@@ -565,15 +565,16 @@ internal class FunctionDocumentableConverterTest(
         val summaryK = moduleK.summary()
         val summaryJ = moduleJ.summary()
         for (summary in listOf(summaryJ, summaryK)) {
-            val annotations = (summary.data.title as TypeSummary).data.type.data.annotations
+            val annotations = (summary.data.title as TypeSummary).data.type.data
+                .annotationComponents
             assertThat(annotations).isEmpty()
         }
 
         val detailK = moduleK.detail()
         val detailJ = moduleJ.detail()
         for (detail in listOf(detailJ, detailK)) {
-            val returnAnnotations = detail.data.returnType.data.annotations
-            val annotations = detail.data.annotations
+            val returnAnnotations = detail.data.returnType.data.annotationComponents
+            val annotations = detail.data.annotationComponents
             val signature = detail.data.signature as FunctionSignature
             assertThat(returnAnnotations.isEmpty())
             assertThat(annotations).isEmpty()
@@ -639,7 +640,7 @@ internal class FunctionDocumentableConverterTest(
         return module.function() ?: module.constructor()
     }
 
-    private fun Parameter.link(): Link.Params = data.primary.link()
+    private fun Parameter.link(): Link.Params = data.type.link()
 
     private fun SymbolSummary.param(): Parameter = signature().parameters.item()
 

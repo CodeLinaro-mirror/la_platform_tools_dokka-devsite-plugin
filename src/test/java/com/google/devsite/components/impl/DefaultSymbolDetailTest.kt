@@ -18,8 +18,8 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.symbols.SymbolDetail.Params
-import com.google.devsite.components.symbols.SymbolDetail.SymbolType
-import com.google.devsite.components.testing.NoopAnnotation
+import com.google.devsite.components.symbols.SymbolDetail.SymbolKind
+import com.google.devsite.components.testing.NoopAnnotationComponent
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.components.testing.NoopFunctionSignature
 import com.google.devsite.components.testing.NoopParameter
@@ -37,7 +37,7 @@ class DefaultSymbolDetailTest {
                 name = "foo",
                 anchors = linkedSetOf(),
                 returnType = NoopParameter("void"),
-                symbolType = SymbolType.FUNCTION,
+                symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
             )
@@ -68,7 +68,7 @@ class DefaultSymbolDetailTest {
                 name = "foo",
                 anchors = linkedSetOf(),
                 returnType = NoopParameter("Unit"),
-                symbolType = SymbolType.FUNCTION,
+                symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
             )
@@ -99,7 +99,7 @@ class DefaultSymbolDetailTest {
                 name = "foo",
                 anchors = linkedSetOf(),
                 returnType = NoopParameter("Unit"),
-                symbolType = SymbolType.PROPERTY,
+                symbolKind = SymbolKind.PROPERTY,
                 signature = NoopFunctionSignature("foo"),
                 metadata = emptyList()
             )
@@ -130,7 +130,7 @@ class DefaultSymbolDetailTest {
                 name = "MyClass",
                 anchors = linkedSetOf(),
                 returnType = NoopParameter("Unit"),
-                symbolType = SymbolType.CONSTRUCTOR,
+                symbolKind = SymbolKind.CONSTRUCTOR,
                 signature = NoopFunctionSignature("MyClass()"),
                 metadata = emptyList()
             )
@@ -161,7 +161,7 @@ class DefaultSymbolDetailTest {
                 name = "MyClass",
                 anchors = linkedSetOf(),
                 returnType = NoopParameter("Unit"),
-                symbolType = SymbolType.CONSTRUCTOR,
+                symbolKind = SymbolKind.CONSTRUCTOR,
                 signature = NoopFunctionSignature("MyClass()"),
                 metadata = emptyList()
             )
@@ -191,9 +191,12 @@ class DefaultSymbolDetailTest {
                 displayLanguage = Language.JAVA,
                 name = "foo",
                 anchors = linkedSetOf(),
-                annotations = listOf(NoopAnnotation("@Foo"), NoopAnnotation("@Bar")),
+                annotationComponents = listOf(
+                    NoopAnnotationComponent("@Foo"),
+                    NoopAnnotationComponent("@Bar")
+                ),
                 returnType = NoopParameter("void"),
-                symbolType = SymbolType.FUNCTION,
+                symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
             )
@@ -225,7 +228,7 @@ class DefaultSymbolDetailTest {
                 anchors = linkedSetOf(),
                 modifiers = listOf("protected", "abstract"),
                 returnType = NoopParameter("void"),
-                symbolType = SymbolType.FUNCTION,
+                symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
             )
@@ -257,7 +260,7 @@ class DefaultSymbolDetailTest {
                 anchors = linkedSetOf(),
                 modifiers = listOf("protected", "abstract"),
                 returnType = NoopParameter("Unit"),
-                symbolType = SymbolType.FUNCTION,
+                symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
             )
@@ -288,7 +291,7 @@ class DefaultSymbolDetailTest {
                 name = "foo",
                 anchors = linkedSetOf("foo(a,b)", "foo(a, b)", "foo-a-b-"),
                 returnType = NoopParameter("void"),
-                symbolType = SymbolType.FUNCTION,
+                symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
             )
@@ -319,7 +322,7 @@ class DefaultSymbolDetailTest {
                 name = "foo",
                 anchors = linkedSetOf(),
                 returnType = NoopParameter("void"),
-                symbolType = SymbolType.FUNCTION,
+                symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = listOf(NoopContextFreeComponent, NoopContextFreeComponent)
             )
@@ -352,7 +355,7 @@ class DefaultSymbolDetailTest {
                 name = "foo",
                 anchors = linkedSetOf(),
                 returnType = NoopParameter("void"),
-                symbolType = SymbolType.FUNCTION,
+                symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList(),
                 extFunctionClass = "MyClassKt"
