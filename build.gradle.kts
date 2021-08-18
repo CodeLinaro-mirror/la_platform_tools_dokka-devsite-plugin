@@ -18,7 +18,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint")
+defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint", "publish")
 
 repositories {
     maven("../../prebuilts/androidx/external")
@@ -28,6 +28,7 @@ plugins {
     kotlin("jvm") version "1.4.30"
     id("com.github.johnrengelman.shadow") version "4.0.4"
     id("application")
+    id("maven-publish")
 }
 
 application {
@@ -141,6 +142,42 @@ val ktlintFormat by tasks.creating(JavaExec::class) {
     main = "com.pinterest.ktlint.Main"
     args = listOf("-F", "src/**/*.kt")
 }
+
+val publicationName = "Dackka"
+val repositoryName = "Dist"
+
+publishing {
+    publications {
+        create<MavenPublication>(publicationName) {
+            from(components["java"])
+            pom {
+                licenses {
+                    license {
+                        name.set("The Apache License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+                developers {
+                    developer {
+                        name.set("The Android Open Source Project")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:https://android.googlesource.com/platform/tools/dokka-devsite-plugin/")
+                    url.set("https://android.googlesource.com/platform/tools/dokka-devsite-plugin//")
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = repositoryName
+            url = uri("file://${getDistributionDirectory().canonicalPath}/repo/repository")
+        }
+    }
+}
+
 
 /**
  * The build server will copy the contents of the distribution directory and make it available for
