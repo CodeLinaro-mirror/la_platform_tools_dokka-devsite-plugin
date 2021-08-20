@@ -54,6 +54,7 @@ import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.doc.DocumentationLink
 import org.jetbrains.dokka.model.doc.Img
 import org.jetbrains.dokka.model.doc.Text
+import org.jetbrains.dokka.model.doc.Pre
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.junit.Ignore
 import org.junit.Test
@@ -906,6 +907,25 @@ internal class DocTagConverterTest(
         assertThat(functionDesc.text()).contains("LastLine")
         assertThat(functionDesc.text()).contains("Instead of using")
         assertThat(functionDesc.data.components.single().children.size).isEqualTo(7)
+    }
+
+    @Test // NOTE: render-to-text puts two spaces where the <pre> was. Is this correct?
+    fun `Test code blocks with @literals and nesting`() {
+        val documentation = """
+            |/**
+            | * Below is a sample of a simple database.
+            | * <pre>
+            | * // File: Song.java
+            | * {@literal @}Entity
+            | * public class Song {
+            | */
+            |public void foo(){}
+        """.render(java = true)
+        val doc = documentation.documentation()
+        val functionDesc = doc.first() as DefaultDescriptionComponent
+        assertThat(functionDesc.text()).isEqualTo("Below is a sample of a simple database." +
+            "  // File: Song.java\n @ Entity\npublic class Song {")
+        assertThat(functionDesc.data.components.last()).isInstanceOf(Pre::class.java)
     }
 
     @Test
