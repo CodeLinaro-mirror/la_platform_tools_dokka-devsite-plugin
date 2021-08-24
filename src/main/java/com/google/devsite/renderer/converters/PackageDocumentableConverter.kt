@@ -19,12 +19,10 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultPackageSummary
 import com.google.devsite.components.impl.DefaultSummaryList
-import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.PackageSummary
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.table.SummaryList
-import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
@@ -33,8 +31,6 @@ import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DProperty
-import org.jetbrains.dokka.model.Documentable
-import org.jetbrains.dokka.model.properties.WithExtraProperties
 
 /** Converts documentables into components for the package summary page. */
 internal class PackageDocumentableConverter(
@@ -51,12 +47,13 @@ internal class PackageDocumentableConverter(
 
     /** @return the root component for the package summary page */
     suspend fun summaryPage(): DevsitePage = coroutineScope {
-        val interfaces = async { docsToSummary(docsHolder.interfacesFor(doc)) }
-        val classes = async { docsToSummary(docsHolder.classesFor(doc, displayLanguage)) }
-        val enums = async { docsToSummary(docsHolder.enumsFor(doc)) }
-        val exceptions = async { docsToSummary(docsHolder.exceptionsFor(doc)) }
-        val annotations = async { docsToSummary(docsHolder.annotationsFor(doc)) }
-        val typeAliases = async { docsToSummary(docsHolder.typeAliasesFor(doc)) }
+        val interfaces = async { javadocConverter.docsToSummary(docsHolder.interfacesFor(doc)) }
+        val classes = async {
+            javadocConverter.docsToSummary(docsHolder.classesFor(doc, displayLanguage)) }
+        val enums = async { javadocConverter.docsToSummary(docsHolder.enumsFor(doc)) }
+        val exceptions = async { javadocConverter.docsToSummary(docsHolder.exceptionsFor(doc)) }
+        val annotations = async { javadocConverter.docsToSummary(docsHolder.annotationsFor(doc)) }
+        val typeAliases = async { javadocConverter.docsToSummary(docsHolder.typeAliasesFor(doc)) }
 
         val topLevelConstantsSummary = async { propertiesToSummary(topLevelConstants()) }
         val topLevelPropertiesSummary = async { propertiesToSummary(topLevelProperties()) }
@@ -98,24 +95,6 @@ internal class PackageDocumentableConverter(
                         extensionFunctions = extensionFunctions.await()
                     )
                 )
-            )
-        )
-    }
-
-    private fun docsToSummary(classlikes: List<Documentable>): SummaryList {
-        val components = classlikes.map { classlike ->
-            val annotations = (classlike as? WithExtraProperties<*>)?.annotations().orEmpty()
-            DefaultTwoPaneSummaryItem(
-                TwoPaneSummaryItem.Params(
-                    title = pathProvider.linkForReference(classlike.dri),
-                    description = javadocConverter.summaryDescription(classlike, annotations)
-                )
-            )
-        }
-
-        return DefaultSummaryList(
-            SummaryList.Params(
-                items = components
             )
         )
     }

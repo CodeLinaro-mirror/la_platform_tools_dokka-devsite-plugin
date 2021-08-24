@@ -18,20 +18,13 @@ package com.google.devsite.components.symbols
 
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.Link
-import com.google.devsite.renderer.Language
 
-/** Represents class signature. */
-internal interface ClassSignature : ContextFreeComponent {
+/** Represents a minimal signature, e.g. that of a classlike in the packages summary. */
+internal interface MiniSignature : ContextFreeComponent {
     val data: Params
 
     class Params(
-        val displayLanguage: Language,
-        val modifiers: List<String>,
-        val type: String,
-        val name: String,
-        val implements: List<Link>,
-        val extends: List<Link>,
-        val typeParameters: List<TypeParameter>,
-        val annotations: List<AnnotationComponent> = emptyList()
+        val annotations: List<AnnotationComponent>,
+        val link: Link
     )
 }

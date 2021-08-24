@@ -25,7 +25,6 @@ import com.google.devsite.components.impl.DefaultInheritedSymbols
 import com.google.devsite.components.impl.DefaultRelatedSymbols
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableTitle
-import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.ClassSignature
@@ -35,7 +34,6 @@ import com.google.devsite.components.table.InheritedSymbolsList
 import com.google.devsite.components.table.RelatedSymbols
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
-import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
@@ -334,14 +332,7 @@ internal class ClasslikeDocumentableConverter(
             // companion object can be omitted.
             Language.KOTLIN -> classlikes.withoutCompanion()
             else -> classlikes
-        }.map { classlike ->
-            DefaultTwoPaneSummaryItem(
-                TwoPaneSummaryItem.Params(
-                    title = pathProvider.linkForReference(classlike.dri),
-                    description = javadocConverter.summaryDescription(classlike)
-                )
-            )
-        }
+        }.map { classlike -> javadocConverter.summaryForDocumentable(classlike) }
 
         return DefaultSummaryList(
             SummaryList.Params(
@@ -470,6 +461,16 @@ internal class ClasslikeDocumentableConverter(
         } else {
             emptyList()
         }
+        val annotations = if (classlike is WithExtraProperties<*>) {
+            classlike.annotations().annotationComponents(
+                pathProvider = pathProvider,
+                displayLanguage = displayLanguage,
+                nullable = false,
+                showNullability = false
+            )
+        } else {
+            emptyList()
+        }
 
         if (classlike !is WithSupertypes) {
             return DefaultClassSignature(ClassSignature.Params(
@@ -479,7 +480,8 @@ internal class ClasslikeDocumentableConverter(
                 modifiers = modifiers,
                 implements = emptyList(),
                 extends = emptyList(),
-                typeParameters = typeParameters
+                typeParameters = typeParameters,
+                annotations = annotations
             ))
         }
 
@@ -498,7 +500,8 @@ internal class ClasslikeDocumentableConverter(
             modifiers = modifiers,
             implements = implements,
             extends = extends,
-            typeParameters = typeParameters
+            typeParameters = typeParameters,
+            annotations = annotations
         ))
     }
 
@@ -559,9 +562,9 @@ internal class ClasslikeDocumentableConverter(
         return DefaultRelatedSymbols(
             RelatedSymbols.Params(
                 directSubclasses = linksForClasslikes(directSubclasses),
-                directSummary = summaryForClasslikes(directSubclasses),
+                directSummary = javadocConverter.docsToSummary(directSubclasses),
                 indirectSubclasses = linksForClasslikes(indirectSubclasses),
-                indirectSummary = summaryForClasslikes(indirectSubclasses)
+                indirectSummary = javadocConverter.docsToSummary(indirectSubclasses)
             )
         )
     }
@@ -569,26 +572,6 @@ internal class ClasslikeDocumentableConverter(
     /** Converts the classlikes to link components for use in the related symbols component. */
     private fun linksForClasslikes(docs: List<DClasslike>): List<Link> {
         return docs.map { pathProvider.linkForReference(it.dri) }
-    }
-
-    /** Converts the classlikes to a summary component for use in the related symbols component. */
-    private fun summaryForClasslikes(docs: List<DClasslike>): SummaryList {
-        return DefaultSummaryList(SummaryList.Params(
-            items = docs.map { classlike ->
-                val annotations =
-                    (classlike as? WithExtraProperties<*>)?.annotations().orEmpty()
-
-                DefaultTwoPaneSummaryItem(
-                    TwoPaneSummaryItem.Params(
-                        title = pathProvider.linkForReference(classlike.dri),
-                        description = javadocConverter.summaryDescription(
-                            classlike,
-                            annotations
-                        )
-                    )
-                )
-            }
-        ))
     }
 
     /**

@@ -19,6 +19,7 @@ package com.google.devsite.components.impl
 import com.google.common.truth.Truth
 import com.google.devsite.components.symbols.ClassSignature
 import com.google.devsite.components.symbols.TypeParameter
+import com.google.devsite.components.testing.NoopAnnotationComponent
 import com.google.devsite.components.testing.NoopLink
 import com.google.devsite.components.testing.NoopSymbolType
 import com.google.devsite.renderer.Language
@@ -41,7 +42,8 @@ class DefaultClassSignatureTest {
                 displayLanguage = Language.KOTLIN,
                 name = "GenericType",
                 projections = listOf(NoopSymbolType("GenericSupertype"))
-            )))
+            ))),
+            annotations = listOf(NoopAnnotationComponent("@GenericAnnotation"))
         ))
 
         val output = createHTML().body {
@@ -52,7 +54,7 @@ class DefaultClassSignatureTest {
         Truth.assertThat(output).isEqualTo(
             """
 <body>
-  <pre>public abstract class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; extends Anyclass implements SomeInterface</pre>
+  <pre>@GenericAnnotation public abstract class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; extends Anyclass implements SomeInterface</pre>
 </body>
             """.trim()
         )
@@ -71,7 +73,8 @@ class DefaultClassSignatureTest {
                 displayLanguage = Language.KOTLIN,
                 name = "GenericType",
                 projections = listOf(NoopSymbolType("GenericSupertype"))
-            )))
+            ))),
+            annotations = listOf(NoopAnnotationComponent("@GenericAnnotation"))
         ))
 
         val output = createHTML().body {
@@ -82,7 +85,7 @@ class DefaultClassSignatureTest {
         Truth.assertThat(output).isEqualTo(
             """
 <body>
-  <pre>open class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; : Anyclass, SomeInterface</pre>
+  <pre>@GenericAnnotation open class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; : Anyclass, SomeInterface</pre>
 </body>
             """.trim()
         )

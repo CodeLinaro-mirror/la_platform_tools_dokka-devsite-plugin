@@ -29,18 +29,18 @@ internal class DefaultClassSignature(
 
     override fun render(into: FlowContent) = into.run {
         pre {
+            data.annotations.render(into, separator = " ", terminator = { +" " })
             +(data.modifiers + data.type + data.name).joinToString(separator = " ")
 
             data.typeParameters.render(into, ShouldBreak.NO, brackets = "<>")
 
             when (data.displayLanguage) {
                 Language.JAVA -> {
-                    data.extends.render(into, ShouldBreak.MAYBE, header = { +" extends " })
-                    data.implements.render(into, ShouldBreak.MAYBE, header = { +" implements " })
+                    data.extends.render(into, header = { +" extends " })
+                    data.implements.render(into, header = { +" implements " })
                 }
                 Language.KOTLIN -> {
-                    (data.extends + data.implements)
-                        .render(into, ShouldBreak.MAYBE, header = { +" : " })
+                    (data.extends + data.implements).render(into, header = { +" : " })
                 }
             }
         }

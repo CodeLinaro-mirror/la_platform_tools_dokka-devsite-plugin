@@ -22,14 +22,12 @@ import com.google.devsite.components.impl.DefaultPackageIndex
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableOfContents
 import com.google.devsite.components.impl.DefaultTocPackage
-import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.pages.ClassIndex
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.PackageIndex
 import com.google.devsite.components.pages.TableOfContents
 import com.google.devsite.components.symbols.TocPackage
 import com.google.devsite.components.table.SummaryList
-import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
@@ -41,7 +39,6 @@ import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DTypeAlias
-import org.jetbrains.dokka.model.properties.WithExtraProperties
 
 /** Converts documentables into components for the root metadata (class/package index). */
 internal class RootDocumentableConverter(
@@ -58,7 +55,7 @@ internal class RootDocumentableConverter(
         val componentClasses = alphabetizedClasses.mapValues { (_, nodes) ->
             DefaultSummaryList(
                 SummaryList.Params(
-                    items = nodes.map(::summaryForClass)
+                    items = nodes.map { javadocConverter.summaryForDocumentable(it) }
                 )
             )
         }
@@ -84,7 +81,7 @@ internal class RootDocumentableConverter(
         val packages = docsHolder.packages()
         val componentPackages = DefaultSummaryList(
             SummaryList.Params(
-                items = packages.map(::summaryForPackage)
+                items = packages.map { javadocConverter.summaryForDocumentable(it) }
             )
         )
 
@@ -124,25 +121,6 @@ internal class RootDocumentableConverter(
     /** Groups class-like types into buckets of their first letter. */
     private fun categorizeClasslikes(classlike: DClasslike): Char {
         return classlike.name().first().toUpperCase()
-    }
-
-    private fun summaryForClass(classlike: DClasslike): DefaultTwoPaneSummaryItem {
-        val annotations = (classlike as? WithExtraProperties<*>)?.annotations().orEmpty()
-        return DefaultTwoPaneSummaryItem(
-            TwoPaneSummaryItem.Params(
-                title = pathProvider.linkForReference(classlike.dri),
-                description = javadocConverter.summaryDescription(classlike, annotations)
-            )
-        )
-    }
-
-    private fun summaryForPackage(packageDoc: DPackage): DefaultTwoPaneSummaryItem {
-        return DefaultTwoPaneSummaryItem(
-            TwoPaneSummaryItem.Params(
-                title = pathProvider.linkForReference(packageDoc.dri),
-                description = javadocConverter.summaryDescription(packageDoc)
-            )
-        )
     }
 
     private fun CoroutineScope.packageForTocAsync(

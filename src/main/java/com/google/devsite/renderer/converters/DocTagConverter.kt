@@ -21,12 +21,14 @@ import com.google.devsite.components.Link
 import com.google.devsite.components.Raw
 import com.google.devsite.components.impl.DefaultDescription
 import com.google.devsite.components.impl.DefaultLink
+import com.google.devsite.components.impl.DefaultMiniSignature
 import com.google.devsite.components.impl.DefaultPropertySignature
 import com.google.devsite.components.impl.DefaultRaw
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableTitle
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.impl.UndocumentedSymbolDescription
+import com.google.devsite.components.symbols.MiniSignature
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.table.SummaryList
@@ -71,6 +73,7 @@ import org.jetbrains.dokka.model.doc.TagWrapper
 import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.model.doc.Throws
 import org.jetbrains.dokka.model.doc.Version
+import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.utilities.cast
 import java.io.File
 import com.google.devsite.components.Description as DescriptionComponent
@@ -576,6 +579,43 @@ internal class DocTagConverter(
                     Language.JAVA -> null
                     Language.KOTLIN -> receiver
                 }
+            )
+        )
+    }
+
+    /**
+     * Converts a generic List<Documentable> to a SummaryList.
+     * Does nothing clever; only converts Documentables to links (by default with annotations)
+     */
+    internal fun docsToSummary(
+        documentables: List<Documentable>,
+        showAnnotations: Boolean = false
+    ) = DefaultSummaryList(SummaryList.Params(items = documentables
+        .map { summaryForDocumentable(it, showAnnotations) }))
+
+    /** Converts generic Documentables to TwoPaneSummaryItems, as simple maybe-annotated links */
+    internal fun summaryForDocumentable(
+        documentable: Documentable,
+        showAnnotations: Boolean = false
+    ):
+        DefaultTwoPaneSummaryItem {
+        val annotations = (documentable as? WithExtraProperties<*>)?.annotations().orEmpty()
+        return DefaultTwoPaneSummaryItem(
+            TwoPaneSummaryItem.Params(
+                title = if (showAnnotations) {
+                    DefaultMiniSignature(MiniSignature.Params(
+                        annotations = annotations.annotationComponents(
+                            pathProvider = pathProvider,
+                            displayLanguage = displayLanguage,
+                            nullable = false,
+                            showNullability = false
+                        ),
+                        link = pathProvider.linkForReference(documentable.dri)
+                    ))
+                } else {
+                    pathProvider.linkForReference(documentable.dri)
+                },
+                description = summaryDescription(documentable, annotations)
             )
         )
     }

@@ -27,6 +27,7 @@ import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.TableOfContents
 import com.google.devsite.components.symbols.AnnotationComponent
 import com.google.devsite.components.symbols.FunctionSignature
+import com.google.devsite.components.symbols.MiniSignature
 import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.components.symbols.SymbolBase
 import com.google.devsite.components.symbols.SymbolSummary
@@ -67,7 +68,8 @@ internal fun SummaryList.single() = items().single()
 internal fun SummaryList.size() = items().size
 internal fun SummaryList.title(): String = (data.header as TableTitle).data.title
 
-internal fun TwoPaneSummaryItem.link(): Link.Params = (data.title as Link).data
+internal fun TwoPaneSummaryItem.link(): Link.Params = (data.title as? Link)?.data
+    ?: (data.title as MiniSignature).data.link.data
 internal fun TwoPaneSummaryItem.summary() = data.description as SymbolSummary
 internal fun TwoPaneSummaryItem.name(): String = (this.data.title as? Parameter)?.data?.name
     ?: (this.data.description as SymbolSummary).name()
