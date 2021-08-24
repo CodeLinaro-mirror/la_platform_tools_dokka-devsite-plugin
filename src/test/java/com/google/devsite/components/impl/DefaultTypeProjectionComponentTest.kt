@@ -17,21 +17,21 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.symbols.SymbolType.Params
+import com.google.devsite.components.symbols.TypeProjectionComponent.Params
 import com.google.devsite.components.testing.NoopLink
-import com.google.devsite.components.testing.NoopSymbolType
+import com.google.devsite.components.testing.NoopTypeProjectionComponent
 import com.google.devsite.renderer.Language
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
 import org.junit.Test
 
-class DefaultSymbolTypeTest {
+class DefaultTypeProjectionComponentTest {
     @Test
     fun `Simple parameter type renders correctly`() {
-        val component = DefaultSymbolType(
+        val component = DefaultTypeProjectionComponent(
             Params(
-                displayLanguage = Language.KOTLIN,
-                type = NoopLink("Int")
+                type = NoopLink("Int"),
+                displayLanguage = Language.KOTLIN
             )
         )
 
@@ -49,11 +49,11 @@ class DefaultSymbolTypeTest {
 
     @Test
     fun `Simple nullable parameter type renders correctly`() {
-        val component = DefaultSymbolType(
+        val component = DefaultTypeProjectionComponent(
             Params(
-                displayLanguage = Language.KOTLIN,
                 type = NoopLink("Int"),
-                nullable = true
+                nullable = true,
+                displayLanguage = Language.KOTLIN
             )
         )
 
@@ -71,11 +71,11 @@ class DefaultSymbolTypeTest {
 
     @Test
     fun `Parameter type with one generic renders correctly`() {
-        val component = DefaultSymbolType(
+        val component = DefaultTypeProjectionComponent(
             Params(
-                displayLanguage = Language.KOTLIN,
                 type = NoopLink("List"),
-                generics = listOf(NoopSymbolType("String"))
+                generics = listOf(NoopTypeProjectionComponent("String")),
+                displayLanguage = Language.KOTLIN
             )
         )
 
@@ -93,12 +93,12 @@ class DefaultSymbolTypeTest {
 
     @Test
     fun `Nullable parameter type with one generic renders correctly`() {
-        val component = DefaultSymbolType(
+        val component = DefaultTypeProjectionComponent(
             Params(
-                displayLanguage = Language.KOTLIN,
                 type = NoopLink("List"),
                 nullable = true,
-                generics = listOf(NoopSymbolType("String"))
+                generics = listOf(NoopTypeProjectionComponent("String")),
+                displayLanguage = Language.KOTLIN
             )
         )
 
@@ -116,11 +116,14 @@ class DefaultSymbolTypeTest {
 
     @Test
     fun `Parameter type with multiple generics renders correctly`() {
-        val component = DefaultSymbolType(
+        val component = DefaultTypeProjectionComponent(
             Params(
-                displayLanguage = Language.KOTLIN,
                 type = NoopLink("Map"),
-                generics = listOf(NoopSymbolType("String"), NoopSymbolType("Int"))
+                generics = listOf(
+                    NoopTypeProjectionComponent("String"),
+                    NoopTypeProjectionComponent("Int")
+                ),
+                displayLanguage = Language.KOTLIN
             )
         )
 

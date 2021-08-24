@@ -468,7 +468,6 @@ internal class ClasslikeDocumentableConverter(
             classlike.annotations().annotationComponents(
                 pathProvider = pathProvider,
                 displayLanguage = displayLanguage,
-                nullable = false,
                 showNullability = false
             )
         } else {

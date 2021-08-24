@@ -20,7 +20,7 @@ import com.google.devsite.renderer.Language
 import kotlinx.html.FlowContent
 
 /** Represents a generic type parameter. */
-internal interface TypeParameter : SymbolBase {
+internal interface TypeParameterComponent : SymbolBase {
     val data: Params
 
     /** Ensure this component's combination of params makes sense. */
@@ -42,7 +42,7 @@ internal interface TypeParameter : SymbolBase {
         val displayLanguage: Language,
         val name: String,
         val modifiers: List<String> = emptyList(),
-        val projections: List<SymbolBase>,
+        val projections: List<TypeProjectionComponent>,
         val annotationComponents: List<AnnotationComponent> = emptyList()
     )
 }

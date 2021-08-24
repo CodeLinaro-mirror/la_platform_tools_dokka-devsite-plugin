@@ -184,11 +184,13 @@ internal abstract class ConverterTestBase(
     private fun testJavaWithRootPageNode(sourceCode: String): DModule {
         val source = """
             |/src/main/java/androidx/example/Test.java
+            |import java.lang.annotation.Target;
+            |import static java.lang.annotation.ElementType.*;
             |package androidx.example;
-            |@Target({METHOD, PARAMETER, FIELD, LOCAL_VARIABLE, ANNOTATION_TYPE, PACKAGE})
+            |@Target({METHOD, PARAMETER, FIELD, LOCAL_VARIABLE, ANNOTATION_TYPE, PACKAGE, TYPE_PARAMETER, TYPE_USE})
             |public @interface Nullable {
             |}
-            |@Target({METHOD, PARAMETER, FIELD, LOCAL_VARIABLE, ANNOTATION_TYPE, PACKAGE})
+            |@Target({METHOD, PARAMETER, FIELD, LOCAL_VARIABLE, ANNOTATION_TYPE, PACKAGE, TYPE_PARAMETER, TYPE_USE})
             |public @interface NonNull {
             |}
             |public class Test {

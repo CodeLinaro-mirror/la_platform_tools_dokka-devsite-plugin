@@ -47,7 +47,7 @@
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;K,&nbsp;V&gt;</code></td>
             <td>
-              <div><code>&lt;K&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/collection/package-summary.html#arrayMapOf(kotlin.Array)">arrayMapOf</a>(pairs:&nbsp;vararg&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;K,&nbsp;V&gt;)</code></div>
+              <div><code>&lt;K&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/collection/package-summary.html#arrayMapOf(kotlin.Array)">arrayMapOf</a>(vararg&nbsp;pairs:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;K,&nbsp;V&gt;)</code></div>
               <p>Returns a new ArrayMap with the specified contents, given as a list of pairs where the first component is the key and the second component is the value.</p>
             </td>
           </tr>
@@ -61,14 +61,14 @@
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T&gt;</code></td>
             <td>
-              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/collection/package-summary.html#arraySetOf(kotlin.Array)">arraySetOf</a>(values:&nbsp;vararg&nbsp;T)</code></div>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/collection/package-summary.html#arraySetOf(kotlin.Array)">arraySetOf</a>(vararg&nbsp;values:&nbsp;T)</code></div>
               <p>Returns a new ArraySet with the specified contents.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code>inline <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;K,&nbsp;V&gt;</code></td>
             <td>
-              <div><code>&lt;K&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/collection/package-summary.html#lruCache(kotlin.Int,kotlin.Function2,kotlin.Function1,kotlin.Function4)">lruCache</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;maxSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;sizeOf:&nbsp;(key, value) <span style="white-space: nowrap;">-&gt;</span> crossinline&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;create:&nbsp;(key) <span style="white-space: nowrap;">-&gt;</span> crossinline&nbsp;V?,<br>&nbsp;&nbsp;&nbsp;&nbsp;onEntryRemoved:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>, key, oldValue, newValue?) <span style="white-space: nowrap;">-&gt;</span> crossinline&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <div><code>&lt;K&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/collection/package-summary.html#lruCache(kotlin.Int,kotlin.Function2,kotlin.Function1,kotlin.Function4)">lruCache</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;maxSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;sizeOf:&nbsp;(key, value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;create:&nbsp;(key) <span style="white-space: nowrap;">-&gt;</span> V?,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;onEntryRemoved:&nbsp;(evicted:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>, key, oldValue, newValue?) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
               <p>Creates an LruCache with the given parameters.</p>
             </td>
           </tr>
@@ -96,14 +96,14 @@
           <tr>
             <td width="40%"><code>inline <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/collection/package-summary.html#(LongSparseArray&lt;T&gt;).forEach(kotlin.Function2)">forEach</a>(action:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>, value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/collection/package-summary.html#(LongSparseArray&lt;T&gt;).forEach(kotlin.Function2)">forEach</a>(action:&nbsp;(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>, value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
               <p>Performs the given <code><a href="/reference/kotlin/androidx/collection/package-summary.html#(LongSparseArray&lt;T&gt;).forEach(kotlin.Function2)">action</a></code> for each key/value entry.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code>inline <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/collection/package-summary.html#(SparseArrayCompat&lt;T&gt;).forEach(kotlin.Function2)">forEach</a>(action:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/collection/package-summary.html#(SparseArrayCompat&lt;T&gt;).forEach(kotlin.Function2)">forEach</a>(action:&nbsp;(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
               <p>Performs the given <code><a href="/reference/kotlin/androidx/collection/package-summary.html#(SparseArrayCompat&lt;T&gt;).forEach(kotlin.Function2)">action</a></code> for each key/value entry.</p>
             </td>
           </tr>
@@ -251,7 +251,7 @@
     </div>
     <div><a name="arrayMapOf-kotlin.Array-"></a><a name="arraymapof"></a>
       <h3 class="api-name" id="arrayMapOf(kotlin.Array)">arrayMapOf</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;K&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/collection/package-summary.html#arrayMapOf(kotlin.Array)">arrayMapOf</a>(pairs:&nbsp;vararg&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;K,&nbsp;V&gt;):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;K,&nbsp;V&gt;</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;K&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/collection/package-summary.html#arrayMapOf(kotlin.Array)">arrayMapOf</a>(vararg&nbsp;pairs:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a>&lt;K,&nbsp;V&gt;):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;K,&nbsp;V&gt;</pre>
       <p>Returns a new ArrayMap with the specified contents, given as a list of pairs where the first component is the key and the second component is the value.</p>
       <p>If multiple pairs have the same key, the resulting map will contain the value from the last of those pairs.</p>
     </div>
@@ -262,12 +262,12 @@
     </div>
     <div><a name="arraySetOf-kotlin.Array-"></a><a name="arraysetof"></a>
       <h3 class="api-name" id="arraySetOf(kotlin.Array)">arraySetOf</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/collection/package-summary.html#arraySetOf(kotlin.Array)">arraySetOf</a>(values:&nbsp;vararg&nbsp;T):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T&gt;</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/collection/package-summary.html#arraySetOf(kotlin.Array)">arraySetOf</a>(vararg&nbsp;values:&nbsp;T):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T&gt;</pre>
       <p>Returns a new ArraySet with the specified contents.</p>
     </div>
     <div><a name="lruCache(kotlin.Int, kotlin.Function2, kotlin.Function1, kotlin.Function4)"></a><a name="lruCache-kotlin.Int-kotlin.Function2-kotlin.Function1-kotlin.Function4-"></a><a name="lrucache"></a>
       <h3 class="api-name" id="lruCache(kotlin.Int,kotlin.Function2,kotlin.Function1,kotlin.Function4)">lruCache</h3>
-      <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;K&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/collection/package-summary.html#lruCache(kotlin.Int,kotlin.Function2,kotlin.Function1,kotlin.Function4)">lruCache</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;maxSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;sizeOf:&nbsp;(key, value) <span style="white-space: nowrap;">-&gt;</span> crossinline&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = { _, _ -&gt; 1 },<br>&nbsp;&nbsp;&nbsp;&nbsp;create:&nbsp;(key) <span style="white-space: nowrap;">-&gt;</span> crossinline&nbsp;V? = { null as V? },<br>&nbsp;&nbsp;&nbsp;&nbsp;onEntryRemoved:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>, key, oldValue, newValue?) <span style="white-space: nowrap;">-&gt;</span> crossinline&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = { _, _, _, _ -&gt; }<br>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;K,&nbsp;V&gt;</pre>
+      <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;K&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;V&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/collection/package-summary.html#lruCache(kotlin.Int,kotlin.Function2,kotlin.Function1,kotlin.Function4)">lruCache</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;maxSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;sizeOf:&nbsp;(key, value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = { _, _ -&gt; 1 },<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;create:&nbsp;(key) <span style="white-space: nowrap;">-&gt;</span> V? = { null as V? },<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;onEntryRemoved:&nbsp;(evicted:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>, key, oldValue, newValue?) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = { _, _, _, _ -&gt; }<br>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;K,&nbsp;V&gt;</pre>
       <p>Creates an LruCache with the given parameters.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -284,19 +284,19 @@
               </td>
             </tr>
             <tr>
-              <td width="40%"><code>sizeOf:&nbsp;(key, value) <span style="white-space: nowrap;">-&gt;</span> crossinline&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = { _, _ -&gt; 1 }</code></td>
+              <td width="40%"><code>crossinline&nbsp;sizeOf:&nbsp;(key, value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = { _, _ -&gt; 1 }</code></td>
               <td>
                 <p>function that returns the size of the entry for key and value in user-defined units. The default implementation returns 1.</p>
               </td>
             </tr>
             <tr>
-              <td width="40%"><code>create:&nbsp;(key) <span style="white-space: nowrap;">-&gt;</span> crossinline&nbsp;V? = { null as V? }</code></td>
+              <td width="40%"><code>crossinline&nbsp;create:&nbsp;(key) <span style="white-space: nowrap;">-&gt;</span> V? = { null as V? }</code></td>
               <td>
                 <p>a create called after a cache miss to compute a value for the corresponding key. Returns the computed value or null if no value can be computed. The default implementation returns null.</p>
               </td>
             </tr>
             <tr>
-              <td width="40%"><code>onEntryRemoved:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>, key, oldValue, newValue?) <span style="white-space: nowrap;">-&gt;</span> crossinline&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = { _, _, _, _ -&gt; }</code></td>
+              <td width="40%"><code>crossinline&nbsp;onEntryRemoved:&nbsp;(evicted:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>, key, oldValue, newValue?) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a> = { _, _, _, _ -&gt; }</code></td>
               <td>
                 <p>a function called for entries that have been evicted or removed.</p>
               </td>
@@ -341,12 +341,12 @@
     </div>
     <div><a name="-LongSparseArray&lt;T&gt;-.forEach-kotlin.Function2-"></a><a name="foreach"></a>
       <h3 class="api-name" id="(LongSparseArray&lt;T&gt;).forEach(kotlin.Function2)">forEach</h3>
-      <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/collection/package-summary.html#(LongSparseArray&lt;T&gt;).forEach(kotlin.Function2)">forEach</a>(action:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>, value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/collection/package-summary.html#(LongSparseArray&lt;T&gt;).forEach(kotlin.Function2)">forEach</a>(action:&nbsp;(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>, value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Performs the given <code><a href="/reference/kotlin/androidx/collection/package-summary.html#(LongSparseArray&lt;T&gt;).forEach(kotlin.Function2)">action</a></code> for each key/value entry.</p>
     </div>
     <div><a name="-SparseArrayCompat&lt;T&gt;-.forEach-kotlin.Function2-"></a><a name="foreach"></a>
       <h3 class="api-name" id="(SparseArrayCompat&lt;T&gt;).forEach(kotlin.Function2)">forEach</h3>
-      <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/collection/package-summary.html#(SparseArrayCompat&lt;T&gt;).forEach(kotlin.Function2)">forEach</a>(action:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/collection/package-summary.html#(SparseArrayCompat&lt;T&gt;).forEach(kotlin.Function2)">forEach</a>(action:&nbsp;(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, value) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Performs the given <code><a href="/reference/kotlin/androidx/collection/package-summary.html#(SparseArrayCompat&lt;T&gt;).forEach(kotlin.Function2)">action</a></code> for each key/value entry.</p>
     </div>
     <div><a name="(LongSparseArray&lt;T&gt;).getOrDefault(kotlin.Long, kotlin.Any)"></a><a name="-LongSparseArray&lt;T&gt;-.getOrDefault-kotlin.Long-kotlin.Any-"></a><a name="getordefault"></a>

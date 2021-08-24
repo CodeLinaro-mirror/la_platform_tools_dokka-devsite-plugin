@@ -19,7 +19,7 @@ package com.google.devsite.components.impl
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.symbols.PropertySignature.Params
 import com.google.devsite.components.testing.NoopLink
-import com.google.devsite.components.testing.NoopParameter
+import com.google.devsite.components.testing.NoopParameterComponent
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -50,7 +50,7 @@ class DefaultPropertySignatureTest {
         val component = DefaultPropertySignature(
             Params(
                 name = NoopLink("foo"),
-                receiver = NoopParameter("String")
+                receiver = NoopParameterComponent("String")
             )
         )
 

@@ -20,21 +20,25 @@ import com.google.devsite.components.Link
 import com.google.devsite.renderer.Language
 
 /** Represents a symbol type such as function parameter types. */
-internal interface SymbolType : SymbolBase {
+internal interface TypeProjectionComponent : SymbolBase {
     val data: Params
 
     override fun length(): Int {
         val typeSize = data.type.length()
+        val annotationSize = data.annotationComponents.sumBy { it.length() }
         val genericsSize = data.generics.sumBy { it.length() + 2 }
 
-        return typeSize + genericsSize
+        return typeSize + annotationSize + genericsSize
     }
 
-    class Params(
-        val displayLanguage: Language,
-        val type: Link,
-        val nullable: Boolean = false,
-        val generics: List<SymbolBase> = emptyList(),
-        val annotationComponents: List<AnnotationComponent> = emptyList()
+    open class Params(
+        open val type: Link,
+        open val annotationComponents: List<AnnotationComponent> = emptyList(),
+        open val nullable: Boolean = false,
+        open val generics: List<TypeProjectionComponent> = emptyList(),
+        open val displayLanguage: Language
     )
+
+    val nullable: Boolean
+        get() = data.nullable || data.annotationComponents.any { it.name == "Nullable" }
 }

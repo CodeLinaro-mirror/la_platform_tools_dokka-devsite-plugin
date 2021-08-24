@@ -22,7 +22,7 @@ import com.google.devsite.components.pages.Classlike.Params
 import com.google.devsite.components.testing.NoopClassHierarchy
 import com.google.devsite.components.testing.NoopClassSignature
 import com.google.devsite.components.testing.NoopContextFreeComponent
-import com.google.devsite.components.testing.NoopDescription
+import com.google.devsite.components.testing.NoopDescriptionComponent
 import com.google.devsite.components.testing.NoopRelatedSymbols
 import com.google.devsite.components.testing.NoopSummaryList
 import kotlinx.html.body
@@ -120,7 +120,7 @@ class DefaultClasslikeTest {
                 signature = NoopClassSignature(),
                 hierarchy = NoopClassHierarchy(shown = false),
                 relatedSymbols = NoopRelatedSymbols(shown = false),
-                description = listOf(NoopDescription("Hello World!")),
+                description = listOf(NoopDescriptionComponent("Hello World!")),
                 symbolTypes = emptyList(),
                 inheritedTypes = emptyList()
             )

@@ -23,7 +23,10 @@ import com.google.devsite.components.symbols.NamedValueAnnotationParameter
 import com.google.devsite.components.symbols.name
 import com.google.devsite.components.symbols.value
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.Language.*
 import com.google.devsite.renderer.converters.testing.exceptNonNull
+import com.google.devsite.renderer.converters.testing.isAtNonNull
+import com.google.devsite.renderer.converters.testing.isAtNullable
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.links.DRI
@@ -145,9 +148,11 @@ internal class AnnotationsTest : ConverterTestBase() {
         """.render(java = true).functionAnnotations()
 
         for (annotations in listOf(annotationsK, annotationsJ)) {
-            val annotationOne = annotations.components().exceptNonNull().first()
+            val annotationOne = annotations.components(isFromJava = annotations == annotationsJ)
+                .exceptNonNull().first()
             val parameterOne = annotationOne.data.parameters.item()
-            val annotationTwo = annotations.components().exceptNonNull().last()
+            val annotationTwo = annotations.components(isFromJava = annotations == annotationsJ)
+                .exceptNonNull().last()
             val parameterTwo = annotationTwo.data.parameters.item()
 
             // NOTE: "value" in java does not match "bar" in kotlin
@@ -179,9 +184,11 @@ internal class AnnotationsTest : ConverterTestBase() {
         """.render(java = true).property()!!.annotations()
 
         for (annotations in listOf(annotationsK, annotationsJ)) {
-            val annotationOne = annotations.components().exceptNonNull().first()
+            val annotationOne = annotations.components(isFromJava = annotations == annotationsJ)
+                .exceptNonNull().first()
             val parameterOne = annotationOne.data.parameters.item()
-            val annotationTwo = annotations.components().exceptNonNull().last()
+            val annotationTwo = annotations.components(isFromJava = annotations == annotationsJ)
+                .exceptNonNull().last()
             val parameterTwo = annotationTwo.data.parameters.item()
 
             // NOTE: "value" in java does not match "bar" in kotlin
@@ -209,9 +216,11 @@ internal class AnnotationsTest : ConverterTestBase() {
         """.render(java = true).function()!!.parameters.single().annotations()
 
         for (annotations in listOf(annotationsK, annotationsJ)) {
-            val annotationOne = annotations.components().exceptNonNull().first()
+            val annotationOne = annotations.components(isFromJava = annotations == annotationsJ)
+                .exceptNonNull().first()
             val parameterOne = annotationOne.data.parameters.item()
-            val annotationTwo = annotations.components().exceptNonNull().last()
+            val annotationTwo = annotations.components(isFromJava = annotations == annotationsJ)
+                .exceptNonNull().last()
             val parameterTwo = annotationTwo.data.parameters.item()
 
             if (annotations == annotationsK) assertThat(parameterOne.name).isEqualTo("bar")
@@ -234,13 +243,15 @@ internal class AnnotationsTest : ConverterTestBase() {
             |public @interface Hello {
             |    public String bar() default "";
             |}
-            |public <@Hello("abc") @Hello(bar = "baz") T> List<T> foo()
+            |public <@Hello("abc") @Hello(bar = "baz") T> java.util.List<T> foo()
         """.render(java = true).function()!!.generics.single().annotations()
 
         for (annotations in listOf(annotationsK, annotationsJ)) {
-            val annotationOne = annotations.components().exceptNonNull().first()
+            val annotationOne = annotations.components(isFromJava = annotations == annotationsJ)
+                .exceptNonNull().first()
             val parameterOne = annotationOne.data.parameters.item()
-            val annotationTwo = annotations.components().exceptNonNull().last()
+            val annotationTwo = annotations.components(isFromJava = annotations == annotationsJ)
+                .exceptNonNull().last()
             val parameterTwo = annotationTwo.data.parameters.item()
 
             if (annotations == annotationsK) assertThat(parameterOne.name).isEqualTo("bar")
@@ -263,14 +274,15 @@ internal class AnnotationsTest : ConverterTestBase() {
             |public @interface Hello {
             |    public String bar() default "";
             |}
-            |public <T extends @Hello(bar = "baz") String> List<T> foo() {
+            |public <T extends @Hello(bar = "baz") String> java.util.List<T> foo() {
             |    return null;
             |}
         """.render(java = true).function()!!.generics.single().bounds.single() as Nullable
         val boundsJava = wrapper.inner as WithExtraProperties<*>
 
         for (annotations in listOf(boundsKotlin.annotations(), boundsJava.annotations())) {
-            val annotationOne = annotations.components().first()
+            val annotationOne = annotations.components(
+                isFromJava = annotations == boundsJava.annotations()).first()
             val parameterOne = annotationOne.data.parameters.item()
 
             assertThat(parameterOne.name).isEqualTo("bar")
@@ -280,24 +292,44 @@ internal class AnnotationsTest : ConverterTestBase() {
 
     @Test
     fun `Nullability annotation is kept and discarded in Java and Kotlin as appropriate`() {
-        val annotationsJ = """
+        val moduleJ = """
             |/**
             | * Stuff
             | */
             |@Nullable
-            |public String foo() {
-            |   return null;
-            |}
-        """.render(java = true).functionAnnotations()
-        val annotationsK = """
+            |public String nulla1() { return null; }
+            |public String nulla2() { return null; }
+            |@NonNull
+            |public String nonna1() { return ""; }
+            |@NotNull
+            |public String nonna2() { return ""; }
+        """.render(java = true)
+        val moduleK = """
             |annotation class Nullable
+            |annotation class NonNull
             |@Nullable
-            |fun foo() = Unit
-        """.render().functionAnnotations()
-
-        for (annotations in listOf(annotationsK, annotationsJ)) {
-            assertThat(annotations.components()).isNotEmpty()
-            assertThat(annotations.components(Language.KOTLIN)).isEmpty()
+            |fun nulla1(): String? = null
+            |fun nulla2(): String? = null
+            |@NonNull
+            |fun nonna1(): String = "foo"
+            |fun nonna2(): String = "foo"
+        """.render()
+        for (whichFun in listOf("nonna1", "nonna2", "nulla1", "nulla2")) {
+            val annotationsJ = moduleJ.functionAnnotations(whichFun)
+            val annotationsK = moduleK.functionAnnotations(whichFun)
+            for (annotations in listOf(annotationsK, annotationsJ)) {
+                if (whichFun != "nulla1") continue
+                val isFromJava = (annotations === annotationsJ) // compare by reference
+                val isKotlinNullable = !isFromJava && "nulla" in whichFun
+                val annotationsAsJ = annotations.components(JAVA, isKotlinNullable, isFromJava)
+                val annotationsAsK = annotations.components(KOTLIN, isKotlinNullable, isFromJava)
+                // Java docs retain explicit nullability in java source, and get injected @NonNull
+                if ("nonna" in whichFun) assertThat(annotationsAsJ.single().isAtNonNull)
+                else if (whichFun == "nulla1") assertThat(annotationsAsJ.single().isAtNullable)
+                else assertThat(annotationsAsJ).isEmpty()
+                // Kotlin docs retain NO nullability annotations EVEN IF explicit in Kotlin source
+                assertThat(annotationsAsK).isEmpty()
+            }
         }
     }
 
@@ -309,28 +341,30 @@ internal class AnnotationsTest : ConverterTestBase() {
             |fun foo() = Unit
         """.render().functionAnnotations()
 
-        assertThat(annotations.isNullable()).isTrue()
+        assertThat(annotations.hasAtNullable()).isTrue()
     }
 
     @Test
-    fun `Nullability annotation is injected for nullable type in Java`() {
-        val annotations = emptyList<Annotation>().components(Language.JAVA, forcedNullable = true)
+    fun `Nullability annotation is not injected for Kotlin-nullable type as-Java`() {
+        val annotations = emptyList<Annotation>()
+            .components(JAVA, isKotlinNullable = true, isFromJava = false)
 
-        assertThat(annotations).isNotEmpty()
+        assertThat(annotations).isEmpty()
     }
 
     @Test
-    fun `Nullability annotation isn't doubly injected for nullable type`() {
+    fun `Nullability annotation isn't doubly injected for @Nullable Kotlin-nullable type`() {
         val annotations = listOf(
             Annotation(DRI("androidx.annotation", "Nullable"), emptyMap())
-        ).components(forcedNullable = true)
+        ).components(isKotlinNullable = true, isFromJava = false)
 
-        assertThat(annotations).hasSize(1)
+        assertThat(annotations.single().isAtNullable)
     }
 
     @Test
-    fun `Nullability annotation is NOT injected for nullable type in Kotlin`() {
-        val annotations = emptyList<Annotation>().components(Language.KOTLIN, forcedNullable = true)
+    fun `Nullability annotation is NOT injected for Kotlin-nullable type as-Kotlin`() {
+        val annotations = emptyList<Annotation>()
+            .components(KOTLIN, isKotlinNullable = true, isFromJava = false)
 
         assertThat(annotations).isEmpty()
     }
@@ -343,20 +377,31 @@ internal class AnnotationsTest : ConverterTestBase() {
 
             |fun baz(@Foo(bar = 100) arg: Long): Long = 1
         """.render().function()!!.parameters.single().annotations()
-        val paramValue = annotationsKt.components().first().data.parameters.single()
+        val paramValue = annotationsKt.components(isFromJava = false)
+            .first().data.parameters.single()
         val data = (paramValue as NamedValueAnnotationParameter).data
         assertThat(data.name).isEqualTo("bar")
         assertThat(data.value).isEqualTo("100")
     }
 
-    private fun DModule.functionAnnotations(): List<Annotation> {
-        return function("foo")!!.annotations()
+    private fun DModule.functionAnnotations(name: String = "foo"): List<Annotation> {
+        return function(name)!!.annotations()
+    }
+
+    private fun DModule.functionReturnAnnotations(name: String = "foo"): List<Annotation> {
+        return function(name)!!.type.annotations()
     }
 
     private fun List<Annotation>.components(
-        language: Language = Language.JAVA,
-        forcedNullable: Boolean = false
-    ) = annotationComponents(pathProvider(), language, forcedNullable)
+        displayLanguage: Language = JAVA,
+        isKotlinNullable: Boolean = false,
+        isFromJava: Boolean = true
+    ) = annotationComponents(
+        pathProvider = pathProvider(),
+        displayLanguage = displayLanguage,
+        isFromJava = isFromJava,
+        isKotlinNullable = isKotlinNullable
+    )
 
     private fun AnnotationComponent.link(): Link.Params = data.type.data
 }

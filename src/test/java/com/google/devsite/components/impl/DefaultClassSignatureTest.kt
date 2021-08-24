@@ -18,10 +18,10 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth
 import com.google.devsite.components.symbols.ClassSignature
-import com.google.devsite.components.symbols.TypeParameter
+import com.google.devsite.components.symbols.TypeParameterComponent
 import com.google.devsite.components.testing.NoopAnnotationComponent
 import com.google.devsite.components.testing.NoopLink
-import com.google.devsite.components.testing.NoopSymbolType
+import com.google.devsite.components.testing.NoopTypeProjectionComponent
 import com.google.devsite.renderer.Language
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
@@ -38,10 +38,10 @@ class DefaultClassSignatureTest {
             modifiers = listOf("public", "abstract"),
             extends = listOf(NoopLink("Anyclass")),
             implements = listOf(NoopLink("SomeInterface")),
-            typeParameters = listOf(DefaultTypeParameter(TypeParameter.Params(
+            typeParameters = listOf(DefaultTypeParameterComponent(TypeParameterComponent.Params(
                 displayLanguage = Language.KOTLIN,
                 name = "GenericType",
-                projections = listOf(NoopSymbolType("GenericSupertype"))
+                projections = listOf(NoopTypeProjectionComponent("GenericSupertype"))
             ))),
             annotations = listOf(NoopAnnotationComponent("@GenericAnnotation"))
         ))
@@ -69,10 +69,10 @@ class DefaultClassSignatureTest {
             modifiers = listOf("open"),
             extends = listOf(NoopLink("Anyclass")),
             implements = listOf(NoopLink("SomeInterface")),
-            typeParameters = listOf(DefaultTypeParameter(TypeParameter.Params(
+            typeParameters = listOf(DefaultTypeParameterComponent(TypeParameterComponent.Params(
                 displayLanguage = Language.KOTLIN,
                 name = "GenericType",
-                projections = listOf(NoopSymbolType("GenericSupertype"))
+                projections = listOf(NoopTypeProjectionComponent("GenericSupertype"))
             ))),
             annotations = listOf(NoopAnnotationComponent("@GenericAnnotation"))
         ))

@@ -29,7 +29,7 @@ internal interface SymbolDetail : ContextFreeComponent {
         val anchors: LinkedHashSet<String>,
         val annotationComponents: List<AnnotationComponent> = emptyList(),
         val modifiers: List<String> = emptyList(),
-        val returnType: Parameter,
+        val returnType: TypeProjectionComponent,
         val symbolKind: SymbolKind,
         val signature: SymbolSignature,
         val metadata: List<ContextFreeComponent>,

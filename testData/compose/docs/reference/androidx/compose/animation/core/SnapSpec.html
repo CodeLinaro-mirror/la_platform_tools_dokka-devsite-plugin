@@ -57,7 +57,7 @@
           <tr>
             <td width="40%"><code>boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/compose/animation/core/SnapSpec.html#equals(kotlin.Any)">equals</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</code></div>
+              <div><code><a href="/reference/androidx/compose/animation/core/SnapSpec.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</code></div>
             </td>
           </tr>
           <tr>
@@ -79,7 +79,7 @@
     <h2>Public fields</h2>
     <div><a name="getDelay()"></a><a name="setDelay()"></a><a name="getDelay--"></a><a name="setDelay--"></a>
       <h3 class="api-name" id="delay()">delay</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/animation/core/SnapSpec.html#delay()">delay</a></pre>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/animation/core/SnapSpec.html#delay()">delay</a></pre>
       <p>the amount of time (in milliseconds) that the animation should wait before it     starts. Defaults to 0.</p>
     </div>
     <h2>Public constructors</h2>
@@ -107,15 +107,15 @@
     <h2>Public methods</h2>
     <div><a name="equals-kotlin.Any-"></a><a name="equals"></a>
       <h3 class="api-name" id="equals(kotlin.Any)">equals</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/animation/core/SnapSpec.html#equals(kotlin.Any)">equals</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</pre>
+      <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/animation/core/SnapSpec.html#equals(kotlin.Any)">equals</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;other)</pre>
     </div>
     <div><a name="hashCode--"></a><a name="hashcode"></a>
       <h3 class="api-name" id="hashCode()">hashCode</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;int&nbsp;<a href="/reference/androidx/compose/animation/core/SnapSpec.html#hashCode()">hashCode</a>()</pre>
+      <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/compose/animation/core/SnapSpec.html#hashCode()">hashCode</a>()</pre>
     </div>
     <div><a name="vectorize-androidx.compose.animation.core.TwoWayConverter-"></a><a name="vectorize"></a>
       <h3 class="api-name" id="vectorize(androidx.compose.animation.core.TwoWayConverter)">vectorize</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;<a href="/reference/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html">VectorizedDurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/SnapSpec.html#vectorize(androidx.compose.animation.core.TwoWayConverter)">vectorize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;converter<br>)</pre>
+      <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/VectorizedDurationBasedAnimationSpec.html">VectorizedDurationBasedAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/SnapSpec.html#vectorize(androidx.compose.animation.core.TwoWayConverter)">vectorize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;converter<br>)</pre>
       <p>Creates a <code><a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> with the given <code><a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code>.</p>
       <p>The underlying animation system operates on <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>s. <code><a href="/reference/androidx/compose/animation/core/SnapSpec.html">T</a></code> will be converted to <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> to animate. <code><a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> describes how the converted <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> should be animated. E.g. The animation could simply interpolate between the start and end values (i.e.<code><a href="/reference/androidx/compose/animation/core/TweenSpec.html">TweenSpec</a></code>), or apply spring physics to produce the motion (i.e. <code><a href="/reference/androidx/compose/animation/core/SpringSpec.html">SpringSpec</a></code>), etc)</p>
       <div class="devsite-table-wrapper">

@@ -19,41 +19,29 @@ package com.google.devsite.components.symbols
 import com.google.devsite.renderer.Language
 
 /** Represents a function or method parameter. */
-internal interface Parameter : SymbolBase {
+internal interface ParameterComponent : SymbolBase {
     val data: Params
-
-    /** Ensure this component's combination of params makes sense. */
-    fun validate()
 
     override fun length(): Int {
         var result = data.name.length
 
         result += data.defaultValue?.length ?: 0
         result += data.annotationComponents.sumBy { it.length() }
-        result += data.lambdaParams.sumBy { it.length() }
-        result += data.lambdaModifiers.sumBy { it.length }
         result += data.modifiers.sumBy { it.length }
         result += data.type.length()
-        result += data.receiver?.length() ?: 0
-        result += if (data.isLambda) 5 else 0
 
         return result
     }
 
     class Params(
         val displayLanguage: Language,
-        val isLambda: Boolean,
         val name: String,
-        val receiver: SymbolBase? = null,
-        val lambdaParams: List<SymbolBase> = emptyList(),
-        val lambdaModifiers: List<String> = emptyList(),
         val modifiers: List<String> = emptyList(),
-        val type: SymbolBase,
+        val type: TypeProjectionComponent,
         val annotationComponents: List<AnnotationComponent> = emptyList(),
         val defaultValue: String? = null
     )
 
     val nullable: Boolean
-        get() = ((data.type as? SymbolType)?.data?.nullable ?: false) ||
-            data.annotationComponents.any { it.data.type.data.name == "Nullable" }
+        get() = data.type.nullable || data.annotationComponents.any { it.name == "Nullable" }
 }

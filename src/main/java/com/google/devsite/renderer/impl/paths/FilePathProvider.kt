@@ -63,10 +63,14 @@ internal interface FilePathProvider {
     /** @return the path of a class-like type */
     fun forType(packageName: String, name: String): String
 
-    /** @see forReference */
-    fun linkForReference(dri: DRI): Link {
+    /**
+     * @see forReference
+     *
+     * @param suffix is used in the case of links of a nullable type
+     */
+    fun linkForReference(dri: DRI, suffix: String = ""): Link {
         val ref = forReference(dri)
-        return DefaultLink(Link.Params(ref.name, ref.url))
+        return DefaultLink(Link.Params(ref.name + suffix, ref.url))
     }
 
     /**

@@ -24,6 +24,6 @@ internal interface TypeSummary : ContextFreeComponent {
 
     class Params(
         val modifiers: List<String> = emptyList(),
-        val type: Parameter
+        val type: TypeProjectionComponent
     )
 }

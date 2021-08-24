@@ -47,7 +47,7 @@
           <tr>
             <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a>(content:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
               <p>Called by the parent composition in response to calling <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code>.</p>
             </td>
           </tr>
@@ -158,7 +158,7 @@
                     <tr>
                       <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">setContent</a>(content:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">setContent</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
                         <p>Update the composition with the content described by the <code><a href="/reference/kotlin/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">content</a></code> composable.</p>
                       </td>
                     </tr>
@@ -178,7 +178,7 @@
     </div>
     <div><a name="composeContent-kotlin.Function0-"></a><a name="composecontent"></a>
       <h3 class="api-name" id="composeContent(kotlin.Function0)">composeContent</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a>(content:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#composeContent(kotlin.Function0)">composeContent</a>(content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Called by the parent composition in response to calling <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code>. After this method the changes should be calculated but not yet applied. DO NOT call this method directly if this is interface is controlled by a <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>, either use <code><a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#setContent(kotlin.Function0)">setContent</a></code> or <code><a href="/reference/kotlin/androidx/compose/runtime/Recomposer.html#composeInitial(androidx.compose.runtime.ControlledComposition,kotlin.Function0)">Recomposer.composeInitial</a></code> instead.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -189,7 +189,7 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>content:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td width="40%"><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> () <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
                 <p>A composable function that describes the tree.</p>
               </td>
@@ -286,7 +286,7 @@
     </div>
     <div><a name="verifyConsistent--"></a><a name="verifyconsistent"></a>
       <h3 class="api-name" id="verifyConsistent()">verifyConsistent</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#verifyConsistent()">verifyConsistent</a>():&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/InternalComposeApi.html">InternalComposeApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ControlledComposition.html#verifyConsistent()">verifyConsistent</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Throws an exception if the internal state of the composer has been corrupted and is no longer consistent. Used in testing the composer itself.</p>
     </div>
     <h2>Public properties</h2>

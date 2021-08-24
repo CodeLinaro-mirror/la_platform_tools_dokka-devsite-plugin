@@ -53,7 +53,9 @@ internal class EnumValueDocumentableConverter(
     fun detail(dEnum: DEnum, enumValue: DEnumEntry, hints: ModifierHints): SymbolDetail {
         val annotations = enumValue.annotations()
         val projection = paramConverter.componentForProjection(
-            GenericTypeConstructor(dEnum.dri, emptyList())
+            GenericTypeConstructor(dEnum.dri, emptyList()),
+            isJavaSource = enumValue.isFromJava(),
+            showNullability = false
         )
         return DefaultSymbolDetail(
             SymbolDetail.Params(
@@ -61,9 +63,9 @@ internal class EnumValueDocumentableConverter(
                 name = enumValue.name,
                 anchors = enumValue.generateAnchors(),
                 annotationComponents = annotations.annotationComponents(
-                    pathProvider,
-                    displayLanguage,
-                    false
+                    pathProvider = pathProvider,
+                    displayLanguage = displayLanguage,
+                    showNullability = false
                 ),
                 modifiers = enumValue.getExtraModifiers().modifiersFor(hints),
                 returnType = projection,

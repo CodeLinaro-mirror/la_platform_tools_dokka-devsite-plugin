@@ -1,0 +1,52 @@
+/*
+ * Copyright 2020 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.google.devsite.components.symbols
+
+import com.google.devsite.components.Link
+import com.google.devsite.renderer.Language
+
+/** Represents a symbol type such as function parameter types. */
+internal interface LambdaTypeProjectionComponent : TypeProjectionComponent {
+    override val data: Params
+
+    override fun length(): Int {
+        val typeSize = data.type.length()
+        val annotationSize = data.annotationComponents.sumBy { it.length() }
+        val lambdaParamsSize = data.lambdaParams.sumBy { it.length() }
+        val lambdaModifiersSize = data.lambdaModifiers.sumBy { it.length }
+        return "() ->".length + typeSize + annotationSize + lambdaModifiersSize + lambdaParamsSize
+    }
+
+    class Params(
+        override val type: Link, // return type
+        override val annotationComponents: List<AnnotationComponent> = emptyList(),
+        val lambdaModifiers: List<String> = emptyList(),
+        // Lambda parameters can be named
+        val lambdaParams: List<ParameterComponent> = emptyList(),
+        val receiver: TypeProjectionComponent? = null,
+        override val nullable: Boolean = false,
+        // Generics on the return type
+        override val generics: List<TypeProjectionComponent> = emptyList(),
+        override val displayLanguage: Language
+    ) : TypeProjectionComponent.Params(
+        type = type,
+        annotationComponents = annotationComponents,
+        nullable = nullable,
+        displayLanguage = displayLanguage,
+        generics = emptyList()
+    )
+}

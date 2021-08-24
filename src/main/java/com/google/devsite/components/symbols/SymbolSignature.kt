@@ -24,7 +24,8 @@ internal interface SymbolSignature : ContextFreeComponent {
     val data: Params
 
     interface Params {
+        val annotationComponents: List<AnnotationComponent>
         val name: Link
-        val receiver: Parameter?
+        val receiver: ParameterComponent?
     }
 }

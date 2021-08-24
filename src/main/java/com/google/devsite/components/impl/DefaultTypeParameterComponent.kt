@@ -18,15 +18,15 @@ package com.google.devsite.components.impl
 
 import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.render
-import com.google.devsite.components.symbols.TypeParameter
+import com.google.devsite.components.symbols.TypeParameterComponent
 import com.google.devsite.renderer.Language
 import kotlinx.html.Entities.nbsp
 import kotlinx.html.FlowContent
 
 /** Default implementation of a function or class type parameter. */
-internal class DefaultTypeParameter(
-    override val data: TypeParameter.Params
-) : TypeParameter {
+internal class DefaultTypeParameterComponent(
+    override val data: TypeParameterComponent.Params
+) : TypeParameterComponent {
     init {
         validate()
     }
@@ -39,8 +39,8 @@ internal class DefaultTypeParameter(
      */
     override fun render(into: FlowContent, angleBrackets: Boolean) = into.run {
         if (angleBrackets) { +"<" }
-        data.annotationComponents
-            .render(into, ShouldBreak.NO, separator = "", terminator = { +nbsp })
+        data.annotationComponents.render(
+            into, ShouldBreak.NO, separator = "", terminator = { +nbsp })
         when (data.displayLanguage) {
             Language.JAVA -> {
                 +data.name

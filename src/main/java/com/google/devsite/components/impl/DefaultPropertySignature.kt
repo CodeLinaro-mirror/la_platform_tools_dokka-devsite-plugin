@@ -16,6 +16,8 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.ShouldBreak
+import com.google.devsite.components.render
 import com.google.devsite.components.symbols.PropertySignature
 import kotlinx.html.FlowContent
 
@@ -24,6 +26,7 @@ internal class DefaultPropertySignature(
     override val data: PropertySignature.Params
 ) : PropertySignature {
     override fun render(into: FlowContent) = into.run {
+        data.annotationComponents.render(into, ShouldBreak.YES, separator = "")
         if (data.receiver != null) {
             data.receiver.render(this)
             +"."

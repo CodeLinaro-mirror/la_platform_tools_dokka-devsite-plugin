@@ -14,19 +14,21 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components
+package com.google.devsite.components.testing
 
-import com.google.devsite.renderer.impl.paths.FilePathProvider
-import org.jetbrains.dokka.model.doc.DocTag
+import com.google.devsite.components.symbols.ParameterComponent
+import kotlinx.html.FlowContent
 
-/** Represents the hand-written documentation for a symbol. */
-internal interface Description : ContextFreeComponent {
-    val data: Params
+internal class NoopParameterComponent(
+    private val text: String,
+    private val forceBreak: Boolean = false
+) : ParameterComponent {
+    override val data: ParameterComponent.Params
+        get() = throw NotImplementedError()
 
-    class Params(
-        val pathProvider: FilePathProvider,
-        val components: List<DocTag> = emptyList(),
-        val summary: Boolean = false,
-        val deprecation: String? = null
-    )
+    override fun render(into: FlowContent) = into.run {
+        +text
+    }
+
+    override fun length() = if (forceBreak) 10_000 else 0
 }

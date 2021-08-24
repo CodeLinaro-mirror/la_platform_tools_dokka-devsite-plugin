@@ -17,7 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.Description.Params
+import com.google.devsite.components.DescriptionComponent.Params
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
@@ -27,7 +27,7 @@ import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.Documentable
 import org.junit.Test
 
-internal class DefaultDescriptionTest : ConverterTestBase() {
+internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     @Test
     fun `Single sentence renders correctly`() {
         val component = """
@@ -771,12 +771,12 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
     private fun DModule.description(
         summary: Boolean = false,
         deprecation: String? = null
-    ): DefaultDescription {
+    ): DefaultDescriptionComponent {
         val tag = explicitClasslike("Foo").tag()
         val classGraph = runBlocking {
             DocumentablesHolder(this@description, this).classGraph()
         }
-        return DefaultDescription(
+        return DefaultDescriptionComponent(
             Params(
                 pathProvider(classGraph = classGraph),
                 tag.children,

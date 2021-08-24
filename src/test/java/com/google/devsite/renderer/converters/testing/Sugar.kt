@@ -20,7 +20,7 @@ package com.google.devsite.renderer.converters.testing
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Component
-import com.google.devsite.components.Description
+import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
 import com.google.devsite.components.pages.ClassIndex
 import com.google.devsite.components.pages.DevsitePage
@@ -28,11 +28,10 @@ import com.google.devsite.components.pages.TableOfContents
 import com.google.devsite.components.symbols.AnnotationComponent
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.MiniSignature
-import com.google.devsite.components.symbols.Parameter
-import com.google.devsite.components.symbols.SymbolBase
+import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.SymbolSummary
-import com.google.devsite.components.symbols.SymbolType
-import com.google.devsite.components.symbols.TypeParameter
+import com.google.devsite.components.symbols.TypeParameterComponent
+import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
@@ -71,37 +70,33 @@ internal fun SummaryList.title(): String = (data.header as TableTitle).data.titl
 internal fun TwoPaneSummaryItem.link(): Link.Params = (data.title as? Link)?.data
     ?: (data.title as MiniSignature).data.link.data
 internal fun TwoPaneSummaryItem.summary() = data.description as SymbolSummary
-internal fun TwoPaneSummaryItem.name(): String = (this.data.title as? Parameter)?.data?.name
+internal fun TwoPaneSummaryItem.name(): String =
+    (this.data.title as? ParameterComponent)?.data?.name
     ?: (this.data.description as SymbolSummary).name()
-internal fun TwoPaneSummaryItem.description() = (data.description as? Description)
+internal fun TwoPaneSummaryItem.description() = (data.description as? DescriptionComponent)
     ?: (data.description as SymbolSummary).data.description
-internal fun SingleColumnSummaryItem.description() = (data.description as? Description)
+internal fun SingleColumnSummaryItem.description() = (data.description as? DescriptionComponent)
     ?: (data.description as SymbolSummary).data.description
 
 internal fun SymbolSummary.name(): String = data.signature.data.name.data.name
 internal fun SymbolSummary.signature() = (data.signature as FunctionSignature).data
 
-internal fun Description.text() = this.data.components.joinToString(" ") { it.text() }
+internal fun DescriptionComponent.text() = this.data.components.joinToString(" ") { it.text() }
 
 internal fun DocTag.text(): String = (this as? Text)?.body
     ?: children.joinToString(" ") { it.text() }
 
-internal fun TypeParameter.projectionName() = this.data.projections.single().link().name
-internal fun Parameter.generics() = this.data.type.asType().data.generics
+internal fun TypeParameterComponent.projectionName() = this.data.projections.single().name()
+internal fun ParameterComponent.generics() = this.data.type.data.generics
 
-internal fun SymbolBase.asType(): SymbolType = when (this) {
-    is Parameter -> data.type.asType()
-    is SymbolType -> this
-    else -> error("Not supported: $this")
-}
+internal fun TypeProjectionComponent.link(): Link.Params = data.type.data
+internal fun ParameterComponent.link(): Link.Params = data.type.link()
 
-internal fun SymbolType.link(): Link.Params = data.type.data
-internal fun SymbolBase.link(): Link.Params = when (this) {
-    is Parameter -> data.type.asType().link()
-    is SymbolType -> data.type.data
-    else -> error("Not supported: $this")
-}
+internal fun TypeProjectionComponent.name() = link().name
+internal fun ParameterComponent.typeName() = data.type.name()
+
 internal fun AnnotationComponent.link(): Link.Params = data.type.data
 internal val AnnotationComponent.isAtNullable get() = this.link().name == "Nullable"
+internal val AnnotationComponent.isAtNonNull get() = this.link().name == "NonNull"
 
 internal fun List<AnnotationComponent>.exceptNonNull() = this.filter { it.link().name != "NonNull" }

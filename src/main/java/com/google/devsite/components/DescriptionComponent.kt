@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components.testing
+package com.google.devsite.components
 
-import com.google.devsite.components.symbols.SymbolType
-import kotlinx.html.FlowContent
+import com.google.devsite.renderer.impl.paths.FilePathProvider
+import org.jetbrains.dokka.model.doc.DocTag
 
-internal class NoopSymbolType(private val text: String) : SymbolType {
-    override val data: SymbolType.Params
-        get() = throw NotImplementedError()
+/** Represents the hand-written documentation for a symbol. */
+internal interface DescriptionComponent : ContextFreeComponent {
+    val data: Params
 
-    override fun render(into: FlowContent) = into.run {
-        +text
-    }
-
-    override fun length() = text.length
+    class Params(
+        val pathProvider: FilePathProvider,
+        val components: List<DocTag> = emptyList(),
+        val summary: Boolean = false,
+        val deprecation: String? = null
+    )
 }

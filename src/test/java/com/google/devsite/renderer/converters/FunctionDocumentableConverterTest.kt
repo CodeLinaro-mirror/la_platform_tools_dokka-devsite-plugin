@@ -19,15 +19,16 @@ package com.google.devsite.renderer.converters
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.FunctionSignature
-import com.google.devsite.components.symbols.Parameter
+import com.google.devsite.components.symbols.LambdaTypeProjectionComponent
+import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolDetail.SymbolKind
 import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
-import com.google.devsite.renderer.converters.testing.asType
-import com.google.devsite.renderer.converters.testing.generics
+import com.google.devsite.renderer.converters.testing.isAtNonNull
 import com.google.devsite.renderer.converters.testing.isAtNullable
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
@@ -36,6 +37,7 @@ import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.projectionName
 import com.google.devsite.renderer.converters.testing.signature
 import com.google.devsite.renderer.converters.testing.summary
+import com.google.devsite.renderer.converters.testing.typeName
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
@@ -230,8 +232,8 @@ internal class FunctionDocumentableConverterTest(
         """.render().summary()
 
         val returnz = summary.returnSummary()
-        val generics = returnz.type.asType().data.generics.items(2)
-        val nestedGenerics = generics.last().asType().data.generics.item()
+        val generics = returnz.type.data.generics.items(2)
+        val nestedGenerics = generics.last().data.generics.item()
 
         assertThat(generics.first().link().name).isEqualTo("String")
         assertThat(generics.last().link().name).isEqualTo("List")
@@ -347,8 +349,8 @@ internal class FunctionDocumentableConverterTest(
         assertThat(inlineGenerics.map { it.data.name }).isEqualTo(listOf("T", "U", "V"))
         assertThat(inlineGenerics[0].projectionName()).isEqualTo("Number")
         assertThat(inlineGenerics[1].projectionName()).isEqualTo("List")
-        val generics = (inlineGenerics[1].data.projections.single() as Parameter).generics()
-        assertThat((generics.single() as Parameter).link().name).isEqualTo("String")
+        val generics = inlineGenerics[1].data.projections.single().data.generics
+        assertThat(generics.single().link().name).isEqualTo("String")
         assertThat(inlineGenerics[2].projectionName()).isEqualTo("T")
     }
 
@@ -459,51 +461,156 @@ internal class FunctionDocumentableConverterTest(
     }
 
     @Test
-    fun `Function detail has nullability information in 4x Kotlin and Java`() {
-        val detailK = """
-            |fun foo(): Int? {}
-        """.render().detail()
-        val detailJ = """
-            |public @Nullable Integer foo() {}
-        """.render(java = true).detail()
-        val detailJ2 = """
-            |@Nullable
-            |public Integer foo() {}
-        """.render(java = true).detail()
-
-        for (detail in listOf(detailK, detailJ, detailJ2)) {
-            val functionAnnotations = detail.data.annotationComponents
-            val returnType = detail.data.returnType
-            javaOnly {
-                assertThat(functionAnnotations.any { it.isAtNullable }).isTrue()
-                assertThat(returnType.data.annotationComponents.any { it.isAtNullable }).isFalse()
-            }
-            kotlinOnly {
-                assertThat(functionAnnotations).isEmpty()
-                assertThat(returnType.nullable).isTrue()
+    fun `Function summary and detail include nullability information in 4x Kotlin and Java`() {
+        val moduleJ = """
+                |public @interface NotNull {}
+                |@Nullable
+                |public String nulla1() { return null; }
+                |public String nulla2() { return null; }
+                |@NonNull
+                |public String nonna1() { return ""; }
+                |public @NonNull String nonna2() { return ""; }
+                """.render(java = true)
+        val moduleK = """
+                |annotation class Nullable
+                |annotation class NonNull
+                |@Nullable
+                |fun nulla1(): String? = null
+                |fun nulla2(): String? = null
+                |@NonNull
+                |fun nonna1(): String = "foo"
+                |fun nonna2(): String = "foo"
+                """.render()
+        fun DModule.sOrD(summary: Boolean, functionName: String): TypeProjectionComponent =
+            if (summary) (summary(functionName).data.title as TypeSummary).data.type
+            else detail(functionName).data.returnType
+        for (isSummary in listOf(true, false)) {
+            for (whichFun in listOf("nonna1", "nonna2", "nulla1", "nulla2")) {
+                val typeJ = moduleJ.sOrD(isSummary, whichFun)
+                val typeK = moduleK.sOrD(isSummary, whichFun)
+                for (aType in listOf(typeJ, typeK)) {
+                    assertThat(aType.nullable).isEqualTo("nulla" in whichFun)
+                    val annotations = aType.data.annotationComponents
+                    assertThat(annotations.singleOrNull()?.name?.let {
+                        it in NULLABILITY_ANNOTATION_NAMES })
+                    kotlinOnly {
+                        // We've decided to hide all nullability annotations as-kotlin even if they
+                        // are present in Kotlin source, because they should not be in kotlin source
+                        assertThat(annotations).isEmpty()
+                    }
+                    javaOnly {
+                        assertThat(annotations.any { it.isAtNonNull })
+                            .isEqualTo("nonna" in whichFun)
+                        assertThat(annotations.any { it.isAtNullable })
+                            .isEqualTo(whichFun == "nulla1")
+                    }
+                }
             }
         }
     }
 
     @Test
-    fun `Function summary has nullability information in 4x Kotlin and Java`() {
-        val summaryK = """
-            |fun foo(): Int? {}
-        """.render().summary().returnSummary().type
-        val summaryJ = """
-            |public @Nullable Integer foo() {}
-        """.render(java = true).summary().returnSummary().type
-        val summaryJ2 = """
-            |@Nullable
-            |public Integer foo() {}
-        """.render(java = true).summary().returnSummary().type
+    fun `Function detail signature nullability is correct on example from Platform`() {
+        val detail = """
+            |/**
+            | * Defines a mapping from an int value to a String. Such a mapping can be used
+            | * in an @ExportedProperty to provide more meaningful values to the end user.
+            | *
+            | * @see android.view.ViewDebug.ExportedProperty
+            | */
+            |@Target({ ElementType.TYPE })
+            |@Retention(RetentionPolicy.RUNTIME)
+            |public @interface IntToString {
+            |    /**
+            |     * The original int value to map to a String.
+            |     *
+            |     * @return An arbitrary int value.
+            |     */
+            |    int from();
+            |    /**
+            |     * The String to use in place of the original int value.
+            |     *
+            |     * @return An arbitrary non-null String.
+            |     */
+            |    String to();
+            |}
+            |/**
+            | * A mapping can be defined to map array indices to specific strings.
+            | * A mapping can be used to see human readable values for the indices
+            | * of an array:
+            | *
+            | * <pre>
+            | * {@literal @}ViewDebug.ExportedProperty(indexMapping = {
+            | *     {@literal @}ViewDebug.IntToString(from = 0, to = "INVALID"),
+            | *     {@literal @}ViewDebug.IntToString(from = 1, to = "FIRST"),
+            | *     {@literal @}ViewDebug.IntToString(from = 2, to = "SECOND")
+            | * })
+            | * private int[] mElements;
+            | * <pre>
+            | *
+            | * @return An array of int to String mappings
+            | *
+            | * @see android.view.ViewDebug.IntToString
+            | * @see #mapping()
+            | */
+            |public IntToString[] indexMapping() default { };
+        """.render(java = true).detail()
+        val returnType = detail.data.returnType
+        val primaryAnnotations = returnType.data.annotationComponents
 
-        for (summary in listOf(summaryK, summaryJ, summaryJ2)) {
-            javaOnly { assertThat(summary.data.annotationComponents).isNotEmpty() }
-            kotlinOnly {
-                assertThat(summary.data.annotationComponents).isEmpty()
-                assertThat(summary.nullable).isTrue()
-            }
+        kotlinOnly {
+            val returnTypeGeneric = returnType.data.generics.single()
+            assertThat(returnTypeGeneric.nullable).isTrue()
+            assertThat(returnType.name()).isEqualTo("Array")
+            assertThat(returnTypeGeneric.name()).isEqualTo("Test.IntToString")
+
+            val genericAnnotations = returnTypeGeneric.data.annotationComponents
+            assertThat(genericAnnotations).isEmpty()
+        }
+        javaOnly {
+            assertThat(returnType.name()).isEqualTo("Test.IntToString[]")
+        }
+        assertThat(returnType.nullable).isTrue()
+        assertThat(primaryAnnotations).isEmpty()
+    }
+
+    @Test
+    fun `Nullability annotations in java source are preserved, Fragment example`() {
+        val signature = """
+            |public @interface androidx.annotation.NonNull
+            |/**
+            | * Print internal state into the given stream.
+            | *
+            | * @param prefix Desired prefix to prepend at each line of output.
+            | * @param fd The raw file descriptor that the dump is being sent to.
+            | * @param writer The PrintWriter to which you should dump your state. This will be closed
+            | *                  for you after you return.
+            | * @param args additional arguments to the dump request.
+            | */
+            |public void onDump(@NonNull java.lang.String prefix, @Nullable java.io.FileDescriptor fd, @NonNull java.io.PrintWriter writer, @Nullable java.lang.String[] args) { throw new RuntimeException("Stub!"); }
+        """.render(java = true).detail("onDump").data.signature as FunctionSignature
+        val param1 = signature.data.parameters[0]
+        assertThat(param1.data.name).isEqualTo("prefix")
+        assertThat(param1.typeName()).isEqualTo("String")
+        assertThat(param1.nullable).isFalse()
+        assertThat(param1.data.annotationComponents).isEmpty()
+        javaOnly { assertThat(param1.data.type.data.annotationComponents.single().isAtNonNull) }
+    }
+
+    @Test
+    fun `Lambda parameter type is correct when identical to lambda return type or receiver`() {
+        val summary = """
+            |fun ScrollableState(consumeScrollDelta: Float.(Float) -> Float): ScrollableState {
+            |    return DefaultScrollableState(consumeScrollDelta)
+            |}
+        """.render().summary("ScrollableState").data.description as SymbolSummary
+        kotlinOnly {
+            val parameter = (summary.data.signature as FunctionSignature).data.parameters.single()
+            val lambda = (parameter.data.type as LambdaTypeProjectionComponent)
+            assertThat(lambda.data.type.data.name).isEqualTo("Float")
+            assertThat(lambda.data.receiver!!.name()).isEqualTo("Float")
+            assertThat(lambda.data.lambdaParams.size).isEqualTo(1)
+            assertThat(lambda.data.lambdaParams.single().typeName()).isEqualTo("Float")
         }
     }
 
@@ -549,44 +656,8 @@ internal class FunctionDocumentableConverterTest(
         )
     }
 
-    @Test
-    fun `Constructor details and summary do not contain @NonNull in 4x Java and Kotlin`() {
-        val moduleK = """
-            |class Foo {
-            |   constructor() {}
-            |}
-        """.render()
-        val moduleJ = """
-            |public class Foo {
-            |   public Foo() {}
-            |}
-        """.render(java = true)
-
-        val summaryK = moduleK.summary()
-        val summaryJ = moduleJ.summary()
-        for (summary in listOf(summaryJ, summaryK)) {
-            val annotations = (summary.data.title as TypeSummary).data.type.data
-                .annotationComponents
-            assertThat(annotations).isEmpty()
-        }
-
-        val detailK = moduleK.detail()
-        val detailJ = moduleJ.detail()
-        for (detail in listOf(detailJ, detailK)) {
-            val returnAnnotations = detail.data.returnType.data.annotationComponents
-            val annotations = detail.data.annotationComponents
-            val signature = detail.data.signature as FunctionSignature
-            assertThat(returnAnnotations.isEmpty())
-            assertThat(annotations).isEmpty()
-            assertThat(signature.data.receiver).isNull()
-        }
-    }
-
-    private fun assertNoLambdaStuff(data: Parameter.Params) {
-        assertThat(data.isLambda).isFalse()
-        assertThat(data.receiver).isNull()
-        assertThat(data.lambdaParams).isEmpty()
-        assertThat(data.lambdaModifiers).isEmpty()
+    private fun assertNoLambdaStuff(data: ParameterComponent.Params) {
+        assertThat(data.type is LambdaTypeProjectionComponent).isFalse()
     }
 
     private fun DModule.summary(
@@ -603,6 +674,12 @@ internal class FunctionDocumentableConverterTest(
         )
         return converter.summary(this.doc(), hints.copy(isSummary = true))
     }
+
+    private fun DModule.summary(funName: String, hints: ModifierHints = ModifierHints(language)) =
+        summary({ this.function(funName)!! }, hints)
+
+    private fun DModule.detail(funName: String, hints: ModifierHints = ModifierHints(language)) =
+        detail({ this.function(funName)!! }, hints)
 
     private fun DModule.functionSummaries(
         hints: ModifierHints = ModifierHints(language)
@@ -640,9 +717,9 @@ internal class FunctionDocumentableConverterTest(
         return module.function() ?: module.constructor()
     }
 
-    private fun Parameter.link(): Link.Params = data.type.link()
+    private fun ParameterComponent.link(): Link.Params = data.type.link()
 
-    private fun SymbolSummary.param(): Parameter = signature().parameters.item()
+    private fun SymbolSummary.param(): ParameterComponent = signature().parameters.item()
 
     private fun TwoPaneSummaryItem.returnSummary(): TypeSummary.Params =
         (data.title as TypeSummary).data

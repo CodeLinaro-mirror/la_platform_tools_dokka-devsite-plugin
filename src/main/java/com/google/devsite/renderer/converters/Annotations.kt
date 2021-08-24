@@ -33,44 +33,75 @@ import org.jetbrains.dokka.model.AnnotationValue
 import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.Annotations.Annotation
 import org.jetbrains.dokka.model.ArrayValue
+import org.jetbrains.dokka.model.Bound
 import org.jetbrains.dokka.model.ClassValue
+import org.jetbrains.dokka.model.Dynamic
 import org.jetbrains.dokka.model.EnumValue
+import org.jetbrains.dokka.model.FunctionalTypeConstructor
+import org.jetbrains.dokka.model.GenericTypeConstructor
+import org.jetbrains.dokka.model.JavaObject
 import org.jetbrains.dokka.model.LiteralValue
+import org.jetbrains.dokka.model.Nullable
+import org.jetbrains.dokka.model.PrimitiveJavaType
 import org.jetbrains.dokka.model.StringValue
+import org.jetbrains.dokka.model.TypeAliased
+import org.jetbrains.dokka.model.TypeParameter
+import org.jetbrains.dokka.model.UnresolvedBound
+import org.jetbrains.dokka.model.Void
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 
-/** @return the components for the provided dokka model annotations */
+/**
+ * @param displayLanguage nullability annotations are present only in Java
+ * @param isFromJava unannotated non-`?` kotlin-as-java gets @NonNull injected, and only that
+ *    Is allowed to be default, IF showNullability is false and the annotated component isn't a type
+ * @param isKotlinNullable whether the type has kotlin nullability not captured in its annotations
+ *    Is allowed to be default, IF showNullability is false and the annotated component isn't a type
+ * @param showNullability we explicitly do not show nullability sometimes, e.g. Java primitives
+ *
+ * @return the components for the provided dokka model annotations
+ */
 internal fun List<Annotation>.annotationComponents(
     pathProvider: FilePathProvider,
     displayLanguage: Language,
-    nullable: Boolean,
+    isFromJava: Boolean? = null,
+    isKotlinNullable: Boolean? = null,
     showNullability: Boolean = true
 ): List<AnnotationComponent> {
+    // TODO: consider turning this into an enum
+    if (showNullability && (isKotlinNullable == null || isFromJava == null))
+        throw RuntimeException("Did not specify isKotlinNullable/fromJava when showing nullability")
+    // if (isKotlinNullable == true && isFromJava == true) Can happen with type parameter bounds
     val injectedAnnotations = mutableListOf<Annotation>()
-    if (nullable && displayLanguage == Language.JAVA && !isNullable() && showNullability) {
-        injectedAnnotations += Annotation(DRI("androidx.annotation", "Nullable"), emptyMap())
+    if (any { it.dri.classNames in BAD_NONNULL_ANNOTATION_NAMES }) {
+        injectedAnnotations.add(AT_NON_NULL) // Bad ones get filtered out later
+        println("WARN: You should be using androidx.annotation.NonNull, not " +
+            "${first{it.dri.classNames in BAD_NONNULL_ANNOTATION_NAMES}.dri}")
     }
-    if (!nullable && displayLanguage == Language.JAVA && !isNonNull() && showNullability) {
-        injectedAnnotations += Annotation(DRI("androidx.annotation", "NonNull"), emptyMap())
+    // We do not add @Nullable in java source, as that is redundant
+    // Inject @NonNull for default-nullability kotlin types as-java if we should showNullability
+    if (showNullability && displayLanguage == Language.JAVA && !hasAtNonNull() &&
+        !isFromJava!! && !isKotlinNullable!!) {
+        injectedAnnotations += AT_NON_NULL
     }
 
     return (this + injectedAnnotations).filter { annotation ->
         shouldDocumentAnnotation(annotation, displayLanguage, showNullability)
-    }.map { annotation -> annotation.toDackkaAnnotation(pathProvider) }
+    }.distinctBy { it.toString() }.map { annotation -> annotation.toDackkaAnnotation(pathProvider) }
 }
+
+internal val AT_NULLABLE = Annotation(DRI("androidx.annotation", "Nullable"), emptyMap())
+internal val AT_NON_NULL = Annotation(DRI("androidx.annotation", "NonNull"), emptyMap())
 
 private fun Annotation.toDackkaAnnotation(pathProvider: FilePathProvider): AnnotationComponent {
     val type = pathProvider.linkForReference(dri)
-    val params = params.map { (name, contents) ->
-        contents.toComponent(name, pathProvider)
-    }
+    val params = params.map { (name, contents) -> contents.toComponent(name, pathProvider) }
     return DefaultAnnotationComponent(AnnotationComponent.Params(type, params))
 }
 
 /** @return true if the `@Nullable` annotation is present, false otherwise */
-internal fun List<Annotation>.isNullable(): Boolean = any { it.dri.classNames == "Nullable" }
+internal fun List<Annotation>.hasAtNullable(): Boolean = any { it.dri.classNames == "Nullable" }
 
-internal fun List<Annotation>.isNonNull(): Boolean = any { it.dri.classNames == "NonNull" }
+internal fun List<Annotation>.hasAtNonNull(): Boolean = any { it.dri.classNames == "NonNull" }
 
 /** @return true if the `@Deprecated` annotation is present, false otherwise */
 internal fun List<Annotation>.isDeprecated(): Boolean = any { it.isDeprecated() }
@@ -80,6 +111,14 @@ internal fun WithExtraProperties<*>.annotations(): List<Annotation> {
     return extra.allOfType<Annotations>().flatMap { annotations ->
         annotations.directAnnotations.values.singleOrNull() ?: emptyList()
     }
+}
+
+internal fun Bound.annotations(): List<Annotation> = when (this) {
+    is TypeParameter, is GenericTypeConstructor, is FunctionalTypeConstructor ->
+        (this as WithExtraProperties<*>).annotations()
+    is Nullable -> this.inner.annotations()
+    is TypeAliased -> this.inner.annotations()
+    is PrimitiveJavaType, Void, is JavaObject, Dynamic, is UnresolvedBound -> emptyList()
 }
 
 /** @return the complete list of annotations for this type */
@@ -95,7 +134,7 @@ internal fun Annotation.isDeprecated(): Boolean = dri.classNames == "Deprecated"
 /** @return true if a developer would find this annotation useful, false otherwise */
 private fun shouldDocumentAnnotation(
     annotation: Annotation,
-    language: Language,
+    displayLanguage: Language,
     showNullability: Boolean = true
 ): Boolean {
     val name = annotation.dri.classNames
@@ -108,16 +147,28 @@ private fun shouldDocumentAnnotation(
     val isDeprecatedAnnotation = annotation.isDeprecated()
     val isNullabilityAnnotation = name in NULLABILITY_ANNOTATION_NAMES
 
+    // Ignored and overwritten with androidx.annotation.NonNull
+    val isBadNonNull = name in BAD_NONNULL_ANNOTATION_NAMES
+
     return !isSuppressAnnotation &&
         !isKotlinJvmAnnotation &&
         !isExplicitlyBannedAnnotation &&
         !isDeprecatedAnnotation &&
-        // Keep nullability annotations for Java, if we should show nullability
-        ((language == Language.JAVA && showNullability) || !isNullabilityAnnotation)
+        !isBadNonNull &&
+        !(isNullabilityAnnotation && !showNullability) &&
+        // Nullability annotations do not appear in Kotlin, even if explicit in Kotlin source
+        !(isNullabilityAnnotation && displayLanguage == Language.KOTLIN)
 }
 
+internal fun Annotation.belongsOnReturnType() =
+    dri.classNames in NULLABILITY_ANNOTATION_NAMES ||
+        dri.classNames in BAD_NONNULL_ANNOTATION_NAMES ||
+        dri.classNames?.shouldBeTypebound() ?: false
+
 private val SUPPRESSION_ANNOTATION_NAMES = listOf("Suppress", "SuppressWarnings", "SuppressLint")
-private val NULLABILITY_ANNOTATION_NAMES = listOf("NonNull", "Nullable")
+internal val NULLABILITY_ANNOTATION_NAMES = listOf("NonNull", "Nullable")
+// javax and jetbrains have their own @NonNull, which we convert to androidx.
+internal val BAD_NONNULL_ANNOTATION_NAMES = listOf("NotNull", "Nonnull")
 private val EXPLICITLY_BANNED_ANNOTATION_NAMES = listOf(
     // This information is compose runtime implementation details; not useful for most
     // and those who would want it should be looking at source
@@ -126,8 +177,24 @@ private val EXPLICITLY_BANNED_ANNOTATION_NAMES = listOf(
     // https://kotlinlang.org/docs/opt-in-requirements.html#non-propagating-opt-in
     "OptIn",
     // This annotation is used mostly in paging, and was removed at the request of the paging team
-    "CheckResult"
+    "CheckResult",
+    // This annotation is apparently generated upstream. Dokka uses it for signature serialization
+    "ParameterName" // It doesn't seem to be useful for developers
 )
+// List of androidx annotations that (now that we are on Java 8) ideally would be migrated
+// ANNOTATION_TARGET.METHOD -> ANNOTATION_TARGET.TYPE. If on a function, they refer to return type
+private val KNOWN_TYPEBOUND_ANNOTATION_NAMES = listOf("Dimension", "Px", "Size")
+// For androidx annotations. E.g. IntRes, IntRange, GravityInt, HalfFloat, ColorLong, UiContext
+private val KNOWN_TYPEBOUND_ANNOTATION_SUFFIXES =
+    listOf("Res", "Range", "Long", "Int", "Float", "Context")
+private fun String.shouldBeTypebound() =
+    finalWord() in KNOWN_TYPEBOUND_ANNOTATION_SUFFIXES || this in KNOWN_TYPEBOUND_ANNOTATION_NAMES
+
+private fun String.finalWord(): String {
+    val lastIndexOfCapital = lastOrNull { it.isUpperCase() }
+        ?.let { indexOf(it) } ?: 0
+    return substring(lastIndexOfCapital)
+}
 
 internal fun AnnotationParameterValue.toComponent(
     name: String? = null,
@@ -157,8 +224,3 @@ internal fun AnnotationParameterValue.toComponent(
 }
 
 internal fun Annotation.nameAsString(): String? = (params["name"] as? StringValue)?.value
-
-private const val LONG_ANNO_PARAM_SUFFIX = ".toLong()"
-
-private fun StringValue.isProbablyLong(): Boolean = value.endsWith(LONG_ANNO_PARAM_SUFFIX)
-private fun StringValue.cleanedLongValue(): String = value.removeSuffix(LONG_ANNO_PARAM_SUFFIX)

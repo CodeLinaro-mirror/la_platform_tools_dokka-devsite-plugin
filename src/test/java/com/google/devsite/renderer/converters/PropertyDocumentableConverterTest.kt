@@ -18,18 +18,18 @@ package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Link
-import com.google.devsite.components.symbols.Parameter
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolDetail.SymbolKind.PROPERTY
 import com.google.devsite.components.symbols.SymbolSignature
 import com.google.devsite.components.symbols.SymbolSummary
-import com.google.devsite.components.symbols.SymbolType
+import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
-import com.google.devsite.renderer.converters.testing.asType
-import com.google.devsite.renderer.converters.testing.summary
+import com.google.devsite.renderer.converters.testing.isAtNonNull
+import com.google.devsite.renderer.converters.testing.isAtNullable
 import com.google.devsite.renderer.converters.testing.name
+import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
@@ -68,46 +68,51 @@ internal class PropertyDocumentableConverterTest(
     }
 
     @Test
-    fun `Property summaries include nullability information in 4x Kotlin and Java`() {
-        val paramK = ("""
-            |val foo: Int? = null
-        """.render().summary().data.title as TypeSummary).data.type
-        val paramJ = ("""
-            |@Nullable public Integer foo = null
-        """.render(java = true).summary().data.title as TypeSummary).data.type
-        val paramJ2 = ("""
-            |@Nullable
-            |public Integer foo = null
-        """.render(java = true).summary().data.title as TypeSummary).data.type
-
-        for (param in listOf(paramK, paramJ, paramJ2)) {
-            javaOnly { assertThat(param.data.annotationComponents).isNotEmpty() }
-            kotlinOnly {
-                assertThat(param.data.annotationComponents).isEmpty()
-                assertThat(param.nullable).isTrue()
+    fun `Property summary and detail include nullability information in 4x Kotlin and Java`() {
+        val moduleJ = """
+        |public @interface NotNull {}
+        |@Nullable
+        |public String nulla1;
+        |public String nulla2;
+        |@NonNull
+        |public String nonna1;
+        |public @NonNull String nonna2;
+        """.render(java = true)
+        val moduleK = """
+        |annotation class Nullable
+        |annotation class NonNull
+        |@Nullable
+        |val nulla1: String? = null
+        |val nulla2: String? = null
+        |@NonNull
+        |val nonna1: String = "foo"
+        |val nonna2: String = "foo"
+        """.render()
+        fun DModule.sOrD(summary: Boolean, propertyName: String): TypeProjectionComponent =
+            if (summary) (summary(propertyName).data.title as TypeSummary).data.type
+            else detail(propertyName).data.returnType
+        for (isSummary in listOf(true, false)) {
+            for (whichProp in listOf("nonna1", "nonna2", "nulla1", "nulla2")) {
+                val typeJ = moduleJ.sOrD(isSummary, whichProp)
+                val typeK = moduleK.sOrD(isSummary, whichProp)
+                for (aType in listOf(typeJ, typeK)) {
+                    assertThat(aType.nullable).isEqualTo("nulla" in whichProp)
+                    val annotations = aType.data.annotationComponents
+                    assertThat(annotations.singleOrNull()?.name?.let {
+                        it in NULLABILITY_ANNOTATION_NAMES })
+                    kotlinOnly {
+                        // We've decided to hide all nullability annotations as-kotlin even if they
+                        // are present in Kotlin source, because they should not be in kotlin source
+                        assertThat(annotations).isEmpty()
+                    }
+                    javaOnly {
+                        assertThat(annotations.any { it.isAtNonNull })
+                            .isEqualTo("nonna" in whichProp)
+                        assertThat(annotations.any { it.isAtNullable })
+                            .isEqualTo(whichProp == "nulla1")
+                    }
+                }
             }
-        }
-    }
-
-    @Test
-    fun `Property details include nullability information in 4x Kotlin and Java`() {
-        val detailsK = """
-            |val foo: Int? = null
-        """.render().detail().data
-        val detailsJ = """
-            |@Nullable public Integer foo = null
-        """.render(java = true).detail().data
-        val detailsJ2 = """
-            |@Nullable
-            |public Integer foo = null
-        """.render(java = true).detail().data
-
-        for (details in listOf(detailsK, detailsJ, detailsJ2)) {
-            kotlinOnly {
-                assertThat(details.annotationComponents).isEmpty()
-                assertThat(details.returnType.data.type.asType().data.nullable).isTrue()
-            }
-            javaOnly { assertThat(details.annotationComponents).isNotEmpty() }
         }
     }
 
@@ -180,19 +185,6 @@ internal class PropertyDocumentableConverterTest(
     }
 
     @Test
-    fun `Property detail component has nullability information`() {
-        val detail = """
-            |val foo: String? = null
-        """.render().detail()
-
-        javaOnly { assertThat(detail.data.annotationComponents).isNotEmpty() }
-        kotlinOnly {
-            assertThat(detail.data.annotationComponents).isEmpty()
-            assertThat(detail.data.returnType.asType().data.nullable).isTrue()
-        }
-    }
-
-    @Test
     fun `Property detail component has correct anchors`() {
         val detail = """
             |val <T : Number> List<T>.foo
@@ -207,7 +199,25 @@ internal class PropertyDocumentableConverterTest(
         )
     }
 
+    @Test
+    fun `Property summary and detail for Kotlin top-level property include annotations`() {
+        val module = """
+            |annotation class ExperimentalComposeApi
+            |@ExperimentalComposeApi
+            |val String.numbah: Int = 5
+        """.render()
+        fun DModule.sOrDAnnotations(summary: Boolean, propertyName: String) =
+            if (summary) (summary(propertyName).data.description as SymbolSummary)
+                .data.signature.data.annotationComponents
+            else detail(propertyName).data.annotationComponents
+        for (isSummary in listOf(true, false)) {
+            val annotations = module.sOrDAnnotations(isSummary, "numbah")
+            assertThat(annotations.single().name).isEqualTo("ExperimentalComposeApi")
+        }
+    }
+
     private fun DModule.summary(
+        name: String = "foo",
         hints: ModifierHints = ModifierHints(language)
     ): TwoPaneSummaryItem {
         val holder = runBlocking { DocumentablesHolder(this@summary, this) }
@@ -218,10 +228,11 @@ internal class PropertyDocumentableConverterTest(
             pathProvider(classGraph = classGraph),
             docConverter
         )
-        return converter.summary(property()!!, hints)
+        return converter.summary(property(name)!!, hints)
     }
 
     private fun DModule.detail(
+        name: String = "foo",
         hints: ModifierHints = ModifierHints(language)
     ): SymbolDetail {
         val holder = runBlocking { DocumentablesHolder(this@detail, this) }
@@ -232,10 +243,11 @@ internal class PropertyDocumentableConverterTest(
             pathProvider(classGraph = classGraph),
             docConverter
         )
-        return converter.detail(property()!!, hints)
+        return converter.detail(property(name)!!, hints)
     }
 
     private fun DModule.signature(
+        name: String = "foo",
         hints: ModifierHints = ModifierHints(language)
     ): SymbolSignature {
         val holder = runBlocking { DocumentablesHolder(this@signature, this) }
@@ -246,11 +258,10 @@ internal class PropertyDocumentableConverterTest(
             pathProvider(classGraph = classGraph),
             docConverter
         )
-        return converter.summary(property()!!, hints).signature()
+        return converter.summary(property(name)!!, hints).signature()
     }
 
-    private fun Parameter.link(): Link.Params = (data.type as SymbolType).link()
-    private fun SymbolType.link(): Link.Params = data.type.data
+    private fun TypeProjectionComponent.link(): Link.Params = data.type.data
     private fun TwoPaneSummaryItem.returnSummary(): TypeSummary.Params =
         (data.title as TypeSummary).data
     private fun TwoPaneSummaryItem.signature() = (data.description as SymbolSummary).data.signature

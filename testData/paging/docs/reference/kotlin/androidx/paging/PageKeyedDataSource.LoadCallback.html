@@ -64,7 +64,7 @@
           <tr>
             <td width="40%"><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List,kotlin.Any)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;,&nbsp;adjacentPageKey:&nbsp;Key?)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List,kotlin.Any)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value?&gt;?,&nbsp;adjacentPageKey:&nbsp;Key?)</code></div>
               <p>Called to pass loaded data from a <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>.</p>
             </td>
           </tr>
@@ -102,7 +102,7 @@
     <h2>Public functions</h2>
     <div><a name="onResult(kotlin.collections.List, kotlin.Any)"></a><a name="onResult-kotlin.collections.List-kotlin.Any-"></a><a name="onresult"></a>
       <h3 class="api-name" id="onResult(kotlin.collections.List,kotlin.Any)">onResult</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List,kotlin.Any)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;,&nbsp;adjacentPageKey:&nbsp;Key?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List,kotlin.Any)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value?&gt;?,&nbsp;adjacentPageKey:&nbsp;Key?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Called to pass loaded data from a <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>.</p>
       <p>Call this method from your PageKeyedDataSource's <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams)">loadBefore</a></code> and <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams)">loadAfter</a></code> methods to return data.</p>
       <p>It is always valid to pass a different amount of data than what is requested. Pass an empty list if there is no more data to load.</p>
@@ -116,7 +116,7 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;</code></td>
+              <td width="40%"><code>data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value?&gt;?</code></td>
               <td>
                 <p>List of items loaded from the PageKeyedDataSource.</p>
               </td>

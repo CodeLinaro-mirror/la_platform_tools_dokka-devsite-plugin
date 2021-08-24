@@ -17,23 +17,29 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.Link
+import com.google.devsite.components.impl.DefaultLambdaTypeProjectionComponent
 import com.google.devsite.components.impl.DefaultLink
-import com.google.devsite.components.impl.DefaultParameter
-import com.google.devsite.components.impl.DefaultSymbolType
-import com.google.devsite.components.impl.DefaultTypeParameter
-import com.google.devsite.components.symbols.Parameter
-import com.google.devsite.components.symbols.SymbolBase
-import com.google.devsite.components.symbols.SymbolType
-import com.google.devsite.components.symbols.TypeParameter as DokkaTypeParameter
+import com.google.devsite.components.impl.DefaultParameterComponent
+import com.google.devsite.components.impl.DefaultTypeParameterComponent
+import com.google.devsite.components.impl.DefaultTypeProjectionComponent
+import com.google.devsite.components.symbols.LambdaTypeProjectionComponent
+import com.google.devsite.components.symbols.ParameterComponent
+import com.google.devsite.components.symbols.TypeParameterComponent
+import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.links.DRI
-import org.jetbrains.dokka.model.Annotations
+import org.jetbrains.dokka.model.Annotations.Annotation
+import org.jetbrains.dokka.model.Bound
+import org.jetbrains.dokka.model.Contravariance
+import org.jetbrains.dokka.model.Covariance
 import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.DTypeParameter
 import org.jetbrains.dokka.model.DefaultValue
+import org.jetbrains.dokka.model.Dynamic
 import org.jetbrains.dokka.model.FunctionalTypeConstructor
 import org.jetbrains.dokka.model.GenericTypeConstructor
+import org.jetbrains.dokka.model.Invariance
 import org.jetbrains.dokka.model.JavaObject
 import org.jetbrains.dokka.model.Nullable
 import org.jetbrains.dokka.model.PrimitiveJavaType
@@ -41,10 +47,11 @@ import org.jetbrains.dokka.model.Projection
 import org.jetbrains.dokka.model.Star
 import org.jetbrains.dokka.model.TypeAliased
 import org.jetbrains.dokka.model.TypeConstructor
-import org.jetbrains.dokka.model.TypeParameter as UpstreamTypeParameter
+import org.jetbrains.dokka.model.TypeParameter
 import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Variance
 import org.jetbrains.dokka.model.Void
+import org.jetbrains.dokka.model.properties.WithExtraProperties
 import java.util.concurrent.ConcurrentHashMap
 
 /** Converts parameter and parameter-likes into their components. */
@@ -66,19 +73,34 @@ internal class ParameterDocumentableConverter(
     fun componentForParameter(
         param: DParameter,
         isSummary: Boolean
-    ): Parameter = when (displayLanguage) {
-        Language.JAVA -> componentForJavaProjection(
-            proj = param.type,
-            name = param.name ?: "receiver",
-            modifiers = param.getExtraModifiers().modifiersFor(ModifierHints(Language.JAVA)),
-            annotations = param.annotations()
-        )
+    ): ParameterComponent = when (displayLanguage) {
+        Language.JAVA -> {
+            DefaultParameterComponent(
+                ParameterComponent.Params(
+                    name = param.name ?: "receiver",
+                    type = componentForProjection(
+                        projection = param.type,
+                        isJavaSource = param.isFromJava(),
+                        propagatedAnnotations = param.annotations()
+                            .filter { it.belongsOnReturnType() }
+                    ),
+                    modifiers = param.getExtraModifiers()
+                        .modifiersFor(ModifierHints(Language.JAVA)),
+                    annotationComponents = param.annotations().filter { !it.belongsOnReturnType() }
+                        .annotationComponents(
+                        pathProvider,
+                        displayLanguage,
+                        showNullability = false
+                    ),
+                    displayLanguage = Language.JAVA
+                )
+            )
+        }
         Language.KOTLIN -> {
             val defaultValueExpression = param.extra.allOfType<DefaultValue>().singleOrNull()?.value
                 ?.takeUnless { isSummary }
-            componentForKotlinProjection(
-                proj = param.type,
-                name = param.name.orEmpty(),
+            componentForKotlinParameter(
+                param = param,
                 defaultValue = defaultValueExpression?.getValue(),
                 modifiers = param.getExtraModifiers().modifiersFor(ModifierHints(Language.KOTLIN)),
                 annotations = param.annotations()
@@ -86,13 +108,94 @@ internal class ParameterDocumentableConverter(
         }
     }
 
+    /** Submethod of componentForParameter with special-case handling for Kotlin, e.g. param name */
+    private fun componentForKotlinParameter(
+        param: DParameter,
+        defaultValue: String? = null,
+        modifiers: List<String> = emptyList(),
+        annotations: List<Annotation> = emptyList()
+    ): ParameterComponent {
+        val projKotlin = param.type.possiblyAsKotlin()
+        val name = param.name.orEmpty()
+        val primaryType = componentForProjection(
+            projection = projKotlin,
+            isJavaSource = param.isFromJava(),
+            propagatedAnnotations = annotations.filter { it.belongsOnReturnType() }
+        )
+
+        val paramName = if (projKotlin.isLambda() && name.isEmpty()) {
+            projKotlin.asTypeConstructor().presentableName
+        } else {
+            name
+        } ?: ""
+
+        return DefaultParameterComponent(
+            ParameterComponent.Params(
+                displayLanguage = Language.KOTLIN,
+                name = paramName,
+                modifiers = modifiers,
+                type = primaryType,
+                annotationComponents = annotations.filter { !it.belongsOnReturnType() }
+                    .annotationComponents(
+                        pathProvider,
+                        displayLanguage,
+                        showNullability = false
+                ),
+                defaultValue = defaultValue
+            )
+        )
+    }
+
+    /** Turns a DTypeParameter into a TypeParameterComponent */
     fun componentForTypeParameter(
         param: DTypeParameter
-    ): DokkaTypeParameter = DefaultTypeParameter(DokkaTypeParameter.Params(
+    ): TypeParameterComponent = DefaultTypeParameterComponent(TypeParameterComponent.Params(
         displayLanguage = displayLanguage,
         name = param.variantTypeParameter.inner.name,
-        projections = param.bounds.map { componentForProjection(it, showNullability = false) }
+        projections = param.bounds.map {
+            componentForProjection(
+                projection = it,
+                isJavaSource = param.isFromJava(),
+                showNullability = false
+            )
+        }
     ))
+
+    /** Turns a lambda (a: String) -> Int 's parameter (a Projection), to a ParameterComponent */
+    internal fun componentForLambdaParameter(
+        projection: Projection,
+        isJavaSource: Boolean,
+        isSummary: Boolean = false
+    ): ParameterComponent {
+        val primaryType = componentForProjection(
+            projection = projection,
+            isJavaSource = isJavaSource,
+            removedAnnotations = projection.annotations().filter { !it.belongsOnReturnType() },
+            propagatedAnnotations = projection.annotations().filter { it.belongsOnReturnType() }
+        )
+
+        val name = (projection as? TypeConstructor)?.presentableName ?: ""
+
+        val defaultValue = (projection as? WithExtraProperties<*>)?.extra?.allOfType<DefaultValue>()
+            ?.singleOrNull()?.value?.takeUnless { isSummary }?.getValue()
+
+        return DefaultParameterComponent(
+            ParameterComponent.Params(
+                displayLanguage = Language.KOTLIN,
+                name = name,
+                modifiers = (projection as? WithExtraProperties<*>)?.getExtraModifiers().orEmpty(),
+                type = primaryType,
+                annotationComponents = projection.annotations().filter { !it.belongsOnReturnType() }
+                    .annotationComponents(
+                    pathProvider = pathProvider,
+                    displayLanguage = displayLanguage,
+                    isFromJava = isJavaSource,
+                    isKotlinNullable = projection is Nullable
+                ),
+                defaultValue = defaultValue
+            )
+        )
+    }
 
     /**
      * Returns the component for a type projection.
@@ -102,62 +205,157 @@ internal class ParameterDocumentableConverter(
      * we *do* want to show nullability information since it's built into the type. Thus, we look at
      * annotations in addition to the Dokka Nullable type.
      *
+     * @param propagatedAnnotations used in cases where e.g. annotations on a function should be
+     *      propagated to the return type
+     * @param isJavaSource used to determine whether an unannotated projection is nullable
      * @param isReturnType used to determine if Unit return types should be converted to void
+     * @param showNullability if false, overrides default behavior and hides nullability annotations
+     * @param isKotlinNullable whether this projection was wrapped in Nullable. As such, should
+     *      only be set when calling this function from inside this function
      */
     fun componentForProjection(
-        proj: Projection,
-        annotations: List<Annotations.Annotation> = emptyList(),
+        projection: Projection,
+        isJavaSource: Boolean,
+        propagatedAnnotations: List<Annotation> = emptyList(),
+        removedAnnotations: List<Annotation> = emptyList(),
         isReturnType: Boolean = false,
-        showNullability: Boolean = true
-    ): Parameter = when (displayLanguage) {
-        Language.JAVA -> componentForJavaProjection(
-            proj,
-            annotations = annotations,
-            isReturnType = isReturnType,
-            showNullability = showNullability
-        )
-        Language.KOTLIN -> componentForKotlinProjection(proj, annotations = annotations)
-    }
-
-    private fun Projection.typeIsNullableAtAll() = when (this) {
-        is TypeConstructor -> {
-            val className = dri.classNames.orEmpty()
-            !(dri.packageName == "kotlin" &&
-                // kotlin types we convert to java primitives don't get nullability
-                (className in kotlinPrimitives ||
-                    // Nothing is converted to void, so nullability isn't useful
-                    className == "Nothing" ||
-                    // Unit can be nullable, but that information is basically always useless
-                    className == "Unit"))
+        showNullability: Boolean = true,
+        isKotlinNullable: Boolean = false
+    ): TypeProjectionComponent {
+        // Lambda functions can't be generic types, but their parameters are crammed into the same
+        // "projections" location where generic types are stored.
+        // This must happen before the rewriting because PrimitiveJavaTypes can't have generics
+        var generics = projection.generics(isJavaSource)
+        // This rewriting must happen before Variance is handled, or we won't know whether to unbox
+        val proj = if (displayLanguage == Language.KOTLIN) projection
+            // This recurs, though isReturnType is always false past the top level
+            else projection.rewriteKotlinPrimitivesForJava(isReturnType)
+        // If a type becomes a java primitive array via rewriting, generics get hoisted
+        if (proj is PrimitiveJavaType && proj.name.endsWith("[]")) generics = emptyList()
+        // The nullability annotation injection must happen before annotationComponents are created
+        if (proj is Nullable) {
+            // isReturnType doesn't need to be propagated because rewriteKotlinPrimitives recurred
+            return componentForProjection(
+                projection = proj.inner,
+                isJavaSource = isJavaSource,
+                propagatedAnnotations = propagatedAnnotations,
+                removedAnnotations = removedAnnotations,
+                isReturnType = false,
+                showNullability = showNullability,
+                isKotlinNullable = true
+            )
         }
-        else -> true
+        // isReturnType = should_convert_Unit_to_void, which is always false for `GenericOf<Unit>`.
+        if (proj is Variance<*>) {
+            return componentForProjection(
+                projection = proj.inner,
+                isJavaSource = isJavaSource,
+                propagatedAnnotations = propagatedAnnotations,
+                removedAnnotations = removedAnnotations,
+                isReturnType = false,
+                showNullability = showNullability
+            )
+        }
+        if (proj is TypeAliased) {
+            return componentForProjection(
+                projection = proj.inner,
+                isJavaSource = isJavaSource,
+                propagatedAnnotations = propagatedAnnotations,
+                removedAnnotations = removedAnnotations,
+                isReturnType = isReturnType,
+                showNullability = showNullability)
+        }
+
+        val annotations = propagatedAnnotations + projection.annotations() - removedAnnotations
+
+        val nullable = proj.isNullable(isJavaSource, propagatedAnnotations) || isKotlinNullable
+
+        return when (displayLanguage) {
+            Language.JAVA -> DefaultTypeProjectionComponent(
+                    TypeProjectionComponent.Params(
+                        type = proj.toLink(),
+                        annotationComponents = annotations.annotationComponents(
+                            pathProvider = pathProvider,
+                            displayLanguage = displayLanguage,
+                            isKotlinNullable = isKotlinNullable,
+                            isFromJava = isJavaSource,
+                            showNullability = showNullability && proj.typeIsNullableAtAll()
+                        ),
+                        nullable = nullable,
+                        displayLanguage = Language.JAVA,
+                        generics = generics
+                    )
+                )
+            Language.KOTLIN -> when (proj.isLambda()) {
+                false -> DefaultTypeProjectionComponent(
+                    TypeProjectionComponent.Params(
+                        displayLanguage = Language.KOTLIN,
+                        type = proj.possiblyAsKotlin().toLink(),
+                        annotationComponents = annotations.annotationComponents(
+                            pathProvider = pathProvider,
+                            displayLanguage = displayLanguage,
+                            showNullability = false
+                        ),
+                        nullable = nullable,
+                        generics = generics
+                    )
+                )
+                true -> componentForLambdaProjectionAsKotlin(
+                    proj = proj.possiblyAsKotlin(),
+                    annotations = annotations,
+                    nullable = nullable
+                )
+            }
+        }
     }
 
-    private fun componentForJavaProjection(
+    /** Converts a Projection representing an as-Kotlin lambda into a TypeProjectionComponent */
+    private fun componentForLambdaProjectionAsKotlin(
         proj: Projection,
-        name: String = "",
-        modifiers: List<String> = emptyList(),
-        annotations: List<Annotations.Annotation> = emptyList(),
-        isReturnType: Boolean = false,
-        showNullability: Boolean = true
-    ): Parameter {
-        val nullable = proj.isNullable() || annotations.isNullable()
+        annotations: List<Annotation> = emptyList(),
+        nullable: Boolean = false
+    ): TypeProjectionComponent {
+        val returnType = proj.asTypeConstructor().projections.last()
+        val lambdaModifiers: List<String> = if (proj.isSuspend()) {
+            listOf("suspend")
+        } else {
+            emptyList()
+        }
 
-        return DefaultParameter(
-            Parameter.Params(
-                isLambda = false,
-                name = name,
-                type = proj.rewriteKotlinPrimitivesForJava(isReturnType).toComponent(),
-                modifiers = modifiers,
+        // Always ignore return type and receiver since they're handled elsewhere, not as params.
+        val lambdaProjections = proj.asTypeConstructor().projections - returnType - proj.receiver()
+        val lambdaParams = lambdaProjections.map { componentForLambdaParameter(it!!, false) }
+
+        return DefaultLambdaTypeProjectionComponent(
+            LambdaTypeProjectionComponent.Params(
+                lambdaModifiers = lambdaModifiers,
+                lambdaParams = lambdaParams,
+                type = returnType.toLink(),
+                receiver = proj.receiver()?.let { componentForProjection(it, false) },
                 annotationComponents = annotations.annotationComponents(
-                    pathProvider,
-                    displayLanguage,
-                    nullable,
-                    showNullability = showNullability && proj.typeIsNullableAtAll()
+                    pathProvider = pathProvider,
+                    displayLanguage = displayLanguage,
+                    showNullability = false
                 ),
-                displayLanguage = Language.JAVA
+                nullable = nullable,
+                generics = returnType.generics(isJavaSource = false),
+                displayLanguage = displayLanguage
             )
         )
+    }
+
+    fun Projection.generics(isJavaSource: Boolean):
+        List<TypeProjectionComponent> = when (this) {
+        is TypeConstructor -> this.projections.map {
+            componentForProjection(it, isJavaSource = isJavaSource)
+        }
+        is Nullable -> this.inner.generics(isJavaSource)
+        is TypeParameter, is PrimitiveJavaType, is UnresolvedBound,
+        is JavaObject, Star, Void, Dynamic -> emptyList()
+        // These three don't matter in the main use case because we recurse there later
+        is Variance<*> -> this.inner.generics(isJavaSource)
+        is Invariance<*> -> this.inner.generics(isJavaSource)
+        is TypeAliased -> this.inner.generics(isJavaSource)
     }
 
     /**
@@ -195,76 +393,18 @@ internal class ParameterDocumentableConverter(
         else -> this
     }
 
-    private fun componentForKotlinProjection(
-        proj: Projection,
-        name: String = "",
-        defaultValue: String? = null,
-        modifiers: List<String> = emptyList(),
-        annotations: List<Annotations.Annotation> = emptyList()
-    ): Parameter {
-        val projKotlin = proj.possiblyAsKotlin()
-        val isLambda = projKotlin.isLambda()
-        val receiver = projKotlin.receiver()
-        val primaryType = if (isLambda) {
-            // Get the return type of the lambda
-            componentForKotlinProjection(projKotlin.asTypeConstructor().projections.last())
-        } else {
-            projKotlin.toComponent(nullable = annotations.isNullable())
-        }
-        val lambdaModifiers: List<String> = if (projKotlin.isSuspend()) {
-            listOf("suspend")
-        } else {
-            emptyList()
-        }
-
-        val lambdaParams: List<Parameter> = if (isLambda) {
-            // Always ignore the return type of the lambda since that's handled by primaryType.
-            val lambdaProjections = projKotlin.asTypeConstructor().projections.dropLast(1)
-            if (receiver == null) {
-                lambdaProjections.map(::componentForKotlinProjection)
-            } else {
-                // If the receiver is available, we also ignore the first type
-                lambdaProjections.drop(1).map(::componentForKotlinProjection)
-            }
-        } else {
-            emptyList()
-        }
-
-        val paramName = if (isLambda && name.isEmpty()) {
-            projKotlin.asTypeConstructor().presentableName
-        } else {
-            name
-        } ?: ""
-
-        return DefaultParameter(
-            Parameter.Params(
-                displayLanguage = Language.KOTLIN,
-                isLambda = isLambda,
-                name = paramName,
-                receiver = receiver,
-                lambdaModifiers = lambdaModifiers,
-                lambdaParams = lambdaParams,
-                modifiers = modifiers,
-                type = primaryType,
-                annotationComponents = annotations.annotationComponents(
-                    pathProvider,
-                    displayLanguage,
-                    annotations.isNullable()
-                ),
-                defaultValue = defaultValue
-            )
-        )
-    }
+    private fun Projection.annotations() = (this as? WithExtraProperties<*>)?.annotations()
+        ?: emptyList()
 
     /** Converts a lambda receiver projection to its type component if available. */
-    private fun Projection.receiver(): Parameter? = when (this) {
+    private fun Projection.receiver(): Projection? = when (this) {
         is FunctionalTypeConstructor -> if (this.isExtensionFunction) {
-            componentForProjection(projections.first())
+            projections.first()
         } else {
             null
         }
 
-        is GenericTypeConstructor, is UpstreamTypeParameter, is PrimitiveJavaType,
+        is GenericTypeConstructor, is TypeParameter, is PrimitiveJavaType,
         is UnresolvedBound, is JavaObject, Star, Void -> null
         is Nullable -> inner.receiver()
         is Variance<*> -> inner.receiver()
@@ -272,44 +412,16 @@ internal class ParameterDocumentableConverter(
         else -> error("Unknown bound: $this")
     }
 
-    /** Converts a documentable type to its type component, recursively expanding generics */
-    private fun Projection.toComponent(nullable: Boolean = false): SymbolType {
-        if (this is Variance<*>) {
-            return inner.toComponent()
-        }
-        if (this is Nullable) {
-            return inner.toComponent(nullable = displayLanguage == Language.KOTLIN)
-        }
-
-        if (this is TypeAliased) {
-            return inner.toComponent()
-        }
-
-        val generics: List<SymbolBase> = when (this) {
-            is TypeConstructor -> projections.map { componentForProjection(it) }
-            is UpstreamTypeParameter, is PrimitiveJavaType, is UnresolvedBound,
-            is JavaObject, Star, Void -> emptyList()
-            else -> error("Unknown bound: $this")
-        }
-
-        return DefaultSymbolType(
-            SymbolType.Params(
-                displayLanguage = displayLanguage,
-                type = toLink(),
-                nullable,
-                generics
-            )
-        )
-    }
-
     /**
      * Converts a documentable type to a link component, assuming all generics have been resolved.
+     *
+     * @param suffix is used in the case where we need to add a ? to a nullable type link
      */
-    private fun Projection.toLink(): Link = when (this) {
+    private fun Projection.toLink(suffix: String = ""): Link = when (this) {
         is TypeConstructor -> pathProvider.linkForReference(dri)
-        is UpstreamTypeParameter -> DefaultLink(
+        is TypeParameter -> DefaultLink(
             Link.Params(
-                name = presentableName ?: name,
+                name = (presentableName ?: name) + suffix,
                 url = ""
             )
         )
@@ -328,13 +440,14 @@ internal class ParameterDocumentableConverter(
         }
         is JavaObject -> when (displayLanguage) {
             Language.JAVA -> pathProvider.linkForReference(DRI("java.lang", "Object"))
-            Language.KOTLIN -> pathProvider.linkForReference(DRI("kotlin", "Any"))
+            Language.KOTLIN -> pathProvider.linkForReference(DRI("kotlin", "Any"), suffix = suffix)
         }
         is PrimitiveJavaType -> when (displayLanguage) {
             Language.JAVA -> DefaultLink(Link.Params(name = name, url = ""))
             Language.KOTLIN -> pathProvider.linkForReference(DRI("kotlin", name.capitalize()))
         }
         is UnresolvedBound -> DefaultLink(Link.Params(name = name, url = ""))
+        is Nullable -> inner.toLink(suffix = "?")
         else -> error("Unknown bound: $this")
     }
 
@@ -347,7 +460,7 @@ internal class ParameterDocumentableConverter(
         is Nullable -> inner.isLambda()
         is Variance<*> -> inner.isLambda()
         is TypeAliased -> inner.isLambda()
-        is UpstreamTypeParameter, is PrimitiveJavaType,
+        is TypeParameter, is PrimitiveJavaType,
         is UnresolvedBound, is JavaObject, Star, Void -> false
         else -> error("Unknown bound: $this of type ${this::class.java}")
     }
@@ -370,21 +483,24 @@ internal class ParameterDocumentableConverter(
      * - Anything in a generic also has to be boxed
      * - Unit aka void can appear in lists and must therefore only be converted to void for return
      *   types
+     * - NOTE: cases get weird for Unit? and Array<Unit>. We try to treat Unit? as Unit, but we
+     *   consider both mistakes in source. Behavior on such cases is not guaranteed.
      */
     private fun Projection.rewriteKotlinPrimitivesForJava(
         isReturnType: Boolean = false,
         mustBoxPrimitive: Boolean = false
     ): Projection = when (this) {
+        // TypeParameter: `public <T> void baroo(T[] derp)`.
         is FunctionalTypeConstructor, is GenericTypeConstructor -> {
             val typeConstructor = this as TypeConstructor
             val isStdlib = dri.packageName == "kotlin"
             val className = dri.classNames.orEmpty()
             val innerProjections = projections.map {
-                // Generics can't be true primitives in Java
-                it.rewriteKotlinPrimitivesForJava(mustBoxPrimitive = true)
+                // Generics can't be true primitives in Java. Don't propagate return type.
+                it.rewriteKotlinPrimitivesForJava(isReturnType = false, mustBoxPrimitive = true)
             }
 
-            if (isReturnType && isStdlib && className == "Unit") {
+            if (isReturnType && (isStdlib && className == "Unit")) {
                 Void
             } else if (isStdlib && className in kotlinPrimitives) {
                 if (mustBoxPrimitive) {
@@ -399,36 +515,74 @@ internal class ParameterDocumentableConverter(
             // kotlin.IntArray -> int[]
             } else if (isStdlib && className in kotlinPrimitiveArrays) {
                 PrimitiveJavaType(className.removeSuffix("Array").toLowerCase() + "[]")
-            // kotlin.Array<int> -> int[]
-            } else if (
-                isStdlib && className == "Array" &&
-                innerProjections.singleOrNull() is PrimitiveJavaType
-            ) {
-                val arrayType = innerProjections.single() as PrimitiveJavaType
-                PrimitiveJavaType(arrayType.name + "[]")
-            // kotlin.Array<Object> -> Object[]
-            } else if (
-                isStdlib && className == "Array" &&
-                innerProjections.singleOrNull() is GenericTypeConstructor
-            ) {
-                val name = when (val type = innerProjections.single()) {
-                    is TypeConstructor -> type.dri.classNames.orEmpty()
-                    is PrimitiveJavaType -> type.name
-                    else -> ""
-                }
-                PrimitiveJavaType("$name[]")
+            } else if (isStdlib && className == "Array") when (innerProjections.singleOrNull()) {
+                // kotlin.Array<Object> -> Object[]
+                is JavaObject -> PrimitiveJavaType("Object[]")
+                // Other Array<Something> -> Something[]; Array<T> -> T[]; Array<() -> Unit> -> ugh
+                is TypeConstructor, is TypeParameter, is TypeAliased, is UnresolvedBound,
+                    is Nullable -> // We can't represent mid-nest nullability; pretend it's not
+                    PrimitiveJavaType("${innerProjections.single().name()}[]")
+                // kotlin.Array<int> -> int[]
+                is PrimitiveJavaType ->
+                    PrimitiveJavaType((innerProjections.single() as PrimitiveJavaType).name + "[]")
+                // Should not be done in the first place
+                Void -> TODO()
+                Dynamic -> TODO()
+                Star -> TODO()
+                is Variance<*> -> TODO()
+                null -> TODO()
             } else {
                 typeConstructor.copy(projections = innerProjections, dri = dri.possiblyAsJava())
             }
         }
-        // Nullable types and variances can't be true primitives in Java
-        is Nullable -> inner.rewriteKotlinPrimitivesForJava(mustBoxPrimitive = true)
-        is Variance<*> -> inner.rewriteKotlinPrimitivesForJava(mustBoxPrimitive = true)
-        else -> this
+        // Nullable types and variances can't be true primitives in Java, and can't be `void`
+        is Nullable -> {
+            val newInner = inner.rewriteKotlinPrimitivesForJava(
+                isReturnType = false,
+                mustBoxPrimitive = true
+            )
+            if (newInner is Void) Void // Special handling for `Unit?` being treated as `Unit`
+            else this.copy(inner = newInner as Bound)
+        }
+        // Strip out Variance wrappers because Java doesn't care
+        is Variance<*> -> inner.rewriteKotlinPrimitivesForJava(
+                isReturnType = false,
+                mustBoxPrimitive = true
+            )
+        // Typealiases don't cancel the argument propagation because they're cosmetic-only
+        is TypeAliased -> this.copy(
+            inner = inner.rewriteKotlinPrimitivesForJava(
+                isReturnType = isReturnType,
+                mustBoxPrimitive = mustBoxPrimitive
+            ) as Bound)
+        // <T> is T in both Java and Kotlin
+        is TypeParameter -> this
+        // Already Java, nothing to do
+        is PrimitiveJavaType, is JavaObject, Void -> this
+        // Not things that get converted to Java
+        Dynamic, Star -> this
+        // Nothing we can do
+        is UnresolvedBound -> this
     }
 
-    // Adds the functionality of a generic copy constructor for TypeConstructor. `copy` is defined by
-    // GenericTypeConstructor and FunctionalTypeConstructor data subclasses
+    private fun Projection.name(): String = when (this) {
+        is TypeParameter -> name
+        is GenericTypeConstructor -> dri.classNames.orEmpty()
+        is Nullable -> inner.name()
+        is TypeAliased -> inner.name()
+        is UnresolvedBound -> name
+        is Variance<*> -> inner.name()
+        is PrimitiveJavaType -> name
+        Void -> "void"
+        Star -> "*"
+        is JavaObject -> "Object"
+        is FunctionalTypeConstructor ->
+            """${dri.classNames!!}(${projections.joinToString(", ") { it.name() }})"""
+        Dynamic -> throw RuntimeException("Invalid State: trying to get name of a Dynamic")
+    }
+
+    // `copy` is defined for data classes. TypeConstructor is a sealed class whose only subclasses
+    // GenericTypeConstructor and FunctionalTypeConstructor are data classes, so we can hoist `copy`
     private fun TypeConstructor.copy(
         dri: DRI = this.dri,
         projections: List<Projection> = this.projections
@@ -438,9 +592,61 @@ internal class ParameterDocumentableConverter(
             is FunctionalTypeConstructor -> this.copy(dri, projections)
         }
 
+    // `copy` is defined for data classes. Variance is a sealed class whose only subclasses
+    // Covariance, Contravariance, and Invariance are data classes, so we can hoist `copy`
+    private fun Variance<*>.copy(
+        inner: Bound = this.inner
+    ): Projection =
+        when (this) {
+            is Covariance -> this.copy(inner)
+            is Contravariance -> this.copy(inner)
+            is Invariance -> this.copy(inner)
+        }
+
+    /** @return true if this is a nullable type, false otherwise */
+    private fun Projection.isNullable(
+        isJavaSource: Boolean,
+        injectedAnnotations: List<Annotation> = emptyList()
+    ): Boolean {
+        val allAnnotations = injectedAnnotations +
+            ((this as? WithExtraProperties<*>)?.annotations() ?: emptyList())
+        if (allAnnotations.hasAtNullable()) return true
+        if (allAnnotations.hasAtNonNull()) return false
+        if (allAnnotations.any { it.dri.classNames in BAD_NONNULL_ANNOTATION_NAMES }) return false
+        return when (this) {
+            is Nullable -> true
+            is Variance<*> -> inner.isNullable(isJavaSource)
+            is TypeAliased -> inner.isNullable(isJavaSource)
+            // Java arrays of primitives are nullable; non-array primitives aren't
+            is PrimitiveJavaType -> "[" in name
+            Void -> false // Not nullable by definition
+            Dynamic, Star -> false // Can come from Kotlin source only
+            // Unannotated java projections are nullable, default Kotlin aren't
+            is TypeParameter, is TypeConstructor, is JavaObject, is UnresolvedBound -> isJavaSource
+        }
+    }
+
+    private fun Projection.typeIsNullableAtAll() = when (this) {
+        is TypeConstructor -> {
+            val className = dri.classNames.orEmpty()
+            !(dri.packageName == "kotlin" &&
+                // kotlin types we convert to java primitives don't get nullability
+                (className in kotlinPrimitives ||
+                    // Nothing is converted to void, so nullability isn't useful
+                    className == "Nothing" ||
+                    // Unit can be nullable, but that information is basically always useless
+                    className == "Unit"))
+        }
+        is Void, is PrimitiveJavaType -> false
+        else -> true
+    }
+
     private companion object {
-        val kotlinPrimitives = setOf(
+        val kotlinPrimitives = listOf(
             "Boolean", "Byte", "Char", "Short", "Int", "Long", "Float", "Double"
+        )
+        val javaBoxedPrimitives = listOf(
+            "Boolean", "Byte", "Character", "Short", "Int", "Long", "Float", "Double"
         )
         val javaPrimitiveToKotlinArrayType = mapOf(
             "int" to "IntArray",

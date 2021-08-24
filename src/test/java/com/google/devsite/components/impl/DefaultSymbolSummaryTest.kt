@@ -18,7 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.symbols.SymbolSummary.Params
-import com.google.devsite.components.testing.NoopDescription
+import com.google.devsite.components.testing.NoopDescriptionComponent
 import com.google.devsite.components.testing.NoopFunctionSignature
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
@@ -30,7 +30,7 @@ class DefaultSymbolSummaryTest {
         val component = DefaultSymbolSummary(
             Params(
                 signature = NoopFunctionSignature("foo()"),
-                description = NoopDescription("This method does baz.")
+                description = NoopDescriptionComponent("This method does baz.")
             )
         )
 

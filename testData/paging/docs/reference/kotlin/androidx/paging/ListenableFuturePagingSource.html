@@ -7,7 +7,7 @@
   <body>
     <h1>ListenableFuturePagingSource</h1>
     <p>
-      <pre>abstract class ListenableFuturePagingSource&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; : <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></pre>
+      <pre>abstract class ListenableFuturePagingSource&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; : <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></pre>
     </p>
     <div class="devsite-table-wrapper">
       <table class="jd-inheritance-table">
@@ -82,7 +82,7 @@
         <tbody>
           <tr>
             <td>
-              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/ListenableFuturePagingSource.html#ListenableFuturePagingSource()">ListenableFuturePagingSource</a>()</code></div>
+              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/ListenableFuturePagingSource.html#ListenableFuturePagingSource()">ListenableFuturePagingSource</a>()</code></div>
             </td>
           </tr>
         </tbody>
@@ -99,14 +99,14 @@
           <tr>
             <td width="40%"><code>open&nbsp;suspend <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a>&lt;Key,&nbsp;Value&gt;</code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/ListenableFuturePagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a>(params:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html">PagingSource.LoadParams</a>&lt;Key&gt;)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/ListenableFuturePagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a>(params:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html">PagingSource.LoadParams</a>&lt;Key?&gt;?)</code></div>
               <p>Loading API for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code>abstract <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a>&lt;Key,&nbsp;Value&gt;&gt;</code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/ListenableFuturePagingSource.html#loadFuture(androidx.paging.PagingSource.LoadParams)">loadFuture</a>(params:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html">PagingSource.LoadParams</a>&lt;Key&gt;)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/ListenableFuturePagingSource.html#loadFuture(androidx.paging.PagingSource.LoadParams)">loadFuture</a>(params:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html">PagingSource.LoadParams</a>&lt;Key?&gt;?)</code></div>
               <p>Loading API for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
             </td>
           </tr>
@@ -129,7 +129,7 @@
                     <tr>
                       <td width="40%"><code>abstract Key?</code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a>(state:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a>(state:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html">PagingState</a>&lt;Key?,&nbsp;Value?&gt;?)</code></div>
                         <p>Provide a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">Key</a></code> used for the initial <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> for the next <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> due to invalidation of this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
                       </td>
                     </tr>
@@ -143,14 +143,14 @@
                     <tr>
                       <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/paging/PagingSource.html#registerInvalidatedCallback(kotlin.Function0)">registerInvalidatedCallback</a>(onInvalidatedCallback:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/paging/PagingSource.html#registerInvalidatedCallback(kotlin.Function0)">registerInvalidatedCallback</a>(onInvalidatedCallback:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?)</code></div>
                         <p>Add a callback to invoke when the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> is first invalidated.</p>
                       </td>
                     </tr>
                     <tr>
                       <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
                       <td>
-                        <div><code><a href="/reference/kotlin/androidx/paging/PagingSource.html#unregisterInvalidatedCallback(kotlin.Function0)">unregisterInvalidatedCallback</a>(onInvalidatedCallback:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+                        <div><code><a href="/reference/kotlin/androidx/paging/PagingSource.html#unregisterInvalidatedCallback(kotlin.Function0)">unregisterInvalidatedCallback</a>(onInvalidatedCallback:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?)</code></div>
                         <p>Remove a previously added invalidate callback.</p>
                       </td>
                     </tr>
@@ -165,18 +165,18 @@
     <h2>Public constructors</h2>
     <div><a name="ListenableFuturePagingSource--"></a><a name="listenablefuturepagingsource"></a>
       <h3 class="api-name" id="ListenableFuturePagingSource()">ListenableFuturePagingSource</h3>
-      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/ListenableFuturePagingSource.html#ListenableFuturePagingSource()">ListenableFuturePagingSource</a>()</pre>
+      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/ListenableFuturePagingSource.html#ListenableFuturePagingSource()">ListenableFuturePagingSource</a>()</pre>
     </div>
     <h2>Public functions</h2>
     <div><a name="load-androidx.paging.PagingSource.LoadParams-"></a><a name="load"></a>
       <h3 class="api-name" id="load(androidx.paging.PagingSource.LoadParams)">load</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/ListenableFuturePagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a>(params:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html">PagingSource.LoadParams</a>&lt;Key&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a>&lt;Key,&nbsp;Value&gt;</pre>
+      <pre class="api-signature no-pretty-print">open&nbsp;suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/ListenableFuturePagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a>(params:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html">PagingSource.LoadParams</a>&lt;Key?&gt;?):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a>&lt;Key,&nbsp;Value&gt;</pre>
       <p>Loading API for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
       <p>Implement this method to trigger your async load (e.g. from database or network).</p>
     </div>
     <div><a name="loadFuture-androidx.paging.PagingSource.LoadParams-"></a><a name="loadfuture"></a>
       <h3 class="api-name" id="loadFuture(androidx.paging.PagingSource.LoadParams)">loadFuture</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/ListenableFuturePagingSource.html#loadFuture(androidx.paging.PagingSource.LoadParams)">loadFuture</a>(params:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html">PagingSource.LoadParams</a>&lt;Key&gt;):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a>&lt;Key,&nbsp;Value&gt;&gt;</pre>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/ListenableFuturePagingSource.html#loadFuture(androidx.paging.PagingSource.LoadParams)">loadFuture</a>(params:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html">PagingSource.LoadParams</a>&lt;Key?&gt;?):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a>&lt;Key,&nbsp;Value&gt;&gt;</pre>
       <p>Loading API for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
       <p>Implement this method to trigger your async load (e.g. from database or network).</p>
     </div>

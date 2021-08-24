@@ -17,9 +17,24 @@
 package com.google.devsite.components
 
 import kotlinx.html.FlowContent
+import kotlinx.html.HTMLTag
+import kotlinx.html.unsafe
 
 /**
  * Represents a component that doesn't need to be in a specific HTML context to render itself
  * correctly.
  */
 internal interface ContextFreeComponent : HtmlComponent<FlowContent>
+
+/**
+ * Recreates the functionality of non-standard <nobr> tag, used to prevent browser from inserting
+ * line breaks in the given content to render.
+ */
+internal fun FlowContent.nobr(render: HTMLTag.() -> Unit) {
+    if (this !is HTMLTag) {
+        return
+    }
+    unsafe { +"<span style=\"white-space: nowrap;\">" }
+    render()
+    unsafe { +"</span>" }
+}

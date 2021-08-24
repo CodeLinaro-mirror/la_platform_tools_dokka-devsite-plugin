@@ -17,19 +17,33 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.ShouldBreak
+import com.google.devsite.components.nobr
 import com.google.devsite.components.render
-import com.google.devsite.components.symbols.SymbolType
+import com.google.devsite.components.symbols.LambdaTypeProjectionComponent
+import kotlinx.html.Entities
 import kotlinx.html.FlowContent
 
 /** Default implementation of a function parameter type. */
-internal class DefaultSymbolType(
-    override val data: SymbolType.Params
-) : SymbolType {
+internal class DefaultLambdaTypeProjectionComponent(
+    override val data: LambdaTypeProjectionComponent.Params
+) : LambdaTypeProjectionComponent {
     override fun render(into: FlowContent) = into.run {
-        data.type.render(this)
-        if (data.generics.isNotEmpty()) {
-            data.generics.render(into, ShouldBreak.NO, brackets = "<>")
+        if (data.nullable) +"("
+        data.annotationComponents.render(this, separator = "", terminator = { +" " })
+        data.lambdaModifiers.render(this, terminator = { +Entities.nbsp })
+        if (data.receiver != null) {
+            data.receiver.render(this)
+            +"."
         }
-        if (data.nullable) +"?"
+        data.lambdaParams.render(this, brackets = "()")
+        +" "
+        nobr {
+            +"->"
+        }
+        +" "
+        data.type.render(this)
+        // Render any generics on the return type
+        data.generics.render(into, ShouldBreak.NO, brackets = "<>")
+        if (data.nullable) +")?"
     }
 }

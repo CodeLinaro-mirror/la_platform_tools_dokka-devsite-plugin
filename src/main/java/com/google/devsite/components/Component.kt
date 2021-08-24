@@ -16,7 +16,7 @@
 
 package com.google.devsite.components
 
-import com.google.devsite.components.symbols.TypeParameter
+import com.google.devsite.components.symbols.TypeParameterComponent
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
 import kotlinx.html.br
@@ -42,7 +42,7 @@ internal fun List<Component<FlowContent>>.render(
     for (parameter in this@render) {
         if (shouldBreak == ShouldBreak.AND_INDENT) repeat(4) { +Entities.nbsp }
         // Group type parameters within a single set of <>s, rather than each making their own
-        if (parameter is TypeParameter) parameter.render(this, false)
+        if (parameter is TypeParameterComponent) parameter.render(this, false)
         else parameter.render(this)
 
         if (parameter !== last() && separator != null) { // null separator -> no separation/spaces
@@ -77,6 +77,12 @@ internal fun List<String>.render(
     }
     if (terminator != null) terminator()
 }
+
+internal fun List<String>.length(separator: String = " ") =
+    sumBy { it.length } + (size - 1) * separator.length
+
+internal val String?.length: Int
+    get() = this?.let { this.length } ?: 0
 
 internal enum class ShouldBreak {
     YES, //   Manually break

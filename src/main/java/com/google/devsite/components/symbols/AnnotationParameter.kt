@@ -19,7 +19,7 @@ package com.google.devsite.components.symbols
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.Sizeable
 
-/** Base type for annotation parameters. Necessaary because there are several different types. */
+/** Base type for annotation parameters. Necessary because there are several different types. */
 internal interface AnnotationParameter : ContextFreeComponent, Sizeable
 
 internal interface NamedValueAnnotationParameter : AnnotationParameter {

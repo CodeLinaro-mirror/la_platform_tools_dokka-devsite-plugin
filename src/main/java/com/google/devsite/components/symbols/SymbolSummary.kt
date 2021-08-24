@@ -17,7 +17,7 @@
 package com.google.devsite.components.symbols
 
 import com.google.devsite.components.ContextFreeComponent
-import com.google.devsite.components.Description
+import com.google.devsite.components.DescriptionComponent
 
 /** Represents a symbols' signature along with its description. */
 internal interface SymbolSummary : ContextFreeComponent {
@@ -25,6 +25,6 @@ internal interface SymbolSummary : ContextFreeComponent {
 
     class Params(
         val signature: SymbolSignature,
-        val description: Description
+        val description: DescriptionComponent
     )
 }

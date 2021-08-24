@@ -16,21 +16,16 @@
 
 package com.google.devsite.components.testing
 
-import com.google.devsite.components.symbols.Parameter
+import com.google.devsite.components.symbols.TypeProjectionComponent
 import kotlinx.html.FlowContent
 
-internal class NoopParameter(
-    private val text: String,
-    private val forceBreak: Boolean = false
-) : Parameter {
-    override val data: Parameter.Params
+internal class NoopTypeProjectionComponent(private val text: String) : TypeProjectionComponent {
+    override val data: TypeProjectionComponent.Params
         get() = throw NotImplementedError()
 
     override fun render(into: FlowContent) = into.run {
         +text
     }
 
-    override fun validate() = Unit
-
-    override fun length() = if (forceBreak) 10_000 else 0
+    override fun length() = text.length
 }

@@ -16,7 +16,7 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.Description
+import com.google.devsite.components.DescriptionComponent
 import kotlinx.html.FlowContent
 import kotlinx.html.OL
 import kotlinx.html.TABLE
@@ -133,9 +133,9 @@ import org.jetbrains.dokka.model.doc.Ul
 import org.jetbrains.dokka.model.doc.Var
 
 /** Default implementation of the hand-written documentation for a symbol. */
-internal class DefaultDescription(
-    override val data: Description.Params
-) : Description {
+internal class DefaultDescriptionComponent(
+    override val data: DescriptionComponent.Params
+) : DescriptionComponent {
     override fun render(into: FlowContent) = into.run {
         if (data.deprecation == null) {
             if (data.summary) {

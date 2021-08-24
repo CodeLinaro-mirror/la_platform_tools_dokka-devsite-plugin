@@ -17,18 +17,18 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.impl.DefaultFunctionSignature
-import com.google.devsite.components.impl.DefaultParameter
+import com.google.devsite.components.impl.DefaultParameterComponent
 import com.google.devsite.components.impl.DefaultSingleColumnSummaryItem
 import com.google.devsite.components.impl.DefaultSymbolDetail
 import com.google.devsite.components.impl.DefaultSymbolSummary
-import com.google.devsite.components.impl.DefaultSymbolType
+import com.google.devsite.components.impl.DefaultTypeProjectionComponent
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultTypeSummary
 import com.google.devsite.components.symbols.FunctionSignature
-import com.google.devsite.components.symbols.Parameter
+import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
-import com.google.devsite.components.symbols.SymbolType
+import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.TwoPaneSummaryItem
@@ -53,10 +53,11 @@ internal class FunctionDocumentableConverter(
                     TypeSummary.Params(
                         modifiers = function.modifiers().modifiersFor(hints),
                         type = paramConverter.componentForProjection(
-                            proj = function.type,
-                            annotations = annotations,
+                            projection = function.type,
+                            // Propagate ALL annotations _for display in the summary_, b/197321617
+                            propagatedAnnotations = annotations,
                             isReturnType = true,
-                            showNullability = !function.isConstructor
+                            isJavaSource = function.isFromJava()
 
                         )
                     )
@@ -64,7 +65,10 @@ internal class FunctionDocumentableConverter(
                 description = DefaultSymbolSummary(
                     SymbolSummary.Params(
                         signature = function.signature(isSummary = true),
-                        description = javadocConverter.summaryDescription(function, annotations)
+                        description = javadocConverter.summaryDescription(
+                            function,
+                            annotations.filter { !it.belongsOnReturnType() }
+                        )
                     )
                 )
             )
@@ -101,13 +105,14 @@ internal class FunctionDocumentableConverter(
         hints: ModifierHints,
         kind: SymbolDetail.SymbolKind
     ): SymbolDetail {
-        val annotations = function.annotations()
         val returnType = paramConverter.componentForProjection(
             function.type,
-            annotations,
+            isJavaSource = function.isFromJava(),
+            function.annotations().filter { it.belongsOnReturnType() },
             isReturnType = true,
-            showNullability = false
+            showNullability = kind != SymbolDetail.SymbolKind.CONSTRUCTOR && !function.isConstructor
         )
+        val annotations = function.annotations().filter { !it.belongsOnReturnType() }
 
         // So far I've only seen this in unit tests where we use the wrong entry point into
         // FunctionDocumentableConverter, but it's possible it could happen in other ways.
@@ -123,9 +128,7 @@ internal class FunctionDocumentableConverter(
                 annotationComponents = annotations.annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
-                    nullable = function.type.isNullable(),
-                    showNullability = !function.isConstructor &&
-                        kind != SymbolDetail.SymbolKind.CONSTRUCTOR
+                    showNullability = false
                 ),
                 modifiers = function.modifiers().modifiersFor(hints),
                 returnType = returnType,
@@ -189,16 +192,15 @@ internal class FunctionDocumentableConverter(
         )
     }
 
-    private fun DFunction.extFunctionClass(): Parameter {
-        return DefaultParameter(
-            Parameter.Params(
+    private fun DFunction.extFunctionClass(): ParameterComponent {
+        return DefaultParameterComponent(
+            ParameterComponent.Params(
                 displayLanguage = displayLanguage,
-                isLambda = false,
                 name = "",
-                type = DefaultSymbolType(
-                    SymbolType.Params(
-                        displayLanguage = displayLanguage,
-                        type = pathProvider.linkForReference(driForSyntheticClass())
+                type = DefaultTypeProjectionComponent(
+                    TypeProjectionComponent.Params(
+                        type = pathProvider.linkForReference(driForSyntheticClass()),
+                        displayLanguage = displayLanguage
                     )
                 )
             )

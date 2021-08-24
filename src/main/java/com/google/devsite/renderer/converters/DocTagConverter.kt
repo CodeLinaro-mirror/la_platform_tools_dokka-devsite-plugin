@@ -17,9 +17,10 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
 import com.google.devsite.components.Raw
-import com.google.devsite.components.impl.DefaultDescription
+import com.google.devsite.components.impl.DefaultDescriptionComponent
 import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultMiniSignature
 import com.google.devsite.components.impl.DefaultPropertySignature
@@ -27,7 +28,7 @@ import com.google.devsite.components.impl.DefaultRaw
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableTitle
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
-import com.google.devsite.components.impl.UndocumentedSymbolDescription
+import com.google.devsite.components.impl.UndocumentedSymbolDescriptionComponent
 import com.google.devsite.components.symbols.MiniSignature
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.table.SummaryItem
@@ -47,11 +48,14 @@ import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DTypeParameter
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.Nullable
+import org.jetbrains.dokka.model.Projection
 import org.jetbrains.dokka.model.StringValue
+import org.jetbrains.dokka.model.TypeConstructor
+import org.jetbrains.dokka.model.Variance
 import org.jetbrains.dokka.model.WithChildren
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.WithGenerics
-import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.doc.Author
 import org.jetbrains.dokka.model.doc.CodeBlock
 import org.jetbrains.dokka.model.doc.Constructor
@@ -77,7 +81,6 @@ import org.jetbrains.dokka.model.doc.Version
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.utilities.cast
 import java.io.File
-import com.google.devsite.components.Description as DescriptionComponent
 
 /** Extracts the hand written documentation from documentables into the correct components. */
 internal class DocTagConverter(
@@ -113,10 +116,9 @@ internal class DocTagConverter(
         val receiverParam = documentable.find<Receiver>()?.let {
             Param(it.root, "receiver")
         }
-        val params = if (documentable is DFunction) documentable.parameters else emptyList()
         val generics = if (documentable is WithGenerics) documentable.generics else emptyList()
         // Tags referring to something with the same name as the Documentable itself should instead
-        // be put into the Description, which is handeled in the getDescription method.
+        // be put into the Description, which is handled in the getDescription method.
         val preparedTags = (listOfNotNull(receiverParam) + documentable.tags())
             .filter { (it as? NamedTagWrapper)?.name != documentable.name }
         val tagsByType = preparedTags.sortedWith(tagOrder(paramNames)).groupBy { it.javaClass }
@@ -133,7 +135,7 @@ internal class DocTagConverter(
             // one to do the switching and then cast the list to its type.
             @kotlin.Suppress("UNCHECKED_CAST")
             when (firstTag) {
-                is Param -> params(tags as List<NamedTagWrapper>, params, generics, documentable)
+                is Param -> params(tags as List<NamedTagWrapper>, generics, documentable)
                 is Return -> returnType(tags as List<Return>, checkNotNull(returnType))
                 is Throws -> throws(tags as List<Throws>)
                 is See -> see(tags as List<See>)
@@ -241,30 +243,37 @@ internal class DocTagConverter(
             components.map { "\n\t$componentType $it" }.joinToString() +
             "\nin ${containingComponent::class.simpleName} ${containingComponent.name}" +
             "\nDid you make a typo? Are you trying to refer to something not visible to users?"
-        docsHolder.logger?.warn(warning)
+        docsHolder.logger.warn(warning)
     }
 
     private fun params(
         tags: List<NamedTagWrapper>,
-        dParams: List<DParameter>,
         dGenerics: List<DTypeParameter>,
         documentable: Documentable
     ): SummaryList {
-        // @param can refer to parameters, type parameters, receivers
+        // @param can refer to parameters, lambda parameters, type parameters, or receivers.
         val allOptions = mutableMapOf<String, ContextFreeComponent>()
-        allOptions.putAll(dParams.map {
-            it.name!! to paramConverter.componentForParameter(it, false) })
+        if (documentable is DFunction) {
+            allOptions.putAll(documentable.parameters.map {
+                it.name!! to paramConverter.componentForParameter(it, false)
+            })
+            allOptions.putAll(
+                recursivelyGetLambdaParamNames(documentable.parameters.map { it.type }).map {
+                    (it.presentableName ?: "") to paramConverter
+                        .componentForLambdaParameter(it, documentable.isFromJava())
+                }
+            )
+        }
         allOptions.putAll(dGenerics.map {
             it.name to paramConverter.componentForTypeParameter(it) })
         if (documentable is Callable && documentable.receiver != null)
             allOptions[documentable.receiver!!.name ?: "receiver"] =
                 paramConverter.componentForParameter(documentable.receiver!!, false)
-
         val params = tags.map { tag ->
             if (allOptions[tag.name()] == null) {
                 throw RuntimeException("Unable to find what is referred to by \"@param " +
-                    "${tag.name()}\" in ${documentable::class.simpleName} ${documentable.name} in" +
-                    " ${documentable.getSourceFile().name}")
+                    "${tag.name()}\" in ${documentable::class.simpleName} ${documentable.name}, " +
+                    "with contents: ${tag.text()}")
             }
             val title = allOptions[tag.name()]!!
             DefaultTwoPaneSummaryItem(
@@ -283,22 +292,27 @@ internal class DocTagConverter(
         )
     }
 
-    private fun Documentable.getSourceFile(): File {
-        val codeFiles = if (this is WithSources) {
-            this.sources.entries.map { File(it.value.path) }
-        } else {
-            sourceSets.map { it.sourceRoots.map { it.getCodeFileDescendant() } }.flatten()
+    /** For example, "a" and "b" in `fun foo((a: (b: String) -> int)) -> Unit)` */
+    private fun recursivelyGetLambdaParamNames(
+        argumentTypes: List<Projection>
+    ): List<TypeConstructor> {
+        val result = mutableListOf<TypeConstructor>()
+        for (argumentType in argumentTypes) {
+            when (argumentType) {
+                is TypeConstructor -> {
+                    if (argumentType.presentableName != null) result += argumentType
+                    result += recursivelyGetLambdaParamNames(argumentType.projections)
+                }
+                is Variance<*> -> {
+                    result += recursivelyGetLambdaParamNames(listOf(argumentType.inner))
+                }
+                is Nullable -> {
+                    result += recursivelyGetLambdaParamNames(listOf(argumentType.inner))
+                }
+            }
         }
-        if (codeFiles.size != 1) throw RuntimeException("Error finding source file for $this.name" +
-            " found multiple sourceSets or sourceRoots. Note: Dackka does not yet support KMP. " +
-            "${codeFiles.map { it.name }}")
-        return codeFiles.single()
+        return result
     }
-
-    private fun File.getCodeFileDescendant(): File =
-        if (this.extension.toLowerCase() in listOf("java", "kt", "js")) this
-        else this.listFiles()?.singleOrNull()?.getCodeFileDescendant()
-            ?: throw RuntimeException("ERROR: unable to detect source file for this code $path")
 
     private fun returnType(tags: List<Return>, returnType: ContextFreeComponent): SummaryList {
         val params = tags.map { tag ->
@@ -389,7 +403,7 @@ internal class DocTagConverter(
                 is NamedTagWrapper -> if (it.name == name) components.add(it.root)
             }
         }
-        if (components.isEmpty()) return UndocumentedSymbolDescription()
+        if (components.isEmpty()) return UndocumentedSymbolDescriptionComponent()
         return description(components, summary, null)
     }
 
@@ -438,7 +452,7 @@ internal class DocTagConverter(
         summary: Boolean = false,
         deprecation: String? = null
     ): DescriptionComponent {
-        return DefaultDescription(
+        return DefaultDescriptionComponent(
             DescriptionComponent.Params(
                 pathProvider,
                 components,
@@ -619,7 +633,6 @@ internal class DocTagConverter(
                         annotations = annotations.annotationComponents(
                             pathProvider = pathProvider,
                             displayLanguage = displayLanguage,
-                            nullable = false,
                             showNullability = false
                         ),
                         link = pathProvider.linkForReference(documentable.dri)

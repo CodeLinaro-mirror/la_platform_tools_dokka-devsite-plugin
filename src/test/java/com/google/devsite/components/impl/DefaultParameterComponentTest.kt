@@ -17,23 +17,25 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.symbols.Parameter.Params
+import com.google.devsite.components.symbols.LambdaTypeProjectionComponent
+import com.google.devsite.components.symbols.ParameterComponent.Params
 import com.google.devsite.components.testing.NoopAnnotationComponent
-import com.google.devsite.components.testing.NoopSymbolType
+import com.google.devsite.components.testing.NoopLambdaTypeProjectionComponent
+import com.google.devsite.components.testing.NoopLink
+import com.google.devsite.components.testing.NoopParameterComponent
+import com.google.devsite.components.testing.NoopTypeProjectionComponent
 import com.google.devsite.renderer.Language
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
 import org.junit.Test
-import kotlin.test.assertFailsWith
 
-class DefaultParameterTest {
+class DefaultParameterComponentTest {
     @Test
     fun `Simple Kotlin parameter renders correctly`() {
-        val component = DefaultParameter(
+        val component = DefaultParameterComponent(
             Params(
-                isLambda = false,
                 name = "number",
-                type = NoopSymbolType("Int"),
+                type = NoopTypeProjectionComponent("Int"),
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -52,11 +54,10 @@ class DefaultParameterTest {
 
     @Test
     fun `Simple Java parameter renders correctly`() {
-        val component = DefaultParameter(
+        val component = DefaultParameterComponent(
             Params(
-                isLambda = false,
                 name = "number",
-                type = NoopSymbolType("int"),
+                type = NoopTypeProjectionComponent("int"),
                 displayLanguage = Language.JAVA
             )
         )
@@ -75,11 +76,10 @@ class DefaultParameterTest {
 
     @Test
     fun `Kotlin parameter without name renders correctly`() {
-        val component = DefaultParameter(
+        val component = DefaultParameterComponent(
             Params(
-                isLambda = false,
                 name = "",
-                type = NoopSymbolType("Int"),
+                type = NoopTypeProjectionComponent("Int"),
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -97,12 +97,34 @@ class DefaultParameterTest {
     }
 
     @Test
-    fun `Java parameter without name renders correctly`() {
-        val component = DefaultParameter(
+    fun `Vararg Kotlin parameter renders correctly`() {
+        val component = DefaultParameterComponent(
             Params(
-                isLambda = false,
+                name = "number",
+                modifiers = listOf("vararg"),
+                type = NoopTypeProjectionComponent("Int"),
+                displayLanguage = Language.KOTLIN
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>vararg&nbsp;number:&nbsp;Int</div>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Java parameter without name renders correctly`() {
+        val component = DefaultParameterComponent(
+            Params(
                 name = "",
-                type = NoopSymbolType("int"),
+                type = NoopTypeProjectionComponent("int"),
                 displayLanguage = Language.JAVA
             )
         )
@@ -121,11 +143,10 @@ class DefaultParameterTest {
 
     @Test
     fun `Kotlin parameter with annotations renders correctly`() {
-        val component = DefaultParameter(
+        val component = DefaultParameterComponent(
             Params(
-                isLambda = false,
                 name = "number",
-                type = NoopSymbolType("Int"),
+                type = NoopTypeProjectionComponent("Int"),
                 annotationComponents = listOf(
                     NoopAnnotationComponent("@Really"),
                     NoopAnnotationComponent("@Special")
@@ -148,11 +169,10 @@ class DefaultParameterTest {
 
     @Test
     fun `Java parameter with annotations renders correctly`() {
-        val component = DefaultParameter(
+        val component = DefaultParameterComponent(
             Params(
-                isLambda = false,
                 name = "number",
-                type = NoopSymbolType("int"),
+                type = NoopTypeProjectionComponent("int"),
                 annotationComponents = listOf(
                     NoopAnnotationComponent("@Really"),
                     NoopAnnotationComponent("@Special")
@@ -174,71 +194,11 @@ class DefaultParameterTest {
     }
 
     @Test
-    fun `Java parameter with lambda is rejected`() {
-        assertFailsWith<IllegalArgumentException> {
-            DefaultParameter(
-                Params(
-                    isLambda = true,
-                    name = "number",
-                    type = NoopSymbolType("int"),
-                    displayLanguage = Language.JAVA
-                )
-            )
-        }
-    }
-
-    @Test
-    fun `Standard parameter with receiver is rejected`() {
-        assertFailsWith<IllegalArgumentException> {
-            DefaultParameter(
-                Params(
-                    isLambda = false,
-                    name = "number",
-                    receiver = NoopSymbolType("int"),
-                    type = NoopSymbolType("int"),
-                    displayLanguage = Language.KOTLIN
-                )
-            )
-        }
-    }
-
-    @Test
-    fun `Standard parameter with lambda modifiers is rejected`() {
-        assertFailsWith<IllegalArgumentException> {
-            DefaultParameter(
-                Params(
-                    isLambda = false,
-                    name = "number",
-                    lambdaModifiers = listOf("suspend"),
-                    type = NoopSymbolType("int"),
-                    displayLanguage = Language.KOTLIN
-                )
-            )
-        }
-    }
-
-    @Test
-    fun `Standard parameter with lambda params is rejected`() {
-        assertFailsWith<IllegalArgumentException> {
-            DefaultParameter(
-                Params(
-                    isLambda = false,
-                    name = "number",
-                    lambdaParams = listOf(NoopSymbolType("int")),
-                    type = NoopSymbolType("int"),
-                    displayLanguage = Language.KOTLIN
-                )
-            )
-        }
-    }
-
-    @Test
     fun `Kotlin parameter with factory lambda renders correctly`() {
-        val component = DefaultParameter(
+        val component = DefaultParameterComponent(
             Params(
-                isLambda = true,
                 name = "block",
-                type = NoopSymbolType("Unit"),
+                type = NoopLambdaTypeProjectionComponent(type = "Unit"),
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -257,12 +217,10 @@ class DefaultParameterTest {
 
     @Test
     fun `Kotlin parameter with receiver renders correctly`() {
-        val component = DefaultParameter(
+        val component = DefaultParameterComponent(
             Params(
-                isLambda = true,
                 name = "number",
-                receiver = NoopSymbolType("Int"),
-                type = NoopSymbolType("Int"),
+                type = NoopLambdaTypeProjectionComponent(receiver = "Int", type = "Int"),
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -281,12 +239,17 @@ class DefaultParameterTest {
 
     @Test
     fun `Kotlin parameter with lambda params renders correctly`() {
-        val component = DefaultParameter(
+        val component = DefaultParameterComponent(
             Params(
-                isLambda = true,
                 name = "number",
-                lambdaParams = listOf(NoopSymbolType("Int"), NoopSymbolType("String")),
-                type = NoopSymbolType("Int"),
+                type = DefaultLambdaTypeProjectionComponent(LambdaTypeProjectionComponent.Params(
+                    type = NoopLink("Int"),
+                    displayLanguage = Language.KOTLIN,
+                    lambdaParams = listOf(
+                        NoopParameterComponent("Int"),
+                        NoopParameterComponent("String")
+                    )
+                )),
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -305,13 +268,15 @@ class DefaultParameterTest {
 
     @Test
     fun `Kotlin parameter with both receiver and lambda params renders correctly`() {
-        val component = DefaultParameter(
+        val component = DefaultParameterComponent(
             Params(
-                isLambda = true,
                 name = "number",
-                receiver = NoopSymbolType("Boolean"),
-                lambdaParams = listOf(NoopSymbolType("String")),
-                type = NoopSymbolType("Int"),
+                type = DefaultLambdaTypeProjectionComponent(LambdaTypeProjectionComponent.Params(
+                    type = NoopLink("Int"),
+                    receiver = NoopTypeProjectionComponent("Boolean"),
+                    displayLanguage = Language.KOTLIN,
+                    lambdaParams = listOf(NoopParameterComponent("String"))
+                )),
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -330,13 +295,15 @@ class DefaultParameterTest {
 
     @Test
     fun `Kotlin parameter with lambda modifiers renders correctly`() {
-        val component = DefaultParameter(
+        val component = DefaultParameterComponent(
             Params(
-                isLambda = true,
                 name = "number",
-                lambdaParams = listOf(NoopSymbolType("String")),
-                lambdaModifiers = listOf("suspend"),
-                type = NoopSymbolType("Int"),
+                type = DefaultLambdaTypeProjectionComponent(LambdaTypeProjectionComponent.Params(
+                    type = NoopLink("Int"),
+                    displayLanguage = Language.KOTLIN,
+                    lambdaParams = listOf(NoopParameterComponent("String")),
+                    lambdaModifiers = listOf("suspend")
+                )),
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -355,12 +322,11 @@ class DefaultParameterTest {
 
     @Test
     fun `Kotlin parameter with default value renders correctly`() {
-        val component = DefaultParameter(
+        val component = DefaultParameterComponent(
             Params(
                 displayLanguage = Language.KOTLIN,
-                isLambda = false,
                 name = "number",
-                type = NoopSymbolType("Int"),
+                type = NoopTypeProjectionComponent("Int"),
                 defaultValue = "5"
             )
         )

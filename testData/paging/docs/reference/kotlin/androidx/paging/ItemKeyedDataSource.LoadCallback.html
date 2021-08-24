@@ -76,7 +76,7 @@
           <tr>
             <td width="40%"><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value?&gt;?)</code></div>
               <p>Called to pass loaded data from a DataSource.</p>
             </td>
           </tr>
@@ -108,7 +108,7 @@
     <h2>Public functions</h2>
     <div><a name="onResult-kotlin.collections.List-"></a><a name="onresult"></a>
       <h3 class="api-name" id="onResult(kotlin.collections.List)">onResult</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value?&gt;?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Called to pass loaded data from a DataSource.</p>
       <p>Call this method from your ItemKeyedDataSource's <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadBefore(androidx.paging.ItemKeyedDataSource.LoadParams)">loadBefore</a></code> and <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadAfter(androidx.paging.ItemKeyedDataSource.LoadParams)">loadAfter</a></code> methods to return data.</p>
       <p>Call this from <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html#loadInitial(androidx.paging.ItemKeyedDataSource.LoadInitialParams)">loadInitial</a></code> to initialize without counting available data, or supporting placeholders.</p>
@@ -122,7 +122,7 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;</code></td>
+              <td width="40%"><code>data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value?&gt;?</code></td>
               <td>
                 <p>List of items loaded from the <code><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a></code>.</p>
               </td>

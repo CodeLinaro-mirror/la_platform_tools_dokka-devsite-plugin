@@ -19,7 +19,7 @@ package com.google.devsite.components.impl
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.symbols.FunctionSignature.Params
 import com.google.devsite.components.testing.NoopLink
-import com.google.devsite.components.testing.NoopParameter
+import com.google.devsite.components.testing.NoopParameterComponent
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -50,7 +50,10 @@ class DefaultFunctionSignatureTest {
         val component = DefaultFunctionSignature(
             Params(
                 name = NoopLink("foo"),
-                parameters = listOf(NoopParameter("String foo"), NoopParameter("int bar"))
+                parameters = listOf(
+                    NoopParameterComponent("String foo"),
+                    NoopParameterComponent("int bar")
+                )
             )
         )
 
@@ -72,8 +75,8 @@ class DefaultFunctionSignatureTest {
             Params(
                 name = NoopLink("foo"),
                 parameters = listOf(
-                    NoopParameter("String foo"),
-                    NoopParameter("int bar")
+                    NoopParameterComponent("String foo"),
+                    NoopParameterComponent("int bar")
                 ),
                 isDeprecated = true
             )
@@ -96,7 +99,7 @@ class DefaultFunctionSignatureTest {
         val component = DefaultFunctionSignature(
             Params(
                 name = NoopLink("foo"),
-                receiver = NoopParameter("String")
+                receiver = NoopParameterComponent("String")
             )
         )
 
@@ -118,8 +121,8 @@ class DefaultFunctionSignatureTest {
             Params(
                 name = NoopLink("foo"),
                 parameters = listOf(
-                    NoopParameter("String foo", forceBreak = true),
-                    NoopParameter("int bar", forceBreak = true)
+                    NoopParameterComponent("String foo", forceBreak = true),
+                    NoopParameterComponent("int bar", forceBreak = true)
                 )
             )
         )

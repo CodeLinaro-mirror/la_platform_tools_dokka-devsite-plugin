@@ -55,7 +55,7 @@
           <tr>
             <td width="40%"><code>open&nbsp;suspend R</code></td>
             <td>
-              <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a>(onFrame:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>) <span style="white-space: nowrap;">-&gt;</span> R)</code></div>
+              <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a>(onFrame:&nbsp;(frameTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>) <span style="white-space: nowrap;">-&gt;</span> R)</code></div>
               <p>Suspends until a new frame is requested, immediately invokes <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code> with the frame time in nanoseconds in the calling context of frame dispatch, then resumes with the result from <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code>.</p>
             </td>
           </tr>
@@ -112,7 +112,7 @@
                     <tr>
                       <td width="40%"><code>open R</code></td>
                       <td>
-                        <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/fold.html">fold</a>(initial:&nbsp;R,&nbsp;operation:&nbsp;(R, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">CoroutineContext.Element</a>) <span style="white-space: nowrap;">-&gt;</span> R)</code></div>
+                        <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/fold.html">fold</a>(initial:&nbsp;R,&nbsp;operation:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/-element/index.html">CoroutineContext.Element</a>, R) <span style="white-space: nowrap;">-&gt;</span> R)</code></div>
                       </td>
                     </tr>
                     <tr>
@@ -153,7 +153,7 @@
     </div>
     <div><a name="withFrameNanos-kotlin.Function1-"></a><a name="withframenanos"></a>
       <h3 class="api-name" id="withFrameNanos(kotlin.Function1)">withFrameNanos</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;suspend&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a>(onFrame:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>) <span style="white-space: nowrap;">-&gt;</span> R):&nbsp;R</pre>
+      <pre class="api-signature no-pretty-print">open&nbsp;suspend&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a>(onFrame:&nbsp;(frameTimeNanos:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>) <span style="white-space: nowrap;">-&gt;</span> R):&nbsp;R</pre>
       <p>Suspends until a new frame is requested, immediately invokes <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code> with the frame time in nanoseconds in the calling context of frame dispatch, then resumes with the result from <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">onFrame</a></code>.</p>
       <p><code>frameTimeNanos</code> should be used when calculating animation time deltas from frame to frame as it may be normalized to the target time for the frame, not necessarily a direct, &quot;now&quot; value.</p>
       <p>The time base of the value provided by <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> is implementation defined. Time values provided are monotonically increasing; after a call to <code><a href="/reference/kotlin/androidx/compose/runtime/PausableMonotonicFrameClock.html#withFrameNanos(kotlin.Function1)">withFrameNanos</a></code> completes it must not provide the same value again for a subsequent call.</p>

@@ -37,6 +37,8 @@ internal class DefaultFunctionSignature(
             +"."
         }
 
+        data.annotationComponents.render(into, ShouldBreak.YES, separator = "")
+
         if (data.isDeprecated) {
             // Bug in kotlinx: <del> tag adds a new line before and after using it
             // https://github.com/Kotlin/kotlinx.html/issues/113

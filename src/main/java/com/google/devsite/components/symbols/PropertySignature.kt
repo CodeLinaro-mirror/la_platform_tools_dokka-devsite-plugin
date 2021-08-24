@@ -24,6 +24,7 @@ internal interface PropertySignature : SymbolSignature {
 
     class Params(
         override val name: Link,
-        override val receiver: Parameter? = null
+        override val receiver: ParameterComponent? = null,
+        override val annotationComponents: List<AnnotationComponent> = emptyList()
     ) : SymbolSignature.Params
 }

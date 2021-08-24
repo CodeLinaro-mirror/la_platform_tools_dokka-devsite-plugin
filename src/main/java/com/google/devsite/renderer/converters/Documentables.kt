@@ -17,6 +17,7 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.Memoizers.isFromJavaMap
 import org.jetbrains.dokka.base.transformers.documentables.isException
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.PointingToDeclaration
@@ -39,20 +40,23 @@ import org.jetbrains.dokka.model.Expression
 import org.jetbrains.dokka.model.ExtraModifiers
 import org.jetbrains.dokka.model.FloatConstant
 import org.jetbrains.dokka.model.IntegerConstant
-import org.jetbrains.dokka.model.Nullable
-import org.jetbrains.dokka.model.Projection
+import org.jetbrains.dokka.model.JavaVisibility
+import org.jetbrains.dokka.model.KotlinModifier
 import org.jetbrains.dokka.model.StringConstant
 import org.jetbrains.dokka.model.TypeConstructor
 import org.jetbrains.dokka.model.UnresolvedBound
-import org.jetbrains.dokka.model.Variance
+import org.jetbrains.dokka.model.WithAbstraction
 import org.jetbrains.dokka.model.WithChildren
 import org.jetbrains.dokka.model.WithSources
+import org.jetbrains.dokka.model.WithVisibility
 import org.jetbrains.dokka.model.isJvmName
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.model.toAdditionalModifiers
 import org.jetbrains.kotlin.builtins.jvm.JavaToKotlinClassMap
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
+import java.io.File
+import java.util.concurrent.ConcurrentHashMap
 
 /** Recursively expands all children. */
 internal val <T> WithChildren<T>.explodedChildren: List<T>
@@ -75,12 +79,52 @@ internal fun DRI.isFromBaseClass(): Boolean {
     return baseClasses.contains(classAndPackage)
 }
 
-/** @return true if this is a nullable type, false otherwise */
-internal fun Projection.isNullable(): Boolean = when (this) {
-    is Nullable -> true
-    is Variance<*> -> inner.isNullable()
-    else -> false
+private object Memoizers {
+    val isFromJavaMap: ConcurrentHashMap<Documentable, Boolean> =
+        ConcurrentHashMap<Documentable, Boolean>()
 }
+
+/**
+ * Infer whether this Documentable is from java source,
+ * and thus whether it's nullable if not annotated.
+ * Memoized.
+ */
+internal fun Documentable.isFromJava() = isFromJavaMap.getOrPut(this) {
+    if (this is WithVisibility) visibility is JavaVisibility
+    if (this is WithAbstraction && this.modifier.isNotEmpty())
+        !modifier.any { (_, v) -> v is KotlinModifier }
+    val sourceFileExtensions = getPossibleSourceFiles().map { it.path }
+        .filter { "package-info.java" !in it }
+        .map { it.substringAfterLast('.') }
+    when {
+        // No Java files -> default is NonNull      (this bypasses e.g. .xml/.gradle)
+        sourceFileExtensions.all { it !in listOf("java", "class") } -> false
+        // No Kotlin files -> default is nullable
+        sourceFileExtensions.all { it !in listOf("kt") } -> true
+        // We don't know. Default to not injecting @NonNull (the primary use of isFromJava)
+        else -> true // (i.e. do not make the strict NonNull assumption for unspecified types)
+    }
+}
+
+private fun DRI.isExternal() = packageName != null &&
+    (packageName!!.startsWith("java") || packageName!!.startsWith("Kotlin") ||
+    ("google" !in packageName!! && "android" !in packageName!!))
+
+internal fun Documentable.getPossibleSourceFiles(): List<File> {
+    val codeFiles = if (this is WithSources) {
+        this.sources.entries.map { File(it.value.path) }
+    } else {
+        sourceSets.map { it.sourceRoots.map { it.getCodeFileDescendants() } }.flatten().flatten()
+    }
+
+    if (codeFiles.isEmpty()) throw RuntimeException("No sources found for $dri")
+    if (codeFiles.size == 1) return codeFiles
+    return codeFiles
+}
+
+private fun File.getCodeFileDescendants(): List<File> =
+    if (this.extension.toLowerCase() in listOf("java", "kt", "js", "class")) listOf(this)
+    else this.listFiles()?.map { it.getCodeFileDescendants() }?.flatten() ?: emptyList()
 
 /**
  * @param displayLanguage the Language of the docs this Documentable will be displayed in
@@ -106,10 +150,11 @@ fun Documentable.stringForType(displayLanguage: Language): String = when (this) 
     else -> error("Unsupported type: $this")
 }
 
-/* Returns if a class is an Exception or not
-   isException, the built in method in Dokka, only considers its supertype so we also look for
-   functions that are Throwable
-   https://github.com/Kotlin/dokka/issues/1557
+/**
+ * Returns if a class is an Exception or not
+ * isException, the built in method in Dokka, only considers its supertype so we also look for
+ * functions that are Throwable
+ * https://github.com/Kotlin/dokka/issues/1557
  */
 val DClass.isExceptionClass: Boolean
     get() = isException || functions.any { function -> function.dri.classNames == "Throwable" }

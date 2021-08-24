@@ -7,7 +7,7 @@
   <body>
     <h1>PagingSource.LoadResult.Page</h1>
     <p>
-      <pre>data class PagingSource.LoadResult.Page&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; : <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a></pre>
+      <pre>data class PagingSource.LoadResult.Page&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; : <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a></pre>
     </p>
     <div class="devsite-table-wrapper">
       <table class="jd-inheritance-table">
@@ -75,13 +75,13 @@ fun NetworkResponseObject.toPage(pageNumber: Int): LoadResult.Page&lt;Int, Item&
         <tbody>
           <tr>
             <td>
-              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#Page(kotlin.collections.List,kotlin.Any,kotlin.Any)">Page</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;,&nbsp;prevKey:&nbsp;Key?,&nbsp;nextKey:&nbsp;Key?)</code></div>
+              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#Page(kotlin.collections.List,kotlin.Any,kotlin.Any)">Page</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value?&gt;?,&nbsp;prevKey:&nbsp;Key?,&nbsp;nextKey:&nbsp;Key?)</code></div>
               <p>Success result object for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td>
-              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#Page(kotlin.collections.List,kotlin.Any,kotlin.Any,kotlin.Int,kotlin.Int)">Page</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;prevKey:&nbsp;Key?,<br>&nbsp;&nbsp;&nbsp;&nbsp;nextKey:&nbsp;Key?,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;-2147483648) itemsBefore:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;-2147483648) itemsAfter:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
+              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#Page(kotlin.collections.List,kotlin.Any,kotlin.Any,kotlin.Int,kotlin.Int)">Page</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value?&gt;?,<br>&nbsp;&nbsp;&nbsp;&nbsp;prevKey:&nbsp;Key?,<br>&nbsp;&nbsp;&nbsp;&nbsp;nextKey:&nbsp;Key?,<br>&nbsp;&nbsp;&nbsp;&nbsp;itemsBefore:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;-2147483648) <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;itemsAfter:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;-2147483648) <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>?<br>)</code></div>
             </td>
           </tr>
         </tbody>
@@ -136,7 +136,7 @@ fun NetworkResponseObject.toPage(pageNumber: Int): LoadResult.Page&lt;Int, Item&
     <h2>Public constructors</h2>
     <div><a name="Page(kotlin.collections.List, kotlin.Any, kotlin.Any)"></a><a name="Page-kotlin.collections.List-kotlin.Any-kotlin.Any-"></a><a name="page"></a>
       <h3 class="api-name" id="Page(kotlin.collections.List,kotlin.Any,kotlin.Any)">Page</h3>
-      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#Page(kotlin.collections.List,kotlin.Any,kotlin.Any)">Page</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;,&nbsp;prevKey:&nbsp;Key?,&nbsp;nextKey:&nbsp;Key?)</pre>
+      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#Page(kotlin.collections.List,kotlin.Any,kotlin.Any)">Page</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value?&gt;?,&nbsp;prevKey:&nbsp;Key?,&nbsp;nextKey:&nbsp;Key?)</pre>
       <p>Success result object for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -147,7 +147,7 @@ fun NetworkResponseObject.toPage(pageNumber: Int): LoadResult.Page&lt;Int, Item&
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;</code></td>
+              <td width="40%"><code>data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value?&gt;?</code></td>
               <td>
                 <p>Loaded data</p>
               </td>
@@ -170,7 +170,7 @@ fun NetworkResponseObject.toPage(pageNumber: Int): LoadResult.Page&lt;Int, Item&
     </div>
     <div><a name="Page(kotlin.collections.List, kotlin.Any, kotlin.Any, kotlin.Int, kotlin.Int)"></a><a name="Page-kotlin.collections.List-kotlin.Any-kotlin.Any-kotlin.Int-kotlin.Int-"></a><a name="page"></a>
       <h3 class="api-name" id="Page(kotlin.collections.List,kotlin.Any,kotlin.Any,kotlin.Int,kotlin.Int)">Page</h3>
-      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#Page(kotlin.collections.List,kotlin.Any,kotlin.Any,kotlin.Int,kotlin.Int)">Page</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;prevKey:&nbsp;Key?,<br>&nbsp;&nbsp;&nbsp;&nbsp;nextKey:&nbsp;Key?,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;-2147483648) itemsBefore:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = COUNT_UNDEFINED,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;-2147483648) itemsAfter:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = COUNT_UNDEFINED<br>)</pre>
+      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html#Page(kotlin.collections.List,kotlin.Any,kotlin.Any,kotlin.Int,kotlin.Int)">Page</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value?&gt;?,<br>&nbsp;&nbsp;&nbsp;&nbsp;prevKey:&nbsp;Key?,<br>&nbsp;&nbsp;&nbsp;&nbsp;nextKey:&nbsp;Key?,<br>&nbsp;&nbsp;&nbsp;&nbsp;itemsBefore:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;-2147483648) <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>? = COUNT_UNDEFINED,<br>&nbsp;&nbsp;&nbsp;&nbsp;itemsAfter:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;-2147483648) <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>? = COUNT_UNDEFINED<br>)</pre>
     </div>
     <h2>Public properties</h2>
     <div><a name="getData()"></a><a name="setData()"></a><a name="getData--"></a><a name="setData--"></a>

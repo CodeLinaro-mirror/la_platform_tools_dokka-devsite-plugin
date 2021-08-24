@@ -61,7 +61,7 @@
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateRegistry.Entry.html">SaveableStateRegistry.Entry</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateRegistry.html#registerProvider(kotlin.String,kotlin.Function0)">registerProvider</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,&nbsp;valueProvider:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateRegistry.html#registerProvider(kotlin.String,kotlin.Function0)">registerProvider</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,&nbsp;valueProvider:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)</code></div>
               <p>Registers the value provider.</p>
             </td>
           </tr>
@@ -120,7 +120,7 @@
     </div>
     <div><a name="registerProvider(kotlin.String, kotlin.Function0)"></a><a name="registerProvider-kotlin.String-kotlin.Function0-"></a><a name="registerprovider"></a>
       <h3 class="api-name" id="registerProvider(kotlin.String,kotlin.Function0)">registerProvider</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateRegistry.html#registerProvider(kotlin.String,kotlin.Function0)">registerProvider</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,&nbsp;valueProvider:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateRegistry.Entry.html">SaveableStateRegistry.Entry</a></pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateRegistry.html#registerProvider(kotlin.String,kotlin.Function0)">registerProvider</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>,&nbsp;valueProvider:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>):&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateRegistry.Entry.html">SaveableStateRegistry.Entry</a></pre>
       <p>Registers the value provider.</p>
       <p>There are could be multiple providers registered for the same <code><a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateRegistry.html#registerProvider(kotlin.String,kotlin.Function0)">key</a></code>. In this case the order in which they were registered matters.</p>
       <p>Say we registered two providers for the key. One provides &quot;1&quot;, second provides &quot;2&quot;. <code><a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateRegistry.html#performSave()">performSave</a></code> in this case will have listOf(&quot;1&quot;, &quot;2) as a value for the key in the map. And later, when the registry will be recreated with the previously saved values, the first execution of <code><a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateRegistry.html#consumeRestored(kotlin.String)">consumeRestored</a></code> would consume &quot;1&quot; and the second one &quot;2&quot;.</p>
@@ -139,7 +139,7 @@
               </td>
             </tr>
             <tr>
-              <td width="40%"><code>valueProvider:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?</code></td>
+              <td width="40%"><code>valueProvider:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a></code></td>
               <td>
                 <p>Provides the current value, to be executed when <code><a href="/reference/kotlin/androidx/compose/runtime/saveable/SaveableStateRegistry.html#performSave()">performSave</a></code> will be triggered to collect all the registered values</p>
               </td>

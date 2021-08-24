@@ -7,7 +7,7 @@
   <body>
     <h1>RemoteMediator</h1>
     <p>
-      <pre>@<a href="/reference/kotlin/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a> abstract class RemoteMediator&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</pre>
+      <pre>@<a href="/reference/kotlin/androidx/paging/ExperimentalPagingApi.html">ExperimentalPagingApi</a> abstract class RemoteMediator&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
     </p>
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
         <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/paging/ListenableFutureRemoteMediator.html">ListenableFutureRemoteMediator</a>, <a href="/reference/kotlin/androidx/paging/rxjava2/RxRemoteMediator.html">RxRemoteMediator</a>, <a href="/reference/kotlin/androidx/paging/rxjava3/RxRemoteMediator.html">RxRemoteMediator</a></div>
@@ -279,7 +279,7 @@ class ExampleRemoteMediator(
         <tbody>
           <tr>
             <td>
-              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/RemoteMediator.html#RemoteMediator()">RemoteMediator</a>()</code></div>
+              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/RemoteMediator.html#RemoteMediator()">RemoteMediator</a>()</code></div>
             </td>
           </tr>
         </tbody>
@@ -303,7 +303,7 @@ class ExampleRemoteMediator(
           <tr>
             <td width="40%"><code>abstract&nbsp;suspend <a href="/reference/kotlin/androidx/paging/RemoteMediator.MediatorResult.html">RemoteMediator.MediatorResult</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a>(loadType:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>,&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a>(loadType:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>?,&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html">PagingState</a>&lt;Key?,&nbsp;Value?&gt;?)</code></div>
               <p>Callback triggered when Paging needs to request more data from a remote source due to any of the following events:</p>
             </td>
           </tr>
@@ -313,7 +313,7 @@ class ExampleRemoteMediator(
     <h2>Public constructors</h2>
     <div><a name="RemoteMediator--"></a><a name="remotemediator"></a>
       <h3 class="api-name" id="RemoteMediator()">RemoteMediator</h3>
-      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/RemoteMediator.html#RemoteMediator()">RemoteMediator</a>()</pre>
+      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/RemoteMediator.html#RemoteMediator()">RemoteMediator</a>()</pre>
     </div>
     <h2>Public functions</h2>
     <div><a name="initialize--"></a><a name="initialize"></a>
@@ -349,7 +349,7 @@ class ExampleRemoteMediator(
     </div>
     <div><a name="load(androidx.paging.LoadType, androidx.paging.PagingState)"></a><a name="load-androidx.paging.LoadType-androidx.paging.PagingState-"></a><a name="load"></a>
       <h3 class="api-name" id="load(androidx.paging.LoadType,androidx.paging.PagingState)">load</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a>(loadType:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>,&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/RemoteMediator.MediatorResult.html">RemoteMediator.MediatorResult</a></pre>
+      <pre class="api-signature no-pretty-print">abstract&nbsp;suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a>(loadType:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>?,&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html">PagingState</a>&lt;Key?,&nbsp;Value?&gt;?):&nbsp;<a href="/reference/kotlin/androidx/paging/RemoteMediator.MediatorResult.html">RemoteMediator.MediatorResult</a></pre>
       <p>Callback triggered when Paging needs to request more data from a remote source due to any of the following events:</p>
       <ul>
         <li>
@@ -374,7 +374,7 @@ class ExampleRemoteMediator(
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>loadType:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a></code></td>
+              <td width="40%"><code>loadType:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>?</code></td>
               <td>
                 <p><code><a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a></code> of the condition which triggered this callback.</p>
                 <ul>
@@ -399,7 +399,7 @@ class ExampleRemoteMediator(
               </td>
             </tr>
             <tr>
-              <td width="40%"><code>state:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;</code></td>
+              <td width="40%"><code>state:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html">PagingState</a>&lt;Key?,&nbsp;Value?&gt;?</code></td>
               <td>
                 <p>A copy of the state including the list of pages currently held in memory of the currently presented <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> at the time of starting the load. E.g. for load(loadType = APPEND), you can use the page or item at the end as input for what to load from the network.</p>
               </td>

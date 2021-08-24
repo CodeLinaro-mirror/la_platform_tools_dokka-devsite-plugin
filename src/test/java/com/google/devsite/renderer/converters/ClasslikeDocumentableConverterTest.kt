@@ -17,7 +17,7 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.Description
+import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Raw
 import com.google.devsite.components.impl.DefaultSymbolDetail
 import com.google.devsite.components.pages.Classlike
@@ -233,6 +233,33 @@ internal class ClasslikeDocumentableConverterTest(
         val (summary) = classlike.symbolsFor("Public constructors")
 
         assertThat(summary.constructor().name()).isEqualTo("Foo")
+    }
+
+    @Test
+    fun `Public constructor does not have @NonNull in 4x Kotlin and Java`() {
+        val constructorsK = """
+        |class Foo {
+        |   constructor() {}
+        |}
+        """.render().page().content<Classlike>().symbolsFor("Public constructors")
+        val constructorsJ = """
+        |public class Foo {
+        |   public Foo() {}
+        |}
+        """.render(java = true).page().content<Classlike>().symbolsFor("Public constructors")
+
+        for (constructor in listOf(constructorsJ, constructorsK)) {
+            // Constructor summaries are SingleColumnSummaryItems containing SymbolSummaries
+            // They cannot have annotations, enforced by design.
+
+            val detail = constructor.second.symbols.single() as SymbolDetail
+            val returnAnnotations = detail.data.returnType.data.annotationComponents
+            val annotations = detail.data.annotationComponents
+            val signature = detail.data.signature as FunctionSignature
+            assertThat(returnAnnotations.isEmpty())
+            assertThat(annotations).isEmpty()
+            assertThat(signature.data.receiver).isNull()
+        }
     }
 
     @Ignore // TODO(b/165112358): foo doesn't show up in the dokka model
@@ -479,7 +506,7 @@ internal class ClasslikeDocumentableConverterTest(
         for (page in listOf(pageK, pageJ)) {
             val classlike = page.content<Classlike>()
             val signature = classlike.data.signature.data
-            val description = (classlike.data.description.first() as Description)
+            val description = (classlike.data.description.first() as DescriptionComponent)
 
             val (enumSummary, enumDetails) = classlike.data.symbolTypes.first {
                 (it.first as? SummaryList)?.title() == "Enum Values"
@@ -493,13 +520,13 @@ internal class ClasslikeDocumentableConverterTest(
             assertThat(description.text()).isEqualTo("class level docs")
 
             assertThat((enumOne.title as Raw).data.text).contains("APPEND")
-            assertThat((enumOne.description as Description).text())
+            assertThat((enumOne.description as DescriptionComponent).text())
                 .contains("Load at the end.")
             assertThat((enumTwo.title as Raw).data.text).contains("PREPEND")
-            assertThat((enumTwo.description as Description).text())
+            assertThat((enumTwo.description as DescriptionComponent).text())
                 .contains("Load at the start")
             assertThat((enumThree.title as Raw).data.text).contains("REFRESH")
-            assertThat((enumThree.description as Description).text())
+            assertThat((enumThree.description as DescriptionComponent).text())
                 .contains("result of invalidation")
 
             val enumName = enumDetails.symbols[0] as SymbolDetail
@@ -568,9 +595,9 @@ internal class ClasslikeDocumentableConverterTest(
 
             if (pages == pagesK) {
                 // overriding class docs is maybe something we want in kotlin, but is not jdoc spec
-                val fooDescription = (fooClass.data.description.first() as Description)
-                val barDescription = (barClass.data.description.first() as Description)
-                val bazDescription = (bazClass.data.description.first() as Description)
+                val fooDescription = (fooClass.data.description.first() as DescriptionComponent)
+                val barDescription = (barClass.data.description.first() as DescriptionComponent)
+                val bazDescription = (bazClass.data.description.first() as DescriptionComponent)
                 assertThat(fooDescription.text()).isEqualTo("docs for foo")
                 // assertThat(barDescription.text()).isEqualTo("docs for foo")
                 assertThat(bazDescription.text()).isEqualTo("overriding docs for baz")

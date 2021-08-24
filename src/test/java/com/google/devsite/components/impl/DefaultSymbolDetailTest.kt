@@ -22,7 +22,7 @@ import com.google.devsite.components.symbols.SymbolDetail.SymbolKind
 import com.google.devsite.components.testing.NoopAnnotationComponent
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.components.testing.NoopFunctionSignature
-import com.google.devsite.components.testing.NoopParameter
+import com.google.devsite.components.testing.NoopTypeProjectionComponent
 import com.google.devsite.renderer.Language
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
@@ -36,7 +36,7 @@ class DefaultSymbolDetailTest {
                 displayLanguage = Language.JAVA,
                 name = "foo",
                 anchors = linkedSetOf(),
-                returnType = NoopParameter("void"),
+                returnType = NoopTypeProjectionComponent("void"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
@@ -67,7 +67,7 @@ class DefaultSymbolDetailTest {
                 displayLanguage = Language.KOTLIN,
                 name = "foo",
                 anchors = linkedSetOf(),
-                returnType = NoopParameter("Unit"),
+                returnType = NoopTypeProjectionComponent("Unit"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
@@ -98,7 +98,7 @@ class DefaultSymbolDetailTest {
                 displayLanguage = Language.KOTLIN,
                 name = "foo",
                 anchors = linkedSetOf(),
-                returnType = NoopParameter("Unit"),
+                returnType = NoopTypeProjectionComponent("Unit"),
                 symbolKind = SymbolKind.PROPERTY,
                 signature = NoopFunctionSignature("foo"),
                 metadata = emptyList()
@@ -129,7 +129,7 @@ class DefaultSymbolDetailTest {
                 displayLanguage = Language.KOTLIN,
                 name = "MyClass",
                 anchors = linkedSetOf(),
-                returnType = NoopParameter("Unit"),
+                returnType = NoopTypeProjectionComponent("Unit"),
                 symbolKind = SymbolKind.CONSTRUCTOR,
                 signature = NoopFunctionSignature("MyClass()"),
                 metadata = emptyList()
@@ -160,7 +160,7 @@ class DefaultSymbolDetailTest {
                 displayLanguage = Language.JAVA,
                 name = "MyClass",
                 anchors = linkedSetOf(),
-                returnType = NoopParameter("Unit"),
+                returnType = NoopTypeProjectionComponent("Unit"),
                 symbolKind = SymbolKind.CONSTRUCTOR,
                 signature = NoopFunctionSignature("MyClass()"),
                 metadata = emptyList()
@@ -195,7 +195,7 @@ class DefaultSymbolDetailTest {
                     NoopAnnotationComponent("@Foo"),
                     NoopAnnotationComponent("@Bar")
                 ),
-                returnType = NoopParameter("void"),
+                returnType = NoopTypeProjectionComponent("void"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
@@ -227,7 +227,7 @@ class DefaultSymbolDetailTest {
                 name = "foo",
                 anchors = linkedSetOf(),
                 modifiers = listOf("protected", "abstract"),
-                returnType = NoopParameter("void"),
+                returnType = NoopTypeProjectionComponent("void"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
@@ -259,7 +259,7 @@ class DefaultSymbolDetailTest {
                 name = "foo",
                 anchors = linkedSetOf(),
                 modifiers = listOf("protected", "abstract"),
-                returnType = NoopParameter("Unit"),
+                returnType = NoopTypeProjectionComponent("Unit"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
@@ -290,7 +290,7 @@ class DefaultSymbolDetailTest {
                 displayLanguage = Language.JAVA,
                 name = "foo",
                 anchors = linkedSetOf("foo(a,b)", "foo(a, b)", "foo-a-b-"),
-                returnType = NoopParameter("void"),
+                returnType = NoopTypeProjectionComponent("void"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList()
@@ -321,7 +321,7 @@ class DefaultSymbolDetailTest {
                 displayLanguage = Language.JAVA,
                 name = "foo",
                 anchors = linkedSetOf(),
-                returnType = NoopParameter("void"),
+                returnType = NoopTypeProjectionComponent("void"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = listOf(NoopContextFreeComponent, NoopContextFreeComponent)
@@ -354,7 +354,7 @@ class DefaultSymbolDetailTest {
                 displayLanguage = Language.JAVA,
                 name = "foo",
                 anchors = linkedSetOf(),
-                returnType = NoopParameter("void"),
+                returnType = NoopTypeProjectionComponent("void"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
                 metadata = emptyList(),

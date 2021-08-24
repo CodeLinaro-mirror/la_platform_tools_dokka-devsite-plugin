@@ -7,7 +7,7 @@
   <body>
     <h1>LazyPagingItems</h1>
     <p>
-      <pre>class LazyPagingItems&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</pre>
+      <pre>class LazyPagingItems&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
     </p>
     <hr>
     <p>The class responsible for accessing the data from a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>. In order to obtain an instance of <code><a href="/reference/kotlin/androidx/paging/compose/LazyPagingItems.html">LazyPagingItems</a></code> use the <code><a href="/reference/kotlin/androidx/paging/compose/package-summary.html#(kotlinx.coroutines.flow.Flow).collectAsLazyPagingItems()">collectAsLazyPagingItems</a></code> extension method of <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> with <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>. This instance can be used by the <code><a href="/reference/kotlin/androidx/paging/compose/package-summary.html#(LazyListScope).items(androidx.paging.compose.LazyPagingItems,kotlin.Function2)">items</a></code> and <code><a href="/reference/kotlin/androidx/paging/compose/package-summary.html#(LazyListScope).itemsIndexed(androidx.paging.compose.LazyPagingItems,kotlin.Function3)">itemsIndexed</a></code> methods inside LazyListScope to display data received from the <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
@@ -20,7 +20,7 @@
         </thead>
         <tbody>
           <tr>
-            <td width="40%"><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</code></td>
+            <td width="40%"><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></td>
             <td>
               <p>the type of value used by <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
             </td>
@@ -40,14 +40,14 @@
           <tr>
             <td width="40%"><code>operator T?</code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/compose/LazyPagingItems.html#get(kotlin.Int)">get</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/compose/LazyPagingItems.html#get(kotlin.Int)">get</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>?)</code></div>
               <p>Returns the item specified at <code><a href="/reference/kotlin/androidx/paging/compose/LazyPagingItems.html#get(kotlin.Int)">index</a></code> and notifies Paging of the item accessed in order to trigger any loads necessary to fulfill <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#prefetchDistance()">PagingConfig.prefetchDistance</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code>T?</code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/compose/LazyPagingItems.html#peek(kotlin.Int)">peek</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/compose/LazyPagingItems.html#peek(kotlin.Int)">peek</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>?)</code></div>
               <p>Returns the presented item at the specified position, without notifying Paging of the item access that would normally trigger page loads.</p>
             </td>
           </tr>
@@ -103,7 +103,7 @@
     <h2>Public functions</h2>
     <div><a name="get-kotlin.Int-"></a><a name="get"></a>
       <h3 class="api-name" id="get(kotlin.Int)">get</h3>
-      <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/compose/LazyPagingItems.html#get(kotlin.Int)">get</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;T?</pre>
+      <pre class="api-signature no-pretty-print">operator&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/compose/LazyPagingItems.html#get(kotlin.Int)">get</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>?):&nbsp;T?</pre>
       <p>Returns the item specified at <code><a href="/reference/kotlin/androidx/paging/compose/LazyPagingItems.html#get(kotlin.Int)">index</a></code> and notifies Paging of the item accessed in order to trigger any loads necessary to fulfill <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#prefetchDistance()">PagingConfig.prefetchDistance</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -114,7 +114,7 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td width="40%"><code>index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>?</code></td>
               <td>
                 <p>the index of the item which should be returned.</p>
               </td>
@@ -142,7 +142,7 @@
     </div>
     <div><a name="peek-kotlin.Int-"></a><a name="peek"></a>
       <h3 class="api-name" id="peek(kotlin.Int)">peek</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/compose/LazyPagingItems.html#peek(kotlin.Int)">peek</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;T?</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/compose/LazyPagingItems.html#peek(kotlin.Int)">peek</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>?):&nbsp;T?</pre>
       <p>Returns the presented item at the specified position, without notifying Paging of the item access that would normally trigger page loads.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -153,7 +153,7 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+              <td width="40%"><code>index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>?</code></td>
               <td>
                 <p>Index of the presented item to return, including placeholders.</p>
               </td>

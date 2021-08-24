@@ -64,7 +64,7 @@
           <tr>
             <td width="40%"><code>abstract void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/paging/PageKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List,kotlin.Any)">onResult</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;data,&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> Key&nbsp;adjacentPageKey)</code></div>
+              <div><code><a href="/reference/androidx/paging/PageKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List,kotlin.Any)">onResult</a>(<a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;Value&gt;&nbsp;data,&nbsp;Key&nbsp;adjacentPageKey)</code></div>
               <p>Called to pass loaded data from a <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>.</p>
             </td>
           </tr>
@@ -102,7 +102,7 @@
     <h2>Public methods</h2>
     <div><a name="onResult(kotlin.collections.List, kotlin.Any)"></a><a name="onResult-kotlin.collections.List-kotlin.Any-"></a><a name="onresult"></a>
       <h3 class="api-name" id="onResult(kotlin.collections.List,kotlin.Any)">onResult</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;void&nbsp;<a href="/reference/androidx/paging/PageKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List,kotlin.Any)">onResult</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;data,&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> Key&nbsp;adjacentPageKey)</pre>
+      <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;void&nbsp;<a href="/reference/androidx/paging/PageKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List,kotlin.Any)">onResult</a>(<a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;Value&gt;&nbsp;data,&nbsp;Key&nbsp;adjacentPageKey)</pre>
       <p>Called to pass loaded data from a <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>.</p>
       <p>Call this method from your PageKeyedDataSource's <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams)">loadBefore</a></code> and <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams)">loadAfter</a></code> methods to return data.</p>
       <p>It is always valid to pass a different amount of data than what is requested. Pass an empty list if there is no more data to load.</p>
@@ -116,13 +116,13 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;data</code></td>
+              <td width="40%"><code><a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;Value&gt;&nbsp;data</code></td>
               <td>
                 <p>List of items loaded from the PageKeyedDataSource.</p>
               </td>
             </tr>
             <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> Key&nbsp;adjacentPageKey</code></td>
+              <td width="40%"><code>Key&nbsp;adjacentPageKey</code></td>
               <td>
                 <p>Key for subsequent page load (previous page in <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams)">loadBefore</a></code> / next page in <code><a href="/reference/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams)">loadAfter</a></code>), or <code>null</code> if there are no more pages to load in the current load direction.</p>
               </td>

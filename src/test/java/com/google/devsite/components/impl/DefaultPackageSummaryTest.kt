@@ -21,7 +21,7 @@ import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.pages.PackageSummary.Params
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.testing.NoopContextFreeComponent
-import com.google.devsite.components.testing.NoopDescription
+import com.google.devsite.components.testing.NoopDescriptionComponent
 import com.google.devsite.components.testing.NoopSummaryList
 import com.google.devsite.renderer.Language
 import kotlinx.html.div
@@ -31,7 +31,8 @@ import org.junit.Test
 class DefaultPackageSummaryTest {
     @Test
     fun `Package summary with description renders correctly`() {
-        val component = createPackageSummary(description = listOf(NoopDescription("Hello World!")))
+        val component = createPackageSummary(
+            description = listOf(NoopDescriptionComponent("Hello World!")))
 
         val output = createHTML().div {
             component.render(this)
