@@ -31,7 +31,6 @@ import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DParameter
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -665,23 +664,125 @@ internal class ParameterDocumentableConverterTest(
         }
     }
 
-    // b/177591246 Typed arrays are not handled as part of [JavaToKotlinClassMap] and need to be
-    // handled manually
-    @Ignore
     @Test
     fun `Kotlin docs for java sources use kotlin types for arrays`() {
-        val paramTypeJ = """
+        val intParamTypeJ = """
             |public void foo(int[] a) {}
         """.render(java = true).param().data
-        val paramTypeK = """
-             |fun foo(foo: IntArray)
+        val intParamTypeK = """
+             |fun foo(a: IntArray)
+        """.render().param().data
+        val booleanParamTypeJ = """
+            |public void foo(boolean[] a) {}
+        """.render(java = true).param().data
+        val booleanParamTypeK = """
+             |fun foo(a: BooleanArray)
         """.render().param().data
 
-        for (paramType in listOf(paramTypeJ, paramTypeK)) {
+        for (paramType in listOf(intParamTypeJ, intParamTypeK)) {
             val typeName = paramType.type.asType().link().name
 
             javaOnly { assertThat(typeName).isEqualTo("int[]") }
             kotlinOnly { assertThat(typeName).isEqualTo("IntArray") }
+        }
+        for (paramType in listOf(booleanParamTypeJ, booleanParamTypeK)) {
+            val typeName = paramType.type.asType().link().name
+
+            javaOnly { assertThat(typeName).isEqualTo("boolean[]") }
+            kotlinOnly { assertThat(typeName).isEqualTo("BooleanArray") }
+        }
+    }
+
+    @Test
+    fun `Kotlin arrays are translated only when necessary`() {
+        val paramType = """
+             |fun foo(a: Array<Int>)
+        """.render().param().data
+
+        val actualType = paramType.type.asType().link().name
+
+        // These values are translated, but maybe shouldn't be. It appears to happen upstream before
+        // any  of our translation code because Array<Int> is treated as IntArray, and in Java we
+        // translate IntArray to int[]. Documenting the current behavior with this test case.
+        javaOnly {
+            assertThat(actualType).isEqualTo("int[]") // Should probably be `Integer[]`
+        }
+        kotlinOnly {
+            assertThat(actualType).isEqualTo("IntArray") // should probably be Array<Int>
+        }
+    }
+
+    @Test
+    fun `Nested arrays are translated correctly`() {
+        val paramTypeK = """
+             |fun foo(a: Array<IntArray>)
+        """.render().param().data.type.asType()
+        val paramTypeJ = """
+            |public void foo(int[][] a) {}
+        """.render(java = true).param().data.type.asType()
+
+        listOf(paramTypeJ, paramTypeK).forEach { paramType ->
+            val actualType = paramType.link().name
+            javaOnly {
+                assertThat(actualType).isEqualTo("int[][]")
+            }
+            kotlinOnly {
+                val generic = paramType.data.generics.singleOrNull()?.link()?.name
+                assertThat(actualType).isEqualTo("Array")
+                assertThat(generic).isEqualTo("IntArray")
+            }
+        }
+    }
+
+    @Test
+    fun `Deeply nested arrays are translated correctly`() {
+        val paramTypeK = """
+             |fun foo(a: Array<Array<IntArray>>)
+        """.render().param().data.type.asType()
+        val paramTypeJ = """
+            |public void foo(int[][][] a) {}
+        """.render(java = true).param().data.type.asType()
+
+        listOf(paramTypeJ, paramTypeK).forEach { paramType ->
+            val actualType = paramType.link().name
+            javaOnly {
+                assertThat(actualType).isEqualTo("int[][][]")
+            }
+            kotlinOnly {
+                val generic = paramType.data.generics.singleOrNull()
+                assertThat(actualType).isEqualTo("Array")
+                assertThat(generic?.link()?.name).isEqualTo("Array")
+                assertThat(
+                    generic?.asType()?.data?.generics?.singleOrNull()?.link()?.name
+                ).isEqualTo("IntArray")
+            }
+        }
+    }
+
+    @Test
+    fun `Java arrays with non-primitive members are translated correctly`() {
+        val paramType = """
+            |public void foo(Integer[] a) {}
+        """.render(java = true).param().data.type.asType()
+        val nestedParamType = """
+            |public void foo(Integer[][] a) {}
+        """.render(java = true).param().data.type.asType()
+
+        val actualType = paramType.link().name
+        val nestedActualType = nestedParamType.link().name
+
+        javaOnly {
+            assertThat(actualType).isEqualTo("Integer[]")
+            assertThat(nestedActualType).isEqualTo("Integer[][]")
+        }
+        kotlinOnly {
+            val generic = paramType.data.generics.single()
+            assertThat(actualType).isEqualTo("Array")
+            assertThat(generic.link().name).isEqualTo("Int")
+
+            val nestedGeneric = nestedParamType.data.generics.single()
+            assertThat(nestedActualType).isEqualTo("Array")
+            assertThat(nestedGeneric.link().name).isEqualTo("Array")
         }
     }
 
