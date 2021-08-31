@@ -74,12 +74,12 @@ internal class ParameterDocumentableConverter(
             annotations = param.annotations()
         )
         Language.KOTLIN -> {
-            val defaultValue = param.extra.allOfType<DefaultValue>().singleOrNull()?.value
+            val defaultValueExpression = param.extra.allOfType<DefaultValue>().singleOrNull()?.value
                 ?.takeUnless { isSummary }
             componentForKotlinProjection(
                 proj = param.type,
                 name = param.name.orEmpty(),
-                defaultValue = defaultValue,
+                defaultValue = defaultValueExpression?.getValue(),
                 modifiers = param.getExtraModifiers().modifiersFor(ModifierHints(Language.KOTLIN)),
                 annotations = param.annotations()
             )

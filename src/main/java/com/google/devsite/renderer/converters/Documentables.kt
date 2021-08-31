@@ -20,6 +20,8 @@ import com.google.devsite.renderer.Language
 import org.jetbrains.dokka.base.transformers.documentables.isException
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.PointingToDeclaration
+import org.jetbrains.dokka.model.BooleanConstant
+import org.jetbrains.dokka.model.ComplexExpression
 import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
@@ -32,9 +34,14 @@ import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DTypeAlias
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.DoubleConstant
+import org.jetbrains.dokka.model.Expression
 import org.jetbrains.dokka.model.ExtraModifiers
+import org.jetbrains.dokka.model.FloatConstant
+import org.jetbrains.dokka.model.IntegerConstant
 import org.jetbrains.dokka.model.Nullable
 import org.jetbrains.dokka.model.Projection
+import org.jetbrains.dokka.model.StringConstant
 import org.jetbrains.dokka.model.TypeConstructor
 import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Variance
@@ -229,3 +236,18 @@ internal fun DRI.possiblyAsKotlin(): DRI {
 
 private fun ClassId.classNames(): String =
     shortClassName.identifier + (outerClassId?.classNames()?.let { ".$it" } ?: "")
+
+/**
+ * Returns the string representation of an [Expression] value, mostly relying on the toString
+ * implementation of that type, but wrapping [String] values in quotes for presentation, and
+ * stripping trailing zeros and appending 'f' or 'd' to floats and doubles respectively.
+ */
+fun Expression.getValue(): String? = when (this) {
+    is ComplexExpression -> value
+    is IntegerConstant -> "$value"
+    is BooleanConstant -> "$value"
+    is StringConstant -> "\"$value\""
+    is DoubleConstant -> "$value"
+    is FloatConstant -> "${value}f"
+    else -> null
+}

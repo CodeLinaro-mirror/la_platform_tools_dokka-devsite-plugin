@@ -20,51 +20,31 @@
     </ul>
  Below is a sample of a simple database. 
     <pre class="prettyprint">// File: Song.java
-
-      <pre class="prettyprint">@</pre>
-Entity
+@Entity
 public class User {
-  
-      <pre class="prettyprint">@</pre>
-PrimaryKey
+  @PrimaryKey
   private int id;
   private String name;
-  
-      <pre class="prettyprint">@</pre>
-ColumnInfo(name = &quot;release_year&quot;)
+  @ColumnInfo(name = &quot;release_year&quot;)
   private int releaseYear;
   // getters and setters are ignored for brevity but they are required for Room to work.
 }
 // File: SongDao.java
-
-      <pre class="prettyprint">@</pre>
-Dao
+@Dao
 public interface SongDao {
-  
-      <pre class="prettyprint">@</pre>
-Query(&quot;SELECT * FROM song&quot;)
+  @Query(&quot;SELECT * FROM song&quot;)
   List&lt;Song&gt; loadAll();
-  
-      <pre class="prettyprint">@</pre>
-Query(&quot;SELECT * FROM song WHERE id IN (:songIds)&quot;)
+  @Query(&quot;SELECT * FROM song WHERE id IN (:songIds)&quot;)
   List&lt;Song&gt; loadAllBySongId(int... songIds);
-  
-      <pre class="prettyprint">@</pre>
-Query(&quot;SELECT * FROM song WHERE name LIKE :name AND release_year = :year LIMIT 1&quot;)
+  @Query(&quot;SELECT * FROM song WHERE name LIKE :name AND release_year = :year LIMIT 1&quot;)
   Song loadOneByNameAndReleaseYear(String first, int year);
-  
-      <pre class="prettyprint">@</pre>
-Insert
+  @Insert
   void insertAll(Song... songs);
-  
-      <pre class="prettyprint">@</pre>
-Delete
+  @Delete
   void delete(Song song);
 }
 // File: MusicDatabase.java
-
-      <pre class="prettyprint">@</pre>
-Database(entities = {Song.java})
+@Database(entities = {Song.java})
 public abstract class MusicDatabase extends RoomDatabase {
   public abstract SongDao userDao();
 }
@@ -78,23 +58,17 @@ public abstract class MusicDatabase extends RoomDatabase {
     <p> You can observe a particular table for changes using the InvalidationTracker class which you can acquire via  RoomDatabase.getInvalidationTracker. </p>
     <p> For convenience, Room allows you to return LiveData from Query methods. It will automatically observe the related tables as long as the <code>LiveData</code> has active observers. </p>
     <pre class="prettyprint">// This live data will automatically dispatch changes as the database changes.
-
-      <pre class="prettyprint">@</pre>
-Query(&quot;SELECT * FROM song ORDER BY name LIMIT 5&quot;)
+@Query(&quot;SELECT * FROM song ORDER BY name LIMIT 5&quot;)
 LiveData&lt;Song&gt; loadFirstFiveSongs();
 </pre>
     <p> You can also return arbitrary data objects from your query results as long as the fields in the object match the list of columns in the query response. This makes it very easy to write applications that drive the UI from persistent storage. </p>
     <pre class="prettyprint">class IdAndSongHeader {
   int id;
-  
-      <pre class="prettyprint">@</pre>
-ColumnInfo(name = &quot;header&quot;)
+  @ColumnInfo(name = &quot;header&quot;)
   String header;
 }
 // DAO
-
-      <pre class="prettyprint">@</pre>
-Query(&quot;SELECT id, name || '-' || release_year AS header FROM user&quot;)
+@Query(&quot;SELECT id, name || '-' || release_year AS header FROM user&quot;)
 public IdAndSongHeader[] loadSongHeaders();
 </pre>
  If there is a mismatch between the query result and the POJO, Room will print a warning during compilation. 

@@ -400,7 +400,7 @@ internal class ParameterDocumentableConverterTest(
     }
 
     @Test
-    fun `Parameter includes primitive default value`() {
+    fun `Parameter includes default string value`() {
         val param = """
             |fun foo(stuff: String = "stuff")
         """.render().param().data
@@ -410,7 +410,61 @@ internal class ParameterDocumentableConverterTest(
     }
 
     @Test
-    fun `Parameter includes default value`() {
+    fun `Parameter includes default float values`() {
+        val module = """
+            |fun foo(a: Float = 0f, b: Float = 2.7180f)
+        """.render()
+
+        val paramA = module.param("a").data
+        val paramB = module.param("b").data
+
+        javaOnly {
+            assertThat(paramA.defaultValue).isNull()
+            assertThat(paramB.defaultValue).isNull()
+        }
+        kotlinOnly {
+            assertThat(paramA.defaultValue).isEqualTo("0.0f")
+            assertThat(paramB.defaultValue).isEqualTo("2.718f")
+        }
+    }
+
+    @Test
+    fun `Parameter includes default double values`() {
+        val module = """
+            |fun foo(a: Double = 0.0, b: Double = 2.7180)
+        """.render()
+
+        val paramA = module.param("a").data
+        val paramB = module.param("b").data
+
+        javaOnly {
+            assertThat(paramA.defaultValue).isNull()
+            assertThat(paramB.defaultValue).isNull()
+        }
+        kotlinOnly {
+            assertThat(paramA.defaultValue).isEqualTo("0.0")
+            assertThat(paramB.defaultValue).isEqualTo("2.718")
+        }
+    }
+
+    @Test
+    fun `Parameter includes complex default values`() {
+        val module = """
+            |fun foo(a: List<String = listOf("a", "b", "c"))
+        """.render()
+
+        val param = module.param().data
+
+        javaOnly {
+            assertThat(param.defaultValue).isNull()
+        }
+        kotlinOnly {
+            assertThat(param.defaultValue).isEqualTo("listOf(\"a\", \"b\", \"c\")")
+        }
+    }
+
+    @Test
+    fun `Parameter includes default list value`() {
         val param = """
             |fun foo(stuff: List<String> = listOf("a", "b", "c"))
         """.render().param().data
