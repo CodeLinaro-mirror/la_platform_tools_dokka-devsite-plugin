@@ -679,6 +679,51 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         )
     }
 
+    @Test
+    fun `Pre and @code handled correctly`() {
+        val component = """
+            |/**
+            | * {@code
+            | *     fun thisIsANonPreCodeBlock() {
+            | *         doNotPreserveWhitespace: String         \\ blah
+            | *     }
+            | * }
+            | * <pre>{@code
+            | *     fun thisIsAPreCodeBlock() {
+            | *         DOPreserveWhitespace: String            \\ blah
+            | *     }
+            | * }</pre>
+            |*/
+            |public class Foo()
+        """.render(java = true).description()
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // These look the same, but pasting them into an HTML file correctly displays:
+        //
+        // fun thisIsANonPreCodeBlock() { doNotPreserveWhitespace: String \\ blah }
+        //
+        //     fun thisIsAPreCodeBlock() {
+        //         DOPreserveWhitespace: String            \\ blah
+        //     }
+        assertThat(output).isEqualTo(
+            """<body>
+  <p><code>
+    fun thisIsANonPreCodeBlock() {
+        doNotPreserveWhitespace: String         \\ blah
+    }
+</code></p>
+  <pre class="prettyprint">
+    fun thisIsAPreCodeBlock() {
+        DOPreserveWhitespace: String            \\ blah
+    }
+</pre>
+</body>"""
+        )
+    }
+
     private fun DModule.description(
         summary: Boolean = false,
         deprecation: String? = null
