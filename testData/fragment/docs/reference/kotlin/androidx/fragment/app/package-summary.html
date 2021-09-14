@@ -55,7 +55,7 @@ public abstract class MusicDatabase extends RoomDatabase {
     .build();
 </pre>
  Since Room verifies your queries at compile time, it also detects information about which tables are accessed by the query or what columns are present in the response. 
-    <p> You can observe a particular table for changes using the InvalidationTracker class which you can acquire via  RoomDatabase.getInvalidationTracker. </p>
+    <p> You can observe a particular table for changes using the InvalidationTracker class which you can acquire via RoomDatabase.getInvalidationTracker. </p>
     <p> For convenience, Room allows you to return LiveData from Query methods. It will automatically observe the related tables as long as the <code>LiveData</code> has active observers. </p>
     <pre class="prettyprint">// This live data will automatically dispatch changes as the database changes.
 @Query(&quot;SELECT * FROM song ORDER BY name LIMIT 5&quot;)
