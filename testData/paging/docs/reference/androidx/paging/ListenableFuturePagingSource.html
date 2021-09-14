@@ -76,38 +76,6 @@
       <table class="responsive">
         <thead>
           <tr>
-            <th colspan="2"><h3>Public fields</h3></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td width="40%"><code>final boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/paging/ListenableFuturePagingSource.html#invalid()">invalid</a></code></div>
-              <p>Whether this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> has been invalidated, which should happen when the data this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> represents changes since it was first instantiated.</p>
-            </td>
-          </tr>
-          <tr>
-            <td width="40%"><code>boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/paging/ListenableFuturePagingSource.html#jumpingSupported()">jumpingSupported</a></code></div>
-              <p><code>true</code> if this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> supports jumping, <code>false</code> otherwise.</p>
-            </td>
-          </tr>
-          <tr>
-            <td width="40%"><code>boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/paging/ListenableFuturePagingSource.html#keyReuseSupported()">keyReuseSupported</a></code></div>
-              <p><code>true</code> if this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> expects to re-use keys to load distinct pages without a call to <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code>, <code>false</code> otherwise.</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="devsite-table-wrapper">
-      <table class="responsive">
-        <thead>
-          <tr>
             <th colspan="2"><h3>Public constructors</h3></th>
           </tr>
         </thead>
@@ -193,40 +161,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <h2>Public fields</h2>
-    <div><a name="getInvalid()"></a><a name="setInvalid()"></a><a name="getInvalid--"></a><a name="setInvalid--"></a>
-      <h3 class="api-name" id="invalid()">invalid</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/paging/ListenableFuturePagingSource.html#invalid()">invalid</a></pre>
-      <p>Whether this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> has been invalidated, which should happen when the data this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> represents changes since it was first instantiated.</p>
-    </div>
-    <div><a name="getJumpingSupported()"></a><a name="setJumpingSupported()"></a><a name="getJumpingSupported--"></a><a name="setJumpingSupported--"></a>
-      <h3 class="api-name" id="jumpingSupported()">jumpingSupported</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;boolean&nbsp;<a href="/reference/androidx/paging/ListenableFuturePagingSource.html#jumpingSupported()">jumpingSupported</a></pre>
-      <p><code>true</code> if this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> supports jumping, <code>false</code> otherwise.</p>
-      <p>Override this to <code>true</code> if pseudo-fast scrolling via jumps is supported.</p>
-      <p>A jump occurs when a <code>RecyclerView</code> scrolls through a number of placeholders defined by <code><a href="/reference/androidx/paging/PagingConfig.html#jumpThreshold()">PagingConfig.jumpThreshold</a></code> and triggers a load with <code><a href="/reference/androidx/paging/LoadType.html#REFRESH">LoadType</a></code>.</p>
-      <p><code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code>s that support jumps should override <code><a href="/reference/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a></code> to return a <code><a href="/reference/androidx/paging/PagingSource.html">Key</a></code> that would load data fulfilling the viewport given a user's current <code><a href="/reference/androidx/paging/PagingState.html#anchorPosition()">PagingState.anchorPosition</a></code>.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="2">See also</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/paging/PagingConfig.html#jumpThreshold()">jumpThreshold</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div><a name="getKeyReuseSupported()"></a><a name="setKeyReuseSupported()"></a><a name="getKeyReuseSupported--"></a><a name="setKeyReuseSupported--"></a>
-      <h3 class="api-name" id="keyReuseSupported()">keyReuseSupported</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;boolean&nbsp;<a href="/reference/androidx/paging/ListenableFuturePagingSource.html#keyReuseSupported()">keyReuseSupported</a></pre>
-      <p><code>true</code> if this <code><a href="/reference/androidx/paging/PagingSource.html">PagingSource</a></code> expects to re-use keys to load distinct pages without a call to <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code>, <code>false</code> otherwise.</p>
     </div>
     <h2>Public constructors</h2>
     <div><a name="ListenableFuturePagingSource--"></a><a name="listenablefuturepagingsource"></a>

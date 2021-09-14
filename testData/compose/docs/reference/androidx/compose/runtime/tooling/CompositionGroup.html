@@ -22,24 +22,10 @@
         </thead>
         <tbody>
           <tr>
-            <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Iterable.html">Iterable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a>&gt;</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#compositionGroups()">compositionGroups</a></code></div>
-              <p>Iterate the composition data in the group.</p>
-            </td>
-          </tr>
-          <tr>
             <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Iterable.html">Iterable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</code></td>
             <td>
               <div><code><a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#data()">data</a></code></div>
               <p>The data stored in the slot table for this group.</p>
-            </td>
-          </tr>
-          <tr>
-            <td width="40%"><code>abstract boolean</code></td>
-            <td>
-              <div><code><a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#isEmpty()">isEmpty</a></code></div>
-              <p>Returns true if no composition data has been collected.</p>
             </td>
           </tr>
           <tr>
@@ -67,20 +53,10 @@
       </table>
     </div>
     <h2>Public fields</h2>
-    <div><a name="getCompositionGroups()"></a><a name="setCompositionGroups()"></a><a name="getCompositionGroups--"></a><a name="setCompositionGroups--"></a>
-      <h3 class="api-name" id="compositionGroups()">compositionGroups</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Iterable.html">Iterable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html">CompositionGroup</a>&gt;&nbsp;<a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#compositionGroups()">compositionGroups</a></pre>
-      <p>Iterate the composition data in the group.  The composition data is structured as a tree of values that corresponds to the call graph of the functions that produced the tree. Interspersed are groups that represents the nodes themselves.</p>
-    </div>
     <div><a name="getData()"></a><a name="setData()"></a><a name="getData--"></a><a name="setData--"></a>
       <h3 class="api-name" id="data()">data</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Iterable.html">Iterable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;<a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#data()">data</a></pre>
       <p>The data stored in the slot table for this group. This information includes the values stored for parameters that are checked for change, any value passed as a parameter for remember and the last value returned by remember, etc.</p>
-    </div>
-    <div><a name="getIsEmpty()"></a><a name="setIsEmpty()"></a><a name="getIsEmpty--"></a><a name="setIsEmpty--"></a>
-      <h3 class="api-name" id="isEmpty()">isEmpty</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a><br>public&nbsp;abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/tooling/CompositionGroup.html#isEmpty()">isEmpty</a></pre>
-      <p>Returns true if no composition data has been collected. This occurs when the first composition into this composition data has not completed yet or, if it is a group, it doesn't contain any child groups.</p>
     </div>
     <div><a name="getKey()"></a><a name="setKey()"></a><a name="getKey--"></a><a name="setKey--"></a>
       <h3 class="api-name" id="key()">key</h3>

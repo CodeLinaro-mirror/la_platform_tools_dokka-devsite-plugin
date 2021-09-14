@@ -1171,7 +1171,7 @@ internal class DocTagConverterTest(
         assertThat(tableEntry).isEqualTo("The arguments used when this entry was created")
     }
 
-@Test // TODO: fix upstream b/195524451 https://github.com/Kotlin/dokka/issues/1911
+    @Test
     fun `from ExoPlayer2, @link split across lines works`() {
         val documentation = """
         |public @interface Mega {
@@ -1207,9 +1207,8 @@ internal class DocTagConverterTest(
             .isEqualTo("PLAYBACK_SUPPRESSION_REASON_TRANSIENT_AUDIO_FOCUS_LOSS")
 
         assertThat(link1.text()).isEqualTo("PLAYBACK_SUPPRESSION_REASON_NONE")
-        // TODO: broken b/195524451 https://github.com/Kotlin/dokka/issues/1911
-        // assertThat(link2.text())
-        //    .isEqualTo("PLAYBACK_SUPPRESSION_REASON_TRANSIENT_AUDIO_FOCUS_LOSS")
+        assertThat(link2.text())
+            .isEqualTo("PLAYBACK_SUPPRESSION_REASON_TRANSIENT_AUDIO_FOCUS_LOSS")
     }
 
     private fun DModule.description(doc: DModule.() -> Documentable = ::smartDoc): Description {
