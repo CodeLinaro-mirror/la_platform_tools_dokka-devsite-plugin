@@ -19,6 +19,7 @@ package com.google.devsite.renderer.converters
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Description
 import com.google.devsite.components.Raw
+import com.google.devsite.components.impl.DefaultSymbolDetail
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.FunctionSignature
@@ -1043,6 +1044,122 @@ internal class ClasslikeDocumentableConverterTest(
             val constructors = documentation.symbolsFor("public constructors")
             assertThat(constructors.first.size()).isEqualTo(0)
         }
+    }
+
+    @Test
+    fun `Java getters and setters are documented`() {
+        val page = """
+            |public final class Foo {
+            |
+            |  public int a;
+            |  public int c; // intentional mismatch of field name / getter name
+            |  private int d;
+            |  protected int e;
+            |
+            |  public int getA() {
+            |    return a;
+            |  }
+            |
+            |  public void setA(int a) {
+            |    this.a = a;
+            |  }
+            |
+            |  public int getB() {
+            |    return c;
+            |  }
+            |
+            |  public void setB(int b) {
+            |    c = b;
+            |  }
+            |
+            |  private int getD() {
+            |    return d;
+            |  }
+            |
+            |  private void setD(int d) {
+            |    this.d = d;
+            |  }
+            |
+            |  protected int getE() {
+            |    return e;
+            |  }
+            |
+            |  protected void setE(int e) {
+            |    this.e = e;
+            |  }
+            |}
+        """.render(java = true).page()
+
+        val classlike = page.content<Classlike>()
+        val publicMethodSymbols = classlike.methodSymbols()
+        val protectedMethodSymbols = classlike.symbolsFor(
+            if (language == Language.KOTLIN) "Protected functions" else "Protected methods"
+        )
+        val publicMethodNames = publicMethodSymbols.second.symbols.map {
+            (it as DefaultSymbolDetail).data.name
+        }
+        val protectedMethodNames = protectedMethodSymbols.second.symbols.map {
+            (it as DefaultSymbolDetail).data.name
+        }
+
+        kotlinOnly {
+            // in Kotlin, we don't need to show getA / setA because property access is preferred.
+            assertThat(publicMethodNames).isEqualTo(listOf("getB", "setB"))
+            assertThat(protectedMethodNames).isEmpty()
+        }
+        javaOnly {
+            assertThat(publicMethodNames).isEqualTo(listOf("getA", "getB", "setA", "setB"))
+            // TODO(b/165112358): 'e' doesn't show up in the dokka model
+            // assertThat(protectedMethodNames).isEqualTo(listOf("getE", "setE"))
+        }
+    }
+
+    @Test
+    fun `Java source with public getter and private setter is documented correctly`() {
+        val page = """
+            |public final class Foo {
+            |
+            |  public int a;
+            |
+            |  public int getA() {
+            |    return a;
+            |  }
+            |
+            |  private void setA(int a) {
+            |    this.a = a;
+            |  }
+            |}
+        """.render(java = true).page()
+
+        val classlike = page.content<Classlike>()
+        val publicMethodSymbols = classlike.methodSymbols()
+        val publicMethodNames = publicMethodSymbols.second.symbols.map {
+            (it as DefaultSymbolDetail).data.name
+        }
+
+        kotlinOnly {
+            assertThat(publicMethodNames).isEmpty()
+        }
+        javaOnly {
+            assertThat(publicMethodNames).isEqualTo(listOf("getA"))
+        }
+    }
+
+    @Test
+    fun `Kotlin generated getters and setters are not documented`() {
+        val page = """
+            |data class Foo(val a: Int, var b: Int) {
+            |    var c: Int
+            |       get() = 0
+            |       set(c: Int): Unit
+            |}
+        """.render().page()
+
+        val classlike = page.content<Classlike>()
+        val methodSymbols = classlike.methodSymbols()
+        val methodNames = methodSymbols.second.symbols.map { (it as DefaultSymbolDetail).data.name }
+
+        assertThat(methodNames).isEmpty()
     }
 
     private fun DModule.page(name: String = "Foo"): DevsitePage {
