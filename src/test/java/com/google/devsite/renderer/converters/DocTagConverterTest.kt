@@ -1171,6 +1171,23 @@ internal class DocTagConverterTest(
         assertThat(tableEntry).isEqualTo("The arguments used when this entry was created")
     }
 
+    @Ignore
+    @Test // Note: this tests upstream behavior. Broken b/200051291 do/dokka-upstream-bug/2146
+    fun `Test spacing around line wraps including inside tags`() {
+        val documentation = """
+            |/**
+            | * blah blah blah blah {@link #longFunctionName(java.lang.Object, java.lang.String, int,
+            | * java.lang.Integer) LongContainingClassName#longFunctionName(Object, String, int,
+            | * Integer)}
+            | */
+            |public void longFunctionName(Object arg1, String arg2, int arg3, Integer arg4) {}
+            |
+        """.render(java = true).documentation({ this.function("longFunctionName")!! })
+        val components = (documentation.single() as Description).data.components.single().children
+        val link = components[1] as DocumentationLink
+        assertThat(link.text()).doesNotContain("int,Integer") // should be a space here
+    }
+
     @Test
     fun `from ExoPlayer2, @link split across lines works`() {
         val documentation = """
