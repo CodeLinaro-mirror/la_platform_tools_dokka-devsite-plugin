@@ -51,6 +51,7 @@ import org.jetbrains.dokka.model.StringValue
 import org.jetbrains.dokka.model.WithChildren
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.WithGenerics
+import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.doc.Author
 import org.jetbrains.dokka.model.doc.CodeBlock
 import org.jetbrains.dokka.model.doc.Constructor
@@ -263,8 +264,7 @@ internal class DocTagConverter(
             if (allOptions[tag.name()] == null) {
                 throw RuntimeException("Unable to find what is referred to by \"@param " +
                     "${tag.name()}\" in ${documentable::class.simpleName} ${documentable.name} in" +
-                    " ${documentable.sourceSets.single().sourceRoots.single()
-                        .getCodeFileDescendant()}")
+                    " ${documentable.getSourceFile().name}")
             }
             val title = allOptions[tag.name()]!!
             DefaultTwoPaneSummaryItem(
@@ -283,10 +283,22 @@ internal class DocTagConverter(
         )
     }
 
-    private fun File.getCodeFileDescendant(): String =
-        if (this.extension.toLowerCase() in listOf("java", "kt", "js")) this.name
+    private fun Documentable.getSourceFile(): File {
+        val codeFiles = if (this is WithSources) {
+            this.sources.entries.map { File(it.value.path) }
+        } else {
+            sourceSets.map { it.sourceRoots.map { it.getCodeFileDescendant() } }.flatten()
+        }
+        if (codeFiles.size != 1) throw RuntimeException("Error finding source file for $this.name" +
+            " found multiple sourceSets or sourceRoots. Note: Dackka does not yet support KMP. " +
+            "${codeFiles.map { it.name }}")
+        return codeFiles.single()
+    }
+
+    private fun File.getCodeFileDescendant(): File =
+        if (this.extension.toLowerCase() in listOf("java", "kt", "js")) this
         else this.listFiles()?.singleOrNull()?.getCodeFileDescendant()
-            ?: "(ERROR: unable to detect source file for this code)"
+            ?: throw RuntimeException("ERROR: unable to detect source file for this code $path")
 
     private fun returnType(tags: List<Return>, returnType: ContextFreeComponent): SummaryList {
         val params = tags.map { tag ->
