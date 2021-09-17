@@ -248,7 +248,7 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         )
     }
 
-    @Test // TODO: Fails in java: b/195519791 https://github.com/Kotlin/dokka/issues/1564
+    @Test
     fun `Inline code renders correctly in 4x Kotlin and Java`() {
         val componentK = """
             |/** The `Boolean` type has two possible values: `true` or `false`. */
@@ -259,7 +259,7 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
             |public class Foo
         """.render(java = true).description()
 
-        for (component in listOf(/*componentJ,*/ componentK)) {
+        for (component in listOf(componentJ, componentK)) {
             val output = createHTML().body {
                 component.render(this)
             }.trim()
