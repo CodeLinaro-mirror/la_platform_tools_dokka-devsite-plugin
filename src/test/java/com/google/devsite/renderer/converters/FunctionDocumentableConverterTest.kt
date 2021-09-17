@@ -174,7 +174,7 @@ internal class FunctionDocumentableConverterTest(
             javaOnly { assertThat(fooReturnz.modifiers).containsExactly("abstract") }
             kotlinOnly { assertThat(fooReturnz.modifiers).isEmpty() }
             val barReturnz = summaries["bar"]!!.returnSummary()
-            javaOnly { assertThat(barReturnz.modifiers).isEmpty() }
+            javaOnly { assertThat(barReturnz.modifiers).containsExactly("default") }
             kotlinOnly {
                 if (summaries == summariesJ) assertThat(barReturnz.modifiers).isEmpty()
                 else assertThat(barReturnz.modifiers).containsExactly("open") }

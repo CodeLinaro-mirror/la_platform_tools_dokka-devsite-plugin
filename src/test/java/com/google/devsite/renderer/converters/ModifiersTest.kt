@@ -203,4 +203,29 @@ internal class ModifiersTest : ConverterTestBase() {
     private fun DModule.modifierz(): List<String> {
         return function("foo")!!.modifiers()
     }
+
+    @Test
+    fun `"default" modifier for interfaces works`() {
+        val theInterface = """
+            |public interface DefaultLifecycleObserver {
+            |    /**
+            |     * Notifies that {@code ON_CREATE} event occurred.
+            |     *
+            |     * @param owner the component, whose state was changed
+            |     */
+            |    public default String onCreate(String owner) {}
+            |    public String nonDefaultMethod(String arg) {}
+            |}
+        """.render(java = true).classlike()!!.classlikes.single()
+        val onCreateModifiers = theInterface.functions.single { it.name == "onCreate" }
+            .modifiers()
+        val nonDefaultModifiers = theInterface.functions.single { it.name == "nonDefaultMethod" }
+            .modifiers()
+        val hintsJ = ModifierHints(Language.JAVA, isInterface = true)
+        val hintsK = ModifierHints(Language.KOTLIN, isInterface = true)
+        assertThat(onCreateModifiers.modifiersFor(hintsJ).single()).isEqualTo("default")
+        assertThat(nonDefaultModifiers.modifiersFor(hintsJ).single()).isEqualTo("abstract")
+        assertThat(onCreateModifiers.modifiersFor(hintsK)).isEmpty()
+        assertThat(nonDefaultModifiers.modifiersFor(hintsK)).isEmpty()
+    }
 }

@@ -63,6 +63,17 @@ internal fun List<String>.modifiersFor(
                 if ("final" !in modifiers) modifiers.add("final") // this happens for `const val`
             }
 
+            // Interface methods are public by default; showing it is not useful
+            if (hints.isInterface) {
+                modifiers.remove("public")
+            }
+
+            // Java uses the "default" modifier on interface non-abstract methods
+            // but Dokka upstream inverts this to make non-default interface methods "abstract"
+            if ("abstract" !in modifiers && hints.isInterface) {
+                modifiers.add("default")
+            }
+
             // These modifiers don't exist in Java
             modifiers.remove("suspend")
             modifiers.remove("inline")
