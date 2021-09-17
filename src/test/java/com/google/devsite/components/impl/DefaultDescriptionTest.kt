@@ -724,6 +724,50 @@ internal class DefaultDescriptionTest : ConverterTestBase() {
         )
     }
 
+    @Test
+    fun `table captions handled correctly`() {
+        val component = """
+            |/**
+            | * <table>
+            | * <caption>Uri patterns and following API calls for MediaControllerCompat methods</caption>
+            | * <tr>
+            | * <th>Uri patterns</th><th>Following API calls</th><th>Method</th>
+            | * </tr><tr>
+            | * <td rowspan="2">{@code androidx://media3-session/setMediaUri?uri=[uri]}</td>
+            | * <td>{@link #prepare}</td>
+            | * <td>{@link MediaControllerCompat.TransportControls#prepareFromUri prepareFromUri}
+            | * </tr>
+            | * </tr>
+            | * </table>
+            | */
+            |public class Foo()
+        """.render(java = true).description()
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        assertThat(output).isEqualTo(
+            """<body>
+  <table>
+    <caption>Uri patterns and following API calls for MediaControllerCompat methods</caption>
+    <tbody>
+      <tr>
+        <th>Uri patterns</th>
+        <th>Following API calls</th>
+        <th>Method</th>
+      </tr>
+      <tr>
+        <td><code>androidx://media3-session/setMediaUri?uri=[uri]</code></td>
+        <td>prepare</td>
+        <td>prepareFromUri</td>
+      </tr>
+    </tbody>
+  </table>
+</body>"""
+        )
+    }
+
     private fun DModule.description(
         summary: Boolean = false,
         deprecation: String? = null

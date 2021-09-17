@@ -30,6 +30,7 @@ import kotlinx.html.aside
 import kotlinx.html.b
 import kotlinx.html.blockQuote
 import kotlinx.html.br
+import kotlinx.html.caption
 import kotlinx.html.code
 import kotlinx.html.del
 import kotlinx.html.div
@@ -64,6 +65,7 @@ import org.jetbrains.dokka.model.doc.B
 import org.jetbrains.dokka.model.doc.Big
 import org.jetbrains.dokka.model.doc.BlockQuote
 import org.jetbrains.dokka.model.doc.Br
+import org.jetbrains.dokka.model.doc.Caption
 import org.jetbrains.dokka.model.doc.Cite
 import org.jetbrains.dokka.model.doc.CodeBlock
 import org.jetbrains.dokka.model.doc.CodeInline
@@ -250,6 +252,7 @@ internal class DefaultDescription(
                 is TFoot -> tfoot { renderTableFooter(tag.children, state) }
                 is Th -> tr { renderTableRow(tag.children, isHeader = true, state) }
                 is Tr -> tr { renderTableRow(tag.children, isHeader = false, state) }
+                is Caption -> caption { renderTags(tag.children, state) }
                 else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
             }
         }
