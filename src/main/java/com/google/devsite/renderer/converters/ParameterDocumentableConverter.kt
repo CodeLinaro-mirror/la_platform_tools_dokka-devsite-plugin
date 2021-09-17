@@ -172,10 +172,24 @@ internal class ParameterDocumentableConverter(
 
     private fun Projection.innerPossiblyAsKotlin(): Projection = when (this) {
         is FunctionalTypeConstructor, is GenericTypeConstructor -> {
-            (this as TypeConstructor).copy(
-                projections = projections.map { it.possiblyAsKotlin() },
-                dri = dri.possiblyAsKotlin()
-            )
+            this as TypeConstructor
+            val proj = projections.singleOrNull()
+            // if this is am array of Java primitives (int[]) then use the kotlin version (IntArray)
+            if (
+                dri.packageName == "kotlin" &&
+                dri.classNames == "Array" &&
+                proj is PrimitiveJavaType
+            ) {
+                copy(
+                    projections = emptyList(),
+                    dri = DRI("kotlin", javaPrimitiveToKotlinArrayType[proj.name])
+                )
+            } else {
+                copy(
+                    projections = projections.map { it.possiblyAsKotlin() },
+                    dri = dri.possiblyAsKotlin()
+                )
+            }
         }
         is Variance<*> -> inner.possiblyAsKotlin()
         else -> this
@@ -365,6 +379,10 @@ internal class ParameterDocumentableConverter(
             val typeConstructor = this as TypeConstructor
             val isStdlib = dri.packageName == "kotlin"
             val className = dri.classNames.orEmpty()
+            val innerProjections = projections.map {
+                // Generics can't be true primitives in Java
+                it.rewriteKotlinPrimitivesForJava(mustBoxPrimitive = true)
+            }
 
             if (isReturnType && isStdlib && className == "Unit") {
                 Void
@@ -378,13 +396,29 @@ internal class ParameterDocumentableConverter(
                 } else {
                     PrimitiveJavaType(className.toLowerCase())
                 }
+            // kotlin.IntArray -> int[]
             } else if (isStdlib && className in kotlinPrimitiveArrays) {
                 PrimitiveJavaType(className.removeSuffix("Array").toLowerCase() + "[]")
+            // kotlin.Array<int> -> int[]
+            } else if (
+                isStdlib && className == "Array" &&
+                innerProjections.singleOrNull() is PrimitiveJavaType
+            ) {
+                val arrayType = innerProjections.single() as PrimitiveJavaType
+                PrimitiveJavaType(arrayType.name + "[]")
+            // kotlin.Array<Object> -> Object[]
+            } else if (
+                isStdlib && className == "Array" &&
+                innerProjections.singleOrNull() is GenericTypeConstructor
+            ) {
+                val name = when (val type = innerProjections.single()) {
+                    is TypeConstructor -> type.dri.classNames.orEmpty()
+                    is PrimitiveJavaType -> type.name
+                    else -> ""
+                }
+                PrimitiveJavaType("$name[]")
             } else {
-                typeConstructor.copy(projections = projections.map {
-                    // Generics can't be true primitives in Java
-                    it.rewriteKotlinPrimitivesForJava(mustBoxPrimitive = true)
-                }, dri = dri.possiblyAsJava())
+                typeConstructor.copy(projections = innerProjections, dri = dri.possiblyAsJava())
             }
         }
         // Nullable types and variances can't be true primitives in Java
@@ -408,16 +442,18 @@ internal class ParameterDocumentableConverter(
         val kotlinPrimitives = setOf(
             "Boolean", "Byte", "Char", "Short", "Int", "Long", "Float", "Double"
         )
-        val kotlinPrimitiveArrays = setOf(
-            "BooleanArray",
-            "ByteArray",
-            "CharArray",
-            "ShortArray",
-            "IntArray",
-            "LongArray",
-            "FloatArray",
-            "DoubleArray"
+        val javaPrimitiveToKotlinArrayType = mapOf(
+            "int" to "IntArray",
+            "boolean" to "BooleanArray",
+            "byte" to "ByteArray",
+            "char" to "CharArray",
+            "short" to "ShortArray",
+            "long" to "LongArray",
+            "float" to "FloatArray",
+            "double" to "DoubleArray"
         )
+        val kotlinPrimitiveArrays = javaPrimitiveToKotlinArrayType.values.toSet()
+
         private val toKotlinTypeMemo = ConcurrentHashMap<Projection, Projection>()
     }
 }
