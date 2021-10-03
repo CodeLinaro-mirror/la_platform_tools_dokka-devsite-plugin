@@ -10,7 +10,7 @@
     <p> Rather than hiding the details of SQLite, Room tries to embrace them by providing convenient APIs to query the database and also verify such queries at compile time. This allows you to access the full power of SQLite while having the type safety provided by Java SQL query builders. </p>
     <p> There are 3 major components in Room. </p>
     <ul>
-      <li>Database: This annotation marks a class as a database. It should be an abstract class that extends RoomDatabase. At runtime, you can acquire an instance of it via Room.databaseBuilder or  Room.inMemoryDatabaseBuilder. 
+      <li>Database: This annotation marks a class as a database. It should be an abstract class that extends RoomDatabase. At runtime, you can acquire an instance of it via Room.databaseBuilder or Room.inMemoryDatabaseBuilder. 
         <p> The database class defines the list of entities and data access objects in the database. It is also the main access point for the underlying connection. </p>
       </li>
       <li>Entity: This annotation marks a class as a database row. For each Entity, a database table is created to hold the items. The Entity class must be referenced in the Database#entities array. Each field of the Entity (and its super class) is persisted in the database unless it is denoted otherwise (see Entity docs for details). </li>

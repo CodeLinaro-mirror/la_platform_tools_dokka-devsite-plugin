@@ -499,10 +499,8 @@ internal class ClasslikeDocumentableConverterTest(
             assertThat((enumTwo.description as Description).text())
                 .contains("Load at the start")
             assertThat((enumThree.title as Raw).data.text).contains("REFRESH")
-            if (page == pageK) { // TODO: fix. Result in java has "result ofinvalidation"
-                assertThat((enumThree.description as Description).text())
-                    .contains("result of invalidation")
-            }
+            assertThat((enumThree.description as Description).text())
+                .contains("result of invalidation")
 
             val enumName = enumDetails.symbols[0] as SymbolDetail
             val returnType = enumName.data.returnType.link()

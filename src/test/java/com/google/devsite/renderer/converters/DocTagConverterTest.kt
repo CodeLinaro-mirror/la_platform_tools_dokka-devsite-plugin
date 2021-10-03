@@ -424,7 +424,6 @@ internal class DocTagConverterTest(
         assertThat(constructorParams.item().description().text()).isEqualTo("context_docs")
     }
 
-    @Test // TODO(b/182457595): fix img tags in javadoc
     fun `Full documentation has img tag in 4x Kotlin and Java`() {
         val documentationK = """
             |/**
@@ -439,7 +438,7 @@ internal class DocTagConverterTest(
             |public fun foo(Integer a)
         """.render(java = true).documentation()
 
-        for (documentation in listOf(/*documentationJ,*/ documentationK)) {
+        for (documentation in listOf(documentationJ, documentationK)) {
             val description = documentation.last() as DefaultDescription
             val img = description.data.components.first().children.item() as Img
 
@@ -938,6 +937,7 @@ internal class DocTagConverterTest(
 
         assertThat(paramSummary.title()).isEqualTo("See also")
         assertThat(paramText.link().name).isEqualTo("String")
+        assertThat(paramText.description().text()).isEqualTo("blah")
     }
 
     @Test
@@ -951,6 +951,7 @@ internal class DocTagConverterTest(
         val paramText = paramSummary.item()
 
         assertPath(paramText.link().url, "kotlin/String.html")
+        assertThat(paramText.description().text()).isEmpty()
     }
 
     @Test
@@ -964,6 +965,7 @@ internal class DocTagConverterTest(
         val paramText = paramSummary.item()
 
         assertPath(paramText.link().url, "androidx/example/Foo.Bar.html")
+        assertThat(paramText.description().text()).isEmpty()
     }
 
     @Test
@@ -978,6 +980,7 @@ internal class DocTagConverterTest(
 
         // TODO(b/167437580): figure out how to reliably parse links
         assertThat(paramText.link().url).contains("isEmpty")
+        assertThat(paramText.description().text()).isEmpty()
     }
 
     @Test
@@ -991,6 +994,7 @@ internal class DocTagConverterTest(
         val paramText = paramSummary.item()
 
         assertPath(paramText.link().url, "java/lang/String.html#isEmpty()")
+        assertThat(paramText.description().text()).isEmpty()
     }
 
     @Test

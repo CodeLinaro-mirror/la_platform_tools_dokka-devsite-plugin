@@ -34,8 +34,7 @@ plugins {
 application {
     mainClassName = "org.jetbrains.dokka.MainKt"
 }
-
-val dokkaVersion = "1.5.30-dev-118"
+val dokkaVersion = "1.6.0-dev-122"
 
 dependencies {
     compileOnly(kotlin("stdlib-jdk8"))
@@ -57,7 +56,7 @@ dependencies {
 }
 
 group = "com.google.devsite"
-version = "0.0.10" // This is appended to archiveBaseName in the ShadowJar task.
+version = "0.0.11" // This is appended to archiveBaseName in the ShadowJar task.
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
