@@ -56,6 +56,11 @@ class BasicTest : IntegrationTestBase() {
     }
 
     @Test
+    fun `Validate prod AndroidX collections-ktx lib`() {
+        verifyDirectory("collections-ktx")
+    }
+
+    @Test
     fun `Validate @sample`() {
         verifyDirectory("sampleAnnotation", sampleLocations = listOf("samples"))
     }
