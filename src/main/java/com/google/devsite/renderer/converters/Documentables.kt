@@ -40,8 +40,8 @@ import org.jetbrains.dokka.model.Expression
 import org.jetbrains.dokka.model.ExtraModifiers
 import org.jetbrains.dokka.model.FloatConstant
 import org.jetbrains.dokka.model.IntegerConstant
-import org.jetbrains.dokka.model.JavaVisibility
 import org.jetbrains.dokka.model.KotlinModifier
+import org.jetbrains.dokka.model.KotlinVisibility
 import org.jetbrains.dokka.model.StringConstant
 import org.jetbrains.dokka.model.TypeConstructor
 import org.jetbrains.dokka.model.UnresolvedBound
@@ -90,9 +90,10 @@ private object Memoizers {
  * Memoized.
  */
 internal fun Documentable.isFromJava() = isFromJavaMap.getOrPut(this) {
-    if (this is WithVisibility) visibility is JavaVisibility
+    if (this is WithVisibility && this.visibility.isNotEmpty())
+        !visibility.values.any { it is KotlinVisibility }
     if (this is WithAbstraction && this.modifier.isNotEmpty())
-        !modifier.any { (_, v) -> v is KotlinModifier }
+        !modifier.values.any { it is KotlinModifier }
     val sourceFileExtensions = getPossibleSourceFiles().map { it.path }
         .filter { "package-info.java" !in it }
         .map { it.substringAfterLast('.') }
