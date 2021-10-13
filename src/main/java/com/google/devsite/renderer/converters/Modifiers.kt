@@ -88,6 +88,12 @@ internal fun List<String>.modifiersFor(
             modifiers.remove("vararg")
         }
         Language.KOTLIN -> {
+            // Handle consolidation
+            if ("static" in modifiers && "final" in modifiers) {
+                modifiers.remove("static")
+                modifiers.remove("final")
+                modifiers.add("const")
+            }
             // Align default modifiers
             modifiers.remove("public")
             if ("override" !in modifiers) {
@@ -102,9 +108,10 @@ internal fun List<String>.modifiersFor(
 
             // Not useful
             modifiers.remove("override")
-            modifiers.sortBy { m -> modifierOrder.indexOf(m) }
         }
     }
+
+    modifiers.sortBy { m -> modifierOrder.indexOf(m) }
 
     if (hints.isSummary) {
         modifiers.remove("public")
@@ -123,8 +130,8 @@ val modifierOrder = listOf(
     "public", "protected", "private", "internal",
     // Multi-platform (one of)
     "expect", "actual",
-    // Extensibility (one of)
-    "final", "open", "abstract", "sealed", "const", "static",
+    // Extensibility (one of OR "static final" where "final" is the java keyword instead)
+    "static", "final", "open", "abstract", "sealed", "const",
     // Other (could be more than one)
     "external", "override", "lateinit", "tailrec", "vararg", "suspend", "inner",
     // Types (one of)
