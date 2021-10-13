@@ -21,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+import dokkatest.simple.TwoKt;
 
 public class Fraggy {
 
@@ -43,4 +44,17 @@ public class Fraggy {
     public int thisShouldNotShow() {return 0;}
     /** @suppress */
     public int thisShouldShowUpItsJavaHiddenWithTheKotlinMethod() {return 0;}
+
+    /**
+     * linklink
+     * @see #registerForActivityResult(Map,List)}
+     * @see #createType(Comparable, List)
+     * @see Two#z
+     * @see TwoKt#copyWhenGreater(List, CharSequence)
+     */
+    public static <Q extends Comparable<Q> & Map<Q, Q>> Q createType(Q blarg, List<Q> gah){
+        return null;
+    }
 }
+
+

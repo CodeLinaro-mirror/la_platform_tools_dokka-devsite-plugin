@@ -44,6 +44,9 @@ private fun TypeReference.name(): String = when (this) {
     is JavaClassReference -> name
     is TypeConstructor -> fullyQualifiedName
     is Nullable -> wrapped.name()
-    is TypeParam -> bounds.single().name()
+    // Parameters aren't used in kdoc links, so this is only relevant for Java linking to Kotlin
+    // Anything with multiple bounds in Java code is linked as the first bound....
+    // (see "simple" integration test Fraggy#createType)
+    is TypeParam -> bounds.first().name()
     is RecursiveType, StarProjection -> ""
 }

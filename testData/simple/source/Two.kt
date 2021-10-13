@@ -31,3 +31,13 @@ interface Two {
 interface Four {
     val fore: String
 }
+
+/**
+ * from jetbrains Kotlin documentation examples
+ * [copyWhenGreater], [Fraggy.createType]
+ */
+fun <T> copyWhenGreater(list: List<T>, threshold: T): List<String>
+    where T : CharSequence,
+          T : Comparable<T> {
+    return list.filter { it > threshold }.map { it.toString() }
+}

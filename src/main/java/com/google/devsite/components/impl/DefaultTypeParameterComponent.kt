@@ -45,7 +45,7 @@ internal class DefaultTypeParameterComponent(
             Language.JAVA -> {
                 +data.name
                 // TODO: handle "implements"
-                data.projections.render(into, ShouldBreak.NO,
+                data.projections.render(into, ShouldBreak.NO, separator = "$nbsp&",
                     header = { +nbsp; +"extends"; +nbsp; })
             }
             Language.KOTLIN -> {
