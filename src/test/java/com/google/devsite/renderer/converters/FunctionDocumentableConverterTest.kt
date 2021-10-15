@@ -656,6 +656,24 @@ internal class FunctionDocumentableConverterTest(
         )
     }
 
+    @Test
+    fun `Where statement generates correct bounds`() {
+        val signatureK = """
+            |fun <T> copyWhenGreater(list: List<T>, threshold: T): List<String>
+            |   where T : CharSequence,
+            |         T : Comparable<T> { return emptyList() }
+        """.render().signature()
+        val signatureJ = """
+            |public <T extends Kotlin.CharSequence & Comparable<T>> List<String> copyWhenGreater(List<T> list, T threshold) {}
+        """.render(java = true).signature()
+        for (signature in listOf(signatureJ, signatureK)) {
+            val bounds = signature.data.typeParameters.single().data.projections
+            assertThat(bounds[0].data.type.data.name).isEqualTo("CharSequence")
+            assertThat(bounds[1].data.type.data.name).isEqualTo("Comparable")
+            assertThat(bounds[1].data.generics.single().data.type.data.name).isEqualTo("T")
+        }
+    }
+
     private fun assertNoLambdaStuff(data: ParameterComponent.Params) {
         assertThat(data.type is LambdaTypeProjectionComponent).isFalse()
     }
@@ -710,6 +728,20 @@ internal class FunctionDocumentableConverterTest(
             docConverter
         )
         return converter.detail(this.doc(), hints)
+    }
+
+    private fun DModule.signature(
+        doc: DModule.() -> DFunction = ::smartDoc
+    ): FunctionSignature {
+        val holder = runBlocking { DocumentablesHolder(this@signature, this) }
+        val classGraph = runBlocking { holder.classGraph() }
+        val docConverter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
+        val converter = FunctionDocumentableConverter(
+            language,
+            pathProvider(classGraph = classGraph),
+            docConverter
+        )
+        return with(converter) { this@signature.doc().signature(isSummary = false) }
     }
 
     /** In case you aren't explicit, our best guess at what you want docs for. */
