@@ -45,14 +45,37 @@ internal class DefaultTypeParameterComponent(
             Language.JAVA -> {
                 +data.name
                 // TODO: handle "implements"
-                data.projections.render(into, ShouldBreak.NO, separator = "$nbsp&",
-                    header = { +nbsp; +"extends"; +nbsp; })
+                when (data.projections.size) {
+                    0 -> null
+                    1 -> { +nbsp; +"extends"; +nbsp; data.projections.single().render(into) }
+                    // Temporary solution, because some rewriting would be necessary to hoist the
+                    // projection information so it can go at the end of the function signature
+                    else -> {
+                        +nbsp; +"extends"; +nbsp
+                        for (projection in data.projections) {
+                            projection.render(into)
+                            if (projection !== data.projections.last()) { +nbsp; +"&"; +nbsp }
+                        }
+                    }
+                }
             }
             Language.KOTLIN -> {
                 +data.name
                 data.modifiers.render(into)
                 // TODO: handle in/out
-                data.projections.render(into, ShouldBreak.NO, header = { +nbsp; +":"; +nbsp })
+                when (data.projections.size) {
+                    0 -> null
+                    1 -> { +nbsp; +":"; +nbsp; data.projections.single().render(into) }
+                    // Temporary solution, because some rewriting would be necessary to hoist the
+                    // projection information so it can go at the end of the function signature
+                    else -> {
+                        +nbsp; +":"; +nbsp
+                        for (projection in data.projections) {
+                            projection.render(into)
+                            if (projection !== data.projections.last()) { +nbsp; +"&"; +nbsp }
+                        }
+                    }
+                }
             }
         }
         if (angleBrackets) { +">" }
