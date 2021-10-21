@@ -104,7 +104,10 @@ internal fun List<String>.modifiersFor(
             }
 
             // These modifiers don't exist in Kotlin
-            modifiers.remove("static")
+            if ("static" in modifiers) {
+                modifiers.remove("static")
+                modifiers.add("java-static")
+            }
 
             // Not useful
             modifiers.remove("override")
@@ -130,8 +133,10 @@ val modifierOrder = listOf(
     "public", "protected", "private", "internal",
     // Multi-platform (one of)
     "expect", "actual",
-    // Extensibility (one of OR "static final" where "final" is the java keyword instead)
-    "static", "final", "open", "abstract", "sealed", "const",
+    // Containing Scope (one of)
+    "static", "java-static",
+    // Extensibility (one of)
+    "final", "open", "abstract", "sealed", "const",
     // Other (could be more than one)
     "external", "override", "lateinit", "tailrec", "vararg", "suspend", "inner",
     // Types (one of)

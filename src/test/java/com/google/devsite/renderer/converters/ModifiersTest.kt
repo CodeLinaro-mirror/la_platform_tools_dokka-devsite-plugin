@@ -137,11 +137,13 @@ internal class ModifiersTest : ConverterTestBase() {
     }
 
     @Test
-    fun `Unknown Java modifiers are stripped from Kotlin`() {
+    fun `Java static modifier is converted in Kotlin`() {
         val hints = ModifierHints(Language.KOTLIN)
         val modifiers = listOf("static")
-
-        assertThat(modifiers.modifiersFor(hints)).isEmpty()
+        // Java-static methods must be used specially in Kotlin
+        // https://kotlinlang.org/docs/java-interop.html#accessing-static-members
+        // TODO b/203678085: allow modifiers to be links
+        assertThat(modifiers.modifiersFor(hints).single()).isEqualTo("java-static")
     }
 
     @Test
