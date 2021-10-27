@@ -42,6 +42,7 @@ import com.google.devsite.renderer.converters.testing.typeName
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DModule
+import org.jetbrains.dokka.model.GenericTypeConstructor
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -673,6 +674,61 @@ internal class FunctionDocumentableConverterTest(
         }
     }
 
+    @Test // This is broken upstream: b/203682189, go/dokka-upstream-bug/2561
+    fun `Overall nullability of array types is handled properly in 4x Java and Kotlin`() {
+        val moduleK = """
+            |fun foo(): IntArray?
+            |fun oof(): IntArray
+            |fun bar(param: List<Array<String>?>)
+            |fun rab(param: List<Array<String>>)
+        """.render()
+        val moduleJ = """
+            |public int[] foo();
+            |public @NonNull int[] oof();
+            |public void bar(java.util.List<int[]> param)
+            |public void rab(java.util.List<@NonNull int[]> param)
+        """.render(java = true)
+
+        val drab = moduleJ.function("rab")!!.parameters.single()
+        val genericDrab = (drab.type as GenericTypeConstructor).projections.single()
+        // assertThat(genericDrab.annotations()).isNotEmpty() // This is a bug
+        // assertThat(genericDrab.annotations().single().dri.classNames).contains("NonNull")
+
+        for (module in listOf(moduleJ, moduleK)) {
+            val rabSig = module.detail("rab").data.signature as FunctionSignature
+            val rabType = rabSig.data.parameters.single().data.type.data.generics.single()
+
+            val fooType = module.detail("foo").data.returnType
+            val oofType = module.detail("oof").data.returnType
+            val barSig = module.detail("bar").data.signature as FunctionSignature
+            val barType = barSig.data.parameters.single().data.type.data.generics.single()
+
+            assertThat(fooType.nullable).isTrue()
+            assertThat(fooType.data.annotationComponents.isEmpty()) // @Nullable is never injected
+            assertThat(oofType.nullable).isFalse()
+
+            assertThat(barType.nullable).isTrue()
+            assertThat(barType.data.annotationComponents.isEmpty()) // @Nullable is never injected
+
+            javaOnly {
+                assertThat(oofType.data.annotationComponents.single().isAtNonNull).isTrue()
+            }
+            kotlinOnly {
+                assertThat(oofType.data.annotationComponents.isEmpty())
+                assertThat(rabType.data.annotationComponents.isEmpty())
+            }
+
+            // This is a bug. We should be able to assert this for both source languages.
+            // Upstream dokka does not pick up the annotation on the int[]
+            if (module == moduleK) {
+                assertThat(rabType.nullable).isFalse()
+                javaOnly {
+                    assertThat(rabType.data.annotationComponents.single().isAtNonNull).isTrue()
+                }
+            }
+        }
+    }
+
     private fun assertNoLambdaStuff(data: ParameterComponent.Params) {
         assertThat(data.type is LambdaTypeProjectionComponent).isFalse()
     }
@@ -700,6 +756,9 @@ internal class FunctionDocumentableConverterTest(
         funName: String,
         hints: ModifierHints = ModifierHints(displayLanguage)
     ) = detail({ this.function(funName)!! }, hints)
+
+    private fun DModule.signature(funName: String) =
+        signature { this.function(funName)!! }
 
     private fun DModule.functionSummaries(
         hints: ModifierHints = ModifierHints(displayLanguage)

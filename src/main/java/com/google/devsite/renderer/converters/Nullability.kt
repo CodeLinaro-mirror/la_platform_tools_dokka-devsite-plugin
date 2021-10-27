@@ -105,14 +105,13 @@ internal fun Projection.getNullability(
         is Nullable -> Nullability.KOTLIN_NULLABLE
         is Variance<*> -> inner.getNullability(displayLanguage, isJavaSource)
         is TypeAliased -> inner.getNullability(displayLanguage, isJavaSource)
-        is PrimitiveJavaType -> // Java arrays are nullable; non-array primitives aren't
-            if ("[" !in name) Nullability.JAVA_NEVER_NULL
-            else if (isJavaSource == true) Nullability.JAVA_NOT_ANNOTATED
-            else Nullability.KOTLIN_DEFAULT
         Void -> Nullability.JAVA_NEVER_NULL // Not nullable by definition
         Dynamic, Star -> Nullability.KOTLIN_DEFAULT // Can come from Kotlin source only
         // Unannotated java projections are nullable, default Kotlin aren't
-        is TypeParameter, is TypeConstructor, is JavaObject, is UnresolvedBound -> {
+        is TypeParameter, is TypeConstructor, is JavaObject, is UnresolvedBound,
+        is PrimitiveJavaType -> {
+            // Java arrays are nullable; non-array primitives aren't
+            if (this is PrimitiveJavaType && "[" !in name) Nullability.JAVA_NEVER_NULL
             // This is the only case where annotations can override the normal nullability
             val allAnnotations = injectedAnnotations +
                 ((this as? WithExtraProperties<*>)?.annotations() ?: emptyList())

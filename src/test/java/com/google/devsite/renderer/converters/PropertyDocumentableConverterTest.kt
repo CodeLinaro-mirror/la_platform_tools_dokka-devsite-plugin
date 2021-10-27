@@ -181,6 +181,43 @@ internal class PropertyDocumentableConverterTest(
     }
 
     @Test
+    fun `Overall nullability of array types is handled properly in 4x Java and Kotlin`() {
+        val moduleK = """
+            |val foo: IntArray?
+            |val oof: IntArry
+            |val bar: Array<String>?
+            |val rab: Array<String>
+        """.render()
+        val moduleJ = """
+            |public int[] foo;
+            |public @NonNull int[] oof;
+            |public String[] bar;
+            |public @NonNull String[] rab;
+        """.render(java = true)
+        for (module in listOf(moduleJ, moduleK)) {
+            val fooType = module.detail("foo").data.returnType
+            val oofType = module.detail("oof").data.returnType
+            val barType = module.detail("bar").data.returnType
+            val rabType = module.detail("rab").data.returnType
+            assertThat(fooType.data.annotationComponents.isEmpty())
+            assertThat(fooType.nullable).isTrue()
+            assertThat(barType.data.annotationComponents.isEmpty())
+            assertThat(barType.nullable).isTrue()
+
+            assertThat(oofType.nullable).isFalse()
+            assertThat(rabType.nullable).isFalse()
+            javaOnly {
+                assertThat(oofType.data.annotationComponents.single().isAtNonNull)
+                assertThat(rabType.data.annotationComponents.single().isAtNonNull)
+            }
+            javaOnly {
+                assertThat(oofType.data.annotationComponents.isEmpty())
+                assertThat(rabType.data.annotationComponents.isEmpty())
+            }
+        }
+    }
+
+    @Test
     fun `Property detail component has correct anchors`() {
         val detail = """
             |val <T : Number> List<T>.foo
