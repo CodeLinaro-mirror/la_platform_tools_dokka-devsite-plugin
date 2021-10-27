@@ -76,4 +76,10 @@ class BasicTest : IntegrationTestBase() {
     fun `Validate inheritance tests`() {
         verifyDirectory("inheritance")
     }
+
+    @Ignore // go/dokka-upstream-bug/2206
+    @Test // SuppressedByConditionDocumentableFilterTransformer cannot suppress packages
+    fun `Validate package-leve @hide`() {
+        verifyDirectory("hidden")
+    }
 }
