@@ -25,6 +25,7 @@ import kotlinx.html.body
 import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.Documentable
+import org.junit.Ignore
 import org.junit.Test
 
 internal class DefaultDescriptionComponentTest : ConverterTestBase() {
@@ -364,6 +365,144 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     </li>
   </ol>
 </body>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Numbered list renders correctly from html`() {
+        val component = """
+            |/**
+            | * <ol>
+            | *    <li>
+            | *      <p>Thing 1</p>
+            | *    </li>
+            | *    <li>
+            | *      <p>Thing 2</p>
+            | *    </li>
+            | *    <li>
+            | *     <p>Thing 3</p>
+            | *    </li>
+            | * </ol>
+            | */
+            |public class Foo {}
+        """.render(java = true).description()
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <ol>
+    <li>
+      <p>Thing 1</p>
+    </li>
+    <li>
+      <p>Thing 2</p>
+    </li>
+    <li>
+      <p>Thing 3</p>
+    </li>
+  </ol>
+</body>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Description list renders correctly in kotlin`() {
+        val component = """
+            |/**
+            | * <dl>
+            | *     <dt>
+            | *        <code>name="<i>name</i>"</code>
+            | *    </dt>
+            | *     <dd>
+            | *         A URI path segment.
+            | *     </dd>
+            | *     <dt>
+            | *         <code>path="<i>path</i>"</code>
+            | *    </dt>
+            | *    <dd>
+            | *         The subdirectory you're sharing.
+            | *     </dd>
+            | * </dl>
+            | */
+            |public class Foo {}
+        """.render().description()
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body><dl>
+     <dt>
+        <code>name="<i>name</i>"</code>
+    </dt>
+     <dd>
+         A URI path segment.
+     </dd>
+     <dt>
+         <code>path="<i>path</i>"</code>
+    </dt>
+    <dd>
+         The subdirectory you're sharing.
+     </dd>
+</dl></body>
+            """.trim()
+        )
+    }
+
+    @Ignore // b/203685756  https://github.com/Kotlin/dokka/issues/2213
+    @Test
+    fun `Description list renders correctly in java`() {
+        val component = """
+            |/**
+            | * <dl>
+            | *     <dt>
+            | *        <code>name="<i>name</i>"</code>
+            | *    </dt>
+            | *     <dd>
+            | *         A URI path segment.
+            | *     </dd>
+            | *     <dt>
+            | *         <code>path="<i>path</i>"</code>
+            | *    </dt>
+            | *    <dd>
+            | *         The subdirectory you're sharing.
+            | *     </dd>
+            | * </dl>
+            | */
+            |public class Foo {}
+        """.render(java = true).description()
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body><dl>
+     <dt>
+        <code>name="<i>name</i>"</code>
+    </dt>
+     <dd>
+         A URI path segment.
+     </dd>
+     <dt>
+         <code>path="<i>path</i>"</code>
+    </dt>
+    <dd>
+         The subdirectory you're sharing.
+     </dd>
+</dl></body>
             """.trim()
         )
     }
