@@ -82,4 +82,9 @@ class BasicTest : IntegrationTestBase() {
     fun `Validate package-leve @hide`() {
         verifyDirectory("hidden")
     }
+
+    @Test // Currently only checks the links for enums resolve
+    fun `Validate linking`() { // CURRENT STATUS: BROKEN: LinkerClass.html enums aren't linked
+        verifyDirectory("linking")
+    }
 }
