@@ -768,6 +768,68 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
         )
     }
 
+    @Test // NOTE: kdoc markdown-style links do not work inside <pre> tags
+    fun `Links inside pre render correctly`() {
+        val componentJ = """
+            |/**
+            | * a {@link Foo}
+            | * <pre>
+            | * public void onCreate() {
+            | *     if (DEVELOPER_MODE) {
+            | *         StrictMode.setThreadPolicy(new {@link Foo pFooey}()
+            | *                 .detectDiskReads()
+            | * </pre>
+            | */
+            |public class Foo
+        """.render(java = true).description()
+        val componentK = """
+            |/**
+            | * a [Foo]
+            | * <pre>
+            | * public void onCreate() {
+            | *     if (DEVELOPER_MODE) {
+            | *         StrictMode.setThreadPolicy(new [Foo]()
+            | *                 .detectDiskReads()
+            | * </pre>
+            | */
+            |public class Foo
+        """.render().description()
+
+        val outputJ = createHTML().body {
+            componentJ.render(this)
+        }.trim()
+        val outputK = createHTML().body {
+            componentK.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(outputJ).isEqualTo(
+            """
+<body>
+  <p>a <code><a href="/reference/[JVM root]/Test.Foo.html">Foo</a></code></p>
+  <pre class="prettyprint">public void onCreate() {
+    if (DEVELOPER_MODE) {
+        StrictMode.setThreadPolicy(new <code><a href="/reference/[JVM root]/Test.Foo.html">pFooey</a></code>()
+                .detectDiskReads()
+</pre>
+</body>
+        """.trim()
+        )
+        // language=html
+        assertThat(outputK).isEqualTo(
+            """
+<body>
+  <p>a <code><a href="/reference/androidx/example/Foo.html">Foo</a></code></p>
+<pre>
+public void onCreate() {
+    if (DEVELOPER_MODE) {
+        StrictMode.setThreadPolicy(new [Foo]()
+                .detectDiskReads()
+</pre></body>
+        """.trim()
+        )
+    }
+
     private fun DModule.description(
         summary: Boolean = false,
         deprecation: String? = null
