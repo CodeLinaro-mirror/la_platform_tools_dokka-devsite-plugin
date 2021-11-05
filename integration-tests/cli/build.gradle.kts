@@ -49,6 +49,7 @@ tasks.register<JavaExec>("run") {
     outputs.dir(generatedDir)
 
     environment("DEVSITE_TENANT", "androidx")
+    environment("DACKKA_EXCLUDED_PACKAGES", ".*excluded.*")
     args = listOf(
         "${project.buildDir}/resources/config.json",
         "-moduleName", "sample",

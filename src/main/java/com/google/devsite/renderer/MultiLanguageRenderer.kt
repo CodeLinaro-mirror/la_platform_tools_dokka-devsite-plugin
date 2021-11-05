@@ -49,22 +49,25 @@ internal class MultiLanguageRenderer(
     }
 
     // Set of packages that Dackka will exclude for both Java and Kotlin refdoc generation
-    private val excludedPackagesForBoth: Set<String> by lazy {
-        System.getenv("DACKKA_EXCLUDED_PACKAGES")?.split(",")?.toSet() ?: emptySet()
+    private val excludedPackagesForBoth: Set<Regex> by lazy {
+        System.getenv("DACKKA_EXCLUDED_PACKAGES")?.split(",")
+            ?.map { it.toRegex() }?.toSet() ?: emptySet()
     }
 
     // Set of packages that Dackka will exclude for Java refdoc generation, which includes
     // packages specified in `excludedPackagesForBoth`
-    private val excludedPackagesForJava: Set<String> by lazy {
+    private val excludedPackagesForJava: Set<Regex> by lazy {
         excludedPackagesForBoth +
-            (System.getenv("DACKKA_EXCLUDED_PACKAGES_JAVA")?.split(",")?.toSet() ?: emptySet())
+            (System.getenv("DACKKA_EXCLUDED_PACKAGES_JAVA")?.split(",")
+                ?.map { it.toRegex() }?.toSet() ?: emptySet())
     }
 
     // Set of packages that Dackka will exclude for Java refdoc generation, which includes
     // packages specified in `excludedPackagesForBoth`
-    private val excludedPackagesForKotlin: Set<String> by lazy {
+    private val excludedPackagesForKotlin: Set<Regex> by lazy {
         excludedPackagesForBoth +
-            (System.getenv("DACKKA_EXCLUDED_PACKAGES_KOTLIN")?.split(",")?.toSet() ?: emptySet())
+            (System.getenv("DACKKA_EXCLUDED_PACKAGES_KOTLIN")?.split(",")
+                ?.map { it.toRegex() }?.toSet() ?: emptySet())
     }
 
     override fun render(root: RootPageNode) {

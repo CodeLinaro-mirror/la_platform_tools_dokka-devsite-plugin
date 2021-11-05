@@ -20,7 +20,8 @@ do
     if [ -d "$dir" ]; then
         baseDir=$(basename "$dir")
         echo "Updating test files for $dir..."
-        rm -rf "testData/${baseDir}/docs" && cp -r "build/docs/testData/${baseDir}/docs" "testData/${baseDir}/docs"
+	# the cp command should not fail when there are no docs (the hidden-package test)
+        rm -rf "testData/${baseDir}/docs" && cp -r "build/docs/testData/${baseDir}/docs" "testData/${baseDir}/docs" || true
     fi
 done
 

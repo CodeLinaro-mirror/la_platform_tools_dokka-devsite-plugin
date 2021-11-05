@@ -22,6 +22,7 @@ import com.google.devsite.renderer.converters.filterOutJvmSynthetic
 import com.google.devsite.renderer.converters.isExceptionClass
 import com.google.devsite.renderer.converters.name
 import com.google.devsite.renderer.converters.nameForSyntheticClass
+import com.google.devsite.renderer.converters.packageName
 import com.google.devsite.renderer.converters.setUpAnalysis
 import com.google.devsite.renderer.converters.withJavaSynthetic
 import kotlinx.coroutines.CoroutineScope
@@ -63,7 +64,7 @@ internal class DocumentablesHolder(
     module: DModule,
     scope: CoroutineScope,
     context: DokkaContext? = null,
-    private val excludedPackages: Set<String> = emptySet()
+    private val excludedPackages: Set<Regex> = emptySet()
 ) {
     private val packages = scope.async { computePackages(module) }
 
@@ -113,7 +114,7 @@ internal class DocumentablesHolder(
 
         analysisMap = scope.async { context?.let { setUpAnalysis(context) } ?: mapOf() }
 
-        allClasslikes = scope.async { computeClasslikes(module, syntheticClasses) }
+        allClasslikes = scope.async { computeClasslikes(module) }
         classGraph = scope.async { computeClassGraph(allClasslikes.await()) }
         documentablesGraph = scope.async { computeDocumentablesGraph(classGraph.await()) }
 
@@ -198,29 +199,33 @@ internal class DocumentablesHolder(
 
     private fun computePackages(module: DModule): List<DPackage> {
         return module.packages
-            .sortedBy { it.name }
-            .filterNot { excludedPackages.contains(it.packageName) }
+            .filterNot { thisPackage -> excludedPackages.any {
+                excludedRegex -> excludedRegex.matches(thisPackage.packageName)
+            } }.sortedBy { it.name }
     }
 
     private suspend fun computeClasslikes(
-        module: DModule,
-        syntheticClasses: MutableMap<DRI, Deferred<List<DClass>>>
+        module: DModule
     ): List<DClasslike> {
-        return computeClasslikes(module.packages.flatMap { classlikesFor(it) }) +
-            syntheticClasses.values.flatMap { it.await() }
+        return computeClasslikes(
+            module.packages.flatMap { classlikesFor(it) }) // classlikesFor already contains synth
     }
 
     private fun computeClasslikes(
         docs: List<Documentable>,
         syntheticClasses: List<DClass> = emptyList()
     ): List<DClasslike> {
-        return (docs.filterIsInstance<DClasslike>() + syntheticClasses).sortedBy { it.name() }
+        return (docs.filterIsInstance<DClasslike>() + syntheticClasses)
+            .filterNot { thisClasslike -> excludedPackages.any {
+            excludedRegex -> excludedRegex.matches(thisClasslike.packageName())
+        } }.sortedBy { it.name() }
     }
 
     private fun computeClasses(docs: List<Documentable>): List<DClass> {
-        return docs.filterIsInstance<DClass>().filterNot { it.isExceptionClass }.sortedBy {
-            it.name()
-        }
+        return docs.filterIsInstance<DClass>().filterNot { it.isExceptionClass }
+        .filterNot { thisClass -> excludedPackages.any {
+            excludedRegex -> excludedRegex.matches(thisClass.packageName())
+        } }.sortedBy { it.name() }
     }
 
     /** Computes the syntheticClasses from top level functions that are used to document Kotlin as

@@ -37,13 +37,18 @@ class DocumentablesHolderTest {
         on { name } doReturn "com.example.c"
         on { packageName } doReturn "com.example.c"
     }
+    private val packageD = mock<DPackage> {
+        on { name } doReturn "com.exclude.a"
+        on { packageName } doReturn "com.exclude.a"
+    }
     private val module = mock<DModule> {
-        on { packages } doReturn listOf(packageC, packageB, packageA)
+        on { packages } doReturn listOf(packageC, packageB, packageD, packageA)
     }
 
     @Test
     fun `computePackages returns list of packages sorted by package name`() {
-        val expected = listOf("com.example.a", "com.example.b", "com.example.c").toTypedArray()
+        val expected = listOf("com.example.a", "com.example.b", "com.example.c", "com.exclude.a")
+            .toTypedArray()
         val packages = runBlocking { DocumentablesHolder(module, this).packages() }
         val result = packages.map { it.packageName }.toTypedArray()
         Truth.assertThat(result).isEqualTo(expected)
@@ -52,7 +57,8 @@ class DocumentablesHolderTest {
     @Test
     fun `computePackages returns list of packages with packages filtered out`() {
         val expected = listOf("com.example.a", "com.example.c").toTypedArray()
-        val excludedPackages = setOf("com.example.b", "com.example.d")
+        val excludedPackages = setOf("com.example.b".toRegex(), "com.example.d".toRegex(),
+            """.*\.exclude.*""".toRegex())
         val packages = runBlocking {
             DocumentablesHolder(
                 module,
