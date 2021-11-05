@@ -1,0 +1,76 @@
+<html devsite="true">
+  <head>
+    <title>Pager</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>Pager</h1>
+    <p>
+      <pre>public final class Pager&lt;Key&nbsp;extends&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>,&nbsp;Value&nbsp;extends&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>&gt;</pre>
+    </p>
+    <hr>
+    <p>Primary entry point into Paging; constructor for a reactive stream of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>.</p>
+    <p>Each <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> represents a snapshot of the backing paginated data. Updates to the backing dataset should be represented by a new instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>.</p>
+    <p>PagingSource.invalidate and calls to AsyncPagingDataDiffer.refresh or PagingDataAdapter.refresh will notify <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code> that the backing dataset has been updated and a new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> / PagingSource pair will be generated to represent an updated snapshot.</p>
+    <p><code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> can be transformed to alter data as it loads, and presented in a <code>RecyclerView</code> via <code>AsyncPagingDataDiffer</code> or <code>PagingDataAdapter</code>.</p>
+    <p>LiveData support is available as an extension property provided by the <code>androidx.paging:paging-runtime</code> artifact.</p>
+    <p>RxJava support is available as extension properties provided by the <code>androidx.paging:paging-rxjava2</code> artifact.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public fields</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/Pager.html#flow()">flow</a></code></div>
+              <p>A cold Flow of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>, which emits new instances of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> once they become invalidated by PagingSource.invalidate or calls to AsyncPagingDataDiffer.refresh or PagingDataAdapter.refresh.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code>&lt;Key&nbsp;extends&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>,&nbsp;Value&nbsp;extends&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/Pager.html#Pager(PagingConfig,kotlin.Any,kotlin.Function0)">Pager</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;config,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;initialKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&gt;&nbsp;pagingSourceFactory<br>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code>&lt;Key&nbsp;extends&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>,&nbsp;Value&nbsp;extends&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/Pager.html#Pager(PagingConfig,kotlin.Any,RemoteMediator&lt;Key, Value&gt;,kotlin.Function0)">Pager</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;config,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;initialKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;remoteMediator,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&gt;&nbsp;pagingSourceFactory<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public fields</h2>
+    <div><a name="getFlow()"></a><a name="setFlow()"></a><a name="getFlow--"></a><a name="setFlow--"></a>
+      <h3 class="api-name" id="flow()">flow</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&gt;&nbsp;<a href="/reference/androidx/paging/Pager.html#flow()">flow</a></pre>
+      <p>A cold Flow of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>, which emits new instances of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> once they become invalidated by PagingSource.invalidate or calls to AsyncPagingDataDiffer.refresh or PagingDataAdapter.refresh.</p>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="Pager(PagingConfig, kotlin.Any, kotlin.Function0)"></a><a name="Pager-PagingConfig-kotlin.Any-kotlin.Function0-"></a><a name="pager"></a>
+      <h3 class="api-name" id="Pager(PagingConfig,kotlin.Any,kotlin.Function0)">Pager</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>public&nbsp;final&nbsp;&lt;Key&nbsp;extends&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>,&nbsp;Value&nbsp;extends&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/Pager.html#Pager(PagingConfig,kotlin.Any,kotlin.Function0)">Pager</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;config,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;initialKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&gt;&nbsp;pagingSourceFactory<br>)</pre>
+    </div>
+    <div><a name="Pager(PagingConfig, kotlin.Any, RemoteMediator&lt;Key, Value&gt;, kotlin.Function0)"></a><a name="Pager-PagingConfig-kotlin.Any-RemoteMediator&lt;Key, Value&gt;-kotlin.Function0-"></a><a name="pager"></a>
+      <h3 class="api-name" id="Pager(PagingConfig,kotlin.Any,RemoteMediator&lt;Key, Value&gt;,kotlin.Function0)">Pager</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>public&nbsp;final&nbsp;&lt;Key&nbsp;extends&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>,&nbsp;Value&nbsp;extends&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/Pager.html#Pager(PagingConfig,kotlin.Any,RemoteMediator&lt;Key, Value&gt;,kotlin.Function0)">Pager</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&nbsp;config,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;initialKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;remoteMediator,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&gt;&nbsp;pagingSourceFactory<br>)</pre>
+    </div>
+  </body>
+</html>
+

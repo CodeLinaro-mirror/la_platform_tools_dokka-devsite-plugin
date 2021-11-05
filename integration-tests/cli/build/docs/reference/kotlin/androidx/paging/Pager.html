@@ -1,0 +1,76 @@
+<html devsite="true">
+  <head>
+    <title>Pager</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>Pager</h1>
+    <p>
+      <pre>class Pager&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</pre>
+    </p>
+    <hr>
+    <p>Primary entry point into Paging; constructor for a reactive stream of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
+    <p>Each <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> represents a snapshot of the backing paginated data. Updates to the backing dataset should be represented by a new instance of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>.</p>
+    <p>PagingSource.invalidate and calls to AsyncPagingDataDiffer.refresh or PagingDataAdapter.refresh will notify <code><a href="/reference/kotlin/androidx/paging/Pager.html">Pager</a></code> that the backing dataset has been updated and a new <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> / PagingSource pair will be generated to represent an updated snapshot.</p>
+    <p><code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> can be transformed to alter data as it loads, and presented in a <code>RecyclerView</code> via <code>AsyncPagingDataDiffer</code> or <code>PagingDataAdapter</code>.</p>
+    <p>LiveData support is available as an extension property provided by the <code>androidx.paging:paging-runtime</code> artifact.</p>
+    <p>RxJava support is available as extension properties provided by the <code>androidx.paging:paging-rxjava2</code> artifact.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/Pager.html#Pager(PagingConfig,kotlin.Any,kotlin.Function0)">Pager</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialKey:&nbsp;Key?,<br>&nbsp;&nbsp;&nbsp;&nbsp;pagingSourceFactory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;Key,&nbsp;Value&gt;<br>)</code></div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/Pager.html#Pager(PagingConfig,kotlin.Any,RemoteMediator&lt;Key, Value&gt;,kotlin.Function0)">Pager</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialKey:&nbsp;Key?,<br>&nbsp;&nbsp;&nbsp;&nbsp;remoteMediator:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;Key,&nbsp;Value&gt;?,<br>&nbsp;&nbsp;&nbsp;&nbsp;pagingSourceFactory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;Key,&nbsp;Value&gt;<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;Value&gt;&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/paging/Pager.html#flow()">flow</a></code></div>
+              <p>A cold Flow of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>, which emits new instances of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> once they become invalidated by PagingSource.invalidate or calls to AsyncPagingDataDiffer.refresh or PagingDataAdapter.refresh.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="Pager(PagingConfig, kotlin.Any, kotlin.Function0)"></a><a name="Pager-PagingConfig-kotlin.Any-kotlin.Function0-"></a><a name="pager"></a>
+      <h3 class="api-name" id="Pager(PagingConfig,kotlin.Any,kotlin.Function0)">Pager</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/Pager.html#Pager(PagingConfig,kotlin.Any,kotlin.Function0)">Pager</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;pagingSourceFactory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;Key,&nbsp;Value&gt;<br>)</pre>
+    </div>
+    <div><a name="Pager(PagingConfig, kotlin.Any, RemoteMediator&lt;Key, Value&gt;, kotlin.Function0)"></a><a name="Pager-PagingConfig-kotlin.Any-RemoteMediator&lt;Key, Value&gt;-kotlin.Function0-"></a><a name="pager"></a>
+      <h3 class="api-name" id="Pager(PagingConfig,kotlin.Any,RemoteMediator&lt;Key, Value&gt;,kotlin.Function0)">Pager</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/Pager.html#Pager(PagingConfig,kotlin.Any,RemoteMediator&lt;Key, Value&gt;,kotlin.Function0)">Pager</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialKey:&nbsp;Key? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;remoteMediator:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;Key,&nbsp;Value&gt;?,<br>&nbsp;&nbsp;&nbsp;&nbsp;pagingSourceFactory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;Key,&nbsp;Value&gt;<br>)</pre>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getFlow()"></a><a name="setFlow()"></a><a name="getFlow--"></a><a name="setFlow--"></a>
+      <h3 class="api-name" id="flow()">flow</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/Pager.html#flow()">flow</a>:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a>&lt;Value&gt;&gt;</pre>
+      <p>A cold Flow of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code>, which emits new instances of <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> once they become invalidated by PagingSource.invalidate or calls to AsyncPagingDataDiffer.refresh or PagingDataAdapter.refresh.</p>
+    </div>
+  </body>
+</html>
+
