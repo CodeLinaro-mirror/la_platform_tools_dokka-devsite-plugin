@@ -23,6 +23,7 @@ import com.google.devsite.renderer.impl.MetadataRenderer
 import com.google.devsite.renderer.impl.PackageRenderer
 import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
 import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
+import com.google.devsite.renderer.impl.paths.DacVersionedDocsFilePathProvider
 import com.google.devsite.renderer.impl.paths.DefaultExternalDokkaLocationProvider
 import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
 import kotlinx.coroutines.Dispatchers
@@ -46,6 +47,10 @@ internal class MultiLanguageRenderer(
             "Please specify the DEVSITE_TENANT envar. For example, if you were generating" +
                 " AndroidX docs, you would set DEVSITE_TENANT=\"androidx\""
         }
+    }
+
+    private val versionedTenant: String? by lazy {
+        System.getenv("DEVSITE_TENANT_VERSIONED") ?: System.getProperty("versionedTenant")
     }
 
     // Set of packages that Dackka will exclude for both Java and Kotlin refdoc generation
@@ -92,6 +97,7 @@ internal class MultiLanguageRenderer(
         classGraph: ClassGraph,
         documentablesGraph: DocumentablesGraph
     ) {
+        if (versionedTenant != null) return
         val language = Language.JAVA
         val filePaths = DacJavaFilePathProvider(tenant, locationProvider, classGraph,
             documentablesGraph)
@@ -109,8 +115,11 @@ internal class MultiLanguageRenderer(
         documentablesGraph: DocumentablesGraph
     ) {
         val language = Language.KOTLIN
-        val filePaths = DacKotlinFilePathProvider(tenant, locationProvider, classGraph,
-            documentablesGraph)
+        val filePaths = versionedTenant?.let {
+            DacVersionedDocsFilePathProvider(
+                it, locationProvider, classGraph, documentablesGraph
+            )
+        } ?: DacKotlinFilePathProvider(tenant, locationProvider, classGraph, documentablesGraph)
         DevsiteRenderer(
             MetadataRenderer(outputWriter, filePaths, language, holder),
             PackageRenderer(outputWriter, filePaths, language, holder),

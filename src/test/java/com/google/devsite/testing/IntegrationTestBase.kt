@@ -45,7 +45,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
     fun verifyDirectory(
         path: String,
         sampleLocations: List<String> = emptyList(),
-        includeFiles: List<String> = emptyList()
+        includeFiles: List<String> = emptyList(),
+        versionedTenant: String? = null
     ) {
         val baseDir = "testData/$path"
         val sourceDir = "$baseDir/source"
@@ -74,7 +75,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                         includeNonPublic = false,
                         reportUndocumented = false,
                         skipDeprecated = false,
-                        suppress = true)
+                        suppress = true
+                    )
                     externalDocumentationLinks = externalLinks
                     samples = sampleLocations.map { "$baseDir/$it" }
                     includes = includeFiles.map { File(sources, it).absolutePath }
@@ -83,9 +85,15 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             offlineMode = true
         }
 
-        val inferredTenant = File(sourceDir).listFiles().orEmpty()
-            .singleOrNull { it.isDirectory }?.name ?: "dokkatest"
-        System.setProperty("tenant", inferredTenant)
+        if (versionedTenant != null) {
+            System.setProperty("versionedTenant", versionedTenant)
+            System.clearProperty("tenant")
+        } else {
+            val inferredTenant = File(sourceDir).listFiles().orEmpty()
+                .singleOrNull { it.isDirectory }?.name ?: "dokkatest"
+            System.setProperty("tenant", inferredTenant)
+            System.clearProperty("versionedTenant")
+        }
 
         val writerPlugin = TestOutputWriterPlugin()
         testFromData(

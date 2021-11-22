@@ -87,4 +87,9 @@ class BasicTest : IntegrationTestBase() {
     fun `Validate linking`() { // CURRENT STATUS: BROKEN: LinkerClass.html enums aren't linked
         verifyDirectory("linking")
     }
+
+    @Test
+    fun `Validate versioned directory support`() {
+        verifyDirectory("simpleVersioned", versionedTenant = "tools/gradle-api/7.0")
+    }
 }
