@@ -25,7 +25,7 @@ repositories {
 }
 
 plugins {
-    kotlin("jvm") version "1.4.30"
+    kotlin("jvm") version "1.6.0"
     id("com.github.johnrengelman.shadow") version "4.0.4"
     id("application")
     id("maven-publish")
@@ -34,10 +34,10 @@ plugins {
 application {
     mainClassName = "org.jetbrains.dokka.MainKt"
 }
-val dokkaVersion = "1.6.0-dev-122"
+val dokkaVersion = "1.6.0-dev-128"
 
 dependencies {
-    compileOnly(kotlin("stdlib-jdk8"))
+    compileOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0")
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.3.9")
 
@@ -47,7 +47,7 @@ dependencies {
     implementation("org.jetbrains.dokka:dokka-core:$dokkaVersion")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.1")
 
-    testImplementation(kotlin("test"))
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.6.0")
     testImplementation("junit:junit:4.12")
     testImplementation("com.google.truth:truth:1.0.1")
     testImplementation("org.jetbrains.dokka:dokka-test-api:$dokkaVersion")

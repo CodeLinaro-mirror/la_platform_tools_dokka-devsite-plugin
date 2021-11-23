@@ -1242,8 +1242,7 @@ internal class DocTagConverterTest(
         assertThat(tableEntry).isEqualTo("The arguments used when this entry was created")
     }
 
-    @Ignore
-    @Test // Note: this tests upstream behavior. Broken b/200051291 do/dokka-upstream-bug/2146
+    @Test // Note: this tests upstream behavior.
     fun `Test spacing around line wraps including inside tags`() {
         val documentation = """
             |/**
