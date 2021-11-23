@@ -959,7 +959,7 @@ internal class DocTagConverterTest(
     }
 
     @Test
-    fun `Full Java documentation has thrown exceptions`() {
+    fun `Full Java documentation has throws tag`() {
         val documentation = """
             |/** @throws IllegalStateException if it fails */
             |public void foo() {}
@@ -973,6 +973,23 @@ internal class DocTagConverterTest(
 
         assertThat(throwsLeft.data.text).isEqualTo("java.lang.IllegalStateException")
         assertThat(throwsRight.body).isEqualTo("if it fails")
+    }
+
+    @Ignore // b/203691421
+    @Test
+    fun `Full Java documentation has checked exceptions`() {
+        val documentation = """
+            |/** IllegalStateException if it fails */
+            |public void foo() throws IllegalStateException {}
+        """.render(java = true).documentation()
+
+        val throwsSummary = documentation.first { (it as? SummaryList)?.title() == "Throws" }
+            as SummaryList
+        val throwsLeft = throwsSummary.item().data.title as Raw
+        val throwsRight = ((throwsSummary.item().data.description as DescriptionComponent)
+            .data.components.first().children.first() as Text)
+
+        assertThat(throwsLeft.data.text).isEqualTo("java.lang.IllegalStateException")
     }
 
     @Test
