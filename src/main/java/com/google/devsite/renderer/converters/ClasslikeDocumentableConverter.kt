@@ -39,8 +39,10 @@ import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import org.jetbrains.dokka.links.Callable
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.parent
+import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DEnum
@@ -49,6 +51,8 @@ import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.GenericTypeConstructor
+import org.jetbrains.dokka.model.KotlinModifier
 import org.jetbrains.dokka.model.WithAbstraction
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.WithGenerics
@@ -98,8 +102,13 @@ internal class ClasslikeDocumentableConverter(
 
         val enumValues = (classlike as? DEnum)?.entries.orEmpty().sortedBy { it.name }
 
-        val declaredConstructors = (classlike as? WithConstructors)?.constructors.orEmpty()
+        var allConstructors = (classlike as? WithConstructors)?.constructors.orEmpty()
             .sortedBy { it.parameters.size }
+        if (classlike is WithConstructors && allConstructors.isEmpty() && classlike.isFromJava() &&
+            classlike !is DAnnotation
+        ) {
+            allConstructors = listOf(createDefaultConstructorFor(classlike))
+        }
         val annotations = (classlike as? WithExtraProperties<*>)?.annotations().orEmpty()
 
         val enumValuesSummary = async {
@@ -123,13 +132,13 @@ internal class ClasslikeDocumentableConverter(
         val publicConstructorsSummary = async {
             constructorsToSummary(
                 publicConstructorsTitle(),
-                declaredConstructors.filter(::isPublic)
+                allConstructors.filter(::isPublic)
             )
         }
         val protectedConstructorsSummary = async {
             constructorsToSummary(
                 protectedConstructorsTitle(),
-                declaredConstructors.filter(::isProtected)
+                allConstructors.filter(::isProtected)
             )
         }
         val publicFunctionsSummary = async {
@@ -172,9 +181,9 @@ internal class ClasslikeDocumentableConverter(
         val protectedProperties =
             async { propertiesToDetail(declaredProperties.filter(::isProtected)) }
         val publicConstructors =
-            async { constructorsToDetail(declaredConstructors.filter(::isPublic)) }
+            async { constructorsToDetail(allConstructors.filter(::isPublic)) }
         val protectedConstructors =
-            async { constructorsToDetail(declaredConstructors.filter(::isProtected)) }
+            async { constructorsToDetail(allConstructors.filter(::isProtected)) }
         val publicFunctions =
             async { functionsToDetail(declaredFunctions.filter(::isPublic)) }
         val protectedFunctions =
@@ -616,6 +625,24 @@ internal class ClasslikeDocumentableConverter(
                 symbol.dri.isFromBaseClass()
         }
     }
+
+    private fun createDefaultConstructorFor(classlike: DClasslike) =
+        DFunction(
+            dri = classlike.dri.copy(callable = Callable(classlike.name!!, null, emptyList())),
+            name = classlike.name!!,
+            isConstructor = true,
+            parameters = emptyList(),
+            documentation = emptyMap(),
+            expectPresentInSet = null,
+            sources = emptyMap(),
+            visibility = classlike.visibility,
+            type = GenericTypeConstructor(dri = classlike.dri, projections = emptyList()),
+            generics = emptyList(),
+            receiver = null,
+            modifier = mapOf(classlike.visibility.keys.single() to KotlinModifier.Final),
+            sourceSets = setOf(classlike.visibility.keys.single()),
+            isExpectActual = false
+        )
 
     /**
      * Returns all [Documentable]s from the list which are not the companion object of [classlike]
