@@ -90,20 +90,23 @@ private object Memoizers {
  * Memoized.
  */
 internal fun Documentable.isFromJava() = isFromJavaMap.getOrPut(this) {
-    if (this is WithVisibility && this.visibility.isNotEmpty())
+    if (this is DClasslike && this.isSynthetic) false
+    else if (this is WithVisibility && this.visibility.isNotEmpty())
         !visibility.values.any { it is KotlinVisibility }
-    if (this is WithAbstraction && this.modifier.isNotEmpty())
+    else if (this is WithAbstraction && this.modifier.isNotEmpty())
         !modifier.values.any { it is KotlinModifier }
-    val sourceFileExtensions = getPossibleSourceFiles().map { it.path }
-        .filter { "package-info.java" !in it }
-        .map { it.substringAfterLast('.') }
-    when {
-        // No Java files -> default is NonNull      (this bypasses e.g. .xml/.gradle)
-        sourceFileExtensions.all { it !in listOf("java", "class") } -> false
-        // No Kotlin files -> default is nullable
-        sourceFileExtensions.all { it !in listOf("kt") } -> true
-        // We don't know. Default to not injecting @NonNull (the primary use of isFromJava)
-        else -> true // (i.e. do not make the strict NonNull assumption for unspecified types)
+    else {
+        val sourceFileExtensions = getPossibleSourceFiles().map { it.path }
+            .filter { "package-info.java" !in it }
+            .map { it.substringAfterLast('.') }
+        when {
+            // No Java files -> default is NonNull      (this bypasses e.g. .xml/.gradle)
+            sourceFileExtensions.all { it !in listOf("java", "class") } -> false
+            // No Kotlin files -> default is nullable
+            sourceFileExtensions.all { it !in listOf("kt") } -> true
+            // We don't know. Default to not injecting @NonNull (the primary use of isFromJava)
+            else -> true // (i.e. do not make the strict NonNull assumption for unspecified types)
+        }
     }
 }
 
@@ -160,9 +163,12 @@ fun Documentable.stringForType(displayLanguage: Language): String = when (this) 
 val DClass.isExceptionClass: Boolean
     get() = isException || functions.any { function -> function.dri.classNames == "Throwable" }
 
-// TODO(b/173138586) replace with something else when implementing JvmName
+/**
+ * Assumes the class this is being called on is Java.
+ * Returns whether the java class was synthetically generated from a Kotlin extension function class
+ */
 val DClasslike.isSynthetic: Boolean
-    get() = name().endsWith("Kt")
+    get() = name().endsWith("Kt") || (this as? WithExtraProperties<*>)?.jvmFileName() != null
 
 /**
  * Converts a top level function to its representation under a Java synthetic class
