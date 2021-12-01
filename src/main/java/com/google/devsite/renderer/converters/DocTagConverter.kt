@@ -128,8 +128,8 @@ internal class DocTagConverter(
             if (tags.isEmpty()) return@mapNotNull null
             val firstTag = tags.first()
             if (documentable is DFunction && firstTag is Param) {
-                @kotlin.Suppress("UNCHECKED_CAST", "TYPE_INFERENCE_ONLY_INPUT_TYPES_WARNING")
-                tags = tags + tagsByType[Property::class.java].orEmpty()
+                val propertyClass = Property::class.java as Class<*>
+                tags = tags + tagsByType[propertyClass].orEmpty()
             }
             // We know all the elements in `tags` will be of the same type, so we pick an arbitrary
             // one to do the switching and then cast the list to its type.

@@ -16,7 +16,7 @@
 
 package dokkatest.hidden;
 
-public class JavaLeafClass extends KotlinSubClass {
+public class JavaLeafClass {
     /**
      * javaLeafClassFunction docs
      * @param baz JavaLeafClassFooDocs
