@@ -1210,10 +1210,28 @@ internal class ClasslikeDocumentableConverterTest(
             public annotation class Foo {}
         """.trimIndent().render(java = false).page("Foo").content<Classlike>()
 
-        for (classlike in listOf(classlikeJ/*, classlikeK*/)) {
+        for (classlike in listOf(classlikeJ/*, classlikeK*/)) { // TODO: b/195529157
             val constructorList = classlike.symbolsFor("Public constructors").second.symbols
             assertThat(constructorList).isEmpty()
         }
+    }
+
+    @Test // Interfaces "extend" other interfaces, while classes "implement" interfaces
+    fun `Interface extending another interface uses correct keyword`() {
+        val signatureJ = """
+            public interface Foo {}
+            public interface Bar extends Foo {}
+        """.trimIndent().render(java = true).page("Bar").content<Classlike>().data.signature
+        val signatureK = """
+            public interface Foo {}
+            public interface Bar : Foo {}
+        """.trimIndent().render(java = false).page("Bar").content<Classlike>().data.signature
+
+        assertThat(signatureJ.data.extends).isEmpty()
+        assertThat(signatureK.data.extends).isEmpty()
+        assertThat(signatureJ.data.implements.single().data.name).isEqualTo("Test.Foo")
+        assertThat(signatureK.data.implements.single().data.name).isEqualTo("Foo")
+        // Now route to DefaultClassSignatureTest.`Interfaces extend other interfaces`()
     }
 
     private fun DModule.page(name: String = "Foo"): DevsitePage {

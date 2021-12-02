@@ -90,4 +90,33 @@ class DefaultClassSignatureTest {
             """.trim()
         )
     }
+
+    @Test
+    fun `Interfaces extend other interfaces`() { // and do not "implement" them
+        val component = DefaultClassSignature(
+            ClassSignature.Params(
+                displayLanguage = Language.JAVA,
+                name = "Foo",
+                type = "interface",
+                modifiers = listOf(),
+                extends = listOf(),
+                implements = listOf(NoopLink("SomeInterface")),
+                typeParameters = listOf(),
+                annotations = listOf()
+            )
+        )
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        Truth.assertThat(output).isEqualTo(
+            """
+<body>
+  <pre>interface Foo extends SomeInterface</pre>
+</body>
+        """.trim()
+        )
+    }
 }

@@ -37,7 +37,7 @@ internal class DefaultClassSignature(
             when (data.displayLanguage) {
                 Language.JAVA -> {
                     data.extends.render(into, header = { +" extends " })
-                    data.implements.render(into, header = { +" implements " })
+                    data.implements.render(into, header = { +" $interfaceInheritance " })
                 }
                 Language.KOTLIN -> {
                     (data.extends + data.implements).render(into, header = { +" : " })
@@ -45,4 +45,6 @@ internal class DefaultClassSignature(
             }
         }
     }
+
+    private val interfaceInheritance = if (data.type == "interface") "extends" else "implements"
 }

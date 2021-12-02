@@ -77,7 +77,7 @@ class BasicTest : IntegrationTestBase() {
         verifyDirectory("inheritance")
     }
 
-    @Test
+    @Test // A non-hidden package is necessary because of an upstream explicit !! after filtering
     fun `Validate package-leve @hide`() {
         verifyDirectory("hidden")
     }
