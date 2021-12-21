@@ -29,9 +29,9 @@ internal interface TypeParameterComponent : SymbolBase {
     override fun length(): Int {
         var result = data.name.length
 
-        result += data.annotationComponents.sumBy { it.length() }
-        result += data.modifiers.sumBy { it.length }
-        result += data.projections.sumBy { it.length() }
+        result += data.annotationComponents.sumOf { it.length() }
+        result += data.modifiers.sumOf { it.length }
+        result += data.projections.sumOf { it.length() }
 
         return result
     }

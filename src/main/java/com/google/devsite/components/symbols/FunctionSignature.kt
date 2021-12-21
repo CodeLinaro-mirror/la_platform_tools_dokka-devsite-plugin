@@ -35,7 +35,7 @@ internal interface FunctionSignature : SymbolSignature, Sizeable {
     override fun length(): Int {
         val nameSize = data.name.length()
         val allParams = data.typeParameters + listOfNotNull(data.receiver) + data.parameters
-        val paramSize = allParams.sumBy { it.length() + 2 }
+        val paramSize = allParams.sumOf { it.length() + 2 }
 
         return nameSize + paramSize
     }

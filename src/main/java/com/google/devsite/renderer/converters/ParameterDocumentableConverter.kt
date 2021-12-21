@@ -52,6 +52,7 @@ import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Variance
 import org.jetbrains.dokka.model.Void
 import org.jetbrains.dokka.model.properties.WithExtraProperties
+import java.util.Locale
 import java.util.concurrent.ConcurrentHashMap
 
 /** Converts parameter and parameter-likes into their components. */
@@ -444,7 +445,18 @@ internal class ParameterDocumentableConverter(
         }
         is PrimitiveJavaType -> when (displayLanguage) {
             Language.JAVA -> DefaultLink(Link.Params(name = name, url = ""))
-            Language.KOTLIN -> pathProvider.linkForReference(DRI("kotlin", name.capitalize()))
+            Language.KOTLIN -> pathProvider.linkForReference(
+                DRI(
+                    "kotlin",
+                    name.replaceFirstChar {
+                        if (it.isLowerCase()) {
+                            it.titlecase(Locale.getDefault())
+                        } else {
+                            it.toString()
+                        }
+                    }
+                )
+            )
         }
         is UnresolvedBound -> DefaultLink(Link.Params(name = name, url = ""))
         is Nullable -> inner.toLink(suffix = "?")
@@ -510,11 +522,13 @@ internal class ParameterDocumentableConverter(
                         else -> typeConstructor.copy(DRI("java.lang", className))
                     }
                 } else {
-                    PrimitiveJavaType(className.toLowerCase())
+                    PrimitiveJavaType(className.lowercase(Locale.getDefault()))
                 }
             // kotlin.IntArray -> int[]
             } else if (isStdlib && className in kotlinPrimitiveArrays) {
-                PrimitiveJavaType(className.removeSuffix("Array").toLowerCase() + "[]")
+                PrimitiveJavaType(
+                    className.removeSuffix("Array").lowercase(Locale.getDefault()) + "[]"
+                )
             } else if (isStdlib && className == "Array") when (innerProjections.singleOrNull()) {
                 // kotlin.Array<Object> -> Object[]
                 is JavaObject -> PrimitiveJavaType("Object[]")

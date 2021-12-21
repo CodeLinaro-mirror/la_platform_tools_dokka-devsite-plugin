@@ -51,7 +51,7 @@ internal interface ArrayValueAnnotationParameter : AnnotationParameter {
 
     override fun length(): Int {
         val nameSize = (data.name?.length?.plus(3)) ?: 0 // " = "
-        val valueSize = data.innerAnnotationParameters.sumBy { it.length() }
+        val valueSize = data.innerAnnotationParameters.sumOf { it.length() }
         return nameSize + valueSize
     }
 

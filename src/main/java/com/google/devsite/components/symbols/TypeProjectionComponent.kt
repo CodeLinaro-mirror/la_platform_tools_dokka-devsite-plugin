@@ -25,8 +25,8 @@ internal interface TypeProjectionComponent : SymbolBase {
 
     override fun length(): Int {
         val typeSize = data.type.length()
-        val annotationSize = data.annotationComponents.sumBy { it.length() }
-        val genericsSize = data.generics.sumBy { it.length() + 2 }
+        val annotationSize = data.annotationComponents.sumOf { it.length() }
+        val genericsSize = data.generics.sumOf { it.length() + 2 }
 
         return typeSize + annotationSize + genericsSize
     }

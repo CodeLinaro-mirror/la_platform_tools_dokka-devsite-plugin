@@ -25,9 +25,9 @@ internal interface LambdaTypeProjectionComponent : TypeProjectionComponent {
 
     override fun length(): Int {
         val typeSize = data.type.length()
-        val annotationSize = data.annotationComponents.sumBy { it.length() }
-        val lambdaParamsSize = data.lambdaParams.sumBy { it.length() }
-        val lambdaModifiersSize = data.lambdaModifiers.sumBy { it.length }
+        val annotationSize = data.annotationComponents.sumOf { it.length() }
+        val lambdaParamsSize = data.lambdaParams.sumOf { it.length() }
+        val lambdaModifiersSize = data.lambdaModifiers.sumOf { it.length }
         return "() ->".length + typeSize + annotationSize + lambdaModifiersSize + lambdaParamsSize
     }
 

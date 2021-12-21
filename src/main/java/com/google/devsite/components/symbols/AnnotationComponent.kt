@@ -26,7 +26,7 @@ internal interface AnnotationComponent : ContextFreeComponent, Sizeable {
 
     override fun length(): Int {
         val typeSize = data.type.length()
-        val paramSize = data.parameters.sumBy { it.length() }
+        val paramSize = data.parameters.sumOf { it.length() }
 
         return typeSize + paramSize
     }

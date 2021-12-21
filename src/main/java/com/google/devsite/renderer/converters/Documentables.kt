@@ -56,6 +56,7 @@ import org.jetbrains.kotlin.builtins.jvm.JavaToKotlinClassMap
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import java.io.File
+import java.util.Locale
 import java.util.concurrent.ConcurrentHashMap
 
 /** Recursively expands all children. */
@@ -127,8 +128,11 @@ internal fun Documentable.getPossibleSourceFiles(): List<File> {
 }
 
 private fun File.getCodeFileDescendants(): List<File> =
-    if (this.extension.toLowerCase() in listOf("java", "kt", "js", "class")) listOf(this)
-    else this.listFiles()?.map { it.getCodeFileDescendants() }?.flatten() ?: emptyList()
+    if (this.extension.lowercase(Locale.getDefault()) in listOf("java", "kt", "js", "class")) {
+        listOf(this)
+    } else {
+        this.listFiles()?.map { it.getCodeFileDescendants() }?.flatten() ?: emptyList()
+    }
 
 /**
  * @param displayLanguage the Language of the docs this Documentable will be displayed in

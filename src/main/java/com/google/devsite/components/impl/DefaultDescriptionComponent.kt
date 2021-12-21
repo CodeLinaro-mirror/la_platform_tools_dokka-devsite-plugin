@@ -222,7 +222,7 @@ internal class DefaultDescriptionComponent(
                         renderTags(tag.children, state)
                     }
                 }
-                is Img -> img(src = tag.params.getValue("href"), alt = tag.params.get("alt")) {
+                is Img -> img(src = tag.params.getValue("href"), alt = tag.params["alt"]) {
                     renderTags(tag.children, state)
                 }
                 is BlockQuote -> blockQuote { renderTags(tag.children, state) }
@@ -240,6 +240,7 @@ internal class DefaultDescriptionComponent(
                     error("Not in table context: ${tag.javaClass.simpleName}.")
                 is Li -> error("Not in list context: ${tag.javaClass.simpleName}. The <li> tag " +
                     "must be contained in a parent element (such as <ol>, <ul>, or <menu>).")
+                else -> { /* do nothing */ }
             }
         }
     }

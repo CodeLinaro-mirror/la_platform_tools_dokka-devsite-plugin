@@ -79,7 +79,7 @@ internal fun List<String>.render(
 }
 
 internal fun List<String>.length(separator: String = " ") =
-    sumBy { it.length } + (size - 1) * separator.length
+    sumOf { it.length } + (size - 1) * separator.length
 
 internal val String?.length: Int
     get() = this?.let { this.length } ?: 0
@@ -97,4 +97,4 @@ internal fun Sizeable.shouldBreak() =
     else ShouldBreak.AND_INDENT
 
 /** We assume that the two-column tables will be more than 70 chars long, but not far more */
-private val ASSUMED_MINIMUM_LINE_LENGTH = 70
+private const val ASSUMED_MINIMUM_LINE_LENGTH = 70

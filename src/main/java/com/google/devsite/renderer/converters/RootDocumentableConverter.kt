@@ -120,7 +120,7 @@ internal class RootDocumentableConverter(
 
     /** Groups class-like types into buckets of their first letter. */
     private fun categorizeClasslikes(classlike: DClasslike): Char {
-        return classlike.name().first().toUpperCase()
+        return classlike.name().first().uppercaseChar()
     }
 
     private fun CoroutineScope.packageForTocAsync(

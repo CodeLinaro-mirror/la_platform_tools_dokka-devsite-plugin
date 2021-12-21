@@ -240,7 +240,7 @@ internal class DocTagConverter(
     ) {
         if (components.none()) return
         val warning = "Unable to find what is referred to by" +
-            components.map { "\n\t$componentType $it" }.joinToString() +
+            components.joinToString { "\n\t$componentType $it" } +
             "\nin ${containingComponent::class.simpleName} ${containingComponent.name}" +
             "\nDid you make a typo? Are you trying to refer to something not visible to users?"
         docsHolder.logger.warn(warning)
@@ -309,6 +309,7 @@ internal class DocTagConverter(
                 is Nullable -> {
                     result += recursivelyGetLambdaParamNames(listOf(argumentType.inner))
                 }
+                else -> { /* do nothing */ }
             }
         }
         return result
@@ -401,6 +402,7 @@ internal class DocTagConverter(
                     components.addAll(it.children)
                 }
                 is NamedTagWrapper -> if (it.name == name) components.add(it.root)
+                else -> { /* do nothing */ }
             }
         }
         if (components.isEmpty()) return UndocumentedSymbolDescriptionComponent()

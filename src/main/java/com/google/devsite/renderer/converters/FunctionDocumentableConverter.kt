@@ -35,6 +35,7 @@ import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.DFunction
+import java.util.Locale
 
 /** Converts documentable functions into function components. */
 internal class FunctionDocumentableConverter(
@@ -188,7 +189,7 @@ internal class FunctionDocumentableConverter(
             callable.anchor(),
             callable.anchor(separator = ", "),
             callable.anchor("-", "-", "-"),
-            callable.name.toLowerCase()
+            callable.name.lowercase(Locale.getDefault())
         )
     }
 

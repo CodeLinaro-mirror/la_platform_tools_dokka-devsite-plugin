@@ -26,8 +26,8 @@ internal interface ParameterComponent : SymbolBase {
         var result = data.name.length
 
         result += data.defaultValue?.length ?: 0
-        result += data.annotationComponents.sumBy { it.length() }
-        result += data.modifiers.sumBy { it.length }
+        result += data.annotationComponents.sumOf { it.length() }
+        result += data.modifiers.sumOf { it.length }
         result += data.type.length()
 
         return result
