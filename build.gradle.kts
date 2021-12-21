@@ -25,7 +25,7 @@ repositories {
 }
 
 plugins {
-    kotlin("jvm") version "1.6.0"
+    kotlin("jvm") version "1.6.10"
     id("com.github.johnrengelman.shadow") version "7.1.1"
     id("application")
     id("maven-publish")
@@ -34,7 +34,7 @@ plugins {
 application {
     mainClassName = "org.jetbrains.dokka.MainKt"
 }
-val dokkaVersion = "1.6.0-dev-128"
+val dokkaVersion = "1.6.10-dev-139"
 
 dependencies {
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0")
