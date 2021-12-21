@@ -160,7 +160,7 @@ fun Documentable.stringForType(displayLanguage: Language): String = when (this) 
 
 /**
  * Returns if a class is an Exception or not
- * isException, the built in method in Dokka, only considers its supertype so we also look for
+ * isException, the built-in method in Dokka, only considers its supertype, so we also look for
  * functions that are Throwable
  * https://github.com/Kotlin/dokka/issues/1557
  */

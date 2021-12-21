@@ -291,7 +291,7 @@ internal class ClasslikeDocumentableConverter(
 
         if (classExtensionFunctions.isNotEmpty()) {
             var extensionFunctions = classExtensionFunctions
-                // Sort by the class the extension function came from first so they will be grouped
+                // Sort by the class the extension function came from first, so they will be grouped
                 // together in a logical way
                 .sortedBy { nameForSyntheticClass(it) + it.name }
             if (displayLanguage == Language.JAVA) {

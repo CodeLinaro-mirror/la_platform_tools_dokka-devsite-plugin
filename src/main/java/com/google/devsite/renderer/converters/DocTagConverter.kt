@@ -82,7 +82,7 @@ import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.utilities.cast
 import java.io.File
 
-/** Extracts the hand written documentation from documentables into the correct components. */
+/** Extracts the handwritten documentation from documentables into the correct components. */
 internal class DocTagConverter(
     private val displayLanguage: Language,
     private val pathProvider: FilePathProvider,

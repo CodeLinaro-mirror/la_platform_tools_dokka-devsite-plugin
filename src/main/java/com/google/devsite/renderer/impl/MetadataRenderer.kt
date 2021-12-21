@@ -35,7 +35,7 @@ internal class MetadataRenderer(
     private val displayLanguage: Language,
     private val docsHolder: DocumentablesHolder
 ) {
-    /** Writes the list of packages in machine readable format. */
+    /** Writes the list of packages in machine-readable format. */
     suspend fun writePackageList() {
         val component =
             DefaultPackageList(PackageList.Params(docsHolder.packages().map { it.name }))
@@ -56,7 +56,7 @@ internal class MetadataRenderer(
         outputWriter.write(pathProvider.rootIndex, rootIndex, "")
     }
 
-    /** Writes the list of packages in human readable format. */
+    /** Writes the list of packages in human-readable format. */
     suspend fun writePackages() {
         val converter = RootDocumentableConverter(displayLanguage, pathProvider, docsHolder)
         val page = converter.packagesPage()
@@ -67,7 +67,7 @@ internal class MetadataRenderer(
         outputWriter.write(pathProvider.packages, packageIndex, "")
     }
 
-    /** Writes the list of classes in human readable format. */
+    /** Writes the list of classes in human-readable format. */
     suspend fun writeClasses() {
         val converter = RootDocumentableConverter(displayLanguage, pathProvider, docsHolder)
         val page = converter.classesPage()

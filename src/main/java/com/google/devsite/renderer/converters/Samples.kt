@@ -78,8 +78,7 @@ internal fun processBody(psiElement: PsiElement): String {
 // Auxiliary function for processBody
 private fun processSampleBody(psiElement: PsiElement): String = when (psiElement) {
     is KtDeclarationWithBody -> {
-        val bodyExpression = psiElement.bodyExpression
-        when (bodyExpression) {
+        when (val bodyExpression = psiElement.bodyExpression) {
             is KtBlockExpression -> bodyExpression.text.removeSurrounding("{", "}")
             else -> bodyExpression!!.text
         }
@@ -149,25 +148,25 @@ internal fun processImports(psiElement: PsiElement): String {
  * These are generated for each sourceSet with samples, and returned as a map.
  */
 internal fun setUpAnalysis(context: DokkaContext) = context.configuration.sourceSets
-    .filter { it.samples.isNotEmpty() }.map {
-        sourceSet -> sourceSet to AnalysisEnvironment(
-        DokkaMessageCollector(context.logger),
-        sourceSet.analysisPlatform
-    ).run {
-        if (analysisPlatform == Platform.jvm) {
-            addClasspath(PathUtil.getJdkClassesRootsFromCurrentJre())
+    .filter { it.samples.isNotEmpty() }.associateWith { sourceSet ->
+        AnalysisEnvironment(
+            DokkaMessageCollector(context.logger),
+            sourceSet.analysisPlatform
+        ).run {
+            if (analysisPlatform == Platform.jvm) {
+                addClasspath(PathUtil.getJdkClassesRootsFromCurrentJre())
+            }
+            sourceSet.classpath.forEach(::addClasspath)
+
+            addSources(sourceSet.samples.toList())
+
+            loadLanguageVersionSettings(sourceSet.languageVersion, sourceSet.apiVersion)
+
+            val environment = createCoreEnvironment()
+            val (facade, _) = createResolutionFacade(environment)
+            EnvironmentAndFacade(environment, facade)
         }
-        sourceSet.classpath.forEach(::addClasspath)
-
-        addSources(sourceSet.samples.toList())
-
-        loadLanguageVersionSettings(sourceSet.languageVersion, sourceSet.apiVersion)
-
-        val environment = createCoreEnvironment()
-        val (facade, _) = createResolutionFacade(environment)
-        EnvironmentAndFacade(environment, facade)
     }
-}.toMap()
 
 internal fun convertTextToJavaSample(
     block: Text,

@@ -148,11 +148,11 @@ internal class DocumentablesHolder(
     }
 
     suspend fun classesFor(packageDoc: DPackage, displayLanguage: Language): List<DClass> {
-        if (displayLanguage == Language.JAVA) {
-            return (classes.getValue(packageDoc.dri).await() +
+        return if (displayLanguage == Language.JAVA) {
+            (classes.getValue(packageDoc.dri).await() +
                 syntheticClasses.getValue(packageDoc.dri).await()).sortedBy { it.name() }
-            } else {
-            return classes.getValue(packageDoc.dri).await()
+        } else {
+            classes.getValue(packageDoc.dri).await()
         }
     }
 
@@ -232,7 +232,7 @@ internal class DocumentablesHolder(
      * Java
      */
     private fun computeSyntheticClasses(packageDoc: DPackage): List<DClass> {
-        // functions that are JvmSynthetic are not accessible from Java so they should not appear
+        // functions that are JvmSynthetic are not accessible from Java, so they should not appear
         // in the documentation
         val javaFunctions = packageDoc.functions.filterOutJvmSynthetic()
         val javaProperties = packageDoc.properties.filterOutJvmSynthetic()
@@ -251,12 +251,12 @@ internal class DocumentablesHolder(
                     classlikes = emptyList(),
                     sources = emptyMap(),
                     expectPresentInSet = null,
-                    visibility = packageDoc.sourceSets.map { it to JavaVisibility.Public }.toMap(),
+                    visibility = packageDoc.sourceSets.associateWith { JavaVisibility.Public },
                     companion = null,
                     generics = emptyList(),
                     supertypes = emptyMap(),
                     documentation = emptyMap(),
-                    modifier = packageDoc.sourceSets.map { it to JavaModifier.Final }.toMap(),
+                    modifier = packageDoc.sourceSets.associateWith { JavaModifier.Final },
                     sourceSets = packageDoc.sourceSets,
                     isExpectActual = false,
                     extra = PropertyContainer.empty()

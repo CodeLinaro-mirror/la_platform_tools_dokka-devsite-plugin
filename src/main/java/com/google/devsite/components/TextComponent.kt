@@ -18,6 +18,6 @@ package com.google.devsite.components
 
 /** Text components render arbitrary pieces of plain text. */
 internal interface TextComponent : Component<StringBuilder> {
-    /** Render this component's data into [text]. */
+    /** Render this component's data into text. */
     override fun render(into: StringBuilder)
 }

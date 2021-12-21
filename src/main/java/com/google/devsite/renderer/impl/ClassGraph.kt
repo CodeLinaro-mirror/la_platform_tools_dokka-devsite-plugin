@@ -64,7 +64,7 @@ internal fun computeDocumentablesGraph(classGraph: ClassGraph): DocumentablesGra
     // helper function for adding a Documentable to a graph
     fun addToDocumentablesGraph(graph: MutableMap<DRI, Documentable>, documentable: Documentable) {
         if (!graph.containsKey(documentable.dri)) {
-            graph.put(documentable.dri, documentable)
+            graph[documentable.dri] = documentable
             for (child in documentable.children) {
                 addToDocumentablesGraph(graph, child)
             }
@@ -80,8 +80,8 @@ internal fun computeDocumentablesGraph(classGraph: ClassGraph): DocumentablesGra
 }
 
 /**
- * Updates the [classNode]s by traversing the supertype tree using [classlikes]. [leaf] will not
- * change so it can be added to every parent's subclasses. The recursion occurs on [child].
+ * Updates the [classGraph] by traversing the supertype tree using [classlikes]. [leaf] will not
+ * change, so it can be added to every parent's subclasses. The recursion occurs on [child].
  *
  * We must recursively traverse the hierarchy graph bottom up because Dokka only provides direct
  * parents as a DRI. We're assuming this will be performant because the JVM doesn't support multiple

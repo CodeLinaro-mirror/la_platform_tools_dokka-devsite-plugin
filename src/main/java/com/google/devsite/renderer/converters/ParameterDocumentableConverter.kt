@@ -67,7 +67,7 @@ internal class ParameterDocumentableConverter(
      * nullable. When rendering Java, we look at the Dokka type information to determine if the
      * Kotlin type is nullable. Why are these flipped? Because if we were rendering Java with Java
      * sources, we would already have annotations. But rendering Java with Kotlin sources won't have
-     * those nullability annotations so we need to look at the Kotlin type. Similarly, rendering
+     * those nullability annotations, so we need to look at the Kotlin type. Similarly, rendering
      * Kotlin with Kotlin sources has the nullability type info built in, but rendering Kotlin with
      * Java sources does not.
      */
@@ -416,7 +416,7 @@ internal class ParameterDocumentableConverter(
     /**
      * Converts a documentable type to a link component, assuming all generics have been resolved.
      *
-     * @param suffix is used in the case where we need to add a ? to a nullable type link
+     * @param suffix is used in the case where we need to add a `?` to a nullable type link
      */
     private fun Projection.toLink(suffix: String = ""): Link = when (this) {
         is TypeConstructor -> pathProvider.linkForReference(dri)
@@ -463,7 +463,7 @@ internal class ParameterDocumentableConverter(
         else -> error("Unknown bound: $this")
     }
 
-    /** Determine whether or not a param is a lambda using the kotlin function type. */
+    /** Determine whether a param is a lambda using the kotlin function type. */
     private fun Projection.isLambda(): Boolean = when (this) {
         is TypeConstructor -> {
             val typeName = dri.classNames.orEmpty()

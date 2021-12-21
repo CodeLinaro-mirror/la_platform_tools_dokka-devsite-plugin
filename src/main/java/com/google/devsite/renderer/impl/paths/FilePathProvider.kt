@@ -124,7 +124,7 @@ internal interface FilePathProvider {
      * Returns a [Documentable] with the given [DRI] if it exists, else null.
      */
     fun findInDocumentablesGraph(dri: DRI): Documentable? {
-        return documentablesGraph.get(dri)
+        return documentablesGraph[dri]
     }
 
     data class ReferencePath(val name: String, val url: String)

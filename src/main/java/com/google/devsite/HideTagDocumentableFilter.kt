@@ -22,7 +22,7 @@ import org.jetbrains.dokka.model.dfs
 import org.jetbrains.dokka.model.doc.CustomTagWrapper
 import org.jetbrains.dokka.plugability.DokkaContext
 
-class HideTagDocumentableFilter(val dokkaContext: DokkaContext) :
+class HideTagDocumentableFilter(dokkaContext: DokkaContext) :
     SuppressedByConditionDocumentableFilterTransformer(dokkaContext) {
     override fun shouldBeSuppressed(d: Documentable): Boolean =
         d.documentation.any {

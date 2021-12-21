@@ -23,6 +23,6 @@ import kotlinx.html.Tag
  * mapping input data to HTML.
  */
 internal interface HtmlComponent<T : Tag> : Component<T> {
-    /** Render this component's data into [html]. */
+    /** Render this component's data into html. */
     override fun render(into: T)
 }

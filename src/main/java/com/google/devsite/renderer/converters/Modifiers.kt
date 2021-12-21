@@ -36,7 +36,7 @@ internal fun <T> T.modifiers(): List<String>
 
 /**
  *  Returns a list of modifiers stored in the AdditionalModifiers extra field
- *  i.e VarArg
+ *  i.e. VarArg
  */
 internal fun <T> T.getExtraModifiers(): List<String>
     where T : WithExtraProperties<*> {

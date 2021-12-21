@@ -49,7 +49,7 @@ internal class DefaultTypeParameterComponent(
                     0 -> { /* do nothing */ }
                     1 -> { +nbsp; +"extends"; +nbsp; data.projections.single().render(into) }
                     // Temporary solution, because some rewriting would be necessary to hoist the
-                    // projection information so it can go at the end of the function signature
+                    // projection information, so it can go at the end of the function signature
                     else -> {
                         +nbsp; +"extends"; +nbsp
                         for (projection in data.projections) {
@@ -67,7 +67,7 @@ internal class DefaultTypeParameterComponent(
                     0 -> { /* do nothing */ }
                     1 -> { +nbsp; +":"; +nbsp; data.projections.single().render(into) }
                     // Temporary solution, because some rewriting would be necessary to hoist the
-                    // projection information so it can go at the end of the function signature
+                    // projection information, so it can go at the end of the function signature
                     else -> {
                         +nbsp; +":"; +nbsp
                         for (projection in data.projections) {
