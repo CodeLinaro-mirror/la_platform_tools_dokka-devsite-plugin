@@ -22,6 +22,7 @@ defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint", "publish")
 
 repositories {
     maven("../../prebuilts/androidx/external")
+    maven("../../prebuilts/androidx/internal")
 }
 
 plugins {
@@ -76,21 +77,79 @@ javaComponent.withVariantsFromConfiguration(configurations["shadowRuntimeElement
     skip()
 }
 
-sourceSets.test {
-    // TODO(b/168667502): use glob to compile all integ tests
+val testData by sourceSets.creating {
     java.srcDirs(
         "testData/innerClasses/source",
         "testData/simple/source",
         "testData/topLevelFunctions/source",
         "testData/linking/source",
         "testData/inheritance/source",
-        "testData/sampleAnnotation/source"
+        "testData/sampleAnnotation/source",
+        "testData/annotations/source",
 
-        //"testData/fragment/source", // These integration tests aren't valid code because they
-        //"testData/paging/source",   // have missing dependencies
-        //"testData/compose/source",
-        //"testData/complicatedPlatform/source"
+        "testData/fragment/source",
+        "testData/paging/source",
+//            "testData/compose/source", // this project seems to require multiplatform build
+        "testData/complicatedPlatform/source"
     )
+}
+
+val testDataImpl = project.configurations.getByName(testData.implementationConfigurationName)
+val testDataAars by project.configurations.creating
+
+
+dependencies {
+    testDataImpl("io.reactivex.rxjava3:rxjava:3.0.0")
+    testDataImpl("io.reactivex.rxjava2:rxjava:2.2.9")
+    testDataImpl("org.robolectric:sandbox:4.7")
+    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2")
+    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.5.2")
+    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx3:1.5.2")
+    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.5.2")
+    testDataImpl("org.robolectric:android-all-instrumented:12-robolectric-7732740-i2")
+
+    testDataImpl(fileTree("$buildDir/exploded"))
+
+    testDataAars("androidx.lifecycle:lifecycle-livedata-core:2.4.0")
+    testDataAars("androidx.lifecycle:lifecycle-viewmodel:2.4.0")
+    testDataAars("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    testDataAars("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
+    testDataAars("androidx.recyclerview:recyclerview:1.2.1")
+    testDataAars("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
+    testDataAars("androidx.compose.foundation:foundation:1.0.5")
+}
+
+val explodeAars by tasks.registering(Sync::class) {
+    into("$buildDir/exploded")
+    from(testDataAars) {
+        include("*.jar")
+    }
+
+    testDataAars.files.filter { it.extension == "aar" }.forEach { arch ->
+        from(zipTree(arch)) {
+            include("classes.jar")
+            rename { arch.nameWithoutExtension + ".jar" }
+        }
+    }
+}
+
+val classpathForTests by tasks.registering(ClasspathForTestsTask::class) {
+    dependsOn(explodeAars)
+    classpath = testData.compileClasspath
+    location.set(file("testData/classpath.txt"))
+}
+
+val compileTestDataKotlin: KotlinCompile by tasks.getting(KotlinCompile::class) {
+    kotlinOptions {
+        // we are only checking if the classpath is complete
+        freeCompilerArgs += "-Xdisable-phases=Codegen"
+    }
+    dependsOn(explodeAars)
+}
+
+tasks.getByName("test") {
+    dependsOn(classpathForTests)
+    dependsOn(compileTestDataKotlin) // this will check classpath for all needed dependencies
 }
 
 val zipTask = project.tasks.register<Zip>("zipResultsOf${name.capitalize()}") {
@@ -193,4 +252,14 @@ fun getDistributionDirectory(): File {
 
 fun isBuildingOnServer(): Boolean {
     return System.getenv("OUT_DIR") != null && System.getenv("DIST_DIR") != null
+}
+
+abstract class ClasspathForTestsTask: DefaultTask() {
+    @get:Classpath abstract var classpath: FileCollection
+    @get:OutputFile abstract val location: RegularFileProperty
+
+    @TaskAction
+    fun run(){
+        location.get().asFile.writeText(classpath.joinToString(separator = "\n"))
+    }
 }

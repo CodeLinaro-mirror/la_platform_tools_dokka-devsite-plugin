@@ -18,7 +18,6 @@ package com.google.devsite.testing
 
 import com.google.common.truth.Truth.assertWithMessage
 import org.jetbrains.dokka.ExternalDocumentationLink
-import org.jetbrains.dokka.PackageOptionsImpl
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.plugability.DokkaContext
@@ -69,14 +68,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                     val sources = File(sourceDir).absoluteFile
                     check(sources.isDirectory) { "$sources does not exist or is not a directory" }
                     sourceRoots = listOf(sources.absolutePath)
-                    classpath = listOfNotNull(jvmStdlibPath, commonStdlibPath)
-                    perPackageOptions += PackageOptionsImpl(
-                        matchingRegex = "androidx.annotation",
-                        includeNonPublic = false,
-                        reportUndocumented = false,
-                        skipDeprecated = false,
-                        suppress = true
-                    )
+                    classpath = classpathFromFile("testData/classpath.txt")
                     externalDocumentationLinks = externalLinks
                     samples = sampleLocations.map { "$baseDir/$it" }
                     includes = includeFiles.map { File(sources, it).absolutePath }
@@ -105,6 +97,9 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             }
         }
     }
+
+    private fun classpathFromFile(file: String): List<String> =
+        File(file).bufferedReader().readLines()
 
     /** Confirms that the given output writer's output matches the contents of the given directory. */
     private fun verifyOutput(writerPlugin: TestOutputWriterPlugin, outputPath: String) {

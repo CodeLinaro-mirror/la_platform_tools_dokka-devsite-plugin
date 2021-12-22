@@ -7,7 +7,7 @@
   <body>
     <h1>DataSource</h1>
     <p>
-      <pre>abstract class DataSource&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
+      <pre>abstract class DataSource&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</pre>
     </p>
     <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
         <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/paging/ItemKeyedDataSource.html">ItemKeyedDataSource</a>, <a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html">PageKeyedDataSource</a>, <a href="/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a></div>
@@ -65,7 +65,7 @@
         </thead>
         <tbody>
           <tr>
-            <td width="40%"><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></td>
+            <td width="40%"><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</code></td>
             <td>
               <p>Unique identifier for item loaded from DataSource. Often an integer to represent position in data set. Note - this is distinct from e.g. Room's `<Value> Value type loaded by the DataSource.</p>
             </td>
@@ -106,14 +106,14 @@
         </thead>
         <tbody>
           <tr>
-            <td width="40%"><code>open @<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td width="40%"><code>open @<a href="/reference/kotlin/androidx/annotation/AnyThread.html">AnyThread</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/DataSource.html#addInvalidatedCallback(androidx.paging.DataSource.InvalidatedCallback)">addInvalidatedCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onInvalidatedCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a>?<br>)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/DataSource.html#addInvalidatedCallback(androidx.paging.DataSource.InvalidatedCallback)">addInvalidatedCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onInvalidatedCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a><br>)</code></div>
               <p>Add a callback to invoke when the DataSource is first invalidated.</p>
             </td>
           </tr>
           <tr>
-            <td width="40%"><code>open @<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td width="40%"><code>open @<a href="/reference/kotlin/androidx/annotation/AnyThread.html">AnyThread</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/paging/DataSource.html#invalidate()">invalidate</a>()</code></div>
               <p>Signal the data source to stop loading, and notify its callback.</p>
@@ -122,35 +122,35 @@
           <tr>
             <td width="40%"><code>open <a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
             <td>
-              <div><code>&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/DataSource.html#map()">map</a>(function:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;Value?,&nbsp;ToValue?&gt;?)</code></div>
+              <div><code>&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/DataSource.html#map(androidx.arch.core.util.Function)">map</a>(function:&nbsp;<a href="/reference/kotlin/androidx/arch/core/util/Function.html">Function</a>&lt;Value,&nbsp;ToValue&gt;)</code></div>
               <p>Applies the given function to each value emitted by the DataSource.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code>open <a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
             <td>
-              <div><code>&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a>(function:&nbsp;((Value) <span style="white-space: nowrap;">-&gt;</span> ToValue)?)</code></div>
+              <div><code>&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a>(function:&nbsp;(Value) <span style="white-space: nowrap;">-&gt;</span> ToValue)</code></div>
               <p>Applies the given function to each value emitted by the DataSource.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code>open <a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
             <td>
-              <div><code>&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage()">mapByPage</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;function:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value?&gt;?,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;ToValue?&gt;?&gt;?<br>)</code></div>
+              <div><code>&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a>(function:&nbsp;<a href="/reference/kotlin/androidx/arch/core/util/Function.html">Function</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;ToValue&gt;&gt;)</code></div>
               <p>Applies the given function to each value emitted by the DataSource.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code>open <a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</code></td>
             <td>
-              <div><code>&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a>(function:&nbsp;((<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;ToValue&gt;)?)</code></div>
+              <div><code>&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a>(function:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;ToValue&gt;)</code></div>
               <p>Applies the given function to each value emitted by the DataSource.</p>
             </td>
           </tr>
           <tr>
-            <td width="40%"><code>open @<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td width="40%"><code>open @<a href="/reference/kotlin/androidx/annotation/AnyThread.html">AnyThread</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/DataSource.html#removeInvalidatedCallback(androidx.paging.DataSource.InvalidatedCallback)">removeInvalidatedCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onInvalidatedCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a>?<br>)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/DataSource.html#removeInvalidatedCallback(androidx.paging.DataSource.InvalidatedCallback)">removeInvalidatedCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onInvalidatedCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a><br>)</code></div>
               <p>Remove a previously added invalidate callback.</p>
             </td>
           </tr>
@@ -177,7 +177,7 @@
     <h2>Public functions</h2>
     <div><a name="addInvalidatedCallback-androidx.paging.DataSource.InvalidatedCallback-"></a><a name="addinvalidatedcallback"></a>
       <h3 class="api-name" id="addInvalidatedCallback(androidx.paging.DataSource.InvalidatedCallback)">addInvalidatedCallback</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html#addInvalidatedCallback(androidx.paging.DataSource.InvalidatedCallback)">addInvalidatedCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onInvalidatedCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a>?<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/AnyThread.html">AnyThread</a><br>open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html#addInvalidatedCallback(androidx.paging.DataSource.InvalidatedCallback)">addInvalidatedCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onInvalidatedCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Add a callback to invoke when the DataSource is first invalidated.</p>
       <p>Once invalidated, a data source will not become valid again.</p>
       <p>A data source will only invoke its callbacks once - the first time <code><a href="/reference/kotlin/androidx/paging/DataSource.html#invalidate()">invalidate</a></code> is called, on that thread.</p>
@@ -190,7 +190,7 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>onInvalidatedCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a>?</code></td>
+              <td width="40%"><code>onInvalidatedCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a></code></td>
               <td>
                 <p>The callback, will be invoked on thread that invalidates the <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>.</p>
               </td>
@@ -201,15 +201,15 @@
     </div>
     <div><a name="invalidate--"></a><a name="invalidate"></a>
       <h3 class="api-name" id="invalidate()">invalidate</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html#invalidate()">invalidate</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/AnyThread.html">AnyThread</a><br>open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html#invalidate()">invalidate</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Signal the data source to stop loading, and notify its callback.</p>
       <p>If invalidate has already been called, this method does nothing.</p>
     </div>
-    <div><a name="map--"></a><a name="map"></a>
-      <h3 class="api-name" id="map()">map</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/DataSource.html#map()">map</a>(function:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;Value?,&nbsp;ToValue?&gt;?):&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
+    <div><a name="map-androidx.arch.core.util.Function-"></a><a name="map"></a>
+      <h3 class="api-name" id="map(androidx.arch.core.util.Function)">map</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/DataSource.html#map(androidx.arch.core.util.Function)">map</a>(function:&nbsp;<a href="/reference/kotlin/androidx/arch/core/util/Function.html">Function</a>&lt;Value,&nbsp;ToValue&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
       <p>Applies the given function to each value emitted by the DataSource.</p>
-      <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage()">mapByPage</a></code>, but operates on individual items.</p>
+      <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code>, but operates on individual items.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -219,13 +219,13 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></td>
+              <td width="40%"><code>&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</code></td>
               <td>
                 <p>Type of items produced by the new DataSource, from the passed function.</p>
               </td>
             </tr>
             <tr>
-              <td width="40%"><code>function:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;Value?,&nbsp;ToValue?&gt;?</code></td>
+              <td width="40%"><code>function:&nbsp;<a href="/reference/kotlin/androidx/arch/core/util/Function.html">Function</a>&lt;Value,&nbsp;ToValue&gt;</code></td>
               <td>
                 <p>Function that runs on each loaded item, returning items of a potentially new type.</p>
               </td>
@@ -259,15 +259,15 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage()">mapByPage</a></code></td>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code></td>
               <td></td>
             </tr>
             <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map()">map</a></code></td>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map(androidx.arch.core.util.Function)">map</a></code></td>
               <td></td>
             </tr>
             <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#mapByPage()">mapByPage</a></code></td>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code></td>
               <td></td>
             </tr>
           </tbody>
@@ -276,10 +276,10 @@
     </div>
     <div><a name="map-kotlin.Function1-"></a><a name="map"></a>
       <h3 class="api-name" id="map(kotlin.Function1)">map</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a>(function:&nbsp;((Value) <span style="white-space: nowrap;">-&gt;</span> ToValue)?):&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/DataSource.html#map(kotlin.Function1)">map</a>(function:&nbsp;(Value) <span style="white-space: nowrap;">-&gt;</span> ToValue):&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
       <p>Applies the given function to each value emitted by the DataSource.</p>
-      <p>An overload of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map()">map</a></code> that accepts a kotlin function type.</p>
-      <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage()">mapByPage</a></code>, but operates on individual items.</p>
+      <p>An overload of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(androidx.arch.core.util.Function)">map</a></code> that accepts a kotlin function type.</p>
+      <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code>, but operates on individual items.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -289,13 +289,13 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></td>
+              <td width="40%"><code>&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</code></td>
               <td>
                 <p>Type of items produced by the new DataSource, from the passed function.</p>
               </td>
             </tr>
             <tr>
-              <td width="40%"><code>function:&nbsp;((Value) <span style="white-space: nowrap;">-&gt;</span> ToValue)?</code></td>
+              <td width="40%"><code>function:&nbsp;(Value) <span style="white-space: nowrap;">-&gt;</span> ToValue</code></td>
               <td>
                 <p>Function that runs on each loaded item, returning items of a potentially new type.</p>
               </td>
@@ -329,22 +329,22 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage()">mapByPage</a></code></td>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code></td>
               <td></td>
             </tr>
             <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map()">map</a></code></td>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map(androidx.arch.core.util.Function)">map</a></code></td>
               <td></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <div><a name="mapByPage--"></a><a name="mapbypage"></a>
-      <h3 class="api-name" id="mapByPage()">mapByPage</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage()">mapByPage</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;function:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value?&gt;?,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;ToValue?&gt;?&gt;?<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
+    <div><a name="mapByPage-androidx.arch.core.util.Function-"></a><a name="mapbypage"></a>
+      <h3 class="api-name" id="mapByPage(androidx.arch.core.util.Function)">mapByPage</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a>(function:&nbsp;<a href="/reference/kotlin/androidx/arch/core/util/Function.html">Function</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;ToValue&gt;&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
       <p>Applies the given function to each value emitted by the DataSource.</p>
-      <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map()">map</a></code>, but allows for batch conversions.</p>
+      <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(androidx.arch.core.util.Function)">map</a></code>, but allows for batch conversions.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -354,13 +354,13 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></td>
+              <td width="40%"><code>&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</code></td>
               <td>
                 <p>Type of items produced by the new DataSource, from the passed function.</p>
               </td>
             </tr>
             <tr>
-              <td width="40%"><code>function:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value?&gt;?,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;ToValue?&gt;?&gt;?</code></td>
+              <td width="40%"><code>function:&nbsp;<a href="/reference/kotlin/androidx/arch/core/util/Function.html">Function</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;ToValue&gt;&gt;</code></td>
               <td>
                 <p>Function that runs on each loaded page, returning items of a potentially new type.</p>
               </td>
@@ -394,15 +394,15 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.html#map()">map</a></code></td>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(androidx.arch.core.util.Function)">map</a></code></td>
               <td></td>
             </tr>
             <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map()">map</a></code></td>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map(androidx.arch.core.util.Function)">map</a></code></td>
               <td></td>
             </tr>
             <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#mapByPage()">mapByPage</a></code></td>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code></td>
               <td></td>
             </tr>
           </tbody>
@@ -411,10 +411,10 @@
     </div>
     <div><a name="mapByPage-kotlin.Function1-"></a><a name="mapbypage"></a>
       <h3 class="api-name" id="mapByPage(kotlin.Function1)">mapByPage</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a>(function:&nbsp;((<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;ToValue&gt;)?):&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(kotlin.Function1)">mapByPage</a>(function:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;ToValue&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a>&lt;Key,&nbsp;ToValue&gt;</pre>
       <p>Applies the given function to each value emitted by the DataSource.</p>
-      <p>An overload of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage()">mapByPage</a></code> that accepts a kotlin function type.</p>
-      <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map()">map</a></code>, but allows for batch conversions.</p>
+      <p>An overload of <code><a href="/reference/kotlin/androidx/paging/DataSource.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code> that accepts a kotlin function type.</p>
+      <p>Same as <code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(androidx.arch.core.util.Function)">map</a></code>, but allows for batch conversions.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -424,13 +424,13 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></td>
+              <td width="40%"><code>&lt;ToValue&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</code></td>
               <td>
                 <p>Type of items produced by the new DataSource, from the passed function.</p>
               </td>
             </tr>
             <tr>
-              <td width="40%"><code>function:&nbsp;((<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;ToValue&gt;)?</code></td>
+              <td width="40%"><code>function:&nbsp;(<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;ToValue&gt;</code></td>
               <td>
                 <p>Function that runs on each loaded page, returning items of a potentially new type.</p>
               </td>
@@ -464,15 +464,15 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.html#map()">map</a></code></td>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.html#map(androidx.arch.core.util.Function)">map</a></code></td>
               <td></td>
             </tr>
             <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map()">map</a></code></td>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#map(androidx.arch.core.util.Function)">map</a></code></td>
               <td></td>
             </tr>
             <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#mapByPage()">mapByPage</a></code></td>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html#mapByPage(androidx.arch.core.util.Function)">mapByPage</a></code></td>
               <td></td>
             </tr>
           </tbody>
@@ -481,7 +481,7 @@
     </div>
     <div><a name="removeInvalidatedCallback-androidx.paging.DataSource.InvalidatedCallback-"></a><a name="removeinvalidatedcallback"></a>
       <h3 class="api-name" id="removeInvalidatedCallback(androidx.paging.DataSource.InvalidatedCallback)">removeInvalidatedCallback</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a><br>open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html#removeInvalidatedCallback(androidx.paging.DataSource.InvalidatedCallback)">removeInvalidatedCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onInvalidatedCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a>?<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/AnyThread.html">AnyThread</a><br>open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.html#removeInvalidatedCallback(androidx.paging.DataSource.InvalidatedCallback)">removeInvalidatedCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;onInvalidatedCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Remove a previously added invalidate callback.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -492,7 +492,7 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>onInvalidatedCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a>?</code></td>
+              <td width="40%"><code>onInvalidatedCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a></code></td>
               <td>
                 <p>The previously added callback.</p>
               </td>

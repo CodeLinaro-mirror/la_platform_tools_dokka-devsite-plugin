@@ -11,7 +11,7 @@
     </p>
     <hr>
     <p>IndicationInstance is a specific instance of an <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html">Indication</a></code> that draws visual effects on certain interactions, such as press or focus.</p>
-    <p>IndicationInstances can be stateful or stateless, and are created by <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html#rememberUpdatedInstance(androidx.compose.foundation.interaction.InteractionSource)">Indication.rememberUpdatedInstance</a></code> - they should be used in-place and not re-used between different <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(Modifier).indication(androidx.compose.foundation.interaction.InteractionSource,androidx.compose.foundation.Indication)">indication</a></code> modifiers.</p>
+    <p>IndicationInstances can be stateful or stateless, and are created by <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html#rememberUpdatedInstance(androidx.compose.foundation.interaction.InteractionSource)">Indication.rememberUpdatedInstance</a></code> - they should be used in-place and not re-used between different <code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).indication(androidx.compose.foundation.interaction.InteractionSource,androidx.compose.foundation.Indication)">indication</a></code> modifiers.</p>
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
@@ -24,7 +24,7 @@
           <tr>
             <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>.<a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html#(ContentDrawScope).drawIndication()">drawIndication</a>()</code></div>
+              <div><code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/ContentDrawScope.html">ContentDrawScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html#(androidx.compose.ui.graphics.drawscope.ContentDrawScope).drawIndication()">drawIndication</a>()</code></div>
               <p>Draws visual effects for the current interactions present on this component.</p>
             </td>
           </tr>
@@ -32,12 +32,12 @@
       </table>
     </div>
     <h2>Public functions</h2>
-    <div><a name="-ContentDrawScope-.drawIndication--"></a><a name="drawindication"></a>
-      <h3 class="api-name" id="(ContentDrawScope).drawIndication()">drawIndication</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>.<a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html#(ContentDrawScope).drawIndication()">drawIndication</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+    <div><a name="-androidx.compose.ui.graphics.drawscope.ContentDrawScope-.drawIndication--"></a><a name="drawindication"></a>
+      <h3 class="api-name" id="(androidx.compose.ui.graphics.drawscope.ContentDrawScope).drawIndication()">drawIndication</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/ContentDrawScope.html">ContentDrawScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html#(androidx.compose.ui.graphics.drawscope.ContentDrawScope).drawIndication()">drawIndication</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Draws visual effects for the current interactions present on this component.</p>
       <p>Typically this function will read state within this instance that is mutated by <code><a href="/reference/kotlin/androidx/compose/foundation/Indication.html#rememberUpdatedInstance(androidx.compose.foundation.interaction.InteractionSource)">Indication.rememberUpdatedInstance</a></code>. This allows <code><a href="/reference/kotlin/androidx/compose/foundation/IndicationInstance.html">IndicationInstance</a></code> to just read state and draw visual effects, and not actually change any state itself.</p>
-      <p>This method MUST call ContentDrawScope.drawContent at some point in order to draw the component itself underneath any indication. Typically this is called at the beginning, so that indication can be drawn as an overlay on top.</p>
+      <p>This method MUST call <code><a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/ContentDrawScope.html#drawContent()">ContentDrawScope.drawContent</a></code> at some point in order to draw the component itself underneath any indication. Typically this is called at the beginning, so that indication can be drawn as an overlay on top.</p>
     </div>
   </body>
 </html>

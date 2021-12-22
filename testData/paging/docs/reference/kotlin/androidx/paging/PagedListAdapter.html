@@ -7,11 +7,11 @@
   <body>
     <h1>PagedListAdapter</h1>
     <p>
-      <pre>abstract class PagedListAdapter&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;VH&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
+      <pre>abstract class PagedListAdapter&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;VH&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt;</pre>
     </p>
     <hr>
     <aside class="caution"><strong>This class is deprecated.</strong><br>PagedListAdapter is deprecated and has been replaced by PagingDataAdapter</aside>
-    <p>RecyclerView.Adapter base class for presenting paged data from <code><a href="/reference/kotlin/androidx/paging/PagedList.html">androidx.paging.PagedList</a></code>s in a RecyclerView.</p>
+    <p><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a></code> base class for presenting paged data from <code><a href="/reference/kotlin/androidx/paging/PagedList.html">androidx.paging.PagedList</a></code>s in a <code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.html">RecyclerView</a></code>.</p>
     <p>This class is a convenience wrapper around <code><a href="/reference/kotlin/androidx/paging/AsyncPagedListDiffer.html">AsyncPagedListDiffer</a></code> that implements common default behavior for item counting, and listening to PagedList update callbacks.</p>
     <p>While using a LiveData<PagedList> is an easy way to provide data to the adapter, it isn't required - you can use <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></code> when new lists are available.</p>
     <p>PagedListAdapter listens to PagedList loading callbacks as pages are loaded, and uses DiffUtil on a background thread to compute fine grained updates as new PagedLists are received.</p>
@@ -28,13 +28,13 @@
         </thead>
         <tbody>
           <tr>
-            <td width="40%"><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></td>
+            <td width="40%"><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</code></td>
             <td>
               <p>Type of the PagedLists this Adapter will receive.</p>
             </td>
           </tr>
           <tr>
-            <td width="40%"><code>&lt;VH&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></td>
+            <td width="40%"><code>&lt;VH&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt;</code></td>
             <td>
               <p>A class that extends ViewHolder that will be used by the adapter.</p>
             </td>
@@ -54,7 +54,7 @@
           <tr>
             <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#addLoadStateListener(kotlin.Function2)">addLoadStateListener</a>(listener:&nbsp;((<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>, <a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#addLoadStateListener(kotlin.Function2)">addLoadStateListener</a>(listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>, <a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
               <p>Add a <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a></code> listener to observe the loading state of the current <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>.</p>
             </td>
           </tr>
@@ -67,57 +67,57 @@
           <tr>
             <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><span><del><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T?&gt;?)</code></div>
+              <div><code><span><del><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?)</code></div>
               <p><strong>This function is deprecated.</strong> Use the two argument variant instead.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;previousList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T?&gt;?,<br>&nbsp;&nbsp;&nbsp;&nbsp;currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T?&gt;?<br>)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;previousList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?,<br>&nbsp;&nbsp;&nbsp;&nbsp;currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?<br>)</code></div>
               <p>Called when the current PagedList is updated.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</a>(listener:&nbsp;((<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>, <a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</a>(listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>, <a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
               <p>Remove a previously registered <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a></code> listener.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a>(pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T?&gt;?)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a>(pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?)</code></div>
               <p>Set the new list to be displayed.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a>(pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T?&gt;?,&nbsp;commitCallback:&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>?)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a>(pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?,&nbsp;commitCallback:&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>?)</code></div>
               <p>Set the new list to be displayed.</p>
             </td>
           </tr>
           <tr>
-            <td width="40%"><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</a>(footer:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;?)</code></div>
-              <p>Create a ConcatAdapter with the provided <code><a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadType.APPEND</a></code> as a list item at the start of the presented list.</p>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</a>(footer:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;)</code></div>
+              <p>Create a <code><a href="/reference/kotlin/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code> with the provided <code><a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadType.APPEND</a></code> as a list item at the start of the presented list.</p>
             </td>
           </tr>
           <tr>
-            <td width="40%"><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</a>(header:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;?)</code></div>
-              <p>Create a ConcatAdapter with the provided <code><a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadType.PREPEND</a></code> as a list item at the end of the presented list.</p>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</a>(header:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;)</code></div>
+              <p>Create a <code><a href="/reference/kotlin/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code> with the provided <code><a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadType.PREPEND</a></code> as a list item at the end of the presented list.</p>
             </td>
           </tr>
           <tr>
-            <td width="40%"><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></code></td>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;header:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;?,<br>&nbsp;&nbsp;&nbsp;&nbsp;footer:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;?<br>)</code></div>
-              <p>Create a ConcatAdapter with the provided <code><a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/kotlin/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code> and <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadType.APPEND</a></code>s as list items at the start and end respectively.</p>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;header:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;footer:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;<br>)</code></div>
+              <p>Create a <code><a href="/reference/kotlin/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code> with the provided <code><a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/kotlin/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code> and <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadType.APPEND</a></code>s as list items at the start and end respectively.</p>
             </td>
           </tr>
         </tbody>
@@ -141,10 +141,223 @@
         </tbody>
       </table>
     </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Inherited functions</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody>
+                    <tr>
+                      <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#bindViewHolder(androidx.recyclerview.widget.RecyclerView.ViewHolder,kotlin.Int)">bindViewHolder</a>(p0:&nbsp;VH,&nbsp;p1:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#canRestoreState()">canRestoreState</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>VH</code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#createViewHolder(android.view.ViewGroup,kotlin.Int)">createViewHolder</a>(p0:&nbsp;<a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>,&nbsp;p1:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#findRelativeAdapterPositionIn(androidx.recyclerview.widget.RecyclerView.Adapter,androidx.recyclerview.widget.RecyclerView.ViewHolder,kotlin.Int)">findRelativeAdapterPositionIn</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;p0:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a>&lt;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;p1:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;p2:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#getItemId(kotlin.Int)">getItemId</a>(p0:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#getItemViewType(kotlin.Int)">getItemViewType</a>(p0:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.StateRestorationPolicy.html">RecyclerView.Adapter.StateRestorationPolicy</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#getStateRestorationPolicy()">getStateRestorationPolicy</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#hasObservers()">hasObservers</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#hasStableIds()">hasStableIds</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyDataSetChanged()">notifyDataSetChanged</a>()</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemChanged(kotlin.Int)">notifyItemChanged</a>(p0:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemChanged(kotlin.Int,kotlin.Any)">notifyItemChanged</a>(p0:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;p1:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemInserted(kotlin.Int)">notifyItemInserted</a>(p0:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemMoved(kotlin.Int,kotlin.Int)">notifyItemMoved</a>(p0:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;p1:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeChanged(kotlin.Int,kotlin.Int)">notifyItemRangeChanged</a>(p0:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;p1:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeChanged(kotlin.Int,kotlin.Int,kotlin.Any)">notifyItemRangeChanged</a>(p0:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;p1:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;p2:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeInserted(kotlin.Int,kotlin.Int)">notifyItemRangeInserted</a>(p0:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;p1:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRangeRemoved(kotlin.Int,kotlin.Int)">notifyItemRangeRemoved</a>(p0:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;p1:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#notifyItemRemoved(kotlin.Int)">notifyItemRemoved</a>(p0:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onAttachedToRecyclerView(androidx.recyclerview.widget.RecyclerView)">onAttachedToRecyclerView</a>(p0:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.html">RecyclerView</a>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onBindViewHolder(androidx.recyclerview.widget.RecyclerView.ViewHolder,kotlin.Int)">onBindViewHolder</a>(p0:&nbsp;VH,&nbsp;p1:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onBindViewHolder(androidx.recyclerview.widget.RecyclerView.ViewHolder,kotlin.Int,kotlin.collections.MutableList)">onBindViewHolder</a>(p0:&nbsp;VH,&nbsp;p1:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;p2:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>abstract VH</code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onCreateViewHolder(android.view.ViewGroup,kotlin.Int)">onCreateViewHolder</a>(p0:&nbsp;<a href="https://developer.android.com/reference/android/view/ViewGroup.html">ViewGroup</a>,&nbsp;p1:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onDetachedFromRecyclerView(androidx.recyclerview.widget.RecyclerView)">onDetachedFromRecyclerView</a>(p0:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.html">RecyclerView</a>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onFailedToRecycleView(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onFailedToRecycleView</a>(p0:&nbsp;VH)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewAttachedToWindow(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onViewAttachedToWindow</a>(p0:&nbsp;VH)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewDetachedFromWindow(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onViewDetachedFromWindow</a>(p0:&nbsp;VH)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#onViewRecycled(androidx.recyclerview.widget.RecyclerView.ViewHolder)">onViewRecycled</a>(p0:&nbsp;VH)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#registerAdapterDataObserver(androidx.recyclerview.widget.RecyclerView.AdapterDataObserver)">registerAdapterDataObserver</a>(p0:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.AdapterDataObserver.html">RecyclerView.AdapterDataObserver</a>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#setHasStableIds(kotlin.Boolean)">setHasStableIds</a>(p0:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#setStateRestorationPolicy(androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy)">setStateRestorationPolicy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;p0:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.StateRestorationPolicy.html">RecyclerView.Adapter.StateRestorationPolicy</a><br>)</code></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html#unregisterAdapterDataObserver(androidx.recyclerview.widget.RecyclerView.AdapterDataObserver)">unregisterAdapterDataObserver</a>(p0:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.AdapterDataObserver.html">RecyclerView.AdapterDataObserver</a>)</code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <h2>Public functions</h2>
     <div><a name="addLoadStateListener-kotlin.Function2-"></a><a name="addloadstatelistener"></a>
       <h3 class="api-name" id="addLoadStateListener(kotlin.Function2)">addLoadStateListener</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#addLoadStateListener(kotlin.Function2)">addLoadStateListener</a>(listener:&nbsp;((<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>, <a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#addLoadStateListener(kotlin.Function2)">addLoadStateListener</a>(listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>, <a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Add a <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a></code> listener to observe the loading state of the current <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code>.</p>
       <p>As new PagedLists are submitted and displayed, the listener will be notified to reflect current <code><a href="/reference/kotlin/androidx/paging/LoadType.html#REFRESH">LoadType.REFRESH</a></code>, <code><a href="/reference/kotlin/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code>, and <code><a href="/reference/kotlin/androidx/paging/LoadType.html#APPEND">LoadType.APPEND</a></code> states.</p>
       <div class="devsite-table-wrapper">
@@ -156,7 +369,7 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>listener:&nbsp;((<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>, <a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?</code></td>
+              <td width="40%"><code>listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>, <a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
                 <p>Listener to receive <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a></code> updates.</p>
               </td>
@@ -186,7 +399,7 @@
     </div>
     <div><a name="onCurrentListChanged-androidx.paging.PagedList-"></a><a name="oncurrentlistchanged"></a>
       <h3 class="api-name" id="onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<span><del><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T?&gt;?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<span><del><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>Use the two argument variant instead.</aside>
       <p>Called when the current PagedList is updated.</p>
       <p>This may be dispatched as part of .submitList if a background diff isn't needed (such as when the first list is passed, or the list is cleared). In either case, PagedListAdapter will simply call .notifyItemRangeInserted.</p>
@@ -200,7 +413,7 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T?&gt;?</code></td>
+              <td width="40%"><code>currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?</code></td>
               <td>
                 <p>new PagedList being displayed, may be null.</p>
               </td>
@@ -226,9 +439,9 @@
     </div>
     <div><a name="onCurrentListChanged(androidx.paging.PagedList, androidx.paging.PagedList)"></a><a name="onCurrentListChanged-androidx.paging.PagedList-androidx.paging.PagedList-"></a><a name="oncurrentlistchanged"></a>
       <h3 class="api-name" id="onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;previousList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T?&gt;?,<br>&nbsp;&nbsp;&nbsp;&nbsp;currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T?&gt;?<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;previousList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?,<br>&nbsp;&nbsp;&nbsp;&nbsp;currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Called when the current PagedList is updated.</p>
-      <p>This may be dispatched as part of .submitList if a background diff isn't needed (such as when the first list is passed, or the list is cleared). In either case, PagedListAdapter will simply call notifyItemRangeInserted.</p>
+      <p>This may be dispatched as part of .submitList if a background diff isn't needed (such as when the first list is passed, or the list is cleared). In either case, PagedListAdapter will simply call <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#notifyItemRangeInserted(kotlin.Int,kotlin.Int)">notifyItemRangeInserted/Removed(0, mPreviousSize)</a></code>.</p>
       <p>This method will <em>not</em>be called when the Adapter switches from presenting a PagedList to a snapshot version of the PagedList during a diff. This means you cannot observe each PagedList via this method.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -239,13 +452,13 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>previousList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T?&gt;?</code></td>
+              <td width="40%"><code>previousList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?</code></td>
               <td>
                 <p><code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> that was previously displayed, may be null.</p>
               </td>
             </tr>
             <tr>
-              <td width="40%"><code>currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T?&gt;?</code></td>
+              <td width="40%"><code>currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?</code></td>
               <td>
                 <p>new <code><a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a></code> being displayed, may be null.</p>
               </td>
@@ -271,7 +484,7 @@
     </div>
     <div><a name="removeLoadStateListener-kotlin.Function2-"></a><a name="removeloadstatelistener"></a>
       <h3 class="api-name" id="removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</a>(listener:&nbsp;((<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>, <a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</a>(listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>, <a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Remove a previously registered <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a></code> listener.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
@@ -282,7 +495,7 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>listener:&nbsp;((<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>, <a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)?</code></td>
+              <td width="40%"><code>listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>, <a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
                 <p>Previously registered listener.</p>
               </td>
@@ -308,7 +521,7 @@
     </div>
     <div><a name="submitList-androidx.paging.PagedList-"></a><a name="submitlist"></a>
       <h3 class="api-name" id="submitList(androidx.paging.PagedList)">submitList</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a>(pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T?&gt;?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a>(pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Set the new list to be displayed.</p>
       <p>If a list is already being displayed, a diff will be computed on a background thread, which will dispatch Adapter.notifyItem events on the main thread.</p>
       <div class="devsite-table-wrapper">
@@ -320,7 +533,7 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T?&gt;?</code></td>
+              <td width="40%"><code>pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?</code></td>
               <td>
                 <p>The new list to be displayed.</p>
               </td>
@@ -331,7 +544,7 @@
     </div>
     <div><a name="submitList(androidx.paging.PagedList, java.lang.Runnable)"></a><a name="submitList-androidx.paging.PagedList-java.lang.Runnable-"></a><a name="submitlist"></a>
       <h3 class="api-name" id="submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a>(pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T?&gt;?,&nbsp;commitCallback:&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a>(pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?,&nbsp;commitCallback:&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Set the new list to be displayed.</p>
       <p>If a list is already being displayed, a diff will be computed on a background thread, which will dispatch Adapter.notifyItem events on the main thread.</p>
       <p>The commit callback can be used to know when the PagedList is committed, but note that it may not be executed. If PagedList B is submitted immediately after PagedList A, and is committed directly, the callback associated with PagedList A will not be run.</p>
@@ -344,7 +557,7 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T?&gt;?</code></td>
+              <td width="40%"><code>pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?</code></td>
               <td>
                 <p>The new list to be displayed.</p>
               </td>
@@ -361,18 +574,18 @@
     </div>
     <div><a name="withLoadStateFooter-androidx.paging.LoadStateAdapter-"></a><a name="withloadstatefooter"></a>
       <h3 class="api-name" id="withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</a>(footer:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;?):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
-      <p>Create a ConcatAdapter with the provided <code><a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadType.APPEND</a></code> as a list item at the start of the presented list.</p>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</a>(footer:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;):&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></pre>
+      <p>Create a <code><a href="/reference/kotlin/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code> with the provided <code><a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadType.APPEND</a></code> as a list item at the start of the presented list.</p>
     </div>
     <div><a name="withLoadStateHeader-androidx.paging.LoadStateAdapter-"></a><a name="withloadstateheader"></a>
       <h3 class="api-name" id="withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</a>(header:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;?):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
-      <p>Create a ConcatAdapter with the provided <code><a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadType.PREPEND</a></code> as a list item at the end of the presented list.</p>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#withLoadStateHeader(androidx.paging.LoadStateAdapter)">withLoadStateHeader</a>(header:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;):&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></pre>
+      <p>Create a <code><a href="/reference/kotlin/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code> with the provided <code><a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadType.PREPEND</a></code> as a list item at the end of the presented list.</p>
     </div>
     <div><a name="withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter, androidx.paging.LoadStateAdapter)"></a><a name="withLoadStateHeaderAndFooter-androidx.paging.LoadStateAdapter-androidx.paging.LoadStateAdapter-"></a><a name="withloadstateheaderandfooter"></a>
       <h3 class="api-name" id="withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;header:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;?,<br>&nbsp;&nbsp;&nbsp;&nbsp;footer:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;?<br>):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a></pre>
-      <p>Create a ConcatAdapter with the provided <code><a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/kotlin/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code> and <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadType.APPEND</a></code>s as list items at the start and end respectively.</p>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;header:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;footer:&nbsp;<a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;*&gt;<br>):&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></pre>
+      <p>Create a <code><a href="/reference/kotlin/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code> with the provided <code><a href="/reference/kotlin/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/kotlin/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code> and <code><a href="/reference/kotlin/androidx/paging/LoadState.html">LoadType.APPEND</a></code>s as list items at the start and end respectively.</p>
     </div>
     <h2>Public properties</h2>
     <div><a name="getCurrentList()"></a><a name="setCurrentList()"></a><a name="getCurrentList--"></a><a name="setCurrentList--"></a>

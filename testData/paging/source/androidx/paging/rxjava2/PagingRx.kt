@@ -38,7 +38,6 @@ import kotlinx.coroutines.rx2.asObservable
  */
 // Both annotations are needed here see: https://youtrack.jetbrains.com/issue/KT-45227
 @ExperimentalCoroutinesApi
-@get:ExperimentalCoroutinesApi
 val <Key : Any, Value : Any> Pager<Key, Value>.observable: Observable<PagingData<Value>>
     get() = flow
         .conflate()
@@ -50,7 +49,6 @@ val <Key : Any, Value : Any> Pager<Key, Value>.observable: Observable<PagingData
  */
 // Both annotations are needed here see: https://youtrack.jetbrains.com/issue/KT-45227
 @ExperimentalCoroutinesApi
-@get:ExperimentalCoroutinesApi
 val <Key : Any, Value : Any> Pager<Key, Value>.flowable: Flowable<PagingData<Value>>
     get() = flow
         .conflate()

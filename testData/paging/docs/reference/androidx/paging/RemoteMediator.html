@@ -19,7 +19,7 @@
               <tr>
                 <td width="40%"><code><a href="/reference/androidx/paging/ListenableFutureRemoteMediator.html">ListenableFutureRemoteMediator</a></code></td>
                 <td>
-                  <p>ListenableFuture-based  compatibility wrapper around <code><a href="/reference/androidx/paging/RemoteMediator.html">RemoteMediator</a></code>'s suspending APIs.</p>
+                  <p><code><a href="https://guava.dev/releases/18.0/api/docs/package-list/com/google/common/util/concurrent/ListenableFuture.html">ListenableFuture</a></code>-based  compatibility wrapper around <code><a href="/reference/androidx/paging/RemoteMediator.html">RemoteMediator</a></code>'s suspending APIs.</p>
                 </td>
               </tr>
               <tr>
@@ -303,7 +303,7 @@ class ExampleRemoteMediator(
           <tr>
             <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/RemoteMediator.MediatorResult.html">RemoteMediator.MediatorResult</a></code></td>
             <td>
-              <div><code><a href="/reference/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a>(<a href="/reference/androidx/paging/LoadType.html">LoadType</a>&nbsp;loadType,&nbsp;<a href="/reference/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;&nbsp;state)</code></div>
+              <div><code><a href="/reference/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>&nbsp;loadType,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingState.html">PagingState</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;state<br>)</code></div>
               <p>Callback triggered when Paging needs to request more data from a remote source due to any of the following events:</p>
             </td>
           </tr>
@@ -349,7 +349,7 @@ class ExampleRemoteMediator(
     </div>
     <div><a name="load(androidx.paging.LoadType, androidx.paging.PagingState)"></a><a name="load-androidx.paging.LoadType-androidx.paging.PagingState-"></a><a name="load"></a>
       <h3 class="api-name" id="load(androidx.paging.LoadType,androidx.paging.PagingState)">load</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/RemoteMediator.MediatorResult.html">RemoteMediator.MediatorResult</a>&nbsp;<a href="/reference/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a>(<a href="/reference/androidx/paging/LoadType.html">LoadType</a>&nbsp;loadType,&nbsp;<a href="/reference/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;&nbsp;state)</pre>
+      <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/RemoteMediator.MediatorResult.html">RemoteMediator.MediatorResult</a>&nbsp;<a href="/reference/androidx/paging/RemoteMediator.html#load(androidx.paging.LoadType,androidx.paging.PagingState)">load</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>&nbsp;loadType,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingState.html">PagingState</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;state<br>)</pre>
       <p>Callback triggered when Paging needs to request more data from a remote source due to any of the following events:</p>
       <ul>
         <li>
@@ -374,7 +374,7 @@ class ExampleRemoteMediator(
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code><a href="/reference/androidx/paging/LoadType.html">LoadType</a>&nbsp;loadType</code></td>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadType.html">LoadType</a>&nbsp;loadType</code></td>
               <td>
                 <p><code><a href="/reference/androidx/paging/LoadType.html">LoadType</a></code> of the condition which triggered this callback.</p>
                 <ul>
@@ -399,7 +399,7 @@ class ExampleRemoteMediator(
               </td>
             </tr>
             <tr>
-              <td width="40%"><code><a href="/reference/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;&nbsp;state</code></td>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingState.html">PagingState</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Key,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Value&gt;&nbsp;state</code></td>
               <td>
                 <p>A copy of the state including the list of pages currently held in memory of the currently presented <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> at the time of starting the load. E.g. for load(loadType = APPEND), you can use the page or item at the end as input for what to load from the network.</p>
               </td>

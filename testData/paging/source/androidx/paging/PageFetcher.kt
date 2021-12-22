@@ -20,6 +20,7 @@ import androidx.paging.LoadType.APPEND
 import androidx.paging.LoadType.PREPEND
 import androidx.paging.LoadType.REFRESH
 import androidx.paging.RemoteMediator.InitializeAction.LAUNCH_INITIAL_REFRESH
+import androidx.paging.ExperimentalPagingApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
@@ -48,6 +49,7 @@ internal class PageFetcher<Key : Any, Value : Any>(
     // The object built by paging builder can maintain the scope so that on rotation we don't stop
     // the paging.
     val flow: Flow<PagingData<Value>> = simpleChannelFlow {
+        @OptIn(ExperimentalPagingApi::class)
         val remoteMediatorAccessor = remoteMediator?.let {
             RemoteMediatorAccessor(this, it)
         }

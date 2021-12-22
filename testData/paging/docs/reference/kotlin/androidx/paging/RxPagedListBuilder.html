@@ -7,13 +7,13 @@
   <body>
     <h1>RxPagedListBuilder</h1>
     <p>
-      <pre>class RxPagedListBuilder&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</pre>
+      <pre>class RxPagedListBuilder&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</pre>
     </p>
     <hr>
     <aside class="caution"><strong>This class is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
     <p>Builder for <code>Observable&lt;PagedList&gt;</code> or <code>Flowable&lt;PagedList&gt;</code>, given a <code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code> and a <code><a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code>.</p>
     <p>The required parameters are in the constructor, so you can simply construct and build, or optionally enable extra features (such as initial load key, or BoundaryCallback).</p>
-    <p>The returned observable/flowable will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setFetchScheduler(Scheduler)">setFetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setNotifyScheduler(Scheduler)">setNotifyScheduler</a></code>, and will dispatch new PagedLists, as well as their updates to that scheduler.</p>
+    <p>The returned observable/flowable will already be subscribed on the <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setFetchScheduler(io.reactivex.Scheduler)">setFetchScheduler</a></code>, and will perform all loading on that scheduler. It will already be observed on <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setNotifyScheduler(io.reactivex.Scheduler)">setNotifyScheduler</a></code>, and will dispatch new PagedLists, as well as their updates to that scheduler.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <thead>
@@ -23,13 +23,13 @@
         </thead>
         <tbody>
           <tr>
-            <td width="40%"><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></td>
+            <td width="40%"><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</code></td>
             <td>
               <p>Type of input valued used to load data from the <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>. Must be integer if you're using <code><a href="/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a></code>.</p>
             </td>
           </tr>
           <tr>
-            <td width="40%"><code>&lt;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></td>
+            <td width="40%"><code>&lt;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;</code></td>
             <td>
               <p>Item type being presented.</p>
             </td>
@@ -48,25 +48,25 @@
         <tbody>
           <tr>
             <td>
-              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <span><del><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#RxPagedListBuilder(kotlin.Function0,androidx.paging.PagedList.Config)">RxPagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pagingSourceFactory:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>?<br>)</code></div>
+              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#RxPagedListBuilder(kotlin.Function0,androidx.paging.PagedList.Config)">RxPagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pagingSourceFactory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a><br>)</code></div>
               <p>Creates a <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code> with required parameters.</p>
             </td>
           </tr>
           <tr>
             <td>
-              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <span><del><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#RxPagedListBuilder(kotlin.Function0,kotlin.Int)">RxPagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pagingSourceFactory:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>?<br>)</code></div>
+              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#RxPagedListBuilder(kotlin.Function0,kotlin.Int)">RxPagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pagingSourceFactory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
               <p>Creates a <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code> with required parameters.</p>
             </td>
           </tr>
           <tr>
             <td>
-              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <span><del><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#RxPagedListBuilder(androidx.paging.DataSource.Factory,androidx.paging.PagedList.Config)">RxPagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;dataSourceFactory:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key?,&nbsp;Value?&gt;?,<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>?<br>)</code></div>
+              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#RxPagedListBuilder(androidx.paging.DataSource.Factory,androidx.paging.PagedList.Config)">RxPagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;dataSourceFactory:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;Value&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a><br>)</code></div>
               <p>Creates a <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code> with required parameters.</p>
             </td>
           </tr>
           <tr>
             <td>
-              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <span><del><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#RxPagedListBuilder(androidx.paging.DataSource.Factory,kotlin.Int)">RxPagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;dataSourceFactory:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key?,&nbsp;Value?&gt;?,<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>?<br>)</code></div>
+              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#RxPagedListBuilder(androidx.paging.DataSource.Factory,kotlin.Int)">RxPagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;dataSourceFactory:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;Value&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</code></div>
               <p>Creates a <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code> with required parameters.</p>
             </td>
           </tr>
@@ -82,14 +82,14 @@
         </thead>
         <tbody>
           <tr>
-            <td width="40%"><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</code></td>
+            <td width="40%"><code><a href="/reference/kotlin/io/reactivex/Flowable.html">Flowable</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#buildFlowable(BackpressureStrategy)">buildFlowable</a>(backpressureStrategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>?)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#buildFlowable(io.reactivex.BackpressureStrategy)">buildFlowable</a>(backpressureStrategy:&nbsp;<a href="/reference/kotlin/io/reactivex/BackpressureStrategy.html">BackpressureStrategy</a>)</code></div>
               <p>Constructs a <code>Flowable&lt;PagedList&gt;</code>.</p>
             </td>
           </tr>
           <tr>
-            <td width="40%"><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</code></td>
+            <td width="40%"><code><a href="/reference/kotlin/io/reactivex/Observable.html">Observable</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#buildObservable()">buildObservable</a>()</code></div>
               <p>Constructs a <code>Observable&lt;PagedList&gt;</code>.</p>
@@ -98,14 +98,14 @@
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setBoundaryCallback(androidx.paging.PagedList.BoundaryCallback)">setBoundaryCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value?&gt;?<br>)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setBoundaryCallback(androidx.paging.PagedList.BoundaryCallback)">setBoundaryCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;?<br>)</code></div>
               <p>Sets a <code><a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">androidx.paging.PagedList.BoundaryCallback</a></code> on each PagedList created, typically used to load additional data from network when paging from local storage.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setFetchScheduler(Scheduler)">setFetchScheduler</a>(scheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>?)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setFetchScheduler(io.reactivex.Scheduler)">setFetchScheduler</a>(scheduler:&nbsp;<a href="/reference/kotlin/io/reactivex/Scheduler.html">Scheduler</a>)</code></div>
               <p>Sets scheduler which will be used for background fetching of PagedLists, as well as on-demand fetching of pages inside.</p>
             </td>
           </tr>
@@ -119,7 +119,7 @@
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setNotifyScheduler(Scheduler)">setNotifyScheduler</a>(scheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>?)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setNotifyScheduler(io.reactivex.Scheduler)">setNotifyScheduler</a>(scheduler:&nbsp;<a href="/reference/kotlin/io/reactivex/Scheduler.html">Scheduler</a>)</code></div>
               <p>Sets scheduler which will be used for observing new PagedLists, as well as loading updates within the PagedLists.</p>
             </td>
           </tr>
@@ -129,7 +129,7 @@
     <h2>Public constructors</h2>
     <div><a name="RxPagedListBuilder(kotlin.Function0, androidx.paging.PagedList.Config)"></a><a name="RxPagedListBuilder-kotlin.Function0-androidx.paging.PagedList.Config-"></a><a name="rxpagedlistbuilder"></a>
       <h3 class="api-name" id="RxPagedListBuilder(kotlin.Function0,androidx.paging.PagedList.Config)">RxPagedListBuilder</h3>
-      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <span><del><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#RxPagedListBuilder(kotlin.Function0,androidx.paging.PagedList.Config)">RxPagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pagingSourceFactory:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>?<br>)</pre>
+      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#RxPagedListBuilder(kotlin.Function0,androidx.paging.PagedList.Config)">RxPagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pagingSourceFactory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a><br>)</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
       <p>Creates a <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code> with required parameters.</p>
       <div class="devsite-table-wrapper">
@@ -141,13 +141,13 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>pagingSourceFactory:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;)?</code></td>
+              <td width="40%"><code>pagingSourceFactory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;</code></td>
               <td>
                 <p>DataSource factory providing DataSource generations.</p>
               </td>
             </tr>
             <tr>
-              <td width="40%"><code>config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>?</code></td>
+              <td width="40%"><code>config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
               <td>
                 <p>Paging configuration.</p>
               </td>
@@ -158,7 +158,7 @@
     </div>
     <div><a name="RxPagedListBuilder(kotlin.Function0, kotlin.Int)"></a><a name="RxPagedListBuilder-kotlin.Function0-kotlin.Int-"></a><a name="rxpagedlistbuilder"></a>
       <h3 class="api-name" id="RxPagedListBuilder(kotlin.Function0,kotlin.Int)">RxPagedListBuilder</h3>
-      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <span><del><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#RxPagedListBuilder(kotlin.Function0,kotlin.Int)">RxPagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pagingSourceFactory:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;)?,<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>?<br>)</pre>
+      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#RxPagedListBuilder(kotlin.Function0,kotlin.Int)">RxPagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pagingSourceFactory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
       <p>Creates a <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code> with required parameters.</p>
       <p>This method is a convenience for:</p>
@@ -172,13 +172,13 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>pagingSourceFactory:&nbsp;(() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;)?</code></td>
+              <td width="40%"><code>pagingSourceFactory:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a>&lt;Key,&nbsp;Value&gt;</code></td>
               <td>
                 <p><code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> factory providing <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> generations.</p>
               </td>
             </tr>
             <tr>
-              <td width="40%"><code>pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>?</code></td>
+              <td width="40%"><code>pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
               <td>
                 <p>Size of pages to load.</p>
               </td>
@@ -189,7 +189,7 @@
     </div>
     <div><a name="RxPagedListBuilder(androidx.paging.DataSource.Factory, androidx.paging.PagedList.Config)"></a><a name="RxPagedListBuilder-androidx.paging.DataSource.Factory-androidx.paging.PagedList.Config-"></a><a name="rxpagedlistbuilder"></a>
       <h3 class="api-name" id="RxPagedListBuilder(androidx.paging.DataSource.Factory,androidx.paging.PagedList.Config)">RxPagedListBuilder</h3>
-      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <span><del><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#RxPagedListBuilder(androidx.paging.DataSource.Factory,androidx.paging.PagedList.Config)">RxPagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;dataSourceFactory:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key?,&nbsp;Value?&gt;?,<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>?<br>)</pre>
+      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#RxPagedListBuilder(androidx.paging.DataSource.Factory,androidx.paging.PagedList.Config)">RxPagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;dataSourceFactory:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;Value&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a><br>)</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
       <p>Creates a <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code> with required parameters.</p>
       <div class="devsite-table-wrapper">
@@ -201,13 +201,13 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>dataSourceFactory:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key?,&nbsp;Value?&gt;?</code></td>
+              <td width="40%"><code>dataSourceFactory:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;Value&gt;</code></td>
               <td>
                 <p>DataSource factory providing DataSource generations.</p>
               </td>
             </tr>
             <tr>
-              <td width="40%"><code>config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a>?</code></td>
+              <td width="40%"><code>config:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.Config.html">PagedList.Config</a></code></td>
               <td>
                 <p>Paging configuration.</p>
               </td>
@@ -218,7 +218,7 @@
     </div>
     <div><a name="RxPagedListBuilder(androidx.paging.DataSource.Factory, kotlin.Int)"></a><a name="RxPagedListBuilder-androidx.paging.DataSource.Factory-kotlin.Int-"></a><a name="rxpagedlistbuilder"></a>
       <h3 class="api-name" id="RxPagedListBuilder(androidx.paging.DataSource.Factory,kotlin.Int)">RxPagedListBuilder</h3>
-      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <span><del><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#RxPagedListBuilder(androidx.paging.DataSource.Factory,kotlin.Int)">RxPagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;dataSourceFactory:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key?,&nbsp;Value?&gt;?,<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>?<br>)</pre>
+      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <span><del><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#RxPagedListBuilder(androidx.paging.DataSource.Factory,kotlin.Int)">RxPagedListBuilder</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;dataSourceFactory:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;Value&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><br>)</pre>
       <aside class="caution"><strong>This function is deprecated.</strong><br>PagedList is deprecated and has been replaced by PagingData</aside>
       <p>Creates a <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a></code> with required parameters.</p>
       <p>This method is a convenience for:</p>
@@ -232,13 +232,13 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>dataSourceFactory:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key?,&nbsp;Value?&gt;?</code></td>
+              <td width="40%"><code>dataSourceFactory:&nbsp;<a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;Key,&nbsp;Value&gt;</code></td>
               <td>
                 <p><code><a href="/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a></code> providing DataSource generations.</p>
               </td>
             </tr>
             <tr>
-              <td width="40%"><code>pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>?</code></td>
+              <td width="40%"><code>pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
               <td>
                 <p>Size of pages to load.</p>
               </td>
@@ -248,9 +248,9 @@
       </div>
     </div>
     <h2>Public functions</h2>
-    <div><a name="buildFlowable-BackpressureStrategy-"></a><a name="buildflowable"></a>
-      <h3 class="api-name" id="buildFlowable(BackpressureStrategy)">buildFlowable</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#buildFlowable(BackpressureStrategy)">buildFlowable</a>(backpressureStrategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>?):&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
+    <div><a name="buildFlowable-io.reactivex.BackpressureStrategy-"></a><a name="buildflowable"></a>
+      <h3 class="api-name" id="buildFlowable(io.reactivex.BackpressureStrategy)">buildFlowable</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#buildFlowable(io.reactivex.BackpressureStrategy)">buildFlowable</a>(backpressureStrategy:&nbsp;<a href="/reference/kotlin/io/reactivex/BackpressureStrategy.html">BackpressureStrategy</a>):&nbsp;<a href="/reference/kotlin/io/reactivex/Flowable.html">Flowable</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <p>Constructs a <code>Flowable&lt;PagedList&gt;</code>.</p>
       <p>The returned Observable will already be observed on the <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#notifyScheduler()">notifyScheduler</a></code>, and subscribed on the <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#fetchScheduler()">fetchScheduler</a></code>.</p>
       <div class="devsite-table-wrapper">
@@ -262,9 +262,9 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>backpressureStrategy:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>?</code></td>
+              <td width="40%"><code>backpressureStrategy:&nbsp;<a href="/reference/kotlin/io/reactivex/BackpressureStrategy.html">BackpressureStrategy</a></code></td>
               <td>
-                <p>BackpressureStrategy for the Flowable to use.</p>
+                <p>BackpressureStrategy for the <code><a href="/reference/kotlin/io/reactivex/Flowable.html">Flowable</a></code> to use.</p>
               </td>
             </tr>
           </tbody>
@@ -279,9 +279,9 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</code></td>
+              <td width="40%"><code><a href="/reference/kotlin/io/reactivex/Flowable.html">Flowable</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</code></td>
               <td>
-                <p>The Flowable of PagedLists</p>
+                <p>The <code><a href="/reference/kotlin/io/reactivex/Flowable.html">Flowable</a></code> of PagedLists</p>
               </td>
             </tr>
           </tbody>
@@ -290,7 +290,7 @@
     </div>
     <div><a name="buildObservable--"></a><a name="buildobservable"></a>
       <h3 class="api-name" id="buildObservable()">buildObservable</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#buildObservable()">buildObservable</a>():&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#buildObservable()">buildObservable</a>():&nbsp;<a href="/reference/kotlin/io/reactivex/Observable.html">Observable</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</pre>
       <p>Constructs a <code>Observable&lt;PagedList&gt;</code>.</p>
       <p>The returned Observable will already be observed on the <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#notifyScheduler()">notifyScheduler</a></code>, and subscribed on the <code><a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#fetchScheduler()">fetchScheduler</a></code>.</p>
       <div class="devsite-table-wrapper">
@@ -302,9 +302,9 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code><a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</code></td>
+              <td width="40%"><code><a href="/reference/kotlin/io/reactivex/Observable.html">Observable</a>&lt;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;Value&gt;&gt;</code></td>
               <td>
-                <p>The Observable of PagedLists</p>
+                <p>The <code><a href="/reference/kotlin/io/reactivex/Observable.html">Observable</a></code> of PagedLists</p>
               </td>
             </tr>
           </tbody>
@@ -313,7 +313,7 @@
     </div>
     <div><a name="setBoundaryCallback-androidx.paging.PagedList.BoundaryCallback-"></a><a name="setboundarycallback"></a>
       <h3 class="api-name" id="setBoundaryCallback(androidx.paging.PagedList.BoundaryCallback)">setBoundaryCallback</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setBoundaryCallback(androidx.paging.PagedList.BoundaryCallback)">setBoundaryCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value?&gt;?<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</pre>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setBoundaryCallback(androidx.paging.PagedList.BoundaryCallback)">setBoundaryCallback</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;?<br>):&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</pre>
       <p>Sets a <code><a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">androidx.paging.PagedList.BoundaryCallback</a></code> on each PagedList created, typically used to load additional data from network when paging from local storage.</p>
       <p>Pass a BoundaryCallback to listen to when the PagedList runs out of data to load. If this method is not called, or <code>null</code> is passed, you will not be notified when each DataSource runs out of data to provide to its PagedList.</p>
       <p>If you are paging from a DataSource.Factory backed by local storage, you can set a BoundaryCallback to know when there is no more information to page from local storage. This is useful to page from the network when local storage is a cache of network data.</p>
@@ -327,7 +327,7 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value?&gt;?</code></td>
+              <td width="40%"><code>boundaryCallback:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.BoundaryCallback.html">PagedList.BoundaryCallback</a>&lt;Value&gt;?</code></td>
               <td>
                 <p>The boundary callback for listening to PagedList load state.</p>
               </td>
@@ -353,12 +353,12 @@
         </table>
       </div>
     </div>
-    <div><a name="setFetchScheduler-Scheduler-"></a><a name="setfetchscheduler"></a>
-      <h3 class="api-name" id="setFetchScheduler(Scheduler)">setFetchScheduler</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setFetchScheduler(Scheduler)">setFetchScheduler</a>(scheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>?):&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</pre>
+    <div><a name="setFetchScheduler-io.reactivex.Scheduler-"></a><a name="setfetchscheduler"></a>
+      <h3 class="api-name" id="setFetchScheduler(io.reactivex.Scheduler)">setFetchScheduler</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setFetchScheduler(io.reactivex.Scheduler)">setFetchScheduler</a>(scheduler:&nbsp;<a href="/reference/kotlin/io/reactivex/Scheduler.html">Scheduler</a>):&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</pre>
       <p>Sets scheduler which will be used for background fetching of PagedLists, as well as on-demand fetching of pages inside.</p>
       <p>If not set, defaults to the Arch components I/O thread pool.</p>
-      <p>The built Observable / Flowable will be subscribed on this scheduler.</p>
+      <p>The built <code><a href="/reference/kotlin/io/reactivex/Observable.html">Observable</a></code> / <code><a href="/reference/kotlin/io/reactivex/Flowable.html">Flowable</a></code> will be subscribed on this scheduler.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -368,9 +368,9 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>scheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>?</code></td>
+              <td width="40%"><code>scheduler:&nbsp;<a href="/reference/kotlin/io/reactivex/Scheduler.html">Scheduler</a></code></td>
               <td>
-                <p>Scheduler used to fetch from DataSources, generally a background thread pool for e.g. I/O or network loading.</p>
+                <p><code><a href="/reference/kotlin/io/reactivex/Scheduler.html">Scheduler</a></code> used to fetch from DataSources, generally a background thread pool for e.g. I/O or network loading.</p>
               </td>
             </tr>
           </tbody>
@@ -434,12 +434,12 @@
         </table>
       </div>
     </div>
-    <div><a name="setNotifyScheduler-Scheduler-"></a><a name="setnotifyscheduler"></a>
-      <h3 class="api-name" id="setNotifyScheduler(Scheduler)">setNotifyScheduler</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setNotifyScheduler(Scheduler)">setNotifyScheduler</a>(scheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>?):&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</pre>
+    <div><a name="setNotifyScheduler-io.reactivex.Scheduler-"></a><a name="setnotifyscheduler"></a>
+      <h3 class="api-name" id="setNotifyScheduler(io.reactivex.Scheduler)">setNotifyScheduler</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html#setNotifyScheduler(io.reactivex.Scheduler)">setNotifyScheduler</a>(scheduler:&nbsp;<a href="/reference/kotlin/io/reactivex/Scheduler.html">Scheduler</a>):&nbsp;<a href="/reference/kotlin/androidx/paging/RxPagedListBuilder.html">RxPagedListBuilder</a>&lt;Key,&nbsp;Value&gt;</pre>
       <p>Sets scheduler which will be used for observing new PagedLists, as well as loading updates within the PagedLists.</p>
       <p>If not set, defaults to the UI thread.</p>
-      <p>The built Observable / Flowable will be observed on this scheduler, so that the thread receiving PagedLists will also receive the internal updates to the PagedList.</p>
+      <p>The built <code><a href="/reference/kotlin/io/reactivex/Observable.html">Observable</a></code> / <code><a href="/reference/kotlin/io/reactivex/Flowable.html">Flowable</a></code> will be observed on this scheduler, so that the thread receiving PagedLists will also receive the internal updates to the PagedList.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -449,7 +449,7 @@
           </thead>
           <tbody>
             <tr>
-              <td width="40%"><code>scheduler:&nbsp;<a href="/reference/kotlin/[JVM root]/&lt;ERROR CLASS&gt;.html">&lt;ERROR CLASS&gt;</a>?</code></td>
+              <td width="40%"><code>scheduler:&nbsp;<a href="/reference/kotlin/io/reactivex/Scheduler.html">Scheduler</a></code></td>
               <td>
                 <p>Scheduler that receives PagedList updates, and where <code><a href="/reference/kotlin/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> calls are dispatched. Generally, this is the UI/main thread.</p>
               </td>

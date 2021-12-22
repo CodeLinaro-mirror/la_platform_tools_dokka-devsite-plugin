@@ -10,7 +10,7 @@
       <pre>@<a href="/reference/androidx/compose/animation/ExperimentalAnimationApi.html">ExperimentalAnimationApi</a> public class EnterTransition</pre>
     </p>
     <hr>
-    <p><code><a href="/reference/androidx/compose/animation/EnterTransition.html">EnterTransition</a></code> defines how an <code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code> Composable appears on screen as it becomes visible. The 3 categories of EnterTransitions available are:</p>
+    <p><code><a href="/reference/androidx/compose/animation/EnterTransition.html">EnterTransition</a></code> defines how an <code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code> Composable appears on screen as it becomes visible. The 3 categories of EnterTransitions available are:</p>
     <ol>
       <li>
         <p>fade <code><a href="/reference/androidx/compose/animation/package-summary.html#fadeIn(kotlin.Float,androidx.compose.animation.core.FiniteAnimationSpec)">fadeIn</a></code>)</p>
@@ -19,7 +19,7 @@
         <p>slide: <code><a href="/reference/androidx/compose/animation/package-summary.html#slideIn(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideIn</a></code>, <code><a href="/reference/androidx/compose/animation/package-summary.html#slideInHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideInHorizontally</a></code>, <code><a href="/reference/androidx/compose/animation/package-summary.html#slideInVertically(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideInVertically</a></code></p>
       </li>
       <li>
-        <p>expand: <code><a href="/reference/androidx/compose/animation/package-summary.html#expandIn(Alignment,kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Boolean)">expandIn</a></code>, <code><a href="/reference/androidx/compose/animation/package-summary.html#expandHorizontally(Alignment.Horizontal,kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Boolean)">expandHorizontally</a></code>, <code><a href="/reference/androidx/compose/animation/package-summary.html#expandVertically(Alignment.Vertical,kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Boolean)">expandVertically</a></code> They can be combined using plus operator,  for example:</p>
+        <p>expand: <code><a href="/reference/androidx/compose/animation/package-summary.html#expandIn(androidx.compose.ui.Alignment,kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Boolean)">expandIn</a></code>, <code><a href="/reference/androidx/compose/animation/package-summary.html#expandHorizontally(androidx.compose.ui.Alignment.Horizontal,kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Boolean)">expandHorizontally</a></code>, <code><a href="/reference/androidx/compose/animation/package-summary.html#expandVertically(androidx.compose.ui.Alignment.Vertical,kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Boolean)">expandVertically</a></code> They can be combined using plus operator,  for example:</p>
       </li>
     </ol>
     <pre class="prettyprint">
@@ -57,7 +57,7 @@ AnimatedVisibility(
     // Content that needs to appear/disappear goes here:
     Box(Modifier.fillMaxWidth().requiredHeight(200.dp)) {}
 }</pre>
-    <p><b>Note</b>: <code><a href="/reference/androidx/compose/animation/package-summary.html#fadeIn(kotlin.Float,androidx.compose.animation.core.FiniteAnimationSpec)">fadeIn</a></code> and <code><a href="/reference/androidx/compose/animation/package-summary.html#slideIn(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideIn</a></code> do not affect the size of the <code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code> composable. In contrast, <code><a href="/reference/androidx/compose/animation/package-summary.html#expandIn(Alignment,kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Boolean)">expandIn</a></code> will grow the clip bounds to reveal the whole content. This will automatically animate other layouts out of the way, very much like <code><a href="/reference/androidx/compose/animation/package-summary.html#(Modifier).animateContentSize(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function2)">animateContentSize</a></code>.</p>
+    <p><b>Note</b>: <code><a href="/reference/androidx/compose/animation/package-summary.html#fadeIn(kotlin.Float,androidx.compose.animation.core.FiniteAnimationSpec)">fadeIn</a></code> and <code><a href="/reference/androidx/compose/animation/package-summary.html#slideIn(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideIn</a></code> do not affect the size of the <code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code> composable. In contrast, <code><a href="/reference/androidx/compose/animation/package-summary.html#expandIn(androidx.compose.ui.Alignment,kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Boolean)">expandIn</a></code> will grow the clip bounds to reveal the whole content. This will automatically animate other layouts out of the way, very much like <code><a href="/reference/androidx/compose/animation/package-summary.html#(androidx.compose.ui.Modifier).animateContentSize(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function2)">animateContentSize</a></code>.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <thead>
@@ -83,19 +83,19 @@ AnimatedVisibility(
             <td></td>
           </tr>
           <tr>
-            <td width="40%"><code><a href="/reference/androidx/compose/animation/package-summary.html#expandIn(Alignment,kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Boolean)">expandIn</a></code></td>
+            <td width="40%"><code><a href="/reference/androidx/compose/animation/package-summary.html#expandIn(androidx.compose.ui.Alignment,kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Boolean)">expandIn</a></code></td>
             <td></td>
           </tr>
           <tr>
-            <td width="40%"><code><a href="/reference/androidx/compose/animation/package-summary.html#expandHorizontally(Alignment.Horizontal,kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Boolean)">expandHorizontally</a></code></td>
+            <td width="40%"><code><a href="/reference/androidx/compose/animation/package-summary.html#expandHorizontally(androidx.compose.ui.Alignment.Horizontal,kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Boolean)">expandHorizontally</a></code></td>
             <td></td>
           </tr>
           <tr>
-            <td width="40%"><code><a href="/reference/androidx/compose/animation/package-summary.html#expandVertically(Alignment.Vertical,kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Boolean)">expandVertically</a></code></td>
+            <td width="40%"><code><a href="/reference/androidx/compose/animation/package-summary.html#expandVertically(androidx.compose.ui.Alignment.Vertical,kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Boolean)">expandVertically</a></code></td>
             <td></td>
           </tr>
           <tr>
-            <td width="40%"><code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code></td>
+            <td width="40%"><code><a href="/reference/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code></td>
             <td></td>
           </tr>
         </tbody>

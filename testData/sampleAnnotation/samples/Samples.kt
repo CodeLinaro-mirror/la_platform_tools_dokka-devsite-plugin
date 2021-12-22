@@ -16,7 +16,7 @@
 
 package dokkatest.sampleAnnotation.samples
 
-import androidx.annotation.Sampled
+import androidx.annotations.Sampled
 import androidx.notARealLibrary.Thingy1
 import androidx.anotherFakeLibrary.FooFooFoo
 
