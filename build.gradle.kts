@@ -26,7 +26,7 @@ repositories {
 
 plugins {
     kotlin("jvm") version "1.6.0"
-    id("com.github.johnrengelman.shadow") version "4.0.4"
+    id("com.github.johnrengelman.shadow") version "7.1.1"
     id("application")
     id("maven-publish")
 }
@@ -64,12 +64,16 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-tasks.withType<ShadowJar> {
+val shadowJar = tasks.withType<ShadowJar> {
     archiveBaseName.set("dackka")
-    archiveClassifier.set(null as String?)
-    archiveVersion.set(null as String?)
     isZip64 = true
     destinationDirectory.set(getDistributionDirectory())
+}
+
+// Do not publish shadow jar to maven
+val javaComponent = components["java"] as AdhocComponentWithVariants
+javaComponent.withVariantsFromConfiguration(configurations["shadowRuntimeElements"]) {
+    skip()
 }
 
 sourceSets.test {
@@ -144,12 +148,9 @@ val ktlintFormat by tasks.creating(JavaExec::class) {
     args = listOf("-F", "src/**/*.kt")
 }
 
-val publicationName = "Dackka"
-val repositoryName = "Dist"
-
 publishing {
     publications {
-        create<MavenPublication>(publicationName) {
+        create<MavenPublication>(name = "Dackka") {
             from(components["java"])
             pom {
                 licenses {
@@ -173,12 +174,10 @@ publishing {
 
     repositories {
         maven {
-            name = repositoryName
             url = uri("file://${getDistributionDirectory().canonicalPath}/repo/repository")
         }
     }
 }
-
 
 /**
  * The build server will copy the contents of the distribution directory and make it available for
@@ -188,7 +187,7 @@ fun getDistributionDirectory(): File {
     return if (System.getenv("DIST_DIR") != null) {
         File(System.getenv("DIST_DIR"))
     } else {
-        File("out/dist")
+        File(projectDir, "out/dist").apply { mkdirs() }
     }
 }
 
