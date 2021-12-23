@@ -48,11 +48,19 @@ import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DTypeParameter
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.Dynamic
+import org.jetbrains.dokka.model.JavaObject
 import org.jetbrains.dokka.model.Nullable
+import org.jetbrains.dokka.model.PrimitiveJavaType
 import org.jetbrains.dokka.model.Projection
+import org.jetbrains.dokka.model.Star
 import org.jetbrains.dokka.model.StringValue
+import org.jetbrains.dokka.model.TypeAliased
 import org.jetbrains.dokka.model.TypeConstructor
+import org.jetbrains.dokka.model.TypeParameter
+import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Variance
+import org.jetbrains.dokka.model.Void
 import org.jetbrains.dokka.model.WithChildren
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.WithGenerics
@@ -309,7 +317,15 @@ internal class DocTagConverter(
                 is Nullable -> {
                     result += recursivelyGetLambdaParamNames(listOf(argumentType.inner))
                 }
-                else -> { /* do nothing */ }
+                is TypeParameter -> {
+                    /* Type parameters can't be lambdas, and are fully squashed to strings. */
+                }
+                is TypeAliased -> { // No clear way to decide which
+                    result += recursivelyGetLambdaParamNames(
+                        setOf(argumentType.inner, argumentType.typeAlias).toList())
+                }
+                is PrimitiveJavaType, is JavaObject, Void, Dynamic, Star -> { /* Do nothing */ }
+                is UnresolvedBound -> { /* Nothing we can do. We warn elsewhere for this case. */ }
             }
         }
         return result
@@ -402,7 +418,8 @@ internal class DocTagConverter(
                     components.addAll(it.children)
                 }
                 is NamedTagWrapper -> if (it.name == name) components.add(it.root)
-                else -> { /* do nothing */ }
+                is Author, is Version, is Since, is Return, is Receiver, is Constructor,
+                is Deprecated, is Suppress -> { /* TODO: We do not support these tags yet */ }
             }
         }
         if (components.isEmpty()) return UndocumentedSymbolDescriptionComponent()

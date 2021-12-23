@@ -240,7 +240,7 @@ internal class DefaultDescriptionComponent(
                     error("Not in table context: ${tag.javaClass.simpleName}.")
                 is Li -> error("Not in list context: ${tag.javaClass.simpleName}. The <li> tag " +
                     "must be contained in a parent element (such as <ol>, <ul>, or <menu>).")
-                else -> { /* do nothing */ }
+                is Caption -> TODO("Support this tag")
             }
         }
     }
