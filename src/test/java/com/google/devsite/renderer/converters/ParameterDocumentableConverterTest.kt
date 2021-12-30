@@ -1025,6 +1025,27 @@ internal class ParameterDocumentableConverterTest(
         }
     }
 
+    @Test // go/kotlin-upstream-bug/2207
+    fun `Type-target annotations work on unresolved return types`() {
+        val paramString = """
+            |annotation class Squark
+            |fun foo(): @Squark String? = null
+        """.render().returnType()
+        val paramUnresolved = """
+            |annotation class Squark
+            |fun foo(): @Squark Unresolved? = null
+        """.render().returnType()
+
+        assertThat(paramString.data.type.data.name).isEqualTo("String")
+        assertThat(paramUnresolved.data.type.data.name).isEqualTo("<ERROR CLASS>")
+
+        for (param in listOf(paramString/*, paramUnresolved*/)) {
+            assertThat(param.data.annotationComponents.size).isEqualTo(1)
+            assertThat(param.nullable).isTrue()
+            assertThat(param.data.annotationComponents.single().name).isEqualTo("Squark")
+        }
+    }
+
     private fun DModule.param(name: String = "foo", forSummary: Boolean = false):
         ParameterComponent {
         val classGraph = runBlocking {

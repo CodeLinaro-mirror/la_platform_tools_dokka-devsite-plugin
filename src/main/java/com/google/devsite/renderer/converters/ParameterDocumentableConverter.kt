@@ -651,7 +651,8 @@ internal class ParameterDocumentableConverter(
                     // Unit can be nullable, but that information is basically always useless
                     className == "Unit"))
         }
-        is Void, is PrimitiveJavaType -> false
+        is Void -> false
+        is PrimitiveJavaType -> "[" in this.name
         else -> true
     }
 
