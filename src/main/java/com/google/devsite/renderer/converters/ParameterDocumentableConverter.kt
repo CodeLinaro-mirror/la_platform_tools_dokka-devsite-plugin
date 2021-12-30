@@ -76,22 +76,25 @@ internal class ParameterDocumentableConverter(
         isSummary: Boolean
     ): ParameterComponent = when (displayLanguage) {
         Language.JAVA -> {
+            val (propagatedAnnotations, retainedAnnotations) = param.annotations()
+                .partition { it.belongsOnReturnType() }
+            val nullability =
+                param.type.getNullability(displayLanguage, param.isFromJava(), param.annotations())
             DefaultParameterComponent(
                 ParameterComponent.Params(
                     name = param.name ?: "receiver",
                     type = componentForProjection(
                         projection = param.type,
                         isJavaSource = param.isFromJava(),
-                        propagatedAnnotations = param.annotations()
-                            .filter { it.belongsOnReturnType() }
+                        propagatedAnnotations = propagatedAnnotations,
+                        propagatedNullability = nullability
                     ),
                     modifiers = param.getExtraModifiers()
                         .modifiersFor(ModifierHints(Language.JAVA)),
-                    annotationComponents = param.annotations().filter { !it.belongsOnReturnType() }
-                        .annotationComponents(
+                    annotationComponents = retainedAnnotations.annotationComponents(
                         pathProvider,
                         displayLanguage,
-                        showNullability = false
+                        nullability = Nullability.DONT_CARE // Propagate Nullability, don't retain
                     ),
                     displayLanguage = Language.JAVA
                 )
@@ -140,7 +143,7 @@ internal class ParameterDocumentableConverter(
                     .annotationComponents(
                         pathProvider,
                         displayLanguage,
-                        showNullability = false
+                        nullability = Nullability.DONT_CARE // as-Kotlin doesn't nullable-annotate
                 ),
                 defaultValue = defaultValue
             )
@@ -157,7 +160,8 @@ internal class ParameterDocumentableConverter(
             componentForProjection(
                 projection = it,
                 isJavaSource = param.isFromJava(),
-                showNullability = false
+                propagatedNullability = if (displayLanguage == Language.JAVA) Nullability.DONT_CARE
+                    else it.getNullability(displayLanguage, param.isFromJava(), param.annotations())
             )
         }
     ))
@@ -171,7 +175,8 @@ internal class ParameterDocumentableConverter(
         val primaryType = componentForProjection(
             projection = projection,
             isJavaSource = isJavaSource,
-            removedAnnotations = projection.annotations().filter { !it.belongsOnReturnType() },
+            removedAnnotations = projection.annotations().filter { !it.belongsOnReturnType() }
+                .distinctBy { it.identifier },
             propagatedAnnotations = projection.annotations().filter { it.belongsOnReturnType() }
         )
 
@@ -190,8 +195,7 @@ internal class ParameterDocumentableConverter(
                     .annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
-                    isFromJava = isJavaSource,
-                    isKotlinNullable = projection is Nullable
+                    nullability = projection.getNullability(displayLanguage, isJavaSource)
                 ),
                 defaultValue = defaultValue
             )
@@ -220,8 +224,7 @@ internal class ParameterDocumentableConverter(
         propagatedAnnotations: List<Annotation> = emptyList(),
         removedAnnotations: List<Annotation> = emptyList(),
         isReturnType: Boolean = false,
-        showNullability: Boolean = true,
-        isKotlinNullable: Boolean = false
+        propagatedNullability: Nullability? = null
     ): TypeProjectionComponent {
         // Lambda functions can't be generic types, but their parameters are crammed into the same
         // "projections" location where generic types are stored.
@@ -242,8 +245,7 @@ internal class ParameterDocumentableConverter(
                 propagatedAnnotations = propagatedAnnotations,
                 removedAnnotations = removedAnnotations,
                 isReturnType = false,
-                showNullability = showNullability,
-                isKotlinNullable = true
+                propagatedNullability = Nullability.KOTLIN_NULLABLE or propagatedNullability
             )
         }
         // isReturnType = should_convert_Unit_to_void, which is always false for `GenericOf<Unit>`.
@@ -254,7 +256,7 @@ internal class ParameterDocumentableConverter(
                 propagatedAnnotations = propagatedAnnotations,
                 removedAnnotations = removedAnnotations,
                 isReturnType = false,
-                showNullability = showNullability
+                propagatedNullability = propagatedNullability
             )
         }
         if (proj is TypeAliased) {
@@ -264,12 +266,15 @@ internal class ParameterDocumentableConverter(
                 propagatedAnnotations = propagatedAnnotations,
                 removedAnnotations = removedAnnotations,
                 isReturnType = isReturnType,
-                showNullability = showNullability)
+                propagatedNullability = propagatedNullability
+            )
         }
 
         val annotations = propagatedAnnotations + projection.annotations() - removedAnnotations
 
-        val nullable = proj.isNullable(isJavaSource, propagatedAnnotations) || isKotlinNullable
+        val nullability =
+            proj.getNullability(displayLanguage, isJavaSource, propagatedAnnotations) or
+                propagatedNullability
 
         return when (displayLanguage) {
             Language.JAVA -> DefaultTypeProjectionComponent(
@@ -278,11 +283,9 @@ internal class ParameterDocumentableConverter(
                         annotationComponents = annotations.annotationComponents(
                             pathProvider = pathProvider,
                             displayLanguage = displayLanguage,
-                            isKotlinNullable = isKotlinNullable,
-                            isFromJava = isJavaSource,
-                            showNullability = showNullability && proj.typeIsNullableAtAll()
+                            nullability = nullability
                         ),
-                        nullable = nullable,
+                        nullability = nullability,
                         displayLanguage = Language.JAVA,
                         generics = generics
                     )
@@ -295,16 +298,16 @@ internal class ParameterDocumentableConverter(
                         annotationComponents = annotations.annotationComponents(
                             pathProvider = pathProvider,
                             displayLanguage = displayLanguage,
-                            showNullability = false
+                            nullability = nullability
                         ),
-                        nullable = nullable,
+                        nullability = nullability,
                         generics = generics
                     )
                 )
                 true -> componentForLambdaProjectionAsKotlin(
                     proj = proj.possiblyAsKotlin(),
                     annotations = annotations,
-                    nullable = nullable
+                    nullability = nullability
                 )
             }
         }
@@ -314,7 +317,7 @@ internal class ParameterDocumentableConverter(
     private fun componentForLambdaProjectionAsKotlin(
         proj: Projection,
         annotations: List<Annotation> = emptyList(),
-        nullable: Boolean = false
+        nullability: Nullability? = null
     ): TypeProjectionComponent {
         val returnType = proj.asTypeConstructor().projections.last()
         val lambdaModifiers: List<String> = if (proj.isSuspend()) {
@@ -336,9 +339,12 @@ internal class ParameterDocumentableConverter(
                 annotationComponents = annotations.annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
-                    showNullability = false
+                    // Don't inject space-consuming nullability annotations for type parameters
+                    nullability = if (displayLanguage == Language.JAVA) Nullability.DONT_CARE
+                        else proj.getNullability(displayLanguage, isJavaSource = false, annotations)
+                            or nullability
                 ),
-                nullable = nullable,
+                nullability = proj.getNullability(displayLanguage) or nullability,
                 generics = returnType.generics(isJavaSource = false),
                 displayLanguage = displayLanguage
             )
@@ -373,7 +379,7 @@ internal class ParameterDocumentableConverter(
         is FunctionalTypeConstructor, is GenericTypeConstructor -> {
             this as TypeConstructor
             val proj = projections.singleOrNull()
-            // if this is am array of Java primitives (int[]) then use the kotlin version (IntArray)
+            // if this is an array of Java primitives (int[]) then use the kotlin version (IntArray)
             if (
                 dri.packageName == "kotlin" &&
                 dri.classNames == "Array" &&
@@ -617,46 +623,7 @@ internal class ParameterDocumentableConverter(
             is Invariance -> this.copy(inner)
         }
 
-    /** @return true if this is a nullable type, false otherwise */
-    private fun Projection.isNullable(
-        isJavaSource: Boolean,
-        injectedAnnotations: List<Annotation> = emptyList()
-    ): Boolean {
-        val allAnnotations = injectedAnnotations +
-            ((this as? WithExtraProperties<*>)?.annotations() ?: emptyList())
-        if (allAnnotations.hasAtNullable()) return true
-        if (allAnnotations.hasAtNonNull()) return false
-        if (allAnnotations.any { it.dri.classNames in BAD_NONNULL_ANNOTATION_NAMES }) return false
-        return when (this) {
-            is Nullable -> true
-            is Variance<*> -> inner.isNullable(isJavaSource)
-            is TypeAliased -> inner.isNullable(isJavaSource)
-            // Java arrays of primitives are nullable; non-array primitives aren't
-            is PrimitiveJavaType -> "[" in name
-            Void -> false // Not nullable by definition
-            Dynamic, Star -> false // Can come from Kotlin source only
-            // Unannotated java projections are nullable, default Kotlin aren't
-            is TypeParameter, is TypeConstructor, is JavaObject, is UnresolvedBound -> isJavaSource
-        }
-    }
-
-    private fun Projection.typeIsNullableAtAll() = when (this) {
-        is TypeConstructor -> {
-            val className = dri.classNames.orEmpty()
-            !(dri.packageName == "kotlin" &&
-                // kotlin types we convert to java primitives don't get nullability
-                (className in kotlinPrimitives ||
-                    // Nothing is converted to void, so nullability isn't useful
-                    className == "Nothing" ||
-                    // Unit can be nullable, but that information is basically always useless
-                    className == "Unit"))
-        }
-        is Void -> false
-        is PrimitiveJavaType -> "[" in this.name
-        else -> true
-    }
-
-    private companion object {
+    internal companion object {
         val kotlinPrimitives = listOf(
             "Boolean", "Byte", "Char", "Short", "Int", "Long", "Float", "Double"
         )

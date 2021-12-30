@@ -55,7 +55,9 @@ internal class EnumValueDocumentableConverter(
         val projection = paramConverter.componentForProjection(
             GenericTypeConstructor(dEnum.dri, emptyList()),
             isJavaSource = enumValue.isFromJava(),
-            showNullability = false
+            // While technically an ENUM_VALUE is a member of ENUM_TYPE? because you can always
+            // define an enum value which is `null`, this isn't useful information
+            propagatedNullability = Nullability.DONT_CARE
         )
         return DefaultSymbolDetail(
             SymbolDetail.Params(
@@ -65,7 +67,7 @@ internal class EnumValueDocumentableConverter(
                 annotationComponents = annotations.annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
-                    showNullability = false
+                    nullability = Nullability.DONT_CARE // See above
                 ),
                 modifiers = enumValue.getExtraModifiers().modifiersFor(hints),
                 returnType = projection,

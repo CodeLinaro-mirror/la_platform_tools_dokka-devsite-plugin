@@ -638,7 +638,10 @@ internal class DocTagConverter(
     ) = DefaultSummaryList(SummaryList.Params(items = documentables
         .map { summaryForDocumentable(it, showAnnotations) }))
 
-    /** Converts generic Documentables to TwoPaneSummaryItems, as simple maybe-annotated links */
+    /**
+     * Converts generic Documentables to TwoPaneSummaryItems, as simple maybe-annotated links
+     * This is used for mini-signatures, e.g. nested types list, subclasses list, package summary
+     */
     internal fun summaryForDocumentable(
         documentable: Documentable,
         showAnnotations: Boolean = false
@@ -652,7 +655,7 @@ internal class DocTagConverter(
                         annotations = annotations.annotationComponents(
                             pathProvider = pathProvider,
                             displayLanguage = displayLanguage,
-                            showNullability = false
+                            nullability = Nullability.DONT_CARE // Not useful for these use cases
                         ),
                         link = pathProvider.linkForReference(documentable.dri)
                     ))

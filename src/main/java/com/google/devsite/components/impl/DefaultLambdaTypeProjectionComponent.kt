@@ -28,7 +28,7 @@ internal class DefaultLambdaTypeProjectionComponent(
     override val data: LambdaTypeProjectionComponent.Params
 ) : LambdaTypeProjectionComponent {
     override fun render(into: FlowContent) = into.run {
-        if (data.nullable) +"("
+        if (data.nullability.nullable) +"("
         data.annotationComponents.render(this, separator = "", terminator = { +" " })
         data.lambdaModifiers.render(this, terminator = { +Entities.nbsp })
         if (data.receiver != null) {
@@ -44,6 +44,6 @@ internal class DefaultLambdaTypeProjectionComponent(
         data.type.render(this)
         // Render any generics on the return type
         data.generics.render(into, ShouldBreak.NO, brackets = "<>")
-        if (data.nullable) +")?"
+        if (data.nullability.nullable) +")?"
     }
 }

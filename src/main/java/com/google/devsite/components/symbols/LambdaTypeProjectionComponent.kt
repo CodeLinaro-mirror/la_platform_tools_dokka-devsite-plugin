@@ -18,6 +18,7 @@ package com.google.devsite.components.symbols
 
 import com.google.devsite.components.Link
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.Nullability
 
 /** Represents a symbol type such as function parameter types. */
 internal interface LambdaTypeProjectionComponent : TypeProjectionComponent {
@@ -38,14 +39,14 @@ internal interface LambdaTypeProjectionComponent : TypeProjectionComponent {
         // Lambda parameters can be named
         val lambdaParams: List<ParameterComponent> = emptyList(),
         val receiver: TypeProjectionComponent? = null,
-        override val nullable: Boolean = false,
+        override val nullability: Nullability,
         // Generics on the return type
         override val generics: List<TypeProjectionComponent> = emptyList(),
         override val displayLanguage: Language
     ) : TypeProjectionComponent.Params(
         type = type,
         annotationComponents = annotationComponents,
-        nullable = nullable,
+        nullability = nullability,
         displayLanguage = displayLanguage,
         generics = emptyList()
     )

@@ -32,6 +32,7 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.description
 import com.google.devsite.renderer.converters.testing.generics
 import com.google.devsite.renderer.converters.testing.isAtNonNull
+import com.google.devsite.renderer.converters.testing.isAtNullable
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
@@ -41,6 +42,7 @@ import com.google.devsite.renderer.converters.testing.single
 import com.google.devsite.renderer.converters.testing.size
 import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.renderer.converters.testing.title
+import com.google.devsite.renderer.converters.testing.typeAnnotations
 import com.google.devsite.renderer.converters.testing.typeName
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
@@ -669,8 +671,8 @@ internal class DocTagConverterTest(
             | * @param currentList The new current list of nullable Ts, may not be null.
             | */
             |public <T> void onCurrentListChanged(
-            |            java.util.List<@NonNull T> previousList,
-            |            @NonNull java.util.List<T> currentList) {}
+            |            @Nullable java.util.List<@NonNull T> previousList,
+            |            @NonNull java.util.List<@Nullable T> currentList) {}
         """.render(java = true).documentation()
         for (documentation in listOf(documentationK, documentationJ)) {
             val paramTable = documentation.first { (it as? SummaryList)?.title() == "Parameters" }
@@ -695,13 +697,18 @@ internal class DocTagConverterTest(
             assertThat(param1Generic.name()).isEqualTo("T")
 
             javaOnly {
-                assertThat(param0Left.data.annotationComponents).isEmpty()
-                assertThat(param0Left.data.type.data.annotationComponents).isEmpty()
+                if (documentation == documentationJ) {
+                    assertThat(param0Left.typeAnnotations().single().isAtNullable).isTrue()
+                    assertThat(param1Generic.data.annotationComponents.single().isAtNullable)
+                        .isTrue()
+                } else {
+                    assertThat(param0Left.typeAnnotations()).isEmpty()
+                    assertThat(param1Generic.data.annotationComponents.isEmpty())
+                }
                 assertThat(param0Generic.data.annotationComponents.single().isAtNonNull).isTrue()
+                assertThat(param0Left.data.annotationComponents).isEmpty()
                 assertThat(param1Left.data.annotationComponents).isEmpty()
-                assertThat(param1Left.data.type.data.annotationComponents.single().isAtNonNull)
-                    .isTrue()
-                assertThat(param1Generic.data.annotationComponents.isEmpty())
+                assertThat(param1Left.typeAnnotations().single().isAtNonNull).isTrue()
             }
             kotlinOnly {
                 assertThat(param0Left.data.type.nullable).isEqualTo(true)

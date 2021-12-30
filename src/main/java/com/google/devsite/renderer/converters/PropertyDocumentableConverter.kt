@@ -30,7 +30,6 @@ import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.DProperty
-import org.jetbrains.dokka.model.Nullable
 import java.util.Locale
 
 /** Converts documentable properties into property components. */
@@ -63,9 +62,7 @@ internal class PropertyDocumentableConverter(
                             annotationComponents = annotations.annotationComponents(
                                 pathProvider = pathProvider,
                                 displayLanguage = displayLanguage,
-                                isFromJava = property.isFromJava(),
-                                isKotlinNullable = property.type is Nullable,
-                                showNullability = false
+                                nullability = Nullability.DONT_CARE // on return type instead
                             )
                         ),
                         description = javadocConverter.summaryDescription(property, annotations)
@@ -77,23 +74,24 @@ internal class PropertyDocumentableConverter(
 
     /** @return the property detail component */
     fun detail(property: DProperty, hints: ModifierHints): SymbolDetail {
-        val annotations = property.annotations().filter { !it.belongsOnReturnType() }
+        val (propagatedAnnotations, retainedAnnotations) = property.annotations()
+            .partition { it.belongsOnReturnType() }
         val returnType = paramConverter.componentForProjection(
             property.type,
             property.isFromJava(),
-            property.annotations().filter { it.belongsOnReturnType() }
+            propagatedAnnotations,
+            propagatedNullability = property.type
+                .getNullability(displayLanguage, property.isFromJava(), propagatedAnnotations)
         )
         return DefaultSymbolDetail(
             SymbolDetail.Params(
                 displayLanguage = displayLanguage,
                 name = property.name,
                 anchors = property.generateAnchors(),
-                annotationComponents = annotations.annotationComponents(
+                annotationComponents = retainedAnnotations.annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
-                    isFromJava = property.isFromJava(),
-                    isKotlinNullable = property.type is Nullable,
-                    showNullability = false
+                    nullability = Nullability.DONT_CARE // Propagates to return type instead
                 ),
                 modifiers = property.modifiers().modifiersFor(hints),
                 returnType = returnType,
@@ -103,7 +101,7 @@ internal class PropertyDocumentableConverter(
                     documentable = property,
                     returnType = returnType,
                     paramNames = listOf("receiver"),
-                    annotations = annotations
+                    annotations = retainedAnnotations
                 )
             )
         )

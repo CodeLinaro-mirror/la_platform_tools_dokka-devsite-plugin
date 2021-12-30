@@ -33,7 +33,7 @@ val List<String>.topLevelExtensionProperty get() = Pair(10f, 20f)
  *
  * @sample dokkatest.sampleAnnotation.samples.FunctionContainingClassSample
  */
-val topLevelProperty: Unit? = null
+val topLevelProperty: String? = null
 
 /**
  * top-level extension function docs
@@ -47,7 +47,7 @@ fun List<String>.topLevelExtensionFunction() = Pair(10f, 20f)
  *
  * @sample dokkatest.sampleAnnotation.samples.FunctionContainingClassSample
  */
-fun topLevelFunction(): Unit? = null
+fun topLevelFunction(): Unit {}
 
 /**
  * top-level class docs
@@ -67,7 +67,7 @@ class TopLevelClass {
      *
      * @sample dokkatest.sampleAnnotation.samples.FunctionContainingClassSample
      */
-    val classProperty: Unit? = null
+    val classProperty: String? = null
 
     /**
      * in-class extension function docs
@@ -81,7 +81,7 @@ class TopLevelClass {
      *
      * @sample dokkatest.sampleAnnotation.samples.FunctionContainingClassSample
      */
-    fun classFunction(): Unit? = null
+    fun classFunction(): Unit {}
 
     /**
      * inner class docs

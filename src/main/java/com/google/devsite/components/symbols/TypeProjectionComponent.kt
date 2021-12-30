@@ -18,6 +18,7 @@ package com.google.devsite.components.symbols
 
 import com.google.devsite.components.Link
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.Nullability
 
 /** Represents a symbol type such as function parameter types. */
 internal interface TypeProjectionComponent : SymbolBase {
@@ -34,11 +35,10 @@ internal interface TypeProjectionComponent : SymbolBase {
     open class Params(
         open val type: Link,
         open val annotationComponents: List<AnnotationComponent> = emptyList(),
-        open val nullable: Boolean = false,
+        open val nullability: Nullability,
         open val generics: List<TypeProjectionComponent> = emptyList(),
         open val displayLanguage: Language
     )
 
-    val nullable: Boolean
-        get() = data.nullable || data.annotationComponents.any { it.name == "Nullable" }
+    val nullable: Boolean get() = data.nullability.nullable
 }

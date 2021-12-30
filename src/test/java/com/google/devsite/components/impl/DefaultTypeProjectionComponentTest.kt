@@ -21,6 +21,7 @@ import com.google.devsite.components.symbols.TypeProjectionComponent.Params
 import com.google.devsite.components.testing.NoopLink
 import com.google.devsite.components.testing.NoopTypeProjectionComponent
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.Nullability
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -31,7 +32,9 @@ class DefaultTypeProjectionComponentTest {
         val component = DefaultTypeProjectionComponent(
             Params(
                 type = NoopLink("Int"),
-                displayLanguage = Language.KOTLIN
+                displayLanguage = Language.KOTLIN,
+                nullability = Nullability.KOTLIN_DEFAULT
+
             )
         )
 
@@ -52,7 +55,7 @@ class DefaultTypeProjectionComponentTest {
         val component = DefaultTypeProjectionComponent(
             Params(
                 type = NoopLink("Int"),
-                nullable = true,
+                nullability = Nullability.KOTLIN_NULLABLE,
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -75,7 +78,8 @@ class DefaultTypeProjectionComponentTest {
             Params(
                 type = NoopLink("List"),
                 generics = listOf(NoopTypeProjectionComponent("String")),
-                displayLanguage = Language.KOTLIN
+                displayLanguage = Language.KOTLIN,
+                nullability = Nullability.KOTLIN_DEFAULT
             )
         )
 
@@ -96,7 +100,7 @@ class DefaultTypeProjectionComponentTest {
         val component = DefaultTypeProjectionComponent(
             Params(
                 type = NoopLink("List"),
-                nullable = true,
+                nullability = Nullability.KOTLIN_NULLABLE,
                 generics = listOf(NoopTypeProjectionComponent("String")),
                 displayLanguage = Language.KOTLIN
             )
@@ -123,7 +127,8 @@ class DefaultTypeProjectionComponentTest {
                     NoopTypeProjectionComponent("String"),
                     NoopTypeProjectionComponent("Int")
                 ),
-                displayLanguage = Language.KOTLIN
+                displayLanguage = Language.KOTLIN,
+                nullability = Nullability.KOTLIN_DEFAULT
             )
         )
 

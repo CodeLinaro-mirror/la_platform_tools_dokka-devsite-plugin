@@ -111,7 +111,9 @@ internal class FunctionDocumentableConverter(
             isJavaSource = function.isFromJava(),
             function.annotations().filter { it.belongsOnReturnType() },
             isReturnType = true,
-            showNullability = kind != SymbolDetail.SymbolKind.CONSTRUCTOR && !function.isConstructor
+            propagatedNullability =
+            if (kind == SymbolDetail.SymbolKind.CONSTRUCTOR || function.isConstructor)
+                Nullability.DONT_CARE else null
         )
         val annotations = function.annotations().filter { !it.belongsOnReturnType() }
 
@@ -129,7 +131,7 @@ internal class FunctionDocumentableConverter(
                 annotationComponents = annotations.annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
-                    showNullability = false
+                    nullability = Nullability.DONT_CARE // Nullability is on the return type instead
                 ),
                 modifiers = function.modifiers().modifiersFor(hints),
                 returnType = returnType,
@@ -193,6 +195,10 @@ internal class FunctionDocumentableConverter(
         )
     }
 
+    /**
+     * Creates the parameter representing the fake containing class for Kotlin top-level functions
+     * represented in a synthetic class, e.g. "SyntheticKt" in SyntheticKt.topLevelFunction(args)
+     */
     private fun DFunction.extFunctionClass(): ParameterComponent {
         return DefaultParameterComponent(
             ParameterComponent.Params(
@@ -201,7 +207,8 @@ internal class FunctionDocumentableConverter(
                 type = DefaultTypeProjectionComponent(
                     TypeProjectionComponent.Params(
                         type = pathProvider.linkForReference(driForSyntheticClass()),
-                        displayLanguage = displayLanguage
+                        displayLanguage = displayLanguage,
+                        nullability = Nullability.DONT_CARE // Fake synthetic classes can't be null
                     )
                 )
             )

@@ -23,7 +23,8 @@ import com.google.devsite.components.symbols.NamedValueAnnotationParameter
 import com.google.devsite.components.symbols.name
 import com.google.devsite.components.symbols.value
 import com.google.devsite.renderer.Language
-import com.google.devsite.renderer.Language.*
+import com.google.devsite.renderer.Language.JAVA
+import com.google.devsite.renderer.Language.KOTLIN
 import com.google.devsite.renderer.converters.testing.exceptNonNull
 import com.google.devsite.renderer.converters.testing.isAtNonNull
 import com.google.devsite.renderer.converters.testing.isAtNullable
@@ -212,7 +213,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |public @interface Hello {
             |    public String bar() default "";
             |}
-            |public void foo(@Hello("abc") @Hello(bar = "baz") String arg)
+            |public void foo(@Hello("abc") @Hello(bar = "baz") @NonNull String arg)
         """.render(java = true).function()!!.parameters.single().annotations()
 
         for (annotations in listOf(annotationsK, annotationsJ)) {
@@ -399,8 +400,9 @@ internal class AnnotationsTest : ConverterTestBase() {
     ) = annotationComponents(
         pathProvider = pathProvider(),
         displayLanguage = displayLanguage,
-        isFromJava = isFromJava,
-        isKotlinNullable = isKotlinNullable
+        nullability = if (isKotlinNullable) Nullability.KOTLIN_NULLABLE
+            else this.inferNullability(isFromJava)
+            ?: defaultNullability(isFromJava)
     )
 
     private fun AnnotationComponent.link(): Link.Params = data.type.data

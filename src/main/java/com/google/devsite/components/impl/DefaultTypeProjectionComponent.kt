@@ -30,6 +30,6 @@ internal class DefaultTypeProjectionComponent(
         data.annotationComponents.render(this, separator = "", terminator = { +" " })
         data.type.render(this)
         data.generics.render(into, ShouldBreak.NO, brackets = "<>")
-        if (data.displayLanguage == Language.KOTLIN && data.nullable) +"?"
+        if (data.displayLanguage == Language.KOTLIN) +data.nullability.renderAsKotlinSuffix()
     }
 }

@@ -25,6 +25,7 @@ import com.google.devsite.components.testing.NoopLink
 import com.google.devsite.components.testing.NoopParameterComponent
 import com.google.devsite.components.testing.NoopTypeProjectionComponent
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.Nullability
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -248,7 +249,8 @@ class DefaultParameterComponentTest {
                     lambdaParams = listOf(
                         NoopParameterComponent("Int"),
                         NoopParameterComponent("String")
-                    )
+                    ),
+                nullability = Nullability.KOTLIN_DEFAULT
                 )),
                 displayLanguage = Language.KOTLIN
             )
@@ -275,7 +277,8 @@ class DefaultParameterComponentTest {
                     type = NoopLink("Int"),
                     receiver = NoopTypeProjectionComponent("Boolean"),
                     displayLanguage = Language.KOTLIN,
-                    lambdaParams = listOf(NoopParameterComponent("String"))
+                    lambdaParams = listOf(NoopParameterComponent("String")),
+                    nullability = Nullability.KOTLIN_DEFAULT
                 )),
                 displayLanguage = Language.KOTLIN
             )
@@ -302,7 +305,8 @@ class DefaultParameterComponentTest {
                     type = NoopLink("Int"),
                     displayLanguage = Language.KOTLIN,
                     lambdaParams = listOf(NoopParameterComponent("String")),
-                    lambdaModifiers = listOf("suspend")
+                    lambdaModifiers = listOf("suspend"),
+                    nullability = Nullability.KOTLIN_DEFAULT
                 )),
                 displayLanguage = Language.KOTLIN
             )

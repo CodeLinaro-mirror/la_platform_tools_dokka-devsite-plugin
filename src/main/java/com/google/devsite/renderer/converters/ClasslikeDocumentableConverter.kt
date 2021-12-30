@@ -477,7 +477,7 @@ internal class ClasslikeDocumentableConverter(
             classlike.annotations().annotationComponents(
                 pathProvider = pathProvider,
                 displayLanguage = displayLanguage,
-                showNullability = false
+                nullability = Nullability.DONT_CARE // Classlike definitions aren't nullable
             )
         } else {
             emptyList()

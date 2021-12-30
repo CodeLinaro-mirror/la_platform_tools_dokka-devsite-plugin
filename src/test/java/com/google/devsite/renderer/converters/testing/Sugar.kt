@@ -94,6 +94,7 @@ internal fun ParameterComponent.link(): Link.Params = data.type.link()
 
 internal fun TypeProjectionComponent.name() = link().name
 internal fun ParameterComponent.typeName() = data.type.name()
+internal fun ParameterComponent.typeAnnotations() = data.type.data.annotationComponents
 
 internal fun AnnotationComponent.link(): Link.Params = data.type.data
 internal val AnnotationComponent.isAtNullable get() = this.link().name == "Nullable"

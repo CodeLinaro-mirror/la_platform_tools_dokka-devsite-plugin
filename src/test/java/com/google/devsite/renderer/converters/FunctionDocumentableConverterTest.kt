@@ -37,6 +37,7 @@ import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.projectionName
 import com.google.devsite.renderer.converters.testing.signature
 import com.google.devsite.renderer.converters.testing.summary
+import com.google.devsite.renderer.converters.testing.typeAnnotations
 import com.google.devsite.renderer.converters.testing.typeName
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
@@ -463,33 +464,26 @@ internal class FunctionDocumentableConverterTest(
     @Test
     fun `Function summary and detail include nullability information in 4x Kotlin and Java`() {
         val moduleJ = """
-                |public @interface NotNull {}
                 |@Nullable
-                |public String nulla1() { return null; }
-                |public String nulla2() { return null; }
+                |public String nulla() { return null; }
+                |public String platform() { return null; }
                 |@NonNull
-                |public String nonna1() { return ""; }
-                |public @NonNull String nonna2() { return ""; }
+                |public String nonnaBefore() { return ""; }
+                |public @NonNull String nonnaClose() { return ""; }
                 """.render(java = true)
         val moduleK = """
-                |annotation class Nullable
-                |annotation class NonNull
-                |@Nullable
-                |fun nulla1(): String? = null
-                |fun nulla2(): String? = null
-                |@NonNull
-                |fun nonna1(): String = "foo"
-                |fun nonna2(): String = "foo"
+                |fun nulla(): String? = null // nullability annotations in Kotlin are errors.
+                |fun nonna(): String = "foo"
                 """.render()
         fun DModule.sOrD(summary: Boolean, functionName: String): TypeProjectionComponent =
             if (summary) (summary(functionName).data.title as TypeSummary).data.type
             else detail(functionName).data.returnType
         for (isSummary in listOf(true, false)) {
-            for (whichFun in listOf("nonna1", "nonna2", "nulla1", "nulla2")) {
-                val typeJ = moduleJ.sOrD(isSummary, whichFun)
-                val typeK = moduleK.sOrD(isSummary, whichFun)
-                for (aType in listOf(typeJ, typeK)) {
-                    assertThat(aType.nullable).isEqualTo("nulla" in whichFun)
+            for (whichFun in listOf("nonna", "nulla", "nonnaBefore", "nonnaClose", "platform")) {
+                val typeJ = if (whichFun == "nonna") null else moduleJ.sOrD(isSummary, whichFun)
+                val typeK = if (whichFun.length != 5) null else moduleK.sOrD(isSummary, whichFun)
+                for (aType in listOfNotNull(typeJ, typeK)) {
+                    assertThat(aType.nullable).isEqualTo(whichFun in "nulla, platform")
                     val annotations = aType.data.annotationComponents
                     assertThat(annotations.singleOrNull()?.name?.let {
                         it in NULLABILITY_ANNOTATION_NAMES })
@@ -502,7 +496,7 @@ internal class FunctionDocumentableConverterTest(
                         assertThat(annotations.any { it.isAtNonNull })
                             .isEqualTo("nonna" in whichFun)
                         assertThat(annotations.any { it.isAtNullable })
-                            .isEqualTo(whichFun == "nulla1")
+                            .isEqualTo(whichFun == "nulla" && aType == typeJ)
                     }
                 }
             }
@@ -594,7 +588,7 @@ internal class FunctionDocumentableConverterTest(
         assertThat(param1.typeName()).isEqualTo("String")
         assertThat(param1.nullable).isFalse()
         assertThat(param1.data.annotationComponents).isEmpty()
-        javaOnly { assertThat(param1.data.type.data.annotationComponents.single().isAtNonNull) }
+        javaOnly { assertThat(param1.typeAnnotations().single().isAtNonNull).isTrue() }
     }
 
     @Test

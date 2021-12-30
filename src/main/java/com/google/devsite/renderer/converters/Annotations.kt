@@ -63,31 +63,35 @@ import org.jetbrains.dokka.model.properties.WithExtraProperties
 internal fun List<Annotation>.annotationComponents(
     pathProvider: FilePathProvider,
     displayLanguage: Language,
-    isFromJava: Boolean? = null,
-    isKotlinNullable: Boolean? = null,
-    showNullability: Boolean = true
+    nullability: Nullability
 ): List<AnnotationComponent> {
-    // TODO: consider turning this into an enum
-    if (showNullability && (isKotlinNullable == null || isFromJava == null))
-        throw RuntimeException("Did not specify isKotlinNullable/fromJava when showing nullability")
-    // if (isKotlinNullable == true && isFromJava == true) Can happen with type parameter bounds
-    val injectedAnnotations = mutableListOf<Annotation>()
-    if (any { it.dri.classNames in BAD_NONNULL_ANNOTATION_NAMES }) {
+    val injectedAnnotations = mutableListOf<Annotation?>()
+    if (any { it.isBadNonNull }) {
         injectedAnnotations.add(AT_NON_NULL) // Bad ones get filtered out later
-        println("WARN: You should be using androidx.annotation.NonNull, not " +
-            "${first{it.dri.classNames in BAD_NONNULL_ANNOTATION_NAMES}.dri}")
+        println("WARN: Use @androidx.annotation.NonNull, not @${first{it.isBadNonNull}.dri}")
+        assert(nullability != Nullability.JAVA_NOT_ANNOTATED)
     }
-    // We do not add @Nullable in java source, as that is redundant
+    if (any { it.isBadNullable }) {
+        injectedAnnotations.add(AT_NULLABLE) // Again, this generally means a bad test classpath
+        println("WARN: Use @androidx.annotation.Nullable, not @${first{it.isBadNullable}.dri}")
+        assert(nullability != Nullability.JAVA_NOT_ANNOTATED)
+    }
+    // DO NOT inject @Nullable in Kotlin-as-Java. Java clients don't need to care about the
+    // distinction between nullable and platform types except when writing API themselves.
     // Inject @NonNull for default-nullability kotlin types as-java if we should showNullability
-    if (showNullability && displayLanguage == Language.JAVA && !hasAtNonNull() &&
-        !isFromJava!! && !isKotlinNullable!!) {
-        injectedAnnotations += AT_NON_NULL
+    if (displayLanguage == Language.JAVA) {
+        injectedAnnotations += nullability.renderAsJavaAnnotation()
     }
 
-    return (this + injectedAnnotations).filter { annotation ->
-        shouldDocumentAnnotation(annotation, displayLanguage, showNullability)
-    }.distinctBy { it.toString() }.map { annotation -> annotation.toDackkaAnnotation(pathProvider) }
+    return (this + injectedAnnotations).filterNotNull().filter { annotation ->
+        shouldDocumentAnnotation(annotation, displayLanguage, nullability)
+    }.distinctBy { it.identifier }.map { annotation -> annotation.toDackkaAnnotation(pathProvider) }
 }
+
+internal fun String?.orNull() = if (this == "") null else this
+
+internal val DRI.fullName: String get() = (packageName.orNull()?.let { "$it." }) + classNames
+internal val Annotation.identifier: String get() = "${dri.fullName}(${params.values.map { "$it" }})"
 
 internal val AT_NULLABLE = Annotation(DRI("androidx.annotation", "Nullable"), emptyMap())
 internal val AT_NON_NULL = Annotation(DRI("androidx.annotation", "NonNull"), emptyMap())
@@ -98,13 +102,19 @@ private fun Annotation.toDackkaAnnotation(pathProvider: FilePathProvider): Annot
     return DefaultAnnotationComponent(AnnotationComponent.Params(type, params))
 }
 
-/** @return true if the `@Nullable` annotation is present, false otherwise */
-internal fun List<Annotation>.hasAtNullable(): Boolean = any { it.dri.classNames == "Nullable" }
-
-internal fun List<Annotation>.hasAtNonNull(): Boolean = any { it.dri.classNames == "NonNull" }
-
+/** @return true if an `@Nullable` annotation is present, false otherwise */
+internal fun List<Annotation>.hasAtNullable(): Boolean =
+    any { it.dri.classNames == "Nullable" || it.isBadNullable }
+/** @return true if an `@NonNull` annotation is present, false otherwise */
+internal fun List<Annotation>.hasAtNonNull(): Boolean =
+    any { it.dri.classNames == "NonNull" || it.isBadNonNull }
 /** @return true if the `@Deprecated` annotation is present, false otherwise */
 internal fun List<Annotation>.isDeprecated(): Boolean = any { it.isDeprecated() }
+
+private val Annotation.isBadNullable
+    get() = dri.classNames == "Nullable" && dri.fullName != AT_NULLABLE.dri.fullName
+private val Annotation.isBadNonNull get() = dri.classNames == "NotNull" ||
+    (dri.classNames == "NonNull" && dri.fullName != AT_NON_NULL.dri.fullName)
 
 /** @return the complete list of annotations for this type */
 internal fun WithExtraProperties<*>.annotations(): List<Annotation> {
@@ -135,40 +145,35 @@ internal fun Annotation.isDeprecated(): Boolean = dri.classNames == "Deprecated"
 private fun shouldDocumentAnnotation(
     annotation: Annotation,
     displayLanguage: Language,
-    showNullability: Boolean = true
+    nullability: Nullability
 ): Boolean {
     val name = annotation.dri.classNames
     // Not useful to developers
     val isSuppressAnnotation = name in SUPPRESSION_ANNOTATION_NAMES
     val isKotlinJvmAnnotation = annotation.dri.packageName == "kotlin.jvm"
     val isExplicitlyBannedAnnotation = name in EXPLICITLY_BANNED_ANNOTATION_NAMES
-
+    if (isSuppressAnnotation || isKotlinJvmAnnotation || isExplicitlyBannedAnnotation) return false
     // Surfaced separately
-    val isDeprecatedAnnotation = annotation.isDeprecated()
-    val isNullabilityAnnotation = name in NULLABILITY_ANNOTATION_NAMES
+    if (annotation.isDeprecated()) return false
 
-    // Ignored and overwritten with androidx.annotation.NonNull
-    val isBadNonNull = name in BAD_NONNULL_ANNOTATION_NAMES
-
-    return !isSuppressAnnotation &&
-        !isKotlinJvmAnnotation &&
-        !isExplicitlyBannedAnnotation &&
-        !isDeprecatedAnnotation &&
-        !isBadNonNull &&
-        !(isNullabilityAnnotation && !showNullability) &&
+    if (name in NULLABILITY_ANNOTATION_NAMES) {
+        // Ignored and overwritten with androidx.annotation.NonNull
+        if (annotation.isBadNullable || annotation.isBadNonNull) return false
+        // Explicitly hidden nullability annotations
+        if (nullability == Nullability.DONT_CARE) return false
         // Nullability annotations do not appear in Kotlin, even if explicit in Kotlin source
-        !(isNullabilityAnnotation && displayLanguage == Language.KOTLIN)
+        if (displayLanguage == Language.KOTLIN) return false
+    }
+    return true
 }
 
 internal fun Annotation.belongsOnReturnType() =
-    dri.classNames in NULLABILITY_ANNOTATION_NAMES ||
-        dri.classNames in BAD_NONNULL_ANNOTATION_NAMES ||
-        dri.classNames?.shouldBeTypebound() ?: false
+    dri.classNames in NULLABILITY_ANNOTATION_NAMES || dri.classNames?.shouldBeTypebound() ?: false
 
 private val SUPPRESSION_ANNOTATION_NAMES = listOf("Suppress", "SuppressWarnings", "SuppressLint")
-internal val NULLABILITY_ANNOTATION_NAMES = listOf("NonNull", "Nullable")
-// javax and jetbrains have their own @NonNull, which we convert to androidx.
-internal val BAD_NONNULL_ANNOTATION_NAMES = listOf("NotNull", "Nonnull")
+// We transform javax.validation.constraints.NotNull into androidx.annotation.NonNull and WARN:
+internal val NULLABILITY_ANNOTATION_NAMES = listOf("NonNull", "Nullable", "NotNull")
+
 private val EXPLICITLY_BANNED_ANNOTATION_NAMES = listOf(
     // This information is compose runtime implementation details; not useful for most
     // and those who would want it should be looking at source

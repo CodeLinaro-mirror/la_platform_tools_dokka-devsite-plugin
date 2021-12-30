@@ -28,6 +28,7 @@ import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
+import com.google.devsite.renderer.converters.testing.typeAnnotations
 import com.google.devsite.renderer.converters.testing.typeName
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
@@ -270,29 +271,32 @@ internal class ParameterDocumentableConverterTest(
     @Test
     fun `Nullability on parameters is rendered correctly in 4x Kotlin and Java`() {
         val functionK = """
-            |fun foo(a: String, b: String?)
+            |fun foo(a: String, b: String?) // Cannot write platform types `String!` in source code
         """.render()
         val functionJ = """
-            |public void foo(@NonNull String a, @Nullable String b)
+            |public void foo(@NonNull String a, @Nullable String b, String c)
         """.render(java = true)
-        val functionJ2 = """
-            |public void foo(@NonNull String a, String b)
-        """.render(java = true)
-        for (function in listOf(functionK, functionJ, functionJ2)) {
+        for (function in listOf(functionK, functionJ)) {
             val paramA = function.param("a")
             val paramB = function.param("b")
             assertThat(paramA.nullable).isFalse()
             assertThat(paramB.nullable).isTrue()
-            kotlinOnly { // Kotlin uses ? and default-nonnull instead of annotations
+            if (function == functionJ) {
+                val paramC = function.param("c")
+                assertThat(paramC.nullable).isTrue()
+                assertThat(paramC.data.annotationComponents).isEmpty()
+            }
+            kotlinOnly { // Kotlin uses ?, !, and default-nonnull instead of annotations
                 assertThat(paramA.data.annotationComponents).isEmpty()
                 assertThat(paramB.data.annotationComponents).isEmpty()
             }
             javaOnly {
-                if (function == functionJ) { // Kotlin-as-Java *types only* don't generate @NonNull
-                    assertThat(paramB.data.type.data.annotationComponents.single().isAtNullable)
-                } else assertThat(paramB.data.type.data.annotationComponents).isEmpty()
-                assertThat(paramA.data.type.data.annotationComponents.single().link().name)
-                    .isEqualTo("NonNull")
+                assertThat(paramA.typeAnnotations().single().isAtNonNull).isTrue()
+                if (function == functionJ) {
+                    assertThat(paramB.typeAnnotations().single().isAtNullable).isTrue()
+                } else {
+                    assertThat(paramB.typeAnnotations()).isEmpty()
+                }
             }
         }
     }
@@ -501,27 +505,27 @@ internal class ParameterDocumentableConverterTest(
             javaOnly {
                 assertThat(lambdaParam.type is LambdaTypeProjectionComponent).isFalse()
 
-                val lambdaType = lambdaParam.type.data
-                assertThat(lambdaType.generics.single().nullable).isFalse()
-                assertThat(lambdaType.generics.single().data.annotationComponents).isEmpty()
+                val lambdaType = lambdaParam.type
+                // assertThat(lambdaType.data.generics.single().nullable).isFalse() // DONT_CARE
+                assertThat(lambdaType.data.generics.single().data.annotationComponents).isEmpty()
                 assertThat(lambdaParam.annotationComponents.isEmpty())
                 if (lambdaParam == nullableLambdaParam) {
                     assertThat(lambdaType.nullable).isTrue()
-                    assertThat(lambdaType.annotationComponents).isEmpty()
+                    assertThat(lambdaType.data.annotationComponents).isEmpty()
                 } else {
                     assertThat(lambdaType.nullable).isFalse()
-                    assertThat(lambdaType.annotationComponents.single().isAtNonNull)
+                    assertThat(lambdaType.data.annotationComponents.single().isAtNonNull).isTrue()
                 }
             }
             kotlinOnly {
                 assertThat(lambdaParam.type is LambdaTypeProjectionComponent).isTrue()
-                val lambdaSymbol = (lambdaParam.type as LambdaTypeProjectionComponent).data
+                val lambdaSymbol = (lambdaParam.type as LambdaTypeProjectionComponent)
                 assertThat(lambdaSymbol.nullable).isEqualTo(lambdaParam == nullableLambdaParam)
             }
         }
     }
 
-    @Test // TODO: fix all of these extra incorrect @NonNulls
+    @Test
     fun `Parameter understands awful compose lambda`() {
         val lambdaParam = """
             |@ExperimentalAnimationApi
@@ -567,17 +571,17 @@ internal class ParameterDocumentableConverterTest(
             assertThat(lambdaParam.name).isEqualTo("transitionSpec")
             assertThat(lambdaParam.annotationComponents).isEmpty()
             assertThat(lambdaParam.type is LambdaTypeProjectionComponent).isTrue()
-            val lambdaSymbol = (lambdaParam.type as LambdaTypeProjectionComponent).data
-            assertThat(lambdaSymbol.type.data.name).isEqualTo("String")
+            val lambdaSymbol = (lambdaParam.type as LambdaTypeProjectionComponent)
+            assertThat(lambdaSymbol.data.type.data.name).isEqualTo("String")
             assertThat(lambdaSymbol.nullable).isFalse()
-            assertThat(lambdaSymbol.annotationComponents.single().name)
+            assertThat(lambdaSymbol.data.annotationComponents.single().name)
                 .isEqualTo("ExtensionFunctionType")
-            assertThat(lambdaSymbol.lambdaModifiers).isEmpty()
-            assertThat(lambdaSymbol.lambdaParams).isEmpty()
-            assertThat(lambdaSymbol.receiver!!.nullable).isFalse()
-            assertThat(lambdaSymbol.receiver.data.type.data.name).isEqualTo("List")
-            assertThat(lambdaSymbol.receiver.data.annotationComponents).isEmpty()
-            val lambdaReceiverGeneric = lambdaSymbol.receiver.data.generics.single()
+            assertThat(lambdaSymbol.data.lambdaModifiers).isEmpty()
+            assertThat(lambdaSymbol.data.lambdaParams).isEmpty()
+            assertThat(lambdaSymbol.data.receiver!!.nullable).isFalse()
+            assertThat(lambdaSymbol.data.receiver!!.data.type.data.name).isEqualTo("List")
+            assertThat(lambdaSymbol.data.receiver!!.data.annotationComponents).isEmpty()
+            val lambdaReceiverGeneric = lambdaSymbol.data.receiver!!.data.generics.single()
             assertThat(lambdaReceiverGeneric.nullable).isFalse()
             assertThat(lambdaReceiverGeneric.data.type.data.name).isEqualTo("S")
             assertThat(lambdaReceiverGeneric.data.annotationComponents).isEmpty()
@@ -706,9 +710,10 @@ internal class ParameterDocumentableConverterTest(
                     assertThat(param.nullable).isTrue()
                 }
                 javaOnly {
-                    if (param == paramJ) {
-                        assertThat(param.data.type.data.annotationComponents.single().isAtNullable)
-                    } else assertThat(param.data.type.data.annotationComponents).isEmpty()
+                    when (param) {
+                        paramJ -> assertThat(param.typeAnnotations().single().isAtNullable).isTrue()
+                        paramK, paramJ2 -> assertThat(param.typeAnnotations()).isEmpty()
+                    }
                 }
             }
         }
@@ -818,8 +823,7 @@ internal class ParameterDocumentableConverterTest(
 
             // We de-deuplicate and assort annotations on lambda parameter parameter names/types
             // Just like we do on functions/return types
-            val lambdaParamTypeAnnotation = lambdaParam.data.type.data.annotationComponents.single()
-            assertThat(lambdaParamTypeAnnotation.data.type.data.name).isEqualTo("Res")
+            assertThat(lambdaParam.typeAnnotations().single().data.type.data.name).isEqualTo("Res")
         }
     }
 
@@ -1042,7 +1046,34 @@ internal class ParameterDocumentableConverterTest(
         for (param in listOf(paramString/*, paramUnresolved*/)) {
             assertThat(param.data.annotationComponents.size).isEqualTo(1)
             assertThat(param.nullable).isTrue()
-            assertThat(param.data.annotationComponents.single().name).isEqualTo("Squark")
+            assertThat(param.data.annotationComponents.first().name).isEqualTo("Squark")
+        }
+    }
+
+    @Test
+    fun `Nullability is correct on implicit return type`() {
+        val returnFoo = """
+            |fun foo() = ""
+        """.render().returnType("foo")
+        val returnCompanion = """
+            |companion object {
+            |    fun static() = "jvm"
+            |}
+        """.render().returnType("static")
+        val returnBar = """
+            |fun bar() = if (1 == 2) "bbb" else null
+        """.render().returnType("bar")
+
+        assertThat(returnFoo.nullable).isFalse()
+        assertThat(returnCompanion.nullable).isFalse()
+        assertThat(returnBar.nullable).isTrue()
+        javaOnly {
+            assertThat(returnFoo.data.annotationComponents.single().isAtNonNull).isTrue()
+            assertThat(returnCompanion.data.annotationComponents.single().isAtNonNull).isTrue()
+        }
+        kotlinOnly {
+            assertThat(returnFoo.data.annotationComponents).isEmpty()
+            assertThat(returnCompanion.data.annotationComponents).isEmpty()
         }
     }
 
@@ -1068,7 +1099,7 @@ internal class ParameterDocumentableConverterTest(
         return converter.componentForParameter(parameterDoc(name), forSummary)
     }
 
-    private fun DModule.returnType(): TypeProjectionComponent {
+    private fun DModule.returnType(name: String = "foo"): TypeProjectionComponent {
             val classGraph = runBlocking {
                 DocumentablesHolder(this@returnType, this).classGraph()
             }
@@ -1077,7 +1108,7 @@ internal class ParameterDocumentableConverterTest(
                 pathProvider(classGraph = classGraph)
             )
             return converter.componentForProjection(
-                projection = function()!!.type,
+                projection = function(name)!!.type,
                 // Propagate ALL annotations _for display in the summary_, b/197321617
                 propagatedAnnotations = emptyList(),
                 isReturnType = true,

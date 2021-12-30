@@ -70,33 +70,26 @@ internal class PropertyDocumentableConverterTest(
     @Test
     fun `Property summary and detail include nullability information in 4x Kotlin and Java`() {
         val moduleJ = """
-        |public @interface NotNull {}
         |@Nullable
-        |public String nulla1;
-        |public String nulla2;
+        |public String nulla;
+        |public String platform;
         |@NonNull
-        |public String nonna1;
-        |public @NonNull String nonna2;
+        |public String nonnaBefore;
+        |public @NonNull String nonnaClose;
         """.render(java = true)
         val moduleK = """
-        |annotation class Nullable
-        |annotation class NonNull
-        |@Nullable
-        |val nulla1: String? = null
-        |val nulla2: String? = null
-        |@NonNull
-        |val nonna1: String = "foo"
-        |val nonna2: String = "foo"
+        |val nulla: String? = null // nullability annotations in Kotlin are errors.
+        |val nonna: String = "foo"
         """.render()
         fun DModule.sOrD(summary: Boolean, propertyName: String): TypeProjectionComponent =
             if (summary) (summary(propertyName).data.title as TypeSummary).data.type
             else detail(propertyName).data.returnType
         for (isSummary in listOf(true, false)) {
-            for (whichProp in listOf("nonna1", "nonna2", "nulla1", "nulla2")) {
-                val typeJ = moduleJ.sOrD(isSummary, whichProp)
-                val typeK = moduleK.sOrD(isSummary, whichProp)
-                for (aType in listOf(typeJ, typeK)) {
-                    assertThat(aType.nullable).isEqualTo("nulla" in whichProp)
+            for (whichProp in listOf("nonna", "nulla", "nonnaBefore", "nonnaClose", "platform")) {
+                val typeJ = if (whichProp == "nonna") null else moduleJ.sOrD(isSummary, whichProp)
+                val typeK = if (whichProp.length != 5) null else moduleK.sOrD(isSummary, whichProp)
+                for (aType in listOfNotNull(typeJ, typeK)) {
+                    assertThat(aType.nullable).isEqualTo(whichProp in "nulla, platform")
                     val annotations = aType.data.annotationComponents
                     assertThat(annotations.singleOrNull()?.name?.let {
                         it in NULLABILITY_ANNOTATION_NAMES })
@@ -109,7 +102,7 @@ internal class PropertyDocumentableConverterTest(
                         assertThat(annotations.any { it.isAtNonNull })
                             .isEqualTo("nonna" in whichProp)
                         assertThat(annotations.any { it.isAtNullable })
-                            .isEqualTo(whichProp == "nulla1")
+                            .isEqualTo(whichProp == "nulla" && aType == typeJ)
                     }
                 }
             }
