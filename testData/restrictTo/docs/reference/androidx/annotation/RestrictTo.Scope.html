@@ -1,0 +1,95 @@
+<html devsite="true">
+  <head>
+    <title>RestrictTo.Scope</title>
+{% setvar book_path %}/reference/dokkatest/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>RestrictTo.Scope</h1>
+    <p>
+      <pre>enum RestrictTo.Scope</pre>
+    </p>
+    <hr>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Enum Values</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>GROUP_ID</code></td>
+            <td>
+              <p><strong>This enum value is deprecated.</strong> Use LIBRARY_GROUP_PREFIX instead.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>LIBRARY</code></td>
+            <td>
+              <p>Restrict usage to code within the same library (e.g. the same gradle group ID and artifact ID).</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>LIBRARY_GROUP</code></td>
+            <td>
+              <p>Restrict usage to code within the same group of libraries.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>LIBRARY_GROUP_PREFIX</code></td>
+            <td>
+              <p>Restrict usage to code within packages whose groups share the same library group prefix up to the last &quot;.&quot;, so for example libraries foo.bar:lib1 and foo.baz:lib2 share the prefix &quot;foo.&quot; and so they can use each other's apis that are restricted to this scope.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>SUBCLASSES</code></td>
+            <td>
+              <p>Restrict usage to subclasses of the enclosing class.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>TESTS</code></td>
+            <td>
+              <p>Restrict usage to tests.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Enum Values</h2>
+    <div>
+      <h3 class="api-name" id="GROUP_ID">GROUP_ID</h3>
+      <pre class="api-signature no-pretty-print"><a href="/reference/androidx/annotation/RestrictTo.Scope.html">RestrictTo.Scope</a>&nbsp;<a href="/reference/androidx/annotation/RestrictTo.Scope.html#GROUP_ID">RestrictTo.Scope.GROUP_ID</a></pre>
+      <aside class="caution"><strong>This enum value is deprecated.</strong><br>Use LIBRARY_GROUP_PREFIX instead.</aside>
+      <p>Restrict usage to code within the same group ID (based on gradle group ID). This is an alias for <code><a href="/reference/androidx/annotation/RestrictTo.Scope.html#LIBRARY_GROUP_PREFIX">LIBRARY_GROUP_PREFIX</a></code>.</p>
+    </div>
+    <div>
+      <h3 class="api-name" id="LIBRARY">LIBRARY</h3>
+      <pre class="api-signature no-pretty-print"><a href="/reference/androidx/annotation/RestrictTo.Scope.html">RestrictTo.Scope</a>&nbsp;<a href="/reference/androidx/annotation/RestrictTo.Scope.html#LIBRARY">RestrictTo.Scope.LIBRARY</a></pre>
+      <p>Restrict usage to code within the same library (e.g. the same gradle group ID and artifact ID).</p>
+    </div>
+    <div>
+      <h3 class="api-name" id="LIBRARY_GROUP">LIBRARY_GROUP</h3>
+      <pre class="api-signature no-pretty-print"><a href="/reference/androidx/annotation/RestrictTo.Scope.html">RestrictTo.Scope</a>&nbsp;<a href="/reference/androidx/annotation/RestrictTo.Scope.html#LIBRARY_GROUP">RestrictTo.Scope.LIBRARY_GROUP</a></pre>
+      <p>Restrict usage to code within the same group of libraries. This corresponds to the gradle group ID.</p>
+    </div>
+    <div>
+      <h3 class="api-name" id="LIBRARY_GROUP_PREFIX">LIBRARY_GROUP_PREFIX</h3>
+      <pre class="api-signature no-pretty-print"><a href="/reference/androidx/annotation/RestrictTo.Scope.html">RestrictTo.Scope</a>&nbsp;<a href="/reference/androidx/annotation/RestrictTo.Scope.html#LIBRARY_GROUP_PREFIX">RestrictTo.Scope.LIBRARY_GROUP_PREFIX</a></pre>
+      <p>Restrict usage to code within packages whose groups share the same library group prefix up to the last &quot;.&quot;, so for example libraries foo.bar:lib1 and foo.baz:lib2 share the prefix &quot;foo.&quot; and so they can use each other's apis that are restricted to this scope. Similarly for com.foo.bar:lib1 and com.foo.baz:lib2 where they share &quot;com.foo.&quot;. Library com.bar.qux:lib3 however will not be able to use the restricted api because it only shares the prefix &quot;com.&quot; and not all the way until the last &quot;.&quot;.</p>
+    </div>
+    <div>
+      <h3 class="api-name" id="SUBCLASSES">SUBCLASSES</h3>
+      <pre class="api-signature no-pretty-print"><a href="/reference/androidx/annotation/RestrictTo.Scope.html">RestrictTo.Scope</a>&nbsp;<a href="/reference/androidx/annotation/RestrictTo.Scope.html#SUBCLASSES">RestrictTo.Scope.SUBCLASSES</a></pre>
+      <p>Restrict usage to subclasses of the enclosing class.</p>
+      <p><b>Note:</b> This scope should not be used to annotate packages.</p>
+    </div>
+    <div>
+      <h3 class="api-name" id="TESTS">TESTS</h3>
+      <pre class="api-signature no-pretty-print"><a href="/reference/androidx/annotation/RestrictTo.Scope.html">RestrictTo.Scope</a>&nbsp;<a href="/reference/androidx/annotation/RestrictTo.Scope.html#TESTS">RestrictTo.Scope.TESTS</a></pre>
+      <p>Restrict usage to tests.</p>
+    </div>
+  </body>
+</html>

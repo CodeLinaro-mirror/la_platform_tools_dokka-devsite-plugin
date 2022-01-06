@@ -86,6 +86,7 @@ val testData by sourceSets.creating {
         "testData/inheritance/source",
         "testData/sampleAnnotation/source",
         "testData/annotations/source",
+        "testData/restrictTo/source",
 
         "testData/fragment/source",
         "testData/paging/source",

@@ -92,4 +92,9 @@ class BasicTest : IntegrationTestBase() {
     fun `Validate versioned directory support`() {
         verifyDirectory("simpleVersioned", versionedTenant = "tools/gradle-api/7.0")
     }
+
+    @Test
+    fun `Validate @RestrictTo`() {
+        verifyDirectory("restrictTo")
+    }
 }

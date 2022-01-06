@@ -45,6 +45,12 @@ class DevsitePlugin : DokkaPlugin() {
         } order { before(dokkaBase.emptyPackagesFilter) }
     }
 
+    val restrictToFilter by extending {
+        dokkaBase.preMergeDocumentableTransformer providing {
+            RestrictToDocumentableFilter(it)
+        } order { before(hideFilter) }
+    }
+
     val docTagsForCheckedExceptions by extending {
         CoreExtensions.documentableTransformer with DocTagsForCheckedExceptionsTransformer()
     }
