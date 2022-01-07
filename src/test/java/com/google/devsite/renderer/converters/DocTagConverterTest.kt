@@ -51,6 +51,7 @@ import org.jetbrains.dokka.links.Callable
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.doc.CodeBlock
 import org.jetbrains.dokka.model.doc.DocumentationLink
 import org.jetbrains.dokka.model.doc.Img
 import org.jetbrains.dokka.model.doc.Text
@@ -502,7 +503,7 @@ internal class DocTagConverterTest(
             |class Ba: Seele
         """.render()
         // sealed classes have hidden constructors
-        assertThat((rendered.explicitClasslike("Seele") as DClass).constructors.isEmpty())
+        assertThat((rendered.explicitClasslike("Seele") as DClass).constructors).isEmpty()
 
         val constructorDoc = rendered.documentation(
             { (this.explicitClasslike("Ba")!! as DClass).constructors.single() })
@@ -835,7 +836,7 @@ internal class DocTagConverterTest(
         """.render(java = true).documentation().first() as DescriptionComponent
 
         for (documentation in listOf(documentationK, documentationJ)) {
-            assertThat("thefirst" in documentation.text()).isFalse()
+            assertThat(documentation.text()).doesNotContain("thefirst")
         }
     }
 
@@ -881,7 +882,7 @@ internal class DocTagConverterTest(
             this.function()!!.parameters.single { it.name == "parent" }
         }).first() as DescriptionComponent).text()
 
-        assertThat("placedin" in paramDocText).isFalse()
+        assertThat(paramDocText).doesNotContain("placedin")
     }
 
     @Test
@@ -1255,7 +1256,7 @@ internal class DocTagConverterTest(
         """.render()
         val documentation = module.documentation({ this.property("arguments")!! })
         val description = (documentation.first() as DescriptionComponent).text()
-        assertThat(description == "The arguments used for this entry")
+        assertThat(description).isEqualTo("The arguments used for this entry")
         val table = (documentation.last() as SummaryList)
         assertThat(table.title()).isEqualTo("Returns")
         val tableEntry = table.item().description().text()
@@ -1320,6 +1321,67 @@ internal class DocTagConverterTest(
         assertThat(link1.text()).isEqualTo("PLAYBACK_SUPPRESSION_REASON_NONE")
         assertThat(link2.text())
             .isEqualTo("PLAYBACK_SUPPRESSION_REASON_TRANSIENT_AUDIO_FOCUS_LOSS")
+    }
+
+    @Test
+    fun `From Platform, java-concurrent-future, pre{@code formatting test`() {
+        val documentation = """
+            /**
+             * A {@code Future} represents the result of an asynchronous
+             * computation.  Methods are provided to check if the computation is
+             * complete, to wait for its completion, and to retrieve the result of
+             * the computation.  The result can only be retrieved using method
+             * {@code get} when the computation has completed, blocking if
+             * necessary until it is ready.  Cancellation is performed by the
+             * {@code cancel} method.  Additional methods are provided to
+             * determine if the task completed normally or was cancelled. Once a
+             * computation has completed, the computation cannot be cancelled.
+             * If you would like to use a {@code Future} for the sake
+             * of cancellability but not provide a usable result, you can
+             * declare types of the form {@code Future<?>} and
+             * return {@code null} as a result of the underlying task.
+             *
+             * <p><b>Sample Usage</b> (Note that the following classes are all
+             * made-up.)
+             *
+             * <pre> {@code
+             * interface ArchiveSearcher { String search(String target); }
+             * class App {
+             *   ExecutorService executor = ...
+             *   ArchiveSearcher searcher = ...
+             *   void showSearch(String target) throws InterruptedException {
+             *     Callable<String> task = () -> searcher.search(target);
+             *     Future<String> future = executor.submit(task);
+             *     displayOtherThings(); // do other things while searching
+             *     try {
+             *       displayText(future.get()); // use future
+             *     } catch (ExecutionException ex) { cleanup(); return; }
+             *   }
+             * }}</pre>
+             *
+             * The {@link FutureTask} class is an implementation of {@code Future} that
+             * implements {@code Runnable}, and so may be executed by an {@code Executor}.
+             * For example, the above construction with {@code submit} could be replaced by:
+             * <pre> {@code
+             * FutureTask<String> future = new FutureTask<>(task);
+             * executor.execute(future);}</pre>
+             *
+             * <p>Memory consistency effects: Actions taken by the asynchronous computation
+             * <a href="package-summary.html#MemoryVisibility"> <i>happen-before</i></a>
+             * actions following the corresponding {@code Future.get()} in another thread.
+             *
+             * @see FutureTask
+             * @see Executor
+             * @since 1.5
+             * @author Doug Lea
+             * @param <V> The result type returned by this Future's {@code get} method
+             */
+            public interface Future<V>
+        """.trimIndent().render(java = true).documentation({ this.explicitClasslike("Future") })
+        val description = documentation[0] as DescriptionComponent
+        val firstCodeBlock = (description.data.components[2] as CodeBlock).text()
+        assertThat(firstCodeBlock).doesNotContain("&lt;")
+        assertThat(firstCodeBlock).doesNotContain("<code>")
     }
 
     private fun DModule.description(doc: DModule.() -> Documentable = ::smartDoc):
