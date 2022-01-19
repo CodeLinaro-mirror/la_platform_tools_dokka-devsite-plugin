@@ -1046,6 +1046,16 @@ internal class ParameterDocumentableConverterTest(
         }
     }
 
+    @Test // TODO: implement. Handle generic Star/wrapping Covariance/Contravariance
+    fun `Type projections are handled`() {
+        val module = """
+            |fun foo(retrieveString: List<out String>, storeString: List<in String>, nope: List<*>)
+        """.render()
+        val typeOut = module.param("retrieveString").data.type
+        val typeIn = module.param("storeString").data.type
+        val typeStar = module.param("nope").data.type
+    }
+
     private fun DModule.param(name: String = "foo", forSummary: Boolean = false):
         ParameterComponent {
         val classGraph = runBlocking {
