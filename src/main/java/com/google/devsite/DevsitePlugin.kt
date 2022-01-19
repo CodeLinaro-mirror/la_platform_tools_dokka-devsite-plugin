@@ -18,6 +18,7 @@ package com.google.devsite
 
 import com.google.devsite.renderer.DocumentablesWrapper
 import com.google.devsite.renderer.MultiLanguageRenderer
+import com.google.devsite.transformers.DocTagsForCheckedExceptionsTransformer
 import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.plugability.DokkaPlugin
@@ -42,5 +43,9 @@ class DevsitePlugin : DokkaPlugin() {
         dokkaBase.preMergeDocumentableTransformer providing {
             HideTagDocumentableFilter(it)
         } order { before(dokkaBase.emptyPackagesFilter) }
+    }
+
+    val docTagsForCheckedExceptions by extending {
+        CoreExtensions.documentableTransformer with DocTagsForCheckedExceptionsTransformer()
     }
 }
