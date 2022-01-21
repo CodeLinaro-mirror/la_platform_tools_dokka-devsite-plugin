@@ -34,7 +34,7 @@ plugins {
 application {
     mainClassName = "org.jetbrains.dokka.MainKt"
 }
-val dokkaVersion = "1.6.10-dev-139"
+val dokkaVersion = "1.6.10-dev-141"
 
 dependencies {
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0")
