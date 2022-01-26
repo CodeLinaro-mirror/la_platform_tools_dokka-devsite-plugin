@@ -32,27 +32,27 @@ plugins {
 }
 
 application {
-    mainClassName = "org.jetbrains.dokka.MainKt"
+    mainClass.set("org.jetbrains.dokka.MainKt")
 }
 val dokkaVersion = "1.6.10-dev-141"
 
 dependencies {
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0")
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.3.9")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.0-native-mt")
 
     implementation("org.jetbrains.dokka:dokka-base-test-utils:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-base:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-cli:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-core:$dokkaVersion")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.11.1")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.1")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.6.0")
-    testImplementation("junit:junit:4.12")
-    testImplementation("com.google.truth:truth:1.0.1")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("com.google.truth:truth:1.1.3")
     testImplementation("org.jetbrains.dokka:dokka-test-api:$dokkaVersion")
-    testImplementation("org.mockito:mockito-inline:3.11.2")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
+    testImplementation("org.mockito:mockito-inline:4.2.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
 }
 
 group = "com.google.devsite"
@@ -113,12 +113,12 @@ tasks.withType<Test> {
     finalizedBy(zipTask)
     doFirst {
         zipTask.configure {
-            from(reports.junitXml.destination)
+            from(reports.junitXml.outputLocation)
         }
     }
 }
 
-val ktlintConfiguration by configurations.creating
+val ktlintConfiguration: Configuration by configurations.creating
 dependencies {
     ktlintConfiguration("com.pinterest:ktlint:0.33.0")
 }
@@ -133,7 +133,7 @@ val ktlint by tasks.creating(JavaExec::class) {
     description = "Check Kotlin code style."
     group = "Verification"
     classpath = ktlintConfiguration
-    main = "com.pinterest.ktlint.Main"
+    mainClass.set("com.pinterest.ktlint.Main")
     args = listOf("src/**/*.kt")
 }
 
@@ -144,7 +144,7 @@ val ktlintFormat by tasks.creating(JavaExec::class) {
     description = "Fix Kotlin code style deviations."
     group = "Formatting"
     classpath = ktlintConfiguration
-    main = "com.pinterest.ktlint.Main"
+    mainClass.set("com.pinterest.ktlint.Main")
     args = listOf("-F", "src/**/*.kt")
 }
 
