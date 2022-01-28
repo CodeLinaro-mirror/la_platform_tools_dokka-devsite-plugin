@@ -123,11 +123,14 @@ internal fun Projection.getNullability(
 
 internal fun List<Annotations.Annotation>.inferNullability(isJavaSource: Boolean?): Nullability? {
     if (hasAtNullable()) {
-        assert(isJavaSource ?: true)
+        // Unfortunately, we don't have the documentable at this point to include in the warning
+        if (isJavaSource == false) print("""WARN: nullability annotation on Kotlin source.
+        If the annotation cannot be found in source, it might be unavoidable from inheritance.""")
         return Nullability.JAVA_ANNOTATED_NULLABLE
     }
     if (hasAtNonNull()) {
-        assert(isJavaSource ?: true)
+        if (isJavaSource == false) print("""WARN: nullability annotation on Kotlin source.
+        If the annotation cannot be found in source, it might be unavoidable from inheritance.""")
         return Nullability.JAVA_ANNOTATED_NOT_NULL
     }
     return null
