@@ -73,6 +73,28 @@ class DefaultTypeProjectionComponentTest {
     }
 
     @Test
+    fun `Simple platform parameter type renders correctly`() {
+        val component = DefaultTypeProjectionComponent(
+            Params(
+                type = NoopLink("Int"),
+                nullability = Nullability.JAVA_NOT_ANNOTATED,
+                displayLanguage = Language.KOTLIN
+            )
+        )
+
+        val output = createHTML().div {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<div>Int!</div>
+            """.trim()
+        )
+    }
+
+    @Test
     fun `Parameter type with one generic renders correctly`() {
         val component = DefaultTypeProjectionComponent(
             Params(

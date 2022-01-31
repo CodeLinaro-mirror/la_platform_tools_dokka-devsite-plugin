@@ -63,7 +63,7 @@ enum class Nullability {
         KOTLIN_NULLABLE, JAVA_ANNOTATED_NULLABLE -> "?"
         KOTLIN_DEFAULT, JAVA_ANNOTATED_NOT_NULL,
         JAVA_NEVER_NULL -> ""
-        JAVA_NOT_ANNOTATED -> "?" // "!" // temporary, to make the rearchitcture impact goldens less
+        JAVA_NOT_ANNOTATED -> "!"
         DONT_CARE -> ""
     }
 
