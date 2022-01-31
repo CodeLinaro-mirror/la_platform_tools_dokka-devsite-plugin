@@ -19,16 +19,19 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultLambdaTypeProjectionComponent
 import com.google.devsite.components.impl.DefaultLink
+import com.google.devsite.components.impl.DefaultMappedTypeProjectionComponent
 import com.google.devsite.components.impl.DefaultParameterComponent
 import com.google.devsite.components.impl.DefaultTypeParameterComponent
 import com.google.devsite.components.impl.DefaultTypeProjectionComponent
 import com.google.devsite.components.symbols.LambdaTypeProjectionComponent
+import com.google.devsite.components.symbols.MappedTypeProjectionComponent
 import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.TypeParameterComponent
 import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.links.DRI
+import org.jetbrains.dokka.links.withClass
 import org.jetbrains.dokka.model.Annotations.Annotation
 import org.jetbrains.dokka.model.Bound
 import org.jetbrains.dokka.model.Contravariance
@@ -276,38 +279,49 @@ internal class ParameterDocumentableConverter(
             proj.getNullability(displayLanguage, isJavaSource, propagatedAnnotations) or
                 propagatedNullability
 
+        val annotationComponents = annotations.annotationComponents(
+            pathProvider = pathProvider,
+            displayLanguage = displayLanguage,
+            nullability = nullability
+        )
+
         return when (displayLanguage) {
             Language.JAVA -> DefaultTypeProjectionComponent(
                     TypeProjectionComponent.Params(
                         type = proj.toLink(),
-                        annotationComponents = annotations.annotationComponents(
-                            pathProvider = pathProvider,
-                            displayLanguage = displayLanguage,
-                            nullability = nullability
-                        ),
+                        annotationComponents = annotationComponents,
                         nullability = nullability,
                         displayLanguage = Language.JAVA,
                         generics = generics
                     )
                 )
-            Language.KOTLIN -> when (proj.isLambda()) {
-                false -> DefaultTypeProjectionComponent(
-                    TypeProjectionComponent.Params(
-                        displayLanguage = Language.KOTLIN,
-                        type = proj.possiblyAsKotlin().toLink(),
-                        annotationComponents = annotations.annotationComponents(
-                            pathProvider = pathProvider,
-                            displayLanguage = displayLanguage,
-                            nullability = nullability
-                        ),
-                        nullability = nullability,
-                        generics = generics
-                    )
-                )
-                true -> componentForLambdaProjectionAsKotlin(
+            Language.KOTLIN -> when {
+                proj.isLambda() -> componentForLambdaProjectionAsKotlin(
                     proj = proj.possiblyAsKotlin(),
                     annotations = annotations,
                     nullability = nullability
+                )
+                isJavaSource && proj is GenericTypeConstructor && proj.dri in mappedCollections ->
+                    DefaultMappedTypeProjectionComponent(
+                        MappedTypeProjectionComponent.Params(
+                            type = proj.toLink(),
+                            alternativePrefix = DefaultLink(Link.Params(
+                                name = "Mutable",
+                                url = pathProvider.forReference(
+                                    mappedCollections.getValue(proj.dri)).url)),
+                            annotationComponents = annotationComponents,
+                            nullability = nullability,
+                            generics = generics
+                        )
+                    )
+                else -> DefaultTypeProjectionComponent(
+                    TypeProjectionComponent.Params(
+                        displayLanguage = Language.KOTLIN,
+                        type = proj.possiblyAsKotlin().toLink(),
+                        annotationComponents = annotationComponents,
+                        nullability = nullability,
+                        generics = generics
+                    )
                 )
             }
         }
@@ -641,6 +655,24 @@ internal class ParameterDocumentableConverter(
             "double" to "DoubleArray"
         )
         val kotlinPrimitiveArrays = javaPrimitiveToKotlinArrayType.values.toSet()
+
+        private val kotlinCollectionsDRI = DRI(packageName = "kotlin.collections")
+
+        private fun mappingFor(name: String): Pair<DRI, DRI> =
+            kotlinCollectionsDRI.withClass(name) to kotlinCollectionsDRI.withClass("Mutable$name")
+
+        // List from https://kotlinlang.org/docs/java-interop.html#mapped-types
+        val mappedCollections = mapOf(
+            mappingFor("Iterator"),
+            mappingFor("Iterable"),
+            mappingFor("Collection"),
+            mappingFor("Set"),
+            mappingFor("List"),
+            mappingFor("ListIterator"),
+            mappingFor("Map"),
+            kotlinCollectionsDRI.withClass("Map").withClass("Entry") to
+                kotlinCollectionsDRI.withClass("MutableMap").withClass("MutableEntry")
+        )
 
         private val toKotlinTypeMemo = ConcurrentHashMap<Projection, Projection>()
     }

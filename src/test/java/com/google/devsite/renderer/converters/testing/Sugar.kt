@@ -27,6 +27,7 @@ import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.TableOfContents
 import com.google.devsite.components.symbols.AnnotationComponent
 import com.google.devsite.components.symbols.FunctionSignature
+import com.google.devsite.components.symbols.MappedTypeProjectionComponent
 import com.google.devsite.components.symbols.MiniSignature
 import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.SymbolSummary
@@ -91,6 +92,8 @@ internal fun ParameterComponent.generics() = this.data.type.data.generics
 
 internal fun TypeProjectionComponent.link(): Link.Params = data.type.data
 internal fun ParameterComponent.link(): Link.Params = data.type.link()
+internal fun TypeProjectionComponent.alternativeLink(): Link.Params? =
+    (this as? MappedTypeProjectionComponent)?.data?.alternativePrefix?.data
 
 internal fun TypeProjectionComponent.name() = link().name
 internal fun ParameterComponent.typeName() = data.type.name()

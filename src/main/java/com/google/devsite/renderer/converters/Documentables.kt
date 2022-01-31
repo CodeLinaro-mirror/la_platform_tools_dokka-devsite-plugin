@@ -291,7 +291,9 @@ internal fun DRI.possiblyAsKotlin(): DRI {
 }
 
 private fun ClassId.classNames(): String =
-    shortClassName.identifier + (outerClassId?.classNames()?.let { ".$it" } ?: "")
+    generateSequence(this) { it.outerClassId }
+        .map { it.shortClassName.identifier }
+        .reduce { acc, pref -> "$pref.$acc" }
 
 /**
  * Returns the string representation of an [Expression] value, mostly relying on the toString

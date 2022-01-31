@@ -18,9 +18,11 @@ package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.symbols.LambdaTypeProjectionComponent
+import com.google.devsite.components.symbols.MappedTypeProjectionComponent
 import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.testing.alternativeLink
 import com.google.devsite.renderer.converters.testing.exceptNonNull
 import com.google.devsite.renderer.converters.testing.isAtNonNull
 import com.google.devsite.renderer.converters.testing.isAtNullable
@@ -1085,6 +1087,56 @@ internal class ParameterDocumentableConverterTest(
         val typeOut = module.param("retrieveString").data.type
         val typeIn = module.param("storeString").data.type
         val typeStar = module.param("nope").data.type
+    }
+
+    @Test
+    fun `Collection types are mapped from Java to Kotlin`() {
+        val module = """
+            |public void foo(java.util.List<String> list, java.util.Map.Entry<String, Int> entry) {}
+        """.render(java = true)
+
+        kotlinOnly {
+            val list = module.param("list").data.type
+            assertThat(list).isInstanceOf(MappedTypeProjectionComponent::class.java)
+            assertThat(list.link().name).isEqualTo("List")
+            assertThat(list.link().url).isEqualTo("/reference/kotlin/kotlin/collections/List.html")
+            assertThat(list.alternativeLink()?.url)
+                .isEqualTo("/reference/kotlin/kotlin/collections/MutableList.html")
+
+            val entry = module.param("entry").data.type
+            assertThat(entry).isInstanceOf(MappedTypeProjectionComponent::class.java)
+            assertThat(entry.link().name).isEqualTo("Map.Entry")
+            assertThat(entry.link().url)
+                .isEqualTo("/reference/kotlin/kotlin/collections/Map.Entry.html")
+            assertThat(entry.alternativeLink()?.url)
+                .isEqualTo("/reference/kotlin/kotlin/collections/MutableMap.MutableEntry.html")
+        }
+
+        javaOnly {
+            val list = module.param("list").data.type
+            assertThat(list).isNotInstanceOf(MappedTypeProjectionComponent::class.java)
+            assertThat(list.link().name).isEqualTo("List")
+            assertThat(list.link().url).isEqualTo("/reference/java/util/List.html")
+
+            val entry = module.param("entry").data.type
+            assertThat(entry).isNotInstanceOf(MappedTypeProjectionComponent::class.java)
+            assertThat(entry.link().name).isEqualTo("Map.Entry")
+            assertThat(entry.link().url).isEqualTo("/reference/java/util/Map.Entry.html")
+        }
+    }
+
+    @Test
+    fun `Kotlin collection types are mapped only in Java`() {
+        val module = """
+            |fun foo(list: java.util.List<String>) {}
+        """.render()
+
+        val list = module.param("list").data.type
+        assertThat(list).isNotInstanceOf(MappedTypeProjectionComponent::class.java)
+
+        javaOnly {
+            assertThat(list.link().url).isEqualTo("/reference/java/util/List.html")
+        }
     }
 
     private fun DModule.param(name: String = "foo", forSummary: Boolean = false):
