@@ -84,19 +84,18 @@ internal class ClasslikeDocumentableConverter(
             declaredFunctions += classlike.gettersAndSetters()
         }
         var declaredProperties = classlike.properties.myTypes()
-        var inheritedFunctions = classlike.functions.inheritedTypes()
         var companionFunctions = classlike.companionFunctions()
         var companionProperties = classlike.companionProperties()
+        val inheritedAll = classlike.children.inheritedTypes()
+
         // Java documentation needs to respect @jvm* annotations
         if (displayLanguage == Language.JAVA) {
             declaredFunctions = declaredFunctions.filterOutJvmSynthetic().map { it.withJvmName() }
             declaredProperties = declaredProperties.filterOutJvmSynthetic()
-            inheritedFunctions = inheritedFunctions.filterOutJvmSynthetic().map { it.withJvmName() }
         }
 
         declaredFunctions = declaredFunctions.sortedBy { it.name }
         declaredProperties = declaredProperties.sortedBy { it.name }
-        inheritedFunctions = inheritedFunctions.sortedBy { it.name }
         companionFunctions = companionFunctions.sortedBy { it.name }
         companionProperties = companionProperties.sortedBy { it.name }
 
@@ -200,7 +199,7 @@ internal class ClasslikeDocumentableConverter(
         val signature = async { computeSignature() }
         val hierarchy = async { computeHierarchy() }
         val relatedSymbols = async { findRelatedSymbols() }
-        val inheritedTypes = async { computeInheritedSymbols(inheritedFunctions) }
+        val inheritedTypes = async { computeInheritedSymbols(inheritedAll) }
 
         val allSymbols = mutableListOf(
             nestedTypesSummary.await() to Classlike.TitledList(nestedTypesTitle(), emptyList()),
@@ -423,20 +422,27 @@ internal class ClasslikeDocumentableConverter(
         )
     }
 
-    private fun propertiesToSummary(name: String, properties: List<DProperty>): SummaryList {
+    private fun propertiesToSummary(
+        name: String? = null,
+        properties: List<DProperty>
+    ): SummaryList {
         val modifierHints = ModifierHints(displayLanguage, isSummary = true, isInterface())
         val components = properties.map {
             propertyConverter.summary(it, modifierHints)
         }
 
+        val title = name?.let {
+            DefaultTableTitle(
+                TableTitle.Params(
+                    title = it,
+                    big = true
+                )
+            )
+        }
+
         return DefaultSummaryList(
             SummaryList.Params(
-                header = DefaultTableTitle(
-                    TableTitle.Params(
-                        title = name,
-                        big = true
-                    )
-                ),
+                header = title,
                 items = components
             )
         )
@@ -545,21 +551,65 @@ internal class ClasslikeDocumentableConverter(
     /**
      * Creates a list of InheritedSymbols from a list of DFunctions
      */
-    private fun computeInheritedSymbols(symbols: List<DFunction>): List<InheritedSymbolsList> {
-        val inheritedSymbolMap = symbols
-            .sortedWith(comparator = functionSignatureComparator())
-            .groupBy { it.dri.parent }
-            .toSortedMap(compareBy { it.classNames })
-        val inheritedFunctionsSummary = inheritedSymbolMap.entries.associate { (dri, functions) ->
-            pathProvider.linkForReference(dri) to functionsToSummary(name = null, functions)
+    private fun computeInheritedSymbols(
+        symbolList: List<Documentable>
+    ): List<InheritedSymbolsList> {
+        val symbols = when (displayLanguage) {
+            Language.JAVA -> symbolList.filterOutJvmSynthetic()
+            Language.KOTLIN -> symbolList
         }
 
-        val inheritedFunctionHeader = DefaultTableTitle(
-            TableTitle.Params(inheritedMethodsTitle(), big = true)
-        )
+        val functions = symbols.filterIsInstance<DFunction>()
+            .sortedWith(functionSignatureComparator())
+        val functionsRenamed = when (displayLanguage) {
+            Language.JAVA -> functions.map { it.withJvmName() }
+            Language.KOTLIN -> functions
+        }
+        val functionsSummary =
+            functionsRenamed.takeIf { it.isNotEmpty() }
+                ?.createInheritedCategory(title = inheritedMethodsTitle()) {
+                    functionsToSummary(functions = it)
+                }
 
-        return listOf(DefaultInheritedSymbols(
-            InheritedSymbolsList.Params(inheritedFunctionHeader, inheritedFunctionsSummary)))
+        val (consts, properties) = symbols.filterIsInstance<DProperty>()
+            .sortedBy { it.name }
+            .partition { isConstant(it.modifiers()) }
+
+        val constsSummary = consts.takeIf { it.isNotEmpty() }
+            ?.createInheritedCategory(title = inheritedConstantsTitle()) {
+                propertiesToSummary(properties = it)
+            }
+
+        val propertiesSummary = properties.takeIf { it.isNotEmpty() }
+            ?.createInheritedCategory(title = inheritedPropertiesTitle()) {
+                propertiesToSummary(properties = it)
+            }
+
+        return listOfNotNull(functionsSummary, constsSummary, propertiesSummary)
+    }
+
+    private fun <T : Documentable> List<T>.createInheritedCategory(
+        title: String,
+        summaryGen: (List<T>) -> SummaryList
+    ): InheritedSymbolsList {
+        fun createInheritedSymbolsList(parent: DRI, symbolList: List<T>): Pair<Link, SummaryList> {
+            val link = pathProvider.linkForReference(parent)
+            val summary = summaryGen(symbolList)
+            return link to summary
+        }
+
+        val category = groupBy { it.dri.parent }
+            .toSortedMap(compareBy { it.classNames })
+            .entries.associate { (k, v) -> createInheritedSymbolsList(k, v) }
+
+        return DefaultInheritedSymbols(
+            InheritedSymbolsList.Params(
+                header = DefaultTableTitle(
+                    TableTitle.Params(title, big = true)
+                ),
+                inheritedSymbolSummaries = category
+            )
+        )
     }
 
     /** Finds the direct and indirect subclasses for this classlike, returning their component. */
@@ -691,6 +741,7 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun publicPropertiesTitle() = "Public ${propertiesTitle()}"
+    private fun inheritedPropertiesTitle() = "Inherited ${propertiesTitle()}"
     private fun protectedPropertiesTitle() = "Protected ${propertiesTitle()}"
     private fun propertiesTitle(): String = when (displayLanguage) {
         Language.JAVA -> "fields"
@@ -698,6 +749,7 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun constantsTitle() = "Constants"
+    private fun inheritedConstantsTitle() = "Inherited ${constantsTitle()}"
     private fun enumValuesTitle() = "Enum Values"
     private fun extensionFunctionsTitle() = "Extension functions"
     private fun companionFunctionsTitle(): String = "companion ${methodsTitle()}"

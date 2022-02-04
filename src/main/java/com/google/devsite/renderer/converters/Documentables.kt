@@ -250,9 +250,9 @@ fun DFunction.driForSyntheticClass() = DRI(dri.packageName, nameForSyntheticClas
 /**
  * Filters out elements that are annotated with @JvmSynthetic
  */
-fun <T> List<T>.filterOutJvmSynthetic(): List<T>
-    where T : WithExtraProperties<*> = this.filterNot {
-        it.annotations().any { it.dri.classNames.equals("JvmSynthetic") }
+fun <T : Documentable> List<T>.filterOutJvmSynthetic(): List<T> = this.filterNot { elem ->
+        elem is WithExtraProperties<*> &&
+            elem.annotations().any { it.dri.classNames.equals("JvmSynthetic") }
     }
 
 /**
