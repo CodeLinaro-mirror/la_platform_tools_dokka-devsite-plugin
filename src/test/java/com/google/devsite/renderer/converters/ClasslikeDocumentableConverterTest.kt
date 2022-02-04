@@ -27,6 +27,7 @@ import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TableTitle
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.content
 import com.google.devsite.renderer.converters.testing.description
@@ -763,6 +764,67 @@ internal class ClasslikeDocumentableConverterTest(
                 listOf("input", "zinput2"),
                 listOf()
             )
+        )
+    }
+
+    @Test
+    fun `Inherited properties are not lost`() {
+        val page = """
+            |open class Parent {
+            |    val b: Int = 8
+            |    val a: String = "9"
+            |}
+            |class Child: Parent()
+        """.render().page("Child").content<Classlike>()
+
+        val category = page.data.inheritedTypes.single().data.inheritedSymbolSummaries
+        val names = category.values.single().items().map { it.name() }
+
+        assertThat(names).containsExactly("a", "b").inOrder()
+    }
+
+    @Test
+    fun `Different categories of symbols inherited from different classes works`() {
+        val page = """
+            |open class GrandParent {
+            |    val grandC: Int = 18
+            |    fun grandA(): String = "9"
+            |    fun grandB(): {}
+            |}
+            |open class Parent: GrandParent {
+            |    val parentB: Int = 8
+            |    val parentA: String = "9"
+            |    fun parentC(): {}
+            |}
+            |class Child: Parent()
+        """.render().page("Child").content<Classlike>()
+
+        val categoriesNames = page.data.inheritedTypes.map {
+            (it.data.header as TableTitle).data.title
+        }
+        kotlinOnly {
+            assertThat(categoriesNames)
+                .containsExactly("Inherited functions", "Inherited properties").inOrder()
+        }
+        javaOnly {
+            assertThat(categoriesNames)
+                .containsExactly("Inherited methods", "Inherited fields").inOrder()
+        }
+
+        val functions = page.data.inheritedTypes.first().data.inheritedSymbolSummaries
+            .mapKeys { it.key.data.name }
+            .mapValues { (_, list) -> list.items().map { it.name() } }
+        assertThat(functions).containsExactly(
+            "GrandParent", listOf("grandA", "grandB"),
+            "Parent", listOf("parentC")
+        )
+
+        val properties = page.data.inheritedTypes.last().data.inheritedSymbolSummaries
+            .mapKeys { it.key.data.name }
+            .mapValues { (_, list) -> list.items().map { it.name() } }
+        assertThat(properties).containsExactly(
+            "GrandParent", listOf("grandC"),
+            "Parent", listOf("parentA", "parentB")
         )
     }
 
