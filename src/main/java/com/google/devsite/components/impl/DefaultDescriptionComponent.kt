@@ -17,6 +17,7 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.DescriptionComponent
+import kotlinx.html.DL
 import kotlinx.html.FlowContent
 import kotlinx.html.OL
 import kotlinx.html.TABLE
@@ -32,8 +33,11 @@ import kotlinx.html.blockQuote
 import kotlinx.html.br
 import kotlinx.html.caption
 import kotlinx.html.code
+import kotlinx.html.dd
 import kotlinx.html.del
 import kotlinx.html.div
+import kotlinx.html.dl
+import kotlinx.html.dt
 import kotlinx.html.em
 import kotlinx.html.h1
 import kotlinx.html.h2
@@ -48,6 +52,7 @@ import kotlinx.html.ol
 import kotlinx.html.p
 import kotlinx.html.pre
 import kotlinx.html.span
+import kotlinx.html.stream.createHTML
 import kotlinx.html.strong
 import kotlinx.html.sub
 import kotlinx.html.sup
@@ -59,7 +64,7 @@ import kotlinx.html.th
 import kotlinx.html.thead
 import kotlinx.html.tr
 import kotlinx.html.ul
-
+import kotlinx.html.unsafe
 import org.jetbrains.dokka.model.doc.A
 import org.jetbrains.dokka.model.doc.B
 import org.jetbrains.dokka.model.doc.Big
@@ -206,6 +211,7 @@ internal class DefaultDescriptionComponent(
                 is H6 -> h6 { renderTags(tag.children, state) }
                 is I, is Em -> em { renderTags(tag.children, state) }
                 is Div -> div { renderTags(tag.children, state) }
+                is Dl -> dl { renderDescriptionList(tag.children, state) }
                 is Span -> span { renderTags(tag.children, state) }
                 is Strikethrough -> del { renderTags(tag.children, state) }
                 is Sub -> sub { renderTags(tag.children, state) }
@@ -232,15 +238,32 @@ internal class DefaultDescriptionComponent(
                     throw NotImplementedError(
                         "Inline HTML pages are not supported: ${tag.javaClass.simpleName}."
                     )
-                is Small, is Big, is Cite, is Dd, is Dfn, is Dir, is Font, is Frame, is FrameSet,
+                is Small, is Big, is Cite, is Dfn, is Dir, is Font, is Frame, is FrameSet,
                 is Input, is Link, is Listing, is NoFrames, is Tt, is U, is Var, is Script,
-                is NoScript, is Section, is Dl, is Dt ->
+                is NoScript, is Section ->
                     throw NotImplementedError("Unknown use case for ${tag.javaClass.simpleName}.")
                 is THead, is TBody, is Td, is TFoot, is Th, is Tr ->
                     error("Not in table context: ${tag.javaClass.simpleName}.")
                 is Li -> error("Not in list context: ${tag.javaClass.simpleName}. The <li> tag " +
                     "must be contained in a parent element (such as <ol>, <ul>, or <menu>).")
+                is Dd, is Dt -> error("Not in list context: ${tag.javaClass.simpleName}. The <dt>" +
+                    " or <dd> tag <must be contained in a <dl> element.")
                 is Caption -> TODO("Support this tag")
+            }
+        }
+    }
+
+    // TODO: remove improper handling of dt b/217941159
+    private fun DL.renderDescriptionList(tags: List<DocTag>, state: State) {
+        for (tag in tags) {
+
+            when (tag) {
+                is Dd -> dd { renderTags(tag.children, state) }
+                is Dt -> dt {
+                    unsafe { +createHTML().p { renderTags(tag.children, state) } }
+                }
+                is Dl -> renderTags(listOf(tag), state)
+                else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
             }
         }
     }

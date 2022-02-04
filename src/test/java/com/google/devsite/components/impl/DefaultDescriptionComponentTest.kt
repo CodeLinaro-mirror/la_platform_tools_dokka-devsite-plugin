@@ -25,7 +25,6 @@ import kotlinx.html.body
 import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.Documentable
-import org.junit.Ignore
 import org.junit.Test
 
 internal class DefaultDescriptionComponentTest : ConverterTestBase() {
@@ -412,6 +411,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
         )
     }
 
+    // TODO fix handling @link inside dt, dd b/217937742
     @Test
     fun `Description list renders correctly in kotlin`() {
         val component = """
@@ -424,7 +424,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | *         A URI path segment.
             | *     </dd>
             | *     <dt>
-            | *         <code>path="<i>path</i>"</code>
+            | *         An {@link Intent} to navigate.
             | *    </dt>
             | *    <dd>
             | *         The subdirectory you're sharing.
@@ -449,7 +449,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
          A URI path segment.
      </dd>
      <dt>
-         <code>path="<i>path</i>"</code>
+         An {@link Intent} to navigate.
     </dt>
     <dd>
          The subdirectory you're sharing.
@@ -459,7 +459,8 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
         )
     }
 
-    @Ignore // b/203685756  https://github.com/Kotlin/dokka/issues/2213
+    // TODO fix handling @link inside dt, dd b/217937742
+    // TODO remove improper handling of dt that requires <p> b/217941159
     @Test
     fun `Description list renders correctly in java`() {
         val component = """
@@ -472,7 +473,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | *         A URI path segment.
             | *     </dd>
             | *     <dt>
-            | *         <code>path="<i>path</i>"</code>
+            | *         An {@link Intent} to navigate
             | *    </dt>
             | *    <dd>
             | *         The subdirectory you're sharing.
@@ -489,20 +490,16 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
         // language=html
         assertThat(output).isEqualTo(
             """
-<body><dl>
-     <dt>
-        <code>name="<i>name</i>"</code>
-    </dt>
-     <dd>
-         A URI path segment.
-     </dd>
-     <dt>
-         <code>path="<i>path</i>"</code>
-    </dt>
-    <dd>
-         The subdirectory you're sharing.
-     </dd>
-</dl></body>
+<body>
+  <dl>
+    <dt><p><code>name=&quot;<em>name</em>&quot;</code></p>
+</dt>
+    <dd> A URI path segment. </dd>
+    <dt><p> An Intent to navigate </p>
+</dt>
+    <dd> The subdirectory you're sharing. </dd>
+  </dl>
+</body>
             """.trim()
         )
     }
