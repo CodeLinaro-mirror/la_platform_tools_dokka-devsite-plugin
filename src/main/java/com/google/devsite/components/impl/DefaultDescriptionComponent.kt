@@ -235,19 +235,19 @@ internal class DefaultDescriptionComponent(
                 is CustomDocTag -> { renderTags(tag.children, state) }
                 is Html, is Head, is Meta, is Header, is Title, is Footer, is IFrame,
                 is Main, is Menu, is Nav, is Index ->
-                    throw NotImplementedError(
-                        "Inline HTML pages are not supported: ${tag.javaClass.simpleName}."
-                    )
+                    throw NotImplementedError("Inline HTML pages are not supported: " +
+                        "${tag.javaClass.simpleName}. Context: $tags.")
                 is Small, is Big, is Cite, is Dfn, is Dir, is Font, is Frame, is FrameSet,
                 is Input, is Link, is Listing, is NoFrames, is Tt, is U, is Var, is Script,
-                is NoScript, is Section ->
-                    throw NotImplementedError("Unknown use case for ${tag.javaClass.simpleName}.")
+                is NoScript, is Section -> throw NotImplementedError("Unknown use case for " +
+                    "${tag.javaClass.simpleName}.  Context: $tags.")
                 is THead, is TBody, is Td, is TFoot, is Th, is Tr ->
-                    error("Not in table context: ${tag.javaClass.simpleName}.")
+                    error("Not in table context: ${tag.javaClass.simpleName}.  Context: $tags.")
                 is Li -> error("Not in list context: ${tag.javaClass.simpleName}. The <li> tag " +
-                    "must be contained in a parent element (such as <ol>, <ul>, or <menu>).")
+                    "must be contained in a parent element (such as <ol>, <ul>, or <menu>). " +
+                    "Context: $tags.")
                 is Dd, is Dt -> error("Not in list context: ${tag.javaClass.simpleName}. The <dt>" +
-                    " or <dd> tag <must be contained in a <dl> element.")
+                    " or <dd> tag <must be contained in a <dl> element. Context: $tags.")
                 is Caption -> TODO("Support this tag")
             }
         }
