@@ -92,6 +92,48 @@ internal class DocTagConverterTest(
         assertThat(description.data.deprecation).isNull()
     }
 
+    @Test
+    fun `h2 and h3 work in description`() {
+        val moduleK = """
+            |/** Hello World!
+            | *
+            | * <h2>Second level</h2>
+            | * <h3>Third level</h3>
+            | */
+            |class Foo
+        """.render()
+
+        val detailK = moduleK.documentation(doc = { this.clazz() }).item() as DescriptionComponent
+        assertThat(detailK.render()).isEqualTo(
+            """
+<body>
+  <p>Hello World!</p>
+  <p><h2>Second level</h2><h3>Third level</h3></p>
+</body>
+            """.trim()
+        )
+
+        val moduleJ = """
+            |/** Hello World!
+            | *
+            | * <h2>Second level</h2>
+            | * <h3>Third level</h3>
+            | */
+            |public class Foo {}
+        """.render(java = true)
+
+        // TODO: b/199863023 Javadoc header tag parsing will be fixed soon
+//        val detailJ = moduleJ.documentation(doc = { this.clazz() }).item() as DescriptionComponent
+//        assertThat(detailJ.render()).isEqualTo(
+//            """
+// <body>
+//  <p>Hello World!</p>
+//  <p><h2>Second level</h2><h3>Third level</h3></p>
+// </body>
+//            """.trim()
+//        )
+    }
+
     @Suppress("unused") // TODO: fix deprecated class details b/183420241
     @Test
     fun `Deprecated class summary and detail description flags correct in 4x Kotlin and Java`() {
