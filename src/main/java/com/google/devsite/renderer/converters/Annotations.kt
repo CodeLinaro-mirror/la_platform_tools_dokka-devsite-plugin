@@ -111,10 +111,12 @@ internal fun List<Annotation>.hasAtNonNull(): Boolean =
 /** @return true if the `@Deprecated` annotation is present, false otherwise */
 internal fun List<Annotation>.isDeprecated(): Boolean = any { it.isDeprecated() }
 
-private val Annotation.isBadNullable
-    get() = dri.classNames == "Nullable" && dri.fullName != AT_NULLABLE.dri.fullName
+/** We sometimes convert androidx annotations to the android. namespace */
+private val Annotation.isBadNullable get() = dri.classNames == "Nullable" &&
+        dri.fullName !in listOf(AT_NULLABLE.dri.fullName, "android.annotation.Nullable")
 private val Annotation.isBadNonNull get() = dri.classNames == "NotNull" ||
-    (dri.classNames == "NonNull" && dri.fullName != AT_NON_NULL.dri.fullName)
+    (dri.classNames == "NonNull" &&
+        dri.fullName !in listOf(AT_NON_NULL.dri.fullName, "android.annotation.NonNull"))
 
 /** @return the complete list of annotations for this type */
 internal fun WithExtraProperties<*>.annotations(): List<Annotation> {

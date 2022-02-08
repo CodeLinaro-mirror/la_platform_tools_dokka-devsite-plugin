@@ -1139,6 +1139,23 @@ internal class ParameterDocumentableConverterTest(
         }
     }
 
+    @Test
+    fun `Nullable kotlin primitive converted to nullable java boxed primitive`() {
+        val paramType = """
+            |fun aFunction(foo: Int?)
+        """.render().param("foo").data.type
+        assertThat(paramType.nullable).isTrue()
+
+        javaOnly {
+            assertThat(paramType.name()).isEqualTo("Integer")
+            "java/lang/Integer" in paramType.data.type.data.url
+        }
+        kotlinOnly {
+            assertThat(paramType.name()).isEqualTo("Int")
+            "kotlin/kotlin/Int" in paramType.data.type.data.url
+        }
+    }
+
     private fun DModule.param(name: String = "foo", forSummary: Boolean = false):
         ParameterComponent {
         val classGraph = runBlocking {
