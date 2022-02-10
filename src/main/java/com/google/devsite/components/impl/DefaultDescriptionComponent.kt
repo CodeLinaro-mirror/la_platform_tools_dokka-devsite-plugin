@@ -236,18 +236,18 @@ internal class DefaultDescriptionComponent(
                 is Html, is Head, is Meta, is Header, is Title, is Footer, is IFrame,
                 is Main, is Menu, is Nav, is Index ->
                     throw NotImplementedError("Inline HTML pages are not supported: " +
-                        "${tag.javaClass.simpleName}. Context: $tags.")
+                        "${tag.javaClass.simpleName}. Context: ${tags.text()}.")
                 is Small, is Big, is Cite, is Dfn, is Dir, is Font, is Frame, is FrameSet,
                 is Input, is Link, is Listing, is NoFrames, is Tt, is U, is Var, is Script,
                 is NoScript, is Section -> throw NotImplementedError("Unknown use case for " +
-                    "${tag.javaClass.simpleName}.  Context: $tags.")
+                    "${tag.javaClass.simpleName}.  Context: ${tags.text()}.")
                 is THead, is TBody, is Td, is TFoot, is Th, is Tr ->
                     error("Not in table context: ${tag.javaClass.simpleName}.  Context: $tags.")
                 is Li -> error("Not in list context: ${tag.javaClass.simpleName}. The <li> tag " +
                     "must be contained in a parent element (such as <ol>, <ul>, or <menu>). " +
-                    "Context: $tags.")
+                    "Context: ${tags.text()}.")
                 is Dd, is Dt -> error("Not in list context: ${tag.javaClass.simpleName}. The <dt>" +
-                    " or <dd> tag <must be contained in a <dl> element. Context: $tags.")
+                    " or <dd> tag <must be contained in a <dl> element. Context: ${tags.text()}.")
                 is Caption -> TODO("Support this tag")
             }
         }
@@ -277,7 +277,8 @@ internal class DefaultDescriptionComponent(
                 is Th -> tr { renderTableRow(tag.children, isHeader = true, state) }
                 is Tr -> tr { renderTableRow(tag.children, isHeader = false, state) }
                 is Caption -> caption { renderTags(tag.children, state) }
-                else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
+                else -> error("No other tags allowed: ${tag.javaClass.simpleName}. " +
+                    "Context: ${tags.text()}.")
             }
         }
     }
@@ -286,7 +287,8 @@ internal class DefaultDescriptionComponent(
         for (tag in tags) {
             when (tag) {
                 is Tr -> tr { renderTableRow(tag.children, isHeader = true, state) }
-                else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
+                else -> error("No other tags allowed: ${tag.javaClass.simpleName}. " +
+                    "Context: ${tags.text()}.")
             }
         }
     }
@@ -295,7 +297,8 @@ internal class DefaultDescriptionComponent(
         for (tag in tags) {
             when (tag) {
                 is Tr -> tr { renderTableRow(tag.children, isHeader = false, state) }
-                else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
+                else -> error("No other tags allowed: ${tag.javaClass.simpleName}. " +
+                    "Context: ${tags.text()}.")
             }
         }
     }
@@ -304,7 +307,8 @@ internal class DefaultDescriptionComponent(
         for (tag in tags) {
             when (tag) {
                 is Tr -> tr { renderTableRow(tag.children, isHeader = false, state) }
-                else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
+                else -> error("No other tags allowed: ${tag.javaClass.simpleName}. " +
+                    "Context: ${tags.text()}.")
             }
         }
     }
@@ -323,7 +327,8 @@ internal class DefaultDescriptionComponent(
                 // <th> is being converted to Text class
                 // TODO(b/193096057): determine root cause
                 is Text -> th { +tag.body }
-                else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
+                else -> error("No other tags allowed: ${tag.javaClass.simpleName}. " +
+                    "Context: ${tags.text()}.")
             }
         }
     }
@@ -333,7 +338,8 @@ internal class DefaultDescriptionComponent(
             when (tag) {
                 is Li -> li { renderTags(tag.children, state) }
                 is Ol, is Ul -> renderTags(listOf(tag), state)
-                else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
+                else -> error("No other tags allowed: ${tag.javaClass.simpleName}. " +
+                    "Context: ${tags.text()}.")
             }
         }
     }
@@ -343,7 +349,8 @@ internal class DefaultDescriptionComponent(
             when (tag) {
                 is Li -> li { renderTags(tag.children, state) }
                 is Ol, is Ul -> renderTags(listOf(tag), state)
-                else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
+                else -> error("No other tags allowed: ${tag.javaClass.simpleName}. " +
+                    "Context: ${tags.text()}.")
             }
         }
     }
@@ -353,4 +360,12 @@ internal class DefaultDescriptionComponent(
      * idempotency of the component.
      */
     private class State(var terminate: Boolean = false)
+
+    /** Function for printing context */
+    fun List<DocTag>.text(): String = map { when (it) {
+        is DocumentationLink -> it.dri.toString() + it.children.text()
+        is CustomDocTag -> it.name + it.children.text()
+        is Text -> it.body + it.children.text()
+        else -> it.children.text()
+    } }.joinToString(", ")
 }
