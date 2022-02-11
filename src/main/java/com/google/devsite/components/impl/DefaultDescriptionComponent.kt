@@ -144,7 +144,7 @@ internal class DefaultDescriptionComponent(
     override fun render(into: FlowContent) = into.run {
         if (data.deprecation == null) {
             if (data.summary) {
-                renderTags(data.components.take(1), State())
+                renderTags(data.components, State())
             } else {
                 renderTags(data.components, State())
             }
@@ -154,7 +154,7 @@ internal class DefaultDescriptionComponent(
                 p {
                     strong { +data.deprecation }
                     +" "
-                    renderTags(data.components.take(1), State())
+                    renderTags(data.components, State())
                 }
             } else {
                 // Displays the deprecation message in notice box with "caution" styling
@@ -167,22 +167,90 @@ internal class DefaultDescriptionComponent(
         }
     }
 
+    private val periodSpaceCapital = """\.\s+[A-Z]""".toRegex()
+    private val periodSpaceNonLowercase = """\.\s+[0-9A-Z{<`@\"(\\\[]""".toRegex()
+    private val doesntEnd = listOf("e.g.", "i.e.", "viz.")
+
+    /**
+     * @param tags the DocTags in this context. This DocTag should be one of them.
+     * @Returns whether this Text DocTag ends with the end of a sentence.
+     * Specifically, whether it meets one of the following conditions (each of which indicate that
+     *    this tag ends a sentence):
+     * 1. Has no children or subsequent tags.
+     * 2. Ends in a period, and the next tag/child starts in a capital letter.
+     * 3. Ends in a period, and the next tag starts with an ambiguous character (neither upper nor
+     *    lower case), AND this tag *does not* end in a known-non-sentence-ending-period-structure,
+     *    e.g. "e.g." or "i.e.".
+     */
+    private fun Text.breaksAtEndOfTag(tags: List<DocTag>): Boolean {
+        if (!(this.body.endsWith(".") || this.body.trim().endsWith("."))) return false
+        val tagIndex = tags.indexOf(this)
+        // Identify the first sentence of the description. Summaries only contain that.
+        val followingText = // Simply render all tags into one string for this check.
+            (this.children.text() + tags.subList(tagIndex + 1, tags.size).text()).trim()
+        if (followingText == "") return true
+        // In some cases the first sentence doesn't end at the first period e.g. when
+        // there is an "e.g.". We detect this by checking whether the first character
+        // after the period (if it exists) is capitalized.
+        if (followingText[0] in 'A'..'Z') return true
+        // If the tag's text ends with "e.g.", "i.e.", or similar, the sentence continues.
+        if (doesntEnd.any { this.body.trim().endsWith(it) }) return false
+        // It is possible the next character's capitalization can't answer the question
+        // --e.g. if it is a number, a link, or a code literal.
+        // In such ambiguous cases we (currently) default to sentence-ends-at-period
+        if (followingText[0] in '0'..'9' || followingText[0] in "{<`@\"([") return true
+        // If the next tag is e.g. a Code tag that begins with a lower case, it's ambiguous.
+        if (tagIndex + 1 < tags.size && tags[tagIndex + 1] !is Text) return true
+        // If the next tag is a Text that begins with a lower case, the sentence has not ended.
+        if (followingText[0] in 'a'..'z') return false
+        println("WARN: you have a strange period in these docs that may or may not end a sentence")
+        println(tags.text())
+        return true // This should never happen--it would require period-space-something-weird
+    }
+
+    /**
+     * @Returns whether this string contains a sentence end-and-start-a-new at the given index.
+     * Uses similar criteria to the above function.
+     */
+    @OptIn(ExperimentalStdlibApi::class)
+    private fun String.containsSentenceBreakAt(index: Int): Boolean {
+        if (periodSpaceCapital.matchesAt(this, index)) return true
+        if (!periodSpaceNonLowercase.matchesAt(this, index)) return false
+        if (doesntEnd.any { this.subSequence(0, index + 1).endsWith(it) }) return false
+        return true
+    }
+
+    /**
+     * @Returns the indexes of all period-space-non-lowercase-known-char sequences in this string.
+     * Pair with the above fun to tell whether there is a sentence-end strictly-inside this string.
+     */
+    private fun String.matchPeriodSpaceNonLowercase(): List<Int> {
+        // check if there is a sentence-end strictly-inside the tag.body
+        var matches = periodSpaceNonLowercase.findAll(this).map { it.range.first }.toList()
+        matches = matches.filter { this.containsSentenceBreakAt(it) }
+        return matches
+    }
+
     private fun FlowContent.renderTags(tags: List<DocTag>, state: State) {
         for (tag in tags) {
-            if (state.terminate) break
+            if (state.terminate)
+                break
             val link = tag.params["href"]
             val isHtml = tag.params["content-type"] == "html"
             when (tag) {
                 is Text -> if (data.summary) {
-                    if (tag.body.endsWith(".") || tag.body.contains(". ")) {
-                        +tag.body.replaceAfter(". ", "").trimEnd()
+                    // If there is a sentence-end, break on the first
+                    val matches = tag.body.matchPeriodSpaceNonLowercase()
+                    if (matches.isNotEmpty()) {
+                        +(tag.body.subSequence(0, matches.minOrNull()!! + 1).toString())
                         state.terminate = true
+                    } else if (tag.breaksAtEndOfTag(tags)) { // If this tag is a full sentence
+                        +tag.body.trimEnd()
+                        state.terminate = true
+                    } else if (isHtml) {
+                        consumer.onTagContentUnsafe { raw(tag.body) }
                     } else {
-                        if (isHtml) {
-                            consumer.onTagContentUnsafe { raw(tag.body) }
-                        } else {
-                            +tag.body
-                        }
+                        +tag.body
                     }
                 } else {
                     if (tag.children.isEmpty()) {
@@ -199,7 +267,11 @@ internal class DefaultDescriptionComponent(
                         }
                     }
                 }
-                is P -> p { renderTags(tag.children, state) }
+                is P -> {
+                    p { renderTags(tag.children, state) }
+                    // Sometimes developers forget periods. Max one paragraph per sentence though.
+                    if (data.summary) state.terminate = true
+                }
                 is A -> a(link) { renderTags(tag.children, state) }
                 is B, is Strong -> b { renderTags(tag.children, state) }
                 Br -> br { renderTags(tag.children, state) }

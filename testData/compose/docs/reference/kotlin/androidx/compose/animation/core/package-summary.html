@@ -19,13 +19,13 @@
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a></code></td>
             <td>
-              <p><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a></code> stores the specification of an animation, including 1) the data type to be animated, and 2) the animation configuration (i.e.</p>
+              <p><code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a></code> stores the specification of an animation, including 1) the data type to be animated, and 2) the animation configuration (i.e. <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code>) that will be used once the data (of type <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">T</a></code>) has been converted to <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a></code></td>
             <td>
-              <p><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a></code> stores the specification of an animation, including 1) the data type to be animated, and 2) the animation configuration (i.e.</p>
+              <p><code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a></code> stores the specification of an animation, including 1) the data type to be animated, and 2) the animation configuration (i.e. <code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedDecayAnimationSpec.html">VectorizedDecayAnimationSpec</a></code>) that will be used once the data (of type <code><a href="/reference/kotlin/androidx/compose/animation/core/DecayAnimationSpec.html">T</a></code>) has been converted to <code><a href="/reference/kotlin/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -246,13 +246,13 @@
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/SpringSpec.html">SpringSpec</a></code></td>
             <td>
-              <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/SpringSpec.html">SpringSpec</a></code> that uses the given spring constants (i.e.</p>
+              <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/SpringSpec.html">SpringSpec</a></code> that uses the given spring constants (i.e. <code><a href="/reference/kotlin/androidx/compose/animation/core/SpringSpec.html#dampingRatio()">dampingRatio</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/core/SpringSpec.html#stiffness()">stiffness</a></code>.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/TargetBasedAnimation.html">TargetBasedAnimation</a></code></td>
             <td>
-              <p>This is a convenient animation wrapper class that works for all target based animations, i.e.</p>
+              <p>This is a convenient animation wrapper class that works for all target based animations, i.e. animations that has a pre-defined end value, unlike decay.</p>
             </td>
           </tr>
           <tr>
@@ -282,7 +282,7 @@
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedKeyframesSpec.html">VectorizedKeyframesSpec</a></code></td>
             <td>
-              <p><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedKeyframesSpec.html">VectorizedKeyframesSpec</a></code> class manages the animation based on the values defined at different timestamps in the duration of the animation (i.e.</p>
+              <p><code><a href="/reference/kotlin/androidx/compose/animation/core/VectorizedKeyframesSpec.html">VectorizedKeyframesSpec</a></code> class manages the animation based on the values defined at different timestamps in the duration of the animation (i.e. different keyframes).</p>
             </td>
           </tr>
           <tr>
@@ -515,7 +515,7 @@
             <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/InfiniteRepeatableSpec.html">InfiniteRepeatableSpec</a>&lt;T&gt;</code></td>
             <td>
               <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#infiniteRepeatable(androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode)">infiniteRepeatable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;animation:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;repeatMode:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a><br>)</code></div>
-              <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/InfiniteRepeatableSpec.html">InfiniteRepeatableSpec</a></code> that plays a <code><a href="/reference/kotlin/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a></code> (e.g.</p>
+              <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/InfiniteRepeatableSpec.html">InfiniteRepeatableSpec</a></code> that plays a <code><a href="/reference/kotlin/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a></code> (e.g. <code><a href="/reference/kotlin/androidx/compose/animation/core/TweenSpec.html">TweenSpec</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.html">KeyframesSpec</a></code>) infinite amount of iterations.</p>
             </td>
           </tr>
           <tr>
@@ -536,7 +536,7 @@
             <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/RepeatableSpec.html">RepeatableSpec</a>&lt;T&gt;</code></td>
             <td>
               <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#repeatable(kotlin.Int,androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode)">repeatable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;iterations:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animation:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;repeatMode:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/RepeatMode.html">RepeatMode</a><br>)</code></div>
-              <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/RepeatableSpec.html">RepeatableSpec</a></code> that plays a <code><a href="/reference/kotlin/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a></code> (e.g.</p>
+              <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/RepeatableSpec.html">RepeatableSpec</a></code> that plays a <code><a href="/reference/kotlin/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a></code> (e.g. <code><a href="/reference/kotlin/androidx/compose/animation/core/TweenSpec.html">TweenSpec</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/core/KeyframesSpec.html">KeyframesSpec</a></code>) the amount of iterations specified by <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#repeatable(kotlin.Int,androidx.compose.animation.core.DurationBasedAnimationSpec,androidx.compose.animation.core.RepeatMode)">iterations</a></code>.</p>
             </td>
           </tr>
           <tr>
@@ -550,7 +550,7 @@
             <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/core/SpringSpec.html">SpringSpec</a>&lt;T&gt;</code></td>
             <td>
               <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a>(dampingRatio:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;stiffness:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,&nbsp;visibilityThreshold:&nbsp;T?)</code></div>
-              <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/SpringSpec.html">SpringSpec</a></code> that uses the given spring constants (i.e.</p>
+              <p>Creates a <code><a href="/reference/kotlin/androidx/compose/animation/core/SpringSpec.html">SpringSpec</a></code> that uses the given spring constants (i.e. <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">dampingRatio</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">stiffness</a></code>.</p>
             </td>
           </tr>
           <tr>

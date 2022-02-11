@@ -177,7 +177,7 @@ internal class DocTagConverterTest(
     fun `Full summary and description work with multiline in 4x Kotlin and Java`() {
         val moduleK = """
             |/**
-            | * Hello World! Docs with period issue, e.g.&nbsp;this.
+            | * Hello World! Docs with period issue, e.g.&nbsp;this/e.g. this.
             | *
             | * A second line of desc. A third line of desc.
             | */
@@ -185,7 +185,7 @@ internal class DocTagConverterTest(
         """.render()
         val moduleJ = """
             |/**
-            | * Hello World! Docs with period issue, e.g.&nbsp;this.
+            | * Hello World! Docs with period issue, e.g.&nbsp;this/e.g. this.
             | *
             | * A second line of desc. A third line of desc.
             | */
@@ -195,6 +195,13 @@ internal class DocTagConverterTest(
         for (module in listOf(moduleJ, moduleK)) {
             val summary = module.description(doc = { this.clazz() })
             assertThat(summary.data.summary).isTrue()
+            assertThat(summary.render()).isEqualTo(
+                """
+<body>
+  <p>Hello World! Docs with period issue, e.g. this/e.g. this.</p>
+</body>
+                """.trim()
+            )
 
             val detail = module.documentation(doc = { this.clazz() }).item() as DescriptionComponent
             assertThat(detail.data.summary).isFalse()
@@ -202,7 +209,7 @@ internal class DocTagConverterTest(
             assertThat(detail.render()).isEqualTo(
                 """
 <body>
-  <p>Hello World! Docs with period issue, e.g. this.${separator}A second line of desc. A third line of desc.</p>
+  <p>Hello World! Docs with period issue, e.g. this/e.g. this.${separator}A second line of desc. A third line of desc.</p>
 </body>
             """.trim()
             )

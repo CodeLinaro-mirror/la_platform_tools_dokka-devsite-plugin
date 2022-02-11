@@ -152,6 +152,125 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     }
 
     @Test
+    fun `Summary breaks on period space code tag`() {
+        val component1 = """
+            |/**
+            | * This is a complete sentence. <code>Foo.hashCode</code> is a function.
+            | */
+            |class Foo
+        """.render().description(
+            summary = true
+        )
+        val component2 = """
+            |/**
+            | * This is a complete sentence.
+            | * <code>Foo.hashCode</code> is a function.
+            | */
+            |class Foo
+        """.render().description(
+            summary = true
+        )
+
+        val output1 = createHTML().body {
+            component1.render(this)
+        }.trim()
+        val output2 = createHTML().body {
+            component2.render(this)
+        }.trim()
+        val expected = """
+<body>
+  <p>This is a complete sentence.</p>
+</body>
+            """.trim()
+        // language=html
+        assertThat(output1).isEqualTo(expected)
+        assertThat(output2).isEqualTo(expected)
+    }
+
+    @Test
+    fun `Summary breaks on period space markdown-code`() {
+        val component = """
+            |/**
+            | * This [Animatable] function creates a float value holder that automatically
+            | * animates its value when the value is changed via [animateTo]. [Animatable] supports value
+            | * change during an ongoing value change animation.
+            | */
+            |class Foo
+        """.render().description(
+            summary = true
+        )
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p>This Animatable function creates a float value holder that automatically animates its value when the value is changed via animateTo.</p>
+</body>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Summary breaks on new paragraph even without ending period`() {
+        val component = """
+            |/**
+            | * Animation will be forced to end when its value reaches upper/lower bound (if they have
+            | * been defined, e.g. via [Animatable.updateBounds])
+            | *
+            | * Unlike [Finished], when an animation ends due to [BoundReached], it often falls short
+            | * from its initial target, and the remaining velocity is often non-zero. Both the end value
+            | * and the remaining velocity can be obtained via [AnimationResult].
+            | */
+            |class Foo
+        """.render().description(
+            summary = true
+        )
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p>Animation will be forced to end when its value reaches upper/lower bound (if they have been defined, e.g. via Animatable.updateBounds)</p>
+</body>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Spacing does not confuse sentence-end detector`() {
+        val component = """
+            |/**
+            | * the amount of time (in milliseconds) the animation will take to finish.
+            | *                     Defaults to [DefaultDuration]
+            | */
+            |class Foo
+        """.render().description(
+            summary = true
+        )
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p>the amount of time (in milliseconds) the animation will take to finish.</p>
+</body>
+            """.trim()
+        )
+    }
+
+    @Test
     fun `Deprecation summary renders renders correctly`() {
         val component = """
             |/**
