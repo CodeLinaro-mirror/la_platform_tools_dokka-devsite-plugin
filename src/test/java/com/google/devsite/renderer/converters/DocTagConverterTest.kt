@@ -122,16 +122,16 @@ internal class DocTagConverterTest(
             |public class Foo {}
         """.render(java = true)
 
-        // TODO: b/199863023 Javadoc header tag parsing will be fixed soon
-//        val detailJ = moduleJ.documentation(doc = { this.clazz() }).item() as DescriptionComponent
-//        assertThat(detailJ.render()).isEqualTo(
-//            """
-// <body>
-//  <p>Hello World!</p>
-//  <p><h2>Second level</h2><h3>Third level</h3></p>
-// </body>
-//            """.trim()
-//        )
+        val detailJ = moduleJ.documentation(doc = { this.clazz() }).item() as DescriptionComponent
+        assertThat(detailJ.render()).isEqualTo(
+            """
+<body>
+  <p>Hello World! </p>
+  <h2>Second level</h2>
+  <h3>Third level</h3>
+</body>
+            """.trim()
+        )
     }
 
     @Suppress("unused") // TODO: fix deprecated class details b/183420241

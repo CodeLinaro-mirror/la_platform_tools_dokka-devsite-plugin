@@ -147,7 +147,8 @@ internal class FilePathProviderTest : ConverterTestBase() {
         val dri = DRI(
             packageName = "androidx.example",
             classNames = "Outer.Inner.FOO",
-            callable = null
+            extra = "{\"org.jetbrains.dokka.links.EnumEntryDRIExtra\":" +
+                "{\"key\":\"org.jetbrains.dokka.links.EnumEntryDRIExtra\"}}"
         )
 
         val (name, url) = pathProvider(classGraph = classGraph).forReference(dri)

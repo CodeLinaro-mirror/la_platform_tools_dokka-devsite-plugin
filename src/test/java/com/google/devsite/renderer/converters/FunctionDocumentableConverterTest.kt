@@ -44,7 +44,6 @@ import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DModule
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -100,9 +99,8 @@ internal class FunctionDocumentableConverterTest(
         kotlinOnly { assertThat(returnz.modifiers).containsExactly("inline") }
     }
 
-    @Ignore // TODO(b/165112358): foo doesn't show up in the dokka model
     @Test
-    fun `Function summary component in abstract class has protected modifier`() {
+    fun `Function summary for protected component in abstract class has no modifier`() {
         val summary = """
             |abstract class Foo {
             |    protected open fun foo() = Unit
@@ -111,7 +109,9 @@ internal class FunctionDocumentableConverterTest(
 
         val returnz = summary.returnSummary()
 
-        assertThat(returnz.modifiers).containsExactly("protected")
+        // public and protected modifiers don't appear in summary
+        kotlinOnly { assertThat(returnz.modifiers).containsExactly("open") }
+        javaOnly { assertThat(returnz.modifiers).isEmpty() }
     }
 
     @Test

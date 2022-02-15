@@ -17,6 +17,7 @@
 package com.google.devsite.testing
 
 import com.google.common.truth.Truth.assertWithMessage
+import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.ExternalDocumentationLink
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.pages.RootPageNode
@@ -72,6 +73,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                     externalDocumentationLinks = externalLinks
                     samples = sampleLocations.map { "$baseDir/$it" }
                     includes = includeFiles.map { File(sources, it).absolutePath }
+                    documentedVisibilities = setOf(DokkaConfiguration.Visibility.PUBLIC,
+                        DokkaConfiguration.Visibility.PROTECTED)
                 }
             }
             offlineMode = true

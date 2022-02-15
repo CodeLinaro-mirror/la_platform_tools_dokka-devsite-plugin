@@ -20,7 +20,6 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.renderer.Language
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.model.DModule
-import org.junit.Ignore
 import org.junit.Test
 
 internal class ModifiersTest : ConverterTestBase() {
@@ -54,7 +53,6 @@ internal class ModifiersTest : ConverterTestBase() {
         assertThat(modifiers).hasSize(2)
     }
 
-    @Ignore // TODO(b/165112358): foo doesn't show up in the dokka model
     @Test
     fun `Protected modifier is found`() {
         val modifiers = """

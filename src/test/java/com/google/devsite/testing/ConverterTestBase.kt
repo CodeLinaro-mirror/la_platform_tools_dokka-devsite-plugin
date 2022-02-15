@@ -28,6 +28,7 @@ import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.CoreExtensions
+import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.ExternalDocumentationLink
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.model.DModule
@@ -151,6 +152,8 @@ internal abstract class ConverterTestBase(
                     sourceRoots = listOf("src/main")
                     classpath = listOfNotNull(jvmStdlibPath, commonStdlibPath)
                     externalDocumentationLinks = externalLinks
+                    documentedVisibilities = setOf(DokkaConfiguration.Visibility.PUBLIC,
+                        DokkaConfiguration.Visibility.PROTECTED)
                 }
             }
             offlineMode = true

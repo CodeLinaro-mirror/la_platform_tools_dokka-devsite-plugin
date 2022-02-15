@@ -187,6 +187,24 @@ class UserAdapter : PagingDataAdapter&lt;User, UserViewHolder&gt;(USER_COMPARATO
       </table>
     </div>
     <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Protected methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>final T</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/PagingDataAdapter.html#getItem(kotlin.Int)">getItem</a>(@<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) int&nbsp;position)</code></div>
+              <p>Returns the presented item at the specified position, notifying Paging of the item access to trigger any loads necessary to fulfill <code><a href="/reference/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
       <table class="responsive" id="inhmethods">
         <thead>
           <tr>
@@ -813,6 +831,46 @@ class MyRxJava2Activity : AppCompatActivity() {
             <tr>
               <td width="40%"><code><a href="/reference/androidx/paging/PagingDataAdapter.html#withLoadStateFooter(androidx.paging.LoadStateAdapter)">withLoadStateFooter</a></code></td>
               <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Protected methods</h2>
+    <div><a name="getItem-kotlin.Int-"></a><a name="getitem"></a>
+      <h3 class="api-name" id="getItem(kotlin.Int)">getItem</h3>
+      <pre class="api-signature no-pretty-print">protected&nbsp;final&nbsp;T&nbsp;<a href="/reference/androidx/paging/PagingDataAdapter.html#getItem(kotlin.Int)">getItem</a>(@<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) int&nbsp;position)</pre>
+      <p>Returns the presented item at the specified position, notifying Paging of the item access to trigger any loads necessary to fulfill <code><a href="/reference/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) int&nbsp;position</code></td>
+              <td>
+                <p>Index of the presented item to return, including placeholders.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Returns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>T</code></td>
+              <td>
+                <p>The presented item at <code><a href="/reference/androidx/paging/PagingDataAdapter.html#getItem(kotlin.Int)">position</a></code>, <code>null</code> if it is a placeholder</p>
+              </td>
             </tr>
           </tbody>
         </table>

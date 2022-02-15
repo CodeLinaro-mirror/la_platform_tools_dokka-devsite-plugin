@@ -65,6 +65,28 @@
       <table class="responsive">
         <thead>
           <tr>
+            <th colspan="2"><h3>Protected constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;<a href="/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; <a href="/reference/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.DiffUtil.ItemCallback)">PagedListAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/DiffUtil.ItemCallback.html">DiffUtil.ItemCallback</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;diffCallback<br>)</code></div>
+              <p>Creates a <code><a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code> with default threading and <code><a href="/reference/androidx/recyclerview/widget/ListUpdateCallback.html">androidx.recyclerview.widget.ListUpdateCallback</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;<a href="/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; <a href="/reference/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.AsyncDifferConfig)">PagedListAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/AsyncDifferConfig.html">AsyncDifferConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;config<br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
             <th colspan="2"><h3>Public methods</h3></th>
           </tr>
         </thead>
@@ -136,6 +158,23 @@
             <td>
               <div><code><a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;header,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;footer<br>)</code></div>
               <p>Create a <code><a href="/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code> with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code> and <code><a href="/reference/androidx/paging/LoadState.html">LoadType.APPEND</a></code>s as list items at the start and end respectively.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Protected methods</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"><code>T</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/PagedListAdapter.html#getItem(kotlin.Int)">getItem</a>(int&nbsp;position)</code></div>
             </td>
           </tr>
         </tbody>
@@ -393,6 +432,34 @@
         </table>
       </div>
     </div>
+    <h2>Protected constructors</h2>
+    <div><a name="PagedListAdapter-androidx.recyclerview.widget.DiffUtil.ItemCallback-"></a><a name="pagedlistadapter"></a>
+      <h3 class="api-name" id="PagedListAdapter(androidx.recyclerview.widget.DiffUtil.ItemCallback)">PagedListAdapter</h3>
+      <pre class="api-signature no-pretty-print">protected&nbsp;final&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;<a href="/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; <a href="/reference/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.DiffUtil.ItemCallback)">PagedListAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/DiffUtil.ItemCallback.html">DiffUtil.ItemCallback</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;diffCallback<br>)</pre>
+      <p>Creates a <code><a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code> with default threading and <code><a href="/reference/androidx/recyclerview/widget/ListUpdateCallback.html">androidx.recyclerview.widget.ListUpdateCallback</a></code>.</p>
+      <p>Convenience for <code><a href="/reference/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code>, which uses default threading behavior.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/DiffUtil.ItemCallback.html">DiffUtil.ItemCallback</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;diffCallback</code></td>
+              <td>
+                <p>The <code><a href="/reference/androidx/recyclerview/widget/DiffUtil.ItemCallback.html">DiffUtil.ItemCallback</a></code> instance to compare items in the list.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="PagedListAdapter-androidx.recyclerview.widget.AsyncDifferConfig-"></a><a name="pagedlistadapter"></a>
+      <h3 class="api-name" id="PagedListAdapter(androidx.recyclerview.widget.AsyncDifferConfig)">PagedListAdapter</h3>
+      <pre class="api-signature no-pretty-print">protected&nbsp;final&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;VH&nbsp;extends&nbsp;<a href="/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; <a href="/reference/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.AsyncDifferConfig)">PagedListAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/AsyncDifferConfig.html">AsyncDifferConfig</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;config<br>)</pre>
+    </div>
     <h2>Public methods</h2>
     <div><a name="addLoadStateListener-kotlin.Function2-"></a><a name="addloadstatelistener"></a>
       <h3 class="api-name" id="addLoadStateListener(kotlin.Function2)">addLoadStateListener</h3>
@@ -625,6 +692,11 @@
       <h3 class="api-name" id="withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a>&nbsp;<a href="/reference/androidx/paging/PagedListAdapter.html#withLoadStateHeaderAndFooter(androidx.paging.LoadStateAdapter,androidx.paging.LoadStateAdapter)">withLoadStateHeaderAndFooter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;header,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&nbsp;footer<br>)</pre>
       <p>Create a <code><a href="/reference/androidx/recyclerview/widget/ConcatAdapter.html">ConcatAdapter</a></code> with the provided <code><a href="/reference/androidx/paging/LoadStateAdapter.html">LoadStateAdapter</a></code>s displaying the <code><a href="/reference/androidx/paging/LoadType.html#PREPEND">LoadType.PREPEND</a></code> and <code><a href="/reference/androidx/paging/LoadState.html">LoadType.APPEND</a></code>s as list items at the start and end respectively.</p>
+    </div>
+    <h2>Protected methods</h2>
+    <div><a name="getItem-kotlin.Int-"></a><a name="getitem"></a>
+      <h3 class="api-name" id="getItem(kotlin.Int)">getItem</h3>
+      <pre class="api-signature no-pretty-print">protected&nbsp;T&nbsp;<a href="/reference/androidx/paging/PagedListAdapter.html#getItem(kotlin.Int)">getItem</a>(int&nbsp;position)</pre>
     </div>
   </body>
 </html>

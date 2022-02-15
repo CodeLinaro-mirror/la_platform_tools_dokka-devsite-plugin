@@ -180,7 +180,6 @@ internal class ClasslikeDocumentableConverterTest(
         }
     }
 
-    @Ignore // TODO(b/165112358): foo doesn't show up in the dokka model
     @Test
     fun `Protected function gets documented`() {
         val page = """
@@ -209,7 +208,6 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(summary.item().summary().name()).isEqualTo("foo")
     }
 
-    @Ignore // TODO(b/165112358): foo doesn't show up in the dokka model
     @Test
     fun `Protected property gets documented`() {
         val page = """
@@ -263,7 +261,6 @@ internal class ClasslikeDocumentableConverterTest(
         }
     }
 
-    @Ignore // TODO(b/165112358): foo doesn't show up in the dokka model
     @Test
     fun `Protected constructor gets documented`() {
         val page = """
@@ -908,7 +905,6 @@ internal class ClasslikeDocumentableConverterTest(
         }
     }
 
-    @Ignore // TODO(b/165112358): protected `bar` doesn't show up in the dokka model
     @Test
     fun `protected companion functions are included in Kotlin and not Java`() {
         val page = """
