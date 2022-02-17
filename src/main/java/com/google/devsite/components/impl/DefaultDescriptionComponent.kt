@@ -183,11 +183,12 @@ internal class DefaultDescriptionComponent(
      *    e.g. "e.g." or "i.e.".
      */
     private fun Text.breaksAtEndOfTag(tags: List<DocTag>): Boolean {
-        if (!(this.body.endsWith(".") || this.body.trim().endsWith("."))) return false
+        if (!this.body.trim().endsWith(".")) return false
         val tagIndex = tags.indexOf(this)
         // Identify the first sentence of the description. Summaries only contain that.
         val followingText = // Simply render all tags into one string for this check.
-            (this.children.text() + tags.subList(tagIndex + 1, tags.size).text()).trim()
+            (this.children.text(separator = " ") +
+                tags.subList(tagIndex + 1, tags.size).text(separator = " ")).trim()
         if (followingText == "") return true
         // In some cases the first sentence doesn't end at the first period e.g. when
         // there is an "e.g.". We detect this by checking whether the first character
@@ -434,10 +435,10 @@ internal class DefaultDescriptionComponent(
     private class State(var terminate: Boolean = false)
 
     /** Function for printing context */
-    fun List<DocTag>.text(): String = map { when (it) {
+    fun List<DocTag>.text(separator: String = ", "): String = map { when (it) {
         is DocumentationLink -> it.dri.toString() + it.children.text()
         is CustomDocTag -> it.name + it.children.text()
         is Text -> it.body + it.children.text()
         else -> it.children.text()
-    } }.joinToString(", ")
+    } }.joinToString(separator)
 }

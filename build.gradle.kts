@@ -61,7 +61,7 @@ version = "0.0.15" // This is appended to archiveBaseName in the ShadowJar task.
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
 

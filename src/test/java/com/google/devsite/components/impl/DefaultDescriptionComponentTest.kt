@@ -83,9 +83,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | * Stuff.
             | */
             |class Foo
-        """.render().description(
-            summary = true
-        )
+        """.render().description(summary = true)
 
         val output = createHTML().body {
             component.render(this)
@@ -110,9 +108,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | * Stuff.
             | */
             |class Foo
-        """.render().description(
-            summary = true
-        )
+        """.render().description(summary = true)
 
         val output = createHTML().body {
             component.render(this)
@@ -133,9 +129,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
         val component = """
             |/** [Foo.Bar] has great drinks. */
             |class Foo
-        """.render().description(
-            summary = true
-        )
+        """.render().description(summary = true)
 
         val output = createHTML().body {
             component.render(this)
@@ -158,18 +152,14 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | * This is a complete sentence. <code>Foo.hashCode</code> is a function.
             | */
             |class Foo
-        """.render().description(
-            summary = true
-        )
+        """.render().description(summary = true)
         val component2 = """
             |/**
             | * This is a complete sentence.
             | * <code>Foo.hashCode</code> is a function.
             | */
             |class Foo
-        """.render().description(
-            summary = true
-        )
+        """.render().description(summary = true)
 
         val output1 = createHTML().body {
             component1.render(this)
@@ -196,9 +186,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | * change during an ongoing value change animation.
             | */
             |class Foo
-        """.render().description(
-            summary = true
-        )
+        """.render().description(summary = true)
 
         val output = createHTML().body {
             component.render(this)
@@ -226,9 +214,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | * and the remaining velocity can be obtained via [AnimationResult].
             | */
             |class Foo
-        """.render().description(
-            summary = true
-        )
+        """.render().description(summary = true)
 
         val output = createHTML().body {
             component.render(this)
@@ -252,9 +238,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | *                     Defaults to [DefaultDuration]
             | */
             |class Foo
-        """.render().description(
-            summary = true
-        )
+        """.render().description(summary = true)
 
         val output = createHTML().body {
             component.render(this)

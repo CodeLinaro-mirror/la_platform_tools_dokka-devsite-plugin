@@ -16,8 +16,12 @@
 
 package dokkatest.simple
 
+import dokkatest.simple.Four
+
 /**
- * Sample class 1
+ * Sample class 1 has a summary.
+ * <br>
+ * And details.
  * @constructor Primary constructor docs
  */
 open class One(override val fore: String) : Four, Five() {
