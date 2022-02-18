@@ -76,6 +76,20 @@ internal class AnnotationsTest : ConverterTestBase() {
     }
 
     @Test
+    fun `@JsName annotation is ignored`() {
+
+        // Declare the CheckResult annotation class before it's used
+        val annotation = """
+            |annotation class JsName
+            |
+            |@JsName("somethingElse")
+            |fun foo() = Unit
+        """.render().functionAnnotations()
+
+        assertThat(annotation.components().exceptNonNull()).isEmpty()
+    }
+
+    @Test
     fun `@Deprecated annotations are ignored since they are surfaced separately`() {
         val annotations = """
             |@Deprecated("So long, farewell, auf wiedersehen, goodbye")

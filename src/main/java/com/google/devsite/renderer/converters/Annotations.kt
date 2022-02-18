@@ -186,7 +186,9 @@ private val EXPLICITLY_BANNED_ANNOTATION_NAMES = listOf(
     // This annotation is used mostly in paging, and was removed at the request of the paging team
     "CheckResult",
     // This annotation is apparently generated upstream. Dokka uses it for signature serialization
-    "ParameterName" // It doesn't seem to be useful for developers
+    "ParameterName", // It doesn't seem to be useful for developers
+    // This annotations is not useful for developers but right now is @ShowAnnotation?
+    "JsName"
 )
 // List of androidx annotations that (now that we are on Java 8) ideally would be migrated
 // ANNOTATION_TARGET.METHOD -> ANNOTATION_TARGET.TYPE. If on a function, they refer to return type
