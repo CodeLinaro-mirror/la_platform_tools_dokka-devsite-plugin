@@ -102,12 +102,12 @@ val testDataAars by project.configurations.creating
 dependencies {
     testDataImpl("io.reactivex.rxjava3:rxjava:3.0.0")
     testDataImpl("io.reactivex.rxjava2:rxjava:2.2.9")
-    testDataImpl("org.robolectric:sandbox:4.7")
+    testDataImpl("org.robolectric:sandbox:4.7.3")
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2")
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.5.2")
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx3:1.5.2")
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.5.2")
-    testDataImpl("org.robolectric:android-all-instrumented:12-robolectric-7732740-i2")
+    testDataImpl("org.robolectric:android-all-instrumented:12-robolectric-7732740-i3")
 
     testDataImpl(fileTree("$buildDir/exploded"))
 
