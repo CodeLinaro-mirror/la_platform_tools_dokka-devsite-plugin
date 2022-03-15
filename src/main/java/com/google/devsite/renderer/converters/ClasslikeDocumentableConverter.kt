@@ -79,10 +79,10 @@ internal class ClasslikeDocumentableConverter(
 
     /** @return the classlike component */
     suspend fun classlike(): DevsitePage = coroutineScope {
-        var declaredFunctions = classlike.functions.myTypes()
-        if (displayLanguage == Language.JAVA) {
-            declaredFunctions += classlike.gettersAndSetters()
-        }
+        var declaredFunctions = if (displayLanguage == Language.JAVA)
+            classlike.functions.myTypes() + classlike.gettersAndSetters()
+        else classlike.functions.myTypes()
+
         var declaredProperties = classlike.properties.myTypes()
         var companionFunctions = classlike.companionFunctions()
         var companionProperties = classlike.companionProperties()

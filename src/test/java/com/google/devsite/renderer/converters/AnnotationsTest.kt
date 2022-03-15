@@ -415,7 +415,7 @@ internal class AnnotationsTest : ConverterTestBase() {
         pathProvider = pathProvider(),
         displayLanguage = displayLanguage,
         nullability = if (isKotlinNullable) Nullability.KOTLIN_NULLABLE
-            else this.inferNullability(isFromJava)
+            else this.inferNullability()
             ?: defaultNullability(isFromJava)
     )
 

@@ -114,25 +114,24 @@ internal fun Projection.getNullability(
             // This is the only case where annotations can override the normal nullability
             val allAnnotations = injectedAnnotations +
                 ((this as? WithExtraProperties<*>)?.annotations() ?: emptyList())
-            allAnnotations.inferNullability(isJavaSource)?.let { return@getNullability it }
+            // We hide nullability annotations on Kotlin docs even if they were explicit in Kotlin
+            // source. This is highly opinionated. As such, we throw a warningto make this explicit.
+            /*if (isJavaSource == false && (this is TypeParameter || this is TypeConstructor) &&
+                (allAnnotations.hasAtNullable() || allAnnotations.hasAtNonNull())) {
+                val name = if (this is TypeParameter) this.name
+                    else (this as TypeConstructor).presentableName
+                println("WARN: Java nullability annotation on Kotlin-source $name. Context: $this")
+            }*/
+            allAnnotations.inferNullability()?.let { return@getNullability it }
             // If there are no nullability annotations:
             defaultNullability(isJavaSource)
         }
     }
 }
 
-internal fun List<Annotations.Annotation>.inferNullability(isJavaSource: Boolean?): Nullability? {
-    if (hasAtNullable()) {
-        // Unfortunately, we don't have the documentable at this point to include in the warning
-        if (isJavaSource == false) println("WARN: nullability annotation on Kotlin source." +
-        "If the annotation cannot be found in source, it might be unavoidable from inheritance.")
-        return Nullability.JAVA_ANNOTATED_NULLABLE
-    }
-    if (hasAtNonNull()) {
-        if (isJavaSource == false) println("WARN: nullability annotation on Kotlin source." +
-        "If the annotation cannot be found in source, it might be unavoidable from inheritance.")
-        return Nullability.JAVA_ANNOTATED_NOT_NULL
-    }
+internal fun List<Annotations.Annotation>.inferNullability(): Nullability? {
+    if (hasAtNullable()) return Nullability.JAVA_ANNOTATED_NULLABLE
+    if (hasAtNonNull()) return Nullability.JAVA_ANNOTATED_NOT_NULL
     return null
 }
 
