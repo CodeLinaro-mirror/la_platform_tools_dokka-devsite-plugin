@@ -29,7 +29,7 @@ internal class DocumentablesWrapper : DocumentableToPageTranslator {
     override fun invoke(module: DModule): RootPageNode = ModulePageNode(
         name = module.name,
         content = ContentText("DO NOT USE", DCI(emptySet(), ContentKind.Main), emptySet()),
-        documentable = module,
+        documentables = listOf(module),
         children = emptyList()
     )
 }

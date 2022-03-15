@@ -608,7 +608,9 @@ internal class DocTagConverter(
         val parts = full.split(".")
 
         val packageName = parts.takeWhile { it.all(Char::isLowerCase) }.joinToString(".")
-        val typeName = parts.takeLastWhile { it.first().isUpperCase() }.joinToString(".")
+        val typeName = parts.takeLastWhile {
+            if (it.isEmpty()) throw RuntimeException("empty element in FQTTPNAT. Full: $full")
+            else it.first().isUpperCase() }.joinToString(".")
 
         return packageName to typeName
     }
