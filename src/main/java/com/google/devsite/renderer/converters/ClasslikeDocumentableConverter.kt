@@ -22,12 +22,14 @@ import com.google.devsite.components.impl.DefaultClassSignature
 import com.google.devsite.components.impl.DefaultClasslike
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultInheritedSymbols
+import com.google.devsite.components.impl.DefaultLibraryMetadata
 import com.google.devsite.components.impl.DefaultRelatedSymbols
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableTitle
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.ClassSignature
+import com.google.devsite.components.symbols.LibraryMetadata
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.table.ClassHierarchy
 import com.google.devsite.components.table.InheritedSymbolsList
@@ -200,6 +202,7 @@ internal class ClasslikeDocumentableConverter(
         val hierarchy = async { computeHierarchy() }
         val relatedSymbols = async { findRelatedSymbols() }
         val inheritedTypes = async { computeInheritedSymbols(inheritedAll) }
+        val libraryMetadata = async { getLibraryMetadata() }
 
         val allSymbols = mutableListOf(
             nestedTypesSummary.await() to Classlike.TitledList(nestedTypesTitle(), emptyList()),
@@ -330,7 +333,8 @@ internal class ClasslikeDocumentableConverter(
                             annotations = annotations
                         ),
                         symbolTypes = allSymbols,
-                        inheritedTypes = inheritedTypes.await()
+                        inheritedTypes = inheritedTypes.await(),
+                        libraryMetadata = libraryMetadata.await()
                     )
                 )
             )
@@ -627,6 +631,18 @@ internal class ClasslikeDocumentableConverter(
                 indirectSubclasses = linksForClasslikes(indirectSubclasses),
                 indirectSummary = javadocConverter.docsToSummary(indirectSubclasses)
             )
+        )
+    }
+
+    private fun getLibraryMetadata(): LibraryMetadata {
+        val params = LibraryMetadata.Params(
+            groupId = "androidx.sample",
+            artifactId = "library"
+        )
+
+        return DefaultLibraryMetadata(
+            data = params,
+            shown = false // Set to true to preview results
         )
     }
 
