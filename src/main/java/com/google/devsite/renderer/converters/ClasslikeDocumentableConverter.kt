@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.components.HtmlComponent
 import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultClassHierarchy
 import com.google.devsite.components.impl.DefaultClassSignature
@@ -41,6 +42,7 @@ import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.html.Tag
 import org.jetbrains.dokka.links.Callable
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.parent
@@ -60,6 +62,7 @@ import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.WithGenerics
 import org.jetbrains.dokka.model.WithSupertypes
 import org.jetbrains.dokka.model.properties.WithExtraProperties
+import kotlin.RuntimeException
 
 /** Converts documentable class-likes into the classlike component. */
 internal class ClasslikeDocumentableConverter(
@@ -347,7 +350,12 @@ internal class ClasslikeDocumentableConverter(
             // companion object can be omitted.
             Language.KOTLIN -> classlikes.withoutCompanion()
             else -> classlikes
-        }.map { classlike -> javadocConverter.summaryForDocumentable(classlike) }
+        }.map {
+            errorContextInjector(it) {
+                classlike ->
+                javadocConverter.summaryForDocumentable(classlike)
+            }
+        }
 
         return DefaultSummaryList(
             SummaryList.Params(
@@ -365,7 +373,9 @@ internal class ClasslikeDocumentableConverter(
     private fun functionsToSummary(name: String? = null, functions: List<DFunction>): SummaryList {
         val modifierHints = ModifierHints(displayLanguage, isSummary = true, isInterface())
         val components = functions.map {
-            functionConverter.summary(it, modifierHints)
+            errorContextInjector(it) {
+                functionConverter.summary(it, modifierHints)
+            }
         }
 
         return DefaultSummaryList(
@@ -384,7 +394,11 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun constructorsToSummary(name: String, constructors: List<DFunction>): SummaryList {
-        val components = constructors.map(functionConverter::summaryForConstructor)
+        val components = constructors.map {
+            errorContextInjector(it) {
+                functionConverter.summaryForConstructor(it)
+            }
+        }
 
         return DefaultSummaryList(
             SummaryList.Params(
@@ -402,19 +416,23 @@ internal class ClasslikeDocumentableConverter(
     private fun functionsToDetail(functions: List<DFunction>): List<SymbolDetail> {
         val modifierHints = ModifierHints(displayLanguage, isSummary = false, isInterface())
         return functions.map {
-            functionConverter.detail(it, modifierHints)
+            errorContextInjector(it) {
+                functionConverter.detail(it, modifierHints)
+            }
         }
     }
 
     private fun constructorsToDetail(functions: List<DFunction>): List<SymbolDetail> {
         val modifierHints = ModifierHints(displayLanguage, isSummary = false, isInterface())
         return functions.map {
-            functionConverter.detailForConstructor(it, modifierHints)
+            errorContextInjector(it) {
+                functionConverter.detailForConstructor(it, modifierHints)
+            }
         }
     }
 
     private fun enumValuesToSummary(title: String, enumVals: List<DEnumEntry>): SummaryList {
-        val components = enumVals.map { enumConverter.summary(it) }
+        val components = enumVals.map { errorContextInjector(it) { enumConverter.summary(it) } }
         return DefaultSummaryList(
             SummaryList.Params(
                 header = DefaultTableTitle(
@@ -434,7 +452,9 @@ internal class ClasslikeDocumentableConverter(
     ): SummaryList {
         val modifierHints = ModifierHints(displayLanguage, isSummary = true, isInterface())
         val components = properties.map {
-            propertyConverter.summary(it, modifierHints)
+            errorContextInjector(it) {
+                propertyConverter.summary(it, modifierHints)
+            }
         }
 
         val title = name?.let {
@@ -457,7 +477,9 @@ internal class ClasslikeDocumentableConverter(
     private fun propertiesToDetail(properties: List<DProperty>): List<SymbolDetail> {
         val modifierHints = ModifierHints(displayLanguage, isSummary = false, isInterface())
         return properties.map {
-            propertyConverter.detail(it, modifierHints)
+            errorContextInjector(it) {
+                propertyConverter.detail(it, modifierHints)
+            }
         }
     }
 
@@ -470,7 +492,9 @@ internal class ClasslikeDocumentableConverter(
         }
         val modifierHints = ModifierHints(displayLanguage, isSummary = false, isInterface())
         return enumValues.map {
-            enumConverter.detail(dEnum, it, modifierHints)
+            errorContextInjector(it) {
+                enumConverter.detail(dEnum, it, modifierHints)
+            }
         }
     }
 
@@ -481,7 +505,11 @@ internal class ClasslikeDocumentableConverter(
             emptyList()
         }
         val typeParameters = if (classlike is WithGenerics) {
-            classlike.generics.map { paramConverter.componentForTypeParameter(it) }
+            classlike.generics.map {
+                errorContextInjector(it) {
+                    paramConverter.componentForTypeParameter(it)
+                }
+            }
         } else {
             emptyList()
         }
@@ -721,6 +749,19 @@ internal class ClasslikeDocumentableConverter(
             sourceSets = setOf(classlike.visibility.keys.single()),
             isExpectActual = false
         )
+
+    private fun <I : Documentable, T : Tag, O : HtmlComponent<T>> errorContextInjector(
+        documentable: I,
+        toDo: (I) -> O,
+    ): O {
+        try {
+            return toDo(documentable)
+        } catch (e: Exception) {
+            val message = "Error when handling ${documentable::class} ${documentable.name} " +
+                "in ${classlike.name}"
+            throw RuntimeException(message, e)
+        }
+    }
 
     /**
      * Returns all [Documentable]s from the list which are not the companion object of [classlike]

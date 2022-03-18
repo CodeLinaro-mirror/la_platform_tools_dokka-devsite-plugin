@@ -142,20 +142,29 @@ internal class DocTagConverter(
             // We know all the elements in `tags` will be of the same type, so we pick an arbitrary
             // one to do the switching and then cast the list to its type.
             @kotlin.Suppress("UNCHECKED_CAST")
-            when (firstTag) {
-                is Param -> params(tags as List<NamedTagWrapper>, generics, documentable)
-                is Return -> returnType(tags as List<Return>, checkNotNull(returnType))
-                is Throws -> throws(tags as List<Throws>)
-                is See -> see(tags as List<See>)
-                is Sample -> null // Samples are handled in the description
-                is Property -> throw RuntimeException("Should have been consumed in description!")
-                is CustomTagWrapper -> null // TODO("b/163811276: custom tag wrapper")
-                is Since -> TODO("b/163811276: since")
-                is Constructor -> null // TODO("b/180525239: constructor")
-                // Documented separately above
-                is Description, is Deprecated, is Receiver -> null
-                // Don't care ;)
-                is Suppress, is Version, is Author -> null
+            try {
+                when (firstTag) {
+                    is Param -> params(tags as List<NamedTagWrapper>, generics, documentable)
+                    is Return -> returnType(tags as List<Return>, checkNotNull(returnType))
+                    is Throws -> throws(tags as List<Throws>)
+                    is See -> see(tags as List<See>)
+                    is Sample -> null // Samples are handled in the description
+                    is Property ->
+                        throw RuntimeException("Should have been consumed in description!")
+                    is CustomTagWrapper -> null // TODO("b/163811276: custom tag wrapper")
+                    is Since -> TODO("b/163811276: since")
+                    is Constructor -> null // TODO("b/180525239: constructor")
+                    // Documented separately above
+                    is Description, is Deprecated, is Receiver -> null
+                    // Don't care ;)
+                    is Suppress, is Version, is Author -> null
+                }
+            } catch (e: Exception) {
+                println(
+                    "Exception thrown while handling ${firstTag::class.java} tags! " +
+                        "Tags: $tags. Parent: ${documentable.name}"
+                )
+                throw e
             }
         }
 
