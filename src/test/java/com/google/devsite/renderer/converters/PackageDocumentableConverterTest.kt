@@ -380,13 +380,12 @@ internal class PackageDocumentableConverterTest(
     }
 
     private fun DModule.page(): DevsitePage {
-        val holder = runBlocking { DocumentablesHolder(this@page, this) }
-        val classGraph = runBlocking { holder.classGraph() }
+        val (holder, pathProvider) = holderAndProvider(this)
         val converter =
             PackageDocumentableConverter(
                 language,
                 packages.single(),
-                pathProvider(classGraph = classGraph),
+                pathProvider,
                 holder
             )
         return runBlocking { converter.summaryPage() }

@@ -31,9 +31,9 @@ import com.google.devsite.renderer.converters.testing.isAtNullable
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.converters.testing.text
-import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
-import kotlinx.coroutines.runBlocking
+import kotlinx.html.stream.createHTML
+import kotlinx.html.tr
 import org.jetbrains.dokka.model.DModule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -230,16 +230,37 @@ internal class PropertyDocumentableConverterTest(
         }
     }
 
+    @Test
+    fun `External link resolution through ExternalDocumentationLinks doesn't give Oracle`() {
+        val propertySummary = """
+            public static Object foo = null
+        """.render(java = true).summary()
+        val html = createHTML().tr {
+            propertySummary.render(this)
+        }.trim()
+        val htmlParts = html.split("\\s+".toRegex())
+        val link = htmlParts[4].split(">")[0]
+        javaOnly {
+            assertThat(link).isEqualTo(
+                "href=\"https://developer.android.com/reference/java/lang/Object.html\""
+            )
+        }
+        kotlinOnly {
+            assertThat(link).isEqualTo(
+                "href=\"https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html\""
+            )
+        }
+    }
+
     private fun DModule.summary(
         name: String = "foo",
         hints: ModifierHints = ModifierHints(language)
     ): TwoPaneSummaryItem {
-        val holder = runBlocking { DocumentablesHolder(this@summary, this) }
-        val classGraph = runBlocking { holder.classGraph() }
-        val docConverter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
+        val (holder, pathProvider) = holderAndProvider(this)
+        val docConverter = DocTagConverter(language, pathProvider, holder)
         val converter = PropertyDocumentableConverter(
             language,
-            pathProvider(classGraph = classGraph),
+            pathProvider,
             docConverter
         )
         return converter.summary(property(name)!!, hints)
@@ -249,12 +270,11 @@ internal class PropertyDocumentableConverterTest(
         name: String = "foo",
         hints: ModifierHints = ModifierHints(language)
     ): SymbolDetail {
-        val holder = runBlocking { DocumentablesHolder(this@detail, this) }
-        val classGraph = runBlocking { holder.classGraph() }
-        val docConverter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
+        val (holder, pathProvider) = holderAndProvider(this)
+        val docConverter = DocTagConverter(language, pathProvider, holder)
         val converter = PropertyDocumentableConverter(
             language,
-            pathProvider(classGraph = classGraph),
+            pathProvider,
             docConverter
         )
         return converter.detail(property(name)!!, hints)
@@ -264,12 +284,11 @@ internal class PropertyDocumentableConverterTest(
         name: String = "foo",
         hints: ModifierHints = ModifierHints(language)
     ): SymbolSignature {
-        val holder = runBlocking { DocumentablesHolder(this@signature, this) }
-        val classGraph = runBlocking { holder.classGraph() }
-        val docConverter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
+        val (holder, pathProvider) = holderAndProvider(this)
+        val docConverter = DocTagConverter(language, pathProvider, holder)
         val converter = PropertyDocumentableConverter(
             language,
-            pathProvider(classGraph = classGraph),
+            pathProvider,
             docConverter
         )
         return converter.summary(property(name)!!, hints).signature()

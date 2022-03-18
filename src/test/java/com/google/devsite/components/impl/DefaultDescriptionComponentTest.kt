@@ -18,9 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.DescriptionComponent.Params
-import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
-import kotlinx.coroutines.runBlocking
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
 import org.jetbrains.dokka.model.DModule
@@ -1074,12 +1072,10 @@ public void onCreate() {
         deprecation: String? = null
     ): DefaultDescriptionComponent {
         val tag = explicitClasslike("Foo").tag()
-        val classGraph = runBlocking {
-            DocumentablesHolder(this@description, this).classGraph()
-        }
+        val (holder, pathProvider) = holderAndProvider(this)
         return DefaultDescriptionComponent(
             Params(
-                pathProvider(classGraph = classGraph),
+                pathProvider,
                 tag.children,
                 summary,
                 deprecation

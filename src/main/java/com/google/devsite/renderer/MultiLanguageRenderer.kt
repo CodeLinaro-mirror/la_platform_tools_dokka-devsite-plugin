@@ -80,7 +80,7 @@ internal class MultiLanguageRenderer(
     }
 
     override fun render(root: RootPageNode) {
-        val module = (root as ModulePageNode).documentable as DModule
+        val module = (root as ModulePageNode).documentables.single() as DModule
         val locationProvider = DefaultExternalDokkaLocationProvider(
             dokkaLocationProvider = DokkaLocationProvider(root, context)
         )

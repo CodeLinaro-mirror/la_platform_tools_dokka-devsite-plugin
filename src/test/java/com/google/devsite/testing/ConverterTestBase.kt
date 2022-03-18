@@ -21,15 +21,19 @@ import com.google.devsite.DevsitePlugin
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.isFromBaseClass
 import com.google.devsite.renderer.impl.ClassGraph
+import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.computeDocumentablesGraph
 import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
 import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
+import com.google.devsite.renderer.impl.paths.DefaultExternalDokkaLocationProvider
 import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.DokkaConfiguration
+import org.jetbrains.dokka.DokkaGenerator
 import org.jetbrains.dokka.ExternalDocumentationLink
+import org.jetbrains.dokka.base.resolvers.local.DokkaLocationProvider
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
@@ -41,6 +45,7 @@ import org.jetbrains.dokka.plugability.DokkaPlugin
 import org.jetbrains.dokka.renderers.Renderer
 import org.jetbrains.dokka.utilities.DokkaConsoleLogger
 import org.jetbrains.dokka.utilities.LoggingLevel
+import org.mockito.Mockito
 import java.io.File
 import java.net.URL
 import kotlin.coroutines.resume
@@ -98,10 +103,10 @@ internal abstract class ConverterTestBase(
 
     private fun <E> List<E>.nullIfEmpty() = if (this.isNotEmpty()) this else null
 
-    protected fun assertPath(actual: String, expected: String) {
+    protected fun assertPath(actual: String, expected: String, prefix: String = "") {
         when (language) {
-            Language.JAVA -> assertThat(actual).isEqualTo("/reference/$expected")
-            Language.KOTLIN -> assertThat(actual).isEqualTo("/reference/kotlin/$expected")
+            Language.JAVA -> assertThat(actual).isEqualTo("$prefix/reference/$expected")
+            Language.KOTLIN -> assertThat(actual).isEqualTo("$prefix/reference/kotlin/$expected")
         }
     }
 
@@ -136,33 +141,56 @@ internal abstract class ConverterTestBase(
         }
     }
 
-    private fun testWithRootPageNode(sourceFiles: List<String>): DModule = runBlocking {
-        val externalLinks = mapOf(
-            "coroutines" to "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core",
-            "android" to "https://developer.android.com/reference",
-            "guava" to "https://guava.dev/releases/18.0/api/docs/package-list",
-            "kotlin" to "https://kotlinlang.org/api/latest/jvm/stdlib/"
-        ).map {
-            ExternalDocumentationLink(
-                url = URL(it.value),
-                packageListUrl = File("testData").toPath()
-                    .resolve("package-lists/${it.key}/package-list").toUri().toURL()
-            )
-        }
-        val configuration = dokkaConfiguration {
-            sourceSets {
-                sourceSet {
-                    sourceRoots = listOf("src/main")
-                    classpath = listOfNotNull(jvmStdlibPath, commonStdlibPath)
-                    externalDocumentationLinks = externalLinks
-                    documentedVisibilities = setOf(
-                        DokkaConfiguration.Visibility.PUBLIC,
-                        DokkaConfiguration.Visibility.PROTECTED
-                    )
-                }
+    private val externalLinks = mapOf(
+        "coroutines" to "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core",
+        "android" to "https://developer.android.com/reference",
+        "guava" to "https://guava.dev/releases/18.0/api/docs/package-list",
+        "kotlin" to "https://kotlinlang.org/api/latest/jvm/stdlib/"
+    ).map {
+        ExternalDocumentationLink(
+            url = URL(it.value),
+            packageListUrl = File("testData").toPath()
+                .resolve("package-lists/${it.key}/package-list").toUri().toURL()
+        )
+    }
+    private val configuration = dokkaConfiguration {
+        sourceSets {
+            sourceSet {
+                sourceRoots = listOf("src/main")
+                classpath = listOfNotNull(jvmStdlibPath, commonStdlibPath)
+                externalDocumentationLinks = externalLinks
+                documentedVisibilities = setOf(
+                    DokkaConfiguration.Visibility.PUBLIC,
+                    DokkaConfiguration.Visibility.PROTECTED
+                )
             }
-            offlineMode = true
         }
+        offlineMode = true
+    }
+    private val dokkaGenerator =
+        DokkaGenerator(configuration, DokkaConsoleLogger(LoggingLevel.WARN))
+    private val context = dokkaGenerator.initializePlugins(
+        configuration,
+        DokkaConsoleLogger(LoggingLevel.WARN),
+        emptyList()
+    )
+    private val mockRootPageNode: RootPageNode = Mockito.mock(RootPageNode::class.java)
+    // This provider will only work on external links; the mock will fail it on internal links.
+    // However, dackka has other methods for resolving internal links, so this is fine.
+    internal val externalProvider =
+        DefaultExternalDokkaLocationProvider(DokkaLocationProvider(mockRootPageNode, context))
+
+    internal fun holderAndProvider(module: DModule): Pair<DocumentablesHolder, FilePathProvider> {
+        val holder = runBlocking { DocumentablesHolder(module, this) }
+        val classGraph = runBlocking { holder.classGraph() }
+        val pathProvider = pathProvider(
+            externalLocationProvider = externalProvider,
+            classGraph = classGraph
+        )
+        return holder to pathProvider
+    }
+
+    private fun testWithRootPageNode(sourceFiles: List<String>): DModule = runBlocking {
         suspendCoroutine { cont ->
             testInline(
                 sourceFiles.joinToString("\n\n"),

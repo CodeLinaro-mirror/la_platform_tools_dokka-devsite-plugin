@@ -27,11 +27,13 @@ import org.junit.Test
 
 internal class FilePathProviderTest : ConverterTestBase() {
 
+    val pathProvider = pathProvider(externalLocationProvider = externalProvider)
+
     @Test
     fun `Root package has correct link`() {
         val dri = DRI()
 
-        val (name, url) = pathProvider().forReference(dri)
+        val (name, url) = pathProvider.forReference(dri)
 
         assertThat(name).isEqualTo("[JVM root]")
         assertPath(url, "[JVM root]/package-summary.html")
@@ -41,7 +43,7 @@ internal class FilePathProviderTest : ConverterTestBase() {
     fun `Package has correct link`() {
         val dri = DRI(packageName = "androidx.example")
 
-        val (name, url) = pathProvider().forReference(dri)
+        val (name, url) = pathProvider.forReference(dri)
 
         assertThat(name).isEqualTo("androidx.example")
         assertPath(url, "androidx/example/package-summary.html")
@@ -51,7 +53,7 @@ internal class FilePathProviderTest : ConverterTestBase() {
     fun `Class has correct link`() {
         val dri = DRI(packageName = "androidx.example", classNames = "Foo")
 
-        val (name, url) = pathProvider().forReference(dri)
+        val (name, url) = pathProvider.forReference(dri)
 
         assertThat(name).isEqualTo("Foo")
         assertPath(url, "androidx/example/Foo.html")
@@ -64,7 +66,7 @@ internal class FilePathProviderTest : ConverterTestBase() {
             callable = Callable(name = "foo", params = emptyList())
         )
 
-        val (name, url) = pathProvider().forReference(dri)
+        val (name, url) = pathProvider.forReference(dri)
 
         assertThat(name).isEqualTo("foo")
         assertPath(url, "androidx/example/package-summary.html#foo()")
@@ -89,7 +91,7 @@ internal class FilePathProviderTest : ConverterTestBase() {
             )
         )
 
-        val (name, url) = pathProvider().forReference(dri)
+        val (name, url) = pathProvider.forReference(dri)
 
         assertThat(name).isEqualTo("foo")
         assertPath(url, "androidx/example/package-summary.html#foo(kotlin.String,kotlin.Int)")
@@ -114,7 +116,7 @@ internal class FilePathProviderTest : ConverterTestBase() {
             )
         )
 
-        val (name, url) = pathProvider().forReference(dri)
+        val (name, url) = pathProvider.forReference(dri)
 
         assertThat(name).isEqualTo("foo")
         assertPath(url, "androidx/example/package-summary.html#(kotlin.String).foo(kotlin.Int)")
@@ -128,7 +130,7 @@ internal class FilePathProviderTest : ConverterTestBase() {
             callable = Callable(name = "foo", params = emptyList())
         )
 
-        val (name, url) = pathProvider().forReference(dri)
+        val (name, url) = pathProvider.forReference(dri)
 
         assertThat(name).isEqualTo("foo")
         assertPath(url, "androidx/example/Foo.html#foo()")

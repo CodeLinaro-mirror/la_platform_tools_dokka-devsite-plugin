@@ -32,9 +32,7 @@ import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.typeAnnotations
 import com.google.devsite.renderer.converters.testing.typeName
-import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
-import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DParameter
 import org.junit.Test
@@ -56,11 +54,13 @@ internal class ParameterDocumentableConverterTest(
         assertThat(paramType.link().name).isEqualTo("String")
 
         javaOnly {
-            assertThat(paramType.link().url).isEqualTo("/reference/java/lang/String.html")
+            assertThat(paramType.link().url)
+                .isEqualTo("https://developer.android.com/reference/java/lang/String.html")
         }
 
         kotlinOnly {
-            assertThat(paramType.link().url).isEqualTo("/reference/kotlin/kotlin/String.html")
+            assertThat(paramType.link().url)
+                .isEqualTo("https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html")
         }
     }
 
@@ -74,12 +74,14 @@ internal class ParameterDocumentableConverterTest(
 
         javaOnly {
             assertThat(paramType.link().name).isEqualTo("Object")
-            assertThat(paramType.link().url).isEqualTo("/reference/java/lang/Object.html")
+            assertThat(paramType.link().url)
+                .isEqualTo("https://developer.android.com/reference/java/lang/Object.html")
         }
 
         kotlinOnly {
             assertThat(paramType.link().name).isEqualTo("Any")
-            assertThat(paramType.link().url).isEqualTo("/reference/kotlin/kotlin/Any.html")
+            assertThat(paramType.link().url)
+                .isEqualTo("https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html")
         }
     }
 
@@ -190,7 +192,7 @@ internal class ParameterDocumentableConverterTest(
         }
     }
 
-    private val ARRAY_URI = "/reference/kotlin/kotlin/Array.html"
+    private val ARRAY_URI = "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"
 
     @Test
     fun `Parameter understands inline generics and does correct Kotlin-Java array translation`() {
@@ -771,7 +773,9 @@ internal class ParameterDocumentableConverterTest(
 
             kotlinOnly {
                 assertThat(paramType.link().name).isEqualTo("Int")
-                assertThat(paramType.link().url).isEqualTo("/reference/kotlin/kotlin/Int.html")
+                assertThat(paramType.link().url).isEqualTo(
+                    "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"
+                )
             }
         }
     }
@@ -857,11 +861,14 @@ internal class ParameterDocumentableConverterTest(
             assertThat(paramType.link().name).isEqualTo("String")
 
             javaOnly {
-                assertThat(paramType.link().url).isEqualTo("/reference/java/lang/String.html")
+                assertThat(paramType.link().url)
+                    .isEqualTo("https://developer.android.com/reference/java/lang/String.html")
             }
 
             kotlinOnly {
-                assertThat(paramType.link().url).isEqualTo("/reference/kotlin/kotlin/String.html")
+                assertThat(paramType.link().url).isEqualTo(
+                    "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"
+                )
             }
         }
     }
@@ -1101,29 +1108,42 @@ internal class ParameterDocumentableConverterTest(
             val list = module.param("list").data.type
             assertThat(list).isInstanceOf(MappedTypeProjectionComponent::class.java)
             assertThat(list.link().name).isEqualTo("List")
-            assertThat(list.link().url).isEqualTo("/reference/kotlin/kotlin/collections/List.html")
-            assertThat(list.alternativeLink()?.url)
-                .isEqualTo("/reference/kotlin/kotlin/collections/MutableList.html")
+            assertThat(list.link().url).isEqualTo(
+                "https://kotlinlang.org/api/latest/" +
+                    "jvm/stdlib/kotlin.collections/-list/index.html"
+            )
+            assertThat(list.alternativeLink()?.url).isEqualTo(
+                "https://kotlinlang.org/api/latest/" +
+                    "jvm/stdlib/kotlin.collections/-mutable-list/index.html"
+            )
 
             val entry = module.param("entry").data.type
             assertThat(entry).isInstanceOf(MappedTypeProjectionComponent::class.java)
             assertThat(entry.link().name).isEqualTo("Map.Entry")
-            assertThat(entry.link().url)
-                .isEqualTo("/reference/kotlin/kotlin/collections/Map.Entry.html")
-            assertThat(entry.alternativeLink()?.url)
-                .isEqualTo("/reference/kotlin/kotlin/collections/MutableMap.MutableEntry.html")
+            assertThat(entry.link().url).isEqualTo(
+                "https://kotlinlang.org/api/latest/" +
+                    "jvm/stdlib/kotlin.collections/-map/-entry/index.html"
+            )
+            assertThat(entry.alternativeLink()?.url).isEqualTo(
+                "https://kotlinlang.org/api/latest" +
+                    "/jvm/stdlib/kotlin.collections/-mutable-map/-mutable-entry/index.html"
+            )
         }
 
         javaOnly {
             val list = module.param("list").data.type
             assertThat(list).isNotInstanceOf(MappedTypeProjectionComponent::class.java)
             assertThat(list.link().name).isEqualTo("List")
-            assertThat(list.link().url).isEqualTo("/reference/java/util/List.html")
+            assertThat(list.link().url).isEqualTo(
+                "https://developer.android.com/reference/java/util/List.html"
+            )
 
             val entry = module.param("entry").data.type
             assertThat(entry).isNotInstanceOf(MappedTypeProjectionComponent::class.java)
             assertThat(entry.link().name).isEqualTo("Map.Entry")
-            assertThat(entry.link().url).isEqualTo("/reference/java/util/Map.Entry.html")
+            assertThat(entry.link().url).isEqualTo(
+                "https://developer.android.com/reference/java/util/Map.Entry.html"
+            )
         }
     }
 
@@ -1137,7 +1157,8 @@ internal class ParameterDocumentableConverterTest(
         assertThat(list).isNotInstanceOf(MappedTypeProjectionComponent::class.java)
 
         javaOnly {
-            assertThat(list.link().url).isEqualTo("/reference/java/util/List.html")
+            assertThat(list.link().url)
+                .isEqualTo("https://developer.android.com/reference/java/util/List.html")
         }
     }
 
@@ -1160,23 +1181,19 @@ internal class ParameterDocumentableConverterTest(
 
     private fun DModule.param(name: String = "foo", forSummary: Boolean = false):
         ParameterComponent {
-        val classGraph = runBlocking {
-            DocumentablesHolder(this@param, this).classGraph()
-        }
+        val (holder, pathProvider) = holderAndProvider(this)
         val converter = ParameterDocumentableConverter(
             language,
-            pathProvider(classGraph = classGraph)
+            pathProvider
         )
         return converter.componentForParameter(parameterDoc(name), forSummary)
     }
 
     private fun DModule.returnType(name: String = "foo"): TypeProjectionComponent {
-        val classGraph = runBlocking {
-            DocumentablesHolder(this@returnType, this).classGraph()
-        }
+        val (holder, pathProvider) = holderAndProvider(this)
         val converter = ParameterDocumentableConverter(
             language,
-            pathProvider(classGraph = classGraph)
+            pathProvider
         )
         return converter.componentForProjection(
             projection = function(name)!!.type,

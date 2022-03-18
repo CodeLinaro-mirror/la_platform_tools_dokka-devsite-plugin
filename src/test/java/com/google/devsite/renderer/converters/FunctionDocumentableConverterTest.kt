@@ -39,9 +39,7 @@ import com.google.devsite.renderer.converters.testing.signature
 import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.converters.testing.typeAnnotations
 import com.google.devsite.renderer.converters.testing.typeName
-import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
-import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DModule
 import org.junit.Test
@@ -212,7 +210,8 @@ internal class FunctionDocumentableConverterTest(
         }
         kotlinOnly {
             assertThat(returnType.link().name).isEqualTo("Unit")
-            assertPath(returnType.link().url, "kotlin/Unit.html")
+            assertThat(returnType.link().url)
+                .isEqualTo("https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html")
         }
     }
 
@@ -635,7 +634,8 @@ internal class FunctionDocumentableConverterTest(
         }
         kotlinOnly {
             assertThat(returnType.link().name).isEqualTo("Unit")
-            assertPath(returnType.link().url, "kotlin/Unit.html")
+            assertThat(returnType.link().url)
+                .isEqualTo("https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html")
         }
     }
 
@@ -680,12 +680,11 @@ internal class FunctionDocumentableConverterTest(
         doc: DModule.() -> DFunction = ::smartDoc,
         hints: ModifierHints = ModifierHints(language)
     ): TwoPaneSummaryItem {
-        val holder = runBlocking { DocumentablesHolder(this@summary, this) }
-        val classGraph = runBlocking { holder.classGraph() }
-        val docConverter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
+        val (holder, pathProvider) = holderAndProvider(this)
+        val docConverter = DocTagConverter(language, pathProvider, holder)
         val converter = FunctionDocumentableConverter(
             language,
-            pathProvider(classGraph = classGraph),
+            pathProvider,
             docConverter
         )
         return converter.summary(this.doc(), hints.copy(isSummary = true))
@@ -700,12 +699,11 @@ internal class FunctionDocumentableConverterTest(
     private fun DModule.functionSummaries(
         hints: ModifierHints = ModifierHints(language)
     ): Map<String, TwoPaneSummaryItem> {
-        val holder = runBlocking { DocumentablesHolder(this@functionSummaries, this) }
-        val classGraph = runBlocking { holder.classGraph() }
-        val docConverter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
+        val (holder, pathProvider) = holderAndProvider(this)
+        val docConverter = DocTagConverter(language, pathProvider, holder)
         val converter = FunctionDocumentableConverter(
             language,
-            pathProvider(classGraph = classGraph),
+            pathProvider,
             docConverter
         )
         return functions()!!.map {
@@ -717,12 +715,11 @@ internal class FunctionDocumentableConverterTest(
         doc: DModule.() -> DFunction = ::smartDoc,
         hints: ModifierHints = ModifierHints(language)
     ): SymbolDetail {
-        val holder = runBlocking { DocumentablesHolder(this@detail, this) }
-        val classGraph = runBlocking { holder.classGraph() }
-        val docConverter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
+        val (holder, pathProvider) = holderAndProvider(this)
+        val docConverter = DocTagConverter(language, pathProvider, holder)
         val converter = FunctionDocumentableConverter(
             language,
-            pathProvider(classGraph = classGraph),
+            pathProvider,
             docConverter
         )
         return converter.detail(this.doc(), hints)
@@ -731,12 +728,11 @@ internal class FunctionDocumentableConverterTest(
     private fun DModule.signature(
         doc: DModule.() -> DFunction = ::smartDoc
     ): FunctionSignature {
-        val holder = runBlocking { DocumentablesHolder(this@signature, this) }
-        val classGraph = runBlocking { holder.classGraph() }
-        val docConverter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
+        val (holder, pathProvider) = holderAndProvider(this)
+        val docConverter = DocTagConverter(language, pathProvider, holder)
         val converter = FunctionDocumentableConverter(
             language,
-            pathProvider(classGraph = classGraph),
+            pathProvider,
             docConverter
         )
         return with(converter) { this@signature.doc().signature(isSummary = false) }

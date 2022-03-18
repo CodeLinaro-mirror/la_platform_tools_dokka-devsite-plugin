@@ -44,7 +44,6 @@ import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.renderer.converters.testing.title
 import com.google.devsite.renderer.converters.testing.typeAnnotations
 import com.google.devsite.renderer.converters.testing.typeName
-import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import kotlinx.html.body
@@ -1118,7 +1117,8 @@ internal class DocTagConverterTest(
         val paramSummary = documentation.last() as SummaryList
         val paramText = paramSummary.item()
 
-        assertPath(paramText.link().url, "kotlin/String.html")
+        assertThat(paramText.link().url)
+            .isEqualTo("https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html")
         assertThat(paramText.description().text()).isEmpty()
     }
 
@@ -1136,19 +1136,25 @@ internal class DocTagConverterTest(
         assertThat(paramText.description().text()).isEmpty()
     }
 
+    @Ignore // Our package-list is incomplete. b/225929725
     @Test
     fun `See also parses link with Kotlin style function`() {
         val documentation = """
-            |/** @see String.isEmpty */
+            |/**
+            | * @see String.isEmpty
+            | * @see String.lastIndex
+            | */
             |class Foo
         """.render().documentation()
 
         val paramSummary = documentation.last() as SummaryList
-        val paramText = paramSummary.item()
+        val (paramText1, paramText2) = paramSummary.items(2).toList()
 
         // TODO(b/167437580): figure out how to reliably parse links
-        assertThat(paramText.link().url).contains("isEmpty")
-        assertThat(paramText.description().text()).isEmpty()
+        assertThat(paramText1.link().url).contains("isEmpty")
+        assertThat(paramText1.description().text()).isEmpty()
+        assertThat(paramText2.link().url).contains("lastIndex")
+        assertThat(paramText2.description().text()).isEmpty()
     }
 
     @Test
@@ -1161,7 +1167,8 @@ internal class DocTagConverterTest(
         val paramSummary = documentation.last() as SummaryList
         val paramText = paramSummary.item()
 
-        assertPath(paramText.link().url, "java/lang/String.html#isEmpty()")
+        assertThat(paramText.link().url)
+            .isEqualTo("https://developer.android.com/reference/java/lang/String.html#isEmpty()")
         assertThat(paramText.description().text()).isEmpty()
     }
 
@@ -1188,7 +1195,9 @@ internal class DocTagConverterTest(
         val paramSummary = documentation.last() as SummaryList
         val paramText = paramSummary.item()
 
-        assertPath(paramText.link().url, "java/lang/String.html")
+        assertThat(paramText.link().url).isEqualTo(
+            "https://developer.android.com/reference/java/lang/String.html"
+        )
     }
 
     @Test
@@ -1303,21 +1312,18 @@ internal class DocTagConverterTest(
             |        }
             | }
         """.render()
-        val holder = runBlocking { DocumentablesHolder(module, this) }
-        val classGraph = runBlocking { holder.classGraph() }
+        val (holder, pathProvider) = holderAndProvider(module)
         val classConverter1 = ClasslikeDocumentableConverter(
             language,
             module.explicitClasslike("DynamicNavGraphBuilder")!!,
-            pathProvider(classGraph = classGraph),
+            pathProvider,
             holder
         )
         val documentedClass1 = runBlocking { classConverter1.classlike() }
         val classConverter2 = ClasslikeDocumentableConverter(
             language,
-            module.explicitClasslike(
-                "ParcelableArrayType"
-            )!!,
-            pathProvider(classGraph = classGraph),
+            module.explicitClasslike("ParcelableArrayType")!!,
+            pathProvider,
             holder
         )
         val documentedClass2 = runBlocking { classConverter2.classlike() }
@@ -1470,9 +1476,8 @@ internal class DocTagConverterTest(
 
     private fun DModule.description(doc: DModule.() -> Documentable = ::smartDoc):
         DescriptionComponent {
-        val holder = runBlocking { DocumentablesHolder(this@description, this) }
-        val classGraph = runBlocking { holder.classGraph() }
-        val converter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
+        val (holder, pathProvider) = holderAndProvider(this)
+        val converter = DocTagConverter(language, pathProvider, holder)
         val annotations = (this.doc() as? WithExtraProperties<*>)?.annotations().orEmpty()
         return converter.summaryDescription(this.doc(), annotations)
     }
@@ -1481,9 +1486,8 @@ internal class DocTagConverterTest(
         doc: DModule.() -> Documentable = ::smartDoc,
         paramNames: List<String> = emptyList()
     ): List<ContextFreeComponent> {
-        val holder = runBlocking { DocumentablesHolder(this@documentation, this) }
-        val classGraph = runBlocking { holder.classGraph() }
-        val converter = DocTagConverter(language, pathProvider(classGraph = classGraph), holder)
+        val (holder, pathProvider) = holderAndProvider(this)
+        val converter = DocTagConverter(language, pathProvider, holder)
         return converter.metadata(
             doc(),
             returnType = NoopContextFreeComponent,
