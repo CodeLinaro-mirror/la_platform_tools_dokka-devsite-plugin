@@ -38,7 +38,7 @@ internal class DefaultInheritedSymbols(
             div("devsite-table-wrapper") {
                 table("responsive") {
                     attributes["id"] = "inhmethods"
-                        thead {
+                    thead {
                         tr {
                             data.header.render(this)
                         }

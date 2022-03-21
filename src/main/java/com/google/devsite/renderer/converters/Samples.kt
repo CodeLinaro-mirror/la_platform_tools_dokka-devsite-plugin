@@ -71,7 +71,8 @@ internal fun processBody(psiElement: PsiElement): String {
     val text = processSampleBody(psiElement).trim { it == '\n' || it == '\r' }.trimEnd()
     val lines = text.split("\n")
     val indent = lines.filter(String::isNotBlank).map {
-        it.takeWhile(Char::isWhitespace).count() }.minOrNull() ?: 0
+        it.takeWhile(Char::isWhitespace).count()
+    }.minOrNull() ?: 0
     return lines.joinToString("\n") { it.drop(indent) }
 }
 
@@ -177,8 +178,10 @@ internal fun convertTextToJavaSample(
         .trim().removePrefix("{").removeSuffix("}")
         // Upstream inserts "*"s on line breaks within the { }
         .split(" ").filter { it.isNotEmpty() && it != "*" }
-    if (sampleLine[0] != "@sample") throw RuntimeException("invalid first line of " +
-        "purported sample block: \"${sampleLine[0]}\"; expected to be \"@sample\"")
+    if (sampleLine[0] != "@sample") throw RuntimeException(
+        "invalid first line of " +
+            "purported sample block: \"${sampleLine[0]}\"; expected to be \"@sample\""
+    )
     val filePath = sampleLine[1]
     val whatSamples = sampleLine[2]
     val sampleFiles = samples.allFiles()
@@ -188,8 +191,10 @@ internal fun convertTextToJavaSample(
         resolvedFile = sampleFiles.filter { it.name == filePath.split("/").last() }
     }
     return when (resolvedFile.size) {
-        0 -> throw RuntimeException("Unable to find the sample file $filePath in the samples " +
-            "directory ${sampleFiles.map { it.path }.reduce { acc, s -> acc.commonPrefixWith(s) }}")
+        0 -> throw RuntimeException(
+            "Unable to find the sample file $filePath in the samples directory " +
+                sampleFiles.map { it.path }.reduce { acc, s -> acc.commonPrefixWith(s) }
+        )
         1 -> CodeBlock(listOf(Text(extractCodeBlockFromFile(resolvedFile.single(), whatSamples))))
         else -> throw RuntimeException("Somehow, multiple files with path $filePath were found.")
     }

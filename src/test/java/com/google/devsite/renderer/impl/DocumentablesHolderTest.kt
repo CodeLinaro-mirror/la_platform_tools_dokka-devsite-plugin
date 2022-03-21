@@ -57,8 +57,10 @@ class DocumentablesHolderTest {
     @Test
     fun `computePackages returns list of packages with packages filtered out`() {
         val expected = listOf("com.example.a", "com.example.c").toTypedArray()
-        val excludedPackages = setOf("com.example.b".toRegex(), "com.example.d".toRegex(),
-            """.*\.exclude.*""".toRegex())
+        val excludedPackages = setOf(
+            "com.example.b".toRegex(), "com.example.d".toRegex(),
+            """.*\.exclude.*""".toRegex()
+        )
         val packages = runBlocking {
             DocumentablesHolder(
                 module,

@@ -366,12 +366,14 @@ internal class ClasslikeDocumentableConverter(
 
         return DefaultSummaryList(
             SummaryList.Params(
-                header = name?.let { DefaultTableTitle(
-                    TableTitle.Params(
-                        title = name,
-                        big = true
+                header = name?.let {
+                    DefaultTableTitle(
+                        TableTitle.Params(
+                            title = name,
+                            big = true
+                        )
                     )
-                ) },
+                },
                 items = components
             )
         )
@@ -490,16 +492,18 @@ internal class ClasslikeDocumentableConverter(
         }
 
         if (classlike !is WithSupertypes) {
-            return DefaultClassSignature(ClassSignature.Params(
-                displayLanguage = displayLanguage,
-                name = classlike.name(),
-                type = classlike.stringForType(displayLanguage),
-                modifiers = modifiers,
-                implements = emptyList(),
-                extends = emptyList(),
-                typeParameters = typeParameters,
-                annotations = annotations
-            ))
+            return DefaultClassSignature(
+                ClassSignature.Params(
+                    displayLanguage = displayLanguage,
+                    name = classlike.name(),
+                    type = classlike.stringForType(displayLanguage),
+                    modifiers = modifiers,
+                    implements = emptyList(),
+                    extends = emptyList(),
+                    typeParameters = typeParameters,
+                    annotations = annotations
+                )
+            )
         }
 
         val extends = docsHolder.classGraph().getValue(classlike.dri).superClasses.map {
@@ -510,16 +514,18 @@ internal class ClasslikeDocumentableConverter(
             pathProvider.linkForReference(it.dri)
         }
 
-        return DefaultClassSignature(ClassSignature.Params(
-            displayLanguage = displayLanguage,
-            name = classlike.name(),
-            type = classlike.stringForType(displayLanguage),
-            modifiers = modifiers,
-            implements = implements,
-            extends = extends,
-            typeParameters = typeParameters,
-            annotations = annotations
-        ))
+        return DefaultClassSignature(
+            ClassSignature.Params(
+                displayLanguage = displayLanguage,
+                name = classlike.name(),
+                type = classlike.stringForType(displayLanguage),
+                modifiers = modifiers,
+                implements = implements,
+                extends = extends,
+                typeParameters = typeParameters,
+                annotations = annotations
+            )
+        )
     }
 
     /** Walks up this class' type hierarchy and returns the hierarchy component. */
@@ -652,8 +658,8 @@ internal class ClasslikeDocumentableConverter(
 
     private fun hasMatchingClassName(symbol: Documentable) = (
         classlike.name() == symbol.dri.classNames ||
-        (classlike as? DClass)?.companion?.name() == symbol.dri.classNames
-    )
+            (classlike as? DClass)?.companion?.name() == symbol.dri.classNames
+        )
 
     private fun DClasslike.companionFunctions(): List<DFunction> =
         (this as? DClass)?.companion?.functions?.myTypes() ?: emptyList()
@@ -670,8 +676,10 @@ internal class ClasslikeDocumentableConverter(
             return emptyList()
         }
         return filterNot { symbol ->
-            (classlike.packageName() == symbol.dri.packageName &&
-                classlike.name() == symbol.dri.classNames) ||
+            (
+                classlike.packageName() == symbol.dri.packageName &&
+                    classlike.name() == symbol.dri.classNames
+                ) ||
                 symbol.dri.isFromBaseClass()
         }
     }

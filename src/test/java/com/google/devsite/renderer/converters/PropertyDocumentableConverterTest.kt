@@ -91,8 +91,11 @@ internal class PropertyDocumentableConverterTest(
                 for (aType in listOfNotNull(typeJ, typeK)) {
                     assertThat(aType.nullable).isEqualTo(whichProp in "nulla, platform")
                     val annotations = aType.data.annotationComponents
-                    assertThat(annotations.singleOrNull()?.name?.let {
-                        it in NULLABILITY_ANNOTATION_NAMES })
+                    assertThat(
+                        annotations.singleOrNull()?.name?.let {
+                            it in NULLABILITY_ANNOTATION_NAMES
+                        }
+                    )
                     kotlinOnly {
                         // We've decided to hide all nullability annotations as-kotlin even if they
                         // are present in Kotlin source, because they should not be in kotlin source

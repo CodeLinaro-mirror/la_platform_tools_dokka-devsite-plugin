@@ -31,20 +31,26 @@ class DefaultClassSignatureTest {
 
     @Test
     fun `Class signature renders correctly in Java`() {
-        val component = DefaultClassSignature(ClassSignature.Params(
-            displayLanguage = Language.JAVA,
-            name = "Foo",
-            type = "class",
-            modifiers = listOf("public", "abstract"),
-            extends = listOf(NoopLink("Anyclass")),
-            implements = listOf(NoopLink("SomeInterface")),
-            typeParameters = listOf(DefaultTypeParameterComponent(TypeParameterComponent.Params(
-                displayLanguage = Language.KOTLIN,
-                name = "GenericType",
-                projections = listOf(NoopTypeProjectionComponent("GenericSupertype"))
-            ))),
-            annotations = listOf(NoopAnnotationComponent("@GenericAnnotation"))
-        ))
+        val component = DefaultClassSignature(
+            ClassSignature.Params(
+                displayLanguage = Language.JAVA,
+                name = "Foo",
+                type = "class",
+                modifiers = listOf("public", "abstract"),
+                extends = listOf(NoopLink("Anyclass")),
+                implements = listOf(NoopLink("SomeInterface")),
+                typeParameters = listOf(
+                    DefaultTypeParameterComponent(
+                        TypeParameterComponent.Params(
+                            displayLanguage = Language.KOTLIN,
+                            name = "GenericType",
+                            projections = listOf(NoopTypeProjectionComponent("GenericSupertype"))
+                        )
+                    )
+                ),
+                annotations = listOf(NoopAnnotationComponent("@GenericAnnotation"))
+            )
+        )
 
         val output = createHTML().body {
             component.render(this)
@@ -62,20 +68,26 @@ class DefaultClassSignatureTest {
 
     @Test
     fun `Class signature renders correctly in Kotlin`() {
-        val component = DefaultClassSignature(ClassSignature.Params(
-            displayLanguage = Language.KOTLIN,
-            name = "Foo",
-            type = "class",
-            modifiers = listOf("open"),
-            extends = listOf(NoopLink("Anyclass")),
-            implements = listOf(NoopLink("SomeInterface")),
-            typeParameters = listOf(DefaultTypeParameterComponent(TypeParameterComponent.Params(
+        val component = DefaultClassSignature(
+            ClassSignature.Params(
                 displayLanguage = Language.KOTLIN,
-                name = "GenericType",
-                projections = listOf(NoopTypeProjectionComponent("GenericSupertype"))
-            ))),
-            annotations = listOf(NoopAnnotationComponent("@GenericAnnotation"))
-        ))
+                name = "Foo",
+                type = "class",
+                modifiers = listOf("open"),
+                extends = listOf(NoopLink("Anyclass")),
+                implements = listOf(NoopLink("SomeInterface")),
+                typeParameters = listOf(
+                    DefaultTypeParameterComponent(
+                        TypeParameterComponent.Params(
+                            displayLanguage = Language.KOTLIN,
+                            name = "GenericType",
+                            projections = listOf(NoopTypeProjectionComponent("GenericSupertype"))
+                        )
+                    )
+                ),
+                annotations = listOf(NoopAnnotationComponent("@GenericAnnotation"))
+            )
+        )
 
         val output = createHTML().body {
             component.render(this)

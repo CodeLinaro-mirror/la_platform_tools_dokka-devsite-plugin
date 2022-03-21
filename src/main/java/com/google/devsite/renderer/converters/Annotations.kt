@@ -113,10 +113,12 @@ internal fun List<Annotation>.isDeprecated(): Boolean = any { it.isDeprecated() 
 
 /** We sometimes convert androidx annotations to the android. namespace */
 private val Annotation.isBadNullable get() = dri.classNames == "Nullable" &&
-        dri.fullName !in listOf(AT_NULLABLE.dri.fullName, "android.annotation.Nullable")
+    dri.fullName !in listOf(AT_NULLABLE.dri.fullName, "android.annotation.Nullable")
 private val Annotation.isBadNonNull get() = dri.classNames == "NotNull" ||
-    (dri.classNames == "NonNull" &&
-        dri.fullName !in listOf(AT_NON_NULL.dri.fullName, "android.annotation.NonNull"))
+    (
+        dri.classNames == "NonNull" &&
+            dri.fullName !in listOf(AT_NON_NULL.dri.fullName, "android.annotation.NonNull")
+        )
 
 /** @return the complete list of annotations for this type */
 internal fun WithExtraProperties<*>.annotations(): List<Annotation> {
@@ -210,14 +212,17 @@ internal fun AnnotationParameterValue.toComponent(
     pathProvider: FilePathProvider
 ): AnnotationParameter = when (this) {
     is StringValue -> DefaultNamedValueAnnotationParameter(
-        NamedValueAnnotationParameter.Params(name, "\"${value}\""))
+        NamedValueAnnotationParameter.Params(name, "\"${value}\"")
+    )
     is LiteralValue -> DefaultNamedValueAnnotationParameter(
         NamedValueAnnotationParameter.Params(name, text())
     )
     is EnumValue -> DefaultNamedValueAnnotationParameter(
-        NamedValueAnnotationParameter.Params(name, enumName))
+        NamedValueAnnotationParameter.Params(name, enumName)
+    )
     is ClassValue -> DefaultNamedValueAnnotationParameter(
-        NamedValueAnnotationParameter.Params(name, className))
+        NamedValueAnnotationParameter.Params(name, className)
+    )
     is ArrayValue -> DefaultArrayValueAnnotationParameter(
         ArrayValueAnnotationParameter.Params(
             name,

@@ -6,15 +6,17 @@ import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.doc.DocumentationNode
-import org.jetbrains.dokka.model.doc.Throws as ThrowsTag
 import org.jetbrains.dokka.utilities.cast
 import org.junit.Ignore
 import org.junit.Test
+import org.jetbrains.dokka.model.doc.Throws as ThrowsTag
 
 class DocTagsForCheckedExceptionsTest : BaseAbstractTest() {
     private val driCorrespondence: Correspondence<ThrowsTag, String> =
-        Correspondence.transforming({ it?.exceptionAddress?.toString() },
-            "has DRI equal to")
+        Correspondence.transforming(
+            { it?.exceptionAddress?.toString() },
+            "has DRI equal to"
+        )
 
     val configuration = dokkaConfiguration {
         sourceSets {

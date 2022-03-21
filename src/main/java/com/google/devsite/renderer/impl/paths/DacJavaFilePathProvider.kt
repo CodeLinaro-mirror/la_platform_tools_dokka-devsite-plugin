@@ -25,5 +25,7 @@ internal class DacJavaFilePathProvider(
     dlp: ExternalDokkaLocationProvider? = null,
     classGraph: ClassGraph,
     documentablesGraph: DocumentablesGraph
-) : DacFilePathProviderBase(tenant, locationProvider = dlp, classGraph = classGraph,
-        documentablesGraph = documentablesGraph)
+) : DacFilePathProviderBase(
+    tenant, locationProvider = dlp, classGraph = classGraph,
+    documentablesGraph = documentablesGraph
+)

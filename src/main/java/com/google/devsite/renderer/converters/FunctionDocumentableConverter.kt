@@ -21,8 +21,8 @@ import com.google.devsite.components.impl.DefaultParameterComponent
 import com.google.devsite.components.impl.DefaultSingleColumnSummaryItem
 import com.google.devsite.components.impl.DefaultSymbolDetail
 import com.google.devsite.components.impl.DefaultSymbolSummary
-import com.google.devsite.components.impl.DefaultTypeProjectionComponent
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
+import com.google.devsite.components.impl.DefaultTypeProjectionComponent
 import com.google.devsite.components.impl.DefaultTypeSummary
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.ParameterComponent
@@ -152,7 +152,8 @@ internal class FunctionDocumentableConverter(
         val receiver = receiver?.let { paramConverter.componentForParameter(it, isSummary) }
         val parameters = parameters.map { paramConverter.componentForParameter(it, isSummary) }
         val typeParameters = this.generics.map {
-            paramConverter.componentForTypeParameter(it) }
+            paramConverter.componentForTypeParameter(it)
+        }
 
         return DefaultFunctionSignature(
             FunctionSignature.Params(
@@ -160,7 +161,8 @@ internal class FunctionDocumentableConverter(
                     when (displayLanguage) {
                         Language.JAVA -> dri.possiblyAsJava()
                         Language.KOTLIN -> dri.possiblyAsKotlin()
-                    }),
+                    }
+                ),
                 receiver = when (displayLanguage) {
                     Language.JAVA -> receiver?.let { extFunctionClass() }
                     Language.KOTLIN -> receiver

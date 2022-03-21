@@ -31,9 +31,9 @@ import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.ExternalDocumentationLink
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
-import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
+import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.pages.ModulePageNode
 import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.plugability.DokkaContext
@@ -41,7 +41,6 @@ import org.jetbrains.dokka.plugability.DokkaPlugin
 import org.jetbrains.dokka.renderers.Renderer
 import org.jetbrains.dokka.utilities.DokkaConsoleLogger
 import org.jetbrains.dokka.utilities.LoggingLevel
-
 import java.io.File
 import java.net.URL
 import kotlin.coroutines.resume
@@ -113,11 +112,15 @@ internal abstract class ConverterTestBase(
         val documentablesGraph = computeDocumentablesGraph(classGraph)
         return when (language) {
             Language.JAVA ->
-                DacJavaFilePathProvider("androidx", externalLocationProvider, classGraph,
-                    documentablesGraph)
+                DacJavaFilePathProvider(
+                    "androidx", externalLocationProvider, classGraph,
+                    documentablesGraph
+                )
             Language.KOTLIN ->
-                DacKotlinFilePathProvider("androidx", externalLocationProvider, classGraph,
-                    documentablesGraph)
+                DacKotlinFilePathProvider(
+                    "androidx", externalLocationProvider, classGraph,
+                    documentablesGraph
+                )
         }
     }
 
@@ -152,8 +155,10 @@ internal abstract class ConverterTestBase(
                     sourceRoots = listOf("src/main")
                     classpath = listOfNotNull(jvmStdlibPath, commonStdlibPath)
                     externalDocumentationLinks = externalLinks
-                    documentedVisibilities = setOf(DokkaConfiguration.Visibility.PUBLIC,
-                        DokkaConfiguration.Visibility.PROTECTED)
+                    documentedVisibilities = setOf(
+                        DokkaConfiguration.Visibility.PUBLIC,
+                        DokkaConfiguration.Visibility.PROTECTED
+                    )
                 }
             }
             offlineMode = true

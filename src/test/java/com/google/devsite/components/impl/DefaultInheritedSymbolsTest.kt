@@ -32,15 +32,18 @@ class DefaultInheritedSymbolsTest {
     @Test
     fun `Inherited symbols table renders correctly `() {
         val inheritedSymbols = HashMap<Link, SummaryList>()
-        inheritedSymbols[NoopLink("aClass")] = DefaultSummaryList(SummaryList.Params(
-            items = listOf(NoopSummaryItem, NoopSummaryItem)
-        ))
+        inheritedSymbols[NoopLink("aClass")] = DefaultSummaryList(
+            SummaryList.Params(
+                items = listOf(NoopSummaryItem, NoopSummaryItem)
+            )
+        )
 
         val component = DefaultInheritedSymbols(
 
             InheritedSymbolsList.Params(
                 header = DefaultTableTitle(
-                    TableTitle.Params("Inherited Methods", big = true)),
+                    TableTitle.Params("Inherited Methods", big = true)
+                ),
                 inheritedSymbolSummaries = inheritedSymbols
             )
 
@@ -51,7 +54,8 @@ class DefaultInheritedSymbolsTest {
         }.trim()
 
         // language=html
-        Truth.assertThat(output).isEqualTo("""
+        Truth.assertThat(output).isEqualTo(
+            """
                 <body>
                   <div class="devsite-table-wrapper">
                     <table class="responsive" id="inhmethods">
@@ -77,7 +81,8 @@ class DefaultInheritedSymbolsTest {
                     </table>
                   </div>
                 </body>
-        """.trimIndent())
+            """.trimIndent()
+        )
     }
 
     @Test
@@ -86,7 +91,8 @@ class DefaultInheritedSymbolsTest {
         val component = DefaultInheritedSymbols(
             InheritedSymbolsList.Params(
                 header = DefaultTableTitle(
-                    TableTitle.Params("Inherited Methods", big = true)),
+                    TableTitle.Params("Inherited Methods", big = true)
+                ),
                 inheritedSymbolSummaries = HashMap<Link, SummaryList>()
             )
 
@@ -97,8 +103,10 @@ class DefaultInheritedSymbolsTest {
         }.trim()
 
         // language=html
-        Truth.assertThat(output).isEqualTo("""
+        Truth.assertThat(output).isEqualTo(
+            """
                 <body></body>
-        """.trimIndent())
+            """.trimIndent()
+        )
     }
 }

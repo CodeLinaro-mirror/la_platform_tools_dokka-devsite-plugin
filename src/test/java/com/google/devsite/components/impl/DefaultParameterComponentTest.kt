@@ -243,15 +243,17 @@ class DefaultParameterComponentTest {
         val component = DefaultParameterComponent(
             Params(
                 name = "number",
-                type = DefaultLambdaTypeProjectionComponent(LambdaTypeProjectionComponent.Params(
-                    type = NoopLink("Int"),
-                    displayLanguage = Language.KOTLIN,
-                    lambdaParams = listOf(
-                        NoopParameterComponent("Int"),
-                        NoopParameterComponent("String")
-                    ),
-                nullability = Nullability.KOTLIN_DEFAULT
-                )),
+                type = DefaultLambdaTypeProjectionComponent(
+                    LambdaTypeProjectionComponent.Params(
+                        type = NoopLink("Int"),
+                        displayLanguage = Language.KOTLIN,
+                        lambdaParams = listOf(
+                            NoopParameterComponent("Int"),
+                            NoopParameterComponent("String")
+                        ),
+                        nullability = Nullability.KOTLIN_DEFAULT
+                    )
+                ),
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -273,13 +275,15 @@ class DefaultParameterComponentTest {
         val component = DefaultParameterComponent(
             Params(
                 name = "number",
-                type = DefaultLambdaTypeProjectionComponent(LambdaTypeProjectionComponent.Params(
-                    type = NoopLink("Int"),
-                    receiver = NoopTypeProjectionComponent("Boolean"),
-                    displayLanguage = Language.KOTLIN,
-                    lambdaParams = listOf(NoopParameterComponent("String")),
-                    nullability = Nullability.KOTLIN_DEFAULT
-                )),
+                type = DefaultLambdaTypeProjectionComponent(
+                    LambdaTypeProjectionComponent.Params(
+                        type = NoopLink("Int"),
+                        receiver = NoopTypeProjectionComponent("Boolean"),
+                        displayLanguage = Language.KOTLIN,
+                        lambdaParams = listOf(NoopParameterComponent("String")),
+                        nullability = Nullability.KOTLIN_DEFAULT
+                    )
+                ),
                 displayLanguage = Language.KOTLIN
             )
         )
@@ -301,13 +305,15 @@ class DefaultParameterComponentTest {
         val component = DefaultParameterComponent(
             Params(
                 name = "number",
-                type = DefaultLambdaTypeProjectionComponent(LambdaTypeProjectionComponent.Params(
-                    type = NoopLink("Int"),
-                    displayLanguage = Language.KOTLIN,
-                    lambdaParams = listOf(NoopParameterComponent("String")),
-                    lambdaModifiers = listOf("suspend"),
-                    nullability = Nullability.KOTLIN_DEFAULT
-                )),
+                type = DefaultLambdaTypeProjectionComponent(
+                    LambdaTypeProjectionComponent.Params(
+                        type = NoopLink("Int"),
+                        displayLanguage = Language.KOTLIN,
+                        lambdaParams = listOf(NoopParameterComponent("String")),
+                        lambdaModifiers = listOf("suspend"),
+                        nullability = Nullability.KOTLIN_DEFAULT
+                    )
+                ),
                 displayLanguage = Language.KOTLIN
             )
         )

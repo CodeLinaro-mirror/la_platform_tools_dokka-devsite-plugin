@@ -73,7 +73,7 @@ internal fun TwoPaneSummaryItem.link(): Link.Params = (data.title as? Link)?.dat
 internal fun TwoPaneSummaryItem.summary() = data.description as SymbolSummary
 internal fun TwoPaneSummaryItem.name(): String =
     (this.data.title as? ParameterComponent)?.data?.name
-    ?: (this.data.description as SymbolSummary).name()
+        ?: (this.data.description as SymbolSummary).name()
 internal fun TwoPaneSummaryItem.description() = (data.description as? DescriptionComponent)
     ?: (data.description as SymbolSummary).data.description
 internal fun SingleColumnSummaryItem.description() = (data.description as? DescriptionComponent)

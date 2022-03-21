@@ -91,8 +91,12 @@ internal class DocumentablesHolder(
             for (packageDoc in module.packages) {
                 val children = async { packageDoc.explodedChildren }
                 val syntheticClassList = async { computeSyntheticClasses(packageDoc) }
-                val classlikesList = async { computeClasslikes(children.await(),
-                    syntheticClassList.await()) }
+                val classlikesList = async {
+                    computeClasslikes(
+                        children.await(),
+                        syntheticClassList.await()
+                    )
+                }
                 val classList = async { computeClasses(children.await()) }
 
                 val enumList = async { computeEnums(children.await()) }
@@ -149,8 +153,10 @@ internal class DocumentablesHolder(
 
     suspend fun classesFor(packageDoc: DPackage, displayLanguage: Language): List<DClass> {
         return if (displayLanguage == Language.JAVA) {
-            (classes.getValue(packageDoc.dri).await() +
-                syntheticClasses.getValue(packageDoc.dri).await()).sortedBy { it.name() }
+            (
+                classes.getValue(packageDoc.dri).await() +
+                    syntheticClasses.getValue(packageDoc.dri).await()
+                ).sortedBy { it.name() }
         } else {
             classes.getValue(packageDoc.dri).await()
         }
@@ -199,16 +205,20 @@ internal class DocumentablesHolder(
 
     private fun computePackages(module: DModule): List<DPackage> {
         return module.packages
-            .filterNot { thisPackage -> excludedPackages.any {
-                excludedRegex -> excludedRegex.matches(thisPackage.packageName)
-            } }.sortedBy { it.name }
+            .filterNot { thisPackage ->
+                excludedPackages.any {
+                    excludedRegex ->
+                    excludedRegex.matches(thisPackage.packageName)
+                }
+            }.sortedBy { it.name }
     }
 
     private suspend fun computeClasslikes(
         module: DModule
     ): List<DClasslike> {
         return computeClasslikes(
-            module.packages.flatMap { classlikesFor(it) }) // classlikesFor already contains synth
+            module.packages.flatMap { classlikesFor(it) }
+        ) // classlikesFor already contains synth
     }
 
     private fun computeClasslikes(
@@ -216,16 +226,22 @@ internal class DocumentablesHolder(
         syntheticClasses: List<DClass> = emptyList()
     ): List<DClasslike> {
         return (docs.filterIsInstance<DClasslike>() + syntheticClasses)
-            .filterNot { thisClasslike -> excludedPackages.any {
-            excludedRegex -> excludedRegex.matches(thisClasslike.packageName())
-        } }.sortedBy { it.name() }
+            .filterNot { thisClasslike ->
+                excludedPackages.any {
+                    excludedRegex ->
+                    excludedRegex.matches(thisClasslike.packageName())
+                }
+            }.sortedBy { it.name() }
     }
 
     private fun computeClasses(docs: List<Documentable>): List<DClass> {
         return docs.filterIsInstance<DClass>().filterNot { it.isExceptionClass }
-        .filterNot { thisClass -> excludedPackages.any {
-            excludedRegex -> excludedRegex.matches(thisClass.packageName())
-        } }.sortedBy { it.name() }
+            .filterNot { thisClass ->
+                excludedPackages.any {
+                    excludedRegex ->
+                    excludedRegex.matches(thisClass.packageName())
+                }
+            }.sortedBy { it.name() }
     }
 
     /** Computes the syntheticClasses from top level functions that are used to document Kotlin as

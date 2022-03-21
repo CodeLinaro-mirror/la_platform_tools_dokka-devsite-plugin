@@ -70,8 +70,10 @@ internal fun DClasslike.name() = dri.classNames!!
 
 internal fun DClasslike.packageName() = dri.packageName!!
 
-private val baseClasses = listOf("kotlin.Any", "java.lang.Object", "kotlin.Enum",
-    "java.lang.Enum", "java.lang.annotation.Annotation")
+private val baseClasses = listOf(
+    "kotlin.Any", "java.lang.Object", "kotlin.Enum",
+    "java.lang.Enum", "java.lang.annotation.Annotation"
+)
 /**
  * Returns true if this dri is from a build in base class like Any, Object, Enum, Annotation
  */
@@ -112,8 +114,10 @@ internal fun Documentable.isFromJava() = isFromJavaMap.getOrPut(this) {
 }
 
 private fun DRI.isExternal() = packageName != null &&
-    (packageName!!.startsWith("java") || packageName!!.startsWith("Kotlin") ||
-    ("google" !in packageName!! && "android" !in packageName!!))
+    (
+        packageName!!.startsWith("java") || packageName!!.startsWith("Kotlin") ||
+            ("google" !in packageName!! && "android" !in packageName!!)
+        )
 
 internal fun Documentable.getPossibleSourceFiles(): List<File> {
     val codeFiles = if (this is WithSources) {
@@ -189,9 +193,11 @@ fun DFunction.withJavaSynthetic(syntheticClassName: String): DFunction {
             callable = dri.callable?.copy(name = jvmName)
         ),
         // put the static modifier on functions in the synthetic class
-        extra = extra.addAll(sourceSets.map {
-            mapOf(it to setOf(ExtraModifiers.JavaOnlyModifiers.Static)).toAdditionalModifiers()
-        })
+        extra = extra.addAll(
+            sourceSets.map {
+                mapOf(it to setOf(ExtraModifiers.JavaOnlyModifiers.Static)).toAdditionalModifiers()
+            }
+        )
     )
 }
 
@@ -221,7 +227,7 @@ private fun DFunction.signatureAsString() =
 
 private fun DParameter.paramAsString() =
     "${name ?: ""}: " +
-    "${(type as? UnresolvedBound)?.name ?: (type as? TypeConstructor)?.dri?.classNames}"
+        "${(type as? UnresolvedBound)?.name ?: (type as? TypeConstructor)?.dri?.classNames}"
 
 /**
  * Returns the value of the @JvmName for this function if one exists or null
@@ -251,9 +257,9 @@ fun DFunction.driForSyntheticClass() = DRI(dri.packageName, nameForSyntheticClas
  * Filters out elements that are annotated with @JvmSynthetic
  */
 fun <T : Documentable> List<T>.filterOutJvmSynthetic(): List<T> = this.filterNot { elem ->
-        elem is WithExtraProperties<*> &&
-            elem.annotations().any { it.dri.classNames.equals("JvmSynthetic") }
-    }
+    elem is WithExtraProperties<*> &&
+        elem.annotations().any { it.dri.classNames.equals("JvmSynthetic") }
+}
 
 /**
  * Uses the JavaToKotlinClassMap to possibly convert a dri to its Java equivalent

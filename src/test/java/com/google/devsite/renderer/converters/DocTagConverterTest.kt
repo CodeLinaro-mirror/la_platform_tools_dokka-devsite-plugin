@@ -56,8 +56,8 @@ import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.doc.CodeBlock
 import org.jetbrains.dokka.model.doc.DocumentationLink
 import org.jetbrains.dokka.model.doc.Img
-import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.model.doc.Pre
+import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.junit.Ignore
 import org.junit.Test
@@ -331,7 +331,8 @@ internal class DocTagConverterTest(
 
         for (documentation in listOf(documentationK, documentationJ)) {
             val classParams = documentation.first {
-                (it as? SummaryList)?.title() == "Parameters" } as SummaryList
+                (it as? SummaryList)?.title() == "Parameters"
+            } as SummaryList
 
             assertThat(classParams.size()).isEqualTo(2)
             val barParam = classParams.items().first().data
@@ -371,7 +372,8 @@ internal class DocTagConverterTest(
 
         for (documentation in listOf(documentationK, documentationJ)) {
             val params = documentation.first {
-                (it as? SummaryList)?.title() == "Parameters" } as SummaryList
+                (it as? SummaryList)?.title() == "Parameters"
+            } as SummaryList
 
             assertThat(params.size()).isEqualTo(2)
             val barParam = params.items().first().data
@@ -379,12 +381,16 @@ internal class DocTagConverterTest(
             val barTypeParam = barParam.title as TypeParameterComponent
             assertThat(barTypeParam.data.name).isEqualTo("Bar")
             assertThat(barTypeParam.projectionName()).isEqualTo("String")
-            assertThat((barParam.description as DescriptionComponent)
-                .text()).isEqualTo("A type of bar")
+            assertThat(
+                (barParam.description as DescriptionComponent)
+                    .text()
+            ).isEqualTo("A type of bar")
             val bazTypeParam = bazParam.title as TypeParameterComponent
             assertThat(bazTypeParam.data.name).isEqualTo("Baz")
-            assertThat((bazParam.description as DescriptionComponent)
-                .text()).isEqualTo("Bazzy baz")
+            assertThat(
+                (bazParam.description as DescriptionComponent)
+                    .text()
+            ).isEqualTo("Bazzy baz")
         }
     }
 
@@ -755,7 +761,8 @@ internal class DocTagConverterTest(
                 }
                 // This is also the upstream bug; T should be @NonNull from both source languages
                 if (documentation == documentationK) assertThat(
-                    param0Generic.data.annotationComponents.single().isAtNonNull).isTrue()
+                    param0Generic.data.annotationComponents.single().isAtNonNull
+                ).isTrue()
                 assertThat(param0Left.data.annotationComponents).isEmpty()
                 assertThat(param1Left.data.annotationComponents).isEmpty()
                 assertThat(param1Left.typeAnnotations().single().isAtNonNull).isTrue()
@@ -781,7 +788,8 @@ internal class DocTagConverterTest(
             |fun mega(funA: (funB: ((unt: Unit, foo: List<Boolean>) -> String) -> Int) -> (Double))
         """.render().documentation()
         val paramTable = documentation.first {
-            (it as? SummaryList)?.title() == "Parameters" } as SummaryList
+            (it as? SummaryList)?.title() == "Parameters"
+        } as SummaryList
         val funADocs = paramTable.items().single { it.name() == "funA" }.description().text()
         assertThat(funADocs).isEqualTo("a fun")
         val funBDocs = paramTable.items().single { it.name() == "funB" }.description().text()
@@ -814,7 +822,8 @@ internal class DocTagConverterTest(
             |}
         """.render().documentation()
         val paramTable = documentation.first {
-            (it as? SummaryList)?.title() == "Parameters" } as SummaryList
+            (it as? SummaryList)?.title() == "Parameters"
+        } as SummaryList
 
         // We don't want Value and/or Key to appear listed as parameters for map().
         assertThat(paramTable.size()).isEqualTo(2)
@@ -840,17 +849,20 @@ internal class DocTagConverterTest(
                 .map { it.data.type.link().name }
             assertThat(param0LambdaArgumentType).isEqualTo(listOf("Value"))
         }
-        assertThat(param0.description().text()).isEqualTo("Function that runs on each " +
+        assertThat(param0.description().text()).isEqualTo(
+            "Function that runs on each " +
                 "loaded item, returning items of a potentially new type."
         )
         assertThat(param1Left.data.name).isEqualTo("ToValue")
         assertThat(param1Left.projectionName()).isEqualTo("String")
-        assertThat(param1.description().text()).isEqualTo("Type of items produced by the " +
+        assertThat(param1.description().text()).isEqualTo(
+            "Type of items produced by the " +
                 "new DataSource, from the passed function."
         )
 
         val seeAlsoTable = documentation.first {
-            (it as? SummaryList)?.title() == "See also" } as SummaryList
+            (it as? SummaryList)?.title() == "See also"
+        } as SummaryList
         assertThat(seeAlsoTable.size()).isEqualTo(3)
         assertThat(seeAlsoTable.items().map { (it.data.title as Link).data.name })
             .isEqualTo(listOf("mapByPage", "DataSource.map", "DataSource.mapByPage"))
@@ -871,7 +883,8 @@ internal class DocTagConverterTest(
                 |}
         """.render().documentation()
         val seeAlsoTable = documentation.first {
-            (it as? SummaryList)?.title() == "See also" } as SummaryList
+            (it as? SummaryList)?.title() == "See also"
+        } as SummaryList
         assertThat((seeAlsoTable.single().data.title as Link).data.name).isEqualTo("filter")
     }
 
@@ -935,9 +948,11 @@ internal class DocTagConverterTest(
     |            .onCreateView(parent, name, context, attrs);
     |}
         """.render(java = true)
-        val paramDocText = (module.documentation(doc = {
-            this.function()!!.parameters.single { it.name == "parent" }
-        }).first() as DescriptionComponent).text()
+        val paramDocText = (
+            module.documentation(doc = {
+                this.function()!!.parameters.single { it.name == "parent" }
+            }).first() as DescriptionComponent
+            ).text()
 
         assertThat(paramDocText).doesNotContain("placedin")
     }
@@ -981,8 +996,10 @@ internal class DocTagConverterTest(
         """.render(java = true)
         val doc = documentation.documentation()
         val functionDesc = doc.first() as DefaultDescriptionComponent
-        assertThat(functionDesc.text()).isEqualTo("Below is a sample of a simple database." +
-            "  // File: Song.java\n @ Entity\npublic class Song {")
+        assertThat(functionDesc.text()).isEqualTo(
+            "Below is a sample of a simple database." +
+                "  // File: Song.java\n @ Entity\npublic class Song {"
+        )
         assertThat(functionDesc.data.components.last()).isInstanceOf(Pre::class.java)
     }
 
@@ -1029,8 +1046,10 @@ internal class DocTagConverterTest(
         val throwsSummary = documentation.first { (it as? SummaryList)?.title() == "Throws" }
             as SummaryList
         val throwsLeft = throwsSummary.item().data.title as Raw
-        val throwsRight = ((throwsSummary.item().data.description as DescriptionComponent)
-            .data.components.first().children.first() as Text)
+        val throwsRight = (
+            (throwsSummary.item().data.description as DescriptionComponent)
+                .data.components.first().children.first() as Text
+            )
 
         assertThat(throwsLeft.data.text).contains("IllegalStateException")
         assertThat(throwsRight.body).isEqualTo("if it fails")
@@ -1046,8 +1065,10 @@ internal class DocTagConverterTest(
         val throwsSummary = documentation.first { (it as? SummaryList)?.title() == "Throws" }
             as SummaryList
         val throwsLeft = throwsSummary.item().data.title as Raw
-        val throwsRight = ((throwsSummary.item().data.description as DescriptionComponent)
-            .data.components.first().children.first() as Text)
+        val throwsRight = (
+            (throwsSummary.item().data.description as DescriptionComponent)
+                .data.components.first().children.first() as Text
+            )
 
         assertThat(throwsLeft.data.text).isEqualTo("java.lang.IllegalStateException")
         assertThat(throwsRight.body).isEqualTo("if it fails")
@@ -1064,8 +1085,10 @@ internal class DocTagConverterTest(
         val throwsSummary = documentation.first { (it as? SummaryList)?.title() == "Throws" }
             as SummaryList
         val throwsLeft = throwsSummary.item().data.title as Raw
-        val throwsRight = ((throwsSummary.item().data.description as DescriptionComponent)
-            .data.components.first().children.first() as Text)
+        val throwsRight = (
+            (throwsSummary.item().data.description as DescriptionComponent)
+                .data.components.first().children.first() as Text
+            )
 
         assertThat(throwsLeft.data.text).isEqualTo("java.lang.IllegalStateException")
     }
@@ -1282,17 +1305,21 @@ internal class DocTagConverterTest(
         """.render()
         val holder = runBlocking { DocumentablesHolder(module, this) }
         val classGraph = runBlocking { holder.classGraph() }
-        val classConverter1 = ClasslikeDocumentableConverter(language,
+        val classConverter1 = ClasslikeDocumentableConverter(
+            language,
             module.explicitClasslike("DynamicNavGraphBuilder")!!,
             pathProvider(classGraph = classGraph),
             holder
         )
         val documentedClass1 = runBlocking { classConverter1.classlike() }
-        val classConverter2 = ClasslikeDocumentableConverter(language,
+        val classConverter2 = ClasslikeDocumentableConverter(
+            language,
             module.explicitClasslike(
-                "ParcelableArrayType")!!,
+                "ParcelableArrayType"
+            )!!,
             pathProvider(classGraph = classGraph),
-            holder)
+            holder
+        )
         val documentedClass2 = runBlocking { classConverter2.classlike() }
         assertThat(outputStreamCaptor.toString()).doesNotContain("WARNING")
         System.setOut(standardOut)
