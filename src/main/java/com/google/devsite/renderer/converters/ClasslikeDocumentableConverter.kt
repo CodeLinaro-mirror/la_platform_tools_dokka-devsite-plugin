@@ -642,8 +642,12 @@ internal class ClasslikeDocumentableConverter(
 
     private fun getLibraryMetadata(): LibraryMetadata {
         val params = LibraryMetadata.Params(
+
+            // TODO: replace these with actual values.
+            // These are temporarily set to static values while working on the UI layout
             groupId = "androidx.sample",
-            artifactId = "library"
+            artifactId = "library",
+            releaseNotesUrl = "https://developer.android.com/jetpack/androidx/versions",
         )
 
         return DefaultLibraryMetadata(

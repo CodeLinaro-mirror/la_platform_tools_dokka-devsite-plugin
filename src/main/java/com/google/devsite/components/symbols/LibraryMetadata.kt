@@ -24,6 +24,7 @@ internal interface LibraryMetadata : ContextFreeComponent {
 
     class Params(
         val groupId: String,
-        val artifactId: String
+        val artifactId: String,
+        val releaseNotesUrl: String,
     )
 }

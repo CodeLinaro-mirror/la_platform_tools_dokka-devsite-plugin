@@ -16,6 +16,7 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.LibraryMetadata
 import kotlinx.html.FlowContent
 import kotlinx.html.div
@@ -29,8 +30,14 @@ internal class DefaultLibraryMetadata(
     override fun render(into: FlowContent): Unit = into.run {
         if (!shown) return
 
+        val params = Link.Params(
+            name = data.groupId + ":" + data.artifactId,
+            url = data.releaseNotesUrl
+        )
+        val link = DefaultLink(params)
+
         div {
-            +(data.groupId + ":" + data.artifactId)
+            link.render(into)
         }
     }
 }
