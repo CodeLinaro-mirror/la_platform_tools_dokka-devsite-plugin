@@ -18,6 +18,7 @@ package com.google.devsite.components.pages
 
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.symbols.ClassSignature
+import com.google.devsite.components.symbols.LibraryMetadata
 import com.google.devsite.components.table.ClassHierarchy
 import com.google.devsite.components.table.InheritedSymbolsList
 import com.google.devsite.components.table.RelatedSymbols
@@ -33,7 +34,8 @@ internal interface Classlike : ContextFreeComponent {
         val relatedSymbols: RelatedSymbols,
         val description: List<ContextFreeComponent>,
         val symbolTypes: List<Pair<SummaryList, TitledList>>,
-        val inheritedTypes: List<InheritedSymbolsList>
+        val inheritedTypes: List<InheritedSymbolsList>,
+        val libraryMetadata: LibraryMetadata
     )
 
     data class TitledList(val title: String, val symbols: List<ContextFreeComponent>)
