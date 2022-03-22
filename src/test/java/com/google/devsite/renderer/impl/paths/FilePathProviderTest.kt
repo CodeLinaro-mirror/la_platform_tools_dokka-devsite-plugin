@@ -21,9 +21,9 @@ import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.links.Callable
-import org.junit.Test
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.TypeConstructor
+import org.junit.Test
 
 internal class FilePathProviderTest : ConverterTestBase() {
 

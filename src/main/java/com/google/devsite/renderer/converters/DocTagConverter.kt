@@ -200,9 +200,12 @@ internal class DocTagConverter(
                     // Enforce that the propagated documentation makes sense somewhere. Specifically
                     // documentation primarily aimed at a constructor may wind up on the DClass
                     // if the parameter being documented is a primary constructor property parameter
-                    invalidNames.removeAll(documentable.properties.map { it.name } +
-                        (documentable as? WithConstructors)?.constructors?.map { constructor ->
-                            constructor.parameters.map { it.name!! } }?.flatten().orEmpty())
+                    invalidNames.removeAll(
+                        documentable.properties.map { it.name } +
+                            (documentable as? WithConstructors)?.constructors?.map { constructor ->
+                                constructor.parameters.map { it.name!! }
+                            }?.flatten().orEmpty()
+                    )
                     logComponentNotFoundWarning("@param", invalidNames, documentable)
                     // Use only docs for type parameters in the parameter documentation table
                     return tags.filter { it.name() in genericNames }
@@ -213,7 +216,8 @@ internal class DocTagConverter(
                 is DProperty -> {
                     val genericNames = generics.map { it.name }
                     val invalidNames = tags.names().filter {
-                        it !in genericNames && it != documentable.name }
+                        it !in genericNames && it != documentable.name
+                    }
                     logComponentNotFoundWarning("@param", invalidNames, documentable)
                     return tags
                 }
@@ -262,9 +266,11 @@ internal class DocTagConverter(
         // @param can refer to parameters, lambda parameters, type parameters, or receivers.
         val allOptions = mutableMapOf<String, ContextFreeComponent>()
         if (documentable is DFunction) {
-            allOptions.putAll(documentable.parameters.map {
-                it.name!! to paramConverter.componentForParameter(it, false)
-            })
+            allOptions.putAll(
+                documentable.parameters.map {
+                    it.name!! to paramConverter.componentForParameter(it, false)
+                }
+            )
             allOptions.putAll(
                 recursivelyGetLambdaParamNames(documentable.parameters.map { it.type }).map {
                     (it.presentableName ?: "") to paramConverter
@@ -272,16 +278,21 @@ internal class DocTagConverter(
                 }
             )
         }
-        allOptions.putAll(dGenerics.map {
-            it.name to paramConverter.componentForTypeParameter(it) })
+        allOptions.putAll(
+            dGenerics.map {
+                it.name to paramConverter.componentForTypeParameter(it)
+            }
+        )
         if (documentable is Callable && documentable.receiver != null)
             allOptions[documentable.receiver!!.name ?: "receiver"] =
                 paramConverter.componentForParameter(documentable.receiver!!, false)
         val params = tags.map { tag ->
             if (allOptions[tag.name()] == null) {
-                throw RuntimeException("Unable to find what is referred to by \"@param " +
-                    "${tag.name()}\" in ${documentable::class.simpleName} ${documentable.name}, " +
-                    "with contents: ${tag.text()}")
+                throw RuntimeException(
+                    "Unable to find what is referred to by \"@param " +
+                        "${tag.name()}\" in ${documentable::class.simpleName} " +
+                        "${documentable.name}, with contents: ${tag.text()}"
+                )
             }
             val title = allOptions[tag.name()]!!
             DefaultTwoPaneSummaryItem(
@@ -322,7 +333,8 @@ internal class DocTagConverter(
                 }
                 is TypeAliased -> { // No clear way to decide which
                     result += recursivelyGetLambdaParamNames(
-                        setOf(argumentType.inner, argumentType.typeAlias).toList())
+                        setOf(argumentType.inner, argumentType.typeAlias).toList()
+                    )
                 }
                 is PrimitiveJavaType, is JavaObject, Void, Dynamic, Star -> { /* Do nothing */ }
                 is UnresolvedBound -> { /* Nothing we can do. We warn elsewhere for this case. */ }
@@ -397,7 +409,8 @@ internal class DocTagConverter(
                 is Description -> {
                     it.children.forEach { child ->
                         recursivelyConsiderPsAndTextsForJavaSamples(
-                            child, components, this.sourceSets.single().samples)
+                            child, components, this.sourceSets.single().samples
+                        )
                     }
                 }
                 is Sample -> {
@@ -440,7 +453,8 @@ internal class DocTagConverter(
                         if ("@sample" !in part) {
                             if (part.isNotBlank()) components.add(Text(part.trim()))
                         } else components.add(
-                            convertTextToJavaSample(Text(part.trim()), samples, docsHolder.logger))
+                            convertTextToJavaSample(Text(part.trim()), samples, docsHolder.logger)
+                        )
                     }
                 }
                 is P -> {
@@ -610,7 +624,8 @@ internal class DocTagConverter(
         val packageName = parts.takeWhile { it.all(Char::isLowerCase) }.joinToString(".")
         val typeName = parts.takeLastWhile {
             if (it.isEmpty()) throw RuntimeException("empty element in FQTTPNAT. Full: $full")
-            else it.first().isUpperCase() }.joinToString(".")
+            else it.first().isUpperCase()
+        }.joinToString(".")
 
         return packageName to typeName
     }
@@ -637,8 +652,12 @@ internal class DocTagConverter(
     internal fun docsToSummary(
         documentables: List<Documentable>,
         showAnnotations: Boolean = false
-    ) = DefaultSummaryList(SummaryList.Params(items = documentables
-        .map { summaryForDocumentable(it, showAnnotations) }))
+    ) = DefaultSummaryList(
+        SummaryList.Params(
+            items = documentables
+                .map { summaryForDocumentable(it, showAnnotations) }
+        )
+    )
 
     /**
      * Converts generic Documentables to TwoPaneSummaryItems, as simple maybe-annotated links
@@ -653,14 +672,16 @@ internal class DocTagConverter(
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
                 title = if (showAnnotations) {
-                    DefaultMiniSignature(MiniSignature.Params(
-                        annotations = annotations.annotationComponents(
-                            pathProvider = pathProvider,
-                            displayLanguage = displayLanguage,
-                            nullability = Nullability.DONT_CARE // Not useful for these use cases
-                        ),
-                        link = pathProvider.linkForReference(documentable.dri)
-                    ))
+                    DefaultMiniSignature(
+                        MiniSignature.Params(
+                            annotations = annotations.annotationComponents(
+                                pathProvider = pathProvider,
+                                displayLanguage = displayLanguage,
+                                nullability = Nullability.DONT_CARE // Not useful for these cases
+                            ),
+                            link = pathProvider.linkForReference(documentable.dri)
+                        )
+                    )
                 } else {
                     pathProvider.linkForReference(documentable.dri)
                 },

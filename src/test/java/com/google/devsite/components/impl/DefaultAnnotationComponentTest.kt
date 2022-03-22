@@ -46,8 +46,11 @@ class DefaultAnnotationComponentTest {
         val component = DefaultAnnotationComponent(
             Params(
                 type = NoopLink("Foo"),
-                parameters = listOf(DefaultNamedValueAnnotationParameter(
-                    NamedValueAnnotationParameter.Params("a", "value")))
+                parameters = listOf(
+                    DefaultNamedValueAnnotationParameter(
+                        NamedValueAnnotationParameter.Params("a", "value")
+                    )
+                )
             )
         )
 
@@ -70,9 +73,11 @@ class DefaultAnnotationComponentTest {
                 type = NoopLink("Foo"),
                 parameters = listOf(
                     DefaultNamedValueAnnotationParameter(
-                        NamedValueAnnotationParameter.Params("a", "value")),
+                        NamedValueAnnotationParameter.Params("a", "value")
+                    ),
                     DefaultNamedValueAnnotationParameter(
-                        NamedValueAnnotationParameter.Params("another", "value"))
+                        NamedValueAnnotationParameter.Params("another", "value")
+                    )
                 )
             )
         )

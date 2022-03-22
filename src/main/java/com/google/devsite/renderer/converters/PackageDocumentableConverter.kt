@@ -49,7 +49,8 @@ internal class PackageDocumentableConverter(
     suspend fun summaryPage(): DevsitePage = coroutineScope {
         val interfaces = async { javadocConverter.docsToSummary(docsHolder.interfacesFor(doc)) }
         val classes = async {
-            javadocConverter.docsToSummary(docsHolder.classesFor(doc, displayLanguage)) }
+            javadocConverter.docsToSummary(docsHolder.classesFor(doc, displayLanguage))
+        }
         val enums = async { javadocConverter.docsToSummary(docsHolder.enumsFor(doc)) }
         val exceptions = async { javadocConverter.docsToSummary(docsHolder.exceptionsFor(doc)) }
         val annotations = async { javadocConverter.docsToSummary(docsHolder.annotationsFor(doc)) }

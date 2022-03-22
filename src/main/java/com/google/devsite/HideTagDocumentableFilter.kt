@@ -26,6 +26,7 @@ class HideTagDocumentableFilter(dokkaContext: DokkaContext) :
     SuppressedByConditionDocumentableFilterTransformer(dokkaContext) {
     override fun shouldBeSuppressed(d: Documentable): Boolean =
         d.documentation.any {
-            (_, docs) -> docs.dfs { it is CustomTagWrapper && it.name.trim() == "hide" } != null
+            (_, docs) ->
+            docs.dfs { it is CustomTagWrapper && it.name.trim() == "hide" } != null
         }
 }

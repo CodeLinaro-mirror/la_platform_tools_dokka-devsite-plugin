@@ -23,9 +23,11 @@ import org.jetbrains.dokka.model.doc.Throws as ThrowsTag
  */
 class DocTagsForCheckedExceptionsTransformer : DocumentableTransformer {
     override fun invoke(original: DModule, context: DokkaContext): DModule =
-        original.copy(packages = original.packages.map { p ->
-            p.copy(classlikes = p.classlikes.map(::transformClasslike))
-        })
+        original.copy(
+            packages = original.packages.map { p ->
+                p.copy(classlikes = p.classlikes.map(::transformClasslike))
+            }
+        )
 
     private fun transformClasslike(classlike: DClasslike): DClasslike =
         when (classlike) {

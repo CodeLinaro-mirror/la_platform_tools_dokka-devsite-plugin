@@ -273,11 +273,11 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 // test pass but, stripped by the IDE
         // language=html
         assertThat(output).isEqualTo(
-"<body>\n" +
-"  <p><strong>This class is deprecated.</strong> \n" +
-"    <p>Hello world!</p>\n" +
-"  </p>\n" +
-"   </body>".trim()
+            "<body>\n" +
+                "  <p><strong>This class is deprecated.</strong> \n" +
+                "    <p>Hello world!</p>\n" +
+                "  </p>\n" +
+                "   </body>".trim()
         )
     }
 

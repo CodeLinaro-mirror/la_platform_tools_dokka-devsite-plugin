@@ -73,8 +73,10 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                     externalDocumentationLinks = externalLinks
                     samples = sampleLocations.map { "$baseDir/$it" }
                     includes = includeFiles.map { File(sources, it).absolutePath }
-                    documentedVisibilities = setOf(DokkaConfiguration.Visibility.PUBLIC,
-                        DokkaConfiguration.Visibility.PROTECTED)
+                    documentedVisibilities = setOf(
+                        DokkaConfiguration.Visibility.PUBLIC,
+                        DokkaConfiguration.Visibility.PROTECTED
+                    )
                 }
             }
             offlineMode = true

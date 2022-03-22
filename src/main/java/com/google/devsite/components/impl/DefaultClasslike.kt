@@ -38,7 +38,7 @@ internal class DefaultClasslike(
 
         val allSummarySections =
             data.symbolTypes.map { it.first }.filter { it.hasContent() } +
-            data.inheritedTypes.filter { it.hasContent() }
+                data.inheritedTypes.filter { it.hasContent() }
         allSummarySections.render(into, separator = null, header = { h2 { +"Summary" } })
 
         for (symbolType in data.symbolTypes.map { it.second }) {

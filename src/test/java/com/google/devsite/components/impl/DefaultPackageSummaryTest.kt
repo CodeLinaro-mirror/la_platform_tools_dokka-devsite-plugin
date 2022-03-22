@@ -32,7 +32,8 @@ class DefaultPackageSummaryTest {
     @Test
     fun `Package summary with description renders correctly`() {
         val component = createPackageSummary(
-            description = listOf(NoopDescriptionComponent("Hello World!")))
+            description = listOf(NoopDescriptionComponent("Hello World!"))
+        )
 
         val output = createHTML().div {
             component.render(this)

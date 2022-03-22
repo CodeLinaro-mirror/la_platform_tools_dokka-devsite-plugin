@@ -78,14 +78,16 @@ enum class Nullability {
 
     infix fun or(other: Nullability?): Nullability = if (other == null) this
     else NULLABILITY_PRECEDENCE_LIST[
-        min(NULLABILITY_PRECEDENCE_LIST.indexOf(this), NULLABILITY_PRECEDENCE_LIST.indexOf(other))]
+        min(NULLABILITY_PRECEDENCE_LIST.indexOf(this), NULLABILITY_PRECEDENCE_LIST.indexOf(other))
+    ]
 
     companion object {
         internal val NULLABILITY_PRECEDENCE_LIST = listOf(
             DONT_CARE,
             JAVA_NEVER_NULL, KOTLIN_NULLABLE,
             JAVA_ANNOTATED_NULLABLE, JAVA_ANNOTATED_NOT_NULL,
-            KOTLIN_DEFAULT, JAVA_NOT_ANNOTATED)
+            KOTLIN_DEFAULT, JAVA_NOT_ANNOTATED
+        )
     }
 }
 
@@ -106,7 +108,7 @@ internal fun Projection.getNullability(
         is PrimitiveJavaType -> // Java arrays are nullable; non-array primitives aren't
             if ("[" !in name) Nullability.JAVA_NEVER_NULL
             else if (isJavaSource == true) Nullability.JAVA_NOT_ANNOTATED
-                else Nullability.KOTLIN_DEFAULT
+            else Nullability.KOTLIN_DEFAULT
         Void -> Nullability.JAVA_NEVER_NULL // Not nullable by definition
         Dynamic, Star -> Nullability.KOTLIN_DEFAULT // Can come from Kotlin source only
         // Unannotated java projections are nullable, default Kotlin aren't

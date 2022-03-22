@@ -893,9 +893,11 @@ internal class ParameterDocumentableConverterTest(
             |public void foo(@NonNull int[] a) {}
         """.render(java = true).param().data.type
 
-        for ((nullableType, nonnullType) in listOf(
-            listOf(nullableTypeJ, nullableTypeK),
-            listOf(nonnullTypeJ, nonnullTypeK))
+        for (
+            (nullableType, nonnullType) in listOf(
+                listOf(nullableTypeJ, nullableTypeK),
+                listOf(nonnullTypeJ, nonnullTypeK)
+            )
         ) {
             if (!(nonnullType === nonnullTypeJ)) continue
             assertThat(nullableType.nullable).isTrue()
@@ -1169,20 +1171,20 @@ internal class ParameterDocumentableConverterTest(
     }
 
     private fun DModule.returnType(name: String = "foo"): TypeProjectionComponent {
-            val classGraph = runBlocking {
-                DocumentablesHolder(this@returnType, this).classGraph()
-            }
-            val converter = ParameterDocumentableConverter(
-                language,
-                pathProvider(classGraph = classGraph)
-            )
-            return converter.componentForProjection(
-                projection = function(name)!!.type,
-                // Propagate ALL annotations _for display in the summary_, b/197321617
-                propagatedAnnotations = emptyList(),
-                isReturnType = true,
-                isJavaSource = function()!!.isFromJava()
-            )
+        val classGraph = runBlocking {
+            DocumentablesHolder(this@returnType, this).classGraph()
+        }
+        val converter = ParameterDocumentableConverter(
+            language,
+            pathProvider(classGraph = classGraph)
+        )
+        return converter.componentForProjection(
+            projection = function(name)!!.type,
+            // Propagate ALL annotations _for display in the summary_, b/197321617
+            propagatedAnnotations = emptyList(),
+            isReturnType = true,
+            isJavaSource = function()!!.isFromJava()
+        )
     }
 
     private fun DModule.parameterDoc(name: String = "foo"): DParameter =

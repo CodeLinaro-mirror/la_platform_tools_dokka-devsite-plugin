@@ -63,16 +63,20 @@ internal class MultiLanguageRenderer(
     // packages specified in `excludedPackagesForBoth`
     private val excludedPackagesForJava: Set<Regex> by lazy {
         excludedPackagesForBoth +
-            (System.getenv("DACKKA_EXCLUDED_PACKAGES_JAVA")?.split(",")
-                ?.map { it.toRegex() }?.toSet() ?: emptySet())
+            (
+                System.getenv("DACKKA_EXCLUDED_PACKAGES_JAVA")?.split(",")
+                    ?.map { it.toRegex() }?.toSet() ?: emptySet()
+                )
     }
 
     // Set of packages that Dackka will exclude for Java refdoc generation, which includes
     // packages specified in `excludedPackagesForBoth`
     private val excludedPackagesForKotlin: Set<Regex> by lazy {
         excludedPackagesForBoth +
-            (System.getenv("DACKKA_EXCLUDED_PACKAGES_KOTLIN")?.split(",")
-                ?.map { it.toRegex() }?.toSet() ?: emptySet())
+            (
+                System.getenv("DACKKA_EXCLUDED_PACKAGES_KOTLIN")?.split(",")
+                    ?.map { it.toRegex() }?.toSet() ?: emptySet()
+                )
     }
 
     override fun render(root: RootPageNode) {
@@ -102,8 +106,10 @@ internal class MultiLanguageRenderer(
     ) {
         if (versionedTenant != null) return
         val language = Language.JAVA
-        val filePaths = DacJavaFilePathProvider(tenant, locationProvider, classGraph,
-            documentablesGraph)
+        val filePaths = DacJavaFilePathProvider(
+            tenant, locationProvider, classGraph,
+            documentablesGraph
+        )
         DevsiteRenderer(
             MetadataRenderer(outputWriter, filePaths, language, holder),
             PackageRenderer(outputWriter, filePaths, language, holder),

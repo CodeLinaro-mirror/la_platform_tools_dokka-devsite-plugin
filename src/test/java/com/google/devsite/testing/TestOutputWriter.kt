@@ -26,9 +26,11 @@ class TestOutputWriterPlugin(failOnOverwrite: Boolean = false) : DokkaPlugin() {
     private val dokkaBase by lazy { plugin<DokkaBase>() }
 
     val testWriter by extending {
-        (dokkaBase.outputWriter
-            with writer
-            override dokkaBase.fileWriter)
+        (
+            dokkaBase.outputWriter
+                with writer
+                override dokkaBase.fileWriter
+            )
     }
 }
 

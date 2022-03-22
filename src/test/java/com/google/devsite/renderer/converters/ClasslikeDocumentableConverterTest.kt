@@ -651,11 +651,19 @@ internal class ClasslikeDocumentableConverterTest(
         val pparam2docs = fooClass.propertySymbol("param2").description()
         val prop1docs = fooClass.propertySymbol("property1").description()
         val prop2docs = fooClass.propertySymbol("property2").description()
-        val param1docs = ((fooClass.symbolsFor("Public constructors").second
-            .symbols.single() as SymbolDetail).data.metadata[1] as SummaryList)
+        val param1docs = (
+            (
+                fooClass.symbolsFor("Public constructors").second
+                    .symbols.single() as SymbolDetail
+                ).data.metadata[1] as SummaryList
+            )
             .items().single { it.name() == "param1" }.description()
-        val param2docs = ((fooClass.symbolsFor("Public constructors").second
-            .symbols.single() as SymbolDetail).data.metadata[1] as SummaryList)
+        val param2docs = (
+            (
+                fooClass.symbolsFor("Public constructors").second
+                    .symbols.single() as SymbolDetail
+                ).data.metadata[1] as SummaryList
+            )
             .items().single { it.name() == "param2" }.description()
         assertThat(pparam1docs.text()).isEqualTo("param1_docs")
         assertThat(prop1docs.text()).isEqualTo("property1_docs")
@@ -668,11 +676,19 @@ internal class ClasslikeDocumentableConverterTest(
         val zpparam2docs = bazClass.propertySymbol("param2").description()
         val zprop1docs = bazClass.propertySymbol("property1").description()
         val zprop2docs = bazClass.propertySymbol("property2").description()
-        val zparam1docs = ((bazClass.symbolsFor("Public constructors").second
-            .symbols.single() as SymbolDetail).data.metadata[1] as SummaryList)
+        val zparam1docs = (
+            (
+                bazClass.symbolsFor("Public constructors").second
+                    .symbols.single() as SymbolDetail
+                ).data.metadata[1] as SummaryList
+            )
             .items().single { it.name() == "param1" }.description()
-        val zparam2docs = ((bazClass.symbolsFor("Public constructors").second
-            .symbols.single() as SymbolDetail).data.metadata[1] as SummaryList)
+        val zparam2docs = (
+            (
+                bazClass.symbolsFor("Public constructors").second
+                    .symbols.single() as SymbolDetail
+                ).data.metadata[1] as SummaryList
+            )
             .items().single { it.name() == "param2" }.description()
         assertThat(zpparam1docs.text()).isEqualTo("override_param1_docs")
         assertThat(zprop1docs.text()).isEqualTo("override_property1_docs")
@@ -684,8 +700,12 @@ internal class ClasslikeDocumentableConverterTest(
         // TODO: patch upstream? dokka to support inheriting documentation on hidden components
         val pparam3docs = barClass.propertySymbol("param3").description()
         val prop3docs = barClass.propertySymbol("property3").description()
-        val param3docs = ((barClass.symbolsFor("Public constructors").second
-            .symbols.single() as SymbolDetail).data.metadata[1] as SummaryList)
+        val param3docs = (
+            (
+                barClass.symbolsFor("Public constructors").second
+                    .symbols.single() as SymbolDetail
+                ).data.metadata[1] as SummaryList
+            )
             .items().single { it.name() == "param3" }.description()
         assertThat(pparam3docs.text()).isEqualTo("param3_docs")
         assertThat(prop3docs.text()).isEqualTo("property3_docs")
