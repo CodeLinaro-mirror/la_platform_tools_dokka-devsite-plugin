@@ -199,7 +199,7 @@ internal abstract class ConverterTestBase(
                 loggerForTest = DokkaConsoleLogger(LoggingLevel.WARN)
             ) {
                 renderingStage = { node: RootPageNode, _: DokkaContext ->
-                    val module = (node as ModulePageNode).documentable as DModule
+                    val module = (node as ModulePageNode).documentables.single() as DModule
                     cont.resume(module)
                 }
             }
