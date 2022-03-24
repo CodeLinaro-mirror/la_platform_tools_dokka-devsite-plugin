@@ -678,10 +678,7 @@ internal class ClasslikeDocumentableConverter(
             releaseNotesUrl = "https://developer.android.com/jetpack/androidx/versions",
         )
 
-        return DefaultLibraryMetadata(
-            data = params,
-            shown = false // Set to true to preview results
-        )
+        return DefaultLibraryMetadata(params, docsHolder.showLibraryMetadata)
     }
 
     /** Converts the classlikes to link components for use in the related symbols component. */

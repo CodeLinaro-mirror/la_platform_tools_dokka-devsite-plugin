@@ -64,7 +64,8 @@ internal class DocumentablesHolder(
     module: DModule,
     scope: CoroutineScope,
     context: DokkaContext? = null,
-    private val excludedPackages: Set<Regex> = emptySet()
+    private val excludedPackages: Set<Regex> = emptySet(),
+    val showLibraryMetadata: Boolean = false,
 ) {
     private val packages = scope.async { computePackages(module) }
 
