@@ -79,6 +79,11 @@ internal class MultiLanguageRenderer(
                 )
     }
 
+    // Boolean to determine if library metadata (such as artifact ID) should be shown.
+    private val showLibraryMetadata: Boolean by lazy {
+        System.getenv("SHOW_LIBRARY_METADATA") == "true"
+    }
+
     override fun render(root: RootPageNode) {
         val module = (root as ModulePageNode).documentables.single() as DModule
         val locationProvider = DefaultExternalDokkaLocationProvider(
@@ -86,10 +91,22 @@ internal class MultiLanguageRenderer(
         )
 
         runBlocking(Dispatchers.Default) {
-            val jHolder = DocumentablesHolder(module, this, context, excludedPackagesForJava)
+            val jHolder = DocumentablesHolder(
+                module = module,
+                scope = this,
+                context = context,
+                excludedPackages = excludedPackagesForJava,
+                showLibraryMetadata = showLibraryMetadata,
+            )
             val jClassGraph = jHolder.classGraph()
             val jDocumentablesGraph = jHolder.documentablesGraph()
-            val kHolder = DocumentablesHolder(module, this, context, excludedPackagesForKotlin)
+            val kHolder = DocumentablesHolder(
+                module = module,
+                scope = this,
+                context = context,
+                excludedPackages = excludedPackagesForKotlin,
+                showLibraryMetadata = showLibraryMetadata,
+            )
             val kClassGraph = kHolder.classGraph()
             val kDocumentablesGraph = kHolder.documentablesGraph()
 
