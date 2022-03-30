@@ -97,6 +97,7 @@ internal fun TypeProjectionComponent.alternativeLink(): Link.Params? =
 
 internal fun TypeProjectionComponent.name() = link().name
 internal fun ParameterComponent.typeName() = data.type.name()
+internal fun ParameterComponent.fullTypeName() = typeName() + generics().asString()
 internal fun ParameterComponent.typeAnnotations() = data.type.data.annotationComponents
 
 internal fun AnnotationComponent.link(): Link.Params = data.type.data
@@ -104,3 +105,6 @@ internal val AnnotationComponent.isAtNullable get() = this.link().name == "Nulla
 internal val AnnotationComponent.isAtNonNull get() = this.link().name == "NonNull"
 
 internal fun List<AnnotationComponent>.exceptNonNull() = this.filter { it.link().name != "NonNull" }
+
+private fun List<TypeProjectionComponent>.asString() =
+    if (isEmpty()) "" else map { it.name() }.joinToString(prefix = "<", postfix = ">")

@@ -24,6 +24,7 @@ import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.alternativeLink
 import com.google.devsite.renderer.converters.testing.exceptNonNull
+import com.google.devsite.renderer.converters.testing.fullTypeName
 import com.google.devsite.renderer.converters.testing.isAtNonNull
 import com.google.devsite.renderer.converters.testing.isAtNullable
 import com.google.devsite.renderer.converters.testing.item
@@ -252,7 +253,7 @@ internal class ParameterDocumentableConverterTest(
     }
 
     @Test
-    fun `Arrays and nullability is handled properly in conversion to Java`() {
+    fun `Nested array nullability is handled properly in Kotlin`() {
         val moduleK = """
             |fun foo(a: Array<Array<String>?>, b: Array<Array<String?>>?)
         """.render()
@@ -269,7 +270,57 @@ internal class ParameterDocumentableConverterTest(
             assertThat(!paramB.data.type.data.generics.single().nullable)
             assertThat(paramB.data.type.data.generics.single().data.generics.single().nullable)
         }
-        // This is impossible to represent in java, sadly. go/dokka-upstream-bug/
+        // This is impossible to represent in java, sadly, and this is a limitation of the language.
+    }
+
+    @Test
+    fun `Array nullability is handled properly in conversion to Java`() {
+        val moduleK = """
+            |fun foo(
+            |   nonnaInt: IntArray,
+            |   nonnaObj: Array<Any>,
+            |   nullaInt: IntArray?
+            |   nullaArr: Array<List<Int>>?
+            |)
+        """.render()
+        val moduleJ = """
+            |public void foo(
+            |   @Nonnull int[] nonnaInt,
+            |   @Nonnull Object[] nonnaObj,
+            |   @Nullable int[] nullaInt,
+            |   @Nullable List<Integer>[] nullaArr
+            |)
+        """.render(java = true)
+        for (module in listOf(moduleJ, moduleK)) {
+            val nonnaInt = module.param("nonnaInt")
+            val nonnaObj = module.param("nonnaObj")
+            val nullaInt = module.param("nullaInt")
+            val nullaArr = module.param("nullaArr")
+
+            val nullas = listOf(nullaInt, nullaArr)
+            val nonnas = listOf(nonnaInt, nonnaObj)
+            val ints = listOf(nullaInt, nullaInt)
+
+            if (module == moduleK) { // Should assert this on all, but go/dokka-upstream/bug/2207
+                nonnas.forEach { assertThat(it.nullable).isFalse() }
+            }
+            nullas.forEach { assertThat(it.nullable).isTrue() }
+
+            javaOnly {
+                ints.forEach { assertThat(it.typeName()).isEqualTo("int[]") }
+                assertThat(nonnaObj.typeName()).isEqualTo("Object[]")
+                val arrType = if (module == moduleJ) "List<Integer>[]" else "List[]" // Type erasure
+                assertThat(nullaArr.fullTypeName()).isEqualTo(arrType)
+                // Needs asserts around annotations present and the exact nullability enum value
+                // but because of go/dokka-upstream/bug/2207 this is currently JAVA_NOT_ANNOTATED.
+            }
+            kotlinOnly {
+                ints.forEach { assertThat(it.typeName()).isEqualTo("IntArray") }
+                assertThat(nonnaObj.fullTypeName()).isEqualTo("Array<Any>")
+                val arrType = if (module == moduleJ) "Array<List<Integer>>" else "Array<List>"
+                assertThat(nullaArr.fullTypeName()).isEqualTo(arrType)
+            }
+        }
     }
 
     @Test
