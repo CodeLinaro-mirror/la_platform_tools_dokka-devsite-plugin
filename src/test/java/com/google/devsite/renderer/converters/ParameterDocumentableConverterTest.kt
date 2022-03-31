@@ -42,8 +42,13 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class ParameterDocumentableConverterTest(
-    private val language: Language
-) : ConverterTestBase(language) {
+    private val displayLanguage: Language
+) : ConverterTestBase(displayLanguage) {
+
+    private val intArray = if (displayLanguage == Language.JAVA) "int[]" else "IntArray"
+    private val boolArray = if (displayLanguage == Language.JAVA) "boolean[]" else "BooleanArray"
+    private val objArray = if (displayLanguage == Language.JAVA) "Object[]" else "Array<Any>"
+
     @Test
     fun `Parameter has correct type`() {
         val param = """
@@ -285,8 +290,8 @@ internal class ParameterDocumentableConverterTest(
         """.render()
         val moduleJ = """
             |public void foo(
-            |   @Nonnull int[] nonnaInt,
-            |   @Nonnull Object[] nonnaObj,
+            |   @NonNull int[] nonnaInt,
+            |   @NonNull Object[] nonnaObj,
             |   @Nullable int[] nullaInt,
             |   @Nullable List<Integer>[] nullaArr
             |)
@@ -301,25 +306,28 @@ internal class ParameterDocumentableConverterTest(
             val nonnas = listOf(nonnaInt, nonnaObj)
             val ints = listOf(nullaInt, nullaInt)
 
-            if (module == moduleK) { // Should assert this on all, but go/dokka-upstream/bug/2207
-                nonnas.forEach { assertThat(it.nullable).isFalse() }
-            }
-            nullas.forEach { assertThat(it.nullable).isTrue() }
+            val expectedNonNull =
+                if (module == moduleJ) Nullability.JAVA_ANNOTATED_NOT_NULL
+                else Nullability.KOTLIN_DEFAULT
+            val expectedNullable =
+                if (module == moduleJ) Nullability.JAVA_ANNOTATED_NULLABLE
+                else Nullability.KOTLIN_NULLABLE
 
-            javaOnly {
-                ints.forEach { assertThat(it.typeName()).isEqualTo("int[]") }
-                assertThat(nonnaObj.typeName()).isEqualTo("Object[]")
-                val arrType = if (module == moduleJ) "List<Integer>[]" else "List[]" // Type erasure
-                assertThat(nullaArr.fullTypeName()).isEqualTo(arrType)
-                // Needs asserts around annotations present and the exact nullability enum value
-                // but because of go/dokka-upstream/bug/2207 this is currently JAVA_NOT_ANNOTATED.
+            nonnas.forEach { assertThat(it.nullable).isFalse() }
+            nullas.forEach { assertThat(it.nullable).isTrue() }
+            nonnas.forEach { assertThat(it.data.type.data.nullability).isEqualTo(expectedNonNull) }
+            nullas.forEach { assertThat(it.data.type.data.nullability).isEqualTo(expectedNullable) }
+
+            val expectedArrList = when (module to displayLanguage) {
+                moduleJ to Language.JAVA -> "List<Integer>[]"
+                moduleK to Language.JAVA -> "List[]"
+                moduleJ to Language.KOTLIN -> "Array<List<Integer>>"
+                moduleK to Language.KOTLIN -> "Array<List>"
+                else -> throw RuntimeException("Impossible! Perhaps the archives are incomplete.")
             }
-            kotlinOnly {
-                ints.forEach { assertThat(it.typeName()).isEqualTo("IntArray") }
-                assertThat(nonnaObj.fullTypeName()).isEqualTo("Array<Any>")
-                val arrType = if (module == moduleJ) "Array<List<Integer>>" else "Array<List>"
-                assertThat(nullaArr.fullTypeName()).isEqualTo(arrType)
-            }
+            ints.forEach { assertThat(it.typeName()).isEqualTo(intArray) }
+            assertThat(nonnaObj.fullTypeName()).isEqualTo(objArray)
+            assertThat(nullaArr.fullTypeName()).isEqualTo(expectedArrList)
         }
     }
 
@@ -993,14 +1001,12 @@ internal class ParameterDocumentableConverterTest(
         for (paramType in listOf(intParamTypeJ, intParamTypeK)) {
             val typeName = paramType.type.link().name
 
-            javaOnly { assertThat(typeName).isEqualTo("int[]") }
-            kotlinOnly { assertThat(typeName).isEqualTo("IntArray") }
+            assertThat(typeName).isEqualTo(intArray)
         }
         for (paramType in listOf(booleanParamTypeJ, booleanParamTypeK)) {
             val typeName = paramType.type.link().name
 
-            javaOnly { assertThat(typeName).isEqualTo("boolean[]") }
-            kotlinOnly { assertThat(typeName).isEqualTo("BooleanArray") }
+            assertThat(typeName).isEqualTo(boolArray)
         }
     }
 
@@ -1234,7 +1240,7 @@ internal class ParameterDocumentableConverterTest(
         ParameterComponent {
         val (holder, pathProvider) = holderAndProvider(this)
         val converter = ParameterDocumentableConverter(
-            language,
+            displayLanguage,
             pathProvider
         )
         return converter.componentForParameter(parameterDoc(name), forSummary)
@@ -1243,7 +1249,7 @@ internal class ParameterDocumentableConverterTest(
     private fun DModule.returnType(name: String = "foo"): TypeProjectionComponent {
         val (holder, pathProvider) = holderAndProvider(this)
         val converter = ParameterDocumentableConverter(
-            language,
+            displayLanguage,
             pathProvider
         )
         return converter.componentForProjection(

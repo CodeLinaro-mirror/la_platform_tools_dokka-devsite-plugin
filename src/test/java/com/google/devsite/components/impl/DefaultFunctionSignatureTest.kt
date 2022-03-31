@@ -144,7 +144,7 @@ class DefaultFunctionSignatureTest {
 
     @Test
     fun `Signature with multiple bounds renders correctly`() {
-        for (language in listOf(Language.KOTLIN, Language.JAVA)) {
+        for (displayLanguage in listOf(Language.KOTLIN, Language.JAVA)) {
             val component = DefaultFunctionSignature(
                 Params(
                     name = NoopLink("copyWhenGreater"),
@@ -155,7 +155,7 @@ class DefaultFunctionSignatureTest {
                     typeParameters = listOf(
                         DefaultTypeParameterComponent(
                             TypeParameterComponent.Params(
-                                displayLanguage = language,
+                                displayLanguage = displayLanguage,
                                 name = "T",
                                 projections = listOf(
                                     NoopTypeProjectionComponent("CharSequence"),
@@ -171,7 +171,7 @@ class DefaultFunctionSignatureTest {
                 component.render(this)
             }.trim()
 
-            if (language == Language.KOTLIN) {
+            if (displayLanguage == Language.KOTLIN) {
                 // language=html
                 assertThat(output).isEqualTo(
                     """

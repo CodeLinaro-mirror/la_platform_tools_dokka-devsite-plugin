@@ -37,8 +37,8 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class RootDocumentableConverterTest(
-    private val language: Language
-) : ConverterTestBase(language) {
+    private val displayLanguage: Language
+) : ConverterTestBase(displayLanguage) {
     @Test
     fun `Class index creates components with correct page title`() {
         val page = """
@@ -384,7 +384,7 @@ internal class RootDocumentableConverterTest(
         check(!(forClasses && forPackages)) { "Must choose 1." }
         val (holder, pathProvider) = holderAndProvider(this)
         val converter = RootDocumentableConverter(
-            language,
+            displayLanguage,
             pathProvider,
             holder
         )
@@ -398,7 +398,7 @@ internal class RootDocumentableConverterTest(
     private fun DModule.toc(): TableOfContents {
         val (holder, pathProvider) = holderAndProvider(this)
         val converter = RootDocumentableConverter(
-            language,
+            displayLanguage,
             pathProvider,
             holder
         )

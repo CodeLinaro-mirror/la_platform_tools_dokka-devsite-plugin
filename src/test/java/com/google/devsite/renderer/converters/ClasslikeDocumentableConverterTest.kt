@@ -51,8 +51,8 @@ import kotlin.test.assertFails
 
 @RunWith(Parameterized::class)
 internal class ClasslikeDocumentableConverterTest(
-    private val language: Language
-) : ConverterTestBase(language) {
+    private val displayLanguage: Language
+) : ConverterTestBase(displayLanguage) {
     @Test
     fun `Classlike creates components with correct title`() {
         val page = """
@@ -1195,7 +1195,7 @@ internal class ClasslikeDocumentableConverterTest(
         val classlike = page.content<Classlike>()
         val publicMethodSymbols = classlike.methodSymbols()
         val protectedMethodSymbols = classlike.symbolsFor(
-            if (language == Language.KOTLIN) "Protected functions" else "Protected methods"
+            if (displayLanguage == Language.KOTLIN) "Protected functions" else "Protected methods"
         )
         val publicMethodNames = publicMethodSymbols.second.symbols.map {
             (it as DefaultSymbolDetail).data.name
@@ -1316,7 +1316,7 @@ internal class ClasslikeDocumentableConverterTest(
         val (holder, pathProvider) = holderAndProvider(this)
         val extFunctionMap = runBlocking { holder.extensionFunctionMap() }
         val converter = ClasslikeDocumentableConverter(
-            language,
+            displayLanguage,
             classlike,
             pathProvider,
             holder,
@@ -1338,14 +1338,14 @@ internal class ClasslikeDocumentableConverterTest(
     }.getOrNull() ?: emptyList()
 
     private fun Classlike.methodSymbols(): Pair<SummaryList, Classlike.TitledList> =
-        symbolsFor(if (language == Language.KOTLIN) "Public functions" else "Public methods")
+        symbolsFor(if (displayLanguage == Language.KOTLIN) "Public functions" else "Public methods")
 
     private fun Classlike.methodSymbol(name: String = "foo") =
         methodSymbols().first.items().singleOrNull { it.name() == name }
             ?: methodSymbols().first.items().single()
 
     private fun Classlike.propertySymbols(): Pair<SummaryList, Classlike.TitledList> =
-        symbolsFor(if (language == Language.KOTLIN) "Public properties" else "Public fields")
+        symbolsFor(if (displayLanguage == Language.KOTLIN) "Public properties" else "Public fields")
 
     private fun Classlike.propertySymbol(name: String = "foo") =
         propertySymbols().first.items().singleOrNull { it.name() == name }

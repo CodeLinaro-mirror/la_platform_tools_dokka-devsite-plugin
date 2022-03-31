@@ -68,8 +68,8 @@ import kotlin.test.assertFails
 
 @RunWith(Parameterized::class)
 internal class DocTagConverterTest(
-    private val language: Language
-) : ConverterTestBase(language) {
+    private val displayLanguage: Language
+) : ConverterTestBase(displayLanguage) {
     @Test
     fun `Empty description isn't documented`() {
         val description = """
@@ -699,7 +699,7 @@ internal class DocTagConverterTest(
 
     @Test // REGRESSION: go/dokka-upstream-bug/2388
     fun `Full documentation parameters table has types with nullability annotations`() {
-        if (language == Language.KOTLIN) return
+        if (displayLanguage == Language.KOTLIN) return
         val documentationK = """
             |/**
             | * @param T a type
@@ -1314,14 +1314,14 @@ internal class DocTagConverterTest(
         """.render()
         val (holder, pathProvider) = holderAndProvider(module)
         val classConverter1 = ClasslikeDocumentableConverter(
-            language,
+            displayLanguage,
             module.explicitClasslike("DynamicNavGraphBuilder")!!,
             pathProvider,
             holder
         )
         val documentedClass1 = runBlocking { classConverter1.classlike() }
         val classConverter2 = ClasslikeDocumentableConverter(
-            language,
+            displayLanguage,
             module.explicitClasslike("ParcelableArrayType")!!,
             pathProvider,
             holder
@@ -1477,7 +1477,7 @@ internal class DocTagConverterTest(
     private fun DModule.description(doc: DModule.() -> Documentable = ::smartDoc):
         DescriptionComponent {
         val (holder, pathProvider) = holderAndProvider(this)
-        val converter = DocTagConverter(language, pathProvider, holder)
+        val converter = DocTagConverter(displayLanguage, pathProvider, holder)
         val annotations = (this.doc() as? WithExtraProperties<*>)?.annotations().orEmpty()
         return converter.summaryDescription(this.doc(), annotations)
     }
@@ -1487,7 +1487,7 @@ internal class DocTagConverterTest(
         paramNames: List<String> = emptyList()
     ): List<ContextFreeComponent> {
         val (holder, pathProvider) = holderAndProvider(this)
-        val converter = DocTagConverter(language, pathProvider, holder)
+        val converter = DocTagConverter(displayLanguage, pathProvider, holder)
         return converter.metadata(
             doc(),
             returnType = NoopContextFreeComponent,

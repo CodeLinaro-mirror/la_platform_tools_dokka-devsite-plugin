@@ -40,8 +40,8 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class PropertyDocumentableConverterTest(
-    private val language: Language
-) : ConverterTestBase(language) {
+    private val displayLanguage: Language
+) : ConverterTestBase(displayLanguage) {
     @Test
     fun `Property summary component creates return type link`() {
         val summary = """
@@ -292,12 +292,12 @@ internal class PropertyDocumentableConverterTest(
 
     private fun DModule.summary(
         name: String = "foo",
-        hints: ModifierHints = ModifierHints(language)
+        hints: ModifierHints = ModifierHints(displayLanguage)
     ): TwoPaneSummaryItem {
         val (holder, pathProvider) = holderAndProvider(this)
-        val docConverter = DocTagConverter(language, pathProvider, holder)
+        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
         val converter = PropertyDocumentableConverter(
-            language,
+            displayLanguage,
             pathProvider,
             docConverter
         )
@@ -306,12 +306,12 @@ internal class PropertyDocumentableConverterTest(
 
     private fun DModule.detail(
         name: String = "foo",
-        hints: ModifierHints = ModifierHints(language)
+        hints: ModifierHints = ModifierHints(displayLanguage)
     ): SymbolDetail {
         val (holder, pathProvider) = holderAndProvider(this)
-        val docConverter = DocTagConverter(language, pathProvider, holder)
+        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
         val converter = PropertyDocumentableConverter(
-            language,
+            displayLanguage,
             pathProvider,
             docConverter
         )
@@ -320,12 +320,12 @@ internal class PropertyDocumentableConverterTest(
 
     private fun DModule.signature(
         name: String = "foo",
-        hints: ModifierHints = ModifierHints(language)
+        hints: ModifierHints = ModifierHints(displayLanguage)
     ): SymbolSignature {
         val (holder, pathProvider) = holderAndProvider(this)
-        val docConverter = DocTagConverter(language, pathProvider, holder)
+        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
         val converter = PropertyDocumentableConverter(
-            language,
+            displayLanguage,
             pathProvider,
             docConverter
         )

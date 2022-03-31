@@ -38,8 +38,8 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class PackageDocumentableConverterTest(
-    private val language: Language
-) : ConverterTestBase(language) {
+    private val displayLanguage: Language
+) : ConverterTestBase(displayLanguage) {
     @Test
     fun `Package summary creates components with correct page title`() {
         val page = listOf(
@@ -299,7 +299,7 @@ internal class PackageDocumentableConverterTest(
         javaOnly {
             val classes = runBlocking {
                 val holder = DocumentablesHolder(page, this)
-                holder.classesFor(page.packages.last(), language)
+                holder.classesFor(page.packages.last(), displayLanguage)
             }
             // testing first and last here is also asserting the alphabetical sort, after jvmname
             assertThat(classes.last().functions.last().name).isEqualTo("bar")
@@ -318,7 +318,7 @@ internal class PackageDocumentableConverterTest(
         javaOnly {
             val classes = runBlocking {
                 val holder = DocumentablesHolder(page, this)
-                holder.classesFor(page.packages.last(), language)
+                holder.classesFor(page.packages.last(), displayLanguage)
             }
             assertThat(classes.last().name).isEqualTo("PagingRx")
             assertThat(classes.last().dri.classNames).isEqualTo("PagingRx")
@@ -330,7 +330,7 @@ internal class PackageDocumentableConverterTest(
         kotlinOnly {
             val classes = runBlocking {
                 val holder = DocumentablesHolder(page, this)
-                holder.classesFor(page.packages.last(), language)
+                holder.classesFor(page.packages.last(), displayLanguage)
             }
             assertThat(classes).isEmpty()
         }
@@ -383,7 +383,7 @@ internal class PackageDocumentableConverterTest(
         val (holder, pathProvider) = holderAndProvider(this)
         val converter =
             PackageDocumentableConverter(
-                language,
+                displayLanguage,
                 packages.single(),
                 pathProvider,
                 holder

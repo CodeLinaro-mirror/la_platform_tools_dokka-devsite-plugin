@@ -52,7 +52,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 internal abstract class ConverterTestBase(
-    private val language: Language = Language.JAVA
+    private val displayLanguage: Language = Language.JAVA
 ) : BaseAbstractTest() {
     protected fun List<String>.render(): DModule = testWithRootPageNode(this)
 
@@ -104,7 +104,7 @@ internal abstract class ConverterTestBase(
     private fun <E> List<E>.nullIfEmpty() = if (this.isNotEmpty()) this else null
 
     protected fun assertPath(actual: String, expected: String, prefix: String = "") {
-        when (language) {
+        when (displayLanguage) {
             Language.JAVA -> assertThat(actual).isEqualTo("$prefix/reference/$expected")
             Language.KOTLIN -> assertThat(actual).isEqualTo("$prefix/reference/kotlin/$expected")
         }
@@ -115,7 +115,7 @@ internal abstract class ConverterTestBase(
         classGraph: ClassGraph = emptyMap()
     ): FilePathProvider {
         val documentablesGraph = computeDocumentablesGraph(classGraph)
-        return when (language) {
+        return when (displayLanguage) {
             Language.JAVA ->
                 DacJavaFilePathProvider(
                     "androidx", externalLocationProvider, classGraph,
@@ -130,13 +130,13 @@ internal abstract class ConverterTestBase(
     }
 
     protected fun javaOnly(block: () -> Unit) {
-        if (language == Language.JAVA) {
+        if (displayLanguage == Language.JAVA) {
             block()
         }
     }
 
     protected fun kotlinOnly(block: () -> Unit) {
-        if (language == Language.KOTLIN) {
+        if (displayLanguage == Language.KOTLIN) {
             block()
         }
     }

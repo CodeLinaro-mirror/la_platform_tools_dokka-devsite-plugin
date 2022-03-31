@@ -49,8 +49,8 @@ import kotlin.test.assertFails
 
 @RunWith(Parameterized::class)
 internal class FunctionDocumentableConverterTest(
-    private val language: Language
-) : ConverterTestBase(language) {
+    private val displayLanguage: Language
+) : ConverterTestBase(displayLanguage) {
 
     @Test
     fun `Top level function summary component has correct default modifiers`() {
@@ -162,13 +162,14 @@ internal class FunctionDocumentableConverterTest(
             |    fun foo()
             |    fun bar() = "default implementation"
             |}
-        """.render().functionSummaries(ModifierHints(language, isInterface = true))
+        """.render().functionSummaries(ModifierHints(displayLanguage, isInterface = true))
         val summariesJ = """
             |public interface Foo {
             |    public void foo();
             |    public default void bar() {return "default implementation"; }
             |}
-        """.render(java = true).functionSummaries(ModifierHints(language, isInterface = true))
+        """.render(java = true)
+            .functionSummaries(ModifierHints(displayLanguage, isInterface = true))
 
         for (summaries in listOf(summariesK, summariesJ)) {
             val fooReturnz = summaries["foo"]!!.returnSummary()
@@ -678,31 +679,35 @@ internal class FunctionDocumentableConverterTest(
 
     private fun DModule.summary(
         doc: DModule.() -> DFunction = ::smartDoc,
-        hints: ModifierHints = ModifierHints(language)
+        hints: ModifierHints = ModifierHints(displayLanguage)
     ): TwoPaneSummaryItem {
         val (holder, pathProvider) = holderAndProvider(this)
-        val docConverter = DocTagConverter(language, pathProvider, holder)
+        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
         val converter = FunctionDocumentableConverter(
-            language,
+            displayLanguage,
             pathProvider,
             docConverter
         )
         return converter.summary(this.doc(), hints.copy(isSummary = true))
     }
 
-    private fun DModule.summary(funName: String, hints: ModifierHints = ModifierHints(language)) =
-        summary({ this.function(funName)!! }, hints)
+    private fun DModule.summary(
+        funName: String,
+        hints: ModifierHints = ModifierHints(displayLanguage)
+    ) = summary({ this.function(funName)!! }, hints)
 
-    private fun DModule.detail(funName: String, hints: ModifierHints = ModifierHints(language)) =
-        detail({ this.function(funName)!! }, hints)
+    private fun DModule.detail(
+        funName: String,
+        hints: ModifierHints = ModifierHints(displayLanguage)
+    ) = detail({ this.function(funName)!! }, hints)
 
     private fun DModule.functionSummaries(
-        hints: ModifierHints = ModifierHints(language)
+        hints: ModifierHints = ModifierHints(displayLanguage)
     ): Map<String, TwoPaneSummaryItem> {
         val (holder, pathProvider) = holderAndProvider(this)
-        val docConverter = DocTagConverter(language, pathProvider, holder)
+        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
         val converter = FunctionDocumentableConverter(
-            language,
+            displayLanguage,
             pathProvider,
             docConverter
         )
@@ -713,12 +718,12 @@ internal class FunctionDocumentableConverterTest(
 
     private fun DModule.detail(
         doc: DModule.() -> DFunction = ::smartDoc,
-        hints: ModifierHints = ModifierHints(language)
+        hints: ModifierHints = ModifierHints(displayLanguage)
     ): SymbolDetail {
         val (holder, pathProvider) = holderAndProvider(this)
-        val docConverter = DocTagConverter(language, pathProvider, holder)
+        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
         val converter = FunctionDocumentableConverter(
-            language,
+            displayLanguage,
             pathProvider,
             docConverter
         )
@@ -729,9 +734,9 @@ internal class FunctionDocumentableConverterTest(
         doc: DModule.() -> DFunction = ::smartDoc
     ): FunctionSignature {
         val (holder, pathProvider) = holderAndProvider(this)
-        val docConverter = DocTagConverter(language, pathProvider, holder)
+        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
         val converter = FunctionDocumentableConverter(
-            language,
+            displayLanguage,
             pathProvider,
             docConverter
         )
