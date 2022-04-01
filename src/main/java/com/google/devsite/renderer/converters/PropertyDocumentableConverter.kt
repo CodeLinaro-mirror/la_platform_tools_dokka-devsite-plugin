@@ -95,7 +95,8 @@ internal class PropertyDocumentableConverter(
                 ),
                 modifiers = property.modifiers().modifiersFor(hints),
                 returnType = returnType,
-                symbolKind = SymbolDetail.SymbolKind.PROPERTY,
+                symbolKind = SymbolDetail.SymbolKind.PROPERTY.takeIf { property.setter != null }
+                    ?: SymbolDetail.SymbolKind.READ_ONLY_PROPERTY,
                 signature = property.signature(isSummary = false),
                 metadata = javadocConverter.metadata(
                     documentable = property,

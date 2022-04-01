@@ -66,11 +66,12 @@ internal interface FilePathProvider {
     /**
      * @see forReference
      *
+     * @param name is used to override the computed name for @JvmName, generated getters, etc.
      * @param suffix is used in the case of links of a nullable type
      */
-    fun linkForReference(dri: DRI, suffix: String = ""): Link {
+    fun linkForReference(dri: DRI, name: String? = null, suffix: String = ""): Link {
         val ref = forReference(dri)
-        return DefaultLink(Link.Params(ref.name + suffix, ref.url))
+        return DefaultLink(Link.Params((name ?: ref.name) + suffix, ref.url))
     }
 
     /**

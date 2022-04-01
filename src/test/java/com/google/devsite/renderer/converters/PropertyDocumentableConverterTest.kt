@@ -19,7 +19,6 @@ package com.google.devsite.renderer.converters
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.SymbolDetail
-import com.google.devsite.components.symbols.SymbolDetail.SymbolKind.PROPERTY
 import com.google.devsite.components.symbols.SymbolSignature
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeProjectionComponent
@@ -154,7 +153,7 @@ internal class PropertyDocumentableConverterTest(
             |val foo
         """.render().detail()
 
-        assertThat(detail.data.symbolKind).isEqualTo(PROPERTY)
+        assertThat(detail.data.symbolKind).isEqualTo(SymbolDetail.SymbolKind.READ_ONLY_PROPERTY)
     }
 
     @Test
@@ -250,6 +249,45 @@ internal class PropertyDocumentableConverterTest(
                 "href=\"https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html\""
             )
         }
+    }
+
+    /** Note: the desired behavior on `var protected set` is unclear */
+    @Test
+    fun `Val-Var verification`() {
+        val module = """
+            |public class Test {
+            |   public val fullClassVal = 0
+            |   public var fullClassVar = 1
+            |   public var internalSetClassVar: Int = 2
+            |       internal set
+            |   public var protectedSetClassVar: Int = 3
+            |       protected set
+            |}
+            |public val fullTopVal = 0
+            |public var fullTopVar = 1
+            |public var internalSetTopVar: Int = 2
+            |    internal set
+            |
+        """.render()
+        fun kindOf(name: String) = module.detail(name).data.symbolKind
+        val fullClassVal = kindOf("fullClassVal")
+        val fullClassVar = kindOf("fullClassVar")
+        val internalSetClassVar = kindOf("internalSetClassVar")
+        val protectedSetClassVar = kindOf("protectedSetClassVar")
+        val fullTopVal = kindOf("fullTopVal")
+        val fullTopVar = kindOf("fullTopVar")
+        val internalSetTopVar = kindOf("internalSetTopVar")
+
+        val vals = listOf(
+            fullClassVal, internalSetClassVar, protectedSetClassVar,
+            fullTopVal, internalSetTopVar
+        )
+        val vars = listOf(fullClassVar, fullTopVar)
+
+        for (shouldBeAVal in vals)
+            assertThat(shouldBeAVal == SymbolDetail.SymbolKind.READ_ONLY_PROPERTY)
+        for (shouldBeAVar in vars)
+            assertThat(shouldBeAVar == SymbolDetail.SymbolKind.PROPERTY)
     }
 
     private fun DModule.summary(

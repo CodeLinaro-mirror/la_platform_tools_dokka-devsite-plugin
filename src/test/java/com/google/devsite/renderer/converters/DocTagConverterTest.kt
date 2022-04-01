@@ -689,7 +689,7 @@ internal class DocTagConverterTest(
         }
         assertFails {
             """
-            |/** @property a
+            |/** @property a */
             |val b
             |val a
             """.render().documentation() // @property must be on correct property

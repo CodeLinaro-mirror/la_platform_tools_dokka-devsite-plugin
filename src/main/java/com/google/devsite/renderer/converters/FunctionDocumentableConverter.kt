@@ -161,7 +161,8 @@ internal class FunctionDocumentableConverter(
                     when (displayLanguage) {
                         Language.JAVA -> dri.possiblyAsJava()
                         Language.KOTLIN -> dri.possiblyAsKotlin()
-                    }
+                    },
+                    name = this.name
                 ),
                 receiver = when (displayLanguage) {
                     Language.JAVA -> receiver?.let { extFunctionClass() }

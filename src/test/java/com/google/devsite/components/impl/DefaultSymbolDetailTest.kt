@@ -99,7 +99,7 @@ class DefaultSymbolDetailTest {
                 name = "foo",
                 anchors = linkedSetOf(),
                 returnType = NoopTypeProjectionComponent("Unit"),
-                symbolKind = SymbolKind.PROPERTY,
+                symbolKind = SymbolKind.READ_ONLY_PROPERTY,
                 signature = NoopFunctionSignature("foo"),
                 metadata = emptyList()
             )

@@ -71,7 +71,7 @@ internal class EnumValueDocumentableConverter(
                 ),
                 modifiers = enumValue.getExtraModifiers().modifiersFor(hints),
                 returnType = projection,
-                symbolKind = SymbolDetail.SymbolKind.PROPERTY,
+                symbolKind = SymbolDetail.SymbolKind.READ_ONLY_PROPERTY,
                 signature = enumValue.signature(),
                 metadata = javadocConverter.metadata(
                     documentable = enumValue,
