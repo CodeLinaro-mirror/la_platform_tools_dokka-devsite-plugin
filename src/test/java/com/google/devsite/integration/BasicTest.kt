@@ -101,4 +101,9 @@ class BasicTest : IntegrationTestBase() {
     fun `Validate @RestrictTo`() {
         verifyDirectory("restrictTo")
     }
+
+    @Test
+    fun `Validate getters setters and modifiers`() {
+        verifyDirectory("getterSetterModifier")
+    }
 }

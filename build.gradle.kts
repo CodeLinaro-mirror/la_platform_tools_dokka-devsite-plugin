@@ -87,7 +87,7 @@ val testData by sourceSets.creating {
         "testData/sampleAnnotation/source",
         "testData/annotations/source",
         "testData/restrictTo/source",
-
+        "testData/getterSetterModifier/source/",
         "testData/fragment/source",
         "testData/paging/source",
 //            "testData/compose/source", // this project seems to require multiplatform build
