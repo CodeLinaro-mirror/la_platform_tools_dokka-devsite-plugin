@@ -25,6 +25,7 @@ import com.google.devsite.renderer.converters.nameForSyntheticClass
 import com.google.devsite.renderer.converters.packageName
 import com.google.devsite.renderer.converters.setUpAnalysis
 import com.google.devsite.renderer.converters.withJavaSynthetic
+import com.google.devsite.util.JsonLibraryMetadata
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
@@ -66,6 +67,7 @@ internal class DocumentablesHolder(
     context: DokkaContext? = null,
     private val excludedPackages: Set<Regex> = emptySet(),
     val showLibraryMetadata: Boolean = false,
+    val libraryMetadata: List<JsonLibraryMetadata> = emptyList(),
 ) {
     private val packages = scope.async { computePackages(module) }
 

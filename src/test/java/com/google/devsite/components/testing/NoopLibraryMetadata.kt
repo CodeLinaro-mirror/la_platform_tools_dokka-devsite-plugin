@@ -17,11 +17,12 @@
 package com.google.devsite.components.testing
 
 import com.google.devsite.components.symbols.LibraryMetadata
+import com.google.devsite.util.JsonLibraryMetadata
 import kotlinx.html.FlowContent
 import kotlinx.html.div
 
 internal class NoopLibraryMetadata(private val shown: Boolean = true) : LibraryMetadata {
-    override val data: LibraryMetadata.Params
+    override val data: JsonLibraryMetadata
         get() = throw NotImplementedError()
 
     override fun render(into: FlowContent): Unit = into.run {

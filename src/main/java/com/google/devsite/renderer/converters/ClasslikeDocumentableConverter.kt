@@ -40,6 +40,7 @@ import com.google.devsite.components.table.TableTitle
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
+import com.google.devsite.util.JsonLibraryMetadata
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.html.Tag
@@ -63,7 +64,6 @@ import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.WithGenerics
 import org.jetbrains.dokka.model.WithSupertypes
 import org.jetbrains.dokka.model.properties.WithExtraProperties
-import kotlin.RuntimeException
 
 /** Converts documentable class-likes into the classlike component. */
 internal class ClasslikeDocumentableConverter(
@@ -681,17 +681,28 @@ internal class ClasslikeDocumentableConverter(
         )
     }
 
-    private fun getLibraryMetadata(): LibraryMetadata {
-        val params = LibraryMetadata.Params(
+    private fun getLibraryMetadata(): LibraryMetadata? {
+        val jsonLibraryMetadata = findMatchingJsonLibraryMetadata()
 
-            // TODO: replace these with actual values.
-            // These are temporarily set to static values while working on the UI layout
-            groupId = "androidx.sample",
-            artifactId = "library",
-            releaseNotesUrl = "https://developer.android.com/jetpack/androidx/versions",
-        )
+        return if (jsonLibraryMetadata == null) {
+            null
+        } else {
+            DefaultLibraryMetadata(jsonLibraryMetadata, docsHolder.showLibraryMetadata)
+        }
+    }
 
-        return DefaultLibraryMetadata(params, docsHolder.showLibraryMetadata)
+    /**
+     * Parse the library metadata list to find a [JsonLibraryMetadata] that matches the current
+     * library being processed.  Otherwise, return null.
+     */
+    private fun findMatchingJsonLibraryMetadata(): JsonLibraryMetadata? {
+        return if (docsHolder.libraryMetadata.isEmpty()) {
+            null
+        } else {
+            // Currently returns static data
+            // TODO (b/228229238) - add logic to find matching data
+            docsHolder.libraryMetadata.first()
+        }
     }
 
     /** Converts the classlikes to link components for use in the related symbols component. */

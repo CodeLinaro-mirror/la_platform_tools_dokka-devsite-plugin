@@ -36,6 +36,7 @@ application {
     mainClass.set("org.jetbrains.dokka.MainKt")
 }
 val dokkaVersion = "1.6.20-dev-154"
+val jacksonVersion = "2.13.1"
 
 dependencies {
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0")
@@ -46,7 +47,8 @@ dependencies {
     implementation("org.jetbrains.dokka:dokka-base:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-cli:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-core:$dokkaVersion")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.1")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jacksonVersion")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.6.0")
     testImplementation("junit:junit:4.13.2")

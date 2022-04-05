@@ -35,7 +35,7 @@ internal interface Classlike : ContextFreeComponent {
         val description: List<ContextFreeComponent>,
         val symbolTypes: List<Pair<SummaryList, TitledList>>,
         val inheritedTypes: List<InheritedSymbolsList>,
-        val libraryMetadata: LibraryMetadata
+        val libraryMetadata: LibraryMetadata?
     )
 
     data class TitledList(val title: String, val symbols: List<ContextFreeComponent>)

@@ -18,12 +18,13 @@ package com.google.devsite.components.impl
 
 import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.LibraryMetadata
+import com.google.devsite.util.JsonLibraryMetadata
 import kotlinx.html.FlowContent
 import kotlinx.html.div
 
 /** Default implementation of a LibraryMetadata. */
 internal class DefaultLibraryMetadata(
-    override val data: LibraryMetadata.Params,
+    override val data: JsonLibraryMetadata,
     private val shown: Boolean = false
 ) : LibraryMetadata {
 

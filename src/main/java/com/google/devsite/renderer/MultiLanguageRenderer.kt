@@ -26,6 +26,7 @@ import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
 import com.google.devsite.renderer.impl.paths.DacVersionedDocsFilePathProvider
 import com.google.devsite.renderer.impl.paths.DefaultExternalDokkaLocationProvider
 import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
+import com.google.devsite.util.JsonLibraryMetadata
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -79,9 +80,26 @@ internal class MultiLanguageRenderer(
                 )
     }
 
-    // Boolean to determine if library metadata (such as artifact ID) should be shown.
+    /**
+     * Boolean to determine if library metadata (such as artifact ID) should be shown.
+     *
+     * This value does not do anything if "LIBRARY_METADATA_FILE" is not specified (see
+     * [libraryMetadataFilename])
+     */
     private val showLibraryMetadata: Boolean by lazy {
         System.getenv("SHOW_LIBRARY_METADATA") == "true"
+    }
+
+    /**
+     * The location of the JSON file containing the library metadata.
+     *
+     * Returns an empty string if "SHOW_LIBRARY_METADATA" system variable isn't defined.
+     *
+     * This value does not do anything if "SHOW_LIBRARY_METADATA" is not true (see
+     * [showLibraryMetadata])
+     */
+    private val libraryMetadataFilename: String by lazy {
+        System.getenv("LIBRARY_METADATA_FILE") ?: ""
     }
 
     override fun render(root: RootPageNode) {
@@ -91,12 +109,16 @@ internal class MultiLanguageRenderer(
         )
 
         runBlocking(Dispatchers.Default) {
+            val jsonLibraryMetadataArray = JsonLibraryMetadata.getMetadataFromFile(
+                libraryMetadataFilename
+            )
             val jHolder = DocumentablesHolder(
                 module = module,
                 scope = this,
                 context = context,
                 excludedPackages = excludedPackagesForJava,
                 showLibraryMetadata = showLibraryMetadata,
+                libraryMetadata = jsonLibraryMetadataArray,
             )
             val jClassGraph = jHolder.classGraph()
             val jDocumentablesGraph = jHolder.documentablesGraph()
@@ -106,6 +128,7 @@ internal class MultiLanguageRenderer(
                 context = context,
                 excludedPackages = excludedPackagesForKotlin,
                 showLibraryMetadata = showLibraryMetadata,
+                libraryMetadata = jsonLibraryMetadataArray,
             )
             val kClassGraph = kHolder.classGraph()
             val kDocumentablesGraph = kHolder.documentablesGraph()
