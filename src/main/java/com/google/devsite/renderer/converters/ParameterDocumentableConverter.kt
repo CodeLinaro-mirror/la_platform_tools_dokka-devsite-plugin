@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.capitalize
 import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultLambdaTypeProjectionComponent
 import com.google.devsite.components.impl.DefaultLink
@@ -475,16 +476,7 @@ internal class ParameterDocumentableConverter(
         is PrimitiveJavaType -> when (displayLanguage) {
             Language.JAVA -> DefaultLink(Link.Params(name = name, url = ""))
             Language.KOTLIN -> pathProvider.linkForReference(
-                DRI(
-                    "kotlin",
-                    name.replaceFirstChar {
-                        if (it.isLowerCase()) {
-                            it.titlecase(Locale.getDefault())
-                        } else {
-                            it.toString()
-                        }
-                    }
-                )
+                DRI("kotlin", name.capitalize())
             )
         }
         is UnresolvedBound -> DefaultLink(Link.Params(name = name, url = ""))

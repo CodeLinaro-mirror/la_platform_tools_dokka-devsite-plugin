@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.capitalize
 import com.google.devsite.components.impl.DefaultPropertySignature
 import com.google.devsite.components.impl.DefaultSymbolDetail
 import com.google.devsite.components.impl.DefaultSymbolSummary
@@ -30,7 +31,6 @@ import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.DProperty
-import java.util.Locale
 
 /** Converts documentable properties into property components. */
 internal class PropertyDocumentableConverter(
@@ -129,13 +129,9 @@ internal class PropertyDocumentableConverter(
     /** Returns anchors for this property, including for synthetic getters and setters. */
     private fun DProperty.generateAnchors(): LinkedHashSet<String> {
         val callable = dri.callable!!
-        val callableCapitalizedName = callable.name.replaceFirstChar {
-            if (it.isLowerCase()) it.titlecase(
-                Locale.getDefault()
-            ) else it.toString()
-        }
-        val getterCallable = callable.copy(name = "get$callableCapitalizedName")
-        val setterCallable = callable.copy(name = "set$callableCapitalizedName")
+
+        val getterCallable = callable.copy(name = "get${callable.name.capitalize()}")
+        val setterCallable = callable.copy(name = "set${callable.name.capitalize()}")
 
         return linkedSetOf(
             // TODO(b/168136770): figure out path for default anchors

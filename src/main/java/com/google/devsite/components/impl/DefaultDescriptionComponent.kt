@@ -167,6 +167,7 @@ internal class DefaultDescriptionComponent(
         }
     }
 
+    // TODO: make this work for non-english docstrings
     private val periodSpaceCapital = """\.\s+[A-Z]""".toRegex()
     private val periodSpaceNonLowercase = """\.\s+[0-9A-Z{<`@\"(\\\[]""".toRegex()
     private val doesntEnd = listOf("e.g.", "i.e.", "viz.")
@@ -181,6 +182,8 @@ internal class DefaultDescriptionComponent(
      * 3. Ends in a period, and the next tag starts with an ambiguous character (neither upper nor
      *    lower case), AND this tag *does not* end in a known-non-sentence-ending-period-structure,
      *    e.g. "e.g." or "i.e.".
+     *
+     *    WARNING: only works for english
      */
     private fun Text.breaksAtEndOfTag(tags: List<DocTag>): Boolean {
         if (!this.body.trim().endsWith(".")) return false

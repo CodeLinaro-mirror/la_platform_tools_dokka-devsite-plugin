@@ -16,11 +16,14 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.not
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.Memoizers.isFromJavaMap
+import com.google.devsite.startsWithAnyOf
 import org.jetbrains.dokka.base.transformers.documentables.isException
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.PointingToDeclaration
+import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.BooleanConstant
 import org.jetbrains.dokka.model.ComplexExpression
 import org.jetbrains.dokka.model.DAnnotation
@@ -113,11 +116,8 @@ internal fun Documentable.isFromJava() = isFromJavaMap.getOrPut(this) {
     }
 }
 
-private fun DRI.isExternal() = packageName != null &&
-    (
-        packageName!!.startsWith("java") || packageName!!.startsWith("Kotlin") ||
-            ("google" !in packageName!! && "android" !in packageName!!)
-        )
+private val INTERNAL_PACKAGES = listOf("java", "Kotlin", "google", "android")
+internal fun DRI.isExternal() = !packageName?.startsWithAnyOf(INTERNAL_PACKAGES) ?: true
 
 internal fun Documentable.getPossibleSourceFiles(): List<File> {
     val codeFiles = if (this is WithSources) {
@@ -172,8 +172,8 @@ val DClass.isExceptionClass: Boolean
     get() = isException || functions.any { function -> function.dri.classNames == "Throwable" }
 
 /**
- * Assumes the class this is being called on is Java.
  * Returns whether the java class was synthetically generated from a Kotlin extension function class
+ * Assumes the class this is being called on is Java.
  */
 val DClasslike.isSynthetic: Boolean
     get() = name().endsWith("Kt") || (this as? WithExtraProperties<*>)?.jvmFileName() != null
@@ -242,6 +242,7 @@ fun WithExtraProperties<*>.jvmName(): String? {
 fun WithExtraProperties<*>.jvmFileName(): String? {
     return fileLevelAnnotations().firstOrNull { it.isJvmName() }?.nameAsString()
 }
+
 /**
  * Returns the value of the file:@JvmName if one exists or null
  */
@@ -327,4 +328,15 @@ fun DClasslike.gettersAndSetters(): List<DFunction> {
         val callableName = it.dri.callable?.name ?: ""
         callableName.startsWith("<get-") || callableName.startsWith("<set-")
     }
+}
+
+private fun DRI.isAtJvmField(): Boolean = packageName == "kotlin.jvm" && classNames == "JvmField"
+
+private fun Annotations.Annotation.isAtJvmField(): Boolean = dri.isAtJvmField()
+
+/**
+ * Returns whether property is annotated as @JvmField
+ */
+fun WithExtraProperties<*>.isJvmField(): Boolean {
+    return annotations().any { it.isAtJvmField() }
 }

@@ -675,8 +675,7 @@ internal class DocTagConverter(
     internal fun summaryForDocumentable(
         documentable: Documentable,
         showAnnotations: Boolean = false
-    ):
-        DefaultTwoPaneSummaryItem {
+    ): DefaultTwoPaneSummaryItem {
         val annotations = (documentable as? WithExtraProperties<*>)?.annotations().orEmpty()
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(

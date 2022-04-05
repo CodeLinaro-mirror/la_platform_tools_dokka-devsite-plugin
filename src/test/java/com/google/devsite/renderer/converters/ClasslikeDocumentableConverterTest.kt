@@ -17,6 +17,7 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.capitalize
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Raw
 import com.google.devsite.components.impl.DefaultSymbolDetail
@@ -1336,6 +1337,9 @@ internal class ClasslikeDocumentableConverterTest(
     ) = runCatching {
         symbolsFor(*types).first.data.items
     }.getOrNull() ?: emptyList()
+
+    private fun String.possiblyAsGetter() = if (displayLanguage == Language.KOTLIN) this
+    else "get" + this.capitalize()
 
     private fun Classlike.methodSymbols(): Pair<SummaryList, Classlike.TitledList> =
         symbolsFor(if (displayLanguage == Language.KOTLIN) "Public functions" else "Public methods")
