@@ -20,7 +20,6 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.capitalize
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Raw
-import com.google.devsite.components.impl.DefaultSymbolDetail
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.FunctionSignature
@@ -1199,10 +1198,10 @@ internal class ClasslikeDocumentableConverterTest(
             if (displayLanguage == Language.KOTLIN) "Protected functions" else "Protected methods"
         )
         val publicMethodNames = publicMethodSymbols.second.symbols.map {
-            (it as DefaultSymbolDetail).data.name
+            (it as SymbolDetail).data.name
         }
         val protectedMethodNames = protectedMethodSymbols.second.symbols.map {
-            (it as DefaultSymbolDetail).data.name
+            (it as SymbolDetail).data.name
         }
 
         kotlinOnly {
@@ -1237,7 +1236,7 @@ internal class ClasslikeDocumentableConverterTest(
         val classlike = page.content<Classlike>()
         val publicMethodSymbols = classlike.methodSymbols()
         val publicMethodNames = publicMethodSymbols.second.symbols.map {
-            (it as DefaultSymbolDetail).data.name
+            (it as SymbolDetail).data.name
         }
 
         kotlinOnly {
@@ -1260,7 +1259,7 @@ internal class ClasslikeDocumentableConverterTest(
 
         val classlike = page.content<Classlike>()
         val methodSymbols = classlike.methodSymbols()
-        val methodNames = methodSymbols.second.symbols.map { (it as DefaultSymbolDetail).data.name }
+        val methodNames = methodSymbols.second.symbols.map { (it as SymbolDetail).data.name }
 
         assertThat(methodNames).isEmpty()
     }
@@ -1275,7 +1274,7 @@ internal class ClasslikeDocumentableConverterTest(
             val classlike = emptyTestClass.render(java = isJava).page("Foo").content<Classlike>()
             val constructorList = classlike.symbolsFor("Public constructors").second.symbols
             assertThat(constructorList.size).isEqualTo(1)
-            assertThat((constructorList.single() as DefaultSymbolDetail).data.name).isEqualTo("Foo")
+            assertThat((constructorList.single() as SymbolDetail).data.name).isEqualTo("Foo")
         }
     }
 

@@ -21,7 +21,6 @@ import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
 import com.google.devsite.components.Raw
-import com.google.devsite.components.impl.DefaultDescriptionComponent
 import com.google.devsite.components.impl.UndocumentedSymbolDescriptionComponent
 import com.google.devsite.components.symbols.LambdaTypeProjectionComponent
 import com.google.devsite.components.symbols.ParameterComponent
@@ -76,8 +75,7 @@ internal class DocTagConverterTest(
             |class Foo
         """.render().description()
 
-        assertThat(description.javaClass)
-            .isAssignableTo(UndocumentedSymbolDescriptionComponent::class.java)
+        assertThat(description).isInstanceOf(UndocumentedSymbolDescriptionComponent::class.java)
     }
 
     @Test
@@ -972,7 +970,7 @@ internal class DocTagConverterTest(
             |public void foo(){}
         """.render(java = true)
         val doc = documentation.documentation()
-        val functionDesc = doc.first() as DefaultDescriptionComponent
+        val functionDesc = doc.first() as DescriptionComponent
         assertThat(functionDesc.data.deprecation).isNotNull()
         // Checking the root for LastLine is somewhat testing Dokka
         // but this was broken in a previous version
@@ -994,7 +992,7 @@ internal class DocTagConverterTest(
             |public void foo(){}
         """.render(java = true)
         val doc = documentation.documentation()
-        val functionDesc = doc.first() as DefaultDescriptionComponent
+        val functionDesc = doc.first() as DescriptionComponent
         assertThat(functionDesc.text()).isEqualTo(
             "Below is a sample of a simple database." +
                 "  // File: Song.java\n @ Entity\npublic class Song {"
