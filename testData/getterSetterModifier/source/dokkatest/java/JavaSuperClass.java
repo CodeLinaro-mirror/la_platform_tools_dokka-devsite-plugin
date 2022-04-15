@@ -25,13 +25,13 @@ public class JavaSuperClass {
      * My java super class getter docs
      */
     public int getJavaSuperBackingField() {
-        return x;
+        return javaSuperBackingField;
     }
     /**
      * My java super class setter docs
      */
-    public void setJavaSuperBackingField(int x) {
-        this.x = x;
+    public void setJavaSuperBackingField(int newValue) {
+        this.javaSuperBackingField = newValue;
     }
     /**
      * My java super class public field

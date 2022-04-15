@@ -33,10 +33,12 @@ import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeParameterComponent
 import com.google.devsite.components.symbols.TypeProjectionComponent
+import com.google.devsite.components.table.InheritedSymbolsList
 import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
 import com.google.devsite.components.table.TwoPaneSummaryItem
+import com.google.devsite.joinMaybePrefix
 import org.jetbrains.dokka.model.doc.DocTag
 import org.jetbrains.dokka.model.doc.Text
 
@@ -97,14 +99,13 @@ internal fun TypeProjectionComponent.alternativeLink(): Link.Params? =
 
 internal fun TypeProjectionComponent.name() = link().name
 internal fun ParameterComponent.typeName() = data.type.name()
-internal fun ParameterComponent.fullTypeName() = typeName() + generics().asString()
+internal fun ParameterComponent.fullTypeName() =
+    typeName() + generics().joinMaybePrefix(prefix = "<", postfix = ">") { it.name() }
 internal fun ParameterComponent.typeAnnotations() = data.type.data.annotationComponents
 
 internal fun AnnotationComponent.link(): Link.Params = data.type.data
 internal val AnnotationComponent.isAtNullable get() = this.link().name == "Nullable"
 internal val AnnotationComponent.isAtNonNull get() = this.link().name == "NonNull"
-
 internal fun List<AnnotationComponent>.exceptNonNull() = this.filter { it.link().name != "NonNull" }
 
-private fun List<TypeProjectionComponent>.asString() =
-    if (isEmpty()) "" else map { it.name() }.joinToString(prefix = "<", postfix = ">")
+internal fun InheritedSymbolsList.title() = (data.header as TableTitle).data.title

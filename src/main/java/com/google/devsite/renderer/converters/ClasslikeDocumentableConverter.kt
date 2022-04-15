@@ -56,6 +56,7 @@ import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.GenericTypeConstructor
+import org.jetbrains.dokka.model.InheritedMember
 import org.jetbrains.dokka.model.KotlinModifier
 import org.jetbrains.dokka.model.WithAbstraction
 import org.jetbrains.dokka.model.WithConstructors
@@ -626,16 +627,17 @@ internal class ClasslikeDocumentableConverter(
         return listOfNotNull(functionsSummary, constsSummary, propertiesSummary)
     }
 
-    private fun <T : Documentable> List<T>.createInheritedCategory(
+    private fun <T> List<T>.createInheritedCategory(
         title: String,
         summaryGen: (List<T>) -> SummaryList
-    ): InheritedSymbolsList {
+    ): InheritedSymbolsList where T : Documentable, T : WithExtraProperties<T> {
         fun createInheritedSymbolsList(parent: DRI, symbolList: List<T>): Pair<Link, SummaryList> {
             val link = pathProvider.linkForReference(parent)
             val summary = summaryGen(symbolList)
             return link to summary
         }
 
+        // val category = groupBy { it.driInheritedFrom() ?: it.dri.parent }
         val category = groupBy { it.dri.parent }
             .toSortedMap(compareBy { it.classNames })
             .entries.associate { (k, v) -> createInheritedSymbolsList(k, v) }
@@ -649,6 +651,17 @@ internal class ClasslikeDocumentableConverter(
             )
         )
     }
+
+    /**
+     * WARNING: does not work properly
+     * The dri from which this documentable is inherited, or null.
+     *
+     * `extra[InheritedMember].inheritedFrom` does not actually contain where inherited members are
+     * inherited from
+     */
+    private fun <T> T.driInheritedFrom(): DRI?
+        where T : Documentable, T : WithExtraProperties<T> =
+        extra[InheritedMember]?.inheritedFrom?.values?.toSet()?.singleOrNull()
 
     /** Finds the direct and indirect subclasses for this classlike, returning their component. */
     // We know our subclasses will always be DClasslikes
