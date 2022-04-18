@@ -19,6 +19,11 @@ package dokkatest.kotlin
 import dokkatest.java.JavaSuperClass
 
 class KotlinExtendingJava : JavaSuperClass() {
+
+    init {
+        javaSuperBackingField += 1
+    }
+
     /**
      * My kotlin leaf class public property
      */

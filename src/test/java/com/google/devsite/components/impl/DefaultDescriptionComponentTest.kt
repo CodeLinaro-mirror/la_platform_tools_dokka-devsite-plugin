@@ -1043,10 +1043,10 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
         assertThat(outputJ).isEqualTo(
             """
 <body>
-  <p>a <code><a href="/reference/[JVM root]/Test.Foo.html">Foo</a></code></p>
+  <p>a <code><a href="/reference/androidx/example/Test.Foo.html">Foo</a></code></p>
   <pre class="prettyprint">public void onCreate() {
     if (DEVELOPER_MODE) {
-        StrictMode.setThreadPolicy(new <code><a href="/reference/[JVM root]/Test.Foo.html">pFooey</a></code>()
+        StrictMode.setThreadPolicy(new <code><a href="/reference/androidx/example/Test.Foo.html">pFooey</a></code>()
                 .detectDiskReads()
 </pre>
 </body>

@@ -18,6 +18,7 @@ package com.google.devsite.testing
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.DevsitePlugin
+import com.google.devsite.joinMaybePrefix
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.isFromBaseClass
 import com.google.devsite.renderer.impl.ClassGraph
@@ -62,7 +63,7 @@ internal abstract class ConverterTestBase(
     ): DModule = if (java) {
         testJavaWithRootPageNode(trimMargin())
     } else {
-        testWithRootPageNode(trimMargin(), fileUseAnnotation)
+        testKotlinWithRootPageNode(trimMargin(), fileUseAnnotation)
     }
 
     protected fun DModule.classlike() = packages.single().classlikes
@@ -83,12 +84,12 @@ internal abstract class ConverterTestBase(
 
     protected fun DModule.constructor() = constructors().single()
 
-    protected fun DModule.constructors() = (classlike() as? DClass)?.constructors?.nullIfEmpty()
+    protected fun DModule.constructors() = (classlike() as? DClass)?.constructors?.ifEmpty { null }
         ?: (classlike()?.classlikes?.single() as DClass).constructors
 
     protected fun DModule.functions() =
-        packages.single().functions.nullIfEmpty()
-            ?: classlike()?.functions?.nullIfEmpty()
+        packages.single().functions.ifEmpty { null }
+            ?: classlike()?.functions?.ifEmpty { null }
             ?: classlike()?.classlikes?.single()?.functions // Go down another layer for java
 
     protected fun DModule.property(name: String? = null) =
@@ -98,10 +99,21 @@ internal abstract class ConverterTestBase(
             ?: classlike()?.properties?.singleOrNull()
 
     protected fun DModule.properties() =
-        packages.single().properties.nullIfEmpty()
+        packages.single().properties.ifEmpty { null }
             ?: classlike()?.properties
 
-    private fun <E> List<E>.nullIfEmpty() = if (this.isNotEmpty()) this else null
+    protected fun inheritedPropertiesTitle() = "Inherited ${propertiesTitle()}"
+    protected fun protectedPropertiesTitle() = "Protected ${propertiesTitle()}"
+    private fun propertiesTitle(): String = when (displayLanguage) {
+        Language.JAVA -> "fields"
+        Language.KOTLIN -> "properties"
+    }
+    protected fun inheritedMethodsTitle() = "Inherited ${methodsTitle()}"
+    protected fun protectedMethodsTitle() = "Protected ${methodsTitle()}"
+    private fun methodsTitle(): String = when (displayLanguage) {
+        Language.JAVA -> "methods"
+        Language.KOTLIN -> "functions"
+    }
 
     protected fun assertPath(actual: String, expected: String, prefix: String = "") {
         when (displayLanguage) {
@@ -206,20 +218,27 @@ internal abstract class ConverterTestBase(
         }
     }
 
-    private fun testWithRootPageNode(sourceCode: String, fileUseAnnotation: String): DModule {
-        val source = """
-            |/src/main/kotlin/androidx/example/Test.kt
-            |$fileUseAnnotation
-            |package androidx.example
-            |
-            |$sourceCode
-        """.trimMargin()
-        return testWithRootPageNode(listOf(source))
+    protected fun String.renderWithoutLanguageHeader() = testWithRootPageNode(listOf(trimMargin()))
+
+    protected fun kotlinHeader(name: String = "Test", fileAnnotations: List<String> = emptyList()) =
+        (
+            "|/src/main/kotlin/androidx/example/$name.kt\n" +
+                fileAnnotations.joinMaybePrefix(postfix = "\n", separator = "\n") +
+                "|package androidx.example"
+            ).trimIndent() + "\n"
+
+    private fun testKotlinWithRootPageNode(sourceCode: String, fileUseAnnotation: String): DModule {
+        val header = kotlinHeader(fileAnnotations = listOf(fileUseAnnotation))
+        return testWithRootPageNode(listOf(header + "|" + sourceCode.trimIndent()))
     }
 
-    private fun testJavaWithRootPageNode(sourceCode: String): DModule {
-        val source = """
-            |/src/main/java/androidx/example/Test.java
+    protected fun javaHeader(name: String = "Test") = """
+        |/src/main/java/androidx/example/$name.java
+        |package androidx.example;
+    """.trimIndent() + "\n"
+
+    /** Java does not support file-level annotations */
+    protected fun javaFullHeader(name: String = "Test") = javaHeader(name) + """
             |import java.lang.annotation.Target;
             |import static java.lang.annotation.ElementType.*;
             |package androidx.example;
@@ -230,9 +249,10 @@ internal abstract class ConverterTestBase(
             |public @interface NonNull {
             |}
             |public class Test {
-            |$sourceCode
-            |}
-        """.trimMargin()
+    """.trimIndent()
+
+    private fun testJavaWithRootPageNode(sourceCode: String): DModule {
+        val source = javaFullHeader() + "|" + sourceCode.trimIndent()
         return testWithRootPageNode(listOf(source))
     }
 

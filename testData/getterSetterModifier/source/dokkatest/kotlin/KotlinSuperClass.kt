@@ -18,7 +18,7 @@ package dokkatest.kotlin
 
 import kotlin.jvm.JvmField
 
-open class KotlinSuperClass {
+public open class KotlinSuperClass {
     /**
      * My kotlin super class public property
      */

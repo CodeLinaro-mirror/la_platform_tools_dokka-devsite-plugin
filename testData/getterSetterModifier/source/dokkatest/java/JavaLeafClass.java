@@ -18,7 +18,7 @@ package dokkatest.java;
 
 import dokkatest.kotlin.KotlinSuperClass;
 
-public class JavaExtendingKotlin extends KotlinSuperClass {
+public class JavaLeafClass extends KotlinSuperClass {
     /**
      * My java leaf class private backing field
      */
@@ -27,14 +27,12 @@ public class JavaExtendingKotlin extends KotlinSuperClass {
      * My java leaf class getter docs
      */
     public int getJavaLeafBackingField() {
-        return x;
+        return javaLeafBackingField;
     }
     /**
      * My java leaf class setter docs
      */
-    public void setJavaLeafBackingField(int x) {
-        this.x = x;
-    }
+    public void setJavaLeafBackingField(int x) { this.javaLeafBackingField = javaLeafBackingField; }
     /**
      * My java leaf class public field
      */
