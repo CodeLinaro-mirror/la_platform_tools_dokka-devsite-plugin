@@ -23,7 +23,7 @@ import org.junit.rules.TemporaryFolder
 import java.io.FileNotFoundException
 import java.io.IOException
 
-class JsonLibraryMetadataTest {
+class LibraryMetadataTest {
 
     @JvmField
     @Rule
@@ -31,14 +31,14 @@ class JsonLibraryMetadataTest {
 
     @Test
     fun `getMetadataFromFile with empty string filename`() {
-        val actual = JsonLibraryMetadata.getMetadataFromFile("")
-        val expected = emptyList<JsonLibraryMetadata>()
+        val actual = LibraryMetadata.getMetadataFromFile("")
+        val expected = emptyList<LibraryMetadata>()
         assertThat(actual).isEqualTo(expected)
     }
 
     @Test(expected = FileNotFoundException::class)
     fun `getMetadataFromFile with missing file`() {
-        JsonLibraryMetadata.getMetadataFromFile("NotAnActualFile.json")
+        LibraryMetadata.getMetadataFromFile("NotAnActualFile.json")
     }
 
     @Test(expected = IOException::class)
@@ -56,7 +56,7 @@ class JsonLibraryMetadataTest {
 
         val file = folder.newFile("Unparseable.json")
         file.writeText(json)
-        JsonLibraryMetadata.getMetadataFromFile(file.toString())
+        LibraryMetadata.getMetadataFromFile(file.toString())
     }
 
     @Test
@@ -81,7 +81,7 @@ class JsonLibraryMetadataTest {
         val file = folder.newFile("LibraryMetadata.json")
         file.writeText(json)
 
-        val metadata = JsonLibraryMetadata.getMetadataFromFile(file.toString())
+        val metadata = LibraryMetadata.getMetadataFromFile(file.toString())
         assertThat(metadata.size).isEqualTo(2)
 
         val libraryMetadata = metadata[0]

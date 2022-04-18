@@ -23,14 +23,14 @@ import com.google.devsite.components.impl.DefaultClassSignature
 import com.google.devsite.components.impl.DefaultClasslike
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultInheritedSymbols
-import com.google.devsite.components.impl.DefaultLibraryMetadata
+import com.google.devsite.components.impl.DefaultLibraryMetadataComponent
 import com.google.devsite.components.impl.DefaultRelatedSymbols
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableTitle
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.ClassSignature
-import com.google.devsite.components.symbols.LibraryMetadata
+import com.google.devsite.components.symbols.LibraryMetadataComponent
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.table.ClassHierarchy
 import com.google.devsite.components.table.InheritedSymbolsList
@@ -40,7 +40,7 @@ import com.google.devsite.components.table.TableTitle
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
-import com.google.devsite.util.JsonLibraryMetadata
+import com.google.devsite.util.LibraryMetadata
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.html.Tag
@@ -206,7 +206,7 @@ internal class ClasslikeDocumentableConverter(
         val hierarchy = async { computeHierarchy() }
         val relatedSymbols = async { findRelatedSymbols() }
         val inheritedTypes = async { computeInheritedSymbols(inheritedAll) }
-        val libraryMetadata = async { getLibraryMetadata() }
+        val libraryMetadataComponent = async { getLibraryMetadata() }
 
         val allSymbols = mutableListOf(
             nestedTypesSummary.await() to Classlike.TitledList(nestedTypesTitle(), emptyList()),
@@ -338,7 +338,7 @@ internal class ClasslikeDocumentableConverter(
                         ),
                         symbolTypes = allSymbols,
                         inheritedTypes = inheritedTypes.await(),
-                        libraryMetadata = libraryMetadata.await()
+                        libraryMetadataComponent = libraryMetadataComponent.await()
                     )
                 )
             )
@@ -681,21 +681,21 @@ internal class ClasslikeDocumentableConverter(
         )
     }
 
-    private fun getLibraryMetadata(): LibraryMetadata? {
+    private fun getLibraryMetadata(): LibraryMetadataComponent? {
         val jsonLibraryMetadata = findMatchingJsonLibraryMetadata()
 
         return if (jsonLibraryMetadata == null) {
             null
         } else {
-            DefaultLibraryMetadata(jsonLibraryMetadata, docsHolder.showLibraryMetadata)
+            DefaultLibraryMetadataComponent(jsonLibraryMetadata, docsHolder.showLibraryMetadata)
         }
     }
 
     /**
-     * Parse the library metadata list to find a [JsonLibraryMetadata] that matches the current
+     * Parse the library metadata list to find a [LibraryMetadata] that matches the current
      * library being processed.  Otherwise, return null.
      */
-    private fun findMatchingJsonLibraryMetadata(): JsonLibraryMetadata? {
+    private fun findMatchingJsonLibraryMetadata(): LibraryMetadata? {
         return if (docsHolder.libraryMetadata.isEmpty()) {
             null
         } else {

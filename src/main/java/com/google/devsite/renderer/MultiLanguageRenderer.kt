@@ -26,7 +26,7 @@ import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
 import com.google.devsite.renderer.impl.paths.DacVersionedDocsFilePathProvider
 import com.google.devsite.renderer.impl.paths.DefaultExternalDokkaLocationProvider
 import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
-import com.google.devsite.util.JsonLibraryMetadata
+import com.google.devsite.util.LibraryMetadata
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -109,7 +109,7 @@ internal class MultiLanguageRenderer(
         )
 
         runBlocking(Dispatchers.Default) {
-            val jsonLibraryMetadataArray = JsonLibraryMetadata.getMetadataFromFile(
+            val libraryMetadataArray = LibraryMetadata.getMetadataFromFile(
                 libraryMetadataFilename
             )
             val jHolder = DocumentablesHolder(
@@ -118,7 +118,7 @@ internal class MultiLanguageRenderer(
                 context = context,
                 excludedPackages = excludedPackagesForJava,
                 showLibraryMetadata = showLibraryMetadata,
-                libraryMetadata = jsonLibraryMetadataArray,
+                libraryMetadata = libraryMetadataArray,
             )
             val jClassGraph = jHolder.classGraph()
             val jDocumentablesGraph = jHolder.documentablesGraph()
@@ -128,7 +128,7 @@ internal class MultiLanguageRenderer(
                 context = context,
                 excludedPackages = excludedPackagesForKotlin,
                 showLibraryMetadata = showLibraryMetadata,
-                libraryMetadata = jsonLibraryMetadataArray,
+                libraryMetadata = libraryMetadataArray,
             )
             val kClassGraph = kHolder.classGraph()
             val kDocumentablesGraph = kHolder.documentablesGraph()

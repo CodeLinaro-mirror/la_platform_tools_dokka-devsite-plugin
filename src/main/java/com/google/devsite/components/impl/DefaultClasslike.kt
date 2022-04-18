@@ -31,7 +31,7 @@ internal class DefaultClasslike(
         p {
             data.signature.render(this)
         }
-        data.libraryMetadata?.render(this)
+        data.libraryMetadataComponent?.render(this)
         data.hierarchy.render(this)
         data.relatedSymbols.render(this)
         data.description.render(into, separator = null, header = { hr() })

@@ -27,13 +27,10 @@ import java.io.IOException
 /**
  * Data class to store the metadata passed in from LIBRARY_METADATA_FILE.
  *
- * These fields should roughly match the fields in
- * [com.google.devsite.components.symbols.LibraryMetadata.Params].
- *
  * Each field has a defined [JsonProperty] to prevent bugs in case a field is renamed (which could
  * result in the Json parser not finding the new field name).
  */
-data class JsonLibraryMetadata(
+data class LibraryMetadata(
 
     @JsonProperty("library")
     var library: String,
@@ -49,14 +46,14 @@ data class JsonLibraryMetadata(
 ) {
 
     /**
-     * Read and parse contents of the given JSON filename to a list of [JsonLibraryMetadata].
+     * Read and parse contents of the given JSON filename to a list of [LibraryMetadata].
      *
      * Returns an empty list if the filename is an empty string.
      *
      * Throws an exception if the file can't be read or if the JSON can't be parsed.
      */
     companion object {
-        fun getMetadataFromFile(filename: String): List<JsonLibraryMetadata> {
+        fun getMetadataFromFile(filename: String): List<LibraryMetadata> {
             if (filename.isEmpty()) {
                 return emptyList()
             }
@@ -67,9 +64,9 @@ data class JsonLibraryMetadata(
             } catch (e: FileNotFoundException) {
                 throw FileNotFoundException("Could not find library metadata file: $filename")
             } catch (e: JacksonException) {
-                throw IOException("Error parsing library metadata JSON file", e)
+                throw IOException("Error parsing JSON in library metadata file $filename", e)
             } catch (e: Exception) {
-                throw Exception("Undefined error when processing library metadata", e)
+                throw Exception("Undefined error processing library metadata file $filename", e)
             }
         }
     }

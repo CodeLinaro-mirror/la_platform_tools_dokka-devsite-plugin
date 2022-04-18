@@ -23,7 +23,7 @@ import com.google.devsite.components.testing.NoopClassHierarchy
 import com.google.devsite.components.testing.NoopClassSignature
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.components.testing.NoopDescriptionComponent
-import com.google.devsite.components.testing.NoopLibraryMetadata
+import com.google.devsite.components.testing.NoopLibraryMetadataComponent
 import com.google.devsite.components.testing.NoopRelatedSymbols
 import com.google.devsite.components.testing.NoopSummaryList
 import kotlinx.html.body
@@ -41,7 +41,7 @@ class DefaultClasslikeTest {
                 description = emptyList(),
                 symbolTypes = emptyList(),
                 inheritedTypes = emptyList(),
-                libraryMetadata = NoopLibraryMetadata()
+                libraryMetadataComponent = NoopLibraryMetadataComponent()
             )
         )
 
@@ -70,7 +70,7 @@ class DefaultClasslikeTest {
                 description = emptyList(),
                 symbolTypes = emptyList(),
                 inheritedTypes = emptyList(),
-                libraryMetadata = NoopLibraryMetadata()
+                libraryMetadataComponent = NoopLibraryMetadataComponent()
             )
         )
 
@@ -100,7 +100,7 @@ class DefaultClasslikeTest {
                 description = emptyList(),
                 symbolTypes = emptyList(),
                 inheritedTypes = emptyList(),
-                libraryMetadata = NoopLibraryMetadata()
+                libraryMetadataComponent = NoopLibraryMetadataComponent()
             )
         )
 
@@ -130,7 +130,7 @@ class DefaultClasslikeTest {
                 description = listOf(NoopDescriptionComponent("Hello World!")),
                 symbolTypes = emptyList(),
                 inheritedTypes = emptyList(),
-                libraryMetadata = NoopLibraryMetadata()
+                libraryMetadataComponent = NoopLibraryMetadataComponent()
             )
         )
 
@@ -166,7 +166,7 @@ class DefaultClasslikeTest {
                     )
                 ),
                 inheritedTypes = emptyList(),
-                libraryMetadata = NoopLibraryMetadata()
+                libraryMetadataComponent = NoopLibraryMetadataComponent()
             )
         )
 

@@ -14,31 +14,22 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components.impl
+package com.google.devsite.components.testing
 
-import com.google.devsite.components.Link
-import com.google.devsite.components.symbols.LibraryMetadata
-import com.google.devsite.util.JsonLibraryMetadata
+import com.google.devsite.components.symbols.LibraryMetadataComponent
+import com.google.devsite.util.LibraryMetadata
 import kotlinx.html.FlowContent
 import kotlinx.html.div
 
-/** Default implementation of a LibraryMetadata. */
-internal class DefaultLibraryMetadata(
-    override val data: JsonLibraryMetadata,
-    private val shown: Boolean = false
-) : LibraryMetadata {
+internal class NoopLibraryMetadataComponent(
+    private val shown: Boolean = true
+) : LibraryMetadataComponent {
+    override val data: LibraryMetadata
+        get() = throw NotImplementedError()
 
     override fun render(into: FlowContent): Unit = into.run {
-        if (!shown) return
-
-        val params = Link.Params(
-            name = data.groupId + ":" + data.artifactId,
-            url = data.releaseNotesUrl
-        )
-        val link = DefaultLink(params)
-
-        div {
-            link.render(into)
+        if (shown) {
+            div { +"Library Metadata" }
         }
     }
 }

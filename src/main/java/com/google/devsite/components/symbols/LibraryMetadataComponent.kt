@@ -17,9 +17,9 @@
 package com.google.devsite.components.symbols
 
 import com.google.devsite.components.ContextFreeComponent
-import com.google.devsite.util.JsonLibraryMetadata
+import com.google.devsite.util.LibraryMetadata
 
 /** Represents the library's metadata section. */
-internal interface LibraryMetadata : ContextFreeComponent {
-    val data: JsonLibraryMetadata
+internal interface LibraryMetadataComponent : ContextFreeComponent {
+    val data: LibraryMetadata
 }
