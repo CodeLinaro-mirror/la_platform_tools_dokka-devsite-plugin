@@ -32,6 +32,7 @@ import java.io.IOException
  */
 data class LibraryMetadata(
 
+    // TODO (b/229784900) remove if we don't end up using this value
     @JsonProperty("library")
     var library: String,
 
@@ -43,6 +44,13 @@ data class LibraryMetadata(
 
     @JsonProperty("releaseNotesUrl")
     var releaseNotesUrl: String,
+
+    /**
+     * This is only used for matching a [org.jetbrains.dokka.model.DClasslike] to a LibraryMetadata
+     * entry and is not shown in the UI.
+     */
+    @JsonProperty("sourceDir")
+    var sourceDir: String,
 ) {
 
     /**
