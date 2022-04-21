@@ -23,6 +23,7 @@ import com.google.devsite.components.Component
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
 import com.google.devsite.components.pages.ClassIndex
+import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.TableOfContents
 import com.google.devsite.components.symbols.AnnotationComponent
@@ -109,3 +110,10 @@ internal val AnnotationComponent.isAtNonNull get() = this.link().name == "NonNul
 internal fun List<AnnotationComponent>.exceptNonNull() = this.filter { it.link().name != "NonNull" }
 
 internal fun InheritedSymbolsList.title() = (data.header as TableTitle).data.title
+
+internal fun Classlike.symbolsFor(
+    vararg types: String
+) = data.symbolTypes.single { (summary, _) ->
+    summary.title() in types
+}
+internal fun Classlike.summaryItemsFor(vararg types: String) = symbolsFor(*types).first.items()

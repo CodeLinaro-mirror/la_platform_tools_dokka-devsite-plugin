@@ -38,6 +38,8 @@ import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.projectionName
 import com.google.devsite.renderer.converters.testing.size
 import com.google.devsite.renderer.converters.testing.summary
+import com.google.devsite.renderer.converters.testing.summaryItemsFor
+import com.google.devsite.renderer.converters.testing.symbolsFor
 import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.renderer.converters.testing.title
 import com.google.devsite.testing.ConverterTestBase
@@ -103,9 +105,9 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.content<Classlike>()
-        val (summary) = classlike.symbolsFor("Public functions", "Public methods")
+        val summary = classlike.methodSummaryItems()
 
-        assertThat(summary.item().summary().name()).isEqualTo("foo")
+        assertThat(summary.single().name()).isEqualTo("foo")
     }
 
     @Test
@@ -148,8 +150,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render().page()
 
-        val (propertiesSummary) = documentation.content<Classlike>()
-            .symbolsFor("Public fields", "Public properties")
+        val propertiesSummary = documentation.content<Classlike>().propertySummaryItems()
         val props = propertiesSummary.items(3)
 
         for ((i, prop) in props.withIndex()) {
@@ -169,13 +170,13 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.content<Classlike>()
-        val (summary) = classlike.symbolsFor("Public functions", "Public methods")
+        val summary = classlike.methodSummaryItems()
 
         javaOnly {
-            assertThat(summary.items().size).isEqualTo(1)
+            assertThat(summary.size).isEqualTo(1)
         }
         kotlinOnly {
-            assertThat(summary.items().size).isEqualTo(2)
+            assertThat(summary.size).isEqualTo(2)
         }
     }
 
@@ -188,7 +189,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.content<Classlike>()
-        val (summary) = classlike.symbolsFor("Protected functions", "Protected methods")
+        val (summary) = classlike.symbolsFor(protectedMethodsTitle(displayLanguage))
 
         assertThat(summary.item().summary().name()).isEqualTo("foo")
     }
@@ -202,9 +203,9 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.content<Classlike>()
-        val (summary) = classlike.symbolsFor("Public properties", "Public fields")
+        val summary = classlike.propertySummaryItems()
 
-        assertThat(summary.item().summary().name()).isEqualTo("foo")
+        assertThat(summary.single().summary().name()).isEqualTo("foo")
     }
 
     @Test
@@ -216,7 +217,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.content<Classlike>()
-        val (summary) = classlike.symbolsFor("Protected properties", "Protected fields")
+        val (summary) = classlike.symbolsFor(protectedPropertiesTitle(displayLanguage))
 
         assertThat(summary.item().summary().name()).isEqualTo("foo")
     }
@@ -532,7 +533,7 @@ internal class ClasslikeDocumentableConverterTest(
         }
     }
 
-    @Test // TODO: add tests and support for kotlin inheriting from java and vice versa
+    @Test
     fun `Class component inherits docs from same language in 4x Kotlin and Java`() {
         val pagesK = """
             | /** docs for foo */
@@ -579,11 +580,11 @@ internal class ClasslikeDocumentableConverterTest(
             val bazClass = pages.page("baz").content<Classlike>()
 
             // Function description inheritance does not work properly
-            val fooDoit = fooClass.methodSymbols().first.items().single()
+            val fooDoit = fooClass.methodSummaryItems().single()
             val fooDoitDocs = fooDoit.summary().data.description.text()
-            val barDoit = barClass.methodSymbols().first.items().single()
+            val barDoit = barClass.methodSummaryItems().single()
             val barDoitDocs = barDoit.summary().data.description.text()
-            val bazDoit = bazClass.methodSymbols().first.items().single()
+            val bazDoit = bazClass.methodSummaryItems().single()
             val bazDoitDocs = bazDoit.summary().data.description.text()
 
             assertThat(fooDoitDocs).isEqualTo("dew it")
@@ -600,16 +601,16 @@ internal class ClasslikeDocumentableConverterTest(
                 assertThat(bazDescription.text()).isEqualTo("overriding docs for baz")
 
                 // overriding properties is kotlin-only, and working
-                val fooDemocracy = fooClass.propertySymbols().first.items().single().summary()
+                val fooDemocracy = fooClass.propertySummaryItems().single().summary()
                 assertThat(fooDemocracy.data.description.text()).isEqualTo("thunderous applause")
-                val barDemocracy = barClass.propertySymbols().first.items().single().summary()
+                val barDemocracy = barClass.propertySummaryItems().single().summary()
                 assertThat(barDemocracy.data.description.text()).isEqualTo("thunderous applause")
-                val bazDemocracy = bazClass.propertySymbols().first.items().single().summary()
+                val bazDemocracy = bazClass.propertySummaryItems().single().summary()
                 assertThat(bazDemocracy.data.description.text()).isEqualTo("KotOR")
 
                 // Using {@inheritDoc} in kotlin is wrong
                 val mazClass = pages.page("maz").content<Classlike>()
-                val mazDoit = mazClass.methodSymbols().first.items().single()
+                val mazDoit = mazClass.methodSummaryItems().single()
                 val mazDoitDocs = mazDoit.summary().data.description.text()
                 assertThat(mazDoitDocs).isNotEqualTo("dew it")
             }
@@ -711,7 +712,7 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(param3docs.text()).isEqualTo("param3_docs")
     }
 
-    @Test // TODO: add tests and support for language-interleaving inheritance hierarchies
+    @Test
     fun `Level-jumping doc inheritance works in 4x Kotlin and Java`() {
         val pageK = """
             | /** docs for foo */
@@ -739,7 +740,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render(java = true).page("baz")
         for (page in listOf(pageJ, pageK)) {
-            val doit = page.content<Classlike>().methodSymbols().first.items().single()
+            val doit = page.content<Classlike>().methodSummaryItems().single()
             assertThat(doit.summary().data.description.text()).isEqualTo("dew it")
         }
     }
@@ -915,12 +916,13 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.content<Classlike>()
-        val companionFunctions = classlike.symbolsItemsFor("Public companion functions")
+
         kotlinOnly {
+            val companionFunctions = classlike.summaryItemsFor(publicCompanionFunctionsTitle())
             assertThat(companionFunctions).hasSize(2)
         }
         javaOnly {
-            assertThat(companionFunctions).isEmpty()
+            classlike.assertNoSymbolsFor(protectedCompanionFunctionsTitle())
         }
     }
 
@@ -935,12 +937,12 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.content<Classlike>()
-        val companionFunctions = classlike.symbolsItemsFor("Protected companion functions")
         kotlinOnly {
+            val companionFunctions = classlike.summaryItemsFor(protectedCompanionFunctionsTitle())
             assertThat(companionFunctions).hasSize(1)
         }
         javaOnly {
-            assertThat(companionFunctions).isEmpty()
+            classlike.assertNoSymbolsFor(protectedCompanionFunctionsTitle())
         }
     }
 
@@ -957,17 +959,17 @@ internal class ClasslikeDocumentableConverterTest(
 
         val classlike = page.content<Classlike>()
 
-        val publicCompanionProperties = classlike
-            .symbolsItemsFor("Public companion properties")
-        val protectedCompanionProperties = classlike
-            .symbolsItemsFor("Protected companion properties")
         kotlinOnly {
+            val publicCompanionProperties = classlike
+                .summaryItemsFor(publicCompanionPropertiesTitle())
+            val protectedCompanionProperties = classlike
+                .summaryItemsFor(protectedCompanionPropertiesTitle())
             assertThat(publicCompanionProperties).hasSize(1)
             assertThat(protectedCompanionProperties).hasSize(1)
         }
         javaOnly {
-            assertThat(publicCompanionProperties).hasSize(0)
-            assertThat(protectedCompanionProperties).hasSize(0)
+            classlike.assertNoSymbolsFor(publicCompanionPropertiesTitle())
+            classlike.assertNoSymbolsFor(protectedCompanionPropertiesTitle())
         }
     }
 
@@ -981,29 +983,21 @@ internal class ClasslikeDocumentableConverterTest(
             |  }
             |}
         """.render()
-        val pageK = moduleK.page()
+        val classlikeK = moduleK.page().content<Classlike>()
 
-        val moduleJ = """
+        val classlikeJ = """
             |public class Foo {
             |  public static void foo() {}
             |  public static String bar = "bar"
             |}
-        """.render(java = true)
-        val pageJ = moduleJ.page()
+        """.render(java = true).page().content<Classlike>()
 
-        val kotlinClasslike = pageK.content<Classlike>()
-        val javaClasslike = pageJ.content<Classlike>()
-        val companionClassK = runCatching { moduleK.page("Companion") }.getOrNull()
+        val companionClassK = moduleK.page("Companion")
 
-        val (kotlinNestedTypeSummary) = kotlinClasslike.symbolsFor("Nested types")
+        val (kotlinNestedTypeSummary) = classlikeK.symbolsFor("Nested types")
 
-        val publicJavaMethods = javaClasslike.methodSymbols()
-        val publicJavaFields = javaClasslike.propertySymbols()
-        val staticJavaMethod = (publicJavaMethods.second.symbols.single() as SymbolDetail).data
-        val staticJavaField = (publicJavaFields.second.symbols.single() as SymbolDetail).data
-
-        val companionFunctions = kotlinClasslike.symbolsItemsFor("Public companion functions")
-        val companionProperties = kotlinClasslike.symbolsItemsFor("Public companion properties")
+        val staticJavaMethod = classlikeJ.methodDetailsItems().single().data
+        val staticJavaField = classlikeJ.propertyDetailsItems().single().data
 
         // Companion class is included in both modules
         assertThat(companionClassK).isNotNull()
@@ -1016,14 +1010,16 @@ internal class ClasslikeDocumentableConverterTest(
         kotlinOnly {
             // nested companion object is not documented because it is inlined
             assertThat(kotlinNestedTypeSummary.items()).hasSize(0)
+            val companionFunctions = classlikeK.summaryItemsFor(publicCompanionFunctionsTitle())
+            val companionProperties = classlikeK.summaryItemsFor(publicCompanionPropertiesTitle())
             assertThat(companionFunctions).hasSize(1)
             assertThat(companionProperties).hasSize(1)
         }
         javaOnly {
             // nested companion object is documented but companion functions are not inlined
             assertThat(kotlinNestedTypeSummary.items()).hasSize(1)
-            assertThat(companionFunctions).hasSize(0)
-            assertThat(companionProperties).hasSize(0)
+            classlikeK.assertNoSymbolsFor(publicCompanionFunctionsTitle())
+            classlikeK.assertNoSymbolsFor(publicCompanionPropertiesTitle())
             assertThat(staticJavaMethod.modifiers).contains("static")
             assertThat(staticJavaField.modifiers).contains("static")
         }
@@ -1193,10 +1189,8 @@ internal class ClasslikeDocumentableConverterTest(
         """.render(java = true).page()
 
         val classlike = page.content<Classlike>()
-        val publicMethodSymbols = classlike.methodSymbols()
-        val protectedMethodSymbols = classlike.symbolsFor(
-            if (displayLanguage == Language.KOTLIN) "Protected functions" else "Protected methods"
-        )
+        val publicMethodSymbols = classlike.symbolsFor(publicMethodsTitle(displayLanguage))
+        val protectedMethodSymbols = classlike.symbolsFor(protectedMethodsTitle(displayLanguage))
         val publicMethodNames = publicMethodSymbols.second.symbols.map {
             (it as SymbolDetail).data.name
         }
@@ -1234,10 +1228,8 @@ internal class ClasslikeDocumentableConverterTest(
         """.render(java = true).page()
 
         val classlike = page.content<Classlike>()
-        val publicMethodSymbols = classlike.methodSymbols()
-        val publicMethodNames = publicMethodSymbols.second.symbols.map {
-            (it as SymbolDetail).data.name
-        }
+        val publicMethodSymbols = classlike.methodDetailsItems()
+        val publicMethodNames = publicMethodSymbols.map { it.data.name }
 
         kotlinOnly {
             assertThat(publicMethodNames).isEmpty()
@@ -1258,8 +1250,8 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.content<Classlike>()
-        val methodSymbols = classlike.methodSymbols()
-        val methodNames = methodSymbols.second.symbols.map { (it as SymbolDetail).data.name }
+        val methodSymbols = classlike.methodDetailsItems()
+        val methodNames = methodSymbols.map { it.data.name }
 
         assertThat(methodNames).isEmpty()
     }
@@ -1325,37 +1317,41 @@ internal class ClasslikeDocumentableConverterTest(
         return runBlocking { converter.classlike() }
     }
 
-    private fun Classlike.symbolsFor(
-        vararg types: String
-    ) = data.symbolTypes.single { (summary, _) ->
-        summary.title() in types
-    }
-
-    private fun Classlike.symbolsItemsFor(
-        vararg types: String
-    ) = runCatching {
-        symbolsFor(*types).first.data.items
-    }.getOrNull() ?: emptyList()
-
     private fun String.possiblyAsGetter() = if (displayLanguage == Language.KOTLIN) this
     else "get" + this.capitalize()
 
-    private fun Classlike.methodSymbols(): Pair<SummaryList, Classlike.TitledList> =
-        symbolsFor(if (displayLanguage == Language.KOTLIN) "Public functions" else "Public methods")
+    private fun Classlike.methodDetailsItems() = (
+        symbolsFor(publicMethodsTitle(displayLanguage)).second.symbols +
+            symbolsFor(protectedMethodsTitle(displayLanguage)).second.symbols
+        ).map { it as SymbolDetail }
+
+    private fun Classlike.methodSummaryItems() =
+        summaryItemsFor(publicMethodsTitle(displayLanguage)) +
+            summaryItemsFor(protectedMethodsTitle(displayLanguage))
 
     private fun Classlike.methodSymbol(name: String = "foo") =
-        methodSymbols().first.items().singleOrNull { it.name() == name }
-            ?: methodSymbols().first.items().single()
+        methodSummaryItems().singleOrNull { it.name() == name }
+            ?: methodSummaryItems().single()
 
-    private fun Classlike.propertySymbols(): Pair<SummaryList, Classlike.TitledList> =
-        symbolsFor(if (displayLanguage == Language.KOTLIN) "Public properties" else "Public fields")
+    private fun Classlike.propertySummaryItems() =
+        summaryItemsFor(publicPropertiesTitle(displayLanguage)) +
+            summaryItemsFor(protectedPropertiesTitle(displayLanguage))
+
+    private fun Classlike.propertyDetailsItems() = (
+        symbolsFor(publicPropertiesTitle(displayLanguage)).second.symbols +
+            symbolsFor(protectedPropertiesTitle(displayLanguage)).second.symbols
+        ).map { it as SymbolDetail }
 
     private fun Classlike.propertySymbol(name: String = "foo") =
-        propertySymbols().first.items().singleOrNull { it.name() == name }
-            ?: propertySymbols().first.items().single()
+        propertySummaryItems().singleOrNull { it.name() == name }
+            ?: propertySummaryItems().single()
 
     private fun SummaryList.constructor() =
         (data.items.item() as SingleColumnSummaryItem).data.description as SymbolSummary
+
+    private fun Classlike.assertNoSymbolsFor(symbolsName: String) = assertThat(
+        data.symbolTypes.none { it.first.title() == symbolsName }
+    ).isTrue()
 
     companion object {
         @JvmStatic

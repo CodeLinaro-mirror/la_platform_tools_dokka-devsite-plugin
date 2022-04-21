@@ -102,19 +102,6 @@ internal abstract class ConverterTestBase(
         packages.single().properties.ifEmpty { null }
             ?: classlike()?.properties
 
-    protected fun inheritedPropertiesTitle() = "Inherited ${propertiesTitle()}"
-    protected fun protectedPropertiesTitle() = "Protected ${propertiesTitle()}"
-    private fun propertiesTitle(): String = when (displayLanguage) {
-        Language.JAVA -> "fields"
-        Language.KOTLIN -> "properties"
-    }
-    protected fun inheritedMethodsTitle() = "Inherited ${methodsTitle()}"
-    protected fun protectedMethodsTitle() = "Protected ${methodsTitle()}"
-    private fun methodsTitle(): String = when (displayLanguage) {
-        Language.JAVA -> "methods"
-        Language.KOTLIN -> "functions"
-    }
-
     protected fun assertPath(actual: String, expected: String, prefix: String = "") {
         when (displayLanguage) {
             Language.JAVA -> assertThat(actual).isEqualTo("$prefix/reference/$expected")

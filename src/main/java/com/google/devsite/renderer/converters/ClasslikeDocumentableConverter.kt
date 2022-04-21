@@ -126,11 +126,14 @@ internal class ClasslikeDocumentableConverter(
             propertiesToSummary(constantsTitle(), declaredProperties.constants())
         }
         val publicPropertiesSummary = async {
-            propertiesToSummary(publicPropertiesTitle(), declaredProperties.filter(::isPublic))
+            propertiesToSummary(
+                publicPropertiesTitle(displayLanguage),
+                declaredProperties.filter(::isPublic)
+            )
         }
         val protectedPropertiesSummary = async {
             propertiesToSummary(
-                protectedPropertiesTitle(),
+                protectedPropertiesTitle(displayLanguage),
                 declaredProperties.filter(::isProtected)
             )
         }
@@ -147,10 +150,16 @@ internal class ClasslikeDocumentableConverter(
             )
         }
         val publicFunctionsSummary = async {
-            functionsToSummary(publicMethodsTitle(), declaredFunctions.filter(::isPublic))
+            functionsToSummary(
+                publicMethodsTitle(displayLanguage),
+                declaredFunctions.filter(::isPublic)
+            )
         }
         val protectedFunctionsSummary = async {
-            functionsToSummary(protectedMethodsTitle(), declaredFunctions.filter(::isProtected))
+            functionsToSummary(
+                protectedMethodsTitle(displayLanguage),
+                declaredFunctions.filter(::isProtected)
+            )
         }
         val publicCompanionFunctionsSummary = async {
             functionsToSummary(
@@ -247,11 +256,11 @@ internal class ClasslikeDocumentableConverter(
             allSymbols.addAll(
                 listOf(
                     publicPropertiesSummary.await() to Classlike.TitledList(
-                        publicPropertiesTitle(),
+                        publicPropertiesTitle(displayLanguage),
                         publicProperties.await()
                     ),
                     protectedPropertiesSummary.await() to Classlike.TitledList(
-                        protectedPropertiesTitle(),
+                        protectedPropertiesTitle(displayLanguage),
                         protectedProperties.await()
                     )
                 )
@@ -269,11 +278,11 @@ internal class ClasslikeDocumentableConverter(
                     protectedConstructors.await()
                 ),
                 publicFunctionsSummary.await() to Classlike.TitledList(
-                    publicMethodsTitle(),
+                    publicMethodsTitle(displayLanguage),
                     publicFunctions.await()
                 ),
                 protectedFunctionsSummary.await() to Classlike.TitledList(
-                    protectedMethodsTitle(),
+                    protectedMethodsTitle(displayLanguage),
                     protectedFunctions.await()
                 )
             )
@@ -284,11 +293,11 @@ internal class ClasslikeDocumentableConverter(
             allSymbols.addAll(
                 listOf(
                     publicPropertiesSummary.await() to Classlike.TitledList(
-                        publicPropertiesTitle(),
+                        publicPropertiesTitle(displayLanguage),
                         publicProperties.await()
                     ),
                     protectedPropertiesSummary.await() to Classlike.TitledList(
-                        protectedPropertiesTitle(),
+                        protectedPropertiesTitle(displayLanguage),
                         protectedProperties.await()
                     )
                 )
@@ -606,7 +615,7 @@ internal class ClasslikeDocumentableConverter(
         }
         val functionsSummary =
             functionsRenamed.takeIf { it.isNotEmpty() }
-                ?.createInheritedCategory(title = inheritedMethodsTitle()) {
+                ?.createInheritedCategory(title = inheritedMethodsTitle(displayLanguage)) {
                     functionsToSummary(functions = it)
                 }
 
@@ -620,7 +629,7 @@ internal class ClasslikeDocumentableConverter(
             }
 
         val propertiesSummary = properties.takeIf { it.isNotEmpty() }
-            ?.createInheritedCategory(title = inheritedPropertiesTitle()) {
+            ?.createInheritedCategory(title = inheritedPropertiesTitle(displayLanguage)) {
                 propertiesToSummary(properties = it)
             }
 
@@ -815,39 +824,50 @@ internal class ClasslikeDocumentableConverter(
         type.isSuspend() || parameters.any { it.type.isSuspend() }
 
     private fun List<DProperty>.constants() = filter { isConstant(it.modifiers()) }
-
-    private fun nestedTypesTitle() = "Nested types"
-
-    private fun publicConstructorsTitle() = "Public ${constructorsTitle()}"
-    private fun protectedConstructorsTitle() = "Protected ${constructorsTitle()}"
-    private fun constructorsTitle(): String = "constructors"
-
-    private fun publicMethodsTitle() = "Public ${methodsTitle()}"
-    private fun inheritedMethodsTitle() = "Inherited ${methodsTitle()}"
-    private fun protectedMethodsTitle() = "Protected ${methodsTitle()}"
-    private fun methodsTitle(): String = when (displayLanguage) {
-        Language.JAVA -> "methods"
-        Language.KOTLIN -> "functions"
-    }
-
-    private fun publicPropertiesTitle() = "Public ${propertiesTitle()}"
-    private fun inheritedPropertiesTitle() = "Inherited ${propertiesTitle()}"
-    private fun protectedPropertiesTitle() = "Protected ${propertiesTitle()}"
-    private fun propertiesTitle(): String = when (displayLanguage) {
-        Language.JAVA -> "fields"
-        Language.KOTLIN -> "properties"
-    }
-
-    private fun constantsTitle() = "Constants"
-    private fun inheritedConstantsTitle() = "Inherited ${constantsTitle()}"
-    private fun enumValuesTitle() = "Enum Values"
-    private fun extensionFunctionsTitle() = "Extension functions"
-    private fun companionFunctionsTitle(): String = "companion ${methodsTitle()}"
-    private fun companionPropertiesTitle(): String = "companion ${propertiesTitle()}"
-    private fun publicCompanionFunctionsTitle(): String = "Public ${companionFunctionsTitle()}"
-    private fun protectedCompanionFunctionsTitle(): String =
-        "Protected ${companionFunctionsTitle()}"
-    private fun publicCompanionPropertiesTitle(): String = "Public ${companionPropertiesTitle()}"
-    private fun protectedCompanionPropertiesTitle(): String =
-        "Protected ${companionPropertiesTitle()}"
 }
+
+internal fun nestedTypesTitle() = "Nested types"
+
+internal fun publicConstructorsTitle() = "Public ${constructorsTitle()}"
+internal fun protectedConstructorsTitle() = "Protected ${constructorsTitle()}"
+internal fun constructorsTitle(): String = "constructors"
+
+internal fun publicMethodsTitle(displayLanguage: Language) =
+    "Public ${methodsTitle(displayLanguage)}"
+internal fun inheritedMethodsTitle(displayLanguage: Language) =
+    "Inherited ${methodsTitle(displayLanguage)}"
+internal fun protectedMethodsTitle(displayLanguage: Language) =
+    "Protected ${methodsTitle(displayLanguage)}"
+internal fun methodsTitle(displayLanguage: Language): String = when (displayLanguage) {
+    Language.JAVA -> "methods"
+    Language.KOTLIN -> "functions"
+}
+
+internal fun publicPropertiesTitle(displayLanguage: Language) =
+    "Public ${propertiesTitle(displayLanguage)}"
+internal fun inheritedPropertiesTitle(displayLanguage: Language) =
+    "Inherited ${propertiesTitle(displayLanguage)}"
+internal fun protectedPropertiesTitle(displayLanguage: Language) =
+    "Protected ${propertiesTitle(displayLanguage)}"
+internal fun propertiesTitle(displayLanguage: Language): String = when (displayLanguage) {
+    Language.JAVA -> "fields"
+    Language.KOTLIN -> "properties"
+}
+
+internal fun constantsTitle() = "Constants"
+internal fun inheritedConstantsTitle() = "Inherited ${constantsTitle()}"
+internal fun enumValuesTitle() = "Enum Values"
+// Extension functions and companions are a Kotlin-only feature and only show up in as-Kotlin
+internal fun extensionFunctionsTitle() = "Extension functions"
+internal fun companionFunctionsTitle(): String =
+    "companion ${methodsTitle(Language.KOTLIN)}"
+internal fun companionPropertiesTitle(displayLanguage: Language): String =
+    "companion ${propertiesTitle(Language.KOTLIN)}"
+internal fun publicCompanionFunctionsTitle(): String =
+    "Public ${companionFunctionsTitle()}"
+internal fun protectedCompanionFunctionsTitle(): String =
+    "Protected ${companionFunctionsTitle()}"
+internal fun publicCompanionPropertiesTitle(): String =
+    "Public ${companionPropertiesTitle(Language.KOTLIN)}"
+internal fun protectedCompanionPropertiesTitle(): String =
+    "Protected ${companionPropertiesTitle(Language.KOTLIN)}"
