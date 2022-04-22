@@ -127,7 +127,7 @@ internal class ParameterDocumentableConverter(
                 modifiers = param.getExtraModifiers()
                     .modifiersFor(
                         ModifierHints(
-                            Language.KOTLIN,
+                            displayLanguage = Language.KOTLIN,
                             type = DParameter::class.java,
                             containingType = null,
                             isSummary = false

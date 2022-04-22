@@ -20,6 +20,7 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.explodedChildren
 import com.google.devsite.renderer.converters.filterOutJvmSynthetic
 import com.google.devsite.renderer.converters.isExceptionClass
+import com.google.devsite.renderer.converters.isOrdinaryCompanion
 import com.google.devsite.renderer.converters.name
 import com.google.devsite.renderer.converters.nameForSyntheticClass
 import com.google.devsite.renderer.converters.packageName
@@ -174,7 +175,9 @@ internal class DocumentablesHolder(
     }
 
     suspend fun classesFor(packageDoc: DPackage, displayLanguage: Language): List<DClass> {
-        val classes = classes.getValue(packageDoc.dri).await()
+        var classes = classes.getValue(packageDoc.dri).await()
+        if (displayLanguage == Language.KOTLIN)
+            classes = classes.filterNot { it.isOrdinaryCompanion() }
         val syntheticClasses = syntheticClasses.getValue(packageDoc.dri).await()
         return if (displayLanguage == Language.JAVA) {
             (classes + syntheticClasses).sortedBy { it.name() }

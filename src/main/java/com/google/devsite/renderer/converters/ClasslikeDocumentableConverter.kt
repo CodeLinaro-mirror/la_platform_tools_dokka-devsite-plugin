@@ -59,6 +59,7 @@ import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DEnum
 import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.DFunction
+import org.jetbrains.dokka.model.DObject
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.GenericTypeConstructor
@@ -89,13 +90,14 @@ internal class ClasslikeDocumentableConverter(
 
     /** @return the classlike component */
     suspend fun classlike(): DevsitePage = coroutineScope {
-        var declaredFunctions = if (displayLanguage == Language.JAVA)
-            (classlike.functions + classlike.properties.gettersAndSetters()).nonInheritedTypes()
-        else classlike.functions.nonInheritedTypes()
-
+        var declaredFunctions = if (displayLanguage == Language.KOTLIN) classlike.functions
+        else classlike.functions + classlike.properties.gettersAndSetters()
+        declaredFunctions = declaredFunctions.nonInheritedTypes()
         var declaredProperties = classlike.properties.nonInheritedTypes()
-        var companionFunctions = classlike.companionFunctions()
         var companionProperties = classlike.companionProperties()
+        var companionFunctions = classlike.companionFunctions() +
+            companionProperties.gettersAndSetters()
+
         val inheritedAll = (classlike.children + classlike.properties.gettersAndSetters())
             .inheritedTypes()
 
@@ -103,6 +105,24 @@ internal class ClasslikeDocumentableConverter(
         if (displayLanguage == Language.JAVA) {
             declaredFunctions = declaredFunctions.filterOutJvmSynthetic().map { it.withJvmName() }
             declaredProperties = declaredProperties.filterOutJvmSynthetic()
+        }
+
+        // Some symbols are moved from the companion object type to the enclosing class in java
+        if (displayLanguage == Language.JAVA) {
+            // Objects that are not top-level
+            if (classlike is DObject && classlike.isCompanion()) {
+                // Hoist companion JvmFields
+                declaredProperties = declaredProperties.filterNot { it.isJvmField() }
+            } else if (classlike !is DObject) {
+                // Classlikes that are not (top-level) objects
+                declaredProperties += companionProperties.filter { it.isJavaStaticField() }
+                declaredProperties += companionProperties.filter { it.isJvmFieldAnnotated() }.map {
+                    // It is technically incorrect to put @JvmStatic on a property, but we use this
+                    // to remember that we should later inject the `static` modifier to this
+                    it.withNewExtras(it.extra.addAnnotation(JvmStatic))
+                }
+                declaredFunctions += companionFunctions.filter { it.isJavaStaticMethod() }
+            }
         }
 
         declaredFunctions = declaredFunctions.sortedBy { it.name }
@@ -125,21 +145,25 @@ internal class ClasslikeDocumentableConverter(
             enumValuesToSummary(enumValuesTitle(), enumValues)
         }
         val nestedTypesSummary = async {
-            nestedTypesToSummary(docsHolder.classlikesFor(classlike))
+            nestedTypesToSummary(
+                docsHolder.classlikesFor(classlike).withoutNeglectableCompanion()
+            )
         }
         val constantsSummary = async {
-            propertiesToSummary(constantsTitle(), declaredProperties.constants())
+            propertiesToSummary(
+                constantsTitle(), (declaredProperties + companionProperties).constants()
+            )
         }
         val publicPropertiesSummary = async {
             propertiesToSummary(
                 publicPropertiesTitle(displayLanguage),
-                declaredProperties.filter(::isPublic)
+                declaredProperties.filter(::isPublicNonConst)
             )
         }
         val protectedPropertiesSummary = async {
             propertiesToSummary(
                 protectedPropertiesTitle(displayLanguage),
-                declaredProperties.filter(::isProtected)
+                declaredProperties.filter(::isProtectedNonConst)
             )
         }
         val publicConstructorsSummary = async {
@@ -181,24 +205,24 @@ internal class ClasslikeDocumentableConverter(
         val publicCompanionPropertiesSummary = async {
             propertiesToSummary(
                 publicCompanionPropertiesTitle(),
-                companionProperties.filter(::isPublic)
+                companionProperties.filter(::isPublicNonConst)
             )
         }
         val protectedCompanionPropertiesSummary = async {
             propertiesToSummary(
                 protectedCompanionPropertiesTitle(),
-                companionProperties.filter(::isProtected)
+                companionProperties.filter(::isProtectedNonConst)
             )
         }
 
         val enumDetails =
             async { enumValuesToDetail(classlike as? DEnum, enumValues) }
         val constants =
-            async { propertiesToDetail(declaredProperties.constants()) }
+            async { propertiesToDetail((declaredProperties + companionProperties).constants()) }
         val publicProperties =
-            async { propertiesToDetail(declaredProperties.filter(::isPublic)) }
+            async { propertiesToDetail(declaredProperties.filter(::isPublicNonConst)) }
         val protectedProperties =
-            async { propertiesToDetail(declaredProperties.filter(::isProtected)) }
+            async { propertiesToDetail(declaredProperties.filter(::isProtectedNonConst)) }
         val publicConstructors =
             async { constructorsToDetail(allConstructors.filter(::isPublic)) }
         val protectedConstructors =
@@ -212,9 +236,9 @@ internal class ClasslikeDocumentableConverter(
         val protectedCompanionFunctionsDetail =
             async { functionsToDetail(companionFunctions.filter(::isProtected)) }
         val publicCompanionPropertiesDetail =
-            async { propertiesToDetail(companionProperties.filter(::isPublic)) }
+            async { propertiesToDetail(companionProperties.filter(::isPublicNonConst)) }
         val protectedCompanionPropertiesDetail =
-            async { propertiesToDetail(companionProperties.filter(::isProtected)) }
+            async { propertiesToDetail(companionProperties.filter(::isProtectedNonConst)) }
 
         val signature = async { computeSignature() }
         val hierarchy = async { computeHierarchy() }
@@ -369,14 +393,16 @@ internal class ClasslikeDocumentableConverter(
     private fun nestedTypesToSummary(classlikes: List<DClasslike>):
         SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> {
         val components = when (displayLanguage) {
-            // When displaying Kotlin pages, companion functions will be inlined and the link to the
-            // companion object can be omitted.
-            Language.KOTLIN -> classlikes.withoutCompanion()
+            // When displaying Kotlin pages, anonymous companion functions will be inlined and the
+            // link to the companion object can be omitted. Named companion objects are presumably
+            // intended to be viewable as first-class elements. Similar for companion objects which
+            // inherit from another type.
+            Language.KOTLIN -> classlikes.withoutNeglectableCompanion()
             else -> classlikes
         }.map {
             errorContextInjector(it) {
                 classlike ->
-                javadocConverter.summaryForDocumentable(classlike)
+                javadocConverter.summaryForDocumentable(classlike, showAnnotations = true)
             }
         }
 
@@ -395,13 +421,14 @@ internal class ClasslikeDocumentableConverter(
 
     private fun functionsToSummary(name: String? = null, functions: List<DFunction>):
         SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
-        val modifierHints = ModifierHints(
-            displayLanguage,
-            isSummary = true,
-            type = DFunction::class.java,
-            containingType = classlike::class.java
-        )
         val components = functions.map {
+            val modifierHints = ModifierHints(
+                displayLanguage = displayLanguage,
+                type = DFunction::class.java,
+                containingType = classlike::class.java,
+                isSummary = true,
+                injectStatic = it.isJavaStaticMethod()
+            )
             errorContextInjector(it) {
                 functionConverter.summary(it, modifierHints)
             }
@@ -444,13 +471,14 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun functionsToDetail(functions: List<DFunction>): List<SymbolDetail> {
-        val modifierHints = ModifierHints(
-            displayLanguage,
-            isSummary = false,
-            type = DFunction::class.java,
-            containingType = classlike::class.java
-        )
         return functions.map {
+            val modifierHints = ModifierHints(
+                displayLanguage = displayLanguage,
+                isSummary = false,
+                type = DFunction::class.java,
+                containingType = classlike::class.java,
+                injectStatic = it.isJavaStaticMethod()
+            )
             errorContextInjector(it) {
                 functionConverter.detail(it, modifierHints)
             }
@@ -459,7 +487,7 @@ internal class ClasslikeDocumentableConverter(
 
     private fun constructorsToDetail(functions: List<DFunction>): List<SymbolDetail> {
         val modifierHints = ModifierHints(
-            displayLanguage,
+            displayLanguage = displayLanguage,
             isSummary = false,
             type = DFunction::class.java,
             containingType = classlike::class.java
@@ -491,13 +519,14 @@ internal class ClasslikeDocumentableConverter(
         name: String? = null,
         properties: List<DProperty>
     ): SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
-        val modifierHints = ModifierHints(
-            displayLanguage,
-            type = DProperty::class.java,
-            containingType = classlike::class.java,
-            isSummary = true
-        )
         val components = properties.map {
+            val modifierHints = ModifierHints(
+                displayLanguage = displayLanguage,
+                type = DProperty::class.java,
+                containingType = classlike::class.java,
+                isSummary = true,
+                injectStatic = it.isJavaStaticField()
+            )
             errorContextInjector(it) {
                 propertyConverter.summary(it, modifierHints)
             }
@@ -521,13 +550,14 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun propertiesToDetail(properties: List<DProperty>): List<SymbolDetail> {
-        val modifierHints = ModifierHints(
-            displayLanguage,
-            isSummary = false,
-            type = DProperty::class.java,
-            containingType = classlike::class.java
-        )
         return properties.map {
+            val modifierHints = ModifierHints(
+                displayLanguage = displayLanguage,
+                type = DProperty::class.java,
+                containingType = classlike::class.java,
+                isSummary = false,
+                injectStatic = it.isJavaStaticField()
+            )
             errorContextInjector(it) {
                 propertyConverter.detail(it, modifierHints)
             }
@@ -858,34 +888,47 @@ internal class ClasslikeDocumentableConverter(
 
     /**
      * Returns all [Documentable]s from the list which are not the companion object of [classlike]
+     * Unless this is as-Java, in which case display everything because some things are only
+     * accessible through the companion in Java.
      */
-    private fun List<Documentable>.withoutCompanion(): List<Documentable> =
-        filterNot { it.dri == (classlike as? DClass)?.companion?.dri }
-
-    private fun isPublic(function: DFunction) = "public" in function.modifiers()
-    private fun isProtected(function: DFunction) = "protected" in function.modifiers()
-
-    /** Filters for public, non-constant properties. */
-    private fun isPublic(property: DProperty): Boolean {
-        val modifiers = property.modifiers()
-        return "public" in modifiers && !isConstant(modifiers)
-    }
-
-    /** Filters for protected, non-constant properties. */
-    private fun isProtected(property: DProperty): Boolean {
-        val modifiers = property.modifiers()
-        return "protected" in modifiers && !isConstant(modifiers)
-    }
-
-    /**
-     * Returns true if function is a suspend function itself, or takes a suspend function as a
-     * parameter.
-     */
-    private fun DFunction.isSuspendFunction() =
-        type.isSuspend() || parameters.any { it.type.isSuspend() }
-
-    private fun List<DProperty>.constants() = filter { isConstant(it.modifiers()) }
+    private fun <T : Documentable> List<T>.withoutNeglectableCompanion(): List<T> =
+        if (displayLanguage == Language.JAVA) this
+        else filterNot {
+            it.dri == (classlike as? DClass)?.companion?.dri && it.isOrdinaryCompanion()
+        }
 }
+
+internal fun Documentable.isOrdinaryCompanion(): Boolean =
+    this is DObject && this.isCompanion() &&
+        name == "Companion" &&
+        supertypes.all { it.value.isEmpty() }
+
+private fun Documentable.isCompanion() =
+    this is DObject && (this.dri.classNames?.contains(".") == true)
+
+private fun isPublic(function: DFunction) = "public" in function.modifiers()
+private fun isProtected(function: DFunction) = "protected" in function.modifiers()
+
+/** Filters for public, non-constant properties. */
+private fun isPublicNonConst(property: DProperty): Boolean {
+    val modifiers = property.modifiers()
+    return "public" in modifiers && !isConstant(modifiers)
+}
+
+/** Filters for protected, non-constant properties. */
+private fun isProtectedNonConst(property: DProperty): Boolean {
+    val modifiers = property.modifiers()
+    return "protected" in modifiers && !isConstant(modifiers)
+}
+
+/**
+ * Returns true if function is a suspend function itself, or takes a suspend function as a
+ * parameter.
+ */
+private fun DFunction.isSuspendFunction() =
+    type.isSuspend() || parameters.any { it.type.isSuspend() }
+
+private fun List<DProperty>.constants() = filter { isConstant(it.modifiers()) }.toSet().toList()
 
 internal fun nestedTypesTitle() = "Nested types"
 

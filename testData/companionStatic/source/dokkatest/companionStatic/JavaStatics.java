@@ -16,6 +16,8 @@
 
 package dokkatest.companionStatic;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Comparator;
 
 // TODO: add tests around companion/static inheritance, including cross-language, protected static
@@ -27,13 +29,24 @@ public class JavaStatics {
     public static int classStaticFunction() { return 4; }
     public static int classStaticProp = 3;
 
+    public static class InnerJavaStatics {
+        public int notStaticinnerField = 2;
+        public int notStaticInnerFun() { return 1; }
+        public static int staticInnerField = 0;
+        public static int staticInnerFun() { return -1; }
+    }
+
     // A demonstration of how Kotlin-as-Java static access works
     private static void tests() {
         double athing = 0;
         String astring = "";
-        athing = KotlinObjectsKt.getTopLevelProp();
-        athing = KotlinObjectsKt.topLevelConst;
         athing = KotlinObjectsKt.topLevelFunction();
+        athing = KotlinObjectsKt.getTopLevelProp();         // Only getter
+        athing = KotlinObjectsKt.topLevelConst;             // Only backing field
+        athing = KotlinObjectsKt.topLevelField;             // Only backing field
+        astring = KotlinObjectsKt.getTopLevelLateinit();    // Both backing field and getter
+        astring = KotlinObjectsKt.topLevelLateinit;         // Both backing field and getter
+
         athing = TopLevelObject.INSTANCE.namedTopLevelObjectFun();
         // Not valid; TopLevelObject is a static context and namedTopLevelObjectFun is not static
         // athing = TopLevelObject.namedTopLevelObjectFun();        // DO NOT DISPLAY
@@ -81,5 +94,32 @@ public class JavaStatics {
         athing = ContainerOfInheriting.Companion.getInheritingCompanionObjectProp(); // Compion Only
         athing = ContainerOfInheriting.Companion.inheritingCompanionObjectFun();// Companion Only
         astring = ContainerOfInheriting.Companion.getMessage(); // From Exception. Companion Only
+
+        astring = TopLevelObject.topLevelStaticLateInitVar;
+        astring = TopLevelObject.getTopLevelStaticLateInitVar();
+        astring = TopLevelObject.topLevelLateInitVar;
+        astring = TopLevelObject.INSTANCE.getTopLevelLateInitVar();
+        // Gives a warning: "static member accessed via instance reference"
+        astring = TopLevelObject.INSTANCE.getTopLevelStaticLateInitVar();
+
+     //   astring = ContainerOfLateinit.companionNotLateInitVar;
+        astring = ContainerOfLateinit.companionLateInitVar;
+        astring = ContainerOfLateinit.companionStaticLateInitVar;
+
+     //   astring = ContainerOfLateinit.getCompanionNotLateInitVar();
+     //   astring = ContainerOfLateinit.getCompanionLateInitVar();
+        astring = ContainerOfLateinit.getCompanionStaticLateInitVar();
+
+        astring = ContainerOfLateinit.Companion.getCompanionNotLateInitVar();
+        astring = ContainerOfLateinit.Companion.getCompanionLateInitVar();
+        // Does not give a warning about static member from instance reference
+        astring = ContainerOfLateinit.Companion.getCompanionStaticLateInitVar();
+
+     //   astring = ContainerOfLateinit.Companion.companionNotLateInitVar;
+     //   astring = ContainerOfLateinit.Companion.companionLateInitVar;
+     //   astring = ContainerOfLateinit.Companion.companionStaticLateInitVar;
+
+        // In conclusion, lateinit vars have a hoisted public static backing field
+        // but not a hoisted public static getter
     }
 }

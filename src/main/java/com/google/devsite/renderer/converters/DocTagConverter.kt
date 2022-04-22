@@ -266,10 +266,10 @@ internal class DocTagConverter(
             return when (documentable) {
                 is DClasslike -> {
                     logComponentNotFoundWarning(
-                        "@property",
-                        tags.names().toSet()
+                        componentType = "@property",
+                        components = tags.names().toSet()
                             .subtract(documentable.properties.map { it.name }.toSet()),
-                        documentable
+                        containingComponent = documentable
                     )
                     emptyList()
                 }
