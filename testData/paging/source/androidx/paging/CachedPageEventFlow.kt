@@ -17,24 +17,20 @@
 package androidx.paging
 
 import androidx.annotation.VisibleForTesting
-import androidx.paging.multicast.Multicaster
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.channels.ClosedSendChannelException
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.consumeAsFlow
-import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onSubscription
+import kotlinx.coroutines.flow.takeWhile
 import kotlinx.coroutines.flow.withIndex
-import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import java.util.ArrayDeque
-import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * An intermediate flow producer that flattens previous page events and gives any new downstream
@@ -47,150 +43,101 @@ internal class CachedPageEventFlow<T : Any>(
     private val pageController = FlattenedPageController<T>()
 
     /**
-     * We can collect from source only once since Events are ordered.
-     * This flag ensures that we do not try to collect from upstream more than once.
+     * Shared flow for downstreams where we dispatch each event coming from upstream.
+     * This only has reply = 1 so it does not keep the previous events. Meanwhile, it still buffers
+     * them for active subscribers.
+     * A final `null` value is emitted as the end of stream message once the job is complete.
      */
-    private val collectedFromSource = AtomicBoolean(false)
-
-    /**
-     * Shared upstream.
-     * Note that, if upstream flow ends, re-subscribing to this will not re-collect from upstream
-     * since PageEvent flows cannot be restarted. Instead, a new subscriber will get only the
-     * cached values from snapshot.
-     */
-    private val multicastedSrc = Multicaster(
-        scope = scope,
-        bufferSize = 0,
-        source = flow {
-            // we can collect from a Flow<PageEvent> only once.
-            // if this multicaster ever gets restarted, we should not try to collect from the
-            // original flow, instead, return empty flow from upstream and let the new downstream
-            // only receive historical events
-            if (collectedFromSource.compareAndSet(false, true)) {
-                emitAll(src.withIndex())
-            }
-        },
-        onEach = pageController::record,
-        keepUpstreamAlive = true
+    private val mutableSharedSrc = MutableSharedFlow<IndexedValue<PageEvent<T>>?>(
+        replay = 1,
+        extraBufferCapacity = Channel.UNLIMITED,
+        onBufferOverflow = BufferOverflow.SUSPEND
     )
 
-    suspend fun close() {
-        multicastedSrc.close()
+    /**
+     * Shared flow used for downstream which also sends the history. Each downstream connects to
+     * this where it first receives a history event and then any other event that was emitted by
+     * the upstream.
+     */
+    private val sharedForDownstream = mutableSharedSrc.onSubscription {
+        val history = pageController.getStateAsEvents()
+        // start the job if it has not started yet. We do this after capturing the history so that
+        // the first subscriber does not receive any history.
+        job.start()
+        history.forEach {
+            emit(it)
+        }
     }
 
-    val downstreamFlow = simpleChannelFlow<PageEvent<T>> {
-        // get a new snapshot. this will immediately hook us to the upstream channel
-        val snapshot = pageController.createTemporaryDownstream()
-        var lastReceivedHistoryIndex = Int.MIN_VALUE
-        // first, dispatch everything in the snapshot
-        // these are events that sync us to the current state + other events that might be
-        // emitted by the upstream between the time of snapshot and us connecting to the upstream
-        val historyCollection = launch {
-            snapshot.consumeHistory().collect {
-                lastReceivedHistoryIndex = it.index
-                send(it.value)
-            }
-        }
-        val activeStreamCollection = launch {
-            multicastedSrc.flow.catch { throwable: Throwable ->
-                // ignore ClosedSendChannelException, possible race condition
-                // watch the following issue to catch a more explicit error
-                // https://github.com/dropbox/Store/issues/45
-                if (throwable !is ClosedSendChannelException) {
-                    throw throwable
-                }
-            }.onCompletion {
-                // if main upstream finishes, make sure to close the history stream
-                // otherwise it might stay open forever
-                snapshot.close()
-            }.collect {
-                // we got a value from real stream, close history
-                snapshot.close()
-                // wait for it to be done so that all events there are dispatched
-                historyCollection.join()
-                // now if it is new enough, emit it, otherwise, skip it
-                if (it.index > lastReceivedHistoryIndex) {
-                    send(it.value)
-                }
-            }
-        }
-        joinAll(activeStreamCollection, historyCollection)
-    }
-}
-
-/**
- * This intermediate class is used to ensure new downstream does not miss any events.
- *
- * There is a race condition where, while it is collecting the initial state, there might be more
- * events dispatched by the real source which will be missed because new downstream is not
- * subscribed to the real upstream yet.
- *
- * FlattenedPageController tracks these temporary channels and sends each event into them as well
- * so that they are not lost until the new downstream connects to the real upstream.
- * After that connection is established, this channel is closed.
- *
- * Each value is indexed to avoid sending the same event multiple times.
- */
-private class TemporaryDownstream<T : Any> {
     /**
-     * List of events that sync us to current state + any other events that might arrive while
-     * we are doing the initial sync
+     * The actual job that collects the upstream.
      */
-    private val historyChannel: Channel<IndexedValue<PageEvent<T>>> = Channel(Channel.UNLIMITED)
-
-    fun consumeHistory() = historyChannel.consumeAsFlow()
-
-    /**
-     * Tries to send the value to the history channel.
-     * Returns false if send fails (e.g. channel is already closed)
-     */
-    suspend fun send(event: IndexedValue<PageEvent<T>>): Boolean {
-        return try {
-            historyChannel.send(event)
-            true
-        } catch (closed: ClosedSendChannelException) {
-            false
+    private val job = scope.launch(start = CoroutineStart.LAZY) {
+        src.withIndex()
+            .collect {
+                mutableSharedSrc.emit(it)
+                pageController.record(it)
+            }
+    }.also {
+        it.invokeOnCompletion {
+            // Emit a final `null` message to the mutable shared flow.
+            // Even though, this tryEmit might technically fail, it shouldn't because we have
+            // unlimited buffer in the shared flow.
+            mutableSharedSrc.tryEmit(null)
         }
     }
 
     fun close() {
-        historyChannel.close()
+        job.cancel()
+    }
+
+    val downstreamFlow = flow {
+        // track max event index we've seen to avoid race condition between history and the shared
+        // stream
+        var maxEventIndex = Integer.MIN_VALUE
+        sharedForDownstream
+            .takeWhile {
+                // shared flow cannot finish hence we have a special marker to finish it
+                it != null
+            }
+            .collect { indexedValue ->
+                // we take until null so this cannot be null
+                if (indexedValue!!.index > maxEventIndex) {
+                    emit(indexedValue.value)
+                    maxEventIndex = indexedValue.index
+                }
+            }
     }
 }
 
 private class FlattenedPageController<T : Any> {
     private val list = FlattenedPageEventStorage<T>()
-    private var snapshots = listOf<TemporaryDownstream<T>>()
     private val lock = Mutex()
+    private var maxEventIndex = -1
 
     /**
      * Record the event.
-     * This sends the event into storage but also into any other active TemporaryDownstream.
      */
     suspend fun record(event: IndexedValue<PageEvent<T>>) {
         lock.withLock {
+            maxEventIndex = event.index
             list.add(event.value)
-            snapshots = snapshots.filter {
-                it.send(event)
-            }
         }
     }
 
     /**
-     * Creates a temporary downstream which will have events that are necessary to sync the
-     * current state + any other events that might arrive while that sync is in progress.
+     * Create a list of events that represents the current state of the list.
      */
-    suspend fun createTemporaryDownstream(): TemporaryDownstream<T> {
+    suspend fun getStateAsEvents(): List<IndexedValue<PageEvent<T>>> {
         return lock.withLock {
-            TemporaryDownstream<T>().also { snap ->
-                list.getAsEvents().forEachIndexed { index, pageEvent ->
-                    snap.send(
-                        IndexedValue(
-                            index = Int.MIN_VALUE + index,
-                            value = pageEvent
-                        )
-                    )
-                }
+            // condensed events to bring downstream up to the current state
+            val catchupEvents = list.getAsEvents()
+            val startEventIndex = maxEventIndex - catchupEvents.size + 1
+            catchupEvents.mapIndexed { index, pageEvent ->
+                IndexedValue(
+                    index = startEventIndex + index,
+                    value = pageEvent
+                )
             }
         }
     }
@@ -213,12 +160,21 @@ internal class FlattenedPageEventStorage<T : Any> {
      * data once we start getting events. This is fine, since downstream needs to handle this
      * anyway - remote state being added after initial, empty, PagingData.
      */
-    private val loadStates = MutableLoadStateCollection()
+    private val sourceStates = MutableLoadStateCollection()
+    private var mediatorStates: LoadStates? = null
+
+    /**
+     * Tracks if we ever received an event from upstream to prevent sending the initial IDLE state
+     * to new downstream subscribers.
+     */
+    private var receivedFirstEvent: Boolean = false
     fun add(event: PageEvent<T>) {
+        receivedFirstEvent = true
         when (event) {
             is PageEvent.Insert<T> -> handleInsert(event)
             is PageEvent.Drop<T> -> handlePageDrop(event)
             is PageEvent.LoadStateUpdate<T> -> handleLoadStateUpdate(event)
+            is PageEvent.StaticList -> handleStaticList(event)
         }
     }
 
@@ -226,7 +182,7 @@ internal class FlattenedPageEventStorage<T : Any> {
         // TODO: include state in drop event for simplicity, instead of reconstructing behavior.
         //  This allows upstream to control how drop affects states (e.g. letting drop affect both
         //  remote and local)
-        loadStates.set(event.loadType, false, LoadState.NotLoading.Incomplete)
+        sourceStates.set(event.loadType, LoadState.NotLoading.Incomplete)
 
         when (event.loadType) {
             LoadType.PREPEND -> {
@@ -242,7 +198,9 @@ internal class FlattenedPageEventStorage<T : Any> {
     }
 
     private fun handleInsert(event: PageEvent.Insert<T>) {
-        loadStates.set(event.combinedLoadStates)
+        sourceStates.set(event.sourceLoadStates)
+        mediatorStates = event.mediatorLoadStates
+
         when (event.loadType) {
             LoadType.REFRESH -> {
                 pages.clear()
@@ -264,26 +222,48 @@ internal class FlattenedPageEventStorage<T : Any> {
     }
 
     private fun handleLoadStateUpdate(event: PageEvent.LoadStateUpdate<T>) {
-        loadStates.set(event.loadType, event.fromMediator, event.loadState)
+        sourceStates.set(event.source)
+        mediatorStates = event.mediator
+    }
+
+    private fun handleStaticList(event: PageEvent.StaticList<T>) {
+        if (event.sourceLoadStates != null) {
+            sourceStates.set(event.sourceLoadStates)
+        }
+
+        if (event.mediatorLoadStates != null) {
+            mediatorStates = event.mediatorLoadStates
+        }
+
+        pages.clear()
+        placeholdersAfter = 0
+        placeholdersBefore = 0
+        pages.add(TransformablePage(originalPageOffset = 0, data = event.data))
     }
 
     fun getAsEvents(): List<PageEvent<T>> {
+        if (!receivedFirstEvent) {
+            return emptyList()
+        }
         val events = mutableListOf<PageEvent<T>>()
+        val source = sourceStates.snapshot()
         if (pages.isNotEmpty()) {
             events.add(
                 PageEvent.Insert.Refresh(
                     pages = pages.toList(),
                     placeholdersBefore = placeholdersBefore,
                     placeholdersAfter = placeholdersAfter,
-                    combinedLoadStates = loadStates.snapshot()
+                    sourceLoadStates = source,
+                    mediatorLoadStates = mediatorStates
                 )
             )
         } else {
-            loadStates.forEach { type, fromMediator, state ->
-                if (PageEvent.LoadStateUpdate.canDispatchWithoutInsert(state, fromMediator)) {
-                    events.add(PageEvent.LoadStateUpdate(type, fromMediator, state))
-                }
-            }
+            events.add(
+                PageEvent.LoadStateUpdate(
+                    source = source,
+                    mediator = mediatorStates
+                )
+            )
         }
 
         return events

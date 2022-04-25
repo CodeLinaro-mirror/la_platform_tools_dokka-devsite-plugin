@@ -26,7 +26,7 @@ repositories {
 }
 
 plugins {
-    kotlin("jvm") version "1.6.10"
+    kotlin("jvm") version "1.6.21"
     id("com.github.johnrengelman.shadow") version "7.1.1"
     id("application")
     id("maven-publish")
@@ -145,7 +145,7 @@ val classpathForTests by tasks.registering(ClasspathForTestsTask::class) {
 val compileTestDataKotlin: KotlinCompile by tasks.getting(KotlinCompile::class) {
     kotlinOptions {
         // we are only checking if the classpath is complete
-        freeCompilerArgs += "-Xdisable-phases=Codegen"
+        //freeCompilerArgs += "-Xdisable-phases=Codegen"
     }
     dependsOn(explodeAars)
 }

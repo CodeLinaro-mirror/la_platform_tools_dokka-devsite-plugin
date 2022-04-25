@@ -35,6 +35,13 @@
               <p>A hot <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> of <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> that emits a snapshot whenever the loading state of the current <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> changes.</p>
             </td>
           </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#onPagesUpdatedFlow()">onPagesUpdatedFlow</a></code></div>
+              <p>A hot <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> that emits after the pages presented to the UI are updated, even if the actual items presented don't change.</p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -70,6 +77,13 @@
             </td>
           </tr>
           <tr>
+            <td width="40%"><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#addOnPagesUpdatedListener(kotlin.Function0)">addOnPagesUpdatedListener</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener)</code></div>
+              <p>Add a listener which triggers after the pages presented to the UI are updated, even if the actual items presented don't change.</p>
+            </td>
+          </tr>
+          <tr>
             <td width="40%"><code>final T</code></td>
             <td>
               <div><code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#getItem(kotlin.Int)">getItem</a>(@<a href="/reference/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) int&nbsp;index)</code></div>
@@ -95,6 +109,13 @@
             <td>
               <div><code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a>,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener<br>)</code></div>
               <p>Remove a previously registered <code><a href="/reference/androidx/paging/CombinedLoadStates.html">CombinedLoadStates</a></code> listener.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#removeOnPagesUpdatedListener(kotlin.Function0)">removeOnPagesUpdatedListener</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener)</code></div>
+              <p>Remove a previously registered listener for new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> generations completing initial load and presenting to the UI.</p>
             </td>
           </tr>
           <tr>
@@ -173,6 +194,24 @@ lifecycleScope.launch {
         }
 }</pre>
     </div>
+    <div><a name="getOnPagesUpdatedFlow()"></a><a name="setOnPagesUpdatedFlow()"></a><a name="getOnPagesUpdatedFlow--"></a><a name="setOnPagesUpdatedFlow--"></a>
+      <h3 class="api-name" id="onPagesUpdatedFlow()">onPagesUpdatedFlow</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#onPagesUpdatedFlow()">onPagesUpdatedFlow</a></pre>
+      <p>A hot <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> that emits after the pages presented to the UI are updated, even if the actual items presented don't change.</p>
+      <p>An update is triggered from one of the following:</p>
+      <ul>
+        <li>
+          <p><code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#submitData(androidx.paging.PagingData)">submitData</a></code> is called and initial load completes, regardless of any differences in     the loaded data</p>
+        </li>
+        <li>
+          <p>A <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code> is inserted</p>
+        </li>
+        <li>
+          <p>A <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code> is dropped</p>
+        </li>
+      </ul>
+      <p>Note: This is a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-shared-flow/index.html">SharedFlow</a></code> configured to replay 0 items with a buffer of size 64. If a collector lags behind page updates, it may trigger multiple times for each intermediate update that was presented while your collector was still working. To avoid this behavior, you can <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/index.html">conflate</a></code> this <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> so that you only receive the latest update, which is useful in cases where you are simply updating UI and don't care about tracking the exact number of page updates.</p>
+    </div>
     <h2>Public constructors</h2>
     <div><a name="AsyncPagingDataDiffer(androidx.recyclerview.widget.DiffUtil.ItemCallback, androidx.recyclerview.widget.ListUpdateCallback, kotlinx.coroutines.CoroutineDispatcher, kotlinx.coroutines.CoroutineDispatcher)"></a><a name="AsyncPagingDataDiffer-androidx.recyclerview.widget.DiffUtil.ItemCallback-androidx.recyclerview.widget.ListUpdateCallback-kotlinx.coroutines.CoroutineDispatcher-kotlinx.coroutines.CoroutineDispatcher-"></a><a name="asyncpagingdatadiffer"></a>
       <h3 class="api-name" id="AsyncPagingDataDiffer(androidx.recyclerview.widget.DiffUtil.ItemCallback,androidx.recyclerview.widget.ListUpdateCallback,kotlinx.coroutines.CoroutineDispatcher,kotlinx.coroutines.CoroutineDispatcher)">AsyncPagingDataDiffer</h3>
@@ -222,6 +261,55 @@ adapter.addLoadStateListener {
           <tbody>
             <tr>
               <td width="40%"><code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#removeLoadStateListener(kotlin.Function1)">removeLoadStateListener</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="addOnPagesUpdatedListener-kotlin.Function0-"></a><a name="addonpagesupdatedlistener"></a>
+      <h3 class="api-name" id="addOnPagesUpdatedListener(kotlin.Function0)">addOnPagesUpdatedListener</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#addOnPagesUpdatedListener(kotlin.Function0)">addOnPagesUpdatedListener</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener)</pre>
+      <p>Add a listener which triggers after the pages presented to the UI are updated, even if the actual items presented don't change.</p>
+      <p>An update is triggered from one of the following:</p>
+      <ul>
+        <li>
+          <p><code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#submitData(androidx.paging.PagingData)">submitData</a></code> is called and initial load completes, regardless of any differences in     the loaded data</p>
+        </li>
+        <li>
+          <p>A <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code> is inserted</p>
+        </li>
+        <li>
+          <p>A <code><a href="/reference/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code> is dropped</p>
+        </li>
+      </ul>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+              <td>
+                <p>called after pages presented are updated.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#removeOnPagesUpdatedListener(kotlin.Function0)">removeOnPagesUpdatedListener</a></code></td>
               <td></td>
             </tr>
           </tbody>
@@ -385,6 +473,43 @@ adapter.addLoadStateListener {
         </table>
       </div>
     </div>
+    <div><a name="removeOnPagesUpdatedListener-kotlin.Function0-"></a><a name="removeonpagesupdatedlistener"></a>
+      <h3 class="api-name" id="removeOnPagesUpdatedListener(kotlin.Function0)">removeOnPagesUpdatedListener</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#removeOnPagesUpdatedListener(kotlin.Function0)">removeOnPagesUpdatedListener</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener)</pre>
+      <p>Remove a previously registered listener for new <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> generations completing initial load and presenting to the UI.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">Parameters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;listener</code></td>
+              <td>
+                <p>Previously registered listener.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="2">See also</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="40%"><code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#addOnPagesUpdatedListener(kotlin.Function0)">addOnPagesUpdatedListener</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <div><a name="retry--"></a><a name="retry"></a>
       <h3 class="api-name" id="retry()">retry</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#retry()">retry</a>()</pre>
@@ -409,7 +534,6 @@ adapter.addLoadStateListener {
       <h3 class="api-name" id="submitData(androidx.paging.PagingData)">submitData</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#submitData(androidx.paging.PagingData)">submitData</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;pagingData)</pre>
       <p>Present a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> until it is invalidated by a call to <code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#refresh()">refresh</a></code> or <code><a href="/reference/androidx/paging/PagingSource.html#invalidate()">PagingSource.invalidate</a></code>.</p>
-      <p><code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#submitData(androidx.paging.PagingData)">submitData</a></code> should be called on the same <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> where updates will be dispatched to UI, typically <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-dispatchers/-main.html">Dispatchers.Main</a></code>. (this is done for you if you use <code>lifecycleScope.launch {}</code>).</p>
       <p>This method is typically used when collecting from a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> produced by <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code>. For RxJava or LiveData support, use the non-suspending overload of <code><a href="/reference/androidx/paging/AsyncPagingDataDiffer.html#submitData(androidx.paging.PagingData)">submitData</a></code>, which accepts a <code><a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code>.</p>
       <p>Note: This method suspends while it is actively presenting page loads from a <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>, until the <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is invalidated. Although cancellation will propagate to this call automatically, collecting from a <code><a href="/reference/androidx/paging/Pager.html#flow()">Pager.flow</a></code> with the intention of presenting the most up-to-date representation of your backing dataset should typically be done using <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/index.html">collectLatest</a></code>.</p>
       <div class="devsite-table-wrapper">

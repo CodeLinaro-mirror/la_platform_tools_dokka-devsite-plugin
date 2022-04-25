@@ -20,8 +20,6 @@ import androidx.annotation.IntRange
 import androidx.annotation.RestrictTo
 import androidx.annotation.VisibleForTesting
 import androidx.paging.LoadType.REFRESH
-import java.util.concurrent.CopyOnWriteArrayList
-import java.util.concurrent.atomic.AtomicBoolean
 
 /** @suppress */
 @Suppress("DEPRECATION")
@@ -81,6 +79,14 @@ public fun <Key : Any> PagedList.Config.toRefreshLoadParams(
  * @see Pager
  */
 public abstract class PagingSource<Key : Any, Value : Any> {
+
+    private val invalidateCallbackTracker = InvalidateCallbackTracker<() -> Unit>(
+        callbackInvoker = { it() }
+    )
+
+    internal val invalidateCallbackCount: Int
+        @VisibleForTesting
+        get() = invalidateCallbackTracker.callbackCount()
 
     /**
      * Params for a load request on a [PagingSource] from [PagingSource.load].
@@ -204,6 +210,24 @@ public abstract class PagingSource<Key : Any, Value : Any> {
         ) : LoadResult<Key, Value>()
 
         /**
+         * Invalid result object for [PagingSource.load]
+         *
+         * This return type can be used to terminate future load requests on this [PagingSource]
+         * when the [PagingSource] is not longer valid due to changes in the underlying dataset.
+         *
+         * For example, if the underlying database gets written into but the [PagingSource] does
+         * not invalidate in time, it may return inconsistent results if its implementation depends
+         * on the immutability of the backing dataset it loads from (e.g., LIMIT OFFSET style db
+         * implementations). In this scenario, it is recommended to check for invalidation after
+         * loading and to return LoadResult.Invalid, which causes Paging to discard any
+         * pending or future load requests to this PagingSource and invalidate it.
+         *
+         * Returning [Invalid] will trigger Paging to [invalidate] this [PagingSource] and
+         * terminate any future attempts to [load] from this [PagingSource]
+         */
+        public class Invalid<Key : Any, Value : Any> : LoadResult<Key, Value>()
+
+        /**
          * Success result object for [PagingSource.load].
          *
          * @sample androidx.paging.samples.pageKeyedPage
@@ -295,17 +319,12 @@ public abstract class PagingSource<Key : Any, Value : Any> {
     public open val keyReuseSupported: Boolean
         get() = false
 
-    @VisibleForTesting
-    internal val onInvalidatedCallbacks = CopyOnWriteArrayList<() -> Unit>()
-
-    private val _invalid = AtomicBoolean(false)
-
     /**
      * Whether this [PagingSource] has been invalidated, which should happen when the data this
      * [PagingSource] represents changes since it was first instantiated.
      */
     public val invalid: Boolean
-        get() = _invalid.get()
+        get() = invalidateCallbackTracker.invalid
 
     /**
      * Signal the [PagingSource] to stop loading.
@@ -314,9 +333,7 @@ public abstract class PagingSource<Key : Any, Value : Any> {
      * this method should have no effect.
      */
     public fun invalidate() {
-        if (_invalid.compareAndSet(false, true)) {
-            onInvalidatedCallbacks.forEach { it.invoke() }
-        }
+        invalidateCallbackTracker.invalidate()
     }
 
     /**
@@ -327,11 +344,14 @@ public abstract class PagingSource<Key : Any, Value : Any> {
      * A [PagingSource] will only invoke its callbacks once - the first time [invalidate] is called,
      * on that thread.
      *
+     * If this [PagingSource] is already invalid, the provided [onInvalidatedCallback] will be
+     * triggered immediately.
+     *
      * @param onInvalidatedCallback The callback that will be invoked on thread that invalidates the
      * [PagingSource].
      */
     public fun registerInvalidatedCallback(onInvalidatedCallback: () -> Unit) {
-        onInvalidatedCallbacks.add(onInvalidatedCallback)
+        invalidateCallbackTracker.registerInvalidatedCallback(onInvalidatedCallback)
     }
 
     /**
@@ -340,7 +360,7 @@ public abstract class PagingSource<Key : Any, Value : Any> {
      * @param onInvalidatedCallback The previously added callback.
      */
     public fun unregisterInvalidatedCallback(onInvalidatedCallback: () -> Unit) {
-        onInvalidatedCallbacks.remove(onInvalidatedCallback)
+        invalidateCallbackTracker.unregisterInvalidatedCallback(onInvalidatedCallback)
     }
 
     /**
@@ -355,17 +375,18 @@ public abstract class PagingSource<Key : Any, Value : Any> {
      * of this [PagingSource]. The [Key] is provided to [load] via [LoadParams.key].
      *
      * The [Key] returned by this method should cause [load] to load enough items to
-     * fill the viewport around the last accessed position, allowing the next generation to
+     * fill the viewport *around* the last accessed position, allowing the next generation to
      * transparently animate in. The last accessed position can be retrieved via
      * [state.anchorPosition][PagingState.anchorPosition], which is typically
-     * the top-most or bottom-most item in the viewport due to access being triggered by binding
+     * the *top-most* or *bottom-most* item in the viewport due to access being triggered by binding
      * items as they scroll into view.
      *
      * For example, if items are loaded based on integer position keys, you can return
-     * [state.anchorPosition][PagingState.anchorPosition].
+     * `( (state.anchorPosition ?: 0) - state.config.initialLoadSize / 2).coerceAtLeast(0)`.
      *
      * Alternately, if items contain a key used to load, get the key from the item in the page at
-     * index [state.anchorPosition][PagingState.anchorPosition].
+     * index [state.anchorPosition][PagingState.anchorPosition] then try to center it based on
+     * `state.config.initialLoadSize`.
      *
      * @param state [PagingState] of the currently fetched data, which includes the most recently
      * accessed position in the list via [PagingState.anchorPosition].

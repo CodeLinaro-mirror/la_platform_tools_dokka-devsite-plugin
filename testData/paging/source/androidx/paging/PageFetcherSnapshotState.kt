@@ -18,6 +18,7 @@ package androidx.paging
 
 import androidx.annotation.CheckResult
 import androidx.paging.LoadState.NotLoading
+import androidx.paging.LoadState.Loading
 import androidx.paging.LoadType.APPEND
 import androidx.paging.LoadType.PREPEND
 import androidx.paging.LoadType.REFRESH
@@ -48,7 +49,7 @@ internal class PageFetcherSnapshotState<Key : Any, Value : Any> private construc
         private set
 
     internal val storageCount
-        get() = pages.sumBy { it.data.size }
+        get() = pages.sumOf { it.data.size }
 
     private var _placeholdersBefore = 0
 
@@ -104,26 +105,27 @@ internal class PageFetcherSnapshotState<Key : Any, Value : Any> private construc
      */
     internal val failedHintsByLoadType = mutableMapOf<LoadType, ViewportHint>()
 
-    // only the local load states
-    internal var sourceLoadStates = LoadStates.IDLE
+    // Only track the local load states, remote states are injected from PageFetcher. This class
+    // only tracks state within a single generation from source side.
+    internal var sourceLoadStates = MutableLoadStateCollection().apply {
+        // Synchronously initialize REFRESH with Loading.
+        // NOTE: It is important that we do this synchronously on init, since PageFetcherSnapshot
+        // expects to send this initial state immediately. It is always correct for a new
+        // generation to immediately begin loading refresh, so rather than start with NotLoading
+        // then updating to Loading, we simply start with Loading immediately to create less
+        // churn downstream.
+        set(REFRESH, Loading)
+    }
         private set
 
     fun consumePrependGenerationIdAsFlow(): Flow<Int> {
         return prependGenerationIdCh.consumeAsFlow()
-            .onStart { prependGenerationIdCh.offer(prependGenerationId) }
+            .onStart { prependGenerationIdCh.trySend(prependGenerationId) }
     }
 
     fun consumeAppendGenerationIdAsFlow(): Flow<Int> {
         return appendGenerationIdCh.consumeAsFlow()
-            .onStart { appendGenerationIdCh.offer(appendGenerationId) }
-    }
-
-    fun setSourceLoadState(type: LoadType, newState: LoadState): Boolean {
-        if (sourceLoadStates.get(type) == newState) {
-            return false
-        }
-        sourceLoadStates = sourceLoadStates.modifyState(type, newState)
-        return true
+            .onStart { appendGenerationIdCh.trySend(appendGenerationId) }
     }
 
     /**
@@ -148,35 +150,20 @@ internal class PageFetcherSnapshotState<Key : Any, Value : Any> private construc
                 pages = pages,
                 placeholdersBefore = placeholdersBefore,
                 placeholdersAfter = placeholdersAfter,
-                combinedLoadStates = CombinedLoadStates(
-                    refresh = sourceLoadStates.refresh,
-                    prepend = sourceLoadStates.prepend,
-                    append = sourceLoadStates.append,
-                    source = sourceLoadStates,
-                    mediator = null,
-                )
+                sourceLoadStates = sourceLoadStates.snapshot(),
+                mediatorLoadStates = null,
             )
             PREPEND -> Prepend(
                 pages = pages,
                 placeholdersBefore = placeholdersBefore,
-                combinedLoadStates = CombinedLoadStates(
-                    refresh = sourceLoadStates.refresh,
-                    prepend = sourceLoadStates.prepend,
-                    append = sourceLoadStates.append,
-                    source = sourceLoadStates,
-                    mediator = null,
-                )
+                sourceLoadStates = sourceLoadStates.snapshot(),
+                mediatorLoadStates = null,
             )
             APPEND -> Append(
                 pages = pages,
                 placeholdersAfter = placeholdersAfter,
-                combinedLoadStates = CombinedLoadStates(
-                    refresh = sourceLoadStates.refresh,
-                    prepend = sourceLoadStates.prepend,
-                    append = sourceLoadStates.append,
-                    source = sourceLoadStates,
-                    mediator = null,
-                )
+                sourceLoadStates = sourceLoadStates.snapshot(),
+                mediatorLoadStates = null,
             )
         }
     }
@@ -241,7 +228,7 @@ internal class PageFetcherSnapshotState<Key : Any, Value : Any> private construc
 
         // Reset load state to NotLoading(endOfPaginationReached = false).
         failedHintsByLoadType.remove(event.loadType)
-        sourceLoadStates = sourceLoadStates.modifyState(event.loadType, NotLoading.Incomplete)
+        sourceLoadStates.set(event.loadType, NotLoading.Incomplete)
 
         when (event.loadType) {
             PREPEND -> {
@@ -251,7 +238,7 @@ internal class PageFetcherSnapshotState<Key : Any, Value : Any> private construc
                 placeholdersBefore = event.placeholdersRemaining
 
                 prependGenerationId++
-                prependGenerationIdCh.offer(prependGenerationId)
+                prependGenerationIdCh.trySend(prependGenerationId)
             }
             APPEND -> {
                 repeat(event.pageCount) { _pages.removeAt(pages.size - 1) }
@@ -259,7 +246,7 @@ internal class PageFetcherSnapshotState<Key : Any, Value : Any> private construc
                 placeholdersAfter = event.placeholdersRemaining
 
                 appendGenerationId++
-                appendGenerationIdCh.offer(appendGenerationId)
+                appendGenerationIdCh.trySend(appendGenerationId)
             }
             else -> throw IllegalArgumentException("cannot drop ${event.loadType}")
         }
@@ -391,6 +378,7 @@ internal class PageFetcherSnapshotState<Key : Any, Value : Any> private construc
      * Wrapper for [PageFetcherSnapshotState], which protects access behind a [Mutex] to prevent
      * race scenarios.
      */
+    @Suppress("SyntheticAccessor")
     internal class Holder<Key : Any, Value : Any>(
         private val config: PagingConfig
     ) {

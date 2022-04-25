@@ -218,6 +218,12 @@ class MyPagingSource(
             </td>
           </tr>
           <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Invalid.html">PagingSource.LoadResult.Invalid</a></code></td>
+            <td>
+              <p>Invalid result object for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code></p>
+            </td>
+          </tr>
+          <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">PagingSource.LoadResult.Page</a></code></td>
             <td>
               <p>Success result object for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code>.</p>
@@ -357,9 +363,9 @@ class MyPagingSource(
       <h3 class="api-name" id="getRefreshKey(androidx.paging.PagingState)">getRefreshKey</h3>
       <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a>(state:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;):&nbsp;Key?</pre>
       <p>Provide a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">Key</a></code> used for the initial <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> for the next <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> due to invalidation of this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>. The <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">Key</a></code> is provided to <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> via <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html#key()">LoadParams.key</a></code>.</p>
-      <p>The <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">Key</a></code> returned by this method should cause <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> to load enough items to fill the viewport around the last accessed position, allowing the next generation to transparently animate in. The last accessed position can be retrieved via <code><a href="/reference/kotlin/androidx/paging/PagingState.html#anchorPosition()">state.anchorPosition</a></code>, which is typically the top-most or bottom-most item in the viewport due to access being triggered by binding items as they scroll into view.</p>
-      <p>For example, if items are loaded based on integer position keys, you can return <code><a href="/reference/kotlin/androidx/paging/PagingState.html#anchorPosition()">state.anchorPosition</a></code>.</p>
-      <p>Alternately, if items contain a key used to load, get the key from the item in the page at index <code><a href="/reference/kotlin/androidx/paging/PagingState.html#anchorPosition()">state.anchorPosition</a></code>.</p>
+      <p>The <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">Key</a></code> returned by this method should cause <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> to load enough items to fill the viewport <em>around</em> the last accessed position, allowing the next generation to transparently animate in. The last accessed position can be retrieved via <code><a href="/reference/kotlin/androidx/paging/PagingState.html#anchorPosition()">state.anchorPosition</a></code>, which is typically the <em>top-most</em> or <em>bottom-most</em> item in the viewport due to access being triggered by binding items as they scroll into view.</p>
+      <p>For example, if items are loaded based on integer position keys, you can return <code>( (state.anchorPosition ?: 0) - state.config.initialLoadSize / 2).coerceAtLeast(0)</code>.</p>
+      <p>Alternately, if items contain a key used to load, get the key from the item in the page at index <code><a href="/reference/kotlin/androidx/paging/PagingState.html#anchorPosition()">state.anchorPosition</a></code> then try to center it based on <code>state.config.initialLoadSize</code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -413,6 +419,7 @@ class MyPagingSource(
       <p>Add a callback to invoke when the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> is first invalidated.</p>
       <p>Once invalidated, a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> will not become valid again.</p>
       <p>A <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> will only invoke its callbacks once - the first time <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code> is called, on that thread.</p>
+      <p>If this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> is already invalid, the provided <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#registerInvalidatedCallback(kotlin.Function0)">onInvalidatedCallback</a></code> will be triggered immediately.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>

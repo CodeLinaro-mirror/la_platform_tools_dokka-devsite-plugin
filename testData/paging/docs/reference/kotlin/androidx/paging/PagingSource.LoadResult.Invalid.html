@@ -1,0 +1,58 @@
+<html devsite="true">
+  <head>
+    <title>PagingSource.LoadResult.Invalid</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>PagingSource.LoadResult.Invalid</h1>
+    <p>
+      <pre>class PagingSource.LoadResult.Invalid&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; : <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a></pre>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="jd-inheritance-table">
+        <tbody>
+          <tr>
+            <td colspan="3"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a></td>
+          </tr>
+          <tr>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="2"><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="1"><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Invalid.html">PagingSource.LoadResult.Invalid</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <p>Invalid result object for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">PagingSource.load</a></code></p>
+    <p>This return type can be used to terminate future load requests on this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> when the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> is not longer valid due to changes in the underlying dataset.</p>
+    <p>For example, if the underlying database gets written into but the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> does not invalidate in time, it may return inconsistent results if its implementation depends on the immutability of the backing dataset it loads from (e.g., LIMIT OFFSET style db implementations). In this scenario, it is recommended to check for invalidation after loading and to return LoadResult.Invalid, which causes Paging to discard any pending or future load requests to this PagingSource and invalidate it.</p>
+    <p>Returning <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Invalid.html">Invalid</a></code> will trigger Paging to <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code> this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> and terminate any future attempts to <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> from this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code></p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Invalid.html#Invalid()">Invalid</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="Invalid--"></a><a name="invalid"></a>
+      <h3 class="api-name" id="Invalid()">Invalid</h3>
+      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Invalid.html#Invalid()">Invalid</a>()</pre>
+    </div>
+  </body>
+</html>

@@ -21,6 +21,7 @@ import androidx.annotation.MainThread
 import androidx.annotation.RestrictTo
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.asCoroutineDispatcher
@@ -184,6 +185,15 @@ public abstract class PagedList<T : Any> internal constructor(
                         when (initialResult) {
                             is PagingSource.LoadResult.Page -> initialResult
                             is PagingSource.LoadResult.Error -> throw initialResult.throwable
+                            is PagingSource.LoadResult.Invalid ->
+                                throw IllegalStateException(
+                                    "Failed to create PagedList. The provided PagingSource " +
+                                        "returned LoadResult.Invalid, but a LoadResult.Page was " +
+                                        "expected. To use a PagingSource which supports " +
+                                        "invalidation, use a PagedList builder that accepts a " +
+                                        "factory method for PagingSource or DataSource.Factory, " +
+                                        "such as LivePagedList."
+                                )
                         }
                     }
                 }
@@ -258,6 +268,7 @@ public abstract class PagedList<T : Any> internal constructor(
         private var dataSource: DataSource<Key, Value>?
         private val initialPage: PagingSource.LoadResult.Page<Key, Value>?
         private val config: Config
+        @OptIn(DelicateCoroutinesApi::class)
         private var coroutineScope: CoroutineScope = GlobalScope
         private var notifyDispatcher: CoroutineDispatcher? = null
         private var fetchDispatcher: CoroutineDispatcher? = null
@@ -493,9 +504,11 @@ public abstract class PagedList<T : Any> internal constructor(
                 LegacyPagingSource(
                     fetchDispatcher = fetchDispatcher,
                     dataSource = dataSource
-                ).also {
-                    it.setPageSize(config.pageSize)
-                }
+                )
+            }
+
+            if (pagingSource is LegacyPagingSource) {
+                pagingSource.setPageSize(config.pageSize)
             }
 
             check(pagingSource != null) {

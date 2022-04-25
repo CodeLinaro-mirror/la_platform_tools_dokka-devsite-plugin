@@ -26,6 +26,49 @@ import androidx.paging.LoadType.REFRESH
  * Every event sent to the UI is a PageEvent, and will be processed atomically.
  */
 internal sealed class PageEvent<T : Any> {
+    /**
+     * Represents a fully-terminal, static list of data.
+     *
+     * This event should always be the first and only emission in a Flow<PageEvent> within a
+     * generation.
+     *
+     * @param sourceLoadStates source [LoadStates] to emit if non-null, ignored otherwise, allowing
+     * the presenter receiving this event to maintain the previous state.
+     * @param mediatorLoadStates mediator [LoadStates] to emit if non-null, ignored otherwise,
+     * allowing the presenter receiving this event to maintain its previous state.
+     */
+    data class StaticList<T : Any>(
+        val data: List<T>,
+        val sourceLoadStates: LoadStates? = null,
+        val mediatorLoadStates: LoadStates? = null
+    ) : PageEvent<T>() {
+        override suspend fun <R : Any> map(transform: suspend (T) -> R): PageEvent<R> {
+            return StaticList(
+                data = data.map { transform(it) },
+                sourceLoadStates = sourceLoadStates,
+                mediatorLoadStates = mediatorLoadStates,
+            )
+        }
+
+        override suspend fun <R : Any> flatMap(
+            transform: suspend (T) -> Iterable<R>
+        ): PageEvent<R> {
+            return StaticList(
+                data = data.flatMap { transform(it) },
+                sourceLoadStates = sourceLoadStates,
+                mediatorLoadStates = mediatorLoadStates,
+            )
+        }
+
+        override suspend fun filter(predicate: suspend (T) -> Boolean): PageEvent<T> {
+            return StaticList(
+                data = data.filter { predicate(it) },
+                sourceLoadStates = sourceLoadStates,
+                mediatorLoadStates = mediatorLoadStates,
+            )
+        }
+    }
+
     // Intentional to prefer Refresh, Prepend, Append constructors from Companion.
     @Suppress("DataClassPrivateConstructor")
     data class Insert<T : Any> private constructor(
@@ -33,9 +76,8 @@ internal sealed class PageEvent<T : Any> {
         val pages: List<TransformablePage<T>>,
         val placeholdersBefore: Int,
         val placeholdersAfter: Int,
-        // NOTE: If more events have combinedLoadStates, make sure to change PageFetcher's
-        //  injectRemoteEvents method
-        val combinedLoadStates: CombinedLoadStates
+        val sourceLoadStates: LoadStates,
+        val mediatorLoadStates: LoadStates? = null
     ) : PageEvent<T>() {
         init {
             require(loadType == APPEND || placeholdersBefore >= 0) {
@@ -65,7 +107,8 @@ internal sealed class PageEvent<T : Any> {
             pages = transform(pages),
             placeholdersBefore = placeholdersBefore,
             placeholdersAfter = placeholdersAfter,
-            combinedLoadStates = combinedLoadStates
+            sourceLoadStates = sourceLoadStates,
+            mediatorLoadStates = mediatorLoadStates,
         )
 
         override suspend fun <R : Any> map(transform: suspend (T) -> R): PageEvent<R> = mapPages {
@@ -119,26 +162,44 @@ internal sealed class PageEvent<T : Any> {
                 pages: List<TransformablePage<T>>,
                 placeholdersBefore: Int,
                 placeholdersAfter: Int,
-                combinedLoadStates: CombinedLoadStates
+                sourceLoadStates: LoadStates,
+                mediatorLoadStates: LoadStates? = null
             ) = Insert(
                 REFRESH,
                 pages,
                 placeholdersBefore,
                 placeholdersAfter,
-                combinedLoadStates,
+                sourceLoadStates,
+                mediatorLoadStates,
             )
 
             fun <T : Any> Prepend(
                 pages: List<TransformablePage<T>>,
                 placeholdersBefore: Int,
-                combinedLoadStates: CombinedLoadStates
-            ) = Insert(PREPEND, pages, placeholdersBefore, -1, combinedLoadStates)
+                sourceLoadStates: LoadStates,
+                mediatorLoadStates: LoadStates? = null
+            ) = Insert(
+                PREPEND,
+                pages,
+                placeholdersBefore,
+                -1,
+                sourceLoadStates,
+                mediatorLoadStates,
+            )
 
             fun <T : Any> Append(
                 pages: List<TransformablePage<T>>,
                 placeholdersAfter: Int,
-                combinedLoadStates: CombinedLoadStates
-            ) = Insert(APPEND, pages, -1, placeholdersAfter, combinedLoadStates)
+                sourceLoadStates: LoadStates,
+                mediatorLoadStates: LoadStates? = null
+            ) = Insert(
+                APPEND,
+                pages,
+                -1,
+                placeholdersAfter,
+                sourceLoadStates,
+                mediatorLoadStates,
+            )
 
             /**
              * Empty refresh, used to convey initial state.
@@ -149,20 +210,16 @@ internal sealed class PageEvent<T : Any> {
                 pages = listOf(TransformablePage.EMPTY_INITIAL_PAGE),
                 placeholdersBefore = 0,
                 placeholdersAfter = 0,
-                combinedLoadStates = CombinedLoadStates(
+                sourceLoadStates = LoadStates(
                     refresh = LoadState.NotLoading.Incomplete,
                     prepend = LoadState.NotLoading.Complete,
                     append = LoadState.NotLoading.Complete,
-                    source = LoadStates(
-                        refresh = LoadState.NotLoading.Incomplete,
-                        prepend = LoadState.NotLoading.Complete,
-                        append = LoadState.NotLoading.Complete,
-                    ),
-                )
+                ),
             )
         }
     }
 
+    // TODO: b/195658070 consider refactoring Drop events to carry full source/mediator states.
     data class Drop<T : Any>(
         val loadType: LoadType,
         /**
@@ -187,37 +244,16 @@ internal sealed class PageEvent<T : Any> {
         val pageCount get() = maxPageOffset - minPageOffset + 1
     }
 
+    /**
+     * A [PageEvent] to notify presenter layer of changes in local and remote LoadState.
+     *
+     * Uses two LoadStates objects instead of CombinedLoadStates so that consumers like
+     * PagingDataDiffer can define behavior of convenience properties
+     */
     data class LoadStateUpdate<T : Any>(
-        val loadType: LoadType,
-        val fromMediator: Boolean,
-        val loadState: LoadState // TODO: consider using full state object here
-    ) : PageEvent<T>() {
-        init {
-            // endOfPaginationReached for local refresh is driven by null values in next/prev keys.
-            require(
-                loadType != REFRESH || fromMediator || loadState !is LoadState.NotLoading ||
-                    !loadState.endOfPaginationReached
-            ) {
-                "LoadStateUpdate for local REFRESH may not set endOfPaginationReached = true"
-            }
-
-            require(canDispatchWithoutInsert(loadState, fromMediator)) {
-                "LoadStateUpdates cannot be used to dispatch NotLoading unless it is from remote" +
-                    " mediator and remote mediator reached end of pagination."
-            }
-        }
-
-        companion object {
-            /**
-             * DataSource loads with no more to load must carry LoadState.NotLoading with them,
-             * to ensure content appears in the same frame as e.g. a load state spinner is removed.
-             *
-             * This prevents multiple related RV animations from happening simultaneously
-             */
-            internal fun canDispatchWithoutInsert(loadState: LoadState, fromMediator: Boolean) =
-                loadState is LoadState.Loading || loadState is LoadState.Error || fromMediator
-        }
-    }
+        val source: LoadStates,
+        val mediator: LoadStates? = null,
+    ) : PageEvent<T>()
 
     @Suppress("UNCHECKED_CAST")
     open suspend fun <R : Any> map(transform: suspend (T) -> R): PageEvent<R> = this as PageEvent<R>
