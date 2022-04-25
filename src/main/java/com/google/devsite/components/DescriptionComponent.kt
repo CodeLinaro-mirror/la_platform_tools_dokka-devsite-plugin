@@ -23,7 +23,7 @@ import org.jetbrains.dokka.model.doc.DocTag
 internal interface DescriptionComponent : ContextFreeComponent {
     val data: Params
 
-    class Params(
+    data class Params(
         val pathProvider: FilePathProvider,
         val components: List<DocTag> = emptyList(),
         val summary: Boolean = false,

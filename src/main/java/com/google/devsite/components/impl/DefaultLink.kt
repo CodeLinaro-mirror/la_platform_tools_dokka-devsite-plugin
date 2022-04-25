@@ -33,4 +33,6 @@ internal class DefaultLink(
             }
         }
     }
+
+    override fun toString() = data.name + if (data.url.isNotEmpty()) " " + data.url else ""
 }

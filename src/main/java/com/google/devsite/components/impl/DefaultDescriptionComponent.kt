@@ -470,4 +470,8 @@ internal class DefaultDescriptionComponent(
             else -> it.children.text()
         }
     }.joinToString(separator)
+
+    override fun toString() = if (data.summary) "summary of " else "" +
+        if (data.deprecation != null) data.deprecation + " " else "" +
+            data.components.joinToString()
 }

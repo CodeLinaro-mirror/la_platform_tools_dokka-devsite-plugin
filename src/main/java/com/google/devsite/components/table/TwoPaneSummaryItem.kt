@@ -22,7 +22,7 @@ import com.google.devsite.components.ContextFreeComponent
 internal interface TwoPaneSummaryItem : SummaryItem {
     override val data: Params
 
-    class Params(
+    data class Params(
         val title: ContextFreeComponent,
         override val description: ContextFreeComponent
     ) : SummaryItem.Params

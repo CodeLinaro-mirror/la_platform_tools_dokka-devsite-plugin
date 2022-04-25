@@ -64,4 +64,7 @@ internal class DefaultClassIndex(
             summary.render(this)
         }
     }
+
+    override fun toString() = data.packagesUrl + " " +
+        data.alphabetizedClasses.map { "${it.key}: ${it.value}" }
 }

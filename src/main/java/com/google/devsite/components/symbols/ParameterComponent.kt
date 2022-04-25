@@ -33,7 +33,7 @@ internal interface ParameterComponent : SymbolBase {
         return result
     }
 
-    class Params(
+    data class Params(
         val displayLanguage: Language,
         val name: String,
         val modifiers: List<String> = emptyList(),

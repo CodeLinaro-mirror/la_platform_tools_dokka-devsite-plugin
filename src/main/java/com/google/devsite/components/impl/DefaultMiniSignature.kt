@@ -18,6 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.devsite.components.render
 import com.google.devsite.components.symbols.MiniSignature
+import com.google.devsite.joinMaybePrefix
 import kotlinx.html.FlowContent
 
 internal class DefaultMiniSignature(
@@ -28,4 +29,6 @@ internal class DefaultMiniSignature(
         data.annotations.render(into, separator = " ")
         data.link.render(into)
     }
+
+    override fun toString() = data.annotations.joinMaybePrefix(postfix = " ") + data.link
 }

@@ -18,6 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.devsite.components.render
 import com.google.devsite.components.symbols.ParameterComponent
+import com.google.devsite.joinMaybePrefix
 import com.google.devsite.renderer.Language
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
@@ -59,4 +60,10 @@ internal class DefaultParameterComponent(
             }
         }
     }
+
+    override fun toString() = data.annotationComponents.joinMaybePrefix(postfix = " ") +
+        data.modifiers.joinMaybePrefix(postfix = " ") +
+        data.type +
+        if (data.name.isNotEmpty()) " " + data.name else "" +
+            (data.defaultValue ?: "")
 }

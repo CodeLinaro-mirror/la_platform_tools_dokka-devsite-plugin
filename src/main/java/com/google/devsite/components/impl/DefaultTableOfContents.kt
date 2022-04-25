@@ -36,4 +36,7 @@ internal class DefaultTableOfContents(
             packageSection.render(this)
         }
     }
+
+    override fun toString() = "Table of contents. Classes at ${data.classesUrl}, " +
+        "Packages at ${data.packagesUrl}. Packages are " + data.packages.joinToString("\n")
 }

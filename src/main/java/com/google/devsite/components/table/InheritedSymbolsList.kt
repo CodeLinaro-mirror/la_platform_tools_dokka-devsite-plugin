@@ -23,7 +23,7 @@ import com.google.devsite.components.Link
 internal interface InheritedSymbolsList : ContextFreeComponent {
     val data: Params
 
-    class Params(
+    data class Params(
         val header: RowComponent,
         val inheritedSymbolSummaries: Map<Link, SummaryList>
     )

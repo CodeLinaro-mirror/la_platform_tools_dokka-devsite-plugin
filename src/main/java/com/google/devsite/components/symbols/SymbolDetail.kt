@@ -23,7 +23,7 @@ import com.google.devsite.renderer.Language
 internal interface SymbolDetail : ContextFreeComponent {
     val data: Params
 
-    class Params(
+    data class Params(
         val displayLanguage: Language,
         val name: String,
         val anchors: LinkedHashSet<String>,

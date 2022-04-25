@@ -61,4 +61,8 @@ internal class DefaultRelatedSymbols(
             unsafe { +"</devsite-expandable>" }
         }
     }
+
+    override fun toString() = "Direct subclasses: ${data.directSubclasses.joinToString()}, summar" +
+        "y ${data.directSummary}. Indirect subclasses: ${data.indirectSubclasses.joinToString()}," +
+        " summary ${data.indirectSummary}"
 }

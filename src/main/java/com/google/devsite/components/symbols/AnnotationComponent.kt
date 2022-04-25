@@ -31,7 +31,7 @@ internal interface AnnotationComponent : ContextFreeComponent, Sizeable {
         return typeSize + paramSize
     }
 
-    class Params(
+    data class Params(
         val type: Link,
         val parameters: List<AnnotationParameter> = emptyList()
     )

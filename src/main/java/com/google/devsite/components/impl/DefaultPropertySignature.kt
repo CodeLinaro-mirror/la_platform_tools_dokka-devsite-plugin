@@ -19,6 +19,7 @@ package com.google.devsite.components.impl
 import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.render
 import com.google.devsite.components.symbols.PropertySignature
+import com.google.devsite.joinMaybePrefix
 import kotlinx.html.FlowContent
 
 /** Default implementation of a property signature. */
@@ -38,4 +39,8 @@ internal class DefaultPropertySignature(
             +" = ${data.constantValue}"
         }
     }
+
+    override fun toString() = data.annotationComponents.joinMaybePrefix(postfix = " ") +
+        if (data.receiver != null) data.receiver.toString() + "." else "" +
+            data.name
 }

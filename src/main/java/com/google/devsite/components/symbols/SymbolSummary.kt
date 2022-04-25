@@ -23,7 +23,7 @@ import com.google.devsite.components.DescriptionComponent
 internal interface SymbolSummary : ContextFreeComponent {
     val data: Params
 
-    class Params(
+    data class Params(
         val signature: SymbolSignature,
         val description: DescriptionComponent
     )

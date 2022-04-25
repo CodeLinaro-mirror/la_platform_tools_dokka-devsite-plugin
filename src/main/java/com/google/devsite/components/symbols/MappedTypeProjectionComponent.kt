@@ -9,12 +9,12 @@ internal interface MappedTypeProjectionComponent : TypeProjectionComponent {
 
     override fun length() = super.length() + "()".length + data.alternativePrefix.length()
 
-    class Params(
-        type: Link,
+    data class Params(
+        override val type: Link,
         val alternativePrefix: Link,
-        annotationComponents: List<AnnotationComponent> = emptyList(),
-        nullability: Nullability,
-        generics: List<TypeProjectionComponent> = emptyList()
+        override val annotationComponents: List<AnnotationComponent> = emptyList(),
+        override val nullability: Nullability,
+        override val generics: List<TypeProjectionComponent> = emptyList()
     ) : TypeProjectionComponent.Params(
         type = type,
         annotationComponents = annotationComponents,

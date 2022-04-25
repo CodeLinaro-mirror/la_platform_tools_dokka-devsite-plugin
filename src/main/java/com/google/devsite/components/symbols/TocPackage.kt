@@ -22,7 +22,7 @@ import com.google.devsite.components.TextComponent
 internal interface TocPackage : TextComponent {
     val data: Params
 
-    class Params(
+    data class Params(
         val name: String,
         val packageUrl: String,
         val interfaces: List<Type> = emptyList(),

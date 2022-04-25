@@ -22,7 +22,7 @@ internal interface Link : ContextFreeComponent, Sizeable {
 
     override fun length() = data.name.length
 
-    class Params(
+    data class Params(
         val name: String,
         val url: String
     )

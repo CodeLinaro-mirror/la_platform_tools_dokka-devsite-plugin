@@ -20,6 +20,7 @@ import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.render
 import com.google.devsite.components.shouldBreak
 import com.google.devsite.components.symbols.FunctionSignature
+import com.google.devsite.joinMaybePrefix
 import kotlinx.html.FlowContent
 import kotlinx.html.span
 import kotlinx.html.unsafe
@@ -57,4 +58,11 @@ internal class DefaultFunctionSignature(
             brackets = "()"
         )
     }
+
+    override fun toString() = data.typeParameters.joinMaybePrefix(postfix = " ") +
+        if (data.receiver != null) data.receiver.toString() + "." else "" +
+            data.annotationComponents.joinMaybePrefix(postfix = " ") +
+            if (data.isDeprecated) "deprecated " else "" +
+                data.name +
+                data.parameters.joinMaybePrefix(prefix = "(", postfix = ")")
 }

@@ -60,4 +60,7 @@ internal class DefaultClassHierarchy(
             }
         }
     }
+
+    override fun toString() = data.parents.withIndex().reversed()
+        .joinToString { (level, parent) -> "$level: $parent" }
 }

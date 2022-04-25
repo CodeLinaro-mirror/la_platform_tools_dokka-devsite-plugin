@@ -23,7 +23,7 @@ import com.google.devsite.components.Link
 internal interface MiniSignature : ContextFreeComponent {
     val data: Params
 
-    class Params(
+    data class Params(
         val annotations: List<AnnotationComponent>,
         val link: Link
     )

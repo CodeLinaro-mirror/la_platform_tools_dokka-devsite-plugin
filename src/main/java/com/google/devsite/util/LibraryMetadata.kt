@@ -20,6 +20,8 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JacksonException
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import com.google.devsite.components.Link
+import com.google.devsite.components.impl.DefaultLink
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -48,6 +50,8 @@ data class LibraryMetadata(
     @JsonProperty("sourceDir")
     var sourceDir: String,
 ) {
+    internal val link: Link
+        get() = DefaultLink(Link.Params(name = "$groupId:$artifactId", url = releaseNotesUrl))
 
     /**
      * Read and parse contents of the given JSON filename to a list of [LibraryMetadata].

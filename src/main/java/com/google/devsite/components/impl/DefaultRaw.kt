@@ -26,4 +26,6 @@ internal class DefaultRaw(
     override fun render(into: FlowContent) = into.run {
         +data.text
     }
+
+    override fun toString() = "Raw: " + data.text
 }

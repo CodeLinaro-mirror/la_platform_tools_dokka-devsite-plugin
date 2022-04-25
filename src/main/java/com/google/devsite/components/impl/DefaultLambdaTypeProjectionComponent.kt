@@ -20,6 +20,7 @@ import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.nobr
 import com.google.devsite.components.render
 import com.google.devsite.components.symbols.LambdaTypeProjectionComponent
+import com.google.devsite.joinMaybePrefix
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
 
@@ -45,5 +46,16 @@ internal class DefaultLambdaTypeProjectionComponent(
         // Render any generics on the return type
         data.generics.render(into, ShouldBreak.NO, brackets = "<>")
         if (data.nullability.nullable) +")?"
+    }
+
+    override fun toString(): String {
+        val result = data.annotationComponents.joinToString() +
+            data.lambdaModifiers.joinToString() +
+            if (data.receiver != null) "${data.receiver}." else "" +
+                data.lambdaParams.joinMaybePrefix(prefix = "(", postfix = ")") +
+                " -> " + data.type +
+                data.generics.joinMaybePrefix(prefix = "<", postfix = ">")
+
+        return if (data.nullability.nullable) "($result)?" else result
     }
 }

@@ -77,6 +77,13 @@ internal class DefaultSymbolDetail(
 
         data.metadata.sortedBy { descriptionSorter(it) }.render(this, separator = null)
     }
+
+    override fun toString() = (data.extFunctionClass ?: "") + data.name + " at " +
+        data.anchors.joinToString() + data.annotationComponents.joinToString() +
+        data.modifiers.joinToString() + (
+        if (data.displayLanguage == Language.KOTLIN) "${data.returnType} : ${data.signature}"
+        else "" + data.signature + data.returnType
+        ) + data.metadata.sortedBy { descriptionSorter(it) }
 }
 
 private fun descriptionSorter(component: ContextFreeComponent): Int {

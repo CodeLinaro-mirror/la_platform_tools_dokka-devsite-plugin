@@ -34,4 +34,6 @@ internal class DefaultSymbolSummary(
 
         data.description.render(this)
     }
+
+    override fun toString() = "${data.signature}: ${data.description}"
 }

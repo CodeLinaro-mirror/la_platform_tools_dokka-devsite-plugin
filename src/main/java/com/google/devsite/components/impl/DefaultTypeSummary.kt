@@ -18,6 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.devsite.components.render
 import com.google.devsite.components.symbols.TypeSummary
+import com.google.devsite.joinMaybePrefix
 import kotlinx.html.FlowContent
 
 /** Default implementation of a type summary. */
@@ -28,4 +29,6 @@ internal class DefaultTypeSummary(
         data.modifiers.render(into, terminator = { +" " })
         data.type.render(into)
     }
+
+    override fun toString() = data.modifiers.joinMaybePrefix(postfix = " ") + data.type
 }

@@ -25,7 +25,7 @@ import kotlinx.html.HTML
 internal interface DevsitePage : HtmlComponent<HTML> {
     val data: Params
 
-    class Params(
+    data class Params(
         val displayLanguage: Language,
         val path: String,
         val bookPath: String,

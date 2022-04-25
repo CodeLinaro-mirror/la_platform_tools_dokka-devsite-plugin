@@ -22,7 +22,7 @@ import com.google.devsite.components.ContextFreeComponent
 internal interface SingleColumnSummaryItem : SummaryItem {
     override val data: Params
 
-    class Params(
+    data class Params(
         override val description: ContextFreeComponent
     ) : SummaryItem.Params
 }

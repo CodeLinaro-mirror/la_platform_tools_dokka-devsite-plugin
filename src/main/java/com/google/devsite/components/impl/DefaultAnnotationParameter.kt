@@ -21,6 +21,8 @@ import com.google.devsite.components.render
 import com.google.devsite.components.symbols.AnnotationValueAnnotationParameter
 import com.google.devsite.components.symbols.ArrayValueAnnotationParameter
 import com.google.devsite.components.symbols.NamedValueAnnotationParameter
+import com.google.devsite.components.symbols.name
+import com.google.devsite.components.symbols.value
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
 
@@ -31,6 +33,8 @@ internal class DefaultNamedValueAnnotationParameter(
         data.name.render(into)
         +data.value
     }
+
+    override fun toString() = "$name $value"
 }
 
 internal class DefaultAnnotationValueAnnotationParameter(
@@ -40,6 +44,8 @@ internal class DefaultAnnotationValueAnnotationParameter(
         data.name.render(into)
         data.annotationComponentValue.render(into)
     }
+
+    override fun toString() = "$name $value"
 }
 
 internal class DefaultArrayValueAnnotationParameter(
@@ -49,6 +55,8 @@ internal class DefaultArrayValueAnnotationParameter(
         data.name.render(into)
         data.innerAnnotationParameters.render(into, brackets = "[]", shouldBreak = ShouldBreak.NO)
     }
+
+    override fun toString() = "$name $value"
 }
 
 private fun String?.render(into: FlowContent) = into.run {

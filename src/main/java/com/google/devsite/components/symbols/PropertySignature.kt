@@ -25,7 +25,7 @@ import com.google.devsite.components.Link
 internal interface PropertySignature : SymbolSignature {
     override val data: Params
 
-    class Params(
+    data class Params(
         override val name: Link,
         override val receiver: ParameterComponent? = null,
         override val annotationComponents: List<AnnotationComponent> = emptyList(),

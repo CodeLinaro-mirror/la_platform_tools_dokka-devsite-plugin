@@ -24,7 +24,7 @@ import com.google.devsite.renderer.Language
 internal interface ClassSignature : ContextFreeComponent {
     val data: Params
 
-    class Params(
+    data class Params(
         val displayLanguage: Language,
         val modifiers: List<String>,
         val type: String,
@@ -32,6 +32,6 @@ internal interface ClassSignature : ContextFreeComponent {
         val implements: List<Link>,
         val extends: List<Link>,
         val typeParameters: List<TypeParameterComponent>,
-        val annotations: List<AnnotationComponent> = emptyList()
+        val annotationComponents: List<AnnotationComponent> = emptyList()
     )
 }

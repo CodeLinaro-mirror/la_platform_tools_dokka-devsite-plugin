@@ -18,6 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.render
+import com.google.devsite.joinMaybePrefix
 import kotlinx.html.FlowContent
 import kotlinx.html.h2
 import kotlinx.html.hr
@@ -36,13 +37,21 @@ internal class DefaultClasslike(
         data.relatedSymbols.render(this)
         data.description.render(into, separator = null, header = { hr() })
 
-        val allSummarySections =
-            data.symbolTypes.map { it.first }.filter { it.hasContent() } +
-                data.inheritedTypes.filter { it.hasContent() }
         allSummarySections.render(into, separator = null, header = { h2 { +"Summary" } })
 
         for (symbolType in data.symbolTypes.map { it.second }) {
             symbolType.symbols.render(into, separator = null, header = { h2 { +symbolType.title } })
         }
     }
+
+    private val allSummarySections = data.symbolTypes.map { it.first }.filter { it.hasContent() } +
+        data.inheritedTypes.filter { it.hasContent() }
+
+    override fun toString() = data.signature.toString() +
+        (data.libraryMetadataComponent?.toString() ?: "") + data.hierarchy + data.relatedSymbols +
+        data.description.joinToString() +
+        data.symbolTypes.map { it.first }.filter { it.hasContent() } +
+        data.inheritedTypes.filter { it.hasContent() } +
+        allSummarySections.joinMaybePrefix(prefix = "Summaries") +
+        data.symbolTypes.map { it.second }.joinToString()
 }

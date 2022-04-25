@@ -41,4 +41,6 @@ internal class DefaultDevsitePage(
             data.content.render(this)
         }
     }
+
+    override fun toString() = "DevsitePage: ${data.title} at ${data.bookPath}\n${data.content}"
 }

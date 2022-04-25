@@ -26,4 +26,6 @@ internal class UndocumentedSymbolDescriptionComponent : DescriptionComponent {
 
     // Do nothing
     override fun render(into: FlowContent) = Unit
+
+    override fun toString() = "UndocumentedSymbolDescriptionComponent"
 }

@@ -28,7 +28,7 @@ import com.google.devsite.components.table.SummaryList
 internal interface Classlike : ContextFreeComponent {
     val data: Params
 
-    class Params(
+    data class Params(
         val signature: ClassSignature,
         val hierarchy: ClassHierarchy,
         val relatedSymbols: RelatedSymbols,

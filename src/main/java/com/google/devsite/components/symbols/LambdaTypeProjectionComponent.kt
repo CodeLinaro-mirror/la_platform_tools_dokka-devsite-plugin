@@ -32,7 +32,7 @@ internal interface LambdaTypeProjectionComponent : TypeProjectionComponent {
         return "() ->".length + typeSize + annotationSize + lambdaModifiersSize + lambdaParamsSize
     }
 
-    class Params(
+    data class Params(
         override val type: Link, // return type
         override val annotationComponents: List<AnnotationComponent> = emptyList(),
         val lambdaModifiers: List<String> = emptyList(),

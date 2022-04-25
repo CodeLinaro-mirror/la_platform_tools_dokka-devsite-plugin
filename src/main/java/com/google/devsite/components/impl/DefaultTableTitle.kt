@@ -39,4 +39,6 @@ internal class DefaultTableTitle(
             }
         }
     }
+
+    override fun toString() = data.title
 }

@@ -57,4 +57,6 @@ internal class DefaultRedirectPage(
             }
         }
     }
+
+    override fun toString() = "Redirect page to ${data.url}"
 }

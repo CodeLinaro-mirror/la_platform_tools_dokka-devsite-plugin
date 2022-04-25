@@ -23,7 +23,7 @@ import com.google.devsite.components.symbols.TocPackage
 internal interface TableOfContents : TextComponent {
     val data: Params
 
-    class Params(
+    data class Params(
         val classesUrl: String,
         val packagesUrl: String,
         val packages: List<TocPackage>

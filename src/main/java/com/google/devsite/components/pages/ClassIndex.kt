@@ -23,7 +23,7 @@ import com.google.devsite.components.table.SummaryList
 internal interface ClassIndex : ContextFreeComponent {
     val data: Params
 
-    class Params(
+    data class Params(
         val packagesUrl: String,
         val alphabetizedClasses: Map<Char, SummaryList>
     )

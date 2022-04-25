@@ -549,7 +549,7 @@ internal class ClasslikeDocumentableConverter(
                     implements = emptyList(),
                     extends = emptyList(),
                     typeParameters = typeParameters,
-                    annotations = annotations
+                    annotationComponents = annotations
                 )
             )
         }
@@ -570,7 +570,7 @@ internal class ClasslikeDocumentableConverter(
                 implements = implements,
                 extends = extends,
                 typeParameters = typeParameters,
-                annotations = annotations
+                annotationComponents = annotations
             )
         )
     }

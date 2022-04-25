@@ -19,6 +19,7 @@ package com.google.devsite.components.impl
 import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.render
 import com.google.devsite.components.symbols.AnnotationComponent
+import com.google.devsite.joinMaybePrefix
 import kotlinx.html.FlowContent
 
 /** Default implementation of an annotation. */
@@ -31,4 +32,7 @@ internal class DefaultAnnotationComponent(
         // "()" displays even if there are no elements
         data.parameters.render(into, brackets = "() ", shouldBreak = ShouldBreak.NO)
     }
+
+    override fun toString() = "@${data.type}" +
+        data.parameters.joinMaybePrefix(prefix = "(", postfix = ")")
 }

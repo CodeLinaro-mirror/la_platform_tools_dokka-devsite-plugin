@@ -22,7 +22,7 @@ import com.google.devsite.components.ContextFreeComponent
 internal interface TypeSummary : ContextFreeComponent {
     val data: Params
 
-    class Params(
+    data class Params(
         val modifiers: List<String> = emptyList(),
         val type: TypeProjectionComponent
     )

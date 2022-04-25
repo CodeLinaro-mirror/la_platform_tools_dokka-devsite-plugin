@@ -19,6 +19,7 @@ package com.google.devsite.components.impl
 import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.render
 import com.google.devsite.components.symbols.TypeParameterComponent
+import com.google.devsite.joinMaybePrefix
 import com.google.devsite.renderer.Language
 import kotlinx.html.Entities.nbsp
 import kotlinx.html.FlowContent
@@ -81,6 +82,20 @@ internal class DefaultTypeParameterComponent(
         }
         if (angleBrackets) { +">" }
     }
+
+    override fun toString() = toString(true)
+    fun toString(showAngleBrackets: Boolean) =
+        (if (showAngleBrackets) "<" else "") +
+            data.annotationComponents.joinMaybePrefix { it.toString() } +
+            data.modifiers.joinMaybePrefix(postfix = " ") +
+            (
+                if (data.projections.isNotEmpty()) (
+                    (if (data.displayLanguage == Language.KOTLIN) ":" else "extends") +
+                        data.projections.joinMaybePrefix(separator = " & ") { it.toString() }
+                    )
+                else ""
+                ) +
+            (if (showAngleBrackets) ">" else "")
 
     override fun validate() {
         require(data.name.isNotEmpty()) {

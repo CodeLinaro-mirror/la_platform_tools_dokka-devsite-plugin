@@ -29,4 +29,6 @@ internal class DefaultSingleColumnSummaryItem(
             data.description.render(this)
         }
     }
+
+    override fun toString() = data.description.toString()
 }

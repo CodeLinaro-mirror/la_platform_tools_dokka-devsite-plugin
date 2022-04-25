@@ -25,7 +25,7 @@ internal interface SummaryList : ContextFreeComponent {
     /** @return true if there is summary content to render, false otherwise */
     fun hasContent(): Boolean
 
-    class Params(
+    data class Params(
         val header: RowComponent? = null,
         val items: List<SummaryItem>
     )

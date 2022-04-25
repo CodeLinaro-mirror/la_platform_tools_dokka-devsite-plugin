@@ -19,6 +19,7 @@ package com.google.devsite.components.impl
 import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.render
 import com.google.devsite.components.symbols.TypeProjectionComponent
+import com.google.devsite.joinMaybePrefix
 import com.google.devsite.renderer.Language
 import kotlinx.html.FlowContent
 
@@ -32,4 +33,9 @@ internal class DefaultTypeProjectionComponent(
         data.generics.render(into, ShouldBreak.NO, brackets = "<>")
         if (data.displayLanguage == Language.KOTLIN) +data.nullability.renderAsKotlinSuffix()
     }
+
+    override fun toString() = data.annotationComponents.joinMaybePrefix(postfix = " ") +
+        data.type +
+        data.generics.joinMaybePrefix(prefix = " <", postfix = ">") +
+        data.nullability.renderAsKotlinSuffix()
 }

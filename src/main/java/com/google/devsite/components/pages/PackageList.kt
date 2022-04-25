@@ -22,7 +22,7 @@ import com.google.devsite.components.TextComponent
 internal interface PackageList : TextComponent {
     val data: Params
 
-    class Params(
+    data class Params(
         val packages: List<String>
     )
 }

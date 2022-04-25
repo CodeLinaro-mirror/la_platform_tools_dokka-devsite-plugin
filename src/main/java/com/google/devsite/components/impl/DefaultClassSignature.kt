@@ -19,6 +19,7 @@ package com.google.devsite.components.impl
 import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.render
 import com.google.devsite.components.symbols.ClassSignature
+import com.google.devsite.joinMaybePrefix
 import com.google.devsite.renderer.Language
 import kotlinx.html.FlowContent
 import kotlinx.html.pre
@@ -29,7 +30,7 @@ internal class DefaultClassSignature(
 
     override fun render(into: FlowContent) = into.run {
         pre {
-            data.annotations.render(into, separator = " ", terminator = { +" " })
+            data.annotationComponents.render(into, separator = " ", terminator = { +" " })
             +(data.modifiers + data.type + data.name).joinToString(separator = " ")
 
             data.typeParameters.render(into, ShouldBreak.NO, brackets = "<>")
@@ -45,6 +46,14 @@ internal class DefaultClassSignature(
             }
         }
     }
+
+    override fun toString() = data.annotationComponents.joinMaybePrefix(postfix = " ") +
+        (data.modifiers + data.type + data.name).joinToString(separator = " ") +
+        data.typeParameters.joinMaybePrefix(prefix = "<", postfix = ">") +
+        if (data.displayLanguage == Language.JAVA) {
+            data.extends.joinMaybePrefix(prefix = " extends ") +
+                data.implements.joinMaybePrefix(prefix = inheritancePhrase)
+        } else (data.extends + data.implements).joinMaybePrefix(prefix = " : ")
 
     private val inheritancePhrase = if (data.type == "interface") "extends" else "implements"
 }

@@ -32,7 +32,9 @@ internal class DefaultTocPackage(
             data.classes,
             data.enums,
             data.exceptions,
-            data.annotations
+            data.annotations,
+            data.typeAliases,
+            data.objects
         ).flatten()
         if (content.isEmpty()) return
 
@@ -65,4 +67,9 @@ internal class DefaultTocPackage(
         appendLine("    - title: \"${type.name}\"")
         appendLine("      path: \"${type.url}\"")
     }
+
+    override fun toString() = "Table of Contents for package ${data.name} at ${data.packageUrl}. " +
+        "Interfaces: ${data.interfaces}, Classes: ${data.classes}, Enums: ${data.enums}, " +
+        "Exceptions: ${data.exceptions}, Annotations: ${data.annotations}, " +
+        "TypeAliases: ${data.typeAliases}, Objects: ${data.objects}."
 }

@@ -48,7 +48,7 @@ class DefaultClassSignatureTest {
                         )
                     )
                 ),
-                annotations = listOf(NoopAnnotationComponent("@GenericAnnotation"))
+                annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation"))
             )
         )
 
@@ -85,7 +85,7 @@ class DefaultClassSignatureTest {
                         )
                     )
                 ),
-                annotations = listOf(NoopAnnotationComponent("@GenericAnnotation"))
+                annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation"))
             )
         )
 
@@ -114,7 +114,7 @@ class DefaultClassSignatureTest {
                 extends = listOf(),
                 implements = listOf(NoopLink("SomeInterface")),
                 typeParameters = listOf(),
-                annotations = listOf()
+                annotationComponents = listOf()
             )
         )
 

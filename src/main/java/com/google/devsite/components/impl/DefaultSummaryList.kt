@@ -53,4 +53,7 @@ internal class DefaultSummaryList(
     }
 
     override fun hasContent() = data.items.isNotEmpty()
+
+    override fun toString(): String =
+        "Header: ${data.header}, contents: ${data.items.joinToString()}"
 }

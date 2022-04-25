@@ -64,4 +64,8 @@ internal class DefaultInheritedSymbols(
             }
         }
     }
+
+    override fun toString() = if (!hasContent()) "" else
+        data.header.toString() + data.inheritedSymbolSummaries
+            .map { (from, summaries) -> "from $from, inherited $summaries" }.joinToString()
 }

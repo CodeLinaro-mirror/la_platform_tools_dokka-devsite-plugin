@@ -36,4 +36,6 @@ internal class DefaultTwoPaneSummaryItem(
             data.description.render(this)
         }
     }
+
+    override fun toString() = "${data.title}: ${data.description}"
 }

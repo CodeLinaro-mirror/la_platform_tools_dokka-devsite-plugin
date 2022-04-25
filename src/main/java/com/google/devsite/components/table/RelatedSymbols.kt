@@ -23,7 +23,7 @@ import com.google.devsite.components.Link
 internal interface RelatedSymbols : ContextFreeComponent {
     val data: Params
 
-    class Params(
+    data class Params(
         val directSubclasses: List<Link>,
         val directSummary: SummaryList,
         val indirectSubclasses: List<Link>,

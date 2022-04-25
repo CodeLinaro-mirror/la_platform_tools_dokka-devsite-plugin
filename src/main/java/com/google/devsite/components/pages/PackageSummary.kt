@@ -24,7 +24,7 @@ import com.google.devsite.renderer.Language
 internal interface PackageSummary : ContextFreeComponent {
     val data: Params
 
-    class Params(
+    data class Params(
         val displayLanguage: Language,
         val description: List<ContextFreeComponent>,
         val interfaces: SummaryList,

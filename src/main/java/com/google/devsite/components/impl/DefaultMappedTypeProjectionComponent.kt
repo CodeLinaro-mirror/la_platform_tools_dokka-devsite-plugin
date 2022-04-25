@@ -3,6 +3,7 @@ package com.google.devsite.components.impl
 import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.render
 import com.google.devsite.components.symbols.MappedTypeProjectionComponent
+import com.google.devsite.joinMaybePrefix
 import kotlinx.html.FlowContent
 
 internal class DefaultMappedTypeProjectionComponent(
@@ -17,4 +18,9 @@ internal class DefaultMappedTypeProjectionComponent(
         data.generics.render(into, ShouldBreak.NO, brackets = "<>")
         +data.nullability.renderAsKotlinSuffix()
     }
+
+    override fun toString() = data.annotationComponents.joinToString() +
+        "(" + data.alternativePrefix + ")" + data.type +
+        data.generics.joinMaybePrefix(prefix = "<", postfix = ">") +
+        data.nullability.renderAsKotlinSuffix()
 }

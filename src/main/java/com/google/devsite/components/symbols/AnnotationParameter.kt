@@ -31,7 +31,7 @@ internal interface NamedValueAnnotationParameter : AnnotationParameter {
         return nameSize + valueSize
     }
     // Name is null if inside an array, in which case only the array is named
-    class Params(val name: String?, val value: String)
+    data class Params(val name: String?, val value: String)
 }
 
 internal interface AnnotationValueAnnotationParameter : AnnotationParameter {
@@ -43,7 +43,7 @@ internal interface AnnotationValueAnnotationParameter : AnnotationParameter {
         return nameSize + valueSize
     }
 
-    class Params(val name: String?, val annotationComponentValue: AnnotationComponent)
+    data class Params(val name: String?, val annotationComponentValue: AnnotationComponent)
 }
 
 internal interface ArrayValueAnnotationParameter : AnnotationParameter {
@@ -55,7 +55,7 @@ internal interface ArrayValueAnnotationParameter : AnnotationParameter {
         return nameSize + valueSize
     }
 
-    class Params(val name: String?, val innerAnnotationParameters: List<AnnotationParameter>)
+    data class Params(val name: String?, val innerAnnotationParameters: List<AnnotationParameter>)
 }
 
 internal val AnnotationParameter.name: String

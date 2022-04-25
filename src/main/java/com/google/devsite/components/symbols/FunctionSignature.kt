@@ -23,7 +23,7 @@ import com.google.devsite.components.Sizeable
 internal interface FunctionSignature : SymbolSignature, Sizeable {
     override val data: Params
 
-    class Params(
+    data class Params(
         override val name: Link,
         override val receiver: ParameterComponent? = null,
         override val annotationComponents: List<AnnotationComponent> = emptyList(),
