@@ -697,7 +697,8 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun getLibraryMetadata(): LibraryMetadataComponent? {
-        val jsonLibraryMetadata = findMatchingJsonLibraryMetadata()
+        val path = getSourceFilePathWithoutFilename(classlike) ?: return null
+        val jsonLibraryMetadata = findMatchingJsonLibraryMetadata(path)
 
         return if (jsonLibraryMetadata == null) {
             null
@@ -707,17 +708,39 @@ internal class ClasslikeDocumentableConverter(
     }
 
     /**
-     * Parse the library metadata list to find a [LibraryMetadata] that matches the current
-     * library being processed.  Otherwise, return null.
+     * Iterate through the library metadata list to find a [LibraryMetadata] that matches the
+     * path for the current library being processed.  Otherwise, return null.
      */
-    private fun findMatchingJsonLibraryMetadata(): LibraryMetadata? {
-        return if (docsHolder.libraryMetadata.isEmpty()) {
-            null
-        } else {
-            // Currently returns static data
-            // TODO (b/228229238) - add logic to find matching data
-            docsHolder.libraryMetadata.first()
+    private fun findMatchingJsonLibraryMetadata(path: String): LibraryMetadata? {
+        return docsHolder.libraryMetadata.firstOrNull {
+            path.endsWith(it.sourceDir)
         }
+    }
+
+    /**
+     * Get the source file path for a [DClasslike] without the filename.
+     *
+     * For example - this would return "androidx/paging/compose" if the path was
+     * "androidx/paging/compose/LazyPagingItems.kt".
+     *
+     * Returns null if there is an error finding the path.
+     */
+    private fun getSourceFilePathWithoutFilename(classlike: DClasslike): String? {
+        val logger = docsHolder.logger
+        val sources = classlike.sources
+        if (sources.isEmpty()) {
+            logger.warn("Sources for ${classlike.name} is empty")
+            return null
+        }
+
+        if (sources.size > 1) {
+            logger.warn(
+                "Multiple sources for ${classlike.name} detected. Source size is ${sources.size}"
+            )
+            return null
+        }
+
+        return sources.entries.first().value.path.substringBeforeLast('/')
     }
 
     /** Converts the classlikes to link components for use in the related symbols component. */
