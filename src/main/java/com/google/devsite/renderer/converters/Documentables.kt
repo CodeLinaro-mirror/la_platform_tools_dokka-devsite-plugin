@@ -105,13 +105,28 @@ internal fun Documentable.isFromJava() = isFromJavaMap.getOrPut(this) {
         val sourceFileExtensions = getPossibleSourceFiles().map { it.path }
             .filter { "package-info.java" !in it }
             .map { it.substringAfterLast('.') }
+        val nOfJavaFiles = sourceFileExtensions.count { it in listOf("java", "class") }
+        val nOfKotlinFiles = sourceFileExtensions.count { it in listOf("kt", "kts", "ktx") }
+        fun errorMessage(utterFailure: Boolean = false) =
+            (if (utterFailure) "ERROR: Utter failure to" else "WARN: Unable to clearly") +
+                "determine source language of ${this.toString().substringBefore("classpath")}. " +
+                "$nOfJavaFiles java files found, $nOfKotlinFiles kotlin files found." +
+                if (!utterFailure) "Guessed the source language is the one with more files." else ""
         when {
-            // No Java files -> default is NonNull      (this bypasses e.g. .xml/.gradle)
-            sourceFileExtensions.all { it !in listOf("java", "class") } -> false
+            // No Java files -> default is NonNull
+            nOfJavaFiles == 0 && nOfKotlinFiles >= 1 -> false // Is not Java source
             // No Kotlin files -> default is nullable
-            sourceFileExtensions.all { it !in listOf("kt") } -> true
-            // We don't know. Default to not injecting @NonNull (the primary use of isFromJava)
-            else -> true // (i.e. do not make the strict NonNull assumption for unspecified types)
+            nOfKotlinFiles == 0 && nOfJavaFiles >= 1 -> true // Is Java source
+            // We don't know. Sometimes we can make a pretty good guess:
+            nOfJavaFiles > 10 * nOfKotlinFiles -> true
+            nOfKotlinFiles > 10 * nOfJavaFiles -> false
+            // Sometimes we really can't
+            nOfJavaFiles > nOfKotlinFiles -> println(errorMessage()).let { true }
+            nOfKotlinFiles > nOfJavaFiles -> println(errorMessage()).let { false }
+            // Explicitly allow certain small integration tests
+            getPossibleSourceFiles().map { it.path }.first().contains("testData") -> true
+            dri.fullName.contains("dokkaTest") -> true
+            else -> throw RuntimeException(errorMessage(utterFailure = true))
         }
     }
 }
