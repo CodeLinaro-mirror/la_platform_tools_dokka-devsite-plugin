@@ -215,7 +215,13 @@ internal class ClasslikeDocumentableConverter(
         val hierarchy = async { computeHierarchy() }
         val relatedSymbols = async { findRelatedSymbols() }
         val inheritedTypes = async { computeInheritedSymbols(inheritedAll) }
-        val libraryMetadataComponent = async { getLibraryMetadata() }
+        val libraryMetadataComponent = async {
+            if (docsHolder.showLibraryMetadata) {
+                getLibraryMetadata()
+            } else {
+                null
+            }
+        }
 
         val allSymbols = mutableListOf(
             nestedTypesSummary.await() to Classlike.TitledList(nestedTypesTitle(), emptyList()),
@@ -696,7 +702,7 @@ internal class ClasslikeDocumentableConverter(
         return if (jsonLibraryMetadata == null) {
             null
         } else {
-            DefaultLibraryMetadataComponent(jsonLibraryMetadata, docsHolder.showLibraryMetadata)
+            DefaultLibraryMetadataComponent(jsonLibraryMetadata)
         }
     }
 

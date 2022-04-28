@@ -34,7 +34,7 @@ internal class DefaultLibraryMetadataComponentTest {
 
     @Test
     fun `Library metadata renders correctly`() {
-        val component = DefaultLibraryMetadataComponent(libraryMetadata, true)
+        val component = DefaultLibraryMetadataComponent(libraryMetadata)
 
         val output = createHTML().body {
             component.render(this)
@@ -46,22 +46,6 @@ internal class DefaultLibraryMetadataComponentTest {
 <body>
   <div><a href="https://d.android.com">testGroup:testArtifactId</a></div>
 </body>
-            """.trim()
-        )
-    }
-
-    @Test
-    fun `Library metadata does not render when param shown is false`() {
-        val component = DefaultLibraryMetadataComponent(libraryMetadata, false)
-
-        val output = createHTML().body {
-            component.render(this)
-        }.trim()
-
-        // language=html
-        assertThat(output).isEqualTo(
-            """
-<body></body>
             """.trim()
         )
     }

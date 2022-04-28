@@ -24,13 +24,10 @@ import kotlinx.html.div
 
 /** Default implementation of a LibraryMetadata. */
 internal class DefaultLibraryMetadataComponent(
-    override val data: LibraryMetadata,
-    private val shown: Boolean = false
+    override val data: LibraryMetadata
 ) : LibraryMetadataComponent {
 
     override fun render(into: FlowContent): Unit = into.run {
-        if (!shown) return
-
         val params = Link.Params(
             name = data.groupId + ":" + data.artifactId,
             url = data.releaseNotesUrl
