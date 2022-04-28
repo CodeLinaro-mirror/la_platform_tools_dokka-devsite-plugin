@@ -867,13 +867,13 @@ internal fun enumValuesTitle() = "Enum Values"
 internal fun extensionFunctionsTitle() = "Extension functions"
 internal fun companionFunctionsTitle(): String =
     "companion ${methodsTitle(Language.KOTLIN)}"
-internal fun companionPropertiesTitle(displayLanguage: Language): String =
+internal fun companionPropertiesTitle(): String =
     "companion ${propertiesTitle(Language.KOTLIN)}"
 internal fun publicCompanionFunctionsTitle(): String =
     "Public ${companionFunctionsTitle()}"
 internal fun protectedCompanionFunctionsTitle(): String =
     "Protected ${companionFunctionsTitle()}"
 internal fun publicCompanionPropertiesTitle(): String =
-    "Public ${companionPropertiesTitle(Language.KOTLIN)}"
+    "Public ${companionPropertiesTitle()}"
 internal fun protectedCompanionPropertiesTitle(): String =
-    "Protected ${companionPropertiesTitle(Language.KOTLIN)}"
+    "Protected ${companionPropertiesTitle()}"
