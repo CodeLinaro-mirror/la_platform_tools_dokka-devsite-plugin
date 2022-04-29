@@ -32,10 +32,6 @@ import java.io.IOException
  */
 data class LibraryMetadata(
 
-    // TODO (b/229784900) remove if we don't end up using this value
-    @JsonProperty("library")
-    var library: String,
-
     @JsonProperty("groupId")
     var groupId: String,
 

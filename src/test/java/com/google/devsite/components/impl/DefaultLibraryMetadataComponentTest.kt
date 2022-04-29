@@ -25,7 +25,6 @@ import org.junit.Test
 internal class DefaultLibraryMetadataComponentTest {
 
     private val libraryMetadata = LibraryMetadata(
-        library = "testLibrary",
         groupId = "testGroup",
         artifactId = "testArtifactId",
         releaseNotesUrl = "https://d.android.com",

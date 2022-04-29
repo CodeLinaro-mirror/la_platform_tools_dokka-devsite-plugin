@@ -64,14 +64,12 @@ class LibraryMetadataTest {
         val json = """
 [
   {
-    "library": "a",
     "groupId": "androidx.a",
     "artifactId": "a-runtime",
     "releaseNotesUrl": "https://d.android.com/a",
     "sourceDir": "a/a-runtime"
   },
   {
-    "library": "b",
     "groupId": "androidx.b",
     "artifactId": "b-runtime",
     "releaseNotesUrl": "https://d.android.com/b",
@@ -87,7 +85,6 @@ class LibraryMetadataTest {
         assertThat(metadata.size).isEqualTo(2)
 
         val libraryMetadata = metadata[0]
-        assertThat(libraryMetadata.library).isEqualTo("a")
         assertThat(libraryMetadata.groupId).isEqualTo("androidx.a")
         assertThat(libraryMetadata.artifactId).isEqualTo("a-runtime")
         assertThat(libraryMetadata.releaseNotesUrl).isEqualTo("https://d.android.com/a")
