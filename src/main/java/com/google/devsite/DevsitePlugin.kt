@@ -41,7 +41,7 @@ class DevsitePlugin : DokkaPlugin() {
 
     val hideFilter by extending {
         dokkaBase.preMergeDocumentableTransformer providing {
-            HideTagDocumentableFilter(it)
+            HideTagAndHiddenDeprecationDocumentableFilter(it)
         } order { before(dokkaBase.emptyPackagesFilter) }
     }
 

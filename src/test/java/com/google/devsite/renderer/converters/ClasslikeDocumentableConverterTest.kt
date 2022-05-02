@@ -235,6 +235,32 @@ internal class ClasslikeDocumentableConverterTest(
     }
 
     @Test
+    fun `Function summary component hides DeprecationLevel HIDDEN`() {
+        val module = """
+            |import kotlin.DeprecationLevel.HIDDEN
+            |
+            |class Visible {
+            |   public val visible = "v"
+            |   @Deprecated("No show!", level = HIDDEN)
+            |   public val invisible = "i"
+            |
+            |   public fun show() = 7
+            |   @Deprecated("No show!", level = HIDDEN)
+            |   public fun noShow() = 5
+            |}
+            |
+            |@Deprecated("No show!", level = HIDDEN)
+            |class Nope
+        """.render()
+
+        assertThat(module.packages.single().classlikes.map { it.name }).containsExactly("Visible")
+        val visible = module.page("Visible").content<Classlike>()
+
+        assertThat(visible.methodSummaryItems().map { it.name() }).containsExactly("show")
+        assertThat(visible.propertySummaryItems().map { it.name() }).containsExactly("visible")
+    }
+
+    @Test
     fun `Public constructor does not have @NonNull in 4x Kotlin and Java`() {
         val constructorsK = """
         |class Foo {
