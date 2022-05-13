@@ -553,12 +553,11 @@ internal class ClasslikeDocumentableConverter(
                 )
             )
         }
-
-        val extends = docsHolder.classGraph().getValue(classlike.dri).superClasses.map {
+        val extends = docsHolder.classGraph().getValue(classlike.dri).directSuperClasses.map {
             pathProvider.linkForReference(it.dri)
         }
 
-        val implements = docsHolder.classGraph().getValue(classlike.dri).interfaces.map {
+        val implements = docsHolder.classGraph().getValue(classlike.dri).directInterfaces.map {
             pathProvider.linkForReference(it.dri)
         }
 

@@ -16,6 +16,8 @@
 
 package com.google.devsite.renderer.impl
 
+import org.jetbrains.dokka.DokkaConfiguration
+import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.Documentable
@@ -33,8 +35,16 @@ internal typealias DocumentablesGraph = Map<DRI, Documentable>
  * This returns the type inheritance of the given [classlikes] as a graph. That is, each DRI is
  * associated with itself and its complete list of subclasses and parents.
  */
-internal fun computeClassGraph(classlikes: List<DClasslike>): ClassGraph {
-    val drisToClasslikes = classlikes.associateBy { it.dri }
+internal fun computeClassGraph(
+    classlikes: List<DClasslike>,
+    externalDocumentablesProvider: ExternalDocumentablesProvider? = null,
+    sourceSets: List<DokkaConfiguration.DokkaSourceSet>? = null
+): ClassGraph {
+    val drisToClasslikes = (classlikes.associateBy { it.dri }).withDefault { dri ->
+        sourceSets?.firstNotNullOfOrNull { sourceSet ->
+            externalDocumentablesProvider?.findClasslike(dri, sourceSet)
+        }
+    }
     val classGraph: Map<DRI, MutableClassNode> = classlikes.associate { classlike ->
         classlike.dri to MutableClassNode(classlike)
     }
@@ -47,11 +57,17 @@ internal fun computeClassGraph(classlikes: List<DClasslike>): ClassGraph {
     return classGraph.mapValues { (_, level) ->
         ClassNode(
             self = level.self,
-            allSubClasses = level.allSubClasses.map { drisToClasslikes.getValue(it) },
-            directSubClasses = level.directSubClasses.map { drisToClasslikes.getValue(it) },
-            indirectSubClasses = level.indirectSubClasses.map { drisToClasslikes.getValue(it) },
-            superClasses = level.superClasses.map { drisToClasslikes.getValue(it) },
-            interfaces = level.interfaces.map { drisToClasslikes.getValue(it) }
+            allSubClasses = level.allSubClasses.mapNotNull { drisToClasslikes.getValue(it) },
+            directSubClasses = level.directSubClasses.mapNotNull { drisToClasslikes.getValue(it) },
+            indirectSubClasses = level.indirectSubClasses.mapNotNull {
+                drisToClasslikes.getValue(it)
+            },
+            directSuperClasses = level.directSuperClasses.mapNotNull {
+                drisToClasslikes.getValue(it)
+            },
+            superClasses = level.superClasses.mapNotNull { drisToClasslikes.getValue(it) },
+            interfaces = level.interfaces.mapNotNull { drisToClasslikes.getValue(it) },
+            directInterfaces = level.directInterfaces.mapNotNull { drisToClasslikes.getValue(it) }
         )
     }
 }
@@ -101,7 +117,7 @@ internal fun computeDocumentablesGraph(classGraph: ClassGraph): DocumentablesGra
 private fun recursivelyUpdateClasslikeSupertypesTree(
     child: DClasslike,
     classGraph: Map<DRI, MutableClassNode>,
-    classlikes: Map<DRI, DClasslike>,
+    classlikes: Map<DRI, DClasslike?>,
     leaf: DClasslike = child
 ) {
     if (child !is WithSupertypes || child.supertypes.isEmpty()) return
@@ -114,21 +130,27 @@ private fun recursivelyUpdateClasslikeSupertypesTree(
             if (child !== leaf) indirect.add(leaf.dri)
         }
 
-        // TODO Support external types b/170124934
-        // type.dri is not found in classlikes if it isn't from this package (or invocation?)
-        // external types like stdlib appear in the supertypes but we filter them out by forcing
-        // the use of classlikes here. This could just be DRI based and we'd connect the external
-        // packages to the proper base URL.
-        val supertype = classlikes[type.dri]
+        // If a classlike cannot be found in this package, the map will fall back to trying to look
+        // it up using the externalDocumentablesProvider, and if we can't find it there either it
+        // will be null.
+        val supertype = classlikes.getValue(type.dri)
         if (supertype != null) {
             recursivelyUpdateClasslikeSupertypesTree(supertype, classGraph, classlikes, leaf)
 
             if (kind == JavaClassKindTypes.CLASS || kind == KotlinClassKindTypes.CLASS) {
-                classGraph.getValue(leaf.dri).superClasses.add(supertype.dri)
+                val leafValue = classGraph.getValue(leaf.dri)
+                leafValue.superClasses.add(supertype.dri)
+                if (leaf == child) {
+                    leafValue.directSuperClasses.add(supertype.dri)
+                }
             }
 
             if (kind == JavaClassKindTypes.INTERFACE || kind == KotlinClassKindTypes.INTERFACE) {
-                classGraph.getValue(leaf.dri).interfaces.add(supertype.dri)
+                val leafValue = classGraph.getValue(leaf.dri)
+                leafValue.interfaces.add(supertype.dri)
+                if (leaf == child) {
+                    leafValue.directInterfaces.add(supertype.dri)
+                }
             }
         }
     }
@@ -139,8 +161,10 @@ internal data class ClassNode(
     val allSubClasses: List<DClasslike>,
     val directSubClasses: List<DClasslike>,
     val indirectSubClasses: List<DClasslike>,
+    val directSuperClasses: List<DClasslike>,
     val superClasses: List<DClasslike>,
-    val interfaces: List<DClasslike>
+    val interfaces: List<DClasslike>,
+    val directInterfaces: List<DClasslike>
 )
 
 // TODO(b/168956053): Use DClasslike directly once dokka has cheap hashCode impl
@@ -149,8 +173,10 @@ private data class MutableClassNode(
     val allSubClasses: MutableSet<DRI> = TreeSet(classComparator),
     val directSubClasses: MutableSet<DRI> = TreeSet(classComparator),
     val indirectSubClasses: MutableSet<DRI> = TreeSet(classComparator),
-    val superClasses: MutableList<DRI> = mutableListOf(),
-    val interfaces: MutableList<DRI> = mutableListOf()
+    val directSuperClasses: MutableSet<DRI> = LinkedHashSet(),
+    val superClasses: MutableSet<DRI> = LinkedHashSet(),
+    val interfaces: MutableSet<DRI> = LinkedHashSet(),
+    val directInterfaces: MutableSet<DRI> = LinkedHashSet()
 ) {
     private companion object {
         /**

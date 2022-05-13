@@ -36,6 +36,7 @@ import org.jetbrains.dokka.DokkaGenerator
 import org.jetbrains.dokka.ExternalDocumentationLink
 import org.jetbrains.dokka.base.resolvers.local.DokkaLocationProvider
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
+import org.jetbrains.dokka.base.translators.descriptors.DefaultExternalDocumentablesProvider
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DModule
@@ -65,6 +66,9 @@ internal abstract class ConverterTestBase(
     } else {
         testKotlinWithRootPageNode(trimMargin(), fileUseAnnotation)
     }
+
+    protected fun String.renderJava(imports: List<String> = emptyList()) =
+        testJavaWithRootPageNode(trimMargin(), imports)
 
     protected fun DModule.classlike() = packages.single().classlikes
         .firstOrNull { it.name !in listOf("Nullable", "NonNull") }
@@ -178,9 +182,18 @@ internal abstract class ConverterTestBase(
     // However, dackka has other methods for resolving internal links, so this is fine.
     internal val externalProvider =
         DefaultExternalDokkaLocationProvider(DokkaLocationProvider(mockRootPageNode, context))
+    internal val externalDocumentablesProvider =
+        DefaultExternalDocumentablesProvider(context)
 
     internal fun holderAndProvider(module: DModule): Pair<DocumentablesHolder, FilePathProvider> {
-        val holder = runBlocking { DocumentablesHolder(module, this) }
+        val holder = runBlocking {
+            DocumentablesHolder(
+                module,
+                this,
+                context = context,
+                externalDocumentablesProvider = externalDocumentablesProvider
+            )
+        }
         val classGraph = runBlocking { holder.classGraph() }
         val pathProvider = pathProvider(
             externalLocationProvider = externalProvider,
@@ -225,9 +238,11 @@ internal abstract class ConverterTestBase(
     """.trimIndent() + "\n"
 
     /** Java does not support file-level annotations */
-    protected fun javaFullHeader(name: String = "Test") = javaHeader(name) + """
+    protected fun javaFullHeader(name: String = "Test", imports: String = "") = javaHeader(name) + """
+            $imports
             |import java.lang.annotation.Target;
             |import static java.lang.annotation.ElementType.*;
+            |import kotlin.
             |package androidx.example;
             |@Target({METHOD, PARAMETER, FIELD, LOCAL_VARIABLE, ANNOTATION_TYPE, PACKAGE, TYPE_PARAMETER, TYPE_USE})
             |public @interface Nullable {
@@ -238,8 +253,12 @@ internal abstract class ConverterTestBase(
             |public class Test {
     """.trimIndent()
 
-    private fun testJavaWithRootPageNode(sourceCode: String): DModule {
-        val source = javaFullHeader() + "|" + sourceCode.trimIndent()
+    private fun testJavaWithRootPageNode(
+        sourceCode: String,
+        imports: List<String> = emptyList()
+    ): DModule {
+        val importText = imports.joinToString() { "|import $it;\n" }
+        val source = javaFullHeader(imports = importText) + "|" + sourceCode.trimIndent()
         return testWithRootPageNode(listOf(source))
     }
 

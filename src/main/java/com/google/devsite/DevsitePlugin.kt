@@ -21,11 +21,13 @@ import com.google.devsite.renderer.MultiLanguageRenderer
 import com.google.devsite.transformers.DocTagsForCheckedExceptionsTransformer
 import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.base.DokkaBase
+import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
 import org.jetbrains.dokka.plugability.DokkaPlugin
 import org.jetbrains.dokka.plugability.querySingle
 
 class DevsitePlugin : DokkaPlugin() {
     private val dokkaBase by lazy { plugin<DokkaBase>() }
+    private val externalDocumentablesProvider by extensionPoint<ExternalDocumentablesProvider>()
 
     val translator by extending {
         CoreExtensions.documentableToPageTranslator providing {
@@ -35,7 +37,11 @@ class DevsitePlugin : DokkaPlugin() {
 
     val renderer by extending {
         CoreExtensions.renderer providing {
-            MultiLanguageRenderer(it, dokkaBase.querySingle { outputWriter })
+            MultiLanguageRenderer(
+                it,
+                dokkaBase.querySingle { outputWriter },
+                dokkaBase.querySingle { externalDocumentablesProvider }
+            )
         } override dokkaBase.htmlRenderer
     }
 

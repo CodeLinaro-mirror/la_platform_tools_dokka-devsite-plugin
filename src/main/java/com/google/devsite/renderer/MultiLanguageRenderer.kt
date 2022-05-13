@@ -32,6 +32,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.base.renderers.OutputWriter
 import org.jetbrains.dokka.base.resolvers.local.DokkaLocationProvider
+import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.pages.ModulePageNode
 import org.jetbrains.dokka.pages.RootPageNode
@@ -41,7 +42,8 @@ import org.jetbrains.dokka.renderers.Renderer
 /** Composite renderer which outputs multiple languages (i.e. Java + Kotlin) */
 internal class MultiLanguageRenderer(
     private val context: DokkaContext,
-    private val outputWriter: OutputWriter
+    private val outputWriter: OutputWriter,
+    private val externalDocumentablesProvider: ExternalDocumentablesProvider
 ) : Renderer {
     private val tenant: String by lazy {
         checkNotNull(System.getenv("DEVSITE_TENANT") ?: System.getProperty("tenant")) {
@@ -116,6 +118,7 @@ internal class MultiLanguageRenderer(
                 module = module,
                 scope = this,
                 context = context,
+                externalDocumentablesProvider = externalDocumentablesProvider,
                 excludedPackages = excludedPackagesForJava,
                 showLibraryMetadata = showLibraryMetadata,
                 libraryMetadata = libraryMetadataArray,
@@ -126,6 +129,7 @@ internal class MultiLanguageRenderer(
                 module = module,
                 scope = this,
                 context = context,
+                externalDocumentablesProvider = externalDocumentablesProvider,
                 excludedPackages = excludedPackagesForKotlin,
                 showLibraryMetadata = showLibraryMetadata,
                 libraryMetadata = libraryMetadataArray,

@@ -432,9 +432,8 @@ internal class ClasslikeDocumentableConverterTest(
         }
     }
 
-    @Ignore // b/170124934
     @Test
-    fun `Class signature appears with extends or implements for external types in 4x`() {
+    fun `Class signature appears with implements for external types in 4x`() {
         val pageExternalK = """
             |/**
             | * An implementation of [Lazy] used by [android.app.Activity.navArgs] and
@@ -449,8 +448,37 @@ internal class ClasslikeDocumentableConverterTest(
             |) : Lazy<Args> {
         """.render().page(name = "NavArgsLazy")
         val pageExternalJ = """
-            |public class JavaArgsLazy<Args extends String>() implements Lazy<Args> {}
-        """.render(java = true).page(name = "NavArgsLazy")
+            |public class JavaArgsLazy implements Lazy {}
+        """.renderJava(imports = listOf("kotlin.LazyKt.Lazy")).page(name = "JavaArgsLazy")
+        val signatureK = pageExternalK.content<Classlike>().data.signature
+        val signatureJ = pageExternalJ.content<Classlike>().data.signature
+        assertThat(
+            signatureK.data.implements.map { it.data.name }
+        ).isEqualTo(listOf("Lazy"))
+        assertThat(
+            signatureJ.data.implements.map { it.data.name }
+        ).isEqualTo(listOf("Lazy"))
+    }
+
+    // This test also validates that only direct superclasses / interfaces are included because
+    // AbstractList extends AbstractCollection which implements various interfaces (Iterable etc).
+    @Test
+    fun `Class signature appears with extends for external types in 4x`() {
+        val pageExternalK = """
+            |import java.util.AbstractList
+            |public class MyList() : AbstractList<Int>()
+        """.render().page(name = "MyList")
+        val signatureK = pageExternalK.content<Classlike>().data.signature
+        val pageExternalJ = """
+            |public class MyList extends AbstractList<String> {}
+        """.renderJava(imports = listOf("java.util.*")).page(name = "MyList")
+        val signatureJ = pageExternalJ.content<Classlike>().data.signature
+        for (signature in listOf(signatureJ, signatureK)) {
+            assertThat(
+                signature.data.extends.map { it.data.name }
+            ).isEqualTo(listOf("AbstractList"))
+            assertThat(signature.data.implements).isEmpty()
+        }
     }
 
     @Test

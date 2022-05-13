@@ -33,6 +33,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.analysis.EnvironmentAndFacade
+import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.withClass
 import org.jetbrains.dokka.model.DAnnotation
@@ -65,6 +66,7 @@ internal class DocumentablesHolder(
     module: DModule,
     scope: CoroutineScope,
     context: DokkaContext? = null,
+    private val externalDocumentablesProvider: ExternalDocumentablesProvider? = null,
     private val excludedPackages: Set<Regex> = emptySet(),
     val showLibraryMetadata: Boolean = false,
     val libraryMetadata: List<LibraryMetadata> = emptyList(),
@@ -122,7 +124,13 @@ internal class DocumentablesHolder(
         analysisMap = scope.async { context?.let { setUpAnalysis(context) } ?: mapOf() }
 
         allClasslikes = scope.async { computeClasslikes(module) }
-        classGraph = scope.async { computeClassGraph(allClasslikes.await()) }
+        classGraph = scope.async {
+            computeClassGraph(
+                allClasslikes.await(),
+                externalDocumentablesProvider,
+                context?.configuration?.sourceSets
+            )
+        }
         documentablesGraph = scope.async { computeDocumentablesGraph(classGraph.await()) }
 
         nestedClasslikesJob = scope.launch {
