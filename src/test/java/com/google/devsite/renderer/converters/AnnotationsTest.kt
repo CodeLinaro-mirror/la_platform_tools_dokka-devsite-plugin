@@ -34,7 +34,6 @@ import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.Annotations.Annotation
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.Nullable
-import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.junit.Test
 
 internal class AnnotationsTest : ConverterTestBase() {
@@ -297,7 +296,7 @@ internal class AnnotationsTest : ConverterTestBase() {
         val boundsKotlin = """
             |annotation class Hello(val bar: String)
             |fun <T : @Hello("baz") String> foo(arg: String): List<T>
-        """.render().function()!!.generics.single().bounds.single() as WithExtraProperties<*>
+        """.render().function()!!.generics.single().bounds.single()
         val wrapper = """
             |@Retention(RetentionPolicy.RUNTIME)
             |@Target(ElementType.TYPE_USE)
@@ -308,7 +307,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             |    return null;
             |}
         """.render(java = true).function()!!.generics.single().bounds.single() as Nullable
-        val boundsJava = wrapper.inner as WithExtraProperties<*>
+        val boundsJava = wrapper.inner
 
         for (annotations in listOf(boundsKotlin.annotations(), boundsJava.annotations())) {
             val annotationOne = annotations.components(

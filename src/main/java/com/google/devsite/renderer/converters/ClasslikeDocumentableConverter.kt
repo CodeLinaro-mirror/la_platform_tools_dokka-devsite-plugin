@@ -120,7 +120,7 @@ internal class ClasslikeDocumentableConverter(
         ) {
             allConstructors = listOf(createDefaultConstructorFor(classlike))
         }
-        val annotations = (classlike as? WithExtraProperties<*>)?.annotations().orEmpty()
+        val annotations = classlike.annotations()
 
         val enumValuesSummary = async {
             enumValuesToSummary(enumValuesTitle(), enumValues)
@@ -540,15 +540,11 @@ internal class ClasslikeDocumentableConverter(
         } else {
             emptyList()
         }
-        val annotations = if (classlike is WithExtraProperties<*>) {
-            classlike.annotations().annotationComponents(
-                pathProvider = pathProvider,
-                displayLanguage = displayLanguage,
-                nullability = Nullability.DONT_CARE // Classlike definitions aren't nullable
-            )
-        } else {
-            emptyList()
-        }
+        val annotations = classlike.annotations().annotationComponents(
+            pathProvider = pathProvider,
+            displayLanguage = displayLanguage,
+            nullability = Nullability.DONT_CARE // Classlike definitions aren't nullable
+        )
 
         if (classlike !is WithSupertypes) {
             return DefaultClassSignature(

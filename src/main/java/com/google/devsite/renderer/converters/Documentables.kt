@@ -54,7 +54,6 @@ import org.jetbrains.dokka.model.WithChildren
 import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.WithVisibility
 import org.jetbrains.dokka.model.isJvmName
-import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.model.toAdditionalModifiers
 import org.jetbrains.kotlin.builtins.jvm.JavaToKotlinClassMap
 import org.jetbrains.kotlin.name.ClassId
@@ -148,7 +147,7 @@ val DClass.isExceptionClass: Boolean
  * Assumes the class this is being called on is Java.
  */
 val DClasslike.isSynthetic: Boolean
-    get() = name().endsWith("Kt") || (this as? WithExtraProperties<*>)?.jvmFileName() != null
+    get() = name().endsWith("Kt") || this.jvmFileName() != null
 
 /**
  * Converts a top level function to its representation under a Java synthetic class
@@ -204,21 +203,21 @@ private fun DParameter.paramAsString() =
 /**
  * Returns the value of the @JvmName for this function if one exists or null
  */
-fun WithExtraProperties<*>.jvmName(): String? {
+fun Documentable.jvmName(): String? {
     return annotations().firstOrNull { it.isJvmName() }?.nameAsString()
 }
 
 /**
  * Returns the value of the file:@JvmName if one exists or null
  */
-fun WithExtraProperties<*>.jvmFileName(): String? {
+fun WithSources.jvmFileName(): String? {
     return fileLevelAnnotations().firstOrNull { it.isJvmName() }?.nameAsString()
 }
 
 /**
  * Returns the value of the file:@JvmName if one exists or null
  */
-fun <T> nameForSyntheticClass(entry: T): String where T : WithSources, T : WithExtraProperties<*> {
+fun nameForSyntheticClass(entry: WithSources): String {
     return entry.jvmFileName() ?: entry.sources.let {
         it.entries.first().value.path.split("/").last().split(".").first() + "Kt"
     }
@@ -230,8 +229,7 @@ fun DFunction.driForSyntheticClass() = DRI(dri.packageName, nameForSyntheticClas
  * Filters out elements that are annotated with @JvmSynthetic
  */
 fun <T : Documentable> List<T>.filterOutJvmSynthetic(): List<T> = this.filterNot { elem ->
-    elem is WithExtraProperties<*> &&
-        elem.annotations().any { it.dri.classNames.equals("JvmSynthetic") }
+    elem.annotations().any { it.dri.classNames.equals("JvmSynthetic") }
 }
 
 /**
@@ -309,6 +307,6 @@ private fun Annotations.Annotation.isAtJvmField(): Boolean = dri.isAtJvmField()
 /**
  * Returns whether property is annotated as @JvmField
  */
-fun WithExtraProperties<*>.isJvmField(): Boolean {
+fun DProperty.isJvmField(): Boolean {
     return annotations().any { it.isAtJvmField() }
 }

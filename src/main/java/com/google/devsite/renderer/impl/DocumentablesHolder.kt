@@ -54,7 +54,6 @@ import org.jetbrains.dokka.model.JavaVisibility
 import org.jetbrains.dokka.model.WithCompanion
 import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.properties.PropertyContainer
-import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.utilities.DokkaConsoleLogger
 import org.jetbrains.dokka.utilities.LoggingLevel
@@ -310,8 +309,7 @@ internal class DocumentablesHolder(
      *
      * This method uses @file:JvmName if it exists or the filename with "Kt" appended
      **/
-    private fun <T> List<T>.mapToSyntheticNames()
-        where T : WithSources, T : WithExtraProperties<*> =
+    private fun List<WithSources>.mapToSyntheticNames(): Map<String, List<WithSources>> =
         map { it.sources to it }
             .groupBy({ (_, function) -> nameForSyntheticClass(function) }) { it.second }
 

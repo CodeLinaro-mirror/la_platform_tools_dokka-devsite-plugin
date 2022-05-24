@@ -17,14 +17,12 @@
 package com.google.devsite
 
 import com.google.devsite.renderer.converters.annotations
-import com.google.devsite.renderer.converters.fullName
+import com.google.devsite.renderer.converters.asString
 import com.google.devsite.renderer.converters.isDeprecated
 import org.jetbrains.dokka.base.transformers.documentables.SuppressedByConditionDocumentableFilterTransformer
 import org.jetbrains.dokka.model.Documentable
-import org.jetbrains.dokka.model.EnumValue
 import org.jetbrains.dokka.model.dfs
 import org.jetbrains.dokka.model.doc.CustomTagWrapper
-import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.plugability.DokkaContext
 
 class HideTagAndHiddenDeprecationDocumentableFilter(dokkaContext: DokkaContext) :
@@ -34,8 +32,7 @@ class HideTagAndHiddenDeprecationDocumentableFilter(dokkaContext: DokkaContext) 
             (_, docs) ->
             docs.dfs { it is CustomTagWrapper && it.name.trim() == "hide" } != null
         } ||
-            ((d as? WithExtraProperties<*>)?.annotations() ?: emptyList()).any {
-                it.isDeprecated() && ((it.params["level"] as? EnumValue)?.enumDri?.fullName ?: "")
-                    .contains("DeprecationLevel.HIDDEN")
+            d.annotations().any {
+                it.isDeprecated() && ("DeprecationLevel.HIDDEN" in it.params["level"].asString())
             }
 }

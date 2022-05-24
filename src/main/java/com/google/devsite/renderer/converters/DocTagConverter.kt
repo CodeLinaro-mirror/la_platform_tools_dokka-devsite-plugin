@@ -88,7 +88,6 @@ import org.jetbrains.dokka.model.doc.TagWrapper
 import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.model.doc.Throws
 import org.jetbrains.dokka.model.doc.Version
-import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.utilities.cast
 import java.io.File
 
@@ -751,7 +750,7 @@ internal class DocTagConverter(
         documentable: Documentable,
         showAnnotations: Boolean = false
     ): DefaultTwoPaneSummaryItem<Link, DescriptionComponent> {
-        val annotations = (documentable as? WithExtraProperties<*>)?.annotations().orEmpty()
+        val annotations = documentable.annotations()
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
                 title = if (showAnnotations) {

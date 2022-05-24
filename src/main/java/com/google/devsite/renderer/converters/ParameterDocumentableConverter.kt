@@ -437,9 +437,6 @@ internal class ParameterDocumentableConverter(
         else -> this
     }
 
-    private fun Projection.annotations() = (this as? WithExtraProperties<*>)?.annotations()
-        ?: emptyList()
-
     /** Converts a lambda receiver projection to its type component if available. */
     private fun Projection.receiver(): Projection? = when (this) {
         is FunctionalTypeConstructor -> if (this.isExtensionFunction) {

@@ -35,6 +35,7 @@ import org.jetbrains.dokka.model.Annotations.Annotation
 import org.jetbrains.dokka.model.ArrayValue
 import org.jetbrains.dokka.model.Bound
 import org.jetbrains.dokka.model.ClassValue
+import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.Dynamic
 import org.jetbrains.dokka.model.EnumValue
 import org.jetbrains.dokka.model.FunctionalTypeConstructor
@@ -43,22 +44,21 @@ import org.jetbrains.dokka.model.JavaObject
 import org.jetbrains.dokka.model.LiteralValue
 import org.jetbrains.dokka.model.Nullable
 import org.jetbrains.dokka.model.PrimitiveJavaType
+import org.jetbrains.dokka.model.Projection
 import org.jetbrains.dokka.model.StringValue
 import org.jetbrains.dokka.model.TypeAliased
 import org.jetbrains.dokka.model.TypeParameter
 import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.Void
+import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 
 /**
  * @param displayLanguage nullability annotations are present only in Java
- * @param isFromJava unannotated non-`?` kotlin-as-java gets @NonNull injected, and only that
- *    Is allowed to be default, IF showNullability is false and the annotated component isn't a type
- * @param isKotlinNullable whether the type has kotlin nullability not captured in its annotations
- *    Is allowed to be default, IF showNullability is false and the annotated component isn't a type
- * @param showNullability we explicitly do not show nullability sometimes, e.g. Java primitives
+ * @param nullability the nullability of the annotated element. Contains information such as source
+ * language and whether we care about the nullability of the annotated element.
  *
- * @return the components for the provided dokka model annotations
+ * @return the AnnotationComponents for the given annotations on the annotated element
  */
 internal fun List<Annotation>.annotationComponents(
     pathProvider: FilePathProvider,
@@ -76,9 +76,8 @@ internal fun List<Annotation>.annotationComponents(
         println("WARN: Use @androidx.annotation.Nullable, not @${first{it.isBadNullable}.dri}")
         assert(nullability != Nullability.JAVA_NOT_ANNOTATED)
     }
-    // DO NOT inject @Nullable in Kotlin-as-Java. Java clients don't need to care about the
-    // distinction between nullable and platform types except when writing API themselves.
-    // Inject @NonNull for default-nullability kotlin types as-java if we should showNullability
+
+    // NOTE: we inject @NonNull, but not @Nullable, as that is usually not useful to Java devs
     if (displayLanguage == Language.JAVA) {
         injectedAnnotations += nullability.renderAsJavaAnnotation()
     }
@@ -121,11 +120,17 @@ private val Annotation.isBadNonNull get() = dri.classNames == "NotNull" ||
         )
 
 /** @return the complete list of annotations for this type */
-internal fun WithExtraProperties<*>.annotations(): List<Annotation> {
+private fun WithExtraProperties<*>.annotations(): List<Annotation> {
     return extra.allOfType<Annotations>().flatMap { annotations ->
         annotations.directAnnotations.values.singleOrNull() ?: emptyList()
     }
 }
+
+internal fun Documentable.annotations() = (this as? WithExtraProperties<*>)?.annotations()
+    ?: emptyList()
+
+internal fun Projection.annotations() = (this as? Bound)?.annotations()
+    ?: (this as? WithExtraProperties<*>)?.annotations() ?: emptyList()
 
 internal fun Bound.annotations(): List<Annotation> = when (this) {
     is TypeParameter, is GenericTypeConstructor, is FunctionalTypeConstructor ->
@@ -135,12 +140,14 @@ internal fun Bound.annotations(): List<Annotation> = when (this) {
     is PrimitiveJavaType, Void, is JavaObject, Dynamic, is UnresolvedBound -> emptyList()
 }
 
-/** @return the complete list of annotations for this type */
-internal fun WithExtraProperties<*>.fileLevelAnnotations(): List<Annotation> {
-    return extra.allOfType<Annotations>().flatMap { annotations ->
+/**
+ * All existing WithSources are WithExtraProperties, and fileLevelAnnotations require sources.
+ * @return the list of file-level annotations on this WithSource's source file
+ */
+internal fun WithSources.fileLevelAnnotations() =
+    (this as WithExtraProperties<*>).extra.allOfType<Annotations>().flatMap { annotations ->
         annotations.fileLevelAnnotations.values.singleOrNull() ?: emptyList()
     }
-}
 
 /** @return true if the `@Deprecated` annotation is present, false otherwise */
 internal fun Annotation.isDeprecated(): Boolean = dri.classNames == "Deprecated"
@@ -214,17 +221,12 @@ internal fun AnnotationParameterValue.toComponent(
     pathProvider: FilePathProvider
 ): AnnotationParameter = when (this) {
     is StringValue -> DefaultNamedValueAnnotationParameter(
-        NamedValueAnnotationParameter.Params(name, "\"${value}\"")
+        NamedValueAnnotationParameter.Params(name, "\"${asString()}\"")
     )
-    is LiteralValue -> DefaultNamedValueAnnotationParameter(
-        NamedValueAnnotationParameter.Params(name, text())
-    )
-    is EnumValue -> DefaultNamedValueAnnotationParameter(
-        NamedValueAnnotationParameter.Params(name, enumName)
-    )
-    is ClassValue -> DefaultNamedValueAnnotationParameter(
-        NamedValueAnnotationParameter.Params(name, className)
-    )
+    is LiteralValue, is EnumValue, is ClassValue ->
+        DefaultNamedValueAnnotationParameter(
+            NamedValueAnnotationParameter.Params(name, asString())
+        )
     is ArrayValue -> DefaultArrayValueAnnotationParameter(
         ArrayValueAnnotationParameter.Params(
             name,
@@ -239,4 +241,14 @@ internal fun AnnotationParameterValue.toComponent(
     )
 }
 
-internal fun Annotation.nameAsString(): String? = (params["name"] as? StringValue)?.value
+internal fun AnnotationParameterValue?.asString() = when (this) {
+    null -> ""
+    is StringValue -> value
+    is EnumValue -> enumName
+    is ClassValue -> className
+    is LiteralValue -> text()
+    is AnnotationValue -> annotation.toString()
+    is ArrayValue -> value.toString()
+}
+
+internal fun Annotation.nameAsString(): String = params["name"].asString()

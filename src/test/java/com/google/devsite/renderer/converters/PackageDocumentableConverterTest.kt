@@ -291,6 +291,9 @@ internal class PackageDocumentableConverterTest(
             |@JvmName("bar")
             |fun foo()
             |
+            |@JvmName("aardvark")
+            |fun baz()
+            |
             |fun apple()
         """.render()
 
@@ -300,8 +303,8 @@ internal class PackageDocumentableConverterTest(
                 holder.classesFor(page.packages.last(), displayLanguage)
             }
             // testing first and last here is also asserting the alphabetical sort, after jvmname
-            assertThat(classes.last().functions.last().name).isEqualTo("bar")
-            assertThat(classes.last().functions.first().name).isEqualTo("apple")
+            val names = classes.last().functions.map { it.name }
+            assertThat(names).isEqualTo(listOf("aardvark", "apple", "bar"))
         }
     }
 

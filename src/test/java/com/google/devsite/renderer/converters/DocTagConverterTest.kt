@@ -58,7 +58,6 @@ import org.jetbrains.dokka.model.doc.DocumentationLink
 import org.jetbrains.dokka.model.doc.Img
 import org.jetbrains.dokka.model.doc.Pre
 import org.jetbrains.dokka.model.doc.Text
-import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -1456,7 +1455,7 @@ internal class DocTagConverterTest(
         DescriptionComponent {
         val (holder, pathProvider) = holderAndProvider(this)
         val converter = DocTagConverter(displayLanguage, pathProvider, holder)
-        val annotations = (this.doc() as? WithExtraProperties<*>)?.annotations().orEmpty()
+        val annotations = this.doc().annotations().orEmpty()
         return converter.summaryDescription(this.doc(), annotations)
     }
 
