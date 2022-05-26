@@ -1079,6 +1079,39 @@ internal class ClasslikeDocumentableConverterTest(
         }
     }
 
+    @Ignore("Un-ignore test (and update as necessary) when b/190600426 is resolved")
+    @Suppress("UNUSED_VARIABLE")
+    @Test
+    fun `static getters in companion objects can be renamed in java`() {
+        val page = """
+            |class Foo {
+            |   companion object {
+            |       @JvmStatic
+            |       @get:JvmName("computeBar")
+            |       val bar = 8
+            |   }
+            |}
+        """.render().page("Foo").content<Classlike>()
+
+        val methods = page.methodSummaryItems()
+//        val staticMethods = methods.filter { it.modifiers().contains("static") }
+//
+//        javaOnly {
+//            assertThat(methods.names()).containsExactly("computeBar")
+//            assertThat(staticMethods).hasSize(1)
+//        }
+
+        kotlinOnly {
+            val companionProperties =
+                page.symbolsFor(companionPropertiesTitle()).first.items()
+            val companionFunctions =
+                page.symbolsFor(companionFunctionsTitle()).first.items()
+
+            assertThat(companionProperties).hasSize(1)
+            assertThat(companionFunctions).isEmpty()
+        }
+    }
+
     @Test
     fun `Extension functions are included on Java and Kotlin pages`() {
         val src = """
