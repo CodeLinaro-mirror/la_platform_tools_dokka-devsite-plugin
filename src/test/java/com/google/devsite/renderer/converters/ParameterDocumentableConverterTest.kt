@@ -1243,7 +1243,11 @@ internal class ParameterDocumentableConverterTest(
             displayLanguage,
             pathProvider
         )
-        return converter.componentForParameter(parameterDoc(name), forSummary)
+        return converter.componentForParameter(
+            param = parameterDoc(name),
+            isSummary = forSummary,
+            isFromJava = function()!!.isFromJava()
+        )
     }
 
     private fun DModule.returnType(name: String = "foo"): TypeProjectionComponent {

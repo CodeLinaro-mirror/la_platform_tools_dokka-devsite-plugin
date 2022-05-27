@@ -77,19 +77,24 @@ internal class ParameterDocumentableConverter(
      */
     fun componentForParameter(
         param: DParameter,
-        isSummary: Boolean
+        isSummary: Boolean,
+        isFromJava: Boolean
     ): ParameterComponent = when (displayLanguage) {
         Language.JAVA -> {
             val (propagatedAnnotations, retainedAnnotations) = param.annotations()
                 .partition { it.belongsOnReturnType() }
             val nullability =
-                param.type.getNullability(displayLanguage, param.isFromJava(), param.annotations())
+                param.type.getNullability(
+                    displayLanguage,
+                    isFromJava,
+                    param.annotations()
+                )
             DefaultParameterComponent(
                 ParameterComponent.Params(
                     name = param.name ?: "receiver",
                     type = componentForProjection(
                         projection = param.type,
-                        isJavaSource = param.isFromJava(),
+                        isJavaSource = isFromJava,
                         propagatedAnnotations = propagatedAnnotations,
                         propagatedNullability = nullability
                     ),
@@ -111,7 +116,8 @@ internal class ParameterDocumentableConverter(
                 param = param,
                 defaultValue = defaultValueExpression?.getValue(),
                 modifiers = param.getExtraModifiers().modifiersFor(ModifierHints(Language.KOTLIN)),
-                annotations = param.annotations()
+                annotations = param.annotations(),
+                isFromJava = isFromJava
             )
         }
     }
@@ -119,6 +125,7 @@ internal class ParameterDocumentableConverter(
     /** Submethod of componentForParameter with special-case handling for Kotlin, e.g. param name */
     private fun componentForKotlinParameter(
         param: DParameter,
+        isFromJava: Boolean,
         defaultValue: String? = null,
         modifiers: List<String> = emptyList(),
         annotations: List<Annotation> = emptyList()
@@ -127,7 +134,7 @@ internal class ParameterDocumentableConverter(
         val name = param.name.orEmpty()
         val primaryType = componentForProjection(
             projection = projKotlin,
-            isJavaSource = param.isFromJava(),
+            isJavaSource = isFromJava,
             propagatedAnnotations = annotations.filter { it.belongsOnReturnType() }
         )
 
@@ -156,19 +163,24 @@ internal class ParameterDocumentableConverter(
 
     /** Turns a DTypeParameter into a TypeParameterComponent */
     fun componentForTypeParameter(
-        param: DTypeParameter
-    ): TypeParameterComponent = DefaultTypeParameterComponent(
+        param: DTypeParameter,
+        isFromJava: Boolean
+    ) = DefaultTypeParameterComponent(
         TypeParameterComponent.Params(
             displayLanguage = displayLanguage,
             name = param.variantTypeParameter.inner.name,
             projections = param.bounds.map {
                 componentForProjection(
                     projection = it,
-                    isJavaSource = param.isFromJava(),
+                    isJavaSource = isFromJava,
                     propagatedNullability = if (displayLanguage == Language.JAVA) {
                         Nullability.DONT_CARE
                     } else {
-                        it.getNullability(displayLanguage, param.isFromJava(), param.annotations())
+                        it.getNullability(
+                            displayLanguage,
+                            isFromJava,
+                            param.annotations()
+                        )
                     }
                 )
             }

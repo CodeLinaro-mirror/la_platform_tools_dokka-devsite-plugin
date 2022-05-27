@@ -149,10 +149,22 @@ internal class FunctionDocumentableConverter(
     }
 
     internal fun DFunction.signature(isSummary: Boolean): FunctionSignature {
-        val receiver = receiver?.let { paramConverter.componentForParameter(it, isSummary) }
-        val parameters = parameters.map { paramConverter.componentForParameter(it, isSummary) }
+        val receiver = receiver?.let {
+            paramConverter.componentForParameter(
+                param = it,
+                isSummary = isSummary,
+                isFromJava = isFromJava()
+            )
+        }
+        val parameters = parameters.map {
+            paramConverter.componentForParameter(
+                param = it,
+                isSummary = isSummary,
+                isFromJava = isFromJava()
+            )
+        }
         val typeParameters = this.generics.map {
-            paramConverter.componentForTypeParameter(it)
+            paramConverter.componentForTypeParameter(param = it, isFromJava = isFromJava())
         }
 
         return DefaultFunctionSignature(

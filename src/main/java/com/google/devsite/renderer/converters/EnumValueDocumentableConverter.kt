@@ -54,7 +54,7 @@ internal class EnumValueDocumentableConverter(
         val annotations = enumValue.annotations()
         val projection = paramConverter.componentForProjection(
             GenericTypeConstructor(dEnum.dri, emptyList()),
-            isJavaSource = enumValue.isFromJava(),
+            isJavaSource = dEnum.isFromJava(),
             // While technically an ENUM_VALUE is a member of ENUM_TYPE? because you can always
             // define an enum value which is `null`, this isn't useful information
             propagatedNullability = Nullability.DONT_CARE
@@ -77,7 +77,8 @@ internal class EnumValueDocumentableConverter(
                     documentable = enumValue,
                     returnType = projection,
                     paramNames = listOf(),
-                    annotations = annotations
+                    annotations = annotations,
+                    isFromJava = dEnum.isFromJava()
                 )
             )
         )
