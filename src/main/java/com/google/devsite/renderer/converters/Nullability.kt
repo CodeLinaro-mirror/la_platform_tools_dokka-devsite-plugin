@@ -124,6 +124,12 @@ internal fun Projection.getNullability(
                     else (this as TypeConstructor).presentableName
                 println("WARN: Java nullability annotation on Kotlin-source $name. Context: $this")
             }*/
+            // WARNING: Kotlin primitives that come from Java sources could have started out as
+            // non-nullable java primitives, or as nullable java boxed primitives. There is no way
+            // to tell, so we conservatively default to JAVA_NOT_ANNOTATED. b/234132128
+            /* if (isJavaSource == true && this is TypeConstructor &&
+                this.dri.packageName == "kotlin" && this.dri.classNames in kotlinPrimitives
+            ) return Nullability.JAVA_NEVER_NULL */
             allAnnotations.inferNullability()?.let { return@getNullability it }
             // If there are no nullability annotations:
             defaultNullability(isJavaSource)

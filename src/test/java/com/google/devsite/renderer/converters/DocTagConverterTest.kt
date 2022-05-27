@@ -51,6 +51,7 @@ import org.jetbrains.dokka.links.Callable
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.doc.CodeBlock
 import org.jetbrains.dokka.model.doc.DocumentationLink
 import org.jetbrains.dokka.model.doc.Img
@@ -406,7 +407,10 @@ internal class DocTagConverterTest(
         val propDoc = module.documentation({ this.property()!! }).single() as DescriptionComponent
         val classDoc = module.documentation({ this.clazz() }).single() as DescriptionComponent
         val constructorDoc = module.documentation({ this.constructor() })
-        val conParamDoc = module.documentation({ this.constructor().parameters.single() }).single()
+        val conParamDoc = module.documentation(
+            { this.constructor().parameters.single() },
+            isFromJava = false
+        ).single()
 
         // An odd propagation system, but it seems to work out to properly document everything?
         assertThat((propDoc).text()).isEqualTo("AtPropertyParameter docs")
@@ -948,7 +952,7 @@ internal class DocTagConverterTest(
         val paramDocText = (
             module.documentation(doc = {
                 this.function()!!.parameters.single { it.name == "parent" }
-            }).first() as DescriptionComponent
+            }, isFromJava = true).first() as DescriptionComponent
             ).text()
 
         assertThat(paramDocText).doesNotContain("placedin")
@@ -1482,14 +1486,23 @@ internal class DocTagConverterTest(
 
     private fun DModule.documentation(
         doc: DModule.() -> Documentable = ::smartDoc,
-        paramNames: List<String> = emptyList()
+        paramNames: List<String> = emptyList(),
+        isFromJava: Boolean? = null
     ): List<ContextFreeComponent> {
         val (holder, pathProvider) = holderAndProvider(this)
         val converter = DocTagConverter(displayLanguage, pathProvider, holder)
-        return converter.metadata(
-            doc(),
+        val doc = doc()
+        return if (doc is WithSources) {
+            converter.metadata(
+                documentable = doc,
+                returnType = NoopContextFreeComponent,
+                paramNames = paramNames,
+            )
+        } else converter.metadata(
+            documentable = doc,
             returnType = NoopContextFreeComponent,
-            paramNames = paramNames
+            paramNames = paramNames,
+            isFromJava = isFromJava!!
         )
     }
 

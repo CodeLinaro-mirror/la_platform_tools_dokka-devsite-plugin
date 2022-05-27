@@ -112,7 +112,13 @@ internal class PropertyDocumentableConverter(
         isSummary: Boolean,
         annotationComponents: List<AnnotationComponent> = emptyList()
     ): PropertySignature {
-        val receiver = receiver?.let { paramConverter.componentForParameter(it, isSummary) }
+        val receiver = receiver?.let {
+            paramConverter.componentForParameter(
+                param = it,
+                isSummary = isSummary,
+                isFromJava = isFromJava()
+            )
+        }
         return DefaultPropertySignature(
             PropertySignature.Params(
                 // TODO(b/168136770): figure out path for default anchors

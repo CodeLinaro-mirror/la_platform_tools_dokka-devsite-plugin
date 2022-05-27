@@ -20,6 +20,7 @@ import com.google.devsite.not
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.Memoizers.isFromJavaMap
 import com.google.devsite.startsWithAnyOf
+import org.jetbrains.dokka.analysis.PsiDocumentableSource
 import org.jetbrains.dokka.base.transformers.documentables.isException
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.PointingToDeclaration
@@ -58,8 +59,6 @@ import org.jetbrains.dokka.model.toAdditionalModifiers
 import org.jetbrains.kotlin.builtins.jvm.JavaToKotlinClassMap
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
-import java.io.File
-import java.util.Locale
 import java.util.concurrent.ConcurrentHashMap
 
 /** Recursively expands all children. */
@@ -86,8 +85,8 @@ internal fun DRI.isFromBaseClass(): Boolean {
 }
 
 private object Memoizers {
-    val isFromJavaMap: ConcurrentHashMap<Documentable, Boolean> =
-        ConcurrentHashMap<Documentable, Boolean>()
+    val isFromJavaMap: ConcurrentHashMap<WithSources, Boolean> =
+        ConcurrentHashMap<WithSources, Boolean>()
 }
 
 /**
@@ -95,63 +94,21 @@ private object Memoizers {
  * and thus whether it's nullable if not annotated.
  * Memoized.
  */
-internal fun Documentable.isFromJava() = isFromJavaMap.getOrPut(this) {
-    if (this is DClasslike && this.isSynthetic) false
-    else if (this is WithVisibility && this.visibility.isNotEmpty())
-        !visibility.values.any { it is KotlinVisibility }
-    else if (this is WithAbstraction && this.modifier.isNotEmpty())
-        !modifier.values.any { it is KotlinModifier }
-    else {
-        val sourceFileExtensions = getPossibleSourceFiles().map { it.path }
-            .filter { "package-info.java" !in it }
-            .map { it.substringAfterLast('.') }
-        val nOfJavaFiles = sourceFileExtensions.count { it in listOf("java", "class") }
-        val nOfKotlinFiles = sourceFileExtensions.count { it in listOf("kt", "kts", "ktx") }
-        fun errorMessage(utterFailure: Boolean = false) =
-            (if (utterFailure) "ERROR: Utter failure to" else "WARN: Unable to clearly") +
-                "determine source language of ${this.toString().substringBefore("classpath")}. " +
-                "$nOfJavaFiles java files found, $nOfKotlinFiles kotlin files found." +
-                if (!utterFailure) "Guessed the source language is the one with more files." else ""
-        when {
-            // No Java files -> default is NonNull
-            nOfJavaFiles == 0 && nOfKotlinFiles >= 1 -> false // Is not Java source
-            // No Kotlin files -> default is nullable
-            nOfKotlinFiles == 0 && nOfJavaFiles >= 1 -> true // Is Java source
-            // We don't know. Sometimes we can make a pretty good guess:
-            nOfJavaFiles > 10 * nOfKotlinFiles -> true
-            nOfKotlinFiles > 10 * nOfJavaFiles -> false
-            // Sometimes we really can't
-            nOfJavaFiles > nOfKotlinFiles -> println(errorMessage()).let { true }
-            nOfKotlinFiles > nOfJavaFiles -> println(errorMessage()).let { false }
-            // Explicitly allow certain small integration tests
-            getPossibleSourceFiles().map { it.path }.first().contains("testData") -> true
-            dri.fullName.contains("dokkaTest") -> true
-            else -> throw RuntimeException(errorMessage(utterFailure = true))
+internal fun WithSources.isFromJava() =
+    isFromJavaMap.getOrPut(this) {
+        if (this is DClasslike && this.isSynthetic) false
+        else if (this is WithVisibility && this.visibility.isNotEmpty())
+            !visibility.values.any { it is KotlinVisibility }
+        else if (this is WithAbstraction && this.modifier.isNotEmpty())
+            !modifier.values.any { it is KotlinModifier }
+        else return when (this.sources.entries.single().value) {
+            is PsiDocumentableSource -> true
+            else -> false
         }
     }
-}
 
 private val INTERNAL_PACKAGES = listOf("java", "Kotlin", "google", "android")
 internal fun DRI.isExternal() = !packageName?.startsWithAnyOf(INTERNAL_PACKAGES) ?: true
-
-internal fun Documentable.getPossibleSourceFiles(): List<File> {
-    val codeFiles = if (this is WithSources) {
-        this.sources.entries.map { File(it.value.path) }
-    } else {
-        sourceSets.map { it.sourceRoots.map { it.getCodeFileDescendants() } }.flatten().flatten()
-    }
-
-    if (codeFiles.isEmpty()) throw RuntimeException("No sources found for $dri")
-    if (codeFiles.size == 1) return codeFiles
-    return codeFiles
-}
-
-private fun File.getCodeFileDescendants(): List<File> =
-    if (this.extension.lowercase(Locale.getDefault()) in listOf("java", "kt", "js", "class")) {
-        listOf(this)
-    } else {
-        this.listFiles()?.map { it.getCodeFileDescendants() }?.flatten() ?: emptyList()
-    }
 
 /**
  * @param displayLanguage the Language of the docs this Documentable will be displayed in

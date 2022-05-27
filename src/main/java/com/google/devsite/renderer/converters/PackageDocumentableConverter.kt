@@ -77,7 +77,10 @@ internal class PackageDocumentableConverter(
                 content = DefaultPackageSummary(
                     PackageSummary.Params(
                         displayLanguage,
-                        description = javadocConverter.metadata(doc),
+                        description = javadocConverter.metadata(
+                            documentable = doc,
+                            isFromJava = true // This parameter is not used in the DPackage case
+                        ),
                         interfaces = interfaces.await(),
                         classes = classes.await(),
                         enums = enums.await(),

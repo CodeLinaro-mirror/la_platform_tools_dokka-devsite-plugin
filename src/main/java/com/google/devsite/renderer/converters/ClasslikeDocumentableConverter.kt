@@ -523,7 +523,7 @@ internal class ClasslikeDocumentableConverter(
         val typeParameters = if (classlike is WithGenerics) {
             classlike.generics.map {
                 errorContextInjector(it) {
-                    paramConverter.componentForTypeParameter(it)
+                    paramConverter.componentForTypeParameter(it, classlike.isFromJava())
                 }
             }
         } else {

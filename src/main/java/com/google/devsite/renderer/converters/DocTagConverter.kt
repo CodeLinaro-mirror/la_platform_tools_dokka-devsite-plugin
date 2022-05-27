@@ -64,6 +64,7 @@ import org.jetbrains.dokka.model.Void
 import org.jetbrains.dokka.model.WithChildren
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.WithGenerics
+import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.doc.Author
 import org.jetbrains.dokka.model.doc.CodeBlock
 import org.jetbrains.dokka.model.doc.Constructor
@@ -108,17 +109,40 @@ internal class DocTagConverter(
             ?: documentable.getDescription(summary = true)
     }
 
+    /** metadata() can either take a WithSources Documentable, OR an isFromJava boolean */
+    fun <T> metadata(
+        documentable: T,
+        returnType: ContextFreeComponent? = null,
+        paramNames: List<String> = emptyList(),
+        annotations: List<Annotations.Annotation> = emptyList()
+    ) where T : Documentable, T : WithSources =
+        metadataImpl(documentable, returnType, paramNames, annotations)
+
+    fun metadata(
+        documentable: Documentable,
+        returnType: ContextFreeComponent? = null,
+        paramNames: List<String> = emptyList(),
+        annotations: List<Annotations.Annotation> = emptyList(),
+        isFromJava: Boolean
+    ) = metadataImpl(documentable, returnType, paramNames, annotations, isFromJava)
+
     /**
      * Returns a breakdown of the different metadata as a deprecation warning, description, and then
      * separate summaries. Examples include the list of parameters, return type, see also, throws,
      * etc.
      */
-    fun metadata(
+    private fun metadataImpl(
         documentable: Documentable,
         returnType: ContextFreeComponent? = null,
         paramNames: List<String> = emptyList(),
-        annotations: List<Annotations.Annotation> = emptyList()
+        annotations: List<Annotations.Annotation> = emptyList(),
+        isFromJavaParam: Boolean? = null
     ): List<ContextFreeComponent> {
+        val isFromJava = if (isFromJavaParam != null) isFromJavaParam
+        else {
+            assert(documentable is WithSources)
+            (documentable as WithSources).isFromJava()
+        }
         val description = documentable.getDescription(summary = false)
         val deprecation = deprecationComponent(documentable, summary = false, annotations)
         val receiverParam = documentable.find<Receiver>()?.let {
@@ -144,7 +168,8 @@ internal class DocTagConverter(
             @kotlin.Suppress("UNCHECKED_CAST")
             try {
                 when (firstTag) {
-                    is Param -> params(tags as List<NamedTagWrapper>, generics, documentable)
+                    is Param ->
+                        params(tags as List<NamedTagWrapper>, generics, documentable, isFromJava)
                     is Return -> returnType(tags as List<Return>, checkNotNull(returnType))
                     is Throws -> throws(tags as List<Throws>)
                     is See -> see(tags as List<See>)
@@ -267,34 +292,59 @@ internal class DocTagConverter(
         docsHolder.logger.warn(warning)
     }
 
+    /** params() can take either a WithSources Documentable, or an isFromJava boolean */
+    private fun <T> params(
+        tags: List<NamedTagWrapper>,
+        dGenerics: List<DTypeParameter>,
+        documentable: T,
+    ) where T : Documentable, T : WithSources =
+        paramsImpl(tags, dGenerics, documentable, documentable.isFromJava())
+
     private fun params(
         tags: List<NamedTagWrapper>,
         dGenerics: List<DTypeParameter>,
-        documentable: Documentable
+        documentable: Documentable,
+        isFromJava: Boolean
+    ) = paramsImpl(tags, dGenerics, documentable, isFromJava)
+
+    private fun paramsImpl(
+        tags: List<NamedTagWrapper>,
+        dGenerics: List<DTypeParameter>,
+        documentable: Documentable,
+        isFromJavaParam: Boolean? = null
     ): SummaryList {
+        val isFromJava = if (isFromJavaParam != null) isFromJavaParam
+        else {
+            assert(documentable is WithSources)
+            (documentable as WithSources).isFromJava()
+        }
         // @param can refer to parameters, lambda parameters, type parameters, or receivers.
         val allOptions = mutableMapOf<String, ContextFreeComponent>()
         if (documentable is DFunction) {
             allOptions.putAll(
                 documentable.parameters.map {
-                    it.name!! to paramConverter.componentForParameter(it, false)
+                    it.name!! to paramConverter.componentForParameter(
+                        param = it,
+                        isSummary = false,
+                        isFromJava = isFromJava
+                    )
                 }
             )
             allOptions.putAll(
                 recursivelyGetLambdaParamNames(documentable.parameters.map { it.type }).map {
                     (it.presentableName ?: "") to paramConverter
-                        .componentForLambdaParameter(it, documentable.isFromJava())
+                        .componentForLambdaParameter(it, isFromJava)
                 }
             )
         }
         allOptions.putAll(
             dGenerics.map {
-                it.name to paramConverter.componentForTypeParameter(it)
+                it.name to paramConverter.componentForTypeParameter(it, isFromJava)
             }
         )
         if (documentable is Callable && documentable.receiver != null)
             allOptions[documentable.receiver!!.name ?: "receiver"] =
-                paramConverter.componentForParameter(documentable.receiver!!, false)
+                paramConverter.componentForParameter(documentable.receiver!!, false, isFromJava)
         val params = tags.map { tag ->
             if (allOptions[tag.name()] == null) {
                 throw RuntimeException(
@@ -641,7 +691,13 @@ internal class DocTagConverter(
 
     // Duplicated from PropertyDocumentableConverter. This is the price of global variables.
     internal fun DProperty.signature(isSummary: Boolean): PropertySignature {
-        val receiver = receiver?.let { paramConverter.componentForParameter(it, isSummary) }
+        val receiver = receiver?.let {
+            paramConverter.componentForParameter(
+                param = it,
+                isSummary = isSummary,
+                isFromJava = isFromJava()
+            )
+        }
         return DefaultPropertySignature(
             PropertySignature.Params(
                 // TODO(b/168136770): figure out path for default anchors
