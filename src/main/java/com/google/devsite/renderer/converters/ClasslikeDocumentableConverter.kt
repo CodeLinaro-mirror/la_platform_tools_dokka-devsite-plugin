@@ -182,7 +182,7 @@ internal class ClasslikeDocumentableConverter(
         val protectedCompanionPropertiesSummary = async {
             propertiesToSummary(
                 protectedCompanionPropertiesTitle(),
-                companionProperties.filter(::isPublic)
+                companionProperties.filter(::isProtected)
             )
         }
 
