@@ -18,6 +18,7 @@ package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Link
+import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSignature
 import com.google.devsite.components.symbols.SymbolSummary
@@ -227,6 +228,41 @@ internal class PropertyDocumentableConverterTest(
                 assertThat(modifiers).isEqualTo(listOf("const"))
             }
         }
+    }
+
+    @Test
+    fun `Constant has value in documentable`() {
+        // TODO(b/228972046): currently constants can only be displayed in kotlin
+        // dependent on go/dokka-upstream-bug/2524
+        /*
+        val intConstantJ = """
+            public static final int FOO = 5;
+        """.render(java = true).signature("FOO").data as PropertySignature.Params
+        assertThat(intConstantJ.constantValue).isNotNull()
+        assertThat(intConstantJ.constantValue).isEqualTo("5")
+
+        val stringConstantJ = """
+            public static final int BAR = "Hi";
+        """.render(java = true).signature("BAR").data as PropertySignature.Params
+        assertThat(stringConstantJ.constantValue).isNotNull()
+        assertThat(stringConstantJ.constantValue).isEqualTo("Hi")
+        */
+
+        val intConstantK = """
+            public const val FOO: Int = 5
+        """.render().signature("FOO").data as PropertySignature.Params
+        assertThat(intConstantK.constantValue).isNotNull()
+        assertThat(intConstantK.constantValue).isEqualTo("5")
+
+        // TODO(b/228972046): currently only primitive value constants can be displayed
+        // dependent on go/dokka-upstream-bug/2008
+        /*
+        val stringConstantK = """
+            public const val BAR: String = "Hi"
+        """.render().signature("BAR").data as PropertySignature.Params
+        assertThat(stringConstantK.constantValue).isNotNull()
+        assertThat(stringConstantK.constantValue).isEqualTo("Hi")
+        */
     }
 
     @Test

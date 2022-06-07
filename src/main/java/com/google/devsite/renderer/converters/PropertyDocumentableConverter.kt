@@ -31,6 +31,7 @@ import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.DProperty
+import org.jetbrains.dokka.model.DefaultValue
 
 /** Converts documentable properties into property components. */
 internal class PropertyDocumentableConverter(
@@ -119,6 +120,12 @@ internal class PropertyDocumentableConverter(
                 isFromJava = isFromJava()
             )
         }
+        val constantValue = if (isConstant(modifiers())) {
+            // the value of a constant is stored as a DefaultValue, pick it out if it exists
+            extra.allOfType<DefaultValue>().singleOrNull()?.value?.getValue()
+        } else {
+            null
+        }
         return DefaultPropertySignature(
             PropertySignature.Params(
                 // TODO(b/168136770): figure out path for default anchors
@@ -127,7 +134,8 @@ internal class PropertyDocumentableConverter(
                     Language.JAVA -> null
                     Language.KOTLIN -> receiver
                 },
-                annotationComponents = annotationComponents
+                annotationComponents = annotationComponents,
+                constantValue = constantValue
             )
         )
     }

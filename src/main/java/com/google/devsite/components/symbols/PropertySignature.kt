@@ -18,13 +18,17 @@ package com.google.devsite.components.symbols
 
 import com.google.devsite.components.Link
 
-/** Represents a property or field signature (aka just the name and receiver). */
+/**
+ * Represents a property or field signature (aka just the name and receiver, and the value if the
+ * property is a constant).
+ */
 internal interface PropertySignature : SymbolSignature {
     override val data: Params
 
     class Params(
         override val name: Link,
         override val receiver: ParameterComponent? = null,
-        override val annotationComponents: List<AnnotationComponent> = emptyList()
+        override val annotationComponents: List<AnnotationComponent> = emptyList(),
+        val constantValue: String? = null
     ) : SymbolSignature.Params
 }

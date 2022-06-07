@@ -33,5 +33,9 @@ internal class DefaultPropertySignature(
         }
 
         data.name.render(this)
+
+        if (data.constantValue != null) {
+            +" = ${data.constantValue}"
+        }
     }
 }
