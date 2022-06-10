@@ -78,13 +78,28 @@ internal class AnnotationsTest : ConverterTestBase() {
     @Test
     fun `@JsName annotation is ignored`() {
 
-        // Declare the CheckResult annotation class before it's used
+        // Declare the JsName annotation class before it's used
         val annotation = """
             |annotation class JsName
             |
             |@JsName("somethingElse")
             |fun foo() = Unit
         """.render().functionAnnotations()
+
+        assertThat(annotation.components().exceptNonNull()).isEmpty()
+    }
+
+    @Test
+    fun `@Override annotation is ignored`() {
+
+        // Declare the JsName annotation class before it's used
+        val annotation = """
+            |public class Foo {
+            |   @Override
+            |   public String toString() { return "A A A"; }
+            |}
+        """.render(java = true).explicitClasslike("Foo").functions.single { it.name == "toString" }
+            .annotations()
 
         assertThat(annotation.components().exceptNonNull()).isEmpty()
     }

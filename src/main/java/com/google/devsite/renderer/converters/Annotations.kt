@@ -190,7 +190,9 @@ private val EXPLICITLY_BANNED_ANNOTATION_NAMES = listOf(
     // This annotation is apparently generated upstream. Dokka uses it for signature serialization
     "ParameterName", // It doesn't seem to be useful for developers
     // This annotations is not useful for developers but right now is @ShowAnnotation?
-    "JsName"
+    "JsName",
+    // This annotation is intended to target the compiler and is general not useful for devs
+    "Override"
 )
 // List of androidx annotations that (now that we are on Java 8) ideally would be migrated
 // ANNOTATION_TARGET.METHOD -> ANNOTATION_TARGET.TYPE. If on a function, they refer to return type
