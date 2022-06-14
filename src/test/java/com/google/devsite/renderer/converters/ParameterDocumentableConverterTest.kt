@@ -1250,18 +1250,18 @@ internal class ParameterDocumentableConverterTest(
         )
     }
 
-    private fun DModule.returnType(name: String = "foo"): TypeProjectionComponent {
+    private fun DModule.returnType(functionName: String = "foo"): TypeProjectionComponent {
         val (holder, pathProvider) = holderAndProvider(this)
         val converter = ParameterDocumentableConverter(
             displayLanguage,
             pathProvider
         )
         return converter.componentForProjection(
-            projection = function(name)!!.type,
+            projection = function(functionName)!!.type,
             // Propagate ALL annotations _for display in the summary_, b/197321617
             propagatedAnnotations = emptyList(),
             isReturnType = true,
-            isJavaSource = function()!!.isFromJava()
+            isJavaSource = function(functionName)!!.isFromJava()
         )
     }
 
