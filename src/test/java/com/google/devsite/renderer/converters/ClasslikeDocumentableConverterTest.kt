@@ -25,6 +25,7 @@ import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
@@ -45,6 +46,8 @@ import com.google.devsite.renderer.converters.testing.title
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DModule
+import org.jetbrains.dokka.model.GenericTypeConstructor
+import org.jetbrains.dokka.model.JavaObject
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -1388,6 +1391,32 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(signatureJ.data.implements.single().data.name).isEqualTo("Test.Foo")
         assertThat(signatureK.data.implements.single().data.name).isEqualTo("Foo")
         // Now route to DefaultClassSignatureTest.`Interfaces extend other interfaces`()
+    }
+
+    @Test // Kotlin.enum.valueOf isn't in the descriptor tree, despite being callable: b/235992590
+    fun `Enum valueOf return type is synthetic`() {
+        val enumDModuleK = """
+            |enum class Foo { BAR, BAZ }
+        """.render()
+        val enumDModuleJ = """
+            |public enum Foo { BAR, BAZ }
+        """.render(java = true)
+        for (enumDModule in listOf(/*enumDModuleK, */enumDModuleJ)) {
+            // Test upstream behavior: only one enumJ.valueOf exists on the enum & it returns a Foo
+            val dFunctions = enumDModule.explicitClasslike("Foo").functions
+            val valueOfDFunctions = dFunctions.filter { it.name == "valueOf" }
+            assertThat(valueOfDFunctions.size).isEqualTo(1)
+            val valueOfDFunctionReturnType = valueOfDFunctions.single().type
+            assertThat(valueOfDFunctionReturnType is JavaObject).isFalse()
+            assertThat((valueOfDFunctionReturnType as GenericTypeConstructor).dri.classNames)
+                .isEqualTo("Test.Foo")
+            // Verify the final result in dackka is correct, and that valueOf is marked inherited.
+            val enumClass = enumDModule.page("Foo").content<Classlike>()
+            val publicFuns = enumClass.methodSummaryItems()
+            val valueOfMethod = publicFuns.single { "valueOf" == it.name() }
+            val valueOfReturnType = (valueOfMethod.data.title as TypeSummary).data.type
+            assertThat(valueOfReturnType.name()).isEqualTo("Test.Foo")
+        }
     }
 
     private fun DModule.page(name: String = "Foo"): DevsitePage {
