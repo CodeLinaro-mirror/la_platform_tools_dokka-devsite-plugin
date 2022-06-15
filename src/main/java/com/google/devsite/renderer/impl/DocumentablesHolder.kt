@@ -43,6 +43,7 @@ import org.jetbrains.dokka.model.DEnum
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DModule
+import org.jetbrains.dokka.model.DObject
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DTypeAlias
@@ -50,6 +51,7 @@ import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.GenericTypeConstructor
 import org.jetbrains.dokka.model.JavaModifier
 import org.jetbrains.dokka.model.JavaVisibility
+import org.jetbrains.dokka.model.WithCompanion
 import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.model.properties.WithExtraProperties
@@ -81,6 +83,7 @@ internal class DocumentablesHolder(
     private val annotations = mutableMapOf<DRI, Deferred<List<DAnnotation>>>()
     private val typeAliases = mutableMapOf<DRI, Deferred<List<DTypeAlias>>>()
     private val exceptions = mutableMapOf<DRI, Deferred<List<DClass>>>()
+    private val objects = mutableMapOf<DRI, Deferred<List<DObject>>>()
 
     private val allClasslikes: Deferred<List<DClasslike>>
     private val nestedClasslikesJob: Job
@@ -109,6 +112,7 @@ internal class DocumentablesHolder(
                 val annotationList = async { computeAnnotations(children.await()) }
                 val typeAliasList = async { computeTypesAliases(packageDoc) }
                 val exceptionList = async { computeExceptions(children.await()) }
+                val objectList = async { computeObjects(children.await()) }
 
                 classlikes[packageDoc.dri] = classlikesList
                 classes[packageDoc.dri] = classList
@@ -118,6 +122,7 @@ internal class DocumentablesHolder(
                 annotations[packageDoc.dri] = annotationList
                 typeAliases[packageDoc.dri] = typeAliasList
                 exceptions[packageDoc.dri] = exceptionList
+                objects[packageDoc.dri] = objectList
             }
         }
 
@@ -187,6 +192,15 @@ internal class DocumentablesHolder(
 
     suspend fun exceptionsFor(packageDoc: DPackage): List<DClass> =
         exceptions.getValue(packageDoc.dri).await()
+
+    suspend fun objectsFor(packageDoc: DPackage, displayLanguage: Language): List<DObject> {
+        return if (displayLanguage == Language.JAVA) {
+            // TODO(b/203678085): Objects should be accessible from top-level static inner class
+            emptyList()
+        } else {
+            objects.getValue(packageDoc.dri).await()
+        }
+    }
 
     /**
      * Iterate through the all packages and create map of each class to its associated
@@ -319,5 +333,12 @@ internal class DocumentablesHolder(
 
     private fun computeExceptions(docs: List<Documentable>): List<DClass> {
         return docs.filterIsInstance<DClass>().filter { it.isExceptionClass }.sortedBy { it.name() }
+    }
+
+    private fun computeObjects(docs: List<Documentable>): List<DObject> {
+        val companions = docs.filterIsInstance<WithCompanion>().mapNotNull { it.companion?.dri }
+        val allObjects = docs.filterIsInstance<DObject>()
+        val nonCompanions = allObjects.filter { !companions.contains(it.dri) }
+        return nonCompanions.sortedBy { it.name() }
     }
 }

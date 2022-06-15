@@ -44,6 +44,7 @@ internal class DefaultTocPackage(
         renderTypes("Exceptions", data.exceptions)
         renderTypes("Annotations", data.annotations)
         renderTypes("Type aliases", data.typeAliases)
+        renderTypes("Objects", data.objects)
     }
 
     private fun StringBuilder.renderTypes(sectionName: String, types: List<TocPackage.Type>) {

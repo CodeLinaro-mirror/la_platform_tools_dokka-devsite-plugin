@@ -377,6 +377,40 @@ internal class RootDocumentableConverterTest(
         assertPath(inner.url, "androidx/example/Outer.Inner.html")
     }
 
+    @Test
+    fun `Toc includes top level objects in Kotlin`() {
+        val toc = """
+            |object Foo {}
+        """.render().toc()
+
+        val tocPackage = toc.item<TocPackage>()
+        javaOnly {
+            // TODO(b/203678085): Objects should be accessible from top-level static inner class
+            assertThat(tocPackage.data.objects).isEmpty()
+        }
+        kotlinOnly {
+            val foo = tocPackage.data.objects.item()
+            assertThat(foo.name).isEqualTo("Foo")
+            assertPath(foo.url, "androidx/example/Foo.html")
+        }
+    }
+
+    @Test
+    fun `Toc does not include companion objects`() {
+        val toc = """
+            |class Foo {
+            |    companion object {}
+            |}
+            |class Bar {
+            |    companion object Baz {}
+            |}
+        """.render().toc()
+
+        val tocPackage = toc.item<TocPackage>()
+        assertThat(tocPackage.data.objects).isEmpty()
+        assertThat(tocPackage.data.classes.size).isEqualTo(2)
+    }
+
     private fun DModule.page(
         forClasses: Boolean = false,
         forPackages: Boolean = false

@@ -132,6 +132,7 @@ internal class RootDocumentableConverter(
         val exceptions = docsHolder.exceptionsFor(packageDoc).map(::typeForToc)
         val annotations = docsHolder.annotationsFor(packageDoc).map(::typeForToc)
         val typeAliases = docsHolder.typeAliasesFor(packageDoc).map(::typeForToc)
+        val objects = docsHolder.objectsFor(packageDoc, displayLanguage).map(::typeForToc)
 
         DefaultTocPackage(
             TocPackage.Params(
@@ -142,7 +143,8 @@ internal class RootDocumentableConverter(
                 enums = enums,
                 exceptions = exceptions,
                 annotations = annotations,
-                typeAliases = typeAliases
+                typeAliases = typeAliases,
+                objects = objects
             )
         )
     }
