@@ -22,7 +22,10 @@ import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.PackageSummary
 import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
@@ -103,7 +106,8 @@ internal class PackageDocumentableConverter(
         )
     }
 
-    private fun functionsToSummary(functions: List<DFunction>): SummaryList {
+    private fun functionsToSummary(functions: List<DFunction>):
+        SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
         val modifierHints = ModifierHints(displayLanguage, isSummary = true)
         val components = functions.map {
             functionConverter.summary(it, modifierHints)
@@ -123,7 +127,8 @@ internal class PackageDocumentableConverter(
         }
     }
 
-    private fun propertiesToSummary(properties: List<DProperty>): SummaryList {
+    private fun propertiesToSummary(properties: List<DProperty>):
+        SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
         val modifierHints = ModifierHints(displayLanguage, isSummary = true)
         val components = properties.map {
             propertyConverter.summary(it, modifierHints)

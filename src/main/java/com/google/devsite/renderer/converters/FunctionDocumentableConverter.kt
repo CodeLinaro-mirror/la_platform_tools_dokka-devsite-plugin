@@ -46,7 +46,8 @@ internal class FunctionDocumentableConverter(
     private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
 
     /** @return the function summary component */
-    fun summary(function: DFunction, hints: ModifierHints): TwoPaneSummaryItem {
+    fun summary(function: DFunction, hints: ModifierHints):
+        TwoPaneSummaryItem<TypeSummary, SymbolSummary> {
         val annotations = function.annotations()
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
@@ -77,7 +78,7 @@ internal class FunctionDocumentableConverter(
     }
 
     /** @return the constructor summary component */
-    fun summaryForConstructor(function: DFunction): SingleColumnSummaryItem {
+    fun summaryForConstructor(function: DFunction): SingleColumnSummaryItem<SymbolSummary> {
         return DefaultSingleColumnSummaryItem(
             SingleColumnSummaryItem.Params(
                 DefaultSymbolSummary(

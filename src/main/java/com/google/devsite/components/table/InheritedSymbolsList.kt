@@ -18,14 +18,17 @@ package com.google.devsite.components.table
 
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.Link
+import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.symbols.TypeSummary
 
 /** Represents the inherited symbols in an expandable summary. */
 internal interface InheritedSymbolsList : ContextFreeComponent {
     val data: Params
 
     data class Params(
-        val header: RowComponent,
-        val inheritedSymbolSummaries: Map<Link, SummaryList>
+        val header: TableTitle,
+        val inheritedSymbolSummaries: Map<Link,
+            SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>>
     )
 
     fun hasContent() = data.inheritedSymbolSummaries.isNotEmpty()

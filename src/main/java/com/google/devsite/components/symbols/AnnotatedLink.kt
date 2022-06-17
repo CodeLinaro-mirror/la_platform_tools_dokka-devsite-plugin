@@ -16,15 +16,14 @@
 
 package com.google.devsite.components.symbols
 
-import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.Link
 
 /** Represents a minimal signature, e.g. that of a classlike in the packages summary. */
-internal interface MiniSignature : ContextFreeComponent {
-    val data: Params
+internal interface AnnotatedLink : Link {
+    override val data: Params
 
     data class Params(
         val annotations: List<AnnotationComponent>,
         val link: Link
-    )
+    ) : Link.Params(name = link.data.name, url = link.data.url)
 }

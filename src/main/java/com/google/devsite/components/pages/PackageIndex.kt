@@ -17,7 +17,10 @@
 package com.google.devsite.components.pages
 
 import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.components.DescriptionComponent
+import com.google.devsite.components.Link
 import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TwoPaneSummaryItem
 
 /** Represents the list of packages page. */
 internal interface PackageIndex : ContextFreeComponent {
@@ -25,6 +28,6 @@ internal interface PackageIndex : ContextFreeComponent {
 
     data class Params(
         val classesUrl: String,
-        val packages: SummaryList
+        val packages: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>
     )
 }

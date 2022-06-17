@@ -601,7 +601,7 @@ internal class FunctionDocumentableConverterTest(
             |fun ScrollableState(consumeScrollDelta: Float.(Float) -> Float): ScrollableState {
             |    return DefaultScrollableState(consumeScrollDelta)
             |}
-        """.render().summary("ScrollableState").data.description as SymbolSummary
+        """.render().summary("ScrollableState").data.description
         kotlinOnly {
             val parameter = (summary.data.signature as FunctionSignature).data.parameters.single()
             val lambda = (parameter.data.type as LambdaTypeProjectionComponent)
@@ -680,7 +680,7 @@ internal class FunctionDocumentableConverterTest(
     private fun DModule.summary(
         doc: DModule.() -> DFunction = ::smartDoc,
         hints: ModifierHints = ModifierHints(displayLanguage)
-    ): TwoPaneSummaryItem {
+    ): TwoPaneSummaryItem<TypeSummary, SymbolSummary> {
         val (holder, pathProvider) = holderAndProvider(this)
         val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
         val converter = FunctionDocumentableConverter(
@@ -703,7 +703,7 @@ internal class FunctionDocumentableConverterTest(
 
     private fun DModule.functionSummaries(
         hints: ModifierHints = ModifierHints(displayLanguage)
-    ): Map<String, TwoPaneSummaryItem> {
+    ): Map<String, TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
         val (holder, pathProvider) = holderAndProvider(this)
         val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
         val converter = FunctionDocumentableConverter(
@@ -752,8 +752,8 @@ internal class FunctionDocumentableConverterTest(
 
     private fun SymbolSummary.param(): ParameterComponent = signature().parameters.item()
 
-    private fun TwoPaneSummaryItem.returnSummary(): TypeSummary.Params =
-        (data.title as TypeSummary).data
+    private fun TwoPaneSummaryItem<TypeSummary, SymbolSummary>.returnSummary(): TypeSummary.Params =
+        data.title.data
 
     companion object {
         @JvmStatic

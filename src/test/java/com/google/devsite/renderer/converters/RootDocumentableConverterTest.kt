@@ -17,12 +17,15 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.components.DescriptionComponent
+import com.google.devsite.components.Link
 import com.google.devsite.components.pages.ClassIndex
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.PackageIndex
 import com.google.devsite.components.pages.TableOfContents
 import com.google.devsite.components.symbols.TocPackage
 import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.content
 import com.google.devsite.renderer.converters.testing.item
@@ -439,8 +442,10 @@ internal class RootDocumentableConverterTest(
         return runBlocking { converter.tocPage() }
     }
 
-    private fun ClassIndex.item() = item<Map.Entry<Char, SummaryList>>()
-    private fun ClassIndex.items(size: Int? = null) = items<Map.Entry<Char, SummaryList>>(size)
+    private fun ClassIndex.item() =
+        item<Map.Entry<Char, SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>>>()
+    private fun ClassIndex.items(size: Int? = null) =
+        items<Map.Entry<Char, SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>>>(size)
 
     companion object {
         @JvmStatic

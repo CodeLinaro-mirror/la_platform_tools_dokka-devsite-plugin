@@ -22,7 +22,6 @@ import com.google.devsite.components.render
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolDetail.SymbolKind
 import com.google.devsite.components.table.SummaryList
-import com.google.devsite.components.table.TableTitle
 import com.google.devsite.renderer.Language
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
@@ -88,8 +87,8 @@ internal class DefaultSymbolDetail(
 
 private fun descriptionSorter(component: ContextFreeComponent): Int {
     return when (component) {
-        is SummaryList -> {
-            val tableName = (component.data.header as TableTitle).data.title
+        is SummaryList<*> -> {
+            val tableName = component.data.header!!.data.title
             when (tableName) {
                 "Parameters" -> 1
                 "Returns" -> 2

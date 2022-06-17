@@ -42,7 +42,8 @@ internal class PropertyDocumentableConverter(
     private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
 
     /** @return the property summary component */
-    fun summary(property: DProperty, hints: ModifierHints): TwoPaneSummaryItem {
+    fun summary(property: DProperty, hints: ModifierHints):
+        TwoPaneSummaryItem<TypeSummary, SymbolSummary> {
         val annotations = property.annotations().filter { !it.belongsOnReturnType() }
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(

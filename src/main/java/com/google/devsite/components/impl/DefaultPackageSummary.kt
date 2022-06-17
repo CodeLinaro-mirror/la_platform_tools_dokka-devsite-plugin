@@ -17,9 +17,14 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.components.DescriptionComponent
+import com.google.devsite.components.Link
 import com.google.devsite.components.pages.PackageSummary
 import com.google.devsite.components.render
+import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import kotlinx.html.FlowContent
 import kotlinx.html.h2
@@ -67,7 +72,21 @@ internal class DefaultPackageSummary(
         }
     }
 
-    private fun FlowContent.renderSummary(summary: SummaryList, title: String) {
+    private fun FlowContent.renderSummary(
+        summary: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
+        title: String
+    ) {
+        if (summary.hasContent()) {
+            h2 { +title }
+        }
+        summary.render(this)
+    }
+
+    @JvmName("renderSummarySectionSummary")
+    private fun FlowContent.renderSummary(
+        summary: SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>,
+        title: String
+    ) {
         if (summary.hasContent()) {
             h2 { +title }
         }

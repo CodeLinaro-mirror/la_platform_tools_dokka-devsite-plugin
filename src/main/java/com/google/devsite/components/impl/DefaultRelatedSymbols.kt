@@ -16,10 +16,12 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
 import com.google.devsite.components.render
 import com.google.devsite.components.table.RelatedSymbols
 import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import kotlinx.html.FlowContent
 import kotlinx.html.div
 import kotlinx.html.span
@@ -36,7 +38,7 @@ internal class DefaultRelatedSymbols(
 
     private fun FlowContent.renderRelatedSymbolsFor(
         subclasses: List<Link>,
-        summary: SummaryList,
+        summary: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
         relatedness: String
     ) {
         if (subclasses.isEmpty()) return

@@ -16,12 +16,12 @@
 
 package com.google.devsite.components.testing
 
-import com.google.devsite.components.table.SummaryItem
+import com.google.devsite.components.table.TableTitle
 import kotlinx.html.TR
 import kotlinx.html.unsafe
 
-internal object NoopSummaryItem : SummaryItem {
-    override val data: SummaryItem.Params
+internal object NoopTableTitle : TableTitle {
+    override val data: TableTitle.Params
         get() = throw NotImplementedError()
 
     override fun render(into: TR) = into.run {

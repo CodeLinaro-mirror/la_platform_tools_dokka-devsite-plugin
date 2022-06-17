@@ -19,13 +19,14 @@ package com.google.devsite.components.impl
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.Classlike.Params
+import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.testing.NoopClassHierarchy
 import com.google.devsite.components.testing.NoopClassSignature
-import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.components.testing.NoopDescriptionComponent
 import com.google.devsite.components.testing.NoopLibraryMetadataComponent
 import com.google.devsite.components.testing.NoopRelatedSymbols
 import com.google.devsite.components.testing.NoopSummaryList
+import com.google.devsite.components.testing.NoopSymbolDetail
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -160,9 +161,9 @@ class DefaultClasslikeTest {
                 relatedSymbols = NoopRelatedSymbols(shown = false),
                 description = emptyList(),
                 symbolTypes = listOf(
-                    NoopSummaryList() to Classlike.TitledList(
+                    NoopSummaryList<SummaryItem>() to Classlike.TitledList(
                         "Symbols",
-                        listOf(NoopContextFreeComponent)
+                        listOf(NoopSymbolDetail)
                     )
                 ),
                 inheritedTypes = emptyList(),

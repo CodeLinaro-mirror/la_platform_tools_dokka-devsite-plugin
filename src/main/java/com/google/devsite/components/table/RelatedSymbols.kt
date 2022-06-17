@@ -17,6 +17,7 @@
 package com.google.devsite.components.table
 
 import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
 
 /** Represents the direct/indirect subclasses expandable summary. */
@@ -25,8 +26,8 @@ internal interface RelatedSymbols : ContextFreeComponent {
 
     data class Params(
         val directSubclasses: List<Link>,
-        val directSummary: SummaryList,
+        val directSummary: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
         val indirectSubclasses: List<Link>,
-        val indirectSummary: SummaryList
+        val indirectSummary: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>
     )
 }

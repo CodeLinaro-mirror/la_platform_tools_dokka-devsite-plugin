@@ -301,7 +301,7 @@ internal class DefaultDescriptionComponent(
                 is CodeInline -> code { renderTags(tag.children, state) }
                 is Pre, is CodeBlock -> pre("prettyprint") { renderTags(tag.children, state) }
                 is DocumentationLink -> code {
-                    val url = data.pathProvider.forReference(tag.dri).url
+                    val url = data.pathProvider!!.forReference(tag.dri).url
                     a(url) {
                         renderTags(tag.children, state)
                     }
@@ -473,5 +473,5 @@ internal class DefaultDescriptionComponent(
 
     override fun toString() = if (data.summary) "summary of " else "" +
         if (data.deprecation != null) data.deprecation + " " else "" +
-            data.components.joinToString()
+            data.components.joinToString { it.toString() }
 }

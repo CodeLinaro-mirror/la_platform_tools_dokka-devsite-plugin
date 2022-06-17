@@ -16,9 +16,9 @@
 
 package com.google.devsite.renderer.converters
 
-import com.google.devsite.components.Raw
+import com.google.devsite.components.DescriptionComponent
+import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultPropertySignature
-import com.google.devsite.components.impl.DefaultRaw
 import com.google.devsite.components.impl.DefaultSymbolDetail
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.symbols.PropertySignature
@@ -39,11 +39,11 @@ internal class EnumValueDocumentableConverter(
     private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
 
     /** @return the enum value summary component */
-    fun summary(enumValue: DEnumEntry): TwoPaneSummaryItem {
+    fun summary(enumValue: DEnumEntry): TwoPaneSummaryItem<Link, DescriptionComponent> {
         val annotations = enumValue.annotations()
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
-                title = DefaultRaw(Raw.Params(enumValue.name)),
+                title = pathProvider.linkForReference(enumValue.dri, enumValue.name),
                 description = javadocConverter.summaryDescription(enumValue, annotations)
             )
         )

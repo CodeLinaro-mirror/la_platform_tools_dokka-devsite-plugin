@@ -19,10 +19,10 @@ package com.google.devsite.components.table
 import com.google.devsite.components.ContextFreeComponent
 
 /** Builds a single column item. */
-internal interface SingleColumnSummaryItem : SummaryItem {
-    override val data: Params
+internal interface SingleColumnSummaryItem<T : ContextFreeComponent> : SummaryItem {
+    override val data: Params<T>
 
-    data class Params(
-        override val description: ContextFreeComponent
+    data class Params<T : ContextFreeComponent>(
+        override val description: T
     ) : SummaryItem.Params
 }

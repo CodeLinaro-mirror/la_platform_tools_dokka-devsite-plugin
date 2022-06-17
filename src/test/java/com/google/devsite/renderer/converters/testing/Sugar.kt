@@ -20,6 +20,7 @@ package com.google.devsite.renderer.converters.testing
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.Component
+import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
 import com.google.devsite.components.pages.ClassIndex
@@ -29,17 +30,24 @@ import com.google.devsite.components.pages.TableOfContents
 import com.google.devsite.components.symbols.AnnotationComponent
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.MappedTypeProjectionComponent
-import com.google.devsite.components.symbols.MiniSignature
 import com.google.devsite.components.symbols.ParameterComponent
+import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeParameterComponent
 import com.google.devsite.components.symbols.TypeProjectionComponent
+import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.InheritedSymbolsList
 import com.google.devsite.components.table.SingleColumnSummaryItem
+import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.table.SummaryList
-import com.google.devsite.components.table.TableTitle
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.joinMaybePrefix
+import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.enumValuesTitle
+import com.google.devsite.renderer.converters.inheritedPropertiesTitle
+import com.google.devsite.renderer.converters.nestedTypesTitle
+import com.google.devsite.renderer.converters.protectedConstructorsTitle
+import com.google.devsite.renderer.converters.publicConstructorsTitle
 import org.jetbrains.dokka.model.doc.DocTag
 import org.jetbrains.dokka.model.doc.Text
 
@@ -53,7 +61,7 @@ internal fun <R> Component<*>.item(): R = items<R>(1).item()
 
 internal fun <R> Component<*>.items(size: Int?): Collection<R> {
     val items = when (this) {
-        is SummaryList -> data.items
+        is SummaryList<*> -> data.items
         is TableOfContents -> data.packages
         is ClassIndex -> data.alphabetizedClasses.entries
         else -> error("Unknown type: $javaClass")
@@ -64,33 +72,49 @@ internal fun <R> Component<*>.items(size: Int?): Collection<R> {
 
 internal fun <T> DevsitePage.content(): T = data.content as T
 
-internal fun SummaryList.item() = item<TwoPaneSummaryItem>()
-internal fun SummaryList.items(size: Int? = null) = items<TwoPaneSummaryItem>(size)
-internal fun SummaryList.sItems(size: Int? = null) = items<SingleColumnSummaryItem>(size)
-internal fun SummaryList.single() = items().single()
-internal fun SummaryList.size() = items().size
-internal fun SummaryList.title(): String = (data.header as TableTitle).data.title
+internal fun <T : ContextFreeComponent, V : ContextFreeComponent>
+SummaryList<TwoPaneSummaryItem<T, V>>.item() = item<TwoPaneSummaryItem<T, V>>()
+internal fun <T : ContextFreeComponent, V : ContextFreeComponent>
+SummaryList<TwoPaneSummaryItem<T, V>>.items(size: Int? = null) =
+    items<TwoPaneSummaryItem<T, V>>(size)
+internal fun <T : ContextFreeComponent> SummaryList<SingleColumnSummaryItem<T>>.sItems(
+    size: Int? = null
+) = items<SingleColumnSummaryItem<T>>(size)
+internal fun <T : ContextFreeComponent, V : ContextFreeComponent>
+SummaryList<TwoPaneSummaryItem<T, V>>.single() = items().single()
+internal fun <T : ContextFreeComponent> SummaryList<SingleColumnSummaryItem<T>>.single() =
+    sItems().single()
+internal fun SummaryList<*>.size() = items<Any?>(null).size
+internal fun SummaryList<*>.title(): String? = data.header?.data?.title
+internal fun <V : SummaryItem> SummaryList<V>.first() = items<V>(null).first()
 
-internal fun TwoPaneSummaryItem.link(): Link.Params = (data.title as? Link)?.data
-    ?: (data.title as MiniSignature).data.link.data
-internal fun TwoPaneSummaryItem.summary() = data.description as SymbolSummary
-internal fun TwoPaneSummaryItem.name(): String =
-    (this.data.title as? ParameterComponent)?.data?.name
-        ?: (this.data.description as SymbolSummary).name()
-internal fun TwoPaneSummaryItem.description() = (data.description as? DescriptionComponent)
-    ?: (data.description as SymbolSummary).data.description
-internal fun SingleColumnSummaryItem.description() = (data.description as? DescriptionComponent)
-    ?: (data.description as SymbolSummary).data.description
+internal fun TwoPaneSummaryItem<Link, DescriptionComponent>
+.link() = data.title.data
+@JvmName("This is internal and will never be used from JVM")
+internal fun TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>
+.link() = data.title.data.type.link()
+
+internal fun TwoPaneSummaryItem<TypeSummary, SymbolSummary>.summary() = data.description
+
+@JvmName("This is internal and will never be used from JVM")
+internal fun TwoPaneSummaryItem<TypeSummary, SymbolSummary>
+.name(): String = this.data.description.name()
+internal fun TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>
+.name(): String = this.data.title.data.name
+@JvmName("This too is internal and will never be used from JVM")
+internal fun TwoPaneSummaryItem<Link, DescriptionComponent>
+.name(): String = this.data.title.data.name
 
 internal fun SymbolSummary.name(): String = data.signature.data.name.data.name
 internal fun SymbolSummary.signature() = (data.signature as FunctionSignature).data
 
-internal fun DescriptionComponent.text() = this.data.components.joinToString(" ") { it.text() }
+internal fun DescriptionComponent.text() =
+    this.data.components.joinToString(" ") { it.text() }
 
 internal fun DocTag.text(): String = (this as? Text)?.body
     ?: children.joinToString(" ") { it.text() }
 
-internal fun TypeParameterComponent.projectionName() = this.data.projections.single().name()
+internal fun TypeParameterComponent.projectionName() = this.data.type.name()
 internal fun ParameterComponent.generics() = this.data.type.data.generics
 
 internal fun TypeProjectionComponent.link(): Link.Params = data.type.data
@@ -108,12 +132,49 @@ internal fun AnnotationComponent.link(): Link.Params = data.type.data
 internal val AnnotationComponent.isAtNullable get() = this.link().name == "Nullable"
 internal val AnnotationComponent.isAtNonNull get() = this.link().name == "NonNull"
 internal fun List<AnnotationComponent>.exceptNonNull() = this.filter { it.link().name != "NonNull" }
+internal fun Pair<SummaryList<*>, Classlike.TitledList<*>>.title() = first.data.header!!.data.title
 
-internal fun InheritedSymbolsList.title() = (data.header as TableTitle).data.title
-
+/** Does not work for constructors, in order to allow a unified return type */
 internal fun Classlike.symbolsFor(
     vararg types: String
 ) = data.symbolTypes.single { (summary, _) ->
-    summary.title() in types
+    summary.title() in types.map {
+        if ("constructors" !in it && "Nested" !in it && "Enum" !in it) it else
+            throw RuntimeException(
+                "Do not use this method to get $it, use the dedicated getter methods."
+            )
+    }
+} as Pair<
+    SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>,
+    Classlike.TitledList<SymbolDetail>>
+internal fun Classlike.summaryItemsFor(vararg types: String) =
+    symbolsFor(*types).first.items(size = null)
+// TODO: split the SymbolTypes list itself (into nullable vars?) to clarify typing
+internal fun Classlike.symbolsForConstructors(public: Boolean = true, protected: Boolean = false) =
+    data.symbolTypes.single { (summary, _) ->
+        summary.title() in listOf(
+            if (public) publicConstructorsTitle() else "",
+            if (protected) protectedConstructorsTitle() else ""
+        )
+    } as Pair<SummaryList<SingleColumnSummaryItem<SymbolSummary>>,
+        Classlike.TitledList<SymbolDetail>>
+
+/** NOTE: nested types are not split by visibility! b/237786465. */
+internal fun Classlike.nestedTypes() = data.symbolTypes.single {
+    (summary, _) ->
+    summary.title() == nestedTypesTitle()
+} as Pair<SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
+    Classlike.TitledList<SymbolDetail>>
+
+internal fun Classlike.enumValues() = data.symbolTypes.single {
+    (summary, _) ->
+    summary.title() == enumValuesTitle()
+} as Pair<SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
+    Classlike.TitledList<SymbolDetail>>
+
+internal val Classlike.inheritedFields get() = data.inheritedTypes.singleOrNull {
+    it.data.header.data.title in
+        listOf(inheritedPropertiesTitle(Language.KOTLIN), inheritedPropertiesTitle(Language.JAVA))
 }
-internal fun Classlike.summaryItemsFor(vararg types: String) = symbolsFor(*types).first.items()
+internal fun InheritedSymbolsList.from(name: String) =
+    data.inheritedSymbolSummaries.entries.singleOrNull { (key, _) -> key.data.name == name }
