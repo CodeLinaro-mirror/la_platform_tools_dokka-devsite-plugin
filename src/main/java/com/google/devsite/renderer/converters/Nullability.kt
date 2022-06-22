@@ -19,6 +19,7 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.renderer.Language
 import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.Bound
+import org.jetbrains.dokka.model.DefinitelyNonNullable
 import org.jetbrains.dokka.model.Dynamic
 import org.jetbrains.dokka.model.JavaObject
 import org.jetbrains.dokka.model.Nullable
@@ -103,6 +104,7 @@ internal fun Projection.getNullability(
 
     return when (this) {
         is Nullable -> Nullability.KOTLIN_NULLABLE
+        is DefinitelyNonNullable -> Nullability.KOTLIN_DEFAULT
         is Variance<*> -> inner.getNullability(displayLanguage, isJavaSource)
         is TypeAliased -> inner.getNullability(displayLanguage, isJavaSource)
         Void -> Nullability.JAVA_NEVER_NULL // Not nullable by definition

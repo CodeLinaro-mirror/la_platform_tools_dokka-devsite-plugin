@@ -26,7 +26,7 @@ import org.jetbrains.dokka.model.doc.CodeBlock
 import org.jetbrains.dokka.model.doc.Text
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.utilities.DokkaLogger
-import org.jetbrains.kotlin.idea.kdoc.resolveKDocSampleLink
+import org.jetbrains.kotlin.idea.kdoc.resolveKDocLink
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.psi.KtBlockExpression
@@ -54,10 +54,11 @@ internal fun fqNameToPsiElement(
     val packageName = functionName.takeWhile { it != '.' }
     val descriptor = resolutionFacade.resolveSession.getPackageFragment(FqName(packageName))
         ?: throw RuntimeException("Cannot find descriptor for package $packageName")
-    val symbol = resolveKDocSampleLink(
+    val symbol = resolveKDocLink(
         BindingContext.EMPTY,
         resolutionFacade,
         descriptor,
+        null,
         functionName.split(".")
     ).firstOrNull() ?: throw RuntimeException("Unresolved function $functionName in @sample")
     return DescriptorToSourceUtils.descriptorToDeclaration(symbol)

@@ -390,7 +390,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
         // language=html
         assertThat(output).isEqualTo(
             """
-<body><p><em>Italics</em>, <b>Bold</b>, <b><em>Both</em></b>, <del>Bad</del>.</p></body>
+<body><p><em>Italics</em>, <b>Bold</b>, <em><b>Both</b></em>, <del>Bad</del>.</p></body>
             """.trim()
         )
     }

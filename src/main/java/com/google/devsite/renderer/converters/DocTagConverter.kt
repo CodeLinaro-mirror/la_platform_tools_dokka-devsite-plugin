@@ -48,6 +48,7 @@ import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DTypeParameter
+import org.jetbrains.dokka.model.DefinitelyNonNullable
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.Dynamic
 import org.jetbrains.dokka.model.JavaObject
@@ -385,6 +386,9 @@ internal class DocTagConverter(
                     result += recursivelyGetLambdaParamNames(listOf(argumentType.inner))
                 }
                 is Nullable -> {
+                    result += recursivelyGetLambdaParamNames(listOf(argumentType.inner))
+                }
+                is DefinitelyNonNullable -> {
                     result += recursivelyGetLambdaParamNames(listOf(argumentType.inner))
                 }
                 is TypeParameter -> {

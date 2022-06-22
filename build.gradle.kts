@@ -23,10 +23,12 @@ defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint", "publish")
 repositories {
     maven("../../prebuilts/androidx/external")
     maven("../../prebuilts/androidx/internal")
+
 }
 
+val kotlinVersion = "1.7.10"
 plugins {
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version "1.7.10"
     id("com.github.johnrengelman.shadow") version "7.1.1"
     id("application")
     id("maven-publish")
@@ -35,13 +37,15 @@ plugins {
 application {
     mainClass.set("org.jetbrains.dokka.MainKt")
 }
-val dokkaVersion = "1.6.20-dev-154"
+val dokkaVersion = "1.7.20-dev-173"
 val jacksonVersion = "2.13.1"
 
 dependencies {
-    compileOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.0-native-mt")
+    implementation("org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion")
+    implementation("org.jetbrains.dokka:dokka-analysis:$dokkaVersion")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.5")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.3")
 
     implementation("org.jetbrains.dokka:dokka-base-test-utils:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-base:$dokkaVersion")
@@ -50,7 +54,7 @@ dependencies {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jacksonVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test:1.6.0")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
     testImplementation("junit:junit:4.13.2")
     testImplementation("com.google.truth:truth:1.1.3")
     testImplementation("org.jetbrains.dokka:dokka-test-api:$dokkaVersion")
@@ -105,10 +109,10 @@ dependencies {
     testDataImpl("io.reactivex.rxjava3:rxjava:3.0.0")
     testDataImpl("io.reactivex.rxjava2:rxjava:2.2.9")
     testDataImpl("org.robolectric:sandbox:4.8.1")
-    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2")
-    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.5.2")
-    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx3:1.5.2")
-    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.5.2")
+    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.1")
+    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.6.1")
+    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx3:1.6.1")
+    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.6.1")
     testDataImpl("org.robolectric:android-all-instrumented:12-robolectric-7732740-i4")
 
     testDataImpl(fileTree("$buildDir/exploded"))

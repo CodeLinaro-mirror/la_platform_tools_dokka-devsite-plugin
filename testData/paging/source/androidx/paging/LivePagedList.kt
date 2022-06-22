@@ -105,6 +105,7 @@ internal class LivePagedList<Key : Any, Value : Any>(
                     currentData = pagedList
                     postValue(pagedList)
                 }
+                is PagingSource.LoadResult.Invalid -> TODO()
             }
         }
     }

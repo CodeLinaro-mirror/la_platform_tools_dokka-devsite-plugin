@@ -35,6 +35,7 @@ import org.jetbrains.dokka.model.Annotations.Annotation
 import org.jetbrains.dokka.model.ArrayValue
 import org.jetbrains.dokka.model.Bound
 import org.jetbrains.dokka.model.ClassValue
+import org.jetbrains.dokka.model.DefinitelyNonNullable
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.Dynamic
 import org.jetbrains.dokka.model.EnumValue
@@ -138,6 +139,7 @@ internal fun Bound.annotations(): List<Annotation> = when (this) {
     is Nullable -> this.inner.annotations()
     is TypeAliased -> this.inner.annotations()
     is PrimitiveJavaType, Void, is JavaObject, Dynamic, is UnresolvedBound -> emptyList()
+    is DefinitelyNonNullable -> this.inner.annotations().filter { it != AT_NULLABLE }
 }
 
 /**

@@ -36,5 +36,5 @@ public class JavaSuperClass {
     /**
      * My java super class public field
      */
-    int javaSuperField;
+    public int javaSuperField;
 }

@@ -1141,7 +1141,7 @@ internal class ParameterDocumentableConverterTest(
         """.render().returnType()
 
         assertThat(paramString.data.type.data.name).isEqualTo("String")
-        assertThat(paramUnresolved.data.type.data.name).isEqualTo("<ERROR CLASS>")
+        assertThat(paramUnresolved.data.type.data.name).isEqualTo("<Error class: unknown class>")
 
         for (param in listOf(paramString/*, paramUnresolved*/)) {
             assertThat(param.annotations.size).isEqualTo(1)

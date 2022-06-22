@@ -41,6 +41,7 @@ import org.jetbrains.dokka.model.Covariance
 import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.DTypeParameter
 import org.jetbrains.dokka.model.DefaultValue
+import org.jetbrains.dokka.model.DefinitelyNonNullable
 import org.jetbrains.dokka.model.Dynamic
 import org.jetbrains.dokka.model.FunctionalTypeConstructor
 import org.jetbrains.dokka.model.GenericTypeConstructor
@@ -424,8 +425,8 @@ internal class ParameterDocumentableConverter(
         is JavaObject, Star, Void, Dynamic -> emptyList()
         // These three don't matter in the main use case because we recurse there later
         is Variance<*> -> this.inner.generics(isJavaSource)
-        is Invariance<*> -> this.inner.generics(isJavaSource)
         is TypeAliased -> this.inner.generics(isJavaSource)
+        is DefinitelyNonNullable -> this.inner.generics(isJavaSource)
     }
 
     /**
@@ -588,7 +589,8 @@ internal class ParameterDocumentableConverter(
                 is JavaObject -> PrimitiveJavaType("Object[]")
                 // Other Array<Something> -> Something[]; Array<T> -> T[]; Array<() -> Unit> -> ugh
                 is TypeConstructor, is TypeParameter, is TypeAliased, is UnresolvedBound,
-                is Nullable -> // We can't represent mid-nest nullability; pretend it's not
+                is Nullable, is DefinitelyNonNullable ->
+                    // We can't represent mid-nest nullability; pretend it's not
                     PrimitiveJavaType("${innerProjections.single().name()}[]")
                 // kotlin.Array<int> -> int[]
                 is PrimitiveJavaType ->
@@ -617,6 +619,12 @@ internal class ParameterDocumentableConverter(
             isReturnType = false,
             mustBoxPrimitive = true
         )
+        is DefinitelyNonNullable -> this.copy(
+            inner = inner.rewriteKotlinPrimitivesForJava(
+                isReturnType = false,
+                mustBoxPrimitive = true
+            ) as Bound
+        )
         // Typealiases don't cancel the argument propagation because they're cosmetic-only
         is TypeAliased -> this.copy(
             inner = inner.rewriteKotlinPrimitivesForJava(
@@ -638,6 +646,7 @@ internal class ParameterDocumentableConverter(
         is TypeParameter -> name
         is GenericTypeConstructor -> dri.classNames.orEmpty()
         is Nullable -> inner.name()
+        is DefinitelyNonNullable -> inner.name()
         is TypeAliased -> inner.name()
         is UnresolvedBound -> name
         is Variance<*> -> inner.name()
