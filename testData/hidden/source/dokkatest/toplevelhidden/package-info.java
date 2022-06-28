@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dokkatest.restrictto.hidden;
-
-public class HiddenPackageClass {
-}
+/**
+ * @hide
+ */
+package dokkatest.toplevelhidden;

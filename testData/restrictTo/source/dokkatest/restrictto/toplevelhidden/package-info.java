@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dokkatest.restrictto.hidden;
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+package dokkatest.restrictto.toplevelhidden;
 
-public class HiddenPackageClass {
-}
+import androidx.annotation.RestrictTo;

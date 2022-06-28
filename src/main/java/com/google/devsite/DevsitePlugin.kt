@@ -45,16 +45,14 @@ class DevsitePlugin : DokkaPlugin() {
         } override dokkaBase.htmlRenderer
     }
 
-    val hideFilter by extending {
+    val preMergeHiddenFilter by extending {
         dokkaBase.preMergeDocumentableTransformer providing {
-            HideTagAndHiddenDeprecationDocumentableFilter(it)
+            PreMergeHiddenDocumentableFilter(it)
         } order { before(dokkaBase.emptyPackagesFilter) }
     }
 
-    val restrictToFilter by extending {
-        dokkaBase.preMergeDocumentableTransformer providing {
-            RestrictToDocumentableFilter(it)
-        } order { before(hideFilter) }
+    val hiddenPackageFilter by extending {
+        CoreExtensions.documentableTransformer with PostMergePackageDocumentableFilter()
     }
 
     val docTagsForCheckedExceptions by extending {

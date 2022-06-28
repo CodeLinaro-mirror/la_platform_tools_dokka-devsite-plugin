@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-package dokkatest.restrictto.hidden;
+package dokkatest.hidden;
 
-public class HiddenPackageClass {
+class KotlinLeafClass {
+    fun kotlinLeafClassFunction() {}
 }
