@@ -102,7 +102,7 @@ internal fun TypeProjectionComponent.name() = link().name
 internal fun ParameterComponent.typeName() = data.type.name()
 internal fun ParameterComponent.fullTypeName() =
     typeName() + generics().joinMaybePrefix(prefix = "<", postfix = ">") { it.name() }
-internal fun ParameterComponent.typeAnnotations() = data.type.data.annotationComponents
+internal fun ParameterComponent.typeAnnotations() = data.type.annotations
 
 internal fun AnnotationComponent.link(): Link.Params = data.type.data
 internal val AnnotationComponent.isAtNullable get() = this.link().name == "Nullable"

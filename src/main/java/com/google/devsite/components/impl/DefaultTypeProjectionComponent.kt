@@ -37,5 +37,6 @@ internal class DefaultTypeProjectionComponent(
     override fun toString() = data.annotationComponents.joinMaybePrefix(postfix = " ") +
         data.type +
         data.generics.joinMaybePrefix(prefix = " <", postfix = ">") +
+        // Do this regardless of displayLanguage, we don't care, it only appears in debugging
         data.nullability.renderAsKotlinSuffix()
 }

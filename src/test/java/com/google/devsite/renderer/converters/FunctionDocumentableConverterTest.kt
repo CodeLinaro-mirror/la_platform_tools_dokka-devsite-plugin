@@ -485,7 +485,7 @@ internal class FunctionDocumentableConverterTest(
                 val typeK = if (whichFun.length != 5) null else moduleK.sOrD(isSummary, whichFun)
                 for (aType in listOfNotNull(typeJ, typeK)) {
                     assertThat(aType.nullable).isEqualTo(whichFun in "nulla, platform")
-                    val annotations = aType.data.annotationComponents
+                    val annotations = aType.annotations
                     assertThat(
                         annotations.singleOrNull()?.name?.let {
                             it in NULLABILITY_ANNOTATION_NAMES
@@ -554,7 +554,7 @@ internal class FunctionDocumentableConverterTest(
             |public IntToString[] indexMapping() default { };
         """.render(java = true).detail()
         val returnType = detail.data.returnType
-        val primaryAnnotations = returnType.data.annotationComponents
+        val primaryAnnotations = returnType.annotations
 
         kotlinOnly {
             val returnTypeGeneric = returnType.data.generics.single()
@@ -562,7 +562,7 @@ internal class FunctionDocumentableConverterTest(
             assertThat(returnType.name()).isEqualTo("Array")
             assertThat(returnTypeGeneric.name()).isEqualTo("Test.IntToString")
 
-            val genericAnnotations = returnTypeGeneric.data.annotationComponents
+            val genericAnnotations = returnTypeGeneric.annotations
             assertThat(genericAnnotations).isEmpty()
         }
         javaOnly {
@@ -591,7 +591,7 @@ internal class FunctionDocumentableConverterTest(
         assertThat(param1.data.name).isEqualTo("prefix")
         assertThat(param1.typeName()).isEqualTo("String")
         assertThat(param1.nullable).isFalse()
-        assertThat(param1.data.annotationComponents).isEmpty()
+        assertThat(param1.annotations).isEmpty()
         javaOnly { assertThat(param1.typeAnnotations().single().isAtNonNull).isTrue() }
     }
 

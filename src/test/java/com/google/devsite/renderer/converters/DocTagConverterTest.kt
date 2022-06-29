@@ -755,17 +755,17 @@ internal class DocTagConverterTest(
             javaOnly {
                 if (documentation == documentationJ) {
                     assertThat(param0Left.typeAnnotations().single().isAtNullable).isTrue()
-                    // assertThat(param1Generic.data.annotationComponents.single().isAtNullable).isTrue()
+                    // assertThat(param1Generic.annotations.single().isAtNullable).isTrue()
                 } else {
                     assertThat(param0Left.typeAnnotations()).isEmpty()
-                    assertThat(param1Generic.data.annotationComponents.isEmpty())
+                    assertThat(param1Generic.annotations.isEmpty())
                 }
                 // This is also the upstream bug; T should be @NonNull from both source languages
                 if (documentation == documentationK) assertThat(
-                    param0Generic.data.annotationComponents.single().isAtNonNull
+                    param0Generic.annotations.single().isAtNonNull
                 ).isTrue()
-                assertThat(param0Left.data.annotationComponents).isEmpty()
-                assertThat(param1Left.data.annotationComponents).isEmpty()
+                assertThat(param0Left.annotations).isEmpty()
+                assertThat(param1Left.annotations).isEmpty()
                 assertThat(param1Left.typeAnnotations().single().isAtNonNull).isTrue()
             }
             kotlinOnly {

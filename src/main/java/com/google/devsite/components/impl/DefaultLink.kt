@@ -34,5 +34,5 @@ internal class DefaultLink(
         }
     }
 
-    override fun toString() = data.name + if (data.url.isNotEmpty()) " " + data.url else ""
+    override fun toString() = data.name + if (data.url.isNotEmpty()) "<ref=${data.url}>" else ""
 }

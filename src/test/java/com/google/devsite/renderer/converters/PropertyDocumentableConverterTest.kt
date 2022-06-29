@@ -90,7 +90,7 @@ internal class PropertyDocumentableConverterTest(
                 val typeK = if (whichProp.length != 5) null else moduleK.sOrD(isSummary, whichProp)
                 for (aType in listOfNotNull(typeJ, typeK)) {
                     assertThat(aType.nullable).isEqualTo(whichProp in "nulla, platform")
-                    val annotations = aType.data.annotationComponents
+                    val annotations = aType.annotations
                     assertThat(
                         annotations.singleOrNull()?.name?.let {
                             it in NULLABILITY_ANNOTATION_NAMES

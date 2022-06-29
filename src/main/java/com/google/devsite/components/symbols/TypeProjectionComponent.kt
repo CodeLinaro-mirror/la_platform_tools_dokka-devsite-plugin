@@ -41,4 +41,5 @@ internal interface TypeProjectionComponent : SymbolBase {
     )
 
     val nullable: Boolean get() = data.nullability.nullable
+    val annotations: List<AnnotationComponent> get() = data.annotationComponents
 }

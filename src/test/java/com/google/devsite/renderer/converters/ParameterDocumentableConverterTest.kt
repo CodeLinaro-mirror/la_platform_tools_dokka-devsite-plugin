@@ -98,7 +98,7 @@ internal class ParameterDocumentableConverterTest(
             |fun foo(@Hello a: List<Int>)
         """.render().param()
 
-        assertThat(param.data.annotationComponents).isNotEmpty()
+        assertThat(param.annotations).isNotEmpty()
     }
 
     @Test
@@ -347,11 +347,11 @@ internal class ParameterDocumentableConverterTest(
             if (function == functionJ) {
                 val paramC = function.param("c")
                 assertThat(paramC.nullable).isTrue()
-                assertThat(paramC.data.annotationComponents).isEmpty()
+                assertThat(paramC.annotations).isEmpty()
             }
             kotlinOnly { // Kotlin uses ?, !, and default-nonnull instead of annotations
-                assertThat(paramA.data.annotationComponents).isEmpty()
-                assertThat(paramB.data.annotationComponents).isEmpty()
+                assertThat(paramA.annotations).isEmpty()
+                assertThat(paramB.annotations).isEmpty()
             }
             javaOnly {
                 assertThat(paramA.typeAnnotations().single().isAtNonNull).isTrue()
@@ -372,11 +372,11 @@ internal class ParameterDocumentableConverterTest(
         val paramA = function.param("a")
         val paramB = function.param("b")
         val paramC = function.param("c")
-        assertThat(paramA.data.annotationComponents).isEmpty()
+        assertThat(paramA.annotations).isEmpty()
         // Unit can be nullable, but that information is basically never useful
-        assertThat(paramB.data.annotationComponents).isEmpty()
+        assertThat(paramB.annotations).isEmpty()
         // Nothing is always null, but @Nullable is not useful
-        assertThat(paramC.data.annotationComponents).isEmpty()
+        assertThat(paramC.annotations).isEmpty()
     }
 
     @Test
@@ -570,14 +570,14 @@ internal class ParameterDocumentableConverterTest(
 
                 val lambdaType = lambdaParam.type
                 // assertThat(lambdaType.data.generics.single().nullable).isFalse() // DONT_CARE
-                assertThat(lambdaType.data.generics.single().data.annotationComponents).isEmpty()
+                assertThat(lambdaType.data.generics.single().annotations).isEmpty()
                 assertThat(lambdaParam.annotationComponents.isEmpty())
                 if (lambdaParam == nullableLambdaParam) {
                     assertThat(lambdaType.nullable).isTrue()
-                    assertThat(lambdaType.data.annotationComponents).isEmpty()
+                    assertThat(lambdaType.annotations).isEmpty()
                 } else {
                     assertThat(lambdaType.nullable).isFalse()
-                    assertThat(lambdaType.data.annotationComponents.single().isAtNonNull).isTrue()
+                    assertThat(lambdaType.annotations.single().isAtNonNull).isTrue()
                 }
             }
             kotlinOnly {
@@ -618,16 +618,16 @@ internal class ParameterDocumentableConverterTest(
 
             assertThat(generic0.nullable).isFalse()
             assertThat(generic0.data.type.data.name).isEqualTo("List")
-            assertThat(generic0.data.annotationComponents.single().isAtNonNull)
+            assertThat(generic0.annotations.single().isAtNonNull).isTrue()
             val generic0generic = generic0.data.generics.single()
             assertThat(generic0generic.nullable).isFalse()
             assertThat(generic0generic.data.type.data.name).isEqualTo("S")
-            assertThat(generic0generic.data.annotationComponents.single().isAtNonNull)
+            assertThat(generic0generic.annotations.single().isAtNonNull).isTrue()
             assertThat(generic0generic.data.generics).isEmpty()
 
             assertThat(generic1.nullable).isFalse()
             assertThat(generic1.data.type.data.name).isEqualTo("String")
-            assertThat(generic1.data.annotationComponents.single().isAtNonNull)
+            assertThat(generic1.annotations.single().isAtNonNull).isTrue()
             assertThat(generic1.data.generics).isEmpty()
         }
         kotlinOnly {
@@ -637,17 +637,17 @@ internal class ParameterDocumentableConverterTest(
             val lambdaSymbol = (lambdaParam.type as LambdaTypeProjectionComponent)
             assertThat(lambdaSymbol.data.type.data.name).isEqualTo("String")
             assertThat(lambdaSymbol.nullable).isFalse()
-            assertThat(lambdaSymbol.data.annotationComponents.single().name)
+            assertThat(lambdaSymbol.annotations.single().name)
                 .isEqualTo("ExtensionFunctionType")
             assertThat(lambdaSymbol.data.lambdaModifiers).isEmpty()
             assertThat(lambdaSymbol.data.lambdaParams).isEmpty()
             assertThat(lambdaSymbol.data.receiver!!.nullable).isFalse()
             assertThat(lambdaSymbol.data.receiver!!.data.type.data.name).isEqualTo("List")
-            assertThat(lambdaSymbol.data.receiver!!.data.annotationComponents).isEmpty()
+            assertThat(lambdaSymbol.data.receiver!!.annotations).isEmpty()
             val lambdaReceiverGeneric = lambdaSymbol.data.receiver!!.data.generics.single()
             assertThat(lambdaReceiverGeneric.nullable).isFalse()
             assertThat(lambdaReceiverGeneric.data.type.data.name).isEqualTo("S")
-            assertThat(lambdaReceiverGeneric.data.annotationComponents).isEmpty()
+            assertThat(lambdaReceiverGeneric.annotations).isEmpty()
             assertThat(lambdaReceiverGeneric.data.generics).isEmpty()
         }
     }
@@ -740,13 +740,13 @@ internal class ParameterDocumentableConverterTest(
         val annotK = """
             |annotation class Stuff
             |fun foo(@Stuff kotlinFoo: Int) {}
-        """.render().param(forSummary = true).data.annotationComponents
+        """.render().param(forSummary = true).annotations
         val annotJ = """
             |@Target({PARAMETER})
             |public @interface Stuff {
             |}
             |public void foo(@Stuff int javaFoo) {};
-        """.render(java = true).param(forSummary = true).data.annotationComponents
+        """.render(java = true).param(forSummary = true).annotations
 
         for (annot in listOf(annotK, annotJ)) {
             assertThat(annot.exceptNonNull().single().data.type.data.name).contains("Stuff")
@@ -769,7 +769,7 @@ internal class ParameterDocumentableConverterTest(
             for (param in listOf(paramK, paramJ, paramJ2)) {
 
                 kotlinOnly {
-                    assertThat(param.data.annotationComponents).isEmpty()
+                    assertThat(param.annotations).isEmpty()
                     assertThat(param.nullable).isTrue()
                 }
                 javaOnly {
@@ -883,7 +883,7 @@ internal class ParameterDocumentableConverterTest(
             assertThat(lambdaParam.typeName()).isEqualTo("String")
 
             // We have decided to suppress the ParameterName annotation for now
-            val lambdaParamAnnotation = lambdaParam.data.annotationComponents.single()
+            val lambdaParamAnnotation = lambdaParam.annotations.single()
             assertThat(lambdaParamAnnotation.data.type.data.name).isEqualTo("Something")
 
             // We de-deuplicate and assort annotations on lambda parameter parameter names/types
@@ -950,7 +950,7 @@ internal class ParameterDocumentableConverterTest(
             |fun foo(a: IntArray?) = Unit
         """.render().param().data.type
         val nullableTypeJ = """
-            |public void foo(int[] a) {}
+            |public void foo(@Nullable int[] a) {}
         """.render(java = true).param().data.type
         val nonnullTypeK = """
             |fun foo(a: IntArray) = Unit
@@ -959,26 +959,28 @@ internal class ParameterDocumentableConverterTest(
             |public void foo(@NonNull int[] a) {}
         """.render(java = true).param().data.type
 
-        for (
-            (nullableType, nonnullType) in listOf(
-                listOf(nullableTypeJ, nullableTypeK),
-                listOf(nonnullTypeJ, nonnullTypeK)
-            )
-        ) {
-            if (!(nonnullType === nonnullTypeJ)) continue
+        val variantJ = listOf(nullableTypeJ, nonnullTypeJ)
+        val variantK = listOf(nullableTypeK, nonnullTypeK)
+
+        for ((nullableType, nonnullType) in listOf(variantJ, variantK)) {
             assertThat(nullableType.nullable).isTrue()
             assertThat(nonnullType.nullable).isFalse()
             javaOnly {
                 assertThat(nullableType.name()).isEqualTo("int[]")
                 assertThat(nonnullType.name()).isEqualTo("int[]")
-                assertThat(nullableType.data.annotationComponents).isEmpty()
-                assertThat(nonnullType.data.annotationComponents.single().isAtNonNull)
+                // We explicitly do not inject @Nullable. See Nullability.renderAsJavaAnnotation()
+                if (nullableType == nullableTypeK) {
+                    assertThat(nullableType.annotations).isEmpty()
+                } else {
+                    assertThat(nullableType.annotations.single().isAtNullable).isTrue()
+                }
+                assertThat(nonnullType.annotations.single().isAtNonNull).isTrue()
             }
             kotlinOnly {
                 assertThat(nullableType.name()).isEqualTo("IntArray")
                 assertThat(nonnullType.name()).isEqualTo("IntArray")
-                assertThat(nonnullType.data.annotationComponents).isEmpty()
-                assertThat(nullableType.data.annotationComponents).isEmpty()
+                assertThat(nonnullType.annotations).isEmpty()
+                assertThat(nullableType.annotations).isEmpty()
             }
         }
     }
@@ -1112,9 +1114,9 @@ internal class ParameterDocumentableConverterTest(
         assertThat(paramUnresolved.data.type.data.name).isEqualTo("<ERROR CLASS>")
 
         for (param in listOf(paramString/*, paramUnresolved*/)) {
-            assertThat(param.data.annotationComponents.size).isEqualTo(1)
+            assertThat(param.annotations.size).isEqualTo(1)
             assertThat(param.nullable).isTrue()
-            assertThat(param.data.annotationComponents.first().name).isEqualTo("Squark")
+            assertThat(param.annotations.first().name).isEqualTo("Squark")
         }
     }
 
@@ -1136,12 +1138,12 @@ internal class ParameterDocumentableConverterTest(
         assertThat(returnCompanion.nullable).isFalse()
         assertThat(returnBar.nullable).isTrue()
         javaOnly {
-            assertThat(returnFoo.data.annotationComponents.single().isAtNonNull).isTrue()
-            assertThat(returnCompanion.data.annotationComponents.single().isAtNonNull).isTrue()
+            assertThat(returnFoo.annotations.single().isAtNonNull).isTrue()
+            assertThat(returnCompanion.annotations.single().isAtNonNull).isTrue()
         }
         kotlinOnly {
-            assertThat(returnFoo.data.annotationComponents).isEmpty()
-            assertThat(returnCompanion.data.annotationComponents).isEmpty()
+            assertThat(returnFoo.annotations).isEmpty()
+            assertThat(returnCompanion.annotations).isEmpty()
         }
     }
 

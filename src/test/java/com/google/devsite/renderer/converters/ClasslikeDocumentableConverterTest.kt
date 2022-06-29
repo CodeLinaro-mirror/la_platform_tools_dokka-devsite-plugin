@@ -281,7 +281,7 @@ internal class ClasslikeDocumentableConverterTest(
             // They cannot have annotations, enforced by design.
 
             val detail = constructor.second.symbols.single() as SymbolDetail
-            val returnAnnotations = detail.data.returnType.data.annotationComponents
+            val returnAnnotations = detail.data.returnType.annotations
             val annotations = detail.data.annotationComponents
             val signature = detail.data.signature as FunctionSignature
             assertThat(returnAnnotations.isEmpty())
