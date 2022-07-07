@@ -30,9 +30,9 @@ class DefaultRelatedSymbolsTest {
         val component = DefaultRelatedSymbols(
             Params(
                 directSubclasses = emptyList(),
-                directSummary = NoopSummaryList(shown = false),
+                directSummary = NoopSummaryList(show = false),
                 indirectSubclasses = emptyList(),
-                indirectSummary = NoopSummaryList(shown = false)
+                indirectSummary = NoopSummaryList(show = false)
             )
         )
 
@@ -55,7 +55,7 @@ class DefaultRelatedSymbolsTest {
                 directSubclasses = listOf(NoopLink("abc")),
                 directSummary = NoopSummaryList(),
                 indirectSubclasses = emptyList(),
-                indirectSummary = NoopSummaryList(shown = false)
+                indirectSummary = NoopSummaryList(show = false)
             )
         )
 
@@ -84,7 +84,7 @@ class DefaultRelatedSymbolsTest {
         val component = DefaultRelatedSymbols(
             Params(
                 directSubclasses = emptyList(),
-                directSummary = NoopSummaryList(shown = false),
+                directSummary = NoopSummaryList(show = false),
                 indirectSubclasses = listOf(NoopLink("abc")),
                 indirectSummary = NoopSummaryList()
             )

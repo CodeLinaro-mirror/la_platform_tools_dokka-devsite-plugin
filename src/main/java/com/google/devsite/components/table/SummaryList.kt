@@ -19,14 +19,14 @@ package com.google.devsite.components.table
 import com.google.devsite.components.ContextFreeComponent
 
 /** Builds a table view. */
-internal interface SummaryList : ContextFreeComponent {
-    val data: Params
+internal interface SummaryList<T : SummaryItem> : ContextFreeComponent {
+    val data: Params<T>
 
     /** @return true if there is summary content to render, false otherwise */
     fun hasContent(): Boolean
 
-    data class Params(
-        val header: RowComponent? = null,
-        val items: List<SummaryItem>
+    data class Params<T>(
+        val header: TableTitle? = null,
+        val items: List<T>
     )
 }

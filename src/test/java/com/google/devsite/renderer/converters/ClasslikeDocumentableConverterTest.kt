@@ -19,7 +19,6 @@ package com.google.devsite.renderer.converters
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.capitalize
 import com.google.devsite.components.DescriptionComponent
-import com.google.devsite.components.Raw
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.FunctionSignature
@@ -28,19 +27,22 @@ import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.SummaryList
-import com.google.devsite.components.table.TableTitle
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.content
-import com.google.devsite.renderer.converters.testing.description
+import com.google.devsite.renderer.converters.testing.enumValues
+import com.google.devsite.renderer.converters.testing.from
+import com.google.devsite.renderer.converters.testing.inheritedFields
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
+import com.google.devsite.renderer.converters.testing.nestedTypes
 import com.google.devsite.renderer.converters.testing.projectionName
 import com.google.devsite.renderer.converters.testing.size
 import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.converters.testing.summaryItemsFor
 import com.google.devsite.renderer.converters.testing.symbolsFor
+import com.google.devsite.renderer.converters.testing.symbolsForConstructors
 import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.renderer.converters.testing.title
 import com.google.devsite.testing.ConverterTestBase
@@ -232,7 +234,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.content<Classlike>()
-        val (summary) = classlike.symbolsFor("Public constructors")
+        val (summary) = classlike.symbolsForConstructors()
 
         assertThat(summary.constructor().name()).isEqualTo("Foo")
     }
@@ -269,12 +271,12 @@ internal class ClasslikeDocumentableConverterTest(
         |class Foo {
         |   constructor() {}
         |}
-        """.render().page().content<Classlike>().symbolsFor("Public constructors")
+        """.render().page().content<Classlike>().symbolsForConstructors()
         val constructorsJ = """
         |public class Foo {
         |   public Foo() {}
         |}
-        """.render(java = true).page().content<Classlike>().symbolsFor("Public constructors")
+        """.render(java = true).page().content<Classlike>().symbolsForConstructors()
 
         for (constructor in listOf(constructorsJ, constructorsK)) {
             // Constructor summaries are SingleColumnSummaryItems containing SymbolSummaries
@@ -297,7 +299,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.content<Classlike>()
-        val (summary) = classlike.symbolsFor("Protected constructors")
+        val (summary) = classlike.symbolsForConstructors(public = false, protected = true)
 
         assertThat(summary.constructor().name()).isEqualTo("Foo")
     }
@@ -311,7 +313,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.content<Classlike>()
-        val (summary) = classlike.symbolsFor("Nested types")
+        val (summary) = classlike.nestedTypes()
         assertThat(summary.item().link().name).isEqualTo("Foo.Bar")
     }
 
@@ -324,7 +326,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.content<Classlike>()
-        val (summary) = classlike.symbolsFor("Nested types")
+        val (summary) = classlike.nestedTypes()
         kotlinOnly {
             assertThat(summary.items()).hasSize(0)
         }
@@ -508,7 +510,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render()
         val page = moduleSecondary.page("BenchmarkState").content<Classlike>()
-        assertThat(page.symbolsFor("Public constructors").first.size()).isEqualTo(0)
+        assertThat(page.symbolsForConstructors().first.size()).isEqualTo(0)
     }
 
     @Test
@@ -563,10 +565,8 @@ internal class ClasslikeDocumentableConverterTest(
             val signature = classlike.data.signature.data
             val description = (classlike.data.description.first() as DescriptionComponent)
 
-            val (enumSummary, enumDetails) = classlike.data.symbolTypes.first {
-                (it.first as? SummaryList)?.title() == "Enum Values"
-            }
-            val enumTable = enumSummary.items(3) as List
+            val (enumSummary, enumDetails) = classlike.enumValues()
+            val enumTable = enumSummary.data.items
             val enumOne = enumTable[0].data
             val enumTwo = enumTable[1].data
             val enumThree = enumTable[2].data
@@ -574,17 +574,14 @@ internal class ClasslikeDocumentableConverterTest(
             assertThat(signature.type).isEqualTo("enum")
             assertThat(description.text()).isEqualTo("class level docs")
 
-            assertThat((enumOne.title as Raw).data.text).contains("APPEND")
-            assertThat((enumOne.description as DescriptionComponent).text())
-                .contains("Load at the end.")
-            assertThat((enumTwo.title as Raw).data.text).contains("PREPEND")
-            assertThat((enumTwo.description as DescriptionComponent).text())
-                .contains("Load at the start")
-            assertThat((enumThree.title as Raw).data.text).contains("REFRESH")
-            assertThat((enumThree.description as DescriptionComponent).text())
-                .contains("result of invalidation")
+            assertThat(enumOne.title.data.name).contains("APPEND")
+            assertThat((enumOne.description).text()).contains("Load at the end.")
+            assertThat(enumTwo.title.data.name).contains("PREPEND")
+            assertThat((enumTwo.description).text()).contains("Load at the start")
+            assertThat(enumThree.title.data.name).contains("REFRESH")
+            assertThat((enumThree.description).text()).contains("result of invalidation")
 
-            val enumName = enumDetails.symbols[0] as SymbolDetail
+            val enumName = enumDetails.symbols[0]
             val returnType = enumName.data.returnType.link()
             assertThat(returnType.name).endsWith("AnEnumType")
         }
@@ -674,99 +671,99 @@ internal class ClasslikeDocumentableConverterTest(
         }
     }
 
-    @Ignore // TODO: patch upstream dokka to implement kotlin documentation inheritance b/184361891
-    @Test // TODO: add @constructor doc inheritance tests once that is implemented
+    @Suppress("UNCHECKED_CAST") // TODO: add tests once @constructor doc inheritance is implemented
+    @Test // TODO: patch upstream dokka to implement kotlin documentation inheritance b/184361891
     fun `Property parameter documentation inherits properly`() {
         val pages = """
             |/**
             | * @param param1 param1_docs
             | * @property property1 property1_docs
             | */
-            |class supclaz(val param1: String, val property1: Int) {}
+            |class Supclaz(val param1: String, val property1: Int) {}
             |/**
             | * @param param2 param2_docs
             | * @property property2 property2_docs
             | */
-            |interface interfaz(val param2: String, val property2: Int) {}
+            |interface Interfaz(val param2: String, val property2: Int) {}
             |/**
             | * @param param3 param3_docs
             | * @property property3 property3_docs
             | */
-            |sealed class sealclaz(internal val param3: String, protected val property3: Int) {}
-            |class foo(param1: String, property1: Int, param2: String, property2: Int): supclaz(param1, property1), interfaz(param2, property2)
+            |sealed class Sealclaz(internal val param3: String, protected val property3: Int) {}
+            |class Foo(param1: String, property1: Int, param2: String, property2: Int): Supclaz(param1, property1), Interfaz(param2, property2)
             |/**
             | * @param param1 override_param1_docs
             | * @param param2 override_param2_docs
             | * @property property1 override_property1_docs
             | * @property property2 override_property2_docs
             | */
-            |class baz(param1: String, property1: Int, param2: String, property2: Int): supclaz(param1, property1), interfaz(param2, property2)
-            |class bar(param3: String, property3: Int): sealclaz(param3, property3)
+            |class Baz(override val param1: String, override val property1: Int, param2: String, override val property2: Int): Supclaz(param1, property1), Interfaz(param2, property2)
+            |class Bar(override val param3: String, override val property3: Int): Sealclaz(param3, property3)
         """.render()
-        val fooClass = pages.page("foo").content<Classlike>()
-        val pparam1docs = fooClass.propertySymbol("param1").description()
-        val pparam2docs = fooClass.propertySymbol("param2").description()
-        val prop1docs = fooClass.propertySymbol("property1").description()
-        val prop2docs = fooClass.propertySymbol("property2").description()
-        val param1docs = (
-            (
-                fooClass.symbolsFor("Public constructors").second
-                    .symbols.single() as SymbolDetail
-                ).data.metadata[1] as SummaryList
-            )
-            .items().single { it.name() == "param1" }.description()
-        val param2docs = (
-            (
-                fooClass.symbolsFor("Public constructors").second
-                    .symbols.single() as SymbolDetail
-                ).data.metadata[1] as SummaryList
-            )
-            .items().single { it.name() == "param2" }.description()
+        val fooClass = pages.page("Foo").content<Classlike>()
+        val fromSupclaz = fooClass.inheritedFields!!.from("Supclaz")!!.value
+        val fromInterfaz = fooClass.inheritedFields!!.from("Interfaz")!!.value
+        val pparam1docs = fromSupclaz.items().single { it.name() == "param1" }.data.description
+        val pparam2docs = fromInterfaz.items().single { it.name() == "param2" }.data.description
+        val prop1docs = fromSupclaz.items().single { it.name() == "property1" }.data.description
+        val prop2docs = fromInterfaz.items().single { it.name() == "property2" }.data.description
+
+        assertThat(fooClass.symbolsFor(publicPropertiesTitle(displayLanguage)).first.hasContent())
+            .isFalse()
+
         assertThat(pparam1docs.text()).isEqualTo("param1_docs")
         assertThat(prop1docs.text()).isEqualTo("property1_docs")
         assertThat(pparam2docs.text()).isEqualTo("param2_docs")
         assertThat(prop2docs.text()).isEqualTo("property2_docs")
+        /* Constructors don't magically inherit and merge @params from parents' constructors
+        val constructorDetails = fooClass.symbolsForConstructors().second.symbols.single()
+        val ctrDocsParamTable = constructorDetails.data.metadata[1] as DocsSummaryList
+        val param1docs = ctrDocsParamTable.items().single { it.name() == "param1" }.data.description
+        val param2docs = ctrDocsParamTable.items().single { it.name() == "param2" }.data.description
         assertThat(param1docs.text()).isEqualTo("param1_docs")
         assertThat(param2docs.text()).isEqualTo("param2_docs")
-        val bazClass = pages.page("baz").content<Classlike>()
-        val zpparam1docs = bazClass.propertySymbol("param1").description()
-        val zpparam2docs = bazClass.propertySymbol("param2").description()
-        val zprop1docs = bazClass.propertySymbol("property1").description()
-        val zprop2docs = bazClass.propertySymbol("property2").description()
-        val zparam1docs = (
-            (
-                bazClass.symbolsFor("Public constructors").second
-                    .symbols.single() as SymbolDetail
-                ).data.metadata[1] as SummaryList
-            )
-            .items().single { it.name() == "param1" }.description()
-        val zparam2docs = (
-            (
-                bazClass.symbolsFor("Public constructors").second
-                    .symbols.single() as SymbolDetail
-                ).data.metadata[1] as SummaryList
-            )
-            .items().single { it.name() == "param2" }.description()
-        assertThat(zpparam1docs.text()).isEqualTo("override_param1_docs")
+        */
+
+        val bazClass = pages.page("Baz").content<Classlike>()
+        val zpparam1docs = bazClass.propertySymbol("param1").data.description
+        val zprop1docs = bazClass.propertySymbol("property1").data.description
+        val zprop2docs = bazClass.propertySymbol("property2").data.description
+
         assertThat(zprop1docs.text()).isEqualTo("override_property1_docs")
-        assertThat(zpparam2docs.text()).isEqualTo("override_param2_docs")
         assertThat(zprop2docs.text()).isEqualTo("override_property2_docs")
-        assertThat(zparam1docs.text()).isEqualTo("override_param1_docs")
-        assertThat(zparam2docs.text()).isEqualTo("override_param2_docs")
-        val barClass = pages.page("bar").content<Classlike>()
-        // TODO: patch upstream? dokka to support inheriting documentation on hidden components
-        val pparam3docs = barClass.propertySymbol("param3").description()
-        val prop3docs = barClass.propertySymbol("property3").description()
-        val param3docs = (
-            (
-                barClass.symbolsFor("Public constructors").second
-                    .symbols.single() as SymbolDetail
-                ).data.metadata[1] as SummaryList
-            )
-            .items().single { it.name() == "param3" }.description()
-        assertThat(pparam3docs.text()).isEqualTo("param3_docs")
+
+        // This param explicitly has "override val" so shows up as a property
+        assertThat(zpparam1docs.text()).isEqualTo("override_param1_docs")
+        // the "Inherited Propeties" section doesn't contain overriding documentation
+        val zFromInterfaz = fooClass.inheritedFields!!.from("Interfaz")!!.value
+        val zpparam2docs = zFromInterfaz.items().single { it.name() == "param2" }.data.description
+        assertThat(zpparam2docs.text()).isEqualTo("param2_docs")
+
+        val zConstructorDetails = bazClass.symbolsForConstructors().second.symbols.single()
+        val zctrDocsParamTabl = zConstructorDetails.data.metadata[1] as DocsSummaryList
+        val zparam1doc = zctrDocsParamTabl.items().single { it.name() == "param1" }.data.description
+        val zparam2doc = zctrDocsParamTabl.items().single { it.name() == "param2" }.data.description
+        assertThat(zparam1doc.text()).isEqualTo("override_param1_docs")
+        assertThat(zparam2doc.text()).isEqualTo("override_param2_docs")
+
+        val barClass = pages.page("Bar").content<Classlike>()
+        // TODO: patch upstream dokka to support inheriting documentation on hidden components
+        // val pparam3docs = barClass.propertySymbol("param3").data.description
+        // assertThat(pparam3docs.text()).isEqualTo("param3_docs")
+
+        val prop3docs = barClass.propertySymbol("property3").data.description
         assertThat(prop3docs.text()).isEqualTo("property3_docs")
-        assertThat(param3docs.text()).isEqualTo("param3_docs")
+        val barSymbols = barClass.data.symbolTypes
+        assertThat(barSymbols.filter { it.first.hasContent() }).hasSize(2)
+        val barProt = barSymbols.single { it.title() == protectedPropertiesTitle(displayLanguage) }
+        assertThat(barProt.first.data.items.single().data.description).isEqualTo(prop3docs)
+
+        /* Constructors don't inherit docs
+        val bConstructorDetails = fooClass.symbolsForConstructors().second.symbols.single()
+        val bctrDocsParamTabl = bConstructorDetails.data.metadata[1] as DocsSummaryList
+        val bparam3doc = bctrDocsParamTabl.items().single { it.name() == "param3" }.data.description
+        assertThat(bparam3doc.text()).isEqualTo("param3_docs")
+        */
     }
 
     @Test
@@ -873,9 +870,7 @@ internal class ClasslikeDocumentableConverterTest(
             |class Child: Parent()
         """.render().page("Child").content<Classlike>()
 
-        val categoriesNames = page.data.inheritedTypes.map {
-            (it.data.header as TableTitle).data.title
-        }
+        val categoriesNames = page.data.inheritedTypes.map { it.data.header.data.title }
         kotlinOnly {
             assertThat(categoriesNames)
                 .containsExactly("Inherited functions", "Inherited properties").inOrder()
@@ -1051,7 +1046,7 @@ internal class ClasslikeDocumentableConverterTest(
 
         val companionClassK = moduleK.page("Companion")
 
-        val (kotlinNestedTypeSummary) = classlikeK.symbolsFor("Nested types")
+        val (kotlinNestedTypeSummary) = classlikeK.nestedTypes()
 
         val staticJavaMethod = classlikeJ.methodDetailsItems().single().data
         val staticJavaField = classlikeJ.propertyDetailsItems().single().data
@@ -1229,7 +1224,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page("PlaybackSuppressionReason").content<Classlike>()
 
         for (documentation in listOf(documentationJ, documentationK)) {
-            val constructors = documentation.symbolsFor("public constructors")
+            val constructors = documentation.symbolsForConstructors()
             assertThat(constructors.first.size()).isEqualTo(0)
         }
     }
@@ -1354,7 +1349,7 @@ internal class ClasslikeDocumentableConverterTest(
 
         for (isJava in listOf(true, false)) {
             val classlike = emptyTestClass.render(java = isJava).page("Foo").content<Classlike>()
-            val constructorList = classlike.symbolsFor("Public constructors").second.symbols
+            val constructorList = classlike.symbolsForConstructors().second.symbols
             assertThat(constructorList.size).isEqualTo(1)
             assertThat((constructorList.single() as SymbolDetail).data.name).isEqualTo("Foo")
         }
@@ -1370,7 +1365,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.trimIndent().render(java = false).page("Foo").content<Classlike>()
 
         for (classlike in listOf(classlikeJ/*, classlikeK*/)) { // TODO: b/195529157
-            val constructorList = classlike.symbolsFor("Public constructors").second.symbols
+            val constructorList = classlike.symbolsForConstructors().second.symbols
             assertThat(constructorList).isEmpty()
         }
     }
@@ -1459,11 +1454,10 @@ internal class ClasslikeDocumentableConverterTest(
         ).map { it as SymbolDetail }
 
     private fun Classlike.propertySymbol(name: String = "foo") =
-        propertySummaryItems().singleOrNull { it.name() == name }
-            ?: propertySummaryItems().single()
+        propertySummaryItems().singleOrNull { it.name() == name }!!
 
-    private fun SummaryList.constructor() =
-        (data.items.item() as SingleColumnSummaryItem).data.description as SymbolSummary
+    private fun SummaryList<SingleColumnSummaryItem<SymbolSummary>>.constructor() =
+        data.items.item().data.description
 
     private fun Classlike.assertNoSymbolsFor(symbolsName: String) = assertThat(
         data.symbolTypes.none { it.first.title() == symbolsName }

@@ -263,17 +263,19 @@ internal class ParameterDocumentableConverterTest(
             |fun foo(a: Array<Array<String>?>, b: Array<Array<String?>>?)
         """.render()
         val paramA = moduleK.param("a")
+        val typeA = paramA.data.type
         val paramB = moduleK.param("b")
+        val typeB = paramB.data.type
         kotlinOnly {
-            assertThat(!paramA.nullable)
-            assertThat(!paramA.data.type.nullable)
-            assertThat(paramA.data.type.data.generics.single().nullable)
-            assertThat(!paramA.data.type.data.generics.single().data.generics.single().nullable)
+            assertThat(paramA.nullable).isFalse()
+            assertThat(typeA.nullable).isFalse()
+            assertThat(typeA.data.generics.single().nullable).isTrue()
+            assertThat(typeA.data.generics.single().data.generics.single().nullable).isFalse()
 
-            assertThat(paramB.nullable)
-            assertThat(paramB.data.type.nullable)
-            assertThat(!paramB.data.type.data.generics.single().nullable)
-            assertThat(paramB.data.type.data.generics.single().data.generics.single().nullable)
+            assertThat(paramB.nullable).isTrue()
+            assertThat(typeB.nullable).isTrue()
+            assertThat(typeB.data.generics.single().nullable).isFalse()
+            assertThat(typeB.data.generics.single().data.generics.single().nullable).isTrue()
         }
         // This is impossible to represent in java, sadly, and this is a limitation of the language.
     }
@@ -385,19 +387,20 @@ internal class ParameterDocumentableConverterTest(
             |fun foo(a: () -> Unit)
         """.render().param().data
 
-        javaOnly {
-            assertThat(lambdaParam.type is LambdaTypeProjectionComponent).isFalse()
+        val primary = lambdaParam.type
 
-            val primary = lambdaParam.type.data
-            assertThat(primary.type.data.name).isEqualTo("Function0")
-            assertThat(primary.generics.item().link().name).isEqualTo("Unit")
+        javaOnly {
+            assertThat(primary is LambdaTypeProjectionComponent).isFalse()
+
+            assertThat(primary.name()).isEqualTo("Function0")
+            assertThat(primary.data.generics.item().link().name).isEqualTo("Unit")
         }
         kotlinOnly {
-            assertThat(lambdaParam.type is LambdaTypeProjectionComponent).isTrue()
-            assertThat((lambdaParam.type as LambdaTypeProjectionComponent).data.receiver).isNull()
-            assertThat(lambdaParam.type.data.lambdaModifiers).isEmpty()
-            assertThat(lambdaParam.type.data.lambdaParams).isEmpty()
-            assertThat(lambdaParam.type.link().name).isEqualTo("Unit")
+            assertThat(primary is LambdaTypeProjectionComponent).isTrue()
+            assertThat((primary as LambdaTypeProjectionComponent).data.receiver).isNull()
+            assertThat(primary.data.lambdaModifiers).isEmpty()
+            assertThat(primary.data.lambdaParams).isEmpty()
+            assertThat(primary.link().name).isEqualTo("Unit")
         }
     }
 
@@ -430,16 +433,18 @@ internal class ParameterDocumentableConverterTest(
             |fun foo(a: suspend Float.() -> Unit)
         """.render().param().data
 
+        val primary = param.type
+
         javaOnly {
             assertThat(param.type is LambdaTypeProjectionComponent).isFalse()
             assertThat(param.type.link().name).isEqualTo("SuspendFunction1")
         }
         kotlinOnly {
-            assertThat(param.type is LambdaTypeProjectionComponent).isTrue()
-            assertThat((param.type as LambdaTypeProjectionComponent).data.receiver).isNotNull()
-            assertThat(param.type.data.receiver!!.link().name).isEqualTo("Float")
-            assertThat(param.type.data.lambdaModifiers).containsExactly("suspend")
-            assertThat(param.type.data.lambdaParams).isEmpty()
+            assertThat(primary is LambdaTypeProjectionComponent).isTrue()
+            assertThat((primary as LambdaTypeProjectionComponent).data.receiver).isNotNull()
+            assertThat(primary.data.receiver!!.link().name).isEqualTo("Float")
+            assertThat(primary.data.lambdaModifiers).containsExactly("suspend")
+            assertThat(primary.data.lambdaParams).isEmpty()
         }
     }
 
@@ -449,21 +454,22 @@ internal class ParameterDocumentableConverterTest(
             |fun foo(a: suspend (Float) -> Unit)
         """.render().param().data
 
+        val primary = param.type
+
         javaOnly {
             assertThat(param.type is LambdaTypeProjectionComponent).isFalse()
 
-            val primary = param.type.data
-            assertThat(primary.type.data.name).isEqualTo("SuspendFunction1")
-            assertThat(primary.generics.first().link().name).isEqualTo("Float")
-            assertThat(primary.generics.last().link().name).isEqualTo("Unit")
+            assertThat(primary.data.type.data.name).isEqualTo("SuspendFunction1")
+            assertThat(primary.data.generics.first().link().name).isEqualTo("Float")
+            assertThat(primary.data.generics.last().link().name).isEqualTo("Unit")
         }
         kotlinOnly {
-            assertThat(param.type is LambdaTypeProjectionComponent).isTrue()
-            assertThat((param.type as LambdaTypeProjectionComponent).data.receiver).isNull()
-            assertThat(param.type.data.lambdaModifiers).containsExactly("suspend")
-            assertThat(param.type.data.lambdaParams).hasSize(1)
-            assertThat(param.type.data.lambdaParams.single().data.type.link().name)
-                .isEqualTo("Float")
+            assertThat(primary is LambdaTypeProjectionComponent).isTrue()
+            assertThat((primary as LambdaTypeProjectionComponent).data.receiver)
+                .isNull()
+            assertThat(primary.data.lambdaModifiers).containsExactly("suspend")
+            assertThat(primary.data.lambdaParams).hasSize(1)
+            assertThat(primary.data.lambdaParams.single().data.type.link().name).isEqualTo("Float")
         }
     }
 
@@ -473,20 +479,21 @@ internal class ParameterDocumentableConverterTest(
             |fun foo(a: (String) -> Unit)
         """.render().param().data
 
+        val primary = param.type
+
         javaOnly {
             assertThat(param.type is LambdaTypeProjectionComponent).isFalse()
 
-            val primary = param.type.data
-            assertThat(primary.type.data.name).isEqualTo("Function1")
-            assertThat(primary.generics.first().link().name).isEqualTo("String")
-            assertThat(primary.generics.last().link().name).isEqualTo("Unit")
+            assertThat(primary.data.type.data.name).isEqualTo("Function1")
+            assertThat(primary.data.generics.first().link().name).isEqualTo("String")
+            assertThat(primary.data.generics.last().link().name).isEqualTo("Unit")
         }
         kotlinOnly {
-            assertThat(param.type is LambdaTypeProjectionComponent).isTrue()
-            assertThat((param.type as LambdaTypeProjectionComponent).data.receiver).isNull()
-            assertThat(param.type.data.lambdaModifiers).isEmpty()
-            assertThat(param.type.data.lambdaParams).hasSize(1)
-            assertThat(param.type.data.lambdaParams.single().typeName()).isEqualTo("String")
+            assertThat(primary is LambdaTypeProjectionComponent).isTrue()
+            assertThat((primary as LambdaTypeProjectionComponent).data.receiver).isNull()
+            assertThat(primary.data.lambdaModifiers).isEmpty()
+            assertThat(primary.data.lambdaParams).hasSize(1)
+            assertThat(primary.data.lambdaParams.single().typeName()).isEqualTo("String")
         }
     }
 
@@ -496,20 +503,21 @@ internal class ParameterDocumentableConverterTest(
             |fun foo(a: Float.() -> Unit)
         """.render().param().data
 
-        javaOnly {
-            assertThat(param.type is LambdaTypeProjectionComponent).isFalse()
+        val primary = param.type
 
-            val primary = param.type.data
-            assertThat(primary.type.data.name).isEqualTo("Function1")
-            assertThat(primary.generics.first().link().name).isEqualTo("Float")
-            assertThat(primary.generics.last().link().name).isEqualTo("Unit")
+        javaOnly {
+            assertThat(primary is LambdaTypeProjectionComponent).isFalse()
+
+            assertThat(primary.data.type.data.name).isEqualTo("Function1")
+            assertThat(primary.data.generics.first().link().name).isEqualTo("Float")
+            assertThat(primary.data.generics.last().link().name).isEqualTo("Unit")
         }
         kotlinOnly {
-            assertThat(param.type is LambdaTypeProjectionComponent).isTrue()
-            assertThat((param.type as LambdaTypeProjectionComponent).data.receiver).isNotNull()
-            assertThat(param.type.data.receiver!!.link().name).isEqualTo("Float")
-            assertThat(param.type.data.lambdaModifiers).isEmpty()
-            assertThat(param.type.data.lambdaParams).isEmpty()
+            assertThat(primary is LambdaTypeProjectionComponent).isTrue()
+            assertThat((primary as LambdaTypeProjectionComponent).data.receiver).isNotNull()
+            assertThat(primary.data.receiver!!.link().name).isEqualTo("Float")
+            assertThat(primary.data.lambdaModifiers).isEmpty()
+            assertThat(primary.data.lambdaParams).isEmpty()
         }
     }
 
@@ -519,39 +527,41 @@ internal class ParameterDocumentableConverterTest(
             |fun foo(block: Int.(Map<String, Int>, Double) -> Collection<Float>)
         """.render().param().data
 
+        val primary = param.type
+
         javaOnly {
             assertThat(param.type is LambdaTypeProjectionComponent).isFalse()
 
-            val primary = param.type.data
-            assertThat(primary.type.data.name).isEqualTo("Function3")
-            assertThat(primary.generics).hasSize(4)
-            assertThat(primary.generics[0].link().name).isEqualTo("Integer")
-            assertThat(primary.generics[1].link().name).isEqualTo("Map")
-            assertThat(primary.generics[2].link().name).isEqualTo("Double")
-            assertThat(primary.generics[3].link().name).isEqualTo("Collection")
+            assertThat(primary.data.type.data.name).isEqualTo("Function3")
+            assertThat(primary.data.generics).hasSize(4)
+            assertThat(primary.data.generics[0].link().name).isEqualTo("Integer")
+            assertThat(primary.data.generics[1].link().name).isEqualTo("Map")
+            assertThat(primary.data.generics[2].link().name).isEqualTo("Double")
+            assertThat(primary.data.generics[3].link().name).isEqualTo("Collection")
 
-            val mapGenerics = primary.generics[1].data.generics.items(2)
+            val mapGenerics = primary.data.generics[1].data.generics.items(2)
             assertThat(mapGenerics.first().link().name).isEqualTo("String")
             assertThat(mapGenerics.last().link().name).isEqualTo("Integer")
 
-            val collectionGeneric = primary.generics[3].data.generics.item()
+            val collectionGeneric = primary.data.generics[3].data.generics.item()
             assertThat(collectionGeneric.link().name).isEqualTo("Float")
         }
         kotlinOnly {
-            assertThat(param.type is LambdaTypeProjectionComponent).isTrue()
-            assertThat((param.type as LambdaTypeProjectionComponent).data.receiver).isNotNull()
-            assertThat(param.type.data.receiver!!.link().name).isEqualTo("Int")
-            assertThat(param.type.data.lambdaModifiers).isEmpty()
-            assertThat(param.type.data.lambdaParams).hasSize(2)
-            assertThat(param.type.data.lambdaParams.first().link().name).isEqualTo("Map")
-            assertThat(param.type.data.lambdaParams.last().link().name).isEqualTo("Double")
+            assertThat(primary is LambdaTypeProjectionComponent).isTrue()
+            assertThat((primary as LambdaTypeProjectionComponent).data.receiver).isNotNull()
+            assertThat(primary.data.receiver!!.link().name).isEqualTo("Int")
+            assertThat(primary.data.lambdaModifiers).isEmpty()
+            assertThat(primary.data.lambdaParams).hasSize(2)
+            assertThat(primary.data.lambdaParams.first().link().name).isEqualTo("Map")
+            assertThat(primary.data.lambdaParams.last().link().name).isEqualTo("Double")
             assertThat(param.type.link().name).isEqualTo("Collection")
 
-            val mapGenerics = param.type.data.lambdaParams.first().data.type.data.generics.items(2)
+            val mapGenerics = primary.data.lambdaParams.first().data.type
+                .data.generics.items(2)
             assertThat(mapGenerics.first().link().name).isEqualTo("String")
             assertThat(mapGenerics.last().link().name).isEqualTo("Int")
 
-            val collectionGeneric = param.type.data.generics.item()
+            val collectionGeneric = primary.data.generics.item()
             assertThat(collectionGeneric.link().name).isEqualTo("Float")
         }
     }

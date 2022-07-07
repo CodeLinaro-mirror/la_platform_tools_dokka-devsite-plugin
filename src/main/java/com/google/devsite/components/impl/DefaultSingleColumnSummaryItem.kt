@@ -16,14 +16,15 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.table.SingleColumnSummaryItem
 import kotlinx.html.TR
 import kotlinx.html.td
 
 /** Default implementation of the single column layout item for constructors. */
-internal class DefaultSingleColumnSummaryItem(
-    override val data: SingleColumnSummaryItem.Params
-) : SingleColumnSummaryItem {
+internal class DefaultSingleColumnSummaryItem<T : ContextFreeComponent>(
+    override val data: SingleColumnSummaryItem.Params<T>
+) : SingleColumnSummaryItem<T> {
     override fun render(into: TR) = into.run {
         td {
             data.description.render(this)

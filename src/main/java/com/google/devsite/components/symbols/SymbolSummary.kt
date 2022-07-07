@@ -16,15 +16,24 @@
 
 package com.google.devsite.components.symbols
 
-import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.DescriptionComponent
+import com.google.devsite.components.impl.DefaultDescriptionComponent
 
 /** Represents a symbols' signature along with its description. */
-internal interface SymbolSummary : ContextFreeComponent {
-    val data: Params
+internal interface SymbolSummary : DescriptionComponent {
+    override val data: Params
 
     data class Params(
         val signature: SymbolSignature,
         val description: DescriptionComponent
+    ) : DescriptionComponent.Params(
+        pathProvider = description.guarded?.data?.pathProvider,
+        components = description.guarded?.data?.components ?: emptyList(),
+        summary = description.guarded?.data?.summary ?: true,
+        deprecation = description.guarded?.data?.deprecation
     )
 }
+// We can't directly access e.g. description.data.pathProvider, because attempting to throws for
+// NoopSymbolSummary and UndocumentedSymbolSummary, because we have ~mocks in our primary hierarchy.
+private val DescriptionComponent.guarded: DescriptionComponent?
+    get() = if (this is DefaultDescriptionComponent) this else null

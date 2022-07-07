@@ -50,7 +50,7 @@ internal class PropertyDocumentableConverterTest(
             |val foo: A
         """.render().summary()
 
-        val returnType = summary.returnSummary().type
+        val returnType = summary.data.title.data.type
 
         assertThat(returnType.link().name).isEqualTo("A")
         assertPath(returnType.link().url, "androidx/example/A.html")
@@ -366,7 +366,7 @@ internal class PropertyDocumentableConverterTest(
     private fun DModule.summary(
         name: String = "foo",
         hints: ModifierHints = ModifierHints(displayLanguage)
-    ): TwoPaneSummaryItem {
+    ): TwoPaneSummaryItem<TypeSummary, SymbolSummary> {
         val (holder, pathProvider) = holderAndProvider(this)
         val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
         val converter = PropertyDocumentableConverter(
@@ -402,13 +402,10 @@ internal class PropertyDocumentableConverterTest(
             pathProvider,
             docConverter
         )
-        return converter.summary(property(name)!!, hints).signature()
+        return converter.summary(property(name)!!, hints).data.description.data.signature
     }
 
     private fun TypeProjectionComponent.link(): Link.Params = data.type.data
-    private fun TwoPaneSummaryItem.returnSummary(): TypeSummary.Params =
-        (data.title as TypeSummary).data
-    private fun TwoPaneSummaryItem.signature() = (data.description as SymbolSummary).data.signature
 
     companion object {
         @JvmStatic

@@ -17,13 +17,13 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.render
-import com.google.devsite.components.symbols.MiniSignature
+import com.google.devsite.components.symbols.AnnotatedLink
 import com.google.devsite.joinMaybePrefix
 import kotlinx.html.FlowContent
 
-internal class DefaultMiniSignature(
-    override val data: MiniSignature.Params
-) : MiniSignature {
+internal class DefaultAnnotatedLink(
+    override val data: AnnotatedLink.Params
+) : AnnotatedLink {
 
     override fun render(into: FlowContent) = into.run {
         data.annotations.render(into, separator = " ")

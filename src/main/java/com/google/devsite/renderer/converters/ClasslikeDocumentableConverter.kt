@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.HtmlComponent
 import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultClassHierarchy
@@ -32,11 +33,16 @@ import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.ClassSignature
 import com.google.devsite.components.symbols.LibraryMetadataComponent
 import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.ClassHierarchy
 import com.google.devsite.components.table.InheritedSymbolsList
 import com.google.devsite.components.table.RelatedSymbols
+import com.google.devsite.components.table.SingleColumnSummaryItem
+import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
@@ -223,7 +229,8 @@ internal class ClasslikeDocumentableConverter(
             }
         }
 
-        val allSymbols = mutableListOf(
+        val allSymbols: MutableList<Pair<SummaryList<out SummaryItem>,
+                Classlike.TitledList<SymbolDetail>>> = mutableListOf(
             nestedTypesSummary.await() to Classlike.TitledList(nestedTypesTitle(), emptyList()),
             enumValuesSummary.await() to Classlike.TitledList(
                 enumValuesTitle(),
@@ -360,7 +367,8 @@ internal class ClasslikeDocumentableConverter(
         )
     }
 
-    private fun typesToSummary(classlikes: List<Documentable>): SummaryList {
+    private fun typesToSummary(classlikes: List<DClasslike>):
+        SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> {
         val components = when (displayLanguage) {
             // When displaying Kotlin pages, companion functions will be inlined and the link to the
             // companion object can be omitted.
@@ -386,7 +394,8 @@ internal class ClasslikeDocumentableConverter(
         )
     }
 
-    private fun functionsToSummary(name: String? = null, functions: List<DFunction>): SummaryList {
+    private fun functionsToSummary(name: String? = null, functions: List<DFunction>):
+        SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
         val modifierHints = ModifierHints(displayLanguage, isSummary = true, isInterface())
         val components = functions.map {
             errorContextInjector(it) {
@@ -409,7 +418,8 @@ internal class ClasslikeDocumentableConverter(
         )
     }
 
-    private fun constructorsToSummary(name: String, constructors: List<DFunction>): SummaryList {
+    private fun constructorsToSummary(name: String, constructors: List<DFunction>):
+        SummaryList<SingleColumnSummaryItem<SymbolSummary>> {
         val components = constructors.map {
             errorContextInjector(it) {
                 functionConverter.summaryForConstructor(it)
@@ -447,7 +457,8 @@ internal class ClasslikeDocumentableConverter(
         }
     }
 
-    private fun enumValuesToSummary(title: String, enumVals: List<DEnumEntry>): SummaryList {
+    private fun enumValuesToSummary(title: String, enumVals: List<DEnumEntry>):
+        SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> {
         val components = enumVals.map { errorContextInjector(it) { enumConverter.summary(it) } }
         return DefaultSummaryList(
             SummaryList.Params(
@@ -465,7 +476,7 @@ internal class ClasslikeDocumentableConverter(
     private fun propertiesToSummary(
         name: String? = null,
         properties: List<DProperty>
-    ): SummaryList {
+    ): SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
         val modifierHints = ModifierHints(displayLanguage, isSummary = true, isInterface())
         val components = properties.map {
             errorContextInjector(it) {
@@ -643,9 +654,10 @@ internal class ClasslikeDocumentableConverter(
 
     private fun <T> List<T>.createInheritedCategory(
         title: String,
-        summaryGen: (List<T>) -> SummaryList
+        summaryGen: (List<T>) -> SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>
     ): InheritedSymbolsList where T : Documentable, T : WithExtraProperties<T> {
-        fun createInheritedSymbolsList(parent: DRI, symbolList: List<T>): Pair<Link, SummaryList> {
+        fun createInheritedSymbolsList(parent: DRI, symbolList: List<T>):
+            Pair<Link, SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>> {
             val link = pathProvider.linkForReference(parent)
             val summary = summaryGen(symbolList)
             return link to summary

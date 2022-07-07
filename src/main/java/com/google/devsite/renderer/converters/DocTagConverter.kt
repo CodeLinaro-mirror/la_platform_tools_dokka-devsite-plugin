@@ -19,19 +19,20 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
-import com.google.devsite.components.Raw
+import com.google.devsite.components.impl.DefaultAnnotatedLink
 import com.google.devsite.components.impl.DefaultDescriptionComponent
 import com.google.devsite.components.impl.DefaultLink
-import com.google.devsite.components.impl.DefaultMiniSignature
+import com.google.devsite.components.impl.DefaultParameterComponent
 import com.google.devsite.components.impl.DefaultPropertySignature
-import com.google.devsite.components.impl.DefaultRaw
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableTitle
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
+import com.google.devsite.components.impl.DefaultTypeProjectionComponent
 import com.google.devsite.components.impl.UndocumentedSymbolDescriptionComponent
-import com.google.devsite.components.symbols.MiniSignature
+import com.google.devsite.components.symbols.AnnotatedLink
+import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.PropertySignature
-import com.google.devsite.components.table.SummaryItem
+import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
 import com.google.devsite.components.table.TwoPaneSummaryItem
@@ -112,7 +113,7 @@ internal class DocTagConverter(
     /** metadata() can either take a WithSources Documentable, OR an isFromJava boolean */
     fun <T> metadata(
         documentable: T,
-        returnType: ContextFreeComponent? = null,
+        returnType: TypeProjectionComponent? = null,
         paramNames: List<String> = emptyList(),
         annotations: List<Annotations.Annotation> = emptyList()
     ) where T : Documentable, T : WithSources =
@@ -120,7 +121,7 @@ internal class DocTagConverter(
 
     fun metadata(
         documentable: Documentable,
-        returnType: ContextFreeComponent? = null,
+        returnType: TypeProjectionComponent? = null,
         paramNames: List<String> = emptyList(),
         annotations: List<Annotations.Annotation> = emptyList(),
         isFromJava: Boolean
@@ -133,7 +134,7 @@ internal class DocTagConverter(
      */
     private fun metadataImpl(
         documentable: Documentable,
-        returnType: ContextFreeComponent? = null,
+        returnType: TypeProjectionComponent? = null,
         paramNames: List<String> = emptyList(),
         annotations: List<Annotations.Annotation> = emptyList(),
         isFromJavaParam: Boolean? = null
@@ -312,14 +313,14 @@ internal class DocTagConverter(
         dGenerics: List<DTypeParameter>,
         documentable: Documentable,
         isFromJavaParam: Boolean? = null
-    ): SummaryList {
+    ): SummaryList<TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>> {
         val isFromJava = if (isFromJavaParam != null) isFromJavaParam
         else {
             assert(documentable is WithSources)
             (documentable as WithSources).isFromJava()
         }
         // @param can refer to parameters, lambda parameters, type parameters, or receivers.
-        val allOptions = mutableMapOf<String, ContextFreeComponent>()
+        val allOptions = mutableMapOf<String, ParameterComponent>()
         if (documentable is DFunction) {
             allOptions.putAll(
                 documentable.parameters.map {
@@ -362,10 +363,10 @@ internal class DocTagConverter(
             )
         }
 
-        return DefaultSummaryList(
-            SummaryList.Params(
+        return DefaultSummaryList<TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>>(
+            SummaryList.Params<TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>>(
                 header = DefaultTableTitle(TableTitle.Params("Parameters")),
-                items = params as List<SummaryItem>
+                items = params
             )
         )
     }
@@ -402,7 +403,8 @@ internal class DocTagConverter(
         return result
     }
 
-    private fun returnType(tags: List<Return>, returnType: ContextFreeComponent): SummaryList {
+    private fun returnType(tags: List<Return>, returnType: TypeProjectionComponent):
+        SummaryList<TwoPaneSummaryItem<TypeProjectionComponent, DescriptionComponent>> {
         val params = tags.map { tag ->
             DefaultTwoPaneSummaryItem(
                 TwoPaneSummaryItem.Params(
@@ -420,11 +422,12 @@ internal class DocTagConverter(
         )
     }
 
-    private fun throws(tags: List<Throws>): SummaryList {
+    private fun throws(tags: List<Throws>):
+        SummaryList<TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>> {
         val params = tags.map { tag ->
             DefaultTwoPaneSummaryItem(
                 TwoPaneSummaryItem.Params(
-                    title = DefaultRaw(Raw.Params(tag.name)),
+                    title = throwsToParameterComponent(tag),
                     description = description(tag)
                 )
             )
@@ -438,7 +441,23 @@ internal class DocTagConverter(
         )
     }
 
-    private fun see(tags: List<See>): SummaryList {
+    private fun throwsToParameterComponent(throws: Throws): ParameterComponent =
+        DefaultParameterComponent(
+            ParameterComponent.Params(
+                displayLanguage = displayLanguage,
+                name = throws.name,
+                type = DefaultTypeProjectionComponent(
+                    TypeProjectionComponent.Params(
+                        type = pathProvider
+                            .linkForReference(throws.exceptionAddress!!, throws.name),
+                        displayLanguage = displayLanguage,
+                        nullability = Nullability.DONT_CARE
+                    )
+                )
+            )
+        )
+
+    private fun see(tags: List<See>): SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> {
         val params = tags.map { tag ->
             DefaultTwoPaneSummaryItem(
                 TwoPaneSummaryItem.Params(
@@ -717,7 +736,7 @@ internal class DocTagConverter(
     internal fun docsToSummary(
         documentables: List<Documentable>,
         showAnnotations: Boolean = false
-    ) = DefaultSummaryList(
+    ) = DefaultSummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>(
         SummaryList.Params(
             items = documentables
                 .map { summaryForDocumentable(it, showAnnotations) }
@@ -731,13 +750,13 @@ internal class DocTagConverter(
     internal fun summaryForDocumentable(
         documentable: Documentable,
         showAnnotations: Boolean = false
-    ): DefaultTwoPaneSummaryItem {
+    ): DefaultTwoPaneSummaryItem<Link, DescriptionComponent> {
         val annotations = (documentable as? WithExtraProperties<*>)?.annotations().orEmpty()
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
                 title = if (showAnnotations) {
-                    DefaultMiniSignature(
-                        MiniSignature.Params(
+                    DefaultAnnotatedLink(
+                        AnnotatedLink.Params(
                             annotations = annotations.annotationComponents(
                                 pathProvider = pathProvider,
                                 displayLanguage = displayLanguage,

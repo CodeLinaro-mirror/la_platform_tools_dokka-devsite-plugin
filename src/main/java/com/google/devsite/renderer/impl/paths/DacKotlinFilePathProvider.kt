@@ -16,8 +16,13 @@
 
 package com.google.devsite.renderer.impl.paths
 
+import com.google.devsite.components.impl.DefaultTypeProjectionComponent
+import com.google.devsite.components.symbols.TypeProjectionComponent
+import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.Nullability
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesGraph
+import org.jetbrains.dokka.links.DRI
 
 /** Creates file paths for DAC Kotlin consumption. */
 internal class DacKotlinFilePathProvider(
@@ -31,4 +36,15 @@ internal class DacKotlinFilePathProvider(
     locationProvider = locationProvider,
     classGraph = classGraph,
     documentablesGraph = documentablesGraph
-)
+) {
+    init {
+        ANY_LINK[Language.KOTLIN] = linkForReference(DRI("kotlin", "Any"))
+        ANY[Language.KOTLIN] = DefaultTypeProjectionComponent(
+            TypeProjectionComponent.Params(
+                type = linkForReference(DRI("kotlin", "Any")),
+                nullability = Nullability.KOTLIN_DEFAULT,
+                displayLanguage = Language.KOTLIN
+            )
+        )
+    }
+}

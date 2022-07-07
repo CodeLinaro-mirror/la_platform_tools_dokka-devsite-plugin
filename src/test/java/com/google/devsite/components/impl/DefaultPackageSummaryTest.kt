@@ -18,11 +18,17 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.components.DescriptionComponent
+import com.google.devsite.components.Link
 import com.google.devsite.components.pages.PackageSummary.Params
+import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.SummaryList
-import com.google.devsite.components.testing.NoopContextFreeComponent
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.components.testing.NoopDescriptionComponent
 import com.google.devsite.components.testing.NoopSummaryList
+import com.google.devsite.components.testing.NoopSymbolDetail
 import com.google.devsite.renderer.Language
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
@@ -51,7 +57,7 @@ class DefaultPackageSummaryTest {
 
     @Test
     fun `Package summary with only interfaces renders correctly`() {
-        val component = createPackageSummary(interfaces = NoopSummaryList(shown = true))
+        val component = createPackageSummary(interfaces = NoopSummaryList())
 
         val output = createHTML().div {
             component.render(this)
@@ -70,7 +76,7 @@ class DefaultPackageSummaryTest {
 
     @Test
     fun `Package summary with only classes renders correctly`() {
-        val component = createPackageSummary(classes = NoopSummaryList(shown = true))
+        val component = createPackageSummary(classes = NoopSummaryList())
 
         val output = createHTML().div {
             component.render(this)
@@ -89,7 +95,7 @@ class DefaultPackageSummaryTest {
 
     @Test
     fun `Package summary with only enums renders correctly`() {
-        val component = createPackageSummary(enums = NoopSummaryList(shown = true))
+        val component = createPackageSummary(enums = NoopSummaryList())
 
         val output = createHTML().div {
             component.render(this)
@@ -108,7 +114,7 @@ class DefaultPackageSummaryTest {
 
     @Test
     fun `Package summary with only exceptions renders correctly`() {
-        val component = createPackageSummary(exceptions = NoopSummaryList(shown = true))
+        val component = createPackageSummary(exceptions = NoopSummaryList())
 
         val output = createHTML().div {
             component.render(this)
@@ -127,7 +133,7 @@ class DefaultPackageSummaryTest {
 
     @Test
     fun `Package summary with only annotations renders correctly`() {
-        val component = createPackageSummary(annotations = NoopSummaryList(shown = true))
+        val component = createPackageSummary(annotations = NoopSummaryList())
 
         val output = createHTML().div {
             component.render(this)
@@ -148,7 +154,7 @@ class DefaultPackageSummaryTest {
     fun `Package summary with only type aliases renders correctly`() {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
-            typeAliases = NoopSummaryList(shown = true)
+            typeAliases = NoopSummaryList()
         )
 
         val output = createHTML().div {
@@ -180,11 +186,11 @@ class DefaultPackageSummaryTest {
             topLevelFunctionsSummary = NoopSummaryList(),
             extensionPropertiesSummary = NoopSummaryList(),
             extensionFunctionsSummary = NoopSummaryList(),
-            topLevelConstants = listOf(NoopContextFreeComponent),
-            topLevelProperties = listOf(NoopContextFreeComponent),
-            topLevelFunctions = listOf(NoopContextFreeComponent),
-            extensionProperties = listOf(NoopContextFreeComponent),
-            extensionFunctions = listOf(NoopContextFreeComponent)
+            topLevelConstants = listOf(NoopSymbolDetail),
+            topLevelProperties = listOf(NoopSymbolDetail),
+            topLevelFunctions = listOf(NoopSymbolDetail),
+            extensionProperties = listOf(NoopSymbolDetail),
+            extensionFunctions = listOf(NoopSymbolDetail)
         )
 
         val output = createHTML().div {
@@ -214,8 +220,8 @@ class DefaultPackageSummaryTest {
     fun `Package summary with Kotlin top-level constants renders correctly`() {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
-            topLevelConstantsSummary = NoopSummaryList(shown = true),
-            topLevelConstants = listOf(NoopContextFreeComponent)
+            topLevelConstantsSummary = NoopSummaryList(),
+            topLevelConstants = listOf(NoopSymbolDetail)
         )
 
         val output = createHTML().div {
@@ -239,8 +245,8 @@ class DefaultPackageSummaryTest {
     fun `Package summary with Kotlin top-level properties renders correctly`() {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
-            topLevelPropertiesSummary = NoopSummaryList(shown = true),
-            topLevelProperties = listOf(NoopContextFreeComponent)
+            topLevelPropertiesSummary = NoopSummaryList(),
+            topLevelProperties = listOf(NoopSymbolDetail)
         )
 
         val output = createHTML().div {
@@ -264,8 +270,8 @@ class DefaultPackageSummaryTest {
     fun `Package summary with Kotlin top-level functions renders correctly`() {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
-            topLevelFunctionsSummary = NoopSummaryList(shown = true),
-            topLevelFunctions = listOf(NoopContextFreeComponent)
+            topLevelFunctionsSummary = NoopSummaryList(),
+            topLevelFunctions = listOf(NoopSymbolDetail)
         )
 
         val output = createHTML().div {
@@ -289,8 +295,8 @@ class DefaultPackageSummaryTest {
     fun `Package summary with Kotlin extension functions renders correctly`() {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
-            extensionFunctionsSummary = NoopSummaryList(shown = true),
-            extensionFunctions = listOf(NoopContextFreeComponent)
+            extensionFunctionsSummary = NoopSummaryList(),
+            extensionFunctions = listOf(NoopSymbolDetail)
         )
 
         val output = createHTML().div {
@@ -314,8 +320,8 @@ class DefaultPackageSummaryTest {
     fun `Package summary with Kotlin extension properties renders correctly`() {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
-            extensionPropertiesSummary = NoopSummaryList(shown = true),
-            extensionProperties = listOf(NoopContextFreeComponent)
+            extensionPropertiesSummary = NoopSummaryList(),
+            extensionProperties = listOf(NoopSymbolDetail)
         )
 
         val output = createHTML().div {
@@ -339,16 +345,16 @@ class DefaultPackageSummaryTest {
     fun `Package summary with all Kotlin bits renders correctly`() {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
-            topLevelConstantsSummary = NoopSummaryList(shown = true),
-            topLevelPropertiesSummary = NoopSummaryList(shown = true),
-            topLevelFunctionsSummary = NoopSummaryList(shown = true),
-            extensionPropertiesSummary = NoopSummaryList(shown = true),
-            extensionFunctionsSummary = NoopSummaryList(shown = true),
-            topLevelConstants = listOf(NoopContextFreeComponent),
-            topLevelProperties = listOf(NoopContextFreeComponent),
-            topLevelFunctions = listOf(NoopContextFreeComponent),
-            extensionProperties = listOf(NoopContextFreeComponent),
-            extensionFunctions = listOf(NoopContextFreeComponent)
+            topLevelConstantsSummary = NoopSummaryList(),
+            topLevelPropertiesSummary = NoopSummaryList(),
+            topLevelFunctionsSummary = NoopSummaryList(),
+            extensionPropertiesSummary = NoopSummaryList(),
+            extensionFunctionsSummary = NoopSummaryList(),
+            topLevelConstants = listOf(NoopSymbolDetail),
+            topLevelProperties = listOf(NoopSymbolDetail),
+            topLevelFunctions = listOf(NoopSymbolDetail),
+            extensionProperties = listOf(NoopSymbolDetail),
+            extensionFunctions = listOf(NoopSymbolDetail)
         )
 
         val output = createHTML().div {
@@ -387,22 +393,33 @@ class DefaultPackageSummaryTest {
     private fun createPackageSummary(
         displayLanguage: Language = Language.JAVA,
         description: List<ContextFreeComponent> = emptyList(),
-        interfaces: SummaryList = NoopSummaryList(shown = false),
-        classes: SummaryList = NoopSummaryList(shown = false),
-        enums: SummaryList = NoopSummaryList(shown = false),
-        exceptions: SummaryList = NoopSummaryList(shown = false),
-        annotations: SummaryList = NoopSummaryList(shown = false),
-        typeAliases: SummaryList = NoopSummaryList(shown = false),
-        topLevelConstantsSummary: SummaryList = NoopSummaryList(shown = false),
-        topLevelPropertiesSummary: SummaryList = NoopSummaryList(shown = false),
-        topLevelFunctionsSummary: SummaryList = NoopSummaryList(shown = false),
-        extensionPropertiesSummary: SummaryList = NoopSummaryList(shown = false),
-        extensionFunctionsSummary: SummaryList = NoopSummaryList(shown = false),
-        topLevelConstants: List<ContextFreeComponent> = emptyList(),
-        topLevelProperties: List<ContextFreeComponent> = emptyList(),
-        topLevelFunctions: List<ContextFreeComponent> = emptyList(),
-        extensionProperties: List<ContextFreeComponent> = emptyList(),
-        extensionFunctions: List<ContextFreeComponent> = emptyList()
+        interfaces: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> =
+            NoopSummaryList(show = false),
+        classes: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> =
+            NoopSummaryList(show = false),
+        enums: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> =
+            NoopSummaryList(show = false),
+        exceptions: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> =
+            NoopSummaryList(show = false),
+        annotations: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> =
+            NoopSummaryList(show = false),
+        typeAliases: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> =
+            NoopSummaryList(show = false),
+        topLevelConstantsSummary: SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> =
+            NoopSummaryList(show = false),
+        topLevelPropertiesSummary: SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> =
+            NoopSummaryList(show = false),
+        topLevelFunctionsSummary: SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> =
+            NoopSummaryList(show = false),
+        extensionPropertiesSummary: SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> =
+            NoopSummaryList(show = false),
+        extensionFunctionsSummary: SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> =
+            NoopSummaryList(show = false),
+        topLevelConstants: List<SymbolDetail> = emptyList(),
+        topLevelProperties: List<SymbolDetail> = emptyList(),
+        topLevelFunctions: List<SymbolDetail> = emptyList(),
+        extensionProperties: List<SymbolDetail> = emptyList(),
+        extensionFunctions: List<SymbolDetail> = emptyList()
     ) = DefaultPackageSummary(
         Params(
             displayLanguage = displayLanguage,

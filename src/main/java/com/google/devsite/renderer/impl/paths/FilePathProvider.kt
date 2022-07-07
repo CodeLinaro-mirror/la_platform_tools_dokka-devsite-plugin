@@ -18,6 +18,8 @@ package com.google.devsite.renderer.impl.paths
 
 import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultLink
+import com.google.devsite.components.symbols.TypeProjectionComponent
+import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.anchor
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesGraph
@@ -146,3 +148,6 @@ internal interface FilePathProvider {
         }
     }
 }
+
+internal val ANY_LINK: MutableMap<Language, Link> = mutableMapOf()
+internal val ANY: MutableMap<Language, TypeProjectionComponent> = mutableMapOf()

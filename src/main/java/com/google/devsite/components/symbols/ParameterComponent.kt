@@ -33,12 +33,12 @@ internal interface ParameterComponent : SymbolBase {
         return result
     }
 
-    data class Params(
-        val displayLanguage: Language,
-        val name: String,
-        val modifiers: List<String> = emptyList(),
-        val type: TypeProjectionComponent,
-        val annotationComponents: List<AnnotationComponent> = emptyList(),
+    open class Params(
+        open val displayLanguage: Language,
+        open val name: String,
+        open val modifiers: List<String> = emptyList(),
+        open val type: TypeProjectionComponent,
+        open val annotationComponents: List<AnnotationComponent> = emptyList(),
         val defaultValue: String? = null
     )
 

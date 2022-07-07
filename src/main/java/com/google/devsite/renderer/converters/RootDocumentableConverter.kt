@@ -16,6 +16,8 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.components.DescriptionComponent
+import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultClassIndex
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultPackageIndex
@@ -28,6 +30,7 @@ import com.google.devsite.components.pages.PackageIndex
 import com.google.devsite.components.pages.TableOfContents
 import com.google.devsite.components.symbols.TocPackage
 import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
@@ -54,7 +57,7 @@ internal class RootDocumentableConverter(
         val alphabetizedClasses = allClasses.groupBy(::categorizeClasslikes)
         val componentClasses = alphabetizedClasses.mapValues { (_, nodes) ->
             DefaultSummaryList(
-                SummaryList.Params(
+                SummaryList.Params<TwoPaneSummaryItem<Link, DescriptionComponent>>(
                     items = nodes.map { javadocConverter.summaryForDocumentable(it) }
                 )
             )
@@ -80,7 +83,7 @@ internal class RootDocumentableConverter(
     suspend fun packagesPage(): DevsitePage {
         val packages = docsHolder.packages()
         val componentPackages = DefaultSummaryList(
-            SummaryList.Params(
+            SummaryList.Params<TwoPaneSummaryItem<Link, DescriptionComponent>>(
                 items = packages.map { javadocConverter.summaryForDocumentable(it) }
             )
         )

@@ -16,18 +16,17 @@
 
 package com.google.devsite.components.testing
 
-import com.google.devsite.components.table.SummaryItem
-import com.google.devsite.components.table.SummaryList
-import kotlinx.html.FlowContent
-import kotlinx.html.div
+import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.symbols.TypeSummary
+import com.google.devsite.components.table.TwoPaneSummaryItem
+import kotlinx.html.TR
+import kotlinx.html.unsafe
 
-internal class NoopSummaryList<T : SummaryItem>(private val show: Boolean = true) : SummaryList<T> {
-    override val data: SummaryList.Params<T>
+internal object NoopTwoPaneTypeSummaryItem : TwoPaneSummaryItem<TypeSummary, SymbolSummary> {
+    override val data: TwoPaneSummaryItem.Params<TypeSummary, SymbolSummary>
         get() = throw NotImplementedError()
 
-    override fun render(into: FlowContent) = into.run {
-        if (hasContent()) div { +"noop" }
+    override fun render(into: TR) = into.run {
+        unsafe { +"<noop/>" }
     }
-
-    override fun hasContent() = show
 }

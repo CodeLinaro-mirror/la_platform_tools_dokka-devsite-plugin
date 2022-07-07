@@ -16,15 +16,16 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import kotlinx.html.TR
 import kotlinx.html.code
 import kotlinx.html.td
 
 /** Default implementation of the two-pane layout item for symbol tables. */
-internal class DefaultTwoPaneSummaryItem(
-    override val data: TwoPaneSummaryItem.Params
-) : TwoPaneSummaryItem {
+internal class DefaultTwoPaneSummaryItem<T : ContextFreeComponent, V : ContextFreeComponent> (
+    override val data: TwoPaneSummaryItem.Params<T, V>
+) : TwoPaneSummaryItem<T, V> {
     override fun render(into: TR) = into.run {
         td {
             attributes["width"] = "40%"

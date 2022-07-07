@@ -19,11 +19,12 @@ package com.google.devsite.components.table
 import com.google.devsite.components.ContextFreeComponent
 
 /** Builds a two-pane layout item. */
-internal interface TwoPaneSummaryItem : SummaryItem {
-    override val data: Params
+internal interface TwoPaneSummaryItem<T : ContextFreeComponent, V : ContextFreeComponent> :
+    SummaryItem {
+    override val data: Params<T, V>
 
-    data class Params(
-        val title: ContextFreeComponent,
-        override val description: ContextFreeComponent
+    data class Params<T : ContextFreeComponent, V : ContextFreeComponent> (
+        val title: T,
+        override val description: V
     ) : SummaryItem.Params
 }

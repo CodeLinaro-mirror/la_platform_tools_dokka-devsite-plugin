@@ -16,6 +16,7 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.table.SummaryList
 import kotlinx.html.FlowContent
 import kotlinx.html.div
@@ -25,9 +26,9 @@ import kotlinx.html.thead
 import kotlinx.html.tr
 
 /** Default implementation of the table view. */
-internal class DefaultSummaryList(
-    override val data: SummaryList.Params
-) : SummaryList {
+internal class DefaultSummaryList<T : SummaryItem>(
+    override val data: SummaryList.Params<T>
+) : SummaryList<T> {
     override fun render(into: FlowContent) = into.run {
         if (!hasContent()) return
 

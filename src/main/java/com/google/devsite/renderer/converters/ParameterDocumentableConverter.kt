@@ -30,6 +30,7 @@ import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.TypeParameterComponent
 import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.impl.paths.ANY_LINK
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.withClass
@@ -481,10 +482,7 @@ internal class ParameterDocumentableConverter(
             Language.JAVA -> DefaultLink(Link.Params(name = "void", url = ""))
             Language.KOTLIN -> pathProvider.linkForReference(DRI("kotlin", "Unit"))
         }
-        is JavaObject -> when (displayLanguage) {
-            Language.JAVA -> pathProvider.linkForReference(DRI("java.lang", "Object"))
-            Language.KOTLIN -> pathProvider.linkForReference(DRI("kotlin", "Any"), suffix = suffix)
-        }
+        is JavaObject -> ANY_LINK[displayLanguage]!!
         is PrimitiveJavaType -> when (displayLanguage) {
             Language.JAVA -> DefaultLink(Link.Params(name = name, url = ""))
             Language.KOTLIN -> pathProvider.linkForReference(

@@ -17,11 +17,12 @@
 package com.google.devsite.components.symbols
 
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.impl.paths.ANY
 import kotlinx.html.FlowContent
 
 /** Represents a generic type parameter. */
-internal interface TypeParameterComponent : SymbolBase {
-    val data: Params
+internal interface TypeParameterComponent : ParameterComponent {
+    override val data: Params
 
     /** Ensure this component's combination of params makes sense. */
     fun validate()
@@ -39,10 +40,16 @@ internal interface TypeParameterComponent : SymbolBase {
     fun render(into: FlowContent, angleBrackets: Boolean)
 
     data class Params(
-        val displayLanguage: Language,
-        val name: String,
-        val modifiers: List<String> = emptyList(),
+        override val displayLanguage: Language,
+        override val name: String,
+        override val modifiers: List<String> = emptyList(),
         val projections: List<TypeProjectionComponent>,
-        val annotationComponents: List<AnnotationComponent> = emptyList()
+        override val annotationComponents: List<AnnotationComponent> = emptyList()
+    ) : ParameterComponent.Params(
+        displayLanguage = displayLanguage,
+        name = name,
+        modifiers = modifiers,
+        type = projections.firstOrNull() ?: ANY[displayLanguage]!!,
+        annotationComponents = annotationComponents
     )
 }
