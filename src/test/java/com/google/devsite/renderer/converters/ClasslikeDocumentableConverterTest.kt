@@ -47,6 +47,7 @@ import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.renderer.converters.testing.title
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
+import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.GenericTypeConstructor
 import org.jetbrains.dokka.model.JavaObject
@@ -957,71 +958,108 @@ internal class ClasslikeDocumentableConverterTest(
     }
 
     @Test
-    fun `classlike companion functions are included in Kotlin and not Java`() {
-        val page = """
+    fun `classlike companion functions are included in Kotlin and nested static in Java`() {
+        val module = """
             |class Foo {
             |  companion object {
             |    fun bar() = Unit
-            |    fun baz() = Unit
+            |    protected fun baz() = Unit
             |  }
             |}
-        """.render().page()
+        """.render()
 
-        val classlike = page.content<Classlike>()
+        val classlike = module.page("Foo").content<Classlike>()
 
         kotlinOnly {
-            val companionFunctions = classlike.summaryItemsFor(publicCompanionFunctionsTitle())
-            assertThat(companionFunctions).hasSize(2)
+            assertThat(classlike.symbolsFor(publicCompanionFunctionsTitle()).first.item().name())
+                .isEqualTo("bar")
+            assertThat(classlike.symbolsFor(protectedCompanionFunctionsTitle()).first.item().name())
+                .isEqualTo("baz")
         }
         javaOnly {
-            classlike.assertNoSymbolsFor(protectedCompanionFunctionsTitle())
+            assertThat(classlike.noSectionFor(publicCompanionFunctionsTitle())).isTrue()
+            assertThat(classlike.noSectionFor(publicCompanionPropertiesTitle())).isTrue()
+            assertThat(classlike.nestedTypes().first.item().name()).isEqualTo("Foo.Companion")
+            val companionClasslike = module.page { this.companionFor("Foo") }.content<Classlike>()
+            assertThat(companionClasslike.methodSummaryItems()).hasSize(2)
+            val barMethod = companionClasslike.methodSymbol("bar")!!
+            val bazMethod = companionClasslike.methodSymbol("baz")!!
+            assertThat(barMethod.data.title.data.modifiers).isEqualTo(listOf("static", "final"))
+            assertThat(bazMethod.data.title.data.modifiers).isEqualTo(listOf("static", "final"))
         }
     }
 
     @Test
-    fun `protected companion functions are included in Kotlin and not Java`() {
-        val page = """
-            |class Foo {
-            |  companion object {
-            |    protected fun bar() = Unit
-            |  }
-            |}
-        """.render().page()
-
-        val classlike = page.content<Classlike>()
-        kotlinOnly {
-            val companionFunctions = classlike.summaryItemsFor(protectedCompanionFunctionsTitle())
-            assertThat(companionFunctions).hasSize(1)
-        }
-        javaOnly {
-            classlike.assertNoSymbolsFor(protectedCompanionFunctionsTitle())
-        }
-    }
-
-    @Test
-    fun `classlike companion properties are included in Kotlin and not Java`() {
-        val page = """
+    fun `classlike companion properties are included in Kotlin and nested static in Java`() {
+        val module = """
             |class Foo {
             |  companion object {
             |    val bar: List<String> = emptyList()
             |    protected val baz: Int = 1
             |  }
             |}
-        """.render().page()
+        """.render()
 
-        val classlike = page.content<Classlike>()
+        val classlike = module.page("Foo").content<Classlike>()
 
         kotlinOnly {
-            val publicCompanionProperties = classlike
-                .summaryItemsFor(publicCompanionPropertiesTitle())
-            val protectedCompanionProperties = classlike
-                .summaryItemsFor(protectedCompanionPropertiesTitle())
-            assertThat(publicCompanionProperties).hasSize(1)
-            assertThat(protectedCompanionProperties).hasSize(1)
+            assertThat(classlike.symbolsFor(publicCompanionPropertiesTitle()).first.item().name())
+                .isEqualTo("bar")
+            assertThat(
+                classlike.symbolsFor(protectedCompanionPropertiesTitle()).first.item().name()
+            ).isEqualTo("baz")
         }
         javaOnly {
-            classlike.assertNoSymbolsFor(publicCompanionPropertiesTitle())
-            classlike.assertNoSymbolsFor(protectedCompanionPropertiesTitle())
+            assertThat(classlike.noSectionFor(publicCompanionFunctionsTitle())).isTrue()
+            assertThat(classlike.noSectionFor(publicCompanionPropertiesTitle())).isTrue()
+            assertThat(classlike.nestedTypes().first.item().name()).isEqualTo("Foo.Companion")
+            val companionClasslike = module.page { this.companionFor("Foo") }.content<Classlike>()
+            assertThat(companionClasslike.propertySummaryItems()).hasSize(2)
+            val barProp = companionClasslike.propertySymbol("bar")!!
+            val bazProp = companionClasslike.propertySymbol("baz")!!
+            assertThat(barProp.data.title.data.modifiers).isEqualTo(listOf("static", "final"))
+            assertThat(bazProp.data.title.data.modifiers).isEqualTo(listOf("static", "final"))
+        }
+    }
+
+    @Test
+    fun `Named top-level objects have pages and treat members properly in 4x Java and Kotlin`() {
+        val moduleK = """
+            |object Foo {
+            |  fun bar() = Unit
+            |  const val baz = "baz"
+            |}
+        """.render()
+        val classlikeK = moduleK.page("Foo").content<Classlike>()
+
+        val classlikeJ = """
+            |public static class Foo {
+            |  public static final void bar() {}
+            |  public static final String baz = "baz"
+            |}
+        """.render(java = true).page("Foo").content<Classlike>()
+
+        for (classlike in listOf(classlikeJ, classlikeK)) {
+            assertThat(classlikeK.noSymbolsFor(publicCompanionFunctionsTitle())).isTrue()
+            assertThat(classlikeK.noSymbolsFor(publicCompanionPropertiesTitle())).isTrue()
+            assertThat(classlike.methodSummaryItems()).hasSize(1)
+            assertThat(classlike.symbolsFor(publicPropertiesTitle(displayLanguage)).first.size)
+                .isEqualTo(0)
+            assertThat(classlike.symbolsFor(constantsTitle()).first.size).isEqualTo(1)
+
+            val barMethod = classlike.methodSymbol("bar")!!
+            val barModifiers = barMethod.data.title.data.modifiers
+            val bazConst = classlike.symbolsFor(constantsTitle()).first.items()
+                .single { it.name() == "baz" }
+            kotlinOnly {
+                if (classlike == classlikeK) assertThat(barModifiers).isEmpty()
+                else assertThat(barModifiers).isEqualTo(listOf("java-static"))
+                assertThat(bazConst.data.title.data.modifiers).isEqualTo(listOf("const"))
+            }
+            javaOnly {
+                assertThat(barModifiers).isEqualTo(listOf("static", "final"))
+                assertThat(bazConst.data.title.data.modifiers).isEqualTo(listOf("static", "final"))
+            }
         }
     }
 
@@ -1070,8 +1108,8 @@ internal class ClasslikeDocumentableConverterTest(
         javaOnly {
             // nested companion object is documented but companion functions are not inlined
             assertThat(kotlinNestedTypeSummary.items()).hasSize(1)
-            classlikeK.assertNoSymbolsFor(publicCompanionFunctionsTitle())
-            classlikeK.assertNoSymbolsFor(publicCompanionPropertiesTitle())
+            assertThat(classlikeK.noSymbolsFor(publicCompanionFunctionsTitle())).isTrue()
+            assertThat(classlikeK.noSymbolsFor(publicCompanionPropertiesTitle())).isTrue()
             assertThat(staticJavaMethod.modifiers).contains("static")
             assertThat(staticJavaField.modifiers).contains("static")
         }
@@ -1428,6 +1466,22 @@ internal class ClasslikeDocumentableConverterTest(
         return runBlocking { converter.classlike() }
     }
 
+    private fun DModule.page(name: DModule.() -> DClasslike): DevsitePage {
+        val (holder, pathProvider) = holderAndProvider(this)
+        val extFunctionMap = runBlocking { holder.extensionFunctionMap() }
+        val converter = ClasslikeDocumentableConverter(
+            displayLanguage,
+            name(),
+            pathProvider,
+            holder,
+            extFunctionMap.getOrDefault(name, emptyList())
+        )
+        return runBlocking { converter.classlike() }
+    }
+
+    private fun DModule.companionFor(name: String = "Foo") =
+        explicitClasslike("Foo").classlikes.single { it.name == "Companion" }
+
     private fun String.possiblyAsGetter() = if (displayLanguage == Language.KOTLIN) this
     else "get" + this.capitalize()
 
@@ -1457,9 +1511,11 @@ internal class ClasslikeDocumentableConverterTest(
     private fun SummaryList<SingleColumnSummaryItem<SymbolSummary>>.constructor() =
         data.items.item().data.description
 
-    private fun Classlike.assertNoSymbolsFor(symbolsName: String) = assertThat(
+    private fun Classlike.noSectionFor(symbolsName: String) =
         data.symbolTypes.none { it.first.title() == symbolsName }
-    ).isTrue()
+
+    private fun Classlike.noSymbolsFor(symbolsName: String) = noSectionFor(symbolsName) ||
+        symbolsFor(symbolsName).first.size == 0
 
     companion object {
         @JvmStatic
