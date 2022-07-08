@@ -19,10 +19,29 @@ package com.google.devsite.renderer.converters
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.renderer.Language
 import com.google.devsite.testing.ConverterTestBase
+import org.jetbrains.dokka.model.DClass
+import org.jetbrains.dokka.model.DFunction
+import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DModule
+import org.jetbrains.dokka.model.DProperty
 import org.junit.Test
+import kotlin.test.assertFails
 
 internal class ModifiersTest : ConverterTestBase() {
+
+    private val javaHints: ModifierHints = ModifierHints(
+        Language.JAVA,
+        isSummary = false,
+        type = DFunction::class.java,
+        containingType = DClass::class.java
+    )
+    private val kotlinHints: ModifierHints = ModifierHints(
+        Language.KOTLIN,
+        isSummary = false,
+        type = DFunction::class.java,
+        containingType = DClass::class.java
+    )
+
     @Test
     fun `Public modifier is found`() {
         val modifiers = """
@@ -120,7 +139,6 @@ internal class ModifiersTest : ConverterTestBase() {
 
     @Test
     fun `Unknown Kotlin modifiers are stripped from Java`() {
-        val hints = ModifierHints(Language.JAVA)
         val modifiers = listOf(
             "suspend",
             "inline",
@@ -131,62 +149,59 @@ internal class ModifiersTest : ConverterTestBase() {
             "open"
         )
 
-        assertThat(modifiers.modifiersFor(hints)).isEmpty()
+        assertThat(modifiers.modifiersFor(javaHints)).isEmpty()
     }
 
     @Test
     fun `Java static modifier is converted in Kotlin`() {
-        val hints = ModifierHints(Language.KOTLIN)
         val modifiers = listOf("static")
         // Java-static methods must be used specially in Kotlin
         // https://kotlinlang.org/docs/java-interop.html#accessing-static-members
         // TODO b/203678085: allow modifiers to be links
-        assertThat(modifiers.modifiersFor(hints).single()).isEqualTo("java-static")
+        assertThat(modifiers.modifiersFor(kotlinHints).single()).isEqualTo("java-static")
     }
 
     @Test
-    fun `Kotlin const modifier is rewritten to static final in Java`() {
-        val hints = ModifierHints(Language.JAVA)
+    fun `Kotlin const modifier is rewritten to static final in Java, only for properties`() {
         val modifiers = listOf("const")
 
+        assertFails { modifiers.modifiersFor(javaHints) }
+
+        val hints = javaHints.copy(type = DProperty::class.java)
         assertThat(modifiers.modifiersFor(hints)).containsExactly("static", "final")
     }
 
     @Test
     fun `Kotlin public modifier is removed in Kotlin`() {
-        val hints = ModifierHints(Language.KOTLIN)
         val modifiers = listOf("public")
 
-        assertThat(modifiers.modifiersFor(hints)).isEmpty()
+        assertThat(modifiers.modifiersFor(kotlinHints)).isEmpty()
     }
 
     @Test
     fun `Kotlin override modifier is removed in Kotlin`() {
-        val hints = ModifierHints(Language.KOTLIN)
         val modifiers = listOf("override")
 
-        assertThat(modifiers.modifiersFor(hints)).isEmpty()
+        assertThat(modifiers.modifiersFor(kotlinHints)).isEmpty()
     }
 
     @Test
     fun `Kotlin final modifier is removed in Kotlin`() {
-        val hints = ModifierHints(Language.KOTLIN)
         val modifiers = listOf("final")
 
-        assertThat(modifiers.modifiersFor(hints)).isEmpty()
+        assertThat(modifiers.modifiersFor(kotlinHints)).isEmpty()
     }
 
     @Test
     fun `Kotlin final modifier is kept if an override is present in Kotlin`() {
-        val hints = ModifierHints(Language.KOTLIN)
         val modifiers = listOf("override", "final")
 
-        assertThat(modifiers.modifiersFor(hints)).containsExactly("final")
+        assertThat(modifiers.modifiersFor(kotlinHints)).containsExactly("final")
     }
 
     @Test
     fun `Kotlin abstract modifier is removed if in an interface in Kotlin`() {
-        val hints = ModifierHints(Language.KOTLIN, isInterface = true)
+        val hints = kotlinHints.copy(containingType = DInterface::class.java)
         val modifiers = listOf("abstract")
 
         assertThat(modifiers.modifiersFor(hints)).isEmpty()
@@ -194,7 +209,7 @@ internal class ModifiersTest : ConverterTestBase() {
 
     @Test
     fun `Visibility modifiers are removed in a summary`() {
-        val hints = ModifierHints(Language.JAVA, isSummary = true)
+        val hints = javaHints.copy(isSummary = true)
         val modifiers = listOf("public", "protected")
 
         assertThat(modifiers.modifiersFor(hints)).isEmpty()
@@ -221,8 +236,8 @@ internal class ModifiersTest : ConverterTestBase() {
             .modifiers()
         val nonDefaultModifiers = theInterface.functions.single { it.name == "nonDefaultMethod" }
             .modifiers()
-        val hintsJ = ModifierHints(Language.JAVA, isInterface = true)
-        val hintsK = ModifierHints(Language.KOTLIN, isInterface = true)
+        val hintsJ = javaHints.copy(containingType = DInterface::class.java)
+        val hintsK = kotlinHints.copy(containingType = DInterface::class.java)
         assertThat(onCreateModifiers.modifiersFor(hintsJ).single()).isEqualTo("default")
         assertThat(nonDefaultModifiers.modifiersFor(hintsJ).single()).isEqualTo("abstract")
         assertThat(onCreateModifiers.modifiersFor(hintsK)).isEmpty()

@@ -47,7 +47,7 @@ internal class DefaultClasslike(
     private val allSummarySections = data.symbolTypes.map { it.first }.filter { it.hasContent() } +
         data.inheritedTypes.filter { it.hasContent() }
 
-    override fun toString() = data.signature.toString() +
+    override fun toString() = data.signature.toString() + " " +
         (data.libraryMetadataComponent?.toString() ?: "") + data.hierarchy + data.relatedSymbols +
         data.description.joinToString() +
         data.symbolTypes.map { it.first }.filter { it.hasContent() } +

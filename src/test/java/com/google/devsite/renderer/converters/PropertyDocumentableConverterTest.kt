@@ -34,7 +34,9 @@ import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.html.stream.createHTML
 import kotlinx.html.tr
+import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DModule
+import org.jetbrains.dokka.model.DProperty
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -43,6 +45,14 @@ import org.junit.runners.Parameterized
 internal class PropertyDocumentableConverterTest(
     private val displayLanguage: Language
 ) : ConverterTestBase(displayLanguage) {
+
+    private val defaultHints: ModifierHints = ModifierHints(
+        displayLanguage,
+        isSummary = false,
+        type = DProperty::class.java,
+        containingType = DClass::class.java
+    )
+
     @Test
     fun `Property summary component creates return type link`() {
         val summary = """
@@ -82,7 +92,7 @@ internal class PropertyDocumentableConverterTest(
         |val nonna: String = "foo"
         """.render()
         fun DModule.sOrD(summary: Boolean, propertyName: String): TypeProjectionComponent =
-            if (summary) (summary(propertyName).data.title as TypeSummary).data.type
+            if (summary) summary(propertyName).data.title.data.type
             else detail(propertyName).data.returnType
         for (isSummary in listOf(true, false)) {
             for (whichProp in listOf("nonna", "nulla", "nonnaBefore", "nonnaClose", "platform")) {
@@ -240,8 +250,8 @@ internal class PropertyDocumentableConverterTest(
             |val String.numbah: Int = 5
         """.render()
         fun DModule.sOrDAnnotations(summary: Boolean, propertyName: String) =
-            if (summary) (summary(propertyName).data.description as SymbolSummary)
-                .data.signature.data.annotationComponents
+            if (summary)
+                summary(propertyName).data.description.data.signature.data.annotationComponents
             else detail(propertyName).data.annotationComponents
         for (isSummary in listOf(true, false)) {
             val annotations = module.sOrDAnnotations(isSummary, "numbah")
@@ -365,7 +375,7 @@ internal class PropertyDocumentableConverterTest(
 
     private fun DModule.summary(
         name: String = "foo",
-        hints: ModifierHints = ModifierHints(displayLanguage)
+        hints: ModifierHints = defaultHints
     ): TwoPaneSummaryItem<TypeSummary, SymbolSummary> {
         val (holder, pathProvider) = holderAndProvider(this)
         val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
@@ -379,7 +389,7 @@ internal class PropertyDocumentableConverterTest(
 
     private fun DModule.detail(
         name: String = "foo",
-        hints: ModifierHints = ModifierHints(displayLanguage)
+        hints: ModifierHints = defaultHints
     ): SymbolDetail {
         val (holder, pathProvider) = holderAndProvider(this)
         val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
@@ -393,7 +403,7 @@ internal class PropertyDocumentableConverterTest(
 
     private fun DModule.signature(
         name: String = "foo",
-        hints: ModifierHints = ModifierHints(displayLanguage)
+        hints: ModifierHints = defaultHints
     ): SymbolSignature {
         val (holder, pathProvider) = holderAndProvider(this)
         val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)

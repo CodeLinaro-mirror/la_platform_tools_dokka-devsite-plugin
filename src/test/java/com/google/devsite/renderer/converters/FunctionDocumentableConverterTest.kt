@@ -40,7 +40,9 @@ import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.converters.testing.typeAnnotations
 import com.google.devsite.renderer.converters.testing.typeName
 import com.google.devsite.testing.ConverterTestBase
+import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DFunction
+import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.GenericTypeConstructor
 import org.junit.Test
@@ -52,6 +54,13 @@ import kotlin.test.assertFails
 internal class FunctionDocumentableConverterTest(
     private val displayLanguage: Language
 ) : ConverterTestBase(displayLanguage) {
+
+    private val defaultHints: ModifierHints = ModifierHints(
+        displayLanguage,
+        isSummary = false,
+        type = DFunction::class.java,
+        containingType = DClass::class.java
+    )
 
     @Test
     fun `Top level function summary component has correct default modifiers`() {
@@ -163,14 +172,14 @@ internal class FunctionDocumentableConverterTest(
             |    fun foo()
             |    fun bar() = "default implementation"
             |}
-        """.render().functionSummaries(ModifierHints(displayLanguage, isInterface = true))
+        """.render().functionSummaries(defaultHints.copy(containingType = DInterface::class.java))
         val summariesJ = """
             |public interface Foo {
             |    public void foo();
             |    public default void bar() {return "default implementation"; }
             |}
-        """.render(java = true)
-            .functionSummaries(ModifierHints(displayLanguage, isInterface = true))
+         """.render(java = true)
+            .functionSummaries(defaultHints.copy(containingType = DInterface::class.java))
 
         for (summaries in listOf(summariesK, summariesJ)) {
             val fooReturnz = summaries["foo"]!!.returnSummary()
@@ -735,7 +744,7 @@ internal class FunctionDocumentableConverterTest(
 
     private fun DModule.summary(
         doc: DModule.() -> DFunction = ::smartDoc,
-        hints: ModifierHints = ModifierHints(displayLanguage)
+        hints: ModifierHints = defaultHints
     ): TwoPaneSummaryItem<TypeSummary, SymbolSummary> {
         val (holder, pathProvider) = holderAndProvider(this)
         val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
@@ -749,19 +758,19 @@ internal class FunctionDocumentableConverterTest(
 
     private fun DModule.summary(
         funName: String,
-        hints: ModifierHints = ModifierHints(displayLanguage)
+        hints: ModifierHints = defaultHints
     ) = summary({ this.function(funName)!! }, hints)
 
     private fun DModule.detail(
         funName: String,
-        hints: ModifierHints = ModifierHints(displayLanguage)
+        hints: ModifierHints = defaultHints
     ) = detail({ this.function(funName)!! }, hints)
 
     private fun DModule.signature(funName: String) =
         signature { this.function(funName)!! }
 
     private fun DModule.functionSummaries(
-        hints: ModifierHints = ModifierHints(displayLanguage)
+        hints: ModifierHints = defaultHints
     ): Map<String, TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
         val (holder, pathProvider) = holderAndProvider(this)
         val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
@@ -777,7 +786,7 @@ internal class FunctionDocumentableConverterTest(
 
     private fun DModule.detail(
         doc: DModule.() -> DFunction = ::smartDoc,
-        hints: ModifierHints = ModifierHints(displayLanguage)
+        hints: ModifierHints = defaultHints
     ): SymbolDetail {
         val (holder, pathProvider) = holderAndProvider(this)
         val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)

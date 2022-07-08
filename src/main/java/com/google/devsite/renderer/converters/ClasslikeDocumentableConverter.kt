@@ -59,7 +59,6 @@ import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DEnum
 import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.DFunction
-import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.GenericTypeConstructor
@@ -396,7 +395,12 @@ internal class ClasslikeDocumentableConverter(
 
     private fun functionsToSummary(name: String? = null, functions: List<DFunction>):
         SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
-        val modifierHints = ModifierHints(displayLanguage, isSummary = true, isInterface())
+        val modifierHints = ModifierHints(
+            displayLanguage,
+            isSummary = true,
+            type = DFunction::class.java,
+            containingType = classlike::class.java
+        )
         val components = functions.map {
             errorContextInjector(it) {
                 functionConverter.summary(it, modifierHints)
@@ -440,7 +444,12 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun functionsToDetail(functions: List<DFunction>): List<SymbolDetail> {
-        val modifierHints = ModifierHints(displayLanguage, isSummary = false, isInterface())
+        val modifierHints = ModifierHints(
+            displayLanguage,
+            isSummary = false,
+            type = DFunction::class.java,
+            containingType = classlike::class.java
+        )
         return functions.map {
             errorContextInjector(it) {
                 functionConverter.detail(it, modifierHints)
@@ -449,7 +458,12 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun constructorsToDetail(functions: List<DFunction>): List<SymbolDetail> {
-        val modifierHints = ModifierHints(displayLanguage, isSummary = false, isInterface())
+        val modifierHints = ModifierHints(
+            displayLanguage,
+            isSummary = false,
+            type = DFunction::class.java,
+            containingType = classlike::class.java
+        )
         return functions.map {
             errorContextInjector(it) {
                 functionConverter.detailForConstructor(it, modifierHints)
@@ -477,7 +491,12 @@ internal class ClasslikeDocumentableConverter(
         name: String? = null,
         properties: List<DProperty>
     ): SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
-        val modifierHints = ModifierHints(displayLanguage, isSummary = true, isInterface())
+        val modifierHints = ModifierHints(
+            displayLanguage,
+            isSummary = true,
+            type = DProperty::class.java,
+            containingType = classlike::class.java
+        )
         val components = properties.map {
             errorContextInjector(it) {
                 propertyConverter.summary(it, modifierHints)
@@ -502,7 +521,12 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun propertiesToDetail(properties: List<DProperty>): List<SymbolDetail> {
-        val modifierHints = ModifierHints(displayLanguage, isSummary = false, isInterface())
+        val modifierHints = ModifierHints(
+            displayLanguage,
+            isSummary = false,
+            type = DProperty::class.java,
+            containingType = classlike::class.java
+        )
         return properties.map {
             errorContextInjector(it) {
                 propertyConverter.detail(it, modifierHints)
@@ -517,7 +541,12 @@ internal class ClasslikeDocumentableConverter(
         if (dEnum == null) {
             return emptyList()
         }
-        val modifierHints = ModifierHints(displayLanguage, isSummary = false, isInterface())
+        val modifierHints = ModifierHints(
+            displayLanguage,
+            isSummary = false,
+            type = DEnumEntry::class.java,
+            containingType = classlike::class.java
+        )
         return enumValues.map {
             errorContextInjector(it) {
                 enumConverter.detail(dEnum, it, modifierHints)
@@ -527,7 +556,14 @@ internal class ClasslikeDocumentableConverter(
 
     private suspend fun computeSignature(): ClassSignature {
         val modifiers = if (classlike is WithAbstraction && classlike is WithExtraProperties<*>) {
-            classlike.modifiers().modifiersFor(ModifierHints(displayLanguage = displayLanguage))
+            classlike.modifiers().modifiersFor(
+                ModifierHints(
+                    displayLanguage,
+                    isSummary = false,
+                    type = classlike::class.java,
+                    containingType = null
+                )
+            )
         } else {
             EmptyModifiers
         }
@@ -835,8 +871,6 @@ internal class ClasslikeDocumentableConverter(
      */
     private fun List<Documentable>.withoutCompanion(): List<Documentable> =
         filterNot { it.dri == (classlike as? DClass)?.companion?.dri }
-
-    private fun isInterface() = classlike is DInterface
 
     private fun isPublic(function: DFunction) = "public" in function.modifiers()
     private fun isProtected(function: DFunction) = "protected" in function.modifiers()

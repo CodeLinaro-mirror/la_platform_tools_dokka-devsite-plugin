@@ -330,7 +330,7 @@ internal class DocTagConverterTest(
         for (documentation in listOf(documentationK, documentationJ)) {
             val classParams = documentation.paramList()
 
-            assertThat(classParams.size()).isEqualTo(2)
+            assertThat(classParams.size).isEqualTo(2)
             val barParam = classParams.items().first().data
             val bazParam = classParams.items().last().data
             val barTypeParam = barParam.title as TypeParameterComponent
@@ -367,7 +367,7 @@ internal class DocTagConverterTest(
         for (documentation in listOf(documentationK, documentationJ)) {
             val params = documentation.paramList()
 
-            assertThat(params.size()).isEqualTo(2)
+            assertThat(params.size).isEqualTo(2)
             val barParam = params.items().first().data
             val bazParam = params.items().last().data
             val barTypeParam = barParam.title as TypeParameterComponent
@@ -717,7 +717,7 @@ internal class DocTagConverterTest(
         """.render(java = true).documentation()
         for (documentation in listOf(documentationK, documentationJ)) {
             val paramTable = documentation.paramList()
-            assertThat(paramTable.size()).isEqualTo(2)
+            assertThat(paramTable.size).isEqualTo(2)
             val param0 = paramTable.items().first()
             val param0Left = param0.data.title
             val param0Generic = param0Left.data.type.data.generics.single()
@@ -807,7 +807,7 @@ internal class DocTagConverterTest(
         val paramTable = documentation.paramList()
 
         // We don't want Value and/or Key to appear listed as parameters for map().
-        assertThat(paramTable.size()).isEqualTo(2)
+        assertThat(paramTable.size).isEqualTo(2)
 
         val param0 = paramTable.items().first()
         val param0Left = param0.data.title
@@ -844,7 +844,7 @@ internal class DocTagConverterTest(
         val seeAlsoTable = documentation.first {
             (it as? DocsSummaryList)?.title() == "See also"
         } as DocsSummaryList
-        assertThat(seeAlsoTable.size()).isEqualTo(3)
+        assertThat(seeAlsoTable.size).isEqualTo(3)
         assertThat(seeAlsoTable.items().map { (it.data.title as Link).data.name })
             .isEqualTo(listOf("mapByPage", "DataSource.map", "DataSource.mapByPage"))
     }

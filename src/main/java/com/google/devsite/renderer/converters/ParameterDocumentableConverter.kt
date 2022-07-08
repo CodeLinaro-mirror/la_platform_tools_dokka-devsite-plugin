@@ -100,7 +100,14 @@ internal class ParameterDocumentableConverter(
                         propagatedNullability = nullability
                     ),
                     modifiers = param.getExtraModifiers()
-                        .modifiersFor(ModifierHints(Language.JAVA)),
+                        .modifiersFor(
+                            ModifierHints(
+                                Language.JAVA,
+                                isSummary = false,
+                                type = DParameter::class.java,
+                                containingType = null
+                            )
+                        ),
                     annotationComponents = retainedAnnotations.annotationComponents(
                         pathProvider,
                         displayLanguage,
@@ -116,7 +123,15 @@ internal class ParameterDocumentableConverter(
             componentForKotlinParameter(
                 param = param,
                 defaultValue = defaultValueExpression?.getValue(),
-                modifiers = param.getExtraModifiers().modifiersFor(ModifierHints(Language.KOTLIN)),
+                modifiers = param.getExtraModifiers()
+                    .modifiersFor(
+                        ModifierHints(
+                            Language.KOTLIN,
+                            isSummary = false,
+                            type = DParameter::class.java,
+                            containingType = null
+                        )
+                    ),
                 annotations = param.annotations(),
                 isFromJava = isFromJava
             )
@@ -208,7 +223,14 @@ internal class ParameterDocumentableConverter(
             ?.singleOrNull()?.value?.takeUnless { isSummary }?.getValue()
 
         val modifiers = (projection as? WithExtraProperties<*>)?.getExtraModifiers().orEmpty()
-            .modifiersFor(ModifierHints(displayLanguage = displayLanguage, isSummary = isSummary))
+            .modifiersFor(
+                ModifierHints(
+                    displayLanguage = displayLanguage,
+                    isSummary = isSummary,
+                    type = DParameter::class.java,
+                    containingType = DParameter::class.java
+                )
+            )
 
         return DefaultParameterComponent(
             ParameterComponent.Params(

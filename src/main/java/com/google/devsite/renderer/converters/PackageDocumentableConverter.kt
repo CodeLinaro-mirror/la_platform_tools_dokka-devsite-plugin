@@ -108,7 +108,12 @@ internal class PackageDocumentableConverter(
 
     private fun functionsToSummary(functions: List<DFunction>):
         SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
-        val modifierHints = ModifierHints(displayLanguage, isSummary = true)
+        val modifierHints = ModifierHints(
+            displayLanguage,
+            isSummary = true,
+            type = DFunction::class.java,
+            containingType = DPackage::class.java
+        )
         val components = functions.map {
             functionConverter.summary(it, modifierHints)
         }
@@ -121,7 +126,12 @@ internal class PackageDocumentableConverter(
     }
 
     private fun functionsToDetail(functions: List<DFunction>): List<SymbolDetail> {
-        val modifierHints = ModifierHints(displayLanguage, isSummary = false)
+        val modifierHints = ModifierHints(
+            displayLanguage,
+            isSummary = false,
+            type = DFunction::class.java,
+            containingType = DPackage::class.java
+        )
         return functions.map {
             functionConverter.detail(it, modifierHints)
         }
@@ -129,7 +139,12 @@ internal class PackageDocumentableConverter(
 
     private fun propertiesToSummary(properties: List<DProperty>):
         SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
-        val modifierHints = ModifierHints(displayLanguage, isSummary = true)
+        val modifierHints = ModifierHints(
+            displayLanguage,
+            isSummary = true,
+            type = DProperty::class.java,
+            containingType = DPackage::class.java
+        )
         val components = properties.map {
             propertyConverter.summary(it, modifierHints)
         }
@@ -142,7 +157,12 @@ internal class PackageDocumentableConverter(
     }
 
     private fun propertiesToDetail(properties: List<DProperty>): List<SymbolDetail> {
-        val modifierHints = ModifierHints(displayLanguage, isSummary = false)
+        val modifierHints = ModifierHints(
+            displayLanguage,
+            isSummary = false,
+            type = DProperty::class.java,
+            containingType = DPackage::class.java
+        )
         return properties.map {
             propertyConverter.detail(it, modifierHints)
         }

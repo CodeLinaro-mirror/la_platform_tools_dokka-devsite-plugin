@@ -74,7 +74,7 @@ internal fun <T : ContextFreeComponent, V : ContextFreeComponent>
 SummaryList<TwoPaneSummaryItem<T, V>>.single() = items().single()
 internal fun <T : ContextFreeComponent> SummaryList<SingleColumnSummaryItem<T>>.single() =
     sItems().single()
-internal fun SummaryList<*>.size() = data.items.size
+internal val SummaryList<*>.size get() = data.items.size
 internal fun SummaryList<*>.title(): String? = data.header?.data?.title
 internal fun <V : SummaryItem> SummaryList<V>.first() = data.items.first()
 

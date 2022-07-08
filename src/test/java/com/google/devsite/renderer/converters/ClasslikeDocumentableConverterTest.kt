@@ -510,7 +510,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render()
         val page = moduleSecondary.page("BenchmarkState").content<Classlike>()
-        assertThat(page.symbolsForConstructors().first.size()).isEqualTo(0)
+        assertThat(page.symbolsForConstructors().first.size).isEqualTo(0)
     }
 
     @Test
@@ -725,9 +725,9 @@ internal class ClasslikeDocumentableConverterTest(
         */
 
         val bazClass = pages.page("Baz").content<Classlike>()
-        val zpparam1docs = bazClass.propertySymbol("param1").data.description
-        val zprop1docs = bazClass.propertySymbol("property1").data.description
-        val zprop2docs = bazClass.propertySymbol("property2").data.description
+        val zpparam1docs = bazClass.propertySymbol("param1")!!.data.description
+        val zprop1docs = bazClass.propertySymbol("property1")!!.data.description
+        val zprop2docs = bazClass.propertySymbol("property2")!!.data.description
 
         assertThat(zprop1docs.text()).isEqualTo("override_property1_docs")
         assertThat(zprop2docs.text()).isEqualTo("override_property2_docs")
@@ -751,7 +751,7 @@ internal class ClasslikeDocumentableConverterTest(
         // val pparam3docs = barClass.propertySymbol("param3").data.description
         // assertThat(pparam3docs.text()).isEqualTo("param3_docs")
 
-        val prop3docs = barClass.propertySymbol("property3").data.description
+        val prop3docs = barClass.propertySymbol("property3")!!.data.description
         assertThat(prop3docs.text()).isEqualTo("property3_docs")
         val barSymbols = barClass.data.symbolTypes
         assertThat(barSymbols.filter { it.first.hasContent() }).hasSize(2)
@@ -1225,7 +1225,7 @@ internal class ClasslikeDocumentableConverterTest(
 
         for (documentation in listOf(documentationJ, documentationK)) {
             val constructors = documentation.symbolsForConstructors()
-            assertThat(constructors.first.size()).isEqualTo(0)
+            assertThat(constructors.first.size).isEqualTo(0)
         }
     }
 
@@ -1442,19 +1442,17 @@ internal class ClasslikeDocumentableConverterTest(
 
     private fun Classlike.methodSymbol(name: String = "foo") =
         methodSummaryItems().singleOrNull { it.name() == name }
-            ?: methodSummaryItems().single()
 
     private fun Classlike.propertySummaryItems() =
         summaryItemsFor(publicPropertiesTitle(displayLanguage)) +
             summaryItemsFor(protectedPropertiesTitle(displayLanguage))
 
-    private fun Classlike.propertyDetailsItems() = (
+    private fun Classlike.propertyDetailsItems() =
         symbolsFor(publicPropertiesTitle(displayLanguage)).second.symbols +
             symbolsFor(protectedPropertiesTitle(displayLanguage)).second.symbols
-        ).map { it as SymbolDetail }
 
     private fun Classlike.propertySymbol(name: String = "foo") =
-        propertySummaryItems().singleOrNull { it.name() == name }!!
+        propertySummaryItems().singleOrNull { it.name() == name }
 
     private fun SummaryList<SingleColumnSummaryItem<SymbolSummary>>.constructor() =
         data.items.item().data.description

@@ -18,6 +18,10 @@ package com.google.devsite.renderer.converters
 
 import com.google.devsite.renderer.Language
 import org.jetbrains.dokka.model.AdditionalModifiers
+import org.jetbrains.dokka.model.DInterface
+import org.jetbrains.dokka.model.DObject
+import org.jetbrains.dokka.model.DProperty
+import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.WithAbstraction
 import org.jetbrains.dokka.model.WithVisibility
 import org.jetbrains.dokka.model.properties.WithExtraProperties
@@ -58,24 +62,30 @@ internal object EmptyModifiers : Modifiers()
 internal fun List<String>.modifiersFor(
     hints: ModifierHints
 ): Modifiers {
-    val modifiers = toMutableList()
+    val modifiers = toMutableSet()
 
     when (hints.displayLanguage) {
         Language.JAVA -> {
             // Rewrite known modifiers
             if ("const" in modifiers) {
+                if (!hints.isProperty) throw RuntimeException("'const' on a ${hints.type}?")
                 modifiers.add("static")
-                if ("final" !in modifiers) modifiers.add("final") // this happens for `const val`
+                modifiers.add("final") // this happens for `const val`
             }
 
             // Interface methods are public by default; showing it is not useful
-            if (hints.isInterface) {
+            if (hints.inInterface) {
                 modifiers.remove("public")
+            }
+
+            // Members of companion objects and top-level objects become static
+            if (hints.inObject) {
+                modifiers.add("static")
             }
 
             // Java uses the "default" modifier on interface non-abstract methods
             // but Dokka upstream inverts this to make non-default interface methods "abstract"
-            if ("abstract" !in modifiers && hints.isInterface) {
+            if ("abstract" !in modifiers && hints.inInterface) {
                 modifiers.add("default")
             }
 
@@ -94,17 +104,20 @@ internal fun List<String>.modifiersFor(
         }
         Language.KOTLIN -> {
             // Handle consolidation
-            if ("static" in modifiers && "final" in modifiers) {
+            if ("static" in modifiers && "final" in modifiers && hints.isProperty) {
                 modifiers.remove("static")
                 modifiers.remove("final")
                 modifiers.add("const")
             }
+            // We do not do this because it is usually not useful for Kotlin users of Java code
+            // if ("final" !in modifiers) modifiers.add("open")
+
             // Align default modifiers
             modifiers.remove("public")
             if ("override" !in modifiers) {
                 modifiers.remove("final")
             }
-            if (hints.isInterface) {
+            if (hints.inInterface) {
                 modifiers.remove("abstract")
             }
 
@@ -119,14 +132,12 @@ internal fun List<String>.modifiersFor(
         }
     }
 
-    modifiers.sortBy { m -> modifierOrder.indexOf(m) }
-
     if (hints.isSummary) {
         modifiers.remove("public")
         modifiers.remove("protected")
     }
 
-    return Modifiers(modifiers)
+    return Modifiers(modifiers.toList().sortedBy { m -> modifierOrder.indexOf(m) })
 }
 
 /**
@@ -179,5 +190,10 @@ val modifierOrder = listOf(
 internal data class ModifierHints(
     val displayLanguage: Language,
     val isSummary: Boolean = false,
-    val isInterface: Boolean = false
-)
+    val type: Class<out Documentable>,
+    val containingType: Class<out Documentable>?
+) {
+    val inInterface get() = containingType == DInterface::class.java
+    val inObject get() = containingType == DObject::class.java
+    val isProperty get() = type == DProperty::class.java
+}
