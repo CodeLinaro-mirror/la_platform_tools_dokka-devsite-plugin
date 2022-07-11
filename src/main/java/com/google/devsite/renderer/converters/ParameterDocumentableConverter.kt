@@ -253,7 +253,7 @@ internal class ParameterDocumentableConverter(
         // This must happen before the rewriting because PrimitiveJavaTypes can't have generics
         var generics = projection.generics(isJavaSource)
         // This rewriting must happen before Variance is handled, or we won't know whether to unbox
-        val proj = if (displayLanguage == Language.KOTLIN) projection
+        val proj = if (displayLanguage == Language.KOTLIN) projection.possiblyAsKotlin()
         // This recurs, though isReturnType is always false past the top level
         else projection.rewriteKotlinPrimitivesForJava(isReturnType)
         // If a type becomes a java primitive array via rewriting, generics get hoisted
@@ -316,7 +316,7 @@ internal class ParameterDocumentableConverter(
             )
             Language.KOTLIN -> when {
                 proj.isLambda() -> componentForLambdaProjectionAsKotlin(
-                    proj = proj.possiblyAsKotlin(),
+                    proj = proj,
                     annotations = annotations,
                     nullability = nullability
                 )
@@ -340,7 +340,7 @@ internal class ParameterDocumentableConverter(
                 else -> DefaultTypeProjectionComponent(
                     TypeProjectionComponent.Params(
                         displayLanguage = Language.KOTLIN,
-                        type = proj.possiblyAsKotlin().toLink(),
+                        type = proj.toLink(),
                         annotationComponents = annotationComponents,
                         nullability = nullability,
                         generics = generics
