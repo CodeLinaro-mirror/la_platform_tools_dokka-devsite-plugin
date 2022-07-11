@@ -60,7 +60,6 @@ internal class FunctionDocumentableConverter(
                             propagatedAnnotations = annotations,
                             isReturnType = true,
                             isJavaSource = function.isFromJava()
-
                         )
                     )
                 ),

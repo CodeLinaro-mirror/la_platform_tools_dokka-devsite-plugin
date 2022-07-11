@@ -1217,6 +1217,29 @@ internal class ParameterDocumentableConverterTest(
     }
 
     @Test
+    fun `Collection type mapping test from CoordinatorLayout`() {
+        val returnType = """
+            |@NonNull
+            |public List<View> getDependents(@NonNull View children) {
+            |    return Collections.<View>emptyList();
+            |}
+        """.renderJava(imports = listOf("import java.util.List"))
+            .returnType(functionName = "getDependents")
+        kotlinOnly {
+            assertThat(returnType).isInstanceOf(MappedTypeProjectionComponent::class.java)
+            assertThat(returnType.link().name).isEqualTo("List")
+            assertThat(returnType.link().url).isEqualTo(
+                "https://kotlinlang.org/api/latest/" +
+                    "jvm/stdlib/kotlin.collections/-list/index.html"
+            )
+            assertThat(returnType.alternativeLink()?.url).isEqualTo(
+                "https://kotlinlang.org/api/latest/" +
+                    "jvm/stdlib/kotlin.collections/-mutable-list/index.html"
+            )
+        }
+    }
+
+    @Test
     fun `Kotlin collection types are mapped only in Java`() {
         val module = """
             |fun foo(list: java.util.List<String>) {}
