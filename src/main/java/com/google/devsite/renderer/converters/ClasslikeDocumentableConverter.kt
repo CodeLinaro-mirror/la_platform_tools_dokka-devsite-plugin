@@ -598,11 +598,12 @@ internal class ClasslikeDocumentableConverter(
             Language.JAVA -> DRI(packageName = "java.lang", classNames = "Object")
             Language.KOTLIN -> DRI(packageName = "kotlin", classNames = "Any")
         }
-        val classHierarchyRootLink = pathProvider.linkForReference(classHierarchyRootDri)
-        val thisLink = pathProvider.linkForReference(classlike.dri)
+        val classHierarchyRootLink = pathProvider
+            .linkForReference(classHierarchyRootDri, classHierarchyRootDri.fullName)
+        val thisLink = pathProvider.linkForReference(classlike.dri, classlike.dri.fullName)
 
         val parentLinks = parents.map { classlike ->
-            pathProvider.linkForReference(classlike.dri)
+            pathProvider.linkForReference(classlike.dri, classlike.dri.fullName)
         }
         val allLinks = listOf(classHierarchyRootLink) + parentLinks + listOf(thisLink)
         return DefaultClassHierarchy(ClassHierarchy.Params(allLinks))

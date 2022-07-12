@@ -389,10 +389,10 @@ internal class ClasslikeDocumentableConverterTest(
         val classlike = page.content<Classlike>()
         val parents = classlike.data.hierarchy.data.parents.items(3).toList()
 
-        javaOnly { assertThat(parents[0].data.name).isEqualTo("Object") }
-        kotlinOnly { assertThat(parents[0].data.name).isEqualTo("Any") }
-        assertThat(parents[1].data.name).isEqualTo("Parent")
-        assertThat(parents[2].data.name).isEqualTo("Foo")
+        javaOnly { assertThat(parents[0].data.name).isEqualTo("java.lang.Object") }
+        kotlinOnly { assertThat(parents[0].data.name).isEqualTo("kotlin.Any") }
+        assertThat(parents[1].data.name).isEqualTo("androidx.example.Parent")
+        assertThat(parents[2].data.name).isEqualTo("androidx.example.Foo")
     }
 
     @Test
@@ -407,12 +407,12 @@ internal class ClasslikeDocumentableConverterTest(
         val classlike = page.content<Classlike>()
         val parents = classlike.data.hierarchy.data.parents.items(5).toList()
 
-        javaOnly { assertThat(parents[0].data.name).isEqualTo("Object") }
-        kotlinOnly { assertThat(parents[0].data.name).isEqualTo("Any") }
-        assertThat(parents[1].data.name).isEqualTo("A")
-        assertThat(parents[2].data.name).isEqualTo("B")
-        assertThat(parents[3].data.name).isEqualTo("C")
-        assertThat(parents[4].data.name).isEqualTo("Foo")
+        javaOnly { assertThat(parents[0].data.name).isEqualTo("java.lang.Object") }
+        kotlinOnly { assertThat(parents[0].data.name).isEqualTo("kotlin.Any") }
+        assertThat(parents[1].data.name).isEqualTo("androidx.example.A")
+        assertThat(parents[2].data.name).isEqualTo("androidx.example.B")
+        assertThat(parents[3].data.name).isEqualTo("androidx.example.C")
+        assertThat(parents[4].data.name).isEqualTo("androidx.example.Foo")
     }
 
     @Test
