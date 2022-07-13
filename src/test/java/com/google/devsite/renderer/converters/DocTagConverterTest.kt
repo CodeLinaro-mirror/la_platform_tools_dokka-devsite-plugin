@@ -1020,36 +1020,106 @@ internal class DocTagConverterTest(
 
     @Test
     fun `Full Kotlin documentation has thrown exceptions`() {
-        val documentation = """
+        val documentationK = """
             |/** @throws IllegalStateException if it fails */
             |fun foo()
         """.render().documentation()
-
-        val throwsSummary = documentation.first { (it as? DocsSummaryList)?.title() == "Throws" }
-            as DocsSummaryList
-        val throwsLeft = throwsSummary.item().data.title
-        val throwsRight =
-            throwsSummary.item().data.description.data.components.first().children.first() as Text
-
-        assertThat(throwsLeft.data.type.name()).contains("IllegalStateException")
-        assertThat(throwsRight.body).isEqualTo("if it fails")
-    }
-
-    @Test
-    fun `Full Java documentation has throws tag`() {
-        val documentation = """
+        val documentationJ = """
             |/** @throws IllegalStateException if it fails */
             |public void foo() {}
         """.render(java = true).documentation()
 
-        val throwsSummary = documentation.first { (it as? DocsSummaryList)?.title() == "Throws" }
-            as DocsSummaryList
-        val throwsLeft = throwsSummary.item().data.title
-        val throwsRight =
-            throwsSummary.item().data.description.data.components.first().children.first() as Text
+        for (documentation in listOf(documentationJ, documentationK)) {
+            val expectedDRI = if (documentation == documentationJ) "java.lang.IllegalStateException"
+            else "kotlin.IllegalStateException"
 
-        assertThat(throwsLeft.data.type.name()).isEqualTo("java.lang.IllegalStateException")
-        assertThat(throwsRight.body).isEqualTo("if it fails")
+            val expectedURL = if (documentation == documentationJ) "https://developer.android.com" +
+                "/reference/java/lang/IllegalStateException.html"
+            else "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/" +
+                "-illegal-state-exception/index.html"
+
+            val throwsSummary =
+                documentation.first { (it as? DocsSummaryList)?.title() == "Throws" }
+                    as DocsSummaryList
+            val throwsTypeAsParam = throwsSummary.item().data.title
+            val throwsTypeAsLink = throwsTypeAsParam.data.type.data.type
+            val throwsDescription = throwsSummary.item().data.description
+            val throwsDescText =
+                throwsDescription.data.components.single().children.single() as Text
+
+            assertThat(throwsTypeAsParam.data.name).isEqualTo(expectedDRI)
+            assertThat(throwsTypeAsLink.data.name).contains(expectedDRI)
+            assertThat(throwsTypeAsLink.data.url).isEqualTo(expectedURL)
+            assertThat(throwsDescText.body).isEqualTo("if it fails")
+        }
+    }
+
+    @Test
+    fun `Bad throws tags generate warnings but not errors`() {
+        val standardOut = System.out
+        val outputStreamCaptor = ByteArrayOutputStream()
+        System.setOut(PrintStream(outputStreamCaptor))
+        fun DModule.throwsTable() = documentation()
+            .first { (it as? DocsSummaryList)?.title() == "Throws" } as DocsSummaryList
+        val moduleJ1 = """
+            |/**
+            | * @throws {@link IllegalStateException} if I try to linkify
+            | */
+            |public void foo() {}
+        """.render(java = true)
+        val moduleJ2 = """
+            |/**
+            | * @throws a IllegalStateException if my syntax is bad
+            | */
+            |public void foo() {}
+        """.render(java = true)
+        val moduleK1 = """
+            |/**
+            | * @throws an IllegalStateException if my syntax is bad
+            | */
+            |fun foo()
+        """.render()
+        val moduleK2 = """
+            |/**
+            | * @throws [IllegalStateException] but this one is actually fine, it turns out
+            | */
+            |fun foo()
+        """.render()
+
+        val throwsBad1 = moduleJ1.throwsTable().item()
+        assertThat(outputStreamCaptor.toString()).contains("WARNING: do not {@link the exception")
+        outputStreamCaptor.reset()
+        val throwsBad2 = moduleJ2.throwsTable().item()
+        assertThat(outputStreamCaptor.toString()).contains("WARNING: do not use 'a' before")
+        outputStreamCaptor.reset()
+        val throwsBad3 = moduleK1.throwsTable().item()
+        assertThat(outputStreamCaptor.toString()).contains("WARNING: do not use 'an' before")
+        outputStreamCaptor.reset()
+        val throwsFine1 = moduleK2.throwsTable().item()
+        assertThat(outputStreamCaptor.toString()).isEmpty()
+
+        for (throws in listOf(throwsBad1, throwsBad2, throwsBad3)) {
+            assertThat(throws.name()).isEqualTo("IllegalStateException")
+            assertThat(throws.data.title.typeName()).isEqualTo("IllegalStateException")
+            assertThat(throws.data.title.link().url).isEqualTo("")
+        }
+
+        assertThat(throwsBad1.data.description.text()).isEqualTo("if I try to linkify")
+        assertThat(throwsBad2.data.description.text())
+            .isEqualTo("IllegalStateException if my syntax is bad")
+        assertThat(throwsBad3.data.description.text())
+            .isEqualTo("IllegalStateException if my syntax is bad")
+
+        assertThat(throwsFine1.data.description.text())
+            .isEqualTo("but this one is actually fine, it turns out")
+        assertThat(throwsFine1.name()).isEqualTo("kotlin.IllegalStateException")
+        assertThat(throwsFine1.data.title.typeName()).isEqualTo("kotlin.IllegalStateException")
+        assertThat(throwsFine1.data.title.link().url).isEqualTo(
+            "https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/" +
+                "-illegal-state-exception/index.html"
+        )
+
+        System.setOut(standardOut)
     }
 
     @Ignore // b/203691421

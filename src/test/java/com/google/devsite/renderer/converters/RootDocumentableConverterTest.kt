@@ -17,15 +17,10 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.DescriptionComponent
-import com.google.devsite.components.Link
 import com.google.devsite.components.pages.ClassIndex
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.PackageIndex
 import com.google.devsite.components.pages.TableOfContents
-import com.google.devsite.components.symbols.TocPackage
-import com.google.devsite.components.table.SummaryList
-import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.content
 import com.google.devsite.renderer.converters.testing.item
@@ -348,7 +343,7 @@ internal class RootDocumentableConverterTest(
             |class Foo
         """.render().toc()
 
-        val tocPackage = toc.item<TocPackage>()
+        val tocPackage = toc.item()
 
         assertThat(tocPackage.data.name).isEqualTo("androidx.example")
         assertPath(tocPackage.data.packageUrl, "androidx/example/package-summary.html")
@@ -360,7 +355,7 @@ internal class RootDocumentableConverterTest(
             |class Foo
         """.render().toc()
 
-        val tocPackage = toc.item<TocPackage>()
+        val tocPackage = toc.item()
         val clazz = tocPackage.data.classes.item()
 
         assertThat(clazz.name).isEqualTo("Foo")
@@ -373,7 +368,7 @@ internal class RootDocumentableConverterTest(
             |class Outer { class Inner }
         """.render().toc()
 
-        val tocPackage = toc.item<TocPackage>()
+        val tocPackage = toc.item()
         val inner = tocPackage.data.classes.items(2).last()
 
         assertThat(inner.name).isEqualTo("Outer.Inner")
@@ -386,7 +381,7 @@ internal class RootDocumentableConverterTest(
             |object Foo {}
         """.render().toc()
 
-        val tocPackage = toc.item<TocPackage>()
+        val tocPackage = toc.item()
         javaOnly {
             // TODO(b/203678085): Objects should be accessible from top-level static inner class
             assertThat(tocPackage.data.objects).isEmpty()
@@ -409,7 +404,7 @@ internal class RootDocumentableConverterTest(
             |}
         """.render().toc()
 
-        val tocPackage = toc.item<TocPackage>()
+        val tocPackage = toc.item()
         assertThat(tocPackage.data.objects).isEmpty()
         assertThat(tocPackage.data.classes.size).isEqualTo(2)
     }
@@ -441,11 +436,6 @@ internal class RootDocumentableConverterTest(
         )
         return runBlocking { converter.tocPage() }
     }
-
-    private fun ClassIndex.item() =
-        item<Map.Entry<Char, SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>>>()
-    private fun ClassIndex.items(size: Int? = null) =
-        items<Map.Entry<Char, SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>>>(size)
 
     companion object {
         @JvmStatic

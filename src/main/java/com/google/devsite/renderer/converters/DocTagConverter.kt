@@ -440,21 +440,43 @@ internal class DocTagConverter(
         )
     }
 
-    private fun throwsToParameterComponent(throws: Throws): ParameterComponent =
-        DefaultParameterComponent(
+    private fun String.firstWord() = substring(0, indexOfFirst { it == ' ' })
+
+    private fun throwsToParameterComponent(throws: Throws): ParameterComponent {
+        var name = throws.name
+        val link = if (throws.name in listOf("a", "an")) {
+            println(
+                "WARNING: do not use '${throws.name}' before the exception type in an @throws" +
+                    " statement. This is against jdoc spec, will be an error in the next version " +
+                    "of dackka, and your exception is not being linked and looks bad. " +
+                    "This was observed in $throws."
+            )
+            name = throws.text().firstWord()
+            DefaultLink(Link.Params(name, ""))
+        } else if ("{@link" in name) {
+            println(
+                "WARNING: do not {@link the exception type in an @throws statement. @throws state" +
+                    "ments are automatically linked. Manually java-linking them is against jdoc s" +
+                    "pec, will be an error in the next version of dackka, and breaks linking beha" +
+                    "vior causing them to actually *not* be linked. This was observed in $throws."
+            )
+            name = name.removePrefix("{@link ").removeSuffix("}")
+            DefaultLink(Link.Params(name, ""))
+        } else pathProvider.linkForReference(throws.exceptionAddress!!, throws.name)
+        return DefaultParameterComponent(
             ParameterComponent.Params(
                 displayLanguage = displayLanguage,
-                name = throws.name,
+                name = name,
                 type = DefaultTypeProjectionComponent(
                     TypeProjectionComponent.Params(
-                        type = pathProvider
-                            .linkForReference(throws.exceptionAddress!!, throws.name),
+                        type = link,
                         displayLanguage = displayLanguage,
                         nullability = Nullability.DONT_CARE
                     )
                 )
             )
         )
+    }
 
     private fun see(tags: List<See>): SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> {
         val params = tags.map { tag ->

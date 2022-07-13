@@ -19,7 +19,6 @@
 package com.google.devsite.renderer.converters.testing
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.Component
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
@@ -51,42 +50,33 @@ import com.google.devsite.renderer.converters.publicConstructorsTitle
 import org.jetbrains.dokka.model.doc.DocTag
 import org.jetbrains.dokka.model.doc.Text
 
-internal fun <T> Collection<T>.item(): T = items(1).single()
+internal fun <T, C : Collection<T>> C.item(): T = items(1).single()
 
-internal fun <T> Collection<T>.items(size: Int?) = apply {
+internal fun <T, C : Collection<T>> C.items(size: Int?) = apply {
     if (size != null) assertThat(this).hasSize(size)
 }
 
-internal fun <R> Component<*>.item(): R = items<R>(1).item()
-
-internal fun <R> Component<*>.items(size: Int?): Collection<R> {
-    val items = when (this) {
-        is SummaryList<*> -> data.items
-        is TableOfContents -> data.packages
-        is ClassIndex -> data.alphabetizedClasses.entries
-        else -> error("Unknown type: $javaClass")
-    } as Collection<R>
-
-    return items.items(size)
-}
+internal fun TableOfContents.items(size: Int?) = data.packages.items(size)
+internal fun TableOfContents.item() = items(1).single()
+internal fun ClassIndex.items(size: Int?) = data.alphabetizedClasses.entries.items(size)
+internal fun ClassIndex.item() = items(1).single()
 
 internal fun <T> DevsitePage.content(): T = data.content as T
 
 internal fun <T : ContextFreeComponent, V : ContextFreeComponent>
-SummaryList<TwoPaneSummaryItem<T, V>>.item() = item<TwoPaneSummaryItem<T, V>>()
+SummaryList<TwoPaneSummaryItem<T, V>>.item() = items(1).single()
 internal fun <T : ContextFreeComponent, V : ContextFreeComponent>
-SummaryList<TwoPaneSummaryItem<T, V>>.items(size: Int? = null) =
-    items<TwoPaneSummaryItem<T, V>>(size)
+SummaryList<TwoPaneSummaryItem<T, V>>.items(size: Int? = null) = data.items.items(size)
 internal fun <T : ContextFreeComponent> SummaryList<SingleColumnSummaryItem<T>>.sItems(
     size: Int? = null
-) = items<SingleColumnSummaryItem<T>>(size)
+) = data.items.items(size)
 internal fun <T : ContextFreeComponent, V : ContextFreeComponent>
 SummaryList<TwoPaneSummaryItem<T, V>>.single() = items().single()
 internal fun <T : ContextFreeComponent> SummaryList<SingleColumnSummaryItem<T>>.single() =
     sItems().single()
-internal fun SummaryList<*>.size() = items<Any?>(null).size
+internal fun SummaryList<*>.size() = data.items.size
 internal fun SummaryList<*>.title(): String? = data.header?.data?.title
-internal fun <V : SummaryItem> SummaryList<V>.first() = items<V>(null).first()
+internal fun <V : SummaryItem> SummaryList<V>.first() = data.items.first()
 
 internal fun TwoPaneSummaryItem<Link, DescriptionComponent>
 .link() = data.title.data
