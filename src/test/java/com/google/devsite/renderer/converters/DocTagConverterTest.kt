@@ -20,7 +20,6 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
-import com.google.devsite.components.Raw
 import com.google.devsite.components.impl.UndocumentedSymbolDescriptionComponent
 import com.google.devsite.components.symbols.LambdaTypeProjectionComponent
 import com.google.devsite.components.symbols.ParameterComponent
@@ -1122,7 +1121,6 @@ internal class DocTagConverterTest(
         System.setOut(standardOut)
     }
 
-    @Ignore // b/203691421
     @Test
     fun `Full Java documentation has checked exceptions`() {
         val documentation = """
@@ -1130,13 +1128,20 @@ internal class DocTagConverterTest(
             |public void foo() throws IllegalStateException {}
         """.render(java = true).documentation()
 
+        val expectedDRI = "java.lang.IllegalStateException"
+        val expectedURL = "https://developer.android.com/reference/java/lang/" +
+            "IllegalStateException.html"
+
         val throwsSummary = documentation.first { (it as? DocsSummaryList)?.title() == "Throws" }
             as DocsSummaryList
-        val throwsLeft = throwsSummary.item().data.title as Raw
-        val throwsRight =
-            throwsSummary.item().data.description.data.components.first().children.first() as Text
+        val throwsTypeAsParam = throwsSummary.item().data.title
+        val throwsTypeAsLink = throwsTypeAsParam.data.type.data.type
+        val throwsDescription = throwsSummary.item().data.description
 
-        assertThat(throwsLeft.data.text).isEqualTo("java.lang.IllegalStateException")
+        assertThat(throwsTypeAsParam.data.name).isEqualTo(expectedDRI)
+        assertThat(throwsTypeAsLink.data.name).contains(expectedDRI)
+        assertThat(throwsTypeAsLink.data.url).isEqualTo(expectedURL)
+        assertThat(throwsDescription.data.components).isEmpty()
     }
 
     @Test
