@@ -653,9 +653,9 @@ internal class ClasslikeDocumentableConverter(
         title: String,
         summaryGen: (List<T>) -> SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>
     ): InheritedSymbolsList where T : Documentable, T : WithExtraProperties<T> {
-        fun createInheritedSymbolsList(parent: DRI, symbolList: List<T>):
+        fun createInheritedSymbolsList(parentDri: DRI, symbolList: List<T>):
             Pair<Link, SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>> {
-            val link = pathProvider.linkForReference(parent)
+            val link = pathProvider.linkForReference(parentDri, parentDri.fullName)
             val summary = summaryGen(symbolList)
             return link to summary
         }
