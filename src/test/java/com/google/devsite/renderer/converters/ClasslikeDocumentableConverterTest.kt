@@ -701,8 +701,8 @@ internal class ClasslikeDocumentableConverterTest(
             |class Bar(override val param3: String, override val property3: Int): Sealclaz(param3, property3)
         """.render()
         val fooClass = pages.page("Foo").content<Classlike>()
-        val fromSupclaz = fooClass.inheritedFields!!.from("Supclaz")!!.value
-        val fromInterfaz = fooClass.inheritedFields!!.from("Interfaz")!!.value
+        val fromSupclaz = fooClass.inheritedFields!!.from("androidx.example.Supclaz")!!.value
+        val fromInterfaz = fooClass.inheritedFields!!.from("androidx.example.Interfaz")!!.value
         val pparam1docs = fromSupclaz.items().single { it.name() == "param1" }.data.description
         val pparam2docs = fromInterfaz.items().single { it.name() == "param2" }.data.description
         val prop1docs = fromSupclaz.items().single { it.name() == "property1" }.data.description
@@ -735,7 +735,7 @@ internal class ClasslikeDocumentableConverterTest(
         // This param explicitly has "override val" so shows up as a property
         assertThat(zpparam1docs.text()).isEqualTo("override_param1_docs")
         // the "Inherited Propeties" section doesn't contain overriding documentation
-        val zFromInterfaz = fooClass.inheritedFields!!.from("Interfaz")!!.value
+        val zFromInterfaz = fooClass.inheritedFields!!.from("androidx.example.Interfaz")!!.value
         val zpparam2docs = zFromInterfaz.items().single { it.name() == "param2" }.data.description
         assertThat(zpparam2docs.text()).isEqualTo("param2_docs")
 
@@ -884,16 +884,16 @@ internal class ClasslikeDocumentableConverterTest(
             .mapKeys { it.key.data.name }
             .mapValues { (_, list) -> list.items().map { it.name() } }
         assertThat(functions).containsExactly(
-            "GrandParent", listOf("grandA", "grandB"),
-            "Parent", listOf("parentC")
+            "androidx.example.GrandParent", listOf("grandA", "grandB"),
+            "androidx.example.Parent", listOf("parentC")
         )
 
         val properties = page.data.inheritedTypes.last().data.inheritedSymbolSummaries
             .mapKeys { it.key.data.name }
             .mapValues { (_, list) -> list.items().map { it.name() } }
         assertThat(properties).containsExactly(
-            "GrandParent", listOf("grandC"),
-            "Parent", listOf("parentA", "parentB")
+            "androidx.example.GrandParent", listOf("grandC"),
+            "androidx.example.Parent", listOf("parentA", "parentB")
         )
     }
 
