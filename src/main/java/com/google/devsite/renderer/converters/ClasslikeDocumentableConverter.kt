@@ -529,7 +529,7 @@ internal class ClasslikeDocumentableConverter(
         val modifiers = if (classlike is WithAbstraction && classlike is WithExtraProperties<*>) {
             classlike.modifiers().modifiersFor(ModifierHints(displayLanguage = displayLanguage))
         } else {
-            emptyList()
+            EmptyModifiers
         }
         val typeParameters = if (classlike is WithGenerics) {
             classlike.generics.map {

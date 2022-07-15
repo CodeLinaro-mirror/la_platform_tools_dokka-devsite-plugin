@@ -36,6 +36,7 @@ import com.google.devsite.renderer.converters.testing.typeName
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DParameter
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -858,6 +859,25 @@ internal class ParameterDocumentableConverterTest(
         assertThat(param.data.name).isEqualTo("stuff")
         javaOnly { assertThat(param.data.modifiers).isEmpty() }
         kotlinOnly { assertThat(param.data.modifiers.last()).isEqualTo("vararg") }
+    }
+
+    @Ignore // Kotlin does not support modifiers on lambda params
+    @Test
+    fun `Vararg modifier appears for lambda param`() {
+        val param = """
+            |fun foo(vararg lambdas: (vararg lambdaparams: String -> Unit))) = Unit
+        """.render().param()
+
+        assertThat(param.data.name).isEqualTo("lambdas")
+        javaOnly {
+            assertThat(param.data.modifiers).isEmpty()
+        }
+        kotlinOnly {
+            assertThat(param.data.modifiers.last()).isEqualTo("vararg")
+            val lambdaParam =
+                (param.data.type as LambdaTypeProjectionComponent).data.lambdaParams.single()
+            assertThat(lambdaParam.data.modifiers).isEqualTo("vararg")
+        }
     }
 
     @Test

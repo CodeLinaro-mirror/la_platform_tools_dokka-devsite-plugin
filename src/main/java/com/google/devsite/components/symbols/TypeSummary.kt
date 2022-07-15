@@ -17,13 +17,15 @@
 package com.google.devsite.components.symbols
 
 import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.renderer.converters.EmptyModifiers
+import com.google.devsite.renderer.converters.Modifiers
 
 /** Represents a symbol type and modifiers for the summary table. */
 internal interface TypeSummary : ContextFreeComponent {
     val data: Params
 
     data class Params(
-        val modifiers: List<String> = emptyList(),
+        val modifiers: Modifiers = EmptyModifiers,
         val type: TypeProjectionComponent
     )
 }

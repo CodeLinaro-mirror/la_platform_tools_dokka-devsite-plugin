@@ -19,6 +19,7 @@ package com.google.devsite.components.impl
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.symbols.TypeSummary.Params
 import com.google.devsite.components.testing.NoopTypeProjectionComponent
+import com.google.devsite.renderer.converters.Modifiers
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -48,7 +49,7 @@ class DefaultTypeSummaryTest {
     fun `Type with modifiers renders correctly`() {
         val component = DefaultTypeSummary(
             Params(
-                modifiers = listOf("open", "suspend"),
+                modifiers = Modifiers("open", "suspend"),
                 type = NoopTypeProjectionComponent("Unit")
             )
         )

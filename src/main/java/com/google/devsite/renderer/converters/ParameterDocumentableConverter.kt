@@ -128,7 +128,7 @@ internal class ParameterDocumentableConverter(
         param: DParameter,
         isFromJava: Boolean,
         defaultValue: String? = null,
-        modifiers: List<String> = emptyList(),
+        modifiers: Modifiers = EmptyModifiers,
         annotations: List<Annotation> = emptyList()
     ): ParameterComponent {
         val projKotlin = param.type.possiblyAsKotlin()
@@ -207,11 +207,14 @@ internal class ParameterDocumentableConverter(
         val defaultValue = (projection as? WithExtraProperties<*>)?.extra?.allOfType<DefaultValue>()
             ?.singleOrNull()?.value?.takeUnless { isSummary }?.getValue()
 
+        val modifiers = (projection as? WithExtraProperties<*>)?.getExtraModifiers().orEmpty()
+            .modifiersFor(ModifierHints(displayLanguage = displayLanguage, isSummary = isSummary))
+
         return DefaultParameterComponent(
             ParameterComponent.Params(
                 displayLanguage = Language.KOTLIN,
                 name = name,
-                modifiers = (projection as? WithExtraProperties<*>)?.getExtraModifiers().orEmpty(),
+                modifiers = modifiers,
                 type = primaryType,
                 annotationComponents = projection.annotations().filter { !it.belongsOnReturnType() }
                     .annotationComponents(

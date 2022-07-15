@@ -17,6 +17,8 @@
 package com.google.devsite.components.symbols
 
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.EmptyModifiers
+import com.google.devsite.renderer.converters.Modifiers
 
 /** Represents a function or method parameter. */
 internal interface ParameterComponent : SymbolBase {
@@ -36,7 +38,7 @@ internal interface ParameterComponent : SymbolBase {
     open class Params(
         open val displayLanguage: Language,
         open val name: String,
-        open val modifiers: List<String> = emptyList(),
+        open val modifiers: Modifiers = EmptyModifiers,
         open val type: TypeProjectionComponent,
         open val annotationComponents: List<AnnotationComponent> = emptyList(),
         val defaultValue: String? = null

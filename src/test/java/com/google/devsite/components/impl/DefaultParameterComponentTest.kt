@@ -25,6 +25,7 @@ import com.google.devsite.components.testing.NoopLink
 import com.google.devsite.components.testing.NoopParameterComponent
 import com.google.devsite.components.testing.NoopTypeProjectionComponent
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.Modifiers
 import com.google.devsite.renderer.converters.Nullability
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
@@ -102,7 +103,7 @@ class DefaultParameterComponentTest {
         val component = DefaultParameterComponent(
             Params(
                 name = "number",
-                modifiers = listOf("vararg"),
+                modifiers = Modifiers("vararg"),
                 type = NoopTypeProjectionComponent("Int"),
                 displayLanguage = Language.KOTLIN
             )
