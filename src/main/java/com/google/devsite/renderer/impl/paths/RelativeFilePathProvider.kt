@@ -28,20 +28,23 @@ internal class RelativeFilePathProvider(
 ) : FilePathProvider {
     override val relative = this
 
-    override val packageList = "$tenant/$MACHINE_PACKAGE_LIST_FILE"
+    override val packageList = getFileRelativePath(tenant, MACHINE_PACKAGE_LIST_FILE)
 
-    override val packages = "$tenant/$PACKAGE_INDEX_FILE"
+    override val packages = getFileRelativePath(tenant, PACKAGE_INDEX_FILE)
 
-    override val classes = "$tenant/$CLASS_INDEX_FILE"
+    override val classes = getFileRelativePath(tenant, CLASS_INDEX_FILE)
 
-    override val rootIndex = "$tenant/$DIR_INDEX_FILE"
+    override val rootIndex = getFileRelativePath(tenant, DIR_INDEX_FILE)
 
-    override val toc = "$tenant/$TOC_FILE"
+    override val toc = getFileRelativePath(tenant, TOC_FILE)
 
-    override val book = "$tenant/$BOOK_FILE"
+    override val book = getFileRelativePath(tenant, BOOK_FILE)
 
     override fun forType(packageName: String, name: String): String {
         val packageAsPath = packageName.replace(".", "/")
         return "$packageAsPath/$name.html"
     }
+
+    private fun getFileRelativePath(tenant: String, fileName: String) =
+        if (tenant.isEmpty()) fileName else "$tenant/$fileName"
 }
