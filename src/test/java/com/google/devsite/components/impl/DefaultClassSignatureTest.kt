@@ -23,6 +23,8 @@ import com.google.devsite.components.testing.NoopAnnotationComponent
 import com.google.devsite.components.testing.NoopLink
 import com.google.devsite.components.testing.NoopTypeProjectionComponent
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.EmptyModifiers
+import com.google.devsite.renderer.converters.Modifiers
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -36,7 +38,7 @@ class DefaultClassSignatureTest {
                 displayLanguage = Language.JAVA,
                 name = "Foo",
                 type = "class",
-                modifiers = listOf("public", "abstract"),
+                modifiers = Modifiers("public", "abstract"),
                 extends = listOf(NoopLink("Anyclass")),
                 implements = listOf(NoopLink("SomeInterface")),
                 typeParameters = listOf(
@@ -73,7 +75,7 @@ class DefaultClassSignatureTest {
                 displayLanguage = Language.KOTLIN,
                 name = "Foo",
                 type = "class",
-                modifiers = listOf("open"),
+                modifiers = Modifiers("open"),
                 extends = listOf(NoopLink("Anyclass")),
                 implements = listOf(NoopLink("SomeInterface")),
                 typeParameters = listOf(
@@ -110,7 +112,7 @@ class DefaultClassSignatureTest {
                 displayLanguage = Language.JAVA,
                 name = "Foo",
                 type = "interface",
-                modifiers = listOf(),
+                modifiers = EmptyModifiers,
                 extends = listOf(),
                 implements = listOf(NoopLink("SomeInterface")),
                 typeParameters = listOf(),

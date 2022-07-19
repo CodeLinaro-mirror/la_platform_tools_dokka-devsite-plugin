@@ -24,6 +24,7 @@ import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.components.testing.NoopFunctionSignature
 import com.google.devsite.components.testing.NoopTypeProjectionComponent
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.Modifiers
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -226,7 +227,7 @@ class DefaultSymbolDetailTest {
                 displayLanguage = Language.JAVA,
                 name = "foo",
                 anchors = linkedSetOf(),
-                modifiers = listOf("protected", "abstract"),
+                modifiers = Modifiers("protected", "abstract"),
                 returnType = NoopTypeProjectionComponent("void"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
@@ -258,7 +259,7 @@ class DefaultSymbolDetailTest {
                 displayLanguage = Language.KOTLIN,
                 name = "foo",
                 anchors = linkedSetOf(),
-                modifiers = listOf("protected", "abstract"),
+                modifiers = Modifiers("protected", "abstract"),
                 returnType = NoopTypeProjectionComponent("Unit"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),

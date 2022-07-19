@@ -18,6 +18,8 @@ package com.google.devsite.components.symbols
 
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.EmptyModifiers
+import com.google.devsite.renderer.converters.Modifiers
 
 /** Represents a fully documented function or property. */
 internal interface SymbolDetail : ContextFreeComponent {
@@ -28,7 +30,7 @@ internal interface SymbolDetail : ContextFreeComponent {
         val name: String,
         val anchors: LinkedHashSet<String>,
         val annotationComponents: List<AnnotationComponent> = emptyList(),
-        val modifiers: List<String> = emptyList(),
+        val modifiers: Modifiers = EmptyModifiers,
         val returnType: TypeProjectionComponent,
         val symbolKind: SymbolKind,
         val signature: SymbolSignature,

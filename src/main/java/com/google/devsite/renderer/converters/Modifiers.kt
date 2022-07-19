@@ -49,10 +49,15 @@ internal fun <T> T.getExtraModifiers(): List<String>
 internal fun isConstant(modifiers: List<String>) =
     "const" in modifiers || ("static" in modifiers && "final" in modifiers)
 
+internal open class Modifiers(baselist: List<String>) : ArrayList<String>(baselist) {
+    constructor(vararg items: String) : this(items.asList())
+}
+internal object EmptyModifiers : Modifiers()
+
 /** Returns a filtered and re-written list of modifiers. */
 internal fun List<String>.modifiersFor(
     hints: ModifierHints
-): List<String> {
+): Modifiers {
     val modifiers = toMutableList()
 
     when (hints.displayLanguage) {
@@ -121,7 +126,7 @@ internal fun List<String>.modifiersFor(
         modifiers.remove("protected")
     }
 
-    return modifiers
+    return Modifiers(modifiers)
 }
 
 /**

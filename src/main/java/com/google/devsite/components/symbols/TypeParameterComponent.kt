@@ -17,6 +17,8 @@
 package com.google.devsite.components.symbols
 
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.EmptyModifiers
+import com.google.devsite.renderer.converters.Modifiers
 import com.google.devsite.renderer.impl.paths.ANY
 import kotlinx.html.FlowContent
 
@@ -42,7 +44,7 @@ internal interface TypeParameterComponent : ParameterComponent {
     data class Params(
         override val displayLanguage: Language,
         override val name: String,
-        override val modifiers: List<String> = emptyList(),
+        override val modifiers: Modifiers = EmptyModifiers,
         val projections: List<TypeProjectionComponent>,
         override val annotationComponents: List<AnnotationComponent> = emptyList()
     ) : ParameterComponent.Params(

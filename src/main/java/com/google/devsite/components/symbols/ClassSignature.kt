@@ -19,6 +19,7 @@ package com.google.devsite.components.symbols
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.Link
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.Modifiers
 
 /** Represents class signature. */
 internal interface ClassSignature : ContextFreeComponent {
@@ -26,7 +27,7 @@ internal interface ClassSignature : ContextFreeComponent {
 
     data class Params(
         val displayLanguage: Language,
-        val modifiers: List<String>,
+        val modifiers: Modifiers,
         val type: String,
         val name: String,
         val implements: List<Link>,
