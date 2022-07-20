@@ -30,4 +30,7 @@ internal interface RelatedSymbols : ContextFreeComponent {
         val indirectSubclasses: List<Link>,
         val indirectSummary: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>
     )
+
+    val isEmpty: Boolean get() =
+        data.directSubclasses.isEmpty() && data.indirectSubclasses.isEmpty()
 }

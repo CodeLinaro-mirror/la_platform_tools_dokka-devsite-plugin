@@ -29,4 +29,6 @@ internal interface SummaryList<T : SummaryItem> : ContextFreeComponent {
         val header: TableTitle? = null,
         val items: List<T>
     )
+
+    fun title(): String? = data.header?.data?.title
 }

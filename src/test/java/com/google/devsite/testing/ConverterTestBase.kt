@@ -202,7 +202,7 @@ internal abstract class ConverterTestBase(
         return holder to pathProvider
     }
 
-    private fun testWithRootPageNode(sourceFiles: List<String>): DModule = runBlocking {
+    protected fun testWithRootPageNode(sourceFiles: List<String>): DModule = runBlocking {
         suspendCoroutine { cont ->
             testInline(
                 sourceFiles.joinToString("\n\n"),

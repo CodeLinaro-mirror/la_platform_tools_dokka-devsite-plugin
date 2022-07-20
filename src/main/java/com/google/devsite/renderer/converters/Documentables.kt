@@ -19,6 +19,7 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.not
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.Memoizers.isFromJavaMap
+import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.startsWithAnyOf
 import org.jetbrains.dokka.analysis.PsiDocumentableSource
 import org.jetbrains.dokka.base.transformers.documentables.isException
@@ -51,7 +52,9 @@ import org.jetbrains.dokka.model.TypeConstructor
 import org.jetbrains.dokka.model.UnresolvedBound
 import org.jetbrains.dokka.model.WithAbstraction
 import org.jetbrains.dokka.model.WithChildren
+import org.jetbrains.dokka.model.WithGenerics
 import org.jetbrains.dokka.model.WithSources
+import org.jetbrains.dokka.model.WithSupertypes
 import org.jetbrains.dokka.model.WithVisibility
 import org.jetbrains.dokka.model.isJvmName
 import org.jetbrains.dokka.model.toAdditionalModifiers
@@ -68,6 +71,14 @@ internal val <T> WithChildren<T>.explodedChildren: List<T>
  * Returns the type's name. Do not use [Documentable.name] as it won't include the outer class.
  */
 internal fun DClasslike.name() = dri.classNames!!
+
+internal fun DClasslike.generics() = (this as? WithGenerics)?.generics ?: emptyList()
+
+internal fun DClasslike.hasSupertypes(classGraph: ClassGraph) =
+    if (this !is WithSupertypes) false else {
+        classGraph.getValue(dri).superClasses.isNotEmpty() ||
+            classGraph.getValue(dri).interfaces.isNotEmpty()
+    }
 
 internal fun DClasslike.packageName() = dri.packageName!!
 
@@ -182,6 +193,12 @@ fun DFunction.withJvmName(): DFunction {
         dri = dri.copy(callable = dri.callable?.copy(name = jvmName))
     )
 }
+
+internal fun DFunction.matches(other: DFunction): Boolean =
+    this.receiver == other.receiver &&
+        this.parameters == other.parameters &&
+        this.dri.packageName == other.dri.packageName &&
+        this.jvmName() == other.jvmName()
 
 /**
  * [Comparator] which sorts [DFunction] by name, then number of params, and then params names if

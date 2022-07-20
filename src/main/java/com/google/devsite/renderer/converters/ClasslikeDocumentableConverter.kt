@@ -66,7 +66,6 @@ import org.jetbrains.dokka.model.InheritedMember
 import org.jetbrains.dokka.model.KotlinModifier
 import org.jetbrains.dokka.model.WithAbstraction
 import org.jetbrains.dokka.model.WithConstructors
-import org.jetbrains.dokka.model.WithGenerics
 import org.jetbrains.dokka.model.WithSupertypes
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 
@@ -567,15 +566,12 @@ internal class ClasslikeDocumentableConverter(
         } else {
             EmptyModifiers
         }
-        val typeParameters = if (classlike is WithGenerics) {
-            classlike.generics.map {
-                errorContextInjector(it) {
-                    paramConverter.componentForTypeParameter(it, classlike.isFromJava())
-                }
+        val typeParameters = classlike.generics().map {
+            errorContextInjector(it) {
+                paramConverter.componentForTypeParameter(it, classlike.isFromJava())
             }
-        } else {
-            emptyList()
         }
+
         val annotations = classlike.annotations().annotationComponents(
             pathProvider = pathProvider,
             displayLanguage = displayLanguage,

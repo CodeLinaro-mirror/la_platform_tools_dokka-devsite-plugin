@@ -173,8 +173,7 @@ internal class DocumentablesHolder(
         return nestedClasslikes.getValue(classlike.dri).await()
     }
 
-    suspend fun classesFor(packageDoc: DPackage, displayLanguage: Language):
-        List<DClass> {
+    suspend fun classesFor(packageDoc: DPackage, displayLanguage: Language): List<DClass> {
         val classes = classes.getValue(packageDoc.dri).await()
         val syntheticClasses = syntheticClasses.getValue(packageDoc.dri).await()
         return if (displayLanguage == Language.JAVA) {

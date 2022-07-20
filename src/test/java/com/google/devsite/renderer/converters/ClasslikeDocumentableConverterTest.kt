@@ -1452,6 +1452,48 @@ internal class ClasslikeDocumentableConverterTest(
         }
     }
 
+    @Ignore // This does not generate a PagingRx class in either Kotlin or Java; TODO: fix
+    @Test
+    fun `JvmMultiFile does not break static attribution`() {
+        val src = listOf(
+            kotlinHeader(
+                name = "PagingRx",
+                fileAnnotations = listOf(
+                    "@file:JvmName(\"PagingRx\")",
+                    "@file:JvmMultifileClass",
+                )
+            ) + """
+                    |/**
+                    | * An [Observable] of [PagingData], which mirrors the stream provided by [Pager.flow], but exposes
+                    | * it as an [Observable].
+                    | */
+                    |// Both annotations are needed here see: https://youtrack.jetbrains.com/issue/KT-45227
+                    |@ExperimentalCoroutinesApi
+                    |val <Key : Any, Value : Any> Pager<Key, Value>.observable: Observable<PagingData<Value>>
+                    |    get() = flow
+                    |        .conflate()
+                    |        .asObservable()
+                """,
+            kotlinHeader(
+                name = "RxPagingData",
+                fileAnnotations = listOf(
+                    "@file:JvmName(\"PagingRx\")",
+                    "@file:JvmMultifileClass",
+                )
+            ) + """
+                    |/**
+                    | * Returns a [PagingData] containing only elements matching the given [predicate].
+                    | */
+                    |@JvmName("filter")
+                    |@CheckResult
+                    |fun <T : Any> PagingData<T>.filterAsync(
+                    |    predicate: (T) -> Single<Boolean>
+                    |): PagingData<T> = filter { predicate(it).await() }
+                """
+        )
+        val module = testWithRootPageNode(src)
+    }
+
     private fun DModule.page(name: String = "Foo"): DevsitePage {
         val classlike = explicitClasslike(name)
         val (holder, pathProvider) = holderAndProvider(this)
