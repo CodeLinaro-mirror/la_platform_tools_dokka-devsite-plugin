@@ -23,7 +23,7 @@ import com.google.devsite.renderer.impl.MetadataRenderer
 import com.google.devsite.renderer.impl.PackageRenderer
 import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
 import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
-import com.google.devsite.renderer.impl.paths.DacVersionedDocsFilePathProvider
+import com.google.devsite.renderer.impl.paths.DacKotlinVersionedDocsFilePathProvider
 import com.google.devsite.renderer.impl.paths.DefaultExternalDokkaLocationProvider
 import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
 import com.google.devsite.util.LibraryMetadata
@@ -169,7 +169,7 @@ internal class MultiLanguageRenderer(
     ) {
         val language = Language.KOTLIN
         val filePaths = versionedTenant?.let {
-            DacVersionedDocsFilePathProvider(
+            DacKotlinVersionedDocsFilePathProvider(
                 it, locationProvider, classGraph, documentablesGraph
             )
         } ?: DacKotlinFilePathProvider(tenant, locationProvider, classGraph, documentablesGraph)

@@ -19,15 +19,15 @@ package com.google.devsite.renderer.impl.paths
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesGraph
 
-/** Creates file paths for DAC Kotlin consumption. */
-internal class DacKotlinFilePathProvider(
-    tenant: String,
+/** Creates file paths for DAC Kotlin consumption for libraries that do not use java. */
+internal class DacKotlinVersionedDocsFilePathProvider(
+    versionedTenant: String,
     locationProvider: ExternalDokkaLocationProvider? = null,
     classGraph: ClassGraph,
     documentablesGraph: DocumentablesGraph
 ) : DacKotlinFilePathProviderBase(
-    tenant,
-    "kotlin",
+    "",
+    versionedTenant,
     locationProvider = locationProvider,
     classGraph = classGraph,
     documentablesGraph = documentablesGraph

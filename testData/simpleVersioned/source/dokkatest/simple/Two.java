@@ -14,21 +14,12 @@
  * limitations under the License.
  */
 
-package com.google.devsite.renderer.impl.paths
+package dokkatest.simple;
 
-import com.google.devsite.renderer.impl.ClassGraph
-import com.google.devsite.renderer.impl.DocumentablesGraph
+import java.util.Set;
 
-/** Creates file paths for DAC Kotlin consumption. */
-internal class DacKotlinFilePathProvider(
-    tenant: String,
-    locationProvider: ExternalDokkaLocationProvider? = null,
-    classGraph: ClassGraph,
-    documentablesGraph: DocumentablesGraph
-) : DacKotlinFilePathProviderBase(
-    tenant,
-    "kotlin",
-    locationProvider = locationProvider,
-    classGraph = classGraph,
-    documentablesGraph = documentablesGraph
-)
+/** Sample Java interface */
+public interface ExampleGenericInterface {
+    /** Generic method */
+    Set<? super String> getScopes();
+}
