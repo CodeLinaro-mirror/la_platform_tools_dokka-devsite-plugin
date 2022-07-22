@@ -31,6 +31,7 @@ import com.google.devsite.renderer.converters.testing.content
 import com.google.devsite.renderer.converters.testing.enumValues
 import com.google.devsite.renderer.converters.testing.from
 import com.google.devsite.renderer.converters.testing.inheritedFields
+import com.google.devsite.renderer.converters.testing.inheritedFunctions
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
@@ -838,18 +839,127 @@ internal class ClasslikeDocumentableConverterTest(
 
     @Test
     fun `Inherited properties are not lost`() {
-        val page = """
-            |open class Parent {
-            |    val b: Int = 8
-            |    val a: String = "9"
+        val moduleK = """
+            |class Test {
+            |   open class Parent {
+            |       var b: Int = 8
+            |       @JvmField
+            |       var a: String = "9"
+            |   }
+            |   class Child: Parent()
             |}
-            |class Child: Parent()
-        """.render().page("Child").content<Classlike>()
+        """.render()
+        val moduleJ = """
+            |public class Parent {
+            |   private int b = 8;
+            |   public int getB() { return b; }
+            |   public void setB(int newB) { b = newB; }
+            |   private String a = "9";
+            |   public String getA() { return a; }
+            |   public void setA(String newA) { a = newA; }
+            |}
+            |public class Child extends Parent
+        """.render(java = true)
 
-        val category = page.data.inheritedTypes.single().data.inheritedSymbolSummaries
-        val names = category.values.single().items().map { it.name() }
+        for (module in listOf(moduleK, moduleJ)) {
+            // This is a test of upstream dokka
+            val dParent = module.explicitClasslike("Parent")
+            val dChild = module.explicitClasslike("Child")
+            // TODO: propertyA should be private. b/241259955 go/dokka-upstream-bug/2603
+            val dPropertyA = dChild.properties.single { it.name == "a" }
+            val getterDri = dPropertyA.getter!!.dri
 
-        assertThat(names).containsExactly("a", "b").inOrder()
+            assertThat(dPropertyA.dri.fullName).contains(dParent.dri.fullName)
+            assertThat(dPropertyA.dri.fullName).isEqualTo("androidx.example.Test.Parent")
+            assertThat(getterDri.fullName).contains(dParent.dri.fullName)
+            assertThat(getterDri.fullName).isEqualTo("androidx.example.Test.Parent")
+
+            // This is a test of dackka
+            val childPage = module.page("Child").content<Classlike>()
+
+            // TODO: `var b` is not `@JvmField`; should be missing. This is also b/241259955
+            val inheritedProps = childPage.inheritedFields!!.data.inheritedSymbolSummaries
+            val inhPropNames = inheritedProps.values.single().items().map { it.name() }
+            assertThat(inhPropNames).containsExactly("a", "b").inOrder()
+            if (displayLanguage == Language.JAVA && module == moduleJ) {
+                val inheritedFuns = childPage.inheritedFunctions!!.data.inheritedSymbolSummaries
+                val inhFunNames = inheritedFuns.values.single().items().map { it.name() }
+                assertThat(inhFunNames).containsExactly("getA", "getB", "setA", "setB").inOrder()
+            }
+        }
+    }
+
+    @Test
+    fun `Externally-inherited vars 4x language test`() {
+        val moduleK = """
+            |class Test {
+            |   class Child: kotlin.RuntimeException()
+            |}
+        """.render()
+        val moduleJ = """
+            |public class Child extends java.lang.RuntimeException
+        """.render(java = true)
+
+        for (module in listOf(moduleK, moduleJ)) {
+            // kotlin.Throwable is an `actual typealias`.
+            // java Throwable: https://docs.oracle.com/javase/7/docs/api/java/lang/Throwable.html
+            val throwableDRI = if (module == moduleK) "kotlin.Throwable" else "java.lang.Throwable"
+            // add/get is not consolidated into a property in Kotlin
+            val sixFuns = listOf(
+                "addSuppressed", "getSuppressed",
+                "fillInStackTrace", "printStackTrace",
+                "getLocalizedMessage",
+                "initCause"
+            )
+            // "Message" becomes a "val" in Kotlin, which hides its getter. ToString is from Object.
+            val missingInKotlin = listOf("getMessage", "toString")
+            // TODO: figure out why stackTrace is accessors in Kotlin (but a field in Java) upstream
+            // Maybe inherited accessors don't get merged into a property? Cause/stackTrace are
+            // private fields upstream, as is `*final* String detailMessage`....
+            val stackTraceAccessors = listOf("getStackTrace", "setStackTrace")
+            val printOverloads = listOf("printStackTrace", "printStackTrace")
+            val expectedProps = listOf("cause", if (module == moduleK) "message" else "stackTrace")
+            val expectedFuns = if (module == moduleK) sixFuns + printOverloads + stackTraceAccessors
+            else sixFuns + missingInKotlin
+            // dackka extracts getters and setters from properties to display separately as-Java
+            val bonusInDackka = if (module == moduleK) emptyList()
+            else listOf("getCause") + stackTraceAccessors
+
+            // This is a test of the upstream dokka Documentables tree
+            val dChild = module.explicitClasslike("Child")
+            assertThat(dChild.properties.size).isEqualTo(2)
+            assertThat(dChild.functions.size).isEqualTo(if (module == moduleK) 10 else 8)
+            assertThat(dChild.properties.names()).containsExactlyElementsIn(expectedProps)
+            assertThat(dChild.functions.names()).containsExactlyElementsIn(expectedFuns)
+
+            if (module == moduleK) {
+                val dMessageProp = dChild.properties.single { it.name == "message" }
+                val dGetStackTrace = dChild.functions.single { it.name == "getStackTrace" }
+                assertThat(dMessageProp.dri.fullName).contains(throwableDRI)
+                assertThat(dMessageProp.getter!!.dri.fullName).contains(throwableDRI)
+                assertThat(dGetStackTrace.dri.fullName).contains(throwableDRI)
+            } else {
+                val dCauseProp = dChild.properties.single { it.name == "cause" }
+                val dStackTrace = dChild.properties.single { it.name == "stackTrace" }
+                assertThat(dCauseProp.dri.fullName).contains(throwableDRI)
+                assertThat(dCauseProp.getter!!.dri.fullName).contains(throwableDRI)
+                assertThat(dStackTrace.dri.fullName).contains(throwableDRI)
+                assertThat(dStackTrace.getter!!.dri.fullName).contains(throwableDRI)
+            }
+
+            // This is a test of the dackka Components tree
+            val childPage = module.page("Child").content<Classlike>()
+
+            val inheritedFuns = childPage.inheritedFunctions!!.from(throwableDRI)!!.value
+            val inheritedProps = childPage.inheritedFields!!.from(throwableDRI)!!.value
+            val funNames = inheritedFuns.items().map { it.name() }
+            val propNames = inheritedProps.items().map { it.name() }
+
+            assertThat(funNames.size).isEqualTo(if (module == moduleK) 10 else 11)
+            assertThat(propNames.size).isEqualTo(2)
+            assertThat(funNames).containsExactlyElementsIn(expectedFuns + bonusInDackka)
+            assertThat(propNames).containsExactlyElementsIn(expectedProps)
+        }
     }
 
     @Test

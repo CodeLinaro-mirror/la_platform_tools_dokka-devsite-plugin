@@ -327,3 +327,9 @@ private fun Annotations.Annotation.isAtJvmField(): Boolean = dri.isAtJvmField()
 fun DProperty.isJvmField(): Boolean {
     return annotations().any { it.isAtJvmField() }
 }
+
+internal fun List<DFunction>.names() = map { it.name }
+@JvmName("internalAndThusKotlinOnly")
+internal fun List<DParameter>.names() = map { it.name }
+@JvmName("internalAndThusKotlinOnlyAlso")
+internal fun List<DProperty>.names() = map { it.name }

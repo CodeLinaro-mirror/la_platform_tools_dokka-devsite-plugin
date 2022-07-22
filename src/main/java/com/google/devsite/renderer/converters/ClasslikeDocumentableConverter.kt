@@ -815,7 +815,7 @@ internal class ClasslikeDocumentableConverter(
         if (classlike.isSynthetic) {
             return emptyList()
         }
-        return filterNot { symbol -> symbol.isFromThisClass() || symbol.dri.isFromBaseClass() }
+        return filter { symbol -> !symbol.isFromThisClass() && !symbol.dri.isFromBaseClass() }
     }
 
     private fun <T : Documentable> T.isFromThisClass() =

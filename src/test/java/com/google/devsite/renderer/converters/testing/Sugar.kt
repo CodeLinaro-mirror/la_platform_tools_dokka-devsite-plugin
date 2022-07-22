@@ -43,6 +43,7 @@ import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.joinMaybePrefix
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.enumValuesTitle
+import com.google.devsite.renderer.converters.inheritedMethodsTitle
 import com.google.devsite.renderer.converters.inheritedPropertiesTitle
 import com.google.devsite.renderer.converters.nestedTypesTitle
 import com.google.devsite.renderer.converters.protectedConstructorsTitle
@@ -164,6 +165,10 @@ internal fun Classlike.enumValues() = data.symbolTypes.single {
 internal val Classlike.inheritedFields get() = data.inheritedTypes.singleOrNull {
     it.data.header.data.title in
         listOf(inheritedPropertiesTitle(Language.KOTLIN), inheritedPropertiesTitle(Language.JAVA))
+}
+internal val Classlike.inheritedFunctions get() = data.inheritedTypes.singleOrNull {
+    it.data.header.data.title in
+        listOf(inheritedMethodsTitle(Language.KOTLIN), inheritedMethodsTitle(Language.JAVA))
 }
 internal fun InheritedSymbolsList.from(name: String) =
     data.inheritedSymbolSummaries.entries.singleOrNull { (key, _) -> key.data.name == name }
