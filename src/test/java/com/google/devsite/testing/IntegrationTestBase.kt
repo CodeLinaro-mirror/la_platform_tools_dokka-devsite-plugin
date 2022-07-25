@@ -134,7 +134,22 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                 assertWithMessage(message).that(generatedContent).isEqualTo(expectedText)
             }
         }
+
+        val expectedFileList = File(outputPath).recursivelyListFiles()
+        // This same "fix" happens automatically when the file is written, so it's needed to match
+        val fixedGeneratedPaths = generatedFiles.keys.map { it.replace("//", "/") }
+        for (eFile in expectedFileList) {
+            if (eFile.path.endsWith("package-list")) continue // b/240145323 generation flaky
+            assertWithMessage("File ${eFile.path} was expected but not generated!")
+                .that(eFile.path.removePrefix(outputPath) in fixedGeneratedPaths).isTrue()
+        }
     }
+
+    fun File.recursivelyListFiles(): List<File> =
+        (this.listFiles { it: File -> !it.isDirectory }?.asList() ?: emptyList()) + (
+            this.listFiles { it: File -> it.isDirectory }
+                ?.flatMap { it: File -> it.recursivelyListFiles() } ?: emptyList()
+            )
 
     /** Exports the output of writerPlugin to outputPath. */
     private fun dump(writerPlugin: TestOutputWriterPlugin, outputPath: String) {
