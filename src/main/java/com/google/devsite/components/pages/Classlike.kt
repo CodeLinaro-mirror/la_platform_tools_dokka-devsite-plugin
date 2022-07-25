@@ -16,31 +16,172 @@
 
 package com.google.devsite.components.pages
 
+import com.google.devsite.ConstructorSummaryList
+import com.google.devsite.FunctionSummaryList
+import com.google.devsite.LinkDescriptionSummaryList
+import com.google.devsite.PropertySummaryList
+import com.google.devsite.components.Component
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.symbols.AnnotationComponent
 import com.google.devsite.components.symbols.ClassSignature
+import com.google.devsite.components.symbols.FunctionSignature
+import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.table.ClassHierarchy
 import com.google.devsite.components.table.InheritedSymbolsList
 import com.google.devsite.components.table.RelatedSymbols
-import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.table.SummaryList
+import com.google.devsite.renderer.Language
+import kotlinx.html.FlowContent
 
 /** Represents class-like pages (class, interface, exception, etc). */
 internal interface Classlike : ContextFreeComponent {
     val data: Params
 
     data class Params(
+        val displayLanguage: Language,
         val signature: ClassSignature,
         val hierarchy: ClassHierarchy,
         val relatedSymbols: RelatedSymbols,
         val description: List<ContextFreeComponent>,
-        val symbolTypes: List<Pair<
-                SummaryList<out SummaryItem>,
-                TitledList<SymbolDetail>>>,
-        val inheritedTypes: List<InheritedSymbolsList>,
+        val nestedTypesSummary: LinkDescriptionSummaryList,
+        val enumValuesSummary: LinkDescriptionSummaryList,
+        val enumValuesDetails: TitledList<SymbolDetail>,
+        val constantsSummary: PropertySummaryList,
+        val constantsDetails: TitledList<SymbolDetail>,
+
+        val publicCompanionFunctionsSummary: FunctionSummaryList,
+        val publicCompanionFunctionsDetails: TitledList<SymbolDetail>,
+        val protectedCompanionFunctionsSummary: FunctionSummaryList,
+        val protectedCompanionFunctionsDetails: TitledList<SymbolDetail>,
+        val publicCompanionPropertiesSummary: PropertySummaryList,
+        val publicCompanionPropertiesDetails: TitledList<SymbolDetail>,
+        val protectedCompanionPropertiesSummary: PropertySummaryList,
+        val protectedCompanionPropertiesDetails: TitledList<SymbolDetail>,
+
+        val publicPropertiesSummary: PropertySummaryList,
+        val publicPropertiesDetails: TitledList<SymbolDetail>,
+        val protectedPropertiesSummary: PropertySummaryList,
+        val protectedPropertiesDetails: TitledList<SymbolDetail>,
+        val publicFunctionsSummary: FunctionSummaryList,
+        val publicFunctionsDetails: TitledList<SymbolDetail>,
+        val protectedFunctionsSummary: FunctionSummaryList,
+        val protectedFunctionsDetails: TitledList<SymbolDetail>,
+        val publicConstructorsSummary: ConstructorSummaryList,
+        val publicConstructorsDetails: TitledList<SymbolDetail>,
+        val protectedConstructorsSummary: ConstructorSummaryList,
+        val protectedConstructorsDetails: TitledList<SymbolDetail>,
+
+        val extensionFunctionsSummary: FunctionSummaryList,
+        val extensionFunctionsDetails: TitledList<SymbolDetail>,
+        val extensionPropertiesSummary: PropertySummaryList,
+        val extensionPropertiesDetails: TitledList<SymbolDetail>,
+
+        val inheritedConstants: InheritedSymbolsList<PropertySignature>,
+        val inheritedFunctions: InheritedSymbolsList<FunctionSignature>,
+        val inheritedProperties: InheritedSymbolsList<PropertySignature>,
         val annotationComponents: List<AnnotationComponent>
     )
 
-    data class TitledList<T : ContextFreeComponent>(val title: String, val symbols: List<T>)
+    data class TitledList<T : SymbolDetail>(val title: String, val symbols: List<T>) : List<T> {
+        override val size = symbols.size
+        override fun contains(element: T) = symbols.contains(element)
+        override fun containsAll(elements: Collection<T>) = symbols.containsAll(elements)
+        override fun get(index: Int) = symbols.get(index)
+        override fun indexOf(element: T) = symbols.indexOf(element)
+        override fun isEmpty() = symbols.isEmpty()
+        override fun iterator() = symbols.iterator()
+        override fun lastIndexOf(element: T) = symbols.lastIndexOf(element)
+        override fun listIterator() = symbols.listIterator()
+        override fun listIterator(index: Int) = symbols.listIterator(index)
+        override fun subList(fromIndex: Int, toIndex: Int) = symbols.subList(fromIndex, toIndex)
+    }
+
+    private val earlySummaries get() = listOfNotNull(
+        data.nestedTypesSummary,
+        data.enumValuesSummary,
+        data.constantsSummary,
+    )
+    private val kotlinOnlySummaries get() = listOfNotNull(
+        data.publicCompanionFunctionsSummary,
+        data.protectedCompanionFunctionsSummary,
+        data.publicCompanionPropertiesSummary,
+        data.protectedCompanionPropertiesSummary
+    )
+    private val functionSummaries get() = listOfNotNull(
+        data.publicConstructorsSummary,
+        data.protectedConstructorsSummary,
+        data.publicFunctionsSummary,
+        data.protectedFunctionsSummary
+    )
+    private val propertiesSummaries get() = listOfNotNull(
+        data.publicPropertiesSummary,
+        data.protectedPropertiesSummary
+    )
+    private val extensionFunctionsSummary get() = listOf(data.extensionFunctionsSummary)
+    private val extensionPropertiesSummary get() = listOf(data.extensionPropertiesSummary)
+
+    val allSummarySections: List<SummaryList<*>>
+        get() = earlySummaries + when (data.displayLanguage) {
+            Language.JAVA -> propertiesSummaries + functionSummaries + extensionFunctionsSummary
+            Language.KOTLIN ->
+                kotlinOnlySummaries + functionSummaries + propertiesSummaries +
+                    extensionFunctionsSummary + extensionPropertiesSummary
+        }
+
+    val inheritedSummarySections: List<InheritedSymbolsList<*>>
+        get() = /* when (data.displayLanguage) {
+            Language.JAVA -> listOfNotNull(
+                data.inheritedConstants,
+                data.inheritedProperties,
+                data.inheritedFunctions
+            )
+            Language.KOTLIN -> listOfNotNull(
+                data.inheritedConstants,
+                data.inheritedFunctions,
+                data.inheritedProperties
+            )
+        } */ // The below is temporary for parity, to avoid the re-arch CL have integ test diffs
+            listOfNotNull(
+                data.inheritedFunctions,
+                data.inheritedConstants,
+                data.inheritedProperties
+            )
+    val allVisibleSummaries: List<Component<FlowContent>> get() =
+        allSummarySections.filter { it.hasContent() } +
+            inheritedSummarySections.filter { it.hasContent() }
+
+    private val earlyDetails get() = listOfNotNull(
+        // nested types has no Details section
+        data.enumValuesDetails,
+        data.constantsDetails,
+    )
+    private val kotlinOnlyDetails get() = listOfNotNull(
+        data.publicCompanionFunctionsDetails,
+        data.protectedCompanionFunctionsDetails,
+        data.publicCompanionPropertiesDetails,
+        data.protectedCompanionPropertiesDetails,
+    )
+    private val functionDetails get() = listOfNotNull(
+        data.publicConstructorsDetails,
+        data.protectedConstructorsDetails,
+        data.publicFunctionsDetails,
+        data.protectedFunctionsDetails
+    )
+    private val propertiesDetails get() = listOfNotNull(
+        data.publicPropertiesDetails,
+        data.protectedPropertiesDetails
+    )
+    private val extensionFunctionsDetails get() = listOf(data.extensionFunctionsDetails)
+    private val extensionPropertiesDetails get() = listOf(data.extensionPropertiesDetails)
+
+    val allDetailsSections: List<TitledList<SymbolDetail>>
+        get() = earlyDetails + when (data.displayLanguage) {
+            Language.JAVA -> propertiesDetails + functionDetails + extensionFunctionsDetails
+            Language.KOTLIN ->
+                kotlinOnlyDetails + functionDetails + propertiesDetails +
+                    extensionFunctionsDetails + extensionPropertiesDetails
+        }
 }
+
+internal fun <T : SymbolDetail> emptyTitledList() = Classlike.TitledList<T>("", emptyList())

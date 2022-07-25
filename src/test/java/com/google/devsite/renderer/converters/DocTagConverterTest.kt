@@ -17,12 +17,13 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.DocsSummaryList
+import com.google.devsite.LinkDescriptionSummaryList
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
 import com.google.devsite.components.impl.UndocumentedSymbolDescriptionComponent
 import com.google.devsite.components.symbols.LambdaTypeProjectionComponent
-import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.TypeParameterComponent
 import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.components.table.SummaryList
@@ -1197,7 +1198,7 @@ internal class DocTagConverterTest(
             |fun foo()
         """.render().documentation()
 
-        val paramSummary = documentation.last() as LinkSummaryList
+        val paramSummary = documentation.last() as LinkDescriptionSummaryList
         val paramText = paramSummary.item()
 
         assertThat(paramSummary.title()).isEqualTo("See also")
@@ -1212,7 +1213,7 @@ internal class DocTagConverterTest(
             |class Foo
         """.render().documentation()
 
-        val paramSummary = documentation.last() as LinkSummaryList
+        val paramSummary = documentation.last() as LinkDescriptionSummaryList
         val paramText = paramSummary.item()
 
         assertThat(paramText.link().url)
@@ -1227,7 +1228,7 @@ internal class DocTagConverterTest(
             |class Foo { class Bar }
         """.render().documentation()
 
-        val paramSummary = documentation.last() as LinkSummaryList
+        val paramSummary = documentation.last() as LinkDescriptionSummaryList
         val paramText = paramSummary.item()
 
         assertPath(paramText.link().url, "androidx/example/Foo.Bar.html")
@@ -1262,7 +1263,7 @@ internal class DocTagConverterTest(
             |public void foo() {}
         """.render(java = true).documentation()
 
-        val paramSummary = documentation.last() as LinkSummaryList
+        val paramSummary = documentation.last() as LinkDescriptionSummaryList
         val paramText = paramSummary.item()
 
         assertThat(paramText.link().url)
@@ -1277,7 +1278,7 @@ internal class DocTagConverterTest(
             |public void foo() {}
         """.render(java = true).documentation()
 
-        val paramSummary = documentation.last() as LinkSummaryList
+        val paramSummary = documentation.last() as LinkDescriptionSummaryList
         val paramText = paramSummary.item()
 
         assertPath(paramText.link().url, "com/example/foo/Foo.html#bar()")
@@ -1290,7 +1291,7 @@ internal class DocTagConverterTest(
             |public void foo() {}
         """.render(java = true).documentation()
 
-        val paramSummary = documentation.last() as LinkSummaryList
+        val paramSummary = documentation.last() as LinkDescriptionSummaryList
         val paramText = paramSummary.item()
 
         assertThat(paramText.link().url).isEqualTo(
@@ -1305,7 +1306,7 @@ internal class DocTagConverterTest(
             |public void foo() {}
         """.render(java = true).documentation()
 
-        val paramSummary = documentation.last() as LinkSummaryList
+        val paramSummary = documentation.last() as LinkDescriptionSummaryList
         val paramText = paramSummary.item()
 
         assertPath(paramText.link().url, "com/example/foo/Foo.html")
@@ -1668,8 +1669,3 @@ internal class DocTagConverterTest(
         )
     }
 }
-
-private typealias LinkSummaryList = SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>
-
-internal typealias DocsSummaryList =
-    SummaryList<TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>>

@@ -16,14 +16,11 @@
 
 package com.google.devsite.components.pages
 
+import com.google.devsite.FunctionSummaryList
+import com.google.devsite.LinkDescriptionSummaryList
+import com.google.devsite.PropertySummaryList
 import com.google.devsite.components.ContextFreeComponent
-import com.google.devsite.components.DescriptionComponent
-import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.SymbolDetail
-import com.google.devsite.components.symbols.SymbolSummary
-import com.google.devsite.components.symbols.TypeSummary
-import com.google.devsite.components.table.SummaryList
-import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 
 /** Represents the package summary page. */
@@ -33,18 +30,18 @@ internal interface PackageSummary : ContextFreeComponent {
     data class Params(
         val displayLanguage: Language,
         val description: List<ContextFreeComponent>,
-        val interfaces: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
-        val classes: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
-        val enums: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
-        val objects: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
-        val exceptions: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
-        val annotations: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
-        val typeAliases: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
-        val topLevelConstantsSummary: SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>,
-        val topLevelPropertiesSummary: SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>,
-        val topLevelFunctionsSummary: SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>,
-        val extensionPropertiesSummary: SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>,
-        val extensionFunctionsSummary: SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>,
+        val interfaces: LinkDescriptionSummaryList,
+        val classes: LinkDescriptionSummaryList,
+        val enums: LinkDescriptionSummaryList,
+        val objects: LinkDescriptionSummaryList,
+        val exceptions: LinkDescriptionSummaryList,
+        val annotations: LinkDescriptionSummaryList,
+        val typeAliases: LinkDescriptionSummaryList,
+        val topLevelConstantsSummary: PropertySummaryList,
+        val topLevelPropertiesSummary: PropertySummaryList,
+        val topLevelFunctionsSummary: FunctionSummaryList,
+        val extensionPropertiesSummary: PropertySummaryList,
+        val extensionFunctionsSummary: FunctionSummaryList,
         val topLevelConstants: List<SymbolDetail>,
         val topLevelProperties: List<SymbolDetail>,
         val topLevelFunctions: List<SymbolDetail>,

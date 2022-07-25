@@ -20,7 +20,6 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.pages.PackageSummary
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.content
-import com.google.devsite.renderer.converters.testing.functionSummary
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
@@ -261,7 +260,7 @@ internal class PackageDocumentableConverterTest(
 
         assertThat(topLevels.items()).hasSize(1)
         assertThat(extensions.items()).isEmpty()
-        assertThat(topLevels.item().functionSummary().name()).isEqualTo("foo")
+        assertThat(topLevels.item().data.description.name()).isEqualTo("foo")
     }
 
     @Test
@@ -345,8 +344,8 @@ internal class PackageDocumentableConverterTest(
         val summary = page.content<PackageSummary>()
         val topLevels = summary.data.topLevelFunctionsSummary.items(2)
 
-        assertThat(topLevels.first().functionSummary().name()).isEqualTo("a")
-        assertThat(topLevels.last().functionSummary().name()).isEqualTo("b")
+        assertThat(topLevels.first().data.description.name()).isEqualTo("a")
+        assertThat(topLevels.last().data.description.name()).isEqualTo("b")
     }
 
     @Test
@@ -361,7 +360,7 @@ internal class PackageDocumentableConverterTest(
 
         assertThat(topLevels.items()).isEmpty()
         assertThat(extensions.items()).hasSize(1)
-        assertThat(extensions.item().functionSummary().name()).isEqualTo("foo")
+        assertThat(extensions.item().data.description.name()).isEqualTo("foo")
     }
 
     @Test
@@ -374,8 +373,8 @@ internal class PackageDocumentableConverterTest(
         val summary = page.content<PackageSummary>()
         val extensions = summary.data.extensionFunctionsSummary.items(2)
 
-        assertThat(extensions.first().functionSummary().name()).isEqualTo("a")
-        assertThat(extensions.last().functionSummary().name()).isEqualTo("b")
+        assertThat(extensions.first().data.description.name()).isEqualTo("a")
+        assertThat(extensions.last().data.description.name()).isEqualTo("b")
     }
 
     @Test

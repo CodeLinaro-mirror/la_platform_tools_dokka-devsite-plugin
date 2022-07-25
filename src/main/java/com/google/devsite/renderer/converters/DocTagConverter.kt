@@ -16,6 +16,8 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.DocsSummaryList
+import com.google.devsite.LinkDescriptionSummaryList
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
@@ -300,7 +302,7 @@ internal class DocTagConverter(
         dGenerics: List<DTypeParameter>,
         documentable: Documentable,
         isFromJava: Boolean
-    ): SummaryList<TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>> {
+    ): DocsSummaryList {
         val tagged = tags.map { it.name() }.toSet()
 
         // @param can refer to parameters, lambda parameters, type parameters, or receivers.
@@ -422,8 +424,7 @@ internal class DocTagConverter(
         )
     }
 
-    private fun throws(tags: List<Throws>):
-        SummaryList<TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>> {
+    private fun throws(tags: List<Throws>): DocsSummaryList {
         val params = tags.map { tag ->
             DefaultTwoPaneSummaryItem(
                 TwoPaneSummaryItem.Params(
@@ -493,7 +494,7 @@ internal class DocTagConverter(
         )
     }
 
-    private fun see(tags: List<See>): SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> {
+    private fun see(tags: List<See>): LinkDescriptionSummaryList {
         val params = tags.map { tag ->
             DefaultTwoPaneSummaryItem(
                 TwoPaneSummaryItem.Params(

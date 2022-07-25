@@ -17,16 +17,13 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.TypeSummaryItem
 import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSignature
-import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeProjectionComponent
-import com.google.devsite.components.symbols.TypeSummary
-import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
-import com.google.devsite.renderer.converters.testing.functionSummary
 import com.google.devsite.renderer.converters.testing.isAtNonNull
 import com.google.devsite.renderer.converters.testing.isAtNullable
 import com.google.devsite.renderer.converters.testing.name
@@ -73,7 +70,7 @@ internal class PropertyDocumentableConverterTest(
             |val iAmACoolProperty
         """.render().summary()
 
-        val property = summary.functionSummary()
+        val property = summary.data.description
 
         assertThat(property.name()).isEqualTo("iAmACoolProperty")
     }
@@ -130,7 +127,7 @@ internal class PropertyDocumentableConverterTest(
             |val foo
         """.render().summary()
 
-        val property = summary.functionSummary()
+        val property = summary.data.description
 
         assertThat(property.data.description.text()).isEqualTo("some_documentation")
     }
@@ -141,7 +138,7 @@ internal class PropertyDocumentableConverterTest(
             |val <T : Number> List<T>.foo
         """.render().summary()
 
-        val property = summary.functionSummary()
+        val property = summary.data.description
         val signature = property.data.signature
 
         assertPath(
@@ -380,7 +377,7 @@ internal class PropertyDocumentableConverterTest(
     private fun DModule.summary(
         name: String = "foo",
         hints: ModifierHints = defaultHints
-    ): TwoPaneSummaryItem<TypeSummary, SymbolSummary> {
+    ): TypeSummaryItem<PropertySignature> {
         val (holder, pathProvider) = holderAndProvider(this)
         val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
         val converter = PropertyDocumentableConverter(

@@ -16,14 +16,35 @@
 
 package com.google.devsite.components.testing
 
+import com.google.devsite.TypeSummaryItem
+import com.google.devsite.components.symbols.FunctionSignature
+import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import kotlinx.html.TR
 import kotlinx.html.unsafe
 
-internal object NoopTwoPaneTypeSummaryItem : TwoPaneSummaryItem<TypeSummary, SymbolSummary> {
-    override val data: TwoPaneSummaryItem.Params<TypeSummary, SymbolSummary>
+internal object NoopTwoPaneTypeSummaryItem : TwoPaneSummaryItem<TypeSummary, SymbolSummary<*>> {
+    override val data: TwoPaneSummaryItem.Params<TypeSummary, SymbolSummary<*>>
+        get() = throw NotImplementedError()
+
+    override fun render(into: TR) = into.run {
+        unsafe { +"<noop/>" }
+    }
+}
+
+internal object NoopTwoPaneTypeSummaryItemF : TypeSummaryItem<FunctionSignature> {
+    override val data: TwoPaneSummaryItem.Params<TypeSummary, SymbolSummary<FunctionSignature>>
+        get() = throw NotImplementedError()
+
+    override fun render(into: TR) = into.run {
+        unsafe { +"<noop/>" }
+    }
+}
+
+internal object NoopTwoPaneTypeSummaryItemP : TypeSummaryItem<PropertySignature> {
+    override val data: TwoPaneSummaryItem.Params<TypeSummary, SymbolSummary<PropertySignature>>
         get() = throw NotImplementedError()
 
     override fun render(into: TR) = into.run {

@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.TypeSummaryItem
 import com.google.devsite.capitalize
 import com.google.devsite.components.impl.DefaultPropertySignature
 import com.google.devsite.components.impl.DefaultSymbolDetail
@@ -41,8 +42,7 @@ internal class PropertyDocumentableConverter(
     private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
 
     /** @return the property summary component */
-    fun summary(property: DProperty, hints: ModifierHints):
-        TwoPaneSummaryItem<TypeSummary, SymbolSummary> {
+    fun summary(property: DProperty, hints: ModifierHints): TypeSummaryItem<PropertySignature> {
         val (typeAnnotations, nonTypeAnnotations) =
             property.annotations().partition { it.belongsOnReturnType() }
         return DefaultTwoPaneSummaryItem(

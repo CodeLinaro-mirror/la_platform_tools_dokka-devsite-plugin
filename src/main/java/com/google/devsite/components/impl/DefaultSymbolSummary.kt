@@ -18,15 +18,16 @@ package com.google.devsite.components.impl
 
 import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.render
+import com.google.devsite.components.symbols.SymbolSignature
 import com.google.devsite.components.symbols.SymbolSummary
 import kotlinx.html.FlowContent
 import kotlinx.html.code
 import kotlinx.html.div
 
 /** Default implementation of a function summary. */
-internal data class DefaultSymbolSummary(
-    override val data: SymbolSummary.Params
-) : SymbolSummary {
+internal data class DefaultSymbolSummary<T : SymbolSignature>(
+    override val data: SymbolSummary.Params<T>
+) : SymbolSummary<T> {
     override fun render(into: FlowContent) = into.run {
         div {
             code {

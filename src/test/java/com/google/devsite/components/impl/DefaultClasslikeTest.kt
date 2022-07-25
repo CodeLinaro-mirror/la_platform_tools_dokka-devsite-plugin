@@ -19,7 +19,7 @@ package com.google.devsite.components.impl
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.Classlike.Params
-import com.google.devsite.components.table.SummaryItem
+import com.google.devsite.components.pages.emptyTitledList
 import com.google.devsite.components.testing.NoopAnnotationComponent
 import com.google.devsite.components.testing.NoopClassHierarchy
 import com.google.devsite.components.testing.NoopClassSignature
@@ -27,6 +27,7 @@ import com.google.devsite.components.testing.NoopDescriptionComponent
 import com.google.devsite.components.testing.NoopRelatedSymbols
 import com.google.devsite.components.testing.NoopSummaryList
 import com.google.devsite.components.testing.NoopSymbolDetail
+import com.google.devsite.renderer.Language
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -34,17 +35,7 @@ import org.junit.Test
 class DefaultClasslikeTest {
     @Test
     fun `Empty classlike renders correctly`() {
-        val component = DefaultClasslike(
-            Params(
-                signature = NoopClassSignature(),
-                hierarchy = NoopClassHierarchy(shown = false),
-                relatedSymbols = NoopRelatedSymbols(shown = false),
-                description = emptyList(),
-                symbolTypes = emptyList(),
-                inheritedTypes = emptyList(),
-                annotationComponents = emptyList()
-            )
-        )
+        val component = DefaultClasslike(emptyClasslikeParams)
 
         val output = createHTML().body {
             component.render(this)
@@ -64,17 +55,8 @@ class DefaultClasslikeTest {
 
     @Test
     fun `Classlike with hierarchy renders correctly`() {
-        val component = DefaultClasslike(
-            Params(
-                signature = NoopClassSignature(),
-                hierarchy = NoopClassHierarchy(),
-                relatedSymbols = NoopRelatedSymbols(shown = false),
-                description = emptyList(),
-                symbolTypes = emptyList(),
-                inheritedTypes = emptyList(),
-                annotationComponents = emptyList()
-            )
-        )
+        val component =
+            DefaultClasslike(emptyClasslikeParams.copy(hierarchy = NoopClassHierarchy()))
 
         val output = createHTML().body {
             component.render(this)
@@ -95,17 +77,8 @@ class DefaultClasslikeTest {
 
     @Test
     fun `Classlike with related symbols renders correctly`() {
-        val component = DefaultClasslike(
-            Params(
-                signature = NoopClassSignature(),
-                hierarchy = NoopClassHierarchy(shown = false),
-                relatedSymbols = NoopRelatedSymbols(),
-                description = emptyList(),
-                symbolTypes = emptyList(),
-                inheritedTypes = emptyList(),
-                annotationComponents = emptyList()
-            )
-        )
+        val component =
+            DefaultClasslike(emptyClasslikeParams.copy(relatedSymbols = NoopRelatedSymbols()))
 
         val output = createHTML().body {
             component.render(this)
@@ -127,14 +100,8 @@ class DefaultClasslikeTest {
     @Test
     fun `Classlike with description renders correctly`() {
         val component = DefaultClasslike(
-            Params(
-                signature = NoopClassSignature(),
-                hierarchy = NoopClassHierarchy(shown = false),
-                relatedSymbols = NoopRelatedSymbols(shown = false),
-                description = listOf(NoopDescriptionComponent("Hello World!")),
-                symbolTypes = emptyList(),
-                inheritedTypes = emptyList(),
-                annotationComponents = emptyList()
+            emptyClasslikeParams.copy(
+                description = listOf(NoopDescriptionComponent("Hello World!"))
             )
         )
 
@@ -159,18 +126,12 @@ class DefaultClasslikeTest {
     @Test
     fun `Classlike with symbols renders correctly`() {
         val component = DefaultClasslike(
-            Params(
-                signature = NoopClassSignature(),
-                hierarchy = NoopClassHierarchy(shown = false),
-                relatedSymbols = NoopRelatedSymbols(shown = false),
-                description = emptyList(),
-                symbolTypes = listOf(
-                    NoopSummaryList<SummaryItem>() to Classlike.TitledList(
-                        "Symbols",
-                        listOf(NoopSymbolDetail)
-                    )
+            emptyClasslikeParams.copy(
+                publicFunctionsSummary = NoopSummaryList(),
+                publicFunctionsDetails = Classlike.TitledList(
+                    "Symbols",
+                    listOf(NoopSymbolDetail)
                 ),
-                inheritedTypes = emptyList(),
                 annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation"))
             )
         )
@@ -195,3 +156,45 @@ class DefaultClasslikeTest {
         )
     }
 }
+
+internal val emptyClasslikeParams =
+    Params(
+        displayLanguage = Language.KOTLIN, // We only use no-op components; this is fine
+        signature = NoopClassSignature(),
+        hierarchy = NoopClassHierarchy(shown = false),
+        relatedSymbols = NoopRelatedSymbols(shown = false),
+        description = emptyList(),
+        annotationComponents = emptyList(),
+        nestedTypesSummary = emptySummaryList(),
+        enumValuesSummary = emptySummaryList(),
+        enumValuesDetails = emptyTitledList(),
+        constantsSummary = emptySummaryList(),
+        constantsDetails = emptyTitledList(),
+        publicCompanionFunctionsSummary = emptySummaryList(),
+        publicCompanionFunctionsDetails = emptyTitledList(),
+        protectedCompanionFunctionsSummary = emptySummaryList(),
+        protectedCompanionFunctionsDetails = emptyTitledList(),
+        publicCompanionPropertiesSummary = emptySummaryList(),
+        publicCompanionPropertiesDetails = emptyTitledList(),
+        protectedCompanionPropertiesSummary = emptySummaryList(),
+        protectedCompanionPropertiesDetails = emptyTitledList(),
+        publicPropertiesSummary = emptySummaryList(),
+        publicPropertiesDetails = emptyTitledList(),
+        protectedPropertiesSummary = emptySummaryList(),
+        protectedPropertiesDetails = emptyTitledList(),
+        publicFunctionsSummary = emptySummaryList(),
+        publicFunctionsDetails = emptyTitledList(),
+        protectedFunctionsSummary = emptySummaryList(),
+        protectedFunctionsDetails = emptyTitledList(),
+        publicConstructorsSummary = emptySummaryList(),
+        publicConstructorsDetails = emptyTitledList(),
+        protectedConstructorsSummary = emptySummaryList(),
+        protectedConstructorsDetails = emptyTitledList(),
+        extensionFunctionsSummary = emptySummaryList(),
+        extensionFunctionsDetails = emptyTitledList(),
+        extensionPropertiesSummary = emptySummaryList(),
+        extensionPropertiesDetails = emptyTitledList(),
+        inheritedConstants = emptyInheritedSymbolsList(),
+        inheritedFunctions = emptyInheritedSymbolsList(),
+        inheritedProperties = emptyInheritedSymbolsList()
+    )

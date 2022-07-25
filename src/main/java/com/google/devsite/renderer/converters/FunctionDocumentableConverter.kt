@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.TypeSummaryItem
 import com.google.devsite.components.impl.DefaultFunctionSignature
 import com.google.devsite.components.impl.DefaultParameterComponent
 import com.google.devsite.components.impl.DefaultSingleColumnSummaryItem
@@ -46,8 +47,7 @@ internal class FunctionDocumentableConverter(
     private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
 
     /** @return the function summary component */
-    fun summary(function: DFunction, hints: ModifierHints):
-        TwoPaneSummaryItem<TypeSummary, SymbolSummary> {
+    fun summary(function: DFunction, hints: ModifierHints): TypeSummaryItem<FunctionSignature> {
         val (typeAnnotations, nonTypeAnnotations) =
             function.annotations().partition { it.belongsOnReturnType() }
         return DefaultTwoPaneSummaryItem(
@@ -83,7 +83,8 @@ internal class FunctionDocumentableConverter(
     }
 
     /** @return the constructor summary component */
-    fun summaryForConstructor(function: DFunction): SingleColumnSummaryItem<SymbolSummary> {
+    fun summaryForConstructor(function: DFunction):
+        SingleColumnSummaryItem<SymbolSummary<FunctionSignature>> {
         return DefaultSingleColumnSummaryItem(
             SingleColumnSummaryItem.Params(
                 DefaultSymbolSummary(

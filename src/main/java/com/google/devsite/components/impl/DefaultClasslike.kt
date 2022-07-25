@@ -41,21 +41,17 @@ internal data class DefaultClasslike(
         data.relatedSymbols.render(this)
         data.description.render(into, separator = null, header = { hr() })
 
-        allSummarySections.render(into, separator = null, header = { h2 { +"Summary" } })
+        allVisibleSummaries.render(into, separator = null, header = { h2 { +"Summary" } })
 
-        for (symbolType in data.symbolTypes.map { it.second }) {
+        for (symbolType in allDetailsSections.filter { it.symbols.isNotEmpty() }) {
             symbolType.symbols.render(into, separator = null, header = { h2 { +symbolType.title } })
         }
     }
 
-    private val allSummarySections = data.symbolTypes.map { it.first }.filter { it.hasContent() } +
-        data.inheritedTypes.filter { it.hasContent() }
-
     override fun toString() = data.signature.toString() + " " +
         data.hierarchy + data.relatedSymbols +
         data.description.joinToString() +
-        data.symbolTypes.map { it.first }.filter { it.hasContent() } +
-        data.inheritedTypes.filter { it.hasContent() } +
-        allSummarySections.joinMaybePrefix(prefix = "Summaries") +
-        data.symbolTypes.map { it.second }.joinToString()
+        inheritedSummarySections.filter { it.hasContent() } +
+        allSummarySections.filter { it.hasContent() }.joinMaybePrefix(prefix = "Summaries") +
+        allDetailsSections.filter { it.symbols.isNotEmpty() }.joinMaybePrefix(prefix = "Details")
 }

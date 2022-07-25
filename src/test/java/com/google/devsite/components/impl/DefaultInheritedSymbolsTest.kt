@@ -17,15 +17,13 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth
+import com.google.devsite.FunctionSummaryList
 import com.google.devsite.components.Link
-import com.google.devsite.components.symbols.SymbolSummary
-import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.InheritedSymbolsList
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
-import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.components.testing.NoopLink
-import com.google.devsite.components.testing.NoopTwoPaneTypeSummaryItem
+import com.google.devsite.components.testing.NoopTwoPaneTypeSummaryItemF
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -34,23 +32,21 @@ class DefaultInheritedSymbolsTest {
 
     @Test
     fun `Inherited symbols table renders correctly `() {
-        val inheritedSymbols = HashMap<Link,
-            SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>>()
-        inheritedSymbols[NoopLink("aClass")] = DefaultSummaryList(
-            SummaryList.Params(
-                items = listOf(NoopTwoPaneTypeSummaryItem, NoopTwoPaneTypeSummaryItem)
+        val inheritedSymbols: Map<Link, FunctionSummaryList> = hashMapOf(
+            NoopLink("aClass") to DefaultSummaryList(
+                SummaryList.Params(
+                    items = listOf(NoopTwoPaneTypeSummaryItemF, NoopTwoPaneTypeSummaryItemF)
+                )
             )
         )
 
         val component = DefaultInheritedSymbols(
-
             InheritedSymbolsList.Params(
                 header = DefaultTableTitle(
                     TableTitle.Params("Inherited Methods", big = true)
                 ),
                 inheritedSymbolSummaries = inheritedSymbols
             )
-
         )
 
         val output = createHTML().body {

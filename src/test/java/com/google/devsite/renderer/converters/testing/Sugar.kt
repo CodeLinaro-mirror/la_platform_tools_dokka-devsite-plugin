@@ -19,6 +19,7 @@
 package com.google.devsite.renderer.converters.testing
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.TypeSummaryItem
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
@@ -30,7 +31,8 @@ import com.google.devsite.components.symbols.AnnotationComponent
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.MappedTypeProjectionComponent
 import com.google.devsite.components.symbols.ParameterComponent
-import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.symbols.PropertySignature
+import com.google.devsite.components.symbols.SymbolSignature
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeParameterComponent
 import com.google.devsite.components.symbols.TypeProjectionComponent
@@ -41,13 +43,6 @@ import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.joinMaybePrefix
-import com.google.devsite.renderer.Language
-import com.google.devsite.renderer.converters.enumValuesTitle
-import com.google.devsite.renderer.converters.inheritedMethodsTitle
-import com.google.devsite.renderer.converters.inheritedPropertiesTitle
-import com.google.devsite.renderer.converters.nestedTypesTitle
-import com.google.devsite.renderer.converters.protectedConstructorsTitle
-import com.google.devsite.renderer.converters.publicConstructorsTitle
 import org.jetbrains.dokka.model.doc.DocTag
 import org.jetbrains.dokka.model.doc.Text
 
@@ -78,29 +73,30 @@ internal fun <T : ContextFreeComponent> SummaryList<SingleColumnSummaryItem<T>>.
 internal val SummaryList<*>.size get() = data.items.size
 internal fun <V : SummaryItem> SummaryList<V>.first() = data.items.first()
 
-internal fun TwoPaneSummaryItem<Link, DescriptionComponent>
-.link() = data.title.data
-@JvmName("This is internal and will never be used from JVM")
-internal fun TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>
-.link() = data.title.data.type.link()
+internal fun TwoPaneSummaryItem<Link, DescriptionComponent>.link() = data.title.data
+@JvmName("paramDescriptionTwoPaneSummaryItemLink")
+internal fun TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>.link() =
+    data.title.data.type.link()
 
-internal fun TwoPaneSummaryItem<TypeSummary, SymbolSummary>.functionSummary() = data.description
+@get:JvmName("FunctionSummaryItemGetDescription")
+internal val <T : SymbolSignature> TypeSummaryItem<T>.description get() = data.description
+
 internal fun TwoPaneSummaryItem<TypeSummary, *>.modifiers() = data.title.data.modifiers
 internal fun Classlike.modifiers() = data.signature.data.modifiers
 
-@JvmName("This is internal and will never be used from JVM")
-internal fun TwoPaneSummaryItem<TypeSummary, SymbolSummary>
-.name(): String = this.data.description.name()
+@JvmName("TypeSymbolSummaryName")
+internal fun <T : SymbolSignature> TypeSummaryItem<T>.name():
+    String = this.data.description.name()
 internal fun TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>
 .name(): String = this.data.title.data.name
-@JvmName("This too is internal and will never be used from JVM")
+@JvmName("LinkDescriptionName")
 internal fun TwoPaneSummaryItem<Link, DescriptionComponent>
 .name(): String = this.data.title.data.name
-internal fun Iterable<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>.nonInstance() =
-    filterNot { it.name() == "INSTANCE" }
+internal fun Iterable<TypeSummaryItem<PropertySignature>>.nonInstance() =
+    filterNot { it.data.title.data.type.name() == "INSTANCE" }
 
-internal fun SymbolSummary.name(): String = data.signature.data.name.data.name
-internal fun SymbolSummary.functionSignature() = (data.signature as FunctionSignature).data
+internal fun SymbolSummary<*>.name(): String = data.signature.data.name.data.name
+internal fun SymbolSummary<FunctionSignature>.functionSignature() = data.signature.data
 
 internal fun DescriptionComponent.text() =
     this.data.components.joinToString(" ") { it.text() }
@@ -132,61 +128,13 @@ internal val AnnotationComponent.isAtNonNull get() = this.link().name == "NonNul
 internal fun List<AnnotationComponent>.exceptNonNull() = this.filter { it.link().name != "NonNull" }
 internal fun Pair<SummaryList<*>, Classlike.TitledList<*>>.title() = first.data.header!!.data.title
 
-internal fun InheritedSymbolsList.title() = data.header.data.title
-internal fun InheritedSymbolsList.from(name: String) =
+@JvmName("titleFunctionSignature")
+internal fun InheritedSymbolsList<FunctionSignature>.title() = data.header.data.title
+internal fun InheritedSymbolsList<PropertySignature>.title() = data.header.data.title
+@JvmName("fromFunctionSignature")
+internal fun InheritedSymbolsList<FunctionSignature>.from(name: String) =
+    data.inheritedSymbolSummaries.entries.singleOrNull { (key, _) -> key.data.name == name }
+internal fun InheritedSymbolsList<PropertySignature>.from(name: String) =
     data.inheritedSymbolSummaries.entries.singleOrNull { (key, _) -> key.data.name == name }
 
-internal fun Classlike.companionName() = nestedTypes().first.item().link().name
-
-/**
- * Pass this e.g. "Public functions" and it will return (summaries, details) for the public funs
- * Does not work for constructors, in order to allow a unified return type
- */
-internal fun Classlike.symbolsFor(
-    vararg types: String
-) = data.symbolTypes.single { (summary, _) ->
-    summary.title() in types.map {
-        if ("constructors" !in it && "Nested" !in it && "Enum" !in it) it else
-            throw RuntimeException(
-                "Do not use this method to get $it, use the dedicated getter methods."
-            )
-    }
-} as Pair<
-    SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>,
-    Classlike.TitledList<SymbolDetail>>
-// TODO: split the SymbolTypes list itself (into nullable vars?) to clarify typing
-internal fun Classlike.symbolsForConstructors(public: Boolean = true, protected: Boolean = false) =
-    data.symbolTypes.single { (summary, _) ->
-        summary.title() in listOf(
-            if (public) publicConstructorsTitle() else "",
-            if (protected) protectedConstructorsTitle() else ""
-        )
-    } as Pair<SummaryList<SingleColumnSummaryItem<SymbolSummary>>,
-        Classlike.TitledList<SymbolDetail>>
-
-/** NOTE: nested types are not split by visibility! b/237786465. */
-internal fun Classlike.nestedTypes() = data.symbolTypes.single {
-    (summary, _) ->
-    summary.title() == nestedTypesTitle()
-} as Pair<SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
-    Classlike.TitledList<SymbolDetail>>
-
-internal fun Classlike.enumValues() = data.symbolTypes.single {
-    (summary, _) ->
-    summary.title() == enumValuesTitle()
-} as Pair<SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
-    Classlike.TitledList<SymbolDetail>>
-
-internal val Classlike.inheritedFields get() = data.inheritedTypes.singleOrNull {
-    it.data.header.data.title in
-        listOf(inheritedPropertiesTitle(Language.KOTLIN), inheritedPropertiesTitle(Language.JAVA))
-}
-internal val Classlike.inheritedFunctions get() = data.inheritedTypes.singleOrNull {
-    it.data.header.data.title in
-        listOf(inheritedMethodsTitle(Language.KOTLIN), inheritedMethodsTitle(Language.JAVA))
-}
-/** Works like symbolsFor but only returns summaries. Also checks inherited (are summary-only) */
-internal fun Classlike.summaryItemsFor(vararg types: String) =
-    data.inheritedTypes.singleOrNull { inheritedSymbols -> (inheritedSymbols.title() in types) }
-        ?.data?.inheritedSymbolSummaries?.flatMap { (_, summaryList) -> summaryList.items() }
-        ?: symbolsFor(*types).first.items()
+internal fun Classlike.companionName() = data.nestedTypesSummary.item().link().name

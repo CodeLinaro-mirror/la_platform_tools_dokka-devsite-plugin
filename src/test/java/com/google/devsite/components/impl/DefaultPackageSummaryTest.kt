@@ -17,13 +17,14 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
+import com.google.devsite.FunctionSummaryList
+import com.google.devsite.LinkDescriptionSummaryList
+import com.google.devsite.PropertySummaryList
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
 import com.google.devsite.components.pages.PackageSummary.Params
 import com.google.devsite.components.symbols.SymbolDetail
-import com.google.devsite.components.symbols.SymbolSummary
-import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TwoPaneSummaryItem
@@ -456,30 +457,18 @@ class DefaultPackageSummaryTest {
     private fun createPackageSummary(
         displayLanguage: Language = Language.JAVA,
         description: List<ContextFreeComponent> = emptyList(),
-        interfaces: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> =
-            NoopSummaryList(show = false),
-        classes: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> =
-            NoopSummaryList(show = false),
-        enums: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> =
-            NoopSummaryList(show = false),
-        objects: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> =
-            NoopSummaryList(show = false),
-        exceptions: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> =
-            NoopSummaryList(show = false),
-        annotations: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> =
-            NoopSummaryList(show = false),
-        typeAliases: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> =
-            NoopSummaryList(show = false),
-        topLevelConstantsSummary: SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> =
-            NoopSummaryList(show = false),
-        topLevelPropertiesSummary: SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> =
-            NoopSummaryList(show = false),
-        topLevelFunctionsSummary: SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> =
-            NoopSummaryList(show = false),
-        extensionPropertiesSummary: SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> =
-            NoopSummaryList(show = false),
-        extensionFunctionsSummary: SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> =
-            NoopSummaryList(show = false),
+        interfaces: LinkDescriptionSummaryList = NoopSummaryList(show = false),
+        classes: LinkDescriptionSummaryList = NoopSummaryList(show = false),
+        enums: LinkDescriptionSummaryList = NoopSummaryList(show = false),
+        objects: LinkDescriptionSummaryList = NoopSummaryList(show = false),
+        exceptions: LinkDescriptionSummaryList = NoopSummaryList(show = false),
+        annotations: LinkDescriptionSummaryList = NoopSummaryList(show = false),
+        typeAliases: LinkDescriptionSummaryList = NoopSummaryList(show = false),
+        topLevelConstantsSummary: PropertySummaryList = NoopSummaryList(show = false),
+        topLevelPropertiesSummary: PropertySummaryList = NoopSummaryList(show = false),
+        topLevelFunctionsSummary: FunctionSummaryList = NoopSummaryList(show = false),
+        extensionPropertiesSummary: PropertySummaryList = NoopSummaryList(show = false),
+        extensionFunctionsSummary: FunctionSummaryList = NoopSummaryList(show = false),
         topLevelConstants: List<SymbolDetail> = emptyList(),
         topLevelProperties: List<SymbolDetail> = emptyList(),
         topLevelFunctions: List<SymbolDetail> = emptyList(),

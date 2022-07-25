@@ -17,18 +17,14 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.Link
+import com.google.devsite.TypeSummaryItem
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.LambdaTypeProjectionComponent
 import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.SymbolDetail.SymbolKind
-import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeProjectionComponent
-import com.google.devsite.components.symbols.TypeSummary
-import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.functionSignature
-import com.google.devsite.renderer.converters.testing.functionSummary
 import com.google.devsite.renderer.converters.testing.isAtNonNull
 import com.google.devsite.renderer.converters.testing.isAtNullable
 import com.google.devsite.renderer.converters.testing.item
@@ -232,7 +228,7 @@ internal class FunctionDocumentableConverterTest(
             |class MyClass
         """.render().functionSummary()
 
-        val constructor = summary.data.description as SymbolSummary
+        val constructor = summary.data.description
 
         assertThat(constructor.name()).isEqualTo("MyClass")
     }
@@ -258,7 +254,7 @@ internal class FunctionDocumentableConverterTest(
             |fun iAmACoolFunction()
         """.render().functionSummary()
 
-        val function = summary.functionSummary()
+        val function = summary.data.description
 
         assertThat(function.name()).isEqualTo("iAmACoolFunction")
     }
@@ -269,7 +265,7 @@ internal class FunctionDocumentableConverterTest(
             |fun String.foo()
         """.render().functionSummary()
 
-        val function = summary.functionSummary()
+        val function = summary.data.description
         val signature = function.functionSignature()
 
         javaOnly {
@@ -299,12 +295,12 @@ internal class FunctionDocumentableConverterTest(
             |fun Any.foo()
         """.render().functionSummary()
 
-        val function = summary.functionSummary()
-        val signature = function.functionSignature()
+        val function = summary.data.description
+        val signature = function.data.signature
 
         javaOnly {
-            assertThat(signature.receiver).isNotNull()
-            val param = signature.receiver!!
+            assertThat(signature.data.receiver).isNotNull()
+            val param = signature.data.receiver!!
             assertNoLambdaStuff(param.data)
 
             val type = param.data.type
@@ -313,8 +309,8 @@ internal class FunctionDocumentableConverterTest(
         }
 
         kotlinOnly {
-            assertThat(signature.receiver).isNotNull()
-            val param = signature.receiver!!
+            assertThat(signature.data.receiver).isNotNull()
+            val param = signature.data.receiver!!
             assertNoLambdaStuff(param.data)
 
             val type = param.data.type
@@ -330,8 +326,8 @@ internal class FunctionDocumentableConverterTest(
             |fun foo(a: String)
         """.render().functionSummary()
 
-        val function = summary.functionSummary()
-        val param = function.param()
+        val function = summary.data.description
+        val param = function.data.signature.data.parameters.single()
         val paramType = param.data.type
 
         assertNoLambdaStuff(param.data)
@@ -344,7 +340,7 @@ internal class FunctionDocumentableConverterTest(
         val summary = """
             |fun <T: Number, U> foo() = Unit
         """.render().functionSummary()
-        val typeParams = summary.functionSummary().functionSignature().typeParameters
+        val typeParams = summary.data.description.data.signature.data.typeParameters
         assertThat(typeParams.first().data.name).isEqualTo("T")
         assertThat(typeParams.first().projectionName()).isEqualTo("Number")
         assertThat(typeParams.last().data.name).isEqualTo("U")
@@ -356,7 +352,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Function signature component creates multiple inline generics`() {
         val inlineGenerics = """
             |fun <T: Number, U: List<String>, V: T> foo() = Unit
-        """.render().functionSummary().functionSummary().functionSignature().typeParameters
+        """.render().functionSummary().data.description.data.signature.data.typeParameters
 
         assertThat(inlineGenerics.map { it.data.name }).isEqualTo(listOf("T", "U", "V"))
         assertThat(inlineGenerics[0].projectionName()).isEqualTo("Number")
@@ -372,7 +368,7 @@ internal class FunctionDocumentableConverterTest(
             |fun <T : Number> List<String>.foo(t: T, a: Map<String, Int>, block: String.(Float) -> Double) = Unit
         """.render().functionSummary()
 
-        val function = summary.functionSummary()
+        val function = summary.data.description
         val signature = function.data.signature
 
         assertPath(
@@ -390,16 +386,16 @@ internal class FunctionDocumentableConverterTest(
             |    boolean a, int b, double c, float d, short e, long f, char g, byte h) {}
         """.render(java = true).functionSummary()
 
-        val function = summary.functionSummary()
+        val function = summary.data.description
         val returnType = summary.returnSummary().type.link()
-        val signature = function.functionSignature()
+        val signature = function.data.signature
 
         javaOnly {
             assertThat(returnType.name).isEqualTo("void")
 
             val expected =
                 listOf("boolean", "int", "double", "float", "short", "long", "char", "byte")
-            for ((i, param) in signature.parameters.withIndex()) {
+            for ((i, param) in signature.data.parameters.withIndex()) {
                 assertThat(param.data.type.link().name).isEqualTo(expected[i])
             }
         }
@@ -408,7 +404,7 @@ internal class FunctionDocumentableConverterTest(
 
             val expected =
                 listOf("Boolean", "Int", "Double", "Float", "Short", "Long", "Char", "Byte")
-            for ((i, param) in signature.parameters.withIndex()) {
+            for ((i, param) in signature.data.parameters.withIndex()) {
                 assertThat(param.data.type.link().name).isEqualTo(expected[i])
             }
         }
@@ -431,7 +427,7 @@ internal class FunctionDocumentableConverterTest(
         val summaryK = """
             |class Foo
         """.render().functionSummary()
-        val constructor = summaryK.data.description as SymbolSummary
+        val constructor = summaryK.data.description
         assertThat(constructor.name()).isEqualTo("Foo")
 
         assertFails {
@@ -487,7 +483,7 @@ internal class FunctionDocumentableConverterTest(
                 |fun nonna(): String = "foo"
                 """.render()
         fun DModule.sOrD(summary: Boolean, functionName: String): TypeProjectionComponent =
-            if (summary) (functionSummary(functionName).data.title as TypeSummary).data.type
+            if (summary) functionSummary(functionName).data.title.data.type
             else functionDetail(functionName).data.returnType
         for (isSummary in listOf(true, false)) {
             for (whichFun in listOf("nonna", "nulla", "nonnaBefore", "nonnaClose", "platform")) {
@@ -612,7 +608,7 @@ internal class FunctionDocumentableConverterTest(
             |}
         """.render().functionSummary("ScrollableState").data.description
         kotlinOnly {
-            val parameter = (summary.data.signature as FunctionSignature).data.parameters.single()
+            val parameter = summary.data.signature.data.parameters.single()
             val lambda = (parameter.data.type as LambdaTypeProjectionComponent)
             assertThat(lambda.data.type.data.name).isEqualTo("Float")
             assertThat(lambda.data.receiver!!.name()).isEqualTo("Float")
@@ -751,12 +747,7 @@ internal class FunctionDocumentableConverterTest(
         assertThat(data.type is LambdaTypeProjectionComponent).isFalse()
     }
 
-    private fun ParameterComponent.link(): Link.Params = data.type.link()
-
-    private fun SymbolSummary.param(): ParameterComponent = functionSignature().parameters.item()
-
-    private fun TwoPaneSummaryItem<TypeSummary, SymbolSummary>.returnSummary(): TypeSummary.Params =
-        data.title.data
+    private fun TypeSummaryItem<FunctionSignature>.returnSummary() = data.title.data
 
     companion object {
         @JvmStatic

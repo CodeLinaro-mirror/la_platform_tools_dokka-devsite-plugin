@@ -55,8 +55,14 @@ internal interface SummaryList<T : SummaryItem> : ContextFreeComponent, List<T> 
 
     override fun subList(fromIndex: Int, toIndex: Int) = data.items.subList(fromIndex, toIndex)
 
-    operator fun plus(other: SummaryList<T>): SummaryList<T> {
-        data.items = data.items + other.data.items
+    /** WARNING: these functions have side effects */
+    operator fun plus(other: List<T>): SummaryList<T> {
+        data.items = data.items + other
+        return this
+    }
+
+    operator fun minus(other: List<T>): SummaryList<T> {
+        data.items = data.items - other
         return this
     }
 }

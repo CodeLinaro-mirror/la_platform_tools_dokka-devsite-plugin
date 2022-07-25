@@ -18,12 +18,10 @@ package com.google.devsite.testing
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.DevsitePlugin
+import com.google.devsite.TypeSummaryItem
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.SymbolDetail
-import com.google.devsite.components.symbols.SymbolSummary
-import com.google.devsite.components.symbols.TypeSummary
-import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.joinMaybePrefix
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.DocTagConverter
@@ -311,7 +309,7 @@ internal abstract class ConverterTestBase(
     protected fun DModule.functionSummary(
         doc: DModule.() -> DFunction = ::smartDoc,
         hints: ModifierHints = defaultHints
-    ): TwoPaneSummaryItem<TypeSummary, SymbolSummary> {
+    ): TypeSummaryItem<FunctionSignature> {
         val (holder, pathProvider) = holderAndProvider(this)
         val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
         val converter = FunctionDocumentableConverter(
@@ -324,7 +322,7 @@ internal abstract class ConverterTestBase(
 
     protected fun DModule.functionSummaries(
         hints: ModifierHints = defaultHints
-    ): Map<String, TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
+    ): Map<String, TypeSummaryItem<FunctionSignature>> {
         val (holder, pathProvider) = holderAndProvider(this)
         val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
         val converter = FunctionDocumentableConverter(

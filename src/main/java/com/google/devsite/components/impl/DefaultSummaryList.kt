@@ -58,3 +58,6 @@ internal data class DefaultSummaryList<T : SummaryItem>(
     override fun toString(): String =
         "Header: ${data.header}, contents: ${data.items.joinToString()}"
 }
+
+internal fun <T : SummaryItem> emptySummaryList() =
+    DefaultSummaryList(SummaryList.Params(null, emptyList<T>()))

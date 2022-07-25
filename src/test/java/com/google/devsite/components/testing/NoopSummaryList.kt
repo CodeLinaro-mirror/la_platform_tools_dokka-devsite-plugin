@@ -31,7 +31,7 @@ internal class NoopSummaryList<T : SummaryItem>(private val show: Boolean = true
 
     override fun hasContent() = show
 
-    override fun plus(other: SummaryList<T>): SummaryList<T> {
+    override fun plus(other: List<T>): SummaryList<T> {
         return this
     }
 }

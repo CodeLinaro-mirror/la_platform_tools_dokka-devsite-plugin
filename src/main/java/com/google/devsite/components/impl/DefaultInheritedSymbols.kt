@@ -16,7 +16,9 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.symbols.SymbolSignature
 import com.google.devsite.components.table.InheritedSymbolsList
+import com.google.devsite.components.table.TableTitle
 import kotlinx.html.FlowContent
 import kotlinx.html.div
 import kotlinx.html.span
@@ -28,9 +30,9 @@ import kotlinx.html.tr
 import kotlinx.html.unsafe
 
 /** Default implementation of inherited symbols. */
-internal data class DefaultInheritedSymbols(
-    override val data: InheritedSymbolsList.Params
-) : InheritedSymbolsList {
+internal data class DefaultInheritedSymbols<T : SymbolSignature>(
+    override val data: InheritedSymbolsList.Params<T>
+) : InheritedSymbolsList<T> {
     override fun render(into: FlowContent) {
         if (data.inheritedSymbolSummaries.isEmpty()) return
 
@@ -69,3 +71,10 @@ internal data class DefaultInheritedSymbols(
         data.header.toString() + " " + data.inheritedSymbolSummaries
             .map { (from, summaries) -> "from $from, inherited $summaries" }.joinToString()
 }
+
+internal fun <T : SymbolSignature> emptyInheritedSymbolsList() = DefaultInheritedSymbols(
+    InheritedSymbolsList.Params<T>(
+        DefaultTableTitle(TableTitle.Params("")),
+        emptyMap()
+    )
+)

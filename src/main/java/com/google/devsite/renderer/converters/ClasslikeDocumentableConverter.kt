@@ -16,8 +16,11 @@
 
 package com.google.devsite.renderer.converters
 
-import com.google.devsite.components.DescriptionComponent
-import com.google.devsite.components.HtmlComponent
+import com.google.devsite.ConstructorSummaryList
+import com.google.devsite.FunctionSummaryList
+import com.google.devsite.LinkDescriptionSummaryList
+import com.google.devsite.PropertySummaryList
+import com.google.devsite.TypeSummaryItem
 import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultClassHierarchy
 import com.google.devsite.components.impl.DefaultClassSignature
@@ -28,28 +31,29 @@ import com.google.devsite.components.impl.DefaultLibraryMetadataComponent
 import com.google.devsite.components.impl.DefaultRelatedSymbols
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableTitle
+import com.google.devsite.components.impl.emptyInheritedSymbolsList
+import com.google.devsite.components.impl.emptySummaryList
 import com.google.devsite.components.pages.Classlike
+import com.google.devsite.components.pages.Classlike.TitledList
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.ClassSignature
+import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.LibraryMetadataComponent
+import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
-import com.google.devsite.components.symbols.SymbolSummary
-import com.google.devsite.components.symbols.TypeSummary
+import com.google.devsite.components.symbols.SymbolSignature
 import com.google.devsite.components.table.ClassHierarchy
 import com.google.devsite.components.table.InheritedSymbolsList
 import com.google.devsite.components.table.RelatedSymbols
-import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
-import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.util.LibraryMetadata
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import kotlinx.html.Tag
 import org.jetbrains.dokka.links.Callable
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.parent
@@ -235,54 +239,57 @@ internal class ClasslikeDocumentableConverter(
             )
         }
         val publicCompanionFunctionsSummary = async {
-            functionsToSummary(
+            emptyIfJava() ?: functionsToSummary(
                 publicCompanionFunctionsTitle(),
                 companionFunctions.filter(::isPublic)
             )
         }
         val protectedCompanionFunctionsSummary = async {
-            functionsToSummary(
+            emptyIfJava() ?: functionsToSummary(
                 protectedCompanionFunctionsTitle(),
                 companionFunctions.filter(::isProtected)
             )
         }
         val publicCompanionPropertiesSummary = async {
-            propertiesToSummary(
+            emptyIfJava() ?: propertiesToSummary(
                 publicCompanionPropertiesTitle(),
                 companionProperties.filter(::isPublicNonConst)
             )
         }
         val protectedCompanionPropertiesSummary = async {
-            propertiesToSummary(
+            emptyIfJava() ?: propertiesToSummary(
                 protectedCompanionPropertiesTitle(),
                 companionProperties.filter(::isProtectedNonConst)
             )
         }
 
-        val enumDetails =
-            async { enumValuesToDetail(classlike as? DEnum, enumValues) }
-        val constants =
+        val enumDetails = (classlike as? DEnum)?.let {
+            async { enumValuesToDetail(it, enumValues) }
+        }
+        val constantsDetails =
             async { propertiesToDetail((declaredProperties + companionProperties).constants()) }
-        val publicProperties =
+        val publicPropertiesDetails =
             async { propertiesToDetail(declaredProperties.filter(::isPublicNonConst)) }
-        val protectedProperties =
+        val protectedPropertiesDetails =
             async { propertiesToDetail(declaredProperties.filter(::isProtectedNonConst)) }
-        val publicConstructors =
+        val publicConstructorsDetails =
             async { constructorsToDetail(allConstructors.filter(::isPublic)) }
-        val protectedConstructors =
+        val protectedConstructorsDetails =
             async { constructorsToDetail(allConstructors.filter(::isProtected)) }
-        val publicFunctions =
+        val publicFunctionsDetails =
             async { functionsToDetail(declaredFunctions.filter(::isPublic)) }
-        val protectedFunctions =
+        val protectedFunctionsDetails =
             async { functionsToDetail(declaredFunctions.filter(::isProtected)) }
         val publicCompanionFunctionsDetail =
-            async { functionsToDetail(companionFunctions.filter(::isPublic)) }
+            async { emptyIfJava() ?: functionsToDetail(companionFunctions.filter(::isPublic)) }
         val protectedCompanionFunctionsDetail =
-            async { functionsToDetail(companionFunctions.filter(::isProtected)) }
-        val publicCompanionPropertiesDetail =
-            async { propertiesToDetail(companionProperties.filter(::isPublicNonConst)) }
-        val protectedCompanionPropertiesDetail =
-            async { propertiesToDetail(companionProperties.filter(::isProtectedNonConst)) }
+            async { emptyIfJava() ?: functionsToDetail(companionFunctions.filter(::isProtected)) }
+        val publicCompanionPropertiesDetail = async {
+            emptyIfJava() ?: propertiesToDetail(companionProperties.filter(::isPublicNonConst))
+        }
+        val protectedCompanionPropertiesDetail = async {
+            emptyIfJava() ?: propertiesToDetail(companionProperties.filter(::isProtectedNonConst))
+        }
 
         val signature = async { computeSignature() }
         val hierarchy = async { computeHierarchy() }
@@ -296,154 +303,46 @@ internal class ClasslikeDocumentableConverter(
             }
         }
 
-        val allSymbols: MutableList<Pair<SummaryList<out SummaryItem>,
-                Classlike.TitledList<SymbolDetail>>> = mutableListOf(
-            nestedTypesSummary.await() to Classlike.TitledList(nestedTypesTitle(), emptyList()),
-            enumValuesSummary.await() to Classlike.TitledList(
-                enumValuesTitle(),
-                enumDetails.await()
-            ),
-            constantsSummary.await() to Classlike.TitledList(
-                constantsTitle(),
-                constants.await()
-            )
-        )
-        if (displayLanguage == Language.KOTLIN) {
-            allSymbols.addAll(
-                listOf(
-                    publicCompanionFunctionsSummary.await() to Classlike.TitledList(
-                        publicCompanionFunctionsTitle(),
-                        publicCompanionFunctionsDetail.await()
-                    ),
-                    protectedCompanionFunctionsSummary.await() to Classlike.TitledList(
-                        protectedCompanionFunctionsTitle(),
-                        protectedCompanionFunctionsDetail.await()
-                    ),
-                    publicCompanionPropertiesSummary.await() to Classlike.TitledList(
-                        publicCompanionPropertiesTitle(),
-                        publicCompanionPropertiesDetail.await()
-                    ),
-                    protectedCompanionPropertiesSummary.await() to Classlike.TitledList(
-                        protectedCompanionPropertiesTitle(),
-                        protectedCompanionPropertiesDetail.await()
-                    )
-                )
-            )
-        }
-
-        // fields appear before constructors in Java docs
-        if (displayLanguage == Language.JAVA) {
-            allSymbols.addAll(
-                listOf(
-                    publicPropertiesSummary.await() to Classlike.TitledList(
-                        publicPropertiesTitle(displayLanguage),
-                        publicProperties.await()
-                    ),
-                    protectedPropertiesSummary.await() to Classlike.TitledList(
-                        protectedPropertiesTitle(displayLanguage),
-                        protectedProperties.await()
-                    )
-                )
-            )
-        }
-
-        allSymbols.addAll(
-            listOf(
-                publicConstructorsSummary.await() to Classlike.TitledList(
-                    publicConstructorsTitle(),
-                    publicConstructors.await()
-                ),
-                protectedConstructorsSummary.await() to Classlike.TitledList(
-                    protectedConstructorsTitle(),
-                    protectedConstructors.await()
-                ),
-                publicFunctionsSummary.await() to Classlike.TitledList(
-                    publicMethodsTitle(displayLanguage),
-                    publicFunctions.await()
-                ),
-                protectedFunctionsSummary.await() to Classlike.TitledList(
-                    protectedMethodsTitle(displayLanguage),
-                    protectedFunctions.await()
-                )
-            )
-        )
-
-        // properties are the last page section in kotlin docs
-        if (displayLanguage == Language.KOTLIN) {
-            allSymbols.addAll(
-                listOf(
-                    publicPropertiesSummary.await() to Classlike.TitledList(
-                        publicPropertiesTitle(displayLanguage),
-                        publicProperties.await()
-                    ),
-                    protectedPropertiesSummary.await() to Classlike.TitledList(
-                        protectedPropertiesTitle(displayLanguage),
-                        protectedProperties.await()
-                    )
-                )
-            )
-        }
-
-        val allExtensionFuns = classExtensionFunctions +
+        var extensionFunctions = classExtensionFunctions +
             if (displayLanguage == Language.JAVA)
                 classExtensionProperties.gettersAndSetters(allowDefault = true)
             else emptyList()
-        if (allExtensionFuns.isNotEmpty()) {
-            var extensionFunctions = allExtensionFuns
-                // Sort by the class the extension function came from first, so they will be grouped
-                // together in a logical way
-                .sortedBy { nameForSyntheticClass(it) + it.name }
-                // Convert DRIs to this class so link from summary to detail will stay on class page
-                .map { it.withDRIOfClass(classlike) }
-            if (displayLanguage == Language.JAVA) {
-                extensionFunctions = extensionFunctions.filterNot {
-                    it.isSuspendFunction()
-                }
+        extensionFunctions = extensionFunctions
+            // Sort by the class the extension function came from first, so they will be grouped
+            // together in a logical way
+            .sortedBy { nameForSyntheticClass(it) + it.name }
+            // Convert DRIs to this class so link from summary to detail will stay on class page
+            .map { it.withDRIOfClass(classlike) }
+        if (displayLanguage == Language.JAVA) {
+            extensionFunctions = extensionFunctions.filterNot {
+                it.isSuspendFunction()
             }
-            val extensionFunctionsSummary = async {
-                functionsToSummary(
-                    extensionFunctionsTitle(),
-                    extensionFunctions
-                )
-            }
-            val extensionFunctionsDetail = async { functionsToDetail(extensionFunctions) }
-
-            allSymbols.add(
-                extensionFunctionsSummary.await() to Classlike.TitledList(
-                    extensionFunctionsTitle(),
-                    extensionFunctionsDetail.await()
-                )
-            )
         }
+        val extensionFunctionsSummary =
+            async { functionsToSummary(extensionFunctionsTitle(), extensionFunctions) }
+        val extensionFunctionsDetail = async { functionsToDetail(extensionFunctions) }
 
         // Extension properties are only as-Java as accessors, so they count as extension functions
-        if (classExtensionProperties.isNotEmpty() && displayLanguage == Language.KOTLIN) {
-            val extensionProperties = classExtensionProperties
-                // Sort by the class the extension property came from first, so they will be grouped
-                // together in a logical way
-                .sortedBy { nameForSyntheticClass(it) + it.name }
-                // Convert DRIs to this class so link from summary to detail will stay on class page
-                .map { it.withDRIOfClass(classlike) }
-            val extensionPropertiesSummary = async {
-                propertiesToSummary(
-                    extensionPropertiesTitle(),
-                    extensionProperties
-                )
-            }
-            val extensionPropertiesDetail = async { propertiesToDetail(extensionProperties) }
-
-            allSymbols.add(
-                extensionPropertiesSummary.await() to Classlike.TitledList(
-                    extensionPropertiesTitle(),
-                    extensionPropertiesDetail.await()
-                )
-            )
+        var extensionProperties = when (displayLanguage) {
+            Language.KOTLIN -> classExtensionProperties
+            Language.JAVA -> emptyList()
         }
+        extensionProperties = extensionProperties
+            // Sort by the class the extension property came from first, so they will be grouped
+            // together in a logical way
+            .sortedBy { nameForSyntheticClass(it) + it.name }
+            // Convert DRIs to this class so link from summary to detail will stay on class page
+            .map { it.withDRIOfClass(classlike) }
+        val extensionPropertiesSummary =
+            async { propertiesToSummary(extensionPropertiesTitle(), extensionProperties) }
+        val extensionPropertiesDetail = async { propertiesToDetail(extensionProperties) }
 
         val processed = docsHolder.classlikesDone.getAndIncrement()
         if (processed % 100 == 0) {
             docsHolder.logger.debug("Dackka: $displayLanguage classlikes processed: $processed")
         }
+
+        val (inheritedFunctions, inheritedConstants, inheritedProperties) = inheritedTypes.await()
 
         DefaultDevsitePage(
             DevsitePage.Params(
@@ -453,6 +352,7 @@ internal class ClasslikeDocumentableConverter(
                 title = classlike.name(),
                 content = DefaultClasslike(
                     Classlike.Params(
+                        displayLanguage = displayLanguage,
                         signature = signature.await(),
                         hierarchy = hierarchy.await(),
                         relatedSymbols = relatedSymbols.await(),
@@ -460,8 +360,82 @@ internal class ClasslikeDocumentableConverter(
                             classlike,
                             annotations = annotations
                         ),
-                        symbolTypes = allSymbols,
-                        inheritedTypes = inheritedTypes.await(),
+                        nestedTypesSummary = nestedTypesSummary.await(),
+                        enumValuesSummary = enumValuesSummary.await(),
+                        enumValuesDetails = TitledList(
+                            enumValuesTitle(),
+                            enumDetails?.await() ?: emptyList()
+                        ),
+                        constantsSummary = constantsSummary.await(),
+                        constantsDetails = TitledList(
+                            constantsTitle(),
+                            constantsDetails.await()
+                        ),
+                        publicCompanionFunctionsSummary = publicCompanionFunctionsSummary.await(),
+                        publicCompanionFunctionsDetails = TitledList(
+                            publicCompanionFunctionsTitle(),
+                            publicCompanionFunctionsDetail.await()
+                        ),
+                        protectedCompanionFunctionsSummary = protectedCompanionFunctionsSummary
+                            .await(),
+                        protectedCompanionFunctionsDetails = TitledList(
+                            protectedCompanionFunctionsTitle(),
+                            protectedCompanionFunctionsDetail.await()
+                        ),
+                        publicCompanionPropertiesSummary = publicCompanionPropertiesSummary.await(),
+                        publicCompanionPropertiesDetails = TitledList(
+                            publicCompanionPropertiesTitle(),
+                            publicCompanionPropertiesDetail.await()
+                        ),
+                        protectedCompanionPropertiesSummary = protectedCompanionPropertiesSummary
+                            .await(),
+                        protectedCompanionPropertiesDetails = TitledList(
+                            protectedCompanionPropertiesTitle(),
+                            protectedCompanionPropertiesDetail.await()
+                        ),
+                        publicConstructorsSummary = publicConstructorsSummary.await(),
+                        publicConstructorsDetails = TitledList(
+                            publicConstructorsTitle(),
+                            publicConstructorsDetails.await()
+                        ),
+                        protectedConstructorsSummary = protectedConstructorsSummary.await(),
+                        protectedConstructorsDetails = TitledList(
+                            protectedConstructorsTitle(),
+                            protectedConstructorsDetails.await()
+                        ),
+                        publicFunctionsSummary = publicFunctionsSummary.await(),
+                        publicFunctionsDetails = TitledList(
+                            publicMethodsTitle(displayLanguage),
+                            publicFunctionsDetails.await()
+                        ),
+                        protectedFunctionsSummary = protectedFunctionsSummary.await(),
+                        protectedFunctionsDetails = TitledList(
+                            protectedMethodsTitle(displayLanguage),
+                            protectedFunctionsDetails.await()
+                        ),
+                        publicPropertiesSummary = publicPropertiesSummary.await(),
+                        publicPropertiesDetails = TitledList(
+                            publicPropertiesTitle(displayLanguage),
+                            publicPropertiesDetails.await()
+                        ),
+                        protectedPropertiesSummary = protectedPropertiesSummary.await(),
+                        protectedPropertiesDetails = TitledList(
+                            protectedPropertiesTitle(displayLanguage),
+                            protectedPropertiesDetails.await()
+                        ),
+                        extensionFunctionsSummary = extensionFunctionsSummary.await(),
+                        extensionFunctionsDetails = TitledList(
+                            extensionFunctionsTitle(),
+                            extensionFunctionsDetail.await()
+                        ),
+                        extensionPropertiesSummary = extensionPropertiesSummary.await(),
+                        extensionPropertiesDetails = TitledList(
+                            extensionPropertiesTitle(),
+                            extensionPropertiesDetail.await()
+                        ),
+                        inheritedFunctions = inheritedFunctions ?: emptyInheritedSymbolsList(),
+                        inheritedConstants = inheritedConstants ?: emptyInheritedSymbolsList(),
+                        inheritedProperties = inheritedProperties ?: emptyInheritedSymbolsList(),
                         annotationComponents = classlike.annotations().annotationComponents(
                             pathProvider = pathProvider,
                             displayLanguage = displayLanguage,
@@ -474,8 +448,11 @@ internal class ClasslikeDocumentableConverter(
         )
     }
 
-    private fun nestedTypesToSummary(classlikes: List<DClasslike>):
-        SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> {
+    /** This is intended to be used as (some thing) = emptyIfJava ?: actuallyComputeItIfKotlin() */
+    private fun <T : SummaryItem> emptyIfJava() =
+        if (displayLanguage == Language.JAVA) emptySummaryList<T>() else null
+
+    private fun nestedTypesToSummary(classlikes: List<DClasslike>): LinkDescriptionSummaryList {
         val components = when (displayLanguage) {
             // When displaying Kotlin pages, anonymous companion functions will be inlined and the
             // link to the companion object can be omitted. Named companion objects are presumably
@@ -504,7 +481,7 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun functionsToSummary(name: String? = null, functions: List<DFunction>):
-        SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
+        FunctionSummaryList {
         val components = functions.map {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,
@@ -535,7 +512,7 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun constructorsToSummary(name: String, constructors: List<DFunction>):
-        SummaryList<SingleColumnSummaryItem<SymbolSummary>> {
+        ConstructorSummaryList {
         val components = constructors.map {
             errorContextInjector(it) {
                 functionConverter.summaryForConstructor(it)
@@ -588,7 +565,7 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun enumValuesToSummary(title: String, enumVals: List<DEnumEntry>):
-        SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> {
+        LinkDescriptionSummaryList {
         val components = enumVals.map { errorContextInjector(it) { enumConverter.summary(it) } }
         return DefaultSummaryList(
             SummaryList.Params(
@@ -603,10 +580,8 @@ internal class ClasslikeDocumentableConverter(
         )
     }
 
-    private fun propertiesToSummary(
-        name: String? = null,
-        properties: List<DProperty>
-    ): SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
+    private fun propertiesToSummary(name: String? = null, properties: List<DProperty>):
+        PropertySummaryList {
         val components = properties.map {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,
@@ -654,13 +629,8 @@ internal class ClasslikeDocumentableConverter(
         }
     }
 
-    private fun enumValuesToDetail(
-        dEnum: DEnum?,
-        enumValues: List<DEnumEntry>
-    ): List<SymbolDetail> {
-        if (dEnum == null) {
-            return emptyList()
-        }
+    private fun enumValuesToDetail(dEnum: DEnum, enumValues: List<DEnumEntry>):
+        List<SymbolDetail> {
         val modifierHints = ModifierHints(
             displayLanguage,
             type = DEnumEntry::class.java,
@@ -759,7 +729,11 @@ internal class ClasslikeDocumentableConverter(
      */
     private fun computeInheritedSymbols(
         symbolList: List<Documentable>
-    ): List<InheritedSymbolsList> {
+    ): Triple<
+        InheritedSymbolsList<FunctionSignature>?,
+        InheritedSymbolsList<PropertySignature>?,
+        InheritedSymbolsList<PropertySignature>?
+        > {
         val symbols = when (displayLanguage) {
             Language.JAVA -> symbolList.filterOutJvmSynthetic()
             Language.KOTLIN -> symbolList
@@ -791,15 +765,15 @@ internal class ClasslikeDocumentableConverter(
                 propertiesToSummary(properties = it)
             }
 
-        return listOfNotNull(functionsSummary, constsSummary, propertiesSummary)
+        return Triple(functionsSummary, constsSummary, propertiesSummary)
     }
 
-    private fun <T> List<T>.createInheritedCategory(
+    private fun <T, U : SymbolSignature> List<T>.createInheritedCategory(
         title: String,
-        summaryGen: (List<T>) -> SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>
-    ): InheritedSymbolsList where T : Documentable, T : WithExtraProperties<T> {
+        summaryGen: (List<T>) -> SummaryList<TypeSummaryItem<U>>
+    ): InheritedSymbolsList<U> where T : Documentable, T : WithExtraProperties<T> {
         fun createInheritedSymbolsList(parentDri: DRI, symbolList: List<T>):
-            Pair<Link, SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>> {
+            Pair<Link, SummaryList<TypeSummaryItem<U>>> {
             val link = pathProvider.linkForReference(parentDri, parentDri.fullName)
             val summary = summaryGen(symbolList)
             return link to summary
@@ -1009,7 +983,7 @@ internal class ClasslikeDocumentableConverter(
             isExpectActual = false
         )
 
-    private fun <I : Documentable, T : Tag, O : HtmlComponent<T>> errorContextInjector(
+    private fun <I : Documentable, O> errorContextInjector(
         documentable: I,
         toDo: (I) -> O,
     ): O {

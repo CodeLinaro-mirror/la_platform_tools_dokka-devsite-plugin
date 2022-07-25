@@ -16,16 +16,15 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.FunctionSummaryList
+import com.google.devsite.PropertySummaryList
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultPackageSummary
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.PackageSummary
 import com.google.devsite.components.symbols.SymbolDetail
-import com.google.devsite.components.symbols.SymbolSummary
-import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.SummaryList
-import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
@@ -119,8 +118,7 @@ internal class PackageDocumentableConverter(
         )
     }
 
-    private fun functionsToSummary(functions: List<DFunction>):
-        SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
+    private fun functionsToSummary(functions: List<DFunction>): FunctionSummaryList {
         val components = functions.map {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,
@@ -152,8 +150,7 @@ internal class PackageDocumentableConverter(
         }
     }
 
-    private fun propertiesToSummary(properties: List<DProperty>):
-        SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
+    private fun propertiesToSummary(properties: List<DProperty>): PropertySummaryList {
         val components = properties.map {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,

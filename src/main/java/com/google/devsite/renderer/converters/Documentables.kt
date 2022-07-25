@@ -423,7 +423,7 @@ fun List<DProperty>.gettersAndSetters(allowDefault: Boolean = false): List<DFunc
 private fun DFunction.withFixedName() = copy(
     dri = dri.copy(
         callable = dri.callable!!.copy(
-            name = fixCallableName(dri?.callable?.name ?: "")
+            name = fixCallableName(dri.callable?.name ?: "")
         )
     )
 )

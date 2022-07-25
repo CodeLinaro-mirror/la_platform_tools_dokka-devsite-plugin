@@ -20,11 +20,11 @@ import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.impl.DefaultDescriptionComponent
 
 /** Represents a symbols' signature along with its description. */
-internal interface SymbolSummary : DescriptionComponent {
-    override val data: Params
+internal interface SymbolSummary<T : SymbolSignature> : DescriptionComponent {
+    override val data: Params<T>
 
-    data class Params(
-        val signature: SymbolSignature,
+    data class Params<T : SymbolSignature>(
+        val signature: T,
         val description: DescriptionComponent,
         val annotationComponents: List<AnnotationComponent>
     ) : DescriptionComponent.Params(

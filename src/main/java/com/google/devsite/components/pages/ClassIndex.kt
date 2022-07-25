@@ -16,11 +16,8 @@
 
 package com.google.devsite.components.pages
 
+import com.google.devsite.LinkDescriptionSummaryList
 import com.google.devsite.components.ContextFreeComponent
-import com.google.devsite.components.DescriptionComponent
-import com.google.devsite.components.Link
-import com.google.devsite.components.table.SummaryList
-import com.google.devsite.components.table.TwoPaneSummaryItem
 
 /** Represents the list of classes page. */
 internal interface ClassIndex : ContextFreeComponent {
@@ -28,7 +25,6 @@ internal interface ClassIndex : ContextFreeComponent {
 
     data class Params(
         val packagesUrl: String,
-        val alphabetizedClasses: Map<Char,
-            SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>>
+        val alphabetizedClasses: Map<Char, LinkDescriptionSummaryList>
     )
 }
