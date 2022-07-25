@@ -91,13 +91,13 @@ internal class ClasslikeDocumentableConverter(
     /** @return the classlike component */
     suspend fun classlike(): DevsitePage = coroutineScope {
         var declaredFunctions = if (displayLanguage == Language.JAVA)
-            classlike.functions.myTypes() + classlike.gettersAndSetters()
-        else classlike.functions.myTypes()
+            (classlike.functions + classlike.gettersAndSetters()).nonInheritedTypes()
+        else classlike.functions.nonInheritedTypes()
 
-        var declaredProperties = classlike.properties.myTypes()
+        var declaredProperties = classlike.properties.nonInheritedTypes()
         var companionFunctions = classlike.companionFunctions()
         var companionProperties = classlike.companionProperties()
-        val inheritedAll = classlike.children.inheritedTypes()
+        val inheritedAll = (classlike.children + classlike.gettersAndSetters()).inheritedTypes()
 
         // Java documentation needs to respect @jvm* annotations
         if (displayLanguage == Language.JAVA) {
@@ -798,25 +798,18 @@ internal class ClasslikeDocumentableConverter(
      *
      * Class and package comparison isn't applicable for synthetic classes
      */
-    private fun <T : Documentable> List<T>.myTypes(): List<T> {
+    private fun <T : Documentable> List<T>.nonInheritedTypes(): List<T> {
         if (classlike.isSynthetic) {
             return this
         }
-        return filter { symbol ->
-            classlike.packageName() == symbol.dri.packageName && hasMatchingClassName(symbol)
-        }
+        return filter { symbol -> symbol.isFromThisClass() }
     }
 
-    private fun hasMatchingClassName(symbol: Documentable) = (
-        classlike.name() == symbol.dri.classNames ||
-            (classlike as? DClass)?.companion?.name() == symbol.dri.classNames
-        )
-
     private fun DClasslike.companionFunctions(): List<DFunction> =
-        (this as? DClass)?.companion?.functions?.myTypes() ?: emptyList()
+        (this as? DClass)?.companion?.functions?.nonInheritedTypes() ?: emptyList()
 
     private fun DClasslike.companionProperties(): List<DProperty> =
-        (this as? DClass)?.companion?.properties?.myTypes() ?: emptyList()
+        (this as? DClass)?.companion?.properties?.nonInheritedTypes() ?: emptyList()
 
     /**
      * Returns the list of inherited symbols, not from Any or Object
@@ -826,14 +819,14 @@ internal class ClasslikeDocumentableConverter(
         if (classlike.isSynthetic) {
             return emptyList()
         }
-        return filterNot { symbol ->
-            (
-                classlike.packageName() == symbol.dri.packageName &&
-                    classlike.name() == symbol.dri.classNames
-                ) ||
-                symbol.dri.isFromBaseClass()
-        }
+        return filterNot { symbol -> symbol.isFromThisClass() || symbol.dri.isFromBaseClass() }
     }
+
+    private fun <T : Documentable> T.isFromThisClass() =
+        classlike.packageName() == dri.packageName && (
+            classlike.name() == dri.classNames ||
+                (classlike as? DClass)?.companion?.name() == dri.classNames
+            )
 
     private fun createDefaultConstructorFor(classlike: DClasslike) =
         DFunction(
