@@ -27,7 +27,8 @@ import org.jetbrains.dokka.model.DPackage
 internal class DevsiteRenderer(
     private val rootFileRenderer: MetadataRenderer,
     private val packageRenderer: PackageRenderer,
-    private val docsHolder: DocumentablesHolder
+    private val docsHolder: DocumentablesHolder,
+    private val displayLanguage: Language
 ) {
     suspend fun render() {
         writeRootMetadata()
@@ -54,7 +55,7 @@ internal class DevsiteRenderer(
         launch { packageRenderer.writeIndex(packageDoc) }
         launch { packageRenderer.writePackageSummary(packageDoc) }
 
-        for (clazz in docsHolder.classlikesFor(packageDoc)) {
+        for (clazz in docsHolder.classlikesFor(packageDoc, displayLanguage)) {
             launch {
                 packageRenderer.writeClasslike(
                     clazz,

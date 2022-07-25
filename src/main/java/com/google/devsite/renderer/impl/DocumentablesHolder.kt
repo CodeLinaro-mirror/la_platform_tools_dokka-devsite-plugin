@@ -158,22 +158,29 @@ internal class DocumentablesHolder(
     suspend fun analysisMap(): Map<DokkaConfiguration.DokkaSourceSet, EnvironmentAndFacade> =
         analysisMap.await()
 
-    suspend fun classlikesFor(packageDoc: DPackage): List<DClasslike> =
-        classlikes.getValue(packageDoc.dri).await()
+    suspend fun classlikesFor(packageDoc: DPackage, displayLanguage: Language): List<DClasslike> {
+        val classlikes = classlikes.getValue(packageDoc.dri).await()
+        val syntheticClasses = syntheticClasses.getValue(packageDoc.dri).await()
+        return if (displayLanguage == Language.JAVA) {
+            classlikes
+        } else {
+            classlikes - syntheticClasses.toSet()
+        }
+    }
 
     suspend fun classlikesFor(classlike: DClasslike): List<DClasslike> {
         nestedClasslikesJob.join()
         return nestedClasslikes.getValue(classlike.dri).await()
     }
 
-    suspend fun classesFor(packageDoc: DPackage, displayLanguage: Language): List<DClass> {
+    suspend fun classesFor(packageDoc: DPackage, displayLanguage: Language):
+        List<DClass> {
+        val classes = classes.getValue(packageDoc.dri).await()
+        val syntheticClasses = syntheticClasses.getValue(packageDoc.dri).await()
         return if (displayLanguage == Language.JAVA) {
-            (
-                classes.getValue(packageDoc.dri).await() +
-                    syntheticClasses.getValue(packageDoc.dri).await()
-                ).sortedBy { it.name() }
+            (classes + syntheticClasses).sortedBy { it.name() }
         } else {
-            classes.getValue(packageDoc.dri).await()
+            classes - syntheticClasses.toSet()
         }
     }
 
@@ -241,8 +248,8 @@ internal class DocumentablesHolder(
         module: DModule
     ): List<DClasslike> {
         return computeClasslikes(
-            module.packages.flatMap { classlikesFor(it) }
-        ) // classlikesFor already contains synth
+            module.packages.flatMap { classlikesFor(it, Language.JAVA) }
+        ) // classlikesFor(JAVA) already contains synth
     }
 
     private fun computeClasslikes(

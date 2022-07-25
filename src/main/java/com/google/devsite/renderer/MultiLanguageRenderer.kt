@@ -157,7 +157,8 @@ internal class MultiLanguageRenderer(
         DevsiteRenderer(
             MetadataRenderer(outputWriter, filePaths, language, holder),
             PackageRenderer(outputWriter, filePaths, language, holder),
-            holder
+            holder,
+            language
         ).render()
     }
 
@@ -176,7 +177,8 @@ internal class MultiLanguageRenderer(
         DevsiteRenderer(
             MetadataRenderer(outputWriter, filePaths, language, holder),
             PackageRenderer(outputWriter, filePaths, language, holder),
-            holder
+            holder,
+            language
         ).render()
     }
 }

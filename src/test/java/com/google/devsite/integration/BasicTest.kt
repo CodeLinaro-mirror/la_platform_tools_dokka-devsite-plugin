@@ -106,4 +106,9 @@ class BasicTest : IntegrationTestBase() {
     fun `Validate getters setters and modifiers`() {
         verifyDirectory("getterSetterModifier")
     }
+
+    @Test
+    fun `Validate @JvmMultifileClass`() {
+        verifyDirectory("multifile")
+    }
 }
