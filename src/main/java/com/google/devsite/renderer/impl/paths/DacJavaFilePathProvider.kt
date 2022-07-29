@@ -33,13 +33,11 @@ internal class DacJavaFilePathProvider(
     tenant, locationProvider = dlp, classGraph = classGraph,
     documentablesGraph = documentablesGraph
 ) {
-    init {
-        ANY[Language.JAVA] = DefaultTypeProjectionComponent(
-            TypeProjectionComponent.Params(
-                type = linkForReference(ANY_DRI[Language.JAVA]!!),
-                nullability = Nullability.JAVA_NOT_ANNOTATED,
-                displayLanguage = Language.JAVA
-            )
+    override val ANY = DefaultTypeProjectionComponent(
+        TypeProjectionComponent.Params(
+            type = linkForReference(ANY_DRI[Language.JAVA]!!),
+            nullability = Nullability.JAVA_NOT_ANNOTATED,
+            displayLanguage = Language.JAVA
         )
-    }
+    )
 }

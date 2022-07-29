@@ -20,6 +20,7 @@ import com.google.common.truth.Truth
 import com.google.devsite.components.symbols.ClassSignature
 import com.google.devsite.components.symbols.TypeParameterComponent
 import com.google.devsite.components.testing.NoopAnnotationComponent
+import com.google.devsite.components.testing.NoopFilePathProvider
 import com.google.devsite.components.testing.NoopLink
 import com.google.devsite.components.testing.NoopTypeProjectionComponent
 import com.google.devsite.renderer.Language
@@ -46,7 +47,8 @@ class DefaultClassSignatureTest {
                         TypeParameterComponent.Params(
                             displayLanguage = Language.KOTLIN,
                             name = "GenericType",
-                            projections = listOf(NoopTypeProjectionComponent("GenericSupertype"))
+                            projections = listOf(NoopTypeProjectionComponent("GenericSupertype")),
+                            pathProvider = NoopFilePathProvider()
                         )
                     )
                 ),
@@ -83,7 +85,8 @@ class DefaultClassSignatureTest {
                         TypeParameterComponent.Params(
                             displayLanguage = Language.KOTLIN,
                             name = "GenericType",
-                            projections = listOf(NoopTypeProjectionComponent("GenericSupertype"))
+                            projections = listOf(NoopTypeProjectionComponent("GenericSupertype")),
+                            pathProvider = NoopFilePathProvider()
                         )
                     )
                 ),

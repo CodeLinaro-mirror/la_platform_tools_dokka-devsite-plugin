@@ -147,10 +147,10 @@ internal interface FilePathProvider {
             className
         }
     }
+    val ANY: TypeProjectionComponent
 }
 
 internal val ANY_DRI: Map<Language, DRI> = mapOf(
     Language.JAVA to DRI("java.lang", "Object"),
     Language.KOTLIN to DRI("kotlin", "Any")
 )
-internal val ANY: MutableMap<Language, TypeProjectionComponent> = mutableMapOf()

@@ -47,4 +47,6 @@ internal class RelativeFilePathProvider(
 
     private fun getFileRelativePath(tenant: String, fileName: String) =
         if (tenant.isEmpty()) fileName else "$tenant/$fileName"
+
+    override val ANY get() = throw RuntimeException("Not associated with a language")
 }

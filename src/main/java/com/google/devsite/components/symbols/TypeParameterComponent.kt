@@ -19,7 +19,7 @@ package com.google.devsite.components.symbols
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.EmptyModifiers
 import com.google.devsite.renderer.converters.Modifiers
-import com.google.devsite.renderer.impl.paths.ANY
+import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.html.FlowContent
 
 /** Represents a generic type parameter. */
@@ -46,12 +46,13 @@ internal interface TypeParameterComponent : ParameterComponent {
         override val name: String,
         override val modifiers: Modifiers = EmptyModifiers,
         val projections: List<TypeProjectionComponent>,
-        override val annotationComponents: List<AnnotationComponent> = emptyList()
+        override val annotationComponents: List<AnnotationComponent> = emptyList(),
+        val pathProvider: FilePathProvider
     ) : ParameterComponent.Params(
         displayLanguage = displayLanguage,
         name = name,
         modifiers = modifiers,
-        type = projections.firstOrNull() ?: ANY[displayLanguage]!!,
+        type = projections.firstOrNull() ?: pathProvider.ANY,
         annotationComponents = annotationComponents
     )
 }

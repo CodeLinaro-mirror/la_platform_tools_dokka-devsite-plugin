@@ -37,13 +37,11 @@ internal abstract class DacKotlinFilePathProviderBase(
     classGraph = classGraph,
     documentablesGraph = documentablesGraph
 ) {
-    init {
-        ANY[Language.KOTLIN] = DefaultTypeProjectionComponent(
-            TypeProjectionComponent.Params(
-                type = this.linkForReference(ANY_DRI[Language.KOTLIN]!!),
-                nullability = Nullability.KOTLIN_DEFAULT,
-                displayLanguage = Language.KOTLIN
-            )
+    override val ANY = DefaultTypeProjectionComponent(
+        TypeProjectionComponent.Params(
+            type = this.linkForReference(ANY_DRI[Language.KOTLIN]!!),
+            nullability = Nullability.KOTLIN_DEFAULT,
+            displayLanguage = Language.KOTLIN
         )
-    }
+    )
 }

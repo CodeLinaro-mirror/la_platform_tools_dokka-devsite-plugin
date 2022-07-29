@@ -199,7 +199,8 @@ internal class ParameterDocumentableConverter(
                         )
                     }
                 )
-            }
+            },
+            pathProvider = pathProvider
         )
     )
 

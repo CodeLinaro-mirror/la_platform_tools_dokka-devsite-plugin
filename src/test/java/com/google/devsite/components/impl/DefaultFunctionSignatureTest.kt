@@ -19,6 +19,7 @@ package com.google.devsite.components.impl
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.symbols.FunctionSignature.Params
 import com.google.devsite.components.symbols.TypeParameterComponent
+import com.google.devsite.components.testing.NoopFilePathProvider
 import com.google.devsite.components.testing.NoopLink
 import com.google.devsite.components.testing.NoopParameterComponent
 import com.google.devsite.components.testing.NoopTypeProjectionComponent
@@ -160,7 +161,8 @@ class DefaultFunctionSignatureTest {
                                 projections = listOf(
                                     NoopTypeProjectionComponent("CharSequence"),
                                     NoopTypeProjectionComponent("Comparable<T>")
-                                )
+                                ),
+                                pathProvider = NoopFilePathProvider()
                             )
                         )
                     )
