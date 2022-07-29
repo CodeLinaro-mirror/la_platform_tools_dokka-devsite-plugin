@@ -22,7 +22,6 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.Nullability
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesGraph
-import org.jetbrains.dokka.links.DRI
 
 /** Creates file paths for DAC Java consumption. */
 internal class DacJavaFilePathProvider(
@@ -35,10 +34,9 @@ internal class DacJavaFilePathProvider(
     documentablesGraph = documentablesGraph
 ) {
     init {
-        ANY_LINK[Language.JAVA] = linkForReference(DRI("java.lang", "Object"))
         ANY[Language.JAVA] = DefaultTypeProjectionComponent(
             TypeProjectionComponent.Params(
-                type = linkForReference(DRI("java.lang", "Object")),
+                type = linkForReference(ANY_DRI[Language.JAVA]!!),
                 nullability = Nullability.JAVA_NOT_ANNOTATED,
                 displayLanguage = Language.JAVA
             )

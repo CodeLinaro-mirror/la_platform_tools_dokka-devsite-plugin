@@ -22,7 +22,6 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.Nullability
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesGraph
-import org.jetbrains.dokka.links.DRI
 
 /** Base file paths for DAC Kotlin consumption. */
 internal abstract class DacKotlinFilePathProviderBase(
@@ -39,10 +38,9 @@ internal abstract class DacKotlinFilePathProviderBase(
     documentablesGraph = documentablesGraph
 ) {
     init {
-        ANY_LINK[Language.KOTLIN] = this.linkForReference(DRI("kotlin", "Any"))
         ANY[Language.KOTLIN] = DefaultTypeProjectionComponent(
             TypeProjectionComponent.Params(
-                type = this.linkForReference(DRI("kotlin", "Any")),
+                type = this.linkForReference(ANY_DRI[Language.KOTLIN]!!),
                 nullability = Nullability.KOTLIN_DEFAULT,
                 displayLanguage = Language.KOTLIN
             )
