@@ -468,7 +468,8 @@ internal class DocTagConverter(
                     "the containing file does not import? Is docs inherited to an un-documented " +
                     "override function, but the exception class is not in scope in the inheriting" +
                     " class? The general fix for these is to fully qualify the exception name, " +
-                    " e.g.`@throws java.io.IOException under some conditions`"
+                    " e.g.`@throws java.io.IOException under some conditions. This was observed" +
+                    " in $throws.`"
             )
             DefaultLink(Link.Params(name, ""))
         } else pathProvider.linkForReference(throws.exceptionAddress!!, name)
