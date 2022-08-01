@@ -1072,6 +1072,12 @@ internal class DocTagConverterTest(
             | */
             |public void foo() {}
         """.render(java = true)
+        val moduleJ3 = """
+            |/**
+            | * @throws IOException if file operations fail
+            | */
+            |public void foo() {}
+        """.render(java = true)
         val moduleK1 = """
             |/**
             | * @throws an IllegalStateException if my syntax is bad
@@ -1081,6 +1087,12 @@ internal class DocTagConverterTest(
         val moduleK2 = """
             |/**
             | * @throws [IllegalStateException] but this one is actually fine, it turns out
+            | */
+            |fun foo()
+        """.render()
+        val moduleK3 = """
+            |/**
+            | * @throws IOException if file operations fail
             | */
             |fun foo()
         """.render()
@@ -1094,6 +1106,14 @@ internal class DocTagConverterTest(
         val throwsBad3 = moduleK1.throwsTable().item()
         assertThat(outputStreamCaptor.toString()).contains("WARNING: do not use 'an' before")
         outputStreamCaptor.reset()
+        val throwsBad4 = moduleJ3.throwsTable().item()
+        assertThat(outputStreamCaptor.toString())
+            .contains("The general fix for these is to fully qualify the exception name")
+        outputStreamCaptor.reset()
+        val throwsBad5 = moduleK3.throwsTable().item()
+        assertThat(outputStreamCaptor.toString())
+            .contains("The general fix for these is to fully qualify the exception name")
+        outputStreamCaptor.reset()
         val throwsFine1 = moduleK2.throwsTable().item()
         assertThat(outputStreamCaptor.toString()).isEmpty()
 
@@ -1102,12 +1122,21 @@ internal class DocTagConverterTest(
             assertThat(throws.data.title.typeName()).isEqualTo("IllegalStateException")
             assertThat(throws.data.title.link().url).isEqualTo("")
         }
+        for (throws in listOf(throwsBad4, throwsBad5)) {
+            assertThat(throws.name()).isEqualTo("IOException")
+            assertThat(throws.data.title.typeName()).isEqualTo("IOException")
+            assertThat(throws.data.title.link().url).isEqualTo("")
+        }
 
         assertThat(throwsBad1.data.description.text()).isEqualTo("if I try to linkify")
         assertThat(throwsBad2.data.description.text())
             .isEqualTo("IllegalStateException if my syntax is bad")
         assertThat(throwsBad3.data.description.text())
             .isEqualTo("IllegalStateException if my syntax is bad")
+        assertThat(throwsBad4.data.description.text())
+            .isEqualTo("if file operations fail")
+        assertThat(throwsBad5.data.description.text())
+            .isEqualTo("if file operations fail")
 
         assertThat(throwsFine1.data.description.text())
             .isEqualTo("but this one is actually fine, it turns out")
