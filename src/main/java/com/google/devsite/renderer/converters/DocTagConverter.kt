@@ -462,7 +462,16 @@ internal class DocTagConverter(
             )
             name = name.removePrefix("{@link ").removeSuffix("}")
             DefaultLink(Link.Params(name, ""))
-        } else pathProvider.linkForReference(throws.exceptionAddress!!, throws.name)
+        } else if (throws.exceptionAddress == null) {
+            println(
+                "WARNING: link to @throws type $name does not resolve. Is it from a package that " +
+                    "the containing file does not import? Is docs inherited to an un-documented " +
+                    "override function, but the exception class is not in scope in the inheriting" +
+                    " class? The general fix for these is to fully qualify the exception name, " +
+                    " e.g.`@throws java.io.IOException under some conditions`"
+            )
+            DefaultLink(Link.Params(name, ""))
+        } else pathProvider.linkForReference(throws.exceptionAddress!!, name)
         return DefaultParameterComponent(
             ParameterComponent.Params(
                 displayLanguage = displayLanguage,
