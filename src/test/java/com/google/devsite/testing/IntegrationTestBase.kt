@@ -134,21 +134,13 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                 assertWithMessage(message).that(generatedContent).isEqualTo(expectedText)
             }
         }
-        /*  Apparently, the generation of every single file is flaky. b/240145323
         val expectedFileList = File(outputPath).recursivelyListFiles()
         // This same "fix" happens automatically when the file is written, so it's needed to match
         val fixedGeneratedPaths = generatedFiles.keys.map { it.replace("//", "/") }
         for (eFile in expectedFileList) {
-            if (
-                eFile.path.endsWith("package-list") ||
-                eFile.path.endsWith("index.html") ||
-                eFile.path.endsWith("classes.html") ||
-                eFile.path.endsWith("packages.html")
-            ) continue // b/240145323 generation flaky
             assertWithMessage("File ${eFile.path} was expected but not generated!")
                 .that(eFile.path.removePrefix(outputPath) in fixedGeneratedPaths).isTrue()
         }
-        */
     }
 
     fun File.recursivelyListFiles(): List<File> =
