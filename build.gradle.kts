@@ -39,13 +39,14 @@ application {
 }
 val dokkaVersion = "1.7.20-dev-173"
 val jacksonVersion = "2.13.1"
+val coroutinesVersion = "1.6.3"
 
 dependencies {
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-analysis:$dokkaVersion")
 
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.5")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$coroutinesVersion")
 
     implementation("org.jetbrains.dokka:dokka-base-test-utils:$dokkaVersion")
     implementation("org.jetbrains.dokka:dokka-base:$dokkaVersion")
@@ -109,10 +110,10 @@ dependencies {
     testDataImpl("io.reactivex.rxjava3:rxjava:3.0.0")
     testDataImpl("io.reactivex.rxjava2:rxjava:2.2.9")
     testDataImpl("org.robolectric:sandbox:4.8.1")
-    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.1")
-    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.6.1")
-    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx3:1.6.1")
-    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.6.1")
+    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$coroutinesVersion")
+    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$coroutinesVersion")
+    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx3:$coroutinesVersion")
+    testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$coroutinesVersion")
     testDataImpl("org.robolectric:android-all-instrumented:12-robolectric-7732740-i4")
 
     testDataImpl(fileTree("$buildDir/exploded"))
