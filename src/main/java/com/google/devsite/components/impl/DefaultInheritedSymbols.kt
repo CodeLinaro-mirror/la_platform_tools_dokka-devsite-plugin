@@ -28,7 +28,7 @@ import kotlinx.html.tr
 import kotlinx.html.unsafe
 
 /** Default implementation of inherited symbols. */
-internal class DefaultInheritedSymbols(
+internal data class DefaultInheritedSymbols(
     override val data: InheritedSymbolsList.Params
 ) : InheritedSymbolsList {
     override fun render(into: FlowContent) {

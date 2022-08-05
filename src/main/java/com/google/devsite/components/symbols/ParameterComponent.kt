@@ -42,7 +42,40 @@ internal interface ParameterComponent : SymbolBase {
         open val type: TypeProjectionComponent,
         open val annotationComponents: List<AnnotationComponent> = emptyList(),
         val defaultValue: String? = null
-    )
+    ) {
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (other !is Params) return false
+
+            if (displayLanguage != other.displayLanguage) return false
+            if (name != other.name) return false
+            if (modifiers != other.modifiers) return false
+            if (type != other.type) return false
+            if (annotationComponents != other.annotationComponents) return false
+            if (defaultValue != other.defaultValue) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            var result = displayLanguage.hashCode()
+            result = 31 * result + name.hashCode()
+            result = 31 * result + modifiers.hashCode()
+            result = 31 * result + type.hashCode()
+            result = 31 * result + annotationComponents.hashCode()
+            result = 31 * result + (defaultValue?.hashCode() ?: 0)
+            return result
+        }
+
+        override fun toString(): String {
+            return "displayLanguage: $displayLanguage, " +
+                "name: $name, " +
+                "modifiers: $modifiers, " +
+                "type: $type, " +
+                "annotationComponents: $annotationComponents, " +
+                "defaultValue: $defaultValue"
+        }
+    }
 
     val nullable: Boolean
         get() = data.type.nullable || data.annotationComponents.any { it.name == "Nullable" }

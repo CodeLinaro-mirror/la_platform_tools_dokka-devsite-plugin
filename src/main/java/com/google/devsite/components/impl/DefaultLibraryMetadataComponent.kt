@@ -22,7 +22,7 @@ import kotlinx.html.FlowContent
 import kotlinx.html.div
 
 /** Default implementation of a LibraryMetadata. */
-internal class DefaultLibraryMetadataComponent(
+internal data class DefaultLibraryMetadataComponent(
     override val data: LibraryMetadata
 ) : LibraryMetadataComponent {
 

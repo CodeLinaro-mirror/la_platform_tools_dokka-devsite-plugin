@@ -22,7 +22,7 @@ import kotlinx.html.a
 import kotlinx.html.p
 
 /** Default implementation of the list of packages page. */
-internal class DefaultPackageIndex(
+internal data class DefaultPackageIndex(
     override val data: PackageIndex.Params
 ) : PackageIndex {
     override fun render(into: FlowContent) = into.run {

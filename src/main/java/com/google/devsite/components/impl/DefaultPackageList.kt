@@ -19,7 +19,7 @@ package com.google.devsite.components.impl
 import com.google.devsite.components.pages.PackageList
 
 /** Default implementation of the package-list. */
-internal class DefaultPackageList(
+internal data class DefaultPackageList(
     override val data: PackageList.Params
 ) : PackageList {
     override fun render(into: StringBuilder) = into.run {

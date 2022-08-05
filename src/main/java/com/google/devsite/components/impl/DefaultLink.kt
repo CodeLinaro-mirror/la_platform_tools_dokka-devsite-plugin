@@ -21,7 +21,7 @@ import kotlinx.html.FlowContent
 import kotlinx.html.a
 
 /** Default implementation of a link. */
-internal class DefaultLink(
+internal data class DefaultLink(
     override val data: Link.Params
 ) : Link {
     override fun render(into: FlowContent) = into.run {

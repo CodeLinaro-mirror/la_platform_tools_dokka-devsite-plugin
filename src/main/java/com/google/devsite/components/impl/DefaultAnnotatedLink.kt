@@ -21,7 +21,7 @@ import com.google.devsite.components.symbols.AnnotatedLink
 import com.google.devsite.joinMaybePrefix
 import kotlinx.html.FlowContent
 
-internal class DefaultAnnotatedLink(
+internal data class DefaultAnnotatedLink(
     override val data: AnnotatedLink.Params
 ) : AnnotatedLink {
 

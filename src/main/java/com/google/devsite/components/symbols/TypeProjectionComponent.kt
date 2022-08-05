@@ -38,7 +38,37 @@ internal interface TypeProjectionComponent : SymbolBase {
         open val nullability: Nullability,
         open val generics: List<TypeProjectionComponent> = emptyList(),
         open val displayLanguage: Language
-    )
+    ) {
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (other !is Params) return false
+
+            if (type != other.type) return false
+            if (annotationComponents != other.annotationComponents) return false
+            if (nullability != other.nullability) return false
+            if (generics != other.generics) return false
+            if (displayLanguage != other.displayLanguage) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            var result = type.hashCode()
+            result = 31 * result + annotationComponents.hashCode()
+            result = 31 * result + nullability.hashCode()
+            result = 31 * result + generics.hashCode()
+            result = 31 * result + displayLanguage.hashCode()
+            return result
+        }
+
+        override fun toString(): String {
+            return "type: $type, " +
+                "annotationComponents: $annotationComponents, " +
+                "nullability: $nullability, " +
+                "generics: $generics, " +
+                "displayLanguage: $displayLanguage"
+        }
+    }
 
     val nullable: Boolean get() = data.nullability.nullable
     val annotations: List<AnnotationComponent> get() = data.annotationComponents

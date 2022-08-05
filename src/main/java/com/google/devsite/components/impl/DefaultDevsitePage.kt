@@ -25,7 +25,7 @@ import kotlinx.html.title
 import kotlinx.html.unsafe
 
 /** Default implementation of the root component for devsite. */
-internal class DefaultDevsitePage(
+internal data class DefaultDevsitePage(
     override val data: DevsitePage.Params
 ) : DevsitePage {
     override fun render(into: HTML) = into.run {

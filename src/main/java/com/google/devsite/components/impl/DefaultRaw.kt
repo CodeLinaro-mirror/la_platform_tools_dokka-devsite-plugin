@@ -20,7 +20,7 @@ import com.google.devsite.components.Raw
 import kotlinx.html.FlowContent
 
 /** Default implementation of plain text. */
-internal class DefaultRaw(
+internal data class DefaultRaw(
     override val data: Raw.Params
 ) : Raw {
     override fun render(into: FlowContent) = into.run {

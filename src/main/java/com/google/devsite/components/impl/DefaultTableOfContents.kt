@@ -19,7 +19,7 @@ package com.google.devsite.components.impl
 import com.google.devsite.components.pages.TableOfContents
 
 /** Default implementation of the toc. */
-internal class DefaultTableOfContents(
+internal data class DefaultTableOfContents(
     override val data: TableOfContents.Params
 ) : TableOfContents {
     override fun render(into: StringBuilder) = into.run {
