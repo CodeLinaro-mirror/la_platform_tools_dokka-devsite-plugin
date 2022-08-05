@@ -27,7 +27,7 @@ import kotlinx.html.tr
 import kotlin.math.max
 
 /** Default implementation of a class hierarchy. */
-internal class DefaultClassHierarchy(
+internal data class DefaultClassHierarchy(
     override val data: ClassHierarchy.Params
 ) : ClassHierarchy {
     override fun render(into: FlowContent) = into.run {

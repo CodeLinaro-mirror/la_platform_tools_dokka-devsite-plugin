@@ -22,7 +22,7 @@ import com.google.devsite.joinMaybePrefix
 import kotlinx.html.FlowContent
 
 /** Default implementation of a type summary. */
-internal class DefaultTypeSummary(
+internal data class DefaultTypeSummary(
     override val data: TypeSummary.Params
 ) : TypeSummary {
     override fun render(into: FlowContent) = into.run {

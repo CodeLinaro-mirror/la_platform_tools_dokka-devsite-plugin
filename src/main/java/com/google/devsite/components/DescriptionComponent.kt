@@ -28,5 +28,30 @@ internal interface DescriptionComponent : ContextFreeComponent {
         val components: List<DocTag> = emptyList(),
         val summary: Boolean = false,
         val deprecation: String? = null
-    )
+    ) {
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (other !is Params) return false
+
+            // NOTE: DocTag is a sealed class that is all data classes
+            if (components != other.components) return false
+            if (summary != other.summary) return false
+            if (deprecation != other.deprecation) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            var result = components.hashCode()
+            result = 31 * result + summary.hashCode()
+            result = 31 * result + (deprecation?.hashCode() ?: 0)
+            return result
+        }
+
+        override fun toString(): String {
+            return "components: $components, " +
+                "summary: $summary, " +
+                "deprecation: $deprecation"
+        }
+    }
 }

@@ -138,7 +138,7 @@ import org.jetbrains.dokka.model.doc.Ul
 import org.jetbrains.dokka.model.doc.Var
 
 /** Default implementation of the hand-written documentation for a symbol. */
-internal class DefaultDescriptionComponent(
+internal data class DefaultDescriptionComponent(
     override val data: DescriptionComponent.Params
 ) : DescriptionComponent {
     override fun render(into: FlowContent) = into.run {

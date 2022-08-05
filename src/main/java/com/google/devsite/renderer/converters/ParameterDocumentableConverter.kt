@@ -103,7 +103,7 @@ internal class ParameterDocumentableConverter(
                     modifiers = param.getExtraModifiers()
                         .modifiersFor(
                             ModifierHints(
-                                Language.JAVA,
+                                displayLanguage = Language.JAVA,
                                 isSummary = false,
                                 type = DParameter::class.java,
                                 containingType = null

@@ -22,7 +22,7 @@ import kotlinx.html.TR
 import kotlinx.html.td
 
 /** Default implementation of the single column layout item for constructors. */
-internal class DefaultSingleColumnSummaryItem<T : ContextFreeComponent>(
+internal data class DefaultSingleColumnSummaryItem<T : ContextFreeComponent>(
     override val data: SingleColumnSummaryItem.Params<T>
 ) : SingleColumnSummaryItem<T> {
     override fun render(into: TR) = into.run {

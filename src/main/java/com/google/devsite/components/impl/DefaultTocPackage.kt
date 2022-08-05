@@ -19,7 +19,7 @@ package com.google.devsite.components.impl
 import com.google.devsite.components.symbols.TocPackage
 
 /** Default implementation of the toc. */
-internal class DefaultTocPackage(
+internal data class DefaultTocPackage(
     override val data: TocPackage.Params
 ) : TocPackage {
     override fun render(into: StringBuilder) = into.run {

@@ -25,7 +25,7 @@ import kotlinx.html.Entities.nbsp
 import kotlinx.html.FlowContent
 
 /** Default implementation of a function or class type parameter. */
-internal class DefaultTypeParameterComponent(
+internal data class DefaultTypeParameterComponent(
     override val data: TypeParameterComponent.Params
 ) : TypeParameterComponent {
     init {

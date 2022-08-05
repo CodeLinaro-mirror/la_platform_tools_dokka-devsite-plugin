@@ -24,7 +24,7 @@ import com.google.devsite.renderer.Language
 import kotlinx.html.FlowContent
 import kotlinx.html.pre
 
-internal class DefaultClassSignature(
+internal data class DefaultClassSignature(
     override val data: ClassSignature.Params
 ) : ClassSignature {
 

@@ -31,7 +31,7 @@ import kotlinx.html.h3
 import kotlinx.html.pre
 
 /** Default implementation of a fully documented function. */
-internal class DefaultSymbolDetail(
+internal data class DefaultSymbolDetail(
     override val data: SymbolDetail.Params
 ) : SymbolDetail {
     override fun render(into: FlowContent) = into.div {

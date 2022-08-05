@@ -140,7 +140,7 @@ internal class PackageDocumentableConverter(
     private fun propertiesToSummary(properties: List<DProperty>):
         SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
         val modifierHints = ModifierHints(
-            displayLanguage,
+            displayLanguage = displayLanguage,
             isSummary = true,
             type = DProperty::class.java,
             containingType = DPackage::class.java

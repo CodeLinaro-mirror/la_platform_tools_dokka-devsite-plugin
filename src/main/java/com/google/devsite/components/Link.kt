@@ -25,5 +25,25 @@ internal interface Link : ContextFreeComponent, Sizeable {
     open class Params(
         val name: String,
         val url: String
-    )
+    ) {
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (other !is Params) return false
+
+            if (name != other.name) return false
+            if (url != other.url) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            var result = name.hashCode()
+            result = 31 * result + url.hashCode()
+            return result
+        }
+
+        override fun toString(): String {
+            return "name: $name, url: $url"
+        }
+    }
 }

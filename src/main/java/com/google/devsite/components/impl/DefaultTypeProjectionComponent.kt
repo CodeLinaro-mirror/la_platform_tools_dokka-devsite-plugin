@@ -24,7 +24,7 @@ import com.google.devsite.renderer.Language
 import kotlinx.html.FlowContent
 
 /** Default implementation of a function parameter type. */
-internal class DefaultTypeProjectionComponent(
+internal data class DefaultTypeProjectionComponent(
     override val data: TypeProjectionComponent.Params
 ) : TypeProjectionComponent {
     override fun render(into: FlowContent) = into.run {

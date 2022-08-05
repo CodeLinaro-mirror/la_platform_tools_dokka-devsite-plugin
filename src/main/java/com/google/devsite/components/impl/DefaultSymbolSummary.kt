@@ -22,7 +22,7 @@ import kotlinx.html.code
 import kotlinx.html.div
 
 /** Default implementation of a function summary. */
-internal class DefaultSymbolSummary(
+internal data class DefaultSymbolSummary(
     override val data: SymbolSummary.Params
 ) : SymbolSummary {
     override fun render(into: FlowContent) = into.run {
