@@ -20,9 +20,8 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.Classlike.Params
 import com.google.devsite.components.pages.emptyTitledList
-import com.google.devsite.components.testing.NoopAnnotationComponent
 import com.google.devsite.components.testing.NoopClassHierarchy
-import com.google.devsite.components.testing.NoopClassSignature
+import com.google.devsite.components.testing.NoopClasslikeSignature
 import com.google.devsite.components.testing.NoopDescriptionComponent
 import com.google.devsite.components.testing.NoopRelatedSymbols
 import com.google.devsite.components.testing.NoopSummaryList
@@ -131,8 +130,7 @@ class DefaultClasslikeTest {
                 publicFunctionsDetails = Classlike.TitledList(
                     "Symbols",
                     listOf(NoopSymbolDetail)
-                ),
-                annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation"))
+                )
             )
         )
 
@@ -145,7 +143,7 @@ class DefaultClasslikeTest {
             """
 <body>
   <p>
-    <pre>@GenericAnnotation<br>Signature</pre>
+    <pre>Signature</pre>
   </p>
   <h2>Summary</h2>
   <div>noop</div>
@@ -160,11 +158,10 @@ class DefaultClasslikeTest {
 internal val emptyClasslikeParams =
     Params(
         displayLanguage = Language.KOTLIN, // We only use no-op components; this is fine
-        signature = NoopClassSignature(),
+        signature = NoopClasslikeSignature(),
         hierarchy = NoopClassHierarchy(shown = false),
         relatedSymbols = NoopRelatedSymbols(shown = false),
         description = emptyList(),
-        annotationComponents = emptyList(),
         nestedTypesSummary = emptySummaryList(),
         enumValuesSummary = emptySummaryList(),
         enumValuesDetails = emptyTitledList(),

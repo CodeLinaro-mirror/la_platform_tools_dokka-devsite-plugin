@@ -17,8 +17,9 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth
-import com.google.devsite.components.symbols.ClassSignature
+import com.google.devsite.components.symbols.ClasslikeSignature
 import com.google.devsite.components.symbols.TypeParameterComponent
+import com.google.devsite.components.testing.NoopAnnotationComponent
 import com.google.devsite.components.testing.NoopFilePathProvider
 import com.google.devsite.components.testing.NoopLink
 import com.google.devsite.components.testing.NoopTypeProjectionComponent
@@ -29,13 +30,13 @@ import kotlinx.html.body
 import kotlinx.html.stream.createHTML
 import org.junit.Test
 
-class DefaultClassSignatureTest {
+class DefaultClasslikeSignatureTest {
     @Test
     fun `Class signature renders correctly in Java`() {
-        val component = DefaultClassSignature(
-            ClassSignature.Params(
+        val component = DefaultClasslikeSignature(
+            ClasslikeSignature.Params(
                 displayLanguage = Language.JAVA,
-                name = "Foo",
+                name = NoopLink("Foo"),
                 type = "class",
                 modifiers = Modifiers("public", "abstract"),
                 extends = listOf(NoopLink("Anyclass")),
@@ -49,7 +50,8 @@ class DefaultClassSignatureTest {
                             displayLanguage = Language.KOTLIN
                         )
                     )
-                )
+                ),
+                annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation"))
             )
         )
 
@@ -60,17 +62,17 @@ class DefaultClassSignatureTest {
         // language=html
         Truth.assertThat(output).isEqualTo(
             """
-<body>public abstract class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; extends Anyclass implements SomeInterface</body>
+<body>@GenericAnnotation<br>public abstract class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; extends Anyclass implements SomeInterface</body>
             """.trim()
         )
     }
 
     @Test
     fun `Class signature renders correctly in Kotlin`() {
-        val component = DefaultClassSignature(
-            ClassSignature.Params(
+        val component = DefaultClasslikeSignature(
+            ClasslikeSignature.Params(
                 displayLanguage = Language.KOTLIN,
-                name = "Foo",
+                name = NoopLink("Foo"),
                 type = "class",
                 modifiers = Modifiers("open"),
                 extends = listOf(NoopLink("Anyclass")),
@@ -84,7 +86,8 @@ class DefaultClassSignatureTest {
                             displayLanguage = Language.KOTLIN
                         )
                     )
-                )
+                ),
+                annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation"))
             )
         )
 
@@ -95,22 +98,23 @@ class DefaultClassSignatureTest {
         // language=html
         Truth.assertThat(output).isEqualTo(
             """
-<body>open class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; : Anyclass, SomeInterface</body>
+<body>@GenericAnnotation<br>open class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; : Anyclass, SomeInterface</body>
             """.trim()
         )
     }
 
     @Test
     fun `Interfaces extend other interfaces`() { // and do not "implement" them
-        val component = DefaultClassSignature(
-            ClassSignature.Params(
+        val component = DefaultClasslikeSignature(
+            ClasslikeSignature.Params(
                 displayLanguage = Language.JAVA,
-                name = "Foo",
+                name = NoopLink("Foo"),
                 type = "interface",
                 modifiers = EmptyModifiers,
                 extends = listOf(),
                 implements = listOf(NoopLink("SomeInterface")),
-                typeParameters = listOf()
+                typeParameters = listOf(),
+                annotationComponents = emptyList()
             )
         )
 

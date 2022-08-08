@@ -16,7 +16,6 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.render
 import com.google.devsite.joinMaybePrefix
@@ -33,7 +32,6 @@ internal data class DefaultClasslike(
     override fun render(into: FlowContent) = into.run {
         p {
             pre {
-                data.annotationComponents.render(into, ShouldBreak.YES, separator = "")
                 data.signature.render(this)
             }
         }

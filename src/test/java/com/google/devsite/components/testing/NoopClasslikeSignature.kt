@@ -16,11 +16,11 @@
 
 package com.google.devsite.components.testing
 
-import com.google.devsite.components.symbols.ClassSignature
+import com.google.devsite.components.symbols.ClasslikeSignature
 import kotlinx.html.FlowContent
 
-internal class NoopClassSignature(private val shown: Boolean = true) : ClassSignature {
-    override val data: ClassSignature.Params
+internal class NoopClasslikeSignature(private val shown: Boolean = true) : ClasslikeSignature {
+    override val data: ClasslikeSignature.Params
         get() = throw NotImplementedError()
 
     override fun render(into: FlowContent) = into.run {

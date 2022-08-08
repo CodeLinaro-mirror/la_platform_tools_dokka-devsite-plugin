@@ -21,22 +21,24 @@ import com.google.devsite.FunctionSummaryList
 import com.google.devsite.LinkDescriptionSummaryList
 import com.google.devsite.PropertySummaryList
 import com.google.devsite.TypeSummaryItem
+import com.google.devsite.WithDescriptionList
 import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultClassHierarchy
-import com.google.devsite.components.impl.DefaultClassSignature
 import com.google.devsite.components.impl.DefaultClasslike
+import com.google.devsite.components.impl.DefaultClasslikeSignature
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultInheritedSymbols
 import com.google.devsite.components.impl.DefaultLibraryMetadataComponent
 import com.google.devsite.components.impl.DefaultRelatedSymbols
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableTitle
+import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.impl.emptyInheritedSymbolsList
 import com.google.devsite.components.impl.emptySummaryList
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.Classlike.TitledList
 import com.google.devsite.components.pages.DevsitePage
-import com.google.devsite.components.symbols.ClassSignature
+import com.google.devsite.components.symbols.ClasslikeSignature
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.LibraryMetadataComponent
 import com.google.devsite.components.symbols.PropertySignature
@@ -48,7 +50,9 @@ import com.google.devsite.components.table.RelatedSymbols
 import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.util.LibraryMetadata
@@ -194,7 +198,8 @@ internal class ClasslikeDocumentableConverter(
         }
         val nestedTypesSummary = async {
             nestedTypesToSummary(
-                docsHolder.classlikesFor(classlike).withoutNeglectableCompanion()
+                docsHolder.classlikesFor(classlike).withoutNeglectableCompanion(),
+                docsHolder.classGraph()
             )
         }
         val constantsSummary = async {
@@ -291,7 +296,7 @@ internal class ClasslikeDocumentableConverter(
             emptyIfJava() ?: propertiesToDetail(companionProperties.filter(::isProtectedNonConst))
         }
 
-        val signature = async { computeSignature() }
+        val signature = async { computeSignature(classlike, docsHolder.classGraph()) }
         val hierarchy = async { computeHierarchy() }
         val relatedSymbols = async { findRelatedSymbols() }
         val inheritedTypes = async { computeInheritedSymbols(inheritedAll) }
@@ -436,11 +441,6 @@ internal class ClasslikeDocumentableConverter(
                         inheritedFunctions = inheritedFunctions ?: emptyInheritedSymbolsList(),
                         inheritedConstants = inheritedConstants ?: emptyInheritedSymbolsList(),
                         inheritedProperties = inheritedProperties ?: emptyInheritedSymbolsList(),
-                        annotationComponents = classlike.annotations().annotationComponents(
-                            pathProvider = pathProvider,
-                            displayLanguage = displayLanguage,
-                            nullability = Nullability.DONT_CARE // Classlike definitions aren't null
-                        )
                     )
                 ),
                 libraryMetadataComponent = libraryMetadataComponent.await()
@@ -452,7 +452,8 @@ internal class ClasslikeDocumentableConverter(
     private fun <T : SummaryItem> emptyIfJava() =
         if (displayLanguage == Language.JAVA) emptySummaryList<T>() else null
 
-    private fun nestedTypesToSummary(classlikes: List<DClasslike>): LinkDescriptionSummaryList {
+    private fun nestedTypesToSummary(classlikes: List<DClasslike>, classGraph: ClassGraph):
+        WithDescriptionList<ClasslikeSignature> {
         val components = when (displayLanguage) {
             // When displaying Kotlin pages, anonymous companion functions will be inlined and the
             // link to the companion object can be omitted. Named companion objects are presumably
@@ -460,10 +461,14 @@ internal class ClasslikeDocumentableConverter(
             // inherit from another type.
             Language.KOTLIN -> classlikes.withoutNeglectableCompanion()
             else -> classlikes
-        }.map {
-            errorContextInjector(it) {
-                classlike ->
-                javadocConverter.summaryForDocumentable(classlike, showAnnotations = true)
+        }.map { nestedClasslike ->
+            errorContextInjector(nestedClasslike) {
+                DefaultTwoPaneSummaryItem(
+                    TwoPaneSummaryItem.Params(
+                        computeSignature(nestedClasslike, classGraph),
+                        javadocConverter.summaryDescription(nestedClasslike)
+                    )
+                )
             }
         }
 
@@ -645,7 +650,8 @@ internal class ClasslikeDocumentableConverter(
         }
     }
 
-    private suspend fun computeSignature(): ClassSignature {
+    private fun computeSignature(classlike: DClasslike, classGraph: ClassGraph):
+        ClasslikeSignature {
         val modifiers = classlike.modifiers().modifiersFor(
             ModifierHints(
                 displayLanguage,
@@ -664,35 +670,45 @@ internal class ClasslikeDocumentableConverter(
         }
 
         if (classlike !is WithSupertypes) {
-            return DefaultClassSignature(
-                ClassSignature.Params(
+            return DefaultClasslikeSignature(
+                ClasslikeSignature.Params(
                     displayLanguage = displayLanguage,
-                    name = classlike.name(),
+                    name = pathProvider.linkForReference(classlike.dri, classlike.name()),
                     type = classlike.stringForType(displayLanguage),
                     modifiers = modifiers,
                     implements = emptyList(),
                     extends = emptyList(),
-                    typeParameters = typeParameters
+                    typeParameters = typeParameters,
+                    annotationComponents = classlike.annotations().annotationComponents(
+                        pathProvider = pathProvider,
+                        displayLanguage = displayLanguage,
+                        nullability = Nullability.DONT_CARE // Classlike definitions aren't null
+                    )
                 )
             )
         }
-        val extends = docsHolder.classGraph().getValue(classlike.dri).directSuperClasses.map {
+        val extends = classGraph.getValue(classlike.dri).directSuperClasses.map {
             pathProvider.linkForReference(it.dri)
         }
 
-        val implements = docsHolder.classGraph().getValue(classlike.dri).directInterfaces.map {
+        val implements = classGraph.getValue(classlike.dri).directInterfaces.map {
             pathProvider.linkForReference(it.dri)
         }
 
-        return DefaultClassSignature(
-            ClassSignature.Params(
+        return DefaultClasslikeSignature(
+            ClasslikeSignature.Params(
                 displayLanguage = displayLanguage,
-                name = classlike.name(),
+                name = pathProvider.linkForReference(classlike.dri, classlike.name()),
                 type = classlike.stringForType(displayLanguage),
                 modifiers = modifiers,
                 implements = implements,
                 extends = extends,
                 typeParameters = typeParameters,
+                annotationComponents = classlike.annotations().annotationComponents(
+                    pathProvider = pathProvider,
+                    displayLanguage = displayLanguage,
+                    nullability = Nullability.DONT_CARE // Classlike definitions aren't null
+                )
             )
         )
     }

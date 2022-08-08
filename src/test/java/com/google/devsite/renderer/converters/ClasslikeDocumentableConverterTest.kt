@@ -34,6 +34,7 @@ import com.google.devsite.renderer.converters.testing.companionName
 import com.google.devsite.renderer.converters.testing.content
 import com.google.devsite.renderer.converters.testing.description
 import com.google.devsite.renderer.converters.testing.from
+import com.google.devsite.renderer.converters.testing.fullName
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
@@ -321,7 +322,7 @@ internal class ClasslikeDocumentableConverterTest(
 
         val classlike = page.content<Classlike>()
         val summary = classlike.data.nestedTypesSummary
-        assertThat(summary.item().link().name).isEqualTo("Foo.Bar")
+        assertThat(summary.item().data.title.fullName()).isEqualTo("Foo.Bar")
     }
 
     @Test

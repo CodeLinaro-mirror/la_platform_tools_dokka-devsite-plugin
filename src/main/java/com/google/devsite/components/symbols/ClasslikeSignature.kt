@@ -22,16 +22,17 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.Modifiers
 
 /** Represents class signature. */
-internal interface ClassSignature : ContextFreeComponent {
+internal interface ClasslikeSignature : ContextFreeComponent {
     val data: Params
 
     data class Params(
         val displayLanguage: Language,
         val modifiers: Modifiers,
         val type: String,
-        val name: String,
+        val name: Link,
         val implements: List<Link>,
         val extends: List<Link>,
-        val typeParameters: List<TypeParameterComponent>
+        val typeParameters: List<TypeParameterComponent>,
+        val annotationComponents: List<AnnotationComponent>
     )
 }

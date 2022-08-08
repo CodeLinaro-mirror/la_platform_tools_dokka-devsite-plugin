@@ -20,10 +20,10 @@ import com.google.devsite.ConstructorSummaryList
 import com.google.devsite.FunctionSummaryList
 import com.google.devsite.LinkDescriptionSummaryList
 import com.google.devsite.PropertySummaryList
+import com.google.devsite.WithDescriptionList
 import com.google.devsite.components.Component
 import com.google.devsite.components.ContextFreeComponent
-import com.google.devsite.components.symbols.AnnotationComponent
-import com.google.devsite.components.symbols.ClassSignature
+import com.google.devsite.components.symbols.ClasslikeSignature
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
@@ -40,11 +40,11 @@ internal interface Classlike : ContextFreeComponent {
 
     data class Params(
         val displayLanguage: Language,
-        val signature: ClassSignature,
+        val signature: ClasslikeSignature,
         val hierarchy: ClassHierarchy,
         val relatedSymbols: RelatedSymbols,
         val description: List<ContextFreeComponent>,
-        val nestedTypesSummary: LinkDescriptionSummaryList,
+        val nestedTypesSummary: WithDescriptionList<ClasslikeSignature>,
         val enumValuesSummary: LinkDescriptionSummaryList,
         val enumValuesDetails: TitledList<SymbolDetail>,
         val constantsSummary: PropertySummaryList,
@@ -79,8 +79,7 @@ internal interface Classlike : ContextFreeComponent {
 
         val inheritedConstants: InheritedSymbolsList<PropertySignature>,
         val inheritedFunctions: InheritedSymbolsList<FunctionSignature>,
-        val inheritedProperties: InheritedSymbolsList<PropertySignature>,
-        val annotationComponents: List<AnnotationComponent>
+        val inheritedProperties: InheritedSymbolsList<PropertySignature>
     )
 
     data class TitledList<T : SymbolDetail>(val title: String, val symbols: List<T>) : List<T> {
