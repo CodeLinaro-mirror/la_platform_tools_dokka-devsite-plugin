@@ -49,6 +49,7 @@ import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DModule
+import org.jetbrains.dokka.model.DObject
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -1600,6 +1601,25 @@ internal class ClasslikeDocumentableConverterTest(
                 """
         )
         val module = testWithRootPageNode(src)
+    }
+
+    @Ignore // b/232944038; go/dokka-upstream-bug/2620
+    @Test
+    fun `Upstream hashcode does not use sources`() {
+        val moduleK = """
+            |object Foo {
+            |  fun bar() = Unit
+            |  const val baz = "baz"
+            |}
+        """.render()
+        val a = moduleK.children.first().children.first() as DObject
+        val a2 = a.copy()
+        val b = a.copy(sources = emptyMap())
+        assertThat(a.equals(a2)).isTrue()
+        assertThat(a.hashCode() == a2.hashCode()).isTrue()
+        // These lines fail
+        assertThat(a.equals(b)).isTrue()
+        assertThat(a.hashCode() == b.hashCode()).isTrue()
     }
 
     private fun DModule.page(name: String = "Foo"): DevsitePage {
