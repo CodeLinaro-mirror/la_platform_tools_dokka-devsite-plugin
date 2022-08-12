@@ -1,0 +1,85 @@
+/*
+ * Copyright 2022 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package dokkatest.companionStatic;
+
+import java.util.Comparator;
+
+// TODO: add tests around companion/static inheritance, including cross-language, protected static
+
+// Expectations for java-as:
+//
+
+public class JavaStatics {
+    public static int classStaticFunction() { return 4; }
+    public static int classStaticProp = 3;
+
+    // A demonstration of how Kotlin-as-Java static access works
+    private static void tests() {
+        double athing = 0;
+        String astring = "";
+        athing = KotlinObjectsKt.getTopLevelProp();
+        athing = KotlinObjectsKt.topLevelConst;
+        athing = KotlinObjectsKt.topLevelFunction();
+        athing = TopLevelObject.INSTANCE.namedTopLevelObjectFun();
+        // Not valid; TopLevelObject is a static context and namedTopLevelObjectFun is not static
+        // athing = TopLevelObject.namedTopLevelObjectFun();        // DO NOT DISPLAY
+        // Not valid; TopLevelObject() is an object and cannot be instantiated (no public ctor)
+        // athing = TopLevelObject().namedTopLevelObjectFun();      // DO NOT DISPLAY
+        athing = TopLevelObject.getNamedTopLevelJvmStaticProp();
+        athing = TopLevelObject.namedTopLevelJvmStaticFun();
+        athing = TopLevelObject.namedTopLevelconst;
+        athing = TopLevelObject.namedTopLevelJvmField;
+        athing = TopLevelInheritingObject.INSTANCE.inheritingTopLevelObjectFun();
+        astring = TopLevelInheritingObject.INSTANCE.getMessage(); // From Exception
+        athing = TopLevelInheritingObject.getInheritingTopLevelJvmStaticProp();
+        athing = TopLevelInheritingObject.inheritingTopLevelJvmStaticFun();
+        athing = TopLevelInheritingObject.inheritingTopLevelConst;
+        athing = TopLevelInheritingObject.inheritingTopLevelJvmField;
+        athing = TopLevelMultiInheritingObject.INSTANCE.multiInheritingTopLevelObjectFun();
+        astring = TopLevelMultiInheritingObject.INSTANCE.getMessage(); // From Exception
+        astring = TopLevelMultiInheritingObject.INSTANCE.reversed().toString(); // From Comparator
+        astring = Comparator.naturalOrder().toString();
+        // Not valid; static methods cannot be inherited like this      // From Comparator
+        // astring = TopLevelMultiInheritingObject.naturalOrder().toString(); // DO NOT DISPLAY
+        athing = TopLevelMultiInheritingObject.getMultiInheritingTopLevelStaticProp();
+        athing = TopLevelMultiInheritingObject.multiInheritingTopLevelStaticFun();
+        athing = TopLevelMultiInheritingObject.multiInheritingTopLevelConst;
+        athing = TopLevelMultiInheritingObject.multiInheritingTopLevelField;
+        athing = ContainerOfBoring.boringCompanionConst;                        // Parent Only
+        athing = ContainerOfBoring.boringCompanionStaticField;                  // Parent Only
+        athing = ContainerOfBoring.boringCompanionStaticField2;                 // Parent Only
+        athing = ContainerOfBoring.getBoringCompanionStaticProp();              // Is Duplicated
+        athing = ContainerOfBoring.boringCompanionStaticFun();                  // Is Duplicated
+        athing = ContainerOfBoring.Companion.getBoringCompanionStaticProp();    // Is Duplicated
+        athing = ContainerOfBoring.Companion.boringCompanionStaticFun();        // Is Duplicated
+        athing = ContainerOfBoring.Companion.getBoringCompanionObjectProp();    // Companion Only
+        athing = ContainerOfBoring.Companion.boringCompanionObjectFun();        // Companion Only
+        athing = ContainerOfNamed.namedCompanionConst;                          // Parent Only
+        athing = ContainerOfNamed.getNamedCompanionStaticProp();                // Is Duplicated
+        athing = ContainerOfNamed.NamedCompanion.getNamedCompanionStaticProp(); // Is Duplicated
+        athing = ContainerOfNamed.NamedCompanion.getNamedCompanionObjectProp(); // Companion Only
+        athing = ContainerOfNamed.NamedCompanion.namedCompanionObjectFun();     // Companion Only
+        // Not valid; named companion object funs should not be in companion section as-Java.
+        // AND they cannot be accessed through the container.
+        // I.e. as-Java, "in 'companion fields'" == "can access as Class.Companion.theField"
+        // athing = ContainerOfNamed.Companion.getNamedCompanionObjectProp();   // DO NOT DISPLAY
+        athing = ContainerOfInheriting.inheritingCompanionConst;                  // Parent Only
+        athing = ContainerOfInheriting.Companion.getInheritingCompanionObjectProp(); // Compion Only
+        athing = ContainerOfInheriting.Companion.inheritingCompanionObjectFun();// Companion Only
+        astring = ContainerOfInheriting.Companion.getMessage(); // From Exception. Companion Only
+    }
+}

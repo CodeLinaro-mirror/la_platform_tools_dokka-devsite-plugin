@@ -235,11 +235,11 @@ internal class DocTagConverter(
                     // Enforce that the propagated documentation makes sense somewhere. Specifically
                     // documentation primarily aimed at a constructor may wind up on the DClass
                     // if the parameter being documented is a primary constructor property parameter
+                    val constructorParamNames = (documentable as? WithConstructors)?.constructors
+                        ?.map { constructor -> constructor.parameters.map { it.name!! } }?.flatten()
+                        .orEmpty()
                     invalidNames.removeAll(
-                        documentable.properties.map { it.name } +
-                            (documentable as? WithConstructors)?.constructors?.map { constructor ->
-                                constructor.parameters.map { it.name!! }
-                            }?.flatten().orEmpty()
+                        (documentable.properties.map { it.name } + constructorParamNames).toSet()
                     )
                     logComponentNotFoundWarning("@param", invalidNames, documentable)
                     // Use only docs for type parameters in the parameter documentation table
@@ -267,7 +267,8 @@ internal class DocTagConverter(
                 is DClasslike -> {
                     logComponentNotFoundWarning(
                         "@property",
-                        tags.names().toSet().subtract(documentable.properties.map { it.name }),
+                        tags.names().toSet()
+                            .subtract(documentable.properties.map { it.name }.toSet()),
                         documentable
                     )
                     emptyList()
@@ -293,32 +294,12 @@ internal class DocTagConverter(
         docsHolder.logger.warn(warning)
     }
 
-    /** params() can take either a WithSources Documentable, or an isFromJava boolean */
-    private fun <T> params(
-        tags: List<NamedTagWrapper>,
-        dGenerics: List<DTypeParameter>,
-        documentable: T,
-    ) where T : Documentable, T : WithSources =
-        paramsImpl(tags, dGenerics, documentable, documentable.isFromJava())
-
     private fun params(
         tags: List<NamedTagWrapper>,
         dGenerics: List<DTypeParameter>,
         documentable: Documentable,
         isFromJava: Boolean
-    ) = paramsImpl(tags, dGenerics, documentable, isFromJava)
-
-    private fun paramsImpl(
-        tags: List<NamedTagWrapper>,
-        dGenerics: List<DTypeParameter>,
-        documentable: Documentable,
-        isFromJavaParam: Boolean? = null
     ): SummaryList<TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>> {
-        val isFromJava = if (isFromJavaParam != null) isFromJavaParam
-        else {
-            assert(documentable is WithSources)
-            (documentable as WithSources).isFromJava()
-        }
         // @param can refer to parameters, lambda parameters, type parameters, or receivers.
         val allOptions = mutableMapOf<String, ParameterComponent>()
         if (documentable is DFunction) {
@@ -363,8 +344,8 @@ internal class DocTagConverter(
             )
         }
 
-        return DefaultSummaryList<TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>>(
-            SummaryList.Params<TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>>(
+        return DefaultSummaryList(
+            SummaryList.Params(
                 header = DefaultTableTitle(TableTitle.Params("Parameters")),
                 items = params
             )
@@ -548,7 +529,7 @@ internal class DocTagConverter(
                 is Deprecated, is Suppress -> { /* TODO: We do not support these tags yet */ }
             }
         }
-        if (components.isEmpty()) return UndocumentedSymbolDescriptionComponent()
+        if (components.isEmpty()) return UndocumentedSymbolDescriptionComponent
         return description(components, summary, null)
     }
 
@@ -771,7 +752,7 @@ internal class DocTagConverter(
     internal fun docsToSummary(
         documentables: List<Documentable>,
         showAnnotations: Boolean = false
-    ) = DefaultSummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>(
+    ) = DefaultSummaryList(
         SummaryList.Params(
             items = documentables
                 .map { summaryForDocumentable(it, showAnnotations) }
@@ -785,7 +766,7 @@ internal class DocTagConverter(
     internal fun summaryForDocumentable(
         documentable: Documentable,
         showAnnotations: Boolean = false
-    ): DefaultTwoPaneSummaryItem<Link, DescriptionComponent> {
+    ): TwoPaneSummaryItem<Link, DescriptionComponent> {
         val annotations = documentable.annotations()
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(

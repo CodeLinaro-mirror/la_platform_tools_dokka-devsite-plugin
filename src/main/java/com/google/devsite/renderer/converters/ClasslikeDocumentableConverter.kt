@@ -90,13 +90,14 @@ internal class ClasslikeDocumentableConverter(
     /** @return the classlike component */
     suspend fun classlike(): DevsitePage = coroutineScope {
         var declaredFunctions = if (displayLanguage == Language.JAVA)
-            (classlike.functions + classlike.gettersAndSetters()).nonInheritedTypes()
+            (classlike.functions + classlike.properties.gettersAndSetters()).nonInheritedTypes()
         else classlike.functions.nonInheritedTypes()
 
         var declaredProperties = classlike.properties.nonInheritedTypes()
         var companionFunctions = classlike.companionFunctions()
         var companionProperties = classlike.companionProperties()
-        val inheritedAll = (classlike.children + classlike.gettersAndSetters()).inheritedTypes()
+        val inheritedAll = (classlike.children + classlike.properties.gettersAndSetters())
+            .inheritedTypes()
 
         // Java documentation needs to respect @jvm* annotations
         if (displayLanguage == Language.JAVA) {
@@ -124,7 +125,7 @@ internal class ClasslikeDocumentableConverter(
             enumValuesToSummary(enumValuesTitle(), enumValues)
         }
         val nestedTypesSummary = async {
-            typesToSummary(docsHolder.classlikesFor(classlike))
+            nestedTypesToSummary(docsHolder.classlikesFor(classlike))
         }
         val constantsSummary = async {
             propertiesToSummary(constantsTitle(), declaredProperties.constants())
@@ -365,7 +366,7 @@ internal class ClasslikeDocumentableConverter(
         )
     }
 
-    private fun typesToSummary(classlikes: List<DClasslike>):
+    private fun nestedTypesToSummary(classlikes: List<DClasslike>):
         SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> {
         val components = when (displayLanguage) {
             // When displaying Kotlin pages, companion functions will be inlined and the link to the
@@ -492,9 +493,9 @@ internal class ClasslikeDocumentableConverter(
     ): SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
         val modifierHints = ModifierHints(
             displayLanguage,
-            isSummary = true,
             type = DProperty::class.java,
-            containingType = classlike::class.java
+            containingType = classlike::class.java,
+            isSummary = true
         )
         val components = properties.map {
             errorContextInjector(it) {
@@ -919,15 +920,9 @@ internal fun inheritedConstantsTitle() = "Inherited ${constantsTitle()}"
 internal fun enumValuesTitle() = "Enum Values"
 // Extension functions and companions are a Kotlin-only feature and only show up in as-Kotlin
 internal fun extensionFunctionsTitle() = "Extension functions"
-internal fun companionFunctionsTitle(): String =
-    "companion ${methodsTitle(Language.KOTLIN)}"
-internal fun companionPropertiesTitle(): String =
-    "companion ${propertiesTitle(Language.KOTLIN)}"
-internal fun publicCompanionFunctionsTitle(): String =
-    "Public ${companionFunctionsTitle()}"
-internal fun protectedCompanionFunctionsTitle(): String =
-    "Protected ${companionFunctionsTitle()}"
-internal fun publicCompanionPropertiesTitle(): String =
-    "Public ${companionPropertiesTitle()}"
-internal fun protectedCompanionPropertiesTitle(): String =
-    "Protected ${companionPropertiesTitle()}"
+internal fun companionFunctionsTitle(): String = "companion ${methodsTitle(Language.KOTLIN)}"
+internal fun companionPropertiesTitle(): String = "companion ${propertiesTitle(Language.KOTLIN)}"
+internal fun publicCompanionFunctionsTitle(): String = "Public ${companionFunctionsTitle()}"
+internal fun protectedCompanionFunctionsTitle(): String = "Protected ${companionFunctionsTitle()}"
+internal fun publicCompanionPropertiesTitle(): String = "Public ${companionPropertiesTitle()}"
+internal fun protectedCompanionPropertiesTitle(): String = "Protected ${companionPropertiesTitle()}"

@@ -124,7 +124,16 @@ internal val AnnotationComponent.isAtNonNull get() = this.link().name == "NonNul
 internal fun List<AnnotationComponent>.exceptNonNull() = this.filter { it.link().name != "NonNull" }
 internal fun Pair<SummaryList<*>, Classlike.TitledList<*>>.title() = first.data.header!!.data.title
 
-/** Does not work for constructors, in order to allow a unified return type */
+internal fun InheritedSymbolsList.title() = data.header.data.title
+internal fun InheritedSymbolsList.from(name: String) =
+    data.inheritedSymbolSummaries.entries.singleOrNull { (key, _) -> key.data.name == name }
+
+internal fun Classlike.companionName() = nestedTypes().first.item().link().name
+
+/**
+ * Pass this e.g. "Public functions" and it will return (summaries, details) for the public funs
+ * Does not work for constructors, in order to allow a unified return type
+ */
 internal fun Classlike.symbolsFor(
     vararg types: String
 ) = data.symbolTypes.single { (summary, _) ->
@@ -137,8 +146,6 @@ internal fun Classlike.symbolsFor(
 } as Pair<
     SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>,
     Classlike.TitledList<SymbolDetail>>
-internal fun Classlike.summaryItemsFor(vararg types: String) =
-    symbolsFor(*types).first.items(size = null)
 // TODO: split the SymbolTypes list itself (into nullable vars?) to clarify typing
 internal fun Classlike.symbolsForConstructors(public: Boolean = true, protected: Boolean = false) =
     data.symbolTypes.single { (summary, _) ->
@@ -170,5 +177,8 @@ internal val Classlike.inheritedFunctions get() = data.inheritedTypes.singleOrNu
     it.data.header.data.title in
         listOf(inheritedMethodsTitle(Language.KOTLIN), inheritedMethodsTitle(Language.JAVA))
 }
-internal fun InheritedSymbolsList.from(name: String) =
-    data.inheritedSymbolSummaries.entries.singleOrNull { (key, _) -> key.data.name == name }
+/** Works like symbolsFor but only returns summaries. Also checks inherited (are summary-only) */
+internal fun Classlike.summaryItemsFor(vararg types: String) =
+    data.inheritedTypes.singleOrNull { inheritedSymbols -> (inheritedSymbols.title() in types) }
+        ?.data?.inheritedSymbolSummaries?.flatMap { (_, summaryList) -> summaryList.items() }
+        ?: symbolsFor(*types).first.items()

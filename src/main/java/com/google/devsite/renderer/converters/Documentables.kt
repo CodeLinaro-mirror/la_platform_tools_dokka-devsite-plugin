@@ -308,8 +308,8 @@ fun Expression.getValue(): String? = when (this) {
  * Returns property getters / setters. Omits generated Kotlin getters and setters which can be
  * identified by looking for a callable name like <get-foo> or <set-bar>.
  */
-fun DClasslike.gettersAndSetters(): List<DFunction> {
-    return properties.flatMap {
+fun List<DProperty>.gettersAndSetters(): List<DFunction> {
+    return flatMap {
         listOf(it.getter, it.setter)
     }.filterNotNull().filterNot {
         val callableName = it.dri.callable?.name ?: ""

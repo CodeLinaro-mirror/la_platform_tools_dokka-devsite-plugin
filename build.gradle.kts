@@ -86,19 +86,23 @@ javaComponent.withVariantsFromConfiguration(configurations["shadowRuntimeElement
 
 val testData by sourceSets.creating {
     java.srcDirs(
-        "testData/innerClasses/source",
-        "testData/simple/source",
-        "testData/topLevelFunctions/source",
-        "testData/linking/source",
-        "testData/inheritance/source",
-        "testData/sampleAnnotation/source",
-        "testData/annotations/source",
-        "testData/restrictTo/source",
-        "testData/getterSetterModifier/source/",
+        // "testData/collections-ktx/source",   // this project is multiplatform
+        "testData/companionStatic/source",
+        "testData/complicatedPlatform/source",
+        // "testData/compose/source",           // this project is multiplatform
         "testData/fragment/source",
+        "testData/getterSetterModifier/source/",
+        "testData/hidden/source",
+        "testData/inheritance/source",
+        "testData/innerClasses/source",
+        "testData/linking/source",
+        "testData/multifile/source",
         "testData/paging/source",
-//            "testData/compose/source", // this project seems to require multiplatform build
-        "testData/complicatedPlatform/source"
+        "testData/restrictTo/source",
+        "testData/sampleAnnotation/source",
+        "testData/simple/source",
+        "testData/simpleVersioned/source",
+        "testData/topLevelFunctions/source",
     )
 }
 

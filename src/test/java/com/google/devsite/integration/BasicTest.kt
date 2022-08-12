@@ -116,4 +116,9 @@ class BasicTest : IntegrationTestBase() {
     fun `Validate @JvmMultifileClass`() {
         verifyDirectory("multifile")
     }
+
+    @Test
+    fun `Validate companion-static interop`() {
+        verifyDirectory("companionStatic")
+    }
 }

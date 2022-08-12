@@ -38,7 +38,7 @@ internal data class DefaultClassSignature(
             when (data.displayLanguage) {
                 Language.JAVA -> {
                     data.extends.render(into, header = { +" extends " })
-                    data.implements.render(into, header = { +" $inheritancePhrase " })
+                    data.implements.render(into, header = { +" $interfaceInheritsPhrase " })
                 }
                 Language.KOTLIN -> {
                     (data.extends + data.implements).render(into, header = { +" : " })
@@ -52,8 +52,9 @@ internal data class DefaultClassSignature(
         data.typeParameters.joinMaybePrefix(prefix = "<", postfix = ">") +
         if (data.displayLanguage == Language.JAVA) {
             data.extends.joinMaybePrefix(prefix = " extends ") +
-                data.implements.joinMaybePrefix(prefix = inheritancePhrase)
+                data.implements.joinMaybePrefix(prefix = interfaceInheritsPhrase)
         } else (data.extends + data.implements).joinMaybePrefix(prefix = " : ")
 
-    private val inheritancePhrase = if (data.type == "interface") "extends" else "implements"
+    // Classes _implement_ interfaces, but interfaces _extend_ other interfaces
+    private val interfaceInheritsPhrase = if (data.type == "interface") "extends" else "implements"
 }

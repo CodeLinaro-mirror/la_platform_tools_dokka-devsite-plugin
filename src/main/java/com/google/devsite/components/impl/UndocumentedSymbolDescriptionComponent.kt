@@ -20,7 +20,7 @@ import com.google.devsite.components.DescriptionComponent
 import kotlinx.html.FlowContent
 
 /** Implementation of a javadoc description that has no documentation. */
-internal class UndocumentedSymbolDescriptionComponent : DescriptionComponent {
+internal object UndocumentedSymbolDescriptionComponent : DescriptionComponent {
     override val data: DescriptionComponent.Params
         get() = error("Unused")
 

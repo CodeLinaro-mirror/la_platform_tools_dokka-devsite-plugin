@@ -189,9 +189,9 @@ val modifierOrder = listOf(
  */
 internal data class ModifierHints(
     val displayLanguage: Language,
-    val isSummary: Boolean = false,
     val type: Class<out Documentable>,
-    val containingType: Class<out Documentable>?
+    val containingType: Class<out Documentable>?,
+    val isSummary: Boolean = false
 ) {
     val inInterface get() = containingType == DInterface::class.java
     val inObject get() = containingType == DObject::class.java

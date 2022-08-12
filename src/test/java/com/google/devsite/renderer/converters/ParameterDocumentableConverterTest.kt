@@ -1293,7 +1293,7 @@ internal class ParameterDocumentableConverterTest(
 
     private fun DModule.param(name: String = "foo", forSummary: Boolean = false):
         ParameterComponent {
-        val (holder, pathProvider) = holderAndProvider(this)
+        val (_, pathProvider) = holderAndProvider(this)
         val converter = ParameterDocumentableConverter(
             displayLanguage,
             pathProvider
@@ -1306,7 +1306,7 @@ internal class ParameterDocumentableConverterTest(
     }
 
     private fun DModule.returnType(functionName: String = "foo"): TypeProjectionComponent {
-        val (holder, pathProvider) = holderAndProvider(this)
+        val (_, pathProvider) = holderAndProvider(this)
         val converter = ParameterDocumentableConverter(
             displayLanguage,
             pathProvider

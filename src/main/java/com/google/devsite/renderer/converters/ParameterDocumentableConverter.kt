@@ -104,9 +104,9 @@ internal class ParameterDocumentableConverter(
                         .modifiersFor(
                             ModifierHints(
                                 displayLanguage = Language.JAVA,
-                                isSummary = false,
                                 type = DParameter::class.java,
-                                containingType = null
+                                containingType = null,
+                                isSummary = false
                             )
                         ),
                     annotationComponents = retainedAnnotations.annotationComponents(
@@ -128,9 +128,9 @@ internal class ParameterDocumentableConverter(
                     .modifiersFor(
                         ModifierHints(
                             Language.KOTLIN,
-                            isSummary = false,
                             type = DParameter::class.java,
-                            containingType = null
+                            containingType = null,
+                            isSummary = false
                         )
                     ),
                 annotations = param.annotations(),

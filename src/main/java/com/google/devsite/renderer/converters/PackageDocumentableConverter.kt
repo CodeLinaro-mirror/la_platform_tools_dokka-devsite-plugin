@@ -141,9 +141,9 @@ internal class PackageDocumentableConverter(
         SummaryList<TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
         val modifierHints = ModifierHints(
             displayLanguage = displayLanguage,
-            isSummary = true,
             type = DProperty::class.java,
-            containingType = DPackage::class.java
+            containingType = DPackage::class.java,
+            isSummary = true
         )
         val components = properties.map {
             propertyConverter.summary(it, modifierHints)
