@@ -376,7 +376,7 @@ internal class ClasslikeDocumentableConverter(
         }.map {
             errorContextInjector(it) {
                 classlike ->
-                javadocConverter.summaryForDocumentable(classlike)
+                javadocConverter.summaryForDocumentable(classlike, showAnnotations = true)
             }
         }
 
