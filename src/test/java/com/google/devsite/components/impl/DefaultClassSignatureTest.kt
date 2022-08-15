@@ -31,7 +31,6 @@ import kotlinx.html.stream.createHTML
 import org.junit.Test
 
 class DefaultClassSignatureTest {
-
     @Test
     fun `Class signature renders correctly in Java`() {
         val component = DefaultClassSignature(

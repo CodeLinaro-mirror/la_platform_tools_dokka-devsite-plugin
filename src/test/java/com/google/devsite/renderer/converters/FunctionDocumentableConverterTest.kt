@@ -21,13 +21,14 @@ import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.LambdaTypeProjectionComponent
 import com.google.devsite.components.symbols.ParameterComponent
-import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolDetail.SymbolKind
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.testing.functionSignature
+import com.google.devsite.renderer.converters.testing.functionSummary
 import com.google.devsite.renderer.converters.testing.isAtNonNull
 import com.google.devsite.renderer.converters.testing.isAtNullable
 import com.google.devsite.renderer.converters.testing.item
@@ -35,8 +36,6 @@ import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.projectionName
-import com.google.devsite.renderer.converters.testing.signature
-import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.converters.testing.typeAnnotations
 import com.google.devsite.renderer.converters.testing.typeName
 import com.google.devsite.testing.ConverterTestBase
@@ -55,7 +54,7 @@ internal class FunctionDocumentableConverterTest(
     private val displayLanguage: Language
 ) : ConverterTestBase(displayLanguage) {
 
-    private val defaultHints: ModifierHints = ModifierHints(
+    override var defaultHints = ModifierHints(
         displayLanguage = displayLanguage,
         isSummary = false,
         type = DFunction::class.java,
@@ -67,7 +66,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Top level function summary component has correct default modifiers`() {
         val summary = """
             |fun foo() = Unit
-        """.render().summary()
+        """.render().functionSummary()
 
         val returnz = summary.returnSummary()
 
@@ -78,7 +77,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Function summary component ignores public modifier`() {
         val summary = """
             |public fun foo() = Unit
-        """.render().summary()
+        """.render().functionSummary()
 
         val returnz = summary.returnSummary()
 
@@ -90,7 +89,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Function summary component has suspend modifier`() {
         val summary = """
             |suspend fun foo() = Unit
-        """.render().summary()
+        """.render().functionSummary()
 
         val returnz = summary.returnSummary()
 
@@ -101,7 +100,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Function summary component has inline modifier`() {
         val summary = """
             |inline fun foo() = Unit
-        """.render().summary()
+        """.render().functionSummary()
 
         val returnz = summary.returnSummary()
 
@@ -114,7 +113,7 @@ internal class FunctionDocumentableConverterTest(
             |abstract class Foo {
             |    protected open fun foo() = Unit
             |}
-        """.render().summary()
+        """.render().functionSummary()
 
         val returnz = summary.returnSummary()
 
@@ -129,7 +128,7 @@ internal class FunctionDocumentableConverterTest(
             |abstract class Foo {
             |    abstract fun foo()
             |}
-        """.render().summary()
+        """.render().functionSummary()
 
         val returnz = summary.returnSummary()
 
@@ -142,7 +141,7 @@ internal class FunctionDocumentableConverterTest(
             |class Foo {
             |    open fun foo() = Unit
             |}
-        """.render().summary()
+        """.render().functionSummary()
 
         val returnz = summary.returnSummary()
 
@@ -156,7 +155,7 @@ internal class FunctionDocumentableConverterTest(
             |class Foo {
             |    abstract suspend fun foo(): Unit
             |}
-        """.render().summary()
+        """.render().functionSummary()
 
         val returnz = summary.returnSummary()
 
@@ -200,7 +199,7 @@ internal class FunctionDocumentableConverterTest(
         val summary = """
             |class A
             |fun foo(): A
-        """.render().summary()
+        """.render().functionSummary()
 
         val returnType = summary.returnSummary().type
 
@@ -212,7 +211,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Function summary component creates void return type link`() {
         val summary = """
             |fun foo() = Unit
-        """.render().summary()
+        """.render().functionSummary()
 
         val returnType = summary.returnSummary().type
 
@@ -231,7 +230,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Function summary component handles constructors`() {
         val summary = """
             |class MyClass
-        """.render().summary()
+        """.render().functionSummary()
 
         val constructor = summary.data.description as SymbolSummary
 
@@ -242,7 +241,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Function summary component creates return type generics`() {
         val summary = """
             |fun foo(): Map<String, List<Long>>
-        """.render().summary()
+        """.render().functionSummary()
 
         val returnz = summary.returnSummary()
         val generics = returnz.type.data.generics.items(2)
@@ -257,9 +256,9 @@ internal class FunctionDocumentableConverterTest(
     fun `Function summary component creates signature with name`() {
         val summary = """
             |fun iAmACoolFunction()
-        """.render().summary()
+        """.render().functionSummary()
 
-        val function = summary.summary()
+        val function = summary.functionSummary()
 
         assertThat(function.name()).isEqualTo("iAmACoolFunction")
     }
@@ -268,10 +267,10 @@ internal class FunctionDocumentableConverterTest(
     fun `Function summary component creates extension receiver`() {
         val summary = """
             |fun String.foo()
-        """.render().summary()
+        """.render().functionSummary()
 
-        val function = summary.summary()
-        val signature = function.signature()
+        val function = summary.functionSummary()
+        val signature = function.functionSignature()
 
         javaOnly {
             assertThat(signature.receiver).isNotNull()
@@ -298,10 +297,10 @@ internal class FunctionDocumentableConverterTest(
     fun `Function summary component creates extension receiver for proper type`() {
         val summary = """
             |fun Any.foo()
-        """.render().summary()
+        """.render().functionSummary()
 
-        val function = summary.summary()
-        val signature = function.signature()
+        val function = summary.functionSummary()
+        val signature = function.functionSignature()
 
         javaOnly {
             assertThat(signature.receiver).isNotNull()
@@ -329,9 +328,9 @@ internal class FunctionDocumentableConverterTest(
     fun `Function summary component creates params`() {
         val summary = """
             |fun foo(a: String)
-        """.render().summary()
+        """.render().functionSummary()
 
-        val function = summary.summary()
+        val function = summary.functionSummary()
         val param = function.param()
         val paramType = param.data.type
 
@@ -344,8 +343,8 @@ internal class FunctionDocumentableConverterTest(
     fun `Function summary component creates inline generics`() {
         val summary = """
             |fun <T: Number, U> foo() = Unit
-        """.render().summary()
-        val typeParams = summary.summary().signature().typeParameters
+        """.render().functionSummary()
+        val typeParams = summary.functionSummary().functionSignature().typeParameters
         assertThat(typeParams.first().data.name).isEqualTo("T")
         assertThat(typeParams.first().projectionName()).isEqualTo("Number")
         assertThat(typeParams.last().data.name).isEqualTo("U")
@@ -357,7 +356,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Function signature component creates multiple inline generics`() {
         val inlineGenerics = """
             |fun <T: Number, U: List<String>, V: T> foo() = Unit
-        """.render().summary().summary().signature().typeParameters
+        """.render().functionSummary().functionSummary().functionSignature().typeParameters
 
         assertThat(inlineGenerics.map { it.data.name }).isEqualTo(listOf("T", "U", "V"))
         assertThat(inlineGenerics[0].projectionName()).isEqualTo("Number")
@@ -371,9 +370,9 @@ internal class FunctionDocumentableConverterTest(
     fun `Function summary component has correct relative link`() {
         val summary = """
             |fun <T : Number> List<String>.foo(t: T, a: Map<String, Int>, block: String.(Float) -> Double) = Unit
-        """.render().summary()
+        """.render().functionSummary()
 
-        val function = summary.summary()
+        val function = summary.functionSummary()
         val signature = function.data.signature
 
         assertPath(
@@ -389,11 +388,11 @@ internal class FunctionDocumentableConverterTest(
         val summary = """
             |public void foo(
             |    boolean a, int b, double c, float d, short e, long f, char g, byte h) {}
-        """.render(java = true).summary()
+        """.render(java = true).functionSummary()
 
-        val function = summary.summary()
+        val function = summary.functionSummary()
         val returnType = summary.returnSummary().type.link()
-        val signature = function.signature()
+        val signature = function.functionSignature()
 
         javaOnly {
             assertThat(returnType.name).isEqualTo("void")
@@ -419,7 +418,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Function summary component understands Java object`() {
         val summary = """
             |public Object foo() {}
-        """.render(java = true).summary()
+        """.render(java = true).functionSummary()
 
         val returnType = summary.returnSummary().type.link()
 
@@ -431,7 +430,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Function summary component exists for (default) constructors`() {
         val summaryK = """
             |class Foo
-        """.render().summary()
+        """.render().functionSummary()
         val constructor = summaryK.data.description as SymbolSummary
         assertThat(constructor.name()).isEqualTo("Foo")
 
@@ -439,7 +438,7 @@ internal class FunctionDocumentableConverterTest(
             val jjj = """
             |public class Foo {}
             """.render(java = true)
-            val summaryJ = jjj.summary()
+            val summaryJ = jjj.functionSummary()
             // val constructor = summaryJ.data.description as SymbolSummary
         }
     }
@@ -448,7 +447,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Function detail component has correct name`() {
         val detail = """
             |fun foo()
-        """.render().detail()
+        """.render().functionDetail()
 
         assertThat(detail.data.name).isEqualTo("foo")
     }
@@ -457,7 +456,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Top level function detail component has correct default modifiers`() {
         val detail = """
             |fun foo() = Unit
-        """.render().detail()
+        """.render().functionDetail()
 
         javaOnly { assertThat(detail.data.modifiers).containsExactly("public", "final") }
         kotlinOnly { assertThat(detail.data.modifiers).isEmpty() }
@@ -468,7 +467,7 @@ internal class FunctionDocumentableConverterTest(
         val detail = """
             |annotation class Hello
             |@Hello fun foo() = Unit
-        """.render().detail()
+        """.render().functionDetail()
 
         assertThat(detail.data.annotationComponents).isNotEmpty()
     }
@@ -488,8 +487,8 @@ internal class FunctionDocumentableConverterTest(
                 |fun nonna(): String = "foo"
                 """.render()
         fun DModule.sOrD(summary: Boolean, functionName: String): TypeProjectionComponent =
-            if (summary) (summary(functionName).data.title as TypeSummary).data.type
-            else detail(functionName).data.returnType
+            if (summary) (functionSummary(functionName).data.title as TypeSummary).data.type
+            else functionDetail(functionName).data.returnType
         for (isSummary in listOf(true, false)) {
             for (whichFun in listOf("nonna", "nulla", "nonnaBefore", "nonnaClose", "platform")) {
                 val typeJ = if (whichFun == "nonna") null else moduleJ.sOrD(isSummary, whichFun)
@@ -563,7 +562,7 @@ internal class FunctionDocumentableConverterTest(
             | * @see #mapping()
             | */
             |public IntToString[] indexMapping() default { };
-        """.render(java = true).detail()
+        """.render(java = true).functionDetail()
         val returnType = detail.data.returnType
         val primaryAnnotations = returnType.annotations
 
@@ -597,7 +596,7 @@ internal class FunctionDocumentableConverterTest(
             | * @param args additional arguments to the dump request.
             | */
             |public void onDump(@NonNull java.lang.String prefix, @Nullable java.io.FileDescriptor fd, @NonNull java.io.PrintWriter writer, @Nullable java.lang.String[] args) { throw new RuntimeException("Stub!"); }
-        """.render(java = true).detail("onDump").data.signature as FunctionSignature
+        """.render(java = true).functionDetail("onDump").data.signature as FunctionSignature
         val param1 = signature.data.parameters[0]
         assertThat(param1.data.name).isEqualTo("prefix")
         assertThat(param1.typeName()).isEqualTo("String")
@@ -612,7 +611,7 @@ internal class FunctionDocumentableConverterTest(
             |fun ScrollableState(consumeScrollDelta: Float.(Float) -> Float): ScrollableState {
             |    return DefaultScrollableState(consumeScrollDelta)
             |}
-        """.render().summary("ScrollableState").data.description
+        """.render().functionSummary("ScrollableState").data.description
         kotlinOnly {
             val parameter = (summary.data.signature as FunctionSignature).data.parameters.single()
             val lambda = (parameter.data.type as LambdaTypeProjectionComponent)
@@ -627,7 +626,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Function detail component is marked as function type`() {
         val detail = """
             |fun foo()
-        """.render().detail()
+        """.render().functionDetail()
 
         assertThat(detail.data.symbolKind).isEqualTo(SymbolKind.FUNCTION)
     }
@@ -636,7 +635,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Function detail component creates void return type link`() {
         val detail = """
             |fun foo() = Unit
-        """.render().detail()
+        """.render().functionDetail()
 
         val returnType = detail.data.returnType
 
@@ -655,7 +654,7 @@ internal class FunctionDocumentableConverterTest(
     fun `Function detail component has correct anchors`() {
         val detail = """
             |fun <T : Number> List<String>.foo(t: T, a: Map<String, Int>, block: String.(Float) -> Double) = Unit
-        """.render().detail()
+        """.render().functionDetail()
 
         assertThat(detail.data.anchors).containsExactly(
             "(kotlin.collections.List).foo(kotlin.Number,kotlin.collections.Map,kotlin.Function2)",
@@ -672,10 +671,10 @@ internal class FunctionDocumentableConverterTest(
             |fun <T> copyWhenGreater(list: List<T>, threshold: T): List<String>
             |   where T : CharSequence,
             |         T : Comparable<T> { return emptyList() }
-        """.render().signature()
+        """.render().functionSignature()
         val signatureJ = """
             |public <T extends Kotlin.CharSequence & Comparable<T>> List<String> copyWhenGreater(List<T> list, T threshold) {}
-        """.render(java = true).signature()
+        """.render(java = true).functionSignature()
         for (signature in listOf(signatureJ, signatureK)) {
             val bounds = signature.data.typeParameters.single().data.projections
             assertThat(bounds[0].data.type.data.name).isEqualTo("CharSequence")
@@ -705,12 +704,12 @@ internal class FunctionDocumentableConverterTest(
         // assertThat(genericDrab.annotations().single().dri.classNames).contains("NonNull")
 
         for (module in listOf(moduleJ, moduleK)) {
-            val rabSig = module.detail("rab").data.signature as FunctionSignature
+            val rabSig = module.functionDetail("rab").data.signature as FunctionSignature
             val rabType = rabSig.data.parameters.single().data.type.data.generics.single()
 
-            val fooType = module.detail("foo").data.returnType
-            val oofType = module.detail("oof").data.returnType
-            val barSig = module.detail("bar").data.signature as FunctionSignature
+            val fooType = module.functionDetail("foo").data.returnType
+            val oofType = module.functionDetail("oof").data.returnType
+            val barSig = module.functionDetail("bar").data.signature as FunctionSignature
             val barType = barSig.data.parameters.single().data.type.data.generics.single()
 
             assertThat(fooType.nullable).isTrue()
@@ -743,83 +742,9 @@ internal class FunctionDocumentableConverterTest(
         assertThat(data.type is LambdaTypeProjectionComponent).isFalse()
     }
 
-    private fun DModule.summary(
-        doc: DModule.() -> DFunction = ::smartDoc,
-        hints: ModifierHints = defaultHints
-    ): TwoPaneSummaryItem<TypeSummary, SymbolSummary> {
-        val (holder, pathProvider) = holderAndProvider(this)
-        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
-        val converter = FunctionDocumentableConverter(
-            displayLanguage,
-            pathProvider,
-            docConverter
-        )
-        return converter.summary(this.doc(), hints.copy(isSummary = true))
-    }
-
-    private fun DModule.summary(
-        funName: String,
-        hints: ModifierHints = defaultHints
-    ) = summary({ this.function(funName)!! }, hints)
-
-    private fun DModule.detail(
-        funName: String,
-        hints: ModifierHints = defaultHints
-    ) = detail({ this.function(funName)!! }, hints)
-
-    private fun DModule.signature(funName: String) =
-        signature { this.function(funName)!! }
-
-    private fun DModule.functionSummaries(
-        hints: ModifierHints = defaultHints
-    ): Map<String, TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
-        val (holder, pathProvider) = holderAndProvider(this)
-        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
-        val converter = FunctionDocumentableConverter(
-            displayLanguage,
-            pathProvider,
-            docConverter
-        )
-        return functions()!!.map {
-            it.name to converter.summary(it, hints.copy(isSummary = true))
-        }.toMap()
-    }
-
-    private fun DModule.detail(
-        doc: DModule.() -> DFunction = ::smartDoc,
-        hints: ModifierHints = defaultHints
-    ): SymbolDetail {
-        val (holder, pathProvider) = holderAndProvider(this)
-        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
-        val converter = FunctionDocumentableConverter(
-            displayLanguage,
-            pathProvider,
-            docConverter
-        )
-        return converter.detail(this.doc(), hints)
-    }
-
-    private fun DModule.signature(
-        doc: DModule.() -> DFunction = ::smartDoc
-    ): FunctionSignature {
-        val (holder, pathProvider) = holderAndProvider(this)
-        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
-        val converter = FunctionDocumentableConverter(
-            displayLanguage,
-            pathProvider,
-            docConverter
-        )
-        return with(converter) { this@signature.doc().signature(isSummary = false) }
-    }
-
-    /** In case you aren't explicit, our best guess at what you want docs for. */
-    private fun smartDoc(module: DModule): DFunction {
-        return module.function() ?: module.constructor()
-    }
-
     private fun ParameterComponent.link(): Link.Params = data.type.link()
 
-    private fun SymbolSummary.param(): ParameterComponent = signature().parameters.item()
+    private fun SymbolSummary.param(): ParameterComponent = functionSignature().parameters.item()
 
     private fun TwoPaneSummaryItem<TypeSummary, SymbolSummary>.returnSummary(): TypeSummary.Params =
         data.title.data

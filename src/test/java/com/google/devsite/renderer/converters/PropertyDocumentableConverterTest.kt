@@ -26,10 +26,10 @@ import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.testing.functionSummary
 import com.google.devsite.renderer.converters.testing.isAtNonNull
 import com.google.devsite.renderer.converters.testing.isAtNullable
 import com.google.devsite.renderer.converters.testing.name
-import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.html.stream.createHTML
@@ -46,7 +46,7 @@ internal class PropertyDocumentableConverterTest(
     private val displayLanguage: Language
 ) : ConverterTestBase(displayLanguage) {
 
-    private val defaultHints: ModifierHints = ModifierHints(
+    override var defaultHints = ModifierHints(
         displayLanguage,
         isSummary = false,
         type = DProperty::class.java,
@@ -73,7 +73,7 @@ internal class PropertyDocumentableConverterTest(
             |val iAmACoolProperty
         """.render().summary()
 
-        val property = summary.summary()
+        val property = summary.functionSummary()
 
         assertThat(property.name()).isEqualTo("iAmACoolProperty")
     }
@@ -130,7 +130,7 @@ internal class PropertyDocumentableConverterTest(
             |val foo
         """.render().summary()
 
-        val property = summary.summary()
+        val property = summary.functionSummary()
 
         assertThat(property.data.description.text()).isEqualTo("some_documentation")
     }
@@ -141,7 +141,7 @@ internal class PropertyDocumentableConverterTest(
             |val <T : Number> List<T>.foo
         """.render().summary()
 
-        val property = summary.summary()
+        val property = summary.functionSummary()
         val signature = property.data.signature
 
         assertPath(

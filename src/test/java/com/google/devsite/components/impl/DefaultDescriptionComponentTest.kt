@@ -1072,7 +1072,7 @@ public void onCreate() {
         deprecation: String? = null
     ): DefaultDescriptionComponent {
         val tag = explicitClasslike("Foo").tag()
-        val (holder, pathProvider) = holderAndProvider(this)
+        val (_, pathProvider) = holderAndProvider(this)
         return DefaultDescriptionComponent(
             Params(
                 pathProvider,

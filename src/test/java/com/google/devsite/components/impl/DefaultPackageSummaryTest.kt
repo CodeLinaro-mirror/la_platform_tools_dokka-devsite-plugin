@@ -24,11 +24,13 @@ import com.google.devsite.components.pages.PackageSummary.Params
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeSummary
+import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.components.testing.NoopDescriptionComponent
 import com.google.devsite.components.testing.NoopSummaryList
 import com.google.devsite.components.testing.NoopSymbolDetail
+import com.google.devsite.components.testing.NoopTwoPaneTypeSummaryItem
 import com.google.devsite.renderer.Language
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
@@ -110,6 +112,67 @@ class DefaultPackageSummaryTest {
 </div>
             """.trim()
         )
+    }
+
+    private fun <T : SummaryItem> defaultSummaryListOf(vararg items: T) =
+        DefaultSummaryList(SummaryList.Params(items = items.asList()))
+
+    @Test
+    fun `Package summary objects are rendered in Java and Kotlin`() {
+        for (language in listOf(Language.KOTLIN, Language.JAVA)) {
+            val component = createPackageSummary(
+                classes = defaultSummaryListOf(
+                    NoopTwoPaneTypeSummaryItem as TwoPaneSummaryItem<Link, DescriptionComponent>
+                ),
+                objects = defaultSummaryListOf(
+                    NoopTwoPaneTypeSummaryItem as TwoPaneSummaryItem<Link, DescriptionComponent>
+                ),
+                displayLanguage = language
+            )
+
+            val output = createHTML().div {
+                component.render(this)
+            }.trim()
+
+            val expected = if (language == Language.KOTLIN) {
+                """
+<div>
+  <h2>Classes</h2>
+  <div class="devsite-table-wrapper">
+    <table class="responsive">
+      <tbody>
+        <tr><noop/></tr>
+      </tbody>
+    </table>
+  </div>
+  <h2>Objects</h2>
+  <div class="devsite-table-wrapper">
+    <table class="responsive">
+      <tbody>
+        <tr><noop/></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+            """
+            } else {
+                """
+<div>
+  <h2>Classes</h2>
+  <div class="devsite-table-wrapper">
+    <table class="responsive">
+      <tbody>
+        <tr><noop/></tr>
+        <tr><noop/></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+            """
+            }
+            // language=html
+            assertThat(output).isEqualTo(expected.trim())
+        }
     }
 
     @Test
@@ -399,6 +462,8 @@ class DefaultPackageSummaryTest {
             NoopSummaryList(show = false),
         enums: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> =
             NoopSummaryList(show = false),
+        objects: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> =
+            NoopSummaryList(show = false),
         exceptions: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> =
             NoopSummaryList(show = false),
         annotations: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>> =
@@ -427,6 +492,7 @@ class DefaultPackageSummaryTest {
             interfaces = interfaces,
             classes = classes,
             enums = enums,
+            objects = objects,
             exceptions = exceptions,
             annotations = annotations,
             typeAliases = typeAliases,

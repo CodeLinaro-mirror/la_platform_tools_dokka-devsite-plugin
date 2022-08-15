@@ -155,7 +155,10 @@ fun Documentable.stringForType(displayLanguage: Language): String = when (this) 
         Language.JAVA -> "field"
         Language.KOTLIN -> "property"
     }
-    is DObject -> "object"
+    is DObject -> when (displayLanguage) {
+        Language.KOTLIN -> "object"
+        Language.JAVA -> "class"
+    }
     is DTypeAlias -> "type alias"
     is DParameter -> "parameter"
     else -> error("Unsupported type: $this")

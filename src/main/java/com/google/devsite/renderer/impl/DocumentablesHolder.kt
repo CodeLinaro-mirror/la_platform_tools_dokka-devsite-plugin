@@ -280,7 +280,7 @@ internal class DocumentablesHolder(
     /** Computes the syntheticClasses from top level functions that are used to document Kotlin as
      * Java
      */
-    private fun computeSyntheticClasses(packageDoc: DPackage): List<DClass> {
+    internal fun computeSyntheticClasses(packageDoc: DPackage): List<DClass> {
         // functions that are JvmSynthetic are not accessible from Java, so they should not appear
         // in the documentation
         val javaFunctions = packageDoc.functions.filterOutJvmSynthetic()

@@ -36,6 +36,7 @@ internal interface PackageSummary : ContextFreeComponent {
         val interfaces: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
         val classes: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
         val enums: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
+        val objects: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
         val exceptions: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
         val annotations: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,
         val typeAliases: SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>,

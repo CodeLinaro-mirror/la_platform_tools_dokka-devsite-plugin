@@ -19,7 +19,7 @@ package com.google.devsite.components.table
 import com.google.devsite.components.ContextFreeComponent
 
 /** Builds a table view. */
-internal interface SummaryList<T : SummaryItem> : ContextFreeComponent {
+internal interface SummaryList<T : SummaryItem> : ContextFreeComponent, List<T> {
     val data: Params<T>
 
     /** @return true if there is summary content to render, false otherwise */
@@ -27,8 +27,36 @@ internal interface SummaryList<T : SummaryItem> : ContextFreeComponent {
 
     data class Params<T>(
         val header: TableTitle? = null,
-        val items: List<T>
+        var items: List<T>
     )
 
     fun title(): String? = data.header?.data?.title
+
+    override val size: Int
+        get() = data.items.size
+
+    override fun contains(element: T) = data.items.contains(element)
+
+    override fun containsAll(elements: Collection<T>) = data.items.containsAll(elements)
+
+    override fun get(index: Int) = data.items.get(index)
+
+    override fun indexOf(element: T) = data.items.indexOf(element)
+
+    override fun isEmpty() = data.items.isEmpty()
+
+    override fun iterator() = data.items.iterator()
+
+    override fun lastIndexOf(element: T) = data.items.lastIndexOf(element)
+
+    override fun listIterator() = data.items.listIterator()
+
+    override fun listIterator(index: Int) = data.items.listIterator(index)
+
+    override fun subList(fromIndex: Int, toIndex: Int) = data.items.subList(fromIndex, toIndex)
+
+    operator fun plus(other: SummaryList<T>): SummaryList<T> {
+        data.items = data.items + other.data.items
+        return this
+    }
 }

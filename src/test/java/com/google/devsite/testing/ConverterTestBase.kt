@@ -18,8 +18,18 @@ package com.google.devsite.testing
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.DevsitePlugin
+import com.google.devsite.components.pages.DevsitePage
+import com.google.devsite.components.symbols.FunctionSignature
+import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.symbols.TypeSummary
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.joinMaybePrefix
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.DocTagConverter
+import com.google.devsite.renderer.converters.FunctionDocumentableConverter
+import com.google.devsite.renderer.converters.ModifierHints
+import com.google.devsite.renderer.converters.PackageDocumentableConverter
 import com.google.devsite.renderer.converters.isFromBaseClass
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesHolder
@@ -39,6 +49,7 @@ import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.base.translators.descriptors.DefaultExternalDocumentablesProvider
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
+import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.pages.ModulePageNode
 import org.jetbrains.dokka.pages.RootPageNode
@@ -73,8 +84,18 @@ internal abstract class ConverterTestBase(
     protected fun DModule.classlike() = packages.single().classlikes
         .firstOrNull { it.name !in listOf("Nullable", "NonNull") }
 
-    protected fun DModule.explicitClasslike(name: String) =
-        packages.flatMap { it.classlikes }.mapNotNull { it.explicitClasslike(name) }.single()
+    protected fun DModule.explicitClasslike(name: String): DClasslike {
+        val normalclass = packages.flatMap { it.classlikes }
+            .mapNotNull { it.explicitClasslike(name) }.singleOrNull()
+        if (normalclass != null) return normalclass
+
+        val (holder, _) = holderAndProvider(this)
+        packages.forEach {
+            val synclass = holder.computeSyntheticClasses(it).singleOrNull { it.name == name }
+            if (synclass != null) return@explicitClasslike synclass
+        }
+        throw RuntimeException("No standard or synthetic class $name")
+    }
 
     private fun DClasslike.explicitClasslike(name: String): DClasslike? =
         if (this.name == name) this
@@ -273,4 +294,92 @@ internal abstract class ConverterTestBase(
             override fun render(root: RootPageNode) = Unit
         }
     }
+
+    protected fun DModule.packagePage(): DevsitePage {
+        val (holder, pathProvider) = holderAndProvider(this)
+        val converter =
+            PackageDocumentableConverter(
+                displayLanguage,
+                packages.single(),
+                pathProvider,
+                holder
+            )
+        return runBlocking { converter.summaryPage() }
+    }
+
+    protected fun DModule.functionSummary(
+        doc: DModule.() -> DFunction = ::smartDoc,
+        hints: ModifierHints = defaultHints
+    ): TwoPaneSummaryItem<TypeSummary, SymbolSummary> {
+        val (holder, pathProvider) = holderAndProvider(this)
+        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
+        val converter = FunctionDocumentableConverter(
+            displayLanguage,
+            pathProvider,
+            docConverter
+        )
+        return converter.summary(this.doc(), hints.copy(isSummary = true))
+    }
+
+    protected fun DModule.functionSummaries(
+        hints: ModifierHints = defaultHints
+    ): Map<String, TwoPaneSummaryItem<TypeSummary, SymbolSummary>> {
+        val (holder, pathProvider) = holderAndProvider(this)
+        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
+        val converter = FunctionDocumentableConverter(
+            displayLanguage,
+            pathProvider,
+            docConverter
+        )
+        return functions()!!.map {
+            it.name to converter.summary(it, hints.copy(isSummary = true))
+        }.toMap()
+    }
+
+    protected fun DModule.functionDetail(
+        doc: DModule.() -> DFunction = ::smartDoc,
+        hints: ModifierHints = defaultHints
+    ): SymbolDetail {
+        val (holder, pathProvider) = holderAndProvider(this)
+        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
+        val converter = FunctionDocumentableConverter(
+            displayLanguage,
+            pathProvider,
+            docConverter
+        )
+        return converter.detail(this.doc(), hints)
+    }
+
+    protected fun DModule.functionSignature(
+        doc: DModule.() -> DFunction = ::smartDoc
+    ): FunctionSignature {
+        val (holder, pathProvider) = holderAndProvider(this)
+        val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
+        val converter = FunctionDocumentableConverter(
+            displayLanguage,
+            pathProvider,
+            docConverter
+        )
+        return with(converter) { this@functionSignature.doc().signature(isSummary = false) }
+    }
+
+    protected fun DModule.functionSummary(
+        funName: String,
+        hints: ModifierHints = defaultHints
+    ) = functionSummary({ this.function(funName)!! }, hints)
+
+    protected fun DModule.functionDetail(
+        funName: String,
+        hints: ModifierHints = defaultHints
+    ) = functionDetail({ this.function(funName)!! }, hints)
+
+    protected fun DModule.functionSignature(funName: String) =
+        functionSignature { this.function(funName)!! }
+
+    /** In case you aren't explicit, our best guess at what you want docs for. */
+    private fun smartDoc(module: DModule): DFunction {
+        return module.function() ?: module.constructor()
+    }
+
+    protected open lateinit var defaultHints: ModifierHints
 }

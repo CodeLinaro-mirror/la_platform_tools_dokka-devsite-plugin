@@ -17,19 +17,17 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.PackageSummary
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.content
+import com.google.devsite.renderer.converters.testing.functionSummary
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
-import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
-import org.jetbrains.dokka.model.DModule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -47,7 +45,7 @@ internal class PackageDocumentableConverterTest(
                 |
                 |class A
             """.trimMargin()
-        ).render().page()
+        ).render().packagePage()
 
         assertThat(page.data.title).isEqualTo("hello.i.am.a.packagez")
     }
@@ -61,7 +59,7 @@ internal class PackageDocumentableConverterTest(
                 |
                 |class A
             """.trimMargin()
-        ).render().page()
+        ).render().packagePage()
 
         assertThat(page.data.path).isEqualTo("hello/i/am/a/packagez/package-summary.html")
     }
@@ -70,7 +68,7 @@ internal class PackageDocumentableConverterTest(
     fun `Package summary creates components with correct book path`() {
         val page = """
             |class Foo
-        """.render().page()
+        """.render().packagePage()
 
         assertPath(page.data.bookPath, "androidx/_book.yaml")
     }
@@ -79,7 +77,7 @@ internal class PackageDocumentableConverterTest(
     fun `Package summary creates components for interfaces`() {
         val page = """
             |interface ImAnInterface
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val interfacz = summary.data.interfaces.item()
@@ -93,7 +91,7 @@ internal class PackageDocumentableConverterTest(
         val page = """
             |interface B
             |interface A
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val interfaces = summary.data.interfaces.items(2)
@@ -106,7 +104,7 @@ internal class PackageDocumentableConverterTest(
     fun `Package summary creates components for classes`() {
         val page = """
             |class ImAClass
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val clazz = summary.data.classes.item()
@@ -120,7 +118,7 @@ internal class PackageDocumentableConverterTest(
         val page = """
             |class B
             |class A
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val classes = summary.data.classes.items(2)
@@ -133,7 +131,7 @@ internal class PackageDocumentableConverterTest(
     fun `Package summary creates components for nested classes`() {
         val page = """
             |class Outer { class Inner }
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val inner = summary.data.classes.items(2).last()
@@ -146,7 +144,7 @@ internal class PackageDocumentableConverterTest(
     fun `Package summary creates components for enums`() {
         val page = """
             |enum class ImAnEnum
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val enum = summary.data.enums.item()
@@ -160,7 +158,7 @@ internal class PackageDocumentableConverterTest(
         val page = """
             |enum class B
             |enum class A
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val enums = summary.data.enums.items(2)
@@ -173,7 +171,7 @@ internal class PackageDocumentableConverterTest(
     fun `Package summary creates components for exceptions`() {
         val page = """
             |class ImAnException : RuntimeException()
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val exception = summary.data.exceptions.item()
@@ -187,7 +185,7 @@ internal class PackageDocumentableConverterTest(
         val page = """
             |class B : RuntimeException()
             |class A : RuntimeException()
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val classes = summary.data.classes.items(0)
@@ -201,7 +199,7 @@ internal class PackageDocumentableConverterTest(
     fun `Package summary creates components for annotations`() {
         val page = """
             |annotation class ImAnAnnotation
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val annotation = summary.data.annotations.item()
@@ -215,7 +213,7 @@ internal class PackageDocumentableConverterTest(
         val page = """
             |annotation class B
             |annotation class A
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val classes = summary.data.annotations.items(2)
@@ -228,7 +226,7 @@ internal class PackageDocumentableConverterTest(
     fun `Package summary creates components for type aliases`() {
         val page = """
             |typealias ImATypeAlias = String
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val annotation = summary.data.typeAliases.item()
@@ -242,7 +240,7 @@ internal class PackageDocumentableConverterTest(
         val page = """
             |typealias B = String
             |typealias A = String
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val classes = summary.data.typeAliases.items(2)
@@ -255,7 +253,7 @@ internal class PackageDocumentableConverterTest(
     fun `Package summary creates components for top-level functions`() {
         val page = """
             |fun foo()
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val topLevels = summary.data.topLevelFunctionsSummary
@@ -263,14 +261,14 @@ internal class PackageDocumentableConverterTest(
 
         assertThat(topLevels.items()).hasSize(1)
         assertThat(extensions.items()).isEmpty()
-        assertThat(topLevels.item().summary().name()).isEqualTo("foo")
+        assertThat(topLevels.item().functionSummary().name()).isEqualTo("foo")
     }
 
     @Test
     fun `Package summary creates synthetic classes for top-level functions in Java`() {
         val page = """
             |fun foo()
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val classes = summary.data.classes.items()
@@ -342,20 +340,20 @@ internal class PackageDocumentableConverterTest(
         val page = """
             |fun b() = Unit
             |fun a() = Unit
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val topLevels = summary.data.topLevelFunctionsSummary.items(2)
 
-        assertThat(topLevels.first().summary().name()).isEqualTo("a")
-        assertThat(topLevels.last().summary().name()).isEqualTo("b")
+        assertThat(topLevels.first().functionSummary().name()).isEqualTo("a")
+        assertThat(topLevels.last().functionSummary().name()).isEqualTo("b")
     }
 
     @Test
     fun `Package summary creates components for extension functions`() {
         val page = """
             |fun String.foo()
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val topLevels = summary.data.topLevelFunctionsSummary
@@ -363,7 +361,7 @@ internal class PackageDocumentableConverterTest(
 
         assertThat(topLevels.items()).isEmpty()
         assertThat(extensions.items()).hasSize(1)
-        assertThat(extensions.item().summary().name()).isEqualTo("foo")
+        assertThat(extensions.item().functionSummary().name()).isEqualTo("foo")
     }
 
     @Test
@@ -371,13 +369,13 @@ internal class PackageDocumentableConverterTest(
         val page = """
             |fun String.b() = Unit
             |fun String.a() = Unit
-        """.render().page()
+        """.render().packagePage()
 
         val summary = page.content<PackageSummary>()
         val extensions = summary.data.extensionFunctionsSummary.items(2)
 
-        assertThat(extensions.first().summary().name()).isEqualTo("a")
-        assertThat(extensions.last().summary().name()).isEqualTo("b")
+        assertThat(extensions.first().functionSummary().name()).isEqualTo("a")
+        assertThat(extensions.last().functionSummary().name()).isEqualTo("b")
     }
 
     @Test
@@ -389,7 +387,7 @@ internal class PackageDocumentableConverterTest(
             |class Bar {
             |    companion object
             |}
-        """.render().page().content<PackageSummary>()
+        """.render().packagePage().content<PackageSummary>()
 
         assertThat("FooCompanion" in packageSummary.data.classes.items().map { it.name() })
 
@@ -399,18 +397,6 @@ internal class PackageDocumentableConverterTest(
         javaOnly {
             assertThat("Companion" in packageSummary.data.classes.items().map { it.name() })
         }
-    }
-
-    private fun DModule.page(): DevsitePage {
-        val (holder, pathProvider) = holderAndProvider(this)
-        val converter =
-            PackageDocumentableConverter(
-                displayLanguage,
-                packages.single(),
-                pathProvider,
-                holder
-            )
-        return runBlocking { converter.summaryPage() }
     }
 
     companion object {

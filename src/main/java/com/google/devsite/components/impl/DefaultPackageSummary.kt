@@ -42,7 +42,7 @@ internal data class DefaultPackageSummary(
             Language.JAVA -> {
                 renderSummary(data.annotations, "Annotations")
                 renderSummary(data.interfaces, "Interfaces")
-                renderSummary(data.classes, "Classes")
+                renderSummary(data.classes + data.objects, "Classes")
                 renderSummary(data.enums, "Enums")
                 renderSummary(data.exceptions, "Exceptions")
             }
@@ -50,6 +50,7 @@ internal data class DefaultPackageSummary(
                 renderSummary(data.interfaces, "Interfaces")
                 renderSummary(data.classes, "Classes")
                 renderSummary(data.exceptions, "Exceptions")
+                renderSummary(data.objects, "Objects")
                 renderSummary(data.annotations, "Annotations")
                 renderSummary(data.enums, "Enums")
             }

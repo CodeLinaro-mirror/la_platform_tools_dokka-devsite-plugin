@@ -16,11 +16,13 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.common.truth.IterableSubject
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.capitalize
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.DevsitePage
+import com.google.devsite.components.pages.PackageSummary
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
@@ -33,6 +35,7 @@ import com.google.devsite.renderer.converters.testing.companionName
 import com.google.devsite.renderer.converters.testing.content
 import com.google.devsite.renderer.converters.testing.enumValues
 import com.google.devsite.renderer.converters.testing.from
+import com.google.devsite.renderer.converters.testing.functionSummary
 import com.google.devsite.renderer.converters.testing.inheritedFields
 import com.google.devsite.renderer.converters.testing.inheritedFunctions
 import com.google.devsite.renderer.converters.testing.item
@@ -44,8 +47,6 @@ import com.google.devsite.renderer.converters.testing.nestedTypes
 import com.google.devsite.renderer.converters.testing.nonInstance
 import com.google.devsite.renderer.converters.testing.projectionName
 import com.google.devsite.renderer.converters.testing.single
-import com.google.devsite.renderer.converters.testing.size
-import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.converters.testing.summaryItemsFor
 import com.google.devsite.renderer.converters.testing.symbolsFor
 import com.google.devsite.renderer.converters.testing.symbolsForConstructors
@@ -136,14 +137,14 @@ internal class ClasslikeDocumentableConverterTest(
         javaOnly {
             val classlike = page.content<Classlike>()
             val (summary) = classlike.symbolsFor("Public methods")
-            assertThat(summary.items().first().summary().name()).isEqualTo("aar")
-            assertThat(summary.items().last().summary().name()).isEqualTo("bar")
+            assertThat(summary.items().first().functionSummary().name()).isEqualTo("aar")
+            assertThat(summary.items().last().functionSummary().name()).isEqualTo("bar")
         }
         kotlinOnly {
             val classlike = page.content<Classlike>()
             val (summary) = classlike.symbolsFor("Public functions")
-            assertThat(summary.items().first().summary().name()).isEqualTo("foo")
-            assertThat(summary.items().last().summary().name()).isEqualTo("zoo")
+            assertThat(summary.items().first().functionSummary().name()).isEqualTo("foo")
+            assertThat(summary.items().last().functionSummary().name()).isEqualTo("zoo")
         }
     }
 
@@ -202,7 +203,7 @@ internal class ClasslikeDocumentableConverterTest(
         val classlike = page.content<Classlike>()
         val (summary) = classlike.symbolsFor(protectedMethodsTitle(displayLanguage))
 
-        assertThat(summary.item().summary().name()).isEqualTo("foo")
+        assertThat(summary.item().functionSummary().name()).isEqualTo("foo")
     }
 
     @Test
@@ -216,7 +217,7 @@ internal class ClasslikeDocumentableConverterTest(
         val classlike = page.content<Classlike>()
         val summary = classlike.propertySummaryItems()
 
-        assertThat(summary.single().summary().name()).isEqualTo("foo")
+        assertThat(summary.single().functionSummary().name()).isEqualTo("foo")
     }
 
     @Test
@@ -230,7 +231,7 @@ internal class ClasslikeDocumentableConverterTest(
         val classlike = page.content<Classlike>()
         val (summary) = classlike.symbolsFor(protectedPropertiesTitle(displayLanguage))
 
-        assertThat(summary.item().summary().name()).isEqualTo("foo")
+        assertThat(summary.item().functionSummary().name()).isEqualTo("foo")
     }
 
     @Test
@@ -647,11 +648,11 @@ internal class ClasslikeDocumentableConverterTest(
 
             // Function description inheritance does not work properly
             val fooDoit = fooClass.methodSummaryItems().single()
-            val fooDoitDocs = fooDoit.summary().data.description.text()
+            val fooDoitDocs = fooDoit.functionSummary().data.description.text()
             val barDoit = barClass.methodSummaryItems().single()
-            val barDoitDocs = barDoit.summary().data.description.text()
+            val barDoitDocs = barDoit.functionSummary().data.description.text()
             val bazDoit = bazClass.methodSummaryItems().single()
-            val bazDoitDocs = bazDoit.summary().data.description.text()
+            val bazDoitDocs = bazDoit.functionSummary().data.description.text()
 
             assertThat(fooDoitDocs).isEqualTo("dew it")
             assertThat(barDoitDocs).isEqualTo("dew it")
@@ -667,17 +668,17 @@ internal class ClasslikeDocumentableConverterTest(
                 assertThat(bazDescription.text()).isEqualTo("overriding docs for baz")
 
                 // overriding properties is kotlin-only, and working
-                val fooDemocracy = fooClass.propertySummaryItems().single().summary()
+                val fooDemocracy = fooClass.propertySummaryItems().single().functionSummary()
                 assertThat(fooDemocracy.data.description.text()).isEqualTo("thunderous applause")
-                val barDemocracy = barClass.propertySummaryItems().single().summary()
+                val barDemocracy = barClass.propertySummaryItems().single().functionSummary()
                 assertThat(barDemocracy.data.description.text()).isEqualTo("thunderous applause")
-                val bazDemocracy = bazClass.propertySummaryItems().single().summary()
+                val bazDemocracy = bazClass.propertySummaryItems().single().functionSummary()
                 assertThat(bazDemocracy.data.description.text()).isEqualTo("KotOR")
 
                 // Using {@inheritDoc} in kotlin is wrong
                 val mazClass = pages.page("maz").content<Classlike>()
                 val mazDoit = mazClass.methodSummaryItems().single()
-                val mazDoitDocs = mazDoit.summary().data.description.text()
+                val mazDoitDocs = mazDoit.functionSummary().data.description.text()
                 assertThat(mazDoitDocs).isNotEqualTo("dew it")
             }
         }
@@ -807,7 +808,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.render(java = true).page("baz")
         for (page in listOf(pageJ, pageK)) {
             val doit = page.content<Classlike>().methodSummaryItems().single()
-            assertThat(doit.summary().data.description.text()).isEqualTo("dew it")
+            assertThat(doit.functionSummary().data.description.text()).isEqualTo("dew it")
         }
     }
 
@@ -1152,12 +1153,13 @@ internal class ClasslikeDocumentableConverterTest(
         """.render()
         val classlikeK = moduleK.page("Foo").content<Classlike>()
 
-        val moduleJ = """
-            |public static class Foo {
+        val moduleJ = """${javaHeader("Foo")}
+            |public class Foo {
             |  public static final void bar() {}
             |  public static final String baz = "baz"
+            |  public static Foo INSTANCE = new Foo()
             |}
-        """.render(java = true)
+        """.renderWithoutLanguageHeader()
         val classlikeJ = moduleJ.page("Foo").content<Classlike>()
 
         for (classlike in listOf(classlikeJ, classlikeK)) {
@@ -1167,7 +1169,11 @@ internal class ClasslikeDocumentableConverterTest(
             val props = classlike.summaryItemsFor(publicPropertiesTitle(displayLanguage))
             val consts = classlike.summaryItemsFor(constantsTitle())
             assertThat(consts.map { it.name() }).containsExactly("baz")
-            assertThat(props).isEmpty()
+            if (displayLanguage == Language.KOTLIN && classlike == classlikeK) {
+                assertThat(props).isEmpty()
+            } else {
+                assertThat(props.single().name()).isEqualTo("INSTANCE")
+            }
 
             val barMethod = classlike.methodSymbol("bar")!!
             val barModifiers = barMethod.modifiers()
@@ -1993,6 +1999,118 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(signatureJ.data.implements.single().data.name).isEqualTo("Test.Foo")
         assertThat(signatureK.data.implements.single().data.name).isEqualTo("Foo")
         // Now route to DefaultClassSignatureTest.`Interfaces extend other interfaces`()
+    }
+
+    @Test
+    fun `companion to inner static class 4x test`() {
+        val moduleK = """
+            |fun topLevelFun() = 5
+            |object TopLevelObject {
+            |   fun topObjectFun() = 5
+            |}
+            |class Container {
+            |   companion object {
+            |       fun companionFun() = 5
+            |       const val hoistedField = 5
+            |   }
+            |}
+        """.render()
+        val sourceJ = javaHeader("Container") + """
+            |public class Container {
+            |   public static class Companion {
+            |      public static int companionFun() {}
+            |   }
+            |   public static final int hoistedField = 5
+            |}
+        """ + javaHeader("TestKt") + """
+            |public static class TestKt {
+            |   public static int topLevelFun() {}
+            |}
+        """ + javaHeader("TopLevelObject") + """
+            |public class TopLevelObject {
+            |   public static TopLevelObject INSTANCE = TopLevelObject()
+            |   public static int topObjectFun() {}
+            |}
+        """.trimIndent()
+        val moduleJ = sourceJ.renderWithoutLanguageHeader()
+
+        fun TwoPaneSummaryItem<*, SymbolSummary>.urlSuffix() =
+            data.description.data.signature.data.name.data.url.substringAfter("example/")
+
+        for (module in listOf(moduleK, moduleJ)) {
+            val testKt = if (displayLanguage == Language.JAVA || module == moduleJ)
+                module.page("TestKt").content<Classlike>()
+            else null
+            val packagePage = if (displayLanguage == Language.KOTLIN && module == moduleK)
+                module.packagePage().content<PackageSummary>()
+            else null
+            // This is top-level in Kotlin and in a Kt class in Java
+            val topLevelFun = packagePage?.data?.topLevelFunctionsSummary?.item()
+                ?: testKt!!.methodSummaryItems().single()
+            assertThat(topLevelFun.name()).isEqualTo("topLevelFun")
+            javaOnly { assertThat(topLevelFun.modifiers()).contains("static") }
+            if (packagePage != null) {
+                assertThat(topLevelFun.urlSuffix()).isEqualTo("package-summary.html#topLevelFun()")
+            } else {
+                assertThat(topLevelFun.urlSuffix()).isEqualTo("TestKt.html#topLevelFun()")
+            }
+
+            // top-level object -> static inner class of synthetic Kt class
+            val topObject = module.page("TopLevelObject").content<Classlike>()
+            val topObjectFun = topObject.methodSummaryItems().single()
+            assertThat(topObjectFun.name()).isEqualTo("topObjectFun")
+            javaOnly { assertThat(topObjectFun.data.title.data.modifiers).contains("static") }
+            assertThat(topObjectFun.urlSuffix()).isEqualTo("TopLevelObject.html#topObjectFun()")
+
+            if (testKt != null) assertThat(testKt.nestedTypes().first.items()).isEmpty()
+            else assertThat(packagePage!!.data.objects.data.items.map { it.name() })
+                .contains("TopLevelObject")
+
+            fun IterableSubject.containsPublicMaybeStatic() =
+                if (module == moduleK) this.containsExactly("public", "static").inOrder()
+                else this.containsExactly("public").inOrder()
+
+            if (displayLanguage == Language.KOTLIN && module == moduleK)
+                assertThat(topObject.data.signature.data.type).isEqualTo("object")
+            else assertThat(topObject.data.signature.data.type).isEqualTo("class")
+
+            javaOnly {
+                // top-level static classes don't exist in Java
+                assertThat(topObject.modifiers()).containsPublicMaybeStatic()
+                // top-level Kotlin objects become Java non-static classes with no constructor
+                // but a static INSTANCE field that contains a static instance
+                val instanceVal = topObject.propertySummaryItems().single()
+                assertThat(instanceVal.name()).isEqualTo("INSTANCE")
+                assertThat(instanceVal.modifiers()).contains("static")
+            }
+
+            // companion <-> inner static class
+            val companionObject = module.page("Companion").content<Classlike>()
+            val companionFun = companionObject.methodSummaryItems().single()
+            assertThat(companionFun.name()).isEqualTo("companionFun")
+            javaOnly { assertThat(companionFun.modifiers()).contains("static") }
+            assertThat(companionFun.urlSuffix())
+                .isEqualTo("Container.Companion.html#companionFun()")
+
+            if (displayLanguage == Language.KOTLIN && module == moduleK)
+                assertThat(companionObject.data.signature.data.type).isEqualTo("object")
+            else assertThat(companionObject.data.signature.data.type).isEqualTo("class")
+
+            javaOnly {
+                assertThat(companionObject.modifiers()).containsPublicMaybeStatic()
+            }
+
+            // This is top-level in Kotlin and in a Kt class in Java
+            val hoistedField = module.page("Container").content<Classlike>()
+                .symbolsFor(constantsTitle()).first.single()
+            assertThat(hoistedField.name()).isEqualTo("hoistedField")
+            javaOnly { assertThat(hoistedField.modifiers()).contains("static") }
+            kotlinOnly { assertThat(hoistedField.modifiers()).contains("const") }
+            if (module == moduleJ)
+                assertThat(hoistedField.urlSuffix()).isEqualTo("Container.html#hoistedField()")
+            else assertThat(hoistedField.urlSuffix())
+                .isEqualTo("Container.Companion.html#hoistedField()")
+        }
     }
 
     @Test // Kotlin.enum.valueOf isn't in the descriptor tree, despite being callable: b/235992590

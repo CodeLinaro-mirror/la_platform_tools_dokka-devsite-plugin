@@ -55,6 +55,9 @@ internal class PackageDocumentableConverter(
             javadocConverter.docsToSummary(docsHolder.classesFor(doc, displayLanguage))
         }
         val enums = async { javadocConverter.docsToSummary(docsHolder.enumsFor(doc)) }
+        val objects = async {
+            javadocConverter.docsToSummary(docsHolder.objectsFor(doc, displayLanguage))
+        }
         val exceptions = async { javadocConverter.docsToSummary(docsHolder.exceptionsFor(doc)) }
         val annotations = async { javadocConverter.docsToSummary(docsHolder.annotationsFor(doc)) }
         val typeAliases = async { javadocConverter.docsToSummary(docsHolder.typeAliasesFor(doc)) }
@@ -87,6 +90,7 @@ internal class PackageDocumentableConverter(
                         interfaces = interfaces.await(),
                         classes = classes.await(),
                         enums = enums.await(),
+                        objects = objects.await(),
                         exceptions = exceptions.await(),
                         annotations = annotations.await(),
                         typeAliases = typeAliases.await(),

@@ -53,6 +53,7 @@ import kotlinx.html.Tag
 import org.jetbrains.dokka.links.Callable
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.parent
+import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
@@ -62,12 +63,15 @@ import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DObject
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.ExtraModifiers
 import org.jetbrains.dokka.model.GenericTypeConstructor
 import org.jetbrains.dokka.model.InheritedMember
 import org.jetbrains.dokka.model.KotlinModifier
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.WithSupertypes
+import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.model.properties.WithExtraProperties
+import org.jetbrains.dokka.model.toAdditionalModifiers
 
 /** Converts documentable class-likes into the classlike component. */
 internal class ClasslikeDocumentableConverter(
@@ -112,7 +116,47 @@ internal class ClasslikeDocumentableConverter(
             if (classlike is DObject && classlike.isCompanion()) {
                 // Hoist companion JvmFields
                 declaredProperties = declaredProperties.filterNot { it.isJvmField() }
-            } else if (classlike !is DObject) {
+            } else if (classlike is DObject) {
+                declaredProperties += DProperty(
+                    dri = classlike.dri.copy(
+                        callable = Callable(name = "INSTANCE", params = emptyList())
+                    ),
+                    name = "INSTANCE",
+                    documentation = emptyMap(),
+                    expectPresentInSet = classlike.expectPresentInSet,
+                    sources = classlike.sources,
+                    visibility = classlike.visibility,
+                    type = GenericTypeConstructor(dri = classlike.dri, projections = emptyList()),
+                    receiver = null,
+                    setter = null,
+                    getter = null,
+                    modifier = emptyMap(),
+                    sourceSets = classlike.sourceSets,
+                    generics = emptyList(),
+                    isExpectActual = false,
+                    extra = PropertyContainer.withAll(
+                        classlike.sourceSets.map {
+                            mapOf(
+                                it to setOf(ExtraModifiers.JavaOnlyModifiers.Static)
+                            ).toAdditionalModifiers()
+                        } + classlike.sourceSets.map {
+                            Annotations(
+                                mapOf(
+                                    it to listOf(
+                                        Annotations.Annotation(
+                                            dri = DRI(
+                                                packageName = "kotlin.jvm",
+                                                classNames = "JvmField"
+                                            ),
+                                            params = emptyMap()
+                                        )
+                                    )
+                                )
+                            )
+                        }
+                    )
+                )
+            } else {
                 // Classlikes that are not (top-level) objects
                 declaredProperties += companionProperties.filter { it.isJavaStaticField() }
                 declaredProperties += companionProperties.filter { it.isJvmFieldAnnotated() }.map {
@@ -595,6 +639,7 @@ internal class ClasslikeDocumentableConverter(
                 displayLanguage,
                 type = classlike::class.java,
                 containingType = null,
+                injectStatic = classlike is DObject && displayLanguage == Language.JAVA,
                 isFromJava = classlike.isFromJava(),
                 isSummary = false
             )
