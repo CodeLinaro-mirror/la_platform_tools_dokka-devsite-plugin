@@ -65,7 +65,6 @@ import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.GenericTypeConstructor
 import org.jetbrains.dokka.model.InheritedMember
 import org.jetbrains.dokka.model.KotlinModifier
-import org.jetbrains.dokka.model.WithAbstraction
 import org.jetbrains.dokka.model.WithConstructors
 import org.jetbrains.dokka.model.WithSupertypes
 import org.jetbrains.dokka.model.properties.WithExtraProperties
@@ -591,19 +590,16 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private suspend fun computeSignature(): ClassSignature {
-        val modifiers = if (classlike is WithAbstraction && classlike is WithExtraProperties<*>) {
-            classlike.modifiers().modifiersFor(
-                ModifierHints(
-                    displayLanguage,
-                    type = classlike::class.java,
-                    containingType = null,
-                    isFromJava = classlike.isFromJava(),
-                    isSummary = false
-                )
+        val modifiers = classlike.modifiers().modifiersFor(
+            ModifierHints(
+                displayLanguage,
+                type = classlike::class.java,
+                containingType = null,
+                isFromJava = classlike.isFromJava(),
+                isSummary = false
             )
-        } else {
-            EmptyModifiers
-        }
+        )
+
         val typeParameters = classlike.generics().map {
             errorContextInjector(it) {
                 paramConverter.componentForTypeParameter(it, classlike.isFromJava())

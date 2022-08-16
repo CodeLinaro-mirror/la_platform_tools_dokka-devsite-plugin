@@ -28,15 +28,15 @@ import org.jetbrains.dokka.model.WithVisibility
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 
 /** @return the complete list of modifiers for this type */
-internal fun <T> T.modifiers(): List<String>
-    where T : WithAbstraction,
-          T : WithVisibility,
-          T : WithExtraProperties<*> {
-    val visibilityModifiers = listOf(visibility.values.single().name)
-    val baseModifiers = modifier.values.map { it.name }.filter { it.isNotEmpty() }
-    val extraModifiers = getExtraModifiers()
-
-    return visibilityModifiers + extraModifiers + baseModifiers
+internal fun Documentable.modifiers(): List<String> {
+    val result = mutableListOf<String>()
+    if (this is WithAbstraction)
+        result += this.modifier.values.map { it.name }.filter { it.isNotEmpty() }
+    if (this is WithVisibility)
+        result += listOf(visibility.values.single().name)
+    if (this is WithExtraProperties<*>)
+        result += getExtraModifiers()
+    return result
 }
 
 /**
