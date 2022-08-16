@@ -24,9 +24,12 @@ import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
+import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.converters.testing.companionName
 import com.google.devsite.renderer.converters.testing.content
 import com.google.devsite.renderer.converters.testing.enumValues
 import com.google.devsite.renderer.converters.testing.from
@@ -35,9 +38,12 @@ import com.google.devsite.renderer.converters.testing.inheritedFunctions
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
+import com.google.devsite.renderer.converters.testing.modifiers
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.nestedTypes
+import com.google.devsite.renderer.converters.testing.nonInstance
 import com.google.devsite.renderer.converters.testing.projectionName
+import com.google.devsite.renderer.converters.testing.single
 import com.google.devsite.renderer.converters.testing.size
 import com.google.devsite.renderer.converters.testing.summary
 import com.google.devsite.renderer.converters.testing.summaryItemsFor
@@ -159,7 +165,7 @@ internal class ClasslikeDocumentableConverterTest(
         val props = propertiesSummary.items(3)
 
         for ((i, prop) in props.withIndex()) {
-            assertThat((prop.data.description as SymbolSummary).name()).isEqualTo(expected[i])
+            assertThat(prop.data.description.name()).isEqualTo(expected[i])
         }
     }
 
@@ -282,7 +288,7 @@ internal class ClasslikeDocumentableConverterTest(
             // Constructor summaries are SingleColumnSummaryItems containing SymbolSummaries
             // They cannot have annotations, enforced by design.
 
-            val detail = constructor.second.symbols.single() as SymbolDetail
+            val detail = constructor.second.symbols.single()
             val returnAnnotations = detail.data.returnType.annotations
             val annotations = detail.data.annotationComponents
             val signature = detail.data.signature as FunctionSignature
@@ -319,19 +325,25 @@ internal class ClasslikeDocumentableConverterTest(
 
     @Test
     fun `Companion objects are documented in Java but not Kotlin because they're inlined`() {
-        val page = """
+        val module = """
             |class Foo {
-            |    companion object Bar
+            |    companion object FooCompanion
             |}
-        """.render().page()
+            |class Bar {
+            |    companion object
+            |}
+        """.render()
+        val foo = module.page("Foo").content<Classlike>()
+        val bar = module.page("Bar").content<Classlike>()
 
-        val classlike = page.content<Classlike>()
-        val (summary) = classlike.nestedTypes()
         kotlinOnly {
-            assertThat(summary.items()).hasSize(0)
+            assertThat(foo.nestedTypes().first.items()).hasSize(1)
+            assertThat(bar.nestedTypes().first.items()).isEmpty()
         }
         javaOnly {
-            assertThat(summary.item().link().name).isEqualTo("Foo.Bar")
+            fun Classlike.companionName() = nestedTypes().first.item().link().name
+            assertThat(foo.companionName()).isEqualTo("Foo.FooCompanion")
+            assertThat(bar.companionName()).isEqualTo("Bar.Companion")
         }
     }
 
@@ -815,7 +827,7 @@ internal class ClasslikeDocumentableConverterTest(
         val inheritedSummary = childClass.data.inheritedTypes.single().data.inheritedSymbolSummaries
         val inheritedMethods = inheritedSummary.entries.single().value.data.items
         val inheritedMethodSignatures = inheritedMethods.map {
-            (it.data.description as SymbolSummary).data.signature as FunctionSignature
+            it.data.description.data.signature as FunctionSignature
         }
         assertThat(inheritedMethodSignatures.map { it.data.name.data.name }).isEqualTo(
             listOf("a", "b", "b", "b", "b", "c")
@@ -1092,8 +1104,8 @@ internal class ClasslikeDocumentableConverterTest(
             assertThat(companionClasslike.methodSummaryItems()).hasSize(2)
             val barMethod = companionClasslike.methodSymbol("bar")!!
             val bazMethod = companionClasslike.methodSymbol("baz")!!
-            assertThat(barMethod.data.title.data.modifiers).isEqualTo(listOf("static", "final"))
-            assertThat(bazMethod.data.title.data.modifiers).isEqualTo(listOf("static", "final"))
+            assertThat(barMethod.modifiers()).isEqualTo(listOf("static", "final"))
+            assertThat(bazMethod.modifiers()).isEqualTo(listOf("static", "final"))
         }
     }
 
@@ -1125,8 +1137,8 @@ internal class ClasslikeDocumentableConverterTest(
             assertThat(companionClasslike.propertySummaryItems()).hasSize(2)
             val barProp = companionClasslike.propertySymbol("bar")!!
             val bazProp = companionClasslike.propertySymbol("baz")!!
-            assertThat(barProp.data.title.data.modifiers).isEqualTo(listOf("static", "final"))
-            assertThat(bazProp.data.title.data.modifiers).isEqualTo(listOf("static", "final"))
+            assertThat(barProp.modifiers()).isEqualTo(listOf("static", "final"))
+            assertThat(bazProp.modifiers()).isEqualTo(listOf("static", "final"))
         }
     }
 
@@ -1140,33 +1152,34 @@ internal class ClasslikeDocumentableConverterTest(
         """.render()
         val classlikeK = moduleK.page("Foo").content<Classlike>()
 
-        val classlikeJ = """
+        val moduleJ = """
             |public static class Foo {
             |  public static final void bar() {}
             |  public static final String baz = "baz"
             |}
-        """.render(java = true).page("Foo").content<Classlike>()
+        """.render(java = true)
+        val classlikeJ = moduleJ.page("Foo").content<Classlike>()
 
         for (classlike in listOf(classlikeJ, classlikeK)) {
             assertThat(classlikeK.noSymbolsFor(publicCompanionFunctionsTitle())).isTrue()
             assertThat(classlikeK.noSymbolsFor(publicCompanionPropertiesTitle())).isTrue()
             assertThat(classlike.methodSummaryItems()).hasSize(1)
-            assertThat(classlike.symbolsFor(publicPropertiesTitle(displayLanguage)).first.size)
-                .isEqualTo(0)
-            assertThat(classlike.symbolsFor(constantsTitle()).first.size).isEqualTo(1)
+            val props = classlike.summaryItemsFor(publicPropertiesTitle(displayLanguage))
+            val consts = classlike.summaryItemsFor(constantsTitle())
+            assertThat(consts.map { it.name() }).containsExactly("baz")
+            assertThat(props).isEmpty()
 
             val barMethod = classlike.methodSymbol("bar")!!
-            val barModifiers = barMethod.data.title.data.modifiers
-            val bazConst = classlike.symbolsFor(constantsTitle()).first.items()
-                .single { it.name() == "baz" }
+            val barModifiers = barMethod.modifiers()
+            val bazConst = consts.single { it.name() == "baz" }
             kotlinOnly {
                 if (classlike == classlikeK) assertThat(barModifiers).isEmpty()
                 else assertThat(barModifiers).isEqualTo(listOf("java-static"))
-                assertThat(bazConst.data.title.data.modifiers).isEqualTo(listOf("const"))
+                assertThat(bazConst.modifiers()).isEqualTo(listOf("const"))
             }
             javaOnly {
                 assertThat(barModifiers).isEqualTo(listOf("static", "final"))
-                assertThat(bazConst.data.title.data.modifiers).isEqualTo(listOf("static", "final"))
+                assertThat(bazConst.modifiers()).isEqualTo(listOf("static", "final"))
             }
         }
     }
@@ -1223,8 +1236,141 @@ internal class ClasslikeDocumentableConverterTest(
         }
     }
 
-    @Ignore("Un-ignore test (and update as necessary) when b/190600426 is resolved")
-    @Suppress("UNUSED_VARIABLE")
+    @Ignore // Pending getter/setter implementation/changes landing
+    @Test
+    fun `JvmStatic is correctly handled in java`() {
+        if (displayLanguage != Language.JAVA) return
+        val page = """
+            |class Foo {
+            |   companion object {
+            |       @JvmStatic fun bar() {}
+            |       @JvmStatic val baz = 8
+            |   }
+            |}
+        """.render().page("Foo").content<Classlike>()
+
+        val nestedTypes = page.summaryItemsFor("Nested types")
+        val methods = page.methodSummaryItems()
+        val staticMethods = methods.filter { it.modifiers().contains("static") }
+
+        // method `bar` can be referenced both as `Foo.bar` and `Foo.Companion.bar`
+        assertThat(nestedTypes).hasSize(1)
+        assertThat(methods.map { it.name() }).containsExactly("bar", "getBaz")
+        assertThat(staticMethods).hasSize(2)
+    }
+
+    @Test
+    fun `JvmField in companion object is static field in java and unchanged in kotlin`() {
+        val module = """
+            |class Foo {
+            |   companion object {
+            |       @JvmField val BAR = 8
+            |       @JvmField var BAZ = "abc"
+            |   }
+            |}
+        """.render()
+
+        val classPage = module.page("Foo").content<Classlike>()
+        val companionPage = module.page("Companion").content<Classlike>()
+
+        val nestedTypes = classPage.nestedTypes()
+        val fields = classPage.propertySummaryItems()
+        val staticFields = fields.filter { it.modifiers().contains("static") }
+
+        javaOnly {
+            // static fields are removed from the companion object
+            assertThat(nestedTypes.first.size).isEqualTo(1)
+            assertThat(classPage.methodSummaryItems()).isEmpty()
+            assertThat(fields.map { it.name() }).containsExactly("BAR", "BAZ")
+            assertThat(staticFields).hasSize(2)
+
+            // companion object exists, but has no fields
+            assertThat(companionPage.methodSummaryItems()).isEmpty()
+            assertThat(companionPage.propertySummaryItems().nonInstance()).isEmpty()
+        }
+
+        kotlinOnly {
+            val companionProperties =
+                classPage.symbolsFor(publicCompanionPropertiesTitle()).first.items()
+
+            // on the other hand, nothing has changed from the kotlin's point of view
+            assertThat(companionProperties.map { it.name() }).containsExactly("BAR", "BAZ")
+        }
+    }
+
+    @Test
+    fun `lateinit property in companion object is static field in java and unchanged in kotlin`() {
+        val module = """
+            |class Foo {
+            |   companion object {
+            |       lateinit var bar: String;
+            |   }
+            |}
+        """.render()
+
+        val classPage = module.page("Foo").content<Classlike>()
+        val companionPage = module.page("Companion").content<Classlike>()
+
+        val nestedTypes = classPage.nestedTypes()
+        val fields = classPage.propertySummaryItems()
+        val staticFields = fields.filter { it.modifiers().contains("static") }
+
+        val companionPageMethods = companionPage.methodSummaryItems()
+        val companionPageFields = companionPage.propertySummaryItems().nonInstance()
+
+        javaOnly {
+            // static fields are removed from the companion object
+            assertThat(nestedTypes.first.size).isEqualTo(1)
+            assertThat(classPage.methodSummaryItems()).isEmpty()
+            assertThat(fields.map { it.name() }).containsExactly("bar")
+            assertThat(staticFields).hasSize(1)
+
+            // everything is duplicated in companion objects in Kotlin
+            // assertThat(companionPageMethods.names()).containsExactly("getBar", "setBar")
+            assertThat(companionPageMethods).isEmpty()
+            assertThat(companionPageFields.map { it.name() }).containsExactly("bar")
+        }
+
+        kotlinOnly {
+            val companionProperties =
+                classPage.symbolsFor(publicCompanionPropertiesTitle()).first.items()
+
+            // on the other nothing has changed from the kotlin's point of view
+            assertThat(companionProperties.map { it.name() }).containsExactly("bar")
+        }
+    }
+
+    @Test
+    fun `const property in companion object is static field in java and const in kotlin`() {
+        val classlike = """
+            |class Foo {
+            |   companion object {
+            |       const val MARGIN = 9
+            |   }
+            |}
+        """.render().page("Foo").content<Classlike>()
+
+        val fields = classlike.propertySummaryItems()
+
+        val constantFields = classlike.summaryItemsFor("Constants")
+        assertThat(constantFields.map { it.name() }).containsExactly("MARGIN")
+
+        javaOnly {
+            assertThat(classlike.methodSummaryItems()).isEmpty()
+
+            assertThat(fields.map { it.name() }).isEmpty()
+        }
+
+        kotlinOnly {
+            val companionProperties =
+                classlike.summaryItemsFor(publicCompanionPropertiesTitle()) +
+                    classlike.summaryItemsFor(protectedCompanionPropertiesTitle())
+
+            assertThat(companionProperties).isEmpty()
+        }
+    }
+
+    @Ignore // Pending getter/setter implementation/changes landing
     @Test
     fun `static getters in companion objects can be renamed in java`() {
         val page = """
@@ -1238,21 +1384,336 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page("Foo").content<Classlike>()
 
         val methods = page.methodSummaryItems()
-//        val staticMethods = methods.filter { it.modifiers().contains("static") }
-//
-//        javaOnly {
-//            assertThat(methods.names()).containsExactly("computeBar")
-//            assertThat(staticMethods).hasSize(1)
-//        }
+        val staticMethods = methods.filter { it.modifiers().contains("static") }
+
+        javaOnly {
+            assertThat(methods.map { it.name() }).containsExactly("computeBar")
+            assertThat(staticMethods).hasSize(1)
+        }
 
         kotlinOnly {
             val companionProperties =
-                page.symbolsFor(companionPropertiesTitle()).first.items()
+                page.symbolsFor(publicCompanionPropertiesTitle()).first.items()
             val companionFunctions =
-                page.symbolsFor(companionFunctionsTitle()).first.items()
+                page.symbolsFor(publicCompanionFunctionsTitle()).first.items()
 
             assertThat(companionProperties).hasSize(1)
             assertThat(companionFunctions).isEmpty()
+        }
+    }
+
+    @Test
+    fun `companion objects can be named`() {
+        val module = """
+            |class Foo {
+            |    companion object Named {
+            |        fun bar() {}
+            |    }
+            |}
+        """.render()
+
+        val classPage = module.page("Foo").content<Classlike>()
+        val companionPage = module.page("Named").content<Classlike>()
+
+        val nestedTypes = classPage.nestedTypes().first.items()
+        val methods = classPage.methodSummaryItems()
+        val companionPageMethods = companionPage.methodSummaryItems()
+
+        assertThat(nestedTypes.map { it.name() }).containsExactly("Foo.Named")
+        assertThat(companionPageMethods.map { it.name() }).containsExactly("bar")
+        assertThat(methods).isEmpty()
+
+        kotlinOnly {
+            val companionFunctions = classPage.symbolsFor(publicCompanionFunctionsTitle()).first
+            assertThat(companionFunctions.items().map { it.name() }).containsExactly("bar")
+        }
+    }
+
+    @Test
+    fun `companion objects can inherit`() {
+        val module = """
+            |class Companionable {
+            |   fun bar() {}
+            |}
+            |
+            |class Foo {
+            |    companion object : Companionable
+            |}
+        """.render()
+
+        val classPage = module.page("Foo").content<Classlike>()
+        val nestedTypes = classPage.nestedTypes().first.items()
+        assertThat(nestedTypes.map { it.name() }).containsExactly("Foo.Companion")
+
+        val companionPage = module.page("Companion").content<Classlike>()
+
+        val companionInheritedMethodsSummaries =
+            companionPage.summaryItemsFor(inheritedMethodsTitle(displayLanguage))
+
+        assertThat(companionInheritedMethodsSummaries.map { it.name() }).containsExactly("bar")
+
+        kotlinOnly {
+            // Inherited companion functions are not hoisted
+            assertThat(classPage.noSymbolsFor(inheritedMethodsTitle(displayLanguage))).isTrue()
+        }
+    }
+
+    @Test // TODO: non-overridden inherited elements in companion objects are missing
+    fun `companion objects that inherits still can have static forwarders`() {
+        // Aka you can add the JvmStatic-ness in an override
+        // NOTE: "@JvmField cannot be applied to a property that overrides another property"
+        // NOTE: "@JvmField can only be applied to final property"
+        // NOTE: @JvmStatic can only be applied to elements in a static context, e.g. an object,
+        // not an interface like Companionable, and you can't inherit from singletons/static context
+        // NOTE: "property in an interface cannot have a backing field" (no getters in interface)
+        val module = """
+            |open class ForDefaultProperties {
+            |   open var notStaticNonOverriddenVar = "bar"
+            |}
+            |interface Companionable {
+            |   fun becomesStaticFun() {}
+            |   var becomesLateinitVar: String
+            |   fun notStaticNonOverriddenFun() {}
+            |   fun notStaticOverriddenFun() {}
+            |   var notStaticOverriddenVar: String
+            |}
+            |
+            |class Foo {
+            |    companion object : Companionable, ForDefaultProperties() {
+            |       @JvmStatic override fun becomesStaticFun() {}
+            |       override lateinit var becomesLateinitVar: String
+            |       override fun notStaticOverriddenFun() {}
+            |       override var notStaticOverriddenVar: String = "baz"
+            |    }
+            |}
+        """.render()
+
+        val classPage = module.page("Foo").content<Classlike>()
+        val companionPage = module.page("Companion").content<Classlike>()
+        assertThat(classPage.nestedTypes().first.items().map { it.name() })
+            .containsExactly("Foo.Companion")
+
+        val methods = classPage.methodSummaryItems()
+        val fields = classPage.propertySummaryItems()
+        val companionPageMethods = companionPage.methodSummaryItems()
+        val companionPageFields = companionPage.propertySummaryItems()
+        val companionInheritedProperties = companionPage.inheritedFields!!
+            .from("androidx.example.Companionable")?.value?.items() ?: emptyList()
+        val companionInheritedFunctions = companionPage.inheritedFunctions!!
+            .from("androidx.example.Companionable")?.value?.items() ?: emptyList()
+        val inheritedDefaultProp = companionPage.inheritedFields!!
+            .from("androidx.example.ForDefaultProperties")?.value?.items() ?: emptyList()
+
+        // Overridden functions
+        assertThat(companionPageMethods.map { it.name() })
+            .containsExactly("becomesStaticFun", "notStaticOverriddenFun")
+        // Overridden vars
+
+        kotlinOnly {
+            val companionProperties =
+                classPage.symbolsFor(publicCompanionPropertiesTitle()).first.items()
+            val companionFunctions =
+                classPage.symbolsFor(publicCompanionFunctionsTitle()).first.items()
+            val zippedProps = companionProperties.zip(companionPageFields)
+            val zippedFuns = companionFunctions.zip(companionPageMethods)
+            assertThat(companionProperties.map { it.name() })
+                .isEqualTo(companionPageFields.map { it.name() })
+            assertThat(companionFunctions.map { it.name() })
+                .isEqualTo(companionPageMethods.map { it.name() })
+
+            assertThat(companionPageFields.map { it.name() })
+                .containsExactly("notStaticOverriddenVar", "becomesLateinitVar")
+
+            // These functions are overridden and newly made static
+            assertThat(companionPageMethods.map { it.name() })
+                .containsExactly("becomesStaticFun", "notStaticOverriddenFun")
+            // These fields are overridden and newly made static
+            assertThat(companionPageFields.map { it.name() })
+                .containsExactly("becomesLateinitVar", "notStaticOverriddenVar")
+            // These functions are not overridden but TODO staticness
+            assertThat(companionInheritedFunctions.map { it.name() })
+                .containsExactly("notStaticNonOverriddenFun")
+            // These fields are not ovverridden but TODO staticness
+            assertThat(companionInheritedProperties.map { it.name() }).isEmpty()
+            assertThat(inheritedDefaultProp.map { it.name() })
+                .containsExactly("notStaticNonOverriddenVar")
+        }
+        javaOnly {
+            assertThat(companionPageFields.map { it.name() })
+                .containsExactly("notStaticOverriddenVar", "becomesLateinitVar")
+            assertThat(methods.map { it.name() }).containsExactly("becomesStaticFun")
+            assertThat(fields.map { it.name() }).containsExactly("becomesLateinitVar")
+        }
+    }
+
+    @Test
+    fun `Comprehensive companion function-property hoist-duplication test`() {
+        val module = """
+            |open class TheContainer {
+            |    companion object TheCompanion {
+            |        fun publicConlyFun() = 1
+            |        protected fun protectedConlyFun() = 2
+            |        @JvmStatic fun publicDuplicatedFun() = 3
+            |        @JvmStatic protected fun protectedDuplicatedFun() = 4
+            |        val publicConlyProp = 5
+            |        protected val protectedConlyProp = 6
+            |        @JvmStatic val publicDuplicatedProp = 7
+            |        @JvmStatic protected val protectedDuplicatedProp = 8
+            |        @JvmField val publicHoistedField = 9
+            |        @JvmField protected val protectedHoistedField = 10
+            |        const val publicHoistedConst = 11
+            |        protected const val protectedHoistedConst = 12
+            |    }
+            |}
+        """.render()
+
+        fun Iterable<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>.names() = map { it.name() }
+        val names = listOf(
+            "publicConlyFun",
+            "protectedConlyFun",
+            "publicDuplicatedFun",
+            "protectedDuplicatedFun",
+            "publicHoistedField",
+            "protectedHoistedField",
+            "publicHoistedConst",
+            "protectedHoistedConst"
+        ) + /*if (displayLanguage == Language.KOTLIN)*/ listOf(
+            "publicConlyProp",
+            "protectedConlyProp",
+            "publicDuplicatedProp",
+            "protectedDuplicatedProp"
+        ) /*else listOf(        // getter/setters generation still needs broader work b/168340963
+            "getPublicConlyProp",
+            "getProtectedConlyProp",
+            "getPublicDuplicatedProp",
+            "getProtectedDuplicatedProp"
+        )*/
+
+        val containerClass = module.page("TheContainer").content<Classlike>()
+        val companionClass = module.page("TheCompanion").content<Classlike>()
+        assertThat(containerClass.nestedTypes().first.single().name())
+            .isEqualTo("TheContainer.TheCompanion")
+        assertThat(containerClass.companionName())
+            .isEqualTo("TheContainer.TheCompanion")
+        // Pull public/protected elements that are hoisted or are in the companion
+        // "CompanionONLY" conly is a misnomer right now; includes methods in both companion&parent
+        var publicHoistedFuns = if (displayLanguage == Language.KOTLIN)
+            containerClass.summaryItemsFor(publicCompanionFunctionsTitle())
+        else containerClass.summaryItemsFor(publicMethodsTitle(displayLanguage))
+            .filter { "static" in it.modifiers() }
+        var protectedHoistedFuns = if (displayLanguage == Language.KOTLIN)
+            containerClass.summaryItemsFor(protectedCompanionFunctionsTitle())
+        else containerClass.summaryItemsFor(protectedMethodsTitle(displayLanguage))
+            .filter { "static" in it.modifiers() }
+        var publicHoistedProps = if (displayLanguage == Language.KOTLIN)
+            containerClass.summaryItemsFor(publicCompanionPropertiesTitle())
+        else containerClass.summaryItemsFor(publicPropertiesTitle(displayLanguage))
+            .filter { "static" in it.modifiers() }
+        var protectedHoistedProps = if (displayLanguage == Language.KOTLIN)
+            containerClass.summaryItemsFor(protectedCompanionPropertiesTitle())
+        else containerClass.summaryItemsFor(protectedPropertiesTitle(displayLanguage))
+            .filter { "static" in it.modifiers() }
+        var publicConlyFuns = companionClass
+            .summaryItemsFor(publicMethodsTitle(displayLanguage))
+        var protectedConlyFuns = companionClass
+            .summaryItemsFor(protectedMethodsTitle(displayLanguage))
+        var publicConlyProps = companionClass
+            .summaryItemsFor(publicPropertiesTitle(displayLanguage))
+        var protectedConlyProps = companionClass
+            .summaryItemsFor(protectedPropertiesTitle(displayLanguage))
+        // Now filter out elements in both hoisted and conly and put them in duplicated
+        val publicDuplicatedFuns = publicConlyFuns.intersect(publicHoistedFuns)
+        publicConlyFuns -= publicDuplicatedFuns
+        publicHoistedFuns -= publicDuplicatedFuns
+        val protectedDuplicatedFuns = protectedConlyFuns.intersect(protectedHoistedFuns)
+        protectedConlyFuns -= protectedDuplicatedFuns
+        protectedHoistedFuns -= protectedDuplicatedFuns
+        val publicDuplicatedProps = publicConlyProps.intersect(publicHoistedProps)
+        publicConlyProps -= publicDuplicatedProps
+        publicHoistedProps -= publicDuplicatedProps
+        val protectedDuplicatedProps = protectedConlyProps.intersect(protectedHoistedProps)
+        protectedConlyProps -= protectedDuplicatedProps
+        protectedHoistedProps -= protectedDuplicatedProps
+        // No visibility distinction for constants: b/237083570
+        // Constants are all hoisted in Java and duplicated in Kotlin
+        val hoistedConstants = containerClass.summaryItemsFor("Constants")
+        val companionConstants = companionClass.summaryItemsFor("Constants")
+
+        javaOnly {
+            // Perform asserts based on name mangling
+            assertThat(publicHoistedFuns.names()).containsExactlyElementsIn(
+                names.filter { "ublic" in it && "Hoisted" in it && "Fun" in it }
+            )
+            assertThat(protectedHoistedFuns.names()).containsExactlyElementsIn(
+                names.filter { "rotected" in it && "Hoisted" in it && "Fun" in it }
+            )
+            assertThat(publicHoistedProps.names()).containsExactlyElementsIn(
+                names.filter {
+                    "ublic" in it && "Hoisted" in it &&
+                        ("Prop" in it || "Field" in it)
+                }
+            )
+            assertThat(protectedHoistedProps.names()).containsExactlyElementsIn(
+                names.filter {
+                    "rotected" in it && "Hoisted" in it &&
+                        ("Prop" in it || "Field" in it)
+                }
+            )
+            assertThat(publicConlyFuns.names()).containsExactlyElementsIn(
+                names.filter { "ublic" in it && "Conly" in it && "Fun" in it }
+            )
+            assertThat(protectedConlyFuns.names()).containsExactlyElementsIn(
+                names.filter { "rotected" in it && "Conly" in it && "Fun" in it }
+            )
+            assertThat(publicConlyProps.names()).containsExactlyElementsIn(
+                names.filter { "ublic" in it && "Conly" in it && "Prop" in it }
+            )
+            assertThat(protectedConlyProps.names()).containsExactlyElementsIn(
+                names.filter { "rotected" in it && "Conly" in it && "Prop" in it }
+            )
+            assertThat(publicDuplicatedFuns.names()).containsExactlyElementsIn(
+                names.filter { "ublic" in it && "Duplicated" in it && "Fun" in it }
+            )
+            assertThat(protectedDuplicatedFuns.names()).containsExactlyElementsIn(
+                names.filter { "rotected" in it && "Duplicated" in it && "Fun" in it }
+            )
+            assertThat(publicDuplicatedProps.names()).containsExactlyElementsIn(
+                names.filter { "ublic" in it && "Duplicated" in it && "Prop" in it }
+            )
+            assertThat(protectedDuplicatedProps.names()).containsExactlyElementsIn(
+                names.filter { "rotected" in it && "Duplicated" in it && "Prop" in it }
+            )
+            assertThat(hoistedConstants.names()).containsExactlyElementsIn(
+                names.filter { "Const" in it }
+            )
+            assertThat(companionConstants).isEmpty()
+        }
+        // In Kotlin, everything is hoisted and there is no `static`, i.e. everything is duplicated
+        kotlinOnly {
+            assertThat(publicHoistedFuns).isEmpty()
+            assertThat(protectedHoistedFuns).isEmpty()
+            assertThat(publicHoistedProps).isEmpty()
+            assertThat(protectedHoistedProps).isEmpty()
+            assertThat(publicConlyFuns).isEmpty()
+            assertThat(protectedConlyFuns).isEmpty()
+            assertThat(publicConlyProps).isEmpty()
+            assertThat(protectedConlyProps).isEmpty()
+            assertThat(publicDuplicatedFuns.names()).containsExactlyElementsIn(
+                names.filter { "ublic" in it && "Fun" in it }
+            )
+            assertThat(protectedDuplicatedFuns.names()).containsExactlyElementsIn(
+                names.filter { "rotected" in it && "Fun" in it }
+            )
+            assertThat(publicDuplicatedProps.names()).containsExactlyElementsIn(
+                names.filter { "ublic" in it && ("Prop" in it || "Field" in it) }
+            )
+            assertThat(protectedDuplicatedProps.names()).containsExactlyElementsIn(
+                names.filter { "rotected" in it && ("Prop" in it || "Field" in it) }
+            )
+            assertThat(hoistedConstants).containsExactlyElementsIn(companionConstants)
+            assertThat(hoistedConstants.names()).containsExactlyElementsIn(
+                names.filter { "Const" in it }
+            )
         }
     }
 
@@ -1497,7 +1958,7 @@ internal class ClasslikeDocumentableConverterTest(
             val classlike = emptyTestClass.render(java = isJava).page("Foo").content<Classlike>()
             val constructorList = classlike.symbolsForConstructors().second.symbols
             assertThat(constructorList.size).isEqualTo(1)
-            assertThat((constructorList.single() as SymbolDetail).data.name).isEqualTo("Foo")
+            assertThat(constructorList.single().data.name).isEqualTo("Foo")
         }
     }
 
@@ -1658,7 +2119,7 @@ internal class ClasslikeDocumentableConverterTest(
     private fun Classlike.methodDetailsItems() = (
         symbolsFor(publicMethodsTitle(displayLanguage)).second.symbols +
             symbolsFor(protectedMethodsTitle(displayLanguage)).second.symbols
-        ).map { it as SymbolDetail }
+        )
 
     private fun Classlike.methodSummaryItems() =
         summaryItemsFor(publicMethodsTitle(displayLanguage)) +
@@ -1682,10 +2143,11 @@ internal class ClasslikeDocumentableConverterTest(
         data.items.item().data.description
 
     private fun Classlike.noSectionFor(symbolsName: String) =
-        data.symbolTypes.none { it.first.title() == symbolsName }
+        data.symbolTypes.none { it.first.title() == symbolsName } &&
+            data.inheritedTypes.none { it.title() == symbolsName }
 
     private fun Classlike.noSymbolsFor(symbolsName: String) = noSectionFor(symbolsName) ||
-        symbolsFor(symbolsName).first.size == 0
+        summaryItemsFor(symbolsName).isEmpty()
 
     companion object {
         @JvmStatic

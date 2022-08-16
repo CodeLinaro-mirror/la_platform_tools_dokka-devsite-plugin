@@ -85,6 +85,7 @@ internal fun TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>
 .link() = data.title.data.type.link()
 
 internal fun TwoPaneSummaryItem<TypeSummary, SymbolSummary>.summary() = data.description
+internal fun TwoPaneSummaryItem<TypeSummary, *>.modifiers() = data.title.data.modifiers
 
 @JvmName("This is internal and will never be used from JVM")
 internal fun TwoPaneSummaryItem<TypeSummary, SymbolSummary>
@@ -94,6 +95,8 @@ internal fun TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>
 @JvmName("This too is internal and will never be used from JVM")
 internal fun TwoPaneSummaryItem<Link, DescriptionComponent>
 .name(): String = this.data.title.data.name
+internal fun Iterable<TwoPaneSummaryItem<TypeSummary, SymbolSummary>>.nonInstance() =
+    filterNot { it.name() == "INSTANCE" }
 
 internal fun SymbolSummary.name(): String = data.signature.data.name.data.name
 internal fun SymbolSummary.signature() = (data.signature as FunctionSignature).data

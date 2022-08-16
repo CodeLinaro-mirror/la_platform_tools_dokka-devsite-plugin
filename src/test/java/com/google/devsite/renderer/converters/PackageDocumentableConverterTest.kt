@@ -380,6 +380,27 @@ internal class PackageDocumentableConverterTest(
         assertThat(extensions.last().summary().name()).isEqualTo("b")
     }
 
+    @Test
+    fun `Companion objects are documented in Java but not Kotlin because they're inlined`() {
+        val packageSummary = """
+            |class Foo {
+            |    companion object FooCompanion
+            |}
+            |class Bar {
+            |    companion object
+            |}
+        """.render().page().content<PackageSummary>()
+
+        assertThat("FooCompanion" in packageSummary.data.classes.items().map { it.name() })
+
+        kotlinOnly {
+            assertThat("Companion" !in packageSummary.data.classes.items().map { it.name() })
+        }
+        javaOnly {
+            assertThat("Companion" in packageSummary.data.classes.items().map { it.name() })
+        }
+    }
+
     private fun DModule.page(): DevsitePage {
         val (holder, pathProvider) = holderAndProvider(this)
         val converter =

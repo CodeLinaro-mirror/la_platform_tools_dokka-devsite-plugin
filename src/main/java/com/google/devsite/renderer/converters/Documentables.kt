@@ -25,6 +25,7 @@ import org.jetbrains.dokka.analysis.PsiDocumentableSource
 import org.jetbrains.dokka.base.transformers.documentables.isException
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.PointingToDeclaration
+import org.jetbrains.dokka.model.AnnotationTarget
 import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.BooleanConstant
 import org.jetbrains.dokka.model.ComplexExpression
@@ -57,6 +58,8 @@ import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.WithSupertypes
 import org.jetbrains.dokka.model.WithVisibility
 import org.jetbrains.dokka.model.isJvmName
+import org.jetbrains.dokka.model.properties.PropertyContainer
+import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.model.toAdditionalModifiers
 import org.jetbrains.kotlin.builtins.jvm.JavaToKotlinClassMap
 import org.jetbrains.kotlin.name.ClassId
@@ -116,6 +119,20 @@ internal fun WithSources.isFromJava() =
             else -> false
         }
     }
+
+internal fun Documentable.isJavaStaticField() = this is DProperty && run {
+    val modifiers = modifiers()
+    "const" in modifiers || "lateinit" in modifiers || isStaticAnnotated()
+}
+
+internal fun Documentable.isJavaStaticMethod() = this is DFunction &&
+    (isStaticAnnotated() || isStaticAccessor())
+
+internal fun DFunction.isStaticAccessor() = false
+// extra[OriginalProperty]?.original?.isStaticAnnotated() ?: false TODO(b/168340963 accessors)
+
+internal fun Documentable.isStaticAnnotated() =
+    annotations().any { it.dri == JvmStatic.dri }
 
 private val INTERNAL_PACKAGES = listOf("java", "Kotlin", "google", "android")
 internal fun DRI.isExternal() = !packageName?.startsWithAnyOf(INTERNAL_PACKAGES) ?: true
@@ -249,6 +266,24 @@ fun <T : Documentable> List<T>.filterOutJvmSynthetic(): List<T> = this.filterNot
     elem.annotations().any { it.dri.classNames.equals("JvmSynthetic") }
 }
 
+/** Adds an annotation to a Documentable. Often used for injecting e.g. @JvmStatic. */
+internal fun <T> PropertyContainer<T>.addAnnotation(newA: Annotations.Annotation):
+    PropertyContainer<T>
+    where T : WithExtraProperties<T>, T : AnnotationTarget {
+    val annotationsWithoutJvmName = get(Annotations)?.let { annotations ->
+        annotations.copy(
+            (annotations.directAnnotations).map { (sourceset, annotations) ->
+                sourceset to (annotations + newA)
+            }.toMap() + annotations.fileLevelAnnotations
+        )
+    }
+    val extraWithoutAnnotations: PropertyContainer<T> = minus(Annotations)
+
+    return extraWithoutAnnotations.addAll(listOfNotNull(annotationsWithoutJvmName))
+}
+
+internal val JvmStatic = Annotations.Annotation(DRI("kotlin.jvm", "JvmStatic"), params = emptyMap())
+
 /**
  * Uses the JavaToKotlinClassMap to possibly convert a dri to its Java equivalent
  * https://kotlinlang.org/docs/reference/java-interop.html#mapped-types
@@ -320,12 +355,14 @@ fun List<DProperty>.gettersAndSetters(): List<DFunction> {
 private fun DRI.isAtJvmField(): Boolean = packageName == "kotlin.jvm" && classNames == "JvmField"
 
 private fun Annotations.Annotation.isAtJvmField(): Boolean = dri.isAtJvmField()
+internal fun DProperty.isJvmFieldAnnotated() =
+    annotations().any { it.isAtJvmField() }
 
 /**
  * Returns whether property is annotated as @JvmField
  */
 fun DProperty.isJvmField(): Boolean {
-    return annotations().any { it.isAtJvmField() }
+    return isJvmFieldAnnotated() || "const" in modifiers()
 }
 
 internal fun List<DFunction>.names() = map { it.name }

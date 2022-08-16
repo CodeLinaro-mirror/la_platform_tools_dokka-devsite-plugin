@@ -36,6 +36,9 @@ import java.lang.Exception
 fun topLevelFunction() = 7
 const val topLevelConst = 6.5
 val topLevelProp = 6
+lateinit var topLevelLateinit: String
+// @JvmStatic var topLevelStaticVar = 5     // not valid
+@JvmField val topLevelField = 5
 
 // NOTE: top-level objects cannot be anonymous
 object TopLevelObject {
@@ -45,7 +48,9 @@ object TopLevelObject {
     @JvmField val namedTopLevelJvmField = 4.25
     // '@JvmStatic' annotation is useless for '@JvmField' or 'const' properties
     // '@JvmField' cannot be applied to 'const' property
-   const val namedTopLevelconst = 4.125
+    const val namedTopLevelconst = 4.125
+    lateinit var topLevelLateInitVar: String
+    @JvmStatic lateinit var topLevelStaticLateInitVar: String
 }
 // Modifier 'open' is not applicable to '(companion )object'
 object TopLevelInheritingObject : Exception() {
@@ -100,6 +105,14 @@ open class ContainerOfInheriting {
     }
 }
 
+open class ContainerOfLateinit {
+    companion object {
+        var companionNotLateInitVar = "String"
+        lateinit var companionLateInitVar: String
+        @JvmStatic lateinit var companionStaticLateInitVar: String
+    }
+}
+
 // A demonstration of how Java-as-Kotlin static access works
 private fun tests() {
     assert(JavaStatics.classStaticFunction() == 999)
@@ -112,4 +125,9 @@ private fun tests() {
     // the "Companion properties" section because they can be accessed as Container.theProp.
     // assert(ContainerOfNamed.Companion.namedCompanionConst == 999.0)
     assert(ContainerOfBoring.boringCompanionObjectFun() == 999)
+
+    assert(JavaStatics.InnerJavaStatics().notStaticInnerFun() == 999)
+    assert(JavaStatics.InnerJavaStatics().notStaticinnerField == 999)
+    assert(JavaStatics.InnerJavaStatics.staticInnerFun() == 999)
+    assert(JavaStatics.InnerJavaStatics.staticInnerField == 999)
 }

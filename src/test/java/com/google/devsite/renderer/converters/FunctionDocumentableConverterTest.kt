@@ -56,7 +56,7 @@ internal class FunctionDocumentableConverterTest(
 ) : ConverterTestBase(displayLanguage) {
 
     private val defaultHints: ModifierHints = ModifierHints(
-        displayLanguage,
+        displayLanguage = displayLanguage,
         isSummary = false,
         type = DFunction::class.java,
         containingType = DClass::class.java

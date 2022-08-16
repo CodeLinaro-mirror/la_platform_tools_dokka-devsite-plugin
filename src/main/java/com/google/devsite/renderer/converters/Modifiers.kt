@@ -20,6 +20,7 @@ import com.google.devsite.renderer.Language
 import org.jetbrains.dokka.model.AdditionalModifiers
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DObject
+import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.WithAbstraction
@@ -73,13 +74,31 @@ internal fun List<String>.modifiersFor(
                 modifiers.add("final") // this happens for `const val`
             }
 
+            // What does @JvmStatic do?
+            // It causes the annotated function/property-and-accessors to be hoisted to the
+            // containing object. It does _not_ affect the presence of the `static` keyword. All
+            // methods that are on or hoisted from companion objects are _always_ static.
+            // As such, @JvmStatic needs no handling here--or it wouldn't if we didn't use it as
+            // an internal flag to represent that something has been hoisted. It is later converted
+            // into injectStatic. (This is convenient because it makes java -> kotlin easy).
+
+            if (hints.injectStatic) {
+                modifiers.add("static")
+            }
+
+            // `lateinit` on a companion var causes the creation of a hoisted public backing field
+            // but _not_ hoisted public accessors.
+            // However, this needs no handling here, as given that the compiler performs the
+            // hoisting, for the same reason that @JvmStatic does not require special handling.
+
             // Interface methods are public by default; showing it is not useful
             if (hints.inInterface) {
                 modifiers.remove("public")
             }
 
             // Members of companion objects and top-level objects become static
-            if (hints.inObject) {
+            // As do top-level elements that get converted to be in *Kt files, even if extensions
+            if (hints.inObject || hints.inPackage) {
                 modifiers.add("static")
             }
 
@@ -103,12 +122,14 @@ internal fun List<String>.modifiersFor(
             modifiers.remove("vararg")
         }
         Language.KOTLIN -> {
-            // Handle consolidation
+
+            // TODO(prevent this from affecting kotlin-as-kotlin @JvmStatic elements b/242571394)
             if ("static" in modifiers && "final" in modifiers && hints.isProperty) {
                 modifiers.remove("static")
                 modifiers.remove("final")
                 modifiers.add("const")
             }
+
             // We do not do this because it is usually not useful for Kotlin users of Java code
             // if ("final" !in modifiers) modifiers.add("open")
 
@@ -186,14 +207,19 @@ val modifierOrder = listOf(
  * have no way of knowing we should keep the `public` modifier. (Note: this doesn't affect our
  * understanding that the function is public and should go in the "Public functions" section. It
  * just means the signature will be "incorrect" since it doesn't reflect the real source code.)
+ *
+ * Sometimes we need to inject the static modifier. For example, when we have an @JvmField hoisted
+ * from a companion object, it becomes static. Upstream doesn't inject, and it's not from an Object.
  */
 internal data class ModifierHints(
     val displayLanguage: Language,
     val type: Class<out Documentable>,
     val containingType: Class<out Documentable>?,
-    val isSummary: Boolean = false
+    val isSummary: Boolean = false,
+    val injectStatic: Boolean = false
 ) {
     val inInterface get() = containingType == DInterface::class.java
     val inObject get() = containingType == DObject::class.java
+    val inPackage get() = containingType == DPackage::class.java
     val isProperty get() = type == DProperty::class.java
 }
