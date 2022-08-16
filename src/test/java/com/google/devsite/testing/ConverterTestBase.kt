@@ -84,17 +84,18 @@ internal abstract class ConverterTestBase(
     protected fun DModule.classlike() = packages.single().classlikes
         .firstOrNull { it.name !in listOf("Nullable", "NonNull") }
 
-    protected fun DModule.explicitClasslike(name: String): DClasslike {
-        val normalclass = packages.flatMap { it.classlikes }
-            .mapNotNull { it.explicitClasslike(name) }.singleOrNull()
-        if (normalclass != null) return normalclass
+    protected fun DModule.explicitClasslike(name: String) =
+        this.explicitClasslikes(name).singleOrNull() ?: throw RuntimeException()
+
+    protected fun DModule.explicitClasslikes(name: String): List<DClasslike> {
+        val normalClasses = packages.flatMap { it.classlikes }
+            .mapNotNull { it.explicitClasslike(name) }
 
         val (holder, _) = holderAndProvider(this)
-        packages.forEach {
-            val synclass = holder.computeSyntheticClasses(it).singleOrNull { it.name == name }
-            if (synclass != null) return@explicitClasslike synclass
+        val synthetics = packages.flatMap {
+            holder.computeSyntheticClasses(it).filter { it.name == name }
         }
-        throw RuntimeException("No standard or synthetic class $name")
+        return normalClasses + synthetics
     }
 
     private fun DClasslike.explicitClasslike(name: String): DClasslike? =
