@@ -308,7 +308,8 @@ internal class DocTagConverter(
                     it.name!! to paramConverter.componentForParameter(
                         param = it,
                         isSummary = false,
-                        isFromJava = isFromJava
+                        isFromJava = isFromJava,
+                        parent = documentable
                     )
                 }
             )
@@ -326,7 +327,12 @@ internal class DocTagConverter(
         )
         if (documentable is Callable && documentable.receiver != null)
             allOptions[documentable.receiver!!.name ?: "receiver"] =
-                paramConverter.componentForParameter(documentable.receiver!!, false, isFromJava)
+                paramConverter.componentForParameter(
+                    param = documentable.receiver!!,
+                    isSummary = false,
+                    isFromJava = isFromJava,
+                    parent = documentable
+                )
         val params = tags.map { tag ->
             if (allOptions[tag.name()] == null) {
                 throw RuntimeException(
@@ -730,7 +736,8 @@ internal class DocTagConverter(
             paramConverter.componentForParameter(
                 param = it,
                 isSummary = isSummary,
-                isFromJava = isFromJava()
+                isFromJava = isFromJava(),
+                parent = this
             )
         }
         return DefaultPropertySignature(

@@ -42,6 +42,7 @@ import org.jetbrains.dokka.model.DParameter
 import org.jetbrains.dokka.model.DTypeParameter
 import org.jetbrains.dokka.model.DefaultValue
 import org.jetbrains.dokka.model.DefinitelyNonNullable
+import org.jetbrains.dokka.model.Documentable
 import org.jetbrains.dokka.model.Dynamic
 import org.jetbrains.dokka.model.FunctionalTypeConstructor
 import org.jetbrains.dokka.model.GenericTypeConstructor
@@ -80,7 +81,8 @@ internal class ParameterDocumentableConverter(
     fun componentForParameter(
         param: DParameter,
         isSummary: Boolean,
-        isFromJava: Boolean
+        isFromJava: Boolean,
+        parent: Documentable
     ): ParameterComponent = when (displayLanguage) {
         Language.JAVA -> {
             val (propagatedAnnotations, retainedAnnotations) = param.annotations()
@@ -105,8 +107,9 @@ internal class ParameterDocumentableConverter(
                             ModifierHints(
                                 displayLanguage = Language.JAVA,
                                 type = DParameter::class.java,
-                                containingType = null,
-                                isSummary = false
+                                containingType = parent::class.java,
+                                isFromJava = isFromJava,
+                                isSummary = false,
                             )
                         ),
                     annotationComponents = retainedAnnotations.annotationComponents(
@@ -129,7 +132,8 @@ internal class ParameterDocumentableConverter(
                         ModifierHints(
                             displayLanguage = Language.KOTLIN,
                             type = DParameter::class.java,
-                            containingType = null,
+                            containingType = parent::class.java,
+                            isFromJava = isFromJava,
                             isSummary = false
                         )
                     ),
@@ -208,12 +212,12 @@ internal class ParameterDocumentableConverter(
     /** Turns a lambda (a: String) -> Int 's parameter (a Projection), to a ParameterComponent */
     internal fun componentForLambdaParameter(
         projection: Projection,
-        isJavaSource: Boolean,
+        isFromJava: Boolean,
         isSummary: Boolean = false
     ): ParameterComponent {
         val primaryType = componentForProjection(
             projection = projection,
-            isJavaSource = isJavaSource,
+            isJavaSource = isFromJava,
             removedAnnotations = projection.annotations().filter { !it.belongsOnReturnType() }
                 .distinctBy { it.identifier },
             propagatedAnnotations = projection.annotations().filter { it.belongsOnReturnType() }
@@ -230,7 +234,8 @@ internal class ParameterDocumentableConverter(
                     displayLanguage = displayLanguage,
                     isSummary = isSummary,
                     type = DParameter::class.java,
-                    containingType = DParameter::class.java
+                    containingType = DParameter::class.java,
+                    isFromJava = isFromJava
                 )
             )
 
@@ -244,7 +249,7 @@ internal class ParameterDocumentableConverter(
                     .annotationComponents(
                         pathProvider = pathProvider,
                         displayLanguage = displayLanguage,
-                        nullability = projection.getNullability(displayLanguage, isJavaSource)
+                        nullability = projection.getNullability(displayLanguage, isFromJava)
                     ),
                 defaultValue = defaultValue
             )

@@ -50,7 +50,8 @@ internal class PropertyDocumentableConverterTest(
         displayLanguage,
         isSummary = false,
         type = DProperty::class.java,
-        containingType = DClass::class.java
+        containingType = DClass::class.java,
+        isFromJava = false // There's no great way to do this. Currently only affects `const` inject
     )
 
     @Test
@@ -267,12 +268,18 @@ internal class PropertyDocumentableConverterTest(
         val modifiersK = """
             public const val FOO: Int = 5
         """.render().detail("FOO").data.modifiers
-        for (modifiers in listOf(modifiersJ, modifiersK)) {
+        val modifiersKNo = """
+            |object aarg {
+            |    @JvmStatic public val FOO: Int = 5
+            |}
+        """.render().detail("FOO").data.modifiers
+        for (modifiers in listOf(modifiersJ, modifiersK, modifiersKNo)) {
             javaOnly {
                 assertThat(modifiers).isEqualTo(listOf("public", "static", "final"))
             }
             kotlinOnly {
-                assertThat(modifiers).isEqualTo(listOf("const"))
+                val expected = if (modifiers == modifiersKNo) emptyList() else listOf("const")
+                assertThat(modifiers).isEqualTo(expected)
             }
         }
     }
@@ -321,7 +328,7 @@ internal class PropertyDocumentableConverterTest(
             propertySummary.render(this)
         }.trim()
         val htmlParts = html.split("\\s+".toRegex())
-        val link = htmlParts[4].split(">")[0]
+        val link = htmlParts.first { it.startsWith("href") }.split(">")[0]
         javaOnly {
             assertThat(link).isEqualTo(
                 "href=\"https://developer.android.com/reference/java/lang/Object.html\""

@@ -29,17 +29,19 @@ import kotlin.test.assertFails
 
 internal class ModifiersTest : ConverterTestBase() {
 
-    private val javaHints: ModifierHints = ModifierHints(
-        Language.JAVA,
-        isSummary = false,
-        type = DFunction::class.java,
-        containingType = DClass::class.java
-    )
     private val kotlinHints: ModifierHints = ModifierHints(
         Language.KOTLIN,
         isSummary = false,
         type = DFunction::class.java,
-        containingType = DClass::class.java
+        containingType = DClass::class.java,
+        isFromJava = false // There's no great way to do this. Currently only affects `const` inject
+    )
+    private val javaHints: ModifierHints = ModifierHints(
+        Language.JAVA,
+        isSummary = false,
+        type = DFunction::class.java,
+        containingType = DClass::class.java,
+        isFromJava = true
     )
 
     @Test
@@ -158,7 +160,8 @@ internal class ModifiersTest : ConverterTestBase() {
         // Java-static methods must be used specially in Kotlin
         // https://kotlinlang.org/docs/java-interop.html#accessing-static-members
         // TODO b/203678085: allow modifiers to be links
-        assertThat(modifiers.modifiersFor(kotlinHints).single()).isEqualTo("java-static")
+        assertThat(modifiers.modifiersFor(kotlinHints.copy(isFromJava = true)).single())
+            .isEqualTo("java-static")
     }
 
     @Test

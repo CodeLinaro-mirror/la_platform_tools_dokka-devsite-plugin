@@ -1301,7 +1301,8 @@ internal class ParameterDocumentableConverterTest(
         return converter.componentForParameter(
             param = parameterDoc(name),
             isSummary = forSummary,
-            isFromJava = function()!!.isFromJava()
+            isFromJava = function()!!.isFromJava(),
+            parent = function()!!
         )
     }
 

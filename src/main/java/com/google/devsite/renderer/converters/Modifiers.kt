@@ -122,9 +122,9 @@ internal fun List<String>.modifiersFor(
             modifiers.remove("vararg")
         }
         Language.KOTLIN -> {
-
-            // TODO(prevent this from affecting kotlin-as-kotlin @JvmStatic elements b/242571394)
-            if ("static" in modifiers && "final" in modifiers && hints.isProperty) {
+            if ("static" in modifiers && "final" in modifiers &&
+                hints.isProperty && hints.isFromJava
+            ) {
                 modifiers.remove("static")
                 modifiers.remove("final")
                 modifiers.add("const")
@@ -145,7 +145,7 @@ internal fun List<String>.modifiersFor(
             // These modifiers don't exist in Kotlin
             if ("static" in modifiers) {
                 modifiers.remove("static")
-                modifiers.add("java-static")
+                if (hints.isFromJava) modifiers.add("java-static")
             }
 
             // Not useful
@@ -215,6 +215,7 @@ internal data class ModifierHints(
     val displayLanguage: Language,
     val type: Class<out Documentable>,
     val containingType: Class<out Documentable>?,
+    val isFromJava: Boolean,
     val isSummary: Boolean = false,
     val injectStatic: Boolean = false
 ) {

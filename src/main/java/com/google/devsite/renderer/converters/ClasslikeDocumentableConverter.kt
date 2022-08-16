@@ -426,6 +426,7 @@ internal class ClasslikeDocumentableConverter(
                 displayLanguage = displayLanguage,
                 type = DFunction::class.java,
                 containingType = classlike::class.java,
+                isFromJava = classlike.isFromJava(),
                 isSummary = true,
                 injectStatic = it.isJavaStaticMethod()
             )
@@ -477,6 +478,7 @@ internal class ClasslikeDocumentableConverter(
                 isSummary = false,
                 type = DFunction::class.java,
                 containingType = classlike::class.java,
+                isFromJava = classlike.isFromJava(),
                 injectStatic = it.isJavaStaticMethod()
             )
             errorContextInjector(it) {
@@ -488,9 +490,10 @@ internal class ClasslikeDocumentableConverter(
     private fun constructorsToDetail(functions: List<DFunction>): List<SymbolDetail> {
         val modifierHints = ModifierHints(
             displayLanguage = displayLanguage,
-            isSummary = false,
             type = DFunction::class.java,
-            containingType = classlike::class.java
+            containingType = classlike::class.java,
+            isFromJava = classlike.isFromJava(),
+            isSummary = false
         )
         return functions.map {
             errorContextInjector(it) {
@@ -524,6 +527,7 @@ internal class ClasslikeDocumentableConverter(
                 displayLanguage = displayLanguage,
                 type = DProperty::class.java,
                 containingType = classlike::class.java,
+                isFromJava = classlike.isFromJava(),
                 isSummary = true,
                 injectStatic = it.isJavaStaticField()
             )
@@ -555,6 +559,7 @@ internal class ClasslikeDocumentableConverter(
                 displayLanguage = displayLanguage,
                 type = DProperty::class.java,
                 containingType = classlike::class.java,
+                isFromJava = classlike.isFromJava(),
                 isSummary = false,
                 injectStatic = it.isJavaStaticField()
             )
@@ -573,9 +578,10 @@ internal class ClasslikeDocumentableConverter(
         }
         val modifierHints = ModifierHints(
             displayLanguage,
-            isSummary = false,
             type = DEnumEntry::class.java,
-            containingType = classlike::class.java
+            containingType = classlike::class.java,
+            isFromJava = classlike.isFromJava(),
+            isSummary = false
         )
         return enumValues.map {
             errorContextInjector(it) {
@@ -589,9 +595,10 @@ internal class ClasslikeDocumentableConverter(
             classlike.modifiers().modifiersFor(
                 ModifierHints(
                     displayLanguage,
-                    isSummary = false,
                     type = classlike::class.java,
-                    containingType = null
+                    containingType = null,
+                    isFromJava = classlike.isFromJava(),
+                    isSummary = false
                 )
             )
         } else {

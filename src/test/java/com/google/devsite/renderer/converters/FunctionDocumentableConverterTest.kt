@@ -59,7 +59,8 @@ internal class FunctionDocumentableConverterTest(
         displayLanguage = displayLanguage,
         isSummary = false,
         type = DFunction::class.java,
-        containingType = DClass::class.java
+        containingType = DClass::class.java,
+        isFromJava = false // There's no great way to do this. Currently only affects `const` inject
     )
 
     @Test

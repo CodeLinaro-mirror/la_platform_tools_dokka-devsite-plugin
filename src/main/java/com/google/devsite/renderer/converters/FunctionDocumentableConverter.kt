@@ -153,14 +153,16 @@ internal class FunctionDocumentableConverter(
             paramConverter.componentForParameter(
                 param = it,
                 isSummary = isSummary,
-                isFromJava = isFromJava()
+                isFromJava = isFromJava(),
+                parent = this
             )
         }
         val parameters = parameters.map {
             paramConverter.componentForParameter(
                 param = it,
                 isSummary = isSummary,
-                isFromJava = isFromJava()
+                isFromJava = isFromJava(),
+                parent = this
             )
         }
         val typeParameters = this.generics.map {

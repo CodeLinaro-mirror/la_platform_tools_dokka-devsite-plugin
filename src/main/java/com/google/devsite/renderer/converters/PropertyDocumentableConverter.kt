@@ -118,7 +118,8 @@ internal class PropertyDocumentableConverter(
             paramConverter.componentForParameter(
                 param = it,
                 isSummary = isSummary,
-                isFromJava = isFromJava()
+                isFromJava = isFromJava(),
+                parent = this
             )
         }
         val constantValue = if (isConstant(modifiers())) {
