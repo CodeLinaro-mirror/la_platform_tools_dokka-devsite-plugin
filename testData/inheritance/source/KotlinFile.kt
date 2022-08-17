@@ -16,13 +16,26 @@
 
 package dokkatest.inheritance
 
-open class KotlinSuperClass {
+interface KotlinInterface {
+    fun aDefaultMethod() = 5
+    fun aNonImplementedMethod(): Int
+}
+
+abstract class KotlinAbstractClass: KotlinInterface {
+    fun aNonAbstractMethod() = 5
+    abstract fun anAbstractMethod(): Int
+}
+
+open class KotlinSuperClass: KotlinAbstractClass() {
     /**
      * kotlinSuperClassFunction docs
      * @param foo KotlinSuperClassFooDocs
      */
     fun kotlinSuperclassFunction(foo: String) = "KotlinSuperClass"
     fun importTest(): JavaSuperClass? = null
+
+    override fun aNonImplementedMethod() = -5
+    override fun anAbstractMethod() = -5
 }
 
 open class KotlinSubClass : JavaSuperClass() {
