@@ -17,7 +17,6 @@
 package com.google.devsite.integration
 
 import com.google.devsite.testing.IntegrationTestBase
-import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -76,7 +75,6 @@ class BasicTest : IntegrationTestBase() {
         verifyDirectory("complicatedPlatform")
     }
 
-    @Ignore // go/dokka-upstream-bug/2187 Inherited function type resolution is flaky
     @Test
     fun `Validate inheritance tests`() {
         verifyDirectory("inheritance")
