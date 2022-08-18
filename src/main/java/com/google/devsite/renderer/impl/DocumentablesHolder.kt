@@ -214,19 +214,19 @@ internal class DocumentablesHolder(
      * Iterate through the all packages and create map of each class to its associated
      * extension functions.
      */
-    suspend fun extensionFunctionMap(): HashMap<String, MutableList<DFunction>> {
-        val extensionFunctionsMapping = HashMap<String, MutableList<DFunction>>()
+    suspend fun extensionFunctionMap(): HashMap<DRI, MutableList<DFunction>> {
+        val extensionFunctionsMapping = HashMap<DRI, MutableList<DFunction>>()
         packages().forEach { packageDoc ->
             packageDoc.functions.forEach { function ->
                 val receiver = function.receiver
                 if (receiver != null) {
                     try {
                         val genericTypeConstructor = receiver.type as GenericTypeConstructor
-                        val className = genericTypeConstructor.dri.classNames.toString()
+                        val dri = genericTypeConstructor.dri
                         val list =
-                            extensionFunctionsMapping.getOrDefault(className, mutableListOf())
+                            extensionFunctionsMapping.getOrDefault(dri, mutableListOf())
                         list.add(function)
-                        extensionFunctionsMapping[className] = list
+                        extensionFunctionsMapping[dri] = list
                     } catch (_: ClassCastException) {
                         // Can't cast function.type; skip to next function
                     }

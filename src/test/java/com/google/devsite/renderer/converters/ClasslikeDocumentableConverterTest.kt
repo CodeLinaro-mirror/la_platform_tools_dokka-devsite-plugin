@@ -1809,6 +1809,61 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(extFunctionClasses).isEqualTo(listOf("FirstJvm", "SecondJvm"))
     }
 
+    @Test
+    fun `Extension functions do not apply to different class with same name`() {
+        val src = listOf(
+            """
+                |/src/main/kotlin/androidx/example/Foo1.kt
+                |package foo1
+                |
+                |class Foo {
+                |}
+            """,
+            """
+                |/src/main/kotlin/androidx/example/Foo1Extension.kt
+                |package foo1
+                |
+                |fun Foo.bar() = Unit
+            """,
+            """
+                |/src/main/kotlin/androidx/example/Foo2.kt
+                |package foo2
+                |
+                |class Foo {
+                |}
+            """,
+            """
+                |/src/main/kotlin/androidx/example/Foo2Extension.kt
+                |package foo2
+                |
+                |fun Foo.baz() = Unit
+            """
+        )
+
+        // Each Foo should have one extension function: bar for foo1, baz for foo2
+        val pages = src.render().pages()
+        assertThat(pages.size).isEqualTo(2)
+        for (page in pages) {
+            val classlike = page.content<Classlike>()
+            val extFunctions = classlike.symbolsFor("Extension functions")
+            assertThat(extFunctions.second.symbols.size).isEqualTo(1)
+        }
+    }
+
+    @Test
+    fun `Extension functions work for inner classes`() {
+        val src = """
+            |class Foo {
+            |    class Bar {
+            |    }
+            |}
+            |fun Foo.Bar.baz() = Unit
+        """
+        val classlike = src.render().page("Bar").content<Classlike>()
+        val extFunctions = classlike.symbolsFor("Extension functions")
+        assertThat(extFunctions.first.data.items).hasSize(1)
+    }
+
     @Ignore // TODO: b/195529157
     @Test
     fun `Annotation types with no parameters have no default constructors`() {
@@ -2210,22 +2265,40 @@ internal class ClasslikeDocumentableConverterTest(
             classlike,
             pathProvider,
             holder,
-            extFunctionMap.getOrDefault(name, emptyList())
+            extFunctionMap.getOrDefault(classlike.dri, emptyList())
         )
         return runBlocking { converter.classlike() }
     }
 
     private fun DModule.page(name: DModule.() -> DClasslike): DevsitePage {
+        val classlike = name()
         val (holder, pathProvider) = holderAndProvider(this)
         val extFunctionMap = runBlocking { holder.extensionFunctionMap() }
         val converter = ClasslikeDocumentableConverter(
             displayLanguage,
-            name(),
+            classlike,
             pathProvider,
             holder,
-            extFunctionMap.getOrDefault(name, emptyList())
+            extFunctionMap.getOrDefault(classlike.dri, emptyList())
         )
         return runBlocking { converter.classlike() }
+    }
+
+    private fun DModule.pages(name: String = "Foo"): List<DevsitePage> {
+        // Collect pages for all classlikes with a given name
+        val classlikes = explicitClasslikes(name)
+        val (holder, pathProvider) = holderAndProvider(this)
+        val extFunctionMap = runBlocking { holder.extensionFunctionMap() }
+        val converters = classlikes.map {
+            ClasslikeDocumentableConverter(
+                displayLanguage,
+                it,
+                pathProvider,
+                holder,
+                extFunctionMap.getOrDefault(it.dri, emptyList())
+            )
+        }
+        return runBlocking { converters.map { it.classlike() } }
     }
 
     private fun DModule.companionFor(name: String = "Foo") =
