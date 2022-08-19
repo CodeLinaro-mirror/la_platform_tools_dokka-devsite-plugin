@@ -37,6 +37,7 @@ import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 /**
  * These filters remove items from the docs when they:
  * - have @hide in a comment
+ * - have @removed in a comment
  * - have a @RestrictTo annotation
  * - are deprecated with DeprecationLevel.HIDDEN
  *
@@ -74,17 +75,24 @@ class PostMergePackageDocumentableFilter : DocumentableTransformer {
 }
 
 private fun Documentable.isHidden(): Boolean =
-    this.hasDeprecationLevelHidden() || this.hasHideAnnotation() || this.hasRestrictToAnnotation()
+    this.hasRestrictToAnnotation() || this.hasDeprecationLevelHidden() ||
+        this.hasHideJavadocTag() || this.hasRemovedJavadocTag()
 
 private fun Documentable.hasDeprecationLevelHidden(): Boolean =
     this.annotations().any {
         it.isDeprecated() && ("DeprecationLevel.HIDDEN" in it.params["level"].asString())
     }
 
-private fun Documentable.hasHideAnnotation(): Boolean =
+private fun Documentable.hasHideJavadocTag(): Boolean =
     this.documentation.any {
         (_, docs) ->
         docs.dfs { it is CustomTagWrapper && it.name.trim() == "hide" } != null
+    }
+
+private fun Documentable.hasRemovedJavadocTag(): Boolean =
+    this.documentation.any {
+        (_, docs) ->
+        docs.dfs { it is CustomTagWrapper && it.name.trim() == "removed" } != null
     }
 
 private fun Documentable.hasRestrictToAnnotation(): Boolean =

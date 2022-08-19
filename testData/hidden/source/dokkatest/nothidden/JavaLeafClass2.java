@@ -22,4 +22,10 @@ public class JavaLeafClass2 {
      * @param baz JavaLeafClassFooDocs
      */
     public String javaLeafClassFunction(String baz) { return "JavaLeafClass"; }
+
+    /** @hide */
+    public void hiddenFunction() {}
+
+    /** @removed */
+    public void removedFunction() {}
 }
