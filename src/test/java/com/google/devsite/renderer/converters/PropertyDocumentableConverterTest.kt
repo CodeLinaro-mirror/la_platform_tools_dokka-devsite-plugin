@@ -262,24 +262,25 @@ internal class PropertyDocumentableConverterTest(
 
     @Test
     fun `Constant modifier translates properly between Kotlin and Java`() {
-        val modifiersJ = """
-            public static final int FOO = 5
-        """.render(java = true).detail("FOO").data.modifiers
-        val modifiersK = """
+        val detailJ = """
+            public static final Integer FOO = 5
+        """.render(java = true)
+            .detail("FOO", hints = defaultHints.copy(isFromJava = true))
+        val detailK = """
             public const val FOO: Int = 5
-        """.render().detail("FOO").data.modifiers
-        val modifiersKNo = """
+        """.render().detail("FOO")
+        val detailKNo = """
             |object aarg {
             |    @JvmStatic public val FOO: Int = 5
             |}
-        """.render().detail("FOO").data.modifiers
-        for (modifiers in listOf(modifiersJ, modifiersK, modifiersKNo)) {
+        """.render().detail("FOO")
+        for (detail in listOf(detailJ, detailK, detailKNo)) {
             javaOnly {
-                assertThat(modifiers).isEqualTo(listOf("public", "static", "final"))
+                assertThat(detail.data.modifiers).isEqualTo(listOf("public", "static", "final"))
             }
             kotlinOnly {
-                val expected = if (modifiers == modifiersKNo) emptyList() else listOf("const")
-                assertThat(modifiers).isEqualTo(expected)
+                val expected = if (detail == detailKNo) emptyList() else listOf("const")
+                assertThat(detail.data.modifiers).isEqualTo(expected)
             }
         }
     }
