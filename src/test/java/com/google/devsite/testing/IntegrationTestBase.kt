@@ -18,6 +18,7 @@ package com.google.devsite.testing
 
 import com.google.common.truth.Truth.assertWithMessage
 import org.jetbrains.dokka.DokkaConfiguration
+import org.jetbrains.dokka.DokkaConfigurationImpl
 import org.jetbrains.dokka.ExternalDocumentationLink
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.pages.RootPageNode
@@ -36,21 +37,12 @@ import java.net.URL
 abstract class IntegrationTestBase : BaseAbstractTest(
     logger = TestLogger(DokkaConsoleLogger(LoggingLevel.WARN))
 ) {
-    /**
-     * Reads sources and outputs from a directory, and validates based on them.
-     *
-     * Sources are located at testData/$path/source
-     * outputs are located at testData/$path/docs
-     */
-    fun verifyDirectory(
-        path: String,
+    fun makeConfiguration(
+        baseDir: String,
+        sourceDir: String,
         sampleLocations: List<String> = emptyList(),
-        includeFiles: List<String> = emptyList(),
-        versionedTenant: String? = null
-    ) {
-        val baseDir = "testData/$path"
-        val sourceDir = "$baseDir/source"
-
+        includeFiles: List<String> = emptyList()
+    ): DokkaConfigurationImpl {
         val externalLinks = mapOf(
             "coroutines" to "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core",
             "android" to "https://developer.android.com/reference",
@@ -63,7 +55,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                     .resolve("package-lists/${it.key}/package-list").toUri().toURL()
             )
         }
-        val configuration = dokkaConfiguration {
+        return dokkaConfiguration {
             sourceSets {
                 sourceSet {
                     val sources = File(sourceDir).absoluteFile
@@ -81,7 +73,9 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             }
             offlineMode = true
         }
+    }
 
+    fun setEnvVarsForTests(sourceDir: String, versionedTenant: String? = null) {
         if (versionedTenant != null) {
             System.setProperty("versionedTenant", versionedTenant)
             System.clearProperty("tenant")
@@ -91,8 +85,50 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             System.setProperty("tenant", inferredTenant)
             System.clearProperty("versionedTenant")
         }
+    }
+
+    fun executionTest(
+        path: String,
+        sampleLocations: List<String> = emptyList(),
+        includeFiles: List<String> = emptyList(),
+        versionedTenant: String? = null
+    ) {
+        val baseDir = "testData/$path"
+        val sourceDir = baseDir
+
+        val configuration = makeConfiguration(baseDir, sourceDir, sampleLocations, includeFiles)
+
+        setEnvVarsForTests(sourceDir, versionedTenant)
 
         val writerPlugin = TestOutputWriterPlugin()
+
+        testFromData(
+            configuration,
+            pluginOverrides = listOf(writerPlugin),
+        ) { Unit }
+    }
+
+    /**
+     * Reads sources and outputs from a directory, and validates based on them.
+     *
+     * Sources are located at testData/$path/source
+     * outputs are located at testData/$path/docs
+     */
+    fun verifyDirectory(
+        path: String,
+        sampleLocs: List<String> = emptyList(),
+        includeFiles: List<String> = emptyList(),
+        versionedTenant: String? = null
+    ) {
+        val baseDir = "testData/$path"
+        val sourceDir = "$baseDir/source"
+
+        val configuration = makeConfiguration(baseDir, sourceDir, sampleLocs, includeFiles)
+
+        setEnvVarsForTests(sourceDir, versionedTenant)
+
+        val writerPlugin = TestOutputWriterPlugin()
+
         testFromData(
             configuration,
             pluginOverrides = listOf(writerPlugin)
