@@ -48,9 +48,11 @@ import org.jetbrains.dokka.model.FloatConstant
 import org.jetbrains.dokka.model.IntegerConstant
 import org.jetbrains.dokka.model.KotlinModifier
 import org.jetbrains.dokka.model.KotlinVisibility
+import org.jetbrains.dokka.model.Modifier
 import org.jetbrains.dokka.model.StringConstant
 import org.jetbrains.dokka.model.TypeConstructor
 import org.jetbrains.dokka.model.UnresolvedBound
+import org.jetbrains.dokka.model.Visibility
 import org.jetbrains.dokka.model.WithAbstraction
 import org.jetbrains.dokka.model.WithChildren
 import org.jetbrains.dokka.model.WithGenerics
@@ -98,26 +100,41 @@ internal fun DRI.isFromBaseClass(): Boolean {
 }
 
 private object Memoizers {
-    val isFromJavaMap: ConcurrentHashMap<WithSources, Boolean> =
-        ConcurrentHashMap<WithSources, Boolean>()
+    val isFromJavaMap: ConcurrentHashMap<Hashable, Boolean> =
+        ConcurrentHashMap<Hashable, Boolean>()
 }
+
+/** go/dokka-upstream-bug/2620. Because Documentables aren't remotely efficiently hashable. */
+internal data class Hashable(
+    val clazz: Class<out WithSources>,
+    val isSynthetic: Boolean?,
+    val dri: DRI?,
+    val visibility: Collection<Visibility>,
+    val modifiers: Collection<Modifier>,
+    val isPsi: Boolean?
+)
+
+private fun WithSources.toHashable() = Hashable(
+    clazz = this::class.java,
+    isSynthetic = (this as? DClasslike)?.isSynthetic,
+    dri = if (this is Documentable) this.dri else null,
+    visibility = if (this is WithVisibility) this.visibility.values else emptyList(),
+    modifiers = if (this is WithAbstraction) this.modifier.values else emptyList(),
+    isPsi = this.sources.entries.singleOrNull()?.value is PsiDocumentableSource
+)
 
 /**
  * Infer whether this Documentable is from java source,
  * and thus whether it's nullable if not annotated.
  * Memoized.
  */
-internal fun WithSources.isFromJava() =
+internal fun WithSources.isFromJava() = this.toHashable().isFromJava()
+private fun Hashable.isFromJava() =
     isFromJavaMap.getOrPut(this) {
-        if (this is DClasslike && this.isSynthetic) false
-        else if (this is WithVisibility && this.visibility.isNotEmpty())
-            !visibility.values.any { it is KotlinVisibility }
-        else if (this is WithAbstraction && this.modifier.isNotEmpty())
-            !modifier.values.any { it is KotlinModifier }
-        else return when (this.sources.entries.single().value) {
-            is PsiDocumentableSource -> true
-            else -> false
-        }
+        if (isSynthetic == true) false
+        else if (visibility.isNotEmpty()) !visibility.any { it is KotlinVisibility }
+        else if (modifiers.isNotEmpty()) !modifiers.any { it is KotlinModifier }
+        else isPsi == true
     }
 
 internal fun Documentable.isJavaStaticField() = this is DProperty && run {
