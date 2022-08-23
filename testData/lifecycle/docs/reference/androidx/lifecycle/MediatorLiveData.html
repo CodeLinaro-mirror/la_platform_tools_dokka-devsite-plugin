@@ -1,0 +1,318 @@
+<html devsite="true">
+  <head>
+    <title>MediatorLiveData</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>MediatorLiveData</h1>
+    <p>
+      <pre>public class MediatorLiveData&lt;T&gt; extends <a href="/reference/androidx/lifecycle/MutableLiveData.html">MutableLiveData</a></pre>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="jd-inheritance-table">
+        <tbody>
+          <tr>
+            <td colspan="4"><a href="https://developer.android.com/reference/java/lang/Object.html">java.lang.Object</a></td>
+          </tr>
+          <tr>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="3"><a href="/reference/androidx/lifecycle/LiveData.html">androidx.lifecycle.LiveData</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="2"><a href="/reference/androidx/lifecycle/MutableLiveData.html">androidx.lifecycle.MutableLiveData</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="1"><a href="/reference/androidx/lifecycle/MediatorLiveData.html">androidx.lifecycle.MediatorLiveData</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <p><code><a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a></code> subclass which may observe other <code>LiveData</code> objects and react on <code>OnChanged</code> events from them. </p>
+    <p> This class correctly propagates its active/inactive states down to source <code>LiveData</code> objects. </p>
+    <p> Consider the following scenario: we have 2 instances of <code>LiveData</code>, let's name them <code>liveData1</code> and <code>liveData2</code>, and we want to merge their emissions in one object: <code>liveDataMerger</code>. Then, <code>liveData1</code> and <code>liveData2</code> will become sources for the <code>MediatorLiveData liveDataMerger</code> and every time <code>onChanged</code> callback is called for either of them, we set a new value in <code>liveDataMerger</code>. </p>
+    <pre class="prettyprint">LiveDataliveData1 = ...;
+LiveData</pre>
+    <p> Let's consider that we only want 10 values emitted by <code>liveData1</code>, to be merged in the <code>liveDataMerger</code>. Then, after 10 values, we can stop listening to <code>
+liveData1</code> and remove it as a source. </p>
+    <pre class="prettyprint">liveDataMerger.addSource(liveData1, new Observer() {
+     private int count = 1;
+
+     Override public void onChanged(@Nullable Integer s) {
+         count++;
+         liveDataMerger.setValue(s);
+         if (count &gt; 10) {
+             liveDataMerger.removeSource(liveData1);
+         }
+     }
+});</pre>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%">Parameters</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code>&lt;T&gt;</code></td>
+            <td>
+              <p>The type of data hold by this instance</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/MediatorLiveData.html#MediatorLiveData()">MediatorLiveData</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code>@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a> void</code></td>
+            <td>
+              <div><code>&lt;S&gt; <a href="/reference/androidx/lifecycle/MediatorLiveData.html#addSource(androidx.lifecycle.LiveData&lt;S&gt;,androidx.lifecycle.Observer&lt;? super S&gt;)">addSource</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;S&gt;&nbsp;source,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;onChanged<br>)</code></div>
+              <p>Starts to listen the given <code>source</code> LiveData, <code>onChanged</code> observer will be called when <code>source</code> value was changed.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a> void</code></td>
+            <td>
+              <div><code>&lt;S&gt; <a href="/reference/androidx/lifecycle/MediatorLiveData.html#removeSource(androidx.lifecycle.LiveData&lt;S&gt;)">removeSource</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;S&gt;&nbsp;toRemote)</code></div>
+              <p>Stops to listen the given <code>LiveData</code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Protected methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code>@<a href="/reference/androidx/annotation/CallSuper.html">CallSuper</a> void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/MediatorLiveData.html#onActive()">onActive</a>()</code></div>
+              <p>Called when the number of active observers change from 0 to 1.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/androidx/annotation/CallSuper.html">CallSuper</a> void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/MediatorLiveData.html#onInactive()">onInactive</a>()</code></div>
+              <p>Called when the number of active observers change from 1 to 0.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="/reference/androidx/lifecycle/LiveData.html">androidx.lifecycle.LiveData</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody class="list">
+                    <tr>
+                      <td width="40%"><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> T</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/lifecycle/LiveData.html#getValue()">getValue</a>()</code></div>
+                        <p>Returns the current value.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/lifecycle/LiveData.html#hasActiveObservers()">hasActiveObservers</a>()</code></div>
+                        <p>Returns true if this LiveData has active observers.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>boolean</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/lifecycle/LiveData.html#hasObservers()">hasObservers</a>()</code></div>
+                        <p>Returns true if this LiveData has observers.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a> void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/lifecycle/LiveData.html#observe(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Observer&lt;? super T&gt;)">observe</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;observer)</code></div>
+                        <p>Adds the given observer to the observers list within the lifespan of the given owner.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a> void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/lifecycle/LiveData.html#observeForever(androidx.lifecycle.Observer&lt;? super T&gt;)">observeForever</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;observer)</code></div>
+                        <p>Adds the given observer to the observers list.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a> void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/lifecycle/LiveData.html#removeObserver(androidx.lifecycle.Observer&lt;? super T&gt;)">removeObserver</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;observer)</code></div>
+                        <p>Removes the given observer from the observers list.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a> void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/lifecycle/LiveData.html#removeObservers(androidx.lifecycle.LifecycleOwner)">removeObservers</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner)</code></div>
+                        <p>Removes all observers that are tied to the given <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code>.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="/reference/androidx/lifecycle/MutableLiveData.html">androidx.lifecycle.MutableLiveData</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody class="list">
+                    <tr>
+                      <td width="40%"><code>void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/lifecycle/MutableLiveData.html#postValue(T)">postValue</a>(T&nbsp;value)</code></div>
+                        <p>Posts a task to a main thread to set the given value.</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="40%"><code>void</code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/lifecycle/MutableLiveData.html#setValue(T)">setValue</a>(T&nbsp;value)</code></div>
+                        <p>Sets the value.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="MediatorLiveData--"></a><a name="mediatorlivedata"></a>
+      <h3 class="api-name" id="MediatorLiveData()">MediatorLiveData</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/lifecycle/MediatorLiveData.html#MediatorLiveData()">MediatorLiveData</a>()</pre>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="addSource(androidx.lifecycle.LiveData&lt;S&gt;, androidx.lifecycle.Observer&lt;? super S&gt;)"></a><a name="addSource-androidx.lifecycle.LiveData&lt;S&gt;-androidx.lifecycle.Observer&lt;? super S&gt;-"></a><a name="addsource"></a>
+      <h3 class="api-name" id="addSource(androidx.lifecycle.LiveData&lt;S&gt;,androidx.lifecycle.Observer&lt;? super S&gt;)">addSource</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a><br>public&nbsp;void&nbsp;&lt;S&gt; <a href="/reference/androidx/lifecycle/MediatorLiveData.html#addSource(androidx.lifecycle.LiveData&lt;S&gt;,androidx.lifecycle.Observer&lt;? super S&gt;)">addSource</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;S&gt;&nbsp;source,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;onChanged<br>)</pre>
+      <p>Starts to listen the given <code>source</code> LiveData, <code>onChanged</code> observer will be called when <code>source</code> value was changed. </p>
+      <p><code>onChanged</code> callback will be called only when this <code>MediatorLiveData</code> is active. </p>
+      <p> If the given LiveData is already added as a source but with a different Observer, <code><a href="https://developer.android.com/reference/java/lang/IllegalArgumentException.html">IllegalArgumentException</a></code> will be thrown.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>&lt;S&gt;</code></td>
+              <td>
+                <p>The type of data hold by <code>source</code> LiveData</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;S&gt;&nbsp;source</code></td>
+              <td>
+                <p>the <code>LiveData</code> to listen to</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Observer.html">Observer</a>&lt;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;&nbsp;onChanged</code></td>
+              <td>
+                <p>The observer that will receive the events</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="removeSource-androidx.lifecycle.LiveData&lt;S&gt;-"></a><a name="removesource"></a>
+      <h3 class="api-name" id="removeSource(androidx.lifecycle.LiveData&lt;S&gt;)">removeSource</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a><br>public&nbsp;void&nbsp;&lt;S&gt; <a href="/reference/androidx/lifecycle/MediatorLiveData.html#removeSource(androidx.lifecycle.LiveData&lt;S&gt;)">removeSource</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;S&gt;&nbsp;toRemote)</pre>
+      <p>Stops to listen the given <code>LiveData</code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>&lt;S&gt;</code></td>
+              <td>
+                <p>the type of data hold by <code>source</code> LiveData</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LiveData.html">LiveData</a>&lt;S&gt;&nbsp;toRemote</code></td>
+              <td>
+                <p><code>LiveData</code> to stop to listen</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Protected methods</h2>
+    <div><a name="onActive--"></a><a name="onactive"></a>
+      <h3 class="api-name" id="onActive()">onActive</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/CallSuper.html">CallSuper</a><br>protected&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/MediatorLiveData.html#onActive()">onActive</a>()</pre>
+      <p>Called when the number of active observers change from 0 to 1. </p>
+      <p> This callback can be used to know that this LiveData is being used thus should be kept up to date.</p>
+    </div>
+    <div><a name="onInactive--"></a><a name="oninactive"></a>
+      <h3 class="api-name" id="onInactive()">onInactive</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/CallSuper.html">CallSuper</a><br>protected&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/MediatorLiveData.html#onInactive()">onInactive</a>()</pre>
+      <p>Called when the number of active observers change from 1 to 0. </p>
+      <p> This does not mean that there are no observers left, there may still be observers but their lifecycle states aren't <code><a href="/reference/androidx/lifecycle/Lifecycle.State.html#STARTED">STARTED</a></code> or <code><a href="/reference/androidx/lifecycle/Lifecycle.State.html#RESUMED">RESUMED</a></code> (like an Activity in the back stack). </p>
+      <p> You can check if there are observers via <code><a href="/reference/androidx/lifecycle/LiveData.html#hasObservers()">hasObservers</a></code>.</p>
+    </div>
+  </body>
+</html>

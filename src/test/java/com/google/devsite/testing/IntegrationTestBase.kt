@@ -37,11 +37,11 @@ import java.net.URL
 abstract class IntegrationTestBase : BaseAbstractTest(
     logger = TestLogger(DokkaConsoleLogger(LoggingLevel.WARN))
 ) {
-    fun makeConfiguration(
+    /** For when a test uses source outside of `./testData/` */
+    fun makeExternalConfiguration(
         sources: List<File>,
-        samplesBaseDir: String,
         samplesLocations: List<String>,
-        includeFiles: List<String>
+        includeFiles: List<String> = emptyList()
     ): DokkaConfigurationImpl {
         sources.forEach { check(it.isDirectory) { "$it does not exist or is not a directory" } }
         val externalLinks = mapOf(
@@ -52,6 +52,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         ).map {
             ExternalDocumentationLink(
                 url = URL(it.value),
+                // TODO: improve package-list updateability b/243840381
                 packageListUrl = File("testData").toPath()
                     .resolve("package-lists/${it.key}/package-list").toUri().toURL()
             )
@@ -60,10 +61,11 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             sourceSets {
                 sourceSet {
                     sourceRoots = sources.map { it.absolutePath }
+                    // TODO: find a workaround to using a fixed classpath file b/243842129
                     classpath = classpathFromFile("testData/classpath.txt")
                     externalDocumentationLinks = externalLinks
-                    samples = samplesLocations.map { "$samplesBaseDir/$it" }
-                    includes = includeFiles.map { File(sources.first(), it).absolutePath }
+                    samples = samplesLocations
+                    includes = includeFiles
                     documentedVisibilities = setOf(
                         DokkaConfiguration.Visibility.PUBLIC,
                         DokkaConfiguration.Visibility.PROTECTED
@@ -74,14 +76,19 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         }
     }
 
-    fun makeConfiguration(
+    /** For when a test uses source in `./testData/` */
+    fun makeInternalConfiguration(
         samplesBaseDir: String,
         sourceDir: String,
         sampleLocations: List<String> = emptyList(),
         includeFiles: List<String> = emptyList()
     ): DokkaConfigurationImpl {
         val sources = File(sourceDir).absoluteFile
-        return makeConfiguration(listOf(sources), samplesBaseDir, sampleLocations, includeFiles)
+        return makeExternalConfiguration(
+            listOf(sources),
+            sampleLocations.map { "$samplesBaseDir/$it" },
+            includeFiles.map { File(sourceDir, it).absolutePath }
+        )
     }
 
     fun setEnvVarsForTests(inferredTenant: String, versionedTenant: String? = null) {
@@ -94,19 +101,15 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         }
     }
 
+    /** Executes dackka on source from an androidx checkout on the same machine. No validation. */
     fun executionTest(
-        vararg paths: String,
+        paths: List<String>,
         sampleLocations: List<String> = emptyList(),
         includeFiles: List<String> = emptyList(),
         versionedTenant: String? = null
     ) {
-        val samplesBaseDir = null // TODO
-
-        val configuration = makeConfiguration(
+        val configuration = makeExternalConfiguration(
             paths.map { File(it).absoluteFile },
-            paths.reduce { a: String, b: String ->
-                a.asIterable().intersect(b.asIterable()).joinToString()
-            },
             sampleLocations,
             includeFiles
         )
@@ -123,22 +126,28 @@ abstract class IntegrationTestBase : BaseAbstractTest(
     }
 
     /**
-     * Reads sources and outputs from a directory, and validates based on them.
+     * Reads sources and outputs from a directory in `./testData/`, and validates based on them.
      *
      * Sources are located at testData/$path/source
      * outputs are located at testData/$path/docs
      */
-    fun verifyDirectory(
+    fun validateDirectory(
         path: String,
-        sampleLocs: List<String> = emptyList(),
+        sampleLocations: List<String> = emptyList(),
         includeFiles: List<String> = emptyList(),
-        versionedTenant: String? = null
+        versionedTenant: String? = null,
+        suffix: String = "source"
     ) {
         val samplesBaseDir = "testData/$path"
         val outputBaseDir = "testData/$path/docs"
-        val sourceDir = "testData/$path/source"
+        val sourceDir = "testData/$path/$suffix"
 
-        val configuration = makeConfiguration(samplesBaseDir, sourceDir, sampleLocs, includeFiles)
+        val configuration = makeInternalConfiguration(
+            samplesBaseDir,
+            sourceDir,
+            sampleLocations,
+            includeFiles
+        )
 
         val inferredTenant = File(sourceDir).listFiles().orEmpty()
             .singleOrNull { it.isDirectory }?.name ?: "dokkatest"
@@ -149,6 +158,41 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         testFromData(
             configuration,
             pluginOverrides = listOf(writerPlugin)
+        ) {
+            renderingStage = { _: RootPageNode, _: DokkaContext ->
+                verifyOutput(writerPlugin, outputBaseDir)
+            }
+        }
+    }
+
+    /**
+     * Runs dackka on sources from a prebuilt and validates against saved docs in `./testData/`.
+     *
+     * Sources are unzipped from prebuilts/androidx/internal/ (grabbed via gradle dependency)
+     *      into `build/explodedSources/$artifactName-$version-sources/`
+     * outputs are located at `testData/$testName/docs`
+     * Samples are kept locally (read from `testData/$testName/samples/`), as they are not published
+     */
+    fun validatePrebuilts(
+        testName: String,
+        artifactNames: List<String>,
+        samples: Boolean = false,
+    ) {
+        val outputBaseDir = "testData/$testName/docs"
+        val samplesBaseDir = "testData/$testName/samples"
+
+        val configuration = makeExternalConfiguration(
+            artifactNames.map { File("build/explodedSources/$it/").absoluteFile },
+            if (samples) listOf(samplesBaseDir) else emptyList(),
+        )
+
+        setEnvVarsForTests(inferredTenant = "androidx")
+
+        val writerPlugin = TestOutputWriterPlugin()
+
+        testFromData(
+            configuration,
+            pluginOverrides = listOf(writerPlugin),
         ) {
             renderingStage = { _: RootPageNode, _: DokkaContext ->
                 verifyOutput(writerPlugin, outputBaseDir)

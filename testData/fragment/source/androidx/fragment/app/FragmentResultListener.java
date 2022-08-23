@@ -14,33 +14,29 @@
  * limitations under the License.
  */
 
-
 package androidx.fragment.app;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 
 /**
  * Listener for handling fragment results.
  *
  * This object should be passed to
- * {@link androidx.fragment.app.FragmentManager#setFragmentResultListener(java.lang.String,androidx.lifecycle.LifecycleOwner,androidx.fragment.app.FragmentResultListener) FragmentManager#setFragmentResultListener(String, LifecycleOwner, FragmentResultListener)}
+ * {@link FragmentManager#setFragmentResultListener(String, LifecycleOwner, FragmentResultListener)}
  * and it will listen for results with the same key that are passed into
- * {@link androidx.fragment.app.FragmentManager#setFragmentResult(java.lang.String,android.os.Bundle) FragmentManager#setFragmentResult(String, Bundle)}.
+ * {@link FragmentManager#setFragmentResult(String, Bundle)}.
  *
- * @see androidx.fragment.app.FragmentResultOwner#setFragmentResultListener
+ * @see FragmentResultOwner#setFragmentResultListener
  */
-
-@SuppressWarnings({"unchecked", "deprecation", "all"})
 public interface FragmentResultListener {
-
-/**
- * Callback used to handle results passed between fragments.
- *
- * @param requestKey key used to store the result
- * @param result result passed to the callback
- */
-
-public void onFragmentResult(@androidx.annotation.NonNull java.lang.String requestKey, @androidx.annotation.NonNull android.os.Bundle result);
+    /**
+     * Callback used to handle results passed between fragments.
+     *
+     * @param requestKey key used to store the result
+     * @param result result passed to the callback
+     */
+    void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result);
 }
-

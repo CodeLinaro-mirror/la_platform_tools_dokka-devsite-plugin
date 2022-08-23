@@ -10,7 +10,7 @@
       <pre>public interface FragmentOnAttachListener</pre>
     </p>
     <hr>
-    <p>Listener for receiving a callback immediately following <code><a href="/reference/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">Fragment#onAttach(Context)</a></code>. This can be used to perform any additional setup / provide any dependencies that the Fragment may need prior to child fragments being attached or the Fragment going through <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">Fragment#onCreate(Bundle)</a></code>.</p>
+    <p>Listener for receiving a callback immediately following <code><a href="/reference/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code>. This can be used to perform any additional setup / provide any dependencies that the Fragment may need prior to child fragments being attached or the Fragment going through <code><a href="/reference/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code>.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <thead>
@@ -36,7 +36,7 @@
         </thead>
         <tbody class="list">
           <tr>
-            <td width="40%"><code>abstract void</code></td>
+            <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/MainThread.html">MainThread</a> void</code></td>
             <td>
               <div><code><a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html#onAttachFragment(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onAttachFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fragmentManager,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;fragment<br>)</code></div>
               <p>Called after the fragment has been attached to its host.</p>
@@ -48,8 +48,8 @@
     <h2>Public methods</h2>
     <div><a name="onAttachFragment(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onAttachFragment-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a><a name="onattachfragment"></a>
       <h3 class="api-name" id="onAttachFragment(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onAttachFragment</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html#onAttachFragment(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onAttachFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fragmentManager,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;fragment<br>)</pre>
-      <p>Called after the fragment has been attached to its host. This is called immediately after <code><a href="/reference/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">Fragment#onAttach(Context)</a></code> and before <code><a href="/reference/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">Fragment#onAttach(Context)</a></code> has been called on any child fragments.</p>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a><br>abstract&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentOnAttachListener.html#onAttachFragment(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onAttachFragment</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fragmentManager,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;fragment<br>)</pre>
+      <p>Called after the fragment has been attached to its host. This is called immediately after <code><a href="/reference/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code> and before <code><a href="/reference/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code> has been called on any child fragments.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -61,13 +61,13 @@
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a>&nbsp;fragmentManager</code></td>
               <td>
-                <p>FragmentManager the fragment is now attached to. This will be the same FragmentManager that is returned by <code><a href="/reference/androidx/fragment/app/Fragment.html#getParentFragmentManager()">Fragment#getParentFragmentManager()</a></code>.</p>
+                <p>FragmentManager the fragment is now attached to. This will be the same FragmentManager that is returned by <code><a href="/reference/androidx/fragment/app/Fragment.html#getParentFragmentManager()">getParentFragmentManager</a></code>.</p>
               </td>
             </tr>
             <tr>
               <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;fragment</code></td>
               <td>
-                <p>Fragment that just received a callback to <code><a href="/reference/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">Fragment#onAttach(Context)</a></code></p>
+                <p>Fragment that just received a callback to <code><a href="/reference/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code></p>
               </td>
             </tr>
           </tbody>

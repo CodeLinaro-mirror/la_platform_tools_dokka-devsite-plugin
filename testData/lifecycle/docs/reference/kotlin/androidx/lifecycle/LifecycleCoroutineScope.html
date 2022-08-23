@@ -1,0 +1,156 @@
+<html devsite="true">
+  <head>
+    <title>LifecycleCoroutineScope</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>LifecycleCoroutineScope</h1>
+    <p>
+      <pre>abstract class LifecycleCoroutineScope : <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></pre>
+    </p>
+    <hr>
+    <p><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> tied to a <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> and <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-main-coroutine-dispatcher/immediate.html">Dispatchers.Main.immediate</a></code></p>
+    <p>This scope will be cancelled when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is destroyed.</p>
+    <p>This scope provides specialised versions of <code>launch</code>: <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html#launchWhenCreated(kotlin.coroutines.SuspendFunction1)">launchWhenCreated</a></code>, <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html#launchWhenStarted(kotlin.coroutines.SuspendFunction1)">launchWhenStarted</a></code>, <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html#launchWhenResumed(kotlin.coroutines.SuspendFunction1)">launchWhenResumed</a></code></p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html">Job</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html#launchWhenCreated(kotlin.coroutines.SuspendFunction1)">launchWhenCreated</a>(block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Launches and runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> controlling this <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html">LifecycleCoroutineScope</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#CREATED">Lifecycle.State.CREATED</a></code> state.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html">Job</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html#launchWhenResumed(kotlin.coroutines.SuspendFunction1)">launchWhenResumed</a>(block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Launches and runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> controlling this <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html">LifecycleCoroutineScope</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#RESUMED">Lifecycle.State.RESUMED</a></code> state.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html">Job</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html#launchWhenStarted(kotlin.coroutines.SuspendFunction1)">launchWhenStarted</a>(block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <p>Launches and runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> controlling this <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html">LifecycleCoroutineScope</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#STARTED">Lifecycle.State.STARTED</a></code> state.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">kotlinx.coroutines.CoroutineScope</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody class="list">
+                    <tr>
+                      <td width="40%"><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
+                      <td>
+                        <div><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/coroutine-context.html">coroutineContext</a></code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="launchWhenCreated-kotlin.coroutines.SuspendFunction1-"></a><a name="launchwhencreated"></a>
+      <h3 class="api-name" id="launchWhenCreated(kotlin.coroutines.SuspendFunction1)">launchWhenCreated</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html#launchWhenCreated(kotlin.coroutines.SuspendFunction1)">launchWhenCreated</a>(block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html">Job</a></pre>
+      <p>Launches and runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> controlling this <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html">LifecycleCoroutineScope</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#CREATED">Lifecycle.State.CREATED</a></code> state.</p>
+      <p>The returned <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html">Job</a></code> will be cancelled when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is destroyed.</p>
+      <p>Caution: This API is not recommended to use as it can lead to wasted resources in some cases. Please, use the <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).repeatOnLifecycle(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">Lifecycle.repeatOnLifecycle</a></code> API instead. This API will be removed in a future release.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenCreated(kotlin.coroutines.SuspendFunction1)">whenCreated</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).coroutineScope()">coroutineScope</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="launchWhenResumed-kotlin.coroutines.SuspendFunction1-"></a><a name="launchwhenresumed"></a>
+      <h3 class="api-name" id="launchWhenResumed(kotlin.coroutines.SuspendFunction1)">launchWhenResumed</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html#launchWhenResumed(kotlin.coroutines.SuspendFunction1)">launchWhenResumed</a>(block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html">Job</a></pre>
+      <p>Launches and runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> controlling this <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html">LifecycleCoroutineScope</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#RESUMED">Lifecycle.State.RESUMED</a></code> state.</p>
+      <p>The returned <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html">Job</a></code> will be cancelled when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is destroyed.</p>
+      <p>Caution: This API is not recommended to use as it can lead to wasted resources in some cases. Please, use the <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).repeatOnLifecycle(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">Lifecycle.repeatOnLifecycle</a></code> API instead. This API will be removed in a future release.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenResumed(kotlin.coroutines.SuspendFunction1)">whenResumed</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).coroutineScope()">coroutineScope</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="launchWhenStarted-kotlin.coroutines.SuspendFunction1-"></a><a name="launchwhenstarted"></a>
+      <h3 class="api-name" id="launchWhenStarted(kotlin.coroutines.SuspendFunction1)">launchWhenStarted</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html#launchWhenStarted(kotlin.coroutines.SuspendFunction1)">launchWhenStarted</a>(block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html">Job</a></pre>
+      <p>Launches and runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> controlling this <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html">LifecycleCoroutineScope</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#STARTED">Lifecycle.State.STARTED</a></code> state.</p>
+      <p>The returned <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/index.html">Job</a></code> will be cancelled when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is destroyed.</p>
+      <p>Caution: This API is not recommended to use as it can lead to wasted resources in some cases. Please, use the <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).repeatOnLifecycle(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">Lifecycle.repeatOnLifecycle</a></code> API instead. This API will be removed in a future release.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStarted(kotlin.coroutines.SuspendFunction1)">whenStarted</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).coroutineScope()">coroutineScope</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

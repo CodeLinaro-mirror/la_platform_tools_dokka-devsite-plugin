@@ -1,0 +1,209 @@
+<html devsite="true">
+  <head>
+    <title>DefaultLifecycleObserver</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>DefaultLifecycleObserver</h1>
+    <p>
+      <pre>public interface DefaultLifecycleObserver extends <a href="/reference/androidx/lifecycle/FullLifecycleObserver.html">FullLifecycleObserver</a></pre>
+    </p>
+    <hr>
+    <p>Callback interface for listening to <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> state changes. If a class implements both this interface and <code><a href="/reference/androidx/lifecycle/LifecycleEventObserver.html">LifecycleEventObserver</a></code>, then methods of <code>DefaultLifecycleObserver</code> will be called first, and then followed by the call of <code><a href="/reference/androidx/lifecycle/LifecycleEventObserver.html#onStateChanged(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Lifecycle.Event)">onStateChanged</a></code></p>
+    <p> If a class implements this interface and in the same time uses <code><a href="/reference/androidx/lifecycle/OnLifecycleEvent.html">OnLifecycleEvent</a></code>, then annotations will be ignored.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/DefaultLifecycleObserver.html#onCreate(androidx.lifecycle.LifecycleOwner)">onCreate</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner)</code></div>
+              <p>Notifies that <code>ON_CREATE</code> event occurred.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/DefaultLifecycleObserver.html#onDestroy(androidx.lifecycle.LifecycleOwner)">onDestroy</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner)</code></div>
+              <p>Notifies that <code>ON_DESTROY</code> event occurred.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/DefaultLifecycleObserver.html#onPause(androidx.lifecycle.LifecycleOwner)">onPause</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner)</code></div>
+              <p>Notifies that <code>ON_PAUSE</code> event occurred.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/DefaultLifecycleObserver.html#onResume(androidx.lifecycle.LifecycleOwner)">onResume</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner)</code></div>
+              <p>Notifies that <code>ON_RESUME</code> event occurred.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/DefaultLifecycleObserver.html#onStart(androidx.lifecycle.LifecycleOwner)">onStart</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner)</code></div>
+              <p>Notifies that <code>ON_START</code> event occurred.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>default void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/DefaultLifecycleObserver.html#onStop(androidx.lifecycle.LifecycleOwner)">onStop</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner)</code></div>
+              <p>Notifies that <code>ON_STOP</code> event occurred.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="onCreate-androidx.lifecycle.LifecycleOwner-"></a><a name="oncreate"></a>
+      <h3 class="api-name" id="onCreate(androidx.lifecycle.LifecycleOwner)">onCreate</h3>
+      <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/DefaultLifecycleObserver.html#onCreate(androidx.lifecycle.LifecycleOwner)">onCreate</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner)</pre>
+      <p>Notifies that <code>ON_CREATE</code> event occurred. </p>
+      <p> This method will be called after the <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code>'s <code>onCreate</code> method returns.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner</code></td>
+              <td>
+                <p>the component, whose state was changed</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onDestroy-androidx.lifecycle.LifecycleOwner-"></a><a name="ondestroy"></a>
+      <h3 class="api-name" id="onDestroy(androidx.lifecycle.LifecycleOwner)">onDestroy</h3>
+      <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/DefaultLifecycleObserver.html#onDestroy(androidx.lifecycle.LifecycleOwner)">onDestroy</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner)</pre>
+      <p>Notifies that <code>ON_DESTROY</code> event occurred. </p>
+      <p> This method will be called before the <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code>'s <code>onDestroy</code> method is called.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner</code></td>
+              <td>
+                <p>the component, whose state was changed</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onPause-androidx.lifecycle.LifecycleOwner-"></a><a name="onpause"></a>
+      <h3 class="api-name" id="onPause(androidx.lifecycle.LifecycleOwner)">onPause</h3>
+      <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/DefaultLifecycleObserver.html#onPause(androidx.lifecycle.LifecycleOwner)">onPause</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner)</pre>
+      <p>Notifies that <code>ON_PAUSE</code> event occurred. </p>
+      <p> This method will be called before the <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code>'s <code>onPause</code> method is called.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner</code></td>
+              <td>
+                <p>the component, whose state was changed</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onResume-androidx.lifecycle.LifecycleOwner-"></a><a name="onresume"></a>
+      <h3 class="api-name" id="onResume(androidx.lifecycle.LifecycleOwner)">onResume</h3>
+      <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/DefaultLifecycleObserver.html#onResume(androidx.lifecycle.LifecycleOwner)">onResume</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner)</pre>
+      <p>Notifies that <code>ON_RESUME</code> event occurred. </p>
+      <p> This method will be called after the <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code>'s <code>onResume</code> method returns.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner</code></td>
+              <td>
+                <p>the component, whose state was changed</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onStart-androidx.lifecycle.LifecycleOwner-"></a><a name="onstart"></a>
+      <h3 class="api-name" id="onStart(androidx.lifecycle.LifecycleOwner)">onStart</h3>
+      <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/DefaultLifecycleObserver.html#onStart(androidx.lifecycle.LifecycleOwner)">onStart</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner)</pre>
+      <p>Notifies that <code>ON_START</code> event occurred. </p>
+      <p> This method will be called after the <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code>'s <code>onStart</code> method returns.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner</code></td>
+              <td>
+                <p>the component, whose state was changed</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="onStop-androidx.lifecycle.LifecycleOwner-"></a><a name="onstop"></a>
+      <h3 class="api-name" id="onStop(androidx.lifecycle.LifecycleOwner)">onStop</h3>
+      <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/DefaultLifecycleObserver.html#onStop(androidx.lifecycle.LifecycleOwner)">onStop</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner)</pre>
+      <p>Notifies that <code>ON_STOP</code> event occurred. </p>
+      <p> This method will be called before the <code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code>'s <code>onStop</code> method is called.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner</code></td>
+              <td>
+                <p>the component, whose state was changed</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

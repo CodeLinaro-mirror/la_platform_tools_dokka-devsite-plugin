@@ -14,35 +14,33 @@
  * limitations under the License.
  */
 
-
 package androidx.fragment.app;
 
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+
 /**
- * Listener for receiving a callback immediately following {@link androidx.fragment.app.Fragment#onAttach(android.content.Context) Fragment#onAttach(Context)}.
+ * Listener for receiving a callback immediately following {@link Fragment#onAttach(Context)}.
  * This can be used to perform any additional setup / provide any dependencies that the Fragment
  * may need prior to child fragments being attached or the Fragment going through
- * {@link androidx.fragment.app.Fragment#onCreate(android.os.Bundle) Fragment#onCreate(Bundle)}.
+ * {@link Fragment#onCreate(Bundle)}.
  *
- * @see androidx.fragment.app.FragmentManager#addFragmentOnAttachListener(FragmentOnAttachListener)
+ * @see FragmentManager#addFragmentOnAttachListener(FragmentOnAttachListener)
  */
-
-@SuppressWarnings({"unchecked", "deprecation", "all"})
 public interface FragmentOnAttachListener {
-
-/**
- * Called after the fragment has been attached to its host. This is called
- * immediately after {@link androidx.fragment.app.Fragment#onAttach(android.content.Context) Fragment#onAttach(Context)} and before
- * {@link androidx.fragment.app.Fragment#onAttach(android.content.Context) Fragment#onAttach(Context)} has been called on any child fragments.
- *
- * @param fragmentManager FragmentManager the fragment is now attached to. This will
- *                        be the same FragmentManager that is returned by
- *                        {@link androidx.fragment.app.Fragment#getParentFragmentManager() Fragment#getParentFragmentManager()}.
- * @param fragment Fragment that just received a callback to {@link androidx.fragment.app.Fragment#onAttach(android.content.Context) Fragment#onAttach(Context)}
- */
-
-public void onAttachFragment(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fragmentManager, @androidx.annotation.NonNull androidx.fragment.app.Fragment fragment);
+    /**
+     * Called after the fragment has been attached to its host. This is called
+     * immediately after {@link Fragment#onAttach(Context)} and before
+     * {@link Fragment#onAttach(Context)} has been called on any child fragments.
+     *
+     * @param fragmentManager FragmentManager the fragment is now attached to. This will
+     *                        be the same FragmentManager that is returned by
+     *                        {@link Fragment#getParentFragmentManager()}.
+     * @param fragment Fragment that just received a callback to {@link Fragment#onAttach(Context)}
+     */
+    @MainThread
+    void onAttachFragment(@NonNull FragmentManager fragmentManager, @NonNull Fragment fragment);
 }
-

@@ -1,0 +1,109 @@
+<html devsite="true">
+  <head>
+    <title>ProcessLifecycleOwner</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>ProcessLifecycleOwner</h1>
+    <p>
+      <pre>public class ProcessLifecycleOwner implements <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></pre>
+    </p>
+    <hr>
+    <p>Class that provides lifecycle for the whole application process. </p>
+    <p> You can consider this LifecycleOwner as the composite of all of your Activities, except that <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_CREATE">ON_CREATE</a></code> will be dispatched once and <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_DESTROY">ON_DESTROY</a></code> will never be dispatched. Other lifecycle events will be dispatched with following rules: ProcessLifecycleOwner will dispatch <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_START">ON_START</a></code>, <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_RESUME">ON_RESUME</a></code> events, as a first activity moves through these events. <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_PAUSE">ON_PAUSE</a></code>, <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_STOP">ON_STOP</a></code>, events will be dispatched with a <b>delay</b> after a last activity passed through them. This delay is long enough to guarantee that ProcessLifecycleOwner won't send any events if activities are destroyed and recreated due to a configuration change. </p>
+    <p> It is useful for use cases where you would like to react on your app coming to the foreground or going to the background and you don't need a milliseconds accuracy in receiving lifecycle events.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/ProcessLifecycleOwner.html#ProcessLifecycleOwner()">ProcessLifecycleOwner</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code>static @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/ProcessLifecycleOwner.html#get()">get</a>()</code></div>
+              <p>The LifecycleOwner for the whole application process.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/ProcessLifecycleOwner.html#getLifecycle()">getLifecycle</a>()</code></div>
+              <p>Returns the Lifecycle of the provider.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="ProcessLifecycleOwner--"></a><a name="processlifecycleowner"></a>
+      <h3 class="api-name" id="ProcessLifecycleOwner()">ProcessLifecycleOwner</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/lifecycle/ProcessLifecycleOwner.html#ProcessLifecycleOwner()">ProcessLifecycleOwner</a>()</pre>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="get--"></a><a name="get"></a>
+      <h3 class="api-name" id="get()">get</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;<a href="/reference/androidx/lifecycle/ProcessLifecycleOwner.html#get()">get</a>()</pre>
+      <p>The LifecycleOwner for the whole application process. Note that if your application has multiple processes, this provider does not know about other processes.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Returns</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code></td>
+              <td>
+                <p><code><a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> for the whole application.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="getLifecycle--"></a><a name="getlifecycle"></a>
+      <h3 class="api-name" id="getLifecycle()">getLifecycle</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a>&nbsp;<a href="/reference/androidx/lifecycle/ProcessLifecycleOwner.html#getLifecycle()">getLifecycle</a>()</pre>
+      <p>Returns the Lifecycle of the provider.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Returns</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code></td>
+              <td>
+                <p>The lifecycle of the provider.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

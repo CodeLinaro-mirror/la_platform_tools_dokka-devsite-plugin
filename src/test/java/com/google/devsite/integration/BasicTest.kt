@@ -17,6 +17,7 @@
 package com.google.devsite.integration
 
 import com.google.devsite.testing.IntegrationTestBase
+import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -25,98 +26,147 @@ import org.junit.Test
 class BasicTest : IntegrationTestBase() {
     @Test
     fun `Validate simple classes`() {
-        verifyDirectory("simple")
+        validateDirectory("simple")
     }
 
     @Test
     fun `Validate simple top-level functions`() {
-        verifyDirectory("topLevelFunctions")
+        validateDirectory("topLevelFunctions")
     }
 
     @Test
     fun `Validate inner classes`() {
-        verifyDirectory("innerClasses")
+        validateDirectory("innerClasses")
     }
 
+    // Cannot be migrated to validatePrebuilts because we don't yet support KMP
     @Test
     fun `Validate prod AndroidX compose lib`() {
-        verifyDirectory("compose", sampleLocs = listOf("samples"))
+        validateDirectory("compose", sampleLocations = listOf("samples"))
+    }
+
+    // We can certainly remove this test once the migration to validatePrebuilts is complete
+    @Test
+    fun `Validate AndroidX fragment sources and prebuilts generate identical docs`() {
+        // By sharing the same path, this test validates against the same goldens the next test does
+        validateDirectory("fragment", sampleLocations = listOf("samples"))
     }
 
     @Test
-    fun `Validate prod AndroidX fragment lib`() {
-        verifyDirectory("fragment", sampleLocs = listOf("samples"))
-    }
-
-    @Test
-    fun `Validate prod AndroidX paging lib`() {
-        verifyDirectory(
-            path = "paging",
-            sampleLocs = listOf("samples"),
-            includeFiles = listOf("metadata.md")
+    fun `Validate prod AndroidX fragment prebuilts`() {
+        validatePrebuilts(
+            testName = "fragment",
+            artifactNames = listOf("fragment"),
+            samples = true
         )
     }
 
     @Test
+    fun `Validate prod AndroidX lifecycle prebuilts`() {
+        // lifecycle-common-java8 and lifecycle-extensions no longer exist
+        validatePrebuilts(
+            testName = "lifecycle",
+            artifactNames = listOf(
+                "lifecycle-common",
+                "lifecycle-compiler",
+                "lifecycle-livedata",
+                "lifecycle-livedata-core",
+                "lifecycle-livedata-core-ktx",
+                "lifecycle-livedata-ktx",
+                "lifecycle-process",
+                "lifecycle-reactivestreams",
+                "lifecycle-reactivestreams-ktx",
+                "lifecycle-runtime",
+                "lifecycle-runtime-ktx",
+                "lifecycle-runtime-testing",
+                "lifecycle-service",
+                "lifecycle-viewmodel",
+                "lifecycle-viewmodel-ktx",
+                "lifecycle-viewmodel-savedstate"
+            )
+        )
+    }
+
+    // Cannot be migrated to validatePrebuilts because we don't yet support KMP
+    @Test
+    fun `Validate prod AndroidX paging lib`() {
+        validateDirectory(
+            path = "paging",
+            sampleLocations = listOf("samples"),
+            includeFiles = listOf("metadata.md")
+        )
+    }
+
+    // Cannot be migrated to validatePrebuilts because we don't yet support KMP
+    @Test
     fun `Validate prod AndroidX collections-ktx lib`() {
-        verifyDirectory("collections-ktx")
+        validateDirectory("collections-ktx")
+    }
+
+    @Ignore // Does not work; KMP problems; collection-jvm doesn't label source jar properly
+    @Test
+    fun `Validate prod AndroidX collections prebuilts`() {
+        validatePrebuilts(
+            testName = "collections",
+            artifactNames = listOf("collection", "collection-jvm", "collection-ktx"),
+        )
     }
 
     @Test
     fun `Validate @sample`() {
-        verifyDirectory(
+        validateDirectory(
             "sampleAnnotation",
-            sampleLocs = listOf("samples")
+            sampleLocations = listOf("samples")
         )
     }
 
     @Test
     fun `Validate complicated Platform files`() {
-        verifyDirectory("complicatedPlatform")
+        validateDirectory("complicatedPlatform")
     }
 
     @Test
     fun `Validate inheritance tests`() {
-        verifyDirectory("inheritance")
+        validateDirectory("inheritance")
     }
 
     @Test // A non-hidden package is necessary because of an upstream explicit !! after filtering
     fun `Validate package-leve @hide`() {
-        verifyDirectory("hidden")
+        validateDirectory("hidden")
     }
 
     @Test // Currently only checks the links for enums resolve
     fun `Validate linking`() { // CURRENT STATUS: BROKEN: LinkerClass.html enums aren't linked
-        verifyDirectory("linking")
+        validateDirectory("linking")
     }
 
     @Test
     fun `Validate versioned directory support`() {
-        verifyDirectory("simpleVersioned", versionedTenant = "tools/gradle-api/7.0")
+        validateDirectory("simpleVersioned", versionedTenant = "tools/gradle-api/7.0")
     }
 
     @Test
     fun `Validate @RestrictTo`() {
-        verifyDirectory("restrictTo")
+        validateDirectory("restrictTo")
     }
 
     @Test
     fun `Validate @JvmMultifile`() {
-        verifyDirectory("multifile")
+        validateDirectory("multifile")
     }
 
     @Test
     fun `Validate getters setters and modifiers`() {
-        verifyDirectory("getterSetterModifier")
+        validateDirectory("getterSetterModifier")
     }
 
     @Test
     fun `Validate @JvmMultifileClass`() {
-        verifyDirectory("multifile")
+        validateDirectory("multifile")
     }
 
     @Test
     fun `Validate companion-static interop`() {
-        verifyDirectory("companionStatic")
+        validateDirectory("companionStatic")
     }
 }

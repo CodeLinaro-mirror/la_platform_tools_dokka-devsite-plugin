@@ -14,15 +14,27 @@
  * limitations under the License.
  */
 
-
 package androidx.fragment.app;
 
-import androidx.viewpager.widget.PagerAdapter;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
+import androidx.viewpager.widget.PagerAdapter;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
 
 /**
- * Implementation of {@link androidx.viewpager.widget.PagerAdapter PagerAdapter} that
- * uses a {@link androidx.fragment.app.Fragment Fragment} to manage each page. This class also handles
+ * Implementation of {@link PagerAdapter} that
+ * uses a {@link Fragment} to manage each page. This class also handles
  * saving and restoring of fragment's state.
  *
  * <p>This version of the pager is more useful when there are a large number
@@ -30,7 +42,7 @@ import androidx.lifecycle.Lifecycle;
  * the user, their entire fragment may be destroyed, only keeping the saved
  * state of that fragment.  This allows the pager to hold on to much less
  * memory associated with each visited page as compared to
- * {@link androidx.fragment.app.FragmentPagerAdapter FragmentPagerAdapter} at the cost of potentially more overhead when
+ * {@link FragmentPagerAdapter} at the cost of potentially more overhead when
  * switching between pages.
  *
  * <p>When using FragmentPagerAdapter the host ViewPager must have a
@@ -59,90 +71,273 @@ import androidx.lifecycle.Lifecycle;
  * @deprecated Switch to {@link androidx.viewpager2.widget.ViewPager2} and use
  * {@link androidx.viewpager2.adapter.FragmentStateAdapter} instead.
  */
-
-@SuppressWarnings({"unchecked", "deprecation", "all"})
+@SuppressWarnings("deprecation")
 @Deprecated
-public abstract class FragmentStatePagerAdapter extends androidx.viewpager.widget.PagerAdapter {
+public abstract class FragmentStatePagerAdapter extends PagerAdapter {
+    private static final String TAG = "FragmentStatePagerAdapt";
+    private static final boolean DEBUG = false;
 
-/**
- * Constructor for {@link androidx.fragment.app.FragmentStatePagerAdapter FragmentStatePagerAdapter} that sets the fragment manager for the
- * adapter. This is the equivalent of calling
- * {@link #FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager,int)} and passing in
- * {@link #BEHAVIOR_SET_USER_VISIBLE_HINT}.
- *
- * <p>Fragments will have {@link androidx.fragment.app.Fragment#setUserVisibleHint(boolean) Fragment#setUserVisibleHint(boolean)} called whenever the
- * current Fragment changes.</p>
- *
- * @param fm fragment manager that will interact with this adapter
- * @deprecated use {@link #FragmentStatePagerAdapter(androidx.fragment.app.FragmentManager,int)} with
- * {@link #BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT}
- */
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({BEHAVIOR_SET_USER_VISIBLE_HINT, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT})
+    private @interface Behavior { }
 
-@Deprecated
-public FragmentStatePagerAdapter(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm) { throw new RuntimeException("Stub!"); }
+    /**
+     * Indicates that {@link Fragment#setUserVisibleHint(boolean)} will be called when the current
+     * fragment changes.
+     *
+     * @deprecated This behavior relies on the deprecated
+     * {@link Fragment#setUserVisibleHint(boolean)} API. Use
+     * {@link #BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT} to switch to its replacement,
+     * {@link FragmentTransaction#setMaxLifecycle}.
+     * @see #FragmentStatePagerAdapter(FragmentManager, int)
+     */
+    @Deprecated
+    public static final int BEHAVIOR_SET_USER_VISIBLE_HINT = 0;
 
-/**
- * Constructor for {@link androidx.fragment.app.FragmentStatePagerAdapter FragmentStatePagerAdapter}.
- *
- * If {@link #BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT} is passed in, then only the current
- * Fragment is in the {@link androidx.lifecycle.Lifecycle.State#RESUMED Lifecycle.State#RESUMED} state, while all other fragments are
- * capped at {@link androidx.lifecycle.Lifecycle.State#STARTED Lifecycle.State#STARTED}. If {@link #BEHAVIOR_SET_USER_VISIBLE_HINT} is
- * passed, all fragments are in the {@link androidx.lifecycle.Lifecycle.State#RESUMED Lifecycle.State#RESUMED} state and there will be
- * callbacks to {@link androidx.fragment.app.Fragment#setUserVisibleHint(boolean) Fragment#setUserVisibleHint(boolean)}.
- *
- * @param fm fragment manager that will interact with this adapter
- * @param behavior determines if only current fragments are in a resumed state
+    /**
+     * Indicates that only the current fragment will be in the {@link Lifecycle.State#RESUMED}
+     * state. All other Fragments are capped at {@link Lifecycle.State#STARTED}.
+     *
+     * @see #FragmentStatePagerAdapter(FragmentManager, int)
+     */
+    public static final int BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT = 1;
 
- * Value is {@link androidx.fragment.app.FragmentStatePagerAdapter#BEHAVIOR_SET_USER_VISIBLE_HINT}, or {@link androidx.fragment.app.FragmentStatePagerAdapter#BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT}
- */
+    private final FragmentManager mFragmentManager;
+    private final int mBehavior;
+    private FragmentTransaction mCurTransaction = null;
 
-public FragmentStatePagerAdapter(@androidx.annotation.NonNull androidx.fragment.app.FragmentManager fm, int behavior) { throw new RuntimeException("Stub!"); }
+    private ArrayList<Fragment.SavedState> mSavedState = new ArrayList<>();
+    private ArrayList<Fragment> mFragments = new ArrayList<>();
+    private Fragment mCurrentPrimaryItem = null;
+    private boolean mExecutingFinishUpdate;
 
-/**
- * Return the Fragment associated with a specified position.
- */
+    /**
+     * Constructor for {@link FragmentStatePagerAdapter} that sets the fragment manager for the
+     * adapter. This is the equivalent of calling
+     * {@link #FragmentStatePagerAdapter(FragmentManager, int)} and passing in
+     * {@link #BEHAVIOR_SET_USER_VISIBLE_HINT}.
+     *
+     * <p>Fragments will have {@link Fragment#setUserVisibleHint(boolean)} called whenever the
+     * current Fragment changes.</p>
+     *
+     * @param fm fragment manager that will interact with this adapter
+     * @deprecated use {@link #FragmentStatePagerAdapter(FragmentManager, int)} with
+     * {@link #BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT}
+     */
+    @Deprecated
+    public FragmentStatePagerAdapter(@NonNull FragmentManager fm) {
+        this(fm, BEHAVIOR_SET_USER_VISIBLE_HINT);
+    }
 
-@androidx.annotation.NonNull
-public abstract androidx.fragment.app.Fragment getItem(int position);
+    /**
+     * Constructor for {@link FragmentStatePagerAdapter}.
+     *
+     * If {@link #BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT} is passed in, then only the current
+     * Fragment is in the {@link Lifecycle.State#RESUMED} state, while all other fragments are
+     * capped at {@link Lifecycle.State#STARTED}. If {@link #BEHAVIOR_SET_USER_VISIBLE_HINT} is
+     * passed, all fragments are in the {@link Lifecycle.State#RESUMED} state and there will be
+     * callbacks to {@link Fragment#setUserVisibleHint(boolean)}.
+     *
+     * @param fm fragment manager that will interact with this adapter
+     * @param behavior determines if only current fragments are in a resumed state
+     */
+    public FragmentStatePagerAdapter(@NonNull FragmentManager fm,
+            @Behavior int behavior) {
+        mFragmentManager = fm;
+        mBehavior = behavior;
+    }
 
-public void startUpdate(@androidx.annotation.NonNull android.view.ViewGroup container) { throw new RuntimeException("Stub!"); }
+    /**
+     * Return the Fragment associated with a specified position.
+     */
+    @NonNull
+    public abstract Fragment getItem(int position);
 
-@androidx.annotation.NonNull
-public java.lang.Object instantiateItem(@androidx.annotation.NonNull android.view.ViewGroup container, int position) { throw new RuntimeException("Stub!"); }
+    @Override
+    public void startUpdate(@NonNull ViewGroup container) {
+        if (container.getId() == View.NO_ID) {
+            throw new IllegalStateException("ViewPager with adapter " + this
+                    + " requires a view id");
+        }
+    }
 
-public void destroyItem(@androidx.annotation.NonNull android.view.ViewGroup container, int position, @androidx.annotation.NonNull java.lang.Object object) { throw new RuntimeException("Stub!"); }
+    @SuppressWarnings("deprecation")
+    @NonNull
+    @Override
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        // If we already have this item instantiated, there is nothing
+        // to do.  This can happen when we are restoring the entire pager
+        // from its saved state, where the fragment manager has already
+        // taken care of restoring the fragments we previously had instantiated.
+        if (mFragments.size() > position) {
+            Fragment f = mFragments.get(position);
+            if (f != null) {
+                return f;
+            }
+        }
 
-public void setPrimaryItem(@androidx.annotation.NonNull android.view.ViewGroup container, int position, @androidx.annotation.NonNull java.lang.Object object) { throw new RuntimeException("Stub!"); }
+        if (mCurTransaction == null) {
+            mCurTransaction = mFragmentManager.beginTransaction();
+        }
 
-public void finishUpdate(@androidx.annotation.NonNull android.view.ViewGroup container) { throw new RuntimeException("Stub!"); }
+        Fragment fragment = getItem(position);
+        if (DEBUG) Log.v(TAG, "Adding item #" + position + ": f=" + fragment);
+        if (mSavedState.size() > position) {
+            Fragment.SavedState fss = mSavedState.get(position);
+            if (fss != null) {
+                fragment.setInitialSavedState(fss);
+            }
+        }
+        while (mFragments.size() <= position) {
+            mFragments.add(null);
+        }
+        fragment.setMenuVisibility(false);
+        if (mBehavior == BEHAVIOR_SET_USER_VISIBLE_HINT) {
+            fragment.setUserVisibleHint(false);
+        }
 
-public boolean isViewFromObject(@androidx.annotation.NonNull android.view.View view, @androidx.annotation.NonNull java.lang.Object object) { throw new RuntimeException("Stub!"); }
+        mFragments.set(position, fragment);
+        mCurTransaction.add(container.getId(), fragment);
 
-@androidx.annotation.Nullable
-public android.os.Parcelable saveState() { throw new RuntimeException("Stub!"); }
+        if (mBehavior == BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+            mCurTransaction.setMaxLifecycle(fragment, Lifecycle.State.STARTED);
+        }
 
-public void restoreState(@androidx.annotation.Nullable android.os.Parcelable state, @androidx.annotation.Nullable java.lang.ClassLoader loader) { throw new RuntimeException("Stub!"); }
+        return fragment;
+    }
 
-/**
- * Indicates that only the current fragment will be in the {@link androidx.lifecycle.Lifecycle.State#RESUMED Lifecycle.State#RESUMED}
- * state. All other Fragments are capped at {@link androidx.lifecycle.Lifecycle.State#STARTED Lifecycle.State#STARTED}.
- *
- * @see #FragmentStatePagerAdapter(FragmentManager, int)
- */
+    // TODO(b/141958824): Suppressed during upgrade to AGP 3.6.
+    @SuppressWarnings("ReferenceEquality")
+    @Override
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        Fragment fragment = (Fragment) object;
 
-public static final int BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT = 1; // 0x1
+        if (mCurTransaction == null) {
+            mCurTransaction = mFragmentManager.beginTransaction();
+        }
+        if (DEBUG) Log.v(TAG, "Removing item #" + position + ": f=" + object
+                + " v=" + ((Fragment)object).getView());
+        while (mSavedState.size() <= position) {
+            mSavedState.add(null);
+        }
+        mSavedState.set(position, fragment.isAdded()
+                ? mFragmentManager.saveFragmentInstanceState(fragment) : null);
+        mFragments.set(position, null);
 
-/**
- * Indicates that {@link androidx.fragment.app.Fragment#setUserVisibleHint(boolean) Fragment#setUserVisibleHint(boolean)} will be called when the current
- * fragment changes.
- *
- * @deprecated This behavior relies on the deprecated
- * {@link androidx.fragment.app.Fragment#setUserVisibleHint(boolean) Fragment#setUserVisibleHint(boolean)} API. Use
- * {@link #BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT} to switch to its replacement,
- * {@link androidx.fragment.app.FragmentTransaction#setMaxLifecycle FragmentTransaction#setMaxLifecycle}.
- * @see #FragmentStatePagerAdapter(FragmentManager, int)
- */
+        mCurTransaction.remove(fragment);
+        if (fragment.equals(mCurrentPrimaryItem)) {
+            mCurrentPrimaryItem = null;
+        }
+    }
 
-@Deprecated public static final int BEHAVIOR_SET_USER_VISIBLE_HINT = 0; // 0x0
+    @Override
+    @SuppressWarnings({"ReferenceEquality", "deprecation"})
+    public void setPrimaryItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        Fragment fragment = (Fragment)object;
+        if (fragment != mCurrentPrimaryItem) {
+            if (mCurrentPrimaryItem != null) {
+                mCurrentPrimaryItem.setMenuVisibility(false);
+                if (mBehavior == BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+                    if (mCurTransaction == null) {
+                        mCurTransaction = mFragmentManager.beginTransaction();
+                    }
+                    mCurTransaction.setMaxLifecycle(mCurrentPrimaryItem, Lifecycle.State.STARTED);
+                } else {
+                    mCurrentPrimaryItem.setUserVisibleHint(false);
+                }
+            }
+            fragment.setMenuVisibility(true);
+            if (mBehavior == BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+                if (mCurTransaction == null) {
+                    mCurTransaction = mFragmentManager.beginTransaction();
+                }
+                mCurTransaction.setMaxLifecycle(fragment, Lifecycle.State.RESUMED);
+            } else {
+                fragment.setUserVisibleHint(true);
+            }
+
+            mCurrentPrimaryItem = fragment;
+        }
+    }
+
+    @Override
+    public void finishUpdate(@NonNull ViewGroup container) {
+        if (mCurTransaction != null) {
+            // We drop any transactions that attempt to be committed
+            // from a re-entrant call to finishUpdate(). We need to
+            // do this as a workaround for Robolectric running measure/layout
+            // calls inline rather than allowing them to be posted
+            // as they would on a real device.
+            if (!mExecutingFinishUpdate) {
+                try {
+                    mExecutingFinishUpdate = true;
+                    mCurTransaction.commitNowAllowingStateLoss();
+                } finally {
+                    mExecutingFinishUpdate = false;
+                }
+            }
+            mCurTransaction = null;
+        }
+    }
+
+    @Override
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+        return ((Fragment)object).getView() == view;
+    }
+
+    @Override
+    @Nullable
+    public Parcelable saveState() {
+        Bundle state = null;
+        if (mSavedState.size() > 0) {
+            state = new Bundle();
+            Fragment.SavedState[] fss = new Fragment.SavedState[mSavedState.size()];
+            mSavedState.toArray(fss);
+            state.putParcelableArray("states", fss);
+        }
+        for (int i=0; i<mFragments.size(); i++) {
+            Fragment f = mFragments.get(i);
+            if (f != null && f.isAdded()) {
+                if (state == null) {
+                    state = new Bundle();
+                }
+                String key = "f" + i;
+                mFragmentManager.putFragment(state, key, f);
+            }
+        }
+        return state;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public void restoreState(@Nullable Parcelable state, @Nullable ClassLoader loader) {
+        if (state != null) {
+            Bundle bundle = (Bundle)state;
+            bundle.setClassLoader(loader);
+            Parcelable[] fss = bundle.getParcelableArray("states");
+            mSavedState.clear();
+            mFragments.clear();
+            if (fss != null) {
+                for (int i=0; i<fss.length; i++) {
+                    mSavedState.add((Fragment.SavedState)fss[i]);
+                }
+            }
+            Iterable<String> keys = bundle.keySet();
+            for (String key: keys) {
+                if (key.startsWith("f")) {
+                    int index = Integer.parseInt(key.substring(1));
+                    Fragment f = mFragmentManager.getFragment(bundle, key);
+                    if (f != null) {
+                        while (mFragments.size() <= index) {
+                            mFragments.add(null);
+                        }
+                        f.setMenuVisibility(false);
+                        mFragments.set(index, f);
+                    } else {
+                        Log.w(TAG, "Bad fragment at key " + key);
+                    }
+                }
+            }
+        }
+    }
 }
-

@@ -1,0 +1,84 @@
+<html devsite="true">
+  <head>
+    <title>ViewModelLazy</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>ViewModelLazy</h1>
+    <p>
+      <pre>class ViewModelLazy&lt;VM&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-lazy/index.html">Lazy</a></pre>
+    </p>
+    <hr>
+    <p>An implementation of <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-lazy/index.html">Lazy</a></code> used by androidx.fragment.app.Fragment.viewModels and androidx.activity.ComponentActivity.viewmodels.</p>
+    <p><code><a href="/reference/kotlin/androidx/lifecycle/ViewModelLazy.html#storeProducer()">storeProducer</a></code> is a lambda that will be called during initialization, <code><a href="/reference/kotlin/androidx/lifecycle/ViewModelLazy.html">VM</a></code> will be created in the scope of returned <code><a href="/reference/kotlin/androidx/lifecycle/ViewModelStore.html">ViewModelStore</a></code>.</p>
+    <p><code><a href="/reference/kotlin/androidx/lifecycle/ViewModelLazy.html#factoryProducer()">factoryProducer</a></code> is a lambda that will be called during initialization, returned <code><a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a></code> will be used for creation of <code><a href="/reference/kotlin/androidx/lifecycle/ViewModelLazy.html">VM</a></code></p>
+    <p>providerOwner is a lambda that will be called during initialization, returned <code><a href="/reference/kotlin/androidx/lifecycle/HasDefaultViewModelProviderFactory.html">HasDefaultViewModelProviderFactory</a></code> will get <code><a href="/reference/kotlin/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code> used for creation of <code><a href="/reference/kotlin/androidx/lifecycle/ViewModelLazy.html">VM</a></code></p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code>&lt;VM&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/kotlin/androidx/lifecycle/ViewModelLazy.html#ViewModelLazy(kotlin.reflect.KClass,kotlin.Function0,kotlin.Function0,kotlin.Function0)">ViewModelLazy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;viewModelClass:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html">KClass</a>&lt;VM&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;storeProducer:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/lifecycle/ViewModelStore.html">ViewModelStore</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;factoryProducer:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;extrasProducer:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a><br>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/ViewModelLazy.html#isInitialized()">isInitialized</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code>open VM</code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/ViewModelLazy.html#value()">value</a></code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="ViewModelLazy(kotlin.reflect.KClass, kotlin.Function0, kotlin.Function0, kotlin.Function0)"></a><a name="ViewModelLazy-kotlin.reflect.KClass-kotlin.Function0-kotlin.Function0-kotlin.Function0-"></a><a name="viewmodellazy"></a>
+      <h3 class="api-name" id="ViewModelLazy(kotlin.reflect.KClass,kotlin.Function0,kotlin.Function0,kotlin.Function0)">ViewModelLazy</h3>
+      <pre class="api-signature no-pretty-print">&lt;VM&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/kotlin/androidx/lifecycle/ViewModelLazy.html#ViewModelLazy(kotlin.reflect.KClass,kotlin.Function0,kotlin.Function0,kotlin.Function0)">ViewModelLazy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;viewModelClass:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html">KClass</a>&lt;VM&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;storeProducer:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/lifecycle/ViewModelStore.html">ViewModelStore</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;factoryProducer:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;extrasProducer:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="/reference/kotlin/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a> = { CreationExtras.Empty }<br>)</pre>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="isInitialized--"></a><a name="isinitialized"></a>
+      <h3 class="api-name" id="isInitialized()">isInitialized</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModelLazy.html#isInitialized()">isInitialized</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
+      <h3 class="api-name" id="value()">value</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModelLazy.html#value()">value</a>:&nbsp;VM</pre>
+    </div>
+  </body>
+</html>

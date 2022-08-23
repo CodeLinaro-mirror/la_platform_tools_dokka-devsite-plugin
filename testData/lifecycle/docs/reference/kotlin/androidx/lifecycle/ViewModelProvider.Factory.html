@@ -1,0 +1,190 @@
+<html devsite="true">
+  <head>
+    <title>ViewModelProvider.Factory</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>ViewModelProvider.Factory</h1>
+    <p>
+      <pre>interface ViewModelProvider.Factory</pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/lifecycle/AbstractSavedStateViewModelFactory.html">AbstractSavedStateViewModelFactory</a>, <a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html">SavedStateViewModelFactory</a>, <a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.NewInstanceFactory.html">ViewModelProvider.NewInstanceFactory</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/AbstractSavedStateViewModelFactory.html">AbstractSavedStateViewModelFactory</a></code></td>
+                <td>
+                  <p>Skeleton of androidx.lifecycle.ViewModelProvider.KeyedFactory that creates <code><a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a></code> for every requested <code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">androidx.lifecycle.ViewModel</a></code>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html">SavedStateViewModelFactory</a></code></td>
+                <td>
+                  <p><code><a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.Factory.html">androidx.lifecycle.ViewModelProvider.Factory</a></code> that can create ViewModels accessing and contributing to a saved state via <code><a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a></code> received in a constructor.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.NewInstanceFactory.html">ViewModelProvider.NewInstanceFactory</a></code></td>
+                <td>
+                  <p>Simple factory, which calls empty constructor on the give class.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known indirect subclasses
+        <div class="showalways" id="subclasses-indirect"><a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.AndroidViewModelFactory.html">ViewModelProvider.AndroidViewModelFactory</a></div>
+      </span>
+      <div id="subclasses-indirect-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.AndroidViewModelFactory.html">ViewModelProvider.AndroidViewModelFactory</a></code></td>
+                <td>
+                  <p><code><a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.Factory.html">Factory</a></code> which may create <code><a href="/reference/kotlin/androidx/lifecycle/AndroidViewModel.html">AndroidViewModel</a></code> and <code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a></code>, which have an empty constructor.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>Implementations of <code>Factory</code> interface are responsible to instantiate ViewModels.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.Factory.Companion.html">ViewModelProvider.Factory.Companion</a></code></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code>open T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.Factory.html#create(java.lang.Class)">create</a>(modelClass:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;)</code></div>
+              <p>Creates a new instance of the given <code>Class</code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>open T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.Factory.html#create(java.lang.Class,androidx.lifecycle.viewmodel.CreationExtras)">create</a>(modelClass:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;,&nbsp;extras:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a>)</code></div>
+              <p>Creates a new instance of the given <code>Class</code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="create-java.lang.Class-"></a><a name="create"></a>
+      <h3 class="api-name" id="create(java.lang.Class)">create</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.Factory.html#create(java.lang.Class)">create</a>(modelClass:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;):&nbsp;T</pre>
+      <p>Creates a new instance of the given <code>Class</code>.</p>
+      <p>Default implementation throws <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unsupported-operation-exception/index.html">UnsupportedOperationException</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>modelClass:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;</code></td>
+              <td>
+                <p>a <code>Class</code> whose instance is requested</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Returns</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>T</code></td>
+              <td>
+                <p>a newly created ViewModel</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="create(java.lang.Class, androidx.lifecycle.viewmodel.CreationExtras)"></a><a name="create-java.lang.Class-androidx.lifecycle.viewmodel.CreationExtras-"></a><a name="create"></a>
+      <h3 class="api-name" id="create(java.lang.Class,androidx.lifecycle.viewmodel.CreationExtras)">create</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.Factory.html#create(java.lang.Class,androidx.lifecycle.viewmodel.CreationExtras)">create</a>(modelClass:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;,&nbsp;extras:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a>):&nbsp;T</pre>
+      <p>Creates a new instance of the given <code>Class</code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>modelClass:&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;</code></td>
+              <td>
+                <p>a <code>Class</code> whose instance is requested</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>extras:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code></td>
+              <td>
+                <p>an additional information for this creation request</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Returns</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>T</code></td>
+              <td>
+                <p>a newly created ViewModel</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
