@@ -46,6 +46,7 @@ import kotlinx.html.h4
 import kotlinx.html.h5
 import kotlinx.html.h6
 import kotlinx.html.hr
+import kotlinx.html.htmlVar
 import kotlinx.html.img
 import kotlinx.html.li
 import kotlinx.html.ol
@@ -311,6 +312,7 @@ internal data class DefaultDescriptionComponent(
                 }
                 is BlockQuote -> blockQuote { renderTags(tag.children, state) }
                 is CustomDocTag -> { renderTags(tag.children, state) }
+                is Var -> htmlVar { renderTags(tag.children, state) }
                 is Html, is Head, is Meta, is Header, is Title, is Footer, is IFrame,
                 is Main, is Menu, is Nav, is Index ->
                     throw NotImplementedError(
@@ -318,7 +320,7 @@ internal data class DefaultDescriptionComponent(
                             "${tag.javaClass.simpleName}. Context: ${tags.text()}."
                     )
                 is Small, is Big, is Cite, is Dfn, is Dir, is Font, is Frame, is FrameSet,
-                is Input, is Link, is Listing, is NoFrames, is Tt, is U, is Var, is Script,
+                is Input, is Link, is Listing, is NoFrames, is Tt, is U, is Script,
                 is NoScript, is Section -> throw NotImplementedError(
                     "Unknown use case for " +
                         "${tag.javaClass.simpleName}.  Context: ${tags.text()}."

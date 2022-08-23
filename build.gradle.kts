@@ -37,7 +37,7 @@ plugins {
 application {
     mainClass.set("org.jetbrains.dokka.MainKt")
 }
-val dokkaVersion = "1.7.20-dev-173"
+val dokkaVersion = "1.7.20-dev-178"
 val jacksonVersion = "2.13.1"
 val coroutinesVersion = "1.6.3"
 
