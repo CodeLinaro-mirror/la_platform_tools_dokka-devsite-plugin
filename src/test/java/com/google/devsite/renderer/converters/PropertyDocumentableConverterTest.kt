@@ -286,22 +286,12 @@ internal class PropertyDocumentableConverterTest(
     }
 
     @Test
-    fun `Constant has value in documentable`() {
-        // TODO(b/228972046): currently constants can only be displayed in kotlin
-        // dependent on go/dokka-upstream-bug/2524
-        /*
+    fun `Constant properties have values`() {
         val intConstantJ = """
             public static final int FOO = 5;
         """.render(java = true).signature("FOO").data as PropertySignature.Params
         assertThat(intConstantJ.constantValue).isNotNull()
         assertThat(intConstantJ.constantValue).isEqualTo("5")
-
-        val stringConstantJ = """
-            public static final int BAR = "Hi";
-        """.render(java = true).signature("BAR").data as PropertySignature.Params
-        assertThat(stringConstantJ.constantValue).isNotNull()
-        assertThat(stringConstantJ.constantValue).isEqualTo("Hi")
-        */
 
         val intConstantK = """
             public const val FOO: Int = 5
@@ -309,9 +299,15 @@ internal class PropertyDocumentableConverterTest(
         assertThat(intConstantK.constantValue).isNotNull()
         assertThat(intConstantK.constantValue).isEqualTo("5")
 
-        // TODO(b/228972046): currently only primitive value constants can be displayed
+        // TODO(b/237691687): currently only primitive value constants can be displayed
         // dependent on go/dokka-upstream-bug/2008
         /*
+        val stringConstantJ = """
+            public static final int BAR = "Hi";
+        """.render(java = true).signature("BAR").data as PropertySignature.Params
+        assertThat(stringConstantJ.constantValue).isNotNull()
+        assertThat(stringConstantJ.constantValue).isEqualTo("Hi")
+
         val stringConstantK = """
             public const val BAR: String = "Hi"
         """.render().signature("BAR").data as PropertySignature.Params
