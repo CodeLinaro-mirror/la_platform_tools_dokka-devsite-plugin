@@ -18,9 +18,19 @@ package com.google.devsite.renderer.impl.paths
 
 import org.jetbrains.dokka.base.resolvers.local.DokkaLocationProvider
 import org.jetbrains.dokka.links.DRI
+import org.jetbrains.dokka.model.DisplaySourceSet
+import java.util.concurrent.ConcurrentHashMap
 
 class DefaultExternalDokkaLocationProvider(
     private val dokkaLocationProvider: DokkaLocationProvider
 ) : ExternalDokkaLocationProvider {
-    override fun resolve(dri: DRI): String? = dokkaLocationProvider.resolve(dri, emptySet())
+    val memoizer = ConcurrentHashMap<DRI, String>()
+    /** ConcurrentHashMap cannot have nullable type parameters for some reason */
+    private fun String.nullifier(): String? = if (this == "null") null else this
+    @kotlin.jvm.JvmName("is private")
+    private fun String?.deNullifier(): String = this ?: "null"
+
+    override fun resolve(dri: DRI): String? = memoizer.getOrPut(dri) {
+        dokkaLocationProvider.resolve(dri, emptySet<DisplaySourceSet>()).deNullifier()
+    }.nullifier()
 }
