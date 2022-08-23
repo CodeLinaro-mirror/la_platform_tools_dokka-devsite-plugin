@@ -65,15 +65,15 @@ class DefaultInheritedSymbolsTest {
                     <table class="responsive" id="inhmethods">
                       <thead>
                         <tr>
-                          <th colspan="2"><h3>Inherited Methods</h3></th>
+                          <th colspan="100%"><h3>Inherited Methods</h3></th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody class="list">
                         <tr>
                           <td><devsite-expandable><span class="expand-control">From class aClass</span>
                             <div class="devsite-table-wrapper">
                               <table class="responsive">
-                                <tbody>
+                                <tbody class="list">
                                   <tr><noop/></tr>
                                   <tr><noop/></tr>
                                 </tbody>
