@@ -140,7 +140,7 @@ class DefaultPackageSummaryTest {
   <h2>Classes</h2>
   <div class="devsite-table-wrapper">
     <table class="responsive">
-      <tbody>
+      <tbody class="list">
         <tr><noop/></tr>
       </tbody>
     </table>
@@ -148,7 +148,7 @@ class DefaultPackageSummaryTest {
   <h2>Objects</h2>
   <div class="devsite-table-wrapper">
     <table class="responsive">
-      <tbody>
+      <tbody class="list">
         <tr><noop/></tr>
       </tbody>
     </table>
@@ -161,7 +161,7 @@ class DefaultPackageSummaryTest {
   <h2>Classes</h2>
   <div class="devsite-table-wrapper">
     <table class="responsive">
-      <tbody>
+      <tbody class="list">
         <tr><noop/></tr>
         <tr><noop/></tr>
       </tbody>

@@ -57,7 +57,7 @@ class DefaultSummaryListTest {
 <div>
   <div class="devsite-table-wrapper">
     <table class="responsive">
-      <tbody>
+      <tbody class="list">
         <tr><noop/></tr>
         <tr><noop/></tr>
       </tbody>
@@ -86,7 +86,7 @@ class DefaultSummaryListTest {
       <thead>
         <tr><noop/></tr>
       </thead>
-      <tbody>
+      <tbody class="list">
         <tr><noop/></tr>
       </tbody>
     </table>

@@ -35,7 +35,7 @@ class DefaultTableTitleTest {
         assertThat(output).isEqualTo(
             """
 <tr>
-  <th colspan="2">Title</th>
+  <th colspan="100%">Title</th>
 </tr>
             """.trim()
         )
@@ -53,7 +53,7 @@ class DefaultTableTitleTest {
         assertThat(output).isEqualTo(
             """
 <tr>
-  <th colspan="2"><h3>Title</h3></th>
+  <th colspan="100%"><h3>Title</h3></th>
 </tr>
             """.trim()
         )

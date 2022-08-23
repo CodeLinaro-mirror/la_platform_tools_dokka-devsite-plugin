@@ -44,7 +44,7 @@ internal data class DefaultInheritedSymbols(
                         }
                     }
 
-                    tbody {
+                    tbody(classes = "list") {
                         for (item in data.inheritedSymbolSummaries) {
                             tr {
                                 td {

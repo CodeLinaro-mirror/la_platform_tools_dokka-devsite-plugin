@@ -27,7 +27,7 @@ internal data class DefaultTableTitle(
 ) : TableTitle {
     override fun render(into: TR) = into.run {
         th {
-            attributes["colspan"] = "2"
+            attributes["colspan"] = "100%"
 
             if (data.big) {
                 // TODO(b/164125463): th isn't flow content :(

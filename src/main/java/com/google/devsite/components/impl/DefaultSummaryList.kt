@@ -42,7 +42,7 @@ internal data class DefaultSummaryList<T : SummaryItem>(
                     }
                 }
 
-                tbody {
+                tbody(classes = "list") {
                     for (item in data.items) {
                         tr {
                             item.render(this)
