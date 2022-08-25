@@ -38,11 +38,12 @@ abstract class IntegrationTestBase : BaseAbstractTest(
     logger = TestLogger(DokkaConsoleLogger(LoggingLevel.WARN))
 ) {
     fun makeConfiguration(
-        baseDir: String,
-        sourceDir: String,
-        sampleLocations: List<String> = emptyList(),
-        includeFiles: List<String> = emptyList()
+        sources: List<File>,
+        samplesBaseDir: String,
+        samplesLocations: List<String>,
+        includeFiles: List<String>
     ): DokkaConfigurationImpl {
+        sources.forEach { check(it.isDirectory) { "$it does not exist or is not a directory" } }
         val externalLinks = mapOf(
             "coroutines" to "https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core",
             "android" to "https://developer.android.com/reference",
@@ -58,13 +59,11 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         return dokkaConfiguration {
             sourceSets {
                 sourceSet {
-                    val sources = File(sourceDir).absoluteFile
-                    check(sources.isDirectory) { "$sources does not exist or is not a directory" }
-                    sourceRoots = listOf(sources.absolutePath)
+                    sourceRoots = sources.map { it.absolutePath }
                     classpath = classpathFromFile("testData/classpath.txt")
                     externalDocumentationLinks = externalLinks
-                    samples = sampleLocations.map { "$baseDir/$it" }
-                    includes = includeFiles.map { File(sources, it).absolutePath }
+                    samples = samplesLocations.map { "$samplesBaseDir/$it" }
+                    includes = includeFiles.map { File(sources.first(), it).absolutePath }
                     documentedVisibilities = setOf(
                         DokkaConfiguration.Visibility.PUBLIC,
                         DokkaConfiguration.Visibility.PROTECTED
@@ -75,37 +74,52 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         }
     }
 
-    fun setEnvVarsForTests(sourceDir: String, versionedTenant: String? = null) {
+    fun makeConfiguration(
+        samplesBaseDir: String,
+        sourceDir: String,
+        sampleLocations: List<String> = emptyList(),
+        includeFiles: List<String> = emptyList()
+    ): DokkaConfigurationImpl {
+        val sources = File(sourceDir).absoluteFile
+        return makeConfiguration(listOf(sources), samplesBaseDir, sampleLocations, includeFiles)
+    }
+
+    fun setEnvVarsForTests(inferredTenant: String, versionedTenant: String? = null) {
         if (versionedTenant != null) {
             System.setProperty("versionedTenant", versionedTenant)
             System.clearProperty("tenant")
         } else {
-            val inferredTenant = File(sourceDir).listFiles().orEmpty()
-                .singleOrNull { it.isDirectory }?.name ?: "dokkatest"
             System.setProperty("tenant", inferredTenant)
             System.clearProperty("versionedTenant")
         }
     }
 
     fun executionTest(
-        path: String,
+        vararg paths: String,
         sampleLocations: List<String> = emptyList(),
         includeFiles: List<String> = emptyList(),
         versionedTenant: String? = null
     ) {
-        val baseDir = "testData/$path"
-        val sourceDir = baseDir
+        val samplesBaseDir = null // TODO
 
-        val configuration = makeConfiguration(baseDir, sourceDir, sampleLocations, includeFiles)
+        val configuration = makeConfiguration(
+            paths.map { File(it).absoluteFile },
+            paths.reduce { a: String, b: String ->
+                a.asIterable().intersect(b.asIterable()).joinToString()
+            },
+            sampleLocations,
+            includeFiles
+        )
 
-        setEnvVarsForTests(sourceDir, versionedTenant)
+        val inferredTenant = "androidx"
+        setEnvVarsForTests(inferredTenant, versionedTenant)
 
         val writerPlugin = TestOutputWriterPlugin()
 
         testFromData(
             configuration,
             pluginOverrides = listOf(writerPlugin),
-        ) { Unit }
+        ) { }
     }
 
     /**
@@ -120,12 +134,15 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         includeFiles: List<String> = emptyList(),
         versionedTenant: String? = null
     ) {
-        val baseDir = "testData/$path"
-        val sourceDir = "$baseDir/source"
+        val samplesBaseDir = "testData/$path"
+        val outputBaseDir = "testData/$path/docs"
+        val sourceDir = "testData/$path/source"
 
-        val configuration = makeConfiguration(baseDir, sourceDir, sampleLocs, includeFiles)
+        val configuration = makeConfiguration(samplesBaseDir, sourceDir, sampleLocs, includeFiles)
 
-        setEnvVarsForTests(sourceDir, versionedTenant)
+        val inferredTenant = File(sourceDir).listFiles().orEmpty()
+            .singleOrNull { it.isDirectory }?.name ?: "dokkatest"
+        setEnvVarsForTests(inferredTenant, versionedTenant)
 
         val writerPlugin = TestOutputWriterPlugin()
 
@@ -134,7 +151,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             pluginOverrides = listOf(writerPlugin)
         ) {
             renderingStage = { _: RootPageNode, _: DokkaContext ->
-                verifyOutput(writerPlugin, "$baseDir/docs")
+                verifyOutput(writerPlugin, outputBaseDir)
             }
         }
     }
