@@ -90,4 +90,32 @@ class LibraryMetadataTest {
         assertThat(libraryMetadata.releaseNotesUrl).isEqualTo("https://d.android.com/a")
         assertThat(libraryMetadata.sourceDir).isEqualTo("a/a-runtime")
     }
+
+    @Test
+    fun `getMetadataFromFile with valid json file with extra field`() {
+        val json = """
+[
+  {
+    "groupId": "androidx.a",
+    "artifactId": "a-runtime",
+    "releaseNotesUrl": "https://d.android.com/a",
+    "sourceDir": "a/a-runtime",
+    "extrafield": "foo"
+  },
+  {
+    "groupId": "androidx.b",
+    "artifactId": "b-runtime",
+    "releaseNotesUrl": "https://d.android.com/b",
+    "sourceDir": "b/b-runtime",
+    "extrafield": "bar"
+  }
+]
+        """.trimIndent()
+
+        val file = folder.newFile("LibraryMetadata.json")
+        file.writeText(json)
+
+        // This should not throw an exception
+        LibraryMetadata.getMetadataFromFile(file.toString())
+    }
 }
