@@ -829,11 +829,14 @@ internal class ClasslikeDocumentableConverter(
     /**
      * Iterate through the library metadata list to find a [LibraryMetadata] that matches the
      * path for the current library being processed.  Otherwise, return null.
+     *
+     * TODO: Re-implement logic as part of b/243175565.
+     * This currently returns null as part of the migration away `sourceDir`.
+     *
      */
+    @Suppress("UNUSED_PARAMETER")
     private fun findMatchingJsonLibraryMetadata(path: String): LibraryMetadata? {
-        return docsHolder.libraryMetadata.firstOrNull {
-            path.endsWith(it.sourceDir)
-        }
+        return null
     }
 
     /**

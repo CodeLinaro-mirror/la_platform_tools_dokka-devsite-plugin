@@ -42,13 +42,6 @@ data class LibraryMetadata(
 
     @JsonProperty("releaseNotesUrl")
     var releaseNotesUrl: String,
-
-    /**
-     * This is only used for matching a [org.jetbrains.dokka.model.DClasslike] to a LibraryMetadata
-     * entry and is not shown in the UI.
-     */
-    @JsonProperty("sourceDir")
-    var sourceDir: String,
 ) {
     internal val link: Link
         get() = DefaultLink(Link.Params(name = "$groupId:$artifactId", url = releaseNotesUrl))

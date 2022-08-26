@@ -66,14 +66,12 @@ class LibraryMetadataTest {
   {
     "groupId": "androidx.a",
     "artifactId": "a-runtime",
-    "releaseNotesUrl": "https://d.android.com/a",
-    "sourceDir": "a/a-runtime"
+    "releaseNotesUrl": "https://d.android.com/a"
   },
   {
     "groupId": "androidx.b",
     "artifactId": "b-runtime",
-    "releaseNotesUrl": "https://d.android.com/b",
-    "sourceDir": "b/b-runtime"
+    "releaseNotesUrl": "https://d.android.com/b"
   }
 ]
         """.trimIndent()
@@ -88,6 +86,5 @@ class LibraryMetadataTest {
         assertThat(libraryMetadata.groupId).isEqualTo("androidx.a")
         assertThat(libraryMetadata.artifactId).isEqualTo("a-runtime")
         assertThat(libraryMetadata.releaseNotesUrl).isEqualTo("https://d.android.com/a")
-        assertThat(libraryMetadata.sourceDir).isEqualTo("a/a-runtime")
     }
 }
