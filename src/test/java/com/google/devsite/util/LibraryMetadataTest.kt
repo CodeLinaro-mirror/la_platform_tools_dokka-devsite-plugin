@@ -66,12 +66,20 @@ class LibraryMetadataTest {
   {
     "groupId": "androidx.a",
     "artifactId": "a-runtime",
-    "releaseNotesUrl": "https://d.android.com/a"
+    "releaseNotesUrl": "https://d.android.com/a",
+    "jarContents": [
+      "META-INF/",
+      "META-INF/MANIFEST.MF",
+      "androidx/",
+      "androidx/library/",
+      "androidx/library/Foo.java",
+      "androidx/library/Bar.kt"]
   },
   {
     "groupId": "androidx.b",
     "artifactId": "b-runtime",
-    "releaseNotesUrl": "https://d.android.com/b"
+    "releaseNotesUrl": "https://d.android.com/b",
+    "jarContents": ["a/b/c.kt"]
   }
 ]
         """.trimIndent()
@@ -86,6 +94,7 @@ class LibraryMetadataTest {
         assertThat(libraryMetadata.groupId).isEqualTo("androidx.a")
         assertThat(libraryMetadata.artifactId).isEqualTo("a-runtime")
         assertThat(libraryMetadata.releaseNotesUrl).isEqualTo("https://d.android.com/a")
+        assertThat(libraryMetadata.jarContents.size).isEqualTo(6)
     }
 
     @Test
@@ -97,6 +106,7 @@ class LibraryMetadataTest {
     "artifactId": "a-runtime",
     "releaseNotesUrl": "https://d.android.com/a",
     "sourceDir": "a/a-runtime",
+    "jarContents": ["a/b/c.kt"],
     "extrafield": "foo"
   },
   {
@@ -104,6 +114,7 @@ class LibraryMetadataTest {
     "artifactId": "b-runtime",
     "releaseNotesUrl": "https://d.android.com/b",
     "sourceDir": "b/b-runtime",
+    "jarContents": ["a/b/c.kt"],
     "extrafield": "bar"
   }
 ]

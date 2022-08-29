@@ -44,6 +44,9 @@ data class LibraryMetadata(
 
     @JsonProperty("releaseNotesUrl")
     var releaseNotesUrl: String,
+
+    @JsonProperty("jarContents")
+    var jarContents: List<String>,
 ) {
     internal val link: Link
         get() = DefaultLink(Link.Params(name = "$groupId:$artifactId", url = releaseNotesUrl))

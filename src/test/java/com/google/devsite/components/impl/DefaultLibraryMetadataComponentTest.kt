@@ -28,7 +28,8 @@ internal class DefaultLibraryMetadataComponentTest {
     private val libraryMetadata = LibraryMetadata(
         groupId = "testGroup",
         artifactId = "testArtifactId",
-        releaseNotesUrl = "https://d.android.com"
+        releaseNotesUrl = "https://d.android.com",
+        jarContents = emptyList()
     )
 
     // TODO: update and re-enable test when implementing b/243175565
