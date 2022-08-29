@@ -16,6 +16,7 @@
 
 package com.google.devsite.util
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.JacksonException
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -32,6 +33,7 @@ import java.io.IOException
  * Each field has a defined [JsonProperty] to prevent bugs in case a field is renamed (which could
  * result in the Json parser not finding the new field name).
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class LibraryMetadata(
 
     @JsonProperty("groupId")
