@@ -131,7 +131,7 @@ class BasicTest : IntegrationTestBase() {
     }
 
     @Test // A non-hidden package is necessary because of an upstream explicit !! after filtering
-    fun `Validate package-leve @hide`() {
+    fun `Validate package-level @hide`() {
         validateDirectory("hidden")
     }
 
@@ -168,5 +168,10 @@ class BasicTest : IntegrationTestBase() {
     @Test
     fun `Validate companion-static interop`() {
         validateDirectory("companionStatic")
+    }
+
+    @Test
+    fun `Validate hidden parents`() {
+        validateDirectory("hiddenParents")
     }
 }

@@ -18,6 +18,7 @@ package com.google.devsite
 
 import com.google.devsite.renderer.converters.annotations
 import com.google.devsite.renderer.converters.asString
+import com.google.devsite.renderer.converters.explodedChildren
 import com.google.devsite.renderer.converters.isDeprecated
 import org.jetbrains.dokka.base.transformers.documentables.SuppressedByConditionDocumentableFilterTransformer
 import org.jetbrains.dokka.links.DRI
@@ -59,7 +60,9 @@ import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 class PreMergeHiddenDocumentableFilter(dokkaContext: DokkaContext) :
     SuppressedByConditionDocumentableFilterTransformer(dokkaContext) {
     override fun shouldBeSuppressed(d: Documentable): Boolean {
-        return d !is DPackage && d.isHidden()
+        val hide = d !is DPackage && d.isHidden()
+        if (hide) addToHiddenSet(d)
+        return hide
     }
 }
 
@@ -69,7 +72,11 @@ class PreMergeHiddenDocumentableFilter(dokkaContext: DokkaContext) :
  */
 class PostMergePackageDocumentableFilter : DocumentableTransformer {
     override fun invoke(original: DModule, context: DokkaContext): DModule {
-        val filteredPackages = original.packages.filter { !it.isHidden() }
+        val filteredPackages = original.packages.filter {
+            val hide = it.isHidden()
+            if (hide) addToHiddenSet(it)
+            !hide
+        }
         return original.copy(packages = filteredPackages)
     }
 }
@@ -114,3 +121,12 @@ private val Documentable.annotations
         ?.get(Annotations)
 
 private val restrictToDri = DRI(packageName = "androidx.annotation", classNames = "RestrictTo")
+
+fun hasBeenHidden(dri: DRI): Boolean {
+    return hiddenDocumentables.contains(dri)
+}
+private fun addToHiddenSet(d: Documentable) {
+    (d.explodedChildren + d).forEach { hiddenDocumentables.add(it.dri) }
+}
+
+private val hiddenDocumentables = mutableSetOf<DRI>()

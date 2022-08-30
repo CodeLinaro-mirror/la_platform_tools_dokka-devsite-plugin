@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer.impl
 
+import com.google.devsite.hasBeenHidden
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
 import org.jetbrains.dokka.links.DRI
@@ -96,38 +97,43 @@ internal fun computeDocumentablesGraph(classGraph: ClassGraph): DocumentablesGra
 }
 
 /**
- * Updates the [classGraph] by traversing the supertype tree using [classlikes]. [leaf] will not
- * change, so it can be added to every parent's subclasses. The recursion occurs on [child].
+ * Updates the [classGraph] by traversing the supertype tree using [classlikes]. [initial] will not
+ * change, so it can be added to every parent's subclasses. The recursion occurs on [current].
  *
  * We must recursively traverse the hierarchy graph bottom up because Dokka only provides direct
  * parents as a DRI. We're assuming this will be performant because the JVM doesn't support multiple
  * inheritance, therefore yielding objects that tend to fan out top down, conversely fanning in
  * bottom up (what this method does).
  *
- * @param child the current classlike who's supertypes we will be traversing
- * @param classGraph the mutable type relation graph to be updated. [child] will be added to the set
- * direct subclasses for each of [child]'s supertypes. Similarly, [leaf] will be added to the set of
- * all subclasses for each of [child]'s supertypes. If [child] and [leaf] aren't the same (i.e. two
- * edges away from each other: A -> B -> C), we add [leaf] to the set of indirect subclasses for
- * each of [child]'s supertypes. Lastly, we add the type hierarchy path of [child] to the parents
- * of [leaf], ordered top-down.
+ * @param current the current classlike who's supertypes we will be traversing
+ * @param classGraph the mutable type relation graph to be updated. [highestVisibleSubtype] will be
+ * added to the set of direct subclasses for each of [current]'s supertypes. Similarly, [initial]
+ * will be added to the set of all subclasses for each of [current]'s supertypes. If
+ * [highestVisibleSubtype] and [initial] aren't the same (i.e. two edges away from each other:
+ * A -> B -> C), we add [initial] to the set of indirect subclasses for each of [current]'s
+ * supertypes. Lastly, we add the type hierarchy path of [current] to the parents of [initial],
+ * ordered top-down.
  * @param classlikes reverse lookup map to get supertypes from DRIs
- * @param leaf constant classlike, storing the starting [child]
+ * @param initial constant classlike, storing the starting [current]. This classlike should be one
+ * that appears in the docs (has an entry in [classGraph]).
+ * @param highestVisibleSubtype the highest-up classlike in the inheritance chain from [current] to
+ * [initial] which isn't hidden from the docs
  */
 private fun recursivelyUpdateClasslikeSupertypesTree(
-    child: DClasslike,
+    current: DClasslike,
     classGraph: Map<DRI, MutableClassNode>,
     classlikes: Map<DRI, DClasslike?>,
-    leaf: DClasslike = child
+    initial: DClasslike = current,
+    highestVisibleSubtype: DClasslike = current
 ) {
-    if (child !is WithSupertypes || child.supertypes.isEmpty()) return
+    if (current !is WithSupertypes || current.supertypes.isEmpty()) return
 
-    val supertypes = child.supertypes.values.single()
+    val supertypes = current.supertypes.values.single()
     for ((type, kind) in supertypes) {
         classGraph[type.dri]?.let { (_, all, direct, indirect) ->
-            all.add(leaf.dri)
-            direct.add(child.dri)
-            if (child !== leaf) indirect.add(leaf.dri)
+            all.add(initial.dri)
+            direct.add(highestVisibleSubtype.dri)
+            if (highestVisibleSubtype !== initial) indirect.add(initial.dri)
         }
 
         // If a classlike cannot be found in this package, the map will fall back to trying to look
@@ -135,20 +141,32 @@ private fun recursivelyUpdateClasslikeSupertypesTree(
         // will be null.
         val supertype = classlikes.getValue(type.dri)
         if (supertype != null) {
-            recursivelyUpdateClasslikeSupertypesTree(supertype, classGraph, classlikes, leaf)
+            // Hidden classes should not be included in the class graph.
+            // Only public and protected classes should be included in the class graph.
+            val visibility = supertype.visibility.values.single().name
+            val hidden = hasBeenHidden(type.dri) ||
+                (visibility != "public" && visibility != "protected")
+
+            val newHighestVisible = if (hidden) highestVisibleSubtype else supertype
+            recursivelyUpdateClasslikeSupertypesTree(
+                supertype, classGraph, classlikes, initial, newHighestVisible
+            )
+
+            // Only add this supertype to leaf's node if this is visible in docs.
+            if (hidden) continue
 
             if (kind == JavaClassKindTypes.CLASS || kind == KotlinClassKindTypes.CLASS) {
-                val leafValue = classGraph.getValue(leaf.dri)
+                val leafValue = classGraph.getValue(initial.dri)
                 leafValue.superClasses.add(supertype.dri)
-                if (leaf == child) {
+                if (initial == highestVisibleSubtype) {
                     leafValue.directSuperClasses.add(supertype.dri)
                 }
             }
 
             if (kind == JavaClassKindTypes.INTERFACE || kind == KotlinClassKindTypes.INTERFACE) {
-                val leafValue = classGraph.getValue(leaf.dri)
+                val leafValue = classGraph.getValue(initial.dri)
                 leafValue.interfaces.add(supertype.dri)
-                if (leaf == child) {
+                if (initial == highestVisibleSubtype) {
                     leafValue.directInterfaces.add(supertype.dri)
                 }
             }

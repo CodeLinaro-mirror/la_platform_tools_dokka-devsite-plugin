@@ -92,6 +92,7 @@ val testData by sourceSets.creating {
         // "testData/compose/source",           // this project is multiplatform
         "testData/getterSetterModifier/source/",
         "testData/hidden/source",
+        "testData/hiddenParents/source",
         "testData/inheritance/source",
         "testData/innerClasses/source",
         "testData/linking/source",
