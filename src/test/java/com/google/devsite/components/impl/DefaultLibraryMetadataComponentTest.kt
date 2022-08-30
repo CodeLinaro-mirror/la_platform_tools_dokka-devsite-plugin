@@ -20,7 +20,6 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.util.LibraryMetadata
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
-import org.junit.Ignore
 import org.junit.Test
 
 internal class DefaultLibraryMetadataComponentTest {
@@ -29,11 +28,9 @@ internal class DefaultLibraryMetadataComponentTest {
         groupId = "testGroup",
         artifactId = "testArtifactId",
         releaseNotesUrl = "https://d.android.com",
-        jarContents = emptyList()
+        jarContents = emptyList() // TODO: remove as part of b/244366769
     )
 
-    // TODO: update and re-enable test when implementing b/243175565
-    @Ignore("b/243175565")
     @Test
     fun `Library metadata renders correctly`() {
         val component = DefaultLibraryMetadataComponent(libraryMetadata)

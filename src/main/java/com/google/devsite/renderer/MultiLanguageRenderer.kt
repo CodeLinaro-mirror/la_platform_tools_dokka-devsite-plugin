@@ -114,6 +114,26 @@ internal class MultiLanguageRenderer(
             val libraryMetadataArray = LibraryMetadata.getMetadataFromFile(
                 libraryMetadataFilename
             )
+
+            // Generate mapping of each file to its respective artifact ID and other metadata
+            val fileMetadataMap = hashMapOf<String, LibraryMetadata>()
+            libraryMetadataArray.forEach { library ->
+                val fileMetadata = LibraryMetadata(
+                    groupId = library.groupId,
+                    artifactId = library.artifactId,
+                    releaseNotesUrl = library.releaseNotesUrl,
+                    jarContents = emptyList() // TODO: remove as part of b/244366769
+                )
+
+                library.jarContents.forEach { file ->
+
+                    // Only process Kotlin and Java files
+                    if (file.endsWith(".kt") || file.endsWith("java")) {
+                        fileMetadataMap[file] = fileMetadata
+                    }
+                }
+            }
+
             val jHolder = DocumentablesHolder(
                 module = module,
                 scope = this,
@@ -121,7 +141,7 @@ internal class MultiLanguageRenderer(
                 externalDocumentablesProvider = externalDocumentablesProvider,
                 excludedPackages = excludedPackagesForJava,
                 showLibraryMetadata = showLibraryMetadata,
-                libraryMetadata = libraryMetadataArray,
+                fileMetadataMap = fileMetadataMap,
             )
             val jClassGraph = jHolder.classGraph()
             val jDocumentablesGraph = jHolder.documentablesGraph()
@@ -132,7 +152,7 @@ internal class MultiLanguageRenderer(
                 externalDocumentablesProvider = externalDocumentablesProvider,
                 excludedPackages = excludedPackagesForKotlin,
                 showLibraryMetadata = showLibraryMetadata,
-                libraryMetadata = libraryMetadataArray,
+                fileMetadataMap = fileMetadataMap,
             )
             val kClassGraph = kHolder.classGraph()
             val kDocumentablesGraph = kHolder.documentablesGraph()

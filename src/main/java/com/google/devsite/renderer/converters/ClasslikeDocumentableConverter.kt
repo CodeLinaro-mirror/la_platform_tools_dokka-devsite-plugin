@@ -827,23 +827,18 @@ internal class ClasslikeDocumentableConverter(
     }
 
     /**
-     * Iterate through the library metadata list to find a [LibraryMetadata] that matches the
-     * path for the current library being processed.  Otherwise, return null.
-     *
-     * TODO: Re-implement logic as part of b/243175565.
-     * This currently returns null as part of the migration away `sourceDir`.
-     *
+     * Iterate through the library metadata Map to find a [LibraryMetadata] that matches the
+     * current class being processed.  Otherwise, return null.
      */
-    @Suppress("UNUSED_PARAMETER")
     private fun findMatchingJsonLibraryMetadata(path: String): LibraryMetadata? {
-        return null
+        return docsHolder.fileMetadataMap[path]
     }
 
     /**
-     * Get the source file path for a [DClasslike] without the filename.
+     * Get the source file path for a [DClasslike].
      *
-     * For example - this would return "androidx/paging/compose" if the path was
-     * "androidx/paging/compose/LazyPagingItems.kt".
+     * For example - this would return "androidx/paging/compose/LazyPagingItems.kt" if the path was
+     * "/location/to/root/of/source/files/androidx/paging/compose/LazyPagingItems.kt".
      *
      * Returns null if there is an error finding the path.
      */
@@ -862,7 +857,9 @@ internal class ClasslikeDocumentableConverter(
             return null
         }
 
-        return sources.entries.first().value.path.substringBeforeLast('/')
+        val prefix = "androidx/"
+        val pathAfterPrefix = sources.entries.first().value.path.substringAfter(prefix)
+        return prefix + pathAfterPrefix
     }
 
     /** Converts the classlikes to link components for use in the related symbols component. */

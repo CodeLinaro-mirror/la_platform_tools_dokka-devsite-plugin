@@ -71,7 +71,7 @@ internal class DocumentablesHolder(
     private val externalDocumentablesProvider: ExternalDocumentablesProvider? = null,
     private val excludedPackages: Set<Regex> = emptySet(),
     val showLibraryMetadata: Boolean = false,
-    val libraryMetadata: List<LibraryMetadata> = emptyList(),
+    val fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
 ) {
     private val packages = scope.async { computePackages(module) }
 
