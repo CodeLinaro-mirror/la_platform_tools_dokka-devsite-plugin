@@ -26,6 +26,7 @@ import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
 import com.google.devsite.renderer.impl.paths.DacKotlinVersionedDocsFilePathProvider
 import com.google.devsite.renderer.impl.paths.DefaultExternalDokkaLocationProvider
 import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
+import com.google.devsite.util.JsonLibraryMetadata
 import com.google.devsite.util.LibraryMetadata
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -111,7 +112,7 @@ internal class MultiLanguageRenderer(
         )
 
         runBlocking(Dispatchers.Default) {
-            val libraryMetadataArray = LibraryMetadata.getMetadataFromFile(
+            val libraryMetadataArray = JsonLibraryMetadata.getMetadataFromFile(
                 libraryMetadataFilename
             )
 
@@ -121,8 +122,7 @@ internal class MultiLanguageRenderer(
                 val fileMetadata = LibraryMetadata(
                     groupId = library.groupId,
                     artifactId = library.artifactId,
-                    releaseNotesUrl = library.releaseNotesUrl,
-                    jarContents = emptyList() // TODO: remove as part of b/244366769
+                    releaseNotesUrl = library.releaseNotesUrl
                 )
 
                 library.jarContents.forEach { file ->

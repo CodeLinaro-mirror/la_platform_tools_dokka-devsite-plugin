@@ -27,8 +27,7 @@ internal class DefaultLibraryMetadataComponentTest {
     private val libraryMetadata = LibraryMetadata(
         groupId = "testGroup",
         artifactId = "testArtifactId",
-        releaseNotesUrl = "https://d.android.com",
-        jarContents = emptyList() // TODO: remove as part of b/244366769
+        releaseNotesUrl = "https://d.android.com"
     )
 
     @Test
