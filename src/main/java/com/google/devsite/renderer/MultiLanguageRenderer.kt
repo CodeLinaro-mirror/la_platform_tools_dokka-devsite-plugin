@@ -115,25 +115,7 @@ internal class MultiLanguageRenderer(
             val libraryMetadataArray = JsonLibraryMetadata.getMetadataFromFile(
                 libraryMetadataFilename
             )
-
-            // Generate mapping of each file to its respective artifact ID and other metadata
-            val fileMetadataMap = hashMapOf<String, LibraryMetadata>()
-            libraryMetadataArray.forEach { library ->
-                val fileMetadata = LibraryMetadata(
-                    groupId = library.groupId,
-                    artifactId = library.artifactId,
-                    releaseNotesUrl = library.releaseNotesUrl
-                )
-
-                library.jarContents.forEach { file ->
-
-                    // Only process Kotlin and Java files
-                    if (file.endsWith(".kt") || file.endsWith("java")) {
-                        fileMetadataMap[file] = fileMetadata
-                    }
-                }
-            }
-
+            val fileMetadataMap = LibraryMetadata.convertJsonMetadataToFileMap(libraryMetadataArray)
             val jHolder = DocumentablesHolder(
                 module = module,
                 scope = this,

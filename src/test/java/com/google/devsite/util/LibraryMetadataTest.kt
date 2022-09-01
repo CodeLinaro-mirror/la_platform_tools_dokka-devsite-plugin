@@ -32,4 +32,61 @@ class LibraryMetadataTest {
         assertThat(metadata.link.data.name).isEqualTo("androidx.a:b")
         assertThat(metadata.link.data.url).isEqualTo("https://d.android.com/release")
     }
+
+    @Test
+    fun `convertJsonMetadataToFileMap properly parses JSON library metadata`() {
+        val jsonMetadata1 = JsonLibraryMetadata(
+            groupId = "androidx.a",
+            artifactId = "foo",
+            releaseNotesUrl = "https://d.android.com/release/a",
+            jarContents = listOf(
+                "androidx/a/a.kt",
+                "androidx/a/b.java"
+            )
+        )
+        val jsonMetadata2 = JsonLibraryMetadata(
+            groupId = "androidx.b",
+            artifactId = "bar",
+            releaseNotesUrl = "https://d.android.com/release/b",
+            jarContents = listOf(
+                "androidx/b/a.kt",
+                "androidx/b/b.java"
+            )
+        )
+        val mapping = LibraryMetadata.convertJsonMetadataToFileMap(
+            listOf(jsonMetadata1, jsonMetadata2)
+        )
+
+        val fileMetadataA = mapping["androidx/a/a.kt"]!!
+        assertThat(fileMetadataA.groupId).isEqualTo("androidx.a")
+        assertThat(fileMetadataA.artifactId).isEqualTo("foo")
+
+        val fileMetadataB = mapping["androidx/b/b.java"]!!
+        assertThat(fileMetadataB.groupId).isEqualTo("androidx.b")
+        assertThat(fileMetadataB.artifactId).isEqualTo("bar")
+    }
+
+    @Test
+    fun `convertJsonMetadataToFileMap should only process Kotlin and Java files`() {
+        val jsonMetadata = JsonLibraryMetadata(
+            groupId = "androidx.a",
+            artifactId = "b",
+            releaseNotesUrl = "https://d.android.com/release",
+            jarContents = listOf(
+                "META-INF",
+                "foo.bar",
+                "androidx/library/",
+                "androidx/library/a.kt",
+                "androidx/library/b.java"
+            )
+        )
+        val mapping = LibraryMetadata.convertJsonMetadataToFileMap(listOf(jsonMetadata))
+
+        assertThat(mapping["androidx/library/a.kt"]).isNotNull()
+        assertThat(mapping["androidx/library/b.java"]).isNotNull()
+
+        assertThat(mapping["META-INF"]).isNull()
+        assertThat(mapping["foo.bar"]).isNull()
+        assertThat(mapping["androidx/library/"]).isNull()
+    }
 }
