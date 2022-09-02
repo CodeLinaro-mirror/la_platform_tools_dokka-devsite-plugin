@@ -816,7 +816,7 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun getLibraryMetadata(): LibraryMetadataComponent? {
-        val path = getSourceFilePathWithoutFilename(classlike) ?: return null
+        val path = getSourceFilePath(classlike) ?: return null
         val jsonLibraryMetadata = findMatchingJsonLibraryMetadata(path)
 
         return if (jsonLibraryMetadata == null) {
@@ -835,14 +835,14 @@ internal class ClasslikeDocumentableConverter(
     }
 
     /**
-     * Get the source file path for a [DClasslike].
+     * Get the source file path for a [DClasslike] relative to the root of the source directory.
      *
      * For example - this would return "androidx/paging/compose/LazyPagingItems.kt" if the path was
      * "/location/to/root/of/source/files/androidx/paging/compose/LazyPagingItems.kt".
      *
      * Returns null if there is an error finding the path.
      */
-    private fun getSourceFilePathWithoutFilename(classlike: DClasslike): String? {
+    private fun getSourceFilePath(classlike: DClasslike): String? {
         val logger = docsHolder.logger
         val sources = classlike.sources
         if (sources.isEmpty()) {
@@ -857,9 +857,10 @@ internal class ClasslikeDocumentableConverter(
             return null
         }
 
-        val prefix = "androidx/"
-        val pathAfterPrefix = sources.entries.first().value.path.substringAfter(prefix)
-        return prefix + pathAfterPrefix
+        val sourceEntry = sources.entries.first()
+        val sourceRoot = sourceEntry.key.sourceRoots.first().toString()
+        val filePath = sourceEntry.value.path.substringAfter(sourceRoot)
+        return filePath.removePrefix("/")
     }
 
     /** Converts the classlikes to link components for use in the related symbols component. */
