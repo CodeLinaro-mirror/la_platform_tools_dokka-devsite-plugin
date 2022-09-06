@@ -170,7 +170,7 @@ internal data class DefaultDescriptionComponent(
 
     // TODO: make this work for non-english docstrings
     private val periodSpaceCapital = """\.\s+[A-Z]""".toRegex()
-    private val periodSpaceNonLowercase = """\.\s+[0-9A-Z{<`@\"(\\\[]""".toRegex()
+    private val periodSpaceNonLowercase = """\.\s+[0-9A-Z{<`@"(\\\[]""".toRegex()
     private val doesntEnd = listOf("e.g.", "i.e.", "viz.")
 
     /**
@@ -219,7 +219,6 @@ internal data class DefaultDescriptionComponent(
      * @Returns whether this string contains a sentence end-and-start-a-new at the given index.
      * Uses similar criteria to the above function.
      */
-    @OptIn(ExperimentalStdlibApi::class)
     private fun String.containsSentenceBreakAt(index: Int): Boolean {
         if (periodSpaceCapital.matchesAt(this, index)) return true
         if (!periodSpaceNonLowercase.matchesAt(this, index)) return false
@@ -351,7 +350,7 @@ internal data class DefaultDescriptionComponent(
                     unsafe { +createHTML().p { renderTags(tag.children, state) } }
                 }
                 is Dl -> renderTags(listOf(tag), state)
-                else -> error("No other tags allowed: ${tag.javaClass.simpleName}.")
+                else -> error("Invalid tag inside of DescriptionList: ${tag.javaClass.simpleName}.")
             }
         }
     }
@@ -366,7 +365,7 @@ internal data class DefaultDescriptionComponent(
                 is Tr -> tr { renderTableRow(tag.children, isHeader = false, state) }
                 is Caption -> caption { renderTags(tag.children, state) }
                 else -> error(
-                    "No other tags allowed: ${tag.javaClass.simpleName}. " +
+                    "Invalid tag inside of Table: ${tag.javaClass.simpleName}. " +
                         "Context: ${tags.text()}."
                 )
             }
@@ -378,7 +377,7 @@ internal data class DefaultDescriptionComponent(
             when (tag) {
                 is Tr -> tr { renderTableRow(tag.children, isHeader = true, state) }
                 else -> error(
-                    "No other tags allowed: ${tag.javaClass.simpleName}. " +
+                    "Invalid tag inside of TableHeader: ${tag.javaClass.simpleName}. " +
                         "Context: ${tags.text()}."
                 )
             }
@@ -390,7 +389,7 @@ internal data class DefaultDescriptionComponent(
             when (tag) {
                 is Tr -> tr { renderTableRow(tag.children, isHeader = false, state) }
                 else -> error(
-                    "No other tags allowed: ${tag.javaClass.simpleName}. " +
+                    "Invalid tag inside of TableBody: ${tag.javaClass.simpleName}. " +
                         "Context: ${tags.text()}."
                 )
             }
@@ -402,7 +401,7 @@ internal data class DefaultDescriptionComponent(
             when (tag) {
                 is Tr -> tr { renderTableRow(tag.children, isHeader = false, state) }
                 else -> error(
-                    "No other tags allowed: ${tag.javaClass.simpleName}. " +
+                    "Invalid tag inside of TableFooter: ${tag.javaClass.simpleName}. " +
                         "Context: ${tags.text()}."
                 )
             }
@@ -424,7 +423,7 @@ internal data class DefaultDescriptionComponent(
                 // TODO(b/193096057): determine root cause
                 is Text -> th { +tag.body }
                 else -> error(
-                    "No other tags allowed: ${tag.javaClass.simpleName}. " +
+                    "Invalid tag inside of TableRow: ${tag.javaClass.simpleName}. " +
                         "Context: ${tags.text()}."
                 )
             }
@@ -437,7 +436,7 @@ internal data class DefaultDescriptionComponent(
                 is Li -> li { renderTags(tag.children, state) }
                 is Ol, is Ul -> renderTags(listOf(tag), state)
                 else -> error(
-                    "No other tags allowed: ${tag.javaClass.simpleName}. " +
+                    "Invalid tag inside of OrderedList: ${tag.javaClass.simpleName}. " +
                         "Context: ${tags.text()}."
                 )
             }
@@ -450,7 +449,7 @@ internal data class DefaultDescriptionComponent(
                 is Li -> li { renderTags(tag.children, state) }
                 is Ol, is Ul -> renderTags(listOf(tag), state)
                 else -> error(
-                    "No other tags allowed: ${tag.javaClass.simpleName}. " +
+                    "Invalid tag inside of UnorderedList: ${tag.javaClass.simpleName}. " +
                         "Context: ${tags.text()}."
                 )
             }
@@ -464,14 +463,14 @@ internal data class DefaultDescriptionComponent(
     private class State(var terminate: Boolean = false)
 
     /** Function for printing context */
-    fun List<DocTag>.text(separator: String = ", "): String = map {
+    fun List<DocTag>.text(separator: String = ", "): String = joinToString(separator) {
         when (it) {
             is DocumentationLink -> it.dri.toString() + it.children.text()
             is CustomDocTag -> it.name + it.children.text()
             is Text -> it.body + it.children.text()
             else -> it.children.text()
         }
-    }.joinToString(separator)
+    }
 
     override fun toString() = if (data.summary) "summary of " else "" +
         if (data.deprecation != null) data.deprecation + " " else "" +
