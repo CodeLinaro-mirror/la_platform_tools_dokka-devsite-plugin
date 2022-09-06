@@ -1,0 +1,334 @@
+<html devsite="true">
+  <head>
+    <title>AbstractSavedStateViewModelFactory</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>AbstractSavedStateViewModelFactory</h1>
+    <p>
+      <pre>public abstract class AbstractSavedStateViewModelFactory extends <a href="/reference/androidx/lifecycle/ViewModelProvider.OnRequeryFactory.html">ViewModelProvider.OnRequeryFactory</a> implements <a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a></pre>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="jd-inheritance-table">
+        <tbody>
+          <tr>
+            <td colspan="3"><a href="https://developer.android.com/reference/java/lang/Object.html">java.lang.Object</a></td>
+          </tr>
+          <tr>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="2"><a href="/reference/androidx/lifecycle/ViewModelProvider.OnRequeryFactory.html">androidx.lifecycle.ViewModelProvider.OnRequeryFactory</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="1"><a href="/reference/androidx/lifecycle/AbstractSavedStateViewModelFactory.html">androidx.lifecycle.AbstractSavedStateViewModelFactory</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <p>Skeleton of androidx.lifecycle.ViewModelProvider.KeyedFactory that creates <code><a href="/reference/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a></code> for every requested <code><a href="/reference/androidx/lifecycle/ViewModel.html">androidx.lifecycle.ViewModel</a></code>. The subclasses implement <code><a href="/reference/androidx/lifecycle/AbstractSavedStateViewModelFactory.html#create(java.lang.String,java.lang.Class&lt;T&gt;,androidx.lifecycle.SavedStateHandle)">create</a></code> to actually instantiate <code>androidx.lifecycle.ViewModel</code>s.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/AbstractSavedStateViewModelFactory.html#AbstractSavedStateViewModelFactory()">AbstractSavedStateViewModelFactory</a>()</code></div>
+              <p>Constructs this factory.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/AbstractSavedStateViewModelFactory.html#AbstractSavedStateViewModelFactory(androidx.savedstate.SavedStateRegistryOwner,android.os.Bundle)">AbstractSavedStateViewModelFactory</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a>&nbsp;owner,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>&nbsp;defaultArgs<br>)</code></div>
+              <p>Constructs this factory.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/androidx/lifecycle/AbstractSavedStateViewModelFactory.html#create(java.lang.Class&lt;T&gt;,androidx.lifecycle.viewmodel.CreationExtras)">create</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;&nbsp;modelClass,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a>&nbsp;extras<br>)</code></div>
+              <p>Creates a new instance of the given <code>Class</code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/androidx/lifecycle/AbstractSavedStateViewModelFactory.html#create(java.lang.Class&lt;T&gt;)">create</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;&nbsp;modelClass)</code></div>
+              <p>Creates a new instance of the given <code>Class</code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Protected methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/androidx/lifecycle/AbstractSavedStateViewModelFactory.html#create(java.lang.String,java.lang.Class&lt;T&gt;,androidx.lifecycle.SavedStateHandle)">create</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;&nbsp;modelClass,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a>&nbsp;handle<br>)</code></div>
+              <p>Creates a new instance of the given <code>Class</code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html">androidx.lifecycle.ViewModelProvider.Factory</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody class="list">
+                    <tr>
+                      <td width="40%"><code>static <a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html#from(androidx.lifecycle.viewmodel.ViewModelInitializer&lt;?&gt;...)">from</a>(ViewModelInitializer[]&nbsp;initializers)</code></div>
+                        <p>Creates an <code><a href="/reference/androidx/lifecycle/viewmodel/InitializerViewModelFactory.html">InitializerViewModelFactory</a></code> using the given initializers.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive" id="inhmethods">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Inherited Constants</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td><devsite-expandable><span class="expand-control">From class <a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html">androidx.lifecycle.ViewModelProvider.Factory</a></span>
+              <div class="devsite-table-wrapper">
+                <table class="responsive">
+                  <tbody class="list">
+                    <tr>
+                      <td width="40%"><code>static&nbsp;final <a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.Companion.html">ViewModelProvider.Factory.Companion</a></code></td>
+                      <td>
+                        <div><code><a href="/reference/androidx/lifecycle/ViewModelProvider.Factory.html#Companion()">Companion</a></code></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+</devsite-expandable>            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="AbstractSavedStateViewModelFactory--"></a><a name="abstractsavedstateviewmodelfactory"></a>
+      <h3 class="api-name" id="AbstractSavedStateViewModelFactory()">AbstractSavedStateViewModelFactory</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/lifecycle/AbstractSavedStateViewModelFactory.html#AbstractSavedStateViewModelFactory()">AbstractSavedStateViewModelFactory</a>()</pre>
+      <p>Constructs this factory. </p>
+      <p> When a factory is constructed this way, a component for which <code><a href="/reference/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a></code> is scoped must have called <code><a href="/reference/androidx/lifecycle/SavedStateHandleSupport.html#enableSavedStateHandles(T)">enableSavedStateHandles</a></code>. See <code><a href="/reference/androidx/lifecycle/SavedStateHandleSupport.html#createSavedStateHandle(androidx.lifecycle.viewmodel.CreationExtras)">createSavedStateHandle</a></code> docs for more details.</p>
+    </div>
+    <div><a name="AbstractSavedStateViewModelFactory(androidx.savedstate.SavedStateRegistryOwner, android.os.Bundle)"></a><a name="AbstractSavedStateViewModelFactory-androidx.savedstate.SavedStateRegistryOwner-android.os.Bundle-"></a><a name="abstractsavedstateviewmodelfactory"></a>
+      <h3 class="api-name" id="AbstractSavedStateViewModelFactory(androidx.savedstate.SavedStateRegistryOwner,android.os.Bundle)">AbstractSavedStateViewModelFactory</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/lifecycle/AbstractSavedStateViewModelFactory.html#AbstractSavedStateViewModelFactory(androidx.savedstate.SavedStateRegistryOwner,android.os.Bundle)">AbstractSavedStateViewModelFactory</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a>&nbsp;owner,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>&nbsp;defaultArgs<br>)</pre>
+      <p>Constructs this factory.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a>&nbsp;owner</code></td>
+              <td>
+                <p><code><a href="/reference/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a></code> that will provide restored state for created <code><a href="/reference/androidx/lifecycle/ViewModel.html">ViewModels</a></code></p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>&nbsp;defaultArgs</code></td>
+              <td>
+                <p>values from this <code>Bundle</code> will be used as defaults by <code><a href="/reference/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a></code> passed in <code><a href="/reference/androidx/lifecycle/ViewModel.html">ViewModels</a></code> if there is no previously saved state or previously saved state misses a value by such key</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="create(java.lang.Class&lt;T&gt;, androidx.lifecycle.viewmodel.CreationExtras)"></a><a name="create-java.lang.Class&lt;T&gt;-androidx.lifecycle.viewmodel.CreationExtras-"></a><a name="create"></a>
+      <h3 class="api-name" id="create(java.lang.Class&lt;T&gt;,androidx.lifecycle.viewmodel.CreationExtras)">create</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/androidx/lifecycle/AbstractSavedStateViewModelFactory.html#create(java.lang.Class&lt;T&gt;,androidx.lifecycle.viewmodel.CreationExtras)">create</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;&nbsp;modelClass,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a>&nbsp;extras<br>)</pre>
+      <p>Creates a new instance of the given <code>Class</code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;&nbsp;modelClass</code></td>
+              <td>
+                <p>a <code>Class</code> whose instance is requested</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a>&nbsp;extras</code></td>
+              <td>
+                <p>an additional information for this creation request</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Returns</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+              <td>
+                <p>a newly created ViewModel</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="create-java.lang.Class&lt;T&gt;-"></a><a name="create"></a>
+      <h3 class="api-name" id="create(java.lang.Class&lt;T&gt;)">create</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/androidx/lifecycle/AbstractSavedStateViewModelFactory.html#create(java.lang.Class&lt;T&gt;)">create</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;&nbsp;modelClass)</pre>
+      <p>Creates a new instance of the given <code>Class</code>.</p>
+      <p>Default implementation throws <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unsupported-operation-exception/index.html">UnsupportedOperationException</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;&nbsp;modelClass</code></td>
+              <td>
+                <p>a <code>Class</code> whose instance is requested</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Returns</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+              <td>
+                <p>a newly created ViewModel</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Protected methods</h2>
+    <div><a name="create(java.lang.String, java.lang.Class&lt;T&gt;, androidx.lifecycle.SavedStateHandle)"></a><a name="create-java.lang.String-java.lang.Class&lt;T&gt;-androidx.lifecycle.SavedStateHandle-"></a><a name="create"></a>
+      <h3 class="api-name" id="create(java.lang.String,java.lang.Class&lt;T&gt;,androidx.lifecycle.SavedStateHandle)">create</h3>
+      <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt; <a href="/reference/androidx/lifecycle/AbstractSavedStateViewModelFactory.html#create(java.lang.String,java.lang.Class&lt;T&gt;,androidx.lifecycle.SavedStateHandle)">create</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;key,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;&nbsp;modelClass,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a>&nbsp;handle<br>)</pre>
+      <p>Creates a new instance of the given <code>Class</code>. </p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>&lt;T&nbsp;extends&nbsp;<a href="/reference/androidx/lifecycle/ViewModel.html">ViewModel</a>&gt;</code></td>
+              <td>
+                <p>The type parameter for the ViewModel.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;key</code></td>
+              <td>
+                <p>a key associated with the requested ViewModel</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;T&gt;&nbsp;modelClass</code></td>
+              <td>
+                <p>a <code>Class</code> whose instance is requested</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a>&nbsp;handle</code></td>
+              <td>
+                <p>a handle to saved state associated with the requested ViewModel</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Returns</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T</code></td>
+              <td>
+                <p>a newly created ViewModels</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

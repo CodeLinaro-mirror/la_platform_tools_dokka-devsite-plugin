@@ -1,0 +1,318 @@
+<html devsite="true">
+  <head>
+    <title>LifecycleRegistry</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>LifecycleRegistry</h1>
+    <p>
+      <pre>public class LifecycleRegistry extends <a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a></pre>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="jd-inheritance-table">
+        <tbody>
+          <tr>
+            <td colspan="3"><a href="https://developer.android.com/reference/java/lang/Object.html">java.lang.Object</a></td>
+          </tr>
+          <tr>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="2"><a href="/reference/androidx/lifecycle/Lifecycle.html">androidx.lifecycle.Lifecycle</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="1"><a href="/reference/androidx/lifecycle/LifecycleRegistry.html">androidx.lifecycle.LifecycleRegistry</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <p>An implementation of <code><a href="/reference/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> that can handle multiple observers. </p>
+    <p> It is used by Fragments and Support Library Activities. You can also directly use it if you have a custom LifecycleOwner.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/LifecycleRegistry.html#LifecycleRegistry(androidx.lifecycle.LifecycleOwner)">LifecycleRegistry</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;provider)</code></div>
+              <p>Creates a new LifecycleRegistry for the given provider.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code>void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/LifecycleRegistry.html#addObserver(androidx.lifecycle.LifecycleObserver)">addObserver</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleObserver.html">LifecycleObserver</a>&nbsp;observer)</code></div>
+              <p>Adds a LifecycleObserver that will be notified when the LifecycleOwner changes state.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>static @<a href="/reference/androidx/annotation/VisibleForTesting.html">VisibleForTesting</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleRegistry.html">LifecycleRegistry</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/LifecycleRegistry.html#createUnsafe(androidx.lifecycle.LifecycleOwner)">createUnsafe</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner)</code></div>
+              <p>Creates a new LifecycleRegistry for the given provider, that doesn't check that its methods are called on the threads other than main.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/LifecycleRegistry.html#getCurrentState()">getCurrentState</a>()</code></div>
+              <p>Returns the current state of the Lifecycle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>int</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/LifecycleRegistry.html#getObserverCount()">getObserverCount</a>()</code></div>
+              <p>The number of observers.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/LifecycleRegistry.html#handleLifecycleEvent(androidx.lifecycle.Lifecycle.Event)">handleLifecycleEvent</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.Event.html">Lifecycle.Event</a>&nbsp;event)</code></div>
+              <p>Sets the current state and notifies the observers.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a> void</code></td>
+            <td>
+              <div><code><span><del><a href="/reference/androidx/lifecycle/LifecycleRegistry.html#markState(androidx.lifecycle.Lifecycle.State)">markState</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>&nbsp;state)</code></div>
+              <p><strong>This method is deprecated.</strong>
+                <p>Use <code><a href="/reference/androidx/lifecycle/LifecycleRegistry.html#setCurrentState(androidx.lifecycle.Lifecycle.State)">setCurrentState</a></code>.</p>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/LifecycleRegistry.html#removeObserver(androidx.lifecycle.LifecycleObserver)">removeObserver</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleObserver.html">LifecycleObserver</a>&nbsp;observer)</code></div>
+              <p>Removes the given observer from the observers list.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a> void</code></td>
+            <td>
+              <div><code><a href="/reference/androidx/lifecycle/LifecycleRegistry.html#setCurrentState(androidx.lifecycle.Lifecycle.State)">setCurrentState</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>&nbsp;state)</code></div>
+              <p>Moves the Lifecycle to the given state and dispatches necessary events to the observers.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="LifecycleRegistry-androidx.lifecycle.LifecycleOwner-"></a><a name="lifecycleregistry"></a>
+      <h3 class="api-name" id="LifecycleRegistry(androidx.lifecycle.LifecycleOwner)">LifecycleRegistry</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/lifecycle/LifecycleRegistry.html#LifecycleRegistry(androidx.lifecycle.LifecycleOwner)">LifecycleRegistry</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;provider)</pre>
+      <p>Creates a new LifecycleRegistry for the given provider. </p>
+      <p> You should usually create this inside your LifecycleOwner class's constructor and hold onto the same instance.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;provider</code></td>
+              <td>
+                <p>The owner LifecycleOwner</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="addObserver-androidx.lifecycle.LifecycleObserver-"></a><a name="addobserver"></a>
+      <h3 class="api-name" id="addObserver(androidx.lifecycle.LifecycleObserver)">addObserver</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/LifecycleRegistry.html#addObserver(androidx.lifecycle.LifecycleObserver)">addObserver</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleObserver.html">LifecycleObserver</a>&nbsp;observer)</pre>
+      <p>Adds a LifecycleObserver that will be notified when the LifecycleOwner changes state. </p>
+      <p> The given observer will be brought to the current state of the LifecycleOwner. For example, if the LifecycleOwner is in <code><a href="/reference/androidx/lifecycle/Lifecycle.State.html#STARTED">STARTED</a></code> state, the given observer will receive <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_CREATE">ON_CREATE</a></code>, <code><a href="/reference/androidx/lifecycle/Lifecycle.Event.html#ON_START">ON_START</a></code> events.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleObserver.html">LifecycleObserver</a>&nbsp;observer</code></td>
+              <td>
+                <p>The observer to notify.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="createUnsafe-androidx.lifecycle.LifecycleOwner-"></a><a name="createunsafe"></a>
+      <h3 class="api-name" id="createUnsafe(androidx.lifecycle.LifecycleOwner)">createUnsafe</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/VisibleForTesting.html">VisibleForTesting</a><br>public&nbsp;static&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleRegistry.html">LifecycleRegistry</a>&nbsp;<a href="/reference/androidx/lifecycle/LifecycleRegistry.html#createUnsafe(androidx.lifecycle.LifecycleOwner)">createUnsafe</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>&nbsp;owner)</pre>
+      <p>Creates a new LifecycleRegistry for the given provider, that doesn't check that its methods are called on the threads other than main. </p>
+      <p> LifecycleRegistry is not synchronized: if multiple threads access this <code>
+LifecycleRegistry</code>, it must be synchronized externally. </p>
+      <p> Another possible use-case for this method is JVM testing, when main thread is not present.</p>
+    </div>
+    <div><a name="getCurrentState--"></a><a name="getcurrentstate"></a>
+      <h3 class="api-name" id="getCurrentState()">getCurrentState</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>&nbsp;<a href="/reference/androidx/lifecycle/LifecycleRegistry.html#getCurrentState()">getCurrentState</a>()</pre>
+      <p>Returns the current state of the Lifecycle.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Returns</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code></td>
+              <td>
+                <p>The current state of the Lifecycle.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="getObserverCount--"></a><a name="getobservercount"></a>
+      <h3 class="api-name" id="getObserverCount()">getObserverCount</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;int&nbsp;<a href="/reference/androidx/lifecycle/LifecycleRegistry.html#getObserverCount()">getObserverCount</a>()</pre>
+      <p>The number of observers.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Returns</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>int</code></td>
+              <td>
+                <p>The number of observers.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="handleLifecycleEvent-androidx.lifecycle.Lifecycle.Event-"></a><a name="handlelifecycleevent"></a>
+      <h3 class="api-name" id="handleLifecycleEvent(androidx.lifecycle.Lifecycle.Event)">handleLifecycleEvent</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/LifecycleRegistry.html#handleLifecycleEvent(androidx.lifecycle.Lifecycle.Event)">handleLifecycleEvent</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.Event.html">Lifecycle.Event</a>&nbsp;event)</pre>
+      <p>Sets the current state and notifies the observers. </p>
+      <p> Note that if the <code>currentState</code> is the same state as the last call to this method, calling this method has no effect.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.Event.html">Lifecycle.Event</a>&nbsp;event</code></td>
+              <td>
+                <p>The event that was received</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="markState-androidx.lifecycle.Lifecycle.State-"></a><a name="markstate"></a>
+      <h3 class="api-name" id="markState(androidx.lifecycle.Lifecycle.State)">markState</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a><br>public&nbsp;void&nbsp;<span><del><a href="/reference/androidx/lifecycle/LifecycleRegistry.html#markState(androidx.lifecycle.Lifecycle.State)">markState</a></del></span>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>&nbsp;state)</pre>
+      <aside class="caution"><strong>This method is deprecated.</strong><br>
+        <p>Use <code><a href="/reference/androidx/lifecycle/LifecycleRegistry.html#setCurrentState(androidx.lifecycle.Lifecycle.State)">setCurrentState</a></code>.</p>
+      </aside>
+      <p>Moves the Lifecycle to the given state and dispatches necessary events to the observers.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>&nbsp;state</code></td>
+              <td>
+                <p>new state</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="removeObserver-androidx.lifecycle.LifecycleObserver-"></a><a name="removeobserver"></a>
+      <h3 class="api-name" id="removeObserver(androidx.lifecycle.LifecycleObserver)">removeObserver</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/LifecycleRegistry.html#removeObserver(androidx.lifecycle.LifecycleObserver)">removeObserver</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleObserver.html">LifecycleObserver</a>&nbsp;observer)</pre>
+      <p>Removes the given observer from the observers list. </p>
+      <p> If this method is called while a state change is being dispatched, </p>
+      <ul>
+        <li>If the given observer has not yet received that event, it will not receive it. </li>
+        <li>If the given observer has more than 1 method that observes the currently dispatched event and at least one of them received the event, all of them will receive the event and the removal will happen afterwards. </li>
+      </ul>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/LifecycleObserver.html">LifecycleObserver</a>&nbsp;observer</code></td>
+              <td>
+                <p>The observer to be removed.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="setCurrentState-androidx.lifecycle.Lifecycle.State-"></a><a name="setcurrentstate"></a>
+      <h3 class="api-name" id="setCurrentState(androidx.lifecycle.Lifecycle.State)">setCurrentState</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a><br>public&nbsp;void&nbsp;<a href="/reference/androidx/lifecycle/LifecycleRegistry.html#setCurrentState(androidx.lifecycle.Lifecycle.State)">setCurrentState</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>&nbsp;state)</pre>
+      <p>Moves the Lifecycle to the given state and dispatches necessary events to the observers.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>&nbsp;state</code></td>
+              <td>
+                <p>new state</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

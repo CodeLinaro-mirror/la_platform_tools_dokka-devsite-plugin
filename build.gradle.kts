@@ -90,7 +90,6 @@ val testData by sourceSets.creating {
         "testData/companionStatic/source",
         "testData/complicatedPlatform/source",
         // "testData/compose/source",           // this project is multiplatform
-        "testData/fragment/source",
         "testData/getterSetterModifier/source/",
         "testData/hidden/source",
         "testData/inheritance/source",
@@ -108,8 +107,37 @@ val testData by sourceSets.creating {
 
 val testDataImpl = project.configurations.getByName(testData.implementationConfigurationName)
 val testDataAars by project.configurations.creating
+val testDataParent by project.configurations.sourceArtifacts
+testDataParent.isCanBeResolved = false
+fun Configuration.setResolveSources() {
+    isTransitive = false
+    isCanBeConsumed = false
+    attributes {
+        attribute(
+            Usage.USAGE_ATTRIBUTE,
+            project.objects.named(Usage.JAVA_RUNTIME)
+        )
+        attribute(
+            Category.CATEGORY_ATTRIBUTE,
+            project.objects.named(Category.DOCUMENTATION)
+        )
+        attribute(
+            DocsType.DOCS_TYPE_ATTRIBUTE,
+            project.objects.named(DocsType.SOURCES)
+        )
+        attribute(
+            LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE,
+            project.objects.named(LibraryElements.JAR)
+        )
+    }
+}
+testDataParent.setResolveSources()
+val testDataSources by project.configurations.creating
+testDataSources.extendsFrom(testDataParent)
+testDataSources.setResolveSources()
 
-
+val lifecycleVersion = "2.5.1"
+val collectionsVersion = "1.3.0-alpha02"
 dependencies {
     testDataImpl("io.reactivex.rxjava3:rxjava:3.0.0")
     testDataImpl("io.reactivex.rxjava2:rxjava:2.2.9")
@@ -129,6 +157,32 @@ dependencies {
     testDataAars("androidx.recyclerview:recyclerview:1.2.1")
     testDataAars("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
     testDataAars("androidx.compose.foundation:foundation:1.0.5")
+    testDataAars("androidx.activity:activity:1.6.0-rc01")
+
+    testDataSources("androidx.fragment:fragment:1.6.0-alpha01")
+    // TODO: publish sample source code in a way accessible to dackka (/studio) b/153171116
+    // testDataSources("androidx.fragment:fragment-samples:1.6.0-alpha01")
+    testDataSources("androidx.lifecycle:lifecycle-common:$lifecycleVersion")
+    testDataSources("androidx.lifecycle:lifecycle-compiler:$lifecycleVersion")
+    testDataSources("androidx.lifecycle:lifecycle-livedata:$lifecycleVersion")
+    testDataSources("androidx.lifecycle:lifecycle-livedata-core:$lifecycleVersion")
+    testDataSources("androidx.lifecycle:lifecycle-livedata-core-ktx:$lifecycleVersion")
+    testDataSources("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    testDataSources("androidx.lifecycle:lifecycle-process:$lifecycleVersion")
+    testDataSources("androidx.lifecycle:lifecycle-reactivestreams:$lifecycleVersion")
+    testDataSources("androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycleVersion")
+    testDataSources("androidx.lifecycle:lifecycle-runtime:$lifecycleVersion")
+    testDataSources("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    testDataSources("androidx.lifecycle:lifecycle-runtime-testing:$lifecycleVersion")
+    testDataSources("androidx.lifecycle:lifecycle-service:$lifecycleVersion")
+    testDataSources("androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion")
+    testDataSources("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    testDataSources("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion")
+/*      Collections doesn't properly declare a documentation variant. KMP problems.
+    testDataSources("androidx.collection:collection:$collectionsVersion")
+    testDataSources("androidx.collection:collection-jvm:$collectionsVersion")
+    testDataSources("androidx.collection:collection-ktx:$collectionsVersion")
+*/
 }
 
 val explodeAars by tasks.registering(Sync::class) {
@@ -145,8 +199,25 @@ val explodeAars by tasks.registering(Sync::class) {
     }
 }
 
+val explodeSources by tasks.registering {
+    testDataSources.files.filter {
+        it.nameWithoutExtension.endsWith("sources")
+    }.forEach { arch ->
+        sync {
+            val splitName = arch.nameWithoutExtension.split("-")
+            val versionInd =
+                splitName.indexOfFirst { '.' in it } // index of first block in version num
+            val baseName = splitName.subList(0, versionInd).joinToString(separator = "-")
+            println("Unzipping prebuilt for $baseName")
+            from(zipTree(arch))
+            into("$buildDir/explodedSources/$baseName")
+        }
+    }
+}
+
 val classpathForTests by tasks.registering(ClasspathForTestsTask::class) {
     dependsOn(explodeAars)
+    dependsOn(explodeSources)
     classpath = testData.compileClasspath
     location.set(file("testData/classpath.txt"))
 }

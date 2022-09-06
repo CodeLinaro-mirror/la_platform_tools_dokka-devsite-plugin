@@ -1,0 +1,188 @@
+<html devsite="true">
+  <head>
+    <title>ViewModel</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>ViewModel</h1>
+    <p>
+      <pre>abstract class ViewModel</pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/lifecycle/AndroidViewModel.html">AndroidViewModel</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/AndroidViewModel.html">AndroidViewModel</a></code></td>
+                <td>
+                  <p>Application context aware <code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>ViewModel is a class that is responsible for preparing and managing the data for an <code><a href="https://developer.android.com/reference/android/app/Activity.html">Activity</a></code> or a Fragment. It also handles the communication of the Activity / Fragment with the rest of the application (e.g. calling the business logic classes). </p>
+    <p> A ViewModel is always created in association with a scope (a fragment or an activity) and will be retained as long as the scope is alive. E.g. if it is an Activity, until it is finished. </p>
+    <p> In other words, this means that a ViewModel will not be destroyed if its owner is destroyed for a configuration change (e.g. rotation). The new owner instance just re-connects to the existing model. </p>
+    <p> The purpose of the ViewModel is to acquire and keep the information that is necessary for an Activity or a Fragment. The Activity or the Fragment should be able to observe changes in the ViewModel. ViewModels usually expose this information via <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> or Android Data Binding. You can also use any observability construct from your favorite framework. </p>
+    <p> ViewModel's only responsibility is to manage the data for the UI. It <b>should never</b> access your view hierarchy or hold a reference back to the Activity or the Fragment. </p>
+    <p> Typical usage from an Activity standpoint would be: </p>
+    <pre class="prettyprint">public class UserActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.user_activity_layout);
+        final UserModel viewModel = new ViewModelProvider(this).get(UserModel.class);
+        viewModel.getUser().observe(this, new Observer&lt;User&gt;() {
+            @Override
+            public void onChanged(@Nullable User data) {
+                // update ui.
+            }
+        });
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 viewModel.doAction();
+            }
+        });
+    }
+}
+</pre>
+ ViewModel would be: 
+    <pre class="prettyprint">public class UserModel extends ViewModel {
+    private final MutableLiveData&lt;User&gt; userLiveData = new MutableLiveData&lt;&gt;();
+
+    public LiveData&lt;User&gt; getUser() {
+        return userLiveData;
+    }
+
+    public UserModel() {
+        // trigger user load.
+    }
+
+    void doAction() {
+        // depending on the action, do necessary business logic calls and update the
+        // userLiveData.
+    }
+}
+</pre>
+    <p> ViewModels can also be used as a communication layer between different Fragments of an Activity. Each Fragment can acquire the ViewModel using the same key via their Activity. This allows communication between Fragments in a de-coupled fashion such that they never need to talk to the other Fragment directly. </p>
+    <pre class="prettyprint">public class MyFragment extends Fragment {
+    public void onStart() {
+        UserModel userModel = new ViewModelProvider(requireActivity()).get(UserModel.class);
+    }
+}
+</pre>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html#ViewModel()">ViewModel</a>()</code></div>
+              <p>Construct a new ViewModel instance.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html#ViewModel(java.io.Closeable...)">ViewModel</a>(closeables:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="https://developer.android.com/reference/java/io/Closeable.html">Closeable</a>!&gt;)</code></div>
+              <p>Construct a new ViewModel instance.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html#addCloseable(java.io.Closeable)">addCloseable</a>(closeable:&nbsp;<a href="https://developer.android.com/reference/java/io/Closeable.html">Closeable</a>)</code></div>
+              <p>Add a new <code><a href="https://developer.android.com/reference/java/io/Closeable.html">Closeable</a></code> object that will be closed directly before <code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html#onCleared()">onCleared</a></code> is called.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Protected functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html#onCleared()">onCleared</a>()</code></div>
+              <p>This method will be called when this ViewModel is no longer used and will be destroyed.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="ViewModel--"></a><a name="viewmodel"></a>
+      <h3 class="api-name" id="ViewModel()">ViewModel</h3>
+      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html#ViewModel()">ViewModel</a>()</pre>
+      <p>Construct a new ViewModel instance. </p>
+      <p> You should <b>never</b> manually construct a ViewModel outside of a <code><a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a></code>.</p>
+    </div>
+    <div><a name="ViewModel-java.io.Closeable...-"></a><a name="viewmodel"></a>
+      <h3 class="api-name" id="ViewModel(java.io.Closeable...)">ViewModel</h3>
+      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html#ViewModel(java.io.Closeable...)">ViewModel</a>(closeables:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;<a href="https://developer.android.com/reference/java/io/Closeable.html">Closeable</a>!&gt;)</pre>
+      <p>Construct a new ViewModel instance. Any <code><a href="https://developer.android.com/reference/java/io/Closeable.html">Closeable</a></code> objects provided here will be closed directly before <code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html#onCleared()">onCleared</a></code> is called. </p>
+      <p> You should <b>never</b> manually construct a ViewModel outside of a <code><a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a></code>.</p>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="addCloseable-java.io.Closeable-"></a><a name="addcloseable"></a>
+      <h3 class="api-name" id="addCloseable(java.io.Closeable)">addCloseable</h3>
+      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html#addCloseable(java.io.Closeable)">addCloseable</a>(closeable:&nbsp;<a href="https://developer.android.com/reference/java/io/Closeable.html">Closeable</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Add a new <code><a href="https://developer.android.com/reference/java/io/Closeable.html">Closeable</a></code> object that will be closed directly before <code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html#onCleared()">onCleared</a></code> is called.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>closeable:&nbsp;<a href="https://developer.android.com/reference/java/io/Closeable.html">Closeable</a></code></td>
+              <td>
+                <p>The object that should be <code><a href="https://developer.android.com/reference/java/io/Closeable.html#close()">closed</a></code> directly before <code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html#onCleared()">onCleared</a></code> is called.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Protected functions</h2>
+    <div><a name="onCleared--"></a><a name="oncleared"></a>
+      <h3 class="api-name" id="onCleared()">onCleared</h3>
+      <pre class="api-signature no-pretty-print">protected&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html#onCleared()">onCleared</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>This method will be called when this ViewModel is no longer used and will be destroyed. </p>
+      <p> It is useful when ViewModel observes some data and you need to clear this subscription to prevent a leak of this ViewModel.</p>
+    </div>
+  </body>
+</html>

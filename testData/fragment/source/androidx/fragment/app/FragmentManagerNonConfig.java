@@ -15,10 +15,15 @@
  */
 
 
-
 package androidx.fragment.app;
 
 import android.os.Parcelable;
+
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelStore;
+
+import java.util.Collection;
+import java.util.Map;
 
 /**
  * FragmentManagerNonConfig stores the retained instance fragments across
@@ -26,18 +31,56 @@ import android.os.Parcelable;
  *
  * <p>Apps should treat objects of this type as opaque, returned by
  * and passed to the state save and restore process for fragments in
- * {@link androidx.fragment.app.FragmentController#retainNestedNonConfig() FragmentController#retainNestedNonConfig()} and
- * {@link androidx.fragment.app.FragmentController#restoreAllState(android.os.Parcelable,androidx.fragment.app.FragmentManagerNonConfig) FragmentController#restoreAllState(Parcelable, FragmentManagerNonConfig)}.</p>
+ * {@link FragmentController#retainNestedNonConfig()} and
+ * {@link FragmentController#restoreAllState(Parcelable, FragmentManagerNonConfig)}.</p>
  *
- * @deprecated Have your {@link androidx.fragment.app.FragmentHostCallback FragmentHostCallback} implement
+ * @deprecated Have your {@link FragmentHostCallback} implement
  * {@link androidx.lifecycle.ViewModelStoreOwner} to automatically retain the Fragment's
  * non configuration state.
  */
-
-@SuppressWarnings({"unchecked", "deprecation", "all"})
 @Deprecated
 public class FragmentManagerNonConfig {
+    private final @Nullable Collection<Fragment> mFragments;
+    private final @Nullable Map<String, FragmentManagerNonConfig> mChildNonConfigs;
+    private final @Nullable Map<String, ViewModelStore> mViewModelStores;
 
-FragmentManagerNonConfig() { throw new RuntimeException("Stub!"); }
+    FragmentManagerNonConfig(@Nullable Collection<Fragment> fragments,
+            @Nullable Map<String, FragmentManagerNonConfig> childNonConfigs,
+            @Nullable Map<String, ViewModelStore> viewModelStores) {
+        mFragments = fragments;
+        mChildNonConfigs = childNonConfigs;
+        mViewModelStores = viewModelStores;
+    }
+
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    boolean isRetaining(Fragment f) {
+        if (mFragments == null) {
+            return false;
+        }
+        return mFragments.contains(f);
+    }
+
+    /**
+     * @return the retained instance fragments returned by a FragmentManager
+     */
+    @Nullable
+    Collection<Fragment> getFragments() {
+        return mFragments;
+    }
+
+    /**
+     * @return the FragmentManagerNonConfigs from any applicable fragment's child FragmentManager
+     */
+    @Nullable
+    Map<String, FragmentManagerNonConfig> getChildNonConfigs() {
+        return mChildNonConfigs;
+    }
+
+    /**
+     * @return the ViewModelStores for all fragments associated with the FragmentManager
+     */
+    @Nullable
+    Map<String, ViewModelStore> getViewModelStores() {
+        return mViewModelStores;
+    }
 }
-

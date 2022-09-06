@@ -1,0 +1,153 @@
+<html devsite="true">
+  <head>
+    <title>SavedStateViewModelFactory</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>SavedStateViewModelFactory</h1>
+    <p>
+      <pre>class SavedStateViewModelFactory : <a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.OnRequeryFactory.html">ViewModelProvider.OnRequeryFactory</a>, <a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.Factory.html">ViewModelProvider.Factory</a></pre>
+    </p>
+    <div class="devsite-table-wrapper">
+      <table class="jd-inheritance-table">
+        <tbody>
+          <tr>
+            <td colspan="3"><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">kotlin.Any</a></td>
+          </tr>
+          <tr>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="2"><a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.OnRequeryFactory.html">androidx.lifecycle.ViewModelProvider.OnRequeryFactory</a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;↳</td>
+            <td colspan="1"><a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html">androidx.lifecycle.SavedStateViewModelFactory</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <p><code><a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.Factory.html">androidx.lifecycle.ViewModelProvider.Factory</a></code> that can create ViewModels accessing and contributing to a saved state via <code><a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a></code> received in a constructor. If <code>defaultArgs</code> bundle was passed into the constructor, it will provide default values in <code>SavedStateHandle</code>.</p>
+    <p>If ViewModel is instance of <code><a href="/reference/kotlin/androidx/lifecycle/AndroidViewModel.html">androidx.lifecycle.AndroidViewModel</a></code>, it looks for a constructor that receives an <code><a href="https://developer.android.com/reference/android/app/Application.html">Application</a></code> and <code><a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a></code> (in this order), otherwise it looks for a constructor that receives <code><a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a></code> only. <code><a href="/reference/kotlin/androidx/lifecycle/AndroidViewModel.html">androidx.lifecycle.AndroidViewModel</a></code> is only supported if you pass a non-null <code><a href="https://developer.android.com/reference/android/app/Application.html">Application</a></code> instance.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html#SavedStateViewModelFactory()">SavedStateViewModelFactory</a>()</code></div>
+              <p>Constructs this factory.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html#SavedStateViewModelFactory(android.app.Application,androidx.savedstate.SavedStateRegistryOwner)">SavedStateViewModelFactory</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;application:&nbsp;<a href="https://developer.android.com/reference/android/app/Application.html">Application</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;owner:&nbsp;<a href="/reference/kotlin/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a><br>)</code></div>
+              <p>Creates <code><a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html">SavedStateViewModelFactory</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html#SavedStateViewModelFactory(android.app.Application,androidx.savedstate.SavedStateRegistryOwner,android.os.Bundle)">SavedStateViewModelFactory</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;application:&nbsp;<a href="https://developer.android.com/reference/android/app/Application.html">Application</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;owner:&nbsp;<a href="/reference/kotlin/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;defaultArgs:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?<br>)</code></div>
+              <p>Creates <code><a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html">SavedStateViewModelFactory</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="SavedStateViewModelFactory--"></a><a name="savedstateviewmodelfactory"></a>
+      <h3 class="api-name" id="SavedStateViewModelFactory()">SavedStateViewModelFactory</h3>
+      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html#SavedStateViewModelFactory()">SavedStateViewModelFactory</a>()</pre>
+      <p>Constructs this factory.</p>
+      <p>When a factory is constructed this way, a component for which <code><a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a></code> is scoped must have called <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.savedstate.SavedStateRegistryOwner).enableSavedStateHandles()">enableSavedStateHandles</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#createSavedStateHandle(androidx.savedstate.SavedStateRegistryOwner,androidx.lifecycle.ViewModelStoreOwner,kotlin.String,android.os.Bundle)">createSavedStateHandle</a></code></td>
+              <td>
+                <p>docs for more details.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="SavedStateViewModelFactory(android.app.Application, androidx.savedstate.SavedStateRegistryOwner)"></a><a name="SavedStateViewModelFactory-android.app.Application-androidx.savedstate.SavedStateRegistryOwner-"></a><a name="savedstateviewmodelfactory"></a>
+      <h3 class="api-name" id="SavedStateViewModelFactory(android.app.Application,androidx.savedstate.SavedStateRegistryOwner)">SavedStateViewModelFactory</h3>
+      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html#SavedStateViewModelFactory(android.app.Application,androidx.savedstate.SavedStateRegistryOwner)">SavedStateViewModelFactory</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;application:&nbsp;<a href="https://developer.android.com/reference/android/app/Application.html">Application</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;owner:&nbsp;<a href="/reference/kotlin/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a><br>)</pre>
+      <p>Creates <code><a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html">SavedStateViewModelFactory</a></code>.</p>
+      <p><code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">androidx.lifecycle.ViewModel</a></code> created with this factory can access to saved state scoped to the given <code>activity</code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>application:&nbsp;<a href="https://developer.android.com/reference/android/app/Application.html">Application</a>?</code></td>
+              <td>
+                <p>an application.  If null, <code><a href="/reference/kotlin/androidx/lifecycle/AndroidViewModel.html">AndroidViewModel</a></code> instances will not be supported.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>owner:&nbsp;<a href="/reference/kotlin/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a></code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a></code> that will provide restored state for created <code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModels</a></code></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="SavedStateViewModelFactory(android.app.Application, androidx.savedstate.SavedStateRegistryOwner, android.os.Bundle)"></a><a name="SavedStateViewModelFactory-android.app.Application-androidx.savedstate.SavedStateRegistryOwner-android.os.Bundle-"></a><a name="savedstateviewmodelfactory"></a>
+      <h3 class="api-name" id="SavedStateViewModelFactory(android.app.Application,androidx.savedstate.SavedStateRegistryOwner,android.os.Bundle)">SavedStateViewModelFactory</h3>
+      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html#SavedStateViewModelFactory(android.app.Application,androidx.savedstate.SavedStateRegistryOwner,android.os.Bundle)">SavedStateViewModelFactory</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;application:&nbsp;<a href="https://developer.android.com/reference/android/app/Application.html">Application</a>?,<br>&nbsp;&nbsp;&nbsp;&nbsp;owner:&nbsp;<a href="/reference/kotlin/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;defaultArgs:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?<br>)</pre>
+      <p>Creates <code><a href="/reference/kotlin/androidx/lifecycle/SavedStateViewModelFactory.html">SavedStateViewModelFactory</a></code>.</p>
+      <p><code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">androidx.lifecycle.ViewModel</a></code> created with this factory can access to saved state scoped to the given <code>activity</code>.</p>
+      <p>When a factory is constructed this way, if you add any <code><a href="/reference/kotlin/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code> those arguments will be used instead of the state passed in here. It is not possible to mix the arguments received here with the <code><a href="/reference/kotlin/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>application:&nbsp;<a href="https://developer.android.com/reference/android/app/Application.html">Application</a>?</code></td>
+              <td>
+                <p>an application. If null, <code><a href="/reference/kotlin/androidx/lifecycle/AndroidViewModel.html">AndroidViewModel</a></code> instances will not be supported.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>owner:&nbsp;<a href="/reference/kotlin/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a></code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/savedstate/SavedStateRegistryOwner.html">SavedStateRegistryOwner</a></code> that will provide restored state for created <code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModels</a></code></p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>defaultArgs:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?</code></td>
+              <td>
+                <p>values from this <code>Bundle</code> will be used as defaults by <code><a href="/reference/kotlin/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a></code> if there is no previously saved state or previously saved state misses a value by such key.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

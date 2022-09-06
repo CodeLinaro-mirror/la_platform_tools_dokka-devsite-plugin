@@ -1,0 +1,425 @@
+<html devsite="true">
+  <head>
+    <title>Lifecycle</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>Lifecycle</h1>
+    <p>
+      <pre>abstract class Lifecycle</pre>
+    </p>
+    <div class="devsite-table-wrapper"><devsite-expandable><span class="expand-control jd-sumtable-subclasses">Known direct subclasses
+        <div class="showalways" id="subclasses-direct"><a href="/reference/kotlin/androidx/lifecycle/LifecycleRegistry.html">LifecycleRegistry</a></div>
+      </span>
+      <div id="subclasses-direct-summary">
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/LifecycleRegistry.html">LifecycleRegistry</a></code></td>
+                <td>
+                  <p>An implementation of <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> that can handle multiple observers.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</devsite-expandable>    </div>
+    <hr>
+    <p>Defines an object that has an Android Lifecycle. Fragment and FragmentActivity classes implement <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> interface which has the <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html#getLifecycle()">getLifecycle</a></code> method to access the Lifecycle. You can also implement <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code> in your own classes. </p>
+    <p><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_CREATE">ON_CREATE</a></code>, <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_START">ON_START</a></code>, <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_RESUME">ON_RESUME</a></code> events in this class are dispatched <b>after</b> the <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code>'s related method returns. <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_PAUSE">ON_PAUSE</a></code>, <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_STOP">ON_STOP</a></code>, <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_DESTROY">ON_DESTROY</a></code> events in this class are dispatched <b>before</b> the <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code>'s related method is called. For instance, <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_START">ON_START</a></code> will be dispatched after <code><a href="https://developer.android.com/reference/android/app/Activity.html#onStart()">onStart</a></code> returns, <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_STOP">ON_STOP</a></code> will be dispatched before <code><a href="https://developer.android.com/reference/android/app/Activity.html#onStop()">onStop</a></code> is called. This gives you certain guarantees on which state the owner is in. </p>
+    <p> To observe lifecycle events call <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html#addObserver(androidx.lifecycle.LifecycleObserver)">addObserver</a></code> passing an object that implements either <code><a href="/reference/kotlin/androidx/lifecycle/DefaultLifecycleObserver.html">DefaultLifecycleObserver</a></code> or <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleEventObserver.html">LifecycleEventObserver</a></code>.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html">Lifecycle.Event</a></code></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code></td>
+            <td>
+              <p>Lifecycle states.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html#Lifecycle()">Lifecycle</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html#addObserver(androidx.lifecycle.LifecycleObserver)">addObserver</a>(observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleObserver.html">LifecycleObserver</a>)</code></div>
+              <p>Adds a LifecycleObserver that will be notified when the LifecycleOwner changes state.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a> <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html#getCurrentState()">getCurrentState</a>()</code></div>
+              <p>Returns the current state of the Lifecycle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>abstract @<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html#removeObserver(androidx.lifecycle.LifecycleObserver)">removeObserver</a>(observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleObserver.html">LifecycleObserver</a>)</code></div>
+              <p>Removes the given observer from the observers list.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code>suspend T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenCreated(kotlin.coroutines.SuspendFunction1)">whenCreated</a>(block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> T)</code></div>
+              <p>Runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#CREATED">Lifecycle.State.CREATED</a></code> state.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>suspend T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenResumed(kotlin.coroutines.SuspendFunction1)">whenResumed</a>(block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> T)</code></div>
+              <p>Runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#RESUMED">Lifecycle.State.RESUMED</a></code> state.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>suspend T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStarted(kotlin.coroutines.SuspendFunction1)">whenStarted</a>(block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> T)</code></div>
+              <p>Runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#STARTED">Lifecycle.State.STARTED</a></code> state.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>suspend T</code></td>
+            <td>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">whenStateAtLeast</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;minState:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> T<br>)</code></div>
+              <p>Runs the given <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">block</a></code> on a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> that executes the <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">block</a></code> on the main thread and suspends the execution unless the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code>'s state is at least <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">minState</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>suspend <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).repeatOnLifecycle(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">repeatOnLifecycle</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>)</code></div>
+              <p>Runs the given <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).repeatOnLifecycle(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">block</a></code> in a new coroutine when <code>this</code><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is at least at <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).repeatOnLifecycle(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">state</a></code> and suspends the execution until <code>this</code><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#DESTROYED">Lifecycle.State.DESTROYED</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>suspend&nbsp;inline R</code></td>
+            <td>
+              <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withCreated(kotlin.Function0)">withCreated</a>(crossinline&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> R)</code></div>
+              <p>Run <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withCreated(kotlin.Function0)">block</a></code> with this <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> in a <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> of at least <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#CREATED">Lifecycle.State.CREATED</a></code> and resume with the result.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>suspend&nbsp;inline R</code></td>
+            <td>
+              <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withResumed(kotlin.Function0)">withResumed</a>(crossinline&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> R)</code></div>
+              <p>Run <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withResumed(kotlin.Function0)">block</a></code> with this <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> in a <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> of at least <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#RESUMED">Lifecycle.State.RESUMED</a></code> and resume with the result.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>suspend&nbsp;inline R</code></td>
+            <td>
+              <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withStarted(kotlin.Function0)">withStarted</a>(crossinline&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> R)</code></div>
+              <p>Run <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withStarted(kotlin.Function0)">block</a></code> with this <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> in a <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> of at least <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#STARTED">Lifecycle.State.STARTED</a></code> and resume with the result.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>suspend&nbsp;inline R</code></td>
+            <td>
+              <div><code>&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.Function0)">withStateAtLeast</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> R<br>)</code></div>
+              <p>Run <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.Function0)">block</a></code> with this <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> in a <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> of at least <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.Function0)">state</a></code> and resume with the result.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="Lifecycle--"></a><a name="lifecycle"></a>
+      <h3 class="api-name" id="Lifecycle()">Lifecycle</h3>
+      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html#Lifecycle()">Lifecycle</a>()</pre>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="addObserver-androidx.lifecycle.LifecycleObserver-"></a><a name="addobserver"></a>
+      <h3 class="api-name" id="addObserver(androidx.lifecycle.LifecycleObserver)">addObserver</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html#addObserver(androidx.lifecycle.LifecycleObserver)">addObserver</a>(observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleObserver.html">LifecycleObserver</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Adds a LifecycleObserver that will be notified when the LifecycleOwner changes state. </p>
+      <p> The given observer will be brought to the current state of the LifecycleOwner. For example, if the LifecycleOwner is in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#STARTED">STARTED</a></code> state, the given observer will receive <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_CREATE">ON_CREATE</a></code>, <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html#ON_START">ON_START</a></code> events.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleObserver.html">LifecycleObserver</a></code></td>
+              <td>
+                <p>The observer to notify.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="getCurrentState--"></a><a name="getcurrentstate"></a>
+      <h3 class="api-name" id="getCurrentState()">getCurrentState</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html#getCurrentState()">getCurrentState</a>():&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></pre>
+      <p>Returns the current state of the Lifecycle.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Returns</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code></td>
+              <td>
+                <p>The current state of the Lifecycle.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="removeObserver-androidx.lifecycle.LifecycleObserver-"></a><a name="removeobserver"></a>
+      <h3 class="api-name" id="removeObserver(androidx.lifecycle.LifecycleObserver)">removeObserver</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/MainThread.html">MainThread</a><br>abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html#removeObserver(androidx.lifecycle.LifecycleObserver)">removeObserver</a>(observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleObserver.html">LifecycleObserver</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Removes the given observer from the observers list. </p>
+      <p> If this method is called while a state change is being dispatched, </p>
+      <ul>
+        <li>If the given observer has not yet received that event, it will not receive it. </li>
+        <li>If the given observer has more than 1 method that observes the currently dispatched event and at least one of them received the event, all of them will receive the event and the removal will happen afterwards. </li>
+      </ul>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>observer:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleObserver.html">LifecycleObserver</a></code></td>
+              <td>
+                <p>The observer to be removed.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2>Extension functions</h2>
+    <div><a name="-androidx.lifecycle.Lifecycle-.whenCreated-kotlin.coroutines.SuspendFunction1-"></a><a name="whencreated"></a>
+      <h3 class="api-name" id="(androidx.lifecycle.Lifecycle).whenCreated(kotlin.coroutines.SuspendFunction1)">whenCreated</h3>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenCreated(kotlin.coroutines.SuspendFunction1)">whenCreated</a>(block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> T):&nbsp;T</pre>
+      <p>Runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#CREATED">Lifecycle.State.CREATED</a></code> state.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">whenStateAtLeast</a></code></td>
+              <td>
+                <p>for details</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="-androidx.lifecycle.Lifecycle-.whenResumed-kotlin.coroutines.SuspendFunction1-"></a><a name="whenresumed"></a>
+      <h3 class="api-name" id="(androidx.lifecycle.Lifecycle).whenResumed(kotlin.coroutines.SuspendFunction1)">whenResumed</h3>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenResumed(kotlin.coroutines.SuspendFunction1)">whenResumed</a>(block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> T):&nbsp;T</pre>
+      <p>Runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#RESUMED">Lifecycle.State.RESUMED</a></code> state.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">whenStateAtLeast</a></code></td>
+              <td>
+                <p>for details</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="-androidx.lifecycle.Lifecycle-.whenStarted-kotlin.coroutines.SuspendFunction1-"></a><a name="whenstarted"></a>
+      <h3 class="api-name" id="(androidx.lifecycle.Lifecycle).whenStarted(kotlin.coroutines.SuspendFunction1)">whenStarted</h3>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStarted(kotlin.coroutines.SuspendFunction1)">whenStarted</a>(block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> T):&nbsp;T</pre>
+      <p>Runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#STARTED">Lifecycle.State.STARTED</a></code> state.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">whenStateAtLeast</a></code></td>
+              <td>
+                <p>for details</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State, kotlin.coroutines.SuspendFunction1)"></a><a name="-androidx.lifecycle.Lifecycle-.whenStateAtLeast-androidx.lifecycle.Lifecycle.State-kotlin.coroutines.SuspendFunction1-"></a><a name="whenstateatleast"></a>
+      <h3 class="api-name" id="(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">whenStateAtLeast</h3>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">whenStateAtLeast</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;minState:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> T<br>):&nbsp;T</pre>
+      <p>Runs the given <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">block</a></code> on a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code> that executes the <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">block</a></code> on the main thread and suspends the execution unless the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code>'s state is at least <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">minState</a></code>.</p>
+      <p>If the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> moves to a lesser state while the <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">block</a></code> is running, the <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">block</a></code> will be suspended until the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> reaches to a state greater or equal to <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">minState</a></code>.</p>
+      <p>Note that this won't effect any sub coroutine if they use a different <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-dispatcher/index.html">CoroutineDispatcher</a></code>. However, the <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">block</a></code> will not resume execution when the sub coroutine finishes unless the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">minState</a></code>.</p>
+      <p>If the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is destroyed while the <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">block</a></code> is suspended, the <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">block</a></code> will be cancelled which will also cancel any child coroutine launched inside the <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">block</a></code>.</p>
+      <p>If you have a <code>try finally</code> block in your code, the <code>finally</code> might run after the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> moves outside the desired state. It is recommended to check the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html#getCurrentState()">Lifecycle.getCurrentState</a></code> before accessing the UI. Similarly, if you have a <code>catch</code> statement that might catch <code>CancellationException</code>, you should check the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html#getCurrentState()">Lifecycle.getCurrentState</a></code> before accessing the UI. See the sample below for more details.</p>
+      <pre class="prettyprint">// running a block of code only if lifecycle is STARTED<br>viewLifecycle.whenStateAtLeast(Lifecycle.State.STARTED) {<br>    // here, we are on the main thread and view lifecycle is guaranteed to be STARTED or RESUMED.<br>    // We can safely access our views.<br>    loadingBar.visibility = View.VISIBLE<br>    try {<br>        // we can call any suspend function<br>        val data = withContext(Dispatchers.IO) {<br>            // this will run in IO thread pool. It will keep running as long as Lifecycle<br>            // is not DESTROYED. If it is destroyed, this coroutine will be cancelled as well.<br>            // However, we CANNOT access Views here.<br><br>            // We are using withContext(Dispatchers.IO) here just for demonstration purposes.<br>            // Such code should live in your business logic classes and your UI should use a<br>            // ViewModel (or similar) to access it.<br>            api.getUser()<br>        }<br>        // this line will execute on the main thread and only if the lifecycle is in at least<br>        // STARTED state (STARTED is the parameter we've passed to whenStateAtLeast)<br>        // Because of this guarantee, we can safely access the UI again.<br>        loadingBar.visibility = View.GONE<br>        nameTextView.text = user.name<br>        lastNameTextView.text = user.lastName<br>    } catch(ex : UserNotFoundException) {<br>        // same as above, this code can safely access UI elements because it only runs if<br>        // view lifecycle is at least STARTED<br>        loadingBar.visibility = View.GONE<br>        showErrorDialog(ex)<br>    } catch(th : Throwable) {<br>         // Unlike the catch statement above, this catch statements it too generic and might<br>         // also catch the CancellationException. Before accessing UI, you should check isActive<br>         // or lifecycle state<br>         if (viewLifecycle.currentState &gt;= Lifecycle.State.STARTED) {<br>             // here you can access the view because you've checked the coroutine is active<br>         }<br>    } finally {<br>        // in case of cancellation, this line might run even if the Lifecycle is not DESTROYED.<br>        // You cannot access Views here unless you check `isActive` or lifecycle state<br>        if (viewLifecycle.currentState &gt;= Lifecycle.State.STARTED) {<br>            // safe to access views<br>        } else {<br>            // not safe to access views<br>        }<br>    }<br>}</pre>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>minState:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code></td>
+              <td>
+                <p>The desired minimum state to run the <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">block</a></code>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> T</code></td>
+              <td>
+                <p>The block to run when the lifecycle is at least in <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).whenStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">minState</a></code>.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Returns</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>T</code></td>
+              <td><T> The return value of the [block]</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="(androidx.lifecycle.Lifecycle).repeatOnLifecycle(androidx.lifecycle.Lifecycle.State, kotlin.coroutines.SuspendFunction1)"></a><a name="-androidx.lifecycle.Lifecycle-.repeatOnLifecycle-androidx.lifecycle.Lifecycle.State-kotlin.coroutines.SuspendFunction1-"></a><a name="repeatonlifecycle"></a>
+      <h3 class="api-name" id="(androidx.lifecycle.Lifecycle).repeatOnLifecycle(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">repeatOnLifecycle</h3>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).repeatOnLifecycle(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">repeatOnLifecycle</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Runs the given <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).repeatOnLifecycle(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">block</a></code> in a new coroutine when <code>this</code><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is at least at <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).repeatOnLifecycle(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">state</a></code> and suspends the execution until <code>this</code><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#DESTROYED">Lifecycle.State.DESTROYED</a></code>.</p>
+      <p>The <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).repeatOnLifecycle(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">block</a></code> will cancel and re-launch as the lifecycle moves in and out of the target state.</p>
+      <pre class="prettyprint">class MyActivity : AppCompatActivity() {<br>    override fun onCreate(savedInstanceState: Bundle?) {<br>        /* ... */<br>            // Runs the block of code in a coroutine when the lifecycle is at least STARTED.<br>            // The coroutine will be cancelled when the ON_STOP event happens and will<br>            // restart executing if the lifecycle receives the ON_START event again.<br>            lifecycleScope.launch {<br>                lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {<br>                    uiStateFlow.collect { uiState -&gt;<br>                        updateUi(uiState)<br>                    }<br>                }<br>            }<br>        }<br>    }</pre>
+      <p>The best practice is to call this function when the lifecycle is initialized. For example, <code>onCreate</code> in an Activity, or <code>onViewCreated</code> in a Fragment. Otherwise, multiple repeating coroutines doing the same could be created and be executed at the same time.</p>
+      <p>Repeated invocations of <code>block</code> will run serially, that is they will always wait for the previous invocation to fully finish before re-starting execution as the state moves in and out of the required state.</p>
+      <p>Warning: <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#INITIALIZED">Lifecycle.State.INITIALIZED</a></code> is not allowed in this API. Passing it as a parameter will throw an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a></code>.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>state:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code></td>
+              <td>
+                <p><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> in which <code>block</code> runs in a new coroutine. That coroutine will cancel if the lifecycle falls below that state, and will restart if it's in that state again.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>block:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> suspend&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td>
+                <p>The block to run when the lifecycle is at least in <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).repeatOnLifecycle(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">state</a></code> state.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="-androidx.lifecycle.Lifecycle-.withCreated-kotlin.Function0-"></a><a name="withcreated"></a>
+      <h3 class="api-name" id="(androidx.lifecycle.Lifecycle).withCreated(kotlin.Function0)">withCreated</h3>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;inline&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withCreated(kotlin.Function0)">withCreated</a>(crossinline&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> R):&nbsp;R</pre>
+      <p>Run <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withCreated(kotlin.Function0)">block</a></code> with this <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> in a <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> of at least <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#CREATED">Lifecycle.State.CREATED</a></code> and resume with the result. Throws the <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleDestroyedException.html">CancellationException</a></code> if the lifecycle has reached <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#DESTROYED">Lifecycle.State.DESTROYED</a></code> by the time of the call or before <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withCreated(kotlin.Function0)">block</a></code> is able to run.</p>
+    </div>
+    <div><a name="-androidx.lifecycle.Lifecycle-.withResumed-kotlin.Function0-"></a><a name="withresumed"></a>
+      <h3 class="api-name" id="(androidx.lifecycle.Lifecycle).withResumed(kotlin.Function0)">withResumed</h3>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;inline&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withResumed(kotlin.Function0)">withResumed</a>(crossinline&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> R):&nbsp;R</pre>
+      <p>Run <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withResumed(kotlin.Function0)">block</a></code> with this <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> in a <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> of at least <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#RESUMED">Lifecycle.State.RESUMED</a></code> and resume with the result. Throws the <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleDestroyedException.html">CancellationException</a></code> if the lifecycle has reached <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#DESTROYED">Lifecycle.State.DESTROYED</a></code> by the time of the call or before <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withResumed(kotlin.Function0)">block</a></code> is able to run.</p>
+    </div>
+    <div><a name="-androidx.lifecycle.Lifecycle-.withStarted-kotlin.Function0-"></a><a name="withstarted"></a>
+      <h3 class="api-name" id="(androidx.lifecycle.Lifecycle).withStarted(kotlin.Function0)">withStarted</h3>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;inline&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withStarted(kotlin.Function0)">withStarted</a>(crossinline&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> R):&nbsp;R</pre>
+      <p>Run <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withStarted(kotlin.Function0)">block</a></code> with this <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> in a <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> of at least <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#STARTED">Lifecycle.State.STARTED</a></code> and resume with the result. Throws the <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleDestroyedException.html">CancellationException</a></code> if the lifecycle has reached <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#DESTROYED">Lifecycle.State.DESTROYED</a></code> by the time of the call or before <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withStarted(kotlin.Function0)">block</a></code> is able to run.</p>
+    </div>
+    <div><a name="(androidx.lifecycle.Lifecycle).withStateAtLeast(androidx.lifecycle.Lifecycle.State, kotlin.Function0)"></a><a name="-androidx.lifecycle.Lifecycle-.withStateAtLeast-androidx.lifecycle.Lifecycle.State-kotlin.Function0-"></a><a name="withstateatleast"></a>
+      <h3 class="api-name" id="(androidx.lifecycle.Lifecycle).withStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.Function0)">withStateAtLeast</h3>
+      <pre class="api-signature no-pretty-print">suspend&nbsp;inline&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a>.<a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.Function0)">withStateAtLeast</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> R<br>):&nbsp;R</pre>
+      <p>Run <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.Function0)">block</a></code> with this <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> in a <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> of at least <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.Function0)">state</a></code> and resume with the result. Throws the <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleDestroyedException.html">CancellationException</a></code> if the lifecycle has reached <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#DESTROYED">Lifecycle.State.DESTROYED</a></code> by the time of the call or before <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).withStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.Function0)">block</a></code> is able to run.</p>
+    </div>
+  </body>
+</html>

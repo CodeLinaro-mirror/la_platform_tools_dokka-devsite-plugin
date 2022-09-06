@@ -58,15 +58,15 @@
             <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
             <td>
               <div><code><span><del><a href="/reference/androidx/fragment/app/FragmentContainer.html#instantiate(android.content.Context,java.lang.String,android.os.Bundle)">instantiate</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/content/Context.html">Context</a>&nbsp;context,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;className,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>&nbsp;arguments<br>)</code></div>
-              <p><strong>This method is deprecated.</strong> 
-                <p>Use <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">FragmentManager#setFragmentFactory</a></code> to control how Fragments are instantiated.</p>
+              <p><strong>This method is deprecated.</strong>
+                <p>Use <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">setFragmentFactory</a></code> to control how Fragments are instantiated.</p>
               </p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a></code></td>
             <td>
-              <div><code><a href="/reference/androidx/fragment/app/FragmentContainer.html#onFindViewById(int)">onFindViewById</a>(int&nbsp;id)</code></div>
+              <div><code><a href="/reference/androidx/fragment/app/FragmentContainer.html#onFindViewById(int)">onFindViewById</a>(@<a href="/reference/androidx/annotation/IdRes.html">IdRes</a> int&nbsp;id)</code></div>
               <p>Return the view with the given resource ID.</p>
             </td>
           </tr>
@@ -83,20 +83,20 @@
     <h2>Public constructors</h2>
     <div><a name="FragmentContainer--"></a><a name="fragmentcontainer"></a>
       <h3 class="api-name" id="FragmentContainer()">FragmentContainer</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;<a href="/reference/androidx/fragment/app/FragmentContainer.html#FragmentContainer()">FragmentContainer</a>()</pre>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/fragment/app/FragmentContainer.html#FragmentContainer()">FragmentContainer</a>()</pre>
     </div>
     <h2>Public methods</h2>
     <div><a name="instantiate(android.content.Context, java.lang.String, android.os.Bundle)"></a><a name="instantiate-android.content.Context-java.lang.String-android.os.Bundle-"></a><a name="instantiate"></a>
       <h3 class="api-name" id="instantiate(android.content.Context,java.lang.String,android.os.Bundle)">instantiate</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&nbsp;<span><del><a href="/reference/androidx/fragment/app/FragmentContainer.html#instantiate(android.content.Context,java.lang.String,android.os.Bundle)">instantiate</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/android/content/Context.html">Context</a>&nbsp;context,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;className,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>&nbsp;arguments<br>)</pre>
       <aside class="caution"><strong>This method is deprecated.</strong><br>
-        <p>Use <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">FragmentManager#setFragmentFactory</a></code> to control how Fragments are instantiated.</p>
+        <p>Use <code><a href="/reference/androidx/fragment/app/FragmentManager.html#setFragmentFactory(androidx.fragment.app.FragmentFactory)">setFragmentFactory</a></code> to control how Fragments are instantiated.</p>
       </aside>
-      <p>Creates an instance of the specified fragment, can be overridden to construct fragments with dependencies, or change the fragment being constructed. By default just calls <code><a href="/reference/androidx/fragment/app/Fragment.html#instantiate(android.content.Context,java.lang.String,android.os.Bundle)">Fragment#instantiate(Context, String, Bundle)</a></code>.</p>
+      <p>Creates an instance of the specified fragment, can be overridden to construct fragments with dependencies, or change the fragment being constructed. By default just calls <code><a href="/reference/androidx/fragment/app/Fragment.html#instantiate(android.content.Context,java.lang.String,android.os.Bundle)">instantiate</a></code>.</p>
     </div>
     <div><a name="onFindViewById-int-"></a><a name="onfindviewbyid"></a>
       <h3 class="api-name" id="onFindViewById(int)">onFindViewById</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;<a href="/reference/androidx/fragment/app/FragmentContainer.html#onFindViewById(int)">onFindViewById</a>(int&nbsp;id)</pre>
+      <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/android/view/View.html">View</a>&nbsp;<a href="/reference/androidx/fragment/app/FragmentContainer.html#onFindViewById(int)">onFindViewById</a>(@<a href="/reference/androidx/annotation/IdRes.html">IdRes</a> int&nbsp;id)</pre>
       <p>Return the view with the given resource ID. May return <code>null</code> if the view is not a child of this container.</p>
     </div>
     <div><a name="onHasView--"></a><a name="onhasview"></a>

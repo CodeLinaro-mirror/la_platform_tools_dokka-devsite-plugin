@@ -14,136 +14,428 @@
  * limitations under the License.
  */
 
-
 package androidx.fragment.app;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.AttributeSet;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
 
 /**
- * Special TabHost that allows the use of {@link androidx.fragment.app.Fragment Fragment} objects for
+ * Special TabHost that allows the use of {@link Fragment} objects for
  * its tab content.  When placing this in a view hierarchy, after inflating
- * the hierarchy you must call {@link #setup(android.content.Context,androidx.fragment.app.FragmentManager,int)}
+ * the hierarchy you must call {@link #setup(Context, FragmentManager, int)}
  * to complete the initialization of the tab host.
  *
  * @deprecated Use <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
  *  TabLayout and ViewPager</a> instead.
  */
-
-@SuppressWarnings({"unchecked", "deprecation", "all"})
+@SuppressWarnings("deprecation")
 @Deprecated
-public class FragmentTabHost extends android.widget.TabHost implements android.widget.TabHost.OnTabChangeListener {
+public class FragmentTabHost extends android.widget.TabHost
+        implements android.widget.TabHost.OnTabChangeListener {
+    private final ArrayList<TabInfo> mTabs = new ArrayList<>();
 
-/**
- * @deprecated Use
- * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
- *  TabLayout and ViewPager</a> instead.
- */
+    private FrameLayout mRealTabContent;
+    private Context mContext;
+    private FragmentManager mFragmentManager;
+    private int mContainerId;
+    private android.widget.TabHost.OnTabChangeListener mOnTabChangeListener;
+    private TabInfo mLastTab;
+    private boolean mAttached;
 
-@Deprecated
-public FragmentTabHost(@androidx.annotation.NonNull android.content.Context context) { super((android.content.Context)null); throw new RuntimeException("Stub!"); }
+    static final class TabInfo {
+        final @NonNull String tag;
+        final @NonNull Class<?> clss;
+        final @Nullable Bundle args;
+        Fragment fragment;
 
-/**
- * @deprecated Use
- * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
- *  TabLayout and ViewPager</a> instead.
- */
+        TabInfo(@NonNull String _tag, @NonNull Class<?> _class, @Nullable Bundle _args) {
+            tag = _tag;
+            clss = _class;
+            args = _args;
+        }
+    }
 
-@Deprecated
-public FragmentTabHost(@androidx.annotation.NonNull android.content.Context context, @androidx.annotation.Nullable android.util.AttributeSet attrs) { super((android.content.Context)null); throw new RuntimeException("Stub!"); }
+    static class DummyTabFactory implements android.widget.TabHost.TabContentFactory {
+        private final Context mContext;
 
-/**
- * @deprecated Use
- * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
- *  TabLayout and ViewPager</a> instead.
- */
+        public DummyTabFactory(Context context) {
+            mContext = context;
+        }
 
-@Deprecated
-public void setup() { throw new RuntimeException("Stub!"); }
+        @Override
+        public View createTabContent(String tag) {
+            View v = new View(mContext);
+            v.setMinimumWidth(0);
+            v.setMinimumHeight(0);
+            return v;
+        }
+    }
 
-/**
- * Set up the FragmentTabHost to use the given FragmentManager
- *
- * @deprecated Use
- * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
- *  TabLayout and ViewPager</a> instead.
- */
+    static class SavedState extends BaseSavedState {
+        String curTab;
 
-@Deprecated
-public void setup(@androidx.annotation.NonNull android.content.Context context, @androidx.annotation.NonNull androidx.fragment.app.FragmentManager manager) { throw new RuntimeException("Stub!"); }
+        SavedState(Parcelable superState) {
+            super(superState);
+        }
 
-/**
- * Set up the FragmentTabHost to use the given FragmentManager
- *
- * @deprecated Use
- * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
- *  TabLayout and ViewPager</a> instead.
- */
+        SavedState(Parcel in) {
+            super(in);
+            curTab = in.readString();
+        }
 
-@Deprecated
-public void setup(@androidx.annotation.NonNull android.content.Context context, @androidx.annotation.NonNull androidx.fragment.app.FragmentManager manager, int containerId) { throw new RuntimeException("Stub!"); }
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeString(curTab);
+        }
 
-/**
- * @deprecated Use
- * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
- *  TabLayout and ViewPager</a> instead.
- */
+        @NonNull
+        @Override
+        public String toString() {
+            return "FragmentTabHost.SavedState{"
+                    + Integer.toHexString(System.identityHashCode(this))
+                    + " curTab=" + curTab + "}";
+        }
 
-@Deprecated
-public void setOnTabChangedListener(@androidx.annotation.Nullable android.widget.TabHost.OnTabChangeListener l) { throw new RuntimeException("Stub!"); }
+        public static final Parcelable.Creator<SavedState> CREATOR
+                = new Parcelable.Creator<SavedState>() {
+            @Override
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
 
-/**
- * @deprecated Use
- * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
- *  TabLayout and ViewPager</a> instead.
- */
+            @Override
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
+    }
 
-@Deprecated
-public void addTab(@androidx.annotation.NonNull android.widget.TabHost.TabSpec tabSpec, @androidx.annotation.NonNull java.lang.Class<?> clss, @androidx.annotation.Nullable android.os.Bundle args) { throw new RuntimeException("Stub!"); }
+    /**
+     * @deprecated Use
+     * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
+     *  TabLayout and ViewPager</a> instead.
+     */
+    @Deprecated
+    public FragmentTabHost(@NonNull Context context) {
+        // Note that we call through to the version that takes an AttributeSet,
+        // because the simple Context construct can result in a broken object!
+        super(context, null);
+        initFragmentTabHost(context, null);
+    }
 
-/**
- * @deprecated Use
- * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
- *  TabLayout and ViewPager</a> instead.
- */
+    /**
+     * @deprecated Use
+     * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
+     *  TabLayout and ViewPager</a> instead.
+     */
+    @Deprecated
+    public FragmentTabHost(@NonNull Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        initFragmentTabHost(context, attrs);
+    }
 
-@Deprecated
-protected void onAttachedToWindow() { throw new RuntimeException("Stub!"); }
+    private void initFragmentTabHost(Context context, AttributeSet attrs) {
+        final TypedArray a = context.obtainStyledAttributes(attrs,
+                new int[] { android.R.attr.inflatedId }, 0, 0);
+        mContainerId = a.getResourceId(0, 0);
+        a.recycle();
 
-/**
- * @deprecated Use
- * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
- *  TabLayout and ViewPager</a> instead.
- */
+        super.setOnTabChangedListener(this);
+    }
 
-@Deprecated
-protected void onDetachedFromWindow() { throw new RuntimeException("Stub!"); }
+    private void ensureHierarchy(Context context) {
+        // If owner hasn't made its own view hierarchy, then as a convenience
+        // we will construct a standard one here.
+        if (findViewById(android.R.id.tabs) == null) {
+            LinearLayout ll = new LinearLayout(context);
+            ll.setOrientation(LinearLayout.VERTICAL);
+            addView(ll, new FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT));
 
-/**
- * @deprecated Use
- * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
- *  TabLayout and ViewPager</a> instead.
- */
+            android.widget.TabWidget tw = new android.widget.TabWidget(context);
+            tw.setId(android.R.id.tabs);
+            tw.setOrientation(android.widget.TabWidget.HORIZONTAL);
+            ll.addView(tw, new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT, 0));
 
-@Deprecated
-@androidx.annotation.NonNull
-protected android.os.Parcelable onSaveInstanceState() { throw new RuntimeException("Stub!"); }
+            FrameLayout fl = new FrameLayout(context);
+            fl.setId(android.R.id.tabcontent);
+            ll.addView(fl, new LinearLayout.LayoutParams(0, 0, 0));
 
-/**
- * @deprecated Use
- * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
- *  TabLayout and ViewPager</a> instead.
- */
+            mRealTabContent = fl = new FrameLayout(context);
+            mRealTabContent.setId(mContainerId);
+            ll.addView(fl, new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, 0, 1));
+        }
+    }
 
-@Deprecated
-protected void onRestoreInstanceState(android.os.Parcelable state) { throw new RuntimeException("Stub!"); }
+    /**
+     * @deprecated Use
+     * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
+     *  TabLayout and ViewPager</a> instead.
+     */
+    @Override @Deprecated
+    public void setup() {
+        throw new IllegalStateException(
+                "Must call setup() that takes a Context and FragmentManager");
+    }
 
-/**
- * @deprecated Use
- * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
- *  TabLayout and ViewPager</a> instead.
- */
+    /**
+     * Set up the FragmentTabHost to use the given FragmentManager
+     *
+     * @deprecated Use
+     * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
+     *  TabLayout and ViewPager</a> instead.
+     */
+    @Deprecated
+    public void setup(@NonNull Context context, @NonNull FragmentManager manager) {
+        ensureHierarchy(context);  // Ensure views required by super.setup()
+        super.setup();
+        mContext = context;
+        mFragmentManager = manager;
+        ensureContent();
+    }
 
-@Deprecated
-public void onTabChanged(@androidx.annotation.Nullable java.lang.String tabId) { throw new RuntimeException("Stub!"); }
+    /**
+     * Set up the FragmentTabHost to use the given FragmentManager
+     *
+     * @deprecated Use
+     * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
+     *  TabLayout and ViewPager</a> instead.
+     */
+    @Deprecated
+    public void setup(@NonNull Context context, @NonNull FragmentManager manager,
+            int containerId) {
+        ensureHierarchy(context);  // Ensure views required by super.setup()
+        super.setup();
+        mContext = context;
+        mFragmentManager = manager;
+        mContainerId = containerId;
+        ensureContent();
+        mRealTabContent.setId(containerId);
+
+        // We must have an ID to be able to save/restore our state.  If
+        // the owner hasn't set one at this point, we will set it ourselves.
+        if (getId() == View.NO_ID) {
+            setId(android.R.id.tabhost);
+        }
+    }
+
+    private void ensureContent() {
+        if (mRealTabContent == null) {
+            mRealTabContent = (FrameLayout)findViewById(mContainerId);
+            if (mRealTabContent == null) {
+                throw new IllegalStateException(
+                        "No tab content FrameLayout found for id " + mContainerId);
+            }
+        }
+    }
+
+    /**
+     * @deprecated Use
+     * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
+     *  TabLayout and ViewPager</a> instead.
+     */
+    @Deprecated
+    @Override
+    public void setOnTabChangedListener(@Nullable OnTabChangeListener l) {
+        mOnTabChangeListener = l;
+    }
+
+    /**
+     * @deprecated Use
+     * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
+     *  TabLayout and ViewPager</a> instead.
+     */
+    @Deprecated
+    public void addTab(@NonNull android.widget.TabHost.TabSpec tabSpec, @NonNull Class<?> clss,
+            @Nullable Bundle args) {
+        tabSpec.setContent(new DummyTabFactory(mContext));
+
+        final String tag = tabSpec.getTag();
+        final TabInfo info = new TabInfo(tag, clss, args);
+
+        if (mAttached) {
+            // If we are already attached to the window, then check to make
+            // sure this tab's fragment is inactive if it exists.  This shouldn't
+            // normally happen.
+            info.fragment = mFragmentManager.findFragmentByTag(tag);
+            if (info.fragment != null && !info.fragment.isDetached()) {
+                final FragmentTransaction ft = mFragmentManager.beginTransaction();
+                ft.detach(info.fragment);
+                ft.commit();
+            }
+        }
+
+        mTabs.add(info);
+        addTab(tabSpec);
+    }
+
+    /**
+     * @deprecated Use
+     * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
+     *  TabLayout and ViewPager</a> instead.
+     */
+    @Deprecated
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+
+        final String currentTag = getCurrentTabTag();
+
+        // Go through all tabs and make sure their fragments match
+        // the correct state.
+        FragmentTransaction ft = null;
+        for (int i = 0, count = mTabs.size(); i < count; i++) {
+            final TabInfo tab = mTabs.get(i);
+            tab.fragment = mFragmentManager.findFragmentByTag(tab.tag);
+            if (tab.fragment != null && !tab.fragment.isDetached()) {
+                if (tab.tag.equals(currentTag)) {
+                    // The fragment for this tab is already there and
+                    // active, and it is what we really want to have
+                    // as the current tab.  Nothing to do.
+                    mLastTab = tab;
+                } else {
+                    // This fragment was restored in the active state,
+                    // but is not the current tab.  Deactivate it.
+                    if (ft == null) {
+                        ft = mFragmentManager.beginTransaction();
+                    }
+                    ft.detach(tab.fragment);
+                }
+            }
+        }
+
+        // We are now ready to go.  Make sure we are switched to the
+        // correct tab.
+        mAttached = true;
+        ft = doTabChanged(currentTag, ft);
+        if (ft != null) {
+            ft.commit();
+            mFragmentManager.executePendingTransactions();
+        }
+    }
+
+    /**
+     * @deprecated Use
+     * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
+     *  TabLayout and ViewPager</a> instead.
+     */
+    @Deprecated
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        mAttached = false;
+    }
+
+    /**
+     * @deprecated Use
+     * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
+     *  TabLayout and ViewPager</a> instead.
+     */
+    @Deprecated
+    @Override
+    @NonNull
+    protected Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        SavedState ss = new SavedState(superState);
+        ss.curTab = getCurrentTabTag();
+        return ss;
+    }
+
+    /**
+     * @deprecated Use
+     * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
+     *  TabLayout and ViewPager</a> instead.
+     */
+    @Deprecated
+    @Override
+    protected void onRestoreInstanceState(@SuppressLint("UnknownNullness") Parcelable state) {
+        if (!(state instanceof SavedState)) {
+            super.onRestoreInstanceState(state);
+            return;
+        }
+        SavedState ss = (SavedState) state;
+        super.onRestoreInstanceState(ss.getSuperState());
+        setCurrentTabByTag(ss.curTab);
+    }
+
+    /**
+     * @deprecated Use
+     * <a href="https://developer.android.com/guide/navigation/navigation-swipe-view ">
+     *  TabLayout and ViewPager</a> instead.
+     */
+    @Deprecated
+    @Override
+    public void onTabChanged(@Nullable String tabId) {
+        if (mAttached) {
+            final FragmentTransaction ft = doTabChanged(tabId, null);
+            if (ft != null) {
+                ft.commit();
+            }
+        }
+        if (mOnTabChangeListener != null) {
+            mOnTabChangeListener.onTabChanged(tabId);
+        }
+    }
+
+    @Nullable
+    private FragmentTransaction doTabChanged(@Nullable String tag,
+            @Nullable FragmentTransaction ft) {
+        final TabInfo newTab = getTabInfoForTag(tag);
+        if (mLastTab != newTab) {
+            if (ft == null) {
+                ft = mFragmentManager.beginTransaction();
+            }
+
+            if (mLastTab != null) {
+                if (mLastTab.fragment != null) {
+                    ft.detach(mLastTab.fragment);
+                }
+            }
+
+            if (newTab != null) {
+                if (newTab.fragment == null) {
+                    newTab.fragment = mFragmentManager.getFragmentFactory().instantiate(
+                            mContext.getClassLoader(), newTab.clss.getName());
+                    newTab.fragment.setArguments(newTab.args);
+                    ft.add(mContainerId, newTab.fragment, newTab.tag);
+                } else {
+                    ft.attach(newTab.fragment);
+                }
+            }
+
+            mLastTab = newTab;
+        }
+
+        return ft;
+    }
+
+    @Nullable
+    private TabInfo getTabInfoForTag(String tabId) {
+        for (int i = 0, count = mTabs.size(); i < count; i++) {
+            final TabInfo tab = mTabs.get(i);
+            if (tab.tag.equals(tabId)) {
+                return tab;
+            }
+        }
+        return null;
+    }
 }
-

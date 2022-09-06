@@ -1,0 +1,92 @@
+<html devsite="true">
+  <head>
+    <title>FragmentStrictMode</title>
+{% setvar book_path %}/reference/kotlin/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>FragmentStrictMode</h1>
+    <p>
+      <pre>object FragmentStrictMode</pre>
+    </p>
+    <hr>
+    <p>FragmentStrictMode is a tool which detects things you might be doing by accident and brings them to your attention so you can fix them. Basically, it's a version of <code><a href="https://developer.android.com/reference/android/os/StrictMode.html">android.os.StrictMode</a></code> specifically for fragment-related issues.</p>
+    <p>You can decide what should happen when a violation is detected. For example, using <code><a href="/reference/kotlin/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#penaltyLog()">Policy.Builder.penaltyLog</a></code> you can watch the output of <code>adb logcat</code> while you use your application to see the violations as they happen.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Nested types</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/fragment/app/strictmode/FragmentStrictMode.OnViolationListener.html">FragmentStrictMode.OnViolationListener</a></code></td>
+            <td>
+              <p>When <code><a href="/reference/kotlin/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#penaltyListener(androidx.fragment.app.strictmode.FragmentStrictMode.OnViolationListener)">Policy.Builder.penaltyListener</a></code> is enabled, the listener is called when a violation occurs.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.html">FragmentStrictMode.Policy</a></code></td>
+            <td>
+              <p><code><a href="/reference/kotlin/androidx/fragment/app/strictmode/FragmentStrictMode.html">FragmentStrictMode</a></code> policy applied to a certain <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code> (or globally).</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a></code></td>
+            <td>
+              <p>Creates <code><a href="/reference/kotlin/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.html">Policy</a></code> instances.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public functions</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code>@<a href="/reference/kotlin/androidx/annotation/VisibleForTesting.html">VisibleForTesting</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/strictmode/FragmentStrictMode.html#onPolicyViolation(androidx.fragment.app.strictmode.Violation)">onPolicyViolation</a>(violation:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/strictmode/Violation.html">Violation</a>)</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.html">FragmentStrictMode.Policy</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/fragment/app/strictmode/FragmentStrictMode.html#defaultPolicy()">defaultPolicy</a></code></div>
+              <p>The current policy for what actions should be detected, as well as the penalty if such actions occur.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public functions</h2>
+    <div><a name="onPolicyViolation-androidx.fragment.app.strictmode.Violation-"></a><a name="onpolicyviolation"></a>
+      <h3 class="api-name" id="onPolicyViolation(androidx.fragment.app.strictmode.Violation)">onPolicyViolation</h3>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/annotation/VisibleForTesting.html">VisibleForTesting</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/strictmode/FragmentStrictMode.html#onPolicyViolation(androidx.fragment.app.strictmode.Violation)">onPolicyViolation</a>(violation:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/strictmode/Violation.html">Violation</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+    </div>
+    <h2>Public properties</h2>
+    <div><a name="getDefaultPolicy()"></a><a name="setDefaultPolicy()"></a><a name="getDefaultPolicy--"></a><a name="setDefaultPolicy--"></a>
+      <h3 class="api-name" id="defaultPolicy()">defaultPolicy</h3>
+      <pre class="api-signature no-pretty-print">var&nbsp;<a href="/reference/kotlin/androidx/fragment/app/strictmode/FragmentStrictMode.html#defaultPolicy()">defaultPolicy</a>:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.html">FragmentStrictMode.Policy</a></pre>
+      <p>The current policy for what actions should be detected, as well as the penalty if such actions occur.</p>
+    </div>
+  </body>
+</html>

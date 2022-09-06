@@ -1,0 +1,198 @@
+<html devsite="true">
+  <head>
+    <title>FragmentStrictMode.Policy.Builder</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <h1>FragmentStrictMode.Policy.Builder</h1>
+    <p>
+      <pre>public final class FragmentStrictMode.Policy.Builder</pre>
+    </p>
+    <hr>
+    <p>Creates <code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.html">Policy</a></code> instances. Methods whose names start with <code>detect</code> specify what problems we should look for. Methods whose names start with <code>penalty</code> specify what we should do when we detect a problem.</p>
+    <p>You can call as many <code>detect</code> and <code>penalty</code> methods as you like. Currently order is insignificant: all penalties apply to all detected problems.</p>
+    <h2>Summary</h2>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public constructors</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td>
+              <div><code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#Builder()">Builder</a>()</code></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Public methods</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#allowViolation(java.lang.Class,java.lang.Class)">allowViolation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&gt;&nbsp;fragmentClass,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/Violation.html">Violation</a>&gt;&nbsp;violationClass<br>)</code></div>
+              <p>Allow the specified <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> class to bypass penalties for the specified <code><a href="/reference/androidx/fragment/app/strictmode/Violation.html">Violation</a></code>, if detected.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#allowViolation(kotlin.String,java.lang.Class)">allowViolation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fragmentClass,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/Violation.html">Violation</a>&gt;&nbsp;violationClass<br>)</code></div>
+              <p>Allow the specified <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> class to bypass penalties for the specified <code><a href="/reference/androidx/fragment/app/strictmode/Violation.html">Violation</a></code>, if detected.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.html">FragmentStrictMode.Policy</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#build()">build</a>()</code></div>
+              <p>Construct the Policy instance.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#detectFragmentReuse()">detectFragmentReuse</a>()</code></div>
+              <p>Detects cases, where a <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> instance is reused, after it was previously removed from a <code><a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#detectFragmentTagUsage()">detectFragmentTagUsage</a>()</code></div>
+              <p>Detects usage of the <fragment> tag inside XML layouts.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#detectRetainInstanceUsage()">detectRetainInstanceUsage</a>()</code></div>
+              <p>Detects calls to <code><a href="/reference/androidx/fragment/app/Fragment.html#setRetainInstance(kotlin.Boolean)">Fragment.setRetainInstance</a></code> and <code><a href="/reference/androidx/fragment/app/Fragment.html#getRetainInstance()">Fragment.getRetainInstance</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#detectSetUserVisibleHint()">detectSetUserVisibleHint</a>()</code></div>
+              <p>Detects calls to <code><a href="/reference/androidx/fragment/app/Fragment.html#setUserVisibleHint(kotlin.Boolean)">Fragment.setUserVisibleHint</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#detectTargetFragmentUsage()">detectTargetFragmentUsage</a>()</code></div>
+              <p>Detects calls to <code><a href="/reference/androidx/fragment/app/Fragment.html#setTargetFragment(androidx.fragment.app.Fragment,kotlin.Int)">Fragment.setTargetFragment</a></code>, <code><a href="/reference/androidx/fragment/app/Fragment.html#getTargetFragment()">Fragment.getTargetFragment</a></code> and <code><a href="/reference/androidx/fragment/app/Fragment.html#getTargetRequestCode()">Fragment.getTargetRequestCode</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#detectWrongFragmentContainer()">detectWrongFragmentContainer</a>()</code></div>
+              <p>Detects cases where a <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> is added to a container other than a <code><a href="/reference/androidx/fragment/app/FragmentContainerView.html">androidx.fragment.app.FragmentContainerView</a></code>.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#penaltyDeath()">penaltyDeath</a>()</code></div>
+              <p>Throws an exception on violation.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#penaltyListener(androidx.fragment.app.strictmode.FragmentStrictMode.OnViolationListener)">penaltyListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.OnViolationListener.html">FragmentStrictMode.OnViolationListener</a>&nbsp;listener<br>)</code></div>
+              <p>Call <code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.OnViolationListener.html#onViolation(androidx.fragment.app.strictmode.Violation)">OnViolationListener.onViolation</a></code> for every violation.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="40%"><code>final @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a></code></td>
+            <td>
+              <div><code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#penaltyLog()">penaltyLog</a>()</code></div>
+              <p>Log detected violations to the system log.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Public constructors</h2>
+    <div><a name="Builder--"></a><a name="builder"></a>
+      <h3 class="api-name" id="Builder()">Builder</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;<a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#Builder()">Builder</a>()</pre>
+    </div>
+    <h2>Public methods</h2>
+    <div><a name="allowViolation(java.lang.Class, java.lang.Class)"></a><a name="allowViolation-java.lang.Class-java.lang.Class-"></a><a name="allowviolation"></a>
+      <h3 class="api-name" id="allowViolation(java.lang.Class,java.lang.Class)">allowViolation</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a>&nbsp;<a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#allowViolation(java.lang.Class,java.lang.Class)">allowViolation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a>&gt;&nbsp;fragmentClass,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/Violation.html">Violation</a>&gt;&nbsp;violationClass<br>)</pre>
+      <p>Allow the specified <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> class to bypass penalties for the specified <code><a href="/reference/androidx/fragment/app/strictmode/Violation.html">Violation</a></code>, if detected.</p>
+      <p>By default, all <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> classes will incur penalties for any detected <code><a href="/reference/androidx/fragment/app/strictmode/Violation.html">Violation</a></code>.</p>
+    </div>
+    <div><a name="allowViolation(kotlin.String, java.lang.Class)"></a><a name="allowViolation-kotlin.String-java.lang.Class-"></a><a name="allowviolation"></a>
+      <h3 class="api-name" id="allowViolation(kotlin.String,java.lang.Class)">allowViolation</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a>&nbsp;<a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#allowViolation(kotlin.String,java.lang.Class)">allowViolation</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;fragmentClass,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Class.html">Class</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/Violation.html">Violation</a>&gt;&nbsp;violationClass<br>)</pre>
+      <p>Allow the specified <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> class to bypass penalties for the specified <code><a href="/reference/androidx/fragment/app/strictmode/Violation.html">Violation</a></code>, if detected.</p>
+      <p>Since this overload of <code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#allowViolation(java.lang.Class,java.lang.Class)">allowViolation</a></code> takes in the name of the Fragment class as a string, rather than accepting the Class itself, the user will need to manually insure the class is not obfuscated.</p>
+      <p>By default, all <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> classes will incur penalties for any detected <code><a href="/reference/androidx/fragment/app/strictmode/Violation.html">Violation</a></code>.</p>
+    </div>
+    <div><a name="build--"></a><a name="build"></a>
+      <h3 class="api-name" id="build()">build</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.html">FragmentStrictMode.Policy</a>&nbsp;<a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#build()">build</a>()</pre>
+      <p>Construct the Policy instance.</p>
+      <p>Note: if no penalties are enabled before calling <code>build</code>, <code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#penaltyLog()">penaltyLog</a></code> is implicitly set.</p>
+    </div>
+    <div><a name="detectFragmentReuse--"></a><a name="detectfragmentreuse"></a>
+      <h3 class="api-name" id="detectFragmentReuse()">detectFragmentReuse</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a>&nbsp;<a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#detectFragmentReuse()">detectFragmentReuse</a>()</pre>
+      <p>Detects cases, where a <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> instance is reused, after it was previously removed from a <code><a href="/reference/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code>.</p>
+    </div>
+    <div><a name="detectFragmentTagUsage--"></a><a name="detectfragmenttagusage"></a>
+      <h3 class="api-name" id="detectFragmentTagUsage()">detectFragmentTagUsage</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a>&nbsp;<a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#detectFragmentTagUsage()">detectFragmentTagUsage</a>()</pre>
+      <p>Detects usage of the <fragment> tag inside XML layouts.</p>
+    </div>
+    <div><a name="detectRetainInstanceUsage--"></a><a name="detectretaininstanceusage"></a>
+      <h3 class="api-name" id="detectRetainInstanceUsage()">detectRetainInstanceUsage</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a>&nbsp;<a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#detectRetainInstanceUsage()">detectRetainInstanceUsage</a>()</pre>
+      <p>Detects calls to <code><a href="/reference/androidx/fragment/app/Fragment.html#setRetainInstance(kotlin.Boolean)">Fragment.setRetainInstance</a></code> and <code><a href="/reference/androidx/fragment/app/Fragment.html#getRetainInstance()">Fragment.getRetainInstance</a></code>.</p>
+    </div>
+    <div><a name="detectSetUserVisibleHint--"></a><a name="detectsetuservisiblehint"></a>
+      <h3 class="api-name" id="detectSetUserVisibleHint()">detectSetUserVisibleHint</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a>&nbsp;<a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#detectSetUserVisibleHint()">detectSetUserVisibleHint</a>()</pre>
+      <p>Detects calls to <code><a href="/reference/androidx/fragment/app/Fragment.html#setUserVisibleHint(kotlin.Boolean)">Fragment.setUserVisibleHint</a></code>.</p>
+    </div>
+    <div><a name="detectTargetFragmentUsage--"></a><a name="detecttargetfragmentusage"></a>
+      <h3 class="api-name" id="detectTargetFragmentUsage()">detectTargetFragmentUsage</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a>&nbsp;<a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#detectTargetFragmentUsage()">detectTargetFragmentUsage</a>()</pre>
+      <p>Detects calls to <code><a href="/reference/androidx/fragment/app/Fragment.html#setTargetFragment(androidx.fragment.app.Fragment,kotlin.Int)">Fragment.setTargetFragment</a></code>, <code><a href="/reference/androidx/fragment/app/Fragment.html#getTargetFragment()">Fragment.getTargetFragment</a></code> and <code><a href="/reference/androidx/fragment/app/Fragment.html#getTargetRequestCode()">Fragment.getTargetRequestCode</a></code>.</p>
+    </div>
+    <div><a name="detectWrongFragmentContainer--"></a><a name="detectwrongfragmentcontainer"></a>
+      <h3 class="api-name" id="detectWrongFragmentContainer()">detectWrongFragmentContainer</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a>&nbsp;<a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#detectWrongFragmentContainer()">detectWrongFragmentContainer</a>()</pre>
+      <p>Detects cases where a <code><a href="/reference/androidx/fragment/app/Fragment.html">Fragment</a></code> is added to a container other than a <code><a href="/reference/androidx/fragment/app/FragmentContainerView.html">androidx.fragment.app.FragmentContainerView</a></code>.</p>
+    </div>
+    <div><a name="penaltyDeath--"></a><a name="penaltydeath"></a>
+      <h3 class="api-name" id="penaltyDeath()">penaltyDeath</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a>&nbsp;<a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#penaltyDeath()">penaltyDeath</a>()</pre>
+      <p>Throws an exception on violation. This penalty runs at the end of all enabled penalties so you'll still get to see logging or other violations before the exception is thrown.</p>
+    </div>
+    <div><a name="penaltyListener-androidx.fragment.app.strictmode.FragmentStrictMode.OnViolationListener-"></a><a name="penaltylistener"></a>
+      <h3 class="api-name" id="penaltyListener(androidx.fragment.app.strictmode.FragmentStrictMode.OnViolationListener)">penaltyListener</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a>&nbsp;<a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#penaltyListener(androidx.fragment.app.strictmode.FragmentStrictMode.OnViolationListener)">penaltyListener</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.OnViolationListener.html">FragmentStrictMode.OnViolationListener</a>&nbsp;listener<br>)</pre>
+      <p>Call <code><a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.OnViolationListener.html#onViolation(androidx.fragment.app.strictmode.Violation)">OnViolationListener.onViolation</a></code> for every violation. The listener will be called on the main thread of the fragment host.</p>
+    </div>
+    <div><a name="penaltyLog--"></a><a name="penaltylog"></a>
+      <h3 class="api-name" id="penaltyLog()">penaltyLog</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html">FragmentStrictMode.Policy.Builder</a>&nbsp;<a href="/reference/androidx/fragment/app/strictmode/FragmentStrictMode.Policy.Builder.html#penaltyLog()">penaltyLog</a>()</pre>
+      <p>Log detected violations to the system log.</p>
+    </div>
+  </body>
+</html>

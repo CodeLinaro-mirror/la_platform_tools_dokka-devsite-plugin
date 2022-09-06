@@ -154,7 +154,7 @@ internal data class DefaultDescriptionComponent(
                 // Displays the deprecation message in a table cell (e.g. class summary table)
                 p {
                     strong { +data.deprecation }
-                    +" "
+                    if (data.components.firstOrNull() is Text) +" "
                     renderTags(data.components, State())
                 }
             } else {
