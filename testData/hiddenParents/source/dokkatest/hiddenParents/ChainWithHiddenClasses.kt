@@ -19,22 +19,27 @@ package dokkatest.hiddenParents
 /** @hide */
 open class HiddenAncestorClass {
     fun ancestorClassFunction(): Unit {}
+    val ancestorClassProperty = 1
 }
 
 open class VisibleGreatGrandparentClass : HiddenAncestorClass() {
     fun greatGrandparentClassFunction(): Unit {}
+    val greatGrandparentClassProperty = 2
 }
 
 /** @hide */
 open class HiddenGrandparentClass : VisibleGreatGrandparentClass() {
     fun grandparentClassFunction(): Unit {}
+    val grandparentClassProperty = 3
 }
 
 /** @hide */
 open class HiddenParentClass : HiddenGrandparentClass() {
     fun parentClassFunction(): Unit {}
+    val parentClassProperty = 4
 }
 
 class VisibleExtendingChild : HiddenParentClass() {
     fun childFunction(): Unit {}
+    val childProperty = 5
 }

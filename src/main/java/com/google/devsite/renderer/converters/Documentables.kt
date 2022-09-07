@@ -336,6 +336,12 @@ internal fun <T> PropertyContainer<T>.addAnnotation(newA: Annotations.Annotation
 
 internal val JvmStatic = Annotations.Annotation(DRI("kotlin.jvm", "JvmStatic"), params = emptyMap())
 
+internal fun DRI.possiblyConvertMappedType(displayLanguage: Language) =
+    when (displayLanguage) {
+        Language.JAVA -> possiblyAsJava()
+        Language.KOTLIN -> possiblyAsKotlin()
+    }
+
 /**
  * Uses the JavaToKotlinClassMap to possibly convert a dri to its Java equivalent
  * https://kotlinlang.org/docs/reference/java-interop.html#mapped-types

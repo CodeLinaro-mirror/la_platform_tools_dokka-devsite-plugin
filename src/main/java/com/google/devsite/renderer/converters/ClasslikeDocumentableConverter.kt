@@ -94,16 +94,10 @@ internal class ClasslikeDocumentableConverter(
 
     /** @return the classlike component */
     suspend fun classlike(): DevsitePage = coroutineScope {
-        var declaredFunctions = if (displayLanguage == Language.KOTLIN) classlike.functions
-        else classlike.functions + classlike.properties.gettersAndSetters()
-        declaredFunctions = declaredFunctions.nonInheritedTypes()
-        var declaredProperties = classlike.properties.nonInheritedTypes()
-        var companionProperties = classlike.companionProperties()
-        var companionFunctions = classlike.companionFunctions() +
-            companionProperties.gettersAndSetters()
-
+        var (declaredFunctions, declaredProperties) = classlike.nonInheritedTypes()
         val inheritedAll = (classlike.children + classlike.properties.gettersAndSetters())
-            .inheritedTypes()
+            .inheritedTypes(classlike.supertypesForDisplayLanguage())
+        var (companionFunctions, companionProperties) = classlike.companionFunctionsAndProperties()
 
         // Java documentation needs to respect @jvm* annotations
         if (displayLanguage == Language.JAVA) {
@@ -878,40 +872,95 @@ internal class ClasslikeDocumentableConverter(
     }
 
     /**
-     * Returns the list of declared symbols. That is, symbols directly owned by this class-like
-     * and not found through the inheritance hierarchy.
-     *
-     * Class and package comparison isn't applicable for synthetic classes
+     * Returns lists of functions and properties directly owned by this class-like.
      */
-    private fun <T : Documentable> List<T>.nonInheritedTypes(): List<T> {
-        if (classlike.isSynthetic) {
-            return this
-        }
-        return filter { symbol -> symbol.isFromThisClass() }
+    private suspend fun DClasslike.nonInheritedTypes(): Pair<List<DFunction>, List<DProperty>> {
+        val allFunctions = if (displayLanguage == Language.KOTLIN) this.functions
+        else this.functions + this.properties.gettersAndSetters()
+
+        val supertypes = this.supertypesForDisplayLanguage()
+
+        return Pair(
+            allFunctions.nonInheritedTypes(supertypes, this),
+            this.properties.nonInheritedTypes(supertypes, this)
+        )
     }
 
-    private fun DClasslike.companionFunctions(): List<DFunction> =
-        (this as? DClass)?.companion?.functions?.nonInheritedTypes() ?: emptyList()
+    /**
+     * Returns the list of declared symbols. That is, symbols directly owned by the provided
+     * class-like and not found through the inheritance hierarchy.
+     *
+     * Class and package comparison isn't applicable for synthetic classes.
+     */
+    private inline fun <reified T : Documentable> List<T>.nonInheritedTypes(
+        supertypes: Set<DRI>,
+        forClass: DClasslike,
+    ): List<T> {
+        if (forClass.isSynthetic) {
+            return this
+        }
+        return filter { symbol -> !symbol.isInherited(supertypes) && !symbol.dri.isFromBaseClass() }
+            .map { symbol ->
+                if (symbol.isFromClass(forClass)) {
+                    symbol
+                } else {
+                    symbol.copyWithDRI(symbol.dri.copyToClass(forClass))
+                }
+            }
+    }
 
-    private fun DClasslike.companionProperties(): List<DProperty> =
-        (this as? DClass)?.companion?.properties?.nonInheritedTypes() ?: emptyList()
+    /**
+     * Makes a copy of the DProperty or DFunction with a new DRI. Defined over Documentables
+     * because both DProperty and DFunction have a `copy` method defined because they are data
+     * classes, but there isn't a way to specify the Documentable must be a data class.
+     */
+    private inline fun <reified T : Documentable> T.copyWithDRI(dri: DRI): T =
+        when (this) {
+            is DFunction -> this.copy(dri) as T
+            is DProperty -> this.copy(dri) as T
+            else -> throw RuntimeException()
+        }
+
+    private fun DRI.copyToClass(toClass: DClasslike): DRI =
+        copy(packageName = toClass.packageName(), classNames = toClass.name())
+
+    private fun Documentable.isFromClass(fromClass: DClasslike) =
+        fromClass.packageName() == dri.packageName &&
+            fromClass.name() == dri.classNames
+
+    /**
+     * Gather superclasses and interfaces for this class, converting mapped types when applicable.
+     */
+    private suspend fun DClasslike.supertypesForDisplayLanguage(): Set<DRI> {
+        val classNode = docsHolder.classGraph().getValue(this.dri)
+        return (classNode.superClasses + classNode.interfaces)
+            .map { it.dri.possiblyConvertMappedType(displayLanguage) }
+            .toSet()
+    }
+
+    private suspend fun DClasslike.companionFunctionsAndProperties():
+        Pair<List<DFunction>, List<DProperty>> {
+        return (this as? DClass)?.companion?.nonInheritedTypes()
+            ?: return Pair(emptyList(), emptyList())
+    }
 
     /**
      * Returns the list of inherited symbols, not from Any or Object
      * If class is synthetic there should be no inherited methods
      */
-    private fun <T : Documentable> List<T>.inheritedTypes(): List<T> {
+    private fun <T : Documentable> List<T>.inheritedTypes(supertypes: Set<DRI>): List<T> {
         if (classlike.isSynthetic) {
             return emptyList()
         }
-        return filter { symbol -> !symbol.isFromThisClass() && !symbol.dri.isFromBaseClass() }
+        return filter { symbol -> symbol.isInherited(supertypes) && !symbol.dri.isFromBaseClass() }
     }
 
-    private fun <T : Documentable> T.isFromThisClass() =
-        classlike.packageName() == dri.packageName && (
-            classlike.name() == dri.classNames ||
-                (classlike as? DClass)?.companion?.name() == dri.classNames
-            )
+    private fun <T : Documentable> T.isInherited(supertypes: Set<DRI>): Boolean {
+        // Convert mapped type for the function to make sure the DRI lines up with supertypes.
+        val classDRI = DRI(dri.packageName, dri.classNames)
+            .possiblyConvertMappedType(displayLanguage)
+        return supertypes.contains(classDRI)
+    }
 
     private fun createDefaultConstructorFor(classlike: DClasslike) =
         DFunction(
