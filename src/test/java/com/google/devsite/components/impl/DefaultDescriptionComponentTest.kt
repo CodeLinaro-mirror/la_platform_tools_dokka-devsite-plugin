@@ -725,7 +725,7 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
     }
 
     @Test
-    fun `Code block renders correctly`() {
+    fun `Code blocks render correctly`() {
         val component = """
             |/**
             | * Welcome:
@@ -735,6 +735,10 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
             | *     println("Hello World!")
             | * }
             | * ```
+            | *
+            | *     fun thisIsACodeBlock() {
+            | *         val butWhy = "per markdown spec, because four-spaces prefix"
+            | *     }
             | */
             |class Foo
         """.render().description()
@@ -749,6 +753,9 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 <body>
   <p>Welcome:</p>
   <pre class="prettyprint">fun main() {<br>    println(&quot;Hello World!&quot;)<br>}</pre>
+  <pre class="prettyprint">    fun thisIsACodeBlock() {
+        val butWhy = &quot;per markdown spec, because four-spaces prefix&quot;
+    }</pre>
 </body>
             """.trim()
         )
