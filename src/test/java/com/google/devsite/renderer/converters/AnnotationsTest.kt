@@ -414,6 +414,22 @@ internal class AnnotationsTest : ConverterTestBase() {
         assertThat(data.value).isEqualTo("100")
     }
 
+    @Test
+    fun `Hidden annotations are not displayed`() {
+        val annotations = """
+            |/** @hide */
+            |annotation class HiddenAnnotation
+            |annotation class VisibleAnnotation
+            |@HiddenAnnotation
+            |@VisibleAnnotation
+            |fun foo() = Unit
+        """.render().functionAnnotations()
+
+        val components = annotations.components().exceptNonNull()
+        assertThat(components.size).isEqualTo(1)
+        assertThat(components.item().link().name).isEqualTo("VisibleAnnotation")
+    }
+
     private fun DModule.functionAnnotations(name: String = "foo"): List<Annotation> {
         return function(name)!!.annotations()
     }

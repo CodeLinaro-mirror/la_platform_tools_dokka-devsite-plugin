@@ -25,6 +25,7 @@ import com.google.devsite.components.symbols.AnnotationParameter
 import com.google.devsite.components.symbols.AnnotationValueAnnotationParameter
 import com.google.devsite.components.symbols.ArrayValueAnnotationParameter
 import com.google.devsite.components.symbols.NamedValueAnnotationParameter
+import com.google.devsite.hasBeenHidden
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.links.DRI
@@ -177,7 +178,8 @@ private fun shouldDocumentAnnotation(
         // Nullability annotations do not appear in Kotlin, even if explicit in Kotlin source
         if (displayLanguage == Language.KOTLIN) return false
     }
-    return true
+
+    return !hasBeenHidden(annotation.dri)
 }
 
 internal fun Annotation.belongsOnReturnType() =
