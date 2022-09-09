@@ -148,6 +148,7 @@ dependencies {
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-rx3:$coroutinesVersion")
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$coroutinesVersion")
     testDataImpl("org.robolectric:android-all-instrumented:12-robolectric-7732740-i4")
+    testDataImpl("junit:junit:4.13.2")
 
     testDataImpl(fileTree("$buildDir/exploded"))
 
@@ -159,6 +160,7 @@ dependencies {
     testDataAars("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
     testDataAars("androidx.compose.foundation:foundation:1.0.5")
     testDataAars("androidx.activity:activity:1.6.0-rc01")
+    testDataAars("androidx.paging:paging-common:3.2.0-alpha02")
 
     testDataSources("androidx.fragment:fragment:1.6.0-alpha01")
     // TODO: publish sample source code in a way accessible to dackka (/studio) b/153171116

@@ -47,7 +47,6 @@ import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.coroutines.coroutineContext
 import kotlin.coroutines.resume
-import kotlin.native.concurrent.ThreadLocal
 
 // TODO: Can we use rootKey for this since all compositions will have an eventual Recomposer parent?
 private const val RecomposerCompoundHashKey = 1000
@@ -883,7 +882,6 @@ class Recomposer(
      *
      * This annotation WILL BE REMOVED with the new memory model of Kotlin/Native.
      */
-    @ThreadLocal
     companion object {
 
         private val _runningRecomposers = MutableStateFlow(persistentSetOf<RecomposerInfoImpl>())
