@@ -42,6 +42,8 @@ import org.jetbrains.kotlin.utils.PathUtil
 import org.jetbrains.kotlin.utils.addIfNotNull
 import java.io.File
 
+internal var failOnMissingSamples = true
+
 /**
  * This invokes the EnvironmentAndFacade object to turn a DRI
  * (like "dokkatest.sampleAnnotation.samples.FunctionContainingClassSample") into a PSIElement
@@ -192,10 +194,10 @@ internal fun convertTextToJavaSample(
         resolvedFile = sampleFiles.filter { it.name == filePath.split("/").last() }
     }
     return when (resolvedFile.size) {
-        0 -> throw RuntimeException(
+        0 -> if (failOnMissingSamples) throw RuntimeException(
             "Unable to find the sample file $filePath in the samples directory " +
                 sampleFiles.map { it.path }.reduce { acc, s -> acc.commonPrefixWith(s) }
-        )
+        ) else CodeBlock()
         1 -> CodeBlock(listOf(Text(extractCodeBlockFromFile(resolvedFile.single(), whatSamples))))
         else -> throw RuntimeException("Somehow, multiple files with path $filePath were found.")
     }

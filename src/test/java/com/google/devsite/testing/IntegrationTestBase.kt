@@ -200,6 +200,35 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         }
     }
 
+    /**
+     * Runs dackka on sources from a prebuilt; for verifying that there are no errors.
+     *
+     * Sources are unzipped from prebuilts/androidx/internal/ (grabbed via gradle dependency)
+     *      into `build/explodedSources/$artifactName-$version-sources/`
+     * Samples are kept locally (read from `testData/$testName/samples/`), as they are not published
+     */
+    fun executePrebuilts(
+        testName: String,
+        artifactNames: List<String>,
+        samples: Boolean = false,
+    ) {
+        val samplesBaseDir = "testData/$testName/samples"
+
+        val configuration = makeExternalConfiguration(
+            artifactNames.map { File("build/explodedSources/$it/").absoluteFile },
+            if (samples) listOf(samplesBaseDir) else emptyList(),
+        )
+
+        setEnvVarsForTests(inferredTenant = "androidx")
+
+        val writerPlugin = TestOutputWriterPlugin()
+
+        testFromData(
+            configuration,
+            pluginOverrides = listOf(writerPlugin),
+        ) { }
+    }
+
     private fun classpathFromFile(file: String): List<String> =
         File(file).bufferedReader().readLines()
 

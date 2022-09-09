@@ -16,6 +16,7 @@
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.api.tasks.testing.logging.TestLogEvent
+import org.gradle.kotlin.dsl.provider.gradleKotlinDslOf
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 defaultTasks = mutableListOf("test", "jar", "shadowJar", "ktlint", "publish")
@@ -187,6 +188,77 @@ dependencies {
     testDataSources("androidx.collection:collection-jvm:$collectionsVersion")
     testDataSources("androidx.collection:collection-ktx:$collectionsVersion")
 */
+    testDataSources("androidx.activity:activity:1.6.0-beta01")
+    testDataSources("androidx.activity:activity-ktx:1.6.0-beta01")
+    testDataSources("androidx.ads:ads-identifier:1.0.0-alpha04")
+    testDataSources("androidx.ads:ads-identifier-common:1.0.0-alpha04")
+    testDataSources("androidx.ads:ads-identifier-provider:1.0.0-alpha04")
+    testDataSources("androidx.annotation:annotation:1.5.0-alpha02")
+    testDataSources("androidx.annotation:annotation-experimental:1.3.0")
+    //testDataSources("androidx.annotation:annotation-experimental-lint:1.0.0-rc01") // need dep
+    testDataSources("androidx.appcompat:appcompat:1.6.0-beta01")
+    testDataSources("androidx.appcompat:appcompat-resources:1.6.0-beta01")
+    testDataSources("androidx.appsearch:appsearch:1.1.0-alpha01")
+    testDataSources("androidx.appsearch:appsearch-builtin-types:1.1.0-alpha01")
+    testDataSources("androidx.appsearch:appsearch-compiler:1.1.0-alpha01")
+    testDataSources("androidx.appsearch:appsearch-ktx:1.1.0-alpha01")
+    testDataSources("androidx.appsearch:appsearch-debug-view:1.1.0-alpha01")
+    testDataSources("androidx.appsearch:appsearch-platform-storage:1.1.0-alpha01")
+    testDataSources("androidx.appsearch:appsearch-local-storage:1.1.0-alpha01")
+    testDataSources("androidx.arch.core:core-common:2.1.0")
+    testDataSources("androidx.arch.core:core-runtime:2.1.0")
+    testDataSources("androidx.arch.core:core-testing:2.1.0")
+    testDataSources("androidx.asynclayoutinflater:asynclayoutinflater:1.0.0")
+    testDataSources("androidx.autofill:autofill:1.2.0-beta01")
+    testDataSources("androidx.benchmark:benchmark:1.0.0-alpha03")
+    testDataSources("androidx.benchmark:benchmark-common:1.2.0-alpha01")
+    testDataSources("androidx.benchmark:benchmark-gradle-plugin:1.2.0-alpha01")
+    testDataImpl(project.files("" + project.gradle.gradleHomeDir + "/lib/gradle-kotlin-dsl-" +
+        project.gradle.gradleVersion + ".jar")) // Needed for benchmark-gradle-plugin
+    // testDataImpl(gradleKotlinDslOf(project)) // should be equivalent to ^^ but does not work
+    testDataImpl(gradleApi())
+    testDataSources("androidx.benchmark:benchmark-junit4:1.2.0-alpha01")
+    testDataSources("androidx.benchmark:benchmark-macro:1.2.0-alpha01")
+    testDataSources("androidx.benchmark:benchmark-macro-junit4:1.2.0-alpha01")
+    testDataSources("androidx.biometric:biometric:1.2.0-alpha04")
+    testDataSources("androidx.biometric:biometric-ktx:1.2.0-alpha04")
+    testDataSources("androidx.browser:browser:1.4.0")
+    testDataSources("androidx.camera:camera-camera2:1.2.0-alpha04")
+    testDataSources("androidx.camera:camera-camera2-pipe:1.0.0-alpha01")
+    testDataSources("androidx.camera:camera-camera2-pipe-testing:1.0.0-alpha01")
+    testDataSources("androidx.camera:camera-core:1.2.0-alpha04")
+    testDataSources("androidx.camera:camera-extensions:1.2.0-alpha04")
+    testDataSources("androidx.camera:camera-lifecycle:1.2.0-alpha04")
+    testDataSources("androidx.camera:camera-mlkit-vision:1.2.0-alpha04")
+    testDataAars("com.google.mlkit:vision-interfaces:16.0.0")
+    testDataSources("androidx.camera:camera-extensions:1.2.0-alpha04")
+    testDataSources("androidx.camera:camera-previewview:1.1.0-beta02")
+    testDataSources("androidx.camera:camera-video:1.2.0-alpha04")
+    testDataSources("androidx.camera:camera-view:1.2.0-alpha04")
+    testDataSources("androidx.camera:camera-viewfinder:1.2.0-alpha04")
+    testDataSources("androidx.car.app:app:1.3.0-alpha01")
+    testDataSources("androidx.car.app:app-aaos:1.0.0-alpha01")
+    testDataSources("androidx.car.app:app-automotive:1.3.0-alpha01")
+    testDataSources("androidx.car.app:app-projected:1.3.0-alpha01")
+    testDataSources("androidx.car.app:app-testing:1.3.0-alpha01")
+    // testDataSources("androidx.car:car:1.0.0-alpha7") // Obsolete artifacts
+    // testDataSources("androidx.car:car-cluster:1.0.0-alpha5")
+    // testDataSources("androidx.car:car-moderator:1.0.0-alpha1")
+    testDataSources("androidx.cardview:cardview:1.0.0")
+    // Collection is KMP
+    // Compose is KMP
+
+    // We do not test against androidx.test, because they are not part of the androidx build
+    // and also publish source jars with problematic no-write-permission on parts
+    testDataAars("androidx.test.uiautomator:uiautomator:2.2.0") // no source jar
+    testDataSources("androidx.tracing:tracing:1.2.0-alpha01")
+    testDataSources("androidx.tracing:tracing-ktx:1.2.0-alpha01")
+    testDataSources("androidx.tracing:tracing-perfetto:1.0.0-alpha01")
+    testDataSources("androidx.tracing:tracing-perfetto-binary:1.0.0-alpha02")
+    testDataSources("androidx.tracing:tracing-perfetto-common:1.0.0-alpha01")
+
+
+
 }
 
 val explodeAars by tasks.registering(Sync::class) {
