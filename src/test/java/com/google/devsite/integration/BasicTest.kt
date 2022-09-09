@@ -151,11 +151,6 @@ class BasicTest : IntegrationTestBase() {
     }
 
     @Test
-    fun `Validate @JvmMultifile`() {
-        validateDirectory("multifile")
-    }
-
-    @Test
     fun `Validate getters setters and modifiers`() {
         validateDirectory("getterSetterModifier")
     }
