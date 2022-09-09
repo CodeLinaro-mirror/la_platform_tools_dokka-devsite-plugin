@@ -68,6 +68,7 @@ import org.jetbrains.dokka.model.GenericTypeConstructor
 import org.jetbrains.dokka.model.InheritedMember
 import org.jetbrains.dokka.model.KotlinModifier
 import org.jetbrains.dokka.model.WithConstructors
+import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.WithSupertypes
 import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.model.properties.WithExtraProperties
@@ -651,11 +652,19 @@ internal class ClasslikeDocumentableConverter(
             }
         }
 
-        val annotations = classlike.annotations().annotationComponents(
-            pathProvider = pathProvider,
-            displayLanguage = displayLanguage,
-            nullability = Nullability.DONT_CARE // Classlike definitions aren't nullable
-        )
+        val annotations = try {
+            classlike.annotations().annotationComponents(
+                pathProvider = pathProvider,
+                displayLanguage = displayLanguage,
+                nullability = Nullability.DONT_CARE // Classlike definitions aren't nullable
+            )
+        } catch (e: Exception) {
+            throw RuntimeException(
+                "Failure while processing annotations for classlike ${classlike.name}." +
+                    "Annotations were ${classlike.annotations()}, ${classlike.getErrorLocation()}",
+                e
+            )
+        }
 
         if (classlike !is WithSupertypes) {
             return DefaultClassSignature(
@@ -929,8 +938,9 @@ internal class ClasslikeDocumentableConverter(
         try {
             return toDo(documentable)
         } catch (e: Exception) {
-            val message = "Error when handling ${documentable::class} ${documentable.name} " +
+            var message = "Error when handling ${documentable::class} ${documentable.name} " +
                 "in ${classlike.name}"
+            if (documentable is WithSources) message += ", " + documentable.getErrorLocation()
             throw RuntimeException(message, e)
         }
     }

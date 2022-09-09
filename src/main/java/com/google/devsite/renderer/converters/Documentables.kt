@@ -66,7 +66,39 @@ import org.jetbrains.dokka.model.toAdditionalModifiers
 import org.jetbrains.kotlin.builtins.jvm.JavaToKotlinClassMap
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
+import java.io.File
 import java.util.concurrent.ConcurrentHashMap
+
+/** For use when generating error messages. Is slow. */
+internal fun <T> T.getErrorLocation(): String where T : WithSources, T : Documentable {
+    val sourceFilePath = this.sources.values.single().path
+    val result = "in declaration of $name in file $sourceFilePath"
+    // Regex that matches the declaration of `this`
+    val matcher = when (sourceFilePath.substringAfterLast(".")) {
+        "kt" ->
+            """(fun|val|var|class|interface|enum|object) (<*> )?([a-zA-Z_0-9]+\.(<*>)?)?$name"""
+                .toRegex()
+        "java" ->
+            (
+                """(public|protected) (static |final )*""" +
+                    """(class |enum |(@)?interface )?[a-zA-Z_0-9]+(<*>)? $name"""
+                ).toRegex()
+        else -> throw RuntimeException("Unknown file type for $sourceFilePath")
+    }
+    // Assume that the type params can't take up more than 3 lines
+    File(sourceFilePath).readLines().windowed(size = 3, step = 1).forEachIndexed { index, lines ->
+        if (matcher.containsMatchIn(lines.joinToString())) {
+            return "$result at line ${index + 2}." // The last line in the window
+        }
+    }
+    // Multiple possible reasons for failure. For example, java syntax does not lend itself to
+    // allowing declaractions to be identified by regex, so there is a good chance it could fail.
+    return "$result, line number could not be determined."
+}
+
+@JvmName("This is internal and will never be used from JVM")
+internal fun Documentable.getErrorLocation() = if (this is WithSources) this.getErrorLocation()
+else "File location could not be determined."
 
 /** Recursively expands all children. */
 internal val <T> WithChildren<T>.explodedChildren: List<T>

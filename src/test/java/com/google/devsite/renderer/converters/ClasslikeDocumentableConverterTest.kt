@@ -1020,6 +1020,17 @@ internal class ClasslikeDocumentableConverterTest(
     }
 
     @Test
+    fun `Failed resolution exception includes line number`() {
+        val message = assertFails {
+            """
+            |/** @param foo does not exist */
+            |class Foo<T: Number, U>() {}
+            """.render().page()
+        }.message
+        assertThat(message).contains("androidx/example/Test.kt at line 2")
+    }
+
+    @Test
     fun `Class component creates inline generics`() {
         val page = """
             |class Foo<T: Number, U>() {}

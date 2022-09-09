@@ -290,7 +290,8 @@ internal class DocTagConverter(
         val warning = "Unable to find what is referred to by" +
             components.joinToString { "\n\t$componentType $it" } +
             "\nin ${containingComponent::class.simpleName} ${containingComponent.name}" +
-            "\nDid you make a typo? Are you trying to refer to something not visible to users?"
+            "\nDid you make a typo? Are you trying to refer to something not visible to users? " +
+            containingComponent.getErrorLocation()
         docsHolder.logger.warn(warning)
     }
 
@@ -435,7 +436,8 @@ internal class DocTagConverter(
 
     private fun throwsToParameterComponent(throws: Throws): ParameterComponent {
         var name = throws.name
-        val link = if (throws.name in listOf("a", "an")) {
+        var dri: DRI? = throws.exceptionAddress
+        if (throws.name in listOf("a", "an")) {
             println(
                 "WARNING: do not use '${throws.name}' before the exception type in an @throws" +
                     " statement. This is against jdoc spec, will be an error in the next version " +
@@ -443,7 +445,7 @@ internal class DocTagConverter(
                     "This was observed in $throws."
             )
             name = throws.text().firstWord()
-            DefaultLink(Link.Params(name, ""))
+            dri = null
         } else if ("{@link" in name) {
             println(
                 "WARNING: do not {@link the exception type in an @throws statement. @throws state" +
@@ -452,7 +454,7 @@ internal class DocTagConverter(
                     "vior causing them to actually *not* be linked. This was observed in $throws."
             )
             name = name.removePrefix("{@link ").removeSuffix("}")
-            DefaultLink(Link.Params(name, ""))
+            dri = null
         } else if (throws.exceptionAddress == null) {
             println(
                 "WARNING: link to @throws type $name does not resolve. Is it from a package that " +
@@ -462,8 +464,11 @@ internal class DocTagConverter(
                     " e.g.`@throws java.io.IOException under some conditions. This was observed" +
                     " in $throws.`"
             )
-            DefaultLink(Link.Params(name, ""))
-        } else pathProvider.linkForReference(throws.exceptionAddress!!, name)
+            dri = null
+        }
+        val link = if (dri == null) DefaultLink(Link.Params(name, url = ""))
+        else pathProvider.linkForReference(throws.exceptionAddress!!, name)
+
         return DefaultParameterComponent(
             ParameterComponent.Params(
                 displayLanguage = displayLanguage,
@@ -519,8 +524,9 @@ internal class DocTagConverter(
                     // TODO: fix this to allow KMP to work. Currently asserts single-platform. b/181224204
                     val sourceSet = sourceSets.single()
 
-                    val facade = analysisMap[sourceSet]?.facade
-                        ?: throw RuntimeException("Cannot resolve facade: ${sourceSet.sourceSetID}")
+                    val facade = analysisMap[sourceSet]?.facade ?: throw RuntimeException(
+                        "Cannot resolve facade: ${sourceSet.sourceSetID} for $this"
+                    )
                     val psiElement = fqNameToPsiElement(facade, dri)
                         ?: throw RuntimeException("Cannot find PsiElement corresponding to $dri")
 
