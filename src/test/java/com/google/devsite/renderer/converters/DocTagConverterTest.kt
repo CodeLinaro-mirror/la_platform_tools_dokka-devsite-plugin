@@ -869,6 +869,32 @@ internal class DocTagConverterTest(
         assertThat((seeAlsoTable.single().data.title as Link).data.name).isEqualTo("filter")
     }
 
+    @Ignore // go/dokka-upstream-bug/2665
+    @Test
+    fun `Copied from draganddrop`() {
+        val documentationK = """
+            | /**
+            | * <p><b>Note:</b> This class requires Android API level 24 or higher.
+            | *
+            | * @see <a href="https://developer.android.com/guide/topics/ui/drag-drop">Drag and drop</a>
+            | * @see <a href="https://developer.android.com/guide/topics/large-screens/multi-window-support#dnd">
+            | *      Multi-window support</a>
+            | */
+            |public final class DropHelper { }
+        """.render().documentation()
+        val seeAlsoTable = documentationK.first {
+            (it as? DocsSummaryList)?.title() == "See also"
+        } as DocsSummaryList
+        val (see1, see2) = seeAlsoTable.items(2)
+        assertThat(see1.link().name).isEqualTo("Drag and drop")
+        assertThat(see1.link().url)
+            .isEqualTo("https://developer.android.com/guide/topics/ui/drag-drop")
+        assertThat(see2.link().name).isEqualTo("Multi-window support")
+        assertThat(see2.link().url).isEqualTo(
+            "https://developer.android.com/guide/topics/large-screens/multi-window-support#dnd"
+        )
+    }
+
     @Test
     fun `Documentation spacing works over multiple lines`() {
         val documentationK = """
