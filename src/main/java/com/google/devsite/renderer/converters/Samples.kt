@@ -140,7 +140,7 @@ internal fun processImports(psiElement: PsiElement): String {
         if (filteredImports.isEmpty()) { return "" }
         // The first blank line doesn't appear in rendered html, just makes raws look nicer
         return "\n" + filteredImports.joinToString(separator = "\n") { it.text } + "\n\n"
-    } else { throw RuntimeException("${psiFile::class} is not a supported sample file type") }
+    } else throw RuntimeException("${psiFile::class} is not a supported sample file type")
 }
 
 /**

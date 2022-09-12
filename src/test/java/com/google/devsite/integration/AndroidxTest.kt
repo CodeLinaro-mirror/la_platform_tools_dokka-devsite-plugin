@@ -21,12 +21,51 @@ import com.google.devsite.testing.IntegrationTestBase
 import org.junit.After
 import org.junit.Ignore
 import org.junit.Test
+import java.io.File
 
+/** Allows testing against lots of androidx sources, e.g. for profiling purposes. */
 class AndroidxTest : IntegrationTestBase() {
+    private fun getAndroidxPath(): String {
+        val androidxPath = File("path_to_androidx_checkout.txt").readLines().singleOrNull()?.trim()
+        logger.debug("Path to androidx checkout: $androidxPath")
+        assert(androidxPath != null && androidxPath.endsWith("androidx-main/frameworks/support")) {
+            "In order to run this test, you must provide a (.gitignore'd) file " +
+                "'path_to_androidx_checkout.txt' in the checkout root, containing a valid path to" +
+                "an androidx-main checkout on the same machine. The file should not contain quotes."
+        }
+        return androidxPath!!
+    }
+
+    @Ignore // Must be run manually
+    @Test
+    fun `Run dackka against partial androidx tip-of-tree`() {
+        val base = getAndroidxPath()
+        executionTest(
+            paths = listOf(
+                "$base/appcompat/",
+                "$base/fragment/",
+                "$base/leanback/",
+                "$base/media/",
+                "$base/media2/"
+            )
+        )
+    }
+
     @Ignore // Must be run manually
     @Test
     fun `Run dackka against full androidx tip-of-tree`() {
-        TODO()
+        // some projects are not intended to be documented and have a large backlog of docs issues
+        val excludedPaths = mutableListOf(
+            "lint-checks",
+            "room-compiler",
+            "camera-camera2-pipe-integration",
+            "integration-tests", // Specifically paging
+            "watchface-samples-minimal-instances",
+            "watchface-samples-minimal-complications",
+            "watchface-samples-minimal-style",
+            "generator" // material-icons-generator
+        )
+        crawlingExecTest(getAndroidxPath(), excludedPaths)
     }
 
     @Ignore // Must be run manually

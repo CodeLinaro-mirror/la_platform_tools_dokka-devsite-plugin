@@ -35,7 +35,7 @@ import java.net.URL
  * Html output results can be found in testData/
  */
 abstract class IntegrationTestBase : BaseAbstractTest(
-    logger = TestLogger(DokkaConsoleLogger(LoggingLevel.WARN))
+    logger = TestLogger(DokkaConsoleLogger(LoggingLevel.DEBUG))
 ) {
     /** For when a test uses source outside of `./testData/` */
     fun makeExternalConfiguration(
@@ -126,6 +126,98 @@ abstract class IntegrationTestBase : BaseAbstractTest(
     }
 
     /**
+     * Executes dackka on source from an androidx checkout on the same machine. No validation.
+     * @param maxFolders limits the source files run against, in case of performance issues
+     */
+    fun crawlingExecTest(
+        checkoutRoot: String,
+        excludedPaths: MutableList<String> = mutableListOf(),
+        maxFolders: Int = 999999
+    ) {
+        // We never intend to run dackka on these folders
+        excludedPaths += listOf(
+            "test", // "test" folders don't contain "main"; stop recursion
+            "development", // A folder of scripts
+            "buildSrc", // Not published or documented
+            "frameworks", // basically a recursive symlink to checkout-root
+            "annotation-sampled" // not published and its docs confuse the samples system
+        )
+        var sourceRoots = mutableListOf<File>()
+        val samplesRoots = mutableSetOf<String>() // Due to symlinks, we need to de-dupe Support4
+        // We want to limit unnecessary recursion work, and we can check that no main folder is more
+        // than 6 folders deep from the checkout root, as folder structure ~ package structure.
+        val MAX_DEPTH = 6
+        var currentDirs = listOf(File(checkoutRoot))
+        var nextDirs = mutableListOf<File>()
+        for (i in 0..MAX_DEPTH) {
+            currentDirs.forEach { parent ->
+                parent.listFiles { child -> child.isDirectory }?.forEach { child ->
+                    when (child.name) {
+                        "main" -> sourceRoots += child
+                        "samples" -> samplesRoots += child.absolutePath
+                        in excludedPaths -> {}
+                        else -> nextDirs += child
+                    }
+                }
+            }
+            currentDirs = nextDirs
+            nextDirs = mutableListOf()
+            if (sourceRoots.size > maxFolders) break
+        }
+        sourceRoots = sourceRoots.take(maxFolders).toMutableList()
+
+        logger.debug("Number of main folders found: ${sourceRoots.size}")
+        logger.debug("Number of samples folders found: ${samplesRoots.size}")
+
+        println(samplesRoots)
+
+        val configuration = makeExternalConfiguration(
+            sourceRoots,
+            samplesRoots.toList(),
+            emptyList()
+        )
+
+        val inferredTenant = "androidx"
+        setEnvVarsForTests(inferredTenant, "")
+
+        val writerPlugin = TestOutputWriterPlugin()
+
+        testFromData(
+            configuration,
+            pluginOverrides = listOf(writerPlugin),
+        ) { }
+    }
+
+    /**
+     * Runs dackka on sources from a prebuilt; for verifying that there are no errors.
+     *
+     * Sources are unzipped from prebuilts/androidx/internal/ (grabbed via gradle dependency)
+     *      into `build/explodedSources/$artifactName-$version-sources/`
+     * Samples are kept locally (read from `testData/$testName/samples/`), as they are not published
+     */
+    fun executePrebuilts(
+        testName: String,
+        artifactNames: List<String>,
+        samples: Boolean = false,
+    ) {
+        val samplesBaseDir = "testData/$testName/samples"
+
+        val configuration = makeExternalConfiguration(
+            artifactNames.map { File("build/explodedSources/$it/").absoluteFile },
+            if (samples) listOf(samplesBaseDir) else emptyList(),
+        )
+
+        setEnvVarsForTests(inferredTenant = "androidx")
+
+        val writerPlugin = TestOutputWriterPlugin()
+
+        testFromData(
+            configuration,
+            pluginOverrides = listOf(writerPlugin),
+        ) { }
+    }
+
+    /**
      * Reads sources and outputs from a directory in `./testData/`, and validates based on them.
      *
      * Sources are located at testData/$path/source
@@ -198,35 +290,6 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                 verifyOutput(writerPlugin, outputBaseDir)
             }
         }
-    }
-
-    /**
-     * Runs dackka on sources from a prebuilt; for verifying that there are no errors.
-     *
-     * Sources are unzipped from prebuilts/androidx/internal/ (grabbed via gradle dependency)
-     *      into `build/explodedSources/$artifactName-$version-sources/`
-     * Samples are kept locally (read from `testData/$testName/samples/`), as they are not published
-     */
-    fun executePrebuilts(
-        testName: String,
-        artifactNames: List<String>,
-        samples: Boolean = false,
-    ) {
-        val samplesBaseDir = "testData/$testName/samples"
-
-        val configuration = makeExternalConfiguration(
-            artifactNames.map { File("build/explodedSources/$it/").absoluteFile },
-            if (samples) listOf(samplesBaseDir) else emptyList(),
-        )
-
-        setEnvVarsForTests(inferredTenant = "androidx")
-
-        val writerPlugin = TestOutputWriterPlugin()
-
-        testFromData(
-            configuration,
-            pluginOverrides = listOf(writerPlugin),
-        ) { }
     }
 
     private fun classpathFromFile(file: String): List<String> =
