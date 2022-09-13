@@ -186,11 +186,11 @@ internal class DocTagConverter(
                     is Suppress, is Version, is Author -> null
                 }
             } catch (e: Exception) {
-                println(
-                    "Exception thrown while handling ${firstTag::class.java} tags! " +
-                        "Tags: $tags. Parent: ${documentable.name}"
+                throw RuntimeException(
+                    "Exception thrown while handling ${firstTag::class.java} tags! Tags: $tags. " +
+                        "Parent: ${documentable.name}, " + documentable.getErrorLocation(),
+                    e
                 )
-                throw e
             }
         }
 
@@ -512,9 +512,17 @@ internal class DocTagConverter(
         tags().forEach {
             when (it) {
                 is Description -> {
-                    it.children.forEach { child ->
-                        recursivelyConsiderPsAndTextsForJavaSamples(
-                            child, components, this.sourceSets.single().samples
+                    try {
+                        it.children.forEach { child ->
+                            recursivelyConsiderPsAndTextsForJavaSamples(
+                                child, components, this.sourceSets.single().samples
+                            )
+                        }
+                    } catch (e: Exception) {
+                        throw RuntimeException(
+                            "Error when resolving samples when processing $name" +
+                                getErrorLocation(),
+                            e
                         )
                     }
                 }
