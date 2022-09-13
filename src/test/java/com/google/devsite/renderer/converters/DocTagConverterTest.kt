@@ -602,7 +602,10 @@ internal class DocTagConverterTest(
             |fun foo()
             """.render().documentation()
         }
-        assertThat(exception.localizedMessage).contains("with contents: aaaaaa")
+        assertThat(exception.localizedMessage).contains("in declaration of foo")
+        assertThat(exception.localizedMessage).contains("Test.kt at line 4")
+        assertThat(exception.localizedMessage).contains("Text(body=aaaaaa")
+        assertThat(exception.localizedMessage).contains("Param tags")
         val standardOut = System.out
         val outputStreamCaptor = ByteArrayOutputStream()
         System.setOut(PrintStream(outputStreamCaptor))
