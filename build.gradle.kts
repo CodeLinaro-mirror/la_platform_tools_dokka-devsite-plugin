@@ -149,6 +149,7 @@ dependencies {
     testDataImpl("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$coroutinesVersion")
     testDataImpl("org.robolectric:android-all-instrumented:12-robolectric-7732740-i4")
     testDataImpl("junit:junit:4.13.2")
+    testDataImpl("com.google.truth:truth:1.1.3")
 
     testDataImpl(fileTree("$buildDir/exploded"))
 
