@@ -1748,6 +1748,19 @@ internal class ClasslikeDocumentableConverterTest(
     }
 
     @Test
+    fun `Extension functions are linked correctly on both Java and Kotlin pages`() {
+        val src = """
+            |class Foo {
+            |}
+            |fun Foo.bar() = Unit
+        """
+        val classlike = src.render().page().content<Classlike>()
+        val extFunction = classlike.symbolsFor("Extension functions").second.symbols[0]
+        val url = extFunction.data.signature.data.name.data.url
+        assertThat(url).endsWith("androidx/example/Foo.html#(androidx.example.Foo).bar()")
+    }
+
+    @Test
     fun `Extension functions are ordered by the package they come from`() {
         val src = listOf(
             """
