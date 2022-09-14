@@ -50,7 +50,7 @@ internal data class DefaultInheritedSymbols(
                                 td {
                                     unsafe { +"<devsite-expandable>" }
                                     span("expand-control") {
-                                        +"From class "
+                                        +"From "
                                         item.key.render(this)
                                     }
 

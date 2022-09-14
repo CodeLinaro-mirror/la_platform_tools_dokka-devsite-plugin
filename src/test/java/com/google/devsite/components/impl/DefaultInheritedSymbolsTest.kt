@@ -70,7 +70,7 @@ class DefaultInheritedSymbolsTest {
                       </thead>
                       <tbody class="list">
                         <tr>
-                          <td><devsite-expandable><span class="expand-control">From class aClass</span>
+                          <td><devsite-expandable><span class="expand-control">From aClass</span>
                             <div class="devsite-table-wrapper">
                               <table class="responsive">
                                 <tbody class="list">
