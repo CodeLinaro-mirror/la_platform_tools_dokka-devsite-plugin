@@ -41,34 +41,41 @@ internal fun computeClassGraph(
     externalDocumentablesProvider: ExternalDocumentablesProvider? = null,
     sourceSets: List<DokkaConfiguration.DokkaSourceSet>? = null
 ): ClassGraph {
-    val drisToClasslikes = (classlikes.associateBy { it.dri }).withDefault { dri ->
+    fun MutableMap<DRI, DClasslike?>.getOrExternal(key: DRI) = getOrPut(key) {
         sourceSets?.firstNotNullOfOrNull { sourceSet ->
-            externalDocumentablesProvider?.findClasslike(dri, sourceSet)
+            externalDocumentablesProvider?.findClasslike(key, sourceSet)
         }
     }
+    val drisToClasslikes = classlikes.associateBy<DClasslike?, DRI> { it!!.dri }.toMutableMap()
     val classGraph: Map<DRI, MutableClassNode> = classlikes.associate { classlike ->
         classlike.dri to MutableClassNode(classlike)
     }
 
     for (classlike in classlikes) {
-        recursivelyUpdateClasslikeSupertypesTree(classlike, classGraph, drisToClasslikes)
+        recursivelyUpdateClasslikeSupertypesTree(
+            classlike, classGraph, drisToClasslikes::getOrExternal
+        )
     }
 
     // TODO(b/168956053): remove drisToClasslikes.getValue(it) once dokka has cheap hashCode impl
     return classGraph.mapValues { (_, level) ->
         ClassNode(
             self = level.self,
-            allSubClasses = level.allSubClasses.mapNotNull { drisToClasslikes.getValue(it) },
-            directSubClasses = level.directSubClasses.mapNotNull { drisToClasslikes.getValue(it) },
+            allSubClasses = level.allSubClasses.mapNotNull { drisToClasslikes.getOrExternal(it) },
+            directSubClasses = level.directSubClasses.mapNotNull {
+                drisToClasslikes.getOrExternal(it)
+            },
             indirectSubClasses = level.indirectSubClasses.mapNotNull {
-                drisToClasslikes.getValue(it)
+                drisToClasslikes.getOrExternal(it)
             },
             directSuperClasses = level.directSuperClasses.mapNotNull {
-                drisToClasslikes.getValue(it)
+                drisToClasslikes.getOrExternal(it)
             },
-            superClasses = level.superClasses.mapNotNull { drisToClasslikes.getValue(it) },
-            interfaces = level.interfaces.mapNotNull { drisToClasslikes.getValue(it) },
-            directInterfaces = level.directInterfaces.mapNotNull { drisToClasslikes.getValue(it) }
+            superClasses = level.superClasses.mapNotNull { drisToClasslikes.getOrExternal(it) },
+            interfaces = level.interfaces.mapNotNull { drisToClasslikes.getOrExternal(it) },
+            directInterfaces = level.directInterfaces.mapNotNull {
+                drisToClasslikes.getOrExternal(it)
+            }
         )
     }
 }
@@ -122,7 +129,7 @@ internal fun computeDocumentablesGraph(classGraph: ClassGraph): DocumentablesGra
 private fun recursivelyUpdateClasslikeSupertypesTree(
     current: DClasslike,
     classGraph: Map<DRI, MutableClassNode>,
-    classlikes: Map<DRI, DClasslike?>,
+    driToClasslike: (DRI) -> DClasslike?,
     initial: DClasslike = current,
     highestVisibleSubtype: DClasslike = current
 ) {
@@ -139,7 +146,7 @@ private fun recursivelyUpdateClasslikeSupertypesTree(
         // If a classlike cannot be found in this package, the map will fall back to trying to look
         // it up using the externalDocumentablesProvider, and if we can't find it there either it
         // will be null.
-        val supertype = classlikes.getValue(type.dri)
+        val supertype = driToClasslike(type.dri)
         if (supertype != null) {
             // Hidden classes should not be included in the class graph.
             // Only public and protected classes should be included in the class graph.
@@ -149,7 +156,7 @@ private fun recursivelyUpdateClasslikeSupertypesTree(
 
             val newHighestVisible = if (hidden) highestVisibleSubtype else supertype
             recursivelyUpdateClasslikeSupertypesTree(
-                supertype, classGraph, classlikes, initial, newHighestVisible
+                supertype, classGraph, driToClasslike, initial, newHighestVisible
             )
 
             // Only add this supertype to leaf's node if this is visible in docs.
