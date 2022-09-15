@@ -383,6 +383,8 @@ internal class ClasslikeDocumentableConverter(
                 // Sort by the class the extension function came from first, so they will be grouped
                 // together in a logical way
                 .sortedBy { nameForSyntheticClass(it) + it.name }
+                // Convert DRIs to this class so link from summary to detail will stay on class page
+                .map { it.withDRIOfClass(classlike) }
             if (displayLanguage == Language.JAVA) {
                 extensionFunctions = extensionFunctions.filterNot {
                     it.isSuspendFunction()
@@ -900,33 +902,31 @@ internal class ClasslikeDocumentableConverter(
             return this
         }
         return filter { symbol -> !symbol.isInherited(supertypes) && !symbol.dri.isFromBaseClass() }
-            .map { symbol ->
-                if (symbol.isFromClass(forClass)) {
-                    symbol
-                } else {
-                    symbol.copyWithDRI(symbol.dri.copyToClass(forClass))
-                }
-            }
+            .map { symbol -> symbol.withDRIOfClass(forClass) }
     }
 
     /**
-     * Makes a copy of the DProperty or DFunction with a new DRI. Defined over Documentables
-     * because both DProperty and DFunction have a `copy` method defined because they are data
-     * classes, but there isn't a way to specify the Documentable must be a data class.
+     * If the DProperty or DFunction does not already have a DRI with the given class, makes a copy
+     * of it with a new DRI. Defined over Documentables because both DProperty and Function have a
+     * `copy` method defined because they are data classes, but there isn't a way to specify the
+     * Documentable must be a data class.
      */
-    private inline fun <reified T : Documentable> T.copyWithDRI(dri: DRI): T =
-        when (this) {
-            is DFunction -> this.copy(dri) as T
-            is DProperty -> this.copy(dri) as T
-            else -> throw RuntimeException()
+    private inline fun <reified T : Documentable> T.withDRIOfClass(forClass: DClasslike): T {
+        return if (forClass.packageName() == this.dri.packageName &&
+            forClass.name() == this.dri.classNames
+        ) {
+            this
+        } else {
+            val dri = this.dri.copy(
+                packageName = forClass.packageName(), classNames = forClass.name()
+            )
+            when (this) {
+                is DFunction -> this.copy(dri) as T
+                is DProperty -> this.copy(dri) as T
+                else -> throw RuntimeException()
+            }
         }
-
-    private fun DRI.copyToClass(toClass: DClasslike): DRI =
-        copy(packageName = toClass.packageName(), classNames = toClass.name())
-
-    private fun Documentable.isFromClass(fromClass: DClasslike) =
-        fromClass.packageName() == dri.packageName &&
-            fromClass.name() == dri.classNames
+    }
 
     /**
      * Gather superclasses and interfaces for this class, converting mapped types when applicable.
