@@ -960,7 +960,8 @@ internal class ClasslikeDocumentableConverter(
 internal fun Documentable.isOrdinaryCompanion(): Boolean =
     this is DObject && this.isCompanion() &&
         name == "Companion" &&
-        supertypes.all { it.value.isEmpty() }
+        supertypes.all { it.value.isEmpty() } &&
+        children.none { it is DClasslike }
 
 private fun Documentable.isCompanion() =
     this is DObject && (this.dri.classNames?.contains(".") == true)
