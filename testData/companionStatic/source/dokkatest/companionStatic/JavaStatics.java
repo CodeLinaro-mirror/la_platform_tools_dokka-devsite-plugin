@@ -34,6 +34,8 @@ public class JavaStatics {
         public int notStaticInnerFun() { return 1; }
         public static int staticInnerField = 0;
         public static int staticInnerFun() { return -1; }
+
+        public @interface nestedNestedInterface {}
     }
 
     // A demonstration of how Kotlin-as-Java static access works

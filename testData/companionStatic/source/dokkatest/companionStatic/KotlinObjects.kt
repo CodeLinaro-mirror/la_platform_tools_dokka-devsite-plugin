@@ -113,6 +113,12 @@ open class ContainerOfLateinit {
     }
 }
 
+open class ContainerOfWithNested {
+    companion object {
+        public annotation class ExperimentalExternalReport
+    }
+}
+
 // A demonstration of how Java-as-Kotlin static access works
 private fun tests() {
     assert(JavaStatics.classStaticFunction() == 999)
