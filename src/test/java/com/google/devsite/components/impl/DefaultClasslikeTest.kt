@@ -23,7 +23,6 @@ import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.testing.NoopClassHierarchy
 import com.google.devsite.components.testing.NoopClassSignature
 import com.google.devsite.components.testing.NoopDescriptionComponent
-import com.google.devsite.components.testing.NoopLibraryMetadataComponent
 import com.google.devsite.components.testing.NoopRelatedSymbols
 import com.google.devsite.components.testing.NoopSummaryList
 import com.google.devsite.components.testing.NoopSymbolDetail
@@ -42,7 +41,7 @@ class DefaultClasslikeTest {
                 description = emptyList(),
                 symbolTypes = emptyList(),
                 inheritedTypes = emptyList(),
-                libraryMetadataComponent = NoopLibraryMetadataComponent()
+                libraryMetadataComponent = null
             )
         )
 
@@ -55,7 +54,6 @@ class DefaultClasslikeTest {
             """
 <body>
   <p>Signature</p>
-  <div>Library Metadata</div>
 </body>
             """.trim()
         )
@@ -71,7 +69,7 @@ class DefaultClasslikeTest {
                 description = emptyList(),
                 symbolTypes = emptyList(),
                 inheritedTypes = emptyList(),
-                libraryMetadataComponent = NoopLibraryMetadataComponent()
+                libraryMetadataComponent = null
             )
         )
 
@@ -84,7 +82,6 @@ class DefaultClasslikeTest {
             """
 <body>
   <p>Signature</p>
-  <div>Library Metadata</div>
   <div>Class hierarchy</div>
 </body>
             """.trim()
@@ -101,7 +98,7 @@ class DefaultClasslikeTest {
                 description = emptyList(),
                 symbolTypes = emptyList(),
                 inheritedTypes = emptyList(),
-                libraryMetadataComponent = NoopLibraryMetadataComponent()
+                libraryMetadataComponent = null
             )
         )
 
@@ -114,7 +111,6 @@ class DefaultClasslikeTest {
             """
 <body>
   <p>Signature</p>
-  <div>Library Metadata</div>
   <div>Related symbols</div>
 </body>
             """.trim()
@@ -131,7 +127,7 @@ class DefaultClasslikeTest {
                 description = listOf(NoopDescriptionComponent("Hello World!")),
                 symbolTypes = emptyList(),
                 inheritedTypes = emptyList(),
-                libraryMetadataComponent = NoopLibraryMetadataComponent()
+                libraryMetadataComponent = null
             )
         )
 
@@ -144,7 +140,6 @@ class DefaultClasslikeTest {
             """
 <body>
   <p>Signature</p>
-  <div>Library Metadata</div>
   <hr>
   <p>Hello World!</p>
 </body>
@@ -167,7 +162,7 @@ class DefaultClasslikeTest {
                     )
                 ),
                 inheritedTypes = emptyList(),
-                libraryMetadataComponent = NoopLibraryMetadataComponent()
+                libraryMetadataComponent = null
             )
         )
 
@@ -180,7 +175,6 @@ class DefaultClasslikeTest {
             """
 <body>
   <p>Signature</p>
-  <div>Library Metadata</div>
   <h2>Summary</h2>
   <div>noop</div>
   <h2>Symbols</h2>
