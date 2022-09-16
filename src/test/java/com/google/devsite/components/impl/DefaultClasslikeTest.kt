@@ -26,6 +26,7 @@ import com.google.devsite.components.testing.NoopDescriptionComponent
 import com.google.devsite.components.testing.NoopRelatedSymbols
 import com.google.devsite.components.testing.NoopSummaryList
 import com.google.devsite.components.testing.NoopSymbolDetail
+import com.google.devsite.util.LibraryMetadata
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -179,6 +180,74 @@ class DefaultClasslikeTest {
   <div>noop</div>
   <h2>Symbols</h2>
   <div>noop</div>
+</body>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Classlike with metadata renders correctly`() {
+        val metadata = LibraryMetadata(
+            groupId = "android.x",
+            artifactId = "artifact",
+            releaseNotesUrl = "https://d.android.com"
+        )
+        val component = DefaultClasslike(
+            Params(
+                signature = NoopClassSignature(),
+                hierarchy = NoopClassHierarchy(shown = false),
+                relatedSymbols = NoopRelatedSymbols(shown = false),
+                description = emptyList(),
+                symbolTypes = emptyList(),
+                inheritedTypes = emptyList(),
+                libraryMetadataComponent = DefaultLibraryMetadataComponent(metadata)
+            )
+        )
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p>Signature</p>
+  <div><a href="https://d.android.com">android.x:artifact</a></div>
+</body>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Classlike with metadata without URL renders correctly`() {
+        val metadata = LibraryMetadata(
+            groupId = "android.x",
+            artifactId = "artifact",
+            releaseNotesUrl = ""
+        )
+        val component = DefaultClasslike(
+            Params(
+                signature = NoopClassSignature(),
+                hierarchy = NoopClassHierarchy(shown = false),
+                relatedSymbols = NoopRelatedSymbols(shown = false),
+                description = emptyList(),
+                symbolTypes = emptyList(),
+                inheritedTypes = emptyList(),
+                libraryMetadataComponent = DefaultLibraryMetadataComponent(metadata)
+            )
+        )
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p>Signature</p>
+  <div>android.x:artifact</div>
 </body>
             """.trim()
         )

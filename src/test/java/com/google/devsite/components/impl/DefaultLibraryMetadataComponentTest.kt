@@ -24,14 +24,13 @@ import org.junit.Test
 
 internal class DefaultLibraryMetadataComponentTest {
 
-    private val libraryMetadata = LibraryMetadata(
-        groupId = "testGroup",
-        artifactId = "testArtifactId",
-        releaseNotesUrl = "https://d.android.com"
-    )
-
     @Test
     fun `Library metadata renders correctly`() {
+        val libraryMetadata = LibraryMetadata(
+            groupId = "testGroup",
+            artifactId = "testArtifactId",
+            releaseNotesUrl = "https://d.android.com"
+        )
         val component = DefaultLibraryMetadataComponent(libraryMetadata)
 
         val output = createHTML().body {
@@ -43,6 +42,29 @@ internal class DefaultLibraryMetadataComponentTest {
             """
 <body>
   <div><a href="https://d.android.com">testGroup:testArtifactId</a></div>
+</body>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Library metadata without release notes URL renders correctly`() {
+        val libraryMetadata = LibraryMetadata(
+            groupId = "testGroup",
+            artifactId = "testArtifactId",
+            releaseNotesUrl = ""
+        )
+        val component = DefaultLibraryMetadataComponent(libraryMetadata)
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <div>testGroup:testArtifactId</div>
 </body>
             """.trim()
         )
