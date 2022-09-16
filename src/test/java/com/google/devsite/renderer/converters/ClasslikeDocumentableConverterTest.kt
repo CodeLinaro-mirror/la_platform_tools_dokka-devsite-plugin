@@ -450,6 +450,26 @@ internal class ClasslikeDocumentableConverterTest(
         }
     }
 
+    @Ignore
+    @Test
+    fun `Class signature and hierarchy can contain generics in 4x`() {
+        val pageK = """
+            |class Foo : List<String>
+        """.render().page("Foo").content<Classlike>()
+        val pageJ = """
+            |public class Foo extends List<String> {}
+        """.render(java = true).page("Foo").content<Classlike>()
+
+        for (page in listOf(pageJ, pageK)) {
+            val classSignature = page.data.signature.data
+            assertThat(classSignature.type).isEqualTo("class")
+            assertThat(classSignature.extends.single().data.name).isEqualTo("List<String>")
+            val hierarchy = page.data.hierarchy.data
+            assertThat(hierarchy.parents.size).isEqualTo(2)
+            assertThat(hierarchy.parents.first().data.name).isEqualTo("List<String>")
+        }
+    }
+
     @Test
     fun `Class signature appears with implements for external types in 4x`() {
         val pageExternalK = """
