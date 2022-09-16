@@ -284,7 +284,7 @@ val explodeSources by tasks.registering {
             val versionInd =
                 splitName.indexOfFirst { '.' in it } // index of first block in version num
             val baseName = splitName.subList(0, versionInd).joinToString(separator = "-")
-            println("Unzipping prebuilt for $baseName")
+            logger.debug("Unzipping prebuilt for $baseName")
             from(zipTree(arch))
             into("$buildDir/explodedSources/$baseName")
         }

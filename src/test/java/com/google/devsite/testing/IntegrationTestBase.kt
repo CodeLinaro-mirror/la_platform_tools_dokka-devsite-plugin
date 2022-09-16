@@ -169,8 +169,6 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         logger.debug("Number of main folders found: ${sourceRoots.size}")
         logger.debug("Number of samples folders found: ${samplesRoots.size}")
 
-        println(samplesRoots)
-
         val configuration = makeExternalConfiguration(
             sourceRoots,
             samplesRoots.toList(),
