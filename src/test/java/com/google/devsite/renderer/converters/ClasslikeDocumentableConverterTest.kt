@@ -46,6 +46,7 @@ import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.nestedTypes
 import com.google.devsite.renderer.converters.testing.nonInstance
 import com.google.devsite.renderer.converters.testing.projectionName
+import com.google.devsite.renderer.converters.testing.receiverTypeName
 import com.google.devsite.renderer.converters.testing.single
 import com.google.devsite.renderer.converters.testing.summaryItemsFor
 import com.google.devsite.renderer.converters.testing.symbolsFor
@@ -1760,11 +1761,19 @@ internal class ClasslikeDocumentableConverterTest(
             |class Foo {
             |}
             |fun Foo.bar() = Unit
-            |fun Foo.baz() = Unit
+            |fun Foo?.baz() = Unit
         """
         val classlike = src.render().page().content<Classlike>()
         val extFunctions = classlike.symbolsFor("Extension functions")
         assertThat(extFunctions.first.data.items).hasSize(2)
+
+        kotlinOnly {
+            val (extDetail1, extDetail2) = extFunctions.second.symbols
+            assertThat((extDetail1.data.signature as FunctionSignature).receiverTypeName())
+                .isEqualTo("Foo")
+            assertThat((extDetail2.data.signature as FunctionSignature).receiverTypeName())
+                .isEqualTo("Foo?")
+        }
     }
 
     @Test

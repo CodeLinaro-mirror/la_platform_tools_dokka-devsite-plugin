@@ -117,6 +117,10 @@ internal fun TypeProjectionComponent.alternativeLink(): Link.Params? =
     (this as? MappedTypeProjectionComponent)?.data?.alternativePrefix?.data
 
 internal fun TypeProjectionComponent.name() = link().name
+internal fun FunctionSignature.receiverTypeName() = data.receiver!!.data.type.let {
+    it.link().name + it.data.nullability.renderAsKotlinSuffix()
+}
+
 internal fun ParameterComponent.typeName() = data.type.name()
 internal fun ParameterComponent.fullTypeName() =
     typeName() + generics().joinMaybePrefix(prefix = "<", postfix = ">") { it.name() }

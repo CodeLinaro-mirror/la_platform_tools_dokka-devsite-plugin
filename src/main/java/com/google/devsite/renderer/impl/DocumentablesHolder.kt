@@ -37,6 +37,7 @@ import org.jetbrains.dokka.analysis.EnvironmentAndFacade
 import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.withClass
+import org.jetbrains.dokka.model.Bound
 import org.jetbrains.dokka.model.DAnnotation
 import org.jetbrains.dokka.model.DClass
 import org.jetbrains.dokka.model.DClasslike
@@ -48,10 +49,20 @@ import org.jetbrains.dokka.model.DObject
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.DTypeAlias
+import org.jetbrains.dokka.model.DefinitelyNonNullable
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.Dynamic
+import org.jetbrains.dokka.model.FunctionalTypeConstructor
 import org.jetbrains.dokka.model.GenericTypeConstructor
 import org.jetbrains.dokka.model.JavaModifier
+import org.jetbrains.dokka.model.JavaObject
 import org.jetbrains.dokka.model.JavaVisibility
+import org.jetbrains.dokka.model.Nullable
+import org.jetbrains.dokka.model.PrimitiveJavaType
+import org.jetbrains.dokka.model.TypeAliased
+import org.jetbrains.dokka.model.TypeParameter
+import org.jetbrains.dokka.model.UnresolvedBound
+import org.jetbrains.dokka.model.Void
 import org.jetbrains.dokka.model.WithCompanion
 import org.jetbrains.dokka.model.WithSources
 import org.jetbrains.dokka.model.properties.PropertyContainer
@@ -218,22 +229,35 @@ internal class DocumentablesHolder(
         val extensionFunctionsMapping = HashMap<DRI, MutableList<DFunction>>()
         packages().forEach { packageDoc ->
             packageDoc.functions.forEach { function ->
-                val receiver = function.receiver
-                if (receiver != null) {
-                    try {
-                        val genericTypeConstructor = receiver.type as GenericTypeConstructor
-                        val dri = genericTypeConstructor.dri
-                        val list =
-                            extensionFunctionsMapping.getOrDefault(dri, mutableListOf())
-                        list.add(function)
-                        extensionFunctionsMapping[dri] = list
-                    } catch (_: ClassCastException) {
-                        // Can't cast function.type; skip to next function
-                    }
-                }
+                function.addToMapping(function.receiver?.type, extensionFunctionsMapping)
             }
         }
         return extensionFunctionsMapping
+    }
+
+    /**
+     * If applicable, adds an extension function to the map, based on its receiver's type.
+     * Takes the receiver's type as a param to allow recursive calling for nullable receivers.
+     */
+    private fun DFunction.addToMapping(rType: Bound?, map: HashMap<DRI, MutableList<DFunction>>) {
+        when (rType) {
+            null -> {} // no receiver
+            is GenericTypeConstructor -> addToMapping(rType.dri, map)
+            is DefinitelyNonNullable -> addToMapping(rType.inner, map)
+            is Nullable -> addToMapping(rType.inner, map)
+            // These types have no classlike pages, so we only document the extension fun
+            // in the package summary
+            is JavaObject, is PrimitiveJavaType, Void, // builtins
+            is TypeAliased, is FunctionalTypeConstructor, is TypeParameter -> {}
+            Dynamic -> TODO() // I don't think this case is possible?
+            is UnresolvedBound -> throw RuntimeException("Unresolved receiver of $this")
+            else -> throw RuntimeException("Unknown receiver for $this")
+        }
+    }
+
+    private fun <T, V> T.addToMapping(v: V, map: HashMap<V, MutableList<T>>) {
+        if (v !in map) map[v] = mutableListOf()
+        map[v]!! += this
     }
 
     private fun computePackages(module: DModule): List<DPackage> {
