@@ -69,6 +69,7 @@ import org.jetbrains.dokka.model.properties.PropertyContainer
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.utilities.DokkaConsoleLogger
 import org.jetbrains.dokka.utilities.LoggingLevel
+import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * Centralized place to retrieve documentables.
@@ -84,6 +85,8 @@ internal class DocumentablesHolder(
     val showLibraryMetadata: Boolean = false,
     val fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
 ) {
+    internal var classlikesDone: AtomicInteger = AtomicInteger()
+
     private val packages = scope.async { computePackages(module) }
 
     private val classlikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
@@ -107,9 +110,9 @@ internal class DocumentablesHolder(
 
     init {
         scope.apply {
-            for (packageDoc in module.packages) {
-                val children = async { packageDoc.explodedChildren }
-                val syntheticClassList = async { computeSyntheticClasses(packageDoc) }
+            for (dPackage in module.packages) {
+                val children = async { dPackage.explodedChildren }
+                val syntheticClassList = async { computeSyntheticClasses(dPackage) }
                 val classlikesList = async {
                     computeClasslikes(
                         children.await(),
@@ -121,19 +124,19 @@ internal class DocumentablesHolder(
                 val enumList = async { computeEnums(children.await()) }
                 val interfaceList = async { computeInterfaces(children.await()) }
                 val annotationList = async { computeAnnotations(children.await()) }
-                val typeAliasList = async { computeTypesAliases(packageDoc) }
+                val typeAliasList = async { computeTypesAliases(dPackage) }
                 val exceptionList = async { computeExceptions(children.await()) }
                 val objectList = async { computeObjects(children.await()) }
 
-                classlikes[packageDoc.dri] = classlikesList
-                classes[packageDoc.dri] = classList
-                syntheticClasses[packageDoc.dri] = syntheticClassList
-                enums[packageDoc.dri] = enumList
-                interfaces[packageDoc.dri] = interfaceList
-                annotations[packageDoc.dri] = annotationList
-                typeAliases[packageDoc.dri] = typeAliasList
-                exceptions[packageDoc.dri] = exceptionList
-                objects[packageDoc.dri] = objectList
+                classlikes[dPackage.dri] = classlikesList
+                classes[dPackage.dri] = classList
+                syntheticClasses[dPackage.dri] = syntheticClassList
+                enums[dPackage.dri] = enumList
+                interfaces[dPackage.dri] = interfaceList
+                annotations[dPackage.dri] = annotationList
+                typeAliases[dPackage.dri] = typeAliasList
+                exceptions[dPackage.dri] = exceptionList
+                objects[dPackage.dri] = objectList
             }
         }
 
@@ -170,9 +173,9 @@ internal class DocumentablesHolder(
     suspend fun analysisMap(): Map<DokkaConfiguration.DokkaSourceSet, EnvironmentAndFacade> =
         analysisMap.await()
 
-    suspend fun classlikesFor(packageDoc: DPackage, displayLanguage: Language): List<DClasslike> {
-        val classlikes = classlikes.getValue(packageDoc.dri).await()
-        val syntheticClasses = syntheticClasses.getValue(packageDoc.dri).await()
+    suspend fun classlikesFor(dPackage: DPackage, displayLanguage: Language): List<DClasslike> {
+        val classlikes = classlikes.getValue(dPackage.dri).await()
+        val syntheticClasses = syntheticClasses.getValue(dPackage.dri).await()
         return if (displayLanguage == Language.JAVA) {
             classlikes
         } else {
@@ -185,11 +188,11 @@ internal class DocumentablesHolder(
         return nestedClasslikes.getValue(classlike.dri).await()
     }
 
-    suspend fun classesFor(packageDoc: DPackage, displayLanguage: Language): List<DClass> {
-        var classes = classes.getValue(packageDoc.dri).await()
+    suspend fun classesFor(dPackage: DPackage, displayLanguage: Language): List<DClass> {
+        var classes = classes.getValue(dPackage.dri).await()
         if (displayLanguage == Language.KOTLIN)
             classes = classes.filterNot { it.isOrdinaryCompanion() }
-        val syntheticClasses = syntheticClasses.getValue(packageDoc.dri).await()
+        val syntheticClasses = syntheticClasses.getValue(dPackage.dri).await()
         return if (displayLanguage == Language.JAVA) {
             (classes + syntheticClasses).sortedBy { it.name() }
         } else {
@@ -197,27 +200,27 @@ internal class DocumentablesHolder(
         }
     }
 
-    suspend fun enumsFor(packageDoc: DPackage): List<DEnum> =
-        enums.getValue(packageDoc.dri).await()
+    suspend fun enumsFor(dPackage: DPackage): List<DEnum> =
+        enums.getValue(dPackage.dri).await()
 
-    suspend fun interfacesFor(packageDoc: DPackage): List<DInterface> =
-        interfaces.getValue(packageDoc.dri).await()
+    suspend fun interfacesFor(dPackage: DPackage): List<DInterface> =
+        interfaces.getValue(dPackage.dri).await()
 
-    suspend fun annotationsFor(packageDoc: DPackage): List<DAnnotation> =
-        annotations.getValue(packageDoc.dri).await()
+    suspend fun annotationsFor(dPackage: DPackage): List<DAnnotation> =
+        annotations.getValue(dPackage.dri).await()
 
-    suspend fun typeAliasesFor(packageDoc: DPackage): List<DTypeAlias> =
-        typeAliases.getValue(packageDoc.dri).await()
+    suspend fun typeAliasesFor(dPackage: DPackage): List<DTypeAlias> =
+        typeAliases.getValue(dPackage.dri).await()
 
-    suspend fun exceptionsFor(packageDoc: DPackage): List<DClass> =
-        exceptions.getValue(packageDoc.dri).await()
+    suspend fun exceptionsFor(dPackage: DPackage): List<DClass> =
+        exceptions.getValue(dPackage.dri).await()
 
-    suspend fun objectsFor(packageDoc: DPackage, displayLanguage: Language): List<DObject> {
+    suspend fun objectsFor(dPackage: DPackage, displayLanguage: Language): List<DObject> {
         return if (displayLanguage == Language.JAVA) {
             // TODO(b/203678085): Objects should be accessible from top-level static inner class
             emptyList()
         } else {
-            objects.getValue(packageDoc.dri).await()
+            objects.getValue(dPackage.dri).await()
         }
     }
 
@@ -227,8 +230,8 @@ internal class DocumentablesHolder(
      */
     suspend fun extensionFunctionMap(): HashMap<DRI, MutableList<DFunction>> {
         val extensionFunctionsMapping = HashMap<DRI, MutableList<DFunction>>()
-        packages().forEach { packageDoc ->
-            packageDoc.functions.forEach { function ->
+        packages().forEach { dPackage ->
+            dPackage.functions.forEach { function ->
                 function.addToMapping(function.receiver?.type, extensionFunctionsMapping)
             }
         }
@@ -304,16 +307,16 @@ internal class DocumentablesHolder(
     /** Computes the syntheticClasses from top level functions that are used to document Kotlin as
      * Java
      */
-    internal fun computeSyntheticClasses(packageDoc: DPackage): List<DClass> {
+    internal fun computeSyntheticClasses(dPackage: DPackage): List<DClass> {
         // functions that are JvmSynthetic are not accessible from Java, so they should not appear
         // in the documentation
-        val javaFunctions = packageDoc.functions.filterOutJvmSynthetic()
-        val javaProperties = packageDoc.properties.filterOutJvmSynthetic()
+        val javaFunctions = dPackage.functions.filterOutJvmSynthetic()
+        val javaProperties = dPackage.properties.filterOutJvmSynthetic()
         return (javaFunctions + javaProperties)
             .mapToSyntheticNames()
             .map { (syntheticClassName, nodes) ->
                 DClass(
-                    dri = packageDoc.dri.withClass(syntheticClassName),
+                    dri = dPackage.dri.withClass(syntheticClassName),
                     name = syntheticClassName,
                     // TODO (b/168340963) handle kotlin as java properties
                     properties = nodes.filterIsInstance<DProperty>(),
@@ -324,13 +327,13 @@ internal class DocumentablesHolder(
                     classlikes = emptyList(),
                     sources = emptyMap(),
                     expectPresentInSet = null,
-                    visibility = packageDoc.sourceSets.associateWith { JavaVisibility.Public },
+                    visibility = dPackage.sourceSets.associateWith { JavaVisibility.Public },
                     companion = null,
                     generics = emptyList(),
                     supertypes = emptyMap(),
                     documentation = emptyMap(),
-                    modifier = packageDoc.sourceSets.associateWith { JavaModifier.Final },
-                    sourceSets = packageDoc.sourceSets,
+                    modifier = dPackage.sourceSets.associateWith { JavaModifier.Final },
+                    sourceSets = dPackage.sourceSets,
                     isExpectActual = false,
                     extra = PropertyContainer.empty()
                 )
@@ -358,8 +361,8 @@ internal class DocumentablesHolder(
         return docs.filterIsInstance<DAnnotation>().sortedBy { it.name() }
     }
 
-    private fun computeTypesAliases(packageDoc: DPackage): List<DTypeAlias> {
-        return packageDoc.typealiases.sortedBy { it.name }
+    private fun computeTypesAliases(dPackage: DPackage): List<DTypeAlias> {
+        return dPackage.typealiases.sortedBy { it.name }
     }
 
     private fun computeExceptions(docs: List<Documentable>): List<DClass> {

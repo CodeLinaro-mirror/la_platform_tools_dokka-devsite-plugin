@@ -103,9 +103,9 @@ internal class RootDocumentableConverter(
 
     /** @return the Devsite _toc.yaml */
     suspend fun tocPage(): TableOfContents {
-        val packageComponents = docsHolder.packages().map { packageDoc ->
+        val packageComponents = docsHolder.packages().map { dPackage ->
             coroutineScope {
-                packageForTocAsync(packageDoc)
+                packageForTocAsync(dPackage)
             }
         }.awaitAll()
 
@@ -124,20 +124,20 @@ internal class RootDocumentableConverter(
     }
 
     private fun CoroutineScope.packageForTocAsync(
-        packageDoc: DPackage
+        dPackage: DPackage
     ): Deferred<DefaultTocPackage> = async {
-        val interfaces = docsHolder.interfacesFor(packageDoc).map(::typeForToc)
-        val classes = docsHolder.classesFor(packageDoc, displayLanguage).map(::typeForToc)
-        val enums = docsHolder.enumsFor(packageDoc).map(::typeForToc)
-        val exceptions = docsHolder.exceptionsFor(packageDoc).map(::typeForToc)
-        val annotations = docsHolder.annotationsFor(packageDoc).map(::typeForToc)
-        val typeAliases = docsHolder.typeAliasesFor(packageDoc).map(::typeForToc)
-        val objects = docsHolder.objectsFor(packageDoc, displayLanguage).map(::typeForToc)
+        val interfaces = docsHolder.interfacesFor(dPackage).map(::typeForToc)
+        val classes = docsHolder.classesFor(dPackage, displayLanguage).map(::typeForToc)
+        val enums = docsHolder.enumsFor(dPackage).map(::typeForToc)
+        val exceptions = docsHolder.exceptionsFor(dPackage).map(::typeForToc)
+        val annotations = docsHolder.annotationsFor(dPackage).map(::typeForToc)
+        val typeAliases = docsHolder.typeAliasesFor(dPackage).map(::typeForToc)
+        val objects = docsHolder.objectsFor(dPackage, displayLanguage).map(::typeForToc)
 
         DefaultTocPackage(
             TocPackage.Params(
-                name = packageDoc.name,
-                packageUrl = pathProvider.forReference(packageDoc.dri).url,
+                name = dPackage.name,
+                packageUrl = pathProvider.forReference(dPackage.dri).url,
                 interfaces = interfaces,
                 classes = classes,
                 enums = enums,
