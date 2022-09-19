@@ -32,7 +32,6 @@ internal interface ClassSignature : ContextFreeComponent {
         val name: String,
         val implements: List<Link>,
         val extends: List<Link>,
-        val typeParameters: List<TypeParameterComponent>,
-        val annotationComponents: List<AnnotationComponent> = emptyList()
+        val typeParameters: List<TypeParameterComponent>
     )
 }

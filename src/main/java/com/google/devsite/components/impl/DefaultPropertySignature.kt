@@ -16,10 +16,7 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.ShouldBreak
-import com.google.devsite.components.render
 import com.google.devsite.components.symbols.PropertySignature
-import com.google.devsite.joinMaybePrefix
 import kotlinx.html.FlowContent
 
 /** Default implementation of a property signature. */
@@ -27,7 +24,6 @@ internal data class DefaultPropertySignature(
     override val data: PropertySignature.Params
 ) : PropertySignature {
     override fun render(into: FlowContent) = into.run {
-        data.annotationComponents.render(into, ShouldBreak.YES, separator = "")
         if (data.receiver != null) {
             data.receiver.render(this)
             +"."
@@ -40,7 +36,7 @@ internal data class DefaultPropertySignature(
         }
     }
 
-    override fun toString() = data.annotationComponents.joinMaybePrefix(postfix = " ") +
+    override fun toString() =
         if (data.receiver != null) data.receiver.toString() + "." else "" +
             data.name
 }

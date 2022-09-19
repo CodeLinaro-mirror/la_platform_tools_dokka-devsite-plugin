@@ -16,6 +16,8 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.ShouldBreak
+import com.google.devsite.components.render
 import com.google.devsite.components.symbols.SymbolSummary
 import kotlinx.html.FlowContent
 import kotlinx.html.code
@@ -28,6 +30,7 @@ internal data class DefaultSymbolSummary(
     override fun render(into: FlowContent) = into.run {
         div {
             code {
+                data.annotationComponents.render(into, ShouldBreak.YES, separator = "")
                 data.signature.render(this)
             }
         }
@@ -35,5 +38,5 @@ internal data class DefaultSymbolSummary(
         data.description.render(this)
     }
 
-    override fun toString() = "${data.signature}: ${data.description}"
+    override fun toString() = "${data.annotationComponents} ${data.signature}: ${data.description}"
 }

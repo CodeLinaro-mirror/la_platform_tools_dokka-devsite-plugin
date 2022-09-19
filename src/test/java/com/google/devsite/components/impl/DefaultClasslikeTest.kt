@@ -20,6 +20,7 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.Classlike.Params
 import com.google.devsite.components.table.SummaryItem
+import com.google.devsite.components.testing.NoopAnnotationComponent
 import com.google.devsite.components.testing.NoopClassHierarchy
 import com.google.devsite.components.testing.NoopClassSignature
 import com.google.devsite.components.testing.NoopDescriptionComponent
@@ -40,7 +41,8 @@ class DefaultClasslikeTest {
                 relatedSymbols = NoopRelatedSymbols(shown = false),
                 description = emptyList(),
                 symbolTypes = emptyList(),
-                inheritedTypes = emptyList()
+                inheritedTypes = emptyList(),
+                annotationComponents = emptyList()
             )
         )
 
@@ -52,7 +54,9 @@ class DefaultClasslikeTest {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p>Signature</p>
+  <p>
+    <pre>Signature</pre>
+  </p>
 </body>
             """.trim()
         )
@@ -67,7 +71,8 @@ class DefaultClasslikeTest {
                 relatedSymbols = NoopRelatedSymbols(shown = false),
                 description = emptyList(),
                 symbolTypes = emptyList(),
-                inheritedTypes = emptyList()
+                inheritedTypes = emptyList(),
+                annotationComponents = emptyList()
             )
         )
 
@@ -79,7 +84,9 @@ class DefaultClasslikeTest {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p>Signature</p>
+  <p>
+    <pre>Signature</pre>
+  </p>
   <div>Class hierarchy</div>
 </body>
             """.trim()
@@ -95,7 +102,8 @@ class DefaultClasslikeTest {
                 relatedSymbols = NoopRelatedSymbols(),
                 description = emptyList(),
                 symbolTypes = emptyList(),
-                inheritedTypes = emptyList()
+                inheritedTypes = emptyList(),
+                annotationComponents = emptyList()
             )
         )
 
@@ -107,7 +115,9 @@ class DefaultClasslikeTest {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p>Signature</p>
+  <p>
+    <pre>Signature</pre>
+  </p>
   <div>Related symbols</div>
 </body>
             """.trim()
@@ -123,7 +133,8 @@ class DefaultClasslikeTest {
                 relatedSymbols = NoopRelatedSymbols(shown = false),
                 description = listOf(NoopDescriptionComponent("Hello World!")),
                 symbolTypes = emptyList(),
-                inheritedTypes = emptyList()
+                inheritedTypes = emptyList(),
+                annotationComponents = emptyList()
             )
         )
 
@@ -135,7 +146,9 @@ class DefaultClasslikeTest {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p>Signature</p>
+  <p>
+    <pre>Signature</pre>
+  </p>
   <hr>
   <p>Hello World!</p>
 </body>
@@ -157,7 +170,8 @@ class DefaultClasslikeTest {
                         listOf(NoopSymbolDetail)
                     )
                 ),
-                inheritedTypes = emptyList()
+                inheritedTypes = emptyList(),
+                annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation"))
             )
         )
 
@@ -169,7 +183,9 @@ class DefaultClasslikeTest {
         assertThat(output).isEqualTo(
             """
 <body>
-  <p>Signature</p>
+  <p>
+    <pre>@GenericAnnotation<br>Signature</pre>
+  </p>
   <h2>Summary</h2>
   <div>noop</div>
   <h2>Symbols</h2>

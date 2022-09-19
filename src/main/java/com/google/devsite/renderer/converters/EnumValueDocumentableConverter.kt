@@ -51,20 +51,22 @@ internal class EnumValueDocumentableConverter(
 
     /** @return the enum detail component */
     fun detail(dEnum: DEnum, enumValue: DEnumEntry, hints: ModifierHints): SymbolDetail {
-        val annotations = enumValue.annotations()
+        val (typeAnnotations, nonTypeAnnotations) =
+            dEnum.annotations().partition { it.belongsOnReturnType() }
         val projection = paramConverter.componentForProjection(
             GenericTypeConstructor(dEnum.dri, emptyList()),
             isJavaSource = dEnum.isFromJava(),
             // While technically an ENUM_VALUE is a member of ENUM_TYPE? because you can always
             // define an enum value which is `null`, this isn't useful information
-            propagatedNullability = Nullability.DONT_CARE
+            propagatedNullability = Nullability.DONT_CARE,
+            propagatedAnnotations = typeAnnotations
         )
         return DefaultSymbolDetail(
             SymbolDetail.Params(
                 displayLanguage = displayLanguage,
                 name = enumValue.name,
                 anchors = enumValue.generateAnchors(),
-                annotationComponents = annotations.annotationComponents(
+                annotationComponents = nonTypeAnnotations.annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
                     nullability = Nullability.DONT_CARE // See above
@@ -77,7 +79,7 @@ internal class EnumValueDocumentableConverter(
                     documentable = enumValue,
                     returnType = projection,
                     paramNames = listOf(),
-                    annotations = annotations,
+                    annotations = nonTypeAnnotations,
                     isFromJava = dEnum.isFromJava()
                 )
             )

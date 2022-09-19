@@ -22,7 +22,6 @@ import com.google.devsite.components.impl.DefaultSymbolDetail
 import com.google.devsite.components.impl.DefaultSymbolSummary
 import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultTypeSummary
-import com.google.devsite.components.symbols.AnnotationComponent
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
@@ -44,7 +43,8 @@ internal class PropertyDocumentableConverter(
     /** @return the property summary component */
     fun summary(property: DProperty, hints: ModifierHints):
         TwoPaneSummaryItem<TypeSummary, SymbolSummary> {
-        val annotations = property.annotations().filter { !it.belongsOnReturnType() }
+        val (typeAnnotations, nonTypeAnnotations) =
+            property.annotations().partition { it.belongsOnReturnType() }
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
                 title = DefaultTypeSummary(
@@ -53,21 +53,20 @@ internal class PropertyDocumentableConverter(
                         type = paramConverter.componentForProjection(
                             property.type,
                             property.isFromJava(),
-                            property.annotations().filter { it.belongsOnReturnType() }
+                            typeAnnotations
                         )
                     )
                 ),
                 description = DefaultSymbolSummary(
                     SymbolSummary.Params(
-                        signature = property.signature(
-                            isSummary = true,
-                            annotationComponents = annotations.annotationComponents(
-                                pathProvider = pathProvider,
-                                displayLanguage = displayLanguage,
-                                nullability = Nullability.DONT_CARE // on return type instead
-                            )
-                        ),
-                        description = javadocConverter.summaryDescription(property, annotations)
+                        signature = property.signature(isSummary = true),
+                        description = javadocConverter
+                            .summaryDescription(property, nonTypeAnnotations),
+                        annotationComponents = nonTypeAnnotations.annotationComponents(
+                            pathProvider = pathProvider,
+                            displayLanguage = displayLanguage,
+                            nullability = Nullability.DONT_CARE // Propagates to return type instead
+                        )
                     )
                 )
             )
@@ -76,21 +75,21 @@ internal class PropertyDocumentableConverter(
 
     /** @return the property detail component */
     fun detail(property: DProperty, hints: ModifierHints): SymbolDetail {
-        val (propagatedAnnotations, retainedAnnotations) = property.annotations()
-            .partition { it.belongsOnReturnType() }
+        val (typeAnnotations, nonTypeAnnotations) =
+            property.annotations().partition { it.belongsOnReturnType() }
         val returnType = paramConverter.componentForProjection(
             property.type,
             property.isFromJava(),
-            propagatedAnnotations,
+            typeAnnotations,
             propagatedNullability = property.type
-                .getNullability(displayLanguage, property.isFromJava(), propagatedAnnotations)
+                .getNullability(displayLanguage, property.isFromJava(), typeAnnotations)
         )
         return DefaultSymbolDetail(
             SymbolDetail.Params(
                 displayLanguage = displayLanguage,
                 name = property.name,
                 anchors = property.generateAnchors(),
-                annotationComponents = retainedAnnotations.annotationComponents(
+                annotationComponents = nonTypeAnnotations.annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
                     nullability = Nullability.DONT_CARE // Propagates to return type instead
@@ -104,16 +103,13 @@ internal class PropertyDocumentableConverter(
                     documentable = property,
                     returnType = returnType,
                     paramNames = listOf("receiver"),
-                    annotations = retainedAnnotations
+                    annotations = nonTypeAnnotations
                 )
             )
         )
     }
 
-    private fun DProperty.signature(
-        isSummary: Boolean,
-        annotationComponents: List<AnnotationComponent> = emptyList()
-    ): PropertySignature {
+    private fun DProperty.signature(isSummary: Boolean): PropertySignature {
         val receiver = receiver?.let {
             paramConverter.componentForParameter(
                 param = it,
@@ -136,7 +132,6 @@ internal class PropertyDocumentableConverter(
                     Language.JAVA -> null
                     Language.KOTLIN -> receiver
                 },
-                annotationComponents = annotationComponents,
                 constantValue = constantValue
             )
         )

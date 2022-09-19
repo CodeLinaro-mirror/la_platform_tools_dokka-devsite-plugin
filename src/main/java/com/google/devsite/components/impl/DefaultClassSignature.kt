@@ -22,38 +22,34 @@ import com.google.devsite.components.symbols.ClassSignature
 import com.google.devsite.joinMaybePrefix
 import com.google.devsite.renderer.Language
 import kotlinx.html.FlowContent
-import kotlinx.html.pre
 
 internal data class DefaultClassSignature(
     override val data: ClassSignature.Params
 ) : ClassSignature {
 
     override fun render(into: FlowContent) = into.run {
-        pre {
-            data.annotationComponents.render(into, separator = " ", terminator = { +" " })
-            +(data.modifiers + data.type + data.name).joinToString(separator = " ")
+        +(data.modifiers + data.type + data.name).joinToString(separator = " ")
 
-            data.typeParameters.render(into, ShouldBreak.NO, brackets = "<>")
+        data.typeParameters.render(into, ShouldBreak.NO, brackets = "<>")
 
-            when (data.displayLanguage) {
-                Language.JAVA -> {
-                    data.extends.render(into, header = { +" extends " })
-                    data.implements.render(into, header = { +" $interfaceInheritsPhrase " })
-                }
-                Language.KOTLIN -> {
-                    (data.extends + data.implements).render(into, header = { +" : " })
-                }
+        when (data.displayLanguage) {
+            Language.JAVA -> {
+                data.extends.render(into, header = { +" extends " })
+                data.implements.render(into, header = { +" $interfaceInheritsPhrase " })
+            }
+            Language.KOTLIN -> {
+                (data.extends + data.implements).render(into, header = { +" : " })
             }
         }
     }
 
-    override fun toString() = data.annotationComponents.joinMaybePrefix(postfix = " ") +
+    override fun toString() =
         (data.modifiers + data.type + data.name).joinToString(separator = " ") +
-        data.typeParameters.joinMaybePrefix(prefix = "<", postfix = ">") +
-        if (data.displayLanguage == Language.JAVA) {
-            data.extends.joinMaybePrefix(prefix = " extends ") +
-                data.implements.joinMaybePrefix(prefix = interfaceInheritsPhrase)
-        } else (data.extends + data.implements).joinMaybePrefix(prefix = " : ")
+            data.typeParameters.joinMaybePrefix(prefix = "<", postfix = ">") +
+            if (data.displayLanguage == Language.JAVA) {
+                data.extends.joinMaybePrefix(prefix = " extends ") +
+                    data.implements.joinMaybePrefix(prefix = interfaceInheritsPhrase)
+            } else (data.extends + data.implements).joinMaybePrefix(prefix = " : ")
 
     // Classes _implement_ interfaces, but interfaces _extend_ other interfaces
     private val interfaceInheritsPhrase = if (data.type == "interface") "extends" else "implements"

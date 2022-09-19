@@ -252,7 +252,7 @@ internal class PropertyDocumentableConverterTest(
         """.render()
         fun DModule.sOrDAnnotations(summary: Boolean, propertyName: String) =
             if (summary)
-                summary(propertyName).data.description.data.signature.data.annotationComponents
+                summary(propertyName).data.description.data.annotationComponents
             else detail(propertyName).data.annotationComponents
         for (isSummary in listOf(true, false)) {
             val annotations = module.sOrDAnnotations(isSummary, "numbah")

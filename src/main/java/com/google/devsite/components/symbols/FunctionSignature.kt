@@ -26,7 +26,6 @@ internal interface FunctionSignature : SymbolSignature, Sizeable {
     data class Params(
         override val name: Link,
         override val receiver: ParameterComponent? = null,
-        override val annotationComponents: List<AnnotationComponent> = emptyList(),
         val typeParameters: List<TypeParameterComponent> = emptyList(),
         val parameters: List<ParameterComponent> = emptyList(),
         val isDeprecated: Boolean = false

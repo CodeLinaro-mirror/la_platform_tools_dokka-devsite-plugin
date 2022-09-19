@@ -427,7 +427,12 @@ internal class ClasslikeDocumentableConverter(
                             annotations = annotations
                         ),
                         symbolTypes = allSymbols,
-                        inheritedTypes = inheritedTypes.await()
+                        inheritedTypes = inheritedTypes.await(),
+                        annotationComponents = classlike.annotations().annotationComponents(
+                            pathProvider = pathProvider,
+                            displayLanguage = displayLanguage,
+                            nullability = Nullability.DONT_CARE // Classlike definitions aren't null
+                        )
                     )
                 ),
                 libraryMetadataComponent = libraryMetadataComponent.await()
@@ -653,20 +658,6 @@ internal class ClasslikeDocumentableConverter(
             }
         }
 
-        val annotations = try {
-            classlike.annotations().annotationComponents(
-                pathProvider = pathProvider,
-                displayLanguage = displayLanguage,
-                nullability = Nullability.DONT_CARE // Classlike definitions aren't nullable
-            )
-        } catch (e: Exception) {
-            throw RuntimeException(
-                "Failure while processing annotations for classlike ${classlike.name}." +
-                    "Annotations were ${classlike.annotations()}, ${classlike.getErrorLocation()}",
-                e
-            )
-        }
-
         if (classlike !is WithSupertypes) {
             return DefaultClassSignature(
                 ClassSignature.Params(
@@ -676,8 +667,7 @@ internal class ClasslikeDocumentableConverter(
                     modifiers = modifiers,
                     implements = emptyList(),
                     extends = emptyList(),
-                    typeParameters = typeParameters,
-                    annotationComponents = annotations
+                    typeParameters = typeParameters
                 )
             )
         }
@@ -698,7 +688,6 @@ internal class ClasslikeDocumentableConverter(
                 implements = implements,
                 extends = extends,
                 typeParameters = typeParameters,
-                annotationComponents = annotations
             )
         )
     }

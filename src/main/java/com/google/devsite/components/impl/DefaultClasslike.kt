@@ -16,6 +16,7 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.render
 import com.google.devsite.joinMaybePrefix
@@ -23,6 +24,7 @@ import kotlinx.html.FlowContent
 import kotlinx.html.h2
 import kotlinx.html.hr
 import kotlinx.html.p
+import kotlinx.html.pre
 
 /** Default implementation of class-like pages. */
 internal data class DefaultClasslike(
@@ -30,7 +32,10 @@ internal data class DefaultClasslike(
 ) : Classlike {
     override fun render(into: FlowContent) = into.run {
         p {
-            data.signature.render(this)
+            pre {
+                data.annotationComponents.render(into, ShouldBreak.YES, separator = "")
+                data.signature.render(this)
+            }
         }
         data.hierarchy.render(this)
         data.relatedSymbols.render(this)

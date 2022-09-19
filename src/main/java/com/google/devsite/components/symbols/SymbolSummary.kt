@@ -25,7 +25,8 @@ internal interface SymbolSummary : DescriptionComponent {
 
     data class Params(
         val signature: SymbolSignature,
-        val description: DescriptionComponent
+        val description: DescriptionComponent,
+        val annotationComponents: List<AnnotationComponent>
     ) : DescriptionComponent.Params(
         pathProvider = description.guarded?.data?.pathProvider,
         components = description.guarded?.data?.components ?: emptyList(),

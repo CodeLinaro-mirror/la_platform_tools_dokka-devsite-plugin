@@ -19,7 +19,6 @@ package com.google.devsite.components.impl
 import com.google.common.truth.Truth
 import com.google.devsite.components.symbols.ClassSignature
 import com.google.devsite.components.symbols.TypeParameterComponent
-import com.google.devsite.components.testing.NoopAnnotationComponent
 import com.google.devsite.components.testing.NoopFilePathProvider
 import com.google.devsite.components.testing.NoopLink
 import com.google.devsite.components.testing.NoopTypeProjectionComponent
@@ -50,8 +49,7 @@ class DefaultClassSignatureTest {
                             pathProvider = NoopFilePathProvider()
                         )
                     )
-                ),
-                annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation"))
+                )
             )
         )
 
@@ -62,9 +60,7 @@ class DefaultClassSignatureTest {
         // language=html
         Truth.assertThat(output).isEqualTo(
             """
-<body>
-  <pre>@GenericAnnotation public abstract class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; extends Anyclass implements SomeInterface</pre>
-</body>
+<body>public abstract class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; extends Anyclass implements SomeInterface</body>
             """.trim()
         )
     }
@@ -88,8 +84,7 @@ class DefaultClassSignatureTest {
                             pathProvider = NoopFilePathProvider()
                         )
                     )
-                ),
-                annotationComponents = listOf(NoopAnnotationComponent("@GenericAnnotation"))
+                )
             )
         )
 
@@ -100,9 +95,7 @@ class DefaultClassSignatureTest {
         // language=html
         Truth.assertThat(output).isEqualTo(
             """
-<body>
-  <pre>@GenericAnnotation open class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; : Anyclass, SomeInterface</pre>
-</body>
+<body>open class Foo&lt;GenericType&nbsp;:&nbsp;GenericSupertype&gt; : Anyclass, SomeInterface</body>
             """.trim()
         )
     }
@@ -117,8 +110,7 @@ class DefaultClassSignatureTest {
                 modifiers = EmptyModifiers,
                 extends = listOf(),
                 implements = listOf(NoopLink("SomeInterface")),
-                typeParameters = listOf(),
-                annotationComponents = listOf()
+                typeParameters = listOf()
             )
         )
 
@@ -129,9 +121,7 @@ class DefaultClassSignatureTest {
         // language=html
         Truth.assertThat(output).isEqualTo(
             """
-<body>
-  <pre>interface Foo extends SomeInterface</pre>
-</body>
+<body>interface Foo extends SomeInterface</body>
         """.trim()
         )
     }

@@ -48,7 +48,8 @@ internal class FunctionDocumentableConverter(
     /** @return the function summary component */
     fun summary(function: DFunction, hints: ModifierHints):
         TwoPaneSummaryItem<TypeSummary, SymbolSummary> {
-        val annotations = function.annotations()
+        val (typeAnnotations, nonTypeAnnotations) =
+            function.annotations().partition { it.belongsOnReturnType() }
         return DefaultTwoPaneSummaryItem(
             TwoPaneSummaryItem.Params(
                 title = DefaultTypeSummary(
@@ -57,7 +58,7 @@ internal class FunctionDocumentableConverter(
                         type = paramConverter.componentForProjection(
                             projection = function.type,
                             // Propagate ALL annotations _for display in the summary_, b/197321617
-                            propagatedAnnotations = annotations,
+                            propagatedAnnotations = typeAnnotations,
                             isReturnType = true,
                             isJavaSource = function.isFromJava()
                         )
@@ -68,7 +69,12 @@ internal class FunctionDocumentableConverter(
                         signature = function.signature(isSummary = true),
                         description = javadocConverter.summaryDescription(
                             function,
-                            annotations.filter { !it.belongsOnReturnType() }
+                            nonTypeAnnotations
+                        ),
+                        annotationComponents = nonTypeAnnotations.annotationComponents(
+                            pathProvider = pathProvider,
+                            displayLanguage = displayLanguage,
+                            nullability = Nullability.DONT_CARE // Propagates to return type instead
                         )
                     )
                 )
@@ -83,7 +89,12 @@ internal class FunctionDocumentableConverter(
                 DefaultSymbolSummary(
                     SymbolSummary.Params(
                         signature = function.signature(isSummary = true),
-                        description = javadocConverter.summaryDescription(function)
+                        description = javadocConverter.summaryDescription(function),
+                        annotationComponents = function.annotations().annotationComponents(
+                            pathProvider = pathProvider,
+                            displayLanguage = displayLanguage,
+                            nullability = Nullability.DONT_CARE // Propagates to return type instead
+                        )
                     )
                 )
             )
@@ -106,16 +117,17 @@ internal class FunctionDocumentableConverter(
         hints: ModifierHints,
         kind: SymbolDetail.SymbolKind
     ): SymbolDetail {
+        val (typeAnnotations, signatureAnnotations) =
+            function.annotations().partition { it.belongsOnReturnType() }
         val returnType = paramConverter.componentForProjection(
-            function.type,
+            projection = function.type,
             isJavaSource = function.isFromJava(),
-            function.annotations().filter { it.belongsOnReturnType() },
+            propagatedAnnotations = typeAnnotations,
             isReturnType = true,
             propagatedNullability =
             if (kind == SymbolDetail.SymbolKind.CONSTRUCTOR || function.isConstructor)
                 Nullability.DONT_CARE else null
         )
-        val annotations = function.annotations().filter { !it.belongsOnReturnType() }
 
         // So far I've only seen this in unit tests where we use the wrong entry point into
         // FunctionDocumentableConverter, but it's possible it could happen in other ways.
@@ -128,7 +140,7 @@ internal class FunctionDocumentableConverter(
                 displayLanguage = displayLanguage,
                 name = function.name,
                 anchors = generateCompatAnchors(function),
-                annotationComponents = annotations.annotationComponents(
+                annotationComponents = signatureAnnotations.annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
                     nullability = Nullability.DONT_CARE // Nullability is on the return type instead
@@ -141,7 +153,7 @@ internal class FunctionDocumentableConverter(
                     documentable = function,
                     returnType = returnType,
                     paramNames = listOf("receiver") + function.parameters.map { it.name!! },
-                    annotations = annotations
+                    annotations = signatureAnnotations
                 ),
                 extFunctionClass = function.receiver?.let { nameForSyntheticClass(function) }
             )

@@ -30,7 +30,8 @@ class DefaultSymbolSummaryTest {
         val component = DefaultSymbolSummary(
             Params(
                 signature = NoopFunctionSignature("foo()"),
-                description = NoopDescriptionComponent("This method does baz.")
+                description = NoopDescriptionComponent("This method does baz."),
+                annotationComponents = emptyList()
             )
         )
 
