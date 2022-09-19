@@ -165,7 +165,8 @@ private fun shouldDocumentAnnotation(
     // Not useful to developers
     val isSuppressAnnotation = name in SUPPRESSION_ANNOTATION_NAMES
     val isKotlinJvmAnnotation = annotation.dri.packageName == "kotlin.jvm"
-    val isExplicitlyBannedAnnotation = name in EXPLICITLY_BANNED_ANNOTATION_NAMES
+    val isExplicitlyBannedAnnotation = name in EXPLICITLY_BANNED_ANNOTATION_NAMES ||
+        (displayLanguage == Language.KOTLIN && name in EXPLICITLY_BANNED_ANNOTATIONS_IN_KOTLIN)
     if (isSuppressAnnotation || isKotlinJvmAnnotation || isExplicitlyBannedAnnotation) return false
     // Surfaced separately
     if (annotation.isDeprecated()) return false
@@ -204,6 +205,9 @@ private val EXPLICITLY_BANNED_ANNOTATION_NAMES = listOf(
     "JsName",
     // This annotation is intended to target the compiler and is general not useful for devs
     "Override"
+)
+private val EXPLICITLY_BANNED_ANNOTATIONS_IN_KOTLIN = listOf(
+    "ExtensionFunctionType"
 )
 // List of androidx annotations that (now that we are on Java 8) ideally would be migrated
 // ANNOTATION_TARGET.METHOD -> ANNOTATION_TARGET.TYPE. If on a function, they refer to return type

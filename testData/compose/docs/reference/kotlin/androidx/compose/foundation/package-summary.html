@@ -104,7 +104,7 @@
           <tr>
             <td width="40%"><code>@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Canvas(androidx.compose.ui.Modifier,kotlin.Function1)">Canvas</a>(modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,&nbsp;onDraw:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> <a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Canvas(androidx.compose.ui.Modifier,kotlin.Function1)">Canvas</a>(modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,&nbsp;onDraw:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>)</code></div>
               <p>Component that allow you to specify an area on the screen and perform canvas drawing on this area.</p>
             </td>
           </tr>
@@ -303,7 +303,7 @@
     </div>
     <div><a name="Canvas(androidx.compose.ui.Modifier, kotlin.Function1)"></a><a name="Canvas-androidx.compose.ui.Modifier-kotlin.Function1-"></a><a name="canvas"></a>
       <h3 class="api-name" id="Canvas(androidx.compose.ui.Modifier,kotlin.Function1)">Canvas</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Canvas(androidx.compose.ui.Modifier,kotlin.Function1)">Canvas</a>(modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,&nbsp;onDraw:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> <a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/package-summary.html#Canvas(androidx.compose.ui.Modifier,kotlin.Function1)">Canvas</a>(modifier:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/Modifier.html">Modifier</a>,&nbsp;onDraw:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Component that allow you to specify an area on the screen and perform canvas drawing on this area. You MUST specify size with modifier, whether with exact sizes via Modifier.size modifier, or relative to parent, via Modifier.fillMaxSize, <code><a href="/reference/kotlin/androidx/compose/foundation/layout/ColumnScope.html#(androidx.compose.ui.Modifier).weight(kotlin.Float,kotlin.Boolean)">ColumnScope.weight</a></code>, etc. If parent wraps this child, only exact sizes must be specified.</p>
       <pre class="prettyprint">
 import androidx.compose.foundation.Canvas
@@ -337,7 +337,7 @@ Canvas(modifier = Modifier.size(100.dp)) {
               </td>
             </tr>
             <tr>
-              <td width="40%"><code>onDraw:&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> <a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+              <td width="40%"><code>onDraw:&nbsp;<a href="/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope.html">DrawScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
               <td>
                 <p>lambda that will be called to perform drawing. Note that this lambda will be called during draw stage, you have no access to composition scope, meaning that <code><a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a></code> function invocation inside it will result to runtime exception</p>
               </td>
