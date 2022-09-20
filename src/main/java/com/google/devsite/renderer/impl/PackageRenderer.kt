@@ -43,29 +43,29 @@ internal class PackageRenderer(
     private val docsHolder: DocumentablesHolder
 ) {
     /** Writes the home page. */
-    suspend fun writeIndex(packageDoc: DPackage) {
+    suspend fun writeIndex(dPackage: DPackage) {
         val redirectComponent = DefaultRedirectPage(RedirectPage.Params(PACKAGE_SUMMARY_FILE))
         val index = createHTML().html {
             redirectComponent.render(this)
         }
 
         outputWriter.write(
-            pathProvider.forType(packageDoc.name, DIR_INDEX_NAME),
+            pathProvider.forType(dPackage.name, DIR_INDEX_NAME),
             index,
             ""
         )
     }
 
-    suspend fun writePackageSummary(packageDoc: DPackage) {
+    suspend fun writePackageSummary(dPackage: DPackage) {
         val converter =
-            PackageDocumentableConverter(displayLanguage, packageDoc, pathProvider, docsHolder)
+            PackageDocumentableConverter(displayLanguage, dPackage, pathProvider, docsHolder)
         val page = converter.summaryPage()
         val packageSummary = createHTML().html {
             page.render(this)
         }
 
         outputWriter.write(
-            pathProvider.forType(packageDoc.name, PACKAGE_SUMMARY_NAME),
+            pathProvider.forType(dPackage.name, PACKAGE_SUMMARY_NAME),
             packageSummary,
             ""
         )

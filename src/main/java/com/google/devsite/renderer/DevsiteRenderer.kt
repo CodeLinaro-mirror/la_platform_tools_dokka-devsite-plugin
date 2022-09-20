@@ -36,8 +36,8 @@ internal class DevsiteRenderer(
 
         val extensionFunctionsMapping = docsHolder.extensionFunctionMap()
 
-        for (packageDoc in docsHolder.packages()) {
-            writePackage(packageDoc, extensionFunctionsMapping)
+        for (dPackage in docsHolder.packages()) {
+            writePackage(dPackage, extensionFunctionsMapping)
         }
     }
 
@@ -50,13 +50,13 @@ internal class DevsiteRenderer(
     }
 
     private suspend fun writePackage(
-        packageDoc: DPackage,
+        dPackage: DPackage,
         extensionFunctionsMapping: HashMap<DRI, MutableList<DFunction>>
     ) = coroutineScope {
-        launch { packageRenderer.writeIndex(packageDoc) }
-        launch { packageRenderer.writePackageSummary(packageDoc) }
+        launch { packageRenderer.writeIndex(dPackage) }
+        launch { packageRenderer.writePackageSummary(dPackage) }
 
-        for (clazz in docsHolder.classlikesFor(packageDoc, displayLanguage)) {
+        for (clazz in docsHolder.classlikesFor(dPackage, displayLanguage)) {
             launch {
                 packageRenderer.writeClasslike(
                     clazz,

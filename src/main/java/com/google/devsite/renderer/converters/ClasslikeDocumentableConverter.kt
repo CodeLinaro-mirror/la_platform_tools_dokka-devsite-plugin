@@ -406,6 +406,11 @@ internal class ClasslikeDocumentableConverter(
             )
         }
 
+        val processed = docsHolder.classlikesDone.getAndIncrement()
+        if (processed % 100 == 0) {
+            docsHolder.logger.debug("Dackka: $displayLanguage classlikes processed: $processed")
+        }
+
         DefaultDevsitePage(
             DevsitePage.Params(
                 displayLanguage,
