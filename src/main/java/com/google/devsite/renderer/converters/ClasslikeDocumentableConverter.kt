@@ -427,10 +427,10 @@ internal class ClasslikeDocumentableConverter(
                             annotations = annotations
                         ),
                         symbolTypes = allSymbols,
-                        inheritedTypes = inheritedTypes.await(),
-                        libraryMetadataComponent = libraryMetadataComponent.await()
+                        inheritedTypes = inheritedTypes.await()
                     )
-                )
+                ),
+                libraryMetadataComponent = libraryMetadataComponent.await()
             )
         )
     }

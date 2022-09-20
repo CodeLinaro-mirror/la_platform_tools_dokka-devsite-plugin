@@ -20,6 +20,7 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.pages.DevsitePage.Params
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.renderer.Language
+import com.google.devsite.util.LibraryMetadata
 import kotlinx.html.html
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -33,7 +34,8 @@ class DefaultDevsitePageTest {
                 path = "page.html",
                 bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
-                content = NoopContextFreeComponent
+                content = NoopContextFreeComponent,
+                libraryMetadataComponent = null
             )
         )
 
@@ -67,7 +69,8 @@ class DefaultDevsitePageTest {
                 path = "page.html",
                 bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
-                content = NoopContextFreeComponent
+                content = NoopContextFreeComponent,
+                libraryMetadataComponent = null
             )
         )
 
@@ -85,6 +88,92 @@ class DefaultDevsitePageTest {
 {% include "_shared/_reference-head-tags.html" %}
   </head>
   <body>
+    <h1>Page Title</h1>
+    <div>noop</div>
+  </body>
+</html>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Page with metadata renders correctly`() {
+        val metadata = LibraryMetadata(
+            groupId = "android.x",
+            artifactId = "artifact",
+            releaseNotesUrl = "https://d.android.com"
+        )
+        val component = DefaultDevsitePage(
+            Params(
+                displayLanguage = Language.KOTLIN,
+                path = "page.html",
+                bookPath = "/reference/androidx/_book.yaml",
+                title = "Page Title",
+                content = NoopContextFreeComponent,
+                libraryMetadataComponent = DefaultLibraryMetadataComponent(metadata)
+            )
+        )
+
+        val output = createHTML().html {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<html devsite="true">
+  <head>
+    <title>Page Title</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="maven-coordinates">Artifact: <a href="https://d.android.com">android.x:artifact</a></div>
+    </div>
+    <h1>Page Title</h1>
+    <div>noop</div>
+  </body>
+</html>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Page with metadata without URL renders correctly`() {
+        val metadata = LibraryMetadata(
+            groupId = "android.x",
+            artifactId = "artifact",
+            releaseNotesUrl = ""
+        )
+        val component = DefaultDevsitePage(
+            Params(
+                displayLanguage = Language.KOTLIN,
+                path = "page.html",
+                bookPath = "/reference/androidx/_book.yaml",
+                title = "Page Title",
+                content = NoopContextFreeComponent,
+                libraryMetadataComponent = DefaultLibraryMetadataComponent(metadata)
+            )
+        )
+
+        val output = createHTML().html {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<html devsite="true">
+  <head>
+    <title>Page Title</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "_shared/_reference-head-tags.html" %}
+  </head>
+  <body>
+    <div id="metadata-info-block">
+      <div id="maven-coordinates">Artifact: android.x:artifact</div>
+    </div>
     <h1>Page Title</h1>
     <div>noop</div>
   </body>

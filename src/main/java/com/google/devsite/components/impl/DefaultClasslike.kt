@@ -32,7 +32,6 @@ internal data class DefaultClasslike(
         p {
             data.signature.render(this)
         }
-        data.libraryMetadataComponent?.render(this)
         data.hierarchy.render(this)
         data.relatedSymbols.render(this)
         data.description.render(into, separator = null, header = { hr() })
@@ -48,7 +47,7 @@ internal data class DefaultClasslike(
         data.inheritedTypes.filter { it.hasContent() }
 
     override fun toString() = data.signature.toString() + " " +
-        (data.libraryMetadataComponent?.toString() ?: "") + data.hierarchy + data.relatedSymbols +
+        data.hierarchy + data.relatedSymbols +
         data.description.joinToString() +
         data.symbolTypes.map { it.first }.filter { it.hasContent() } +
         data.inheritedTypes.filter { it.hasContent() } +

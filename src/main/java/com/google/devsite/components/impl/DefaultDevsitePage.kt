@@ -28,6 +28,7 @@ import kotlinx.html.unsafe
 internal data class DefaultDevsitePage(
     override val data: DevsitePage.Params
 ) : DevsitePage {
+
     override fun render(into: HTML) = into.run {
         attributes["devsite"] = "true"
         head {
@@ -37,10 +38,12 @@ internal data class DefaultDevsitePage(
         }
 
         body {
+            data.libraryMetadataComponent?.render(this)
             h1 { +data.title }
             data.content.render(this)
         }
     }
 
-    override fun toString() = "DevsitePage: ${data.title} at ${data.bookPath}\n${data.content}"
+    override fun toString() = "DevsitePage: ${data.title} at ${data.bookPath}\n${data.content} " +
+        "with metadata " + (data.libraryMetadataComponent?.toString() ?: "")
 }
