@@ -41,7 +41,9 @@ internal class DefaultLibraryMetadataComponentTest {
         assertThat(output).isEqualTo(
             """
 <body>
-  <div><a href="https://d.android.com">testGroup:testArtifactId</a></div>
+  <div id="metadata-info-block">
+    <div id="maven-coordinates">Artifact: <a href="https://d.android.com">testGroup:testArtifactId</a></div>
+  </div>
 </body>
             """.trim()
         )
@@ -64,7 +66,9 @@ internal class DefaultLibraryMetadataComponentTest {
         assertThat(output).isEqualTo(
             """
 <body>
-  <div>testGroup:testArtifactId</div>
+  <div id="metadata-info-block">
+    <div id="maven-coordinates">Artifact: testGroup:testArtifactId</div>
+  </div>
 </body>
             """.trim()
         )

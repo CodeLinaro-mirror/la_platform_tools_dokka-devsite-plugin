@@ -105,7 +105,8 @@ internal class PackageDocumentableConverter(
                         extensionProperties = extensionProperties.await(),
                         extensionFunctions = extensionFunctions.await()
                     )
-                )
+                ),
+                libraryMetadataComponent = null
             )
         )
     }

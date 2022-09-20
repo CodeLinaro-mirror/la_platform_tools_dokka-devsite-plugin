@@ -18,6 +18,7 @@ package com.google.devsite.components.pages
 
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.HtmlComponent
+import com.google.devsite.components.symbols.LibraryMetadataComponent
 import com.google.devsite.renderer.Language
 import kotlinx.html.HTML
 
@@ -30,6 +31,7 @@ internal interface DevsitePage : HtmlComponent<HTML> {
         val path: String,
         val bookPath: String,
         val title: String,
-        val content: ContextFreeComponent
+        val content: ContextFreeComponent,
+        val libraryMetadataComponent: LibraryMetadataComponent?
     )
 }

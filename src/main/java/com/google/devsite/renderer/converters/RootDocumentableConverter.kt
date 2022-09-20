@@ -71,8 +71,10 @@ internal class RootDocumentableConverter(
                         pathProvider.packages,
                         componentClasses
                     )
-                )
+                ),
+                libraryMetadataComponent = null
             )
+
         )
     }
 
@@ -96,7 +98,8 @@ internal class RootDocumentableConverter(
                         pathProvider.classes,
                         componentPackages
                     )
-                )
+                ),
+                libraryMetadataComponent = null
             )
         )
     }

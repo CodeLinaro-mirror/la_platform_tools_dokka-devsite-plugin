@@ -20,6 +20,7 @@ import com.google.devsite.components.symbols.LibraryMetadataComponent
 import com.google.devsite.util.LibraryMetadata
 import kotlinx.html.FlowContent
 import kotlinx.html.div
+import kotlinx.html.id
 
 /** Default implementation of a LibraryMetadata. */
 internal data class DefaultLibraryMetadataComponent(
@@ -27,8 +28,14 @@ internal data class DefaultLibraryMetadataComponent(
 ) : LibraryMetadataComponent {
 
     override fun render(into: FlowContent): Unit = into.run {
+        // CSS ids are declared in internal codebase (cl/475581680)
         div {
-            data.link.render(into)
+            id = "metadata-info-block"
+            div {
+                id = "maven-coordinates"
+                +"Artifact: "
+                data.link.render(this)
+            }
         }
     }
 
