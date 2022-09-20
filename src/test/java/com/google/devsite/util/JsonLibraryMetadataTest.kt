@@ -37,12 +37,12 @@ class JsonLibraryMetadataTest {
     }
 
     @Test(expected = FileNotFoundException::class)
-    fun `getMetadataFromFile with missing file`() {
+    fun `getMetadataFromFile with missing file throws FileNotFoundException`() {
         JsonLibraryMetadata.getMetadataFromFile("NotAnActualFile.json")
     }
 
     @Test(expected = IOException::class)
-    fun `getMetadataFromFile with unparseable json file`() {
+    fun `getMetadataFromFile with unparseable json file throws IOException`() {
         val json = """
 [
   {
