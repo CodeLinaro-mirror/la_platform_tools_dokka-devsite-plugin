@@ -50,6 +50,8 @@ data class JsonLibraryMetadata(
     /**
      * Read and parse contents of the given JSON filename to a list of [JsonLibraryMetadata].
      *
+     * Only includes metadata that has both a groupId and an artifactId.
+     *
      * Returns an empty list if the filename is an empty string.
      *
      * Throws an exception if the file can't be read or if the JSON can't be parsed.
@@ -62,7 +64,8 @@ data class JsonLibraryMetadata(
 
             return try {
                 val jsonStr = File(filename).readText()
-                jacksonObjectMapper().readValue(jsonStr)
+                val list = jacksonObjectMapper().readValue<List<JsonLibraryMetadata>>(jsonStr)
+                list.filter { it.groupId.isNotEmpty() && it.artifactId.isNotEmpty() }
             } catch (e: FileNotFoundException) {
                 throw FileNotFoundException("Could not find library metadata file: $filename")
             } catch (e: JacksonException) {

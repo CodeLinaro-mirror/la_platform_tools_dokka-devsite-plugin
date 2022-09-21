@@ -126,4 +126,85 @@ class JsonLibraryMetadataTest {
         // This should not throw an exception
         JsonLibraryMetadata.getMetadataFromFile(file.toString())
     }
+
+    @Test
+    fun `getMetadataFromFile with json file with blank groupId`() {
+        val json = """
+[
+  {
+    "groupId": "androidx.a",
+    "artifactId": "a-runtime",
+    "releaseNotesUrl": "https://d.android.com/a",
+    "jarContents": ["a/unused.kt"]
+  },
+  {
+    "groupId": "",
+    "artifactId": "b-runtime",
+    "releaseNotesUrl": "https://d.android.com/b",
+    "jarContents": ["b/unused.kt"]
+  }
+]
+        """.trimIndent()
+
+        val file = folder.newFile("LibraryMetadata.json")
+        file.writeText(json)
+
+        val metadata = JsonLibraryMetadata.getMetadataFromFile(file.toString())
+        assertThat(metadata.size).isEqualTo(1)
+        assertThat(metadata[0].groupId).isEqualTo("androidx.a")
+    }
+
+    @Test
+    fun `getMetadataFromFile with json file with blank artifactId`() {
+        val json = """
+[
+  {
+    "groupId": "androidx.a",
+    "artifactId": "a-runtime",
+    "releaseNotesUrl": "https://d.android.com/a",
+    "jarContents": ["a/unused.kt"]
+  },
+  {
+    "groupId": "androidx.b",
+    "artifactId": "",
+    "releaseNotesUrl": "https://d.android.com/b",
+    "jarContents": ["b/unused.kt"]
+  }
+]
+        """.trimIndent()
+
+        val file = folder.newFile("LibraryMetadata.json")
+        file.writeText(json)
+
+        val metadata = JsonLibraryMetadata.getMetadataFromFile(file.toString())
+        assertThat(metadata.size).isEqualTo(1)
+        assertThat(metadata[0].groupId).isEqualTo("androidx.a")
+    }
+
+    @Test
+    fun `getMetadataFromFile with json file with blank groupId and artifactId`() {
+        val json = """
+[
+  {
+    "groupId": "androidx.a",
+    "artifactId": "a-runtime",
+    "releaseNotesUrl": "https://d.android.com/a",
+    "jarContents": ["a/unused.kt"]
+  },
+  {
+    "groupId": "",
+    "artifactId": "",
+    "releaseNotesUrl": "https://d.android.com/b",
+    "jarContents": ["b/unused.kt"]
+  }
+]
+        """.trimIndent()
+
+        val file = folder.newFile("LibraryMetadata.json")
+        file.writeText(json)
+
+        val metadata = JsonLibraryMetadata.getMetadataFromFile(file.toString())
+        assertThat(metadata.size).isEqualTo(1)
+        assertThat(metadata[0].groupId).isEqualTo("androidx.a")
+    }
 }
