@@ -738,6 +738,16 @@ internal class FunctionDocumentableConverterTest(
         }
     }
 
+    @Test // This source is from compose.foundation.DarkTheme
+    fun `Delegate-to-internal pattern works in Kotlin`() {
+        val returnSummary = """
+            fun isSystemInDarkTheme() = _isSystemInDarkTheme()
+
+            internal expect fun _isSystemInDarkTheme(): Boolean
+        """.render().functionSummary("isSystemInDarkTheme").returnSummary()
+        assertThat(returnSummary.type.name().lowercase()).isEqualTo("boolean")
+    }
+
     private fun assertNoLambdaStuff(data: ParameterComponent.Params) {
         assertThat(data.type is LambdaTypeProjectionComponent).isFalse()
     }
