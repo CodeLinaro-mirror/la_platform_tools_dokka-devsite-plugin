@@ -83,7 +83,9 @@ internal class RootDocumentableConverter(
         val packages = docsHolder.packages()
         val componentPackages = DefaultSummaryList(
             SummaryList.Params(
-                items = packages.map { javadocConverter.summaryForDocumentable(it) }
+                items = packages
+                    .filter { it.name != "[root]" } // this synthetic package has broken self-links
+                    .map { javadocConverter.summaryForDocumentable(it) }
             )
         )
 

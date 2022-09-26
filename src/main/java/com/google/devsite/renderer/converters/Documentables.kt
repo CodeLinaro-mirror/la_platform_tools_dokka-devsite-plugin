@@ -83,7 +83,12 @@ internal fun <T> T.getErrorLocation(): String where T : WithSources, T : Documen
                 """(public|protected) (static |final )*""" +
                     """(class |enum |(@)?interface )?[a-zA-Z_0-9]+(<*>)? $name"""
                 ).toRegex()
-        else -> throw RuntimeException("Unknown file type for $sourceFilePath")
+        "class" -> return result // this type's source is in a prebuilt?
+        else -> {
+            // This means the error occurred while parsing a synthetic element
+            if ("org.jetbrains.kotlin.descriptors" in sourceFilePath) return result
+            else throw RuntimeException("Unknown file type for $sourceFilePath")
+        }
     }
     // Assume that the type params can't take up more than 3 lines
     File(sourceFilePath).readLines().windowed(size = 3, step = 1).forEachIndexed { index, lines ->

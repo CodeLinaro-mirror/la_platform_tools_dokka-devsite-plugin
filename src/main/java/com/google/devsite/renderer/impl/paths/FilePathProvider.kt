@@ -73,6 +73,9 @@ internal interface FilePathProvider {
      */
     fun linkForReference(dri: DRI, name: String? = null, suffix: String = ""): Link {
         val ref = forReference(dri)
+        if (ref.url == "")
+            if (dri.packageName !in NON_DOCUMENTABLE_PACKAGES) // Currently impossible; future-proof
+                throw RuntimeException("Unresolved type link for DRI $dri")
         return DefaultLink(Link.Params((name ?: ref.name) + suffix, ref.url))
     }
 
