@@ -512,18 +512,18 @@ internal class DocTagConverter(
         tags().forEach {
             when (it) {
                 is Description -> {
-                    try {
-                        it.children.forEach { child ->
+                    it.children.forEach { child ->
+                        try {
                             recursivelyConsiderPsAndTextsForJavaSamples(
                                 child, components, this.sourceSets.single().samples
                             )
+                        } catch (e: Exception) {
+                            throw RuntimeException(
+                                "Error when resolving samples when processing $name" +
+                                    getErrorLocation(),
+                                e
+                            )
                         }
-                    } catch (e: Exception) {
-                        throw RuntimeException(
-                            "Error when resolving samples when processing $name" +
-                                getErrorLocation(),
-                            e
-                        )
                     }
                 }
                 is Sample -> {
@@ -553,12 +553,18 @@ internal class DocTagConverter(
         return description(components, summary, null)
     }
 
+    /** annotation-sampled and SampledAnnotationDetector */
+    private fun DocTag.explicitlyBanLookingForSamples() =
+        "Functions referenced with @sample are annotated with @Sampled" in text() ||
+            "Denotes that the annotated function is considered a sample function" in text() ||
+            "that functions referred to from KDoc with a @sample tag are annotated" in text()
+
     private fun recursivelyConsiderPsAndTextsForJavaSamples(
         root: DocTag,
         components: MutableList<DocTag>,
         samples: Set<File>
     ) {
-        if ("@sample" !in root.text()) components.add(root)
+        if ("@sample" !in root.text() || root.explicitlyBanLookingForSamples()) components.add(root)
         else {
             when (root) {
                 is Text -> {
