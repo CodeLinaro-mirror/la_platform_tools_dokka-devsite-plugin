@@ -559,7 +559,6 @@ internal class FunctionDocumentableConverterTest(
             | * @return An array of int to String mappings
             | *
             | * @see android.view.ViewDebug.IntToString
-            | * @see #mapping()
             | */
             |public IntToString[] indexMapping() default { };
         """.render(java = true).functionDetail()

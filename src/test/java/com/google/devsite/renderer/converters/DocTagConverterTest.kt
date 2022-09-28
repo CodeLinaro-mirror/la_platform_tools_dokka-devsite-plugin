@@ -800,9 +800,6 @@ internal class DocTagConverterTest(
             |     * @param ToValue Type of items produced by the new DataSource, from the passed function.
             |     * @return A new [Factory], which transforms items using the given function.
             |     *
-            |     * @see mapByPage
-            |     * @see DataSource.map
-            |     * @see DataSource.mapByPage
             |     */
             |    open fun <ToValue : String> map(function: (Value) -> ToValue): Factory<Key, ToValue>
             |}
@@ -843,13 +840,6 @@ internal class DocTagConverterTest(
             "Type of items produced by the " +
                 "new DataSource, from the passed function."
         )
-
-        val seeAlsoTable = documentation.first {
-            (it as? DocsSummaryList)?.title() == "See also"
-        } as DocsSummaryList
-        assertThat(seeAlsoTable.size).isEqualTo(3)
-        assertThat(seeAlsoTable.items().map { (it.data.title as Link).data.name })
-            .isEqualTo(listOf("mapByPage", "DataSource.map", "DataSource.mapByPage"))
     }
 
     @Test
@@ -1570,8 +1560,6 @@ internal class DocTagConverterTest(
              * <a href="package-summary.html#MemoryVisibility"> <i>happen-before</i></a>
              * actions following the corresponding {@code Future.get()} in another thread.
              *
-             * @see FutureTask
-             * @see Executor
              * @since 1.5
              * @author Doug Lea
              * @param <V> The result type returned by this Future's {@code get} method

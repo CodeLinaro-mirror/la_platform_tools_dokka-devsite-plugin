@@ -713,11 +713,22 @@ internal class DocTagConverter(
         // TODO(b/167437580): figure out how to reliably parse links
         val segments = name.split("#")
         return if (segments.size == 1) {
-            // Assume we have a fully qualified type
-            val (packageName, typeName) = fullyQualifiedTypeToPackageNameAndType(segments.single())
-            if (packageName.isEmpty() || typeName.isEmpty()) {
-                // Turns out we didn't, so give up
+            val (packageName, typeName) = typeToPackageNameAndType(segments.single())
+            if (typeName.isEmpty()) {
+                println("WARN: Failed to resolve `@see $name`!")
+                // Maybe the link is `package.Class.aFunction` instead of `package.Class#aFunction`?
+                val last = name.substringAfterLast(".")
+                val rest = name.substringBeforeLast(".")
+                if (last.firstOrNull()?.isLowerCase() == true && rest.any { it.isUpperCase() }) {
+                    println("Did you mean $rest#$last?")
+                    val (packageName, typeName) = typeToPackageNameAndType(rest)
+                    val url = pathProvider.forType(packageName, typeName)
+                    DefaultLink(Link.Params(typeName, "$url#$last"))
+                }
                 DefaultLink(Link.Params(name, url = ""))
+            } else if (packageName.isEmpty()) {
+                // This is a same-package type link, though we sadly can't prove it's correct
+                pathProvider.linkForReference(DRI("", typeName))
             } else {
                 pathProvider.linkForReference(DRI(packageName, typeName))
             }
@@ -727,26 +738,27 @@ internal class DocTagConverter(
                 // Self link
                 DefaultLink(Link.Params(anchor, anchor))
             } else {
-                // Assume fully qualified link with anchor
-                val (packageName, typeName) = fullyQualifiedTypeToPackageNameAndType(type)
+                // Assume link with anchor
+                val (packageName, typeName) = typeToPackageNameAndType(type)
                 val url = pathProvider.forType(packageName, typeName)
                 DefaultLink(Link.Params(typeName, "$url#$anchor"))
             }
         } else {
-            error("Could not understand path: $name")
+            throw RuntimeException("Could not understand path: $name")
         }
     }
 
     /** Horrible guess-work to try and extract the package and type names. */
-    private fun fullyQualifiedTypeToPackageNameAndType(full: String): Pair<String, String> {
+    private fun typeToPackageNameAndType(full: String): Pair<String, String> {
         val parts = full.split(".")
+
+        if (parts.size == 1) return "" to full
 
         val packageName = parts.takeWhile { it.all(Char::isLowerCase) }.joinToString(".")
         val typeName = parts.takeLastWhile {
-            if (it.isEmpty()) throw RuntimeException("empty element in FQTTPNAT. Full: $full")
+            if (it.isEmpty()) throw RuntimeException("empty element in TTPNAT. Full: $full")
             else it.first().isUpperCase()
         }.joinToString(".")
-
         return packageName to typeName
     }
 

@@ -302,6 +302,7 @@ internal data class DefaultDescriptionComponent(
                 is Pre, is CodeBlock -> pre("prettyprint") { renderTags(tag.children, state) }
                 is DocumentationLink -> code {
                     val url = data.pathProvider!!.forReference(tag.dri).url
+                    // TODO: improve enforcement/warning for broken links in description b/192556649
                     a(url) {
                         renderTags(tag.children, state)
                     }
