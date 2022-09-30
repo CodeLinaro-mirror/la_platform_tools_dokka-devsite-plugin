@@ -241,7 +241,7 @@ internal data class DefaultDescriptionComponent(
         for (tag in tags) {
             if (state.terminate)
                 break
-            val link = tag.params["href"]
+            val link = tag.params["href"]?.handleDocRoot()
             val isHtml = tag.params["content-type"] == "html"
             when (tag) {
                 is Text -> if (data.summary) {
@@ -254,14 +254,14 @@ internal data class DefaultDescriptionComponent(
                         +tag.body.trimEnd()
                         state.terminate = true
                     } else if (isHtml) {
-                        consumer.onTagContentUnsafe { raw(tag.body) }
+                        consumer.onTagContentUnsafe { raw(tag.body.handleDocRoot()) }
                     } else {
                         +tag.body
                     }
                 } else {
                     if (tag.children.isEmpty()) {
                         if (isHtml) {
-                            consumer.onTagContentUnsafe { raw(tag.body) }
+                            consumer.onTagContentUnsafe { raw(tag.body.handleDocRoot()) }
                         } else {
                             +tag.body
                         }
@@ -339,6 +339,10 @@ internal data class DefaultDescriptionComponent(
                 is Caption -> TODO("Support this tag")
             }
         }
+    }
+
+    private fun String.handleDocRoot(): String {
+        return replace("{@docRoot}", "/")
     }
 
     // TODO: remove improper handling of dt b/217941159

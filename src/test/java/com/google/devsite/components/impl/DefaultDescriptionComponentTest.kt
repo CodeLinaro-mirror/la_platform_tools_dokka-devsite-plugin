@@ -1074,6 +1074,27 @@ public void onCreate() {
         )
     }
 
+    @Test
+    fun `HTML link with docRoot renders correctly`() {
+        val component = """
+            |/** Click <a href="{@docRoot}guide">here</a>. */
+            |class Foo
+        """.render().description()
+
+        val output = createHTML().body {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<body>
+  <p>Click <a href="/guide">here</a>.</p>
+</body>
+            """.trim()
+        )
+    }
+
     private fun DModule.description(
         summary: Boolean = false,
         deprecation: String? = null
