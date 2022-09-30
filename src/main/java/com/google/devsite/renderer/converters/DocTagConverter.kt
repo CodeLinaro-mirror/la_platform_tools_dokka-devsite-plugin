@@ -301,10 +301,27 @@ internal class DocTagConverter(
         documentable: Documentable,
         isFromJava: Boolean
     ): SummaryList<TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>> {
+        val tagged = tags.map { it.name() }.toSet()
+
         // @param can refer to parameters, lambda parameters, type parameters, or receivers.
-        val allOptions = mutableMapOf<String, ParameterComponent>()
+        // For each type of parameter, if at least one has a corresponding @param tag, document all
+        // of them, including the ones without @param tags. If there are no @param tags for a type
+        // of parameter, none of the parameters of that type will be documented.
+        val allDocumentedParams = mutableMapOf<String, ParameterComponent>()
+        if (documentable is Callable && documentable.receiver != null) {
+            val name = documentable.receiver!!.name ?: "receiver"
+            if (tagged.contains(name)) {
+                allDocumentedParams[name] =
+                    paramConverter.componentForParameter(
+                        param = documentable.receiver!!,
+                        isSummary = false,
+                        isFromJava = isFromJava,
+                        parent = documentable
+                    )
+            }
+        }
         if (documentable is DFunction) {
-            allOptions.putAll(
+            allDocumentedParams.putAll(
                 documentable.parameters.map {
                     it.name!! to paramConverter.componentForParameter(
                         param = it,
@@ -314,39 +331,48 @@ internal class DocTagConverter(
                     )
                 }
             )
-            allOptions.putAll(
-                recursivelyGetLambdaParamNames(documentable.parameters.map { it.type }).map {
-                    (it.presentableName ?: "") to paramConverter
-                        .componentForLambdaParameter(it, isFromJava)
+            val lamParams = recursivelyGetLambdaParamNames(documentable.parameters.map { it.type })
+            if (lamParams.any { tagged.contains(it.presentableName) }) {
+                allDocumentedParams.putAll(
+                    lamParams.map {
+                        (it.presentableName ?: "") to paramConverter
+                            .componentForLambdaParameter(it, isFromJava)
+                    }
+                )
+            }
+        }
+        if (dGenerics.map { it.name }.any { tagged.contains(it) }) {
+            allDocumentedParams.putAll(
+                dGenerics.map {
+                    it.name to paramConverter.componentForTypeParameter(it, isFromJava)
                 }
             )
         }
-        allOptions.putAll(
-            dGenerics.map {
-                it.name to paramConverter.componentForTypeParameter(it, isFromJava)
-            }
-        )
-        if (documentable is Callable && documentable.receiver != null)
-            allOptions[documentable.receiver!!.name ?: "receiver"] =
-                paramConverter.componentForParameter(
-                    param = documentable.receiver!!,
-                    isSummary = false,
-                    isFromJava = isFromJava,
-                    parent = documentable
-                )
-        val params = tags.map { tag ->
-            if (allOptions[tag.name()] == null) {
+
+        // Create map from name to tag, while checking that all tags are valid.
+        val namesToTags = tags.associateBy { tag ->
+            if (allDocumentedParams[tag.name()] == null) {
                 throw RuntimeException(
                     "Unable to find what is referred to by \"@param " +
                         "${tag.name()}\" in ${documentable::class.simpleName} " +
                         "${documentable.name}, with contents: ${tag.text()}"
                 )
             }
-            val title = allOptions[tag.name()]!!
+            tag.name()
+        }
+
+        val params = allDocumentedParams.map { (name, component) ->
+            val tag = namesToTags[name]
+            // If a param doesn't have a tag, create an empty description.
+            val description = if (tag != null) {
+                description(tag)
+            } else {
+                description()
+            }
             DefaultTwoPaneSummaryItem(
                 TwoPaneSummaryItem.Params(
-                    title = title,
-                    description = description(tag)
+                    title = component,
+                    description = description
                 )
             )
         }
