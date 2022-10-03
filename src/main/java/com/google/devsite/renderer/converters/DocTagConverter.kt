@@ -150,11 +150,11 @@ internal class DocTagConverter(
             Param(it.root, "receiver")
         }
         val generics = if (documentable is WithGenerics) documentable.generics else emptyList()
-        // Tags referring to something with the same name as the Documentable itself should instead
-        // be put into the Description, which is handled in the getDescription method.
-        val preparedTags = (listOfNotNull(receiverParam) + documentable.tags())
-            .filter { (it as? NamedTagWrapper)?.name != documentable.name }
-        val tagsByType = preparedTags.sortedWith(tagOrder(paramNames)).groupBy { it.javaClass }
+        // Filter out tags which should instead be put into the Description, which is handled in the
+        // getDescription method.
+        val metadataTags = (listOfNotNull(receiverParam) + documentable.tags())
+            .filter { !it.belongsInDescriptionOf(documentable) }
+        val tagsByType = metadataTags.sortedWith(tagOrder(paramNames)).groupBy { it.javaClass }
         val tables = tagsByType.mapNotNull { (_, rawTags) ->
             // b/172000585
             var tags = handleUpstreamTagDuplication(documentable, rawTags, generics)
@@ -544,13 +544,27 @@ internal class DocTagConverter(
                     components.add(CodeBlock(listOf(Text(imports + body))))
                     components.addAll(it.children)
                 }
-                is NamedTagWrapper -> if (it.name == name) components.add(it.root)
+                is NamedTagWrapper -> if (it.belongsInDescriptionOf(this)) components.add(it.root)
                 is Author, is Version, is Since, is Return, is Receiver, is Constructor,
                 is Deprecated, is Suppress -> { /* TODO: We do not support these tags yet */ }
             }
         }
         if (components.isEmpty()) return UndocumentedSymbolDescriptionComponent
         return description(components, summary, null)
+    }
+
+    /**
+     * Tags with the same name as the documentable should generally go in the description component,
+     * but sometimes the tag refers to something else with the same name, like a parameter that has
+     * the same name as its function.
+     */
+    private fun TagWrapper.belongsInDescriptionOf(documentable: Documentable): Boolean {
+        if (this !is NamedTagWrapper) return false
+        if (this.name != documentable.name) return false
+        return when (this) {
+            is Param, is Property -> documentable is DParameter || documentable is DProperty
+            else -> true
+        }
     }
 
     /** annotation-sampled and SampledAnnotationDetector */

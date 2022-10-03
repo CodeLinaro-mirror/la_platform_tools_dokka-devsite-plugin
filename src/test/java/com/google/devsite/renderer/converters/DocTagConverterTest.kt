@@ -1354,6 +1354,25 @@ internal class DocTagConverterTest(
     }
 
     @Test
+    fun `Param with same name as function is correctly documented`() {
+        val expected = listOf("foo", "bar")
+        val documentation = """
+        |/**
+        | * @param foo a parameter with the same name as the function
+        | * @param bar a parameter with a different name
+        | */
+        |fun foo(foo: String, bar: String)
+    """.render().documentation(paramNames = expected)
+
+        val paramSummary = documentation.last() as DocsSummaryList
+        val params = paramSummary.items(2)
+
+        for ((i, param) in params.withIndex()) {
+            assertThat(param.data.title.data.name).isEqualTo(expected[i])
+        }
+    }
+
+    @Test
     fun `@sample annotation in kotlin fails if the target samples doesn't exist`() {
         val documentation = """
             |/**
