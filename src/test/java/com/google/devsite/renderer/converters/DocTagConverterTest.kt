@@ -1354,25 +1354,6 @@ internal class DocTagConverterTest(
     }
 
     @Test
-    fun `Full documentation includes all params`() {
-        val expected = listOf("a", "b", "c")
-        val documentation = """
-            |/**
-            | * @param b
-            | * @param c
-            | */
-            |fun foo(a: String, b: String, c: String)
-        """.render().documentation(paramNames = expected)
-
-        val paramSummary = documentation.last() as DocsSummaryList
-        val params = paramSummary.items(3)
-
-        for ((i, param) in params.withIndex()) {
-            assertThat(param.data.title.data.name).isEqualTo(expected[i])
-        }
-    }
-
-    @Test
     fun `@sample annotation in kotlin fails if the target samples doesn't exist`() {
         val documentation = """
             |/**
