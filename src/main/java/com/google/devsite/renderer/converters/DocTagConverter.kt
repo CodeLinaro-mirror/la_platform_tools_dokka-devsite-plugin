@@ -301,12 +301,21 @@ internal class DocTagConverter(
         documentable: Documentable,
         isFromJava: Boolean
     ): SummaryList<TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>> {
+        val tagged = tags.map { it.name() }.toSet()
+
         // @param can refer to parameters, lambda parameters, type parameters, or receivers.
         val allOptions = mutableMapOf<String, ParameterComponent>()
         if (documentable is DFunction) {
             allOptions.putAll(
                 documentable.parameters.map {
-                    it.name!! to paramConverter.componentForParameter(
+                    val name = it.name!!
+                    if (!tagged.contains(name)) {
+                        docsHolder.logger.warn(
+                            "Missing @param tag for parameter `$name` of function " +
+                                "${documentable.dri}"
+                        )
+                    }
+                    name to paramConverter.componentForParameter(
                         param = it,
                         isSummary = false,
                         isFromJava = isFromJava,

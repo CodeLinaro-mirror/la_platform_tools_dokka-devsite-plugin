@@ -1373,6 +1373,27 @@ internal class DocTagConverterTest(
     }
 
     @Test
+    fun `Warning on missing @param documentation`() {
+        val standardOut = System.out
+        val outputStreamCaptor = ByteArrayOutputStream()
+        System.setOut(PrintStream(outputStreamCaptor))
+
+        """
+            |/**
+            | * @param b
+            | * @param c
+            | */
+            |fun foo(a: String, b: String, c: String)
+        """.render().documentation()
+
+        val expected = "WARN: Missing @param tag for parameter `a` of function " +
+            "androidx.example//foo/#kotlin.String#kotlin.String#kotlin.String/" +
+            "PointingToDeclaration/"
+        assertThat(outputStreamCaptor.toString()).contains(expected)
+        System.setOut(standardOut)
+    }
+
+    @Test
     fun `@sample annotation in kotlin fails if the target samples doesn't exist`() {
         val documentation = """
             |/**
