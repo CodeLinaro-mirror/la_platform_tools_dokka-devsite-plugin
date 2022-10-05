@@ -2343,6 +2343,23 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(a.hashCode() == b.hashCode()).isTrue()
     }
 
+    @Test
+    fun `Source links are generated correctly`() {
+        val page = """
+                |class Foo
+            """.render().page()
+
+        val metadataComponent = page.data.metadataComponent
+        assertThat(metadataComponent).isNotNull()
+        val link = metadataComponent!!.data.sourceLink
+        assertThat(link).isNotNull()
+
+        val expectedPath = "kotlin/androidx/example/Test.kt"
+        val expectedClass = "androidx.example.Foo"
+        val expected = "https://cs.android.com/search?q=file:$expectedPath class:$expectedClass"
+        assertThat(link!!.data.url).isEqualTo(expected)
+    }
+
     private fun DModule.page(name: String = "Foo"): DevsitePage<Classlike> {
         val classlike = explicitClasslikes(name).single()
         return page { classlike }

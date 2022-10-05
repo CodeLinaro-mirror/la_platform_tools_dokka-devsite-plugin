@@ -86,6 +86,8 @@ internal class DocumentablesHolder(
     private val excludedPackages: Set<Regex> = emptySet(),
     val showLibraryMetadata: Boolean = false,
     val fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
+    // TODO: b/161899463 -- remove once source links are ready to be displayed
+    val showSourceLink: Boolean = false,
 ) {
     internal var classlikesDone: AtomicInteger = AtomicInteger()
 

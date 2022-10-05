@@ -60,6 +60,7 @@ import com.google.devsite.renderer.impl.paths.FilePathProvider
 import com.google.devsite.util.LibraryMetadata
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import org.jetbrains.dokka.DokkaConfiguration.DokkaSourceSet
 import org.jetbrains.dokka.links.Callable
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.parent
@@ -73,6 +74,7 @@ import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DObject
 import org.jetbrains.dokka.model.DProperty
 import org.jetbrains.dokka.model.Documentable
+import org.jetbrains.dokka.model.DocumentableSource
 import org.jetbrains.dokka.model.ExtraModifiers
 import org.jetbrains.dokka.model.GenericTypeConstructor
 import org.jetbrains.dokka.model.InheritedMember
@@ -852,15 +854,25 @@ internal abstract class ClasslikeDocumentableConverter(
         )
     }
 
+    /**
+     * Creates a metadata component for this classlike. If [getSourceEntry] returns null for the
+     * classlike, this will also return null as the source entry is needed to create both the
+     * library metadata and the source link.
+     */
     private fun getMetadata(): MetadataComponent? {
-        val path = getSourceFilePath(classlike) ?: return null
+        val entry = getSourceEntry(classlike) ?: return null
+        val path = getSourceFilePath(entry)
         val jsonLibraryMetadata = findMatchingJsonLibraryMetadata(path)
+        val sourceUrl = if (docsHolder.showSourceLink) {
+            createLinkToSource(entry, path)
+        } else {
+            null
+        }
 
         return DefaultMetadataComponent(
             MetadataComponent.Params(
                 libraryMetadata = jsonLibraryMetadata,
-                // TODO: b/161899463 -- fill in the source link
-                sourceLinkUrl = null
+                sourceLinkUrl = sourceUrl
             )
         )
     }
@@ -874,14 +886,10 @@ internal abstract class ClasslikeDocumentableConverter(
     }
 
     /**
-     * Get the source file path for a [DClasslike] relative to the root of the source directory.
-     *
-     * For example - this would return "androidx/paging/compose/LazyPagingItems.kt" if the path was
-     * "/location/to/root/of/source/files/androidx/paging/compose/LazyPagingItems.kt".
-     *
-     * Returns null if there is an error finding the path.
+     * Finds the single source entry associated with the classlike. Returns null and logs a warning
+     * if there are no source entries or multiple sources entries for the classlike.
      */
-    private fun getSourceFilePath(classlike: DClasslike): String? {
+    private fun getSourceEntry(classlike: DClasslike): SourceEntry? {
         val logger = docsHolder.logger
         val sources = classlike.sources
         if (sources.isEmpty()) {
@@ -896,10 +904,46 @@ internal abstract class ClasslikeDocumentableConverter(
             return null
         }
 
-        val sourceEntry = sources.entries.first()
+        return sources.entries.single()
+    }
+
+    /**
+     * Get the source file path from the [SourceEntry] relative to the root of the source directory.
+     *
+     * For example - this would return "androidx/paging/compose/LazyPagingItems.kt" if the path was
+     * "/location/to/root/of/source/files/androidx/paging/compose/LazyPagingItems.kt".
+     */
+    private fun getSourceFilePath(sourceEntry: SourceEntry): String {
         val sourceRoot = sourceEntry.key.sourceRoots.first().toString()
         val filePath = sourceEntry.value.path.substringAfter(sourceRoot)
         return filePath.removePrefix("/")
+    }
+
+    /**
+     * Creates a link to the source of the classlike based on the base URL in the source entry's
+     * source link.
+     *
+     * Returns null if the source entry has no source link.
+     *
+     * This supports one source link per source set and will error if more than one is provided.
+     */
+    private fun createLinkToSource(sourceEntry: SourceEntry, path: String): String? {
+        val sourceLinks = sourceEntry.key.sourceLinks
+        if (sourceLinks.isEmpty()) {
+            return null
+        } else if (sourceLinks.size > 1) {
+            throw RuntimeException(
+                "Multiple source links provided for source set ${sourceEntry.key.displayName}. " +
+                    "Dackka supports only one source link per source set.\n" +
+                    "The source link URL should be a format string with placeholders for the " +
+                    "filepath and (optionally) the qualified name of the class.\n" +
+                    "For example, `https://cs.android.com/search?ss=androidx/platform/frameworks" +
+                    "/support&q=file:%s class:%s` is the source link for AndroidX."
+            )
+        }
+
+        val sourceLink = sourceLinks.single().remoteUrl.toString()
+        return sourceLink.format(path, classlike.dri.fullName)
     }
 
     /** Converts the classlikes to link components for use in the related symbols component. */
@@ -1039,6 +1083,8 @@ internal abstract class ClasslikeDocumentableConverter(
             it.dri == (classlike as? DClass)?.companion?.dri && it.isOrdinaryCompanion()
         }
 }
+
+typealias SourceEntry = Map.Entry<DokkaSourceSet, DocumentableSource>
 
 internal fun Documentable.isOrdinaryCompanion(): Boolean =
     this is DObject && this.isCompanion() &&
