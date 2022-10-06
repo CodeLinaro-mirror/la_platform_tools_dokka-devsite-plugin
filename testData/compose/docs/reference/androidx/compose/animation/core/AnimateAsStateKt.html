@@ -494,8 +494,8 @@ fun OffsetAnimation(selected: Boolean) {
       <p>Fire-and-forget animation function for <code><a href="/reference/androidx/compose/ui/geometry/Rect.html">Rect</a></code>. This Composable function is overloaded for different parameter types such as <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code>, <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code>, etc. When the provided <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animateRectAsState(androidx.compose.ui.geometry.Rect,androidx.compose.animation.core.AnimationSpec,kotlin.Function1)">targetValue</a></code> is changed, the animation will run automatically. If there is already an animation in-flight when <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animateRectAsState(androidx.compose.ui.geometry.Rect,androidx.compose.animation.core.AnimationSpec,kotlin.Function1)">targetValue</a></code> changes, the on-going animation will adjust course to animate towards the new target value.</p>
       <p><code><a href="/reference/androidx/compose/animation/core/package-summary.html#animateRectAsState(androidx.compose.ui.geometry.Rect,androidx.compose.animation.core.AnimationSpec,kotlin.Function1)">animateRectAsState</a></code> returns a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> object. The value of the state object will continuously be updated by the animation until the animation finishes.</p>
       <p>Note, <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animateRectAsState(androidx.compose.ui.geometry.Rect,androidx.compose.animation.core.AnimationSpec,kotlin.Function1)">animateRectAsState</a></code> cannot be canceled/stopped without removing this composable function from the tree. See <code><a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a></code> for cancelable animations.</p>
-      <pre class="prettyprint">    val bounds: Rect by animateRectAsState(
-        if (enabled) Rect(0f, 0f, 100f, 100f) else Rect(8f, 8f, 80f, 80f))</pre>
+      <pre class="prettyprint">val bounds: Rect by animateRectAsState(
+    if (enabled) Rect(0f, 0f, 100f, 100f) else Rect(8f, 8f, 80f, 80f))</pre>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -549,8 +549,8 @@ fun OffsetAnimation(selected: Boolean) {
       <p>Fire-and-forget animation function for <code><a href="/reference/androidx/compose/ui/geometry/Size.html">Size</a></code>. This Composable function is overloaded for different parameter types such as <code><a href="/reference/androidx/compose/ui/unit/Dp.html">Dp</a></code>, <code><a href="/reference/androidx/compose/ui/graphics/Color.html">Color</a></code>, <code><a href="/reference/androidx/compose/ui/geometry/Offset.html">Offset</a></code>, etc. When the provided <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animateSizeAsState(androidx.compose.ui.geometry.Size,androidx.compose.animation.core.AnimationSpec,kotlin.Function1)">targetValue</a></code> is changed, the animation will run automatically. If there is already an animation in-flight when <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animateSizeAsState(androidx.compose.ui.geometry.Size,androidx.compose.animation.core.AnimationSpec,kotlin.Function1)">targetValue</a></code> changes, the on-going animation will adjust course to animate towards the new target value.</p>
       <p><code><a href="/reference/androidx/compose/animation/core/package-summary.html#animateSizeAsState(androidx.compose.ui.geometry.Size,androidx.compose.animation.core.AnimationSpec,kotlin.Function1)">animateSizeAsState</a></code> returns a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> object. The value of the state object will continuously be updated by the animation until the animation finishes.</p>
       <p>Note, <code><a href="/reference/androidx/compose/animation/core/package-summary.html#animateSizeAsState(androidx.compose.ui.geometry.Size,androidx.compose.animation.core.AnimationSpec,kotlin.Function1)">animateSizeAsState</a></code> cannot be canceled/stopped without removing this composable function from the tree. See <code><a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a></code> for cancelable animations.</p>
-      <pre class="prettyprint">    val size: Size by animateSizeAsState(
-        if (selected) Size(20f, 20f) else Size(10f, 10f))</pre>
+      <pre class="prettyprint">val size: Size by animateSizeAsState(
+    if (selected) Size(20f, 20f) else Size(10f, 10f))</pre>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -636,7 +636,7 @@ fun ArbitraryValueTypeAnimation(enabled: Boolean) {
     )
     Box(Modifier.size(animSize.width, animSize.height).background(color = Color.Red))
 }</pre>
-      <pre class="prettyprint">    data class MySize(val width: Dp, val height: Dp)</pre>
+      <pre class="prettyprint">data class MySize(val width: Dp, val height: Dp)</pre>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>

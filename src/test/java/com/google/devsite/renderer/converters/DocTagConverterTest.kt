@@ -104,7 +104,7 @@ internal class DocTagConverterTest(
             """
 <body>
   <p>Hello World!</p>
-  <p><h2>Second level</h2><h3>Third level</h3></p>
+  <p><h2>Second level</h2> <h3>Third level</h3></p>
 </body>
             """.trim()
         )

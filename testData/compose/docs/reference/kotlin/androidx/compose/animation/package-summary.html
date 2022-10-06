@@ -245,7 +245,7 @@
             <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/EnterTransition.html">EnterTransition</a></code></td>
             <td>
               <div><code>@<a href="/reference/kotlin/androidx/compose/animation/ExperimentalAnimationApi.html">ExperimentalAnimationApi</a><br><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideInHorizontally</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initialOffsetX:&nbsp;(fullWidth:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>&gt;<br>)</code></div>
-              <p>This slides in the content horizontally, from a starting offset defined in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">initialOffsetX</a></code> to <code>0</code><b>pixels</b>.</p>
+              <p>This slides in the content horizontally, from a starting offset defined in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">initialOffsetX</a></code> to <code>0</code> <b>pixels</b>.</p>
             </td>
           </tr>
           <tr>
@@ -943,6 +943,10 @@ fun AnimatedVisibilityInLazyColumn() {
             </tr>
             <tr>
               <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#shrinkOut(androidx.compose.ui.Alignment,kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Boolean)">shrinkOut</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code></td>
               <td></td>
             </tr>
             <tr>
@@ -1752,7 +1756,7 @@ AnimatedVisibility(
     <div><a name="slideInHorizontally(kotlin.Function1, androidx.compose.animation.core.FiniteAnimationSpec)"></a><a name="slideInHorizontally-kotlin.Function1-androidx.compose.animation.core.FiniteAnimationSpec-"></a><a name="slideinhorizontally"></a>
       <h3 class="api-name" id="slideInHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideInHorizontally</h3>
       <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/animation/ExperimentalAnimationApi.html">ExperimentalAnimationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideInHorizontally</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;initialOffsetX:&nbsp;(fullWidth:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = { -it / 2 },<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>&gt; = spring(visibilityThreshold = IntOffset.VisibilityThreshold)<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/EnterTransition.html">EnterTransition</a></pre>
-      <p>This slides in the content horizontally, from a starting offset defined in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">initialOffsetX</a></code> to <code>0</code><b>pixels</b>. The direction of the slide can be controlled by configuring the <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">initialOffsetX</a></code>. A positive value means sliding from right to left, whereas a negative value would slide the content from left to right.</p>
+      <p>This slides in the content horizontally, from a starting offset defined in <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">initialOffsetX</a></code> to <code>0</code> <b>pixels</b>. The direction of the slide can be controlled by configuring the <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">initialOffsetX</a></code>. A positive value means sliding from right to left, whereas a negative value would slide the content from left to right.</p>
       <p><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">initialOffsetX</a></code> is a lambda that takes the full width of the content and returns an offset. This allows the starting offset to be defined proportional to the full size, or as an absolute value. It defaults to return half of negative width, which would offset the content to the left by half of its width, and slide towards the right.</p>
       <pre class="prettyprint">
 import androidx.compose.animation.AnimatedVisibility
@@ -2276,6 +2280,10 @@ Spacer(Modifier.requiredHeight(20.dp))</pre>
               <td></td>
             </tr>
             <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
               <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#(androidx.compose.foundation.layout.ColumnScope).AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code></td>
               <td></td>
             </tr>
@@ -2397,6 +2405,10 @@ Column(
               <td></td>
             </tr>
             <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
               <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/AnimatedVisibilityScope.html">AnimatedVisibilityScope</a></code></td>
               <td></td>
             </tr>
@@ -2484,6 +2496,10 @@ Column(
             </tr>
             <tr>
               <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#shrinkOut(androidx.compose.ui.Alignment,kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Boolean)">shrinkOut</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code></td>
               <td></td>
             </tr>
             <tr>
@@ -2611,6 +2627,10 @@ Column {
             </tr>
             <tr>
               <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#shrinkOut(androidx.compose.ui.Alignment,kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Boolean)">shrinkOut</a></code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedVisibility(kotlin.Boolean,androidx.compose.ui.Modifier,androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.Function1)">AnimatedVisibility</a></code></td>
               <td></td>
             </tr>
             <tr>

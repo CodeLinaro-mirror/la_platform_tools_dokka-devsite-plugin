@@ -12,17 +12,17 @@
     <hr>
     <p><code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html">VectorizedKeyframesSpec</a></code> class manages the animation based on the values defined at different timestamps in the duration of the animation (i.e. different keyframes). Each keyframe can be provided via <code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html#keyframes()">keyframes</a></code> parameter. <code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html">VectorizedKeyframesSpec</a></code> allows very specific animation definitions with a precision to millisecond.</p>
     <p>Here's an example of creating a <code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html">VectorizedKeyframesSpec</a></code> animation: (<code><a href="/reference/androidx/compose/animation/core/VectorizedKeyframesSpec.html#keyframes()">keyframes</a></code> and <code><a href="/reference/androidx/compose/animation/core/KeyframesSpec.KeyframesSpecConfig.html">KeyframesSpec.KeyframesSpecConfig</a></code> could make defining key frames much more readable.)</p>
-    <pre class="prettyprint">    val delay = 120
-    val startValue = AnimationVector3D(100f, 200f, 300f)
-    val endValue = AnimationVector3D(200f, 100f, 0f)
-    val keyframes = VectorizedKeyframesSpec(
-         keyframes = mutableMapOf (
-              0 to (startValue to LinearEasing),
-              100 to (startValue to FastOutLinearInEasing)
-         ),
-         durationMillis = 200,
-         delayMillis = delay
-    )</pre>
+    <pre class="prettyprint">val delay = 120
+val startValue = AnimationVector3D(100f, 200f, 300f)
+val endValue = AnimationVector3D(200f, 100f, 0f)
+val keyframes = VectorizedKeyframesSpec(
+     keyframes = mutableMapOf (
+          0 to (startValue to LinearEasing),
+          100 to (startValue to FastOutLinearInEasing)
+     ),
+     durationMillis = 200,
+     delayMillis = delay
+)</pre>
     <div class="devsite-table-wrapper">
       <table class="responsive">
         <thead>

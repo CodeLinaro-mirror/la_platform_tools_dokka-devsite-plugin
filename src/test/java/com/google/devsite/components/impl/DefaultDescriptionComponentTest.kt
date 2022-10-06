@@ -753,9 +753,9 @@ internal class DefaultDescriptionComponentTest : ConverterTestBase() {
 <body>
   <p>Welcome:</p>
   <pre class="prettyprint">fun main() {<br>    println(&quot;Hello World!&quot;)<br>}</pre>
-  <pre class="prettyprint">    fun thisIsACodeBlock() {
-        val butWhy = &quot;per markdown spec, because four-spaces prefix&quot;
-    }</pre>
+  <pre class="prettyprint">fun thisIsACodeBlock() {
+    val butWhy = &quot;per markdown spec, because four-spaces prefix&quot;
+}</pre>
 </body>
             """.trim()
         )

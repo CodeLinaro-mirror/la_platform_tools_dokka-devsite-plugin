@@ -58,6 +58,8 @@ import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DModule
 import org.jetbrains.dokka.model.DObject
+import org.jetbrains.dokka.model.GenericTypeConstructor
+import org.jetbrains.dokka.model.JavaObject
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -2233,18 +2235,18 @@ internal class ClasslikeDocumentableConverterTest(
             // Test upstream behavior: only one enumJ.valueOf exists on the enum & it returns a Foo
             val dFunctions = enumDModule.explicitClasslike("Foo").functions
             val valueOfDFunctions = dFunctions.filter { it.name == "valueOf" }
-            assertThat(valueOfDFunctions.size).isEqualTo(0)
-            // NEW: valueOf is hidden by upstream dokka's ObviousFunction filter
-            // val valueOfDFunctionReturnType = valueOfDFunctions.single().type
-            // assertThat(valueOfDFunctionReturnType is JavaObject).isFalse()
-            // assertThat((valueOfDFunctionReturnType as GenericTypeConstructor).dri.classNames)
-            //    .isEqualTo("Test.Foo")
+            assertThat(valueOfDFunctions.size).isEqualTo(1)
+            val valueOfDFunctionReturnType = valueOfDFunctions.single().type
+            assertThat(valueOfDFunctionReturnType is JavaObject).isFalse()
+            assertThat((valueOfDFunctionReturnType as GenericTypeConstructor).dri.classNames)
+                .isEqualTo("Test.Foo")
+
             // Verify the final result in dackka is correct, and that valueOf is marked inherited.
-            // val enumClass = enumDModule.page("Foo").content<Classlike>()
-            // val publicFuns = enumClass.methodSummaryItems()
-            // val valueOfMethod = publicFuns.single { "valueOf" == it.name() }
-            // val valueOfReturnType = (valueOfMethod.data.title as TypeSummary).data.type
-            // assertThat(valueOfReturnType.name()).isEqualTo("Test.Foo")
+            val enumClass = enumDModule.page("Foo").content<Classlike>()
+            val publicFuns = enumClass.methodSummaryItems()
+            val valueOfMethod = publicFuns.single { "valueOf" == it.name() }
+            val valueOfReturnType = valueOfMethod.data.title.data.type
+            assertThat(valueOfReturnType.name()).isEqualTo("Test.Foo")
         }
     }
 
