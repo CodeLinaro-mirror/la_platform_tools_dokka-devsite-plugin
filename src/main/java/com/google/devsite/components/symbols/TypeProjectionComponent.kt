@@ -34,10 +34,10 @@ internal interface TypeProjectionComponent : SymbolBase {
 
     open class Params(
         open val type: Link,
-        open val annotationComponents: List<AnnotationComponent> = emptyList(),
         open val nullability: Nullability,
+        open val displayLanguage: Language,
         open val generics: List<TypeProjectionComponent> = emptyList(),
-        open val displayLanguage: Language
+        open val annotationComponents: List<AnnotationComponent> = emptyList()
     ) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true

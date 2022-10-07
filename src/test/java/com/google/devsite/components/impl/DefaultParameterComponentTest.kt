@@ -103,9 +103,9 @@ class DefaultParameterComponentTest {
         val component = DefaultParameterComponent(
             Params(
                 name = "number",
-                modifiers = Modifiers("vararg"),
                 type = NoopTypeProjectionComponent("Int"),
-                displayLanguage = Language.KOTLIN
+                displayLanguage = Language.KOTLIN,
+                modifiers = Modifiers("vararg")
             )
         )
 
@@ -149,11 +149,11 @@ class DefaultParameterComponentTest {
             Params(
                 name = "number",
                 type = NoopTypeProjectionComponent("Int"),
+                displayLanguage = Language.KOTLIN,
                 annotationComponents = listOf(
                     NoopAnnotationComponent("@Really"),
                     NoopAnnotationComponent("@Special")
-                ),
-                displayLanguage = Language.KOTLIN
+                )
             )
         )
 
@@ -175,11 +175,11 @@ class DefaultParameterComponentTest {
             Params(
                 name = "number",
                 type = NoopTypeProjectionComponent("int"),
+                displayLanguage = Language.JAVA,
                 annotationComponents = listOf(
                     NoopAnnotationComponent("@Really"),
                     NoopAnnotationComponent("@Special")
-                ),
-                displayLanguage = Language.JAVA
+                )
             )
         )
 
@@ -247,12 +247,12 @@ class DefaultParameterComponentTest {
                 type = DefaultLambdaTypeProjectionComponent(
                     LambdaTypeProjectionComponent.Params(
                         type = NoopLink("Int"),
+                        nullability = Nullability.KOTLIN_DEFAULT,
                         displayLanguage = Language.KOTLIN,
                         lambdaParams = listOf(
                             NoopParameterComponent("Int"),
                             NoopParameterComponent("String")
-                        ),
-                        nullability = Nullability.KOTLIN_DEFAULT
+                        )
                     )
                 ),
                 displayLanguage = Language.KOTLIN
@@ -279,10 +279,10 @@ class DefaultParameterComponentTest {
                 type = DefaultLambdaTypeProjectionComponent(
                     LambdaTypeProjectionComponent.Params(
                         type = NoopLink("Int"),
-                        receiver = NoopTypeProjectionComponent("Boolean"),
+                        nullability = Nullability.KOTLIN_DEFAULT,
                         displayLanguage = Language.KOTLIN,
                         lambdaParams = listOf(NoopParameterComponent("String")),
-                        nullability = Nullability.KOTLIN_DEFAULT
+                        receiver = NoopTypeProjectionComponent("Boolean")
                     )
                 ),
                 displayLanguage = Language.KOTLIN
@@ -309,10 +309,10 @@ class DefaultParameterComponentTest {
                 type = DefaultLambdaTypeProjectionComponent(
                     LambdaTypeProjectionComponent.Params(
                         type = NoopLink("Int"),
+                        nullability = Nullability.KOTLIN_DEFAULT,
                         displayLanguage = Language.KOTLIN,
-                        lambdaParams = listOf(NoopParameterComponent("String")),
                         lambdaModifiers = listOf("suspend"),
-                        nullability = Nullability.KOTLIN_DEFAULT
+                        lambdaParams = listOf(NoopParameterComponent("String"))
                     )
                 ),
                 displayLanguage = Language.KOTLIN
@@ -335,9 +335,9 @@ class DefaultParameterComponentTest {
     fun `Kotlin parameter with default value renders correctly`() {
         val component = DefaultParameterComponent(
             Params(
-                displayLanguage = Language.KOTLIN,
                 name = "number",
                 type = NoopTypeProjectionComponent("Int"),
+                displayLanguage = Language.KOTLIN,
                 defaultValue = "5"
             )
         )

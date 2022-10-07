@@ -38,7 +38,7 @@ import org.jetbrains.dokka.model.DProperty
 /** Converts documentables into components for the package summary page. */
 internal class PackageDocumentableConverter(
     private val displayLanguage: Language,
-    private val doc: DPackage,
+    private val dPackage: DPackage,
     private val pathProvider: FilePathProvider,
     private val docsHolder: DocumentablesHolder
 ) {
@@ -50,17 +50,25 @@ internal class PackageDocumentableConverter(
 
     /** @return the root component for the package summary page */
     suspend fun summaryPage(): DevsitePage = coroutineScope {
-        val interfaces = async { javadocConverter.docsToSummary(docsHolder.interfacesFor(doc)) }
+        val interfaces = async {
+            javadocConverter.docsToSummary(docsHolder.interfacesFor(dPackage))
+        }
         val classes = async {
-            javadocConverter.docsToSummary(docsHolder.classesFor(doc, displayLanguage))
+            javadocConverter.docsToSummary(docsHolder.classesFor(dPackage, displayLanguage))
         }
-        val enums = async { javadocConverter.docsToSummary(docsHolder.enumsFor(doc)) }
+        val enums = async { javadocConverter.docsToSummary(docsHolder.enumsFor(dPackage)) }
         val objects = async {
-            javadocConverter.docsToSummary(docsHolder.objectsFor(doc, displayLanguage))
+            javadocConverter.docsToSummary(docsHolder.objectsFor(dPackage, displayLanguage))
         }
-        val exceptions = async { javadocConverter.docsToSummary(docsHolder.exceptionsFor(doc)) }
-        val annotations = async { javadocConverter.docsToSummary(docsHolder.annotationsFor(doc)) }
-        val typeAliases = async { javadocConverter.docsToSummary(docsHolder.typeAliasesFor(doc)) }
+        val exceptions = async {
+            javadocConverter.docsToSummary(docsHolder.exceptionsFor(dPackage))
+        }
+        val annotations = async {
+            javadocConverter.docsToSummary(docsHolder.annotationsFor(dPackage))
+        }
+        val typeAliases = async {
+            javadocConverter.docsToSummary(docsHolder.typeAliasesFor(dPackage))
+        }
 
         val topLevelConstantsSummary = async { propertiesToSummary(topLevelConstants()) }
         val topLevelPropertiesSummary = async { propertiesToSummary(topLevelProperties()) }
@@ -77,14 +85,14 @@ internal class PackageDocumentableConverter(
         DefaultDevsitePage(
             DevsitePage.Params(
                 displayLanguage,
-                path = pathProvider.relative.forReference(doc.dri).url,
+                path = pathProvider.relative.forReference(dPackage.dri).url,
                 bookPath = pathProvider.book,
-                title = doc.name,
+                title = dPackage.name,
                 content = DefaultPackageSummary(
                     PackageSummary.Params(
                         displayLanguage,
                         description = javadocConverter.metadata(
-                            documentable = doc,
+                            documentable = dPackage,
                             isFromJava = false // This parameter is not used in the DPackage case
                         ),
                         interfaces = interfaces.await(),
@@ -177,24 +185,24 @@ internal class PackageDocumentableConverter(
         }
     }
 
-    private fun topLevelConstants() = doc.properties
+    private fun topLevelConstants() = dPackage.properties
         .filter { isConstant(it.modifiers()) }
         .sortedBy { it.name }
 
-    private fun topLevelProperties() = doc.properties
+    private fun topLevelProperties() = dPackage.properties
         .filterNot { isConstant(it.modifiers()) }
         .filter { it.receiver == null }
         .sortedBy { it.name }
 
-    private fun topLevelFunctions() = doc.functions
+    private fun topLevelFunctions() = dPackage.functions
         .filter { it.receiver == null }
         .sortedBy { it.name }
 
-    private fun extensionProperties() = doc.properties
+    private fun extensionProperties() = dPackage.properties
         .filterNot { it.receiver == null }
         .sortedBy { it.name }
 
-    private fun extensionFunctions() = doc.functions
+    private fun extensionFunctions() = dPackage.functions
         .filterNot { it.receiver == null }
         .sortedBy { it.name }
 }

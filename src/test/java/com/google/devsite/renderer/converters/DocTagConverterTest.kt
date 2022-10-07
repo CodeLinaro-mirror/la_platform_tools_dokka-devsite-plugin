@@ -38,9 +38,7 @@ import com.google.devsite.renderer.converters.testing.link
 import com.google.devsite.renderer.converters.testing.name
 import com.google.devsite.renderer.converters.testing.projectionName
 import com.google.devsite.renderer.converters.testing.single
-import com.google.devsite.renderer.converters.testing.size
 import com.google.devsite.renderer.converters.testing.text
-import com.google.devsite.renderer.converters.testing.title
 import com.google.devsite.renderer.converters.testing.typeAnnotations
 import com.google.devsite.renderer.converters.testing.typeName
 import com.google.devsite.testing.ConverterTestBase

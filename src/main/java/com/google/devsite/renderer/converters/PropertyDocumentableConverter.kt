@@ -49,12 +49,12 @@ internal class PropertyDocumentableConverter(
             TwoPaneSummaryItem.Params(
                 title = DefaultTypeSummary(
                     TypeSummary.Params(
-                        modifiers = property.modifiers().modifiersFor(hints),
                         type = paramConverter.componentForProjection(
                             property.type,
                             property.isFromJava(),
                             typeAnnotations
-                        )
+                        ),
+                        modifiers = property.modifiers().modifiersFor(hints)
                     )
                 ),
                 description = DefaultSymbolSummary(
@@ -86,24 +86,24 @@ internal class PropertyDocumentableConverter(
         )
         return DefaultSymbolDetail(
             SymbolDetail.Params(
-                displayLanguage = displayLanguage,
                 name = property.name,
-                anchors = property.generateAnchors(),
-                annotationComponents = nonTypeAnnotations.annotationComponents(
-                    pathProvider = pathProvider,
-                    displayLanguage = displayLanguage,
-                    nullability = Nullability.DONT_CARE // Propagates to return type instead
-                ),
-                modifiers = property.modifiers().modifiersFor(hints),
                 returnType = returnType,
                 symbolKind = SymbolDetail.SymbolKind.PROPERTY.takeIf { property.setter != null }
                     ?: SymbolDetail.SymbolKind.READ_ONLY_PROPERTY,
                 signature = property.signature(isSummary = false),
+                anchors = property.generateAnchors(),
                 metadata = javadocConverter.metadata(
                     documentable = property,
                     returnType = returnType,
                     paramNames = listOf("receiver"),
                     annotations = nonTypeAnnotations
+                ),
+                displayLanguage = displayLanguage,
+                modifiers = property.modifiers().modifiersFor(hints),
+                annotationComponents = nonTypeAnnotations.annotationComponents(
+                    pathProvider = pathProvider,
+                    displayLanguage = displayLanguage,
+                    nullability = Nullability.DONT_CARE // Propagates to return type instead
                 )
             )
         )

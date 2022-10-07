@@ -156,13 +156,13 @@ class DefaultFunctionSignatureTest {
                     typeParameters = listOf(
                         DefaultTypeParameterComponent(
                             TypeParameterComponent.Params(
-                                displayLanguage = displayLanguage,
                                 name = "T",
                                 projections = listOf(
                                     NoopTypeProjectionComponent("CharSequence"),
                                     NoopTypeProjectionComponent("Comparable<T>")
                                 ),
-                                pathProvider = NoopFilePathProvider()
+                                pathProvider = NoopFilePathProvider(),
+                                displayLanguage = displayLanguage
                             )
                         )
                     )

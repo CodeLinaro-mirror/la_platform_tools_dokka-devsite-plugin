@@ -34,13 +34,13 @@ class DefaultSymbolDetailTest {
     fun `Simple Java function renders correctly`() {
         val component = DefaultSymbolDetail(
             Params(
-                displayLanguage = Language.JAVA,
                 name = "foo",
-                anchors = linkedSetOf(),
                 returnType = NoopTypeProjectionComponent("void"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
-                metadata = emptyList()
+                anchors = linkedSetOf(),
+                metadata = emptyList(),
+                displayLanguage = Language.JAVA
             )
         )
 
@@ -65,13 +65,13 @@ class DefaultSymbolDetailTest {
     fun `Simple Kotlin function renders correctly`() {
         val component = DefaultSymbolDetail(
             Params(
-                displayLanguage = Language.KOTLIN,
                 name = "foo",
-                anchors = linkedSetOf(),
                 returnType = NoopTypeProjectionComponent("Unit"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
-                metadata = emptyList()
+                anchors = linkedSetOf(),
+                metadata = emptyList(),
+                displayLanguage = Language.KOTLIN
             )
         )
 
@@ -96,13 +96,13 @@ class DefaultSymbolDetailTest {
     fun `Simple Kotlin property renders correctly`() {
         val component = DefaultSymbolDetail(
             Params(
-                displayLanguage = Language.KOTLIN,
                 name = "foo",
-                anchors = linkedSetOf(),
                 returnType = NoopTypeProjectionComponent("Unit"),
                 symbolKind = SymbolKind.READ_ONLY_PROPERTY,
                 signature = NoopFunctionSignature("foo"),
-                metadata = emptyList()
+                anchors = linkedSetOf(),
+                metadata = emptyList(),
+                displayLanguage = Language.KOTLIN
             )
         )
 
@@ -127,13 +127,13 @@ class DefaultSymbolDetailTest {
     fun `Simple Kotlin constructor renders correctly`() {
         val component = DefaultSymbolDetail(
             Params(
-                displayLanguage = Language.KOTLIN,
                 name = "MyClass",
-                anchors = linkedSetOf(),
                 returnType = NoopTypeProjectionComponent("Unit"),
                 symbolKind = SymbolKind.CONSTRUCTOR,
                 signature = NoopFunctionSignature("MyClass()"),
-                metadata = emptyList()
+                anchors = linkedSetOf(),
+                metadata = emptyList(),
+                displayLanguage = Language.KOTLIN
             )
         )
 
@@ -158,13 +158,13 @@ class DefaultSymbolDetailTest {
     fun `Simple Java constructor renders correctly`() {
         val component = DefaultSymbolDetail(
             Params(
-                displayLanguage = Language.JAVA,
                 name = "MyClass",
-                anchors = linkedSetOf(),
                 returnType = NoopTypeProjectionComponent("Unit"),
                 symbolKind = SymbolKind.CONSTRUCTOR,
                 signature = NoopFunctionSignature("MyClass()"),
-                metadata = emptyList()
+                anchors = linkedSetOf(),
+                metadata = emptyList(),
+                displayLanguage = Language.JAVA
             )
         )
 
@@ -189,17 +189,17 @@ class DefaultSymbolDetailTest {
     fun `Java function with annotations renders correctly`() {
         val component = DefaultSymbolDetail(
             Params(
-                displayLanguage = Language.JAVA,
                 name = "foo",
-                anchors = linkedSetOf(),
-                annotationComponents = listOf(
-                    NoopAnnotationComponent("@Foo"),
-                    NoopAnnotationComponent("@Bar")
-                ),
                 returnType = NoopTypeProjectionComponent("void"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
-                metadata = emptyList()
+                anchors = linkedSetOf(),
+                metadata = emptyList(),
+                displayLanguage = Language.JAVA,
+                annotationComponents = listOf(
+                    NoopAnnotationComponent("@Foo"),
+                    NoopAnnotationComponent("@Bar")
+                )
             )
         )
 
@@ -224,14 +224,14 @@ class DefaultSymbolDetailTest {
     fun `Java function with modifiers renders correctly`() {
         val component = DefaultSymbolDetail(
             Params(
-                displayLanguage = Language.JAVA,
                 name = "foo",
-                anchors = linkedSetOf(),
-                modifiers = Modifiers("protected", "abstract"),
                 returnType = NoopTypeProjectionComponent("void"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
-                metadata = emptyList()
+                anchors = linkedSetOf(),
+                metadata = emptyList(),
+                displayLanguage = Language.JAVA,
+                modifiers = Modifiers("protected", "abstract")
             )
         )
 
@@ -256,14 +256,14 @@ class DefaultSymbolDetailTest {
     fun `Kotlin function with modifiers renders correctly`() {
         val component = DefaultSymbolDetail(
             Params(
-                displayLanguage = Language.KOTLIN,
                 name = "foo",
-                anchors = linkedSetOf(),
-                modifiers = Modifiers("protected", "abstract"),
                 returnType = NoopTypeProjectionComponent("Unit"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
-                metadata = emptyList()
+                anchors = linkedSetOf(),
+                metadata = emptyList(),
+                displayLanguage = Language.KOTLIN,
+                modifiers = Modifiers("protected", "abstract")
             )
         )
 
@@ -288,13 +288,13 @@ class DefaultSymbolDetailTest {
     fun `Function anchors render correctly`() {
         val component = DefaultSymbolDetail(
             Params(
-                displayLanguage = Language.JAVA,
                 name = "foo",
-                anchors = linkedSetOf("foo(a,b)", "foo(a, b)", "foo-a-b-"),
                 returnType = NoopTypeProjectionComponent("void"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
-                metadata = emptyList()
+                anchors = linkedSetOf("foo(a,b)", "foo(a, b)", "foo-a-b-"),
+                metadata = emptyList(),
+                displayLanguage = Language.JAVA
             )
         )
 
@@ -319,13 +319,13 @@ class DefaultSymbolDetailTest {
     fun `Function with metadata renders correctly`() {
         val component = DefaultSymbolDetail(
             Params(
-                displayLanguage = Language.JAVA,
                 name = "foo",
-                anchors = linkedSetOf(),
                 returnType = NoopTypeProjectionComponent("void"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
-                metadata = listOf(NoopContextFreeComponent, NoopContextFreeComponent)
+                anchors = linkedSetOf(),
+                metadata = listOf(NoopContextFreeComponent, NoopContextFreeComponent),
+                displayLanguage = Language.JAVA
             )
         )
 
@@ -352,13 +352,13 @@ class DefaultSymbolDetailTest {
     fun `Function with extension function package renders correctly`() {
         val component = DefaultSymbolDetail(
             Params(
-                displayLanguage = Language.JAVA,
                 name = "foo",
-                anchors = linkedSetOf(),
                 returnType = NoopTypeProjectionComponent("void"),
                 symbolKind = SymbolKind.FUNCTION,
                 signature = NoopFunctionSignature("foo()"),
+                anchors = linkedSetOf(),
                 metadata = emptyList(),
+                displayLanguage = Language.JAVA,
                 extFunctionClass = "MyClassKt"
             )
         )

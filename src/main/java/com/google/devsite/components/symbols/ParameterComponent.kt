@@ -36,12 +36,12 @@ internal interface ParameterComponent : SymbolBase {
     }
 
     open class Params(
-        open val displayLanguage: Language,
         open val name: String,
-        open val modifiers: Modifiers = EmptyModifiers,
         open val type: TypeProjectionComponent,
-        open val annotationComponents: List<AnnotationComponent> = emptyList(),
-        val defaultValue: String? = null
+        open val displayLanguage: Language,
+        open val modifiers: Modifiers = EmptyModifiers,
+        val defaultValue: String? = null,
+        open val annotationComponents: List<AnnotationComponent> = emptyList()
     ) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true

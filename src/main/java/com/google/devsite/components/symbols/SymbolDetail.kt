@@ -26,16 +26,16 @@ internal interface SymbolDetail : ContextFreeComponent {
     val data: Params
 
     data class Params(
-        val displayLanguage: Language,
         val name: String,
-        val anchors: LinkedHashSet<String>,
-        val annotationComponents: List<AnnotationComponent> = emptyList(),
-        val modifiers: Modifiers = EmptyModifiers,
         val returnType: TypeProjectionComponent,
         val symbolKind: SymbolKind,
         val signature: SymbolSignature,
+        val anchors: LinkedHashSet<String>,
         val metadata: List<ContextFreeComponent>,
-        val extFunctionClass: String? = null
+        val displayLanguage: Language,
+        val modifiers: Modifiers = EmptyModifiers,
+        val extFunctionClass: String? = null,
+        val annotationComponents: List<AnnotationComponent> = emptyList()
     )
 
     /** Holds the Kotlin keywords for various symbol types. */

@@ -54,14 +54,14 @@ internal class FunctionDocumentableConverter(
             TwoPaneSummaryItem.Params(
                 title = DefaultTypeSummary(
                     TypeSummary.Params(
-                        modifiers = function.modifiers().modifiersFor(hints),
                         type = paramConverter.componentForProjection(
                             projection = function.type,
                             // Propagate ALL annotations _for display in the summary_, b/197321617
                             propagatedAnnotations = typeAnnotations,
                             isReturnType = true,
                             isJavaSource = function.isFromJava()
-                        )
+                        ),
+                        modifiers = function.modifiers().modifiersFor(hints)
                     )
                 ),
                 description = DefaultSymbolSummary(
@@ -137,25 +137,25 @@ internal class FunctionDocumentableConverter(
 
         return DefaultSymbolDetail(
             SymbolDetail.Params(
-                displayLanguage = displayLanguage,
                 name = function.name,
-                anchors = generateCompatAnchors(function),
-                annotationComponents = signatureAnnotations.annotationComponents(
-                    pathProvider = pathProvider,
-                    displayLanguage = displayLanguage,
-                    nullability = Nullability.DONT_CARE // Nullability is on the return type instead
-                ),
-                modifiers = function.modifiers().modifiersFor(hints),
                 returnType = returnType,
                 symbolKind = kind,
                 signature = function.signature(isSummary = false),
+                anchors = generateCompatAnchors(function),
                 metadata = javadocConverter.metadata(
                     documentable = function,
                     returnType = returnType,
                     paramNames = listOf("receiver") + function.parameters.map { it.name!! },
                     annotations = signatureAnnotations
                 ),
-                extFunctionClass = function.receiver?.let { nameForSyntheticClass(function) }
+                displayLanguage = displayLanguage,
+                modifiers = function.modifiers().modifiersFor(hints),
+                extFunctionClass = function.receiver?.let { nameForSyntheticClass(function) },
+                annotationComponents = signatureAnnotations.annotationComponents(
+                    pathProvider = pathProvider,
+                    displayLanguage = displayLanguage,
+                    nullability = Nullability.DONT_CARE // Nullability is on the return type instead
+                )
             )
         )
     }
@@ -228,15 +228,15 @@ internal class FunctionDocumentableConverter(
     private fun DFunction.extFunctionClass(): ParameterComponent {
         return DefaultParameterComponent(
             ParameterComponent.Params(
-                displayLanguage = displayLanguage,
                 name = "",
                 type = DefaultTypeProjectionComponent(
                     TypeProjectionComponent.Params(
                         type = pathProvider.linkForReference(driForSyntheticClass()),
-                        displayLanguage = displayLanguage,
-                        nullability = Nullability.DONT_CARE // Fake synthetic classes can't be null
+                        nullability = Nullability.DONT_CARE,
+                        displayLanguage = displayLanguage // Fake synthetic classes can't be null
                     )
-                )
+                ),
+                displayLanguage = displayLanguage
             )
         )
     }

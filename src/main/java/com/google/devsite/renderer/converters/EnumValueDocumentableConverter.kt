@@ -63,24 +63,24 @@ internal class EnumValueDocumentableConverter(
         )
         return DefaultSymbolDetail(
             SymbolDetail.Params(
-                displayLanguage = displayLanguage,
                 name = enumValue.name,
-                anchors = enumValue.generateAnchors(),
-                annotationComponents = nonTypeAnnotations.annotationComponents(
-                    pathProvider = pathProvider,
-                    displayLanguage = displayLanguage,
-                    nullability = Nullability.DONT_CARE // See above
-                ),
-                modifiers = enumValue.getExtraModifiers().modifiersFor(hints),
                 returnType = projection,
                 symbolKind = SymbolDetail.SymbolKind.READ_ONLY_PROPERTY,
                 signature = enumValue.signature(),
+                anchors = enumValue.generateAnchors(),
                 metadata = javadocConverter.metadata(
                     documentable = enumValue,
                     returnType = projection,
                     paramNames = listOf(),
                     annotations = nonTypeAnnotations,
                     isFromJava = dEnum.isFromJava()
+                ),
+                displayLanguage = displayLanguage,
+                modifiers = enumValue.getExtraModifiers().modifiersFor(hints),
+                annotationComponents = nonTypeAnnotations.annotationComponents(
+                    pathProvider = pathProvider,
+                    displayLanguage = displayLanguage,
+                    nullability = Nullability.DONT_CARE // See above
                 )
             )
         )

@@ -480,15 +480,15 @@ internal class DocTagConverter(
 
         return DefaultParameterComponent(
             ParameterComponent.Params(
-                displayLanguage = displayLanguage,
                 name = name,
                 type = DefaultTypeProjectionComponent(
                     TypeProjectionComponent.Params(
                         type = link,
-                        displayLanguage = displayLanguage,
-                        nullability = Nullability.DONT_CARE
+                        nullability = Nullability.DONT_CARE,
+                        displayLanguage = displayLanguage
                     )
-                )
+                ),
+                displayLanguage = displayLanguage
             )
         )
     }

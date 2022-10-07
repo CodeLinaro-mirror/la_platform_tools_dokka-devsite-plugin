@@ -25,7 +25,7 @@ internal interface TypeSummary : ContextFreeComponent {
     val data: Params
 
     data class Params(
-        val modifiers: Modifiers = EmptyModifiers,
-        val type: TypeProjectionComponent
+        val type: TypeProjectionComponent,
+        val modifiers: Modifiers = EmptyModifiers
     )
 }

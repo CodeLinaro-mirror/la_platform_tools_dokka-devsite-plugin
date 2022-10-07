@@ -102,6 +102,7 @@ internal class ParameterDocumentableConverter(
                         propagatedAnnotations = propagatedAnnotations,
                         propagatedNullability = nullability
                     ),
+                    displayLanguage = Language.JAVA,
                     modifiers = param.getExtraModifiers()
                         .modifiersFor(
                             ModifierHints(
@@ -116,8 +117,7 @@ internal class ParameterDocumentableConverter(
                         pathProvider,
                         displayLanguage,
                         nullability = Nullability.DONT_CARE // Propagate Nullability, don't retain
-                    ),
-                    displayLanguage = Language.JAVA
+                    )
                 )
             )
         }
@@ -167,17 +167,17 @@ internal class ParameterDocumentableConverter(
 
         return DefaultParameterComponent(
             ParameterComponent.Params(
-                displayLanguage = Language.KOTLIN,
                 name = paramName,
-                modifiers = modifiers,
                 type = primaryType,
+                displayLanguage = Language.KOTLIN,
+                modifiers = modifiers,
+                defaultValue = defaultValue,
                 annotationComponents = annotations.filter { !it.belongsOnReturnType() }
                     .annotationComponents(
                         pathProvider,
                         displayLanguage,
                         nullability = Nullability.DONT_CARE // as-Kotlin doesn't nullable-annotate
-                    ),
-                defaultValue = defaultValue
+                    )
             )
         )
     }
@@ -188,7 +188,6 @@ internal class ParameterDocumentableConverter(
         isFromJava: Boolean
     ) = DefaultTypeParameterComponent(
         TypeParameterComponent.Params(
-            displayLanguage = displayLanguage,
             name = param.variantTypeParameter.inner.name,
             projections = param.bounds.map {
                 componentForProjection(
@@ -205,7 +204,8 @@ internal class ParameterDocumentableConverter(
                     }
                 )
             },
-            pathProvider = pathProvider
+            pathProvider = pathProvider,
+            displayLanguage = displayLanguage
         )
     )
 
@@ -241,17 +241,17 @@ internal class ParameterDocumentableConverter(
 
         return DefaultParameterComponent(
             ParameterComponent.Params(
-                displayLanguage = Language.KOTLIN,
                 name = name,
-                modifiers = modifiers,
                 type = primaryType,
+                displayLanguage = Language.KOTLIN,
+                modifiers = modifiers,
+                defaultValue = defaultValue,
                 annotationComponents = projection.annotations().filter { !it.belongsOnReturnType() }
                     .annotationComponents(
                         pathProvider = pathProvider,
                         displayLanguage = displayLanguage,
                         nullability = projection.getNullability(displayLanguage, isFromJava)
-                    ),
-                defaultValue = defaultValue
+                    )
             )
         )
     }
@@ -340,10 +340,10 @@ internal class ParameterDocumentableConverter(
             Language.JAVA -> DefaultTypeProjectionComponent(
                 TypeProjectionComponent.Params(
                     type = proj.toLink(),
-                    annotationComponents = annotationComponents,
                     nullability = nullability,
                     displayLanguage = Language.JAVA,
-                    generics = generics
+                    generics = generics,
+                    annotationComponents = annotationComponents
                 )
             )
             Language.KOTLIN -> when {
@@ -371,11 +371,11 @@ internal class ParameterDocumentableConverter(
                     )
                 else -> DefaultTypeProjectionComponent(
                     TypeProjectionComponent.Params(
-                        displayLanguage = Language.KOTLIN,
                         type = proj.toLink(),
-                        annotationComponents = annotationComponents,
                         nullability = nullability,
-                        generics = generics
+                        displayLanguage = Language.KOTLIN,
+                        generics = generics,
+                        annotationComponents = annotationComponents
                     )
                 )
             }
@@ -401,10 +401,13 @@ internal class ParameterDocumentableConverter(
 
         return DefaultLambdaTypeProjectionComponent(
             LambdaTypeProjectionComponent.Params(
+                type = returnType.toLink(),
+                nullability = proj.getNullability(displayLanguage) or nullability,
+                displayLanguage = displayLanguage,
                 lambdaModifiers = lambdaModifiers,
                 lambdaParams = lambdaParams,
-                type = returnType.toLink(),
                 receiver = proj.receiver()?.let { componentForProjection(it, false) },
+                generics = returnType.generics(isJavaSource = false),
                 annotationComponents = annotations.annotationComponents(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
@@ -412,10 +415,7 @@ internal class ParameterDocumentableConverter(
                     nullability = if (displayLanguage == Language.JAVA) Nullability.DONT_CARE
                     else proj.getNullability(displayLanguage, isJavaSource = false, annotations)
                         or nullability
-                ),
-                nullability = proj.getNullability(displayLanguage) or nullability,
-                generics = returnType.generics(isJavaSource = false),
-                displayLanguage = displayLanguage
+                )
             )
         )
     }

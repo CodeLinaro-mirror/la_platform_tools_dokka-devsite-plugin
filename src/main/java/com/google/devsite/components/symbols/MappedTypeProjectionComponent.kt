@@ -17,9 +17,9 @@ internal interface MappedTypeProjectionComponent : TypeProjectionComponent {
         override val generics: List<TypeProjectionComponent> = emptyList()
     ) : TypeProjectionComponent.Params(
         type = type,
-        annotationComponents = annotationComponents,
         nullability = nullability,
+        displayLanguage = Language.KOTLIN,
         generics = generics,
-        displayLanguage = Language.KOTLIN
+        annotationComponents = annotationComponents
     )
 }

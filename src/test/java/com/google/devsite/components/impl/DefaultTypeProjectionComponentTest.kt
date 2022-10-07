@@ -32,8 +32,8 @@ class DefaultTypeProjectionComponentTest {
         val component = DefaultTypeProjectionComponent(
             Params(
                 type = NoopLink("Int"),
-                displayLanguage = Language.KOTLIN,
-                nullability = Nullability.KOTLIN_DEFAULT
+                nullability = Nullability.KOTLIN_DEFAULT,
+                displayLanguage = Language.KOTLIN
 
             )
         )
@@ -99,9 +99,9 @@ class DefaultTypeProjectionComponentTest {
         val component = DefaultTypeProjectionComponent(
             Params(
                 type = NoopLink("List"),
-                generics = listOf(NoopTypeProjectionComponent("String")),
+                nullability = Nullability.KOTLIN_DEFAULT,
                 displayLanguage = Language.KOTLIN,
-                nullability = Nullability.KOTLIN_DEFAULT
+                generics = listOf(NoopTypeProjectionComponent("String"))
             )
         )
 
@@ -123,8 +123,8 @@ class DefaultTypeProjectionComponentTest {
             Params(
                 type = NoopLink("List"),
                 nullability = Nullability.KOTLIN_NULLABLE,
-                generics = listOf(NoopTypeProjectionComponent("String")),
-                displayLanguage = Language.KOTLIN
+                displayLanguage = Language.KOTLIN,
+                generics = listOf(NoopTypeProjectionComponent("String"))
             )
         )
 
@@ -145,12 +145,12 @@ class DefaultTypeProjectionComponentTest {
         val component = DefaultTypeProjectionComponent(
             Params(
                 type = NoopLink("Map"),
+                nullability = Nullability.KOTLIN_DEFAULT,
+                displayLanguage = Language.KOTLIN,
                 generics = listOf(
                     NoopTypeProjectionComponent("String"),
                     NoopTypeProjectionComponent("Int")
-                ),
-                displayLanguage = Language.KOTLIN,
-                nullability = Nullability.KOTLIN_DEFAULT
+                )
             )
         )
 

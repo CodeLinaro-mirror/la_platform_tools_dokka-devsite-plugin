@@ -43,10 +43,10 @@ class DefaultClassSignatureTest {
                 typeParameters = listOf(
                     DefaultTypeParameterComponent(
                         TypeParameterComponent.Params(
-                            displayLanguage = Language.KOTLIN,
                             name = "GenericType",
                             projections = listOf(NoopTypeProjectionComponent("GenericSupertype")),
-                            pathProvider = NoopFilePathProvider()
+                            pathProvider = NoopFilePathProvider(),
+                            displayLanguage = Language.KOTLIN
                         )
                     )
                 )
@@ -78,10 +78,10 @@ class DefaultClassSignatureTest {
                 typeParameters = listOf(
                     DefaultTypeParameterComponent(
                         TypeParameterComponent.Params(
-                            displayLanguage = Language.KOTLIN,
                             name = "GenericType",
                             projections = listOf(NoopTypeProjectionComponent("GenericSupertype")),
-                            pathProvider = NoopFilePathProvider()
+                            pathProvider = NoopFilePathProvider(),
+                            displayLanguage = Language.KOTLIN
                         )
                     )
                 )

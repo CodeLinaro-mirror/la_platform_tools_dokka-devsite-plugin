@@ -34,20 +34,20 @@ internal interface LambdaTypeProjectionComponent : TypeProjectionComponent {
 
     data class Params(
         override val type: Link, // return type
-        override val annotationComponents: List<AnnotationComponent> = emptyList(),
+        override val nullability: Nullability,
+        override val displayLanguage: Language,
         val lambdaModifiers: List<String> = emptyList(),
         // Lambda parameters can be named
         val lambdaParams: List<ParameterComponent> = emptyList(),
         val receiver: TypeProjectionComponent? = null,
-        override val nullability: Nullability,
         // Generics on the return type
         override val generics: List<TypeProjectionComponent> = emptyList(),
-        override val displayLanguage: Language
+        override val annotationComponents: List<AnnotationComponent> = emptyList()
     ) : TypeProjectionComponent.Params(
         type = type,
-        annotationComponents = annotationComponents,
         nullability = nullability,
         displayLanguage = displayLanguage,
-        generics = emptyList()
+        generics = emptyList(),
+        annotationComponents = annotationComponents
     )
 }

@@ -49,8 +49,8 @@ class DefaultTypeSummaryTest {
     fun `Type with modifiers renders correctly`() {
         val component = DefaultTypeSummary(
             Params(
-                modifiers = Modifiers("open", "suspend"),
-                type = NoopTypeProjectionComponent("Unit")
+                type = NoopTypeProjectionComponent("Unit"),
+                modifiers = Modifiers("open", "suspend")
             )
         )
 
