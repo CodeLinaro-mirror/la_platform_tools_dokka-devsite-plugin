@@ -108,6 +108,9 @@ internal fun List<String>.modifiersFor(
                 modifiers.add("default")
             }
 
+            // Java constructors can't be `final`
+            if (hints.isConstructor) modifiers.remove("final")
+
             // These modifiers don't exist in Java
             modifiers.remove("suspend")
             modifiers.remove("inline")
@@ -217,7 +220,8 @@ internal data class ModifierHints(
     val containingType: Class<out Documentable>?,
     val isFromJava: Boolean,
     val isSummary: Boolean = false,
-    val injectStatic: Boolean = false
+    val injectStatic: Boolean = false,
+    val isConstructor: Boolean = false
 ) {
     val inInterface get() = containingType == DInterface::class.java
     val inObject get() = containingType == DObject::class.java

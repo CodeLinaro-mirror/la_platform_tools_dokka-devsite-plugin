@@ -543,7 +543,8 @@ internal class ClasslikeDocumentableConverter(
             type = DFunction::class.java,
             containingType = classlike::class.java,
             isFromJava = classlike.isFromJava(),
-            isSummary = false
+            isSummary = false,
+            isConstructor = true
         )
         return functions.map {
             errorContextInjector(it) {
