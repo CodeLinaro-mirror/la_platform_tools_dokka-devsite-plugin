@@ -267,6 +267,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         testName: String,
         artifactNames: List<String>,
         samples: Boolean = false,
+        includeFiles: List<String> = emptyList()
     ) {
         val outputBaseDir = "testData/$testName/docs"
         val samplesBaseDir = "testData/$testName/samples"
@@ -274,6 +275,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         val configuration = makeExternalConfiguration(
             artifactNames.map { File("build/explodedSources/$it/").absoluteFile },
             if (samples) listOf(samplesBaseDir) else emptyList(),
+            includeFiles = includeFiles.map { File("testData/$testName/source", it).absolutePath }
         )
 
         setEnvVarsForTests(inferredTenant = "androidx")

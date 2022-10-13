@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.ALLOW
 import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.PREVENT
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -58,11 +59,79 @@ import kotlinx.coroutines.flow.Flow
  *
  * @sample androidx.paging.samples.pagingDataAdapterSample
  */
-abstract class PagingDataAdapter<T : Any, VH : RecyclerView.ViewHolder> @JvmOverloads constructor(
+abstract class PagingDataAdapter<T : Any, VH : RecyclerView.ViewHolder>
+/**
+ * Construct a [PagingDataAdapter].
+ *
+ * @param mainDispatcher [CoroutineContext] where UI events are dispatched. Typically, this should be
+ * [Dispatchers.Main].
+ * @param workerDispatcher [CoroutineContext] where the work to generate UI events is dispatched, for
+ * example when diffing lists on [REFRESH]. Typically, this should have a background
+ * [CoroutineDispatcher] set; [Dispatchers.Default] by default.
+ * @param diffCallback Callback for calculating the diff between two non-disjoint lists on
+ * [REFRESH]. Used as a fallback for item-level diffing when Paging is unable to find a faster path
+ * for generating the UI events required to display the new list.
+ */
+@JvmOverloads
+constructor(
     diffCallback: DiffUtil.ItemCallback<T>,
-    mainDispatcher: CoroutineDispatcher = Dispatchers.Main,
-    workerDispatcher: CoroutineDispatcher = Dispatchers.Default
+    mainDispatcher: CoroutineContext = Dispatchers.Main,
+    workerDispatcher: CoroutineContext = Dispatchers.Default,
 ) : RecyclerView.Adapter<VH>() {
+
+    /**
+     * Construct a [PagingDataAdapter].
+     *
+     * @param diffCallback Callback for calculating the diff between two non-disjoint lists on
+     * [REFRESH]. Used as a fallback for item-level diffing when Paging is unable to find a faster
+     * path for generating the UI events required to display the new list.
+     * @param mainDispatcher [CoroutineDispatcher] where UI events are dispatched. Typically,
+     * this should be [Dispatchers.Main].
+     */
+    @Deprecated(
+        message = "Superseded by constructors which accept CoroutineContext",
+        level = DeprecationLevel.HIDDEN
+    )
+    // Only for binary compatibility; cannot apply @JvmOverloads as the function signature would
+    // conflict with the primary constructor.
+    @Suppress("MissingJvmstatic")
+    constructor(
+        diffCallback: DiffUtil.ItemCallback<T>,
+        mainDispatcher: CoroutineDispatcher = Dispatchers.Main,
+    ) : this(
+        diffCallback = diffCallback,
+        mainDispatcher = mainDispatcher,
+        workerDispatcher = Dispatchers.Default,
+    )
+
+    /**
+     * Construct a [PagingDataAdapter].
+     *
+     * @param diffCallback Callback for calculating the diff between two non-disjoint lists on
+     * [REFRESH]. Used as a fallback for item-level diffing when Paging is unable to find a faster
+     * path for generating the UI events required to display the new list.
+     * @param mainDispatcher [CoroutineDispatcher] where UI events are dispatched. Typically,
+     * this should be [Dispatchers.Main].
+     * @param workerDispatcher [CoroutineDispatcher] where the work to generate UI events is
+     * dispatched, for example when diffing lists on [REFRESH]. Typically, this should dispatch on a
+     * background thread; [Dispatchers.Default] by default.
+     */
+    @Deprecated(
+        message = "Superseded by constructors which accept CoroutineContext",
+        level = DeprecationLevel.HIDDEN
+    )
+    // Only for binary compatibility; cannot apply @JvmOverloads as the function signature would
+    // conflict with the primary constructor.
+    @Suppress("MissingJvmstatic")
+    constructor(
+        diffCallback: DiffUtil.ItemCallback<T>,
+        mainDispatcher: CoroutineDispatcher = Dispatchers.Main,
+        workerDispatcher: CoroutineDispatcher = Dispatchers.Default,
+    ) : this(
+        diffCallback = diffCallback,
+        mainDispatcher = mainDispatcher,
+        workerDispatcher = workerDispatcher,
+    )
 
     /**
      * Track whether developer called [setStateRestorationPolicy] or not to decide whether the
@@ -149,10 +218,6 @@ abstract class PagingDataAdapter<T : Any, VH : RecyclerView.ViewHolder> @JvmOver
     /**
      * Present a [PagingData] until it is invalidated by a call to [refresh] or
      * [PagingSource.invalidate].
-     *
-     * [submitData] should be called on the same [CoroutineDispatcher] where updates will be
-     * dispatched to UI, typically [Dispatchers.Main] (this is done for you if you use
-     * `lifecycleScope.launch {}`).
      *
      * This method is typically used when collecting from a [Flow] produced by [Pager]. For RxJava
      * or LiveData support, use the non-suspending overload of [submitData], which accepts a
@@ -261,6 +326,26 @@ abstract class PagingDataAdapter<T : Any, VH : RecyclerView.ViewHolder> @JvmOver
     val loadStateFlow: Flow<CombinedLoadStates> = differ.loadStateFlow
 
     /**
+     * A hot [Flow] that emits after the pages presented to the UI are updated, even if the
+     * actual items presented don't change.
+     *
+     * An update is triggered from one of the following:
+     *   * [submitData] is called and initial load completes, regardless of any differences in
+     *     the loaded data
+     *   * A [Page][androidx.paging.PagingSource.LoadResult.Page] is inserted
+     *   * A [Page][androidx.paging.PagingSource.LoadResult.Page] is dropped
+     *
+     * Note: This is a [SharedFlow][kotlinx.coroutines.flow.SharedFlow] configured to replay
+     * 0 items with a buffer of size 64. If a collector lags behind page updates, it may
+     * trigger multiple times for each intermediate update that was presented while your collector
+     * was still working. To avoid this behavior, you can
+     * [conflate][kotlinx.coroutines.flow.conflate] this [Flow] so that you only receive the latest
+     * update, which is useful in cases where you are simply updating UI and don't care about
+     * tracking the exact number of page updates.
+     */
+    val onPagesUpdatedFlow: Flow<Unit> = differ.onPagesUpdatedFlow
+
+    /**
      * Add a [CombinedLoadStates] listener to observe the loading state of the current [PagingData].
      *
      * As new [PagingData] generations are submitted and displayed, the listener will be notified to
@@ -283,6 +368,36 @@ abstract class PagingDataAdapter<T : Any, VH : RecyclerView.ViewHolder> @JvmOver
      */
     fun removeLoadStateListener(listener: (CombinedLoadStates) -> Unit) {
         differ.removeLoadStateListener(listener)
+    }
+
+    /**
+     * Add a listener which triggers after the pages presented to the UI are updated, even if the
+     * actual items presented don't change.
+     *
+     * An update is triggered from one of the following:
+     *   * [submitData] is called and initial load completes, regardless of any differences in
+     *     the loaded data
+     *   * A [Page][androidx.paging.PagingSource.LoadResult.Page] is inserted
+     *   * A [Page][androidx.paging.PagingSource.LoadResult.Page] is dropped
+     *
+     * @param listener called after pages presented are updated.
+     *
+     * @see removeOnPagesUpdatedListener
+     */
+    fun addOnPagesUpdatedListener(listener: () -> Unit) {
+        differ.addOnPagesUpdatedListener(listener)
+    }
+
+    /**
+     * Remove a previously registered listener for new [PagingData] generations completing
+     * initial load and presenting to the UI.
+     *
+     * @param listener Previously registered listener.
+     *
+     * @see addOnPagesUpdatedListener
+     */
+    fun removeOnPagesUpdatedListener(listener: () -> Unit) {
+        differ.removeOnPagesUpdatedListener(listener)
     }
 
     /**

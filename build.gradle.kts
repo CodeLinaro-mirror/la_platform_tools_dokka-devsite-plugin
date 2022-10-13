@@ -248,6 +248,17 @@ dependencies {
     // Collection is KMP
     // Compose is KMP
 
+    testDataSources("androidx.paging:paging-common:3.2.0-alpha02")
+    testDataSources("androidx.paging:paging-common-ktx:3.2.0-alpha02")
+    testDataSources("androidx.paging:paging-runtime:3.2.0-alpha02")
+    testDataSources("androidx.paging:paging-runtime-ktx:3.2.0-alpha02")
+    testDataSources("androidx.paging:paging-rxjava2:3.2.0-alpha02")
+    testDataSources("androidx.paging:paging-rxjava2-ktx:3.2.0-alpha02")
+    testDataSources("androidx.paging:paging-rxjava3:3.2.0-alpha02")
+    testDataSources("androidx.paging:paging-guava:3.2.0-alpha02")
+    testDataSources("androidx.paging:paging-compose:1.0.0-alpha16")
+
+
     // We do not test against androidx.test, because they are not part of the androidx build
     // and also publish source jars with problematic no-write-permission on parts
     testDataAars("androidx.test.uiautomator:uiautomator:2.2.0") // no source jar

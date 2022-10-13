@@ -63,7 +63,7 @@ internal class LegacyPageFetcher<K : Any, V : Any>(
                 when (value) {
                     is PagingSource.LoadResult.Page -> onLoadSuccess(type, value)
                     is PagingSource.LoadResult.Error -> onLoadError(type, value.throwable)
-                    is PagingSource.LoadResult.Invalid -> TODO()
+                    is PagingSource.LoadResult.Invalid -> onLoadInvalid()
                 }
             }
         }
@@ -91,6 +91,11 @@ internal class LegacyPageFetcher<K : Any, V : Any>(
 
         val state = LoadState.Error(throwable)
         loadStateManager.setState(type, state)
+    }
+
+    private fun onLoadInvalid() {
+        source.invalidate()
+        detach()
     }
 
     fun trySchedulePrepend() {

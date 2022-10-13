@@ -87,7 +87,27 @@ class BasicTest : IntegrationTestBase() {
         )
     }
 
-    // Cannot be migrated to validatePrebuilts because we don't yet support KMP
+    @Test
+    fun `Validate AndroidX paging prebuilts`() {
+        validatePrebuilts(
+            testName = "paging",
+            artifactNames = listOf(
+                "paging-common",
+                "paging-common-ktx",
+                "paging-runtime",
+                "paging-runtime-ktx",
+                "paging-rxjava2",
+                "paging-rxjava2-ktx",
+                "paging-rxjava3",
+                "paging-guava"
+                // Either don't compile testData/paging/source or dackka applies the compose plugin
+                // "paging-compose"
+            ),
+            samples = true,
+            includeFiles = listOf("metadata.md")
+        )
+    }
+
     @Test
     fun `Validate prod AndroidX paging lib`() {
         validateDirectory(
