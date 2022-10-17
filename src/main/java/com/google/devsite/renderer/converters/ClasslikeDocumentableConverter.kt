@@ -80,7 +80,8 @@ internal class ClasslikeDocumentableConverter(
     private val classlike: DClasslike,
     private val pathProvider: FilePathProvider,
     private val docsHolder: DocumentablesHolder,
-    private val classExtensionFunctions: List<DFunction> = emptyList()
+    private val classExtensionFunctions: List<DFunction> = emptyList(),
+    private val classExtensionProperties: List<DProperty> = emptyList()
 ) {
     private val javadocConverter = DocTagConverter(displayLanguage, pathProvider, docsHolder)
     private val functionConverter =
@@ -383,8 +384,12 @@ internal class ClasslikeDocumentableConverter(
             )
         }
 
-        if (classExtensionFunctions.isNotEmpty()) {
-            var extensionFunctions = classExtensionFunctions
+        val allExtensionFuns = classExtensionFunctions +
+            if (displayLanguage == Language.JAVA)
+                classExtensionProperties.gettersAndSetters(allowDefault = true)
+            else emptyList()
+        if (allExtensionFuns.isNotEmpty()) {
+            var extensionFunctions = allExtensionFuns
                 // Sort by the class the extension function came from first, so they will be grouped
                 // together in a logical way
                 .sortedBy { nameForSyntheticClass(it) + it.name }
@@ -407,6 +412,30 @@ internal class ClasslikeDocumentableConverter(
                 extensionFunctionsSummary.await() to Classlike.TitledList(
                     extensionFunctionsTitle(),
                     extensionFunctionsDetail.await()
+                )
+            )
+        }
+
+        // Extension properties are only as-Java as accessors, so they count as extension functions
+        if (classExtensionProperties.isNotEmpty() && displayLanguage == Language.KOTLIN) {
+            val extensionProperties = classExtensionProperties
+                // Sort by the class the extension property came from first, so they will be grouped
+                // together in a logical way
+                .sortedBy { nameForSyntheticClass(it) + it.name }
+                // Convert DRIs to this class so link from summary to detail will stay on class page
+                .map { it.withDRIOfClass(classlike) }
+            val extensionPropertiesSummary = async {
+                propertiesToSummary(
+                    extensionPropertiesTitle(),
+                    extensionProperties
+                )
+            }
+            val extensionPropertiesDetail = async { propertiesToDetail(extensionProperties) }
+
+            allSymbols.add(
+                extensionPropertiesSummary.await() to Classlike.TitledList(
+                    extensionPropertiesTitle(),
+                    extensionPropertiesDetail.await()
                 )
             )
         }
@@ -1072,6 +1101,7 @@ internal fun inheritedConstantsTitle() = "Inherited ${constantsTitle()}"
 internal fun enumValuesTitle() = "Enum Values"
 // Extension functions and companions are a Kotlin-only feature and only show up in as-Kotlin
 internal fun extensionFunctionsTitle() = "Extension functions"
+internal fun extensionPropertiesTitle() = "Extension properties"
 internal fun companionFunctionsTitle(): String = "companion ${methodsTitle(Language.KOTLIN)}"
 internal fun companionPropertiesTitle(): String = "companion ${propertiesTitle(Language.KOTLIN)}"
 internal fun publicCompanionFunctionsTitle(): String = "Public ${companionFunctionsTitle()}"

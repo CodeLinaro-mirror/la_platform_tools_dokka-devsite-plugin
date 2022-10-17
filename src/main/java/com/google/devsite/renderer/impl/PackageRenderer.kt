@@ -34,6 +34,7 @@ import org.jetbrains.dokka.base.renderers.OutputWriter
 import org.jetbrains.dokka.model.DClasslike
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
+import org.jetbrains.dokka.model.DProperty
 
 /** Renders docs for a single package, including the summary and each symbol. */
 internal class PackageRenderer(
@@ -71,7 +72,11 @@ internal class PackageRenderer(
         )
     }
 
-    suspend fun writeClasslike(classlikeDoc: DClasslike, classExtensionFunctions: List<DFunction>) {
+    suspend fun writeClasslike(
+        classlikeDoc: DClasslike,
+        classExtensionFunctions: List<DFunction>,
+        classExtensionProperties: List<DProperty>
+    ) {
         if (classlikeDoc.isSynthetic && displayLanguage == Language.KOTLIN) {
             return
         }
@@ -81,7 +86,8 @@ internal class PackageRenderer(
                 classlikeDoc,
                 pathProvider,
                 docsHolder,
-                classExtensionFunctions
+                classExtensionFunctions,
+                classExtensionProperties
             )
         val page = converter.classlike()
         val classlike = createHTML().html {

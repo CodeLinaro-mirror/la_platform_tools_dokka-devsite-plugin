@@ -141,6 +141,24 @@
         </tbody>
       </table>
     </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a>.<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html#(androidx.lifecycle.ViewModel).viewModelScope()">viewModelScope</a></code></div>
+              <p><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> tied to this <code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <h2>Public constructors</h2>
     <div><a name="ViewModel--"></a><a name="viewmodel"></a>
       <h3 class="api-name" id="ViewModel()">ViewModel</h3>
@@ -183,6 +201,13 @@
       <pre class="api-signature no-pretty-print">protected&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html#onCleared()">onCleared</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>This method will be called when this ViewModel is no longer used and will be destroyed. </p>
       <p> It is useful when ViewModel observes some data and you need to clear this subscription to prevent a leak of this ViewModel.</p>
+    </div>
+    <h2>Extension properties</h2>
+    <div><a name="(androidx.lifecycle.ViewModel).getViewModelScope()"></a><a name="(androidx.lifecycle.ViewModel).setViewModelScope()"></a><a name="-androidx.lifecycle.ViewModel-.getViewModelScope--"></a><a name="-androidx.lifecycle.ViewModel-.setViewModelScope--"></a>
+      <h3 class="api-name" id="(androidx.lifecycle.ViewModel).viewModelScope()">viewModelScope</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a>.<a href="/reference/kotlin/androidx/lifecycle/ViewModel.html#(androidx.lifecycle.ViewModel).viewModelScope()">viewModelScope</a>:&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></pre>
+      <p><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> tied to this <code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html">ViewModel</a></code>. This scope will be canceled when ViewModel will be cleared, i.e <code><a href="/reference/kotlin/androidx/lifecycle/ViewModel.html#onCleared()">ViewModel.onCleared</a></code> is called</p>
+      <p>This scope is bound to <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-main-coroutine-dispatcher/immediate.html">Dispatchers.Main.immediate</a></code></p>
     </div>
   </body>
 </html>

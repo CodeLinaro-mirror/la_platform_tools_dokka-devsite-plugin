@@ -19,6 +19,7 @@ package com.google.devsite.renderer.impl
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.explodedChildren
 import com.google.devsite.renderer.converters.filterOutJvmSynthetic
+import com.google.devsite.renderer.converters.gettersAndSetters
 import com.google.devsite.renderer.converters.isExceptionClass
 import com.google.devsite.renderer.converters.isOrdinaryCompanion
 import com.google.devsite.renderer.converters.name
@@ -34,6 +35,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.analysis.EnvironmentAndFacade
+import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
 import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.links.withClass
@@ -228,14 +230,40 @@ internal class DocumentablesHolder(
      * Iterate through the all packages and create map of each class to its associated
      * extension functions.
      */
-    suspend fun extensionFunctionMap(): HashMap<DRI, MutableList<DFunction>> {
+    suspend fun extensionFunctionMap(displayLanguage: Language):
+        HashMap<DRI, MutableList<DFunction>> {
         val extensionFunctionsMapping = HashMap<DRI, MutableList<DFunction>>()
         packages().forEach { dPackage ->
             dPackage.functions.forEach { function ->
                 function.addToMapping(function.receiver?.type, extensionFunctionsMapping)
             }
+            if (displayLanguage == Language.JAVA) {
+                dPackage.properties.gettersAndSetters().forEach { accessor ->
+                    accessor.addToMapping(
+                        accessor.receiver?.type,
+                        extensionFunctionsMapping
+                    )
+                }
+            }
         }
         return extensionFunctionsMapping
+    }
+
+    /**
+     * Iterate through the all packages and create map of each class to its associated
+     * extension functions.
+     */
+    suspend fun extensionPropertyMap(): HashMap<DRI, MutableList<DProperty>> {
+        val extensionPropertiesMapping = HashMap<DRI, MutableList<DProperty>>()
+        packages().forEach { dPackage ->
+            dPackage.properties.forEach { property ->
+                property.addToMapping(
+                    property.receiver?.type?.driOrNull,
+                    extensionPropertiesMapping
+                )
+            }
+        }
+        return extensionPropertiesMapping
     }
 
     /**
@@ -258,7 +286,8 @@ internal class DocumentablesHolder(
         }
     }
 
-    private fun <T, V> T.addToMapping(v: V, map: HashMap<V, MutableList<T>>) {
+    private fun <T, V> T.addToMapping(v: V?, map: HashMap<V, MutableList<T>>) {
+        if (v == null) return
         if (v !in map) map[v] = mutableListOf()
         map[v]!! += this
     }

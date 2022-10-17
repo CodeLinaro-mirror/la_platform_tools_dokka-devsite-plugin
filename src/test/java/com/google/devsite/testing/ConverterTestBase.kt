@@ -89,7 +89,7 @@ internal abstract class ConverterTestBase(
 
     protected fun DModule.explicitClasslikes(name: String): List<DClasslike> {
         val normalClasses = packages.flatMap { it.classlikes }
-            .mapNotNull { it.explicitClasslike(name) }
+            .mapNotNull { it.explicitSubClasslike(name) }
 
         val (holder, _) = holderAndProvider(this)
         val synthetics = packages.flatMap {
@@ -98,9 +98,9 @@ internal abstract class ConverterTestBase(
         return normalClasses + synthetics
     }
 
-    private fun DClasslike.explicitClasslike(name: String): DClasslike? =
+    private fun DClasslike.explicitSubClasslike(name: String): DClasslike? =
         if (this.name == name) this
-        else this.classlikes.mapNotNull { it.explicitClasslike(name) }.singleOrNull()
+        else this.classlikes.mapNotNull { it.explicitSubClasslike(name) }.singleOrNull()
 
     protected fun DModule.function(name: String? = null) =
         packages.single().functions.singleOrNull { it.name == name }

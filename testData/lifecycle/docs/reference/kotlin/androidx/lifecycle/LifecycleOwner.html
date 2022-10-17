@@ -154,6 +154,24 @@
         </tbody>
       </table>
     </div>
+    <div class="devsite-table-wrapper">
+      <table class="responsive">
+        <thead>
+          <tr>
+            <th colspan="100%"><h3>Extension properties</h3></th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          <tr>
+            <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html">LifecycleCoroutineScope</a></code></td>
+            <td>
+              <div><code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>.<a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html#(androidx.lifecycle.LifecycleOwner).lifecycleScope()">lifecycleScope</a></code></div>
+              <p><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> tied to this <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code>'s <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code>.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <h2>Public functions</h2>
     <div><a name="getLifecycle--"></a><a name="getlifecycle"></a>
       <h3 class="api-name" id="getLifecycle()">getLifecycle</h3>
@@ -284,6 +302,14 @@
       <h3 class="api-name" id="(androidx.lifecycle.LifecycleOwner).withStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.Function0)">withStateAtLeast</h3>
       <pre class="api-signature no-pretty-print">suspend&nbsp;inline&nbsp;fun&nbsp;&lt;R&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>.<a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html#(androidx.lifecycle.LifecycleOwner).withStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.Function0)">withStateAtLeast</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;state:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;block:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> R<br>):&nbsp;R</pre>
       <p>Run <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.LifecycleOwner).withStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.Function0)">block</a></code> with this <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code>'s <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> in a <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html">Lifecycle.State</a></code> of at least <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.LifecycleOwner).withStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.Function0)">state</a></code> and resume with the result. Throws the <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleDestroyedException.html">CancellationException</a></code> if the lifecycle has reached <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#DESTROYED">Lifecycle.State.DESTROYED</a></code> by the time of the call or before <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.LifecycleOwner).withStateAtLeast(androidx.lifecycle.Lifecycle.State,kotlin.Function0)">block</a></code> is able to run.</p>
+    </div>
+    <h2>Extension properties</h2>
+    <div><a name="(androidx.lifecycle.LifecycleOwner).getLifecycleScope()"></a><a name="(androidx.lifecycle.LifecycleOwner).setLifecycleScope()"></a><a name="-androidx.lifecycle.LifecycleOwner-.getLifecycleScope--"></a><a name="-androidx.lifecycle.LifecycleOwner-.setLifecycleScope--"></a>
+      <h3 class="api-name" id="(androidx.lifecycle.LifecycleOwner).lifecycleScope()">lifecycleScope</h3>
+      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a>.<a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html#(androidx.lifecycle.LifecycleOwner).lifecycleScope()">lifecycleScope</a>:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html">LifecycleCoroutineScope</a></pre>
+      <p><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a></code> tied to this <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code>'s <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code>.</p>
+      <p>This scope will be cancelled when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is destroyed.</p>
+      <p>This scope is bound to <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-main-coroutine-dispatcher/immediate.html">Dispatchers.Main.immediate</a></code>.</p>
     </div>
   </body>
 </html>

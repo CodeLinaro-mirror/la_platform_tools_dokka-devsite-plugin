@@ -24,6 +24,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
+import org.jetbrains.dokka.model.DProperty
 
 internal class DevsiteRenderer(
     private val rootFileRenderer: MetadataRenderer,
@@ -34,10 +35,11 @@ internal class DevsiteRenderer(
     suspend fun render() {
         writeRootMetadata()
 
-        val extensionFunctionsMapping = docsHolder.extensionFunctionMap()
+        val extensionFunctionsMapping = docsHolder.extensionFunctionMap(displayLanguage)
+        val extensionPropertiesMapping = docsHolder.extensionPropertyMap()
 
         for (dPackage in docsHolder.packages()) {
-            writePackage(dPackage, extensionFunctionsMapping)
+            writePackage(dPackage, extensionFunctionsMapping, extensionPropertiesMapping)
         }
     }
 
@@ -51,7 +53,8 @@ internal class DevsiteRenderer(
 
     private suspend fun writePackage(
         dPackage: DPackage,
-        extensionFunctionsMapping: HashMap<DRI, MutableList<DFunction>>
+        extensionFunctionsMapping: Map<DRI, List<DFunction>>,
+        extensionPropertiesMapping: Map<DRI, List<DProperty>>
     ) = coroutineScope {
         launch { packageRenderer.writeIndex(dPackage) }
         launch { packageRenderer.writePackageSummary(dPackage) }
@@ -60,7 +63,8 @@ internal class DevsiteRenderer(
             launch {
                 packageRenderer.writeClasslike(
                     clazz,
-                    extensionFunctionsMapping.getOrDefault(clazz.dri, emptyList())
+                    extensionFunctionsMapping.getOrDefault(clazz.dri, emptyList()),
+                    extensionPropertiesMapping.getOrDefault(clazz.dri, emptyList()),
                 )
             }
         }

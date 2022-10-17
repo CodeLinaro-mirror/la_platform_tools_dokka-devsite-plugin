@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.capitalize
 import com.google.devsite.not
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.Memoizers.isFromJavaMap
@@ -403,16 +404,36 @@ fun Expression.getValue(): String? = when (this) {
 }
 
 /**
- * Returns property getters / setters. Omits generated Kotlin getters and setters which can be
- * identified by looking for a callable name like <get-foo> or <set-bar>.
+ * Returns property getters / setters. Omits generated Kotlin getters and setters (which can be
+ * identified by looking for a callable name like <get-foo> or <set-bar>) unless explicitly allowed.
  */
-fun List<DProperty>.gettersAndSetters(): List<DFunction> {
+fun List<DProperty>.gettersAndSetters(allowDefault: Boolean = false): List<DFunction> {
     return flatMap {
         listOf(it.getter, it.setter)
-    }.filterNotNull().filterNot {
-        val callableName = it.dri.callable?.name ?: ""
-        callableName.startsWith("<get-") || callableName.startsWith("<set-")
-    }
+    }.map {
+        val callableName = it?.dri?.callable?.name ?: ""
+        if (callableName.startsWith("<get-") || callableName.startsWith("<set-"))
+            if (allowDefault) it!!.withFixedName()
+            else null
+        else it
+    }.filterNotNull()
+}
+
+/** Fixes the name of synthetic accessors, e.g. <get-bar> to getBar */
+private fun DFunction.withFixedName() = copy(
+    dri = dri.copy(
+        callable = dri.callable!!.copy(
+            name = fixCallableName(dri?.callable?.name ?: "")
+        )
+    )
+)
+
+private fun fixCallableName(badName: String) = when {
+    badName.startsWith("<get-") ->
+        "get" + badName.removePrefix("<get-").removeSuffix(">").capitalize()
+    badName.startsWith("<set-") ->
+        "set" + badName.removePrefix("<set-").removeSuffix(">").capitalize()
+    else -> throw RuntimeException("This should never happen; error fixing accessor name")
 }
 
 private fun DRI.isAtJvmField(): Boolean = packageName == "kotlin.jvm" && classNames == "JvmField"

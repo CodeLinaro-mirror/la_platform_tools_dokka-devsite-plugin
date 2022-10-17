@@ -24,6 +24,7 @@ import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.PackageSummary
 import com.google.devsite.components.symbols.FunctionSignature
+import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeSummary
@@ -53,6 +54,7 @@ import com.google.devsite.renderer.converters.testing.symbolsFor
 import com.google.devsite.renderer.converters.testing.symbolsForConstructors
 import com.google.devsite.renderer.converters.testing.text
 import com.google.devsite.renderer.converters.testing.title
+import com.google.devsite.renderer.converters.testing.typeName
 import com.google.devsite.testing.ConverterTestBase
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.model.DClasslike
@@ -1896,7 +1898,7 @@ internal class ClasslikeDocumentableConverterTest(
         )
 
         // Each Foo should have one extension function: bar for foo1, baz for foo2
-        val pages = src.render().pages()
+        val pages = src.render().pages("Foo")
         assertThat(pages.size).isEqualTo(2)
         for (page in pages) {
             val classlike = page.content<Classlike>()
@@ -1917,6 +1919,56 @@ internal class ClasslikeDocumentableConverterTest(
         val classlike = src.render().page("Bar").content<Classlike>()
         val extFunctions = classlike.symbolsFor("Extension functions")
         assertThat(extFunctions.first.data.items).hasSize(1)
+    }
+
+    @Test
+    fun `Extension properties are handled correctly as-Java and as-Kotlin`() {
+        val module = """
+            |class Foo {
+            |}
+            |var Foo.bar get() = 5
+        """.render()
+        val classlike1 = module.page("Foo").content<Classlike>()
+
+        javaOnly {
+            val classlike2 = module.page("TestKt").content<Classlike>()
+            // TODO(ensure extension properties appear in Kt pages b/254472656)
+            for (classlike in listOf(classlike1/*, classlike2*/)) {
+                val extFunctions = classlike.symbolsFor("Extension functions")
+                assertThat(extFunctions.first.data.items).hasSize(2)
+                val (extGetterDetail, extSetterDetail) = extFunctions.second.symbols.items(2)
+
+                assertThat(extGetterDetail.data.name).isEqualTo("getBar")
+                val getterSignature = extGetterDetail.data.signature as FunctionSignature
+                assertThat(getterSignature.data.receiver!!.typeName()).isEqualTo("TestKt")
+                assertThat(getterSignature.data.parameters.single().typeName()).isEqualTo("Foo")
+                assertThat(getterSignature.data.parameters.single().data.name).isEqualTo("receiver")
+
+                assertThat(extSetterDetail.data.name).isEqualTo("setBar")
+                val setterSignature = extSetterDetail.data.signature as FunctionSignature
+                assertThat(setterSignature.data.receiver!!.typeName()).isEqualTo("TestKt")
+                val (param1, param2) = setterSignature.data.parameters.items(2)
+                assertThat(param1.typeName()).isEqualTo("Foo")
+                assertThat(param1.data.name).isEqualTo("receiver")
+                assertThat(param2.typeName()).isEqualTo("int")
+                assertThat(param2.data.name).isEqualTo("bar")
+            }
+        }
+
+        kotlinOnly {
+            val extProperties1Raw = classlike1.symbolsFor("Extension properties")
+            val extProperties1 = extProperties1Raw.first to extProperties1Raw.second.symbols
+            val packageSummary = module.packagePage().data.content as PackageSummary
+            val extProperties2 = packageSummary.data.extensionPropertiesSummary to
+                packageSummary.data.extensionProperties
+            for (extProperties in listOf(extProperties1, extProperties2)) {
+                assertThat(extProperties.first.data.items).hasSize(1)
+                val extDeet = extProperties.second.single()
+                assertThat(extDeet.data.name).isEqualTo("bar")
+                assertThat((extDeet.data.signature as PropertySignature).data.receiver!!.typeName())
+                    .isEqualTo("Foo")
+            }
+        }
     }
 
     @Ignore // TODO: b/195529157
@@ -2312,49 +2364,38 @@ internal class ClasslikeDocumentableConverterTest(
     }
 
     private fun DModule.page(name: String = "Foo"): DevsitePage {
-        val classlike = explicitClasslike(name)
-        val (holder, pathProvider) = holderAndProvider(this)
-        val extFunctionMap = runBlocking { holder.extensionFunctionMap() }
-        val converter = ClasslikeDocumentableConverter(
-            displayLanguage,
-            classlike,
-            pathProvider,
-            holder,
-            extFunctionMap.getOrDefault(classlike.dri, emptyList())
-        )
-        return runBlocking { converter.classlike() }
+        val classlike = explicitClasslikes(name).single()
+        return page { classlike }
     }
 
-    private fun DModule.page(name: DModule.() -> DClasslike): DevsitePage {
-        val classlike = name()
-        val (holder, pathProvider) = holderAndProvider(this)
-        val extFunctionMap = runBlocking { holder.extensionFunctionMap() }
-        val converter = ClasslikeDocumentableConverter(
-            displayLanguage,
-            classlike,
-            pathProvider,
-            holder,
-            extFunctionMap.getOrDefault(classlike.dri, emptyList())
-        )
-        return runBlocking { converter.classlike() }
-    }
+    private fun DModule.page(name: DModule.() -> DClasslike): DevsitePage =
+        pages(listOf(name())).single()
 
-    private fun DModule.pages(name: String = "Foo"): List<DevsitePage> {
-        // Collect pages for all classlikes with a given name
-        val classlikes = explicitClasslikes(name)
+    @JvmName("pagesForClasslikes")
+    private fun DModule.pages(classlikes: List<DClasslike>): List<DevsitePage> {
         val (holder, pathProvider) = holderAndProvider(this)
-        val extFunctionMap = runBlocking { holder.extensionFunctionMap() }
+        val extFunctionMap = runBlocking { holder.extensionFunctionMap(displayLanguage) }
+        val extPropertyMap = runBlocking { holder.extensionPropertyMap() }
         val converters = classlikes.map {
             ClasslikeDocumentableConverter(
                 displayLanguage,
                 it,
                 pathProvider,
                 holder,
-                extFunctionMap.getOrDefault(it.dri, emptyList())
+                extFunctionMap.getOrDefault(it.dri, emptyList()),
+                extPropertyMap.getOrDefault(it.dri, emptyList())
             )
         }
         return runBlocking { converters.map { it.classlike() } }
     }
+
+    /** Note: does not return nested classlikes */
+    private fun DModule.allPages() = pages(packages.single().classlikes)
+
+    private fun DModule.pages(name: String = "Foo") = pages(explicitClasslikes(name))
+
+    private fun DModule.pages(names: List<String>): List<DevsitePage> =
+        pages(names.map { explicitClasslike(it) })
 
     private fun DModule.companionFor(name: String = "Foo") =
         explicitClasslike("Foo").classlikes.single { it.name == "Companion" }
