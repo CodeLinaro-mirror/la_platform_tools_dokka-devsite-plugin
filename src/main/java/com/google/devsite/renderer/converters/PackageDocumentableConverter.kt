@@ -196,7 +196,7 @@ internal class PackageDocumentableConverter(
 
     private fun topLevelFunctions() = dPackage.functions
         .filter { it.receiver == null }
-        .sortedBy { it.name }
+        .sortedBy { it.name + " " + it.dri }
 
     private fun extensionProperties() = dPackage.properties
         .filterNot { it.receiver == null }
@@ -204,5 +204,5 @@ internal class PackageDocumentableConverter(
 
     private fun extensionFunctions() = dPackage.functions
         .filterNot { it.receiver == null }
-        .sortedBy { it.name }
+        .sortedBy { it.name + " " + it.dri }
 }

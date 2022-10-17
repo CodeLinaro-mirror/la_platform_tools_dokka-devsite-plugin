@@ -71,13 +71,13 @@
         <tbody class="list">
           <tr>
             <td>
-              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;VH&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; <a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.DiffUtil.ItemCallback)">PagedListAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;diffCallback:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/DiffUtil.ItemCallback.html">DiffUtil.ItemCallback</a>&lt;T&gt;<br>)</code></div>
-              <p>Creates a <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code> with default threading and <code><a href="/reference/kotlin/androidx/recyclerview/widget/ListUpdateCallback.html">androidx.recyclerview.widget.ListUpdateCallback</a></code>.</p>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;VH&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; <a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.AsyncDifferConfig)">PagedListAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/AsyncDifferConfig.html">AsyncDifferConfig</a>&lt;T&gt;<br>)</code></div>
             </td>
           </tr>
           <tr>
             <td>
-              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;VH&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; <a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.AsyncDifferConfig)">PagedListAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/AsyncDifferConfig.html">AsyncDifferConfig</a>&lt;T&gt;<br>)</code></div>
+              <div><code>&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;VH&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; <a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.DiffUtil.ItemCallback)">PagedListAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;diffCallback:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/DiffUtil.ItemCallback.html">DiffUtil.ItemCallback</a>&lt;T&gt;<br>)</code></div>
+              <p>Creates a <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html">PagedListAdapter</a></code> with default threading and <code><a href="/reference/kotlin/androidx/recyclerview/widget/ListUpdateCallback.html">androidx.recyclerview.widget.ListUpdateCallback</a></code>.</p>
             </td>
           </tr>
         </tbody>
@@ -107,15 +107,15 @@
           <tr>
             <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><span><del><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?)</code></div>
-              <p><strong>This function is deprecated.</strong> Use the two argument variant instead.</p>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;previousList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?,<br>&nbsp;&nbsp;&nbsp;&nbsp;currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?<br>)</code></div>
+              <p>Called when the current PagedList is updated.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;previousList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?,<br>&nbsp;&nbsp;&nbsp;&nbsp;currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?<br>)</code></div>
-              <p>Called when the current PagedList is updated.</p>
+              <div><code><span><del><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?)</code></div>
+              <p><strong>This function is deprecated.</strong> Use the two argument variant instead.</p>
             </td>
           </tr>
           <tr>
@@ -128,14 +128,14 @@
           <tr>
             <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a>(pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a>(pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?,&nbsp;commitCallback:&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>?)</code></div>
               <p>Set the new list to be displayed.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code>open <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
-              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a>(pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?,&nbsp;commitCallback:&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>?)</code></div>
+              <div><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a>(pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?)</code></div>
               <p>Set the new list to be displayed.</p>
             </td>
           </tr>
@@ -406,6 +406,10 @@
       </table>
     </div>
     <h2>Protected constructors</h2>
+    <div><a name="PagedListAdapter-androidx.recyclerview.widget.AsyncDifferConfig-"></a><a name="pagedlistadapter"></a>
+      <h3 class="api-name" id="PagedListAdapter(androidx.recyclerview.widget.AsyncDifferConfig)">PagedListAdapter</h3>
+      <pre class="api-signature no-pretty-print">protected&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;VH&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; <a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.AsyncDifferConfig)">PagedListAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/AsyncDifferConfig.html">AsyncDifferConfig</a>&lt;T&gt;<br>)</pre>
+    </div>
     <div><a name="PagedListAdapter-androidx.recyclerview.widget.DiffUtil.ItemCallback-"></a><a name="pagedlistadapter"></a>
       <h3 class="api-name" id="PagedListAdapter(androidx.recyclerview.widget.DiffUtil.ItemCallback)">PagedListAdapter</h3>
       <pre class="api-signature no-pretty-print">protected&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;VH&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; <a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.DiffUtil.ItemCallback)">PagedListAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;diffCallback:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/DiffUtil.ItemCallback.html">DiffUtil.ItemCallback</a>&lt;T&gt;<br>)</pre>
@@ -428,10 +432,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div><a name="PagedListAdapter-androidx.recyclerview.widget.AsyncDifferConfig-"></a><a name="pagedlistadapter"></a>
-      <h3 class="api-name" id="PagedListAdapter(androidx.recyclerview.widget.AsyncDifferConfig)">PagedListAdapter</h3>
-      <pre class="api-signature no-pretty-print">protected&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;VH&nbsp;:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a>&gt; <a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#PagedListAdapter(androidx.recyclerview.widget.AsyncDifferConfig)">PagedListAdapter</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;config:&nbsp;<a href="/reference/kotlin/androidx/recyclerview/widget/AsyncDifferConfig.html">AsyncDifferConfig</a>&lt;T&gt;<br>)</pre>
     </div>
     <h2>Public functions</h2>
     <div><a name="addLoadStateListener-kotlin.Function2-"></a><a name="addloadstatelistener"></a>
@@ -475,46 +475,6 @@
     <div><a name="getItemCount--"></a><a name="getitemcount"></a>
       <h3 class="api-name" id="getItemCount()">getItemCount</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#getItemCount()">getItemCount</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-    </div>
-    <div><a name="onCurrentListChanged-androidx.paging.PagedList-"></a><a name="oncurrentlistchanged"></a>
-      <h3 class="api-name" id="onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<span><del><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <aside class="caution"><strong>This function is deprecated.</strong><br>Use the two argument variant instead.</aside>
-      <p>Called when the current PagedList is updated.</p>
-      <p>This may be dispatched as part of <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></code> if a background diff isn't needed (such as when the first list is passed, or the list is cleared). In either case, PagedListAdapter will simply call <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#notifyItemRangeInserted(kotlin.Int,kotlin.Int)">notifyItemRangeInserted/Removed(0, mPreviousSize)</a></code>.</p>
-      <p>This method will <em>not</em>be called when the Adapter switches from presenting a PagedList to a snapshot version of the PagedList during a diff. This means you cannot observe each PagedList via this method.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?</code></td>
-              <td>
-                <p>new PagedList being displayed, may be null.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
     <div><a name="onCurrentListChanged(androidx.paging.PagedList, androidx.paging.PagedList)"></a><a name="onCurrentListChanged-androidx.paging.PagedList-androidx.paging.PagedList-"></a><a name="oncurrentlistchanged"></a>
       <h3 class="api-name" id="onCurrentListChanged(androidx.paging.PagedList,androidx.paging.PagedList)">onCurrentListChanged</h3>
@@ -561,6 +521,46 @@
         </table>
       </div>
     </div>
+    <div><a name="onCurrentListChanged-androidx.paging.PagedList-"></a><a name="oncurrentlistchanged"></a>
+      <h3 class="api-name" id="onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<span><del><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></del></span>(currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <aside class="caution"><strong>This function is deprecated.</strong><br>Use the two argument variant instead.</aside>
+      <p>Called when the current PagedList is updated.</p>
+      <p>This may be dispatched as part of <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a></code> if a background diff isn't needed (such as when the first list is passed, or the list is cleared). In either case, PagedListAdapter will simply call <code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#notifyItemRangeInserted(kotlin.Int,kotlin.Int)">notifyItemRangeInserted/Removed(0, mPreviousSize)</a></code>.</p>
+      <p>This method will <em>not</em>be called when the Adapter switches from presenting a PagedList to a snapshot version of the PagedList during a diff. This means you cannot observe each PagedList via this method.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>currentList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?</code></td>
+              <td>
+                <p>new PagedList being displayed, may be null.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#onCurrentListChanged(androidx.paging.PagedList)">onCurrentListChanged</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <div><a name="removeLoadStateListener-kotlin.Function2-"></a><a name="removeloadstatelistener"></a>
       <h3 class="api-name" id="removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#removeLoadStateListener(kotlin.Function2)">removeLoadStateListener</a>(listener:&nbsp;(<a href="/reference/kotlin/androidx/paging/LoadType.html">LoadType</a>, <a href="/reference/kotlin/androidx/paging/LoadState.html">LoadState</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
@@ -598,29 +598,6 @@
         </table>
       </div>
     </div>
-    <div><a name="submitList-androidx.paging.PagedList-"></a><a name="submitlist"></a>
-      <h3 class="api-name" id="submitList(androidx.paging.PagedList)">submitList</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a>(pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Set the new list to be displayed.</p>
-      <p>If a list is already being displayed, a diff will be computed on a background thread, which will dispatch Adapter.notifyItem events on the main thread.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?</code></td>
-              <td>
-                <p>The new list to be displayed.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
     <div><a name="submitList(androidx.paging.PagedList, java.lang.Runnable)"></a><a name="submitList-androidx.paging.PagedList-java.lang.Runnable-"></a><a name="submitlist"></a>
       <h3 class="api-name" id="submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList,java.lang.Runnable)">submitList</a>(pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?,&nbsp;commitCallback:&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
@@ -645,6 +622,29 @@
               <td width="40%"><code>commitCallback:&nbsp;<a href="https://developer.android.com/reference/java/lang/Runnable.html">Runnable</a>?</code></td>
               <td>
                 <p>Optional runnable that is executed when the PagedList is committed, if it is committed.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="submitList-androidx.paging.PagedList-"></a><a name="submitlist"></a>
+      <h3 class="api-name" id="submitList(androidx.paging.PagedList)">submitList</h3>
+      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagedListAdapter.html#submitList(androidx.paging.PagedList)">submitList</a>(pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      <p>Set the new list to be displayed.</p>
+      <p>If a list is already being displayed, a diff will be computed on a background thread, which will dispatch Adapter.notifyItem events on the main thread.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>pagedList:&nbsp;<a href="/reference/kotlin/androidx/paging/PagedList.html">PagedList</a>&lt;T&gt;?</code></td>
+              <td>
+                <p>The new list to be displayed.</p>
               </td>
             </tr>
           </tbody>

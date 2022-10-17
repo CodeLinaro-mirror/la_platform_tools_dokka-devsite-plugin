@@ -55,7 +55,8 @@ internal class RootDocumentableConverter(
         val componentClasses = alphabetizedClasses.mapValues { (_, nodes) ->
             DefaultSummaryList(
                 SummaryList.Params(
-                    items = nodes.map { javadocConverter.summaryForDocumentable(it) }
+                    items = nodes.sortedBy { it.dri.classNames + " " + it.dri }
+                        .map { javadocConverter.summaryForDocumentable(it) }
                 )
             )
         }

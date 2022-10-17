@@ -1,0 +1,51 @@
+/*
+ * Copyright 2022 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package dokkatest.notSimple
+
+import dokkatest.simple.Four
+
+/**
+ * This has the same name as another class but a different DRI. Sorting order must be deterministic.
+ */
+open class One(override val fore: String) : Four, Five() {
+
+    /** Secondary constructor docs */
+    constructor(blarg: Int) : this("$blarg")
+
+    /** Property docs. */
+    val v = 0
+
+    /** Function docs. */
+    fun w() = Unit
+}
+
+/** This as well is class-name-colliding */
+open class Five {
+    /** Five Function docs. */
+    fun fiveFunction() = Unit
+
+    open fun thisShouldShowUpKt() = 0
+
+    /** @suppress */
+    open fun thisShouldNotShowUpKt() = 0
+
+    /** @hide */
+    open fun thisShouldNotShowUpItsKotlinHiddenWithTheAtHideWhichWeExplicitlyImplemented() = 0
+}
+
+fun One.oneExtensionFun() = 5
+fun dokkatest.simple.One.oneExtensionFun() = -5

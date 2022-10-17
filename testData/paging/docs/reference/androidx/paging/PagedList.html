@@ -210,15 +210,15 @@
           <tr>
             <td width="40%"><code>final void</code></td>
             <td>
-              <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#addWeakCallback(kotlin.collections.List,androidx.paging.PagedList.Callback)">addWeakCallback</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;previousSnapshot,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback<br>)</code></div>
-              <p><strong>This method is deprecated.</strong> Dispatching a diff since snapshot created is behavior that can be instead tracked by attaching a Callback to the PagedList that is mutating, and tracking changes since calling PagedList.snapshot().</p>
+              <div><code><a href="/reference/androidx/paging/PagedList.html#addWeakCallback(androidx.paging.PagedList.Callback)">addWeakCallback</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback)</code></div>
+              <p>Adds a callback.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code>final void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/paging/PagedList.html#addWeakCallback(androidx.paging.PagedList.Callback)">addWeakCallback</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback)</code></div>
-              <p>Adds a callback.</p>
+              <div><code><span><del><a href="/reference/androidx/paging/PagedList.html#addWeakCallback(kotlin.collections.List,androidx.paging.PagedList.Callback)">addWeakCallback</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;previousSnapshot,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback<br>)</code></div>
+              <p><strong>This method is deprecated.</strong> Dispatching a diff since snapshot created is behavior that can be instead tracked by attaching a Callback to the PagedList that is mutating, and tracking changes since calling PagedList.snapshot().</p>
             </td>
           </tr>
           <tr>
@@ -760,6 +760,44 @@
       </div>
     </div>
     <h2>Public methods</h2>
+    <div><a name="addWeakCallback-androidx.paging.PagedList.Callback-"></a><a name="addweakcallback"></a>
+      <h3 class="api-name" id="addWeakCallback(androidx.paging.PagedList.Callback)">addWeakCallback</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagedList.html#addWeakCallback(androidx.paging.PagedList.Callback)">addWeakCallback</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback)</pre>
+      <p>Adds a callback.</p>
+      <p>The callback is internally held as weak reference, so <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> doesn't hold a strong reference to its observer, such as a <code><a href="/reference/androidx/paging/PagedListAdapter.html">androidx.paging.PagedListAdapter</a></code>. If an adapter were held with a strong reference, it would be necessary to clear its <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> observer before it could be GC'd.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback</code></td>
+              <td>
+                <p>Callback to dispatch to.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">See also</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code><a href="/reference/androidx/paging/PagedList.html#removeWeakCallback(androidx.paging.PagedList.Callback)">removeWeakCallback</a></code></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <div><a name="addWeakCallback(kotlin.collections.List, androidx.paging.PagedList.Callback)"></a><a name="addWeakCallback-kotlin.collections.List-androidx.paging.PagedList.Callback-"></a><a name="addweakcallback"></a>
       <h3 class="api-name" id="addWeakCallback(kotlin.collections.List,androidx.paging.PagedList.Callback)">addWeakCallback</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<span><del><a href="/reference/androidx/paging/PagedList.html#addWeakCallback(kotlin.collections.List,androidx.paging.PagedList.Callback)">addWeakCallback</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/util/List.html">List</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;previousSnapshot,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback<br>)</pre>
@@ -786,44 +824,6 @@
               <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback</code></td>
               <td>
                 <p><code><a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a></code> to dispatch to.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/paging/PagedList.html#removeWeakCallback(androidx.paging.PagedList.Callback)">removeWeakCallback</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div><a name="addWeakCallback-androidx.paging.PagedList.Callback-"></a><a name="addweakcallback"></a>
-      <h3 class="api-name" id="addWeakCallback(androidx.paging.PagedList.Callback)">addWeakCallback</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/paging/PagedList.html#addWeakCallback(androidx.paging.PagedList.Callback)">addWeakCallback</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback)</pre>
-      <p>Adds a callback.</p>
-      <p>The callback is internally held as weak reference, so <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> doesn't hold a strong reference to its observer, such as a <code><a href="/reference/androidx/paging/PagedListAdapter.html">androidx.paging.PagedListAdapter</a></code>. If an adapter were held with a strong reference, it would be necessary to clear its <code><a href="/reference/androidx/paging/PagedList.html">PagedList</a></code> observer before it could be GC'd.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagedList.Callback.html">PagedList.Callback</a>&nbsp;callback</code></td>
-              <td>
-                <p>Callback to dispatch to.</p>
               </td>
             </tr>
           </tbody>

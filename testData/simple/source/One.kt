@@ -30,7 +30,7 @@ open class One(override val fore: String) : Four, Five() {
     constructor(blarg: Int) : this("$blarg")
 
     /** Property docs. */
-    val v = 0
+    val v = 70
 
     /** Function docs. */
     fun w() = Unit

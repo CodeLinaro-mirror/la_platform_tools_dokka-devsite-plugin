@@ -243,15 +243,15 @@
           <tr>
             <td width="40%"><code>void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name,&nbsp;int&nbsp;flags)</code></div>
-              <p>Pop the last fragment transition from the manager's fragment back stack.</p>
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(int,int)">popBackStack</a>(int&nbsp;id,&nbsp;int&nbsp;flags)</code></div>
+              <p>Pop all back stack states up to the one with the given identifier.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code>void</code></td>
             <td>
-              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(int,int)">popBackStack</a>(int&nbsp;id,&nbsp;int&nbsp;flags)</code></div>
-              <p>Pop all back stack states up to the one with the given identifier.</p>
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name,&nbsp;int&nbsp;flags)</code></div>
+              <p>Pop the last fragment transition from the manager's fragment back stack.</p>
             </td>
           </tr>
           <tr>
@@ -264,15 +264,15 @@
           <tr>
             <td width="40%"><code>boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate(java.lang.String,int)">popBackStackImmediate</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name,&nbsp;int&nbsp;flags)</code></div>
-              <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a></code>, but performs the operation immediately inside of the call.</p>
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate(int,int)">popBackStackImmediate</a>(int&nbsp;id,&nbsp;int&nbsp;flags)</code></div>
+              <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(int,int)">popBackStack</a></code>, but performs the operation immediately inside of the call.</p>
             </td>
           </tr>
           <tr>
             <td width="40%"><code>boolean</code></td>
             <td>
-              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate(int,int)">popBackStackImmediate</a>(int&nbsp;id,&nbsp;int&nbsp;flags)</code></div>
-              <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(int,int)">popBackStack</a></code>, but performs the operation immediately inside of the call.</p>
+              <div><code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate(java.lang.String,int)">popBackStackImmediate</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name,&nbsp;int&nbsp;flags)</code></div>
+              <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a></code>, but performs the operation immediately inside of the call.</p>
             </td>
           </tr>
           <tr>
@@ -846,34 +846,6 @@
       <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack()">popBackStack</a>()</pre>
       <p>Pop the top state off the back stack. This function is asynchronous -- it enqueues the request to pop, but the action will not be performed until the application returns to its event loop.</p>
     </div>
-    <div><a name="popBackStack(java.lang.String, int)"></a><a name="popBackStack-java.lang.String-int-"></a><a name="popbackstack"></a>
-      <h3 class="api-name" id="popBackStack(java.lang.String,int)">popBackStack</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name,&nbsp;int&nbsp;flags)</pre>
-      <p>Pop the last fragment transition from the manager's fragment back stack. This function is asynchronous -- it enqueues the request to pop, but the action will not be performed until the application returns to its event loop.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name</code></td>
-              <td>
-                <p>If non-null, this is the name of a previous back state to look for; if found, all states up to that state will be popped. The <code><a href="/reference/androidx/fragment/app/FragmentManager.html#POP_BACK_STACK_INCLUSIVE()">POP_BACK_STACK_INCLUSIVE</a></code> flag can be used to control whether the named state itself is popped. If null, only the top state is popped.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>int&nbsp;flags</code></td>
-              <td>
-                <p>Either 0 or <code><a href="/reference/androidx/fragment/app/FragmentManager.html#POP_BACK_STACK_INCLUSIVE()">POP_BACK_STACK_INCLUSIVE</a></code>.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
     <div><a name="popBackStack(int, int)"></a><a name="popBackStack-int-int-"></a><a name="popbackstack"></a>
       <h3 class="api-name" id="popBackStack(int,int)">popBackStack</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(int,int)">popBackStack</a>(int&nbsp;id,&nbsp;int&nbsp;flags)</pre>
@@ -890,6 +862,34 @@
               <td width="40%"><code>int&nbsp;id</code></td>
               <td>
                 <p>Identifier of the stated to be popped. If no identifier exists, false is returned. The identifier is the number returned by <code><a href="/reference/androidx/fragment/app/FragmentTransaction.html#commit()">FragmentTransaction.commit()</a></code>. The <code><a href="/reference/androidx/fragment/app/FragmentManager.html#POP_BACK_STACK_INCLUSIVE()">POP_BACK_STACK_INCLUSIVE</a></code> flag can be used to control whether the named state itself is popped.</p>
+              </td>
+            </tr>
+            <tr>
+              <td width="40%"><code>int&nbsp;flags</code></td>
+              <td>
+                <p>Either 0 or <code><a href="/reference/androidx/fragment/app/FragmentManager.html#POP_BACK_STACK_INCLUSIVE()">POP_BACK_STACK_INCLUSIVE</a></code>.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div><a name="popBackStack(java.lang.String, int)"></a><a name="popBackStack-java.lang.String-int-"></a><a name="popbackstack"></a>
+      <h3 class="api-name" id="popBackStack(java.lang.String,int)">popBackStack</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;void&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name,&nbsp;int&nbsp;flags)</pre>
+      <p>Pop the last fragment transition from the manager's fragment back stack. This function is asynchronous -- it enqueues the request to pop, but the action will not be performed until the application returns to its event loop.</p>
+      <div class="devsite-table-wrapper">
+        <table class="responsive">
+          <thead>
+            <tr>
+              <th colspan="100%">Parameters</th>
+            </tr>
+          </thead>
+          <tbody class="list">
+            <tr>
+              <td width="40%"><code>@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name</code></td>
+              <td>
+                <p>If non-null, this is the name of a previous back state to look for; if found, all states up to that state will be popped. The <code><a href="/reference/androidx/fragment/app/FragmentManager.html#POP_BACK_STACK_INCLUSIVE()">POP_BACK_STACK_INCLUSIVE</a></code> flag can be used to control whether the named state itself is popped. If null, only the top state is popped.</p>
               </td>
             </tr>
             <tr>
@@ -924,10 +924,10 @@
         </table>
       </div>
     </div>
-    <div><a name="popBackStackImmediate(java.lang.String, int)"></a><a name="popBackStackImmediate-java.lang.String-int-"></a><a name="popbackstackimmediate"></a>
-      <h3 class="api-name" id="popBackStackImmediate(java.lang.String,int)">popBackStackImmediate</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate(java.lang.String,int)">popBackStackImmediate</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name,&nbsp;int&nbsp;flags)</pre>
-      <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a></code>, but performs the operation immediately inside of the call. This is like calling <code><a href="/reference/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a></code> afterwards without forcing the start of postponed Transactions.</p>
+    <div><a name="popBackStackImmediate(int, int)"></a><a name="popBackStackImmediate-int-int-"></a><a name="popbackstackimmediate"></a>
+      <h3 class="api-name" id="popBackStackImmediate(int,int)">popBackStackImmediate</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate(int,int)">popBackStackImmediate</a>(int&nbsp;id,&nbsp;int&nbsp;flags)</pre>
+      <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(int,int)">popBackStack</a></code>, but performs the operation immediately inside of the call. This is like calling <code><a href="/reference/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a></code> afterwards without forcing the start of postponed Transactions.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>
@@ -946,10 +946,10 @@
         </table>
       </div>
     </div>
-    <div><a name="popBackStackImmediate(int, int)"></a><a name="popBackStackImmediate-int-int-"></a><a name="popbackstackimmediate"></a>
-      <h3 class="api-name" id="popBackStackImmediate(int,int)">popBackStackImmediate</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate(int,int)">popBackStackImmediate</a>(int&nbsp;id,&nbsp;int&nbsp;flags)</pre>
-      <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(int,int)">popBackStack</a></code>, but performs the operation immediately inside of the call. This is like calling <code><a href="/reference/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a></code> afterwards without forcing the start of postponed Transactions.</p>
+    <div><a name="popBackStackImmediate(java.lang.String, int)"></a><a name="popBackStackImmediate-java.lang.String-int-"></a><a name="popbackstackimmediate"></a>
+      <h3 class="api-name" id="popBackStackImmediate(java.lang.String,int)">popBackStackImmediate</h3>
+      <pre class="api-signature no-pretty-print">public&nbsp;boolean&nbsp;<a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStackImmediate(java.lang.String,int)">popBackStackImmediate</a>(@<a href="/reference/androidx/annotation/Nullable.html">Nullable</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;name,&nbsp;int&nbsp;flags)</pre>
+      <p>Like <code><a href="/reference/androidx/fragment/app/FragmentManager.html#popBackStack(java.lang.String,int)">popBackStack</a></code>, but performs the operation immediately inside of the call. This is like calling <code><a href="/reference/androidx/fragment/app/FragmentManager.html#executePendingTransactions()">executePendingTransactions</a></code> afterwards without forcing the start of postponed Transactions.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
           <thead>

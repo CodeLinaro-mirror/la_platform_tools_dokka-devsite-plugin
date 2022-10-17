@@ -194,7 +194,7 @@ internal class DocumentablesHolder(
             classes = classes.filterNot { it.isOrdinaryCompanion() }
         val syntheticClasses = syntheticClasses.getValue(dPackage.dri).await()
         return if (displayLanguage == Language.JAVA) {
-            (classes + syntheticClasses).sortedBy { it.name() }
+            (classes + syntheticClasses).sortedBy { "${it.name()} ${it.dri}" }
         } else {
             classes - syntheticClasses.toSet()
         }
@@ -270,7 +270,7 @@ internal class DocumentablesHolder(
                     excludedRegex ->
                     excludedRegex.matches(thisPackage.packageName)
                 }
-            }.sortedBy { it.name }
+            }.sortedBy { "${it.name} ${it.dri}" }
     }
 
     private suspend fun computeClasslikes(
@@ -291,7 +291,7 @@ internal class DocumentablesHolder(
                     excludedRegex ->
                     excludedRegex.matches(thisClasslike.packageName())
                 }
-            }.sortedBy { it.name() }
+            }.sortedBy { "${it.name()} ${it.dri}" }
     }
 
     private fun computeClasses(docs: List<Documentable>): List<DClass> {
@@ -301,7 +301,7 @@ internal class DocumentablesHolder(
                     excludedRegex ->
                     excludedRegex.matches(thisClass.packageName())
                 }
-            }.sortedBy { it.name() }
+            }.sortedBy { "${it.name()} ${it.dri}" }
     }
 
     /** Computes the syntheticClasses from top level functions that are used to document Kotlin as
@@ -323,7 +323,7 @@ internal class DocumentablesHolder(
                     constructors = emptyList(),
                     functions = nodes.filterIsInstance<DFunction>().map {
                         it.withJavaSynthetic(syntheticClassName)
-                    }.sortedBy { it.name },
+                    }.sortedBy { "${it.name} ${it.dri}" },
                     classlikes = emptyList(),
                     sources = emptyMap(),
                     expectPresentInSet = null,
@@ -350,29 +350,30 @@ internal class DocumentablesHolder(
             .groupBy({ (_, function) -> nameForSyntheticClass(function) }) { it.second }
 
     private fun computeEnums(docs: List<Documentable>): List<DEnum> {
-        return docs.filterIsInstance<DEnum>().sortedBy { it.name() }
+        return docs.filterIsInstance<DEnum>().sortedBy { "${it.name()} ${it.dri}" }
     }
 
     private fun computeInterfaces(docs: List<Documentable>): List<DInterface> {
-        return docs.filterIsInstance<DInterface>().sortedBy { it.name() }
+        return docs.filterIsInstance<DInterface>().sortedBy { "${it.name()} ${it.dri}" }
     }
 
     private fun computeAnnotations(docs: List<Documentable>): List<DAnnotation> {
-        return docs.filterIsInstance<DAnnotation>().sortedBy { it.name() }
+        return docs.filterIsInstance<DAnnotation>().sortedBy { "${it.name()} ${it.dri}" }
     }
 
     private fun computeTypesAliases(dPackage: DPackage): List<DTypeAlias> {
-        return dPackage.typealiases.sortedBy { it.name }
+        return dPackage.typealiases.sortedBy { "${it.name} ${it.dri}" }
     }
 
     private fun computeExceptions(docs: List<Documentable>): List<DClass> {
-        return docs.filterIsInstance<DClass>().filter { it.isExceptionClass }.sortedBy { it.name() }
+        return docs.filterIsInstance<DClass>().filter { it.isExceptionClass }
+            .sortedBy { "${it.name()} ${it.dri}" }
     }
 
     private fun computeObjects(docs: List<Documentable>): List<DObject> {
         val companions = docs.filterIsInstance<WithCompanion>().mapNotNull { it.companion?.dri }
         val allObjects = docs.filterIsInstance<DObject>()
         val nonCompanions = allObjects.filter { !companions.contains(it.dri) }
-        return nonCompanions.sortedBy { it.name() }
+        return nonCompanions.sortedBy { "${it.name()} ${it.dri}" }
     }
 }

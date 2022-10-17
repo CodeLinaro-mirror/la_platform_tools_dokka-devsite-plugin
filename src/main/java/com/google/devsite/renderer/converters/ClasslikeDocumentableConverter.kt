@@ -163,15 +163,20 @@ internal class ClasslikeDocumentableConverter(
             }
         }
 
-        declaredFunctions = declaredFunctions.sortedBy { it.name }
+        declaredFunctions = declaredFunctions.sortedBy {
+            "${it.name} ${it.receiver} ${it.parameters.joinToString(" ")}"
+        }
         declaredProperties = declaredProperties.sortedBy { it.name }
-        companionFunctions = companionFunctions.sortedBy { it.name }
+        companionFunctions = companionFunctions.sortedBy {
+            "${it.name} ${it.receiver} ${it.parameters.joinToString(" ")}"
+        }
         companionProperties = companionProperties.sortedBy { it.name }
 
         val enumValues = (classlike as? DEnum)?.entries.orEmpty().sortedBy { it.name }
 
-        var allConstructors = (classlike as? WithConstructors)?.constructors.orEmpty()
-            .sortedBy { it.parameters.size }
+        var allConstructors = (classlike as? WithConstructors)?.constructors.orEmpty().sortedBy {
+            String.format("%03d", it.parameters.size) + " " + it.parameters.joinToString()
+        }
         if (classlike is WithConstructors && allConstructors.isEmpty() && classlike.isFromJava() &&
             classlike !is DAnnotation
         ) {
@@ -744,7 +749,7 @@ internal class ClasslikeDocumentableConverter(
                 }
 
         val (consts, properties) = symbols.filterIsInstance<DProperty>()
-            .sortedBy { it.name }
+            .sortedBy { "${it.name} ${it.dri}" }
             .partition { isConstant(it.modifiers()) }
 
         val constsSummary = consts.takeIf { it.isNotEmpty() }
@@ -773,7 +778,7 @@ internal class ClasslikeDocumentableConverter(
 
         // val category = groupBy { it.driInheritedFrom() ?: it.dri.parent }
         val category = groupBy { it.dri.parent }
-            .toSortedMap(compareBy { it.classNames })
+            .toSortedMap(compareBy { it.classNames + " " + it.fullName })
             .entries.associate { (k, v) -> createInheritedSymbolsList(k, v) }
 
         return DefaultInheritedSymbols(
