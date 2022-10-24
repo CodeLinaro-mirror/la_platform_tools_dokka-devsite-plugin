@@ -130,7 +130,7 @@ internal interface Classlike : ContextFreeComponent {
         }
 
     val inheritedSummarySections: List<InheritedSymbolsList<*>>
-        get() = /* when (data.displayLanguage) {
+        get() = when (data.displayLanguage) {
             Language.JAVA -> listOfNotNull(
                 data.inheritedConstants,
                 data.inheritedProperties,
@@ -141,12 +141,7 @@ internal interface Classlike : ContextFreeComponent {
                 data.inheritedFunctions,
                 data.inheritedProperties
             )
-        } */ // The below is temporary for parity, to avoid the re-arch CL have integ test diffs
-            listOfNotNull(
-                data.inheritedFunctions,
-                data.inheritedConstants,
-                data.inheritedProperties
-            )
+        }
     val allVisibleSummaries: List<Component<FlowContent>> get() =
         allSummarySections.filter { it.hasContent() } +
             inheritedSummarySections.filter { it.hasContent() }

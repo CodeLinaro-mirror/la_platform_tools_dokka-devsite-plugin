@@ -40,7 +40,7 @@ internal data class DefaultClasslike(
         data.hierarchy.render(this)
         data.relatedSymbols.render(this)
         data.description.render(into, separator = null, header = { hr() })
-
+        // The ordering logic for these summaries is in Classlike.kt
         allVisibleSummaries.render(into, separator = null, header = { h2 { +"Summary" } })
 
         for (symbolType in allDetailsSections.filter { it.symbols.isNotEmpty() }) {
