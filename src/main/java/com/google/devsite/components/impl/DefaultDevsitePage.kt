@@ -38,12 +38,12 @@ internal data class DefaultDevsitePage(
         }
 
         body {
-            data.libraryMetadataComponent?.render(this)
+            data.metadataComponent?.render(this)
             h1 { +data.title }
             data.content.render(this)
         }
     }
 
     override fun toString() = "DevsitePage: ${data.title} at ${data.bookPath}\n${data.content} " +
-        "with metadata " + (data.libraryMetadataComponent?.toString() ?: "")
+        "with metadata " + (data.metadataComponent?.toString() ?: "")
 }

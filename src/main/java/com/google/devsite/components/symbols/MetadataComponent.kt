@@ -17,9 +17,19 @@
 package com.google.devsite.components.symbols
 
 import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.components.Link
+import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.util.LibraryMetadata
 
-/** Represents the library's metadata section. */
-internal interface LibraryMetadataComponent : ContextFreeComponent {
-    val data: LibraryMetadata
+/** Represents the page's metadata section. */
+internal interface MetadataComponent : ContextFreeComponent {
+    val data: Params
+
+    data class Params(
+        val libraryMetadata: LibraryMetadata?,
+        val sourceLinkUrl: String?,
+    ) {
+        internal val sourceLink: Link?
+            get() = sourceLinkUrl?.let { DefaultLink(Link.Params(name = "View Source", url = it)) }
+    }
 }

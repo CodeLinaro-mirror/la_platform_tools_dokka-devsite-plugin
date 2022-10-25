@@ -113,7 +113,7 @@ internal class PackageDocumentableConverter(
                         extensionFunctions = extensionFunctions.await()
                     )
                 ),
-                libraryMetadataComponent = null
+                metadataComponent = null
             )
         )
     }

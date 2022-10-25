@@ -18,6 +18,7 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.pages.DevsitePage.Params
+import com.google.devsite.components.symbols.MetadataComponent
 import com.google.devsite.components.testing.NoopContextFreeComponent
 import com.google.devsite.renderer.Language
 import com.google.devsite.util.LibraryMetadata
@@ -35,7 +36,7 @@ class DefaultDevsitePageTest {
                 bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
                 content = NoopContextFreeComponent,
-                libraryMetadataComponent = null
+                metadataComponent = null
             )
         )
 
@@ -70,7 +71,7 @@ class DefaultDevsitePageTest {
                 bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
                 content = NoopContextFreeComponent,
-                libraryMetadataComponent = null
+                metadataComponent = null
             )
         )
 
@@ -98,24 +99,30 @@ class DefaultDevsitePageTest {
 
     @Test
     fun `Page with metadata renders correctly`() {
-        val metadata = LibraryMetadata(
+        val libraryMetadata = LibraryMetadata(
             groupId = "android.x",
             artifactId = "artifact",
             releaseNotesUrl = "https://d.android.com"
         )
-        val component = DefaultDevsitePage(
+        val metadataComponent = DefaultMetadataComponent(
+            MetadataComponent.Params(
+                libraryMetadata = libraryMetadata,
+                sourceLinkUrl = "https://cs.android.com"
+            )
+        )
+        val pageComponent = DefaultDevsitePage(
             Params(
                 displayLanguage = Language.KOTLIN,
                 path = "page.html",
                 bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
                 content = NoopContextFreeComponent,
-                libraryMetadataComponent = DefaultLibraryMetadataComponent(metadata)
+                metadataComponent = metadataComponent
             )
         )
 
         val output = createHTML().html {
-            component.render(this)
+            pageComponent.render(this)
         }.trim()
 
         // language=html
@@ -130,6 +137,7 @@ class DefaultDevsitePageTest {
   <body>
     <div id="metadata-info-block">
       <div id="maven-coordinates">Artifact: <a href="https://d.android.com">android.x:artifact</a></div>
+      <div id="source-link"><a href="https://cs.android.com">View Source</a></div>
     </div>
     <h1>Page Title</h1>
     <div>noop</div>
@@ -141,24 +149,30 @@ class DefaultDevsitePageTest {
 
     @Test
     fun `Page with metadata without URL renders correctly`() {
-        val metadata = LibraryMetadata(
+        val libraryMetadata = LibraryMetadata(
             groupId = "android.x",
             artifactId = "artifact",
             releaseNotesUrl = ""
         )
-        val component = DefaultDevsitePage(
+        val metadataComponent = DefaultMetadataComponent(
+            MetadataComponent.Params(
+                libraryMetadata = libraryMetadata,
+                sourceLinkUrl = null
+            )
+        )
+        val pageComponent = DefaultDevsitePage(
             Params(
                 displayLanguage = Language.KOTLIN,
                 path = "page.html",
                 bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
                 content = NoopContextFreeComponent,
-                libraryMetadataComponent = DefaultLibraryMetadataComponent(metadata)
+                metadataComponent = metadataComponent
             )
         )
 
         val output = createHTML().html {
-            component.render(this)
+            pageComponent.render(this)
         }.trim()
 
         // language=html

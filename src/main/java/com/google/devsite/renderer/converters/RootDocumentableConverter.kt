@@ -73,7 +73,7 @@ internal class RootDocumentableConverter(
                         componentClasses
                     )
                 ),
-                libraryMetadataComponent = null
+                metadataComponent = null
             )
 
         )
@@ -102,7 +102,7 @@ internal class RootDocumentableConverter(
                         componentPackages
                     )
                 ),
-                libraryMetadataComponent = null
+                metadataComponent = null
             )
         )
     }

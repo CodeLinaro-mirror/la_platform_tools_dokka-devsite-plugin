@@ -27,7 +27,7 @@ import com.google.devsite.components.impl.DefaultClassSignature
 import com.google.devsite.components.impl.DefaultClasslike
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultInheritedSymbols
-import com.google.devsite.components.impl.DefaultLibraryMetadataComponent
+import com.google.devsite.components.impl.DefaultMetadataComponent
 import com.google.devsite.components.impl.DefaultRelatedSymbols
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableTitle
@@ -38,7 +38,7 @@ import com.google.devsite.components.pages.Classlike.TitledList
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.ClassSignature
 import com.google.devsite.components.symbols.FunctionSignature
-import com.google.devsite.components.symbols.LibraryMetadataComponent
+import com.google.devsite.components.symbols.MetadataComponent
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSignature
@@ -295,9 +295,9 @@ internal class ClasslikeDocumentableConverter(
         val hierarchy = async { computeHierarchy() }
         val relatedSymbols = async { findRelatedSymbols() }
         val inheritedTypes = async { computeInheritedSymbols(inheritedAll) }
-        val libraryMetadataComponent = async {
+        val metadataComponent = async {
             if (docsHolder.showLibraryMetadata) {
-                getLibraryMetadata()
+                getMetadata()
             } else {
                 null
             }
@@ -443,7 +443,7 @@ internal class ClasslikeDocumentableConverter(
                         )
                     )
                 ),
-                libraryMetadataComponent = libraryMetadataComponent.await()
+                metadataComponent = metadataComponent.await()
             )
         )
     }
@@ -823,15 +823,17 @@ internal class ClasslikeDocumentableConverter(
         )
     }
 
-    private fun getLibraryMetadata(): LibraryMetadataComponent? {
+    private fun getMetadata(): MetadataComponent? {
         val path = getSourceFilePath(classlike) ?: return null
         val jsonLibraryMetadata = findMatchingJsonLibraryMetadata(path)
 
-        return if (jsonLibraryMetadata == null) {
-            null
-        } else {
-            DefaultLibraryMetadataComponent(jsonLibraryMetadata)
-        }
+        return DefaultMetadataComponent(
+            MetadataComponent.Params(
+                libraryMetadata = jsonLibraryMetadata,
+                // TODO: b/161899463 -- fill in the source link
+                sourceLinkUrl = null
+            )
+        )
     }
 
     /**

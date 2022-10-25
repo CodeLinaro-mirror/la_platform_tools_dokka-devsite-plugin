@@ -16,28 +16,37 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.symbols.LibraryMetadataComponent
-import com.google.devsite.util.LibraryMetadata
+import com.google.devsite.components.symbols.MetadataComponent
 import kotlinx.html.FlowContent
 import kotlinx.html.div
 import kotlinx.html.id
 
-/** Default implementation of a LibraryMetadata. */
-internal data class DefaultLibraryMetadataComponent(
-    override val data: LibraryMetadata
-) : LibraryMetadataComponent {
+/** Default implementation of a MetadataComponent. */
+internal data class DefaultMetadataComponent(
+    override val data: MetadataComponent.Params
+) : MetadataComponent {
 
     override fun render(into: FlowContent): Unit = into.run {
         // CSS ids are declared in internal codebase (cl/475581680)
         div {
             id = "metadata-info-block"
-            div {
-                id = "maven-coordinates"
-                +"Artifact: "
-                data.link.render(this)
+            data.libraryMetadata?.let {
+                div {
+                    id = "maven-coordinates"
+                    +"Artifact: "
+                    it.link.render(this)
+                }
+            }
+            data.sourceLink?.let {
+                div {
+                    id = "source-link"
+                    it.render(this)
+                }
             }
         }
     }
 
-    override fun toString() = "Metadata: Release Notes URL: " + data.link
+    override fun toString() = "Metadata:" +
+        data.libraryMetadata?.link?.let { " Release Notes URL: $it" }.orEmpty() +
+        data.sourceLinkUrl?.let { " Source Link URL: $it" }.orEmpty()
 }
