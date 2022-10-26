@@ -61,7 +61,6 @@ internal typealias PropertySummaryList = SummaryList<TypeSummaryItem<PropertySig
 internal typealias FunctionSummaryList = SummaryList<TypeSummaryItem<FunctionSignature>>
 internal typealias ConstructorSummaryList =
     SummaryList<SingleColumnSummaryItem<SymbolSummary<FunctionSignature>>>
-internal typealias LinkDescriptionSummaryList =
-    SummaryList<TwoPaneSummaryItem<Link, DescriptionComponent>>
-internal typealias DocsSummaryList =
-    SummaryList<TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>>
+internal typealias WithDescriptionList<T> = SummaryList<TwoPaneSummaryItem<T, DescriptionComponent>>
+internal typealias LinkDescriptionSummaryList = WithDescriptionList<Link>
+internal typealias DocsSummaryList = WithDescriptionList<ParameterComponent>

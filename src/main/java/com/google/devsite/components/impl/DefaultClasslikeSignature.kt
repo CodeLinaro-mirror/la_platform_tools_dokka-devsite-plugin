@@ -18,17 +18,20 @@ package com.google.devsite.components.impl
 
 import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.render
-import com.google.devsite.components.symbols.ClassSignature
+import com.google.devsite.components.symbols.ClasslikeSignature
 import com.google.devsite.joinMaybePrefix
 import com.google.devsite.renderer.Language
 import kotlinx.html.FlowContent
 
-internal data class DefaultClassSignature(
-    override val data: ClassSignature.Params
-) : ClassSignature {
+internal data class DefaultClasslikeSignature(
+    override val data: ClasslikeSignature.Params
+) : ClasslikeSignature {
 
     override fun render(into: FlowContent) = into.run {
-        +(data.modifiers + data.type + data.name).joinToString(separator = " ")
+        data.annotationComponents.render(into, ShouldBreak.YES, separator = "")
+
+        (data.modifiers + data.type).render(into, nbsp = false, terminator = { +" " })
+        data.name.render(into)
 
         data.typeParameters.render(into, ShouldBreak.NO, brackets = "<>")
 

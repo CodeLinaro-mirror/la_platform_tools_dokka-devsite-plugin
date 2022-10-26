@@ -19,6 +19,7 @@ package com.google.devsite.renderer.converters
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.DocsSummaryList
 import com.google.devsite.LinkDescriptionSummaryList
+import com.google.devsite.WithDescriptionList
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
@@ -26,8 +27,6 @@ import com.google.devsite.components.impl.UndocumentedSymbolDescriptionComponent
 import com.google.devsite.components.symbols.LambdaTypeProjectionComponent
 import com.google.devsite.components.symbols.TypeParameterComponent
 import com.google.devsite.components.symbols.TypeProjectionComponent
-import com.google.devsite.components.table.SummaryList
-import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.components.testing.NoopTypeProjectionComponent
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.generics
@@ -1027,8 +1026,7 @@ internal class DocTagConverterTest(
             |fun foo() = Unit
         """.render().documentation()
 
-        val paramSummary = documentation.last() as
-            SummaryList<TwoPaneSummaryItem<TypeProjectionComponent, DescriptionComponent>>
+        val paramSummary = documentation.last() as WithDescriptionList<TypeProjectionComponent>
         val returns = paramSummary.item()
 
         assertThat(paramSummary.title()).isEqualTo("Returns")
