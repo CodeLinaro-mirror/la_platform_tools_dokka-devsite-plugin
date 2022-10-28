@@ -2357,7 +2357,7 @@ internal class ClasslikeDocumentableConverterTest(
         val extFunctionMap = runBlocking { holder.extensionFunctionMap(displayLanguage) }
         val extPropertyMap = runBlocking { holder.extensionPropertyMap() }
         val converters = classlikes.map {
-            ClasslikeDocumentableConverter(
+            NonKmpClasslikeConverter(
                 displayLanguage,
                 it,
                 pathProvider,

@@ -1450,14 +1450,14 @@ internal class DocTagConverterTest(
             | }
         """.render()
         val (holder, pathProvider) = holderAndProvider(module)
-        val classConverter1 = ClasslikeDocumentableConverter(
+        val classConverter1 = NonKmpClasslikeConverter(
             displayLanguage,
             module.explicitClasslike("DynamicNavGraphBuilder"),
             pathProvider,
             holder
         )
         val documentedClass1 = runBlocking { classConverter1.classlike() }
-        val classConverter2 = ClasslikeDocumentableConverter(
+        val classConverter2 = NonKmpClasslikeConverter(
             displayLanguage,
             module.explicitClasslike("ParcelableArrayType"),
             pathProvider,

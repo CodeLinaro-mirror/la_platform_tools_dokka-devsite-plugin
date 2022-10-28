@@ -44,9 +44,11 @@ import com.google.devsite.components.symbols.MetadataComponent
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSignature
+import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.table.ClassHierarchy
 import com.google.devsite.components.table.InheritedSymbolsList
 import com.google.devsite.components.table.RelatedSymbols
+import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
@@ -83,7 +85,7 @@ import org.jetbrains.dokka.model.properties.WithExtraProperties
 import org.jetbrains.dokka.model.toAdditionalModifiers
 
 /** Converts documentable class-likes into the classlike component. */
-internal class ClasslikeDocumentableConverter(
+internal abstract class ClasslikeDocumentableConverter(
     private val displayLanguage: Language,
     private val classlike: DClasslike,
     private val pathProvider: FilePathProvider,
@@ -91,15 +93,24 @@ internal class ClasslikeDocumentableConverter(
     private val classExtensionFunctions: List<DFunction> = emptyList(),
     private val classExtensionProperties: List<DProperty> = emptyList()
 ) {
-    private val javadocConverter = DocTagConverter(displayLanguage, pathProvider, docsHolder)
-    private val functionConverter =
-        FunctionDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
-    private val propertyConverter =
-        PropertyDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
+    protected val javadocConverter = DocTagConverter(displayLanguage, pathProvider, docsHolder)
     private val paramConverter =
         ParameterDocumentableConverter(displayLanguage, pathProvider)
     private val enumConverter =
         EnumValueDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
+
+    protected abstract val functionToSummaryConverter:
+        (DFunction, ModifierHints) -> TypeSummaryItem<FunctionSignature>
+    protected abstract val functionToDetailConverter:
+        (DFunction, ModifierHints) -> SymbolDetail<FunctionSignature>
+    protected abstract val propertyToSummaryConverter:
+        (DProperty, ModifierHints) -> TypeSummaryItem<PropertySignature>
+    protected abstract val propertyToDetailConverter:
+        (DProperty, ModifierHints) -> SymbolDetail<PropertySignature>
+    protected abstract val constructorToSummaryConverter:
+        (DFunction) -> SingleColumnSummaryItem<SymbolSummary<FunctionSignature>>
+    protected abstract val constructorToDetailConverter:
+        (DFunction, ModifierHints) -> SymbolDetail<FunctionSignature>
 
     /** @return the classlike component */
     suspend fun classlike(): DevsitePage<Classlike> = coroutineScope {
@@ -497,7 +508,7 @@ internal class ClasslikeDocumentableConverter(
                 injectStatic = it.isJavaStaticMethod()
             )
             errorContextInjector(it) {
-                functionConverter.summary(it, modifierHints)
+                functionToSummaryConverter(it, modifierHints)
             }
         }
 
@@ -520,7 +531,7 @@ internal class ClasslikeDocumentableConverter(
         ConstructorSummaryList {
         val components = constructors.map {
             errorContextInjector(it) {
-                functionConverter.summaryForConstructor(it)
+                constructorToSummaryConverter(it)
             }
         }
 
@@ -549,7 +560,7 @@ internal class ClasslikeDocumentableConverter(
                 injectStatic = it.isJavaStaticMethod()
             )
             errorContextInjector(it) {
-                functionConverter.detail(it, modifierHints)
+                functionToDetailConverter(it, modifierHints)
             }
         }
     }
@@ -566,7 +577,7 @@ internal class ClasslikeDocumentableConverter(
         )
         return functions.map {
             errorContextInjector(it) {
-                functionConverter.detailForConstructor(it, modifierHints)
+                constructorToDetailConverter(it, modifierHints)
             }
         }
     }
@@ -599,7 +610,7 @@ internal class ClasslikeDocumentableConverter(
                 injectStatic = it.isJavaStaticField()
             )
             errorContextInjector(it) {
-                propertyConverter.summary(it, modifierHints)
+                propertyToSummaryConverter(it, modifierHints)
             }
         }
 
@@ -632,7 +643,7 @@ internal class ClasslikeDocumentableConverter(
                 injectStatic = it.isJavaStaticField()
             )
             errorContextInjector(it) {
-                propertyConverter.detail(it, modifierHints)
+                propertyToDetailConverter(it, modifierHints)
             }
         }
     }

@@ -19,7 +19,7 @@ package com.google.devsite.renderer.impl
 import com.google.devsite.components.impl.DefaultRedirectPage
 import com.google.devsite.components.pages.RedirectPage
 import com.google.devsite.renderer.Language
-import com.google.devsite.renderer.converters.ClasslikeDocumentableConverter
+import com.google.devsite.renderer.converters.NonKmpClasslikeConverter
 import com.google.devsite.renderer.converters.PackageDocumentableConverter
 import com.google.devsite.renderer.converters.isSynthetic
 import com.google.devsite.renderer.converters.name
@@ -81,7 +81,7 @@ internal class PackageRenderer(
             return
         }
         val converter =
-            ClasslikeDocumentableConverter(
+            NonKmpClasslikeConverter(
                 displayLanguage,
                 classlikeDoc,
                 pathProvider,
