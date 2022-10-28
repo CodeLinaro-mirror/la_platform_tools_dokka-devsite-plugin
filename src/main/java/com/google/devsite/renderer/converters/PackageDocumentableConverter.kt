@@ -50,7 +50,7 @@ internal class PackageDocumentableConverter(
         PropertyDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
 
     /** @return the root component for the package summary page */
-    suspend fun summaryPage(): DevsitePage = coroutineScope {
+    suspend fun summaryPage(): DevsitePage<PackageSummary> = coroutineScope {
         val interfaces = async {
             javadocConverter.docsToSummary(docsHolder.interfacesFor(dPackage))
         }

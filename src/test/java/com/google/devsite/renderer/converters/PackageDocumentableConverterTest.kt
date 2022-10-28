@@ -17,9 +17,7 @@
 package com.google.devsite.renderer.converters
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.pages.PackageSummary
 import com.google.devsite.renderer.Language
-import com.google.devsite.renderer.converters.testing.content
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
@@ -78,7 +76,7 @@ internal class PackageDocumentableConverterTest(
             |interface ImAnInterface
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val interfacz = summary.data.interfaces.item()
 
         assertThat(interfacz.link().name).isEqualTo("ImAnInterface")
@@ -92,7 +90,7 @@ internal class PackageDocumentableConverterTest(
             |interface A
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val interfaces = summary.data.interfaces.items(2)
 
         assertThat(interfaces.first().link().name).isEqualTo("A")
@@ -105,7 +103,7 @@ internal class PackageDocumentableConverterTest(
             |class ImAClass
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val clazz = summary.data.classes.item()
 
         assertThat(clazz.link().name).isEqualTo("ImAClass")
@@ -119,7 +117,7 @@ internal class PackageDocumentableConverterTest(
             |class A
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val classes = summary.data.classes.items(2)
 
         assertThat(classes.first().link().name).isEqualTo("A")
@@ -132,7 +130,7 @@ internal class PackageDocumentableConverterTest(
             |class Outer { class Inner }
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val inner = summary.data.classes.items(2).last()
 
         assertThat(inner.link().name).isEqualTo("Outer.Inner")
@@ -145,7 +143,7 @@ internal class PackageDocumentableConverterTest(
             |enum class ImAnEnum
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val enum = summary.data.enums.item()
 
         assertThat(enum.link().name).isEqualTo("ImAnEnum")
@@ -159,7 +157,7 @@ internal class PackageDocumentableConverterTest(
             |enum class A
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val enums = summary.data.enums.items(2)
 
         assertThat(enums.first().link().name).isEqualTo("A")
@@ -172,7 +170,7 @@ internal class PackageDocumentableConverterTest(
             |class ImAnException : RuntimeException()
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val exception = summary.data.exceptions.item()
 
         assertThat(exception.link().name).isEqualTo("ImAnException")
@@ -186,7 +184,7 @@ internal class PackageDocumentableConverterTest(
             |class A : RuntimeException()
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val classes = summary.data.classes.items(0)
         val exceptions = summary.data.exceptions.items(2)
 
@@ -200,7 +198,7 @@ internal class PackageDocumentableConverterTest(
             |annotation class ImAnAnnotation
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val annotation = summary.data.annotations.item()
 
         assertThat(annotation.link().name).isEqualTo("ImAnAnnotation")
@@ -214,7 +212,7 @@ internal class PackageDocumentableConverterTest(
             |annotation class A
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val classes = summary.data.annotations.items(2)
 
         assertThat(classes.first().link().name).isEqualTo("A")
@@ -227,7 +225,7 @@ internal class PackageDocumentableConverterTest(
             |typealias ImATypeAlias = String
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val annotation = summary.data.typeAliases.item()
 
         assertThat(annotation.link().name).isEqualTo("ImATypeAlias")
@@ -241,7 +239,7 @@ internal class PackageDocumentableConverterTest(
             |typealias A = String
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val classes = summary.data.typeAliases.items(2)
 
         assertThat(classes.first().link().name).isEqualTo("A")
@@ -254,7 +252,7 @@ internal class PackageDocumentableConverterTest(
             |fun foo()
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val topLevels = summary.data.topLevelFunctionsSummary
         val extensions = summary.data.extensionFunctionsSummary
 
@@ -269,7 +267,7 @@ internal class PackageDocumentableConverterTest(
             |fun foo()
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val classes = summary.data.classes.items()
 
         javaOnly {
@@ -341,7 +339,7 @@ internal class PackageDocumentableConverterTest(
             |fun a() = Unit
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val topLevels = summary.data.topLevelFunctionsSummary.items(2)
 
         assertThat(topLevels.first().data.description.name()).isEqualTo("a")
@@ -354,7 +352,7 @@ internal class PackageDocumentableConverterTest(
             |fun String.foo()
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val topLevels = summary.data.topLevelFunctionsSummary
         val extensions = summary.data.extensionFunctionsSummary
 
@@ -370,7 +368,7 @@ internal class PackageDocumentableConverterTest(
             |fun String.a() = Unit
         """.render().packagePage()
 
-        val summary = page.content<PackageSummary>()
+        val summary = page.data.content
         val extensions = summary.data.extensionFunctionsSummary.items(2)
 
         assertThat(extensions.first().data.description.name()).isEqualTo("a")
@@ -386,7 +384,7 @@ internal class PackageDocumentableConverterTest(
             |class Bar {
             |    companion object
             |}
-        """.render().packagePage().content<PackageSummary>()
+        """.render().packagePage().data.content
 
         assertThat("FooCompanion" in packageSummary.data.classes.items().map { it.name() })
 

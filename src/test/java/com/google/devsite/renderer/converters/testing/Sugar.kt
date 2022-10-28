@@ -25,7 +25,6 @@ import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
 import com.google.devsite.components.pages.ClassIndex
 import com.google.devsite.components.pages.Classlike
-import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.TableOfContents
 import com.google.devsite.components.symbols.AnnotationComponent
 import com.google.devsite.components.symbols.ClasslikeSignature
@@ -57,8 +56,6 @@ internal fun TableOfContents.items(size: Int?) = data.packages.items(size)
 internal fun TableOfContents.item() = items(1).single()
 internal fun ClassIndex.items(size: Int?) = data.alphabetizedClasses.entries.items(size)
 internal fun ClassIndex.item() = items(1).single()
-
-internal fun <T> DevsitePage.content(): T = data.content as T
 
 internal fun <T : ContextFreeComponent, V : ContextFreeComponent>
 SummaryList<TwoPaneSummaryItem<T, V>>.item() = items(1).single()

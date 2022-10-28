@@ -20,6 +20,7 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.DevsitePlugin
 import com.google.devsite.TypeSummaryItem
 import com.google.devsite.components.pages.DevsitePage
+import com.google.devsite.components.pages.PackageSummary
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.joinMaybePrefix
@@ -294,7 +295,7 @@ internal abstract class ConverterTestBase(
         }
     }
 
-    protected fun DModule.packagePage(): DevsitePage {
+    protected fun DModule.packagePage(): DevsitePage<PackageSummary> {
         val (holder, pathProvider) = holderAndProvider(this)
         val converter =
             PackageDocumentableConverter(

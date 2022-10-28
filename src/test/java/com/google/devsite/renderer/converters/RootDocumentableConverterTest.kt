@@ -22,7 +22,6 @@ import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.PackageIndex
 import com.google.devsite.components.pages.TableOfContents
 import com.google.devsite.renderer.Language
-import com.google.devsite.renderer.converters.testing.content
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
@@ -41,7 +40,7 @@ internal class RootDocumentableConverterTest(
     fun `Class index creates components with correct page title`() {
         val page = """
             |class Foo
-        """.render().page(forClasses = true)
+        """.render().indexPageForClasses()
 
         assertThat(page.data.title).isEqualTo("Class Index")
     }
@@ -50,7 +49,7 @@ internal class RootDocumentableConverterTest(
     fun `Class index creates components with correct path`() {
         val page = """
             |class Foo
-        """.render().page(forClasses = true)
+        """.render().indexPageForClasses()
 
         assertThat(page.data.path).isEqualTo("androidx/classes.html")
     }
@@ -59,7 +58,7 @@ internal class RootDocumentableConverterTest(
     fun `Class index creates components with correct book path`() {
         val page = """
             |class Foo
-        """.render().page(forClasses = true)
+        """.render().indexPageForClasses()
 
         assertPath(page.data.bookPath, "androidx/_book.yaml")
     }
@@ -68,9 +67,9 @@ internal class RootDocumentableConverterTest(
     fun `Class index creates components with correct packages link`() {
         val page = """
             |class Foo
-        """.render().page(forClasses = true)
+        """.render().indexPageForClasses()
 
-        val classIndex = page.content<ClassIndex>()
+        val classIndex = page.data.content
 
         assertPath(classIndex.data.packagesUrl, "androidx/packages.html")
     }
@@ -79,9 +78,9 @@ internal class RootDocumentableConverterTest(
     fun `Class index creates components for single class`() {
         val page = """
             |class Foo
-        """.render().page(forClasses = true)
+        """.render().indexPageForClasses()
 
-        val classIndex = page.content<ClassIndex>()
+        val classIndex = page.data.content
         val (letter, summary) = classIndex.item()
 
         assertThat(letter).isEqualTo('F')
@@ -93,9 +92,9 @@ internal class RootDocumentableConverterTest(
     fun `Class index creates components for nested class`() {
         val page = """
             |class Outer { class Inner }
-        """.render().page(forClasses = true)
+        """.render().indexPageForClasses()
 
-        val classIndex = page.content<ClassIndex>()
+        val classIndex = page.data.content
         val (letter, summary) = classIndex.item()
         val outer = summary.items(2).first()
         val inner = summary.items(2).last()
@@ -111,9 +110,9 @@ internal class RootDocumentableConverterTest(
     fun `Class index creates components for enum`() {
         val page = """
             |enum class Choice { A, B }
-        """.render().page(forClasses = true)
+        """.render().indexPageForClasses()
 
-        val classIndex = page.content<ClassIndex>()
+        val classIndex = page.data.content
         val (letter, summary) = classIndex.item()
 
         assertThat(letter).isEqualTo('C')
@@ -127,9 +126,9 @@ internal class RootDocumentableConverterTest(
             |class Fo
             |class Foo
             |class Fooo
-        """.render().page(forClasses = true)
+        """.render().indexPageForClasses()
 
-        val classIndex = page.content<ClassIndex>()
+        val classIndex = page.data.content
         val (letter, summary) = classIndex.item()
 
         assertThat(letter).isEqualTo('F')
@@ -148,9 +147,9 @@ internal class RootDocumentableConverterTest(
         val page = """
             |class AB
             |class AA
-        """.render().page(forClasses = true)
+        """.render().indexPageForClasses()
 
-        val classIndex = page.content<ClassIndex>()
+        val classIndex = page.data.content
         val classes = classIndex.item().value.items(2)
 
         assertThat(classes.first().link().name).isEqualTo("AA")
@@ -172,9 +171,9 @@ internal class RootDocumentableConverterTest(
                 |
                 |class AA
             """.trimMargin()
-        ).render().page(forClasses = true)
+        ).render().indexPageForClasses()
 
-        val classIndex = page.content<ClassIndex>()
+        val classIndex = page.data.content
         val classes = classIndex.item().value.items(2)
 
         assertThat(classes.first().link().name).isEqualTo("AA")
@@ -186,9 +185,9 @@ internal class RootDocumentableConverterTest(
         val page = """
             |class B
             |class A
-        """.render().page(forClasses = true)
+        """.render().indexPageForClasses()
 
-        val classIndex = page.content<ClassIndex>()
+        val classIndex = page.data.content
         val classes = classIndex.items(2)
 
         assertThat(classes.first().key).isEqualTo('A')
@@ -200,9 +199,9 @@ internal class RootDocumentableConverterTest(
         val page = """
             |class Foo
             |class Bar
-        """.render().page(forClasses = true)
+        """.render().indexPageForClasses()
 
-        val classIndex = page.content<ClassIndex>()
+        val classIndex = page.data.content
         val (fooLetter, fooSummary) = classIndex.items(2).last()
         val (barLetter, barSummary) = classIndex.items(2).first()
 
@@ -218,7 +217,7 @@ internal class RootDocumentableConverterTest(
     fun `Package index creates components with correct page title`() {
         val page = """
             |class Foo
-        """.render().page(forPackages = true)
+        """.render().indexPageForPackages()
 
         assertThat(page.data.title).isEqualTo("Package Index")
     }
@@ -227,7 +226,7 @@ internal class RootDocumentableConverterTest(
     fun `Package index creates components with correct path`() {
         val page = """
             |class Foo
-        """.render().page(forPackages = true)
+        """.render().indexPageForPackages()
 
         assertThat(page.data.path).isEqualTo("androidx/packages.html")
     }
@@ -236,7 +235,7 @@ internal class RootDocumentableConverterTest(
     fun `Package index creates components with correct book path`() {
         val page = """
             |class Foo
-        """.render().page(forPackages = true)
+        """.render().indexPageForPackages()
 
         assertPath(page.data.bookPath, "androidx/_book.yaml")
     }
@@ -245,9 +244,9 @@ internal class RootDocumentableConverterTest(
     fun `Package index creates components with correct classes link`() {
         val page = """
             |class Foo
-        """.render().page(forPackages = true)
+        """.render().indexPageForPackages()
 
-        val packageIndex = page.content<PackageIndex>()
+        val packageIndex = page.data.content
 
         assertPath(packageIndex.data.classesUrl, "androidx/classes.html")
     }
@@ -261,9 +260,9 @@ internal class RootDocumentableConverterTest(
                 |
                 |class Foo
             """.trimMargin()
-        ).render().page(forPackages = true)
+        ).render().indexPageForPackages()
 
-        val packageIndex = page.content<PackageIndex>()
+        val packageIndex = page.data.content
         val packagez = packageIndex.data.packages.item()
 
         assertThat(packagez.link().name).isEqualTo("androidx.example")
@@ -291,9 +290,9 @@ internal class RootDocumentableConverterTest(
                 |
                 |class C
             """.trimMargin()
-        ).render().page(forPackages = true)
+        ).render().indexPageForPackages()
 
-        val packageIndex = page.content<PackageIndex>()
+        val packageIndex = page.data.content
         val packages = packageIndex.data.packages.items(3)
 
         val expectedPackages = listOf("a", "b", "c")
@@ -318,9 +317,9 @@ internal class RootDocumentableConverterTest(
                 |
                 |class A
             """.trimMargin()
-        ).render().page(forPackages = true)
+        ).render().indexPageForPackages()
 
-        val packageIndex = page.content<PackageIndex>()
+        val packageIndex = page.data.content
         val packages = packageIndex.data.packages.items(2)
 
         assertThat(packages.first().link().name).isEqualTo("a")
@@ -409,22 +408,24 @@ internal class RootDocumentableConverterTest(
         assertThat(tocPackage.data.classes.size).isEqualTo(2)
     }
 
-    private fun DModule.page(
-        forClasses: Boolean = false,
-        forPackages: Boolean = false
-    ): DevsitePage {
-        check(!(forClasses && forPackages)) { "Must choose 1." }
+    private fun DModule.indexPageForClasses(): DevsitePage<ClassIndex> {
         val (holder, pathProvider) = holderAndProvider(this)
         val converter = RootDocumentableConverter(
             displayLanguage,
             pathProvider,
             holder
         )
-        return when {
-            forClasses -> runBlocking { converter.classesPage() }
-            forPackages -> runBlocking { converter.packagesPage() }
-            else -> error("Must choose 1.")
-        }
+        return runBlocking { converter.classesPage() }
+    }
+
+    private fun DModule.indexPageForPackages(): DevsitePage<PackageIndex> {
+        val (holder, pathProvider) = holderAndProvider(this)
+        val converter = RootDocumentableConverter(
+            displayLanguage,
+            pathProvider,
+            holder
+        )
+        return runBlocking { converter.packagesPage() }
     }
 
     private fun DModule.toc(): TableOfContents {

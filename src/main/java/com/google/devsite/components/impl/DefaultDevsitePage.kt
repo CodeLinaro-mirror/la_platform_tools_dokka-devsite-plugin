@@ -16,6 +16,7 @@
 
 package com.google.devsite.components.impl
 
+import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.pages.DevsitePage
 import kotlinx.html.HTML
 import kotlinx.html.body
@@ -25,9 +26,9 @@ import kotlinx.html.title
 import kotlinx.html.unsafe
 
 /** Default implementation of the root component for devsite. */
-internal data class DefaultDevsitePage(
-    override val data: DevsitePage.Params
-) : DevsitePage {
+internal data class DefaultDevsitePage<T : ContextFreeComponent>(
+    override val data: DevsitePage.Params<T>
+) : DevsitePage<T> {
 
     override fun render(into: HTML) = into.run {
         attributes["devsite"] = "true"

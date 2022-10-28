@@ -23,15 +23,15 @@ import com.google.devsite.renderer.Language
 import kotlinx.html.HTML
 
 /** Represents any devsite page and should be used as the root component. */
-internal interface DevsitePage : HtmlComponent<HTML> {
-    val data: Params
+internal interface DevsitePage<T : ContextFreeComponent> : HtmlComponent<HTML> {
+    val data: Params<T>
 
-    data class Params(
+    data class Params<T : ContextFreeComponent>(
         val displayLanguage: Language,
         val path: String,
         val bookPath: String,
         val title: String,
-        val content: ContextFreeComponent,
+        val content: T,
         val metadataComponent: MetadataComponent?
     )
 }

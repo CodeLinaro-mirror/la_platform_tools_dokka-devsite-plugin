@@ -30,7 +30,6 @@ import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSignature
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.companionName
-import com.google.devsite.renderer.converters.testing.content
 import com.google.devsite.renderer.converters.testing.description
 import com.google.devsite.renderer.converters.testing.from
 import com.google.devsite.renderer.converters.testing.fullName
@@ -96,7 +95,7 @@ internal class ClasslikeDocumentableConverterTest(
             |interface Foo
         """.render().page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
 
         assertThat(
             classlike.allSummarySections.filter { it.hasContent() } +
@@ -113,7 +112,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render().page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
         val summary = classlike.data.publicFunctionsSummary
 
         assertThat(summary.single().name()).isEqualTo("foo")
@@ -131,7 +130,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render().page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
         val summary = classlike.data.publicFunctionsSummary
 
         val (fun1, fun2) = summary.items(2)
@@ -160,7 +159,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render().page()
 
-        val propertiesSummary = documentation.content<Classlike>().data.publicPropertiesSummary
+        val propertiesSummary = documentation.data.content.data.publicPropertiesSummary
         val props = propertiesSummary.items(3)
 
         for ((i, prop) in props.withIndex()) {
@@ -179,7 +178,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render().page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
         val summary = classlike.data.publicFunctionsSummary
 
         javaOnly {
@@ -198,7 +197,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render().page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
         val summary = classlike.data.protectedFunctionsSummary
 
         assertThat(summary.item().description.name()).isEqualTo("foo")
@@ -212,7 +211,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render().page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
         val summary = classlike.data.publicPropertiesSummary
 
         assertThat(summary.single().description.name()).isEqualTo("foo")
@@ -226,7 +225,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render().page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
         val summary = classlike.data.protectedPropertiesSummary
 
         assertThat(summary.item().description.name()).isEqualTo("foo")
@@ -238,7 +237,7 @@ internal class ClasslikeDocumentableConverterTest(
             |class Foo
         """.render().page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
         val summary = classlike.data.publicConstructorsSummary
 
         assertThat(summary.constructor().name()).isEqualTo("Foo")
@@ -264,7 +263,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.render()
 
         assertThat(module.packages.single().classlikes.map { it.name }).containsExactly("Visible")
-        val visible = module.page("Visible").content<Classlike>()
+        val visible = module.page("Visible").data.content
 
         assertThat(visible.data.publicFunctionsSummary.map { it.name() })
             .containsExactly("show")
@@ -278,12 +277,12 @@ internal class ClasslikeDocumentableConverterTest(
         |class Foo {
         |   constructor() {}
         |}
-        """.render().page().content<Classlike>()
+        """.render().page().data.content
         val classlikeJ = """
         |public class Foo {
         |   public Foo() {}
         |}
-        """.render(java = true).page().content<Classlike>()
+        """.render(java = true).page().data.content
 
         for (classlike in listOf(classlikeJ, classlikeK)) {
             // Constructor summaries are SingleColumnSummaryItems containing SymbolSummaries
@@ -304,7 +303,7 @@ internal class ClasslikeDocumentableConverterTest(
             |open class Foo protected constructor()
         """.render().page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
         val summary = classlike.data.protectedConstructorsSummary
 
         assertThat(summary.constructor().name()).isEqualTo("Foo")
@@ -318,7 +317,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render().page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
         val summary = classlike.data.nestedTypesSummary
         assertThat(summary.item().data.title.fullName()).isEqualTo("Foo.Bar")
     }
@@ -333,8 +332,8 @@ internal class ClasslikeDocumentableConverterTest(
             |    companion object
             |}
         """.render()
-        val foo = module.page("Foo").content<Classlike>()
-        val bar = module.page("Bar").content<Classlike>()
+        val foo = module.page("Foo").data.content
+        val bar = module.page("Bar").data.content
 
         kotlinOnly {
             assertThat(foo.data.nestedTypesSummary.items()).hasSize(1)
@@ -355,7 +354,7 @@ internal class ClasslikeDocumentableConverterTest(
             |open class A : Foo
         """.render().page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
         val subclasses = classlike.data.relatedSymbols.data.directSubclasses.items(2)
 
         assertThat(subclasses.first().data.name).isEqualTo("A")
@@ -371,7 +370,7 @@ internal class ClasslikeDocumentableConverterTest(
             |open class A : B
         """.render().page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
         val subclasses = classlike.data.relatedSymbols.data.indirectSubclasses.items(2)
 
         assertThat(subclasses.first().data.name).isEqualTo("A")
@@ -384,7 +383,7 @@ internal class ClasslikeDocumentableConverterTest(
             |class Foo
         """.render().page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
         val parents = classlike.data.hierarchy.data.parents
 
         assertThat(parents).isEmpty()
@@ -397,7 +396,7 @@ internal class ClasslikeDocumentableConverterTest(
             |class Foo : Parent
         """.render().page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
         val parents = classlike.data.hierarchy.data.parents.items(3).toList()
 
         javaOnly { assertThat(parents[0].data.name).isEqualTo("java.lang.Object") }
@@ -415,7 +414,7 @@ internal class ClasslikeDocumentableConverterTest(
             |class Foo : C
         """.render().page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
         val parents = classlike.data.hierarchy.data.parents.items(5).toList()
 
         javaOnly { assertThat(parents[0].data.name).isEqualTo("java.lang.Object") }
@@ -441,7 +440,7 @@ internal class ClasslikeDocumentableConverterTest(
 
         for (page in listOf(pageJ, pageK)) {
             val prefix = if (page == pageK) "" else "Test."
-            val classSignature = page.content<Classlike>().data.signature.data
+            val classSignature = page.data.content.data.signature.data
             assertThat(classSignature.type).isEqualTo("class")
             assertThat(classSignature.extends.single().data.name).isEqualTo("${prefix}B")
             assertThat(classSignature.implements.single().data.name).isEqualTo("${prefix}A")
@@ -453,10 +452,10 @@ internal class ClasslikeDocumentableConverterTest(
     fun `Class signature and hierarchy can contain generics in 4x`() {
         val pageK = """
             |class Foo : List<String>
-        """.render().page("Foo").content<Classlike>()
+        """.render().page("Foo").data.content
         val pageJ = """
             |public class Foo extends List<String> {}
-        """.render(java = true).page("Foo").content<Classlike>()
+        """.render(java = true).page("Foo").data.content
 
         for (page in listOf(pageJ, pageK)) {
             val classSignature = page.data.signature.data
@@ -486,8 +485,8 @@ internal class ClasslikeDocumentableConverterTest(
         val pageExternalJ = """
             |public class JavaArgsLazy implements Lazy {}
         """.renderJava(imports = listOf("kotlin.LazyKt.Lazy")).page(name = "JavaArgsLazy")
-        val signatureK = pageExternalK.content<Classlike>().data.signature
-        val signatureJ = pageExternalJ.content<Classlike>().data.signature
+        val signatureK = pageExternalK.data.content.data.signature
+        val signatureJ = pageExternalJ.data.content.data.signature
         assertThat(
             signatureK.data.implements.map { it.data.name }
         ).isEqualTo(listOf("Lazy"))
@@ -504,11 +503,11 @@ internal class ClasslikeDocumentableConverterTest(
             |import java.util.AbstractList
             |public class MyList() : AbstractList<Int>()
         """.render().page(name = "MyList")
-        val signatureK = pageExternalK.content<Classlike>().data.signature
+        val signatureK = pageExternalK.data.content.data.signature
         val pageExternalJ = """
             |public class MyList extends AbstractList<String> {}
         """.renderJava(imports = listOf("java.util.*")).page(name = "MyList")
-        val signatureJ = pageExternalJ.content<Classlike>().data.signature
+        val signatureJ = pageExternalJ.data.content.data.signature
         for (signature in listOf(signatureJ, signatureK)) {
             assertThat(
                 signature.data.extends.map { it.data.name }
@@ -540,7 +539,7 @@ internal class ClasslikeDocumentableConverterTest(
             |    constructor(foo: String) { this.foo = foo }
             |}
         """.render()
-        val page = moduleSecondary.page("BenchmarkState").content<Classlike>()
+        val page = moduleSecondary.page("BenchmarkState").data.content
         assertThat(page.data.publicConstructorsSummary.size).isEqualTo(0)
     }
 
@@ -592,7 +591,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.render(java = true).page(name = "AnEnumType")
 
         for (page in listOf(pageK, pageJ)) {
-            val classlike = page.content<Classlike>()
+            val classlike = page.data.content
             val signature = classlike.data.signature.data
             val description = (classlike.data.description.first() as DescriptionComponent)
 
@@ -661,9 +660,9 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render(java = true) // Java {@inheritdoc} does not support classes & properties
         for (pages in listOf(pagesK, pagesJ)) {
-            val fooClass = pages.page("foo").content<Classlike>()
-            val barClass = pages.page("bar").content<Classlike>()
-            val bazClass = pages.page("baz").content<Classlike>()
+            val fooClass = pages.page("foo").data.content
+            val barClass = pages.page("bar").data.content
+            val bazClass = pages.page("baz").data.content
 
             // Function description inheritance does not work properly
             val fooDoit = fooClass.data.publicFunctionsSummary.single()
@@ -695,7 +694,7 @@ internal class ClasslikeDocumentableConverterTest(
                 assertThat(bazDemocracy.data.description.text()).isEqualTo("KotOR")
 
                 // Using {@inheritDoc} in kotlin is wrong
-                val mazClass = pages.page("maz").content<Classlike>()
+                val mazClass = pages.page("maz").data.content
                 val mazDoit = mazClass.data.publicFunctionsSummary.single()
                 val mazDoitDocs = mazDoit.data.description.data.description.text()
                 assertThat(mazDoitDocs).isNotEqualTo("dew it")
@@ -732,7 +731,7 @@ internal class ClasslikeDocumentableConverterTest(
             |class Baz(override val param1: String, override val property1: Int, param2: String, override val property2: Int): Supclaz(param1, property1), Interfaz(param2, property2)
             |class Bar(override val param3: String, override val property3: Int): Sealclaz(param3, property3)
         """.render()
-        val fooClass = pages.page("Foo").content<Classlike>()
+        val fooClass = pages.page("Foo").data.content
         val fromSupclaz = fooClass.data.inheritedProperties.from("androidx.example.Supclaz")!!.value
         val fromInterfaz =
             fooClass.data.inheritedProperties.from("androidx.example.Interfaz")!!.value
@@ -756,7 +755,7 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(param2docs.text()).isEqualTo("param2_docs")
         */
 
-        val bazClass = pages.page("Baz").content<Classlike>()
+        val bazClass = pages.page("Baz").data.content
         val zpparam1docs = bazClass.propertySymbol("param1")!!.data.description
         val zprop1docs = bazClass.propertySymbol("property1")!!.data.description
         val zprop2docs = bazClass.propertySymbol("property2")!!.data.description
@@ -779,7 +778,7 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(zparam1doc.text()).isEqualTo("override_param1_docs")
         assertThat(zparam2doc.text()).isEqualTo("override_param2_docs")
 
-        val barClass = pages.page("Bar").content<Classlike>()
+        val barClass = pages.page("Bar").data.content
         // TODO: patch upstream dokka to support inheriting documentation on hidden components
         // val pparam3docs = barClass.propertySymbol("param3").data.description
         // assertThat(pparam3docs.text()).isEqualTo("param3_docs")
@@ -841,7 +840,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render(java = true).page("baz")
         for (page in listOf(pageJ, pageK)) {
-            val doit = page.content<Classlike>().data.publicFunctionsSummary.single()
+            val doit = page.data.content.data.publicFunctionsSummary.single()
             assertThat(doit.description.data.description.text()).isEqualTo("dew it")
         }
     }
@@ -858,7 +857,7 @@ internal class ClasslikeDocumentableConverterTest(
             |    fun b(input: Int) {}
             |}
             |class Child() : Parent {}
-        """.render().page("Child").content<Classlike>()
+        """.render().page("Child").data.content
         val inheritedSummary = childClass.data.inheritedFunctions.data.inheritedSymbolSummaries
         val inheritedMethods = inheritedSummary.entries.single().value.data.items
         val inheritedMethodSignatures = inheritedMethods.map { it.data.description.data.signature }
@@ -921,7 +920,7 @@ internal class ClasslikeDocumentableConverterTest(
             assertThat(getterDri.fullName).isEqualTo("androidx.example.Test.Parent")
 
             // This is a test of dackka
-            val childPage = module.page("Child").content<Classlike>()
+            val childPage = module.page("Child").data.content
 
             // TODO: `var b` is not `@JvmField`; should be missing. This is also b/241259955
             val inheritedProps = childPage.data.inheritedProperties.data.inheritedSymbolSummaries
@@ -995,7 +994,7 @@ internal class ClasslikeDocumentableConverterTest(
             }
 
             // This is a test of the dackka Components tree
-            val childPage = module.page("Child").content<Classlike>()
+            val childPage = module.page("Child").data.content
 
             val inheritedFuns = childPage.data.inheritedFunctions.from(throwableDRI)!!.value
             val inheritedProps = childPage.data.inheritedProperties.from(throwableDRI)!!.value
@@ -1023,7 +1022,7 @@ internal class ClasslikeDocumentableConverterTest(
             |    fun parentC(): {}
             |}
             |class Child: Parent()
-        """.render().page("Child").content<Classlike>()
+        """.render().page("Child").data.content
 
         val categoriesNames =
             listOf(page.data.inheritedFunctions.title(), page.data.inheritedProperties.title())
@@ -1069,7 +1068,7 @@ internal class ClasslikeDocumentableConverterTest(
         val page = """
             |class Foo<T: Number, U>() {}
         """.render().page()
-        val typeParams = page.content<Classlike>().data.signature.data.typeParameters
+        val typeParams = page.data.content.data.signature.data.typeParameters
         assertThat(typeParams.first().data.name).isEqualTo("T")
         assertThat(typeParams.first().projectionName()).isEqualTo("Number")
         assertThat(typeParams.last().data.name).isEqualTo("U")
@@ -1080,7 +1079,7 @@ internal class ClasslikeDocumentableConverterTest(
     @Test
     fun `Class component creates all symbols in the correct order`() {
         val page = "class Foo {}".render().page()
-        val symbolTypes = page.content<Classlike>().allDetailsSections.map { it.title }
+        val symbolTypes = page.data.content.allDetailsSections.map { it.title }
 
         javaOnly {
             assertThat(symbolTypes).containsExactlyElementsIn(
@@ -1133,7 +1132,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render()
 
-        val classlike = module.page("Foo").content<Classlike>()
+        val classlike = module.page("Foo").data.content
 
         kotlinOnly {
             assertThat(classlike.data.publicCompanionFunctionsSummary.item().name())
@@ -1145,7 +1144,7 @@ internal class ClasslikeDocumentableConverterTest(
             assertThat(classlike.data.publicCompanionFunctionsSummary).isEmpty()
             assertThat(classlike.data.publicCompanionPropertiesSummary).isEmpty()
             assertThat(classlike.data.nestedTypesSummary.item().name()).isEqualTo("Foo.Companion")
-            val companionClasslike = module.page { this.companionFor("Foo") }.content<Classlike>()
+            val companionClasslike = module.page { this.companionFor("Foo") }.data.content
             val barMethod = companionClasslike.data.publicFunctionsSummary.single()
             assertThat(barMethod.name()).isEqualTo("bar")
             val bazMethod = companionClasslike.data.protectedFunctionsSummary.single()
@@ -1166,7 +1165,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render()
 
-        val classlike = module.page("Foo").content<Classlike>()
+        val classlike = module.page("Foo").data.content
 
         kotlinOnly {
             assertThat(classlike.data.publicCompanionPropertiesSummary.item().name())
@@ -1179,7 +1178,7 @@ internal class ClasslikeDocumentableConverterTest(
             assertThat(classlike.data.publicCompanionFunctionsSummary).isEmpty()
             assertThat(classlike.data.publicCompanionPropertiesSummary).isEmpty()
             assertThat(classlike.data.nestedTypesSummary.item().name()).isEqualTo("Foo.Companion")
-            val companionClasslike = module.page { this.companionFor("Foo") }.content<Classlike>()
+            val companionClasslike = module.page { this.companionFor("Foo") }.data.content
             val barProp = companionClasslike.data.publicPropertiesSummary.single()
             assertThat(barProp.name()).isEqualTo("bar")
             val bazProp = companionClasslike.data.protectedPropertiesSummary.single()
@@ -1197,7 +1196,7 @@ internal class ClasslikeDocumentableConverterTest(
             |  const val baz = "baz"
             |}
         """.render()
-        val classlikeK = moduleK.page("Foo").content<Classlike>()
+        val classlikeK = moduleK.page("Foo").data.content
 
         val moduleJ = """${javaHeader("Foo")}
             |public class Foo {
@@ -1206,7 +1205,7 @@ internal class ClasslikeDocumentableConverterTest(
             |  public static Foo INSTANCE = new Foo()
             |}
         """.renderWithoutLanguageHeader()
-        val classlikeJ = moduleJ.page("Foo").content<Classlike>()
+        val classlikeJ = moduleJ.page("Foo").data.content
 
         for (classlike in listOf(classlikeJ, classlikeK)) {
             assertThat(classlikeK.data.publicCompanionFunctionsSummary).isEmpty()
@@ -1246,14 +1245,14 @@ internal class ClasslikeDocumentableConverterTest(
             |  }
             |}
         """.render()
-        val classlikeK = moduleK.page().content<Classlike>()
+        val classlikeK = moduleK.page().data.content
 
         val classlikeJ = """
             |public class Foo {
             |  public static void foo() {}
             |  public static String bar = "bar"
             |}
-        """.render(java = true).page().content<Classlike>()
+        """.render(java = true).page().data.content
 
         val companionClassK = moduleK.page("Companion")
 
@@ -1299,7 +1298,7 @@ internal class ClasslikeDocumentableConverterTest(
             |       @JvmStatic val baz = 8
             |   }
             |}
-        """.render().page("Foo").content<Classlike>()
+        """.render().page("Foo").data.content
 
         val nestedTypes = page.data.nestedTypesSummary.items()
         val methods = page.data.publicFunctionsSummary
@@ -1322,8 +1321,8 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render()
 
-        val classPage = module.page("Foo").content<Classlike>()
-        val companionPage = module.page("Companion").content<Classlike>()
+        val classPage = module.page("Foo").data.content
+        val companionPage = module.page("Companion").data.content
 
         val nestedTypes = classPage.data.nestedTypesSummary
         val fields = classPage.data.publicPropertiesSummary
@@ -1360,8 +1359,8 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render()
 
-        val classPage = module.page("Foo").content<Classlike>()
-        val companionPage = module.page("Companion").content<Classlike>()
+        val classPage = module.page("Foo").data.content
+        val companionPage = module.page("Companion").data.content
 
         val nestedTypes = classPage.data.nestedTypesSummary
         val fields = classPage.data.publicPropertiesSummary
@@ -1400,7 +1399,7 @@ internal class ClasslikeDocumentableConverterTest(
             |       const val MARGIN = 9
             |   }
             |}
-        """.render().page("Foo").content<Classlike>()
+        """.render().page("Foo").data.content
 
         val fields = classlike.data.publicPropertiesSummary
 
@@ -1430,7 +1429,7 @@ internal class ClasslikeDocumentableConverterTest(
             |       val bar = 8
             |   }
             |}
-        """.render().page("Foo").content<Classlike>()
+        """.render().page("Foo").data.content
 
         val methods = page.data.publicFunctionsSummary
         val staticMethods = methods.filter { it.modifiers().contains("static") }
@@ -1459,8 +1458,8 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render()
 
-        val classPage = module.page("Foo").content<Classlike>()
-        val companionPage = module.page("Named").content<Classlike>()
+        val classPage = module.page("Foo").data.content
+        val companionPage = module.page("Named").data.content
 
         val nestedTypes = classPage.data.nestedTypesSummary.items()
         val methods = classPage.data.publicFunctionsSummary
@@ -1488,11 +1487,11 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render()
 
-        val classPage = module.page("Foo").content<Classlike>()
+        val classPage = module.page("Foo").data.content
         val nestedTypes = classPage.data.nestedTypesSummary.items()
         assertThat(nestedTypes.map { it.name() }).containsExactly("Foo.Companion")
 
-        val companionPage = module.page("Companion").content<Classlike>()
+        val companionPage = module.page("Companion").data.content
 
         val companionInheritedMethodsSummaries = companionPage.data.inheritedFunctions
 
@@ -1534,8 +1533,8 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render()
 
-        val classPage = module.page("Foo").content<Classlike>()
-        val companionPage = module.page("Companion").content<Classlike>()
+        val classPage = module.page("Foo").data.content
+        val companionPage = module.page("Companion").data.content
         assertThat(classPage.data.nestedTypesSummary.items().map { it.name() })
             .containsExactly("Foo.Companion")
 
@@ -1633,8 +1632,8 @@ internal class ClasslikeDocumentableConverterTest(
             "getProtectedDuplicatedProp"
         )*/
 
-        val containerClass = module.page("TheContainer").content<Classlike>()
-        val companionClass = module.page("TheCompanion").content<Classlike>()
+        val containerClass = module.page("TheContainer").data.content
+        val companionClass = module.page("TheCompanion").data.content
         assertThat(containerClass.data.nestedTypesSummary.single().name())
             .isEqualTo("TheContainer.TheCompanion")
         assertThat(containerClass.companionName())
@@ -1761,7 +1760,7 @@ internal class ClasslikeDocumentableConverterTest(
             |fun Foo.bar() = Unit
             |fun Foo?.baz() = Unit
         """
-        val classlike = src.render().page().content<Classlike>()
+        val classlike = src.render().page().data.content
         assertThat(classlike.data.extensionFunctionsSummary.data.items).hasSize(2)
 
         kotlinOnly {
@@ -1778,7 +1777,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
             |fun Foo.bar() = Unit
         """
-        val classlike = src.render().page().content<Classlike>()
+        val classlike = src.render().page().data.content
         val extFunction = classlike.data.extensionFunctionsDetails.symbols[0]
         val url = extFunction.data.signature.data.name.data.url
         assertThat(url).endsWith("androidx/example/Foo.html#(androidx.example.Foo).bar()")
@@ -1810,7 +1809,7 @@ internal class ClasslikeDocumentableConverterTest(
                 |fun Foo.zab() = Unit
             """
         )
-        val classlike = src.render().page().content<Classlike>()
+        val classlike = src.render().page().data.content
         val extFunctions = classlike.data.extensionFunctionsDetails.symbols
         val extFunctionClasses = extFunctions.map { it.data.extFunctionClass }
         assertThat(extFunctionClasses).isEqualTo(listOf("FirstKt", "SecondKt"))
@@ -1847,7 +1846,7 @@ internal class ClasslikeDocumentableConverterTest(
                 |fun Foo.zab() = Unit
             """
         )
-        val classlike = src.render().page().content<Classlike>()
+        val classlike = src.render().page().data.content
         val extFunctions = classlike.data.extensionFunctionsDetails.symbols
         val extFunctionClasses = extFunctions.map { it.data.extFunctionClass }
         assertThat(extFunctionClasses).isEqualTo(listOf("FirstJvm", "SecondJvm"))
@@ -1888,7 +1887,7 @@ internal class ClasslikeDocumentableConverterTest(
         val pages = src.render().pages("Foo")
         assertThat(pages.size).isEqualTo(2)
         for (page in pages) {
-            val classlike = page.content<Classlike>()
+            val classlike = page.data.content
             assertThat(classlike.data.extensionFunctionsDetails.symbols.size).isEqualTo(1)
         }
     }
@@ -1902,7 +1901,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
             |fun Foo.Bar.baz() = Unit
         """
-        val classlike = src.render().page("Bar").content<Classlike>()
+        val classlike = src.render().page("Bar").data.content
         assertThat(classlike.data.extensionFunctionsDetails.symbols).hasSize(1)
     }
 
@@ -1913,10 +1912,10 @@ internal class ClasslikeDocumentableConverterTest(
             |}
             |var Foo.bar get() = 5
         """.render()
-        val classlike1 = module.page("Foo").content<Classlike>()
+        val classlike1 = module.page("Foo").data.content
 
         javaOnly {
-            val classlike2 = module.page("TestKt").content<Classlike>()
+            val classlike2 = module.page("TestKt").data.content
             // TODO(ensure extension properties appear in Kt pages b/254472656)
             for (classlike in listOf(classlike1/*, classlike2*/)) {
                 assertThat(classlike.data.extensionFunctionsSummary.data.items).hasSize(2)
@@ -1970,7 +1969,7 @@ internal class ClasslikeDocumentableConverterTest(
         |   @Retention(RetentionPolicy.SOURCE)
         |   @interface PlaybackSuppressionReason {}
         |}
-        """.render(java = true).page("PlaybackSuppressionReason").content<Classlike>()
+        """.render(java = true).page("PlaybackSuppressionReason").data.content
         val documentationK = """
         |public annotation class Mega {
         |   /**
@@ -1980,7 +1979,7 @@ internal class ClasslikeDocumentableConverterTest(
         |    */
         |   annotation class PlaybackSuppressionReason {}
         |}
-        """.render().page("PlaybackSuppressionReason").content<Classlike>()
+        """.render().page("PlaybackSuppressionReason").data.content
 
         for (documentation in listOf(documentationJ, documentationK)) {
             assertThat(documentation.data.publicConstructorsSummary).isEmpty()
@@ -2031,7 +2030,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render(java = true).page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
         val publicMethodSymbols = classlike.data.publicFunctionsDetails
         val protectedMethodSymbols = classlike.data.protectedFunctionsDetails
         val publicMethodNames = publicMethodSymbols.symbols.map { it.data.name }
@@ -2067,7 +2066,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render(java = true).page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
         val publicMethodSymbols = classlike.data.publicFunctionsDetails.symbols
         val publicMethodNames = publicMethodSymbols.map { it.data.name }
         val aProp = classlike.data.publicPropertiesDetails.symbols.single { it.data.name == "a" }
@@ -2092,7 +2091,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render().page()
 
-        val classlike = page.content<Classlike>()
+        val classlike = page.data.content
         val methodSymbols = classlike.data.publicFunctionsDetails
 
         assertThat(methodSymbols).isEmpty()
@@ -2105,7 +2104,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.trimIndent()
 
         for (isJava in listOf(true, false)) {
-            val classlike = emptyTestClass.render(java = isJava).page("Foo").content<Classlike>()
+            val classlike = emptyTestClass.render(java = isJava).page("Foo").data.content
             val constructorList = classlike.data.publicConstructorsDetails.symbols
             assertThat(constructorList.size).isEqualTo(1)
             assertThat(constructorList.single().data.name).isEqualTo("Foo")
@@ -2116,10 +2115,10 @@ internal class ClasslikeDocumentableConverterTest(
     fun `Default no-arg constructors are not autogenerated for annotations`() {
         val classlikeJ = """
             public @interface Foo {}
-        """.trimIndent().render(java = true).page("Foo").content<Classlike>()
+        """.trimIndent().render(java = true).page("Foo").data.content
         val classlikeK = """
             public annotation class Foo {}
-        """.trimIndent().render(java = false).page("Foo").content<Classlike>()
+        """.trimIndent().render(java = false).page("Foo").data.content
 
         for (classlike in listOf(classlikeJ/*, classlikeK*/)) { // TODO: b/195529157
             assertThat(classlike.data.publicConstructorsDetails).isEmpty()
@@ -2131,11 +2130,11 @@ internal class ClasslikeDocumentableConverterTest(
         val signatureJ = """
             public interface Foo {}
             public interface Bar extends Foo {}
-        """.trimIndent().render(java = true).page("Bar").content<Classlike>().data.signature
+        """.trimIndent().render(java = true).page("Bar").data.content.data.signature
         val signatureK = """
             public interface Foo {}
             public interface Bar : Foo {}
-        """.trimIndent().render(java = false).page("Bar").content<Classlike>().data.signature
+        """.trimIndent().render(java = false).page("Bar").data.content.data.signature
 
         assertThat(signatureJ.data.extends).isEmpty()
         assertThat(signatureK.data.extends).isEmpty()
@@ -2182,10 +2181,10 @@ internal class ClasslikeDocumentableConverterTest(
 
         for (module in listOf(moduleK, moduleJ)) {
             val testKt = if (displayLanguage == Language.JAVA || module == moduleJ)
-                module.page("TestKt").content<Classlike>()
+                module.page("TestKt").data.content
             else null
             val packagePage = if (displayLanguage == Language.KOTLIN && module == moduleK)
-                module.packagePage().content<PackageSummary>()
+                module.packagePage().data.content
             else null
             // This is top-level in Kotlin and in a Kt class in Java
             val topLevelFun = packagePage?.data?.topLevelFunctionsSummary?.item()
@@ -2199,7 +2198,7 @@ internal class ClasslikeDocumentableConverterTest(
             }
 
             // top-level object -> static inner class of synthetic Kt class
-            val topObject = module.page("TopLevelObject").content<Classlike>()
+            val topObject = module.page("TopLevelObject").data.content
             val topObjectFun = topObject.data.publicFunctionsSummary.single()
             assertThat(topObjectFun.name()).isEqualTo("topObjectFun")
             javaOnly { assertThat(topObjectFun.data.title.data.modifiers).contains("static") }
@@ -2228,7 +2227,7 @@ internal class ClasslikeDocumentableConverterTest(
             }
 
             // companion <-> inner static class
-            val companionObject = module.page("Companion").content<Classlike>()
+            val companionObject = module.page("Companion").data.content
             val companionFun = companionObject.data.publicFunctionsSummary.single()
             assertThat(companionFun.name()).isEqualTo("companionFun")
             javaOnly { assertThat(companionFun.modifiers()).contains("static") }
@@ -2244,7 +2243,7 @@ internal class ClasslikeDocumentableConverterTest(
             }
 
             // This is top-level in Kotlin and in a Kt class in Java
-            val hoistedField = module.page("Container").content<Classlike>()
+            val hoistedField = module.page("Container").data.content
                 .data.constantsSummary.single()
             assertThat(hoistedField.name()).isEqualTo("hoistedField")
             javaOnly { assertThat(hoistedField.modifiers()).contains("static") }
@@ -2275,7 +2274,7 @@ internal class ClasslikeDocumentableConverterTest(
                 .isEqualTo("Test.Foo")
 
             // Verify the final result in dackka is correct, and that valueOf is marked inherited.
-            val enumClass = enumDModule.page("Foo").content<Classlike>()
+            val enumClass = enumDModule.page("Foo").data.content
             val publicFuns = enumClass.data.publicFunctionsSummary
             val valueOfMethod = publicFuns.single { "valueOf" == it.name() }
             val valueOfReturnType = valueOfMethod.data.title.data.type
@@ -2344,16 +2343,16 @@ internal class ClasslikeDocumentableConverterTest(
         assertThat(a.hashCode() == b.hashCode()).isTrue()
     }
 
-    private fun DModule.page(name: String = "Foo"): DevsitePage {
+    private fun DModule.page(name: String = "Foo"): DevsitePage<Classlike> {
         val classlike = explicitClasslikes(name).single()
         return page { classlike }
     }
 
-    private fun DModule.page(name: DModule.() -> DClasslike): DevsitePage =
+    private fun DModule.page(name: DModule.() -> DClasslike) =
         pages(listOf(name())).single()
 
     @JvmName("pagesForClasslikes")
-    private fun DModule.pages(classlikes: List<DClasslike>): List<DevsitePage> {
+    private fun DModule.pages(classlikes: List<DClasslike>): List<DevsitePage<Classlike>> {
         val (holder, pathProvider) = holderAndProvider(this)
         val extFunctionMap = runBlocking { holder.extensionFunctionMap(displayLanguage) }
         val extPropertyMap = runBlocking { holder.extensionPropertyMap() }
@@ -2375,7 +2374,7 @@ internal class ClasslikeDocumentableConverterTest(
 
     private fun DModule.pages(name: String = "Foo") = pages(explicitClasslikes(name))
 
-    private fun DModule.pages(names: List<String>): List<DevsitePage> =
+    private fun DModule.pages(names: List<String>) =
         pages(names.map { explicitClasslike(it) })
 
     private fun DModule.companionFor(name: String = "Foo") =

@@ -20,14 +20,12 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.Classlike.Params
 import com.google.devsite.components.pages.emptyTitledList
-import com.google.devsite.components.symbols.FunctionSignature
-import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.testing.NoopClassHierarchy
 import com.google.devsite.components.testing.NoopClasslikeSignature
 import com.google.devsite.components.testing.NoopDescriptionComponent
 import com.google.devsite.components.testing.NoopRelatedSymbols
 import com.google.devsite.components.testing.NoopSummaryList
-import com.google.devsite.components.testing.NoopSymbolDetail
+import com.google.devsite.components.testing.NoopSymbolDetailF
 import com.google.devsite.renderer.Language
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
@@ -124,15 +122,12 @@ class DefaultClasslikeTest {
         )
     }
 
-    @Test @Suppress("UNCHECKED_CAST")
+    @Test
     fun `Classlike with symbols renders correctly`() {
         val component = DefaultClasslike(
             emptyClasslikeParams.copy(
                 publicFunctionsSummary = NoopSummaryList(),
-                publicFunctionsDetails = Classlike.TitledList(
-                    "Symbols",
-                    listOf(NoopSymbolDetail as SymbolDetail<FunctionSignature>)
-                )
+                publicFunctionsDetails = Classlike.TitledList("Symbols", listOf(NoopSymbolDetailF))
             )
         )
 

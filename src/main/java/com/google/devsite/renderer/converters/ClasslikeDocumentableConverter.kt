@@ -102,7 +102,7 @@ internal class ClasslikeDocumentableConverter(
         EnumValueDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
 
     /** @return the classlike component */
-    suspend fun classlike(): DevsitePage = coroutineScope {
+    suspend fun classlike(): DevsitePage<Classlike> = coroutineScope {
         var (declaredFunctions, declaredProperties) = classlike.nonInheritedTypes()
         val inheritedAll = (classlike.children + classlike.properties.gettersAndSetters())
             .inheritedTypes(classlike.supertypesForDisplayLanguage())
