@@ -23,6 +23,8 @@ import com.google.devsite.components.impl.DefaultPackageSummary
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.PackageSummary
+import com.google.devsite.components.symbols.FunctionSignature
+import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.renderer.Language
@@ -137,7 +139,8 @@ internal class PackageDocumentableConverter(
         )
     }
 
-    private fun functionsToDetail(functions: List<DFunction>): List<SymbolDetail> {
+    private fun functionsToDetail(functions: List<DFunction>):
+        List<SymbolDetail<FunctionSignature>> {
         return functions.map {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,
@@ -169,7 +172,8 @@ internal class PackageDocumentableConverter(
         )
     }
 
-    private fun propertiesToDetail(properties: List<DProperty>): List<SymbolDetail> {
+    private fun propertiesToDetail(properties: List<DProperty>):
+        List<SymbolDetail<PropertySignature>> {
         return properties.map {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,

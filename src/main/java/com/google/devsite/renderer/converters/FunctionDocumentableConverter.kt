@@ -103,21 +103,19 @@ internal class FunctionDocumentableConverter(
     }
 
     /** @return the function detail component */
-    fun detail(function: DFunction, hints: ModifierHints): SymbolDetail {
-        return detail(function, hints, SymbolDetail.SymbolKind.FUNCTION)
-    }
+    fun detail(function: DFunction, hints: ModifierHints) =
+        detail(function, hints, SymbolDetail.SymbolKind.FUNCTION)
 
     /** @return the constructor detail component */
-    fun detailForConstructor(function: DFunction, hints: ModifierHints): SymbolDetail {
-        return detail(function, hints, SymbolDetail.SymbolKind.CONSTRUCTOR)
-    }
+    fun detailForConstructor(function: DFunction, hints: ModifierHints) =
+        detail(function, hints, SymbolDetail.SymbolKind.CONSTRUCTOR)
 
     /** @return the symbol detail component */
     private fun detail(
         function: DFunction,
         hints: ModifierHints,
         kind: SymbolDetail.SymbolKind
-    ): SymbolDetail {
+    ): SymbolDetail<FunctionSignature> {
         val (typeAnnotations, signatureAnnotations) =
             function.annotations().partition { it.belongsOnReturnType() }
         val returnType = paramConverter.componentForProjection(

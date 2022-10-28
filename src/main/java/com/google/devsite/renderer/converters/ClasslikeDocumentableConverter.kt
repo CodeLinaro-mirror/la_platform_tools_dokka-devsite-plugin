@@ -537,7 +537,8 @@ internal class ClasslikeDocumentableConverter(
         )
     }
 
-    private fun functionsToDetail(functions: List<DFunction>): List<SymbolDetail> {
+    private fun functionsToDetail(functions: List<DFunction>):
+        List<SymbolDetail<FunctionSignature>> {
         return functions.map {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,
@@ -553,7 +554,8 @@ internal class ClasslikeDocumentableConverter(
         }
     }
 
-    private fun constructorsToDetail(functions: List<DFunction>): List<SymbolDetail> {
+    private fun constructorsToDetail(functions: List<DFunction>):
+        List<SymbolDetail<FunctionSignature>> {
         val modifierHints = ModifierHints(
             displayLanguage = displayLanguage,
             type = DFunction::class.java,
@@ -618,7 +620,8 @@ internal class ClasslikeDocumentableConverter(
         )
     }
 
-    private fun propertiesToDetail(properties: List<DProperty>): List<SymbolDetail> {
+    private fun propertiesToDetail(properties: List<DProperty>):
+        List<SymbolDetail<PropertySignature>> {
         return properties.map {
             val modifierHints = ModifierHints(
                 displayLanguage = displayLanguage,
@@ -635,7 +638,7 @@ internal class ClasslikeDocumentableConverter(
     }
 
     private fun enumValuesToDetail(dEnum: DEnum, enumValues: List<DEnumEntry>):
-        List<SymbolDetail> {
+        List<SymbolDetail<PropertySignature>> {
         val modifierHints = ModifierHints(
             displayLanguage,
             type = DEnumEntry::class.java,
@@ -823,7 +826,6 @@ internal class ClasslikeDocumentableConverter(
 
     /** Finds the direct and indirect subclasses for this classlike, returning their component. */
     // We know our subclasses will always be DClasslikes
-    @Suppress("UNCHECKED_CAST")
     private suspend fun findRelatedSymbols(): RelatedSymbols {
         val classNode = docsHolder.classGraph().getValue(classlike.dri)
         val directSubclasses = classNode.directSubClasses

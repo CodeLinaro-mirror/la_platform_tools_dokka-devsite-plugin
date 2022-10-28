@@ -20,6 +20,8 @@ import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.Classlike.Params
 import com.google.devsite.components.pages.emptyTitledList
+import com.google.devsite.components.symbols.FunctionSignature
+import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.testing.NoopClassHierarchy
 import com.google.devsite.components.testing.NoopClasslikeSignature
 import com.google.devsite.components.testing.NoopDescriptionComponent
@@ -122,14 +124,14 @@ class DefaultClasslikeTest {
         )
     }
 
-    @Test
+    @Test @Suppress("UNCHECKED_CAST")
     fun `Classlike with symbols renders correctly`() {
         val component = DefaultClasslike(
             emptyClasslikeParams.copy(
                 publicFunctionsSummary = NoopSummaryList(),
                 publicFunctionsDetails = Classlike.TitledList(
                     "Symbols",
-                    listOf(NoopSymbolDetail)
+                    listOf(NoopSymbolDetail as SymbolDetail<FunctionSignature>)
                 )
             )
         )

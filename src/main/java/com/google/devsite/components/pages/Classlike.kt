@@ -27,6 +27,7 @@ import com.google.devsite.components.symbols.ClasslikeSignature
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.symbols.SymbolSignature
 import com.google.devsite.components.table.ClassHierarchy
 import com.google.devsite.components.table.InheritedSymbolsList
 import com.google.devsite.components.table.RelatedSymbols
@@ -46,47 +47,47 @@ internal interface Classlike : ContextFreeComponent {
         val description: List<ContextFreeComponent>,
         val nestedTypesSummary: WithDescriptionList<ClasslikeSignature>,
         val enumValuesSummary: LinkDescriptionSummaryList,
-        val enumValuesDetails: TitledList<SymbolDetail>,
+        val enumValuesDetails: TitledList<SymbolDetail<PropertySignature>>,
         val constantsSummary: PropertySummaryList,
-        val constantsDetails: TitledList<SymbolDetail>,
+        val constantsDetails: TitledList<SymbolDetail<PropertySignature>>,
 
         val publicCompanionFunctionsSummary: FunctionSummaryList,
-        val publicCompanionFunctionsDetails: TitledList<SymbolDetail>,
+        val publicCompanionFunctionsDetails: TitledList<SymbolDetail<FunctionSignature>>,
         val protectedCompanionFunctionsSummary: FunctionSummaryList,
-        val protectedCompanionFunctionsDetails: TitledList<SymbolDetail>,
+        val protectedCompanionFunctionsDetails: TitledList<SymbolDetail<FunctionSignature>>,
         val publicCompanionPropertiesSummary: PropertySummaryList,
-        val publicCompanionPropertiesDetails: TitledList<SymbolDetail>,
+        val publicCompanionPropertiesDetails: TitledList<SymbolDetail<PropertySignature>>,
         val protectedCompanionPropertiesSummary: PropertySummaryList,
-        val protectedCompanionPropertiesDetails: TitledList<SymbolDetail>,
+        val protectedCompanionPropertiesDetails: TitledList<SymbolDetail<PropertySignature>>,
 
         val publicPropertiesSummary: PropertySummaryList,
-        val publicPropertiesDetails: TitledList<SymbolDetail>,
+        val publicPropertiesDetails: TitledList<SymbolDetail<PropertySignature>>,
         val protectedPropertiesSummary: PropertySummaryList,
-        val protectedPropertiesDetails: TitledList<SymbolDetail>,
+        val protectedPropertiesDetails: TitledList<SymbolDetail<PropertySignature>>,
         val publicFunctionsSummary: FunctionSummaryList,
-        val publicFunctionsDetails: TitledList<SymbolDetail>,
+        val publicFunctionsDetails: TitledList<SymbolDetail<FunctionSignature>>,
         val protectedFunctionsSummary: FunctionSummaryList,
-        val protectedFunctionsDetails: TitledList<SymbolDetail>,
+        val protectedFunctionsDetails: TitledList<SymbolDetail<FunctionSignature>>,
         val publicConstructorsSummary: ConstructorSummaryList,
-        val publicConstructorsDetails: TitledList<SymbolDetail>,
+        val publicConstructorsDetails: TitledList<SymbolDetail<FunctionSignature>>,
         val protectedConstructorsSummary: ConstructorSummaryList,
-        val protectedConstructorsDetails: TitledList<SymbolDetail>,
+        val protectedConstructorsDetails: TitledList<SymbolDetail<FunctionSignature>>,
 
         val extensionFunctionsSummary: FunctionSummaryList,
-        val extensionFunctionsDetails: TitledList<SymbolDetail>,
+        val extensionFunctionsDetails: TitledList<SymbolDetail<FunctionSignature>>,
         val extensionPropertiesSummary: PropertySummaryList,
-        val extensionPropertiesDetails: TitledList<SymbolDetail>,
+        val extensionPropertiesDetails: TitledList<SymbolDetail<PropertySignature>>,
 
         val inheritedConstants: InheritedSymbolsList<PropertySignature>,
         val inheritedFunctions: InheritedSymbolsList<FunctionSignature>,
         val inheritedProperties: InheritedSymbolsList<PropertySignature>
     )
 
-    data class TitledList<T : SymbolDetail>(val title: String, val symbols: List<T>) : List<T> {
+    data class TitledList<T : SymbolDetail<*>>(val title: String, val symbols: List<T>) : List<T> {
         override val size = symbols.size
         override fun contains(element: T) = symbols.contains(element)
         override fun containsAll(elements: Collection<T>) = symbols.containsAll(elements)
-        override fun get(index: Int) = symbols.get(index)
+        override fun get(index: Int) = symbols[index]
         override fun indexOf(element: T) = symbols.indexOf(element)
         override fun isEmpty() = symbols.isEmpty()
         override fun iterator() = symbols.iterator()
@@ -169,7 +170,7 @@ internal interface Classlike : ContextFreeComponent {
     private val extensionFunctionsDetails get() = listOf(data.extensionFunctionsDetails)
     private val extensionPropertiesDetails get() = listOf(data.extensionPropertiesDetails)
 
-    val allDetailsSections: List<TitledList<SymbolDetail>>
+    val allDetailsSections: List<TitledList<out SymbolDetail<out SymbolSignature>>>
         get() = earlyDetails + when (data.displayLanguage) {
             Language.JAVA -> propertiesDetails + functionDetails + extensionFunctionsDetails
             Language.KOTLIN ->
@@ -178,4 +179,5 @@ internal interface Classlike : ContextFreeComponent {
         }
 }
 
-internal fun <T : SymbolDetail> emptyTitledList() = Classlike.TitledList<T>("", emptyList())
+internal fun <U : SymbolSignature, T : SymbolDetail<U>> emptyTitledList() =
+    Classlike.TitledList<T>("", emptyList())

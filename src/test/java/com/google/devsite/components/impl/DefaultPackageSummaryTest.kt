@@ -21,17 +21,17 @@ import com.google.devsite.FunctionSummaryList
 import com.google.devsite.LinkDescriptionSummaryList
 import com.google.devsite.PropertySummaryList
 import com.google.devsite.components.ContextFreeComponent
-import com.google.devsite.components.DescriptionComponent
-import com.google.devsite.components.Link
 import com.google.devsite.components.pages.PackageSummary.Params
+import com.google.devsite.components.symbols.FunctionSignature
+import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.table.SummaryList
-import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.components.testing.NoopDescriptionComponent
 import com.google.devsite.components.testing.NoopSummaryList
-import com.google.devsite.components.testing.NoopSymbolDetail
-import com.google.devsite.components.testing.NoopTwoPaneTypeSummaryItem
+import com.google.devsite.components.testing.NoopSymbolDetailF
+import com.google.devsite.components.testing.NoopSymbolDetailP
+import com.google.devsite.components.testing.NoopTwoPaneTypeSummaryItemLD
 import com.google.devsite.renderer.Language
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
@@ -122,12 +122,8 @@ class DefaultPackageSummaryTest {
     fun `Package summary objects are rendered in Java and Kotlin`() {
         for (language in listOf(Language.KOTLIN, Language.JAVA)) {
             val component = createPackageSummary(
-                classes = defaultSummaryListOf(
-                    NoopTwoPaneTypeSummaryItem as TwoPaneSummaryItem<Link, DescriptionComponent>
-                ),
-                objects = defaultSummaryListOf(
-                    NoopTwoPaneTypeSummaryItem as TwoPaneSummaryItem<Link, DescriptionComponent>
-                ),
+                classes = defaultSummaryListOf(NoopTwoPaneTypeSummaryItemLD),
+                objects = defaultSummaryListOf(NoopTwoPaneTypeSummaryItemLD),
                 displayLanguage = language
             )
 
@@ -250,11 +246,11 @@ class DefaultPackageSummaryTest {
             topLevelFunctionsSummary = NoopSummaryList(),
             extensionPropertiesSummary = NoopSummaryList(),
             extensionFunctionsSummary = NoopSummaryList(),
-            topLevelConstants = listOf(NoopSymbolDetail),
-            topLevelProperties = listOf(NoopSymbolDetail),
-            topLevelFunctions = listOf(NoopSymbolDetail),
-            extensionProperties = listOf(NoopSymbolDetail),
-            extensionFunctions = listOf(NoopSymbolDetail)
+            topLevelConstants = listOf(NoopSymbolDetailP),
+            topLevelProperties = listOf(NoopSymbolDetailP),
+            topLevelFunctions = listOf(NoopSymbolDetailF),
+            extensionProperties = listOf(NoopSymbolDetailP),
+            extensionFunctions = listOf(NoopSymbolDetailF)
         )
 
         val output = createHTML().div {
@@ -285,7 +281,7 @@ class DefaultPackageSummaryTest {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
             topLevelConstantsSummary = NoopSummaryList(),
-            topLevelConstants = listOf(NoopSymbolDetail)
+            topLevelConstants = listOf(NoopSymbolDetailP)
         )
 
         val output = createHTML().div {
@@ -310,7 +306,7 @@ class DefaultPackageSummaryTest {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
             topLevelPropertiesSummary = NoopSummaryList(),
-            topLevelProperties = listOf(NoopSymbolDetail)
+            topLevelProperties = listOf(NoopSymbolDetailP)
         )
 
         val output = createHTML().div {
@@ -335,7 +331,7 @@ class DefaultPackageSummaryTest {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
             topLevelFunctionsSummary = NoopSummaryList(),
-            topLevelFunctions = listOf(NoopSymbolDetail)
+            topLevelFunctions = listOf(NoopSymbolDetailF)
         )
 
         val output = createHTML().div {
@@ -360,7 +356,7 @@ class DefaultPackageSummaryTest {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
             extensionFunctionsSummary = NoopSummaryList(),
-            extensionFunctions = listOf(NoopSymbolDetail)
+            extensionFunctions = listOf(NoopSymbolDetailF)
         )
 
         val output = createHTML().div {
@@ -385,7 +381,7 @@ class DefaultPackageSummaryTest {
         val component = createPackageSummary(
             displayLanguage = Language.KOTLIN,
             extensionPropertiesSummary = NoopSummaryList(),
-            extensionProperties = listOf(NoopSymbolDetail)
+            extensionProperties = listOf(NoopSymbolDetailP)
         )
 
         val output = createHTML().div {
@@ -414,11 +410,11 @@ class DefaultPackageSummaryTest {
             topLevelFunctionsSummary = NoopSummaryList(),
             extensionPropertiesSummary = NoopSummaryList(),
             extensionFunctionsSummary = NoopSummaryList(),
-            topLevelConstants = listOf(NoopSymbolDetail),
-            topLevelProperties = listOf(NoopSymbolDetail),
-            topLevelFunctions = listOf(NoopSymbolDetail),
-            extensionProperties = listOf(NoopSymbolDetail),
-            extensionFunctions = listOf(NoopSymbolDetail)
+            topLevelConstants = listOf(NoopSymbolDetailP),
+            topLevelProperties = listOf(NoopSymbolDetailP),
+            topLevelFunctions = listOf(NoopSymbolDetailF),
+            extensionProperties = listOf(NoopSymbolDetailP),
+            extensionFunctions = listOf(NoopSymbolDetailF)
         )
 
         val output = createHTML().div {
@@ -469,11 +465,11 @@ class DefaultPackageSummaryTest {
         topLevelFunctionsSummary: FunctionSummaryList = NoopSummaryList(show = false),
         extensionPropertiesSummary: PropertySummaryList = NoopSummaryList(show = false),
         extensionFunctionsSummary: FunctionSummaryList = NoopSummaryList(show = false),
-        topLevelConstants: List<SymbolDetail> = emptyList(),
-        topLevelProperties: List<SymbolDetail> = emptyList(),
-        topLevelFunctions: List<SymbolDetail> = emptyList(),
-        extensionProperties: List<SymbolDetail> = emptyList(),
-        extensionFunctions: List<SymbolDetail> = emptyList()
+        topLevelConstants: List<SymbolDetail<PropertySignature>> = emptyList(),
+        topLevelProperties: List<SymbolDetail<PropertySignature>> = emptyList(),
+        topLevelFunctions: List<SymbolDetail<FunctionSignature>> = emptyList(),
+        extensionProperties: List<SymbolDetail<PropertySignature>> = emptyList(),
+        extensionFunctions: List<SymbolDetail<FunctionSignature>> = emptyList()
     ) = DefaultPackageSummary(
         Params(
             displayLanguage = displayLanguage,

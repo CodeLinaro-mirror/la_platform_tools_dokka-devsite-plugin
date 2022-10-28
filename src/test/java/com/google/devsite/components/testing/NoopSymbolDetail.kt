@@ -16,12 +16,15 @@
 
 package com.google.devsite.components.testing
 
+import com.google.devsite.components.symbols.FunctionSignature
+import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.symbols.SymbolSignature
 import kotlinx.html.FlowContent
 import kotlinx.html.div
 
-internal object NoopSymbolDetail : SymbolDetail {
-    override val data: SymbolDetail.Params
+internal object NoopSymbolDetail : SymbolDetail<SymbolSignature> {
+    override val data: SymbolDetail.Params<SymbolSignature>
         get() = throw NotImplementedError()
 
     override fun render(into: FlowContent) = into.run {
@@ -30,3 +33,7 @@ internal object NoopSymbolDetail : SymbolDetail {
         }
     }
 }
+@Suppress("UNCHECKED_CAST")
+internal val NoopSymbolDetailF = NoopSymbolDetail as SymbolDetail<FunctionSignature>
+@Suppress("UNCHECKED_CAST")
+internal val NoopSymbolDetailP = NoopSymbolDetail as SymbolDetail<PropertySignature>

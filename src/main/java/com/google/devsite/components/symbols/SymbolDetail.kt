@@ -22,14 +22,14 @@ import com.google.devsite.renderer.converters.EmptyModifiers
 import com.google.devsite.renderer.converters.Modifiers
 
 /** Represents a fully documented function or property. */
-internal interface SymbolDetail : ContextFreeComponent {
-    val data: Params
+internal interface SymbolDetail<T : SymbolSignature> : ContextFreeComponent {
+    val data: Params<T>
 
-    data class Params(
+    data class Params<T : SymbolSignature>(
         val name: String,
         val returnType: TypeProjectionComponent,
         val symbolKind: SymbolKind,
-        val signature: SymbolSignature,
+        val signature: T,
         val anchors: LinkedHashSet<String>,
         val metadata: List<ContextFreeComponent>,
         val displayLanguage: Language,

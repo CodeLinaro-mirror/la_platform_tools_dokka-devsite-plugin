@@ -330,15 +330,15 @@ internal abstract class ConverterTestBase(
             pathProvider,
             docConverter
         )
-        return functions()!!.map {
+        return functions()!!.associate {
             it.name to converter.summary(it, hints.copy(isSummary = true))
-        }.toMap()
+        }
     }
 
     protected fun DModule.functionDetail(
         doc: DModule.() -> DFunction = ::smartDoc,
         hints: ModifierHints = defaultHints
-    ): SymbolDetail {
+    ): SymbolDetail<FunctionSignature> {
         val (holder, pathProvider) = holderAndProvider(this)
         val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
         val converter = FunctionDocumentableConverter(
@@ -371,9 +371,6 @@ internal abstract class ConverterTestBase(
         funName: String,
         hints: ModifierHints = defaultHints
     ) = functionDetail({ this.function(funName)!! }, hints)
-
-    protected fun DModule.functionSignature(funName: String) =
-        functionSignature { this.function(funName)!! }
 
     /** In case you aren't explicit, our best guess at what you want docs for. */
     private fun smartDoc(module: DModule): DFunction {

@@ -21,7 +21,6 @@ import com.google.devsite.TypeSummaryItem
 import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
-import com.google.devsite.components.symbols.SymbolSignature
 import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.isAtNonNull
@@ -192,7 +191,7 @@ internal class PropertyDocumentableConverterTest(
     fun `Overall nullability of array types is handled properly in 4x Java and Kotlin`() {
         val moduleK = """
             |val foo: IntArray?
-            |val oof: IntArry
+            |val oof: IntArray
             |val bar: Array<String>?
             |val rab: Array<String>
         """.render()
@@ -286,13 +285,13 @@ internal class PropertyDocumentableConverterTest(
     fun `Constant properties have values`() {
         val intConstantJ = """
             public static final int FOO = 5;
-        """.render(java = true).signature("FOO").data as PropertySignature.Params
+        """.render(java = true).signature("FOO").data
         assertThat(intConstantJ.constantValue).isNotNull()
         assertThat(intConstantJ.constantValue).isEqualTo("5")
 
         val intConstantK = """
             public const val FOO: Int = 5
-        """.render().signature("FOO").data as PropertySignature.Params
+        """.render().signature("FOO").data
         assertThat(intConstantK.constantValue).isNotNull()
         assertThat(intConstantK.constantValue).isEqualTo("5")
 
@@ -301,13 +300,13 @@ internal class PropertyDocumentableConverterTest(
         /*
         val stringConstantJ = """
             public static final int BAR = "Hi";
-        """.render(java = true).signature("BAR").data as PropertySignature.Params
+        """.render(java = true).signature("BAR").data
         assertThat(stringConstantJ.constantValue).isNotNull()
         assertThat(stringConstantJ.constantValue).isEqualTo("Hi")
 
         val stringConstantK = """
             public const val BAR: String = "Hi"
-        """.render().signature("BAR").data as PropertySignature.Params
+        """.render().signature("BAR").data
         assertThat(stringConstantK.constantValue).isNotNull()
         assertThat(stringConstantK.constantValue).isEqualTo("Hi")
         */
@@ -391,7 +390,7 @@ internal class PropertyDocumentableConverterTest(
     private fun DModule.detail(
         name: String = "foo",
         hints: ModifierHints = defaultHints
-    ): SymbolDetail {
+    ): SymbolDetail<PropertySignature> {
         val (holder, pathProvider) = holderAndProvider(this)
         val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
         val converter = PropertyDocumentableConverter(
@@ -405,7 +404,7 @@ internal class PropertyDocumentableConverterTest(
     private fun DModule.signature(
         name: String = "foo",
         hints: ModifierHints = defaultHints
-    ): SymbolSignature {
+    ): PropertySignature {
         val (holder, pathProvider) = holderAndProvider(this)
         val docConverter = DocTagConverter(displayLanguage, pathProvider, holder)
         val converter = PropertyDocumentableConverter(

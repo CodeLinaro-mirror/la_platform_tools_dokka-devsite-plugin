@@ -591,7 +591,7 @@ internal class FunctionDocumentableConverterTest(
             | * @param args additional arguments to the dump request.
             | */
             |public void onDump(@NonNull java.lang.String prefix, @Nullable java.io.FileDescriptor fd, @NonNull java.io.PrintWriter writer, @Nullable java.lang.String[] args) { throw new RuntimeException("Stub!"); }
-        """.render(java = true).functionDetail("onDump").data.signature as FunctionSignature
+        """.render(java = true).functionDetail("onDump").data.signature
         val param1 = signature.data.parameters[0]
         assertThat(param1.data.name).isEqualTo("prefix")
         assertThat(param1.typeName()).isEqualTo("String")
@@ -699,12 +699,12 @@ internal class FunctionDocumentableConverterTest(
         // assertThat(genericDrab.annotations().single().dri.classNames).contains("NonNull")
 
         for (module in listOf(moduleJ, moduleK)) {
-            val rabSig = module.functionDetail("rab").data.signature as FunctionSignature
+            val rabSig = module.functionDetail("rab").data.signature
             val rabType = rabSig.data.parameters.single().data.type.data.generics.single()
 
             val fooType = module.functionDetail("foo").data.returnType
             val oofType = module.functionDetail("oof").data.returnType
-            val barSig = module.functionDetail("bar").data.signature as FunctionSignature
+            val barSig = module.functionDetail("bar").data.signature
             val barType = barSig.data.parameters.single().data.type.data.generics.single()
 
             assertThat(fooType.nullable).isTrue()

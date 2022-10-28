@@ -20,6 +20,8 @@ import com.google.devsite.FunctionSummaryList
 import com.google.devsite.LinkDescriptionSummaryList
 import com.google.devsite.PropertySummaryList
 import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.components.symbols.FunctionSignature
+import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.renderer.Language
 
@@ -42,10 +44,10 @@ internal interface PackageSummary : ContextFreeComponent {
         val topLevelFunctionsSummary: FunctionSummaryList,
         val extensionPropertiesSummary: PropertySummaryList,
         val extensionFunctionsSummary: FunctionSummaryList,
-        val topLevelConstants: List<SymbolDetail>,
-        val topLevelProperties: List<SymbolDetail>,
-        val topLevelFunctions: List<SymbolDetail>,
-        val extensionProperties: List<SymbolDetail>,
-        val extensionFunctions: List<SymbolDetail>
+        val topLevelConstants: List<SymbolDetail<PropertySignature>>,
+        val topLevelProperties: List<SymbolDetail<PropertySignature>>,
+        val topLevelFunctions: List<SymbolDetail<FunctionSignature>>,
+        val extensionProperties: List<SymbolDetail<PropertySignature>>,
+        val extensionFunctions: List<SymbolDetail<FunctionSignature>>
     )
 }

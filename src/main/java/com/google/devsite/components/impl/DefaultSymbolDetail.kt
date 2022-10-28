@@ -21,6 +21,7 @@ import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.render
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolDetail.SymbolKind
+import com.google.devsite.components.symbols.SymbolSignature
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.renderer.Language
 import kotlinx.html.Entities
@@ -31,9 +32,9 @@ import kotlinx.html.h3
 import kotlinx.html.pre
 
 /** Default implementation of a fully documented function. */
-internal data class DefaultSymbolDetail(
-    override val data: SymbolDetail.Params
-) : SymbolDetail {
+internal data class DefaultSymbolDetail<T : SymbolSignature>(
+    override val data: SymbolDetail.Params<T>
+) : SymbolDetail<T> {
     override fun render(into: FlowContent) = into.div {
         for (anchor in data.anchors.drop(1)) {
             a { attributes["name"] = anchor }

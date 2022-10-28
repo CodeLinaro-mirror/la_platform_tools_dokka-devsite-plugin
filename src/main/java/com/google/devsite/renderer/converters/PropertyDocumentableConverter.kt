@@ -74,7 +74,7 @@ internal class PropertyDocumentableConverter(
     }
 
     /** @return the property detail component */
-    fun detail(property: DProperty, hints: ModifierHints): SymbolDetail {
+    fun detail(property: DProperty, hints: ModifierHints): SymbolDetail<PropertySignature> {
         val (typeAnnotations, nonTypeAnnotations) =
             property.annotations().partition { it.belongsOnReturnType() }
         val returnType = paramConverter.componentForProjection(

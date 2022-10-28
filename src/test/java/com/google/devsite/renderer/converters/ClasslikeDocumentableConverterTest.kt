@@ -26,7 +26,6 @@ import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.pages.PackageSummary
-import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSignature
 import com.google.devsite.renderer.Language
@@ -293,10 +292,9 @@ internal class ClasslikeDocumentableConverterTest(
             val detail = classlike.data.publicConstructorsDetails.symbols.single()
             val returnAnnotations = detail.data.returnType.annotations
             val annotations = detail.data.annotationComponents
-            val signature = detail.data.signature as FunctionSignature
             assertThat(returnAnnotations.isEmpty())
             assertThat(annotations).isEmpty()
-            assertThat(signature.data.receiver).isNull()
+            assertThat(detail.data.signature.data.receiver).isNull()
         }
     }
 
@@ -1768,10 +1766,8 @@ internal class ClasslikeDocumentableConverterTest(
 
         kotlinOnly {
             val (extDetail1, extDetail2) = classlike.data.extensionFunctionsDetails.symbols
-            assertThat((extDetail1.data.signature as FunctionSignature).receiverTypeName())
-                .isEqualTo("Foo")
-            assertThat((extDetail2.data.signature as FunctionSignature).receiverTypeName())
-                .isEqualTo("Foo?")
+            assertThat(extDetail1.data.signature.receiverTypeName()).isEqualTo("Foo")
+            assertThat(extDetail2.data.signature.receiverTypeName()).isEqualTo("Foo?")
         }
     }
 
@@ -1928,13 +1924,13 @@ internal class ClasslikeDocumentableConverterTest(
                     classlike.data.extensionFunctionsDetails.symbols.items(2)
 
                 assertThat(extGetterDetail.data.name).isEqualTo("getBar")
-                val getterSignature = extGetterDetail.data.signature as FunctionSignature
+                val getterSignature = extGetterDetail.data.signature
                 assertThat(getterSignature.data.receiver!!.typeName()).isEqualTo("TestKt")
                 assertThat(getterSignature.data.parameters.single().typeName()).isEqualTo("Foo")
                 assertThat(getterSignature.data.parameters.single().data.name).isEqualTo("receiver")
 
                 assertThat(extSetterDetail.data.name).isEqualTo("setBar")
-                val setterSignature = extSetterDetail.data.signature as FunctionSignature
+                val setterSignature = extSetterDetail.data.signature
                 assertThat(setterSignature.data.receiver!!.typeName()).isEqualTo("TestKt")
                 val (param1, param2) = setterSignature.data.parameters.items(2)
                 assertThat(param1.typeName()).isEqualTo("Foo")

@@ -17,8 +17,9 @@
 package com.google.devsite.components.testing
 
 import com.google.devsite.TypeSummaryItem
+import com.google.devsite.components.DescriptionComponent
+import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.FunctionSignature
-import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.TwoPaneSummaryItem
@@ -34,20 +35,9 @@ internal object NoopTwoPaneTypeSummaryItem : TwoPaneSummaryItem<TypeSummary, Sym
     }
 }
 
-internal object NoopTwoPaneTypeSummaryItemF : TypeSummaryItem<FunctionSignature> {
-    override val data: TwoPaneSummaryItem.Params<TypeSummary, SymbolSummary<FunctionSignature>>
-        get() = throw NotImplementedError()
-
-    override fun render(into: TR) = into.run {
-        unsafe { +"<noop/>" }
-    }
-}
-
-internal object NoopTwoPaneTypeSummaryItemP : TypeSummaryItem<PropertySignature> {
-    override val data: TwoPaneSummaryItem.Params<TypeSummary, SymbolSummary<PropertySignature>>
-        get() = throw NotImplementedError()
-
-    override fun render(into: TR) = into.run {
-        unsafe { +"<noop/>" }
-    }
-}
+@Suppress("UNCHECKED_CAST")
+internal val NoopTwoPaneTypeSummaryItemF =
+    NoopTwoPaneTypeSummaryItem as TypeSummaryItem<FunctionSignature>
+@Suppress("UNCHECKED_CAST")
+internal val NoopTwoPaneTypeSummaryItemLD =
+    NoopTwoPaneTypeSummaryItem as TwoPaneSummaryItem<Link, DescriptionComponent>

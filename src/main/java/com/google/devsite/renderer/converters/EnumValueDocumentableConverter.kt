@@ -50,7 +50,8 @@ internal class EnumValueDocumentableConverter(
     }
 
     /** @return the enum detail component */
-    fun detail(dEnum: DEnum, enumValue: DEnumEntry, hints: ModifierHints): SymbolDetail {
+    fun detail(dEnum: DEnum, enumValue: DEnumEntry, hints: ModifierHints):
+        SymbolDetail<PropertySignature> {
         val (typeAnnotations, nonTypeAnnotations) =
             dEnum.annotations().partition { it.belongsOnReturnType() }
         val projection = paramConverter.componentForProjection(

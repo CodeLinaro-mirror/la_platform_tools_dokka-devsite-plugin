@@ -134,7 +134,7 @@ internal fun Documentable.annotations() = (this as? WithExtraProperties<*>)?.ann
 internal fun Projection.annotations() = (this as? Bound)?.annotations()
     ?: (this as? WithExtraProperties<*>)?.annotations() ?: emptyList()
 
-internal fun Bound.annotations(): List<Annotation> = when (this) {
+private fun Bound.annotations(): List<Annotation> = when (this) {
     is TypeParameter, is GenericTypeConstructor, is FunctionalTypeConstructor ->
         (this as WithExtraProperties<*>).annotations()
     is Nullable -> this.inner.annotations()
