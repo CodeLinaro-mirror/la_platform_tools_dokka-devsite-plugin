@@ -23,7 +23,7 @@ import com.google.devsite.components.table.InheritedSymbolsList
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableTitle
 import com.google.devsite.components.testing.NoopLink
-import com.google.devsite.components.testing.NoopTwoPaneTypeSummaryItemF
+import com.google.devsite.components.testing.NoopTableRowTypeSummaryItemF
 import kotlinx.html.body
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -35,7 +35,7 @@ class DefaultInheritedSymbolsTest {
         val inheritedSymbols: Map<Link, FunctionSummaryList> = hashMapOf(
             NoopLink("aClass") to DefaultSummaryList(
                 SummaryList.Params(
-                    items = listOf(NoopTwoPaneTypeSummaryItemF, NoopTwoPaneTypeSummaryItemF)
+                    items = listOf(NoopTableRowTypeSummaryItemF, NoopTableRowTypeSummaryItemF)
                 )
             )
         )

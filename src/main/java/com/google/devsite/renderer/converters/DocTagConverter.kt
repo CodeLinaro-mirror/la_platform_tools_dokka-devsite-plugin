@@ -823,9 +823,10 @@ internal class DocTagConverter(
     )
 
     /**
-     * Converts generic Documentables to TwoPaneSummaryItems, as simple maybe-annotated links
+     * Converts generic Documentables to TableRowSummaryItems, as simple maybe-annotated links
      * This is used for mini-signatures, e.g. nested types list, subclasses list, package summary
      */
+    // TODO(KMP, b/256177393)
     internal fun summaryForDocumentable(
         documentable: Documentable,
         showAnnotations: Boolean = false

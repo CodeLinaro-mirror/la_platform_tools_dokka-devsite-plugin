@@ -94,9 +94,10 @@ internal abstract class ClasslikeDocumentableConverter(
     private val classExtensionFunctions: List<DFunction> = emptyList(),
     private val classExtensionProperties: List<DProperty> = emptyList()
 ) {
+    private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
+    // TODO(KMP b/254490320)
     protected val javadocConverter = DocTagConverter(displayLanguage, pathProvider, docsHolder)
-    private val paramConverter =
-        ParameterDocumentableConverter(displayLanguage, pathProvider)
+    // TODO(KMP b/256172699)
     private val enumConverter =
         EnumValueDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
 

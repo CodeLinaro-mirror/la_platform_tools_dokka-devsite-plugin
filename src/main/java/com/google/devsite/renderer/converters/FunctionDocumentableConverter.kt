@@ -16,8 +16,10 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.KmpTypeSummaryItem
 import com.google.devsite.TypeSummaryItem
 import com.google.devsite.components.impl.DefaultFunctionSignature
+import com.google.devsite.components.impl.DefaultKmpTableRowSummaryItem
 import com.google.devsite.components.impl.DefaultParameterComponent
 import com.google.devsite.components.impl.DefaultSymbolDetail
 import com.google.devsite.components.impl.DefaultSymbolSummary
@@ -30,6 +32,7 @@ import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.components.symbols.TypeSummary
+import com.google.devsite.components.table.KmpTableRowSummaryItem
 import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
@@ -50,6 +53,43 @@ internal class FunctionDocumentableConverter(
             function.annotations().partition { it.belongsOnReturnType() }
         return DefaultTableRowSummaryItem(
             TableRowSummaryItem.Params(
+                title = DefaultTypeSummary(
+                    TypeSummary.Params(
+                        type = paramConverter.componentForProjection(
+                            projection = function.type,
+                            // Propagate ALL annotations _for display in the summary_, b/197321617
+                            propagatedAnnotations = typeAnnotations,
+                            isReturnType = true,
+                            isJavaSource = function.isFromJava()
+                        ),
+                        modifiers = function.modifiers().modifiersFor(hints)
+                    )
+                ),
+                description = DefaultSymbolSummary(
+                    SymbolSummary.Params(
+                        signature = function.signature(isSummary = true),
+                        description = javadocConverter.summaryDescription(
+                            function,
+                            nonTypeAnnotations
+                        ),
+                        annotationComponents = nonTypeAnnotations.annotationComponents(
+                            pathProvider = pathProvider,
+                            displayLanguage = displayLanguage,
+                            nullability = Nullability.DONT_CARE // Propagates to return type instead
+                        )
+                    )
+                )
+            )
+        )
+    }
+
+    /** @return the function summary component */
+    fun summaryKmp(function: DFunction, hints: ModifierHints):
+        KmpTypeSummaryItem<FunctionSignature> {
+        val (typeAnnotations, nonTypeAnnotations) =
+            function.annotations().partition { it.belongsOnReturnType() }
+        return DefaultKmpTableRowSummaryItem(
+            KmpTableRowSummaryItem.Params(
                 title = DefaultTypeSummary(
                     TypeSummary.Params(
                         type = paramConverter.componentForProjection(
@@ -101,16 +141,94 @@ internal class FunctionDocumentableConverter(
         )
     }
 
+    /** @return the constructor summary component */
+    fun summaryForKmpConstructor(function: DFunction):
+        KmpTableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>> {
+        return DefaultKmpTableRowSummaryItem(
+            KmpTableRowSummaryItem.Params(
+                title = null,
+                DefaultSymbolSummary(
+                    SymbolSummary.Params(
+                        signature = function.signature(isSummary = true),
+                        description = javadocConverter.summaryDescription(function),
+                        annotationComponents = function.annotations().annotationComponents(
+                            pathProvider = pathProvider,
+                            displayLanguage = displayLanguage,
+                            nullability = Nullability.DONT_CARE // Propagates to return type instead
+                        )
+                    )
+                )
+            )
+        )
+    }
+
     /** @return the function detail component */
     fun detail(function: DFunction, hints: ModifierHints) =
         detail(function, hints, SymbolDetail.SymbolKind.FUNCTION)
+
+    /** @return the function detail component */
+    fun detailKmp(function: DFunction, hints: ModifierHints) =
+        detailKmp(function, hints, SymbolDetail.SymbolKind.FUNCTION)
 
     /** @return the constructor detail component */
     fun detailForConstructor(function: DFunction, hints: ModifierHints) =
         detail(function, hints, SymbolDetail.SymbolKind.CONSTRUCTOR)
 
+    /** @return the constructor detail component */
+    fun detailForKmpConstructor(function: DFunction, hints: ModifierHints) =
+        detailKmp(function, hints, SymbolDetail.SymbolKind.CONSTRUCTOR)
+
     /** @return the symbol detail component */
     private fun detail(
+        function: DFunction,
+        hints: ModifierHints,
+        kind: SymbolDetail.SymbolKind
+    ): SymbolDetail<FunctionSignature> {
+        val (typeAnnotations, signatureAnnotations) =
+            function.annotations().partition { it.belongsOnReturnType() }
+        val returnType = paramConverter.componentForProjection(
+            projection = function.type,
+            isJavaSource = function.isFromJava(),
+            propagatedAnnotations = typeAnnotations,
+            isReturnType = true,
+            propagatedNullability =
+            if (kind == SymbolDetail.SymbolKind.CONSTRUCTOR || function.isConstructor)
+                Nullability.DONT_CARE else null
+        )
+
+        // So far I've only seen this in unit tests where we use the wrong entry point into
+        // FunctionDocumentableConverter, but it's possible it could happen in other ways.
+        if (function.isConstructor != (kind == SymbolDetail.SymbolKind.CONSTRUCTOR)) {
+            println("WARNING: constructor ${function.dri} is not being parsed correctly")
+        }
+
+        return DefaultSymbolDetail(
+            SymbolDetail.Params(
+                name = function.name,
+                returnType = returnType,
+                symbolKind = kind,
+                signature = function.signature(isSummary = false),
+                anchors = generateCompatAnchors(function),
+                metadata = javadocConverter.metadata(
+                    documentable = function,
+                    returnType = returnType,
+                    paramNames = listOf("receiver") + function.parameters.map { it.name!! },
+                    annotations = signatureAnnotations
+                ),
+                displayLanguage = displayLanguage,
+                modifiers = function.modifiers().modifiersFor(hints),
+                extFunctionClass = function.receiver?.let { nameForSyntheticClass(function) },
+                annotationComponents = signatureAnnotations.annotationComponents(
+                    pathProvider = pathProvider,
+                    displayLanguage = displayLanguage,
+                    nullability = Nullability.DONT_CARE // Nullability is on the return type instead
+                )
+            )
+        )
+    }
+
+    /** @return the symbol detail component */
+    private fun detailKmp(
         function: DFunction,
         hints: ModifierHints,
         kind: SymbolDetail.SymbolKind

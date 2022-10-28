@@ -65,7 +65,7 @@ SummaryList<TableRowSummaryItem<T, V>>.single() = items().single()
 internal fun <V : SummaryItem> SummaryList<V>.first() = data.items.first()
 
 internal fun TableRowSummaryItem<Link, DescriptionComponent>.link() = data.title.data
-@JvmName("paramDescriptionTwoPaneSummaryItemLink")
+@JvmName("paramDescriptionTableRowSummaryItemLink")
 internal fun TableRowSummaryItem<ParameterComponent, DescriptionComponent>.link() =
     data.title.data.type.link()
 

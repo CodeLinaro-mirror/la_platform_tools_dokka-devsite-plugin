@@ -23,6 +23,7 @@ import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeSummary
+import com.google.devsite.components.table.KmpTableRowSummaryItem
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableRowSummaryItem
 import java.util.Locale
@@ -56,6 +57,7 @@ inline fun <reified T> tensorOf(vararg arrays: Array<T>): Array<Array<T>> =
         .map { it.toTypedArray() }.toTypedArray()
 
 internal typealias TypeSummaryItem<T> = TableRowSummaryItem<TypeSummary, SymbolSummary<T>>
+internal typealias KmpTypeSummaryItem<T> = KmpTableRowSummaryItem<TypeSummary, SymbolSummary<T>>
 internal typealias PropertySummaryList = SummaryList<TypeSummaryItem<PropertySignature>>
 internal typealias FunctionSummaryList = SummaryList<TypeSummaryItem<FunctionSignature>>
 internal typealias ConstructorSummaryList =

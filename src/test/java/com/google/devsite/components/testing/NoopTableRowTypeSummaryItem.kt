@@ -36,8 +36,8 @@ internal object NoopTableRowTypeSummaryItem : TableRowSummaryItem<TypeSummary, S
 }
 
 @Suppress("UNCHECKED_CAST")
-internal val NoopTwoPaneTypeSummaryItemF =
+internal val NoopTableRowTypeSummaryItemF =
     NoopTableRowTypeSummaryItem as TypeSummaryItem<FunctionSignature>
 @Suppress("UNCHECKED_CAST")
-internal val NoopTwoPaneTypeSummaryItemLD =
+internal val NoopTableRowTypeSummaryItemLD =
     NoopTableRowTypeSummaryItem as TableRowSummaryItem<Link, DescriptionComponent>

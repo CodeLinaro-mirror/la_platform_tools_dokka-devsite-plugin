@@ -285,13 +285,17 @@ internal class ClasslikeDocumentableConverterTest(
         """.render(java = true).page().data.content
 
         for (classlike in listOf(classlikeJ, classlikeK)) {
-            // Constructor summaries are SingleColumnSummaryItems containing SymbolSummaries
-            // They cannot have annotations, enforced by design.
+            // Ctor summaries are TableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>>
+            // they don't have return types in the model at all, so those can't be annotated
+            // though the constructor itself still can be, which is fine
+            val summary = classlike.data.publicConstructorsSummary.single()
+            val summaryAnnotations = summary.data.description.data.annotationComponents
+            assertThat(summaryAnnotations).isEmpty()
 
             val detail = classlike.data.publicConstructorsDetails.symbols.single()
             val returnAnnotations = detail.data.returnType.annotations
             val annotations = detail.data.annotationComponents
-            assertThat(returnAnnotations.isEmpty())
+            assertThat(returnAnnotations).isEmpty()
             assertThat(annotations).isEmpty()
             assertThat(detail.data.signature.data.receiver).isNull()
         }

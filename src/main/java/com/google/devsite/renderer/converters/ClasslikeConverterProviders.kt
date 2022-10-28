@@ -50,7 +50,7 @@ internal class NonKmpClasslikeConverter(
     override val constructorToDetailConverter = functionConverter::detailForConstructor
 }
 
-internal abstract class KmpClasslikeConverter(
+internal class KmpClasslikeConverter(
     displayLanguage: Language,
     classlike: DClasslike,
     pathProvider: FilePathProvider,
@@ -64,4 +64,15 @@ internal abstract class KmpClasslikeConverter(
     docsHolder,
     classExtensionFunctions,
     classExtensionProperties
-)
+) {
+    private val functionConverter =
+        FunctionDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
+    private val propertyConverter =
+        PropertyDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
+    override val functionToSummaryConverter = functionConverter::summaryKmp
+    override val functionToDetailConverter = functionConverter::detailKmp
+    override val propertyToSummaryConverter = propertyConverter::summaryKmp
+    override val propertyToDetailConverter = propertyConverter::detailKmp
+    override val constructorToSummaryConverter = functionConverter::summaryForKmpConstructor
+    override val constructorToDetailConverter = functionConverter::detailForKmpConstructor
+}

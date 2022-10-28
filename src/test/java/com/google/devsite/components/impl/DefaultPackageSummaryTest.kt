@@ -31,7 +31,7 @@ import com.google.devsite.components.testing.NoopDescriptionComponent
 import com.google.devsite.components.testing.NoopSummaryList
 import com.google.devsite.components.testing.NoopSymbolDetailF
 import com.google.devsite.components.testing.NoopSymbolDetailP
-import com.google.devsite.components.testing.NoopTwoPaneTypeSummaryItemLD
+import com.google.devsite.components.testing.NoopTableRowTypeSummaryItemLD
 import com.google.devsite.renderer.Language
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
@@ -122,8 +122,8 @@ class DefaultPackageSummaryTest {
     fun `Package summary objects are rendered in Java and Kotlin`() {
         for (language in listOf(Language.KOTLIN, Language.JAVA)) {
             val component = createPackageSummary(
-                classes = defaultSummaryListOf(NoopTwoPaneTypeSummaryItemLD),
-                objects = defaultSummaryListOf(NoopTwoPaneTypeSummaryItemLD),
+                classes = defaultSummaryListOf(NoopTableRowTypeSummaryItemLD),
+                objects = defaultSummaryListOf(NoopTableRowTypeSummaryItemLD),
                 displayLanguage = language
             )
 

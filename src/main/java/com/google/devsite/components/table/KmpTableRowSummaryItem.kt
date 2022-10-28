@@ -19,27 +19,12 @@ package com.google.devsite.components.table
 import com.google.devsite.components.ContextFreeComponent
 
 /** Builds a two-pane layout item. */
-internal interface TableRowSummaryItem<T : ContextFreeComponent?, V : ContextFreeComponent> :
-    SummaryItem {
+internal interface KmpTableRowSummaryItem<T : ContextFreeComponent?, V : ContextFreeComponent> :
+    TableRowSummaryItem<T, V> {
     override val data: Params<T, V>
-
-    open class Params<T : ContextFreeComponent?, V : ContextFreeComponent> (
-        open val title: T,
+    // TODO(KMP b/254489852)
+    data class Params<T : ContextFreeComponent?, V : ContextFreeComponent> (
+        override val title: T,
         override val description: V
-    ) : SummaryItem.Params {
-        // Due to not being at the bottom of a class hierarchy, this Params can't be a data class
-        override fun equals(other: Any?): Boolean {
-            if (this === other) return true
-            if (other !is Params<*, *>) return false
-            if (title != other.title) return false
-            if (description != other.description) return false
-            return true
-        }
-
-        override fun hashCode(): Int {
-            var result = title?.hashCode() ?: 0
-            result = 31 * result + description.hashCode()
-            return result
-        }
-    }
+    ) : TableRowSummaryItem.Params<T, V>(title, description)
 }

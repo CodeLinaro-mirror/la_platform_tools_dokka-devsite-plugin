@@ -16,8 +16,10 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.KmpTypeSummaryItem
 import com.google.devsite.TypeSummaryItem
 import com.google.devsite.capitalize
+import com.google.devsite.components.impl.DefaultKmpTableRowSummaryItem
 import com.google.devsite.components.impl.DefaultPropertySignature
 import com.google.devsite.components.impl.DefaultSymbolDetail
 import com.google.devsite.components.impl.DefaultSymbolSummary
@@ -27,6 +29,7 @@ import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeSummary
+import com.google.devsite.components.table.KmpTableRowSummaryItem
 import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
@@ -73,8 +76,77 @@ internal class PropertyDocumentableConverter(
         )
     }
 
+    /** @return the property summary component */
+    fun summaryKmp(property: DProperty, hints: ModifierHints):
+        KmpTypeSummaryItem<PropertySignature> {
+        val (typeAnnotations, nonTypeAnnotations) =
+            property.annotations().partition { it.belongsOnReturnType() }
+        return DefaultKmpTableRowSummaryItem(
+            KmpTableRowSummaryItem.Params(
+                title = DefaultTypeSummary(
+                    TypeSummary.Params(
+                        type = paramConverter.componentForProjection(
+                            property.type,
+                            property.isFromJava(),
+                            typeAnnotations
+                        ),
+                        modifiers = property.modifiers().modifiersFor(hints)
+                    )
+                ),
+                description = DefaultSymbolSummary(
+                    SymbolSummary.Params(
+                        signature = property.signature(isSummary = true),
+                        description = javadocConverter
+                            .summaryDescription(property, nonTypeAnnotations),
+                        annotationComponents = nonTypeAnnotations.annotationComponents(
+                            pathProvider = pathProvider,
+                            displayLanguage = displayLanguage,
+                            nullability = Nullability.DONT_CARE // Propagates to return type instead
+                        )
+                    )
+                )
+            )
+        )
+    }
+
     /** @return the property detail component */
     fun detail(property: DProperty, hints: ModifierHints): SymbolDetail<PropertySignature> {
+        val (typeAnnotations, nonTypeAnnotations) =
+            property.annotations().partition { it.belongsOnReturnType() }
+        val returnType = paramConverter.componentForProjection(
+            property.type,
+            property.isFromJava(),
+            typeAnnotations,
+            propagatedNullability = property.type
+                .getNullability(displayLanguage, property.isFromJava(), typeAnnotations)
+        )
+        return DefaultSymbolDetail(
+            SymbolDetail.Params(
+                name = property.name,
+                returnType = returnType,
+                symbolKind = SymbolDetail.SymbolKind.PROPERTY.takeIf { property.setter != null }
+                    ?: SymbolDetail.SymbolKind.READ_ONLY_PROPERTY,
+                signature = property.signature(isSummary = false),
+                anchors = property.generateAnchors(),
+                metadata = javadocConverter.metadata(
+                    documentable = property,
+                    returnType = returnType,
+                    paramNames = listOf("receiver"),
+                    annotations = nonTypeAnnotations
+                ),
+                displayLanguage = displayLanguage,
+                modifiers = property.modifiers().modifiersFor(hints),
+                annotationComponents = nonTypeAnnotations.annotationComponents(
+                    pathProvider = pathProvider,
+                    displayLanguage = displayLanguage,
+                    nullability = Nullability.DONT_CARE // Propagates to return type instead
+                )
+            )
+        )
+    }
+
+    /** @return the property detail component */
+    fun detailKmp(property: DProperty, hints: ModifierHints): SymbolDetail<PropertySignature> {
         val (typeAnnotations, nonTypeAnnotations) =
             property.annotations().partition { it.belongsOnReturnType() }
         val returnType = paramConverter.componentForProjection(

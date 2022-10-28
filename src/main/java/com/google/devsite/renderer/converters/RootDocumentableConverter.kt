@@ -49,7 +49,8 @@ internal class RootDocumentableConverter(
     private val javadocConverter = DocTagConverter(displayLanguage, pathProvider, docsHolder)
 
     /** @return the root component for the class index page */
-    suspend fun classesPage(): DevsitePage<ClassIndex> {
+    // TODO(KMP b/256171288)
+    suspend fun classesIndexPage(): DevsitePage<ClassIndex> {
         val allClasses = docsHolder.allClasslikes()
         val alphabetizedClasses = allClasses.groupBy(::categorizeClasslikes)
         val componentClasses = alphabetizedClasses.mapValues { (_, nodes) ->
@@ -80,7 +81,8 @@ internal class RootDocumentableConverter(
     }
 
     /** @return the root component for the package index page */
-    suspend fun packagesPage(): DevsitePage<PackageIndex> {
+    // TODO(KMP b/256171288)
+    suspend fun packagesIndexPage(): DevsitePage<PackageIndex> {
         val packages = docsHolder.packages()
         val componentPackages = DefaultSummaryList(
             SummaryList.Params(

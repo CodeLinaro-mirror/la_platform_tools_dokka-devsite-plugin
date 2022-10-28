@@ -62,6 +62,7 @@ internal class DevsiteRenderer(
         for (clazz in docsHolder.classlikesFor(dPackage, displayLanguage)) {
             launch {
                 packageRenderer.writeClasslike(
+                    dPackage,
                     clazz,
                     extensionFunctionsMapping.getOrDefault(clazz.dri, emptyList()),
                     extensionPropertiesMapping.getOrDefault(clazz.dri, emptyList()),

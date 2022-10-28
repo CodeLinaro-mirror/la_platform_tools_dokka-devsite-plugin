@@ -415,7 +415,7 @@ internal class RootDocumentableConverterTest(
             pathProvider,
             holder
         )
-        return runBlocking { converter.classesPage() }
+        return runBlocking { converter.classesIndexPage() }
     }
 
     private fun DModule.indexPageForPackages(): DevsitePage<PackageIndex> {
@@ -425,7 +425,7 @@ internal class RootDocumentableConverterTest(
             pathProvider,
             holder
         )
-        return runBlocking { converter.packagesPage() }
+        return runBlocking { converter.packagesIndexPage() }
     }
 
     private fun DModule.toc(): TableOfContents {

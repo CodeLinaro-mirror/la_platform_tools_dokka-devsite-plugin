@@ -59,7 +59,7 @@ internal class MetadataRenderer(
     /** Writes the list of packages in human-readable format. */
     suspend fun writePackages() {
         val converter = RootDocumentableConverter(displayLanguage, pathProvider, docsHolder)
-        val page = converter.packagesPage()
+        val page = converter.packagesIndexPage()
         val packageIndex = createHTML().html {
             page.render(this)
         }
@@ -70,7 +70,7 @@ internal class MetadataRenderer(
     /** Writes the list of classes in human-readable format. */
     suspend fun writeClasses() {
         val converter = RootDocumentableConverter(displayLanguage, pathProvider, docsHolder)
-        val page = converter.classesPage()
+        val page = converter.classesIndexPage()
         val classIndex = createHTML().html {
             page.render(this)
         }
