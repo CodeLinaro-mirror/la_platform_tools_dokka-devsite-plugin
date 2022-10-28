@@ -31,8 +31,8 @@ import com.google.devsite.components.impl.DefaultInheritedSymbols
 import com.google.devsite.components.impl.DefaultMetadataComponent
 import com.google.devsite.components.impl.DefaultRelatedSymbols
 import com.google.devsite.components.impl.DefaultSummaryList
+import com.google.devsite.components.impl.DefaultTableRowSummaryItem
 import com.google.devsite.components.impl.DefaultTableTitle
-import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.impl.emptyInheritedSymbolsList
 import com.google.devsite.components.impl.emptySummaryList
 import com.google.devsite.components.pages.Classlike
@@ -48,11 +48,10 @@ import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.table.ClassHierarchy
 import com.google.devsite.components.table.InheritedSymbolsList
 import com.google.devsite.components.table.RelatedSymbols
-import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.components.table.TableTitle
-import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesHolder
@@ -110,7 +109,7 @@ internal abstract class ClasslikeDocumentableConverter(
     protected abstract val propertyToDetailConverter:
         (DProperty, ModifierHints) -> SymbolDetail<PropertySignature>
     protected abstract val constructorToSummaryConverter:
-        (DFunction) -> SingleColumnSummaryItem<SymbolSummary<FunctionSignature>>
+        (DFunction) -> TableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>>
     protected abstract val constructorToDetailConverter:
         (DFunction, ModifierHints) -> SymbolDetail<FunctionSignature>
 
@@ -476,8 +475,8 @@ internal abstract class ClasslikeDocumentableConverter(
             else -> classlikes
         }.map { nestedClasslike ->
             errorContextInjector(nestedClasslike) {
-                DefaultTwoPaneSummaryItem(
-                    TwoPaneSummaryItem.Params(
+                DefaultTableRowSummaryItem(
+                    TableRowSummaryItem.Params(
                         computeSignature(nestedClasslike, classGraph),
                         javadocConverter.summaryDescription(nestedClasslike)
                     )

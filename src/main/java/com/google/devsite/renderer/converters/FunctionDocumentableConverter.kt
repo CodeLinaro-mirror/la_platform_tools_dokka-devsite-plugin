@@ -19,10 +19,9 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.TypeSummaryItem
 import com.google.devsite.components.impl.DefaultFunctionSignature
 import com.google.devsite.components.impl.DefaultParameterComponent
-import com.google.devsite.components.impl.DefaultSingleColumnSummaryItem
 import com.google.devsite.components.impl.DefaultSymbolDetail
 import com.google.devsite.components.impl.DefaultSymbolSummary
-import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
+import com.google.devsite.components.impl.DefaultTableRowSummaryItem
 import com.google.devsite.components.impl.DefaultTypeProjectionComponent
 import com.google.devsite.components.impl.DefaultTypeSummary
 import com.google.devsite.components.symbols.FunctionSignature
@@ -31,8 +30,7 @@ import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.components.symbols.TypeSummary
-import com.google.devsite.components.table.SingleColumnSummaryItem
-import com.google.devsite.components.table.TwoPaneSummaryItem
+import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.DFunction
@@ -50,8 +48,8 @@ internal class FunctionDocumentableConverter(
     fun summary(function: DFunction, hints: ModifierHints): TypeSummaryItem<FunctionSignature> {
         val (typeAnnotations, nonTypeAnnotations) =
             function.annotations().partition { it.belongsOnReturnType() }
-        return DefaultTwoPaneSummaryItem(
-            TwoPaneSummaryItem.Params(
+        return DefaultTableRowSummaryItem(
+            TableRowSummaryItem.Params(
                 title = DefaultTypeSummary(
                     TypeSummary.Params(
                         type = paramConverter.componentForProjection(
@@ -84,9 +82,10 @@ internal class FunctionDocumentableConverter(
 
     /** @return the constructor summary component */
     fun summaryForConstructor(function: DFunction):
-        SingleColumnSummaryItem<SymbolSummary<FunctionSignature>> {
-        return DefaultSingleColumnSummaryItem(
-            SingleColumnSummaryItem.Params(
+        TableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>> {
+        return DefaultTableRowSummaryItem(
+            TableRowSummaryItem.Params(
+                title = null,
                 DefaultSymbolSummary(
                     SymbolSummary.Params(
                         signature = function.signature(isSummary = true),

@@ -17,20 +17,25 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.ContextFreeComponent
-import com.google.devsite.components.table.TwoPaneSummaryItem
+import com.google.devsite.components.table.TableRowSummaryItem
 import kotlinx.html.TR
 import kotlinx.html.code
 import kotlinx.html.td
 
 /** Default implementation of the two-pane layout item for symbol tables. */
-internal data class DefaultTwoPaneSummaryItem<T : ContextFreeComponent, V : ContextFreeComponent> (
-    override val data: TwoPaneSummaryItem.Params<T, V>
-) : TwoPaneSummaryItem<T, V> {
+internal data class DefaultTableRowSummaryItem<
+    T : ContextFreeComponent?,
+    V : ContextFreeComponent
+    > (
+    override val data: TableRowSummaryItem.Params<T, V>
+) : TableRowSummaryItem<T, V> {
     override fun render(into: TR) = into.run {
-        td {
-            attributes["width"] = "40%"
-            code {
-                data.title.render(this)
+        data.title?.let { title ->
+            td {
+                attributes["width"] = "40%"
+                code {
+                    title.render(this)
+                }
             }
         }
         td {
@@ -38,5 +43,5 @@ internal data class DefaultTwoPaneSummaryItem<T : ContextFreeComponent, V : Cont
         }
     }
 
-    override fun toString() = "${data.title}: ${data.description}"
+    override fun toString() = (data.title?.let { "$it: " } ?: "") + data.description.toString()
 }

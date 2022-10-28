@@ -38,10 +38,9 @@ import com.google.devsite.components.symbols.TypeParameterComponent
 import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.components.symbols.TypeSummary
 import com.google.devsite.components.table.InheritedSymbolsList
-import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.table.SummaryList
-import com.google.devsite.components.table.TwoPaneSummaryItem
+import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.joinMaybePrefix
 import org.jetbrains.dokka.model.doc.DocTag
 import org.jetbrains.dokka.model.doc.Text
@@ -58,37 +57,31 @@ internal fun ClassIndex.items(size: Int?) = data.alphabetizedClasses.entries.ite
 internal fun ClassIndex.item() = items(1).single()
 
 internal fun <T : ContextFreeComponent, V : ContextFreeComponent>
-SummaryList<TwoPaneSummaryItem<T, V>>.item() = items(1).single()
+SummaryList<TableRowSummaryItem<T, V>>.item() = items(1).single()
 internal fun <T : ContextFreeComponent, V : ContextFreeComponent>
-SummaryList<TwoPaneSummaryItem<T, V>>.items(size: Int? = null) = data.items.items(size)
-internal fun <T : ContextFreeComponent> SummaryList<SingleColumnSummaryItem<T>>.sItems(
-    size: Int? = null
-) = data.items.items(size)
+SummaryList<TableRowSummaryItem<T, V>>.items(size: Int? = null) = data.items.items(size)
 internal fun <T : ContextFreeComponent, V : ContextFreeComponent>
-SummaryList<TwoPaneSummaryItem<T, V>>.single() = items().single()
-internal fun <T : ContextFreeComponent> SummaryList<SingleColumnSummaryItem<T>>.single() =
-    sItems().single()
-internal val SummaryList<*>.size get() = data.items.size
+SummaryList<TableRowSummaryItem<T, V>>.single() = items().single()
 internal fun <V : SummaryItem> SummaryList<V>.first() = data.items.first()
 
-internal fun TwoPaneSummaryItem<Link, DescriptionComponent>.link() = data.title.data
+internal fun TableRowSummaryItem<Link, DescriptionComponent>.link() = data.title.data
 @JvmName("paramDescriptionTwoPaneSummaryItemLink")
-internal fun TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>.link() =
+internal fun TableRowSummaryItem<ParameterComponent, DescriptionComponent>.link() =
     data.title.data.type.link()
 
 @get:JvmName("FunctionSummaryItemGetDescription")
 internal val <T : SymbolSignature> TypeSummaryItem<T>.description get() = data.description
 
-internal fun TwoPaneSummaryItem<TypeSummary, *>.modifiers() = data.title.data.modifiers
+internal fun TableRowSummaryItem<TypeSummary, *>.modifiers() = data.title.data.modifiers
 internal fun Classlike.modifiers() = data.signature.data.modifiers
 
 @JvmName("TypeSymbolSummaryName")
 internal fun <T : SymbolSignature> TypeSummaryItem<T>.name():
     String = this.data.description.name()
-internal fun TwoPaneSummaryItem<ParameterComponent, DescriptionComponent>
+internal fun TableRowSummaryItem<ParameterComponent, DescriptionComponent>
 .name(): String = this.data.title.data.name
 @JvmName("LinkDescriptionName")
-internal fun TwoPaneSummaryItem<Link, DescriptionComponent>
+internal fun TableRowSummaryItem<Link, DescriptionComponent>
 .name(): String = this.data.title.data.name
 internal fun Iterable<TypeSummaryItem<PropertySignature>>.nonInstance() =
     filterNot { it.data.title.data.type.name() == "INSTANCE" }
@@ -140,5 +133,5 @@ internal fun Classlike.companionName() = data.nestedTypesSummary.item().data.tit
 internal fun ClasslikeSignature.fullName() = data.name.data.name
 
 @JvmName("RelatedTypesTableGetName")
-internal fun TwoPaneSummaryItem<ClasslikeSignature, DescriptionComponent>.name() =
+internal fun TableRowSummaryItem<ClasslikeSignature, DescriptionComponent>.name() =
     data.title.fullName()

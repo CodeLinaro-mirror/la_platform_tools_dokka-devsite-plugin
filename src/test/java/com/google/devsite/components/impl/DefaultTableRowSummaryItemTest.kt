@@ -17,16 +17,16 @@
 package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
-import com.google.devsite.components.table.TwoPaneSummaryItem.Params
+import com.google.devsite.components.table.TableRowSummaryItem.Params
 import com.google.devsite.components.testing.PlainTextOutput
 import kotlinx.html.stream.createHTML
 import kotlinx.html.tr
 import org.junit.Test
 
-class DefaultTwoPaneSummaryItemTest {
+class DefaultTableRowSummaryItemTest {
     @Test
     fun `Empty item renders correctly`() {
-        val component = DefaultTwoPaneSummaryItem(Params(PlainTextOutput(""), PlainTextOutput("")))
+        val component = DefaultTableRowSummaryItem(Params(PlainTextOutput(""), PlainTextOutput("")))
 
         val output = createHTML().tr {
             component.render(this)
@@ -46,7 +46,7 @@ class DefaultTwoPaneSummaryItemTest {
     @Test
     fun `Simple item renders correctly`() {
         val component =
-            DefaultTwoPaneSummaryItem(
+            DefaultTableRowSummaryItem(
                 Params(
                     PlainTextOutput("Title"),
                     PlainTextOutput("Description")

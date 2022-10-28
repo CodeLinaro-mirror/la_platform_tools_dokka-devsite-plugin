@@ -22,12 +22,12 @@ import com.google.devsite.components.Link
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeSummary
-import com.google.devsite.components.table.TwoPaneSummaryItem
+import com.google.devsite.components.table.TableRowSummaryItem
 import kotlinx.html.TR
 import kotlinx.html.unsafe
 
-internal object NoopTwoPaneTypeSummaryItem : TwoPaneSummaryItem<TypeSummary, SymbolSummary<*>> {
-    override val data: TwoPaneSummaryItem.Params<TypeSummary, SymbolSummary<*>>
+internal object NoopTableRowTypeSummaryItem : TableRowSummaryItem<TypeSummary, SymbolSummary<*>> {
+    override val data: TableRowSummaryItem.Params<TypeSummary, SymbolSummary<*>>
         get() = throw NotImplementedError()
 
     override fun render(into: TR) = into.run {
@@ -37,7 +37,7 @@ internal object NoopTwoPaneTypeSummaryItem : TwoPaneSummaryItem<TypeSummary, Sym
 
 @Suppress("UNCHECKED_CAST")
 internal val NoopTwoPaneTypeSummaryItemF =
-    NoopTwoPaneTypeSummaryItem as TypeSummaryItem<FunctionSignature>
+    NoopTableRowTypeSummaryItem as TypeSummaryItem<FunctionSignature>
 @Suppress("UNCHECKED_CAST")
 internal val NoopTwoPaneTypeSummaryItemLD =
-    NoopTwoPaneTypeSummaryItem as TwoPaneSummaryItem<Link, DescriptionComponent>
+    NoopTableRowTypeSummaryItem as TableRowSummaryItem<Link, DescriptionComponent>

@@ -14,22 +14,17 @@
  * limitations under the License.
  */
 
-package com.google.devsite.components.impl
+package com.google.devsite.components.table
 
 import com.google.devsite.components.ContextFreeComponent
-import com.google.devsite.components.table.SingleColumnSummaryItem
-import kotlinx.html.TR
-import kotlinx.html.td
 
-/** Default implementation of the single column layout item for constructors. */
-internal data class DefaultSingleColumnSummaryItem<T : ContextFreeComponent>(
-    override val data: SingleColumnSummaryItem.Params<T>
-) : SingleColumnSummaryItem<T> {
-    override fun render(into: TR) = into.run {
-        td {
-            data.description.render(this)
-        }
-    }
+/** Builds a two-pane layout item. */
+internal interface TableRowSummaryItem<T : ContextFreeComponent?, V : ContextFreeComponent> :
+    SummaryItem {
+    override val data: Params<T, V>
 
-    override fun toString() = data.description.toString()
+    data class Params<T : ContextFreeComponent?, V : ContextFreeComponent> (
+        val title: T,
+        override val description: V
+    ) : SummaryItem.Params
 }

@@ -23,9 +23,8 @@ import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeSummary
-import com.google.devsite.components.table.SingleColumnSummaryItem
 import com.google.devsite.components.table.SummaryList
-import com.google.devsite.components.table.TwoPaneSummaryItem
+import com.google.devsite.components.table.TableRowSummaryItem
 import java.util.Locale
 
 /** Enables calling `!nullableBool ?: false` rather than a built-in less readable alternative. */
@@ -56,11 +55,12 @@ inline fun <reified T> tensorOf(vararg arrays: Array<T>): Array<Array<T>> =
     tensorOf(*(arrays.map { it.asIterable() }.toTypedArray()))
         .map { it.toTypedArray() }.toTypedArray()
 
-internal typealias TypeSummaryItem<T> = TwoPaneSummaryItem<TypeSummary, SymbolSummary<T>>
+internal typealias TypeSummaryItem<T> = TableRowSummaryItem<TypeSummary, SymbolSummary<T>>
 internal typealias PropertySummaryList = SummaryList<TypeSummaryItem<PropertySignature>>
 internal typealias FunctionSummaryList = SummaryList<TypeSummaryItem<FunctionSignature>>
 internal typealias ConstructorSummaryList =
-    SummaryList<SingleColumnSummaryItem<SymbolSummary<FunctionSignature>>>
-internal typealias WithDescriptionList<T> = SummaryList<TwoPaneSummaryItem<T, DescriptionComponent>>
+    SummaryList<TableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>>>
+internal typealias WithDescriptionList<T> =
+    SummaryList<TableRowSummaryItem<T, DescriptionComponent>>
 internal typealias LinkDescriptionSummaryList = WithDescriptionList<Link>
 internal typealias DocsSummaryList = WithDescriptionList<ParameterComponent>

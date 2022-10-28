@@ -27,8 +27,8 @@ import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultParameterComponent
 import com.google.devsite.components.impl.DefaultPropertySignature
 import com.google.devsite.components.impl.DefaultSummaryList
+import com.google.devsite.components.impl.DefaultTableRowSummaryItem
 import com.google.devsite.components.impl.DefaultTableTitle
-import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
 import com.google.devsite.components.impl.DefaultTypeProjectionComponent
 import com.google.devsite.components.impl.UndocumentedSymbolDescriptionComponent
 import com.google.devsite.components.symbols.AnnotatedLink
@@ -36,8 +36,8 @@ import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.TypeProjectionComponent
 import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.components.table.TableTitle
-import com.google.devsite.components.table.TwoPaneSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
@@ -354,8 +354,8 @@ internal class DocTagConverter(
                 )
             }
             val title = allOptions[tag.name()]!!
-            DefaultTwoPaneSummaryItem(
-                TwoPaneSummaryItem.Params(
+            DefaultTableRowSummaryItem(
+                TableRowSummaryItem.Params(
                     title = title,
                     description = description(tag)
                 )
@@ -406,10 +406,10 @@ internal class DocTagConverter(
     }
 
     private fun returnType(tags: List<Return>, returnType: TypeProjectionComponent):
-        SummaryList<TwoPaneSummaryItem<TypeProjectionComponent, DescriptionComponent>> {
+        SummaryList<TableRowSummaryItem<TypeProjectionComponent, DescriptionComponent>> {
         val params = tags.map { tag ->
-            DefaultTwoPaneSummaryItem(
-                TwoPaneSummaryItem.Params(
+            DefaultTableRowSummaryItem(
+                TableRowSummaryItem.Params(
                     title = returnType,
                     description = description(tag)
                 )
@@ -426,8 +426,8 @@ internal class DocTagConverter(
 
     private fun throws(tags: List<Throws>): DocsSummaryList {
         val params = tags.map { tag ->
-            DefaultTwoPaneSummaryItem(
-                TwoPaneSummaryItem.Params(
+            DefaultTableRowSummaryItem(
+                TableRowSummaryItem.Params(
                     title = throwsToParameterComponent(tag),
                     description = description(tag)
                 )
@@ -496,8 +496,8 @@ internal class DocTagConverter(
 
     private fun see(tags: List<See>): LinkDescriptionSummaryList {
         val params = tags.map { tag ->
-            DefaultTwoPaneSummaryItem(
-                TwoPaneSummaryItem.Params(
+            DefaultTableRowSummaryItem(
+                TableRowSummaryItem.Params(
                     title = tag.toLink(),
                     description = description(tag)
                 )
@@ -829,10 +829,10 @@ internal class DocTagConverter(
     internal fun summaryForDocumentable(
         documentable: Documentable,
         showAnnotations: Boolean = false
-    ): TwoPaneSummaryItem<Link, DescriptionComponent> {
+    ): TableRowSummaryItem<Link, DescriptionComponent> {
         val annotations = documentable.annotations()
-        return DefaultTwoPaneSummaryItem(
-            TwoPaneSummaryItem.Params(
+        return DefaultTableRowSummaryItem(
+            TableRowSummaryItem.Params(
                 title = if (showAnnotations) {
                     DefaultAnnotatedLink(
                         AnnotatedLink.Params(

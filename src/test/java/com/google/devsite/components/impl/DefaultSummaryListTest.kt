@@ -18,8 +18,8 @@ package com.google.devsite.components.impl
 
 import com.google.common.truth.Truth.assertThat
 import com.google.devsite.components.table.SummaryList.Params
+import com.google.devsite.components.testing.NoopTableRowTypeSummaryItem
 import com.google.devsite.components.testing.NoopTableTitle
-import com.google.devsite.components.testing.NoopTwoPaneTypeSummaryItem
 import kotlinx.html.div
 import kotlinx.html.stream.createHTML
 import org.junit.Test
@@ -44,7 +44,7 @@ class DefaultSummaryListTest {
     @Test
     fun `Simple summary renders correctly`() {
         val component = DefaultSummaryList(
-            Params(items = listOf(NoopTwoPaneTypeSummaryItem, NoopTwoPaneTypeSummaryItem))
+            Params(items = listOf(NoopTableRowTypeSummaryItem, NoopTableRowTypeSummaryItem))
         )
 
         val output = createHTML().div {
@@ -71,7 +71,7 @@ class DefaultSummaryListTest {
     @Test
     fun `Summary with header renders correctly`() {
         val component =
-            DefaultSummaryList(Params(header = NoopTableTitle, listOf(NoopTwoPaneTypeSummaryItem)))
+            DefaultSummaryList(Params(header = NoopTableTitle, listOf(NoopTableRowTypeSummaryItem)))
 
         val output = createHTML().div {
             component.render(this)

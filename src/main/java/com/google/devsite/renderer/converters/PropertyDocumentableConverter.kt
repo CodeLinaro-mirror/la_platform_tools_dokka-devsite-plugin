@@ -21,13 +21,13 @@ import com.google.devsite.capitalize
 import com.google.devsite.components.impl.DefaultPropertySignature
 import com.google.devsite.components.impl.DefaultSymbolDetail
 import com.google.devsite.components.impl.DefaultSymbolSummary
-import com.google.devsite.components.impl.DefaultTwoPaneSummaryItem
+import com.google.devsite.components.impl.DefaultTableRowSummaryItem
 import com.google.devsite.components.impl.DefaultTypeSummary
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
 import com.google.devsite.components.symbols.TypeSummary
-import com.google.devsite.components.table.TwoPaneSummaryItem
+import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import org.jetbrains.dokka.model.DProperty
@@ -45,8 +45,8 @@ internal class PropertyDocumentableConverter(
     fun summary(property: DProperty, hints: ModifierHints): TypeSummaryItem<PropertySignature> {
         val (typeAnnotations, nonTypeAnnotations) =
             property.annotations().partition { it.belongsOnReturnType() }
-        return DefaultTwoPaneSummaryItem(
-            TwoPaneSummaryItem.Params(
+        return DefaultTableRowSummaryItem(
+            TableRowSummaryItem.Params(
                 title = DefaultTypeSummary(
                     TypeSummary.Params(
                         type = paramConverter.componentForProjection(
