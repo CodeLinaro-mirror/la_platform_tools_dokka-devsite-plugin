@@ -27,6 +27,10 @@ internal data class DefaultLink(
     override fun render(into: FlowContent) = into.run {
         if (data.url.isEmpty()) {
             +data.name
+        } else if (data.externalLink) {
+            a(data.url, classes = "external") {
+                +data.name
+            }
         } else {
             a(data.url) {
                 +data.name

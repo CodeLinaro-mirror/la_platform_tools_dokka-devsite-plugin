@@ -137,7 +137,7 @@ class DefaultDevsitePageTest {
   <body>
     <div id="metadata-info-block">
       <div id="maven-coordinates">Artifact: <a href="https://d.android.com">android.x:artifact</a></div>
-      <div id="source-link"><a href="https://cs.android.com">View Source</a></div>
+      <div id="source-link"><a href="https://cs.android.com" class="external">View Source</a></div>
     </div>
     <h1>Page Title</h1>
     <div>noop</div>

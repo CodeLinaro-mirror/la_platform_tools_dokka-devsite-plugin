@@ -30,6 +30,8 @@ internal interface MetadataComponent : ContextFreeComponent {
         val sourceLinkUrl: String?,
     ) {
         internal val sourceLink: Link?
-            get() = sourceLinkUrl?.let { DefaultLink(Link.Params(name = "View Source", url = it)) }
+            get() = sourceLinkUrl?.let {
+                DefaultLink(Link.Params(name = "View Source", url = it, externalLink = true))
+            }
     }
 }
