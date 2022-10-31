@@ -206,20 +206,20 @@ internal class PropertyDocumentableConverterTest(
             val oofType = module.detail("oof").data.returnType
             val barType = module.detail("bar").data.returnType
             val rabType = module.detail("rab").data.returnType
-            assertThat(fooType.data.annotationComponents.isEmpty())
+            assertThat(fooType.data.annotationComponents).isEmpty()
             assertThat(fooType.nullable).isTrue()
-            assertThat(barType.data.annotationComponents.isEmpty())
+            assertThat(barType.data.annotationComponents).isEmpty()
             assertThat(barType.nullable).isTrue()
 
             assertThat(oofType.nullable).isFalse()
             assertThat(rabType.nullable).isFalse()
             javaOnly {
-                assertThat(oofType.data.annotationComponents.single().isAtNonNull)
-                assertThat(rabType.data.annotationComponents.single().isAtNonNull)
+                assertThat(oofType.data.annotationComponents.single().isAtNonNull).isTrue()
+                assertThat(rabType.data.annotationComponents.single().isAtNonNull).isTrue()
             }
-            javaOnly {
-                assertThat(oofType.data.annotationComponents.isEmpty())
-                assertThat(rabType.data.annotationComponents.isEmpty())
+            kotlinOnly {
+                assertThat(oofType.data.annotationComponents).isEmpty()
+                assertThat(rabType.data.annotationComponents).isEmpty()
             }
         }
     }

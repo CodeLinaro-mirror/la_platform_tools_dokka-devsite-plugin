@@ -582,7 +582,7 @@ internal class ParameterDocumentableConverterTest(
                 val lambdaType = lambdaParam.type
                 // assertThat(lambdaType.data.generics.single().nullable).isFalse() // DONT_CARE
                 assertThat(lambdaType.data.generics.single().annotations).isEmpty()
-                assertThat(lambdaParam.annotationComponents.isEmpty())
+                assertThat(lambdaParam.annotationComponents).isEmpty()
                 if (lambdaParam == nullableLambdaParam) {
                     assertThat(lambdaType.nullable).isTrue()
                     assertThat(lambdaType.annotations).isEmpty()

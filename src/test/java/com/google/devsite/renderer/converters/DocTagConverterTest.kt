@@ -743,7 +743,7 @@ internal class DocTagConverterTest(
                     // assertThat(param1Generic.annotations.single().isAtNullable).isTrue()
                 } else {
                     assertThat(param0Left.typeAnnotations()).isEmpty()
-                    assertThat(param1Generic.annotations.isEmpty())
+                    assertThat(param1Generic.annotations).isEmpty()
                 }
                 // This is also the upstream bug; T should be @NonNull from both source languages
                 if (documentation == documentationK) assertThat(
