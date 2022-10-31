@@ -708,18 +708,18 @@ internal class FunctionDocumentableConverterTest(
             val barType = barSig.data.parameters.single().data.type.data.generics.single()
 
             assertThat(fooType.nullable).isTrue()
-            assertThat(fooType.data.annotationComponents.isEmpty()) // @Nullable is never injected
+            assertThat(fooType.data.annotationComponents).isEmpty() // @Nullable is never injected
             assertThat(oofType.nullable).isFalse()
 
             assertThat(barType.nullable).isTrue()
-            assertThat(barType.data.annotationComponents.isEmpty()) // @Nullable is never injected
+            assertThat(barType.data.annotationComponents).isEmpty() // @Nullable is never injected
 
             javaOnly {
                 assertThat(oofType.data.annotationComponents.single().isAtNonNull).isTrue()
             }
             kotlinOnly {
-                assertThat(oofType.data.annotationComponents.isEmpty())
-                assertThat(rabType.data.annotationComponents.isEmpty())
+                assertThat(oofType.data.annotationComponents).isEmpty()
+                assertThat(rabType.data.annotationComponents).isEmpty()
             }
 
             // This is a bug. We should be able to assert this for both source languages.

@@ -323,39 +323,36 @@ internal class AnnotationsTest : ConverterTestBase() {
     @Test
     fun `Nullability annotation is kept and discarded in Java and Kotlin as appropriate`() {
         val moduleJ = """
-            |/**
-            | * Stuff
-            | */
             |@Nullable
-            |public String nulla1() { return null; }
-            |public String nulla2() { return null; }
+            |public String nulla() { return null; }
+            |public String platform() { return null; }
             |@NonNull
             |public String nonna1() { return ""; }
             |@NotNull
             |public String nonna2() { return ""; }
-        """.render(java = true)
+        """.renderJava(imports = listOf("import org.jetbrains.annotations.NotNull"))
         val moduleK = """
             |annotation class Nullable
             |annotation class NonNull
             |@Nullable
-            |fun nulla1(): String? = null
-            |fun nulla2(): String? = null
+            |fun nulla(): String? = null
             |@NonNull
             |fun nonna1(): String = "foo"
             |fun nonna2(): String = "foo"
         """.render()
-        for (whichFun in listOf("nonna1", "nonna2", "nulla1", "nulla2")) {
+        for (whichFun in listOf("nonna1", "nonna2", "nulla", "platform")) {
             val annotationsJ = moduleJ.functionAnnotations(whichFun)
-            val annotationsK = moduleK.functionAnnotations(whichFun)
-            for (annotations in listOf(annotationsK, annotationsJ)) {
-                if (whichFun != "nulla1") continue
+            val annotationsK = if (whichFun != "platform") moduleK.functionAnnotations(whichFun)
+            else null
+            for (annotations in listOfNotNull(annotationsK, annotationsJ)) {
                 val isFromJava = (annotations === annotationsJ) // compare by reference
                 val isKotlinNullable = !isFromJava && "nulla" in whichFun
                 val annotationsAsJ = annotations.components(JAVA, isKotlinNullable, isFromJava)
                 val annotationsAsK = annotations.components(KOTLIN, isKotlinNullable, isFromJava)
                 // Java docs retain explicit nullability in java source, and get injected @NonNull
-                if ("nonna" in whichFun) assertThat(annotationsAsJ.single().isAtNonNull)
-                else if (whichFun == "nulla1") assertThat(annotationsAsJ.single().isAtNullable)
+                if ("nonna" in whichFun) assertThat(annotationsAsJ.single().isAtNonNull).isTrue()
+                else if (whichFun == "nulla")
+                    assertThat(annotationsAsJ.single().isAtNullable).isTrue()
                 else assertThat(annotationsAsJ).isEmpty()
                 // Kotlin docs retain NO nullability annotations EVEN IF explicit in Kotlin source
                 assertThat(annotationsAsK).isEmpty()
@@ -388,7 +385,7 @@ internal class AnnotationsTest : ConverterTestBase() {
             Annotation(DRI("androidx.annotation", "Nullable"), emptyMap())
         ).components(isKotlinNullable = true, isFromJava = false)
 
-        assertThat(annotations.single().isAtNullable)
+        assertThat(annotations.single().isAtNullable).isTrue()
     }
 
     @Test
