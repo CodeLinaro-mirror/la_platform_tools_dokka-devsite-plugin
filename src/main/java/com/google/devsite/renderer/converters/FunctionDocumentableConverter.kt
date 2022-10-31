@@ -60,7 +60,8 @@ internal class FunctionDocumentableConverter(
                             // Propagate ALL annotations _for display in the summary_, b/197321617
                             propagatedAnnotations = typeAnnotations,
                             isReturnType = true,
-                            isJavaSource = function.isFromJava()
+                            isJavaSource = function.isFromJava(),
+                            sourceSet = function.sourceSets.single()
                         ),
                         modifiers = function.modifiers().modifiersFor(hints)
                     )
@@ -97,7 +98,8 @@ internal class FunctionDocumentableConverter(
                             // Propagate ALL annotations _for display in the summary_, b/197321617
                             propagatedAnnotations = typeAnnotations,
                             isReturnType = true,
-                            isJavaSource = function.isFromJava()
+                            isJavaSource = function.isFromJava(),
+                            sourceSet = function.getExpectOrCommonSourceSet()
                         ),
                         modifiers = function.modifiers().modifiersFor(hints)
                     )
@@ -193,7 +195,8 @@ internal class FunctionDocumentableConverter(
             isReturnType = true,
             propagatedNullability =
             if (kind == SymbolDetail.SymbolKind.CONSTRUCTOR || function.isConstructor)
-                Nullability.DONT_CARE else null
+                Nullability.DONT_CARE else null,
+            sourceSet = function.sourceSets.single()
         )
 
         // So far I've only seen this in unit tests where we use the wrong entry point into
@@ -242,7 +245,8 @@ internal class FunctionDocumentableConverter(
             isReturnType = true,
             propagatedNullability =
             if (kind == SymbolDetail.SymbolKind.CONSTRUCTOR || function.isConstructor)
-                Nullability.DONT_CARE else null
+                Nullability.DONT_CARE else null,
+            sourceSet = function.getExpectOrCommonSourceSet()
         )
 
         // So far I've only seen this in unit tests where we use the wrong entry point into

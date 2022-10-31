@@ -1316,7 +1316,8 @@ internal class ParameterDocumentableConverterTest(
             // Propagate ALL annotations _for display in the summary_, b/197321617
             propagatedAnnotations = emptyList(),
             isReturnType = true,
-            isJavaSource = function(functionName)!!.isFromJava()
+            isJavaSource = function(functionName)!!.isFromJava(),
+            sourceSet = getExpectOrCommonSourceSet()
         )
     }
 

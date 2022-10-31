@@ -454,3 +454,9 @@ internal fun List<DFunction>.names() = map { it.name }
 internal fun List<DParameter>.names() = map { it.name }
 @JvmName("internalAndThusKotlinOnlyAlso")
 internal fun List<DProperty>.names() = map { it.name }
+
+internal fun Documentable.getExpectOrCommonSourceSet() =
+    sourceSets.singleOrNull()
+        ?: expectPresentInSet
+        ?: sourceSets.singleOrNull { it.displayName == "common" }
+        ?: sourceSets.singleOrNull { "common" in it.displayName }!!

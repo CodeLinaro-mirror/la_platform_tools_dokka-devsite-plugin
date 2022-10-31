@@ -55,6 +55,7 @@ internal class PropertyDocumentableConverter(
                         type = paramConverter.componentForProjection(
                             property.type,
                             property.isFromJava(),
+                            property.sourceSets.single(),
                             typeAnnotations
                         ),
                         modifiers = property.modifiers().modifiersFor(hints)
@@ -88,6 +89,7 @@ internal class PropertyDocumentableConverter(
                         type = paramConverter.componentForProjection(
                             property.type,
                             property.isFromJava(),
+                            property.getExpectOrCommonSourceSet(),
                             typeAnnotations
                         ),
                         modifiers = property.modifiers().modifiersFor(hints)
@@ -116,6 +118,7 @@ internal class PropertyDocumentableConverter(
         val returnType = paramConverter.componentForProjection(
             property.type,
             property.isFromJava(),
+            property.sourceSets.single(),
             typeAnnotations,
             propagatedNullability = property.type
                 .getNullability(displayLanguage, property.isFromJava(), typeAnnotations)
@@ -152,6 +155,7 @@ internal class PropertyDocumentableConverter(
         val returnType = paramConverter.componentForProjection(
             property.type,
             property.isFromJava(),
+            sourceSet = property.getExpectOrCommonSourceSet(),
             typeAnnotations,
             propagatedNullability = property.type
                 .getNullability(displayLanguage, property.isFromJava(), typeAnnotations)

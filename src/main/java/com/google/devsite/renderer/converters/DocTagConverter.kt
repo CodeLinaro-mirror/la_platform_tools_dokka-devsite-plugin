@@ -42,6 +42,7 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.runBlocking
+import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.Callable
@@ -171,8 +172,13 @@ internal class DocTagConverter(
             @kotlin.Suppress("UNCHECKED_CAST")
             try {
                 when (firstTag) {
-                    is Param ->
-                        params(tags as List<NamedTagWrapper>, generics, documentable, isFromJava)
+                    is Param -> params(
+                        tags as List<NamedTagWrapper>,
+                        generics,
+                        documentable,
+                        isFromJava,
+                        documentable.getExpectOrCommonSourceSet()
+                    )
                     is Return -> returnType(tags as List<Return>, checkNotNull(returnType))
                     is Throws -> throws(tags as List<Throws>)
                     is See -> see(tags as List<See>)
@@ -301,7 +307,8 @@ internal class DocTagConverter(
         tags: List<NamedTagWrapper>,
         dGenerics: List<DTypeParameter>,
         documentable: Documentable,
-        isFromJava: Boolean
+        isFromJava: Boolean,
+        sourceSet: DokkaConfiguration.DokkaSourceSet
     ): DocsSummaryList {
         val tagged = tags.map { it.name() }.toSet()
 
@@ -328,7 +335,7 @@ internal class DocTagConverter(
             allOptions.putAll(
                 recursivelyGetLambdaParamNames(documentable.parameters.map { it.type }).map {
                     (it.presentableName ?: "") to paramConverter
-                        .componentForLambdaParameter(it, isFromJava)
+                        .componentForLambdaParameter(it, isFromJava, sourceSet)
                 }
             )
         }
