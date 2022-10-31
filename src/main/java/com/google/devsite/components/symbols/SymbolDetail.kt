@@ -25,18 +25,49 @@ import com.google.devsite.renderer.converters.Modifiers
 internal interface SymbolDetail<T : SymbolSignature> : ContextFreeComponent {
     val data: Params<T>
 
-    data class Params<T : SymbolSignature>(
-        val name: String,
-        val returnType: TypeProjectionComponent,
-        val symbolKind: SymbolKind,
-        val signature: T,
-        val anchors: LinkedHashSet<String>,
-        val metadata: List<ContextFreeComponent>,
-        val displayLanguage: Language,
-        val modifiers: Modifiers = EmptyModifiers,
-        val extFunctionClass: String? = null,
-        val annotationComponents: List<AnnotationComponent> = emptyList()
-    )
+    // Because this is not the bottom of a class hierarchy (KmpSymbolDetail), it can't be `data`
+    open class Params<T : SymbolSignature>(
+        open val name: String,
+        open val returnType: TypeProjectionComponent,
+        open val symbolKind: SymbolKind,
+        open val signature: T,
+        open val anchors: LinkedHashSet<String>,
+        open val metadata: List<ContextFreeComponent>,
+        open val displayLanguage: Language,
+        open val modifiers: Modifiers = EmptyModifiers,
+        open val extFunctionClass: String? = null,
+        open val annotationComponents: List<AnnotationComponent> = emptyList()
+    ) {
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (other !is Params<*>) return false
+            if (name != other.name) return false
+            if (returnType != other.returnType) return false
+            if (symbolKind != other.symbolKind) return false
+            if (signature != other.signature) return false
+            if (anchors != other.anchors) return false
+            if (metadata != other.metadata) return false
+            if (displayLanguage != other.displayLanguage) return false
+            if (modifiers != other.modifiers) return false
+            if (extFunctionClass != other.extFunctionClass) return false
+            if (annotationComponents != other.annotationComponents) return false
+            return true
+        }
+
+        override fun hashCode(): Int {
+            var result = name.hashCode()
+            result = 31 * result + returnType.hashCode()
+            result = 31 * result + symbolKind.hashCode()
+            result = 31 * result + signature.hashCode()
+            result = 31 * result + anchors.hashCode()
+            result = 31 * result + metadata.hashCode()
+            result = 31 * result + displayLanguage.hashCode()
+            result = 31 * result + modifiers.hashCode()
+            result = 31 * result + (extFunctionClass?.hashCode() ?: 0)
+            result = 31 * result + annotationComponents.hashCode()
+            return result
+        }
+    }
 
     /** Holds the Kotlin keywords for various symbol types. */
     enum class SymbolKind(val keyword: String) {

@@ -19,6 +19,7 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.KmpTypeSummaryItem
 import com.google.devsite.TypeSummaryItem
 import com.google.devsite.components.impl.DefaultFunctionSignature
+import com.google.devsite.components.impl.DefaultKmpSymbolDetail
 import com.google.devsite.components.impl.DefaultKmpTableRowSummaryItem
 import com.google.devsite.components.impl.DefaultParameterComponent
 import com.google.devsite.components.impl.DefaultSymbolDetail
@@ -27,6 +28,7 @@ import com.google.devsite.components.impl.DefaultTableRowSummaryItem
 import com.google.devsite.components.impl.DefaultTypeProjectionComponent
 import com.google.devsite.components.impl.DefaultTypeSummary
 import com.google.devsite.components.symbols.FunctionSignature
+import com.google.devsite.components.symbols.KmpSymbolDetail
 import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
@@ -232,7 +234,7 @@ internal class FunctionDocumentableConverter(
         function: DFunction,
         hints: ModifierHints,
         kind: SymbolDetail.SymbolKind
-    ): SymbolDetail<FunctionSignature> {
+    ): KmpSymbolDetail<FunctionSignature> {
         val (typeAnnotations, signatureAnnotations) =
             function.annotations().partition { it.belongsOnReturnType() }
         val returnType = paramConverter.componentForProjection(
@@ -251,8 +253,8 @@ internal class FunctionDocumentableConverter(
             println("WARNING: constructor ${function.dri} is not being parsed correctly")
         }
 
-        return DefaultSymbolDetail(
-            SymbolDetail.Params(
+        return DefaultKmpSymbolDetail(
+            KmpSymbolDetail.Params(
                 name = function.name,
                 returnType = returnType,
                 symbolKind = kind,

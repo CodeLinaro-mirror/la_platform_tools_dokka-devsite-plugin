@@ -19,12 +19,14 @@ package com.google.devsite.renderer.converters
 import com.google.devsite.KmpTypeSummaryItem
 import com.google.devsite.TypeSummaryItem
 import com.google.devsite.capitalize
+import com.google.devsite.components.impl.DefaultKmpSymbolDetail
 import com.google.devsite.components.impl.DefaultKmpTableRowSummaryItem
 import com.google.devsite.components.impl.DefaultPropertySignature
 import com.google.devsite.components.impl.DefaultSymbolDetail
 import com.google.devsite.components.impl.DefaultSymbolSummary
 import com.google.devsite.components.impl.DefaultTableRowSummaryItem
 import com.google.devsite.components.impl.DefaultTypeSummary
+import com.google.devsite.components.symbols.KmpSymbolDetail
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.symbols.SymbolSummary
@@ -146,7 +148,7 @@ internal class PropertyDocumentableConverter(
     }
 
     /** @return the property detail component */
-    fun detailKmp(property: DProperty, hints: ModifierHints): SymbolDetail<PropertySignature> {
+    fun detailKmp(property: DProperty, hints: ModifierHints): KmpSymbolDetail<PropertySignature> {
         val (typeAnnotations, nonTypeAnnotations) =
             property.annotations().partition { it.belongsOnReturnType() }
         val returnType = paramConverter.componentForProjection(
@@ -156,8 +158,8 @@ internal class PropertyDocumentableConverter(
             propagatedNullability = property.type
                 .getNullability(displayLanguage, property.isFromJava(), typeAnnotations)
         )
-        return DefaultSymbolDetail(
-            SymbolDetail.Params(
+        return DefaultKmpSymbolDetail(
+            KmpSymbolDetail.Params(
                 name = property.name,
                 returnType = returnType,
                 symbolKind = SymbolDetail.SymbolKind.PROPERTY.takeIf { property.setter != null }

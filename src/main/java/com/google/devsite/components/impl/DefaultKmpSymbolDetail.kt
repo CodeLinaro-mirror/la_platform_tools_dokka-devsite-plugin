@@ -16,13 +16,11 @@
 
 package com.google.devsite.components.impl
 
-import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.ShouldBreak
 import com.google.devsite.components.render
-import com.google.devsite.components.symbols.SymbolDetail
+import com.google.devsite.components.symbols.KmpSymbolDetail
 import com.google.devsite.components.symbols.SymbolDetail.SymbolKind
 import com.google.devsite.components.symbols.SymbolSignature
-import com.google.devsite.components.table.SummaryList
 import com.google.devsite.renderer.Language
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
@@ -32,9 +30,9 @@ import kotlinx.html.h3
 import kotlinx.html.pre
 
 /** Default implementation of a fully documented function. */
-internal data class DefaultSymbolDetail<T : SymbolSignature>(
-    override val data: SymbolDetail.Params<T>
-) : SymbolDetail<T> {
+internal data class DefaultKmpSymbolDetail<T : SymbolSignature>(
+    override val data: KmpSymbolDetail.Params<T>
+) : KmpSymbolDetail<T> {
     override fun render(into: FlowContent) = into.div {
         for (anchor in data.anchors.drop(1)) {
             a { attributes["name"] = anchor }
@@ -43,7 +41,7 @@ internal data class DefaultSymbolDetail<T : SymbolSignature>(
         h3("api-name") {
             data.anchors.firstOrNull()?.let { attributes["id"] = it }
             if (data.displayLanguage == Language.JAVA && data.extFunctionClass != null) {
-                +data.extFunctionClass!!
+                +data.extFunctionClass
                 +"."
             }
             +data.name
@@ -84,20 +82,4 @@ internal data class DefaultSymbolDetail<T : SymbolSignature>(
         if (data.displayLanguage == Language.KOTLIN) "${data.returnType} : ${data.signature}"
         else "" + data.signature + data.returnType
         ) + data.metadata.sortedBy { descriptionSorter(it) }
-}
-
-internal fun descriptionSorter(component: ContextFreeComponent): Int {
-    return when (component) {
-        is SummaryList<*> -> {
-            val tableName = component.data.header!!.data.title
-            when (tableName) {
-                "Parameters" -> 1
-                "Returns" -> 2
-                "Throws" -> 3
-                "See also" -> 4
-                else -> 5 // Unknown tables go at the end
-            }
-        } // Parameters Table > Returns Table
-        else -> 0 // Preserve input order for all other cases, and put them before the tables
-    }
 }
