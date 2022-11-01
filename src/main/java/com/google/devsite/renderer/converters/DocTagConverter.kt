@@ -521,21 +521,6 @@ internal class DocTagConverter(
         val components = mutableListOf<DocTag>()
         tags().forEach {
             when (it) {
-                is Description -> {
-                    it.children.forEach { child ->
-                        try {
-                            recursivelyConsiderPsAndTextsForJavaSamples(
-                                child, components, this.sourceSets.single().samples
-                            )
-                        } catch (e: Exception) {
-                            throw RuntimeException(
-                                "Error when resolving samples when processing $name" +
-                                    getErrorLocation(),
-                                e
-                            )
-                        }
-                    }
-                }
                 is Sample -> {
                     val dri = it.name
 
@@ -554,7 +539,22 @@ internal class DocTagConverter(
                     components.add(CodeBlock(listOf(Text(imports + body))))
                     components.addAll(it.children)
                 }
-                is NamedTagWrapper -> if (it.belongsInDescriptionOf(this)) components.add(it.root)
+                is Description, is NamedTagWrapper -> {
+                    if (!it.belongsInDescriptionOf(this)) return@forEach
+                    it.children.forEach { child ->
+                        try {
+                            recursivelyConsiderPsAndTextsForJavaSamples(
+                                child, components, this.sourceSets.single().samples
+                            )
+                        } catch (e: Exception) {
+                            throw RuntimeException(
+                                "Error when resolving samples when processing $name" +
+                                    getErrorLocation(),
+                                e
+                            )
+                        }
+                    }
+                }
                 is Author, is Version, is Since, is Return, is Receiver, is Constructor,
                 is Deprecated, is Suppress -> { /* TODO: We do not support these tags yet */ }
             }
@@ -569,10 +569,12 @@ internal class DocTagConverter(
      * the same name as its function.
      */
     private fun TagWrapper.belongsInDescriptionOf(documentable: Documentable): Boolean {
+        if (this is Description) return true
         if (this !is NamedTagWrapper) return false
-        if (this.name != documentable.name) return false
         return when (this) {
-            is Param, is Property -> documentable is DParameter || documentable is DProperty
+            is Param, is Property -> (documentable is DParameter || documentable is DProperty) &&
+                (this.name == documentable.name)
+            is Throws, is See -> false
             else -> true
         }
     }
