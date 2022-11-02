@@ -863,11 +863,7 @@ internal abstract class ClasslikeDocumentableConverter(
         val entry = getSourceEntry(classlike) ?: return null
         val path = getSourceFilePath(entry)
         val jsonLibraryMetadata = findMatchingJsonLibraryMetadata(path)
-        val sourceUrl = if (docsHolder.showSourceLink) {
-            createLinkToSource(entry, path)
-        } else {
-            null
-        }
+        val sourceUrl = createLinkToSource(entry, path)
 
         return DefaultMetadataComponent(
             MetadataComponent.Params(
@@ -937,8 +933,8 @@ internal abstract class ClasslikeDocumentableConverter(
                     "Dackka supports only one source link per source set.\n" +
                     "The source link URL should be a format string with placeholders for the " +
                     "filepath and (optionally) the qualified name of the class.\n" +
-                    "For example, `https://cs.android.com/search?ss=androidx/platform/frameworks" +
-                    "/support&q=file:%s class:%s` is the source link for AndroidX."
+                    "For example, `https://cs.android.com/search?q=file:%s+class:%s&ss=androidx/" +
+                    "platform/frameworks/support` is the source link for AndroidX."
             )
         }
 
