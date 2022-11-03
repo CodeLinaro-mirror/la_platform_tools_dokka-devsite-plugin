@@ -84,7 +84,6 @@ internal class DocumentablesHolder(
     context: DokkaContext? = null,
     private val externalDocumentablesProvider: ExternalDocumentablesProvider? = null,
     private val excludedPackages: Set<Regex> = emptySet(),
-    val showLibraryMetadata: Boolean = false,
     val fileMetadataMap: Map<String, LibraryMetadata> = emptyMap(),
 ) {
     internal var classlikesDone: AtomicInteger = AtomicInteger()

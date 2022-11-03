@@ -313,13 +313,7 @@ internal abstract class ClasslikeDocumentableConverter(
         val hierarchy = async { computeHierarchy() }
         val relatedSymbols = async { findRelatedSymbols() }
         val inheritedTypes = async { computeInheritedSymbols(inheritedAll) }
-        val metadataComponent = async {
-            if (docsHolder.showLibraryMetadata) {
-                getMetadata()
-            } else {
-                null
-            }
-        }
+        val metadataComponent = async { getMetadata() }
 
         var extensionFunctions = classExtensionFunctions +
             if (displayLanguage == Language.JAVA)

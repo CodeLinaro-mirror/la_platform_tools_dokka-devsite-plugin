@@ -222,7 +222,6 @@ internal abstract class ConverterTestBase(
                 this,
                 context = context,
                 externalDocumentablesProvider = externalDocumentablesProvider,
-                showLibraryMetadata = true,
             )
         }
         val classGraph = runBlocking { holder.classGraph() }
