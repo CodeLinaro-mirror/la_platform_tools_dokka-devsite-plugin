@@ -17,6 +17,7 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.renderer.Language
+import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.model.AdditionalModifiers
 import org.jetbrains.dokka.model.DInterface
 import org.jetbrains.dokka.model.DObject
@@ -28,26 +29,27 @@ import org.jetbrains.dokka.model.WithVisibility
 import org.jetbrains.dokka.model.properties.WithExtraProperties
 
 /** @return the complete list of modifiers for this type */
+// TODO(KMP, b/254490320)
 internal fun Documentable.modifiers(): List<String> {
-    val result = mutableListOf<String>()
+    val result = mutableListOf<String?>()
     if (this is WithAbstraction)
-        result += this.modifier.values.map { it.name }.filter { it.isNotEmpty() }
+        result += listOf(modifier[getExpectOrCommonSourceSet()]?.name)
     if (this is WithVisibility)
-        result += listOf(visibility.values.single().name)
+        result += listOf(visibility[getExpectOrCommonSourceSet()]?.name)
     if (this is WithExtraProperties<*>)
-        result += getExtraModifiers()
-    return result
+        result += getExtraModifiers(getExpectOrCommonSourceSet())
+    return result.filterNotNull().filter { it.isNotEmpty() }
 }
 
 /**
  *  Returns a list of modifiers stored in the AdditionalModifiers extra field
  *  i.e. VarArg
  */
-internal fun <T> T.getExtraModifiers(): List<String>
-    where T : WithExtraProperties<*> {
-    return extra.allOfType<AdditionalModifiers>().flatMap { modifiers ->
-        modifiers.content.values.single().map { it.name }.filter { it.isNotEmpty() }
-    }
+internal fun <T : WithExtraProperties<*>> T.getExtraModifiers(
+    sourceSet: DokkaConfiguration.DokkaSourceSet
+) = extra.allOfType<AdditionalModifiers>().flatMap { modifiers ->
+    modifiers.content[sourceSet]?.map { it.name }
+        ?.filter { it.isNotEmpty() } ?: emptyList()
 }
 
 /** @return true if the modifiers represent a constant symbol, false otherwise */
