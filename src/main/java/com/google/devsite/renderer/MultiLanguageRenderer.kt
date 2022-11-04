@@ -84,22 +84,9 @@ internal class MultiLanguageRenderer(
     }
 
     /**
-     * Boolean to determine if library metadata (such as artifact ID) should be shown.
-     *
-     * This value does not do anything if "LIBRARY_METADATA_FILE" is not specified (see
-     * [libraryMetadataFilename])
-     */
-    private val showLibraryMetadata: Boolean by lazy {
-        System.getenv("SHOW_LIBRARY_METADATA") == "true"
-    }
-
-    /**
      * The location of the JSON file containing the library metadata.
      *
      * Returns an empty string if "SHOW_LIBRARY_METADATA" system variable isn't defined.
-     *
-     * This value does not do anything if "SHOW_LIBRARY_METADATA" is not true (see
-     * [showLibraryMetadata])
      */
     private val libraryMetadataFilename: String by lazy {
         System.getenv("LIBRARY_METADATA_FILE") ?: ""
@@ -122,7 +109,6 @@ internal class MultiLanguageRenderer(
                 context = context,
                 externalDocumentablesProvider = externalDocumentablesProvider,
                 excludedPackages = excludedPackagesForJava,
-                showLibraryMetadata = showLibraryMetadata,
                 fileMetadataMap = fileMetadataMap,
             )
             val jClassGraph = jHolder.classGraph()
@@ -133,7 +119,6 @@ internal class MultiLanguageRenderer(
                 context = context,
                 externalDocumentablesProvider = externalDocumentablesProvider,
                 excludedPackages = excludedPackagesForKotlin,
-                showLibraryMetadata = showLibraryMetadata,
                 fileMetadataMap = fileMetadataMap,
             )
             val kClassGraph = kHolder.classGraph()
