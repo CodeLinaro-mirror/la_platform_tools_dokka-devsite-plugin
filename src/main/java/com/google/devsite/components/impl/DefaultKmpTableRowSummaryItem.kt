@@ -40,7 +40,9 @@ internal data class DefaultKmpTableRowSummaryItem<
         td {
             data.description.render(this)
         }
-        // TODO(KMP, b/254489852), render platforms
+        td {
+            data.platforms.render(this)
+        }
     }
 
     override fun toString() = (data.title?.let { "$it: " } ?: "") + data.description.toString()

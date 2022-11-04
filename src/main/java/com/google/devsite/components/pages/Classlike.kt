@@ -40,6 +40,7 @@ internal interface Classlike : ContextFreeComponent {
     val data: Params
 
     data class Params(
+        val header: ContextFreeComponent?,
         val displayLanguage: Language,
         val signature: ClasslikeSignature,
         val hierarchy: ClassHierarchy,

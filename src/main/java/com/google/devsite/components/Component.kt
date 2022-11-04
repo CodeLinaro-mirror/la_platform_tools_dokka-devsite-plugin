@@ -16,15 +16,54 @@
 
 package com.google.devsite.components
 
+import com.google.devsite.components.symbols.Platform
 import com.google.devsite.components.symbols.TypeParameterComponent
+import com.google.devsite.components.symbols.devsiteId
+import com.google.devsite.components.symbols.selectorDisplayName
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
+import kotlinx.html.HTMLTag
+import kotlinx.html.attributesMapOf
 import kotlinx.html.br
+import kotlinx.html.option
+import kotlinx.html.select
+import kotlinx.html.visit
 
 /** A component renders some data into a UI container. */
 internal interface Component<T> {
     /** Render this component's data into the container. */
     fun render(into: T)
+}
+
+inline fun FlowContent.devsiteFilter(crossinline block: HTMLTag.() -> Unit = {}) =
+    HTMLTag(
+        tagName = "devsite-filter ",
+        consumer = consumer,
+        initialAttributes = attributesMapOf("select-el-container-id", "platform"),
+        namespace = null,
+        inlineTag = false,
+        emptyTag = false
+    ).visit(block)
+fun FlowContent.devsitePlatformSelector(
+    platforms: List<Platform>
+) = HTMLTag(
+    tagName = "devsite-select ",
+    consumer = consumer,
+    initialAttributes = attributesMapOf("id", "platform", "label", "Select a platform"),
+    namespace = null,
+    inlineTag = false,
+    emptyTag = false
+).visit {
+    this@devsitePlatformSelector.select {
+        multiple = true
+        platforms.map { platform ->
+            option {
+                selected = true
+                value = platform.devsiteId()
+                +platform.selectorDisplayName()
+            }
+        }
+    }
 }
 
 internal fun List<Component<FlowContent>>.render(

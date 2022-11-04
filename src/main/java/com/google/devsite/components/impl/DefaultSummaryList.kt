@@ -30,7 +30,6 @@ internal data class DefaultSummaryList<T : SummaryItem>(
 ) : SummaryList<T> {
     override fun render(into: FlowContent) = into.run {
         if (!hasContent()) return
-
         div("devsite-table-wrapper") {
             // Delegate choices of table layout (e.g. column number, width) to the first row.
             // This is the same method html table rendering itself normally uses.

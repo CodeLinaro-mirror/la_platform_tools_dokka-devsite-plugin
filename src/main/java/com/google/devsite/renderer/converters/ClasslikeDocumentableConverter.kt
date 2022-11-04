@@ -28,6 +28,7 @@ import com.google.devsite.components.impl.DefaultClasslike
 import com.google.devsite.components.impl.DefaultClasslikeSignature
 import com.google.devsite.components.impl.DefaultClasslikeSummary
 import com.google.devsite.components.impl.DefaultDevsitePage
+import com.google.devsite.components.impl.DefaultDevsitePlatformSelector
 import com.google.devsite.components.impl.DefaultInheritedSymbols
 import com.google.devsite.components.impl.DefaultMetadataComponent
 import com.google.devsite.components.impl.DefaultRelatedSymbols
@@ -96,6 +97,8 @@ internal abstract class ClasslikeDocumentableConverter(
     private val classExtensionFunctions: List<DFunction> = emptyList(),
     private val classExtensionProperties: List<DProperty> = emptyList()
 ) {
+    protected abstract val header: DefaultDevsitePlatformSelector?
+
     private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
     // TODO(KMP b/254490320)
     protected val javadocConverter = DocTagConverter(displayLanguage, pathProvider, docsHolder)
@@ -370,6 +373,7 @@ internal abstract class ClasslikeDocumentableConverter(
                 title = classlike.name(),
                 content = DefaultClasslike(
                     Classlike.Params(
+                        header = header,
                         displayLanguage = displayLanguage,
                         signature = signature.await(),
                         hierarchy = hierarchy.await(),
@@ -833,10 +837,10 @@ internal abstract class ClasslikeDocumentableConverter(
      *
      * `extra[InheritedMember].inheritedFrom` does not actually contain where inherited members are
      * inherited from
-     */
+     */ /*
     private fun <T> T.driInheritedFrom(): DRI?
         where T : Documentable, T : WithExtraProperties<T> =
-        extra[InheritedMember]?.inheritedFrom?.values?.toSet()?.singleOrNull()
+        extra[InheritedMember]?.inheritedFrom?.values?.toSet()?.singleOrNull() */
 
     /** Finds the direct and indirect subclasses for this classlike, returning their component. */
     // We know our subclasses will always be DClasslikes

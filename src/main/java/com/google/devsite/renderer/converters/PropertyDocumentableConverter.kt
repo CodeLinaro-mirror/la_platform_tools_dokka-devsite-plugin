@@ -21,6 +21,7 @@ import com.google.devsite.TypeSummaryItem
 import com.google.devsite.capitalize
 import com.google.devsite.components.impl.DefaultKmpSymbolDetail
 import com.google.devsite.components.impl.DefaultKmpTableRowSummaryItem
+import com.google.devsite.components.impl.DefaultPlatformComponent
 import com.google.devsite.components.impl.DefaultPropertySignature
 import com.google.devsite.components.impl.DefaultSymbolDetail
 import com.google.devsite.components.impl.DefaultSymbolSummary
@@ -108,7 +109,8 @@ internal class PropertyDocumentableConverter(
                             nullability = Nullability.DONT_CARE // Propagates to return type instead
                         )
                     )
-                )
+                ),
+                platforms = DefaultPlatformComponent(property.sourceSets)
             )
         )
     }
@@ -192,7 +194,8 @@ internal class PropertyDocumentableConverter(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
                     nullability = Nullability.DONT_CARE // Propagates to return type instead
-                )
+                ),
+                platforms = DefaultPlatformComponent(property.sourceSets)
             )
         )
     }

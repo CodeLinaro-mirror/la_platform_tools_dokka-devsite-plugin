@@ -16,6 +16,8 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.components.impl.DefaultDevsitePlatformSelector
+import com.google.devsite.components.symbols.Platform
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
@@ -38,6 +40,7 @@ internal class NonKmpClasslikeConverter(
     classExtensionFunctions,
     classExtensionProperties
 ) {
+    override val header: DefaultDevsitePlatformSelector? = null
     private val functionConverter =
         FunctionDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
     private val propertyConverter =
@@ -65,6 +68,9 @@ internal class KmpClasslikeConverter(
     classExtensionFunctions,
     classExtensionProperties
 ) {
+    override val header = DefaultDevsitePlatformSelector(
+        platforms = listOf(Platform.COMMON, Platform.JVM, Platform.JS, Platform.NATIVE)
+    )
     private val functionConverter =
         FunctionDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
     private val propertyConverter =

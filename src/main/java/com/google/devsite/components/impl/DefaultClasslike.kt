@@ -30,6 +30,7 @@ internal data class DefaultClasslike(
     override val data: Classlike.Params
 ) : Classlike {
     override fun render(into: FlowContent) = into.run {
+        if (data.header != null) data.header.render(this)
         p {
             pre {
                 data.signature.render(this)

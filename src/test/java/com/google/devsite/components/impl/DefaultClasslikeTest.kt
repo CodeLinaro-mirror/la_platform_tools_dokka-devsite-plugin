@@ -156,6 +156,7 @@ class DefaultClasslikeTest {
 
 internal val emptyClasslikeParams =
     Params(
+        header = null,
         displayLanguage = Language.KOTLIN, // We only use no-op components; this is fine
         signature = NoopClasslikeSignature(),
         hierarchy = NoopClassHierarchy(shown = false),

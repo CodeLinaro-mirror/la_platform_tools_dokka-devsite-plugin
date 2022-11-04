@@ -17,6 +17,16 @@
 package com.google.devsite.components.table
 
 import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.components.devsiteFilter
+import com.google.devsite.components.symbols.PlatformComponent
+import kotlinx.html.COL
+import kotlinx.html.DIV
+import kotlinx.html.TABLE
+import kotlinx.html.attributesMapOf
+import kotlinx.html.col
+import kotlinx.html.colGroup
+import kotlinx.html.table
+import kotlinx.html.visit
 
 /** Builds a three-pane layout item with a Platform indicator for DevsiteSelector in column 3. */
 internal interface KmpTableRowSummaryItem<T : ContextFreeComponent?, V : ContextFreeComponent> :
@@ -26,6 +36,20 @@ internal interface KmpTableRowSummaryItem<T : ContextFreeComponent?, V : Context
     // TODO(KMP b/254489852)
     data class Params<T : ContextFreeComponent?, V : ContextFreeComponent>(
         override val title: T,
-        override val description: V
+        override val description: V,
+        val platforms: PlatformComponent
     ) : TableRowSummaryItem.Params<T, V>(title, description)
+
+    override fun layout(into: DIV, contents: TABLE.() -> Unit) = into.run {
+        devsiteFilter {
+            into.table("fixed") {
+                colGroup {
+                    COL(attributesMapOf("width", "35%"), consumer).visit {}
+                    COL(attributesMapOf("width", "58%"), consumer).visit {}
+                    col() // Last col should be floating-width. (This method can't set "width".)
+                }
+                contents()
+            }
+        }
+    }
 }

@@ -58,13 +58,13 @@ class KmpTest : IntegrationTestBase() {
             )
         }
         fun SourceSetsBuilder.createSourceSet(
-            nameArg: String,
-            displayNameArg: String = nameArg.capitalize(),
-            analysisPlatformArg: String = nameArg,
-            dependentSourceSetsArg: Set<DokkaSourceSetID> = emptySet()
+            name: String,
+            displayName: String = name.capitalize(),
+            analysisPlatform: String = name,
+            dependentSourceSets: Set<DokkaSourceSetID> = emptySet()
         ) = sourceSet {
-            name = nameArg; displayName = displayNameArg; analysisPlatform = analysisPlatformArg
-            dependentSourceSets = dependentSourceSetsArg
+            this.name = name
+            this.displayName = displayName
             val sources = File(sourceDir + "/" + name + "Main").absoluteFile
             check(sources.isDirectory) { "$sources does not exist or is not a directory" }
             sourceRoots = listOf(sources.absolutePath)
@@ -74,6 +74,8 @@ class KmpTest : IntegrationTestBase() {
                 DokkaConfiguration.Visibility.PUBLIC,
                 DokkaConfiguration.Visibility.PROTECTED
             )
+            this.analysisPlatform = analysisPlatform
+            this.dependentSourceSets = dependentSourceSets
         }
         // TODO: write a test that has multiple libraries across the source sets
 
@@ -81,7 +83,7 @@ class KmpTest : IntegrationTestBase() {
             sourceSets {
                 val common = createSourceSet("common")
                 createSourceSet("jvm", "JVM", "jvm", setOf(common.value.sourceSetID))
-                createSourceSet("native", dependentSourceSetsArg = setOf(common.value.sourceSetID))
+                createSourceSet("native", dependentSourceSets = setOf(common.value.sourceSetID))
             }
             offlineMode = true
         }

@@ -17,11 +17,13 @@
 package com.google.devsite.components.impl
 
 import com.google.devsite.components.ShouldBreak
+import com.google.devsite.components.devsiteFilter
 import com.google.devsite.components.render
 import com.google.devsite.components.symbols.KmpSymbolDetail
 import com.google.devsite.components.symbols.SymbolDetail.SymbolKind
 import com.google.devsite.components.symbols.SymbolSignature
 import com.google.devsite.renderer.Language
+import kotlinx.html.DIV
 import kotlinx.html.Entities
 import kotlinx.html.FlowContent
 import kotlinx.html.a
@@ -46,16 +48,7 @@ internal data class DefaultKmpSymbolDetail<T : SymbolSignature>(
             }
             +data.name
         }
-        /*
-        // TODO(KMP, b/254489852): Style for platform
-        data.platforms.forEach {
-            div {
-                if (it.shortName() != "common") {
-                    +it.shortName()
-                }
-            }
-            comment("platform-${it.selectorDisplayName()}")
-        }*/
+        data.platforms.renderForDetail(into)
         pre("api-signature no-pretty-print") {
             data.annotationComponents.render(into, ShouldBreak.YES, separator = "")
             data.modifiers.render(this, terminator = { +Entities.nbsp })
@@ -84,6 +77,14 @@ internal data class DefaultKmpSymbolDetail<T : SymbolSignature>(
         }
 
         data.metadata.sortedBy { descriptionSorter(it) }.render(this, separator = null)
+    }
+
+    override fun layout(into: FlowContent, contents: DIV.() -> Unit) = into.run {
+        devsiteFilter {
+            into.div(classes = "list") {
+                contents()
+            }
+        }
     }
 
     override fun toString() = (data.extFunctionClass ?: "") + data.name + " at " +

@@ -22,6 +22,7 @@ import com.google.devsite.components.impl.DefaultFunctionSignature
 import com.google.devsite.components.impl.DefaultKmpSymbolDetail
 import com.google.devsite.components.impl.DefaultKmpTableRowSummaryItem
 import com.google.devsite.components.impl.DefaultParameterComponent
+import com.google.devsite.components.impl.DefaultPlatformComponent
 import com.google.devsite.components.impl.DefaultSymbolDetail
 import com.google.devsite.components.impl.DefaultSymbolSummary
 import com.google.devsite.components.impl.DefaultTableRowSummaryItem
@@ -119,7 +120,8 @@ internal class FunctionDocumentableConverter(
                             nullability = Nullability.DONT_CARE // Propagates to return type instead
                         )
                     )
-                )
+                ),
+                platforms = DefaultPlatformComponent(function.sourceSets)
             )
         )
     }
@@ -161,7 +163,8 @@ internal class FunctionDocumentableConverter(
                             nullability = Nullability.DONT_CARE // Propagates to return type instead
                         )
                     )
-                )
+                ),
+                platforms = DefaultPlatformComponent(function.sourceSets)
             )
         )
     }
@@ -277,7 +280,8 @@ internal class FunctionDocumentableConverter(
                     pathProvider = pathProvider,
                     displayLanguage = displayLanguage,
                     nullability = Nullability.DONT_CARE // Nullability is on the return type instead
-                )
+                ),
+                platforms = DefaultPlatformComponent(function.sourceSets)
             )
         )
     }
