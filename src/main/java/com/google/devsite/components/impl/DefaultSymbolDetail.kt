@@ -48,7 +48,6 @@ internal data class DefaultSymbolDetail<T : SymbolSignature>(
             }
             +data.name
         }
-
         pre("api-signature no-pretty-print") {
             data.annotationComponents.render(into, ShouldBreak.YES, separator = "")
             data.modifiers.render(this, terminator = { +Entities.nbsp })
