@@ -32,6 +32,14 @@ val List<String>.topLevelExtensionProperty get() = Pair(10f, 20f)
  * top-level non-extension property docs
  *
  * @sample dokkatest.sampleAnnotation.samples.FunctionContainingClassSample
+ *
+ * and this is a Java sample from Kotlin source using Kotlin syntax (does not work):
+ * @BROKENsample dokkatest.sampleAnnotation.samples.FragmentArgumentsSupport.onCreate
+ *
+ * and this is a Java sample from Kotlin source using Java syntax:
+ *
+ * {@sample frameworks/support/samples/Support4Demos/src/main/java/com/example/android/supportv4/app/FragmentArgumentsSupport.java
+ *      fragment}
  */
 val topLevelProperty: String? = null
 
@@ -39,6 +47,9 @@ val topLevelProperty: String? = null
  * top-level extension function docs
  *
  * @sample dokkatest.sampleAnnotation.samples.FunctionContainingClassSample
+ *
+ * and this is an XML sample from Kotlin source:
+ * {@sample frameworks/support/samples/Support4Demos/src/main/res/layout/fragment_arguments_support.xml from_attributes}
  */
 fun List<String>.topLevelExtensionFunction() = Pair(10f, 20f)
 
