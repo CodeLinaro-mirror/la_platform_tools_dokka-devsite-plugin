@@ -17,6 +17,7 @@
 package com.google.devsite.renderer.converters
 
 import com.google.devsite.renderer.Language
+import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.model.Annotations
 import org.jetbrains.dokka.model.DefinitelyNonNullable
 import org.jetbrains.dokka.model.Dynamic
@@ -94,6 +95,7 @@ enum class Nullability {
 /** @return true if this is a nullable type, false otherwise */
 internal fun Projection.getNullability(
     displayLanguage: Language,
+    sourceSet: DokkaConfiguration.DokkaSourceSet,
     isJavaSource: Boolean? = null,
     injectedAnnotations: List<Annotations.Annotation> = emptyList()
 ): Nullability {
@@ -104,8 +106,8 @@ internal fun Projection.getNullability(
     return when (this) {
         is Nullable -> Nullability.KOTLIN_NULLABLE
         is DefinitelyNonNullable -> Nullability.KOTLIN_DEFAULT
-        is Variance<*> -> inner.getNullability(displayLanguage, isJavaSource)
-        is TypeAliased -> inner.getNullability(displayLanguage, isJavaSource)
+        is Variance<*> -> inner.getNullability(displayLanguage, sourceSet, isJavaSource)
+        is TypeAliased -> inner.getNullability(displayLanguage, sourceSet, isJavaSource)
         Void -> Nullability.JAVA_NEVER_NULL // Not nullable by definition
         Dynamic, Star -> Nullability.KOTLIN_DEFAULT // Can come from Kotlin source only
         // Unannotated java projections are nullable, default Kotlin aren't
@@ -114,7 +116,7 @@ internal fun Projection.getNullability(
             // Java arrays are nullable; non-array primitives aren't
             if (this is PrimitiveJavaType && "[" !in name) Nullability.JAVA_NEVER_NULL
             // This is the only case where annotations can override the normal nullability
-            val allAnnotations = injectedAnnotations + this.annotations()
+            val allAnnotations = injectedAnnotations + this.annotations(sourceSet)
             // We hide nullability annotations on Kotlin docs even if they were explicit in Kotlin
             // source. This is highly opinionated. As such, we throw a warningto make this explicit.
             /*if (isJavaSource == false && (this is TypeParameter || this is TypeConstructor) &&

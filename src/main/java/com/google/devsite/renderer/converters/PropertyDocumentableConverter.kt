@@ -123,7 +123,12 @@ internal class PropertyDocumentableConverter(
             property.sourceSets.single(),
             typeAnnotations,
             propagatedNullability = property.type
-                .getNullability(displayLanguage, property.isFromJava(), typeAnnotations)
+                .getNullability(
+                    displayLanguage = displayLanguage,
+                    sourceSet = property.getExpectOrCommonSourceSet(),
+                    isJavaSource = property.isFromJava(),
+                    injectedAnnotations = typeAnnotations
+                )
         )
         return DefaultSymbolDetail(
             SymbolDetail.Params(
@@ -160,7 +165,12 @@ internal class PropertyDocumentableConverter(
             sourceSet = property.getExpectOrCommonSourceSet(),
             typeAnnotations,
             propagatedNullability = property.type
-                .getNullability(displayLanguage, property.isFromJava(), typeAnnotations)
+                .getNullability(
+                    displayLanguage = displayLanguage,
+                    sourceSet = property.getExpectOrCommonSourceSet(),
+                    isJavaSource = property.isFromJava(),
+                    injectedAnnotations = typeAnnotations
+                )
         )
         return DefaultKmpSymbolDetail(
             KmpSymbolDetail.Params(
@@ -198,10 +208,9 @@ internal class PropertyDocumentableConverter(
         }
         val constantValue = if (isConstant(modifiers())) {
             // the value of a constant is stored as a DefaultValue, pick it out if it exists
-            extra.allOfType<DefaultValue>().singleOrNull()?.value?.getValue()
-        } else {
-            null
-        }
+            extra.allOfType<DefaultValue>().singleOrNull()?.expression
+                ?.get(getExpectOrCommonSourceSet())?.getValue()
+        } else null
         return DefaultPropertySignature(
             PropertySignature.Params(
                 // TODO(b/168136770): figure out path for default anchors
