@@ -455,6 +455,15 @@ internal fun List<DParameter>.names() = map { it.name }
 @JvmName("internalAndThusKotlinOnlyAlso")
 internal fun List<DProperty>.names() = map { it.name }
 
+/**
+ * Attempts to get the `expect` source set for a Documentable, or wherever else a sourceset-agnostic
+ * version of the function is defined. This is because we currently pull e.g. description
+ * documentation from this kind of source set, and ignore e.g. `actual`s' documentation.
+ *
+ * Single-platform functions, regardless of function, will return sourceSets.singleOrNull
+ * expect/actual classes and elements will return expectPresentInSet
+ * There are fallbacks for some odd cases following that.
+ */
 internal fun Documentable.getExpectOrCommonSourceSet() =
     sourceSets.singleOrNull()
         ?: expectPresentInSet

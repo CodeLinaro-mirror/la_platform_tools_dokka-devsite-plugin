@@ -312,7 +312,6 @@ val classpathForTests by tasks.registering(ClasspathForTestsTask::class) {
 
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
-        // we are only checking if the classpath is complete
         freeCompilerArgs += "-Xmulti-platform"
     }
     dependsOn(explodeAars)
