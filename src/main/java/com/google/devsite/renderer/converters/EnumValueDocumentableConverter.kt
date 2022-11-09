@@ -39,7 +39,6 @@ internal class EnumValueDocumentableConverter(
     private val paramConverter = ParameterDocumentableConverter(displayLanguage, pathProvider)
 
     /** @return the enum value summary component */
-    // TODO(KMP, b/256172699)
     fun summary(enumValue: DEnumEntry): TableRowSummaryItem<Link, DescriptionComponent> {
         val annotations = enumValue.annotations()
         return DefaultTableRowSummaryItem(

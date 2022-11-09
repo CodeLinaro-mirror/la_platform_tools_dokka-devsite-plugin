@@ -904,8 +904,6 @@ internal abstract class ClasslikeDocumentableConverter(
      * "/location/to/root/of/source/files/androidx/paging/compose/LazyPagingItems.kt".
      */
     private fun getSourceFilePath(sourceEntry: SourceEntry): String {
-        // It is possible for there to me multiple sourceRoots; e.g. with extension functions.
-        // TODO: verify that first() actually gets the most-correct source file for such situations
         val sourceRoot = sourceEntry.key.sourceRoots.first().toString()
         val filePath = sourceEntry.value.path.substringAfter(sourceRoot)
         return filePath.removePrefix("/")

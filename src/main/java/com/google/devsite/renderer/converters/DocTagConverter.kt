@@ -530,8 +530,9 @@ internal class DocTagConverter(
             when (it) {
                 is Sample -> {
                     val dri = it.name
-                    // TODO(KMP) we currently have no plan to provide KMP samples b/181224204
-                    val sourceSet = this.getExpectOrCommonSourceSet()
+
+                    // TODO: fix this to allow KMP to work. Currently asserts single-platform. b/181224204
+                    val sourceSet = sourceSets.single()
 
                     val facade = analysisMap[sourceSet]?.facade ?: throw RuntimeException(
                         "Cannot resolve facade: ${sourceSet.sourceSetID} for $this"
@@ -550,7 +551,7 @@ internal class DocTagConverter(
                     it.children.forEach { child ->
                         try {
                             recursivelyConsiderPsAndTextsForJavaSamples(
-                                child, components, this.getExpectOrCommonSourceSet().samples
+                                child, components, this.sourceSets.single().samples
                             )
                         } catch (e: Exception) {
                             throw RuntimeException(

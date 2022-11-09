@@ -18,13 +18,12 @@ package com.google.devsite.components.table
 
 import com.google.devsite.components.ContextFreeComponent
 
-/** Builds a three-pane layout item with a Platform indicator for DevsiteSelector in column 3. */
+/** Builds a two-pane layout item. */
 internal interface KmpTableRowSummaryItem<T : ContextFreeComponent?, V : ContextFreeComponent> :
     TableRowSummaryItem<T, V> {
     override val data: Params<T, V>
-
     // TODO(KMP b/254489852)
-    data class Params<T : ContextFreeComponent?, V : ContextFreeComponent>(
+    data class Params<T : ContextFreeComponent?, V : ContextFreeComponent> (
         override val title: T,
         override val description: V
     ) : TableRowSummaryItem.Params<T, V>(title, description)

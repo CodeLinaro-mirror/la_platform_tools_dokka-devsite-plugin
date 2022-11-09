@@ -17,7 +17,6 @@
 package com.google.devsite.renderer.impl
 
 import com.google.devsite.hasBeenHidden
-import com.google.devsite.renderer.converters.getExpectOrCommonSourceSet
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
 import org.jetbrains.dokka.links.DRI
@@ -136,8 +135,7 @@ private fun recursivelyUpdateClasslikeSupertypesTree(
 ) {
     if (current !is WithSupertypes || current.supertypes.isEmpty()) return
 
-    // TODO(KMP): this currently only constructs the `common`/`expect` tree. b/253454963
-    val supertypes = current.supertypes[current.getExpectOrCommonSourceSet()]!!
+    val supertypes = current.supertypes.values.single()
     for ((type, kind) in supertypes) {
         classGraph[type.dri]?.let { (_, all, direct, indirect) ->
             all.add(initial.dri)
