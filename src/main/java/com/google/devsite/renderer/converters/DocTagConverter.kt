@@ -690,8 +690,7 @@ internal class DocTagConverter(
     /**
      * @return the doc tags (aka human-written javadoc or kdoc) associated with this documentable
      */
-    private fun Documentable.tags() = documentation[getExpectOrCommonSourceSet()]?.children
-        ?: emptyList()
+    private fun Documentable.tags() = documentation.values.singleOrNull()?.children.orEmpty()
 
     /** Like singleOrNull, but requires that only one element be present if any. */
     private fun <T> List<T>.strictSingleOrNull() = if (isEmpty()) {

@@ -28,7 +28,6 @@ import com.google.devsite.components.symbols.NamedValueAnnotationParameter
 import com.google.devsite.hasBeenHidden
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.paths.FilePathProvider
-import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.AnnotationParameterValue
 import org.jetbrains.dokka.model.AnnotationValue
@@ -123,37 +122,34 @@ private val Annotation.isBadNonNull get() = dri.classNames == "NotNull" ||
         )
 
 /** @return the complete list of annotations for this type */
-private fun WithExtraProperties<*>.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet) =
-    extra.allOfType<Annotations>().flatMap { annotations ->
-        annotations.directAnnotations[sourceSet] ?: emptyList()
+private fun WithExtraProperties<*>.annotations(): List<Annotation> {
+    return extra.allOfType<Annotations>().flatMap { annotations ->
+        annotations.directAnnotations.values.singleOrNull() ?: emptyList()
     }
+}
 
-internal fun Documentable.annotations() =
-    (this as? WithExtraProperties<*>)?.annotations(getExpectOrCommonSourceSet())
-        ?: emptyList()
+internal fun Documentable.annotations() = (this as? WithExtraProperties<*>)?.annotations()
+    ?: emptyList()
 
-internal fun Projection.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet) =
-    (this as? Bound)?.annotations(sourceSet)
-        ?: (this as? WithExtraProperties<*>)?.annotations(sourceSet) ?: emptyList()
+internal fun Projection.annotations() = (this as? Bound)?.annotations()
+    ?: (this as? WithExtraProperties<*>)?.annotations() ?: emptyList()
 
-private fun Bound.annotations(sourceSet: DokkaConfiguration.DokkaSourceSet): List<Annotation> =
-    when (this) {
-        is TypeParameter, is GenericTypeConstructor, is FunctionalTypeConstructor ->
-            (this as WithExtraProperties<*>).annotations(sourceSet)
-        is Nullable -> this.inner.annotations(sourceSet)
-        is TypeAliased -> this.inner.annotations(sourceSet)
-        is PrimitiveJavaType, Void, is JavaObject, Dynamic, is UnresolvedBound -> emptyList()
-        is DefinitelyNonNullable -> this.inner.annotations(sourceSet).filter { it != AT_NULLABLE }
-    }
+private fun Bound.annotations(): List<Annotation> = when (this) {
+    is TypeParameter, is GenericTypeConstructor, is FunctionalTypeConstructor ->
+        (this as WithExtraProperties<*>).annotations()
+    is Nullable -> this.inner.annotations()
+    is TypeAliased -> this.inner.annotations()
+    is PrimitiveJavaType, Void, is JavaObject, Dynamic, is UnresolvedBound -> emptyList()
+    is DefinitelyNonNullable -> this.inner.annotations().filter { it != AT_NULLABLE }
+}
 
 /**
  * All existing WithSources are WithExtraProperties, and fileLevelAnnotations require sources.
  * @return the list of file-level annotations on this WithSource's source file
  */
-internal fun WithSources.fileLevelAnnotations(): List<Annotation> =
+internal fun WithSources.fileLevelAnnotations() =
     (this as WithExtraProperties<*>).extra.allOfType<Annotations>().flatMap { annotations ->
-        annotations.fileLevelAnnotations[(this as Documentable).getExpectOrCommonSourceSet()]
-            ?: emptyList()
+        annotations.fileLevelAnnotations.values.singleOrNull() ?: emptyList()
     }
 
 /** @return true if the `@Deprecated` annotation is present, false otherwise */

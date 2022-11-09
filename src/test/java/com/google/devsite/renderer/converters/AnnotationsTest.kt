@@ -32,8 +32,8 @@ import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.testing.ConverterTestBase
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.Annotations.Annotation
-import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DModule
+import org.jetbrains.dokka.model.Nullable
 import org.junit.Test
 
 internal class AnnotationsTest : ConverterTestBase() {
@@ -293,13 +293,11 @@ internal class AnnotationsTest : ConverterTestBase() {
 
     @Test
     fun `Type parameter type has annotation and value in 4x Kotlin and Java`() {
-        fun DFunction.genericBoundsAnnotations() =
-            generics.single().bounds.single().annotations(getExpectOrCommonSourceSet())
-        val functionKotlin = """
+        val boundsKotlin = """
             |annotation class Hello(val bar: String)
             |fun <T : @Hello("baz") String> foo(arg: String): List<T>
-        """.render().function()!!
-        val functionJava = """
+        """.render().function()!!.generics.single().bounds.single()
+        val wrapper = """
             |@Retention(RetentionPolicy.RUNTIME)
             |@Target(ElementType.TYPE_USE)
             |public @interface Hello {
@@ -308,13 +306,15 @@ internal class AnnotationsTest : ConverterTestBase() {
             |public <T extends @Hello(bar = "baz") String> java.util.List<T> foo() {
             |    return null;
             |}
-        """.render(java = true).function()!!
+        """.render(java = true).function()!!.generics.single().bounds.single() as Nullable
+        val boundsJava = wrapper.inner
 
-        for (function in listOf(functionJava, functionKotlin)) {
-            val annotations = function.genericBoundsAnnotations()
-            val annotationOne = annotations.components(isFromJava = function == functionJava)
-                .first()
+        for (annotations in listOf(boundsKotlin.annotations(), boundsJava.annotations())) {
+            val annotationOne = annotations.components(
+                isFromJava = annotations == boundsJava.annotations()
+            ).first()
             val parameterOne = annotationOne.data.parameters.item()
+
             assertThat(parameterOne.name).isEqualTo("bar")
             assertThat(parameterOne.value).isEqualTo("\"baz\"")
         }
@@ -432,7 +432,7 @@ internal class AnnotationsTest : ConverterTestBase() {
     }
 
     private fun DModule.functionReturnAnnotations(name: String = "foo"): List<Annotation> {
-        return function(name)!!.type.annotations(function(name)!!.getExpectOrCommonSourceSet())
+        return function(name)!!.type.annotations()
     }
 
     private fun List<Annotation>.components(

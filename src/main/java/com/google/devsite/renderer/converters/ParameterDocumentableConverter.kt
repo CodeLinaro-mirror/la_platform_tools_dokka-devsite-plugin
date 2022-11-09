@@ -91,7 +91,6 @@ internal class ParameterDocumentableConverter(
             val nullability =
                 param.type.getNullability(
                     displayLanguage,
-                    param.getExpectOrCommonSourceSet(),
                     isFromJava,
                     param.annotations()
                 )
@@ -125,8 +124,8 @@ internal class ParameterDocumentableConverter(
             )
         }
         Language.KOTLIN -> {
-            val defaultValueExpression = param.extra.allOfType<DefaultValue>().singleOrNull()
-                ?.expression?.get(param.getExpectOrCommonSourceSet())?.takeUnless { isSummary }
+            val defaultValueExpression = param.extra.allOfType<DefaultValue>().singleOrNull()?.value
+                ?.takeUnless { isSummary }
             componentForKotlinParameter(
                 param = param,
                 defaultValue = defaultValueExpression?.getValue(),
@@ -203,7 +202,6 @@ internal class ParameterDocumentableConverter(
                     } else {
                         it.getNullability(
                             displayLanguage,
-                            param.getExpectOrCommonSourceSet(),
                             isFromJava,
                             param.annotations()
                         )
@@ -226,16 +224,15 @@ internal class ParameterDocumentableConverter(
             projection = projection,
             isJavaSource = isFromJava,
             sourceSet = sourceSet,
-            removedAnnotations = projection.annotations(sourceSet)
-                .filter { !it.belongsOnReturnType() }.distinctBy { it.identifier },
-            propagatedAnnotations = projection.annotations(sourceSet)
-                .filter { it.belongsOnReturnType() }
+            removedAnnotations = projection.annotations().filter { !it.belongsOnReturnType() }
+                .distinctBy { it.identifier },
+            propagatedAnnotations = projection.annotations().filter { it.belongsOnReturnType() }
         )
 
         val name = (projection as? TypeConstructor)?.presentableName ?: ""
 
         val defaultValue = (projection as? WithExtraProperties<*>)?.extra?.allOfType<DefaultValue>()
-            ?.singleOrNull()?.expression?.get(sourceSet)?.takeUnless { isSummary }?.getValue()
+            ?.singleOrNull()?.value?.takeUnless { isSummary }?.getValue()
 
         val modifiers = (projection as? WithExtraProperties<*>)?.getExtraModifiers(sourceSet)
             .orEmpty()
@@ -256,13 +253,11 @@ internal class ParameterDocumentableConverter(
                 displayLanguage = Language.KOTLIN,
                 modifiers = modifiers,
                 defaultValue = defaultValue,
-                annotationComponents = projection.annotations(sourceSet)
-                    .filter { !it.belongsOnReturnType() }
+                annotationComponents = projection.annotations().filter { !it.belongsOnReturnType() }
                     .annotationComponents(
                         pathProvider = pathProvider,
                         displayLanguage = displayLanguage,
-                        nullability = projection
-                            .getNullability(displayLanguage, sourceSet, isFromJava)
+                        nullability = projection.getNullability(displayLanguage, isFromJava)
                     )
             )
         )
@@ -340,11 +335,10 @@ internal class ParameterDocumentableConverter(
             )
         }
 
-        val annotations =
-            propagatedAnnotations + projection.annotations(sourceSet) - removedAnnotations
+        val annotations = propagatedAnnotations + projection.annotations() - removedAnnotations
 
         val nullability =
-            proj.getNullability(displayLanguage, sourceSet, isJavaSource, propagatedAnnotations) or
+            proj.getNullability(displayLanguage, isJavaSource, propagatedAnnotations) or
                 propagatedNullability
 
         val annotationComponents = annotations.annotationComponents(
@@ -422,7 +416,7 @@ internal class ParameterDocumentableConverter(
         return DefaultLambdaTypeProjectionComponent(
             LambdaTypeProjectionComponent.Params(
                 type = returnType.toLink(),
-                nullability = proj.getNullability(displayLanguage, sourceSet) or nullability,
+                nullability = proj.getNullability(displayLanguage) or nullability,
                 displayLanguage = displayLanguage,
                 lambdaModifiers = lambdaModifiers,
                 lambdaParams = lambdaParams,
@@ -433,7 +427,7 @@ internal class ParameterDocumentableConverter(
                     displayLanguage = displayLanguage,
                     // Don't inject space-consuming nullability annotations for type parameters
                     nullability = if (displayLanguage == Language.JAVA) Nullability.DONT_CARE
-                    else proj.getNullability(displayLanguage, sourceSet, false, annotations)
+                    else proj.getNullability(displayLanguage, isJavaSource = false, annotations)
                         or nullability
                 )
             )
