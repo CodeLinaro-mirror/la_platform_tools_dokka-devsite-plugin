@@ -51,7 +51,9 @@ internal class RootDocumentableConverter(
     /** @return the root component for the class index page */
     // TODO(KMP b/256171288)
     suspend fun classesIndexPage(): DevsitePage<ClassIndex> {
-        val allClasses = docsHolder.allClasslikes()
+        val allClasses = docsHolder.allClasslikes().filterNot {
+            it.shouldNotBeDisplayed(displayLanguage)
+        }
         val alphabetizedClasses = allClasses.groupBy(::categorizeClasslikes)
         val componentClasses = alphabetizedClasses.mapValues { (_, nodes) ->
             DefaultSummaryList(
@@ -140,7 +142,7 @@ internal class RootDocumentableConverter(
         val exceptions = docsHolder.exceptionsFor(dPackage).map(::typeForToc)
         val annotations = docsHolder.annotationsFor(dPackage).map(::typeForToc)
         val typeAliases = docsHolder.typeAliasesFor(dPackage).map(::typeForToc)
-        val objects = docsHolder.objectsFor(dPackage, displayLanguage).map(::typeForToc)
+        val objects = docsHolder.interestingObjectsFor(dPackage, displayLanguage).map(::typeForToc)
 
         DefaultTocPackage(
             TocPackage.Params(

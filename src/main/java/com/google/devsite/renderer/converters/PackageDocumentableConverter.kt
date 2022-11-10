@@ -59,7 +59,9 @@ internal class PackageDocumentableConverter(
         }
         val enums = async { javadocConverter.docsToSummary(docsHolder.enumsFor(dPackage)) }
         val objects = async {
-            javadocConverter.docsToSummary(docsHolder.objectsFor(dPackage, displayLanguage))
+            javadocConverter.docsToSummary(
+                docsHolder.interestingObjectsFor(dPackage, displayLanguage)
+            )
         }
         val exceptions = async {
             javadocConverter.docsToSummary(docsHolder.exceptionsFor(dPackage))

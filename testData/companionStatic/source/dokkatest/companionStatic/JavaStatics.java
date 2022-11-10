@@ -66,12 +66,14 @@ public class JavaStatics {
         athing = TopLevelInheritingObject.inheritingTopLevelJvmField;
         athing = TopLevelMultiInheritingObject.INSTANCE.multiInheritingTopLevelObjectFun();
         astring = TopLevelMultiInheritingObject.INSTANCE.getMessage(); // From Exception
+        // astring = TopLevelMultiInheritingObject.INSTANCE.getMultiInheritingTopLevelStaticProp();
         astring = TopLevelMultiInheritingObject.INSTANCE.reversed().toString(); // From Comparator
         astring = Comparator.naturalOrder().toString();
         // Not valid; static methods cannot be inherited like this      // From Comparator
         // astring = TopLevelMultiInheritingObject.naturalOrder().toString(); // DO NOT DISPLAY
         athing = TopLevelMultiInheritingObject.getMultiInheritingTopLevelStaticProp();
         athing = TopLevelMultiInheritingObject.multiInheritingTopLevelStaticFun();
+        // athing = TopLevelMultiInheritingObject.getMessage(); // Non-static method; static context
         athing = TopLevelMultiInheritingObject.multiInheritingTopLevelConst;
         athing = TopLevelMultiInheritingObject.multiInheritingTopLevelField;
         athing = ContainerOfBoring.boringCompanionConst;                        // Parent Only
@@ -83,6 +85,7 @@ public class JavaStatics {
         athing = ContainerOfBoring.Companion.boringCompanionStaticFun();        // Is Duplicated
         athing = ContainerOfBoring.Companion.getBoringCompanionObjectProp();    // Companion Only
         athing = ContainerOfBoring.Companion.boringCompanionObjectFun();        // Companion Only
+        // athing = ContainerOfBoring.Companion.INSTANCE;   // not generated for companions
         athing = ContainerOfNamed.namedCompanionConst;                          // Parent Only
         athing = ContainerOfNamed.getNamedCompanionStaticProp();                // Is Duplicated
         athing = ContainerOfNamed.NamedCompanion.getNamedCompanionStaticProp(); // Is Duplicated
@@ -93,10 +96,10 @@ public class JavaStatics {
         // I.e. as-Java, "in 'companion fields'" == "can access as Class.Companion.theField"
         // athing = ContainerOfNamed.Companion.getNamedCompanionObjectProp();   // DO NOT DISPLAY
         athing = ContainerOfInheriting.inheritingCompanionConst;                  // Parent Only
-        athing = ContainerOfInheriting.Companion.getInheritingCompanionObjectProp(); // Compion Only
+        athing = ContainerOfInheriting.Companion.getInheritingCompanionObjectProp(); // Compn'n Only
         athing = ContainerOfInheriting.Companion.inheritingCompanionObjectFun();// Companion Only
         astring = ContainerOfInheriting.Companion.getMessage(); // From Exception. Companion Only
-
+        // Note: Container.Companion is analogous to TopLevelObject.INSTANCE, NOT TopLevelObject
         astring = TopLevelObject.topLevelStaticLateInitVar;
         astring = TopLevelObject.getTopLevelStaticLateInitVar();
         astring = TopLevelObject.topLevelLateInitVar;

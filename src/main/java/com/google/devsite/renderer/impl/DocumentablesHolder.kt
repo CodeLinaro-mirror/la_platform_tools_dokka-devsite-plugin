@@ -21,18 +21,20 @@ import com.google.devsite.renderer.converters.explodedChildren
 import com.google.devsite.renderer.converters.filterOutJvmSynthetic
 import com.google.devsite.renderer.converters.gettersAndSetters
 import com.google.devsite.renderer.converters.isExceptionClass
-import com.google.devsite.renderer.converters.isOrdinaryCompanion
 import com.google.devsite.renderer.converters.name
 import com.google.devsite.renderer.converters.nameForSyntheticClass
 import com.google.devsite.renderer.converters.packageName
 import com.google.devsite.renderer.converters.setUpAnalysis
+import com.google.devsite.renderer.converters.shouldNotBeDisplayed
 import com.google.devsite.renderer.converters.withJavaSynthetic
+import com.google.devsite.renderer.converters.withoutNeglectableCompanionOf
 import com.google.devsite.util.LibraryMetadata
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.analysis.EnvironmentAndFacade
 import org.jetbrains.dokka.base.signatures.KotlinSignatureUtils.driOrNull
@@ -89,19 +91,22 @@ internal class DocumentablesHolder(
     internal var classlikesDone: AtomicInteger = AtomicInteger()
 
     private val packages = scope.async { computePackages(module) }
-
+    // Includes even should-not-be-displayed classlikes
     private val classlikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
     private val classes = mutableMapOf<DRI, Deferred<List<DClass>>>()
-    private val syntheticClasses = mutableMapOf<DRI, Deferred<List<DClass>>>()
+    private val syntheticClasses = mutableMapOf<DRI, Deferred<Set<DClass>>>()
     private val enums = mutableMapOf<DRI, Deferred<List<DEnum>>>()
     private val interfaces = mutableMapOf<DRI, Deferred<List<DInterface>>>()
     private val annotations = mutableMapOf<DRI, Deferred<List<DAnnotation>>>()
     private val typeAliases = mutableMapOf<DRI, Deferred<List<DTypeAlias>>>()
     private val exceptions = mutableMapOf<DRI, Deferred<List<DClass>>>()
-    private val objects = mutableMapOf<DRI, Deferred<List<DObject>>>()
+    private val companions = mutableMapOf<DRI, Deferred<Map<DRI, DObject>>>()
+    private val interestingKotlinObjects = mutableMapOf<DRI, Deferred<List<DObject>>>()
 
     private val allClasslikes: Deferred<List<DClasslike>>
+    private val allCompanions: Deferred<Map<DRI, DObject>>
     private val nestedClasslikesJob: Job
+    // Filtering for should-show should be done by accessors of this field
     private val nestedClasslikes = mutableMapOf<DRI, Deferred<List<DClasslike>>>()
     private val classGraph: Deferred<ClassGraph>
     private val documentablesGraph: Deferred<DocumentablesGraph>
@@ -114,12 +119,13 @@ internal class DocumentablesHolder(
             for (dPackage in module.packages) {
                 val children = async { dPackage.explodedChildren }
                 val syntheticClassList = async { computeSyntheticClasses(dPackage) }
-                val classlikesList = async {
+                val combinedClasslikesList = async {
                     computeClasslikes(
                         children.await(),
                         syntheticClassList.await()
                     )
                 }
+
                 val classList = async { computeClasses(children.await()) }
 
                 val enumList = async { computeEnums(children.await()) }
@@ -127,9 +133,12 @@ internal class DocumentablesHolder(
                 val annotationList = async { computeAnnotations(children.await()) }
                 val typeAliasList = async { computeTypesAliases(dPackage) }
                 val exceptionList = async { computeExceptions(children.await()) }
-                val objectList = async { computeObjects(children.await()) }
+                val companionsMap = async { computeCompanions(children.await()) }
+                val interestingKotlinObjectsList = async {
+                    computeInterestingObjectsForKotlin(children.await(), companionsMap.await().keys)
+                }
 
-                classlikes[dPackage.dri] = classlikesList
+                classlikes[dPackage.dri] = combinedClasslikesList
                 classes[dPackage.dri] = classList
                 syntheticClasses[dPackage.dri] = syntheticClassList
                 enums[dPackage.dri] = enumList
@@ -137,16 +146,21 @@ internal class DocumentablesHolder(
                 annotations[dPackage.dri] = annotationList
                 typeAliases[dPackage.dri] = typeAliasList
                 exceptions[dPackage.dri] = exceptionList
-                objects[dPackage.dri] = objectList
+                interestingKotlinObjects[dPackage.dri] = interestingKotlinObjectsList
+                companions[dPackage.dri] = companionsMap
             }
         }
 
         analysisMap = scope.async { context?.let { setUpAnalysis(context) } ?: mapOf() }
 
         allClasslikes = scope.async { computeClasslikes(module) }
+        allCompanions = scope.async {
+            module.packages.flatMap { companions[it.dri]!!.await().entries }
+                .associate { it.key to it.value }
+        }
         classGraph = scope.async {
             computeClassGraph(
-                allClasslikes.await(),
+                allClasslikes.await() + allCompanions.await().values,
                 externalDocumentablesProvider,
                 context?.configuration?.sourceSets
             )
@@ -176,28 +190,38 @@ internal class DocumentablesHolder(
 
     suspend fun classlikesFor(dPackage: DPackage, displayLanguage: Language): List<DClasslike> {
         val classlikes = classlikes.getValue(dPackage.dri).await()
+            .filterNot { it.shouldNotBeDisplayed(displayLanguage) }
         val syntheticClasses = syntheticClasses.getValue(dPackage.dri).await()
         return if (displayLanguage == Language.JAVA) {
             classlikes
         } else {
-            classlikes - syntheticClasses.toSet()
+            classlikes - syntheticClasses
         }
     }
 
-    suspend fun classlikesFor(classlike: DClasslike): List<DClasslike> {
+    /**
+     * Returns a classlike's nested classlikes.
+     * Does not include should-not-be-documented Documentables.
+     * Currently, this means only as-Kotlin fully-hoistable companion objects
+     */
+    suspend fun nestedClasslikesFor(classlike: DClasslike, displayLanguage: Language):
+        List<DClasslike> {
         nestedClasslikesJob.join()
-        return nestedClasslikes.getValue(classlike.dri).await()
+        val theseNestedClasslikes = nestedClasslikes.getValue(classlike.dri).await()
+        // When displaying Kotlin pages, anonymous companion functions will be inlined and the
+        // link to the companion object can be omitted. Named companion objects are presumably
+        // intended to be viewable as first-class elements. Similar for companion objects which
+        // inherit from another type.
+        return theseNestedClasslikes.withoutNeglectableCompanionOf(classlike, displayLanguage)
     }
 
     suspend fun classesFor(dPackage: DPackage, displayLanguage: Language): List<DClass> {
-        var classes = classes.getValue(dPackage.dri).await()
-        if (displayLanguage == Language.KOTLIN)
-            classes = classes.filterNot { it.isOrdinaryCompanion() }
+        val classes = classes.getValue(dPackage.dri).await()
         val syntheticClasses = syntheticClasses.getValue(dPackage.dri).await()
         return if (displayLanguage == Language.JAVA) {
             (classes + syntheticClasses).sortedBy { "${it.name()} ${it.dri}" }
         } else {
-            classes - syntheticClasses.toSet()
+            classes - syntheticClasses
         }
     }
 
@@ -216,14 +240,13 @@ internal class DocumentablesHolder(
     suspend fun exceptionsFor(dPackage: DPackage): List<DClass> =
         exceptions.getValue(dPackage.dri).await()
 
-    suspend fun objectsFor(dPackage: DPackage, displayLanguage: Language): List<DObject> {
-        return if (displayLanguage == Language.JAVA) {
-            // TODO(b/203678085): Objects should be accessible from top-level static inner class
+    suspend fun interestingObjectsFor(dPackage: DPackage, displayLanguage: Language) =
+        if (displayLanguage == Language.JAVA) {
+            // TODO(b/203678085): Objects are instead converted to top-level static inner classes
             emptyList()
         } else {
-            objects.getValue(dPackage.dri).await()
+            interestingKotlinObjects.getValue(dPackage.dri).await()
         }
-    }
 
     /**
      * Iterate through the all packages and create map of each class to its associated
@@ -301,17 +324,17 @@ internal class DocumentablesHolder(
             }.sortedBy { "${it.name} ${it.dri}" }
     }
 
-    private suspend fun computeClasslikes(
-        module: DModule
-    ): List<DClasslike> {
+    /** Returns all should-be-documented classlikes in this module. */
+    private suspend fun computeClasslikes(module: DModule): List<DClasslike> {
         return computeClasslikes(
             module.packages.flatMap { classlikesFor(it, Language.JAVA) }
         ) // classlikesFor(JAVA) already contains synth
     }
 
+    /** Returns all classlikes among all given documentables. */
     private fun computeClasslikes(
         docs: List<Documentable>,
-        syntheticClasses: List<DClass> = emptyList()
+        syntheticClasses: Set<DClass> = emptySet()
     ): List<DClasslike> {
         return (docs.filterIsInstance<DClasslike>() + syntheticClasses)
             .filterNot { thisClasslike ->
@@ -335,7 +358,7 @@ internal class DocumentablesHolder(
     /** Computes the syntheticClasses from top level functions that are used to document Kotlin as
      * Java
      */
-    internal fun computeSyntheticClasses(dPackage: DPackage): List<DClass> {
+    internal fun computeSyntheticClasses(dPackage: DPackage): Set<DClass> {
         // functions that are JvmSynthetic are not accessible from Java, so they should not appear
         // in the documentation
         val javaFunctions = dPackage.functions.filterOutJvmSynthetic()
@@ -365,7 +388,7 @@ internal class DocumentablesHolder(
                     isExpectActual = false,
                     extra = PropertyContainer.empty()
                 )
-            }
+            }.toSet()
     }
 
     /** Returns a map from String name of synthetic class that this Function (WithSources) would be
@@ -398,10 +421,27 @@ internal class DocumentablesHolder(
             .sortedBy { "${it.name()} ${it.dri}" }
     }
 
-    private fun computeObjects(docs: List<Documentable>): List<DObject> {
-        val companions = docs.filterIsInstance<WithCompanion>().mapNotNull { it.companion?.dri }
+    /** Returns a Map<DRI, DObject> because `Set<Documentable>.contains` is unusable b/232944038. */
+    private fun computeCompanions(docs: List<Documentable>) =
+        docs.filterIsInstance<WithCompanion>().mapNotNull { it.companion }.associateBy { it.dri }
+
+    /** Computes the list of objects that are interesting in Kotlin */
+    private fun computeInterestingObjectsForKotlin(docs: List<Documentable>, companions: Set<DRI>):
+        List<DObject> {
         val allObjects = docs.filterIsInstance<DObject>()
-        val nonCompanions = allObjects.filter { !companions.contains(it.dri) }
-        return nonCompanions.sortedBy { "${it.name()} ${it.dri}" }
+
+        // Un-ordinary companions are companions, but also appear in the ToC.
+        val (boringObjects, interestingObjects) =
+            allObjects.partition { it.shouldNotBeDisplayed(Language.KOTLIN) }
+        // Error-level enforcement that non-companion objects aren't named 'Companion'
+        // Thus, we can elsewhere freely use `isOrdinaryCompanion` without checking companionhood.
+        (boringObjects.map { it.dri } - companions).forEach {
+            throw RuntimeException(
+                "Object with illegal name: named 'Companion' but is not a companion object: $it."
+            )
+        }
+        return interestingObjects.sortedBy { "${it.name()} ${it.dri}" }
     }
+
+    fun isCompanion(dObject: DObject) = runBlocking { dObject.dri in allCompanions.await().keys }
 }

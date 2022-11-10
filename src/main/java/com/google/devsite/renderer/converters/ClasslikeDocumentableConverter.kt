@@ -130,7 +130,7 @@ internal abstract class ClasslikeDocumentableConverter(
         // Some symbols are moved from the companion object type to the enclosing class in java
         if (displayLanguage == Language.JAVA) {
             // Objects that are not top-level
-            if (classlike is DObject && classlike.isCompanion()) {
+            if (classlike is DObject && docsHolder.isCompanion(classlike)) {
                 // Hoist companion JvmFields
                 declaredProperties = declaredProperties.filterNot { it.isJvmField() }
             } else if (classlike is DObject) {
@@ -211,7 +211,8 @@ internal abstract class ClasslikeDocumentableConverter(
         }
         val nestedTypesSummary = async {
             nestedTypesToSummary(
-                docsHolder.classlikesFor(classlike).withoutNeglectableCompanion(),
+                // These are filtered for not-shown classlikes when accessed
+                docsHolder.nestedClasslikesFor(classlike, displayLanguage),
                 docsHolder.classGraph()
             )
         }
@@ -459,16 +460,9 @@ internal abstract class ClasslikeDocumentableConverter(
     private fun <T : SummaryItem> emptyIfJava() =
         if (displayLanguage == Language.JAVA) emptySummaryList<T>() else null
 
-    private fun nestedTypesToSummary(classlikes: List<DClasslike>, classGraph: ClassGraph):
+    private fun nestedTypesToSummary(nestedClasslikes: List<DClasslike>, classGraph: ClassGraph):
         WithDescriptionList<ClasslikeSignature> {
-        val components = when (displayLanguage) {
-            // When displaying Kotlin pages, anonymous companion functions will be inlined and the
-            // link to the companion object can be omitted. Named companion objects are presumably
-            // intended to be viewable as first-class elements. Similar for companion objects which
-            // inherit from another type.
-            Language.KOTLIN -> classlikes.withoutNeglectableCompanion()
-            else -> classlikes
-        }.map { nestedClasslike ->
+        val components = nestedClasslikes.map { nestedClasslike ->
             errorContextInjector(nestedClasslike) {
                 DefaultTableRowSummaryItem(
                     TableRowSummaryItem.Params(
@@ -1000,7 +994,7 @@ internal abstract class ClasslikeDocumentableConverter(
      * Gather superclasses and interfaces for this class, converting mapped types when applicable.
      */
     private suspend fun DClasslike.supertypesForDisplayLanguage(): Set<DRI> {
-        val classNode = docsHolder.classGraph().getValue(this.dri)
+        val classNode = docsHolder.classGraph()[this.dri] ?: return emptySet()
         return (classNode.superClasses + classNode.interfaces)
             .map { it.dri.possiblyConvertMappedType(displayLanguage) }
             .toSet()
@@ -1061,29 +1055,42 @@ internal abstract class ClasslikeDocumentableConverter(
             throw RuntimeException(message, e)
         }
     }
-
-    /**
-     * Returns all [Documentable]s from the list which are not the companion object of [classlike]
-     * Unless this is as-Java, in which case display everything because some things are only
-     * accessible through the companion in Java.
-     */
-    private fun <T : Documentable> List<T>.withoutNeglectableCompanion(): List<T> =
-        if (displayLanguage == Language.JAVA) this
-        else filterNot {
-            it.dri == (classlike as? DClass)?.companion?.dri && it.isOrdinaryCompanion()
-        }
 }
 
 typealias SourceEntry = Map.Entry<DokkaSourceSet, DocumentableSource>
 
-internal fun Documentable.isOrdinaryCompanion(): Boolean =
-    this is DObject && this.isCompanion() &&
-        name == "Companion" &&
+/**
+ * Returns whether this DObject is an ordinary companion and is not signifcant enough to show on its
+ * own. This requires that it be not named, not inherit anything, and not contain anything that is
+ * not hoisted onto the containing object.
+ *
+ * This function can also be used on DObjects where it is unknown whether it is a companion at all.
+ * This works because we enforce non-companion objects being named 'Companion' as an error.
+ *
+ * Returns true: is both a companion and uninteresting
+ * Returns false: either is not a companion, or is interesting
+ */
+internal fun DObject.isOrdinaryCompanion(): Boolean =
+    name == "Companion" &&
         supertypes.all { it.value.isEmpty() } &&
         children.none { it is DClasslike }
 
-private fun Documentable.isCompanion() =
-    this is DObject && (this.dri.classNames?.contains(".") == true)
+internal fun DClasslike.shouldNotBeDisplayed(displayLanguage: Language) =
+    displayLanguage == Language.KOTLIN && this is DObject && this.isOrdinaryCompanion()
+
+/**
+ * Returns all [Documentable]s from the list which are not a companion object of [classlike] that
+ * has only hoistable elements, such that direct use of the companion is never warranted.
+ *
+ * This is a best-effort temporary approximation. Even as-Java, companions can be fully hoistable.
+ */
+internal fun List<DClasslike>.withoutNeglectableCompanionOf(
+    classlike: DClasslike,
+    displayLanguage: Language
+) = filterNot {
+    classlike is DClass && it.dri == classlike.companion?.dri &&
+        it.shouldNotBeDisplayed(displayLanguage)
+}
 
 private fun isPublic(function: DFunction) = "public" in function.modifiers()
 private fun isProtected(function: DFunction) = "protected" in function.modifiers()
