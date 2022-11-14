@@ -58,11 +58,13 @@ class KmpTest : IntegrationTestBase() {
             )
         }
         fun SourceSetsBuilder.createSourceSet(
-            name: String,
-            displayName: String = name.capitalize(),
-            analysisPlatform: String = name,
-            dependentSourceSets: Set<DokkaSourceSetID> = emptySet()
+            nameArg: String,
+            displayNameArg: String = nameArg.capitalize(),
+            analysisPlatformArg: String = nameArg,
+            dependentSourceSetsArg: Set<DokkaSourceSetID> = emptySet()
         ) = sourceSet {
+            name = nameArg; displayName = displayNameArg; analysisPlatform = analysisPlatformArg
+            dependentSourceSets = dependentSourceSetsArg
             val sources = File(sourceDir + "/" + name + "Main").absoluteFile
             check(sources.isDirectory) { "$sources does not exist or is not a directory" }
             sourceRoots = listOf(sources.absolutePath)
@@ -78,8 +80,8 @@ class KmpTest : IntegrationTestBase() {
         val configuration = dokkaConfiguration {
             sourceSets {
                 val common = createSourceSet("common")
-                createSourceSet("jvm", "JVM", "", setOf(common.value.sourceSetID))
-                createSourceSet("native", dependentSourceSets = setOf(common.value.sourceSetID))
+                createSourceSet("jvm", "JVM", "jvm", setOf(common.value.sourceSetID))
+                createSourceSet("native", dependentSourceSetsArg = setOf(common.value.sourceSetID))
             }
             offlineMode = true
         }
