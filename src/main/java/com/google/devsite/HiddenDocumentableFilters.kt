@@ -82,8 +82,9 @@ class PostMergePackageDocumentableFilter : DocumentableTransformer {
 }
 
 private fun Documentable.isHidden(): Boolean =
-    this.hasRestrictToAnnotation() || this.hasDeprecationLevelHidden() ||
-        this.hasHideJavadocTag() || this.hasRemovedJavadocTag()
+    this.hasAnnotation(restrictToDri) || this.hasDeprecationLevelHidden() ||
+        this.hasHideJavadocTag() || this.hasRemovedJavadocTag() ||
+        this.hasAnnotation(visibleForTestingDri)
 
 private fun Documentable.hasDeprecationLevelHidden(): Boolean =
     this.annotations().any {
@@ -102,8 +103,8 @@ private fun Documentable.hasRemovedJavadocTag(): Boolean =
         docs.dfs { it is CustomTagWrapper && it.name.trim() == "removed" } != null
     }
 
-private fun Documentable.hasRestrictToAnnotation(): Boolean =
-    restrictToDri in this.directAnnotations || restrictToDri in this.fileLevelAnnotations
+private fun Documentable.hasAnnotation(annotationDri: DRI): Boolean =
+    annotationDri in this.directAnnotations || annotationDri in this.fileLevelAnnotations
 
 private operator fun SourceSetDependent<List<Annotations.Annotation>>.contains(dri: DRI) =
     any { (_, annotations) -> annotations.any { it.dri == dri } }
@@ -121,6 +122,9 @@ private val Documentable.annotations
         ?.get(Annotations)
 
 private val restrictToDri = DRI(packageName = "androidx.annotation", classNames = "RestrictTo")
+private val visibleForTestingDri = DRI(
+    packageName = "androidx.annotation", classNames = "VisibleForTesting"
+)
 
 fun hasBeenHidden(dri: DRI): Boolean {
     return hiddenDocumentables.contains(dri)

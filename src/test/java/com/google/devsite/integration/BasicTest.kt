@@ -189,4 +189,9 @@ class BasicTest : IntegrationTestBase() {
     fun `Validate hidden parents`() {
         validateDirectory("hiddenParents")
     }
+
+    @Test
+    fun `Validate @VisibleForTesting`() {
+        validateDirectory("visibleForTesting")
+    }
 }
