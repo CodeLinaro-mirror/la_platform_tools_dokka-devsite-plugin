@@ -312,7 +312,7 @@ val classpathForTests by tasks.registering(ClasspathForTestsTask::class) {
 val compileTestDataKotlin: KotlinCompile by tasks.getting(KotlinCompile::class) {
     kotlinOptions {
         // we are only checking if the classpath is complete
-        //freeCompilerArgs += "-Xdisable-phases=Codegen"
+        freeCompilerArgs += "-Xmulti-platform"
     }
     dependsOn(explodeAars)
 }

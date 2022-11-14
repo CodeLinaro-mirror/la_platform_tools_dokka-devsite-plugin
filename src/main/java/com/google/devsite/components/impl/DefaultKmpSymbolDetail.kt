@@ -46,6 +46,16 @@ internal data class DefaultKmpSymbolDetail<T : SymbolSignature>(
             }
             +data.name
         }
+        /*
+        // TODO(KMP, b/254489852): Style for platform
+        data.platforms.forEach {
+            div {
+                if (it.shortName() != "common") {
+                    +it.shortName()
+                }
+            }
+            comment("platform-${it.selectorDisplayName()}")
+        }*/
         pre("api-signature no-pretty-print") {
             data.annotationComponents.render(into, ShouldBreak.YES, separator = "")
             data.modifiers.render(this, terminator = { +Entities.nbsp })

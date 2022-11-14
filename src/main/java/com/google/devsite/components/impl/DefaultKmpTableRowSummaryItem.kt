@@ -29,7 +29,6 @@ internal data class DefaultKmpTableRowSummaryItem<
     > (
     override val data: KmpTableRowSummaryItem.Params<T, V>
 ) : KmpTableRowSummaryItem<T, V> {
-    // TODO(KMP b/254489852)
     override fun render(into: TR) = into.run {
         data.title?.let { title ->
             td {
@@ -42,6 +41,7 @@ internal data class DefaultKmpTableRowSummaryItem<
         td {
             data.description.render(this)
         }
+        // TODO(KMP, b/254489852), render platforms
     }
 
     override fun toString() = (data.title?.let { "$it: " } ?: "") + data.description.toString()

@@ -38,7 +38,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
     logger = TestLogger(DokkaConsoleLogger(LoggingLevel.DEBUG))
 ) {
     /** For when a test uses source outside of `./testData/` */
-    fun makeExternalConfiguration(
+    open fun makeExternalConfiguration(
         sources: List<File>,
         samplesLocations: List<String>,
         includeFiles: List<String> = emptyList()
@@ -221,7 +221,7 @@ abstract class IntegrationTestBase : BaseAbstractTest(
      * Sources are located at testData/$path/source
      * outputs are located at testData/$path/docs
      */
-    fun validateDirectory(
+    open fun validateDirectory(
         path: String,
         sampleLocations: List<String> = emptyList(),
         includeFiles: List<String> = emptyList(),
@@ -292,11 +292,11 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         }
     }
 
-    private fun classpathFromFile(file: String): List<String> =
+    protected fun classpathFromFile(file: String): List<String> =
         File(file).bufferedReader().readLines()
 
     /** Confirms that the given output writer's output matches the contents of the given directory. */
-    private fun verifyOutput(writerPlugin: TestOutputWriterPlugin, outputPath: String) {
+    protected fun verifyOutput(writerPlugin: TestOutputWriterPlugin, outputPath: String) {
         val outputDirectory = File(outputPath).absolutePath
         val generatedFiles = writerPlugin.writer.contents
 
