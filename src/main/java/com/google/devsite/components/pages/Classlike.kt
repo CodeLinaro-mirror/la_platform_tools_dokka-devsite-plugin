@@ -16,11 +16,11 @@
 
 package com.google.devsite.components.pages
 
+import com.google.devsite.ClasslikeSummaryList
 import com.google.devsite.ConstructorSummaryList
 import com.google.devsite.FunctionSummaryList
 import com.google.devsite.LinkDescriptionSummaryList
 import com.google.devsite.PropertySummaryList
-import com.google.devsite.WithDescriptionList
 import com.google.devsite.components.Component
 import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.components.symbols.ClasslikeSignature
@@ -45,7 +45,7 @@ internal interface Classlike : ContextFreeComponent {
         val hierarchy: ClassHierarchy,
         val relatedSymbols: RelatedSymbols,
         val description: List<ContextFreeComponent>,
-        val nestedTypesSummary: WithDescriptionList<ClasslikeSignature>,
+        val nestedTypesSummary: ClasslikeSummaryList,
         val enumValuesSummary: LinkDescriptionSummaryList,
         val enumValuesDetails: TitledList<SymbolDetail<PropertySignature>>,
         val constantsSummary: PropertySummaryList,

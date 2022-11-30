@@ -32,7 +32,6 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.testing.companionName
 import com.google.devsite.renderer.converters.testing.description
 import com.google.devsite.renderer.converters.testing.from
-import com.google.devsite.renderer.converters.testing.fullName
 import com.google.devsite.renderer.converters.testing.item
 import com.google.devsite.renderer.converters.testing.items
 import com.google.devsite.renderer.converters.testing.link
@@ -322,12 +321,11 @@ internal class ClasslikeDocumentableConverterTest(
         """.render().page()
 
         val classlike = page.data.content
-        val summary = classlike.data.nestedTypesSummary
-        assertThat(summary.item().data.title.fullName()).isEqualTo("Foo.Bar")
+        assertThat(classlike.companionName()).isEqualTo("Foo.Bar")
     }
 
     @Test
-    fun `Companion objects are documented in Java but not Kotlin because they're inlined`() {
+    fun `Unnamed companions are documented in Java but not Kotlin because they're inlined`() {
         val module = """
             |class Foo {
             |    companion object FooCompanion
@@ -339,12 +337,11 @@ internal class ClasslikeDocumentableConverterTest(
         val foo = module.page("Foo").data.content
         val bar = module.page("Bar").data.content
 
+        assertThat(foo.companionName()).isEqualTo("Foo.FooCompanion")
         kotlinOnly {
-            assertThat(foo.data.nestedTypesSummary.items()).hasSize(1)
-            assertThat(bar.data.nestedTypesSummary.items()).isEmpty()
+            assertThat(bar.data.nestedTypesSummary).isEmpty()
         }
         javaOnly {
-            assertThat(foo.companionName()).isEqualTo("Foo.FooCompanion")
             assertThat(bar.companionName()).isEqualTo("Bar.Companion")
         }
     }
@@ -1147,7 +1144,7 @@ internal class ClasslikeDocumentableConverterTest(
         javaOnly {
             assertThat(classlike.data.publicCompanionFunctionsSummary).isEmpty()
             assertThat(classlike.data.publicCompanionPropertiesSummary).isEmpty()
-            assertThat(classlike.data.nestedTypesSummary.item().name()).isEqualTo("Foo.Companion")
+            assertThat(classlike.companionName()).isEqualTo("Foo.Companion")
             val companionClasslike = module.page { this.companionFor("Foo") }.data.content
             val barMethod = companionClasslike.data.publicFunctionsSummary.single()
             assertThat(barMethod.name()).isEqualTo("bar")
@@ -1181,7 +1178,7 @@ internal class ClasslikeDocumentableConverterTest(
         javaOnly {
             assertThat(classlike.data.publicCompanionFunctionsSummary).isEmpty()
             assertThat(classlike.data.publicCompanionPropertiesSummary).isEmpty()
-            assertThat(classlike.data.nestedTypesSummary.item().name()).isEqualTo("Foo.Companion")
+            assertThat(classlike.companionName()).isEqualTo("Foo.Companion")
             val companionClasslike = module.page { this.companionFor("Foo") }.data.content
             val barProp = companionClasslike.data.publicPropertiesSummary.single()
             assertThat(barProp.name()).isEqualTo("bar")
@@ -1283,7 +1280,7 @@ internal class ClasslikeDocumentableConverterTest(
         }
         javaOnly {
             // nested companion object is documented but companion functions are not inlined
-            assertThat(kotlinNestedTypeSummary.items()).hasSize(1)
+            assertThat(kotlinNestedTypeSummary).hasSize(1)
             assertThat(classlikeK.data.publicCompanionFunctionsSummary).isEmpty()
             assertThat(classlikeK.data.publicCompanionPropertiesSummary).isEmpty()
             assertThat(staticJavaMethod.modifiers).contains("static")
@@ -1304,7 +1301,7 @@ internal class ClasslikeDocumentableConverterTest(
             |}
         """.render().page("Foo").data.content
 
-        val nestedTypes = page.data.nestedTypesSummary.items()
+        val nestedTypes = page.data.nestedTypesSummary
         val methods = page.data.publicFunctionsSummary
         val staticMethods = methods.filter { it.modifiers().contains("static") }
 
@@ -1465,11 +1462,11 @@ internal class ClasslikeDocumentableConverterTest(
         val classPage = module.page("Foo").data.content
         val companionPage = module.page("Named").data.content
 
-        val nestedTypes = classPage.data.nestedTypesSummary.items()
+        val nestedTypes = classPage.data.nestedTypesSummary
         val methods = classPage.data.publicFunctionsSummary
         val companionPageMethods = companionPage.data.publicFunctionsSummary
 
-        assertThat(nestedTypes.map { it.name() }).containsExactly("Foo.Named")
+        assertThat(classPage.companionName()).isEqualTo("Foo.Named")
         assertThat(companionPageMethods.map { it.name() }).containsExactly("bar")
         assertThat(methods).isEmpty()
 
@@ -1492,8 +1489,7 @@ internal class ClasslikeDocumentableConverterTest(
         """.render()
 
         val classPage = module.page("Foo").data.content
-        val nestedTypes = classPage.data.nestedTypesSummary.items()
-        assertThat(nestedTypes.map { it.name() }).containsExactly("Foo.Companion")
+        assertThat(classPage.companionName()).isEqualTo("Foo.Companion")
 
         val companionPage = module.page("Companion").data.content
 
@@ -1539,8 +1535,7 @@ internal class ClasslikeDocumentableConverterTest(
 
         val classPage = module.page("Foo").data.content
         val companionPage = module.page("Companion").data.content
-        assertThat(classPage.data.nestedTypesSummary.items().map { it.name() })
-            .containsExactly("Foo.Companion")
+        assertThat(classPage.companionName()).isEqualTo("Foo.Companion")
 
         val methods = classPage.data.publicFunctionsSummary
         val fields = classPage.data.publicPropertiesSummary
@@ -1638,8 +1633,6 @@ internal class ClasslikeDocumentableConverterTest(
 
         val containerClass = module.page("TheContainer").data.content
         val companionClass = module.page("TheCompanion").data.content
-        assertThat(containerClass.data.nestedTypesSummary.single().name())
-            .isEqualTo("TheContainer.TheCompanion")
         assertThat(containerClass.companionName())
             .isEqualTo("TheContainer.TheCompanion")
         // Pull public/protected elements that are hoisted or are in the companion

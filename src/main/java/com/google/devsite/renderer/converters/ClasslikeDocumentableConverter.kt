@@ -16,16 +16,17 @@
 
 package com.google.devsite.renderer.converters
 
+import com.google.devsite.ClasslikeSummaryList
 import com.google.devsite.ConstructorSummaryList
 import com.google.devsite.FunctionSummaryList
 import com.google.devsite.LinkDescriptionSummaryList
 import com.google.devsite.PropertySummaryList
 import com.google.devsite.TypeSummaryItem
-import com.google.devsite.WithDescriptionList
 import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultClassHierarchy
 import com.google.devsite.components.impl.DefaultClasslike
 import com.google.devsite.components.impl.DefaultClasslikeSignature
+import com.google.devsite.components.impl.DefaultClasslikeSummary
 import com.google.devsite.components.impl.DefaultDevsitePage
 import com.google.devsite.components.impl.DefaultInheritedSymbols
 import com.google.devsite.components.impl.DefaultMetadataComponent
@@ -39,6 +40,7 @@ import com.google.devsite.components.pages.Classlike
 import com.google.devsite.components.pages.Classlike.TitledList
 import com.google.devsite.components.pages.DevsitePage
 import com.google.devsite.components.symbols.ClasslikeSignature
+import com.google.devsite.components.symbols.ClasslikeSummary
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.MetadataComponent
 import com.google.devsite.components.symbols.PropertySignature
@@ -461,13 +463,18 @@ internal abstract class ClasslikeDocumentableConverter(
         if (displayLanguage == Language.JAVA) emptySummaryList<T>() else null
 
     private fun nestedTypesToSummary(nestedClasslikes: List<DClasslike>, classGraph: ClassGraph):
-        WithDescriptionList<ClasslikeSignature> {
+        ClasslikeSummaryList {
         val components = nestedClasslikes.map { nestedClasslike ->
             errorContextInjector(nestedClasslike) {
                 DefaultTableRowSummaryItem(
                     TableRowSummaryItem.Params(
-                        computeSignature(nestedClasslike, classGraph),
-                        javadocConverter.summaryDescription(nestedClasslike)
+                        title = null,
+                        description = DefaultClasslikeSummary(
+                            ClasslikeSummary.Params(
+                                signature = computeSignature(nestedClasslike, classGraph),
+                                description = javadocConverter.summaryDescription(nestedClasslike)
+                            )
+                        ) as ClasslikeSummary
                     )
                 )
             }

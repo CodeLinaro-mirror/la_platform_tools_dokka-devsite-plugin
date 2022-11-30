@@ -18,6 +18,7 @@ package com.google.devsite
 
 import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
+import com.google.devsite.components.symbols.ClasslikeSummary
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.PropertySignature
@@ -62,6 +63,8 @@ internal typealias PropertySummaryList = SummaryList<TypeSummaryItem<PropertySig
 internal typealias FunctionSummaryList = SummaryList<TypeSummaryItem<FunctionSignature>>
 internal typealias ConstructorSummaryList =
     SummaryList<TableRowSummaryItem<Nothing?, SymbolSummary<FunctionSignature>>>
+internal typealias ClasslikeSummaryList =
+    SummaryList<TableRowSummaryItem<Nothing?, ClasslikeSummary>>
 internal typealias WithDescriptionList<T> =
     SummaryList<TableRowSummaryItem<T, DescriptionComponent>>
 internal typealias LinkDescriptionSummaryList = WithDescriptionList<Link>

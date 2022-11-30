@@ -128,7 +128,8 @@ internal fun InheritedSymbolsList<FunctionSignature>.from(name: String) =
 internal fun InheritedSymbolsList<PropertySignature>.from(name: String) =
     data.inheritedSymbolSummaries.entries.singleOrNull { (key, _) -> key.data.name == name }
 
-internal fun Classlike.companionName() = data.nestedTypesSummary.item().data.title.fullName()
+internal fun Classlike.companionName() =
+    data.nestedTypesSummary.item().data.description.data.signature.fullName()
 
 internal fun ClasslikeSignature.fullName() = data.name.data.name
 
