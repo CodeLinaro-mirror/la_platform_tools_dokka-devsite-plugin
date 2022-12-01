@@ -16,14 +16,17 @@
 
 package com.google.devsite.integration
 
+import com.google.devsite.DevsiteConfiguration
 import com.google.devsite.capitalize
 import com.google.devsite.testing.IntegrationTestBase
 import com.google.devsite.testing.TestOutputWriterPlugin
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.DokkaSourceSetID
 import org.jetbrains.dokka.ExternalDocumentationLink
+import org.jetbrains.dokka.PluginConfigurationImpl
 import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.plugability.DokkaContext
+import org.jetbrains.dokka.toJsonString
 import org.junit.Test
 import testApi.testRunner.SourceSetsBuilder
 import java.io.File
@@ -77,6 +80,9 @@ class KmpTest : IntegrationTestBase() {
         }
         // TODO: write a test that has multiple libraries across the source sets
 
+        val inferredTenant = File(sourceDir).listFiles().orEmpty()
+            .singleOrNull { it.isDirectory }?.name ?: "dokkatest"
+
         val configuration = dokkaConfiguration {
             sourceSets {
                 val common = createSourceSet("common")
@@ -84,16 +90,20 @@ class KmpTest : IntegrationTestBase() {
                 createSourceSet("native", dependentSourceSetsArg = setOf(common.value.sourceSetID))
             }
             offlineMode = true
-        }
-
-        if (versionedTenant != null) {
-            System.setProperty("versionedTenant", versionedTenant)
-            System.clearProperty("tenant")
-        } else {
-            val inferredTenant = File(sourceDir).listFiles().orEmpty()
-                .singleOrNull { it.isDirectory }?.name ?: "dokkatest"
-            System.setProperty("tenant", inferredTenant)
-            System.clearProperty("versionedTenant")
+            pluginsConfigurations = mutableListOf(
+                PluginConfigurationImpl(
+                    fqPluginName = "com.google.devsite.DevsitePlugin",
+                    serializationFormat = DokkaConfiguration.SerializationFormat.JSON,
+                    values = DevsiteConfiguration(
+                        tenant = inferredTenant,
+                        versionedTenant = versionedTenant,
+                        excludedPackages = null,
+                        excludedPackagesForJava = null,
+                        excludedPackagesForKotlin = null,
+                        libraryMetadataFilename = null
+                    ).toJsonString()
+                )
+            )
         }
 
         val writerPlugin = TestOutputWriterPlugin()
