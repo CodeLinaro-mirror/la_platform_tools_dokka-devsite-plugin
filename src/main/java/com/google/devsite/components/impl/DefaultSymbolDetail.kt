@@ -35,7 +35,7 @@ import kotlinx.html.pre
 internal data class DefaultSymbolDetail<T : SymbolSignature>(
     override val data: SymbolDetail.Params<T>
 ) : SymbolDetail<T> {
-    override fun render(into: FlowContent) = into.div {
+    override fun render(into: FlowContent) = into.div(classes = "api-item") {
         for (anchor in data.anchors.drop(1)) {
             a { attributes["name"] = anchor }
         }

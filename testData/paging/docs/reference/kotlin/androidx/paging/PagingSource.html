@@ -332,7 +332,7 @@ class MyPagingSource(
       </table>
     </div>
     <h2>Public constructors</h2>
-    <div><a name="PagingSource--"></a><a name="pagingsource"></a>
+    <div class="api-item"><a name="PagingSource--"></a><a name="pagingsource"></a>
       <h3 class="api-name" id="PagingSource()">PagingSource</h3>
       <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="/reference/kotlin/androidx/paging/PagingSource.html#PagingSource()">PagingSource</a>()</pre>
       <div class="devsite-table-wrapper">
@@ -360,7 +360,7 @@ class MyPagingSource(
       </div>
     </div>
     <h2>Public functions</h2>
-    <div><a name="getRefreshKey-androidx.paging.PagingState-"></a><a name="getrefreshkey"></a>
+    <div class="api-item"><a name="getRefreshKey-androidx.paging.PagingState-"></a><a name="getrefreshkey"></a>
       <h3 class="api-name" id="getRefreshKey(androidx.paging.PagingState)">getRefreshKey</h3>
       <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a>(state:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingState.html">PagingState</a>&lt;Key,&nbsp;Value&gt;):&nbsp;Key?</pre>
       <p>Provide a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">Key</a></code> used for the initial <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> for the next <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> due to invalidation of this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>. The <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">Key</a></code> is provided to <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a></code> via <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html#key()">LoadParams.key</a></code>.</p>
@@ -402,19 +402,19 @@ class MyPagingSource(
         </table>
       </div>
     </div>
-    <div><a name="invalidate--"></a><a name="invalidate"></a>
+    <div class="api-item"><a name="invalidate--"></a><a name="invalidate"></a>
       <h3 class="api-name" id="invalidate()">invalidate</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html#invalidate()">invalidate</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Signal the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> to stop loading.</p>
       <p>This method is idempotent. i.e., If <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code> has already been called, subsequent calls to this method should have no effect.</p>
     </div>
-    <div><a name="load-androidx.paging.PagingSource.LoadParams-"></a><a name="load"></a>
+    <div class="api-item"><a name="load-androidx.paging.PagingSource.LoadParams-"></a><a name="load"></a>
       <h3 class="api-name" id="load(androidx.paging.PagingSource.LoadParams)">load</h3>
       <pre class="api-signature no-pretty-print">abstract&nbsp;suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html#load(androidx.paging.PagingSource.LoadParams)">load</a>(params:&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html">PagingSource.LoadParams</a>&lt;Key&gt;):&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.html">PagingSource.LoadResult</a>&lt;Key,&nbsp;Value&gt;</pre>
       <p>Loading API for <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
       <p>Implement this method to trigger your async load (e.g. from database or network).</p>
     </div>
-    <div><a name="registerInvalidatedCallback-kotlin.Function0-"></a><a name="registerinvalidatedcallback"></a>
+    <div class="api-item"><a name="registerInvalidatedCallback-kotlin.Function0-"></a><a name="registerinvalidatedcallback"></a>
       <h3 class="api-name" id="registerInvalidatedCallback(kotlin.Function0)">registerInvalidatedCallback</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html#registerInvalidatedCallback(kotlin.Function0)">registerInvalidatedCallback</a>(onInvalidatedCallback:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Add a callback to invoke when the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> is first invalidated.</p>
@@ -439,7 +439,7 @@ class MyPagingSource(
         </table>
       </div>
     </div>
-    <div><a name="unregisterInvalidatedCallback-kotlin.Function0-"></a><a name="unregisterinvalidatedcallback"></a>
+    <div class="api-item"><a name="unregisterInvalidatedCallback-kotlin.Function0-"></a><a name="unregisterinvalidatedcallback"></a>
       <h3 class="api-name" id="unregisterInvalidatedCallback(kotlin.Function0)">unregisterInvalidatedCallback</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html#unregisterInvalidatedCallback(kotlin.Function0)">unregisterInvalidatedCallback</a>(onInvalidatedCallback:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Remove a previously added invalidate callback.</p>
@@ -462,12 +462,12 @@ class MyPagingSource(
       </div>
     </div>
     <h2>Public properties</h2>
-    <div><a name="getInvalid()"></a><a name="setInvalid()"></a><a name="getInvalid--"></a><a name="setInvalid--"></a>
+    <div class="api-item"><a name="getInvalid()"></a><a name="setInvalid()"></a><a name="getInvalid--"></a><a name="setInvalid--"></a>
       <h3 class="api-name" id="invalid()">invalid</h3>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html#invalid()">invalid</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
       <p>Whether this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> has been invalidated, which should happen when the data this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> represents changes since it was first instantiated.</p>
     </div>
-    <div><a name="getJumpingSupported()"></a><a name="setJumpingSupported()"></a><a name="getJumpingSupported--"></a><a name="setJumpingSupported--"></a>
+    <div class="api-item"><a name="getJumpingSupported()"></a><a name="setJumpingSupported()"></a><a name="getJumpingSupported--"></a><a name="setJumpingSupported--"></a>
       <h3 class="api-name" id="jumpingSupported()">jumpingSupported</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html#jumpingSupported()">jumpingSupported</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
       <p><code>true</code> if this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> supports jumping, <code>false</code> otherwise.</p>
@@ -490,7 +490,7 @@ class MyPagingSource(
         </table>
       </div>
     </div>
-    <div><a name="getKeyReuseSupported()"></a><a name="setKeyReuseSupported()"></a><a name="getKeyReuseSupported--"></a><a name="setKeyReuseSupported--"></a>
+    <div class="api-item"><a name="getKeyReuseSupported()"></a><a name="setKeyReuseSupported()"></a><a name="getKeyReuseSupported--"></a><a name="setKeyReuseSupported--"></a>
       <h3 class="api-name" id="keyReuseSupported()">keyReuseSupported</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingSource.html#keyReuseSupported()">keyReuseSupported</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
       <p><code>true</code> if this <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> expects to re-use keys to load distinct pages without a call to <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#invalidate()">invalidate</a></code>, <code>false</code> otherwise.</p>

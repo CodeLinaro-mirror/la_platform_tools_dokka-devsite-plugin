@@ -134,13 +134,13 @@
       </table>
     </div>
     <h2>Public companion properties</h2>
-    <div><a name="getSaver()"></a><a name="setSaver()"></a><a name="getSaver--"></a><a name="setSaver--"></a>
+    <div class="api-item"><a name="getSaver()"></a><a name="setSaver()"></a><a name="getSaver--"></a><a name="setSaver--"></a>
       <h3 class="api-name" id="Saver()">Saver</h3>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.Companion.html#Saver()">Saver</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/saveable/Saver.html">Saver</a>&lt;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html">LazyListState</a>,&nbsp;*&gt;</pre>
       <p>The default <code><a href="/reference/kotlin/androidx/compose/runtime/saveable/Saver.html">Saver</a></code> implementation for <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html">LazyListState</a></code>.</p>
     </div>
     <h2>Public constructors</h2>
-    <div><a name="LazyListState(kotlin.Int, kotlin.Int)"></a><a name="LazyListState-kotlin.Int-kotlin.Int-"></a><a name="lazyliststate"></a>
+    <div class="api-item"><a name="LazyListState(kotlin.Int, kotlin.Int)"></a><a name="LazyListState-kotlin.Int-kotlin.Int-"></a><a name="lazyliststate"></a>
       <h3 class="api-name" id="LazyListState(kotlin.Int,kotlin.Int)">LazyListState</h3>
       <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#LazyListState(kotlin.Int,kotlin.Int)">LazyListState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;firstVisibleItemIndex:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0,<br>&nbsp;&nbsp;&nbsp;&nbsp;firstVisibleItemScrollOffset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0<br>)</pre>
       <div class="devsite-table-wrapper">
@@ -168,7 +168,7 @@
       </div>
     </div>
     <h2>Public functions</h2>
-    <div><a name="animateScrollToItem(kotlin.Int, kotlin.Int)"></a><a name="animateScrollToItem-kotlin.Int-kotlin.Int-"></a><a name="animatescrolltoitem"></a>
+    <div class="api-item"><a name="animateScrollToItem(kotlin.Int, kotlin.Int)"></a><a name="animateScrollToItem-kotlin.Int-kotlin.Int-"></a><a name="animatescrolltoitem"></a>
       <h3 class="api-name" id="animateScrollToItem(kotlin.Int,kotlin.Int)">animateScrollToItem</h3>
       <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#animateScrollToItem(kotlin.Int,kotlin.Int)">animateScrollToItem</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;scrollOffset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Animate (smooth scroll) to the given item.</p>
@@ -196,7 +196,7 @@
         </table>
       </div>
     </div>
-    <div><a name="dispatchRawDelta-kotlin.Float-"></a><a name="dispatchrawdelta"></a>
+    <div class="api-item"><a name="dispatchRawDelta-kotlin.Float-"></a><a name="dispatchrawdelta"></a>
       <h3 class="api-name" id="dispatchRawDelta(kotlin.Float)">dispatchRawDelta</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#dispatchRawDelta(kotlin.Float)">dispatchRawDelta</a>(delta:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
       <p>Dispatch scroll delta in pixels avoiding all scroll related mechanisms.</p>
@@ -237,14 +237,14 @@
         </table>
       </div>
     </div>
-    <div><a name="scroll(androidx.compose.foundation.MutatePriority, kotlin.coroutines.SuspendFunction1)"></a><a name="scroll-androidx.compose.foundation.MutatePriority-kotlin.coroutines.SuspendFunction1-"></a><a name="scroll"></a>
+    <div class="api-item"><a name="scroll(androidx.compose.foundation.MutatePriority, kotlin.coroutines.SuspendFunction1)"></a><a name="scroll-androidx.compose.foundation.MutatePriority-kotlin.coroutines.SuspendFunction1-"></a><a name="scroll"></a>
       <h3 class="api-name" id="scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a>(scrollPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a>,&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Call this function to take control of scrolling and gain the ability to send scroll events via <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html#scrollBy(kotlin.Float)">ScrollScope.scrollBy</a></code>. All actions that change the logical scroll position must be performed within a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> block (even if they don't call any other methods on this object) in order to guarantee that mutual exclusion is enforced.</p>
       <p>Cancels the currently running scroll, if any, and suspends until the cancellation is complete.</p>
       <p>If <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> is called from elsewhere, this will be canceled.</p>
     </div>
-    <div><a name="scrollToItem(kotlin.Int, kotlin.Int)"></a><a name="scrollToItem-kotlin.Int-kotlin.Int-"></a><a name="scrolltoitem"></a>
+    <div class="api-item"><a name="scrollToItem(kotlin.Int, kotlin.Int)"></a><a name="scrollToItem-kotlin.Int-kotlin.Int-"></a><a name="scrolltoitem"></a>
       <h3 class="api-name" id="scrollToItem(kotlin.Int,kotlin.Int)">scrollToItem</h3>
       <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#scrollToItem(kotlin.Int,kotlin.Int)">scrollToItem</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;scrollOffset:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Instantly brings the item at <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#scrollToItem(kotlin.Int,kotlin.Int)">index</a></code> to the top of the viewport, offset by <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#scrollToItem(kotlin.Int,kotlin.Int)">scrollOffset</a></code> pixels.</p>
@@ -274,27 +274,27 @@
       </div>
     </div>
     <h2>Public properties</h2>
-    <div><a name="getFirstVisibleItemIndex()"></a><a name="setFirstVisibleItemIndex()"></a><a name="getFirstVisibleItemIndex--"></a><a name="setFirstVisibleItemIndex--"></a>
+    <div class="api-item"><a name="getFirstVisibleItemIndex()"></a><a name="setFirstVisibleItemIndex()"></a><a name="getFirstVisibleItemIndex--"></a><a name="setFirstVisibleItemIndex--"></a>
       <h3 class="api-name" id="firstVisibleItemIndex()">firstVisibleItemIndex</h3>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#firstVisibleItemIndex()">firstVisibleItemIndex</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
       <p>The index of the first item that is visible</p>
     </div>
-    <div><a name="getFirstVisibleItemScrollOffset()"></a><a name="setFirstVisibleItemScrollOffset()"></a><a name="getFirstVisibleItemScrollOffset--"></a><a name="setFirstVisibleItemScrollOffset--"></a>
+    <div class="api-item"><a name="getFirstVisibleItemScrollOffset()"></a><a name="setFirstVisibleItemScrollOffset()"></a><a name="getFirstVisibleItemScrollOffset--"></a><a name="setFirstVisibleItemScrollOffset--"></a>
       <h3 class="api-name" id="firstVisibleItemScrollOffset()">firstVisibleItemScrollOffset</h3>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#firstVisibleItemScrollOffset()">firstVisibleItemScrollOffset</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
       <p>The scroll offset of the first visible item. Scrolling forward is positive - i.e., the amount that the item is offset backwards</p>
     </div>
-    <div><a name="getInteractionSource()"></a><a name="setInteractionSource()"></a><a name="getInteractionSource--"></a><a name="setInteractionSource--"></a>
+    <div class="api-item"><a name="getInteractionSource()"></a><a name="setInteractionSource()"></a><a name="getInteractionSource--"></a><a name="setInteractionSource--"></a>
       <h3 class="api-name" id="interactionSource()">interactionSource</h3>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#interactionSource()">interactionSource</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></pre>
       <p><code><a href="/reference/kotlin/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code> that will be used to dispatch drag events when this list is being dragged. If you want to know whether the fling (or animated scroll) is in progress, use <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#isScrollInProgress()">isScrollInProgress</a></code>.</p>
     </div>
-    <div><a name="getIsScrollInProgress()"></a><a name="setIsScrollInProgress()"></a><a name="getIsScrollInProgress--"></a><a name="setIsScrollInProgress--"></a>
+    <div class="api-item"><a name="getIsScrollInProgress()"></a><a name="setIsScrollInProgress()"></a><a name="getIsScrollInProgress--"></a><a name="setIsScrollInProgress--"></a>
       <h3 class="api-name" id="isScrollInProgress()">isScrollInProgress</h3>
       <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#isScrollInProgress()">isScrollInProgress</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
       <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling by gesture, fling or programmatically or not.</p>
     </div>
-    <div><a name="getLayoutInfo()"></a><a name="setLayoutInfo()"></a><a name="getLayoutInfo--"></a><a name="setLayoutInfo--"></a>
+    <div class="api-item"><a name="getLayoutInfo()"></a><a name="setLayoutInfo()"></a><a name="getLayoutInfo--"></a><a name="setLayoutInfo--"></a>
       <h3 class="api-name" id="layoutInfo()">layoutInfo</h3>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListState.html#layoutInfo()">layoutInfo</a>:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html">LazyListLayoutInfo</a></pre>
       <p>The object of <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListLayoutInfo.html">LazyListLayoutInfo</a></code> calculated during the last layout pass. For example, you can use it to calculate what items are currently visible.</p>

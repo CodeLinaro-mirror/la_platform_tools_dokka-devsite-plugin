@@ -133,7 +133,7 @@
       </table>
     </div>
     <h2>Public functions</h2>
-    <div><a name="dispatchRawDelta-kotlin.Float-"></a><a name="dispatchrawdelta"></a>
+    <div class="api-item"><a name="dispatchRawDelta-kotlin.Float-"></a><a name="dispatchrawdelta"></a>
       <h3 class="api-name" id="dispatchRawDelta(kotlin.Float)">dispatchRawDelta</h3>
       <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#dispatchRawDelta(kotlin.Float)">dispatchRawDelta</a>(delta:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
       <p>Dispatch scroll delta in pixels avoiding all scroll related mechanisms.</p>
@@ -174,20 +174,20 @@
         </table>
       </div>
     </div>
-    <div><a name="scroll(androidx.compose.foundation.MutatePriority, kotlin.coroutines.SuspendFunction1)"></a><a name="scroll-androidx.compose.foundation.MutatePriority-kotlin.coroutines.SuspendFunction1-"></a><a name="scroll"></a>
+    <div class="api-item"><a name="scroll(androidx.compose.foundation.MutatePriority, kotlin.coroutines.SuspendFunction1)"></a><a name="scroll-androidx.compose.foundation.MutatePriority-kotlin.coroutines.SuspendFunction1-"></a><a name="scroll"></a>
       <h3 class="api-name" id="scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</h3>
       <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;scrollPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a> = MutatePriority.Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html">ScrollScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Call this function to take control of scrolling and gain the ability to send scroll events via <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollScope.html#scrollBy(kotlin.Float)">ScrollScope.scrollBy</a></code>. All actions that change the logical scroll position must be performed within a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> block (even if they don't call any other methods on this object) in order to guarantee that mutual exclusion is enforced.</p>
       <p>If <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scroll</a></code> is called from elsewhere with the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">scrollPriority</a></code> higher or equal to ongoing scroll, ongoing scroll will be canceled.</p>
     </div>
     <h2>Public properties</h2>
-    <div><a name="getIsScrollInProgress()"></a><a name="setIsScrollInProgress()"></a><a name="getIsScrollInProgress--"></a><a name="setIsScrollInProgress--"></a>
+    <div class="api-item"><a name="getIsScrollInProgress()"></a><a name="setIsScrollInProgress()"></a><a name="getIsScrollInProgress--"></a><a name="setIsScrollInProgress--"></a>
       <h3 class="api-name" id="isScrollInProgress()">isScrollInProgress</h3>
       <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#isScrollInProgress()">isScrollInProgress</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
       <p>Whether this <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a></code> is currently scrolling by gesture, fling or programmatically or not.</p>
     </div>
     <h2>Extension functions</h2>
-    <div><a name="(androidx.compose.foundation.gestures.ScrollableState).animateScrollBy(kotlin.Float, androidx.compose.animation.core.AnimationSpec)"></a><a name="-androidx.compose.foundation.gestures.ScrollableState-.animateScrollBy-kotlin.Float-androidx.compose.animation.core.AnimationSpec-"></a><a name="animatescrollby"></a>
+    <div class="api-item"><a name="(androidx.compose.foundation.gestures.ScrollableState).animateScrollBy(kotlin.Float, androidx.compose.animation.core.AnimationSpec)"></a><a name="-androidx.compose.foundation.gestures.ScrollableState-.animateScrollBy-kotlin.Float-androidx.compose.animation.core.AnimationSpec-"></a><a name="animatescrollby"></a>
       <h3 class="api-name" id="(androidx.compose.foundation.gestures.ScrollableState).animateScrollBy(kotlin.Float,androidx.compose.animation.core.AnimationSpec)">animateScrollBy</h3>
       <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#(androidx.compose.foundation.gestures.ScrollableState).animateScrollBy(kotlin.Float,androidx.compose.animation.core.AnimationSpec)">animateScrollBy</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>&gt; = spring()<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
       <p>Scroll by <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.ScrollableState).animateScrollBy(kotlin.Float,androidx.compose.animation.core.AnimationSpec)">value</a></code> pixels with animation.</p>
@@ -233,7 +233,7 @@
         </table>
       </div>
     </div>
-    <div><a name="-androidx.compose.foundation.gestures.ScrollableState-.scrollBy-kotlin.Float-"></a><a name="scrollby"></a>
+    <div class="api-item"><a name="-androidx.compose.foundation.gestures.ScrollableState-.scrollBy-kotlin.Float-"></a><a name="scrollby"></a>
       <h3 class="api-name" id="(androidx.compose.foundation.gestures.ScrollableState).scrollBy(kotlin.Float)">scrollBy</h3>
       <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#(androidx.compose.foundation.gestures.ScrollableState).scrollBy(kotlin.Float)">scrollBy</a>(value:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></pre>
       <p>Jump instantly by <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.foundation.gestures.ScrollableState).scrollBy(kotlin.Float)">value</a></code> pixels.</p>
@@ -290,7 +290,7 @@
         </table>
       </div>
     </div>
-    <div><a name="-androidx.compose.foundation.gestures.ScrollableState-.stopScroll-androidx.compose.foundation.MutatePriority-"></a><a name="stopscroll"></a>
+    <div class="api-item"><a name="-androidx.compose.foundation.gestures.ScrollableState-.stopScroll-androidx.compose.foundation.MutatePriority-"></a><a name="stopscroll"></a>
       <h3 class="api-name" id="(androidx.compose.foundation.gestures.ScrollableState).stopScroll(androidx.compose.foundation.MutatePriority)">stopScroll</h3>
       <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html">ScrollableState</a>.<a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#(androidx.compose.foundation.gestures.ScrollableState).stopScroll(androidx.compose.foundation.MutatePriority)">stopScroll</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;scrollPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a> = MutatePriority.Default<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
       <p>Stop and suspend until any ongoing animation, smooth scrolling, fling, or any other scroll occurring via <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/ScrollableState.html#scroll(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">ScrollableState.scroll</a></code> is terminated.</p>

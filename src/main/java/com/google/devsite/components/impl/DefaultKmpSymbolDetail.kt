@@ -33,7 +33,7 @@ import kotlinx.html.pre
 internal data class DefaultKmpSymbolDetail<T : SymbolSignature>(
     override val data: KmpSymbolDetail.Params<T>
 ) : KmpSymbolDetail<T> {
-    override fun render(into: FlowContent) = into.div {
+    override fun render(into: FlowContent) = into.div(classes = "api-item") {
         for (anchor in data.anchors.drop(1)) {
             a { attributes["name"] = anchor }
         }

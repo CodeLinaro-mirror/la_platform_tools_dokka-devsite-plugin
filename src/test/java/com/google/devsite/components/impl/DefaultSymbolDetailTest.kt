@@ -52,7 +52,7 @@ class DefaultSymbolDetailTest {
         assertThat(output).isEqualTo(
             """
 <div>
-  <div>
+  <div class="api-item">
     <h3 class="api-name">foo</h3>
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
   </div>
@@ -83,7 +83,7 @@ class DefaultSymbolDetailTest {
         assertThat(output).isEqualTo(
             """
 <div>
-  <div>
+  <div class="api-item">
     <h3 class="api-name">foo</h3>
     <pre class="api-signature no-pretty-print">fun&nbsp;foo():&nbsp;Unit</pre>
   </div>
@@ -114,7 +114,7 @@ class DefaultSymbolDetailTest {
         assertThat(output).isEqualTo(
             """
 <div>
-  <div>
+  <div class="api-item">
     <h3 class="api-name">foo</h3>
     <pre class="api-signature no-pretty-print">val&nbsp;foo:&nbsp;Unit</pre>
   </div>
@@ -145,7 +145,7 @@ class DefaultSymbolDetailTest {
         assertThat(output).isEqualTo(
             """
 <div>
-  <div>
+  <div class="api-item">
     <h3 class="api-name">MyClass</h3>
     <pre class="api-signature no-pretty-print">MyClass()</pre>
   </div>
@@ -176,7 +176,7 @@ class DefaultSymbolDetailTest {
         assertThat(output).isEqualTo(
             """
 <div>
-  <div>
+  <div class="api-item">
     <h3 class="api-name">MyClass</h3>
     <pre class="api-signature no-pretty-print">MyClass()</pre>
   </div>
@@ -211,7 +211,7 @@ class DefaultSymbolDetailTest {
         assertThat(output).isEqualTo(
             """
 <div>
-  <div>
+  <div class="api-item">
     <h3 class="api-name">foo</h3>
     <pre class="api-signature no-pretty-print">@Foo<br>@Bar<br>void&nbsp;foo()</pre>
   </div>
@@ -243,7 +243,7 @@ class DefaultSymbolDetailTest {
         assertThat(output).isEqualTo(
             """
 <div>
-  <div>
+  <div class="api-item">
     <h3 class="api-name">foo</h3>
     <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;void&nbsp;foo()</pre>
   </div>
@@ -275,7 +275,7 @@ class DefaultSymbolDetailTest {
         assertThat(output).isEqualTo(
             """
 <div>
-  <div>
+  <div class="api-item">
     <h3 class="api-name">foo</h3>
     <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;fun&nbsp;foo():&nbsp;Unit</pre>
   </div>
@@ -306,7 +306,7 @@ class DefaultSymbolDetailTest {
         assertThat(output).isEqualTo(
             """
 <div>
-  <div><a name="foo(a, b)"></a><a name="foo-a-b-"></a>
+  <div class="api-item"><a name="foo(a, b)"></a><a name="foo-a-b-"></a>
     <h3 class="api-name" id="foo(a,b)">foo</h3>
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
   </div>
@@ -337,7 +337,7 @@ class DefaultSymbolDetailTest {
         assertThat(output).isEqualTo(
             """
 <div>
-  <div>
+  <div class="api-item">
     <h3 class="api-name">foo</h3>
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
     <div>noop</div>
@@ -371,7 +371,7 @@ class DefaultSymbolDetailTest {
         assertThat(output).isEqualTo(
             """
 <div>
-  <div>
+  <div class="api-item">
     <h3 class="api-name">MyClassKt.foo</h3>
     <pre class="api-signature no-pretty-print">void&nbsp;foo()</pre>
   </div>

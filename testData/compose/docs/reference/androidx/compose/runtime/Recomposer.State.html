@@ -104,38 +104,38 @@
       </table>
     </div>
     <h2>Enum Values</h2>
-    <div>
+    <div class="api-item">
       <h3 class="api-name" id="Idle">Idle</h3>
       <pre class="api-signature no-pretty-print"><a href="/reference/androidx/compose/runtime/Recomposer.State.html">Recomposer.State</a>&nbsp;<a href="/reference/androidx/compose/runtime/Recomposer.State.html#Idle">Recomposer.State.Idle</a></pre>
       <p>The <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> is tracking composition and snapshot invalidations but there is currently no work to do.</p>
     </div>
-    <div>
+    <div class="api-item">
       <h3 class="api-name" id="Inactive">Inactive</h3>
       <pre class="api-signature no-pretty-print"><a href="/reference/androidx/compose/runtime/Recomposer.State.html">Recomposer.State</a>&nbsp;<a href="/reference/androidx/compose/runtime/Recomposer.State.html#Inactive">Recomposer.State.Inactive</a></pre>
       <p>The <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> is not tracking invalidations for known composers and it will not recompose them in response to changes. Call <code><a href="/reference/androidx/compose/runtime/Recomposer.html#runRecomposeAndApplyChanges()">runRecomposeAndApplyChanges</a></code> to await and perform work. This is the initial state of a newly constructed <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code>.</p>
     </div>
-    <div>
+    <div class="api-item">
       <h3 class="api-name" id="InactivePendingWork">InactivePendingWork</h3>
       <pre class="api-signature no-pretty-print"><a href="/reference/androidx/compose/runtime/Recomposer.State.html">Recomposer.State</a>&nbsp;<a href="/reference/androidx/compose/runtime/Recomposer.State.html#InactivePendingWork">Recomposer.State.InactivePendingWork</a></pre>
       <p>The <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> is <code><a href="/reference/androidx/compose/runtime/Recomposer.State.html#Inactive">Inactive</a></code> but at least one effect associated with a managed composition is awaiting a frame. This frame will not be produced until the <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> is <code><a href="/reference/androidx/compose/runtime/Recomposer.html#runRecomposeAndApplyChanges()">running</a></code>.</p>
     </div>
-    <div>
+    <div class="api-item">
       <h3 class="api-name" id="PendingWork">PendingWork</h3>
       <pre class="api-signature no-pretty-print"><a href="/reference/androidx/compose/runtime/Recomposer.State.html">Recomposer.State</a>&nbsp;<a href="/reference/androidx/compose/runtime/Recomposer.State.html#PendingWork">Recomposer.State.PendingWork</a></pre>
       <p>The <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> has been notified of pending work it must perform and is either actively performing it or awaiting the appropriate opportunity to perform it. This work may include invalidated composers that must be recomposed, snapshot state changes that must be presented to known composers to check for invalidated compositions, or coroutines awaiting a frame using the Recomposer's <code><a href="/reference/androidx/compose/runtime/MonotonicFrameClock.html">MonotonicFrameClock</a></code>.</p>
     </div>
-    <div>
+    <div class="api-item">
       <h3 class="api-name" id="ShutDown">ShutDown</h3>
       <pre class="api-signature no-pretty-print"><a href="/reference/androidx/compose/runtime/Recomposer.State.html">Recomposer.State</a>&nbsp;<a href="/reference/androidx/compose/runtime/Recomposer.State.html#ShutDown">Recomposer.State.ShutDown</a></pre>
       <p><code><a href="/reference/androidx/compose/runtime/Recomposer.html#cancel()">cancel</a></code> was called on the <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> and all cleanup work has completed. The <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> is no longer available for use.</p>
     </div>
-    <div>
+    <div class="api-item">
       <h3 class="api-name" id="ShuttingDown">ShuttingDown</h3>
       <pre class="api-signature no-pretty-print"><a href="/reference/androidx/compose/runtime/Recomposer.State.html">Recomposer.State</a>&nbsp;<a href="/reference/androidx/compose/runtime/Recomposer.State.html#ShuttingDown">Recomposer.State.ShuttingDown</a></pre>
       <p><code><a href="/reference/androidx/compose/runtime/Recomposer.html#cancel()">cancel</a></code> was called on the <code><a href="/reference/androidx/compose/runtime/Recomposer.html">Recomposer</a></code> and it is no longer available for use. Cleanup work has not yet been fully completed and composition effect coroutines may still be running.</p>
     </div>
     <h2>Public methods</h2>
-    <div><a name="valueOf-kotlin.String-"></a><a name="valueof"></a>
+    <div class="api-item"><a name="valueOf-kotlin.String-"></a><a name="valueof"></a>
       <h3 class="api-name" id="valueOf(kotlin.String)">valueOf</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Recomposer.State.html">Recomposer.State</a>&nbsp;<a href="/reference/androidx/compose/runtime/Recomposer.State.html#valueOf(kotlin.String)">valueOf</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/String.html">String</a>&nbsp;value)</pre>
       <p>Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)</p>
@@ -157,7 +157,7 @@
         </table>
       </div>
     </div>
-    <div><a name="values--"></a><a name="values"></a>
+    <div class="api-item"><a name="values--"></a><a name="values"></a>
       <h3 class="api-name" id="values()">values</h3>
       <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Recomposer.State[]&nbsp;<a href="/reference/androidx/compose/runtime/Recomposer.State.html#values()">values</a>()</pre>
       <p>Returns an array containing the constants of this enum type, in the order they're declared.</p>
