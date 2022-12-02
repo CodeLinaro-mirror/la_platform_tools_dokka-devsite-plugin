@@ -144,8 +144,10 @@ class DefaultClasslikeTest {
   </p>
   <h2>Summary</h2>
   <div>noop</div>
-  <h2>Symbols</h2>
-  <div>noop</div>
+  <div class="list">
+    <h2>Symbols</h2>
+    <div>noop</div>
+  </div>
 </body>
             """.trim()
         )

@@ -68,6 +68,10 @@ Box(
 }</pre>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%">See also</th>
@@ -88,6 +92,10 @@ Box(
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public fields</h3></th>
@@ -155,6 +163,10 @@ Box(
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
@@ -171,6 +183,10 @@ Box(
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
@@ -222,93 +238,102 @@ Box(
         </tbody>
       </table>
     </div>
-    <h2>Public fields</h2>
-    <div class="api-item"><a name="getIsRunning()"></a><a name="setIsRunning()"></a><a name="getIsRunning--"></a><a name="setIsRunning--"></a>
-      <h3 class="api-name" id="isRunning()">isRunning</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#isRunning()">isRunning</a></pre>
-      <p>Indicates whether the animation is running.</p>
-    </div>
-    <div class="api-item"><a name="getLowerBound()"></a><a name="setLowerBound()"></a><a name="getLowerBound--"></a><a name="setLowerBound--"></a>
-      <h3 class="api-name" id="lowerBound()">lowerBound</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;T&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">lowerBound</a></pre>
-      <p>Lower bound of the animation, null by default (meaning no lower bound). Bounds can be changed using <code><a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">updateBounds</a></code>.</p>
-      <p>Animation will stop as soon as <em>any</em> dimension specified in <code><a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">lowerBound</a></code> is reached. For example: For an Animatable<Offset> with an <code><a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">lowerBound</a></code> set to Offset(100f, 200f), when the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code>.x drops below 100f <em>or</em> <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code>.y drops below 200f, the animation will stop.</p>
-    </div>
-    <div class="api-item"><a name="getTargetValue()"></a><a name="setTargetValue()"></a><a name="getTargetValue--"></a><a name="setTargetValue--"></a>
-      <h3 class="api-name" id="targetValue()">targetValue</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#targetValue()">targetValue</a></pre>
-      <p>The target of the current animation. If the animation finishes un-interrupted, it will reach this target value.</p>
-    </div>
-    <div class="api-item"><a name="getTypeConverter()"></a><a name="setTypeConverter()"></a><a name="getTypeConverter--"></a><a name="setTypeConverter--"></a>
-      <h3 class="api-name" id="typeConverter()">typeConverter</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#typeConverter()">typeConverter</a></pre>
-      <p>A two-way converter that converts the given type <code><a href="/reference/androidx/compose/animation/core/Animatable.html">T</a></code> from and to     <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code></p>
-    </div>
-    <div class="api-item"><a name="getUpperBound()"></a><a name="setUpperBound()"></a><a name="getUpperBound--"></a><a name="setUpperBound--"></a>
-      <h3 class="api-name" id="upperBound()">upperBound</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;T&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">upperBound</a></pre>
-      <p>Upper bound of the animation, null by default (meaning no upper bound). Bounds can be changed using <code><a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">updateBounds</a></code>.</p>
-      <p>Animation will stop as soon as <em>any</em> dimension specified in <code><a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">upperBound</a></code> is reached. For example: For an Animatable<Offset> with an <code><a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">upperBound</a></code> set to Offset(100f, 200f), when the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code>.x exceeds 100f <em>or</em> <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code>.y exceeds 200f, the animation will stop.</p>
-    </div>
-    <div class="api-item"><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
-      <h3 class="api-name" id="value()">value</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></pre>
-      <p>Current value of the animation.</p>
-    </div>
-    <div class="api-item"><a name="getVelocity()"></a><a name="setVelocity()"></a><a name="getVelocity--"></a><a name="setVelocity--"></a>
-      <h3 class="api-name" id="velocity()">velocity</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#velocity()">velocity</a></pre>
-      <p>Returns the velocity, converted from <code><a href="/reference/androidx/compose/animation/core/Animatable.html#velocityVector()">velocityVector</a></code>.</p>
-    </div>
-    <div class="api-item"><a name="getVelocityVector()"></a><a name="setVelocityVector()"></a><a name="getVelocityVector--"></a><a name="setVelocityVector--"></a>
-      <h3 class="api-name" id="velocityVector()">velocityVector</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#velocityVector()">velocityVector</a></pre>
-      <p>Velocity vector of the animation (in the form of <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>.</p>
-    </div>
-    <h2>Public constructors</h2>
-    <div class="api-item"><a name="Animatable(kotlin.Any, androidx.compose.animation.core.TwoWayConverter, kotlin.Any)"></a><a name="Animatable-kotlin.Any-androidx.compose.animation.core.TwoWayConverter-kotlin.Any-"></a><a name="animatable"></a>
-      <h3 class="api-name" id="Animatable(kotlin.Any,androidx.compose.animation.core.TwoWayConverter,kotlin.Any)">Animatable</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/Animatable.html#Animatable(kotlin.Any,androidx.compose.animation.core.TwoWayConverter,kotlin.Any)">Animatable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;typeConverter,<br>&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;visibilityThreshold<br>)</pre>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;initialValue</code></td>
-              <td>
-                <p>initial value of the animatable value holder</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;typeConverter</code></td>
-              <td>
-                <p>A two-way converter that converts the given type <code><a href="/reference/androidx/compose/animation/core/Animatable.html">T</a></code> from and to     <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code></p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>T&nbsp;visibilityThreshold</code></td>
-              <td>
-                <p>Threshold at which the animation may round off to its target value.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getIsRunning()"></a><a name="setIsRunning()"></a><a name="getIsRunning--"></a><a name="setIsRunning--"></a>
+        <h3 class="api-name" id="isRunning()">isRunning</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#isRunning()">isRunning</a></pre>
+        <p>Indicates whether the animation is running.</p>
+      </div>
+      <div class="api-item"><a name="getLowerBound()"></a><a name="setLowerBound()"></a><a name="getLowerBound--"></a><a name="setLowerBound--"></a>
+        <h3 class="api-name" id="lowerBound()">lowerBound</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;T&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">lowerBound</a></pre>
+        <p>Lower bound of the animation, null by default (meaning no lower bound). Bounds can be changed using <code><a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">updateBounds</a></code>.</p>
+        <p>Animation will stop as soon as <em>any</em> dimension specified in <code><a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">lowerBound</a></code> is reached. For example: For an Animatable<Offset> with an <code><a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">lowerBound</a></code> set to Offset(100f, 200f), when the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code>.x drops below 100f <em>or</em> <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code>.y drops below 200f, the animation will stop.</p>
+      </div>
+      <div class="api-item"><a name="getTargetValue()"></a><a name="setTargetValue()"></a><a name="getTargetValue--"></a><a name="setTargetValue--"></a>
+        <h3 class="api-name" id="targetValue()">targetValue</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#targetValue()">targetValue</a></pre>
+        <p>The target of the current animation. If the animation finishes un-interrupted, it will reach this target value.</p>
+      </div>
+      <div class="api-item"><a name="getTypeConverter()"></a><a name="setTypeConverter()"></a><a name="getTypeConverter--"></a><a name="setTypeConverter--"></a>
+        <h3 class="api-name" id="typeConverter()">typeConverter</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#typeConverter()">typeConverter</a></pre>
+        <p>A two-way converter that converts the given type <code><a href="/reference/androidx/compose/animation/core/Animatable.html">T</a></code> from and to     <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code></p>
+      </div>
+      <div class="api-item"><a name="getUpperBound()"></a><a name="setUpperBound()"></a><a name="getUpperBound--"></a><a name="setUpperBound--"></a>
+        <h3 class="api-name" id="upperBound()">upperBound</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;T&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">upperBound</a></pre>
+        <p>Upper bound of the animation, null by default (meaning no upper bound). Bounds can be changed using <code><a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">updateBounds</a></code>.</p>
+        <p>Animation will stop as soon as <em>any</em> dimension specified in <code><a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">upperBound</a></code> is reached. For example: For an Animatable<Offset> with an <code><a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">upperBound</a></code> set to Offset(100f, 200f), when the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code>.x exceeds 100f <em>or</em> <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code>.y exceeds 200f, the animation will stop.</p>
+      </div>
+      <div class="api-item"><a name="getValue()"></a><a name="setValue()"></a><a name="getValue--"></a><a name="setValue--"></a>
+        <h3 class="api-name" id="value()">value</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></pre>
+        <p>Current value of the animation.</p>
+      </div>
+      <div class="api-item"><a name="getVelocity()"></a><a name="setVelocity()"></a><a name="getVelocity--"></a><a name="setVelocity--"></a>
+        <h3 class="api-name" id="velocity()">velocity</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#velocity()">velocity</a></pre>
+        <p>Returns the velocity, converted from <code><a href="/reference/androidx/compose/animation/core/Animatable.html#velocityVector()">velocityVector</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getVelocityVector()"></a><a name="setVelocityVector()"></a><a name="getVelocityVector--"></a><a name="setVelocityVector--"></a>
+        <h3 class="api-name" id="velocityVector()">velocityVector</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#velocityVector()">velocityVector</a></pre>
+        <p>Velocity vector of the animation (in the form of <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>.</p>
       </div>
     </div>
-    <h2>Public methods</h2>
-    <div class="api-item"><a name="animateDecay(kotlin.Any, androidx.compose.animation.core.DecayAnimationSpec, kotlin.Function1)"></a><a name="animateDecay-kotlin.Any-androidx.compose.animation.core.DecayAnimationSpec-kotlin.Function1-"></a><a name="animatedecay"></a>
-      <h3 class="api-name" id="animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationResult.html">AnimationResult</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;initialVelocity,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;animationSpec,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
-      <p>Start a decay animation (i.e. an animation that <em>slows down</em> from the given <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">initialVelocity</a></code> starting at current <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">Animatable.value</a></code> until the velocity reaches 0. If there's already an ongoing animation, the animation in-flight will be immediately cancelled. Decay animation is often used after a fling gesture.</p>
-      <p><code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animationSpec</a></code> defines the decay animation that will be used for this animation. Some options for this <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animationSpec</a></code> include: <code><a href="/reference/androidx/compose/animation/package-summary.html#splineBasedDecay(androidx.compose.ui.unit.Density)">splineBasedDecay</a></code> and <code><a href="/reference/androidx/compose/animation/core/package-summary.html#exponentialDecay(kotlin.Float,kotlin.Float)">exponentialDecay</a></code>. <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">block</a></code> will be invoked on each animation frame.</p>
-      <p>Returns an <code><a href="/reference/androidx/compose/animation/core/AnimationResult.html">AnimationResult</a></code> object, that contains the <code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html">reason</a></code> for ending the animation, and an end state of the animation. The reason for ending the animation will be <code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#Finished">Finished</a></code> if the animation finishes successfully without any interruption. If the animation reaches the either <code><a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">lowerBound</a></code> or <code><a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">upperBound</a></code> in any dimension, the animation will end with <code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#BoundReached">BoundReached</a></code> being the end reason.</p>
-      <p>If the animation gets interrupted by 1) another call to start an animation (i.e. <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</a></code>/<code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a></code>), 2) <code><a href="/reference/androidx/compose/animation/core/Animatable.html#stop()">Animatable.stop</a></code>, or 3)<code><a href="/reference/androidx/compose/animation/core/Animatable.html#snapTo(kotlin.Any)">Animatable.snapTo</a></code>, the canceled animation will throw a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-cancellation-exception/index.html">CancellationException</a></code> as the job gets canceled. As a result, all the subsequent work in the caller's coroutine will be canceled. This is often the desired behavior. If there's any cleanup that needs to be done when an animation gets canceled, consider starting the animation in a <code>try-catch</code> block.</p>
-      <p><b>Note</b>, once the animation ends, its velocity will be reset to 0. If there's a need to continue the momentum before the animation gets interrupted or reaches the bound, it's recommended to use the velocity in the returned <code><a href="/reference/androidx/compose/animation/core/AnimationResult.html#endState()">AnimationResult.endState</a></code> to start another animation.</p>
-      <pre class="prettyprint">
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="Animatable(kotlin.Any, androidx.compose.animation.core.TwoWayConverter, kotlin.Any)"></a><a name="Animatable-kotlin.Any-androidx.compose.animation.core.TwoWayConverter-kotlin.Any-"></a><a name="animatable"></a>
+        <h3 class="api-name" id="Animatable(kotlin.Any,androidx.compose.animation.core.TwoWayConverter,kotlin.Any)">Animatable</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/Animatable.html#Animatable(kotlin.Any,androidx.compose.animation.core.TwoWayConverter,kotlin.Any)">Animatable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;initialValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;typeConverter,<br>&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;visibilityThreshold<br>)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;initialValue</code></td>
+                <td>
+                  <p>initial value of the animatable value holder</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;typeConverter</code></td>
+                <td>
+                  <p>A two-way converter that converts the given type <code><a href="/reference/androidx/compose/animation/core/Animatable.html">T</a></code> from and to     <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code></p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>T&nbsp;visibilityThreshold</code></td>
+                <td>
+                  <p>Threshold at which the animation may round off to its target value.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="animateDecay(kotlin.Any, androidx.compose.animation.core.DecayAnimationSpec, kotlin.Function1)"></a><a name="animateDecay-kotlin.Any-androidx.compose.animation.core.DecayAnimationSpec-kotlin.Function1-"></a><a name="animatedecay"></a>
+        <h3 class="api-name" id="animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationResult.html">AnimationResult</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;initialVelocity,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/DecayAnimationSpec.html">DecayAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;animationSpec,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
+        <p>Start a decay animation (i.e. an animation that <em>slows down</em> from the given <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">initialVelocity</a></code> starting at current <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">Animatable.value</a></code> until the velocity reaches 0. If there's already an ongoing animation, the animation in-flight will be immediately cancelled. Decay animation is often used after a fling gesture.</p>
+        <p><code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animationSpec</a></code> defines the decay animation that will be used for this animation. Some options for this <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animationSpec</a></code> include: <code><a href="/reference/androidx/compose/animation/package-summary.html#splineBasedDecay(androidx.compose.ui.unit.Density)">splineBasedDecay</a></code> and <code><a href="/reference/androidx/compose/animation/core/package-summary.html#exponentialDecay(kotlin.Float,kotlin.Float)">exponentialDecay</a></code>. <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">block</a></code> will be invoked on each animation frame.</p>
+        <p>Returns an <code><a href="/reference/androidx/compose/animation/core/AnimationResult.html">AnimationResult</a></code> object, that contains the <code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html">reason</a></code> for ending the animation, and an end state of the animation. The reason for ending the animation will be <code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#Finished">Finished</a></code> if the animation finishes successfully without any interruption. If the animation reaches the either <code><a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">lowerBound</a></code> or <code><a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">upperBound</a></code> in any dimension, the animation will end with <code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#BoundReached">BoundReached</a></code> being the end reason.</p>
+        <p>If the animation gets interrupted by 1) another call to start an animation (i.e. <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</a></code>/<code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a></code>), 2) <code><a href="/reference/androidx/compose/animation/core/Animatable.html#stop()">Animatable.stop</a></code>, or 3)<code><a href="/reference/androidx/compose/animation/core/Animatable.html#snapTo(kotlin.Any)">Animatable.snapTo</a></code>, the canceled animation will throw a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-cancellation-exception/index.html">CancellationException</a></code> as the job gets canceled. As a result, all the subsequent work in the caller's coroutine will be canceled. This is often the desired behavior. If there's any cleanup that needs to be done when an animation gets canceled, consider starting the animation in a <code>try-catch</code> block.</p>
+        <p><b>Note</b>, once the animation ends, its velocity will be reset to 0. If there's a need to continue the momentum before the animation gets interrupted or reaches the bound, it's recommended to use the velocity in the returned <code><a href="/reference/androidx/compose/animation/core/AnimationResult.html#endState()">AnimationResult.endState</a></code> to start another animation.</p>
+        <pre class="prettyprint">
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.calculateTargetValue
 import androidx.compose.animation.splineBasedDecay
@@ -383,24 +408,24 @@ fun Modifier.swipeToDismiss(): Modifier = composed {
         }
     }.offset { IntOffset(0, animatedOffsetY.value.roundToInt()) }
 }</pre>
-    </div>
-    <div class="api-item"><a name="animateTo(kotlin.Any, androidx.compose.animation.core.AnimationSpec, kotlin.Any, kotlin.Function1)"></a><a name="animateTo-kotlin.Any-androidx.compose.animation.core.AnimationSpec-kotlin.Any-kotlin.Function1-"></a><a name="animateto"></a>
-      <h3 class="api-name" id="animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationResult.html">AnimationResult</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;animationSpec,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;initialVelocity,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
-      <p>Starts an animation to animate from <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code> to the provided <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">targetValue</a></code>. If there is already an animation in-flight, this method will cancel the ongoing animation before starting a new animation continuing the current <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code> and <code><a href="/reference/androidx/compose/animation/core/Animatable.html#velocity()">velocity</a></code>. It's recommended to set the optional <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">initialVelocity</a></code> only when <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</a></code> is used immediately after a fling. In most of the other cases, altering velocity would result in visual discontinuity.</p>
-      <p>The animation will use the provided <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animationSpec</a></code> to animate the value towards the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">targetValue</a></code>. When no <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animationSpec</a></code> is specified, a <code><a href="/reference/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code> will be used.  <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">block</a></code> will be invoked on each animation frame.</p>
-      <p>Returns an <code><a href="/reference/androidx/compose/animation/core/AnimationResult.html">AnimationResult</a></code> object. It contains: 1) the reason for ending the animation, and 2) an end state of the animation. The reason for ending the animation can be either of the following two:</p>
-      <ul>
-        <li>
-          <p><code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#Finished">Finished</a></code>, when the animation finishes successfully without any interruption,</p>
-        </li>
-        <li>
-          <p><code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#BoundReached">BoundReached</a></code> If the animation reaches the either <code><a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">lowerBound</a></code> or <code><a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">upperBound</a></code> in any     dimension, the animation will end with <code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#BoundReached">BoundReached</a></code> being the end reason.</p>
-        </li>
-      </ul>
-      <p>If the animation gets interrupted by 1) another call to start an animation (i.e. <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</a></code>/<code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a></code>), 2) <code><a href="/reference/androidx/compose/animation/core/Animatable.html#stop()">Animatable.stop</a></code>, or 3)<code><a href="/reference/androidx/compose/animation/core/Animatable.html#snapTo(kotlin.Any)">Animatable.snapTo</a></code>, the canceled animation will throw a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-cancellation-exception/index.html">CancellationException</a></code> as the job gets canceled. As a result, all the subsequent work in the caller's coroutine will be canceled. This is often the desired behavior. If there's any cleanup that needs to be done when an animation gets canceled, consider starting the animation in a <code>try-catch</code> block.</p>
-      <p><b>Note</b>: once the animation ends, its velocity will be reset to 0. The animation state at the point of interruption/reaching bound is captured in the returned <code><a href="/reference/androidx/compose/animation/core/AnimationResult.html">AnimationResult</a></code>. If there's a need to continue the momentum that the animation had before it was interrupted or reached the bound, it's recommended to use the velocity in the returned <code><a href="/reference/androidx/compose/animation/core/AnimationResult.html#endState()">AnimationResult.endState</a></code> to start another animation.</p>
-      <pre class="prettyprint">
+      </div>
+      <div class="api-item"><a name="animateTo(kotlin.Any, androidx.compose.animation.core.AnimationSpec, kotlin.Any, kotlin.Function1)"></a><a name="animateTo-kotlin.Any-androidx.compose.animation.core.AnimationSpec-kotlin.Any-kotlin.Function1-"></a><a name="animateto"></a>
+        <h3 class="api-name" id="animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationResult.html">AnimationResult</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;targetValue,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;animationSpec,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;initialVelocity,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;block<br>)</pre>
+        <p>Starts an animation to animate from <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code> to the provided <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">targetValue</a></code>. If there is already an animation in-flight, this method will cancel the ongoing animation before starting a new animation continuing the current <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code> and <code><a href="/reference/androidx/compose/animation/core/Animatable.html#velocity()">velocity</a></code>. It's recommended to set the optional <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">initialVelocity</a></code> only when <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</a></code> is used immediately after a fling. In most of the other cases, altering velocity would result in visual discontinuity.</p>
+        <p>The animation will use the provided <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animationSpec</a></code> to animate the value towards the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">targetValue</a></code>. When no <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animationSpec</a></code> is specified, a <code><a href="/reference/androidx/compose/animation/core/package-summary.html#spring(kotlin.Float,kotlin.Float,kotlin.Any)">spring</a></code> will be used.  <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">block</a></code> will be invoked on each animation frame.</p>
+        <p>Returns an <code><a href="/reference/androidx/compose/animation/core/AnimationResult.html">AnimationResult</a></code> object. It contains: 1) the reason for ending the animation, and 2) an end state of the animation. The reason for ending the animation can be either of the following two:</p>
+        <ul>
+          <li>
+            <p><code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#Finished">Finished</a></code>, when the animation finishes successfully without any interruption,</p>
+          </li>
+          <li>
+            <p><code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#BoundReached">BoundReached</a></code> If the animation reaches the either <code><a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">lowerBound</a></code> or <code><a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">upperBound</a></code> in any     dimension, the animation will end with <code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#BoundReached">BoundReached</a></code> being the end reason.</p>
+          </li>
+        </ul>
+        <p>If the animation gets interrupted by 1) another call to start an animation (i.e. <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</a></code>/<code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a></code>), 2) <code><a href="/reference/androidx/compose/animation/core/Animatable.html#stop()">Animatable.stop</a></code>, or 3)<code><a href="/reference/androidx/compose/animation/core/Animatable.html#snapTo(kotlin.Any)">Animatable.snapTo</a></code>, the canceled animation will throw a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-cancellation-exception/index.html">CancellationException</a></code> as the job gets canceled. As a result, all the subsequent work in the caller's coroutine will be canceled. This is often the desired behavior. If there's any cleanup that needs to be done when an animation gets canceled, consider starting the animation in a <code>try-catch</code> block.</p>
+        <p><b>Note</b>: once the animation ends, its velocity will be reset to 0. The animation state at the point of interruption/reaching bound is captured in the returned <code><a href="/reference/androidx/compose/animation/core/AnimationResult.html">AnimationResult</a></code>. If there's a need to continue the momentum that the animation had before it was interrupted or reached the bound, it's recommended to use the velocity in the returned <code><a href="/reference/androidx/compose/animation/core/AnimationResult.html#endState()">AnimationResult.endState</a></code> to start another animation.</p>
+        <pre class="prettyprint">
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.LaunchedEffect
@@ -425,133 +450,154 @@ fun Modifier.fadeIn(): Modifier = composed {
     }
     this.graphicsLayer(alpha = alphaAnimation.value)
 }</pre>
-    </div>
-    <div class="api-item"><a name="asState--"></a><a name="asstate"></a>
-      <h3 class="api-name" id="asState()">asState</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#asState()">asState</a>()</pre>
-      <p>Returns a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> representing the current <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code> of this animation. This allows hoisting the animation's current value without causing unnecessary recompositions when the value changes.</p>
-    </div>
-    <div class="api-item"><a name="snapTo-kotlin.Any-"></a><a name="snapto"></a>
-      <h3 class="api-name" id="snapTo(kotlin.Any)">snapTo</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#snapTo(kotlin.Any)">snapTo</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;targetValue)</pre>
-      <p>Sets the current value to the target value, without any animation. This will also cancel any on-going animation with a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-cancellation-exception/index.html">CancellationException</a></code>. This function will return <em>after</em> canceling any on-going animation and updating the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">Animatable.value</a></code> and <code><a href="/reference/androidx/compose/animation/core/Animatable.html#targetValue()">Animatable.targetValue</a></code> to the provided <code><a href="/reference/androidx/compose/animation/core/Animatable.html#snapTo(kotlin.Any)">targetValue</a></code>.</p>
-      <p><b>Note</b>: If the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">lowerBound</a></code> or <code><a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">upperBound</a></code> is specified, the provided <code><a href="/reference/androidx/compose/animation/core/Animatable.html#snapTo(kotlin.Any)">targetValue</a></code> will be clamped to the bounds to ensure <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">Animatable.value</a></code> is always within bounds.</p>
-      <p>See <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</a></code> and <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a></code> for more details about animation being canceled.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;targetValue</code></td>
-              <td>
-                <p>The new target value to set <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code> to.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/animation/core/Animatable.html#stop()">stop</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="asState--"></a><a name="asstate"></a>
+        <h3 class="api-name" id="asState()">asState</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#asState()">asState</a>()</pre>
+        <p>Returns a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> representing the current <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code> of this animation. This allows hoisting the animation's current value without causing unnecessary recompositions when the value changes.</p>
       </div>
-    </div>
-    <div class="api-item"><a name="stop--"></a><a name="stop"></a>
-      <h3 class="api-name" id="stop()">stop</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#stop()">stop</a>()</pre>
-      <p>Stops any on-going animation with a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-cancellation-exception/index.html">CancellationException</a></code>.</p>
-      <p>This function will not return until the ongoing animation has been canceled (if any). Note, <code><a href="/reference/androidx/compose/animation/core/Animatable.html#stop()">stop</a></code> function does <b>not</b> skip the animation value to its target value. Rather the animation will be stopped in its track. Consider <code><a href="/reference/androidx/compose/animation/core/Animatable.html#snapTo(kotlin.Any)">snapTo</a></code> if it's desired to not only stop the animation but also snap the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code> to a given value.</p>
-      <p>See <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</a></code> and <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a></code> for more details about animation being canceled.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/animation/core/Animatable.html#snapTo(kotlin.Any)">snapTo</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="snapTo-kotlin.Any-"></a><a name="snapto"></a>
+        <h3 class="api-name" id="snapTo(kotlin.Any)">snapTo</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#snapTo(kotlin.Any)">snapTo</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;targetValue)</pre>
+        <p>Sets the current value to the target value, without any animation. This will also cancel any on-going animation with a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-cancellation-exception/index.html">CancellationException</a></code>. This function will return <em>after</em> canceling any on-going animation and updating the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">Animatable.value</a></code> and <code><a href="/reference/androidx/compose/animation/core/Animatable.html#targetValue()">Animatable.targetValue</a></code> to the provided <code><a href="/reference/androidx/compose/animation/core/Animatable.html#snapTo(kotlin.Any)">targetValue</a></code>.</p>
+        <p><b>Note</b>: If the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">lowerBound</a></code> or <code><a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">upperBound</a></code> is specified, the provided <code><a href="/reference/androidx/compose/animation/core/Animatable.html#snapTo(kotlin.Any)">targetValue</a></code> will be clamped to the bounds to ensure <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">Animatable.value</a></code> is always within bounds.</p>
+        <p>See <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</a></code> and <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a></code> for more details about animation being canceled.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;targetValue</code></td>
+                <td>
+                  <p>The new target value to set <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code> to.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/animation/core/Animatable.html#stop()">stop</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="updateBounds(kotlin.Any, kotlin.Any)"></a><a name="updateBounds-kotlin.Any-kotlin.Any-"></a><a name="updatebounds"></a>
-      <h3 class="api-name" id="updateBounds(kotlin.Any,kotlin.Any)">updateBounds</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">updateBounds</a>(T&nbsp;lowerBound,&nbsp;T&nbsp;upperBound)</pre>
-      <p>Updates either <code><a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">lowerBound</a></code> or <code><a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">upperBound</a></code>, or both. This will update <code><a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">Animatable.lowerBound</a></code> and/or <code><a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">Animatable.upperBound</a></code> accordingly after a check to ensure the provided <code><a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">lowerBound</a></code> is no greater than <code><a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">upperBound</a></code> in any dimension.</p>
-      <p>Setting the bounds will immediate clamp the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code>, only if the animation isn't running. For the on-going animation, the value at the next frame update will be checked against the bounds. If the value reaches the bound, then the animation will end with <code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#BoundReached">BoundReached</a></code> end reason.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>T&nbsp;lowerBound</code></td>
-              <td>
-                <p>lower bound of the animation. Defaults to the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">Animatable.lowerBound</a></code>     that is currently set.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>T&nbsp;upperBound</code></td>
-              <td>
-                <p>upper bound of the animation. Defaults to the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">Animatable.upperBound</a></code>     that is currently set.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="stop--"></a><a name="stop"></a>
+        <h3 class="api-name" id="stop()">stop</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#stop()">stop</a>()</pre>
+        <p>Stops any on-going animation with a <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-cancellation-exception/index.html">CancellationException</a></code>.</p>
+        <p>This function will not return until the ongoing animation has been canceled (if any). Note, <code><a href="/reference/androidx/compose/animation/core/Animatable.html#stop()">stop</a></code> function does <b>not</b> skip the animation value to its target value. Rather the animation will be stopped in its track. Consider <code><a href="/reference/androidx/compose/animation/core/Animatable.html#snapTo(kotlin.Any)">snapTo</a></code> if it's desired to not only stop the animation but also snap the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code> to a given value.</p>
+        <p>See <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</a></code> and <code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a></code> for more details about animation being canceled.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateTo(kotlin.Any,androidx.compose.animation.core.AnimationSpec,kotlin.Any,kotlin.Function1)">animateTo</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/animation/core/Animatable.html#animateDecay(kotlin.Any,androidx.compose.animation.core.DecayAnimationSpec,kotlin.Function1)">animateDecay</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/animation/core/Animatable.html#snapTo(kotlin.Any)">snapTo</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Throws</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">kotlin.IllegalStateException</a>&nbsp;kotlin.IllegalStateException</code></td>
-              <td>
-                <p>if the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">lowerBound</a></code> is greater than <code><a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">upperBound</a></code> in any     dimension.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="updateBounds(kotlin.Any, kotlin.Any)"></a><a name="updateBounds-kotlin.Any-kotlin.Any-"></a><a name="updatebounds"></a>
+        <h3 class="api-name" id="updateBounds(kotlin.Any,kotlin.Any)">updateBounds</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">updateBounds</a>(T&nbsp;lowerBound,&nbsp;T&nbsp;upperBound)</pre>
+        <p>Updates either <code><a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">lowerBound</a></code> or <code><a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">upperBound</a></code>, or both. This will update <code><a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">Animatable.lowerBound</a></code> and/or <code><a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">Animatable.upperBound</a></code> accordingly after a check to ensure the provided <code><a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">lowerBound</a></code> is no greater than <code><a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">upperBound</a></code> in any dimension.</p>
+        <p>Setting the bounds will immediate clamp the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#value()">value</a></code>, only if the animation isn't running. For the on-going animation, the value at the next frame update will be checked against the bounds. If the value reaches the bound, then the animation will end with <code><a href="/reference/androidx/compose/animation/core/AnimationEndReason.html#BoundReached">BoundReached</a></code> end reason.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>T&nbsp;lowerBound</code></td>
+                <td>
+                  <p>lower bound of the animation. Defaults to the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#lowerBound()">Animatable.lowerBound</a></code>     that is currently set.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>T&nbsp;upperBound</code></td>
+                <td>
+                  <p>upper bound of the animation. Defaults to the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#upperBound()">Animatable.upperBound</a></code>     that is currently set.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">kotlin.IllegalStateException</a>&nbsp;kotlin.IllegalStateException</code></td>
+                <td>
+                  <p>if the <code><a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">lowerBound</a></code> is greater than <code><a href="/reference/androidx/compose/animation/core/Animatable.html#updateBounds(kotlin.Any,kotlin.Any)">upperBound</a></code> in any     dimension.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

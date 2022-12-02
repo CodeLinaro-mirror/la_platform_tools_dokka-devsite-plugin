@@ -17,6 +17,10 @@
     <p>An instance of MutableInteractionSource can be created by using the <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> factory function. This instance should be <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">remember</a></code>ed before it is passed to other components that consume it.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%">See also</th>
@@ -37,6 +41,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
@@ -72,6 +80,10 @@
             <td><devsite-expandable><span class="expand-control">From <a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">androidx.compose.foundation.interaction.InteractionSource</a></span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
                   <tbody class="list">
                     <tr>
                       <td width="40%"><code>abstract @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a>&gt;</code></td>
@@ -88,45 +100,55 @@
         </tbody>
       </table>
     </div>
-    <h2>Public methods</h2>
-    <div class="api-item"><a name="emit-androidx.compose.foundation.interaction.Interaction-"></a><a name="emit"></a>
-      <h3 class="api-name" id="emit(androidx.compose.foundation.interaction.Interaction)">emit</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#emit(androidx.compose.foundation.interaction.Interaction)">emit</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a>&nbsp;interaction)</pre>
-      <p>Emits <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#emit(androidx.compose.foundation.interaction.Interaction)">interaction</a></code> into <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#interactions()">interactions</a></code>. This method is not thread-safe and should not be invoked concurrently.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#tryEmit(androidx.compose.foundation.interaction.Interaction)">tryEmit</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="emit-androidx.compose.foundation.interaction.Interaction-"></a><a name="emit"></a>
+        <h3 class="api-name" id="emit(androidx.compose.foundation.interaction.Interaction)">emit</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#emit(androidx.compose.foundation.interaction.Interaction)">emit</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a>&nbsp;interaction)</pre>
+        <p>Emits <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#emit(androidx.compose.foundation.interaction.Interaction)">interaction</a></code> into <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#interactions()">interactions</a></code>. This method is not thread-safe and should not be invoked concurrently.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#tryEmit(androidx.compose.foundation.interaction.Interaction)">tryEmit</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="tryEmit-androidx.compose.foundation.interaction.Interaction-"></a><a name="tryemit"></a>
-      <h3 class="api-name" id="tryEmit(androidx.compose.foundation.interaction.Interaction)">tryEmit</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#tryEmit(androidx.compose.foundation.interaction.Interaction)">tryEmit</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a>&nbsp;interaction)</pre>
-      <p>Tries to emit <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#tryEmit(androidx.compose.foundation.interaction.Interaction)">interaction</a></code> into <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#interactions()">interactions</a></code> without suspending. It returns <code>true</code> if the value was emitted successfully.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#emit(androidx.compose.foundation.interaction.Interaction)">emit</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="tryEmit-androidx.compose.foundation.interaction.Interaction-"></a><a name="tryemit"></a>
+        <h3 class="api-name" id="tryEmit(androidx.compose.foundation.interaction.Interaction)">tryEmit</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#tryEmit(androidx.compose.foundation.interaction.Interaction)">tryEmit</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a>&nbsp;interaction)</pre>
+        <p>Tries to emit <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#tryEmit(androidx.compose.foundation.interaction.Interaction)">interaction</a></code> into <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#interactions()">interactions</a></code> without suspending. It returns <code>true</code> if the value was emitted successfully.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html#emit(androidx.compose.foundation.interaction.Interaction)">emit</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

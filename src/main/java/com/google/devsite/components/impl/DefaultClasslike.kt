@@ -42,7 +42,16 @@ internal data class DefaultClasslike(
         allVisibleSummaries.render(into, separator = null, header = { h2 { +"Summary" } })
 
         for (symbolType in allDetailsSections.filter { it.symbols.isNotEmpty() }) {
-            symbolType.symbols.render(into, separator = null, header = { h2 { +symbolType.title } })
+            // Delegate choices of table layout (e.g. filters available) to the first item.
+            // This is the same method we use for layout of the summary section tables.
+            // We know that all items will want the same thing, because they will all be Ts
+            symbolType.symbols.first().layout(this) {
+                symbolType.symbols.render(
+                    into,
+                    separator = null,
+                    header = { h2 { +symbolType.title } }
+                )
+            }
         }
     }
 

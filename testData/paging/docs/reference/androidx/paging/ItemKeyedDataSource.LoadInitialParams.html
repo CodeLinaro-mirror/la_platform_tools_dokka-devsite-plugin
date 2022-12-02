@@ -14,6 +14,10 @@
     <p>Holder object for inputs to <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html#loadInitial(androidx.paging.ItemKeyedDataSource.LoadInitialParams)">loadInitial</a></code>.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%">Parameters</th>
@@ -32,6 +36,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public fields</h3></th>
@@ -64,6 +72,10 @@
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
@@ -78,44 +90,52 @@
         </tbody>
       </table>
     </div>
-    <h2>Public fields</h2>
-    <div class="api-item"><a name="getPlaceholdersEnabled()"></a><a name="setPlaceholdersEnabled()"></a><a name="getPlaceholdersEnabled--"></a><a name="setPlaceholdersEnabled--"></a>
-      <h3 class="api-name" id="placeholdersEnabled()">placeholdersEnabled</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html#placeholdersEnabled()">placeholdersEnabled</a></pre>
-      <p>Defines whether placeholders are enabled, and whether the loaded total count will be ignored.</p>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getPlaceholdersEnabled()"></a><a name="setPlaceholdersEnabled()"></a><a name="getPlaceholdersEnabled--"></a><a name="setPlaceholdersEnabled--"></a>
+        <h3 class="api-name" id="placeholdersEnabled()">placeholdersEnabled</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html#placeholdersEnabled()">placeholdersEnabled</a></pre>
+        <p>Defines whether placeholders are enabled, and whether the loaded total count will be ignored.</p>
+      </div>
+      <div class="api-item"><a name="getRequestedInitialKey()"></a><a name="setRequestedInitialKey()"></a><a name="getRequestedInitialKey--"></a><a name="setRequestedInitialKey--"></a>
+        <h3 class="api-name" id="requestedInitialKey()">requestedInitialKey</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;Key&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html#requestedInitialKey()">requestedInitialKey</a></pre>
+        <p>Load items around this key, or at the beginning of the data set if <code>null</code> is passed.</p>
+        <p>Note that this key is generally a hint, and may be ignored if you want to always load from the beginning.</p>
+      </div>
+      <div class="api-item"><a name="getRequestedLoadSize()"></a><a name="setRequestedLoadSize()"></a><a name="getRequestedLoadSize--"></a><a name="setRequestedLoadSize--"></a>
+        <h3 class="api-name" id="requestedLoadSize()">requestedLoadSize</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html#requestedLoadSize()">requestedLoadSize</a></pre>
+        <p>Requested number of items to load.</p>
+        <p>Note that this may be larger than available data.</p>
+      </div>
     </div>
-    <div class="api-item"><a name="getRequestedInitialKey()"></a><a name="setRequestedInitialKey()"></a><a name="getRequestedInitialKey--"></a><a name="setRequestedInitialKey--"></a>
-      <h3 class="api-name" id="requestedInitialKey()">requestedInitialKey</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;Key&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html#requestedInitialKey()">requestedInitialKey</a></pre>
-      <p>Load items around this key, or at the beginning of the data set if <code>null</code> is passed.</p>
-      <p>Note that this key is generally a hint, and may be ignored if you want to always load from the beginning.</p>
-    </div>
-    <div class="api-item"><a name="getRequestedLoadSize()"></a><a name="setRequestedLoadSize()"></a><a name="getRequestedLoadSize--"></a><a name="setRequestedLoadSize--"></a>
-      <h3 class="api-name" id="requestedLoadSize()">requestedLoadSize</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html#requestedLoadSize()">requestedLoadSize</a></pre>
-      <p>Requested number of items to load.</p>
-      <p>Note that this may be larger than available data.</p>
-    </div>
-    <h2>Public constructors</h2>
-    <div class="api-item"><a name="LoadInitialParams(kotlin.Any, kotlin.Int, kotlin.Boolean)"></a><a name="LoadInitialParams-kotlin.Any-kotlin.Int-kotlin.Boolean-"></a><a name="loadinitialparams"></a>
-      <h3 class="api-name" id="LoadInitialParams(kotlin.Any,kotlin.Int,kotlin.Boolean)">LoadInitialParams</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;&lt;Key&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html#LoadInitialParams(kotlin.Any,kotlin.Int,kotlin.Boolean)">LoadInitialParams</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;requestedInitialKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;requestedLoadSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;placeholdersEnabled<br>)</pre>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>&lt;Key&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</code></td>
-              <td>
-                <p>Type of data used to query <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html">Value</a></code> types out of the <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="LoadInitialParams(kotlin.Any, kotlin.Int, kotlin.Boolean)"></a><a name="LoadInitialParams-kotlin.Any-kotlin.Int-kotlin.Boolean-"></a><a name="loadinitialparams"></a>
+        <h3 class="api-name" id="LoadInitialParams(kotlin.Any,kotlin.Int,kotlin.Boolean)">LoadInitialParams</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;&lt;Key&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/ItemKeyedDataSource.LoadInitialParams.html#LoadInitialParams(kotlin.Any,kotlin.Int,kotlin.Boolean)">LoadInitialParams</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;requestedInitialKey,<br>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;requestedLoadSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;placeholdersEnabled<br>)</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>&lt;Key&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt;</code></td>
+                <td>
+                  <p>Type of data used to query <code><a href="/reference/androidx/paging/ItemKeyedDataSource.html">Value</a></code> types out of the <code><a href="/reference/androidx/paging/DataSource.html">DataSource</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

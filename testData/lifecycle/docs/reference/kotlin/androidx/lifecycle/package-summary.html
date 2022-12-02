@@ -9,6 +9,10 @@
     <h2>Interfaces</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <tbody class="list">
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/DefaultLifecycleObserver.html">DefaultLifecycleObserver</a></code></td>
@@ -78,6 +82,10 @@
     <h2>Classes</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <tbody class="list">
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/AbstractSavedStateViewModelFactory.html">AbstractSavedStateViewModelFactory</a></code></td>
@@ -241,6 +249,10 @@
     <h2>Exceptions</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <tbody class="list">
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/LifecycleDestroyedException.html">LifecycleDestroyedException</a></code></td>
@@ -254,6 +266,10 @@
     <h2>Objects</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <tbody class="list">
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/ErrorMessages.html">ErrorMessages</a></code></td>
@@ -265,6 +281,10 @@
     <h2>Annotations</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <tbody class="list">
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/OnLifecycleEvent.html">OnLifecycleEvent</a></code></td>
@@ -280,6 +300,10 @@
     <h2>Enums</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <tbody class="list">
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.Event.html">Lifecycle.Event</a></code></td>
@@ -297,6 +321,10 @@
     <h2>Top-level functions summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <tbody class="list">
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/model/InputModel.html">InputModel</a></code></td>
@@ -354,6 +382,10 @@
     <h2>Extension functions summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <tbody class="list">
           <tr>
             <td width="40%"><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;T&gt;</code></td>
@@ -621,6 +653,10 @@
     <h2>Top-level properties summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <tbody class="list">
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/viewmodel/CreationExtras.Key.html">CreationExtras.Key</a>&lt;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>&gt;</code></td>
@@ -649,6 +685,10 @@
     <h2>Extension properties summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <tbody class="list">
           <tr>
             <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/LifecycleCoroutineScope.html">LifecycleCoroutineScope</a></code></td>
@@ -699,6 +739,10 @@
       <pre class="prettyprint">// a simple LiveData that receives value 3, 3 seconds after being observed for the first time.<br>val data : LiveData&lt;Int&gt; = liveData {<br>    delay(3000)<br>    emit(3)<br>}<br><br><br>// a LiveData that fetches a `User` object based on a `userId` and refreshes it every 30 seconds<br>// as long as it is observed<br>val userId : LiveData&lt;String&gt; = ...<br>val user = userId.switchMap { id -&gt;<br>    liveData {<br>      while(true) {<br>        // note that `while(true)` is fine because the `delay(30_000)` below will cooperate in<br>        // cancellation if LiveData is not actively observed anymore<br>        val data = api.fetch(id) // errors are ignored for brevity<br>        emit(data)<br>        delay(30_000)<br>      }<br>    }<br>}<br><br>// A retrying data fetcher with doubling back-off<br>val user = liveData {<br>    var backOffTime = 1_000<br>    var succeeded = false<br>    while(!succeeded) {<br>        try {<br>            emit(api.fetch(id))<br>            succeeded = true<br>        } catch(ioError : IOException) {<br>            delay(backOffTime)<br>            backOffTime *= minOf(backOffTime * 2, 60_000)<br>        }<br>    }<br>}<br><br>// a LiveData that tries to load the `User` from local cache first and then tries to fetch<br>// from the server and also yields the updated value<br>val user = liveData {<br>    // dispatch loading first<br>    emit(LOADING(id))<br>    // check local storage<br>    val cached = cache.loadUser(id)<br>    if (cached != null) {<br>        emit(cached)<br>    }<br>    if (cached == null || cached.isStale()) {<br>        val fresh = api.fetch(id) // errors are ignored for brevity<br>        cache.save(fresh)<br>        emit(fresh)<br>    }<br>}<br><br>// a LiveData that immediately receives a LiveData&lt;User&gt; from the database and yields it as a<br>// source but also tries to back-fill the database from the server<br>val user = liveData {<br>    val fromDb: LiveData&lt;User&gt; = roomDatabase.loadUser(id)<br>    emitSource(fromDb)<br>    val updated = api.fetch(id) // errors are ignored for brevity<br>    // Since we are using Room here, updating the database will update the `fromDb` LiveData<br>    // that was obtained above. See Room's documentation for more details.<br>    // https://developer.android.com/training/data-storage/room/accessing-data#query-observable<br>    roomDatabase.insert(updated)<br>}</pre>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">Parameters</th>
@@ -739,6 +783,10 @@
       <pre class="prettyprint">// a simple LiveData that receives value 3, 3 seconds after being observed for the first time.<br>val data : LiveData&lt;Int&gt; = liveData {<br>    delay(3000)<br>    emit(3)<br>}<br><br><br>// a LiveData that fetches a `User` object based on a `userId` and refreshes it every 30 seconds<br>// as long as it is observed<br>val userId : LiveData&lt;String&gt; = ...<br>val user = userId.switchMap { id -&gt;<br>    liveData {<br>      while(true) {<br>        // note that `while(true)` is fine because the `delay(30_000)` below will cooperate in<br>        // cancellation if LiveData is not actively observed anymore<br>        val data = api.fetch(id) // errors are ignored for brevity<br>        emit(data)<br>        delay(30_000)<br>      }<br>    }<br>}<br><br>// A retrying data fetcher with doubling back-off<br>val user = liveData {<br>    var backOffTime = 1_000<br>    var succeeded = false<br>    while(!succeeded) {<br>        try {<br>            emit(api.fetch(id))<br>            succeeded = true<br>        } catch(ioError : IOException) {<br>            delay(backOffTime)<br>            backOffTime *= minOf(backOffTime * 2, 60_000)<br>        }<br>    }<br>}<br><br>// a LiveData that tries to load the `User` from local cache first and then tries to fetch<br>// from the server and also yields the updated value<br>val user = liveData {<br>    // dispatch loading first<br>    emit(LOADING(id))<br>    // check local storage<br>    val cached = cache.loadUser(id)<br>    if (cached != null) {<br>        emit(cached)<br>    }<br>    if (cached == null || cached.isStale()) {<br>        val fresh = api.fetch(id) // errors are ignored for brevity<br>        cache.save(fresh)<br>        emit(fresh)<br>    }<br>}<br><br>// a LiveData that immediately receives a LiveData&lt;User&gt; from the database and yields it as a<br>// source but also tries to back-fill the database from the server<br>val user = liveData {<br>    val fromDb: LiveData&lt;User&gt; = roomDatabase.loadUser(id)<br>    emitSource(fromDb)<br>    val updated = api.fetch(id) // errors are ignored for brevity<br>    // Since we are using Room here, updating the database will update the `fromDb` LiveData<br>    // that was obtained above. See Room's documentation for more details.<br>    // https://developer.android.com/training/data-storage/room/accessing-data#query-observable<br>    roomDatabase.insert(updated)<br>}</pre>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">Parameters</th>
@@ -798,6 +846,10 @@
       <p>The <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(kotlinx.coroutines.flow.Flow).asLiveData(kotlin.coroutines.CoroutineContext,java.time.Duration)">timeout</a></code> can be changed to fit different use cases better, for example increasing it will give more time to flow to complete before being canceled and is good for finite flows that are costly to restart. Otherwise if a flow is cheap to restart decreasing the <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(kotlinx.coroutines.flow.Flow).asLiveData(kotlin.coroutines.CoroutineContext,java.time.Duration)">timeout</a></code> value will allow to produce less values that aren't consumed by anything.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">Parameters</th>
@@ -831,6 +883,10 @@
       <p>The <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(kotlinx.coroutines.flow.Flow).asLiveData(kotlin.coroutines.CoroutineContext,kotlin.Long)">timeoutInMs</a></code> can be changed to fit different use cases better, for example increasing it will give more time to flow to complete before being canceled and is good for finite flows that are costly to restart. Otherwise if a flow is cheap to restart decreasing the <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(kotlinx.coroutines.flow.Flow).asLiveData(kotlin.coroutines.CoroutineContext,kotlin.Long)">timeoutInMs</a></code> value will allow to produce less values that aren't consumed by anything.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">Parameters</th>
@@ -861,6 +917,10 @@
       <p>This <code><a href="/reference/kotlin/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code> must contain <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#SAVED_STATE_REGISTRY_OWNER_KEY()">SAVED_STATE_REGISTRY_OWNER_KEY</a></code>, <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#VIEW_MODEL_STORE_OWNER_KEY()">VIEW_MODEL_STORE_OWNER_KEY</a></code> and <code><a href="/reference/kotlin/androidx/lifecycle/ViewModelProvider.NewInstanceFactory.Companion.html#VIEW_MODEL_KEY()">VIEW_MODEL_KEY</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">Throws</th>
@@ -913,6 +973,10 @@
       <p>Tip: If multiple flows need to be collected using <code>flowWithLifecycle</code>, consider using the <code><a href="/reference/kotlin/androidx/lifecycle/package-summary.html#(androidx.lifecycle.Lifecycle).repeatOnLifecycle(androidx.lifecycle.Lifecycle.State,kotlin.coroutines.SuspendFunction1)">Lifecycle.repeatOnLifecycle</a></code> API to collect from all of them using a different <code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/index.html">launch</a></code> per flow instead. That's more efficient and consumes less resources as no hot flows are created.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">Parameters</th>
@@ -936,6 +1000,10 @@
       </div>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">Returns</th>
@@ -958,6 +1026,10 @@
       <p>Returns an existing ViewModel or creates a new one in the scope (usually, a fragment or an activity), associated with this <code>ViewModelProvider</code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">See also</th>
@@ -1029,6 +1101,10 @@
       <p>Warning: <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#INITIALIZED">Lifecycle.State.INITIALIZED</a></code> is not allowed in this API. Passing it as a parameter will throw an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">IllegalArgumentException</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">Parameters</th>
@@ -1058,6 +1134,10 @@
       <pre class="prettyprint">class MyActivity : AppCompatActivity() {<br>    override fun onCreate(savedInstanceState: Bundle?) {<br>        /* ... */<br>            // Runs the block of code in a coroutine when the lifecycle is at least STARTED.<br>            // The coroutine will be cancelled when the ON_STOP event happens and will<br>            // restart executing if the lifecycle receives the ON_START event again.<br>            lifecycleScope.launch {<br>                repeatOnLifecycle(Lifecycle.State.STARTED) {<br>                    uiStateFlow.collect { uiState -&gt;<br>                        updateUi(uiState)<br>                    }<br>                }<br>            }<br>        }<br>    }</pre>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">See also</th>
@@ -1094,6 +1174,10 @@ changes.      <pre class="prettyprint">class UserViewModel: AndroidViewModel {<b
       <p>Creates an observable <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> stream from a ReactiveStreams <code><a href="/reference/kotlin/org/reactivestreams/Publisher.html">Publisher</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">See also</th>
@@ -1114,6 +1198,10 @@ changes.      <pre class="prettyprint">class UserViewModel: AndroidViewModel {<b
       <p>Adapts the given <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> stream to a ReactiveStreams <code><a href="/reference/kotlin/org/reactivestreams/Publisher.html">Publisher</a></code>.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">See also</th>
@@ -1134,6 +1222,10 @@ changes.      <pre class="prettyprint">class UserViewModel: AndroidViewModel {<b
       <p>Runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#CREATED">Lifecycle.State.CREATED</a></code> state.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">See also</th>
@@ -1156,6 +1248,10 @@ changes.      <pre class="prettyprint">class UserViewModel: AndroidViewModel {<b
       <p>Runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code>'s <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#CREATED">Lifecycle.State.CREATED</a></code> state.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">See also</th>
@@ -1178,6 +1274,10 @@ changes.      <pre class="prettyprint">class UserViewModel: AndroidViewModel {<b
       <p>Runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#RESUMED">Lifecycle.State.RESUMED</a></code> state.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">See also</th>
@@ -1200,6 +1300,10 @@ changes.      <pre class="prettyprint">class UserViewModel: AndroidViewModel {<b
       <p>Runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code>'s <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#RESUMED">Lifecycle.State.RESUMED</a></code> state.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">See also</th>
@@ -1222,6 +1326,10 @@ changes.      <pre class="prettyprint">class UserViewModel: AndroidViewModel {<b
       <p>Runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#STARTED">Lifecycle.State.STARTED</a></code> state.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">See also</th>
@@ -1244,6 +1352,10 @@ changes.      <pre class="prettyprint">class UserViewModel: AndroidViewModel {<b
       <p>Runs the given block when the <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleOwner.html">LifecycleOwner</a></code>'s <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> is at least in <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.html#STARTED">Lifecycle.State.STARTED</a></code> state.</p>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">See also</th>
@@ -1271,6 +1383,10 @@ changes.      <pre class="prettyprint">class UserViewModel: AndroidViewModel {<b
       <pre class="prettyprint">// running a block of code only if lifecycle is STARTED<br>viewLifecycle.whenStateAtLeast(Lifecycle.State.STARTED) {<br>    // here, we are on the main thread and view lifecycle is guaranteed to be STARTED or RESUMED.<br>    // We can safely access our views.<br>    loadingBar.visibility = View.VISIBLE<br>    try {<br>        // we can call any suspend function<br>        val data = withContext(Dispatchers.IO) {<br>            // this will run in IO thread pool. It will keep running as long as Lifecycle<br>            // is not DESTROYED. If it is destroyed, this coroutine will be cancelled as well.<br>            // However, we CANNOT access Views here.<br><br>            // We are using withContext(Dispatchers.IO) here just for demonstration purposes.<br>            // Such code should live in your business logic classes and your UI should use a<br>            // ViewModel (or similar) to access it.<br>            api.getUser()<br>        }<br>        // this line will execute on the main thread and only if the lifecycle is in at least<br>        // STARTED state (STARTED is the parameter we've passed to whenStateAtLeast)<br>        // Because of this guarantee, we can safely access the UI again.<br>        loadingBar.visibility = View.GONE<br>        nameTextView.text = user.name<br>        lastNameTextView.text = user.lastName<br>    } catch(ex : UserNotFoundException) {<br>        // same as above, this code can safely access UI elements because it only runs if<br>        // view lifecycle is at least STARTED<br>        loadingBar.visibility = View.GONE<br>        showErrorDialog(ex)<br>    } catch(th : Throwable) {<br>         // Unlike the catch statement above, this catch statements it too generic and might<br>         // also catch the CancellationException. Before accessing UI, you should check isActive<br>         // or lifecycle state<br>         if (viewLifecycle.currentState &gt;= Lifecycle.State.STARTED) {<br>             // here you can access the view because you've checked the coroutine is active<br>         }<br>    } finally {<br>        // in case of cancellation, this line might run even if the Lifecycle is not DESTROYED.<br>        // You cannot access Views here unless you check `isActive` or lifecycle state<br>        if (viewLifecycle.currentState &gt;= Lifecycle.State.STARTED) {<br>            // safe to access views<br>        } else {<br>            // not safe to access views<br>        }<br>    }<br>}</pre>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">Parameters</th>
@@ -1294,6 +1410,10 @@ changes.      <pre class="prettyprint">class UserViewModel: AndroidViewModel {<b
       </div>
       <div class="devsite-table-wrapper">
         <table class="responsive">
+          <colgroup>
+            <col width="40%">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th colspan="100%">Returns</th>

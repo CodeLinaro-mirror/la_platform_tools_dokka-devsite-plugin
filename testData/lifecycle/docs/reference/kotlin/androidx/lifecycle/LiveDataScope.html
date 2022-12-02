@@ -14,6 +14,10 @@
     <p>Interface that allows controlling a <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> from a coroutine block.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%">See also</th>
@@ -30,6 +34,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public functions</h3></th>
@@ -55,6 +63,10 @@
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public properties</h3></th>
@@ -71,97 +83,117 @@
         </tbody>
       </table>
     </div>
-    <h2>Public functions</h2>
-    <div class="api-item"><a name="emit-kotlin.Any-"></a><a name="emit"></a>
-      <h3 class="api-name" id="emit(kotlin.Any)">emit</h3>
-      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emit(kotlin.Any)">emit</a>(value:&nbsp;T):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Set's the <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code>'s value to the given <code><a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emit(kotlin.Any)">value</a></code>. If you've called <code><a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emitSource(androidx.lifecycle.LiveData)">emitSource</a></code> previously, calling <code><a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emit(kotlin.Any)">emit</a></code> will remove that source.</p>
-      <p>Note that this function suspends until the value is set on the <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>value:&nbsp;T</code></td>
-              <td>
-                <p>The new value for the <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code></p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="emit-kotlin.Any-"></a><a name="emit"></a>
+        <h3 class="api-name" id="emit(kotlin.Any)">emit</h3>
+        <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emit(kotlin.Any)">emit</a>(value:&nbsp;T):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Set's the <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code>'s value to the given <code><a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emit(kotlin.Any)">value</a></code>. If you've called <code><a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emitSource(androidx.lifecycle.LiveData)">emitSource</a></code> previously, calling <code><a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emit(kotlin.Any)">emit</a></code> will remove that source.</p>
+        <p>Note that this function suspends until the value is set on the <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>value:&nbsp;T</code></td>
+                <td>
+                  <p>The new value for the <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emitSource(androidx.lifecycle.LiveData)">emitSource</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emitSource(androidx.lifecycle.LiveData)">emitSource</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="emitSource-androidx.lifecycle.LiveData-"></a><a name="emitsource"></a>
+        <h3 class="api-name" id="emitSource(androidx.lifecycle.LiveData)">emitSource</h3>
+        <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emitSource(androidx.lifecycle.LiveData)">emitSource</a>(source:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;T&gt;):&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-disposable-handle/index.html">DisposableHandle</a></pre>
+        <p>Add the given <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> as a source, similar to <code><a href="/reference/kotlin/androidx/lifecycle/MediatorLiveData.html#addSource(androidx.lifecycle.LiveData,androidx.lifecycle.Observer)">MediatorLiveData.addSource</a></code>. Calling this method will remove any source that was yielded before via <code><a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emitSource(androidx.lifecycle.LiveData)">emitSource</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>source:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;T&gt;</code></td>
+                <td>
+                  <p>The <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> instance whose values will be dispatched from the current <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emit(kotlin.Any)">emit</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/MediatorLiveData.html#addSource(androidx.lifecycle.LiveData,androidx.lifecycle.Observer)">addSource</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/MediatorLiveData.html#removeSource(androidx.lifecycle.LiveData)">removeSource</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-    <div class="api-item"><a name="emitSource-androidx.lifecycle.LiveData-"></a><a name="emitsource"></a>
-      <h3 class="api-name" id="emitSource(androidx.lifecycle.LiveData)">emitSource</h3>
-      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emitSource(androidx.lifecycle.LiveData)">emitSource</a>(source:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;T&gt;):&nbsp;<a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-disposable-handle/index.html">DisposableHandle</a></pre>
-      <p>Add the given <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> as a source, similar to <code><a href="/reference/kotlin/androidx/lifecycle/MediatorLiveData.html#addSource(androidx.lifecycle.LiveData,androidx.lifecycle.Observer)">MediatorLiveData.addSource</a></code>. Calling this method will remove any source that was yielded before via <code><a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emitSource(androidx.lifecycle.LiveData)">emitSource</a></code>.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>source:&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a>&lt;T&gt;</code></td>
-              <td>
-                <p>The <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code> instance whose values will be dispatched from the current <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getLatestValue()"></a><a name="setLatestValue()"></a><a name="getLatestValue--"></a><a name="setLatestValue--"></a>
+        <h3 class="api-name" id="latestValue()">latestValue</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#latestValue()">latestValue</a>:&nbsp;T?</pre>
+        <p>References the current value of the <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
+        <p>If the block never <code>emit</code>ed a value, <code><a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#latestValue()">latestValue</a></code> will be <code>null</code>. You can use this value to check what was then latest value <code>emit</code>ed by your <code>block</code> before it got cancelled.</p>
+        <p>Note that if the block called <code><a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emitSource(androidx.lifecycle.LiveData)">emitSource</a></code>, then <code>latestValue</code> will be last value dispatched by the <code>source</code> <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
       </div>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emit(kotlin.Any)">emit</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/MediatorLiveData.html#addSource(androidx.lifecycle.LiveData,androidx.lifecycle.Observer)">addSource</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/lifecycle/MediatorLiveData.html#removeSource(androidx.lifecycle.LiveData)">removeSource</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <h2>Public properties</h2>
-    <div class="api-item"><a name="getLatestValue()"></a><a name="setLatestValue()"></a><a name="getLatestValue--"></a><a name="setLatestValue--"></a>
-      <h3 class="api-name" id="latestValue()">latestValue</h3>
-      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#latestValue()">latestValue</a>:&nbsp;T?</pre>
-      <p>References the current value of the <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
-      <p>If the block never <code>emit</code>ed a value, <code><a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#latestValue()">latestValue</a></code> will be <code>null</code>. You can use this value to check what was then latest value <code>emit</code>ed by your <code>block</code> before it got cancelled.</p>
-      <p>Note that if the block called <code><a href="/reference/kotlin/androidx/lifecycle/LiveDataScope.html#emitSource(androidx.lifecycle.LiveData)">emitSource</a></code>, then <code>latestValue</code> will be last value dispatched by the <code>source</code> <code><a href="/reference/kotlin/androidx/lifecycle/LiveData.html">LiveData</a></code>.</p>
     </div>
   </body>
 </html>

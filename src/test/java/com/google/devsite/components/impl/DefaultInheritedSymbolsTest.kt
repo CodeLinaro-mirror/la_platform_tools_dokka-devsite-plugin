@@ -69,6 +69,10 @@ class DefaultInheritedSymbolsTest {
                           <td><devsite-expandable><span class="expand-control">From aClass</span>
                             <div class="devsite-table-wrapper">
                               <table class="responsive">
+                                <colgroup>
+                                  <col width="40%">
+                                  <col>
+                                </colgroup>
                                 <tbody class="list">
                                   <tr><noop/></tr>
                                   <tr><noop/></tr>

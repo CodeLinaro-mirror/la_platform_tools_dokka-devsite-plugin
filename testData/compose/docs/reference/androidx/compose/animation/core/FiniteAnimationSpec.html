@@ -16,6 +16,10 @@
       <div id="subclasses-direct-summary">
         <div class="devsite-table-wrapper">
           <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
             <tbody class="list">
               <tr>
                 <td width="40%"><code><a href="/reference/androidx/compose/animation/core/DurationBasedAnimationSpec.html">DurationBasedAnimationSpec</a></code></td>
@@ -46,6 +50,10 @@
       <div id="subclasses-indirect-summary">
         <div class="devsite-table-wrapper">
           <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
             <tbody class="list">
               <tr>
                 <td width="40%"><code><a href="/reference/androidx/compose/animation/core/KeyframesSpec.html">KeyframesSpec</a></code></td>
@@ -74,6 +82,10 @@
     <p><code><a href="/reference/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a></code> is the interface that all non-infinite <code><a href="/reference/androidx/compose/animation/core/AnimationSpec.html">AnimationSpec</a></code>s implement, including: <code><a href="/reference/androidx/compose/animation/core/TweenSpec.html">TweenSpec</a></code>, <code><a href="/reference/androidx/compose/animation/core/SpringSpec.html">SpringSpec</a></code>, <code><a href="/reference/androidx/compose/animation/core/KeyframesSpec.html">KeyframesSpec</a></code>, <code><a href="/reference/androidx/compose/animation/core/RepeatableSpec.html">RepeatableSpec</a></code>, <code><a href="/reference/androidx/compose/animation/core/SnapSpec.html">SnapSpec</a></code>, etc. By definition, <code><a href="/reference/androidx/compose/animation/core/InfiniteRepeatableSpec.html">InfiniteRepeatableSpec</a></code> <b>does not</b> implement this interface.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%">See also</th>
@@ -90,6 +102,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
@@ -106,28 +122,34 @@
         </tbody>
       </table>
     </div>
-    <h2>Public methods</h2>
-    <div class="api-item"><a name="vectorize-androidx.compose.animation.core.TwoWayConverter-"></a><a name="vectorize"></a>
-      <h3 class="api-name" id="vectorize(androidx.compose.animation.core.TwoWayConverter)">vectorize</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/VectorizedFiniteAnimationSpec.html">VectorizedFiniteAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/FiniteAnimationSpec.html#vectorize(androidx.compose.animation.core.TwoWayConverter)">vectorize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;converter<br>)</pre>
-      <p>Creates a <code><a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> with the given <code><a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code>.</p>
-      <p>The underlying animation system operates on <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>s. <code><a href="/reference/androidx/compose/animation/core/FiniteAnimationSpec.html">T</a></code> will be converted to <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> to animate. <code><a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> describes how the converted <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> should be animated. E.g. The animation could simply interpolate between the start and end values (i.e.<code><a href="/reference/androidx/compose/animation/core/TweenSpec.html">TweenSpec</a></code>), or apply spring physics to produce the motion (i.e. <code><a href="/reference/androidx/compose/animation/core/SpringSpec.html">SpringSpec</a></code>), etc)</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;converter</code></td>
-              <td>
-                <p>converts the type <code><a href="/reference/androidx/compose/animation/core/FiniteAnimationSpec.html">T</a></code> from and to <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> type</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="vectorize-androidx.compose.animation.core.TwoWayConverter-"></a><a name="vectorize"></a>
+        <h3 class="api-name" id="vectorize(androidx.compose.animation.core.TwoWayConverter)">vectorize</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/VectorizedFiniteAnimationSpec.html">VectorizedFiniteAnimationSpec</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;&lt;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/FiniteAnimationSpec.html#vectorize(androidx.compose.animation.core.TwoWayConverter)">vectorize</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;converter<br>)</pre>
+        <p>Creates a <code><a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> with the given <code><a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code>.</p>
+        <p>The underlying animation system operates on <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>s. <code><a href="/reference/androidx/compose/animation/core/FiniteAnimationSpec.html">T</a></code> will be converted to <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> to animate. <code><a href="/reference/androidx/compose/animation/core/VectorizedAnimationSpec.html">VectorizedAnimationSpec</a></code> describes how the converted <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> should be animated. E.g. The animation could simply interpolate between the start and end values (i.e.<code><a href="/reference/androidx/compose/animation/core/TweenSpec.html">TweenSpec</a></code>), or apply spring physics to produce the motion (i.e. <code><a href="/reference/androidx/compose/animation/core/SpringSpec.html">SpringSpec</a></code>), etc)</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;converter</code></td>
+                <td>
+                  <p>converts the type <code><a href="/reference/androidx/compose/animation/core/FiniteAnimationSpec.html">T</a></code> from and to <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> type</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

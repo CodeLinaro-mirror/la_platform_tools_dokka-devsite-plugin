@@ -15,6 +15,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public functions</h3></th>
@@ -43,6 +47,10 @@
             <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">androidx.compose.runtime.MutableState</a></span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
                   <tbody class="list">
                     <tr>
                       <td width="40%"><code>operator T</code></td>
@@ -76,6 +84,10 @@
             <td><devsite-expandable><span class="expand-control">From <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">kotlinx.coroutines.CoroutineScope</a></span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
                   <tbody class="list">
                     <tr>
                       <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></code></td>
@@ -92,6 +104,10 @@
             <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/runtime/MutableState.html">androidx.compose.runtime.MutableState</a></span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
                   <tbody class="list">
                     <tr>
                       <td width="40%"><code>T</code></td>
@@ -107,13 +123,14 @@
         </tbody>
       </table>
     </div>
-    <h2>Public functions</h2>
-    <div class="api-item"><a name="awaitDispose-kotlin.Function0-"></a><a name="awaitdispose"></a>
-      <h3 class="api-name" id="awaitDispose(kotlin.Function0)">awaitDispose</h3>
-      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#awaitDispose(kotlin.Function0)">awaitDispose</a>(onDispose:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-nothing/index.html">Nothing</a></pre>
-      <p>Await the disposal of this producer whether it left the composition, the source changed, or an error occurred. Always runs <code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#awaitDispose(kotlin.Function0)">onDispose</a></code> before resuming.</p>
-      <p>This method is useful when configuring callback-based state producers that do not suspend, for example:</p>
-      <pre class="prettyprint">
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="awaitDispose-kotlin.Function0-"></a><a name="awaitdispose"></a>
+        <h3 class="api-name" id="awaitDispose(kotlin.Function0)">awaitDispose</h3>
+        <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#awaitDispose(kotlin.Function0)">awaitDispose</a>(onDispose:&nbsp;() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-nothing/index.html">Nothing</a></pre>
+        <p>Await the disposal of this producer whether it left the composition, the source changed, or an error occurred. Always runs <code><a href="/reference/kotlin/androidx/compose/runtime/ProduceStateScope.html#awaitDispose(kotlin.Function0)">onDispose</a></code> before resuming.</p>
+        <p>This method is useful when configuring callback-based state producers that do not suspend, for example:</p>
+        <pre class="prettyprint">
 import androidx.compose.runtime.produceState
 
 val currentPerson by produceState&lt;Person?&gt;(null, viewModel) {
@@ -125,6 +142,7 @@ val currentPerson by produceState&lt;Person?&gt;(null, viewModel) {
         disposable.dispose()
     }
 }</pre>
+      </div>
     </div>
   </body>
 </html>

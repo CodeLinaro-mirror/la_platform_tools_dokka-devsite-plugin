@@ -16,6 +16,10 @@
       <div id="subclasses-direct-summary">
         <div class="devsite-table-wrapper">
           <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
             <tbody class="list">
               <tr>
                 <td width="40%"><code><a href="/reference/androidx/compose/runtime/ControlledComposition.html">ControlledComposition</a></code></td>
@@ -34,6 +38,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public fields</h3></th>
@@ -59,6 +67,10 @@
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
@@ -82,81 +94,97 @@
         </tbody>
       </table>
     </div>
-    <h2>Public fields</h2>
-    <div class="api-item"><a name="getHasInvalidations()"></a><a name="setHasInvalidations()"></a><a name="getHasInvalidations--"></a><a name="setHasInvalidations--"></a>
-      <h3 class="api-name" id="hasInvalidations()">hasInvalidations</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/Composition.html#hasInvalidations()">hasInvalidations</a></pre>
-      <p>Returns true if any pending invalidations have been scheduled. An invalidation is schedule if <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html#invalidate()">RecomposeScope.invalidate</a></code> has been called on any composition scopes create for the composition.</p>
-      <p>Modifying <code><a href="/reference/androidx/compose/runtime/MutableState.html#value()">MutableState.value</a></code> of a value produced by <code><a href="/reference/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">mutableStateOf</a></code> will automatically call <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html#invalidate()">RecomposeScope.invalidate</a></code> for any scope that read <code><a href="/reference/androidx/compose/runtime/State.html#value()">State.value</a></code> of the mutable state instance during composition.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">mutableStateOf</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getHasInvalidations()"></a><a name="setHasInvalidations()"></a><a name="getHasInvalidations--"></a><a name="setHasInvalidations--"></a>
+        <h3 class="api-name" id="hasInvalidations()">hasInvalidations</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/Composition.html#hasInvalidations()">hasInvalidations</a></pre>
+        <p>Returns true if any pending invalidations have been scheduled. An invalidation is schedule if <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html#invalidate()">RecomposeScope.invalidate</a></code> has been called on any composition scopes create for the composition.</p>
+        <p>Modifying <code><a href="/reference/androidx/compose/runtime/MutableState.html#value()">MutableState.value</a></code> of a value produced by <code><a href="/reference/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">mutableStateOf</a></code> will automatically call <code><a href="/reference/androidx/compose/runtime/RecomposeScope.html#invalidate()">RecomposeScope.invalidate</a></code> for any scope that read <code><a href="/reference/androidx/compose/runtime/State.html#value()">State.value</a></code> of the mutable state instance during composition.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/package-summary.html#mutableStateOf(kotlin.Any,androidx.compose.runtime.SnapshotMutationPolicy)">mutableStateOf</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getIsDisposed()"></a><a name="setIsDisposed()"></a><a name="getIsDisposed--"></a><a name="setIsDisposed--"></a>
+        <h3 class="api-name" id="isDisposed()">isDisposed</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/Composition.html#isDisposed()">isDisposed</a></pre>
+        <p>True if <code><a href="/reference/androidx/compose/runtime/Composition.html#dispose()">dispose</a></code> has been called.</p>
       </div>
     </div>
-    <div class="api-item"><a name="getIsDisposed()"></a><a name="setIsDisposed()"></a><a name="getIsDisposed--"></a><a name="setIsDisposed--"></a>
-      <h3 class="api-name" id="isDisposed()">isDisposed</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/runtime/Composition.html#isDisposed()">isDisposed</a></pre>
-      <p>True if <code><a href="/reference/androidx/compose/runtime/Composition.html#dispose()">dispose</a></code> has been called.</p>
-    </div>
-    <h2>Public methods</h2>
-    <div class="api-item"><a name="dispose--"></a><a name="dispose"></a>
-      <h3 class="api-name" id="dispose()">dispose</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Composition.html#dispose()">dispose</a>()</pre>
-      <p>Clear the hierarchy that was created from the composition and release resources allocated for composition. After calling <code><a href="/reference/androidx/compose/runtime/Composition.html#dispose()">dispose</a></code> the composition will no longer be recomposed and calling <code><a href="/reference/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">setContent</a></code> will throw an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>. Calling <code><a href="/reference/androidx/compose/runtime/Composition.html#dispose()">dispose</a></code> is idempotent, all calls after the first are a no-op.</p>
-    </div>
-    <div class="api-item"><a name="setContent-kotlin.Function0-"></a><a name="setcontent"></a>
-      <h3 class="api-name" id="setContent(kotlin.Function0)">setContent</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">setContent</a>(@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content)</pre>
-      <p>Update the composition with the content described by the <code><a href="/reference/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">content</a></code> composable. After this has been called the changes to produce the initial composition has been calculated and applied to the composition.</p>
-      <p>Will throw an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code> if the composition has been disposed.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
-              <td>
-                <p>A composable function that describes the content of the composition.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="dispose--"></a><a name="dispose"></a>
+        <h3 class="api-name" id="dispose()">dispose</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Composition.html#dispose()">dispose</a>()</pre>
+        <p>Clear the hierarchy that was created from the composition and release resources allocated for composition. After calling <code><a href="/reference/androidx/compose/runtime/Composition.html#dispose()">dispose</a></code> the composition will no longer be recomposed and calling <code><a href="/reference/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">setContent</a></code> will throw an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code>. Calling <code><a href="/reference/androidx/compose/runtime/Composition.html#dispose()">dispose</a></code> is idempotent, all calls after the first are a no-op.</p>
       </div>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Throws</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">kotlin.IllegalStateException</a>&nbsp;kotlin.IllegalStateException</code></td>
-              <td>
-                <p>thrown in the composition has been <code><a href="/reference/androidx/compose/runtime/Composition.html#dispose()">dispose</a></code>d.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="setContent-kotlin.Function0-"></a><a name="setcontent"></a>
+        <h3 class="api-name" id="setContent(kotlin.Function0)">setContent</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">setContent</a>(@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content)</pre>
+        <p>Update the composition with the content described by the <code><a href="/reference/androidx/compose/runtime/Composition.html#setContent(kotlin.Function0)">content</a></code> composable. After this has been called the changes to produce the initial composition has been calculated and applied to the composition.</p>
+        <p>Will throw an <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a></code> if the composition has been disposed.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
+                <td>
+                  <p>A composable function that describes the content of the composition.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-state-exception/index.html">kotlin.IllegalStateException</a>&nbsp;kotlin.IllegalStateException</code></td>
+                <td>
+                  <p>thrown in the composition has been <code><a href="/reference/androidx/compose/runtime/Composition.html#dispose()">dispose</a></code>d.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

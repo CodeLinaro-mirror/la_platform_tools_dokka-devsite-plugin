@@ -20,10 +20,19 @@ import com.google.devsite.components.ContextFreeComponent
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.EmptyModifiers
 import com.google.devsite.renderer.converters.Modifiers
+import kotlinx.html.DIV
+import kotlinx.html.FlowContent
+import kotlinx.html.div
 
 /** Represents a fully documented function or property. */
 internal interface SymbolDetail<T : SymbolSignature> : ContextFreeComponent {
     val data: Params<T>
+
+    fun layout(into: FlowContent, contents: DIV.() -> Unit) = into.run {
+        div(classes = "list") {
+            contents()
+        }
+    }
 
     // Because this is not the bottom of a class hierarchy (KmpSymbolDetail), it can't be `data`
     open class Params<T : SymbolSignature>(

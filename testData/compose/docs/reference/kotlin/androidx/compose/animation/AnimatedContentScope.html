@@ -15,6 +15,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Nested types</h3></th>
@@ -36,6 +40,10 @@
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public functions</h3></th>
@@ -68,6 +76,10 @@
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public properties</h3></th>
@@ -103,6 +115,10 @@
             <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/animation/core/Transition.Segment.html">androidx.compose.animation.core.Transition.Segment</a></span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
                   <tbody class="list">
                     <tr>
                       <td width="40%"><code>open&nbsp;infix <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></code></td>
@@ -119,16 +135,17 @@
         </tbody>
       </table>
     </div>
-    <h2>Public functions</h2>
-    <div class="api-item"><a name="slideIntoContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection, androidx.compose.animation.core.FiniteAnimationSpec, kotlin.Function1)"></a><a name="slideIntoContainer-androidx.compose.animation.AnimatedContentScope.SlideDirection-androidx.compose.animation.core.FiniteAnimationSpec-kotlin.Function1-"></a><a name="slideintocontainer"></a>
-      <h3 class="api-name" id="slideIntoContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">slideIntoContainer</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideIntoContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">slideIntoContainer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;towards:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.html">AnimatedContentScope.SlideDirection</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>&gt; = spring(
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="slideIntoContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection, androidx.compose.animation.core.FiniteAnimationSpec, kotlin.Function1)"></a><a name="slideIntoContainer-androidx.compose.animation.AnimatedContentScope.SlideDirection-androidx.compose.animation.core.FiniteAnimationSpec-kotlin.Function1-"></a><a name="slideintocontainer"></a>
+        <h3 class="api-name" id="slideIntoContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">slideIntoContainer</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideIntoContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">slideIntoContainer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;towards:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.html">AnimatedContentScope.SlideDirection</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>&gt; = spring(
             visibilityThreshold = IntOffset.VisibilityThreshold
         ),<br>&nbsp;&nbsp;&nbsp;&nbsp;initialOffset:&nbsp;(offsetForFullSlide:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = { it }<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/EnterTransition.html">EnterTransition</a></pre>
-      <p>This defines a horizontal/vertical slide-in that is specific to <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function2)">AnimatedContent</a></code> from the edge of the container. The offset amount is dynamically calculated based on the current size of the <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function2)">AnimatedContent</a></code> and its content alignment. This offset (may be positive or negative based on the direction of the slide) is then passed to <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideIntoContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">initialOffset</a></code>. By default, <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideIntoContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">initialOffset</a></code> will be using the offset calculated from the system to slide the content in. <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideIntoContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">slideIntoContainer</a></code> is a convenient alternative to <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideInHorizontally</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInVertically(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideInVertically</a></code> when the incoming and outgoing content differ in size. Otherwise, it would be equivalent to <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideInHorizontally</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInVertically(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideInVertically</a></code> with an offset of the full width/height.</p>
-      <p><code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideIntoContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">towards</a></code> specifies the slide direction. Content can be slided into the container towards <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.Companion.html#Left()">SlideDirection.Left</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.Companion.html#Right()">SlideDirection.Right</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.Companion.html#Up()">SlideDirection.Up</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.Companion.html#Down()">SlideDirection.Down</a></code>.</p>
-      <p><code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideIntoContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">animationSpec</a></code> defines the animation that will be used to animate the slide-in.</p>
-      <pre class="prettyprint">// enum class NestedMenuState { Level1, Level2, Level3 }
+        <p>This defines a horizontal/vertical slide-in that is specific to <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function2)">AnimatedContent</a></code> from the edge of the container. The offset amount is dynamically calculated based on the current size of the <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function2)">AnimatedContent</a></code> and its content alignment. This offset (may be positive or negative based on the direction of the slide) is then passed to <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideIntoContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">initialOffset</a></code>. By default, <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideIntoContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">initialOffset</a></code> will be using the offset calculated from the system to slide the content in. <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideIntoContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">slideIntoContainer</a></code> is a convenient alternative to <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideInHorizontally</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInVertically(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideInVertically</a></code> when the incoming and outgoing content differ in size. Otherwise, it would be equivalent to <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideInHorizontally</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInVertically(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideInVertically</a></code> with an offset of the full width/height.</p>
+        <p><code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideIntoContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">towards</a></code> specifies the slide direction. Content can be slided into the container towards <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.Companion.html#Left()">SlideDirection.Left</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.Companion.html#Right()">SlideDirection.Right</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.Companion.html#Up()">SlideDirection.Up</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.Companion.html#Down()">SlideDirection.Down</a></code>.</p>
+        <p><code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideIntoContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">animationSpec</a></code> defines the animation that will be used to animate the slide-in.</p>
+        <pre class="prettyprint">// enum class NestedMenuState { Level1, Level2, Level3 }
 // This is an example of creating a transitionSpec for navigating in a nested menu. The goal
 // is to 1) establish a z-order for different levels of the menu, and 2) imply a spatial
 // order between the menus via the different slide direction when navigating to child menu vs
@@ -163,39 +180,43 @@ val transitionSpec: AnimatedContentScope&lt;NestedMenuState&gt;.() -&gt; Content
         }
     }
 }</pre>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function2)">AnimatedContent</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideInHorizontally</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInVertically(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideInVertically</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function2)">AnimatedContent</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideInHorizontally</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideInVertically(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideInVertically</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="slideOutOfContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection, androidx.compose.animation.core.FiniteAnimationSpec, kotlin.Function1)"></a><a name="slideOutOfContainer-androidx.compose.animation.AnimatedContentScope.SlideDirection-androidx.compose.animation.core.FiniteAnimationSpec-kotlin.Function1-"></a><a name="slideoutofcontainer"></a>
-      <h3 class="api-name" id="slideOutOfContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">slideOutOfContainer</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideOutOfContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">slideOutOfContainer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;towards:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.html">AnimatedContentScope.SlideDirection</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>&gt; = spring(
+      <div class="api-item"><a name="slideOutOfContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection, androidx.compose.animation.core.FiniteAnimationSpec, kotlin.Function1)"></a><a name="slideOutOfContainer-androidx.compose.animation.AnimatedContentScope.SlideDirection-androidx.compose.animation.core.FiniteAnimationSpec-kotlin.Function1-"></a><a name="slideoutofcontainer"></a>
+        <h3 class="api-name" id="slideOutOfContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">slideOutOfContainer</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideOutOfContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">slideOutOfContainer</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;towards:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.html">AnimatedContentScope.SlideDirection</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;animationSpec:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/core/FiniteAnimationSpec.html">FiniteAnimationSpec</a>&lt;<a href="/reference/kotlin/androidx/compose/ui/unit/IntOffset.html">IntOffset</a>&gt; = spring(
             visibilityThreshold = IntOffset.VisibilityThreshold
         ),<br>&nbsp;&nbsp;&nbsp;&nbsp;targetOffset:&nbsp;(offsetForFullSlide:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = { it }<br>):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/ExitTransition.html">ExitTransition</a></pre>
-      <p>This defines a horizontal/vertical exit transition to completely slide out of the <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function2)">AnimatedContent</a></code> container. The offset amount is dynamically calculated based on the current size of the <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function2)">AnimatedContent</a></code> and the new target size. This offset gets passed to <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideOutOfContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">targetOffset</a></code> lambda. By default, <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideOutOfContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">targetOffset</a></code> uses this offset as is, but it can be customized to slide a distance based on the offset. <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideOutOfContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">slideOutOfContainer</a></code> is a convenient alternative to <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideOutHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideOutHorizontally</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideOutVertically(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideOutVertically</a></code> when the incoming and outgoing content differ in size. Otherwise, it would be equivalent to <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideOutHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideOutHorizontally</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideOutVertically(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideOutVertically</a></code> with an offset of the full width/height.</p>
-      <p><code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideOutOfContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">towards</a></code> specifies the slide direction. Content can be slided out of the container towards <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.Companion.html#Left()">SlideDirection.Left</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.Companion.html#Right()">SlideDirection.Right</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.Companion.html#Up()">SlideDirection.Up</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.Companion.html#Down()">SlideDirection.Down</a></code>.</p>
-      <p><code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideOutOfContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">animationSpec</a></code> defines the animation that will be used to animate the slide-out.</p>
-      <pre class="prettyprint">// enum class NestedMenuState { Level1, Level2, Level3 }
+        <p>This defines a horizontal/vertical exit transition to completely slide out of the <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function2)">AnimatedContent</a></code> container. The offset amount is dynamically calculated based on the current size of the <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function2)">AnimatedContent</a></code> and the new target size. This offset gets passed to <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideOutOfContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">targetOffset</a></code> lambda. By default, <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideOutOfContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">targetOffset</a></code> uses this offset as is, but it can be customized to slide a distance based on the offset. <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideOutOfContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">slideOutOfContainer</a></code> is a convenient alternative to <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideOutHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideOutHorizontally</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideOutVertically(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideOutVertically</a></code> when the incoming and outgoing content differ in size. Otherwise, it would be equivalent to <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideOutHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideOutHorizontally</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideOutVertically(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideOutVertically</a></code> with an offset of the full width/height.</p>
+        <p><code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideOutOfContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">towards</a></code> specifies the slide direction. Content can be slided out of the container towards <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.Companion.html#Left()">SlideDirection.Left</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.Companion.html#Right()">SlideDirection.Right</a></code>, <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.Companion.html#Up()">SlideDirection.Up</a></code> and <code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.SlideDirection.Companion.html#Down()">SlideDirection.Down</a></code>.</p>
+        <p><code><a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#slideOutOfContainer(androidx.compose.animation.AnimatedContentScope.SlideDirection,androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)">animationSpec</a></code> defines the animation that will be used to animate the slide-out.</p>
+        <pre class="prettyprint">// enum class NestedMenuState { Level1, Level2, Level3 }
 // This is an example of creating a transitionSpec for navigating in a nested menu. The goal
 // is to 1) establish a z-order for different levels of the menu, and 2) imply a spatial
 // order between the menus via the different slide direction when navigating to child menu vs
@@ -230,35 +251,39 @@ val transitionSpec: AnimatedContentScope&lt;NestedMenuState&gt;.() -&gt; Content
         }
     }
 }</pre>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function2)">AnimatedContent</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideOutHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideOutHorizontally</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideOutVertically(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideOutVertically</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#AnimatedContent(kotlin.Any,androidx.compose.ui.Modifier,kotlin.Function1,androidx.compose.ui.Alignment,kotlin.Function2)">AnimatedContent</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideOutHorizontally(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideOutHorizontally</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/compose/animation/package-summary.html#slideOutVertically(kotlin.Function1,androidx.compose.animation.core.FiniteAnimationSpec)">slideOutVertically</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="-androidx.compose.animation.ContentTransform-.using-androidx.compose.animation.SizeTransform-"></a><a name="using"></a>
-      <h3 class="api-name" id="(androidx.compose.animation.ContentTransform).using(androidx.compose.animation.SizeTransform)">using</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/animation/ExperimentalAnimationApi.html">ExperimentalAnimationApi</a><br>infix&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/ContentTransform.html">ContentTransform</a>.<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#(androidx.compose.animation.ContentTransform).using(androidx.compose.animation.SizeTransform)">using</a>(sizeTransform:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html">SizeTransform</a>?):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/ContentTransform.html">ContentTransform</a></pre>
-      <p>Customizes the <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html">SizeTransform</a></code> of a given <code><a href="/reference/kotlin/androidx/compose/animation/ContentTransform.html">ContentTransform</a></code>. For example:</p>
-      <pre class="prettyprint">
+      <div class="api-item"><a name="-androidx.compose.animation.ContentTransform-.using-androidx.compose.animation.SizeTransform-"></a><a name="using"></a>
+        <h3 class="api-name" id="(androidx.compose.animation.ContentTransform).using(androidx.compose.animation.SizeTransform)">using</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/animation/ExperimentalAnimationApi.html">ExperimentalAnimationApi</a><br>infix&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/animation/ContentTransform.html">ContentTransform</a>.<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#(androidx.compose.animation.ContentTransform).using(androidx.compose.animation.SizeTransform)">using</a>(sizeTransform:&nbsp;<a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html">SizeTransform</a>?):&nbsp;<a href="/reference/kotlin/androidx/compose/animation/ContentTransform.html">ContentTransform</a></pre>
+        <p>Customizes the <code><a href="/reference/kotlin/androidx/compose/animation/SizeTransform.html">SizeTransform</a></code> of a given <code><a href="/reference/kotlin/androidx/compose/animation/ContentTransform.html">ContentTransform</a></code>. For example:</p>
+        <pre class="prettyprint">
 import androidx.compose.animation.SizeTransform
 import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.tween
@@ -297,17 +322,20 @@ val transitionSpec: AnimatedContentScope&lt;CartState&gt;.() -&gt; ContentTransf
                 }
             )
     }</pre>
+      </div>
     </div>
-    <h2>Public properties</h2>
-    <div class="api-item"><a name="getInitialState()"></a><a name="setInitialState()"></a><a name="getInitialState--"></a><a name="setInitialState--"></a>
-      <h3 class="api-name" id="initialState()">initialState</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#initialState()">initialState</a>:&nbsp;S</pre>
-      <p>Initial state of a Transition Segment. This is the state that transition starts from.</p>
-    </div>
-    <div class="api-item"><a name="getTargetState()"></a><a name="setTargetState()"></a><a name="getTargetState--"></a><a name="setTargetState--"></a>
-      <h3 class="api-name" id="targetState()">targetState</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#targetState()">targetState</a>:&nbsp;S</pre>
-      <p>Target state of a Transition Segment. This is the state that transition will end on.</p>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getInitialState()"></a><a name="setInitialState()"></a><a name="getInitialState--"></a><a name="setInitialState--"></a>
+        <h3 class="api-name" id="initialState()">initialState</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#initialState()">initialState</a>:&nbsp;S</pre>
+        <p>Initial state of a Transition Segment. This is the state that transition starts from.</p>
+      </div>
+      <div class="api-item"><a name="getTargetState()"></a><a name="setTargetState()"></a><a name="getTargetState--"></a><a name="setTargetState--"></a>
+        <h3 class="api-name" id="targetState()">targetState</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/compose/animation/AnimatedContentScope.html#targetState()">targetState</a>:&nbsp;S</pre>
+        <p>Target state of a Transition Segment. This is the state that transition will end on.</p>
+      </div>
     </div>
   </body>
 </html>

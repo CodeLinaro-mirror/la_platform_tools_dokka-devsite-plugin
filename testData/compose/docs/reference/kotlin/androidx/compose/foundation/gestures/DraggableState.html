@@ -15,6 +15,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public functions</h3></th>
@@ -38,59 +42,69 @@
         </tbody>
       </table>
     </div>
-    <h2>Public functions</h2>
-    <div class="api-item"><a name="dispatchRawDelta-kotlin.Float-"></a><a name="dispatchrawdelta"></a>
-      <h3 class="api-name" id="dispatchRawDelta(kotlin.Float)">dispatchRawDelta</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#dispatchRawDelta(kotlin.Float)">dispatchRawDelta</a>(delta:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Dispatch drag delta in pixels avoiding all drag related priority mechanisms.</p>
-      <p><b>NOTE:</b> unlike <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a></code>, dispatching any delta with this method will bypass scrolling of any priority. This method will also ignore <code>reverseDirection</code> and other parameters set in <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).draggable(androidx.compose.foundation.gestures.DraggableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean,kotlin.coroutines.SuspendFunction2,kotlin.coroutines.SuspendFunction2,kotlin.Boolean)">draggable</a></code>.</p>
-      <p>This method is used internally for low level operations, allowing implementers of <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html">DraggableState</a></code> influence the consumption as suits them, e.g. introduce nested scrolling. Manually dispatching delta via this method will likely result in a bad user experience, you must prefer <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a></code> method over this one.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>delta:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
-              <td>
-                <p>amount of scroll dispatched in the nested drag process</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="dispatchRawDelta-kotlin.Float-"></a><a name="dispatchrawdelta"></a>
+        <h3 class="api-name" id="dispatchRawDelta(kotlin.Float)">dispatchRawDelta</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#dispatchRawDelta(kotlin.Float)">dispatchRawDelta</a>(delta:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Dispatch drag delta in pixels avoiding all drag related priority mechanisms.</p>
+        <p><b>NOTE:</b> unlike <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a></code>, dispatching any delta with this method will bypass scrolling of any priority. This method will also ignore <code>reverseDirection</code> and other parameters set in <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).draggable(androidx.compose.foundation.gestures.DraggableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean,kotlin.coroutines.SuspendFunction2,kotlin.coroutines.SuspendFunction2,kotlin.Boolean)">draggable</a></code>.</p>
+        <p>This method is used internally for low level operations, allowing implementers of <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html">DraggableState</a></code> influence the consumption as suits them, e.g. introduce nested scrolling. Manually dispatching delta via this method will likely result in a bad user experience, you must prefer <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a></code> method over this one.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>delta:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></code></td>
+                <td>
+                  <p>amount of scroll dispatched in the nested drag process</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="drag(androidx.compose.foundation.MutatePriority, kotlin.coroutines.SuspendFunction1)"></a><a name="drag-androidx.compose.foundation.MutatePriority-kotlin.coroutines.SuspendFunction1-"></a><a name="drag"></a>
-      <h3 class="api-name" id="drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</h3>
-      <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;dragPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a> = MutatePriority.Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DragScope.html">DragScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Call this function to take control of drag logic.</p>
-      <p>All actions that change the logical drag position must be performed within a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a></code> block (even if they don't call any other methods on this object) in order to guarantee that mutual exclusion is enforced.</p>
-      <p>If <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a></code> is called from elsewhere with the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">dragPriority</a></code> higher or equal to ongoing drag, ongoing drag will be canceled.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>dragPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a> = MutatePriority.Default</code></td>
-              <td>
-                <p>of the drag operation</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DragScope.html">DragScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-              <td>
-                <p>to perform drag in</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="drag(androidx.compose.foundation.MutatePriority, kotlin.coroutines.SuspendFunction1)"></a><a name="drag-androidx.compose.foundation.MutatePriority-kotlin.coroutines.SuspendFunction1-"></a><a name="drag"></a>
+        <h3 class="api-name" id="drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</h3>
+        <pre class="api-signature no-pretty-print">suspend&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;dragPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a> = MutatePriority.Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DragScope.html">DragScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Call this function to take control of drag logic.</p>
+        <p>All actions that change the logical drag position must be performed within a <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a></code> block (even if they don't call any other methods on this object) in order to guarantee that mutual exclusion is enforced.</p>
+        <p>If <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">drag</a></code> is called from elsewhere with the <code><a href="/reference/kotlin/androidx/compose/foundation/gestures/DraggableState.html#drag(androidx.compose.foundation.MutatePriority,kotlin.coroutines.SuspendFunction1)">dragPriority</a></code> higher or equal to ongoing drag, ongoing drag will be canceled.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>dragPriority:&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/MutatePriority.html">MutatePriority</a> = MutatePriority.Default</code></td>
+                <td>
+                  <p>of the drag operation</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>block:&nbsp;suspend&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/gestures/DragScope.html">DragScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                <td>
+                  <p>to perform drag in</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

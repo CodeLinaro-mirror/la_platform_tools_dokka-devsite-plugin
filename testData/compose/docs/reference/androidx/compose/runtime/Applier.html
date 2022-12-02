@@ -16,6 +16,10 @@
       <div id="subclasses-direct-summary">
         <div class="devsite-table-wrapper">
           <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
             <tbody class="list">
               <tr>
                 <td width="40%"><code><a href="/reference/androidx/compose/runtime/AbstractApplier.html">AbstractApplier</a></code></td>
@@ -107,6 +111,10 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
 }</pre>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%">See also</th>
@@ -135,6 +143,10 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public fields</h3></th>
@@ -153,6 +165,10 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
@@ -225,118 +241,122 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
         </tbody>
       </table>
     </div>
-    <h2>Public fields</h2>
-    <div class="api-item"><a name="getCurrent()"></a><a name="setCurrent()"></a><a name="getCurrent--"></a><a name="setCurrent--"></a>
-      <h3 class="api-name" id="current()">current</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></pre>
-      <p>The node that operations will be applied on at any given time. It is expected that the value of this property will change as <code><a href="/reference/androidx/compose/runtime/Applier.html#down(kotlin.Any)">down</a></code> and <code><a href="/reference/androidx/compose/runtime/Applier.html#up()">up</a></code> are called.</p>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getCurrent()"></a><a name="setCurrent()"></a><a name="getCurrent--"></a><a name="setCurrent--"></a>
+        <h3 class="api-name" id="current()">current</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></pre>
+        <p>The node that operations will be applied on at any given time. It is expected that the value of this property will change as <code><a href="/reference/androidx/compose/runtime/Applier.html#down(kotlin.Any)">down</a></code> and <code><a href="/reference/androidx/compose/runtime/Applier.html#up()">up</a></code> are called.</p>
+      </div>
     </div>
-    <h2>Public methods</h2>
-    <div class="api-item"><a name="clear--"></a><a name="clear"></a>
-      <h3 class="api-name" id="clear()">clear</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#clear()">clear</a>()</pre>
-      <p>Move to the root and remove all nodes from the root, preparing both this <code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code> and its root to be used as the target of a new composition in the future.</p>
-    </div>
-    <div class="api-item"><a name="down-kotlin.Any-"></a><a name="down"></a>
-      <h3 class="api-name" id="down(kotlin.Any)">down</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#down(kotlin.Any)">down</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N&nbsp;node)</pre>
-      <p>Indicates that the applier is getting traversed &quot;down&quot; the tree. When this gets called, <code><a href="/reference/androidx/compose/runtime/Applier.html#down(kotlin.Any)">node</a></code> is expected to be a child of <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code>, and after this operation, <code><a href="/reference/androidx/compose/runtime/Applier.html#down(kotlin.Any)">node</a></code> is expected to be the new <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code>.</p>
-    </div>
-    <div class="api-item"><a name="insertBottomUp(kotlin.Int, kotlin.Any)"></a><a name="insertBottomUp-kotlin.Int-kotlin.Any-"></a><a name="insertbottomup"></a>
-      <h3 class="api-name" id="insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a>(int&nbsp;index,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N&nbsp;instance)</pre>
-      <p>Indicates that <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">instance</a></code> should be inserted as a child of <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> at <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">index</a></code>. An applier should insert the node into the tree either in <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a></code> or <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a></code>, not both. See the description of <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a></code> to which describes when to implement <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a></code> and when to use <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a></code>.</p>
-    </div>
-    <div class="api-item"><a name="insertTopDown(kotlin.Int, kotlin.Any)"></a><a name="insertTopDown-kotlin.Int-kotlin.Any-"></a><a name="inserttopdown"></a>
-      <h3 class="api-name" id="insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a>(int&nbsp;index,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N&nbsp;instance)</pre>
-      <p>Indicates that <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">instance</a></code> should be inserted as a child to <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> at <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">index</a></code>. An applier should insert the node into the tree either in <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a></code> or <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a></code>, not both.</p>
-      <p>The <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a></code> method is called before the children of <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">instance</a></code> have been created and inserted into it. <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a></code> is called after all children have been created and inserted.</p>
-      <p>Some trees are faster to build top-down, in which case the <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a></code> method should be used to insert the <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">instance</a></code>. Other tress are faster to build bottom-up in which case <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a></code> should be used.</p>
-      <p>To give example of building a tree top-down vs. bottom-up consider the following tree,</p>
-      <pre class="prettyprint">      R<br>      |<br>      B<br>     / \<br>    A   C</pre>
-      <p>where the node <code>B</code> is being inserted into the tree at <code>R</code>. Top-down building of the tree first inserts <code>B</code> into <code>R</code>, then inserts <code>A</code> into <code>B</code> followed by inserting <code>C</code> into B`. For example,</p>
-      <pre class="prettyprint">    1           2           3<br>    R           R           R<br>    |           |           |<br>    B           B           B<br>               /           / \<br>              A           A   C</pre>
-      <p>A bottom-up building of the tree starts with inserting <code>A</code> and <code>C</code> into <code>B</code> then inserts <code>B</code> tree into <code>R</code>.</p>
-      <pre class="prettyprint">    1           2           3<br>    B           B           R<br>    |          / \          |<br>    A         A   C         B<br>                           / \<br>                          A   C</pre>
-      <p>To see how building top-down vs. bottom-up can differ significantly in performance consider a tree where whenever a child is added to the tree all parent nodes, up to the root, are notified of the new child entering the tree. If the tree is built top-down,</p>
-      <ol>
-        <li>
-          <p><code>R</code> is notified of <code>B</code> entering.</p>
-        </li>
-        <li>
-          <p><code>B</code> is notified of <code>A</code> entering, <code>R</code> is notified of <code>A</code> entering.</p>
-        </li>
-        <li>
-          <p><code>B</code> is notified of <code>C</code> entering, <code>R</code> is notified of <code>C</code> entering.</p>
-        </li>
-      </ol>
-      <p>for a total of 5 notifications. The number of notifications grows exponentially with the number of inserts.</p>
-      <p>For bottom-up, the notifications are,</p>
-      <ol>
-        <li>
-          <p><code>B</code> is notified <code>A</code> entering.</p>
-        </li>
-        <li>
-          <p><code>B</code> is notified <code>C</code> entering.</p>
-        </li>
-        <li>
-          <p><code>R</code> is notified <code>B</code> entering.</p>
-        </li>
-      </ol>
-      <p>The notifications are linear to the number of nodes inserted.</p>
-      <p>If, on the other hand, all children are notified when the parent enters a tree, then the notifications are, for top-down,</p>
-      <ol>
-        <li>
-          <p><code>B</code> is notified it is entering <code>R</code>.</p>
-        </li>
-        <li>
-          <p><code>A</code> is notified it is entering <code>B</code>.</p>
-        </li>
-        <li>
-          <p><code>C</code> is notified it is entering <code>B</code>.</p>
-        </li>
-      </ol>
-      <p>which is linear to the number of nodes inserted.</p>
-      <p>For bottom-up, the notifications look like,</p>
-      <ol>
-        <li>
-          <p><code>A</code> is notified it is entering <code>B</code>.</p>
-        </li>
-        <li>
-          <p><code>C</code> is notified it is entering <code>B</code>.</p>
-        </li>
-        <li>
-          <p><code>B</code> is notified it is entering <code>R</code>, <code>A</code> is notified it is entering <code>R</code>,     <code>C</code> is notified it is entering <code>R</code>.</p>
-        </li>
-      </ol>
-      <p>which exponential to the number of nodes inserted.</p>
-    </div>
-    <div class="api-item"><a name="move(kotlin.Int, kotlin.Int, kotlin.Int)"></a><a name="move-kotlin.Int-kotlin.Int-kotlin.Int-"></a><a name="move"></a>
-      <h3 class="api-name" id="move(kotlin.Int,kotlin.Int,kotlin.Int)">move</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">move</a>(int&nbsp;from,&nbsp;int&nbsp;to,&nbsp;int&nbsp;count)</pre>
-      <p>Indicates that <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">count</a></code> children of <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> should be moved from index <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">from</a></code> to index <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">to</a></code>.</p>
-      <p>The <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">to</a></code> index is relative to the position before the change, so, for example, to move an element at position 1 to after the element at position 2, <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">from</a></code> should be <code>1</code> and <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">to</a></code> should be <code>3</code>. If the elements were A B C D E, calling <code>move(1, 3, 1)</code> would result in the elements being reordered to A C B D E.</p>
-    </div>
-    <div class="api-item"><a name="onBeginChanges--"></a><a name="onbeginchanges"></a>
-      <h3 class="api-name" id="onBeginChanges()">onBeginChanges</h3>
-      <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#onBeginChanges()">onBeginChanges</a>()</pre>
-      <p>Called when the <code><a href="/reference/androidx/compose/runtime/Composer.html">Composer</a></code> is about to begin applying changes using this applier. <code><a href="/reference/androidx/compose/runtime/Applier.html#onEndChanges()">onEndChanges</a></code> will be called when changes are complete.</p>
-    </div>
-    <div class="api-item"><a name="onEndChanges--"></a><a name="onendchanges"></a>
-      <h3 class="api-name" id="onEndChanges()">onEndChanges</h3>
-      <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#onEndChanges()">onEndChanges</a>()</pre>
-      <p>Called when the <code><a href="/reference/androidx/compose/runtime/Composer.html">Composer</a></code> is finished applying changes using this applier. A call to <code><a href="/reference/androidx/compose/runtime/Applier.html#onBeginChanges()">onBeginChanges</a></code> will always precede a call to <code><a href="/reference/androidx/compose/runtime/Applier.html#onEndChanges()">onEndChanges</a></code>.</p>
-    </div>
-    <div class="api-item"><a name="remove(kotlin.Int, kotlin.Int)"></a><a name="remove-kotlin.Int-kotlin.Int-"></a><a name="remove"></a>
-      <h3 class="api-name" id="remove(kotlin.Int,kotlin.Int)">remove</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#remove(kotlin.Int,kotlin.Int)">remove</a>(int&nbsp;index,&nbsp;int&nbsp;count)</pre>
-      <p>Indicates that the children of <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> from <code><a href="/reference/androidx/compose/runtime/Applier.html#remove(kotlin.Int,kotlin.Int)">index</a></code> to <code><a href="/reference/androidx/compose/runtime/Applier.html#remove(kotlin.Int,kotlin.Int)">index</a></code> + <code><a href="/reference/androidx/compose/runtime/Applier.html#remove(kotlin.Int,kotlin.Int)">count</a></code> should be removed.</p>
-    </div>
-    <div class="api-item"><a name="up--"></a><a name="up"></a>
-      <h3 class="api-name" id="up()">up</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#up()">up</a>()</pre>
-      <p>Indicates that the applier is getting traversed &quot;up&quot; the tree. After this operation completes, the <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> should return the &quot;parent&quot; of the <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> node at the beginning of this operation.</p>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="clear--"></a><a name="clear"></a>
+        <h3 class="api-name" id="clear()">clear</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#clear()">clear</a>()</pre>
+        <p>Move to the root and remove all nodes from the root, preparing both this <code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code> and its root to be used as the target of a new composition in the future.</p>
+      </div>
+      <div class="api-item"><a name="down-kotlin.Any-"></a><a name="down"></a>
+        <h3 class="api-name" id="down(kotlin.Any)">down</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#down(kotlin.Any)">down</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N&nbsp;node)</pre>
+        <p>Indicates that the applier is getting traversed &quot;down&quot; the tree. When this gets called, <code><a href="/reference/androidx/compose/runtime/Applier.html#down(kotlin.Any)">node</a></code> is expected to be a child of <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code>, and after this operation, <code><a href="/reference/androidx/compose/runtime/Applier.html#down(kotlin.Any)">node</a></code> is expected to be the new <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="insertBottomUp(kotlin.Int, kotlin.Any)"></a><a name="insertBottomUp-kotlin.Int-kotlin.Any-"></a><a name="insertbottomup"></a>
+        <h3 class="api-name" id="insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a>(int&nbsp;index,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N&nbsp;instance)</pre>
+        <p>Indicates that <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">instance</a></code> should be inserted as a child of <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> at <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">index</a></code>. An applier should insert the node into the tree either in <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a></code> or <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a></code>, not both. See the description of <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a></code> to which describes when to implement <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a></code> and when to use <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="insertTopDown(kotlin.Int, kotlin.Any)"></a><a name="insertTopDown-kotlin.Int-kotlin.Any-"></a><a name="inserttopdown"></a>
+        <h3 class="api-name" id="insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a>(int&nbsp;index,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> N&nbsp;instance)</pre>
+        <p>Indicates that <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">instance</a></code> should be inserted as a child to <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> at <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">index</a></code>. An applier should insert the node into the tree either in <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a></code> or <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a></code>, not both.</p>
+        <p>The <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a></code> method is called before the children of <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">instance</a></code> have been created and inserted into it. <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a></code> is called after all children have been created and inserted.</p>
+        <p>Some trees are faster to build top-down, in which case the <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">insertTopDown</a></code> method should be used to insert the <code><a href="/reference/androidx/compose/runtime/Applier.html#insertTopDown(kotlin.Int,kotlin.Any)">instance</a></code>. Other tress are faster to build bottom-up in which case <code><a href="/reference/androidx/compose/runtime/Applier.html#insertBottomUp(kotlin.Int,kotlin.Any)">insertBottomUp</a></code> should be used.</p>
+        <p>To give example of building a tree top-down vs. bottom-up consider the following tree,</p>
+        <pre class="prettyprint">      R<br>      |<br>      B<br>     / \<br>    A   C</pre>
+        <p>where the node <code>B</code> is being inserted into the tree at <code>R</code>. Top-down building of the tree first inserts <code>B</code> into <code>R</code>, then inserts <code>A</code> into <code>B</code> followed by inserting <code>C</code> into B`. For example,</p>
+        <pre class="prettyprint">    1           2           3<br>    R           R           R<br>    |           |           |<br>    B           B           B<br>               /           / \<br>              A           A   C</pre>
+        <p>A bottom-up building of the tree starts with inserting <code>A</code> and <code>C</code> into <code>B</code> then inserts <code>B</code> tree into <code>R</code>.</p>
+        <pre class="prettyprint">    1           2           3<br>    B           B           R<br>    |          / \          |<br>    A         A   C         B<br>                           / \<br>                          A   C</pre>
+        <p>To see how building top-down vs. bottom-up can differ significantly in performance consider a tree where whenever a child is added to the tree all parent nodes, up to the root, are notified of the new child entering the tree. If the tree is built top-down,</p>
+        <ol>
+          <li>
+            <p><code>R</code> is notified of <code>B</code> entering.</p>
+          </li>
+          <li>
+            <p><code>B</code> is notified of <code>A</code> entering, <code>R</code> is notified of <code>A</code> entering.</p>
+          </li>
+          <li>
+            <p><code>B</code> is notified of <code>C</code> entering, <code>R</code> is notified of <code>C</code> entering.</p>
+          </li>
+        </ol>
+        <p>for a total of 5 notifications. The number of notifications grows exponentially with the number of inserts.</p>
+        <p>For bottom-up, the notifications are,</p>
+        <ol>
+          <li>
+            <p><code>B</code> is notified <code>A</code> entering.</p>
+          </li>
+          <li>
+            <p><code>B</code> is notified <code>C</code> entering.</p>
+          </li>
+          <li>
+            <p><code>R</code> is notified <code>B</code> entering.</p>
+          </li>
+        </ol>
+        <p>The notifications are linear to the number of nodes inserted.</p>
+        <p>If, on the other hand, all children are notified when the parent enters a tree, then the notifications are, for top-down,</p>
+        <ol>
+          <li>
+            <p><code>B</code> is notified it is entering <code>R</code>.</p>
+          </li>
+          <li>
+            <p><code>A</code> is notified it is entering <code>B</code>.</p>
+          </li>
+          <li>
+            <p><code>C</code> is notified it is entering <code>B</code>.</p>
+          </li>
+        </ol>
+        <p>which is linear to the number of nodes inserted.</p>
+        <p>For bottom-up, the notifications look like,</p>
+        <ol>
+          <li>
+            <p><code>A</code> is notified it is entering <code>B</code>.</p>
+          </li>
+          <li>
+            <p><code>C</code> is notified it is entering <code>B</code>.</p>
+          </li>
+          <li>
+            <p><code>B</code> is notified it is entering <code>R</code>, <code>A</code> is notified it is entering <code>R</code>,     <code>C</code> is notified it is entering <code>R</code>.</p>
+          </li>
+        </ol>
+        <p>which exponential to the number of nodes inserted.</p>
+      </div>
+      <div class="api-item"><a name="move(kotlin.Int, kotlin.Int, kotlin.Int)"></a><a name="move-kotlin.Int-kotlin.Int-kotlin.Int-"></a><a name="move"></a>
+        <h3 class="api-name" id="move(kotlin.Int,kotlin.Int,kotlin.Int)">move</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">move</a>(int&nbsp;from,&nbsp;int&nbsp;to,&nbsp;int&nbsp;count)</pre>
+        <p>Indicates that <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">count</a></code> children of <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> should be moved from index <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">from</a></code> to index <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">to</a></code>.</p>
+        <p>The <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">to</a></code> index is relative to the position before the change, so, for example, to move an element at position 1 to after the element at position 2, <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">from</a></code> should be <code>1</code> and <code><a href="/reference/androidx/compose/runtime/Applier.html#move(kotlin.Int,kotlin.Int,kotlin.Int)">to</a></code> should be <code>3</code>. If the elements were A B C D E, calling <code>move(1, 3, 1)</code> would result in the elements being reordered to A C B D E.</p>
+      </div>
+      <div class="api-item"><a name="onBeginChanges--"></a><a name="onbeginchanges"></a>
+        <h3 class="api-name" id="onBeginChanges()">onBeginChanges</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#onBeginChanges()">onBeginChanges</a>()</pre>
+        <p>Called when the <code><a href="/reference/androidx/compose/runtime/Composer.html">Composer</a></code> is about to begin applying changes using this applier. <code><a href="/reference/androidx/compose/runtime/Applier.html#onEndChanges()">onEndChanges</a></code> will be called when changes are complete.</p>
+      </div>
+      <div class="api-item"><a name="onEndChanges--"></a><a name="onendchanges"></a>
+        <h3 class="api-name" id="onEndChanges()">onEndChanges</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#onEndChanges()">onEndChanges</a>()</pre>
+        <p>Called when the <code><a href="/reference/androidx/compose/runtime/Composer.html">Composer</a></code> is finished applying changes using this applier. A call to <code><a href="/reference/androidx/compose/runtime/Applier.html#onBeginChanges()">onBeginChanges</a></code> will always precede a call to <code><a href="/reference/androidx/compose/runtime/Applier.html#onEndChanges()">onEndChanges</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="remove(kotlin.Int, kotlin.Int)"></a><a name="remove-kotlin.Int-kotlin.Int-"></a><a name="remove"></a>
+        <h3 class="api-name" id="remove(kotlin.Int,kotlin.Int)">remove</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#remove(kotlin.Int,kotlin.Int)">remove</a>(int&nbsp;index,&nbsp;int&nbsp;count)</pre>
+        <p>Indicates that the children of <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> from <code><a href="/reference/androidx/compose/runtime/Applier.html#remove(kotlin.Int,kotlin.Int)">index</a></code> to <code><a href="/reference/androidx/compose/runtime/Applier.html#remove(kotlin.Int,kotlin.Int)">index</a></code> + <code><a href="/reference/androidx/compose/runtime/Applier.html#remove(kotlin.Int,kotlin.Int)">count</a></code> should be removed.</p>
+      </div>
+      <div class="api-item"><a name="up--"></a><a name="up"></a>
+        <h3 class="api-name" id="up()">up</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html#up()">up</a>()</pre>
+        <p>Indicates that the applier is getting traversed &quot;up&quot; the tree. After this operation completes, the <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> should return the &quot;parent&quot; of the <code><a href="/reference/androidx/compose/runtime/Applier.html#current()">current</a></code> node at the beginning of this operation.</p>
+      </div>
     </div>
   </body>
 </html>

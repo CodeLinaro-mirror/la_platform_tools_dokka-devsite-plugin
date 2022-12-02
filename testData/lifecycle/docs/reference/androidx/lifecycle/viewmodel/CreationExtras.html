@@ -16,6 +16,10 @@
       <div id="subclasses-direct-summary">
         <div class="devsite-table-wrapper">
           <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
             <tbody class="list">
               <tr>
                 <td width="40%"><code><a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.Empty.html">CreationExtras.Empty</a></code></td>
@@ -40,6 +44,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Nested types</h3></th>
@@ -63,6 +71,10 @@
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
@@ -81,6 +93,10 @@
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Extension functions</h3></th>
@@ -97,35 +113,43 @@
         </tbody>
       </table>
     </div>
-    <h2>Public methods</h2>
-    <div class="api-item"><a name="get-androidx.lifecycle.viewmodel.CreationExtras.Key-"></a><a name="get"></a>
-      <h3 class="api-name" id="get(androidx.lifecycle.viewmodel.CreationExtras.Key)">get</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html#get(androidx.lifecycle.viewmodel.CreationExtras.Key)">get</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.Key.html">CreationExtras.Key</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key)</pre>
-      <p>Returns an element associated with the given <code><a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html#get(androidx.lifecycle.viewmodel.CreationExtras.Key)">key</a></code></p>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="get-androidx.lifecycle.viewmodel.CreationExtras.Key-"></a><a name="get"></a>
+        <h3 class="api-name" id="get(androidx.lifecycle.viewmodel.CreationExtras.Key)">get</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;abstract&nbsp;T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html#get(androidx.lifecycle.viewmodel.CreationExtras.Key)">get</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.Key.html">CreationExtras.Key</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;key)</pre>
+        <p>Returns an element associated with the given <code><a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html#get(androidx.lifecycle.viewmodel.CreationExtras.Key)">key</a></code></p>
+      </div>
     </div>
-    <h2>Extension functions</h2>
-    <div class="api-item"><a name="-androidx.lifecycle.viewmodel.CreationExtras-.createSavedStateHandle--"></a><a name="createsavedstatehandle"></a>
-      <h3 class="api-name" id="(androidx.lifecycle.viewmodel.CreationExtras).createSavedStateHandle()">SavedStateHandleSupport.createSavedStateHandle</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a>&nbsp;<a href="/reference/androidx/lifecycle/viewmodel/SavedStateHandleSupport.html">SavedStateHandleSupport</a>.<a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html#(androidx.lifecycle.viewmodel.CreationExtras).createSavedStateHandle()">createSavedStateHandle</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a>&nbsp;receiver<br>)</pre>
-      <p>Creates <code>SavedStateHandle</code> that can be used in your ViewModels</p>
-      <p>This function requires <code><a href="/reference/androidx/lifecycle/package-summary.html#(androidx.savedstate.SavedStateRegistryOwner).enableSavedStateHandles()">enableSavedStateHandles</a></code> call during the component initialization. Latest versions of androidx components like <code>ComponentActivity</code>, <code>Fragment</code>, <code>NavBackStackEntry</code> makes this call automatically.</p>
-      <p>This <code><a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code> must contain <code><a href="/reference/androidx/lifecycle/package-summary.html#SAVED_STATE_REGISTRY_OWNER_KEY()">SAVED_STATE_REGISTRY_OWNER_KEY</a></code>, <code><a href="/reference/androidx/lifecycle/package-summary.html#VIEW_MODEL_STORE_OWNER_KEY()">VIEW_MODEL_STORE_OWNER_KEY</a></code> and <code><a href="/reference/androidx/lifecycle/ViewModelProvider.NewInstanceFactory.Companion.html#VIEW_MODEL_KEY()">VIEW_MODEL_KEY</a></code>.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Throws</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">kotlin.IllegalArgumentException</a>&nbsp;kotlin.IllegalArgumentException</code></td>
-              <td>
-                <p>if this <code>CreationExtras</code> are missing required keys: <code>ViewModelStoreOwnerKey</code>, <code>SavedStateRegistryOwnerKey</code>, <code>VIEW_MODEL_KEY</code></p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.lifecycle.viewmodel.CreationExtras-.createSavedStateHandle--"></a><a name="createsavedstatehandle"></a>
+        <h3 class="api-name" id="(androidx.lifecycle.viewmodel.CreationExtras).createSavedStateHandle()">SavedStateHandleSupport.createSavedStateHandle</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/annotation/MainThread.html">MainThread</a><br>public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/SavedStateHandle.html">SavedStateHandle</a>&nbsp;<a href="/reference/androidx/lifecycle/viewmodel/SavedStateHandleSupport.html">SavedStateHandleSupport</a>.<a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html#(androidx.lifecycle.viewmodel.CreationExtras).createSavedStateHandle()">createSavedStateHandle</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a>&nbsp;receiver<br>)</pre>
+        <p>Creates <code>SavedStateHandle</code> that can be used in your ViewModels</p>
+        <p>This function requires <code><a href="/reference/androidx/lifecycle/package-summary.html#(androidx.savedstate.SavedStateRegistryOwner).enableSavedStateHandles()">enableSavedStateHandles</a></code> call during the component initialization. Latest versions of androidx components like <code>ComponentActivity</code>, <code>Fragment</code>, <code>NavBackStackEntry</code> makes this call automatically.</p>
+        <p>This <code><a href="/reference/androidx/lifecycle/viewmodel/CreationExtras.html">CreationExtras</a></code> must contain <code><a href="/reference/androidx/lifecycle/package-summary.html#SAVED_STATE_REGISTRY_OWNER_KEY()">SAVED_STATE_REGISTRY_OWNER_KEY</a></code>, <code><a href="/reference/androidx/lifecycle/package-summary.html#VIEW_MODEL_STORE_OWNER_KEY()">VIEW_MODEL_STORE_OWNER_KEY</a></code> and <code><a href="/reference/androidx/lifecycle/ViewModelProvider.NewInstanceFactory.Companion.html#VIEW_MODEL_KEY()">VIEW_MODEL_KEY</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Throws</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-illegal-argument-exception/index.html">kotlin.IllegalArgumentException</a>&nbsp;kotlin.IllegalArgumentException</code></td>
+                <td>
+                  <p>if this <code>CreationExtras</code> are missing required keys: <code>ViewModelStoreOwnerKey</code>, <code>SavedStateRegistryOwnerKey</code>, <code>VIEW_MODEL_KEY</code></p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

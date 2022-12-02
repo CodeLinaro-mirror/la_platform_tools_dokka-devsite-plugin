@@ -15,6 +15,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
@@ -31,6 +35,10 @@
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public functions</h3></th>
@@ -140,453 +148,513 @@
         </tbody>
       </table>
     </div>
-    <h2>Public constructors</h2>
-    <div class="api-item"><a name="FragmentLifecycleCallbacks--"></a><a name="fragmentlifecyclecallbacks"></a>
-      <h3 class="api-name" id="FragmentLifecycleCallbacks()">FragmentLifecycleCallbacks</h3>
-      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#FragmentLifecycleCallbacks()">FragmentLifecycleCallbacks</a>()</pre>
-    </div>
-    <h2>Public functions</h2>
-    <div class="api-item"><a name="onFragmentActivityCreated(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.os.Bundle)"></a><a name="onFragmentActivityCreated-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.os.Bundle-"></a><a name="onfragmentactivitycreated"></a>
-      <h3 class="api-name" id="onFragmentActivityCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentActivityCreated</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<span><del><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentActivityCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentActivityCreated</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;savedInstanceState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <aside class="caution"><strong>This function is deprecated.</strong><br>
-        <p>To get a callback specifically when a Fragment activity's <code><a href="https://developer.android.com/reference/android/app/Activity.html#onCreate(android.os.Bundle)">onCreate</a></code> is called, register a <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleObserver.html">androidx.lifecycle.LifecycleObserver</a></code> on the Activity's <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> in <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentAttached</a></code>, removing it when it receives the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.CREATED.html">CREATED</a></code> callback.</p>
-      </aside>
-      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onActivityCreated(android.os.Bundle)">onActivityCreated</a></code>. This will only happen once for any given fragment instance, though the fragment may be attached and detached multiple times.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
-              <td>
-                <p>Host FragmentManager</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
-              <td>
-                <p>Fragment changing state</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>savedInstanceState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?</code></td>
-              <td>
-                <p>Saved instance bundle from a previous instance</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="FragmentLifecycleCallbacks--"></a><a name="fragmentlifecyclecallbacks"></a>
+        <h3 class="api-name" id="FragmentLifecycleCallbacks()">FragmentLifecycleCallbacks</h3>
+        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#FragmentLifecycleCallbacks()">FragmentLifecycleCallbacks</a>()</pre>
       </div>
     </div>
-    <div class="api-item"><a name="onFragmentAttached(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.content.Context)"></a><a name="onFragmentAttached-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.content.Context-"></a><a name="onfragmentattached"></a>
-      <h3 class="api-name" id="onFragmentAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentAttached</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentAttached</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,&nbsp;context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Called after the fragment has been attached to its host. Its host will have had <code>onAttachFragment</code> called before this call happens.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
-              <td>
-                <p>Host FragmentManager</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
-              <td>
-                <p>Fragment changing state</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a></code></td>
-              <td>
-                <p>Context that the Fragment was attached to</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="onFragmentActivityCreated(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.os.Bundle)"></a><a name="onFragmentActivityCreated-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.os.Bundle-"></a><a name="onfragmentactivitycreated"></a>
+        <h3 class="api-name" id="onFragmentActivityCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentActivityCreated</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<span><del><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentActivityCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentActivityCreated</a></del></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;savedInstanceState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <aside class="caution"><strong>This function is deprecated.</strong><br>
+          <p>To get a callback specifically when a Fragment activity's <code><a href="https://developer.android.com/reference/android/app/Activity.html#onCreate(android.os.Bundle)">onCreate</a></code> is called, register a <code><a href="/reference/kotlin/androidx/lifecycle/LifecycleObserver.html">androidx.lifecycle.LifecycleObserver</a></code> on the Activity's <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.html">Lifecycle</a></code> in <code><a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentAttached</a></code>, removing it when it receives the <code><a href="/reference/kotlin/androidx/lifecycle/Lifecycle.State.CREATED.html">CREATED</a></code> callback.</p>
+        </aside>
+        <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onActivityCreated(android.os.Bundle)">onActivityCreated</a></code>. This will only happen once for any given fragment instance, though the fragment may be attached and detached multiple times.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
+                <td>
+                  <p>Host FragmentManager</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+                <td>
+                  <p>Fragment changing state</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>savedInstanceState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?</code></td>
+                <td>
+                  <p>Saved instance bundle from a previous instance</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="onFragmentCreated(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.os.Bundle)"></a><a name="onFragmentCreated-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.os.Bundle-"></a><a name="onfragmentcreated"></a>
-      <h3 class="api-name" id="onFragmentCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentCreated</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentCreated</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;savedInstanceState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code>. This will only happen once for any given fragment instance, though the fragment may be attached and detached multiple times.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
-              <td>
-                <p>Host FragmentManager</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
-              <td>
-                <p>Fragment changing state</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>savedInstanceState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?</code></td>
-              <td>
-                <p>Saved instance bundle from a previous instance</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="onFragmentAttached(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.content.Context)"></a><a name="onFragmentAttached-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.content.Context-"></a><a name="onfragmentattached"></a>
+        <h3 class="api-name" id="onFragmentAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentAttached</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentAttached</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,&nbsp;context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called after the fragment has been attached to its host. Its host will have had <code>onAttachFragment</code> called before this call happens.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
+                <td>
+                  <p>Host FragmentManager</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+                <td>
+                  <p>Fragment changing state</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a></code></td>
+                <td>
+                  <p>Context that the Fragment was attached to</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="onFragmentDestroyed(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentDestroyed-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a><a name="onfragmentdestroyed"></a>
-      <h3 class="api-name" id="onFragmentDestroyed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentDestroyed</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentDestroyed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentDestroyed</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onDestroy()">onDestroy</a></code>.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
-              <td>
-                <p>Host FragmentManager</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
-              <td>
-                <p>Fragment changing state</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="onFragmentCreated(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.os.Bundle)"></a><a name="onFragmentCreated-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.os.Bundle-"></a><a name="onfragmentcreated"></a>
+        <h3 class="api-name" id="onFragmentCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentCreated</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentCreated</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;savedInstanceState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code>. This will only happen once for any given fragment instance, though the fragment may be attached and detached multiple times.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
+                <td>
+                  <p>Host FragmentManager</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+                <td>
+                  <p>Fragment changing state</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>savedInstanceState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?</code></td>
+                <td>
+                  <p>Saved instance bundle from a previous instance</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="onFragmentDetached(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentDetached-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a><a name="onfragmentdetached"></a>
-      <h3 class="api-name" id="onFragmentDetached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentDetached</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentDetached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentDetached</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onDetach()">onDetach</a></code>.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
-              <td>
-                <p>Host FragmentManager</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
-              <td>
-                <p>Fragment changing state</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="onFragmentDestroyed(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentDestroyed-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a><a name="onfragmentdestroyed"></a>
+        <h3 class="api-name" id="onFragmentDestroyed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentDestroyed</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentDestroyed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentDestroyed</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onDestroy()">onDestroy</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
+                <td>
+                  <p>Host FragmentManager</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+                <td>
+                  <p>Fragment changing state</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="onFragmentPaused(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentPaused-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a><a name="onfragmentpaused"></a>
-      <h3 class="api-name" id="onFragmentPaused(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentPaused</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentPaused(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentPaused</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onPause()">onPause</a></code>.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
-              <td>
-                <p>Host FragmentManager</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
-              <td>
-                <p>Fragment changing state</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="onFragmentDetached(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentDetached-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a><a name="onfragmentdetached"></a>
+        <h3 class="api-name" id="onFragmentDetached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentDetached</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentDetached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentDetached</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onDetach()">onDetach</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
+                <td>
+                  <p>Host FragmentManager</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+                <td>
+                  <p>Fragment changing state</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="onFragmentPreAttached(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.content.Context)"></a><a name="onFragmentPreAttached-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.content.Context-"></a><a name="onfragmentpreattached"></a>
-      <h3 class="api-name" id="onFragmentPreAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentPreAttached</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentPreAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentPreAttached</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,&nbsp;context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Called right before the fragment's <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code> method is called. This is a good time to inject any required dependencies or perform other configuration for the fragment before any of the fragment's lifecycle methods are invoked.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
-              <td>
-                <p>Host FragmentManager</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
-              <td>
-                <p>Fragment changing state</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a></code></td>
-              <td>
-                <p>Context that the Fragment is being attached to</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="onFragmentPaused(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentPaused-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a><a name="onfragmentpaused"></a>
+        <h3 class="api-name" id="onFragmentPaused(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentPaused</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentPaused(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentPaused</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onPause()">onPause</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
+                <td>
+                  <p>Host FragmentManager</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+                <td>
+                  <p>Fragment changing state</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="onFragmentPreCreated(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.os.Bundle)"></a><a name="onFragmentPreCreated-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.os.Bundle-"></a><a name="onfragmentprecreated"></a>
-      <h3 class="api-name" id="onFragmentPreCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentPreCreated</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentPreCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentPreCreated</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;savedInstanceState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Called right before the fragment's <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code> method is called. This is a good time to inject any required dependencies or perform other configuration for the fragment.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
-              <td>
-                <p>Host FragmentManager</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
-              <td>
-                <p>Fragment changing state</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>savedInstanceState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?</code></td>
-              <td>
-                <p>Saved instance bundle from a previous instance</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="onFragmentPreAttached(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.content.Context)"></a><a name="onFragmentPreAttached-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.content.Context-"></a><a name="onfragmentpreattached"></a>
+        <h3 class="api-name" id="onFragmentPreAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentPreAttached</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentPreAttached(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.content.Context)">onFragmentPreAttached</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,&nbsp;context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called right before the fragment's <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onAttach(android.content.Context)">onAttach</a></code> method is called. This is a good time to inject any required dependencies or perform other configuration for the fragment before any of the fragment's lifecycle methods are invoked.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
+                <td>
+                  <p>Host FragmentManager</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+                <td>
+                  <p>Fragment changing state</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>context:&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html">Context</a></code></td>
+                <td>
+                  <p>Context that the Fragment is being attached to</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="onFragmentResumed(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentResumed-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a><a name="onfragmentresumed"></a>
-      <h3 class="api-name" id="onFragmentResumed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentResumed</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentResumed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentResumed</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onResume()">onResume</a></code>.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
-              <td>
-                <p>Host FragmentManager</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
-              <td>
-                <p>Fragment changing state</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="onFragmentPreCreated(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.os.Bundle)"></a><a name="onFragmentPreCreated-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.os.Bundle-"></a><a name="onfragmentprecreated"></a>
+        <h3 class="api-name" id="onFragmentPreCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentPreCreated</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentPreCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentPreCreated</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;savedInstanceState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called right before the fragment's <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreate(android.os.Bundle)">onCreate</a></code> method is called. This is a good time to inject any required dependencies or perform other configuration for the fragment.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
+                <td>
+                  <p>Host FragmentManager</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+                <td>
+                  <p>Fragment changing state</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>savedInstanceState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?</code></td>
+                <td>
+                  <p>Saved instance bundle from a previous instance</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="onFragmentSaveInstanceState(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.os.Bundle)"></a><a name="onFragmentSaveInstanceState-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.os.Bundle-"></a><a name="onfragmentsaveinstancestate"></a>
-      <h3 class="api-name" id="onFragmentSaveInstanceState(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentSaveInstanceState</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentSaveInstanceState(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentSaveInstanceState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;outState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onSaveInstanceState(android.os.Bundle)">onSaveInstanceState</a></code>.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
-              <td>
-                <p>Host FragmentManager</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
-              <td>
-                <p>Fragment changing state</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>outState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a></code></td>
-              <td>
-                <p>Saved state bundle for the fragment</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="onFragmentResumed(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentResumed-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a><a name="onfragmentresumed"></a>
+        <h3 class="api-name" id="onFragmentResumed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentResumed</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentResumed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentResumed</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onResume()">onResume</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
+                <td>
+                  <p>Host FragmentManager</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+                <td>
+                  <p>Fragment changing state</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="onFragmentStarted(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentStarted-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a><a name="onfragmentstarted"></a>
-      <h3 class="api-name" id="onFragmentStarted(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentStarted</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentStarted(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentStarted</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onStart()">onStart</a></code>.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
-              <td>
-                <p>Host FragmentManager</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
-              <td>
-                <p>Fragment changing state</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="onFragmentSaveInstanceState(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.os.Bundle)"></a><a name="onFragmentSaveInstanceState-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.os.Bundle-"></a><a name="onfragmentsaveinstancestate"></a>
+        <h3 class="api-name" id="onFragmentSaveInstanceState(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentSaveInstanceState</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentSaveInstanceState(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.os.Bundle)">onFragmentSaveInstanceState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;outState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onSaveInstanceState(android.os.Bundle)">onSaveInstanceState</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
+                <td>
+                  <p>Host FragmentManager</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+                <td>
+                  <p>Fragment changing state</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>outState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a></code></td>
+                <td>
+                  <p>Saved state bundle for the fragment</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="onFragmentStopped(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentStopped-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a><a name="onfragmentstopped"></a>
-      <h3 class="api-name" id="onFragmentStopped(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentStopped</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentStopped(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentStopped</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onStop()">onStop</a></code>.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
-              <td>
-                <p>Host FragmentManager</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
-              <td>
-                <p>Fragment changing state</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="onFragmentStarted(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentStarted-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a><a name="onfragmentstarted"></a>
+        <h3 class="api-name" id="onFragmentStarted(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentStarted</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentStarted(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentStarted</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onStart()">onStart</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
+                <td>
+                  <p>Host FragmentManager</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+                <td>
+                  <p>Fragment changing state</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="onFragmentViewCreated(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.view.View, android.os.Bundle)"></a><a name="onFragmentViewCreated-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.view.View-android.os.Bundle-"></a><a name="onfragmentviewcreated"></a>
-      <h3 class="api-name" id="onFragmentViewCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.view.View,android.os.Bundle)">onFragmentViewCreated</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentViewCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.view.View,android.os.Bundle)">onFragmentViewCreated</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;v:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;savedInstanceState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Called after the fragment has returned a non-null view from the FragmentManager's request to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code>.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
-              <td>
-                <p>Host FragmentManager</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
-              <td>
-                <p>Fragment that created and owns the view</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>v:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a></code></td>
-              <td>
-                <p>View returned by the fragment</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>savedInstanceState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?</code></td>
-              <td>
-                <p>Saved instance bundle from a previous instance</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="onFragmentStopped(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentStopped-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a><a name="onfragmentstopped"></a>
+        <h3 class="api-name" id="onFragmentStopped(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentStopped</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentStopped(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentStopped</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onStop()">onStop</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
+                <td>
+                  <p>Host FragmentManager</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+                <td>
+                  <p>Fragment changing state</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="onFragmentViewDestroyed(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentViewDestroyed-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a><a name="onfragmentviewdestroyed"></a>
-      <h3 class="api-name" id="onFragmentViewDestroyed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentViewDestroyed</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentViewDestroyed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentViewDestroyed</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onDestroyView()">onDestroyView</a></code>.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
-              <td>
-                <p>Host FragmentManager</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
-              <td>
-                <p>Fragment changing state</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="onFragmentViewCreated(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment, android.view.View, android.os.Bundle)"></a><a name="onFragmentViewCreated-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-android.view.View-android.os.Bundle-"></a><a name="onfragmentviewcreated"></a>
+        <h3 class="api-name" id="onFragmentViewCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.view.View,android.os.Bundle)">onFragmentViewCreated</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentViewCreated(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment,android.view.View,android.os.Bundle)">onFragmentViewCreated</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;v:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;savedInstanceState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?<br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called after the fragment has returned a non-null view from the FragmentManager's request to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)">onCreateView</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
+                <td>
+                  <p>Host FragmentManager</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+                <td>
+                  <p>Fragment that created and owns the view</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>v:&nbsp;<a href="https://developer.android.com/reference/android/view/View.html">View</a></code></td>
+                <td>
+                  <p>View returned by the fragment</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>savedInstanceState:&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html">Bundle</a>?</code></td>
+                <td>
+                  <p>Saved instance bundle from a previous instance</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="onFragmentViewDestroyed(androidx.fragment.app.FragmentManager, androidx.fragment.app.Fragment)"></a><a name="onFragmentViewDestroyed-androidx.fragment.app.FragmentManager-androidx.fragment.app.Fragment-"></a><a name="onfragmentviewdestroyed"></a>
+        <h3 class="api-name" id="onFragmentViewDestroyed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentViewDestroyed</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.FragmentLifecycleCallbacks.html#onFragmentViewDestroyed(androidx.fragment.app.FragmentManager,androidx.fragment.app.Fragment)">onFragmentViewDestroyed</a>(fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a>,&nbsp;f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called after the fragment has returned from the FragmentManager's call to <code><a href="/reference/kotlin/androidx/fragment/app/Fragment.html#onDestroyView()">onDestroyView</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>fm:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/FragmentManager.html">FragmentManager</a></code></td>
+                <td>
+                  <p>Host FragmentManager</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>f:&nbsp;<a href="/reference/kotlin/androidx/fragment/app/Fragment.html">Fragment</a></code></td>
+                <td>
+                  <p>Fragment changing state</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

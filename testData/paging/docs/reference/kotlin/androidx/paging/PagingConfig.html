@@ -15,6 +15,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Constants</h3></th>
@@ -33,6 +37,10 @@
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
@@ -49,6 +57,10 @@
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public properties</h3></th>
@@ -100,111 +112,125 @@
         </tbody>
       </table>
     </div>
-    <h2>Constants</h2>
-    <div class="api-item"><a name="getMAX_SIZE_UNBOUNDED()"></a><a name="setMAX_SIZE_UNBOUNDED()"></a><a name="getMAX_SIZE_UNBOUNDED--"></a><a name="setMAX_SIZE_UNBOUNDED--"></a>
-      <h3 class="api-name" id="MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</h3>
-      <pre class="api-signature no-pretty-print">const&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.Companion.html#MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-      <p>When <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#maxSize()">maxSize</a></code> is set to <code><a href="/reference/kotlin/androidx/paging/PagingConfig.Companion.html#MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</a></code>, the maximum number of items loaded is unbounded, and pages will never be dropped.</p>
-    </div>
-    <h2>Public constructors</h2>
-    <div class="api-item"><a name="PagingConfig(kotlin.Int, kotlin.Int, kotlin.Boolean, kotlin.Int, kotlin.Int, kotlin.Int)"></a><a name="PagingConfig-kotlin.Int-kotlin.Int-kotlin.Boolean-kotlin.Int-kotlin.Int-kotlin.Int-"></a><a name="pagingconfig"></a>
-      <h3 class="api-name" id="PagingConfig(kotlin.Int,kotlin.Int,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.Int)">PagingConfig</h3>
-      <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/PagingConfig.html#PagingConfig(kotlin.Int,kotlin.Int,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.Int)">PagingConfig</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;prefetchDistance:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = pageSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;enablePlaceholders:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = true,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadSize:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;1) <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = pageSize * DEFAULT_INITIAL_PAGE_MULTIPLIER,<br>&nbsp;&nbsp;&nbsp;&nbsp;maxSize:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;2) <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = MAX_SIZE_UNBOUNDED,<br>&nbsp;&nbsp;&nbsp;&nbsp;jumpThreshold:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = COUNT_UNDEFINED<br>)</pre>
-    </div>
-    <h2>Public properties</h2>
-    <div class="api-item"><a name="getEnablePlaceholders()"></a><a name="setEnablePlaceholders()"></a><a name="getEnablePlaceholders--"></a><a name="setEnablePlaceholders--"></a>
-      <h3 class="api-name" id="enablePlaceholders()">enablePlaceholders</h3>
-      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.html#enablePlaceholders()">enablePlaceholders</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
-      <p>Defines whether <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> may display <code>null</code> placeholders, if the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> provides them.</p>
-      <p><code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> will present <code>null</code> placeholders for not-yet-loaded content if two conditions are met:</p>
-      <ol>
-        <li>
-          <p>Its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> can count all unloaded items (so that the number of nulls to present is known).</p>
-        </li>
-        <li>
-          <p><code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#enablePlaceholders()">enablePlaceholders</a></code> is set to <code>true</code></p>
-        </li>
-      </ol>
-    </div>
-    <div class="api-item"><a name="getInitialLoadSize()"></a><a name="setInitialLoadSize()"></a><a name="getInitialLoadSize--"></a><a name="setInitialLoadSize--"></a>
-      <h3 class="api-name" id="initialLoadSize()">initialLoadSize</h3>
-      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.html#initialLoadSize()">initialLoadSize</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-      <p>Defines requested load size for initial load from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>, typically larger than <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">pageSize</a></code>, so on first load data there's a large enough range of content loaded to cover small scrolls.</p>
-      <p>Note: <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#initialLoadSize()">initialLoadSize</a></code> is used to inform <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html#loadSize()">PagingSource.LoadParams.loadSize</a></code>, but is not enforced. A <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> may completely ignore this value and still return a valid initial <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code>.</p>
-    </div>
-    <div class="api-item"><a name="getJumpThreshold()"></a><a name="setJumpThreshold()"></a><a name="getJumpThreshold--"></a><a name="setJumpThreshold--"></a>
-      <h3 class="api-name" id="jumpThreshold()">jumpThreshold</h3>
-      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.html#jumpThreshold()">jumpThreshold</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-      <p>Defines a threshold for the number of items scrolled outside the bounds of loaded items before Paging should give up on loading pages incrementally, and instead jump to the user's position by triggering REFRESH via invalidate.</p>
-      <p>Defaults to <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.Companion.html#COUNT_UNDEFINED()">COUNT_UNDEFINED</a></code>, which disables invalidation due to scrolling large distances.</p>
-      <p>Note: In order to allow <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> to resume from the user's current scroll position after invalidation, <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">PagingSource.getRefreshKey</a></code> must be implemented.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/PagingSource.html#jumpingSupported()">jumpingSupported</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Constants</h2>
+      <div class="api-item"><a name="getMAX_SIZE_UNBOUNDED()"></a><a name="setMAX_SIZE_UNBOUNDED()"></a><a name="getMAX_SIZE_UNBOUNDED--"></a><a name="setMAX_SIZE_UNBOUNDED--"></a>
+        <h3 class="api-name" id="MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</h3>
+        <pre class="api-signature no-pretty-print">const&nbsp;val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.Companion.html#MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>When <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#maxSize()">maxSize</a></code> is set to <code><a href="/reference/kotlin/androidx/paging/PagingConfig.Companion.html#MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</a></code>, the maximum number of items loaded is unbounded, and pages will never be dropped.</p>
       </div>
     </div>
-    <div class="api-item"><a name="getMaxSize()"></a><a name="setMaxSize()"></a><a name="getMaxSize--"></a><a name="setMaxSize--"></a>
-      <h3 class="api-name" id="maxSize()">maxSize</h3>
-      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.html#maxSize()">maxSize</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-      <p>Defines the maximum number of items that may be loaded into <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> before pages should be dropped.</p>
-      <p>If set to <code><a href="/reference/kotlin/androidx/paging/PagingConfig.Companion.html#MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</a></code>, pages will never be dropped.</p>
-      <p>This can be used to cap the number of items kept in memory by dropping pages. This value is typically many pages so old pages are cached in case the user scrolls back.</p>
-      <p>This value must be at least two times the <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a></code> plus the <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">pageSize</a></code>). This constraint prevent loads from being continuously fetched and discarded due to prefetching.</p>
-      <p><code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#maxSize()">maxSize</a></code> is best effort, not a guarantee. In practice, if <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#maxSize()">maxSize</a></code> is many times <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">pageSize</a></code>, the number of items held by <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> will not grow above this number. Exceptions are made as necessary to guarantee:</p>
-      <ul>
-        <li>
-          <p>Pages are never dropped until there are more than two pages loaded. Note that a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> may not be held strictly to <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">requested pageSize</a></code>, so two pages may be larger than expected.</p>
-        </li>
-        <li>
-          <p>Pages are never dropped if they are within a prefetch window (defined to be <code>pageSize + (2 * prefetchDistance)</code>) of the most recent load.</p>
-        </li>
-      </ul>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/kotlin/androidx/paging/PagingConfig.Companion.html#MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="PagingConfig(kotlin.Int, kotlin.Int, kotlin.Boolean, kotlin.Int, kotlin.Int, kotlin.Int)"></a><a name="PagingConfig-kotlin.Int-kotlin.Int-kotlin.Boolean-kotlin.Int-kotlin.Int-kotlin.Int-"></a><a name="pagingconfig"></a>
+        <h3 class="api-name" id="PagingConfig(kotlin.Int,kotlin.Int,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.Int)">PagingConfig</h3>
+        <pre class="api-signature no-pretty-print"><a href="/reference/kotlin/androidx/paging/PagingConfig.html#PagingConfig(kotlin.Int,kotlin.Int,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.Int)">PagingConfig</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;pageSize:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;prefetchDistance:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;0) <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = pageSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;enablePlaceholders:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = true,<br>&nbsp;&nbsp;&nbsp;&nbsp;initialLoadSize:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;1) <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = pageSize * DEFAULT_INITIAL_PAGE_MULTIPLIER,<br>&nbsp;&nbsp;&nbsp;&nbsp;maxSize:&nbsp;@<a href="/reference/kotlin/androidx/annotation/IntRange.html">IntRange</a>(from&nbsp;=&nbsp;2) <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = MAX_SIZE_UNBOUNDED,<br>&nbsp;&nbsp;&nbsp;&nbsp;jumpThreshold:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = COUNT_UNDEFINED<br>)</pre>
       </div>
     </div>
-    <div class="api-item"><a name="getPageSize()"></a><a name="setPageSize()"></a><a name="getPageSize--"></a><a name="setPageSize--"></a>
-      <h3 class="api-name" id="pageSize()">pageSize</h3>
-      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">pageSize</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-      <p>Defines the number of items loaded at once from the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
-      <p>Should be several times the number of visible items onscreen.</p>
-      <p>Configuring your page size depends on how your data is being loaded and used. Smaller page sizes improve memory usage, latency, and avoid GC churn. Larger pages generally improve loading throughput, to a point (avoid loading more than 2MB from SQLite at once, since it incurs extra cost).</p>
-      <p>If you're loading data for very large, social-media style cards that take up most of a screen, and your database isn't a bottleneck, 10-20 may make sense. If you're displaying dozens of items in a tiled grid, which can present items during a scroll much more quickly, consider closer to 100.</p>
-      <p>Note: <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">pageSize</a></code> is used to inform <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html#loadSize()">PagingSource.LoadParams.loadSize</a></code>, but is not enforced. A <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> may completely ignore this value and still return a valid <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code>.</p>
-    </div>
-    <div class="api-item"><a name="getPrefetchDistance()"></a><a name="setPrefetchDistance()"></a><a name="getPrefetchDistance--"></a><a name="setPrefetchDistance--"></a>
-      <h3 class="api-name" id="prefetchDistance()">prefetchDistance</h3>
-      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
-      <p>Prefetch distance which defines how far from the edge of loaded content an access must be to trigger further loading. Typically should be set several times the number of visible items onscreen.</p>
-      <p>E.g., If this value is set to 50, a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> will attempt to load 50 items in advance of data that's already been accessed.</p>
-      <p>A value of 0 indicates that no list items will be loaded until they are specifically requested. This is generally not recommended, so that users don't observe a placeholder item (with placeholders) or end of list (without) while scrolling.</p>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getEnablePlaceholders()"></a><a name="setEnablePlaceholders()"></a><a name="getEnablePlaceholders--"></a><a name="setEnablePlaceholders--"></a>
+        <h3 class="api-name" id="enablePlaceholders()">enablePlaceholders</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.html#enablePlaceholders()">enablePlaceholders</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></pre>
+        <p>Defines whether <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> may display <code>null</code> placeholders, if the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> provides them.</p>
+        <p><code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> will present <code>null</code> placeholders for not-yet-loaded content if two conditions are met:</p>
+        <ol>
+          <li>
+            <p>Its <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> can count all unloaded items (so that the number of nulls to present is known).</p>
+          </li>
+          <li>
+            <p><code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#enablePlaceholders()">enablePlaceholders</a></code> is set to <code>true</code></p>
+          </li>
+        </ol>
+      </div>
+      <div class="api-item"><a name="getInitialLoadSize()"></a><a name="setInitialLoadSize()"></a><a name="getInitialLoadSize--"></a><a name="setInitialLoadSize--"></a>
+        <h3 class="api-name" id="initialLoadSize()">initialLoadSize</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.html#initialLoadSize()">initialLoadSize</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>Defines requested load size for initial load from <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>, typically larger than <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">pageSize</a></code>, so on first load data there's a large enough range of content loaded to cover small scrolls.</p>
+        <p>Note: <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#initialLoadSize()">initialLoadSize</a></code> is used to inform <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html#loadSize()">PagingSource.LoadParams.loadSize</a></code>, but is not enforced. A <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> may completely ignore this value and still return a valid initial <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getJumpThreshold()"></a><a name="setJumpThreshold()"></a><a name="getJumpThreshold--"></a><a name="setJumpThreshold--"></a>
+        <h3 class="api-name" id="jumpThreshold()">jumpThreshold</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.html#jumpThreshold()">jumpThreshold</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>Defines a threshold for the number of items scrolled outside the bounds of loaded items before Paging should give up on loading pages incrementally, and instead jump to the user's position by triggering REFRESH via invalidate.</p>
+        <p>Defaults to <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.Companion.html#COUNT_UNDEFINED()">COUNT_UNDEFINED</a></code>, which disables invalidation due to scrolling large distances.</p>
+        <p>Note: In order to allow <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> to resume from the user's current scroll position after invalidation, <code><a href="/reference/kotlin/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">PagingSource.getRefreshKey</a></code> must be implemented.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/paging/PagingSource.html#getRefreshKey(androidx.paging.PagingState)">getRefreshKey</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/paging/PagingSource.html#jumpingSupported()">jumpingSupported</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getMaxSize()"></a><a name="setMaxSize()"></a><a name="getMaxSize--"></a><a name="setMaxSize--"></a>
+        <h3 class="api-name" id="maxSize()">maxSize</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.html#maxSize()">maxSize</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>Defines the maximum number of items that may be loaded into <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> before pages should be dropped.</p>
+        <p>If set to <code><a href="/reference/kotlin/androidx/paging/PagingConfig.Companion.html#MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</a></code>, pages will never be dropped.</p>
+        <p>This can be used to cap the number of items kept in memory by dropping pages. This value is typically many pages so old pages are cached in case the user scrolls back.</p>
+        <p>This value must be at least two times the <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a></code> plus the <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">pageSize</a></code>). This constraint prevent loads from being continuously fetched and discarded due to prefetching.</p>
+        <p><code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#maxSize()">maxSize</a></code> is best effort, not a guarantee. In practice, if <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#maxSize()">maxSize</a></code> is many times <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">pageSize</a></code>, the number of items held by <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> will not grow above this number. Exceptions are made as necessary to guarantee:</p>
+        <ul>
+          <li>
+            <p>Pages are never dropped until there are more than two pages loaded. Note that a <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> may not be held strictly to <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">requested pageSize</a></code>, so two pages may be larger than expected.</p>
+          </li>
+          <li>
+            <p>Pages are never dropped if they are within a prefetch window (defined to be <code>pageSize + (2 * prefetchDistance)</code>) of the most recent load.</p>
+          </li>
+        </ul>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/kotlin/androidx/paging/PagingConfig.Companion.html#MAX_SIZE_UNBOUNDED()">MAX_SIZE_UNBOUNDED</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getPageSize()"></a><a name="setPageSize()"></a><a name="getPageSize--"></a><a name="setPageSize--"></a>
+        <h3 class="api-name" id="pageSize()">pageSize</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">pageSize</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>Defines the number of items loaded at once from the <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code>.</p>
+        <p>Should be several times the number of visible items onscreen.</p>
+        <p>Configuring your page size depends on how your data is being loaded and used. Smaller page sizes improve memory usage, latency, and avoid GC churn. Larger pages generally improve loading throughput, to a point (avoid loading more than 2MB from SQLite at once, since it incurs extra cost).</p>
+        <p>If you're loading data for very large, social-media style cards that take up most of a screen, and your database isn't a bottleneck, 10-20 may make sense. If you're displaying dozens of items in a tiled grid, which can present items during a scroll much more quickly, consider closer to 100.</p>
+        <p>Note: <code><a href="/reference/kotlin/androidx/paging/PagingConfig.html#pageSize()">pageSize</a></code> is used to inform <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadParams.html#loadSize()">PagingSource.LoadParams.loadSize</a></code>, but is not enforced. A <code><a href="/reference/kotlin/androidx/paging/PagingSource.html">PagingSource</a></code> may completely ignore this value and still return a valid <code><a href="/reference/kotlin/androidx/paging/PagingSource.LoadResult.Page.html">Page</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="getPrefetchDistance()"></a><a name="setPrefetchDistance()"></a><a name="getPrefetchDistance--"></a><a name="setPrefetchDistance--"></a>
+        <h3 class="api-name" id="prefetchDistance()">prefetchDistance</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/paging/PagingConfig.html#prefetchDistance()">prefetchDistance</a>:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></pre>
+        <p>Prefetch distance which defines how far from the edge of loaded content an access must be to trigger further loading. Typically should be set several times the number of visible items onscreen.</p>
+        <p>E.g., If this value is set to 50, a <code><a href="/reference/kotlin/androidx/paging/PagingData.html">PagingData</a></code> will attempt to load 50 items in advance of data that's already been accessed.</p>
+        <p>A value of 0 indicates that no list items will be loaded until they are specifically requested. This is generally not recommended, so that users don't observe a placeholder item (with placeholders) or end of list (without) while scrolling.</p>
+      </div>
     </div>
   </body>
 </html>

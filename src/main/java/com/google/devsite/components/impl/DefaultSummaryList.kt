@@ -20,7 +20,6 @@ import com.google.devsite.components.table.SummaryItem
 import com.google.devsite.components.table.SummaryList
 import kotlinx.html.FlowContent
 import kotlinx.html.div
-import kotlinx.html.table
 import kotlinx.html.tbody
 import kotlinx.html.thead
 import kotlinx.html.tr
@@ -33,7 +32,10 @@ internal data class DefaultSummaryList<T : SummaryItem>(
         if (!hasContent()) return
 
         div("devsite-table-wrapper") {
-            table("responsive") {
+            // Delegate choices of table layout (e.g. column number, width) to the first row.
+            // This is the same method html table rendering itself normally uses.
+            // We know that all rows will want the same thing, because they will all be Ts
+            data.items.first().layout(this) {
                 if (data.header != null) {
                     thead {
                         tr {

@@ -16,6 +16,10 @@
       <div id="subclasses-direct-summary">
         <div class="devsite-table-wrapper">
           <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
             <tbody class="list">
               <tr>
                 <td width="40%"><code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code></td>
@@ -218,6 +222,10 @@ Column(
     <p>To emit <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s so that consumers can react to them, see <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code>.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%">See also</th>
@@ -238,6 +246,10 @@ Column(
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public fields</h3></th>
@@ -256,6 +268,10 @@ Column(
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Extension functions</h3></th>
@@ -286,12 +302,13 @@ Column(
         </tbody>
       </table>
     </div>
-    <h2>Public fields</h2>
-    <div class="api-item"><a name="getInteractions()"></a><a name="setInteractions()"></a><a name="getInteractions--"></a><a name="setInteractions--"></a>
-      <h3 class="api-name" id="interactions()">interactions</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a>&gt;&nbsp;<a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html#interactions()">interactions</a></pre>
-      <p><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> representing the stream of all <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s emitted through this <code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code>. This can be used to see <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s emitted in order, and with additional metadata, such as the press position for <code><a href="/reference/androidx/compose/foundation/interaction/PressInteraction.Press.html">PressInteraction.Press</a></code>.</p>
-      <pre class="prettyprint">
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getInteractions()"></a><a name="setInteractions()"></a><a name="getInteractions--"></a><a name="setInteractions--"></a>
+        <h3 class="api-name" id="interactions()">interactions</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a>&gt;&nbsp;<a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html#interactions()">interactions</a></pre>
+        <p><code><a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a></code> representing the stream of all <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s emitted through this <code><a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a></code>. This can be used to see <code><a href="/reference/androidx/compose/foundation/interaction/Interaction.html">Interaction</a></code>s emitted in order, and with additional metadata, such as the press position for <code><a href="/reference/androidx/compose/foundation/interaction/PressInteraction.Press.html">PressInteraction.Press</a></code>.</p>
+        <pre class="prettyprint">
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.border
@@ -405,75 +422,90 @@ Column(
         modifier = Modifier.fillMaxSize().wrapContentSize()
     )
 }</pre>
-    </div>
-    <h2>Extension functions</h2>
-    <div class="api-item"><a name="-androidx.compose.foundation.interaction.InteractionSource-.collectIsDraggedAsState--"></a><a name="collectisdraggedasstate"></a>
-      <h3 class="api-name" id="(androidx.compose.foundation.interaction.InteractionSource).collectIsDraggedAsState()">DragInteractionKt.collectIsDraggedAsState</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;<a href="/reference/androidx/compose/foundation/interaction/DragInteractionKt.html">DragInteractionKt</a>.<a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html#(androidx.compose.foundation.interaction.InteractionSource).collectIsDraggedAsState()">collectIsDraggedAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>&nbsp;receiver<br>)</pre>
-      <p>Subscribes to this <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> and returns a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> representing whether this component is dragged or not.</p>
-      <p><code><a href="/reference/androidx/compose/foundation/interaction/DragInteraction.html">DragInteraction</a></code> is typically set by interactions such as <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).draggable(androidx.compose.foundation.gestures.DraggableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean,kotlin.coroutines.SuspendFunction2,kotlin.coroutines.SuspendFunction2,kotlin.Boolean)">androidx.compose.foundation.gestures.draggable</a></code> and <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">androidx.compose.foundation.gestures.scrollable</a></code>, and higher level components such as <code><a href="/reference/androidx/compose/foundation/lazy/package-summary.html#LazyRow(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Function1)">androidx.compose.foundation.lazy.LazyRow</a></code>, available through <code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#interactionSource()">androidx.compose.foundation.lazy.LazyListState.interactionSource</a></code>.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Returns</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;</code></td>
-              <td>
-                <p><code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> representing whether this component is being dragged or not</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </div>
-    <div class="api-item"><a name="-androidx.compose.foundation.interaction.InteractionSource-.collectIsFocusedAsState--"></a><a name="collectisfocusedasstate"></a>
-      <h3 class="api-name" id="(androidx.compose.foundation.interaction.InteractionSource).collectIsFocusedAsState()">FocusInteractionKt.collectIsFocusedAsState</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;<a href="/reference/androidx/compose/foundation/interaction/FocusInteractionKt.html">FocusInteractionKt</a>.<a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html#(androidx.compose.foundation.interaction.InteractionSource).collectIsFocusedAsState()">collectIsFocusedAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>&nbsp;receiver<br>)</pre>
-      <p>Subscribes to this <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> and returns a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> representing whether this component is focused or not.</p>
-      <p><code><a href="/reference/androidx/compose/foundation/interaction/FocusInteraction.html">FocusInteraction</a></code> is typically set by <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).focusable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource)">androidx.compose.foundation.focusable</a></code> and focusable components, such as <code><a href="/reference/androidx/compose/foundation/text/package-summary.html#BasicTextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,androidx.compose.ui.text.input.VisualTransformation,kotlin.Function1,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Brush,kotlin.Function1)">androidx.compose.foundation.text.BasicTextField</a></code>.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Returns</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;</code></td>
-              <td>
-                <p><code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> representing whether this component is being focused or not</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.foundation.interaction.InteractionSource-.collectIsDraggedAsState--"></a><a name="collectisdraggedasstate"></a>
+        <h3 class="api-name" id="(androidx.compose.foundation.interaction.InteractionSource).collectIsDraggedAsState()">DragInteractionKt.collectIsDraggedAsState</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;<a href="/reference/androidx/compose/foundation/interaction/DragInteractionKt.html">DragInteractionKt</a>.<a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html#(androidx.compose.foundation.interaction.InteractionSource).collectIsDraggedAsState()">collectIsDraggedAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>&nbsp;receiver<br>)</pre>
+        <p>Subscribes to this <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> and returns a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> representing whether this component is dragged or not.</p>
+        <p><code><a href="/reference/androidx/compose/foundation/interaction/DragInteraction.html">DragInteraction</a></code> is typically set by interactions such as <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).draggable(androidx.compose.foundation.gestures.DraggableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource,kotlin.Boolean,kotlin.coroutines.SuspendFunction2,kotlin.coroutines.SuspendFunction2,kotlin.Boolean)">androidx.compose.foundation.gestures.draggable</a></code> and <code><a href="/reference/androidx/compose/foundation/gestures/package-summary.html#(androidx.compose.ui.Modifier).scrollable(androidx.compose.foundation.gestures.ScrollableState,androidx.compose.foundation.gestures.Orientation,kotlin.Boolean,kotlin.Boolean,androidx.compose.foundation.gestures.FlingBehavior,androidx.compose.foundation.interaction.MutableInteractionSource)">androidx.compose.foundation.gestures.scrollable</a></code>, and higher level components such as <code><a href="/reference/androidx/compose/foundation/lazy/package-summary.html#LazyRow(androidx.compose.ui.Modifier,androidx.compose.foundation.lazy.LazyListState,androidx.compose.foundation.layout.PaddingValues,kotlin.Boolean,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,androidx.compose.foundation.gestures.FlingBehavior,kotlin.Function1)">androidx.compose.foundation.lazy.LazyRow</a></code>, available through <code><a href="/reference/androidx/compose/foundation/lazy/LazyListState.html#interactionSource()">androidx.compose.foundation.lazy.LazyListState.interactionSource</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;</code></td>
+                <td>
+                  <p><code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> representing whether this component is being dragged or not</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="-androidx.compose.foundation.interaction.InteractionSource-.collectIsPressedAsState--"></a><a name="collectispressedasstate"></a>
-      <h3 class="api-name" id="(androidx.compose.foundation.interaction.InteractionSource).collectIsPressedAsState()">PressInteractionKt.collectIsPressedAsState</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;<a href="/reference/androidx/compose/foundation/interaction/PressInteractionKt.html">PressInteractionKt</a>.<a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html#(androidx.compose.foundation.interaction.InteractionSource).collectIsPressedAsState()">collectIsPressedAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>&nbsp;receiver<br>)</pre>
-      <p>Subscribes to this <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> and returns a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> representing whether this component is pressed or not.</p>
-      <p><code><a href="/reference/androidx/compose/foundation/interaction/PressInteraction.html">PressInteraction</a></code> is typically set by <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).clickable(kotlin.Boolean,kotlin.String,androidx.compose.ui.semantics.Role,kotlin.Function0)">androidx.compose.foundation.clickable</a></code> and clickable higher level components, such as buttons.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Returns</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;</code></td>
-              <td>
-                <p><code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> representing whether this component is being pressed or not</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="-androidx.compose.foundation.interaction.InteractionSource-.collectIsFocusedAsState--"></a><a name="collectisfocusedasstate"></a>
+        <h3 class="api-name" id="(androidx.compose.foundation.interaction.InteractionSource).collectIsFocusedAsState()">FocusInteractionKt.collectIsFocusedAsState</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;<a href="/reference/androidx/compose/foundation/interaction/FocusInteractionKt.html">FocusInteractionKt</a>.<a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html#(androidx.compose.foundation.interaction.InteractionSource).collectIsFocusedAsState()">collectIsFocusedAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>&nbsp;receiver<br>)</pre>
+        <p>Subscribes to this <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> and returns a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> representing whether this component is focused or not.</p>
+        <p><code><a href="/reference/androidx/compose/foundation/interaction/FocusInteraction.html">FocusInteraction</a></code> is typically set by <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).focusable(kotlin.Boolean,androidx.compose.foundation.interaction.MutableInteractionSource)">androidx.compose.foundation.focusable</a></code> and focusable components, such as <code><a href="/reference/androidx/compose/foundation/text/package-summary.html#BasicTextField(kotlin.String,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,kotlin.Boolean,androidx.compose.ui.text.TextStyle,androidx.compose.foundation.text.KeyboardOptions,androidx.compose.foundation.text.KeyboardActions,kotlin.Boolean,kotlin.Int,androidx.compose.ui.text.input.VisualTransformation,kotlin.Function1,androidx.compose.foundation.interaction.MutableInteractionSource,androidx.compose.ui.graphics.Brush,kotlin.Function1)">androidx.compose.foundation.text.BasicTextField</a></code>.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;</code></td>
+                <td>
+                  <p><code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> representing whether this component is being focused or not</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="-androidx.compose.foundation.interaction.InteractionSource-.collectIsPressedAsState--"></a><a name="collectispressedasstate"></a>
+        <h3 class="api-name" id="(androidx.compose.foundation.interaction.InteractionSource).collectIsPressedAsState()">PressInteractionKt.collectIsPressedAsState</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;&nbsp;<a href="/reference/androidx/compose/foundation/interaction/PressInteractionKt.html">PressInteractionKt</a>.<a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html#(androidx.compose.foundation.interaction.InteractionSource).collectIsPressedAsState()">collectIsPressedAsState</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/interaction/InteractionSource.html">InteractionSource</a>&nbsp;receiver<br>)</pre>
+        <p>Subscribes to this <code><a href="/reference/androidx/compose/foundation/interaction/MutableInteractionSource.html">MutableInteractionSource</a></code> and returns a <code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> representing whether this component is pressed or not.</p>
+        <p><code><a href="/reference/androidx/compose/foundation/interaction/PressInteraction.html">PressInteraction</a></code> is typically set by <code><a href="/reference/androidx/compose/foundation/package-summary.html#(androidx.compose.ui.Modifier).clickable(kotlin.Boolean,kotlin.String,androidx.compose.ui.semantics.Role,kotlin.Function0)">androidx.compose.foundation.clickable</a></code> and clickable higher level components, such as buttons.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/State.html">State</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://developer.android.com/reference/java/lang/Boolean.html">Boolean</a>&gt;</code></td>
+                <td>
+                  <p><code><a href="/reference/androidx/compose/runtime/State.html">State</a></code> representing whether this component is being pressed or not</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

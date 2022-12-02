@@ -16,6 +16,10 @@
       <div id="subclasses-direct-summary">
         <div class="devsite-table-wrapper">
           <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
             <tbody class="list">
               <tr>
                 <td width="40%"><code><a href="/reference/androidx/compose/animation/core/DecayAnimation.html">DecayAnimation</a></code></td>
@@ -40,6 +44,10 @@
     <p><b>Note</b>: <code><a href="/reference/androidx/compose/animation/core/Animation.html">Animation</a></code> does not track the lifecycle of an animation. It merely reacts to play time change and returns the new value/velocity as a result. It can be used as a building block for more lifecycle aware animations. In contrast, <code><a href="/reference/androidx/compose/animation/core/Animatable.html">Animatable</a></code> and <code><a href="/reference/androidx/compose/animation/core/Transition.html">Transition</a></code> are stateful and manage their own lifecycles.</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%">See also</th>
@@ -60,6 +68,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public fields</h3></th>
@@ -99,6 +111,10 @@
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
@@ -131,6 +147,10 @@
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Extension functions</h3></th>
@@ -147,115 +167,137 @@
         </tbody>
       </table>
     </div>
-    <h2>Public fields</h2>
-    <div class="api-item"><a name="getDurationNanos()"></a><a name="setDurationNanos()"></a><a name="getDurationNanos--"></a><a name="setDurationNanos--"></a>
-      <h3 class="api-name" id="durationNanos()">durationNanos</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;long&nbsp;<a href="/reference/androidx/compose/animation/core/Animation.html#durationNanos()">durationNanos</a></pre>
-      <p>This amount of time in nanoseconds that the animation will run before it finishes</p>
-    </div>
-    <div class="api-item"><a name="getIsInfinite()"></a><a name="setIsInfinite()"></a><a name="getIsInfinite--"></a><a name="setIsInfinite--"></a>
-      <h3 class="api-name" id="isInfinite()">isInfinite</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/animation/core/Animation.html#isInfinite()">isInfinite</a></pre>
-      <p>Whether or not the <code><a href="/reference/androidx/compose/animation/core/Animation.html">Animation</a></code> represents an infinite animation. That is, one that will not finish by itself, one that needs an external action to stop. For examples, an indeterminate progress bar, which will only stop when it is removed from the composition.</p>
-    </div>
-    <div class="api-item"><a name="getTargetValue()"></a><a name="setTargetValue()"></a><a name="getTargetValue--"></a><a name="setTargetValue--"></a>
-      <h3 class="api-name" id="targetValue()">targetValue</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/animation/core/Animation.html#targetValue()">targetValue</a></pre>
-      <p>This is the value that the <code><a href="/reference/androidx/compose/animation/core/Animation.html">Animation</a></code> will reach when it finishes uninterrupted.</p>
-    </div>
-    <div class="api-item"><a name="getTypeConverter()"></a><a name="setTypeConverter()"></a><a name="getTypeConverter--"></a><a name="setTypeConverter--"></a>
-      <h3 class="api-name" id="typeConverter()">typeConverter</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;<a href="/reference/androidx/compose/animation/core/Animation.html#typeConverter()">typeConverter</a></pre>
-      <p>The <code><a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code> that will be used to convert value/velocity from any arbitrary data type to <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>. This makes it possible to animate different dimensions of the data object independently (e.g. x/y dimensions of the position data).</p>
-    </div>
-    <h2>Public methods</h2>
-    <div class="api-item"><a name="getValueFromNanos-kotlin.Long-"></a><a name="getvaluefromnanos"></a>
-      <h3 class="api-name" id="getValueFromNanos(kotlin.Long)">getValueFromNanos</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/animation/core/Animation.html#getValueFromNanos(kotlin.Long)">getValueFromNanos</a>(long&nbsp;playTimeNanos)</pre>
-      <p>Returns the value of the animation at the given play time.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>long&nbsp;playTimeNanos</code></td>
-              <td>
-                <p>the play time that is used to determine the value of the animation.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getDurationNanos()"></a><a name="setDurationNanos()"></a><a name="getDurationNanos--"></a><a name="setDurationNanos--"></a>
+        <h3 class="api-name" id="durationNanos()">durationNanos</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;long&nbsp;<a href="/reference/androidx/compose/animation/core/Animation.html#durationNanos()">durationNanos</a></pre>
+        <p>This amount of time in nanoseconds that the animation will run before it finishes</p>
+      </div>
+      <div class="api-item"><a name="getIsInfinite()"></a><a name="setIsInfinite()"></a><a name="getIsInfinite--"></a><a name="setIsInfinite--"></a>
+        <h3 class="api-name" id="isInfinite()">isInfinite</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/animation/core/Animation.html#isInfinite()">isInfinite</a></pre>
+        <p>Whether or not the <code><a href="/reference/androidx/compose/animation/core/Animation.html">Animation</a></code> represents an infinite animation. That is, one that will not finish by itself, one that needs an external action to stop. For examples, an indeterminate progress bar, which will only stop when it is removed from the composition.</p>
+      </div>
+      <div class="api-item"><a name="getTargetValue()"></a><a name="setTargetValue()"></a><a name="getTargetValue--"></a><a name="setTargetValue--"></a>
+        <h3 class="api-name" id="targetValue()">targetValue</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/animation/core/Animation.html#targetValue()">targetValue</a></pre>
+        <p>This is the value that the <code><a href="/reference/androidx/compose/animation/core/Animation.html">Animation</a></code> will reach when it finishes uninterrupted.</p>
+      </div>
+      <div class="api-item"><a name="getTypeConverter()"></a><a name="setTypeConverter()"></a><a name="getTypeConverter--"></a><a name="setTypeConverter--"></a>
+        <h3 class="api-name" id="typeConverter()">typeConverter</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;<a href="/reference/androidx/compose/animation/core/Animation.html#typeConverter()">typeConverter</a></pre>
+        <p>The <code><a href="/reference/androidx/compose/animation/core/TwoWayConverter.html">TwoWayConverter</a></code> that will be used to convert value/velocity from any arbitrary data type to <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code>. This makes it possible to animate different dimensions of the data object independently (e.g. x/y dimensions of the position data).</p>
       </div>
     </div>
-    <div class="api-item"><a name="getVelocityVectorFromNanos-kotlin.Long-"></a><a name="getvelocityvectorfromnanos"></a>
-      <h3 class="api-name" id="getVelocityVectorFromNanos(kotlin.Long)">getVelocityVectorFromNanos</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;<a href="/reference/androidx/compose/animation/core/Animation.html#getVelocityVectorFromNanos(kotlin.Long)">getVelocityVectorFromNanos</a>(long&nbsp;playTimeNanos)</pre>
-      <p>Returns the velocity (in <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> form) of the animation at the given play time.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>long&nbsp;playTimeNanos</code></td>
-              <td>
-                <p>the play time that is used to calculate the velocity of the animation.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="getValueFromNanos-kotlin.Long-"></a><a name="getvaluefromnanos"></a>
+        <h3 class="api-name" id="getValueFromNanos(kotlin.Long)">getValueFromNanos</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;<a href="/reference/androidx/compose/animation/core/Animation.html#getValueFromNanos(kotlin.Long)">getValueFromNanos</a>(long&nbsp;playTimeNanos)</pre>
+        <p>Returns the value of the animation at the given play time.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>long&nbsp;playTimeNanos</code></td>
+                <td>
+                  <p>the play time that is used to determine the value of the animation.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="getVelocityVectorFromNanos-kotlin.Long-"></a><a name="getvelocityvectorfromnanos"></a>
+        <h3 class="api-name" id="getVelocityVectorFromNanos(kotlin.Long)">getVelocityVectorFromNanos</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&nbsp;<a href="/reference/androidx/compose/animation/core/Animation.html#getVelocityVectorFromNanos(kotlin.Long)">getVelocityVectorFromNanos</a>(long&nbsp;playTimeNanos)</pre>
+        <p>Returns the velocity (in <code><a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a></code> form) of the animation at the given play time.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>long&nbsp;playTimeNanos</code></td>
+                <td>
+                  <p>the play time that is used to calculate the velocity of the animation.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="isFinishedFromNanos-kotlin.Long-"></a><a name="isfinishedfromnanos"></a>
+        <h3 class="api-name" id="isFinishedFromNanos(kotlin.Long)">isFinishedFromNanos</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/animation/core/Animation.html#isFinishedFromNanos(kotlin.Long)">isFinishedFromNanos</a>(long&nbsp;playTimeNanos)</pre>
+        <p>Returns whether the animation is finished at the given play time.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>long&nbsp;playTimeNanos</code></td>
+                <td>
+                  <p>the play time used to determine whether the animation is finished.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-    <div class="api-item"><a name="isFinishedFromNanos-kotlin.Long-"></a><a name="isfinishedfromnanos"></a>
-      <h3 class="api-name" id="isFinishedFromNanos(kotlin.Long)">isFinishedFromNanos</h3>
-      <pre class="api-signature no-pretty-print">default&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/animation/core/Animation.html#isFinishedFromNanos(kotlin.Long)">isFinishedFromNanos</a>(long&nbsp;playTimeNanos)</pre>
-      <p>Returns whether the animation is finished at the given play time.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>long&nbsp;playTimeNanos</code></td>
-              <td>
-                <p>the play time used to determine whether the animation is finished.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <h2>Extension functions</h2>
-    <div class="api-item"><a name="-androidx.compose.animation.core.Animation-.getVelocityFromNanos-kotlin.Long-"></a><a name="getvelocityfromnanos"></a>
-      <h3 class="api-name" id="(androidx.compose.animation.core.Animation).getVelocityFromNanos(kotlin.Long)">AnimationKt.getVelocityFromNanos</h3>
-      <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/AnimationKt.html">AnimationKt</a>.<a href="/reference/androidx/compose/animation/core/Animation.html#(androidx.compose.animation.core.Animation).getVelocityFromNanos(kotlin.Long)">getVelocityFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/Animation.html">Animation</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;playTimeNanos<br>)</pre>
-      <p>Returns the velocity of the animation at the given play time.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>long&nbsp;playTimeNanos</code></td>
-              <td>
-                <p>the play time that is used to calculate the velocity of the animation.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="-androidx.compose.animation.core.Animation-.getVelocityFromNanos-kotlin.Long-"></a><a name="getvelocityfromnanos"></a>
+        <h3 class="api-name" id="(androidx.compose.animation.core.Animation).getVelocityFromNanos(kotlin.Long)">AnimationKt.getVelocityFromNanos</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;V&nbsp;extends&nbsp;<a href="/reference/androidx/compose/animation/core/AnimationVector.html">AnimationVector</a>&gt; <a href="/reference/androidx/compose/animation/core/AnimationKt.html">AnimationKt</a>.<a href="/reference/androidx/compose/animation/core/Animation.html#(androidx.compose.animation.core.Animation).getVelocityFromNanos(kotlin.Long)">getVelocityFromNanos</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/animation/core/Animation.html">Animation</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T,&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> V&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;playTimeNanos<br>)</pre>
+        <p>Returns the velocity of the animation at the given play time.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>long&nbsp;playTimeNanos</code></td>
+                <td>
+                  <p>the play time that is used to calculate the velocity of the animation.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

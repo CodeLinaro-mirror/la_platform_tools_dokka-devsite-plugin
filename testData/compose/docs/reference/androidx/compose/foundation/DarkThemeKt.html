@@ -13,6 +13,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
@@ -29,14 +33,15 @@
         </tbody>
       </table>
     </div>
-    <h2>Public methods</h2>
-    <div class="api-item"><a name="isSystemInDarkTheme--"></a><a name="issystemindarktheme"></a>
-      <h3 class="api-name" id="isSystemInDarkTheme()">isSystemInDarkTheme</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/DarkThemeKt.html#isSystemInDarkTheme()">isSystemInDarkTheme</a>()</pre>
-      <p>This function should be used to help build responsive UIs that follow the system setting, to avoid harsh contrast changes when switching between applications.</p>
-      <p>It is also recommended to provide user accessible overrides in your application, so users can choose to force an always-light or always-dark theme. To do this, you should provide the current theme value in a CompositionLocal or similar to components further down your hierarchy, only calling this effect once at the top level if no user override has been set. This also helps avoid multiple calls to this effect, which can be expensive as it queries system configuration.</p>
-      <p>For example, to draw a white rectangle when in dark theme, and a black rectangle when in light theme:</p>
-      <pre class="prettyprint">
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="isSystemInDarkTheme--"></a><a name="issystemindarktheme"></a>
+        <h3 class="api-name" id="isSystemInDarkTheme()">isSystemInDarkTheme</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;boolean&nbsp;<a href="/reference/androidx/compose/foundation/DarkThemeKt.html#isSystemInDarkTheme()">isSystemInDarkTheme</a>()</pre>
+        <p>This function should be used to help build responsive UIs that follow the system setting, to avoid harsh contrast changes when switching between applications.</p>
+        <p>It is also recommended to provide user accessible overrides in your application, so users can choose to force an always-light or always-dark theme. To do this, you should provide the current theme value in a CompositionLocal or similar to components further down your hierarchy, only calling this effect once at the top level if no user override has been set. This also helps avoid multiple calls to this effect, which can be expensive as it queries system configuration.</p>
+        <p>For example, to draw a white rectangle when in dark theme, and a black rectangle when in light theme:</p>
+        <pre class="prettyprint">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
@@ -47,22 +52,27 @@ val color = if (dark) Color.White else Color.Black
 Box {
     Box(Modifier.size(50.dp).background(color = color))
 }</pre>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Returns</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>boolean</code></td>
-              <td>
-                <p><code>true</code> if the system is considered to be in 'dark theme'.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>boolean</code></td>
+                <td>
+                  <p><code>true</code> if the system is considered to be in 'dark theme'.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

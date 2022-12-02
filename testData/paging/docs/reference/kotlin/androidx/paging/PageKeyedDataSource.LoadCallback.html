@@ -16,6 +16,10 @@
     <p>It is always valid for a DataSource loading method that takes a callback to stash the callback and call it later. This enables DataSources to be fully asynchronous, and to handle temporary, recoverable error states (such as a network error that can be retried).</p>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%">Parameters</th>
@@ -40,6 +44,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
@@ -56,6 +64,10 @@
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public functions</h3></th>
@@ -72,64 +84,76 @@
         </tbody>
       </table>
     </div>
-    <h2>Public constructors</h2>
-    <div class="api-item"><a name="LoadCallback--"></a><a name="loadcallback"></a>
-      <h3 class="api-name" id="LoadCallback()">LoadCallback</h3>
-      <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html#LoadCallback()">LoadCallback</a>()</pre>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></td>
-              <td>
-                <p>Type of data used to query pages.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>&lt;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></td>
-              <td>
-                <p>Type of items being loaded.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="LoadCallback--"></a><a name="loadcallback"></a>
+        <h3 class="api-name" id="LoadCallback()">LoadCallback</h3>
+        <pre class="api-signature no-pretty-print">&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?,&nbsp;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html#LoadCallback()">LoadCallback</a>()</pre>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>&lt;Key&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></td>
+                <td>
+                  <p>Type of data used to query pages.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>&lt;Value&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt;</code></td>
+                <td>
+                  <p>Type of items being loaded.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-    <h2>Public functions</h2>
-    <div class="api-item"><a name="onResult(kotlin.collections.List, kotlin.Any)"></a><a name="onResult-kotlin.collections.List-kotlin.Any-"></a><a name="onresult"></a>
-      <h3 class="api-name" id="onResult(kotlin.collections.List,kotlin.Any)">onResult</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List,kotlin.Any)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;,&nbsp;adjacentPageKey:&nbsp;Key?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Called to pass loaded data from a <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>.</p>
-      <p>Call this method from your PageKeyedDataSource's <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams)">loadBefore</a></code> and <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams)">loadAfter</a></code> methods to return data.</p>
-      <p>It is always valid to pass a different amount of data than what is requested. Pass an empty list if there is no more data to load.</p>
-      <p>Pass the key for the subsequent page to load to adjacentPageKey. For example, if you've loaded a page in <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams)">loadBefore</a></code>, pass the key for the previous page, or <code>null</code> if the loaded page is the first. If in <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams)">loadAfter</a></code>, pass the key for the next page, or <code>null</code> if the loaded page is the last.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;</code></td>
-              <td>
-                <p>List of items loaded from the PageKeyedDataSource.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>adjacentPageKey:&nbsp;Key?</code></td>
-              <td>
-                <p>Key for subsequent page load (previous page in <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams)">loadBefore</a></code> / next page in <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams)">loadAfter</a></code>), or <code>null</code> if there are no more pages to load in the current load direction.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="onResult(kotlin.collections.List, kotlin.Any)"></a><a name="onResult-kotlin.collections.List-kotlin.Any-"></a><a name="onresult"></a>
+        <h3 class="api-name" id="onResult(kotlin.collections.List,kotlin.Any)">onResult</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.LoadCallback.html#onResult(kotlin.collections.List,kotlin.Any)">onResult</a>(data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;,&nbsp;adjacentPageKey:&nbsp;Key?):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called to pass loaded data from a <code><a href="/reference/kotlin/androidx/paging/DataSource.html">DataSource</a></code>.</p>
+        <p>Call this method from your PageKeyedDataSource's <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams)">loadBefore</a></code> and <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams)">loadAfter</a></code> methods to return data.</p>
+        <p>It is always valid to pass a different amount of data than what is requested. Pass an empty list if there is no more data to load.</p>
+        <p>Pass the key for the subsequent page to load to adjacentPageKey. For example, if you've loaded a page in <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams)">loadBefore</a></code>, pass the key for the previous page, or <code>null</code> if the loaded page is the first. If in <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams)">loadAfter</a></code>, pass the key for the next page, or <code>null</code> if the loaded page is the last.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>data:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Value&gt;</code></td>
+                <td>
+                  <p>List of items loaded from the PageKeyedDataSource.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>adjacentPageKey:&nbsp;Key?</code></td>
+                <td>
+                  <p>Key for subsequent page load (previous page in <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadBefore(androidx.paging.PageKeyedDataSource.LoadParams)">loadBefore</a></code> / next page in <code><a href="/reference/kotlin/androidx/paging/PageKeyedDataSource.html#loadAfter(androidx.paging.PageKeyedDataSource.LoadParams)">loadAfter</a></code>), or <code>null</code> if there are no more pages to load in the current load direction.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

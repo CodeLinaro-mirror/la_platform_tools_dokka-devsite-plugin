@@ -88,6 +88,10 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
 }</pre>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%">See also</th>
@@ -116,6 +120,10 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public constructors</h3></th>
@@ -132,6 +140,10 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public functions</h3></th>
@@ -164,6 +176,10 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Protected functions</h3></th>
@@ -194,6 +210,10 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public properties</h3></th>
@@ -228,6 +248,10 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
             <td><devsite-expandable><span class="expand-control">From <a href="/reference/kotlin/androidx/compose/runtime/Applier.html">androidx.compose.runtime.Applier</a></span>
               <div class="devsite-table-wrapper">
                 <table class="responsive">
+                  <colgroup>
+                    <col width="40%">
+                    <col>
+                  </colgroup>
                   <tbody class="list">
                     <tr>
                       <td width="40%"><code>abstract <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
@@ -279,50 +303,58 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
         </tbody>
       </table>
     </div>
-    <h2>Public constructors</h2>
-    <div class="api-item"><a name="AbstractApplier-kotlin.Any-"></a><a name="abstractapplier"></a>
-      <h3 class="api-name" id="AbstractApplier(kotlin.Any)">AbstractApplier</h3>
-      <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#AbstractApplier(kotlin.Any)">AbstractApplier</a>(root:&nbsp;T)</pre>
+    <div class="list">
+      <h2>Public constructors</h2>
+      <div class="api-item"><a name="AbstractApplier-kotlin.Any-"></a><a name="abstractapplier"></a>
+        <h3 class="api-name" id="AbstractApplier(kotlin.Any)">AbstractApplier</h3>
+        <pre class="api-signature no-pretty-print">&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#AbstractApplier(kotlin.Any)">AbstractApplier</a>(root:&nbsp;T)</pre>
+      </div>
     </div>
-    <h2>Public functions</h2>
-    <div class="api-item"><a name="clear--"></a><a name="clear"></a>
-      <h3 class="api-name" id="clear()">clear</h3>
-      <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#clear()">clear</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Move to the root and remove all nodes from the root, preparing both this <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html">Applier</a></code> and its root to be used as the target of a new composition in the future.</p>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="clear--"></a><a name="clear"></a>
+        <h3 class="api-name" id="clear()">clear</h3>
+        <pre class="api-signature no-pretty-print">final&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#clear()">clear</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Move to the root and remove all nodes from the root, preparing both this <code><a href="/reference/kotlin/androidx/compose/runtime/Applier.html">Applier</a></code> and its root to be used as the target of a new composition in the future.</p>
+      </div>
+      <div class="api-item"><a name="down-kotlin.Any-"></a><a name="down"></a>
+        <h3 class="api-name" id="down(kotlin.Any)">down</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">down</a>(node:&nbsp;T):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Indicates that the applier is getting traversed &quot;down&quot; the tree. When this gets called, <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">node</a></code> is expected to be a child of <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code>, and after this operation, <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">node</a></code> is expected to be the new <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="up--"></a><a name="up"></a>
+        <h3 class="api-name" id="up()">up</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#up()">up</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Indicates that the applier is getting traversed &quot;up&quot; the tree. After this operation completes, the <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code> should return the &quot;parent&quot; of the <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code> node at the beginning of this operation.</p>
+      </div>
     </div>
-    <div class="api-item"><a name="down-kotlin.Any-"></a><a name="down"></a>
-      <h3 class="api-name" id="down(kotlin.Any)">down</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">down</a>(node:&nbsp;T):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Indicates that the applier is getting traversed &quot;down&quot; the tree. When this gets called, <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">node</a></code> is expected to be a child of <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code>, and after this operation, <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">node</a></code> is expected to be the new <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code>.</p>
+    <div class="list">
+      <h2>Protected functions</h2>
+      <div class="api-item"><a name="(kotlin.collections.MutableList).move(kotlin.Int, kotlin.Int, kotlin.Int)"></a><a name="-kotlin.collections.MutableList-.move-kotlin.Int-kotlin.Int-kotlin.Int-"></a><a name="move"></a>
+        <h3 class="api-name" id="(kotlin.collections.MutableList).move(kotlin.Int,kotlin.Int,kotlin.Int)">move</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;fun&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#(kotlin.collections.MutableList).move(kotlin.Int,kotlin.Int,kotlin.Int)">move</a>(from:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;to:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;count:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      </div>
+      <div class="api-item"><a name="onClear--"></a><a name="onclear"></a>
+        <h3 class="api-name" id="onClear()">onClear</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#onClear()">onClear</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Called to perform clearing of the <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#root()">root</a></code> when <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#clear()">clear</a></code> is called.</p>
+      </div>
+      <div class="api-item"><a name="(kotlin.collections.MutableList).remove(kotlin.Int, kotlin.Int)"></a><a name="-kotlin.collections.MutableList-.remove-kotlin.Int-kotlin.Int-"></a><a name="remove"></a>
+        <h3 class="api-name" id="(kotlin.collections.MutableList).remove(kotlin.Int,kotlin.Int)">remove</h3>
+        <pre class="api-signature no-pretty-print">protected&nbsp;fun&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#(kotlin.collections.MutableList).remove(kotlin.Int,kotlin.Int)">remove</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;count:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+      </div>
     </div>
-    <div class="api-item"><a name="up--"></a><a name="up"></a>
-      <h3 class="api-name" id="up()">up</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#up()">up</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Indicates that the applier is getting traversed &quot;up&quot; the tree. After this operation completes, the <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code> should return the &quot;parent&quot; of the <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a></code> node at the beginning of this operation.</p>
-    </div>
-    <h2>Protected functions</h2>
-    <div class="api-item"><a name="(kotlin.collections.MutableList).move(kotlin.Int, kotlin.Int, kotlin.Int)"></a><a name="-kotlin.collections.MutableList-.move-kotlin.Int-kotlin.Int-kotlin.Int-"></a><a name="move"></a>
-      <h3 class="api-name" id="(kotlin.collections.MutableList).move(kotlin.Int,kotlin.Int,kotlin.Int)">move</h3>
-      <pre class="api-signature no-pretty-print">protected&nbsp;fun&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#(kotlin.collections.MutableList).move(kotlin.Int,kotlin.Int,kotlin.Int)">move</a>(from:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;to:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;count:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-    </div>
-    <div class="api-item"><a name="onClear--"></a><a name="onclear"></a>
-      <h3 class="api-name" id="onClear()">onClear</h3>
-      <pre class="api-signature no-pretty-print">protected&nbsp;abstract&nbsp;fun&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#onClear()">onClear</a>():&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Called to perform clearing of the <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#root()">root</a></code> when <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#clear()">clear</a></code> is called.</p>
-    </div>
-    <div class="api-item"><a name="(kotlin.collections.MutableList).remove(kotlin.Int, kotlin.Int)"></a><a name="-kotlin.collections.MutableList-.remove-kotlin.Int-kotlin.Int-"></a><a name="remove"></a>
-      <h3 class="api-name" id="(kotlin.collections.MutableList).remove(kotlin.Int,kotlin.Int)">remove</h3>
-      <pre class="api-signature no-pretty-print">protected&nbsp;fun&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a>&lt;T&gt;.<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#(kotlin.collections.MutableList).remove(kotlin.Int,kotlin.Int)">remove</a>(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,&nbsp;count:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-    </div>
-    <h2>Public properties</h2>
-    <div class="api-item"><a name="getCurrent()"></a><a name="setCurrent()"></a><a name="getCurrent--"></a><a name="setCurrent--"></a>
-      <h3 class="api-name" id="current()">current</h3>
-      <pre class="api-signature no-pretty-print">open&nbsp;var&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a>:&nbsp;T</pre>
-      <p>The node that operations will be applied on at any given time. It is expected that the value of this property will change as <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">down</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#up()">up</a></code> are called.</p>
-    </div>
-    <div class="api-item"><a name="getRoot()"></a><a name="setRoot()"></a><a name="getRoot--"></a><a name="setRoot--"></a>
-      <h3 class="api-name" id="root()">root</h3>
-      <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#root()">root</a>:&nbsp;T</pre>
+    <div class="list">
+      <h2>Public properties</h2>
+      <div class="api-item"><a name="getCurrent()"></a><a name="setCurrent()"></a><a name="getCurrent--"></a><a name="setCurrent--"></a>
+        <h3 class="api-name" id="current()">current</h3>
+        <pre class="api-signature no-pretty-print">open&nbsp;var&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#current()">current</a>:&nbsp;T</pre>
+        <p>The node that operations will be applied on at any given time. It is expected that the value of this property will change as <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#down(kotlin.Any)">down</a></code> and <code><a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#up()">up</a></code> are called.</p>
+      </div>
+      <div class="api-item"><a name="getRoot()"></a><a name="setRoot()"></a><a name="getRoot--"></a><a name="setRoot--"></a>
+        <h3 class="api-name" id="root()">root</h3>
+        <pre class="api-signature no-pretty-print">val&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/AbstractApplier.html#root()">root</a>:&nbsp;T</pre>
+      </div>
     </div>
   </body>
 </html>

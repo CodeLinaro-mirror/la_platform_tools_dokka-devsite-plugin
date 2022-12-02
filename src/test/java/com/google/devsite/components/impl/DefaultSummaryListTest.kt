@@ -57,6 +57,10 @@ class DefaultSummaryListTest {
 <div>
   <div class="devsite-table-wrapper">
     <table class="responsive">
+      <colgroup>
+        <col width="40%">
+        <col>
+      </colgroup>
       <tbody class="list">
         <tr><noop/></tr>
         <tr><noop/></tr>
@@ -83,6 +87,10 @@ class DefaultSummaryListTest {
 <div>
   <div class="devsite-table-wrapper">
     <table class="responsive">
+      <colgroup>
+        <col width="40%">
+        <col>
+      </colgroup>
       <thead>
         <tr><noop/></tr>
       </thead>

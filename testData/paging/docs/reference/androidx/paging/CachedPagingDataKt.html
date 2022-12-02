@@ -13,6 +13,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
@@ -29,16 +33,17 @@
         </tbody>
       </table>
     </div>
-    <h2>Public methods</h2>
-    <div class="api-item"><a name="-kotlinx.coroutines.flow.Flow-.cachedIn-kotlinx.coroutines.CoroutineScope-"></a><a name="cachedin"></a>
-      <h3 class="api-name" id="(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">CachedPagingDataKt.cachedIn</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/CachedPagingDataKt.html">CachedPagingDataKt</a>.<a href="/reference/androidx/paging/CachedPagingDataKt.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>&nbsp;scope<br>)</pre>
-      <p>Caches the <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> such that any downstream collection from this flow will share the same <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>.</p>
-      <p>The flow is kept active as long as the given <code><a href="/reference/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">scope</a></code> is active. To avoid leaks, make sure to use a <code><a href="/reference/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">scope</a></code> that is already managed (like a ViewModel scope) or manually cancel it when you don't need paging anymore.</p>
-      <p>A common use case for this caching is to cache <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> in a ViewModel. This can ensure that, upon configuration change (e.g. rotation), then new Activity will receive the existing data immediately rather than fetching it from scratch.</p>
-      <p>Calling <code><a href="/reference/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> is required to allow calling androidx.paging.AsyncPagingDataAdapter on the same instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> emitted by <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code> or any of its transformed derivatives, as reloading data from scratch on the same generation of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is an unsupported operation.</p>
-      <p>Note that this does not turn the <code>Flow&lt;PagingData&gt;</code> into a hot stream. It won't execute any unnecessary code unless it is being collected.</p>
-      <pre class="prettyprint">
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="-kotlinx.coroutines.flow.Flow-.cachedIn-kotlinx.coroutines.CoroutineScope-"></a><a name="cachedin"></a>
+        <h3 class="api-name" id="(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">CachedPagingDataKt.cachedIn</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&gt;&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/paging/CachedPagingDataKt.html">CachedPagingDataKt</a>.<a href="/reference/androidx/paging/CachedPagingDataKt.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/index.html">Flow</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/paging/PagingData.html">PagingData</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&gt;&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>&nbsp;scope<br>)</pre>
+        <p>Caches the <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> such that any downstream collection from this flow will share the same <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code>.</p>
+        <p>The flow is kept active as long as the given <code><a href="/reference/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">scope</a></code> is active. To avoid leaks, make sure to use a <code><a href="/reference/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">scope</a></code> that is already managed (like a ViewModel scope) or manually cancel it when you don't need paging anymore.</p>
+        <p>A common use case for this caching is to cache <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> in a ViewModel. This can ensure that, upon configuration change (e.g. rotation), then new Activity will receive the existing data immediately rather than fetching it from scratch.</p>
+        <p>Calling <code><a href="/reference/androidx/paging/package-summary.html#(kotlinx.coroutines.flow.Flow).cachedIn(kotlinx.coroutines.CoroutineScope)">cachedIn</a></code> is required to allow calling androidx.paging.AsyncPagingDataAdapter on the same instance of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> emitted by <code><a href="/reference/androidx/paging/Pager.html">Pager</a></code> or any of its transformed derivatives, as reloading data from scratch on the same generation of <code><a href="/reference/androidx/paging/PagingData.html">PagingData</a></code> is an unsupported operation.</p>
+        <p>Note that this does not turn the <code>Flow&lt;PagingData&gt;</code> into a hot stream. It won't execute any unnecessary code unless it is being collected.</p>
+        <pre class="prettyprint">
 import androidx.activity.viewModels
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -77,22 +82,27 @@ class MyActivity : AppCompatActivity() {
         }
     }
 }</pre>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>&nbsp;scope</code></td>
-              <td>
-                <p>The coroutine scope where this page cache will be kept alive.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html">CoroutineScope</a>&nbsp;scope</code></td>
+                <td>
+                  <p>The coroutine scope where this page cache will be kept alive.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

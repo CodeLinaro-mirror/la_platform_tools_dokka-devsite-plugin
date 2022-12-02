@@ -15,6 +15,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public functions</h3></th>
@@ -47,6 +51,10 @@
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Extension functions</h3></th>
@@ -84,74 +92,83 @@
         </tbody>
       </table>
     </div>
-    <h2>Public functions</h2>
-    <div class="api-item"><a name="item(kotlin.Any, kotlin.Function1)"></a><a name="item-kotlin.Any-kotlin.Function1-"></a><a name="item"></a>
-      <h3 class="api-name" id="item(kotlin.Any,kotlin.Function1)">item</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html#item(kotlin.Any,kotlin.Function1)">item</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>? = null,&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Adds a single item.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>? = null</code></td>
-              <td>
-                <p>a stable and unique key representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-              <td>
-                <p>the content of the item</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public functions</h2>
+      <div class="api-item"><a name="item(kotlin.Any, kotlin.Function1)"></a><a name="item-kotlin.Any-kotlin.Function1-"></a><a name="item"></a>
+        <h3 class="api-name" id="item(kotlin.Any,kotlin.Function1)">item</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html#item(kotlin.Any,kotlin.Function1)">item</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>? = null,&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Adds a single item.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>? = null</code></td>
+                <td>
+                  <p>a stable and unique key representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                <td>
+                  <p>the content of the item</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="items(kotlin.Int, kotlin.Function1, kotlin.Function2)"></a><a name="items-kotlin.Int-kotlin.Function1-kotlin.Function2-"></a><a name="items"></a>
-      <h3 class="api-name" id="items(kotlin.Int,kotlin.Function1,kotlin.Function2)">items</h3>
-      <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html#items(kotlin.Int,kotlin.Function1,kotlin.Function2)">items</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;count:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;key:&nbsp;((index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Adds a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html#items(kotlin.Int,kotlin.Function1,kotlin.Function2)">count</a></code> of items.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>count:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
-              <td>
-                <p>the items count</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>key:&nbsp;((index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null</code></td>
-              <td>
-                <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-              <td>
-                <p>the content displayed by a single item</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="items(kotlin.Int, kotlin.Function1, kotlin.Function2)"></a><a name="items-kotlin.Int-kotlin.Function1-kotlin.Function2-"></a><a name="items"></a>
+        <h3 class="api-name" id="items(kotlin.Int,kotlin.Function1,kotlin.Function2)">items</h3>
+        <pre class="api-signature no-pretty-print">fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html#items(kotlin.Int,kotlin.Function1,kotlin.Function2)">items</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;count:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;key:&nbsp;((index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Adds a <code><a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html#items(kotlin.Int,kotlin.Function1,kotlin.Function2)">count</a></code> of items.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>count:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></code></td>
+                <td>
+                  <p>the items count</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>key:&nbsp;((index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null</code></td>
+                <td>
+                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                <td>
+                  <p>the content displayed by a single item</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="stickyHeader(kotlin.Any, kotlin.Function1)"></a><a name="stickyHeader-kotlin.Any-kotlin.Function1-"></a><a name="stickyheader"></a>
-      <h3 class="api-name" id="stickyHeader(kotlin.Any,kotlin.Function1)">stickyHeader</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html#stickyHeader(kotlin.Any,kotlin.Function1)">stickyHeader</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>? = null,&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Adds a sticky header item, which will remain pinned even when scrolling after it. The header will remain pinned until the next header will take its place.</p>
-      <pre class="prettyprint">
+      <div class="api-item"><a name="stickyHeader(kotlin.Any, kotlin.Function1)"></a><a name="stickyHeader-kotlin.Any-kotlin.Function1-"></a><a name="stickyheader"></a>
+        <h3 class="api-name" id="stickyHeader(kotlin.Any,kotlin.Function1)">stickyHeader</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/kotlin/androidx/compose/foundation/ExperimentalFoundationApi.html">ExperimentalFoundationApi</a><br>fun&nbsp;<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html#stickyHeader(kotlin.Any,kotlin.Function1)">stickyHeader</a>(key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>? = null,&nbsp;content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Adds a sticky header item, which will remain pinned even when scrolling after it. The header will remain pinned until the next header will take its place.</p>
+        <pre class="prettyprint">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -175,165 +192,188 @@ LazyColumn(reverseLayout = true, contentPadding = PaddingValues(6.dp)) {
         }
     }
 }</pre>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>? = null</code></td>
-              <td>
-                <p>a stable and unique key representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-              <td>
-                <p>the content of the header</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>key:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>? = null</code></td>
+                <td>
+                  <p>a stable and unique key representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>content:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.() <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                <td>
+                  <p>the content of the header</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-    <h2>Extension functions</h2>
-    <div class="api-item"><a name="(androidx.compose.foundation.lazy.LazyListScope).items(kotlin.collections.List, kotlin.Function1, kotlin.Function2)"></a><a name="-androidx.compose.foundation.lazy.LazyListScope-.items-kotlin.collections.List-kotlin.Function1-kotlin.Function2-"></a><a name="items"></a>
-      <h3 class="api-name" id="(androidx.compose.foundation.lazy.LazyListScope).items(kotlin.collections.List,kotlin.Function1,kotlin.Function2)">items</h3>
-      <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html">LazyListScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html#(androidx.compose.foundation.lazy.LazyListScope).items(kotlin.collections.List,kotlin.Function1,kotlin.Function2)">items</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;items:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;noinline&nbsp;key:&nbsp;((item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Adds a list of items.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>items:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;</code></td>
-              <td>
-                <p>the data list</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>noinline&nbsp;key:&nbsp;((item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null</code></td>
-              <td>
-                <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>crossinline&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-              <td>
-                <p>the content displayed by a single item</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Extension functions</h2>
+      <div class="api-item"><a name="(androidx.compose.foundation.lazy.LazyListScope).items(kotlin.collections.List, kotlin.Function1, kotlin.Function2)"></a><a name="-androidx.compose.foundation.lazy.LazyListScope-.items-kotlin.collections.List-kotlin.Function1-kotlin.Function2-"></a><a name="items"></a>
+        <h3 class="api-name" id="(androidx.compose.foundation.lazy.LazyListScope).items(kotlin.collections.List,kotlin.Function1,kotlin.Function2)">items</h3>
+        <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html">LazyListScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html#(androidx.compose.foundation.lazy.LazyListScope).items(kotlin.collections.List,kotlin.Function1,kotlin.Function2)">items</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;items:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;noinline&nbsp;key:&nbsp;((item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Adds a list of items.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>items:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;</code></td>
+                <td>
+                  <p>the data list</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>noinline&nbsp;key:&nbsp;((item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null</code></td>
+                <td>
+                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>crossinline&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                <td>
+                  <p>the content displayed by a single item</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="(androidx.compose.foundation.lazy.LazyListScope).items(kotlin.Array, kotlin.Function1, kotlin.Function2)"></a><a name="-androidx.compose.foundation.lazy.LazyListScope-.items-kotlin.Array-kotlin.Function1-kotlin.Function2-"></a><a name="items"></a>
-      <h3 class="api-name" id="(androidx.compose.foundation.lazy.LazyListScope).items(kotlin.Array,kotlin.Function1,kotlin.Function2)">items</h3>
-      <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html">LazyListScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html#(androidx.compose.foundation.lazy.LazyListScope).items(kotlin.Array,kotlin.Function1,kotlin.Function2)">items</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;items:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;noinline&nbsp;key:&nbsp;((item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Adds an array of items.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>items:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;T&gt;</code></td>
-              <td>
-                <p>the data array</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>noinline&nbsp;key:&nbsp;((item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null</code></td>
-              <td>
-                <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>crossinline&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-              <td>
-                <p>the content displayed by a single item</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="(androidx.compose.foundation.lazy.LazyListScope).items(kotlin.Array, kotlin.Function1, kotlin.Function2)"></a><a name="-androidx.compose.foundation.lazy.LazyListScope-.items-kotlin.Array-kotlin.Function1-kotlin.Function2-"></a><a name="items"></a>
+        <h3 class="api-name" id="(androidx.compose.foundation.lazy.LazyListScope).items(kotlin.Array,kotlin.Function1,kotlin.Function2)">items</h3>
+        <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html">LazyListScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html#(androidx.compose.foundation.lazy.LazyListScope).items(kotlin.Array,kotlin.Function1,kotlin.Function2)">items</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;items:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;noinline&nbsp;key:&nbsp;((item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Adds an array of items.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>items:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;T&gt;</code></td>
+                <td>
+                  <p>the data array</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>noinline&nbsp;key:&nbsp;((item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null</code></td>
+                <td>
+                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>crossinline&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                <td>
+                  <p>the content displayed by a single item</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="(androidx.compose.foundation.lazy.LazyListScope).itemsIndexed(kotlin.collections.List, kotlin.Function2, kotlin.Function3)"></a><a name="-androidx.compose.foundation.lazy.LazyListScope-.itemsIndexed-kotlin.collections.List-kotlin.Function2-kotlin.Function3-"></a><a name="itemsindexed"></a>
-      <h3 class="api-name" id="(androidx.compose.foundation.lazy.LazyListScope).itemsIndexed(kotlin.collections.List,kotlin.Function2,kotlin.Function3)">itemsIndexed</h3>
-      <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html">LazyListScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html#(androidx.compose.foundation.lazy.LazyListScope).itemsIndexed(kotlin.collections.List,kotlin.Function2,kotlin.Function3)">itemsIndexed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;items:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;noinline&nbsp;key:&nbsp;((index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Adds a list of items where the content of an item is aware of its index.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>items:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;</code></td>
-              <td>
-                <p>the data list</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>noinline&nbsp;key:&nbsp;((index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null</code></td>
-              <td>
-                <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>crossinline&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-              <td>
-                <p>the content displayed by a single item</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="(androidx.compose.foundation.lazy.LazyListScope).itemsIndexed(kotlin.collections.List, kotlin.Function2, kotlin.Function3)"></a><a name="-androidx.compose.foundation.lazy.LazyListScope-.itemsIndexed-kotlin.collections.List-kotlin.Function2-kotlin.Function3-"></a><a name="itemsindexed"></a>
+        <h3 class="api-name" id="(androidx.compose.foundation.lazy.LazyListScope).itemsIndexed(kotlin.collections.List,kotlin.Function2,kotlin.Function3)">itemsIndexed</h3>
+        <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html">LazyListScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html#(androidx.compose.foundation.lazy.LazyListScope).itemsIndexed(kotlin.collections.List,kotlin.Function2,kotlin.Function3)">itemsIndexed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;items:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;noinline&nbsp;key:&nbsp;((index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Adds a list of items where the content of an item is aware of its index.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>items:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;T&gt;</code></td>
+                <td>
+                  <p>the data list</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>noinline&nbsp;key:&nbsp;((index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null</code></td>
+                <td>
+                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>crossinline&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                <td>
+                  <p>the content displayed by a single item</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="(androidx.compose.foundation.lazy.LazyListScope).itemsIndexed(kotlin.Array, kotlin.Function2, kotlin.Function3)"></a><a name="-androidx.compose.foundation.lazy.LazyListScope-.itemsIndexed-kotlin.Array-kotlin.Function2-kotlin.Function3-"></a><a name="itemsindexed"></a>
-      <h3 class="api-name" id="(androidx.compose.foundation.lazy.LazyListScope).itemsIndexed(kotlin.Array,kotlin.Function2,kotlin.Function3)">itemsIndexed</h3>
-      <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html">LazyListScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html#(androidx.compose.foundation.lazy.LazyListScope).itemsIndexed(kotlin.Array,kotlin.Function2,kotlin.Function3)">itemsIndexed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;items:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;noinline&nbsp;key:&nbsp;((index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
-      <p>Adds an array of items where the content of an item is aware of its index.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>items:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;T&gt;</code></td>
-              <td>
-                <p>the data array</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>noinline&nbsp;key:&nbsp;((index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null</code></td>
-              <td>
-                <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>crossinline&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
-              <td>
-                <p>the content displayed by a single item</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="(androidx.compose.foundation.lazy.LazyListScope).itemsIndexed(kotlin.Array, kotlin.Function2, kotlin.Function3)"></a><a name="-androidx.compose.foundation.lazy.LazyListScope-.itemsIndexed-kotlin.Array-kotlin.Function2-kotlin.Function3-"></a><a name="itemsindexed"></a>
+        <h3 class="api-name" id="(androidx.compose.foundation.lazy.LazyListScope).itemsIndexed(kotlin.Array,kotlin.Function2,kotlin.Function3)">itemsIndexed</h3>
+        <pre class="api-signature no-pretty-print">inline&nbsp;fun&nbsp;&lt;T&nbsp;:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?&gt; <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html">LazyListScope</a>.<a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyListScope.html#(androidx.compose.foundation.lazy.LazyListScope).itemsIndexed(kotlin.Array,kotlin.Function2,kotlin.Function3)">itemsIndexed</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;items:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;T&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;noinline&nbsp;key:&nbsp;((index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null,<br>&nbsp;&nbsp;&nbsp;&nbsp;crossinline&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><br>):&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></pre>
+        <p>Adds an array of items where the content of an item is aware of its index.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>items:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html">Array</a>&lt;T&gt;</code></td>
+                <td>
+                  <p>the data array</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>noinline&nbsp;key:&nbsp;((index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)? = null</code></td>
+                <td>
+                  <p>a factory of stable and unique keys representing the item. Using the same key for multiple items in the list is not allowed. Type of the key should be saveable via Bundle on Android. If null is passed the position in the list will represent the key. When you specify the key the scroll position will be maintained based on the key, which means if you add/remove items before the current visible item the item with the given key will be kept as the first visible one.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>crossinline&nbsp;itemContent:&nbsp;@<a href="/reference/kotlin/androidx/compose/runtime/Composable.html">Composable</a> <a href="/reference/kotlin/androidx/compose/foundation/lazy/LazyItemScope.html">LazyItemScope</a>.(index:&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, item) <span style="white-space: nowrap;">-&gt;</span> <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+                <td>
+                  <p>the content displayed by a single item</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

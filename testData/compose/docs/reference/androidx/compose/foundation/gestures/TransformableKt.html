@@ -13,6 +13,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
@@ -29,13 +33,14 @@
         </tbody>
       </table>
     </div>
-    <h2>Public methods</h2>
-    <div class="api-item"><a name="(androidx.compose.ui.Modifier).transformable(androidx.compose.foundation.gestures.TransformableState, kotlin.Boolean, kotlin.Boolean)"></a><a name="-androidx.compose.ui.Modifier-.transformable-androidx.compose.foundation.gestures.TransformableState-kotlin.Boolean-kotlin.Boolean-"></a><a name="transformable"></a>
-      <h3 class="api-name" id="(androidx.compose.ui.Modifier).transformable(androidx.compose.foundation.gestures.TransformableState,kotlin.Boolean,kotlin.Boolean)">TransformableKt.transformable</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/gestures/TransformableKt.html">TransformableKt</a>.<a href="/reference/androidx/compose/foundation/gestures/TransformableKt.html#(androidx.compose.ui.Modifier).transformable(androidx.compose.foundation.gestures.TransformableState,kotlin.Boolean,kotlin.Boolean)">transformable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/gestures/TransformableState.html">TransformableState</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;lockRotationOnZoomPan,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;enabled<br>)</pre>
-      <p>Enable transformation gestures of the modified UI element.</p>
-      <p>Users should update their state themselves using default <code><a href="/reference/androidx/compose/foundation/gestures/TransformableState.html">TransformableState</a></code> and its <code>onTransformation</code> callback or by implementing <code><a href="/reference/androidx/compose/foundation/gestures/TransformableState.html">TransformableState</a></code> interface manually and reflect their own state in UI when using this component.</p>
-      <pre class="prettyprint">
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="(androidx.compose.ui.Modifier).transformable(androidx.compose.foundation.gestures.TransformableState, kotlin.Boolean, kotlin.Boolean)"></a><a name="-androidx.compose.ui.Modifier-.transformable-androidx.compose.foundation.gestures.TransformableState-kotlin.Boolean-kotlin.Boolean-"></a><a name="transformable"></a>
+        <h3 class="api-name" id="(androidx.compose.ui.Modifier).transformable(androidx.compose.foundation.gestures.TransformableState,kotlin.Boolean,kotlin.Boolean)">TransformableKt.transformable</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;<a href="/reference/androidx/compose/foundation/gestures/TransformableKt.html">TransformableKt</a>.<a href="/reference/androidx/compose/foundation/gestures/TransformableKt.html#(androidx.compose.ui.Modifier).transformable(androidx.compose.foundation.gestures.TransformableState,kotlin.Boolean,kotlin.Boolean)">transformable</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/ui/Modifier.html">Modifier</a>&nbsp;receiver,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/gestures/TransformableState.html">TransformableState</a>&nbsp;state,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;lockRotationOnZoomPan,<br>&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;enabled<br>)</pre>
+        <p>Enable transformation gestures of the modified UI element.</p>
+        <p>Users should update their state themselves using default <code><a href="/reference/androidx/compose/foundation/gestures/TransformableState.html">TransformableState</a></code> and its <code>onTransformation</code> callback or by implementing <code><a href="/reference/androidx/compose/foundation/gestures/TransformableState.html">TransformableState</a></code> interface manually and reflect their own state in UI when using this component.</p>
+        <pre class="prettyprint">
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.animateZoomBy
@@ -100,34 +105,39 @@ Box(
         )
     }
 }</pre>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/gestures/TransformableState.html">TransformableState</a>&nbsp;state</code></td>
-              <td>
-                <p><code><a href="/reference/androidx/compose/foundation/gestures/TransformableState.html">TransformableState</a></code> of the transformable. Defines how transformation events will be interpreted by the user land logic, contains useful information about on-going events and provides animation capabilities.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>boolean&nbsp;lockRotationOnZoomPan</code></td>
-              <td>
-                <p>If <code>true</code>, rotation is allowed only if touch slop is detected for rotation before pan or zoom motions. If not, pan and zoom gestures will be detected, but rotation gestures will not be. If <code>false</code>, once touch slop is reached, all three gestures are detected.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>boolean&nbsp;enabled</code></td>
-              <td>
-                <p>whether zooming by gestures is enabled or not</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/foundation/gestures/TransformableState.html">TransformableState</a>&nbsp;state</code></td>
+                <td>
+                  <p><code><a href="/reference/androidx/compose/foundation/gestures/TransformableState.html">TransformableState</a></code> of the transformable. Defines how transformation events will be interpreted by the user land logic, contains useful information about on-going events and provides animation capabilities.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>boolean&nbsp;lockRotationOnZoomPan</code></td>
+                <td>
+                  <p>If <code>true</code>, rotation is allowed only if touch slop is detected for rotation before pan or zoom motions. If not, pan and zoom gestures will be detected, but rotation gestures will not be. If <code>false</code>, once touch slop is reached, all three gestures are detected.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>boolean&nbsp;enabled</code></td>
+                <td>
+                  <p>whether zooming by gestures is enabled or not</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>

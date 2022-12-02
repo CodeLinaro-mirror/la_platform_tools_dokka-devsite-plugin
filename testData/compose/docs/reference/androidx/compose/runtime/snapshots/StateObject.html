@@ -16,6 +16,10 @@
       <div id="subclasses-direct-summary">
         <div class="devsite-table-wrapper">
           <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
             <tbody class="list">
               <tr>
                 <td width="40%"><code><a href="/reference/androidx/compose/runtime/snapshots/SnapshotStateList.html">SnapshotStateList</a></code></td>
@@ -39,6 +43,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public fields</h3></th>
@@ -57,6 +65,10 @@
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
@@ -80,69 +92,81 @@
         </tbody>
       </table>
     </div>
-    <h2>Public fields</h2>
-    <div class="api-item"><a name="getFirstStateRecord()"></a><a name="setFirstStateRecord()"></a><a name="getFirstStateRecord--"></a><a name="setFirstStateRecord--"></a>
-      <h3 class="api-name" id="firstStateRecord()">firstStateRecord</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#firstStateRecord()">firstStateRecord</a></pre>
-      <p>The first state record in a linked list of state records.</p>
-    </div>
-    <h2>Public methods</h2>
-    <div class="api-item"><a name="mergeRecords(androidx.compose.runtime.snapshots.StateRecord, androidx.compose.runtime.snapshots.StateRecord, androidx.compose.runtime.snapshots.StateRecord)"></a><a name="mergeRecords-androidx.compose.runtime.snapshots.StateRecord-androidx.compose.runtime.snapshots.StateRecord-androidx.compose.runtime.snapshots.StateRecord-"></a><a name="mergerecords"></a>
-      <h3 class="api-name" id="mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">mergeRecords</h3>
-      <pre class="api-signature no-pretty-print">default&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">mergeRecords</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;previous,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;current,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;applied<br>)</pre>
-      <p>Produce a merged state based on the conflicting state changes.</p>
-      <p>This method must not modify any of the records received and should treat the state records as immutable, even the <code><a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">applied</a></code> record.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;previous</code></td>
-              <td>
-                <p>the state record that was used to create the <code><a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">applied</a></code> record and is a state that also (though indirectly) produced the <code><a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">current</a></code> record.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;current</code></td>
-              <td>
-                <p>the state record of the parent snapshot or global state.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;applied</code></td>
-              <td>
-                <p>the state record that is being applied of the parent snapshot or global state.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Returns</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a></code></td>
-              <td>
-                <p>the modified state or <code>null</code> if the values cannot be merged. If the states cannot be merged the current apply will fail. Any of the parameters can be returned as a result. If it is not one of the parameter values then it <em>must</em> be a new value that is created by calling <code><a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html#create()">StateRecord.create</a></code> on one of the records passed and then can be modified to have the merged value before being returned. If a new record is returned <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">MutableSnapshot.apply</a></code> will update the internal snapshot id and call <code><a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#prependStateRecord(androidx.compose.runtime.snapshots.StateRecord)">prependStateRecord</a></code> if the record is used.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getFirstStateRecord()"></a><a name="setFirstStateRecord()"></a><a name="getFirstStateRecord--"></a><a name="setFirstStateRecord--"></a>
+        <h3 class="api-name" id="firstStateRecord()">firstStateRecord</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#firstStateRecord()">firstStateRecord</a></pre>
+        <p>The first state record in a linked list of state records.</p>
       </div>
     </div>
-    <div class="api-item"><a name="prependStateRecord-androidx.compose.runtime.snapshots.StateRecord-"></a><a name="prependstaterecord"></a>
-      <h3 class="api-name" id="prependStateRecord(androidx.compose.runtime.snapshots.StateRecord)">prependStateRecord</h3>
-      <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#prependStateRecord(androidx.compose.runtime.snapshots.StateRecord)">prependStateRecord</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;value)</pre>
-      <p>Add a new state record to the beginning of a list. After this call <code><a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#firstStateRecord()">firstStateRecord</a></code> should be <code><a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#prependStateRecord(androidx.compose.runtime.snapshots.StateRecord)">value</a></code>.</p>
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="mergeRecords(androidx.compose.runtime.snapshots.StateRecord, androidx.compose.runtime.snapshots.StateRecord, androidx.compose.runtime.snapshots.StateRecord)"></a><a name="mergeRecords-androidx.compose.runtime.snapshots.StateRecord-androidx.compose.runtime.snapshots.StateRecord-androidx.compose.runtime.snapshots.StateRecord-"></a><a name="mergerecords"></a>
+        <h3 class="api-name" id="mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">mergeRecords</h3>
+        <pre class="api-signature no-pretty-print">default&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">mergeRecords</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;previous,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;current,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;applied<br>)</pre>
+        <p>Produce a merged state based on the conflicting state changes.</p>
+        <p>This method must not modify any of the records received and should treat the state records as immutable, even the <code><a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">applied</a></code> record.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;previous</code></td>
+                <td>
+                  <p>the state record that was used to create the <code><a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">applied</a></code> record and is a state that also (though indirectly) produced the <code><a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">current</a></code> record.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;current</code></td>
+                <td>
+                  <p>the state record of the parent snapshot or global state.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;applied</code></td>
+                <td>
+                  <p>the state record that is being applied of the parent snapshot or global state.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Returns</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a></code></td>
+                <td>
+                  <p>the modified state or <code>null</code> if the values cannot be merged. If the states cannot be merged the current apply will fail. Any of the parameters can be returned as a result. If it is not one of the parameter values then it <em>must</em> be a new value that is created by calling <code><a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html#create()">StateRecord.create</a></code> on one of the records passed and then can be modified to have the merged value before being returned. If a new record is returned <code><a href="/reference/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">MutableSnapshot.apply</a></code> will update the internal snapshot id and call <code><a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#prependStateRecord(androidx.compose.runtime.snapshots.StateRecord)">prependStateRecord</a></code> if the record is used.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="api-item"><a name="prependStateRecord-androidx.compose.runtime.snapshots.StateRecord-"></a><a name="prependstaterecord"></a>
+        <h3 class="api-name" id="prependStateRecord(androidx.compose.runtime.snapshots.StateRecord)">prependStateRecord</h3>
+        <pre class="api-signature no-pretty-print">abstract&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#prependStateRecord(androidx.compose.runtime.snapshots.StateRecord)">prependStateRecord</a>(@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>&nbsp;value)</pre>
+        <p>Add a new state record to the beginning of a list. After this call <code><a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#firstStateRecord()">firstStateRecord</a></code> should be <code><a href="/reference/androidx/compose/runtime/snapshots/StateObject.html#prependStateRecord(androidx.compose.runtime.snapshots.StateRecord)">value</a></code>.</p>
+      </div>
     </div>
   </body>
 </html>

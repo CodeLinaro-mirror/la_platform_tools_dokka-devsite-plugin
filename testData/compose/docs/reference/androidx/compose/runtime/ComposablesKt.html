@@ -13,6 +13,10 @@
     <h2>Summary</h2>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public fields</h3></th>
@@ -45,6 +49,10 @@
     </div>
     <div class="devsite-table-wrapper">
       <table class="responsive">
+        <colgroup>
+          <col width="40%">
+          <col>
+        </colgroup>
         <thead>
           <tr>
             <th colspan="100%"><h3>Public methods</h3></th>
@@ -152,30 +160,33 @@
         </tbody>
       </table>
     </div>
-    <h2>Public fields</h2>
-    <div class="api-item"><a name="getCurrentComposer()"></a><a name="setCurrentComposer()"></a><a name="getCurrentComposer--"></a><a name="setCurrentComposer--"></a>
-      <h3 class="api-name" id="currentComposer()">currentComposer</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Composer.html">Composer</a>&nbsp;<a href="/reference/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></pre>
-      <p>TODO(lmr): provide documentation</p>
+    <div class="list">
+      <h2>Public fields</h2>
+      <div class="api-item"><a name="getCurrentComposer()"></a><a name="setCurrentComposer()"></a><a name="getCurrentComposer--"></a><a name="setCurrentComposer--"></a>
+        <h3 class="api-name" id="currentComposer()">currentComposer</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Composer.html">Composer</a>&nbsp;<a href="/reference/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></pre>
+        <p>TODO(lmr): provide documentation</p>
+      </div>
+      <div class="api-item"><a name="getCurrentCompositeKeyHash()"></a><a name="setCurrentCompositeKeyHash()"></a><a name="getCurrentCompositeKeyHash--"></a><a name="setCurrentCompositeKeyHash--"></a>
+        <h3 class="api-name" id="currentCompositeKeyHash()">currentCompositeKeyHash</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/runtime/package-summary.html#currentCompositeKeyHash()">currentCompositeKeyHash</a></pre>
+        <p>This a hash value used to coordinate map externally stored state to the composition. For example, this is used by saved instance state to preserve state across activity lifetime boundaries.</p>
+        <p>This value is not likely to be unique but is not guaranteed unique. There are known cases, such as for loops without a <code><a href="/reference/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code>, where the runtime does not have enough information to make the compound key hash unique.</p>
+      </div>
+      <div class="api-item"><a name="getCurrentRecomposeScope()"></a><a name="setCurrentRecomposeScope()"></a><a name="getCurrentRecomposeScope--"></a><a name="setCurrentRecomposeScope--"></a>
+        <h3 class="api-name" id="currentRecomposeScope()">currentRecomposeScope</h3>
+        <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a>&nbsp;<a href="/reference/androidx/compose/runtime/package-summary.html#currentRecomposeScope()">currentRecomposeScope</a></pre>
+        <p>Returns an object which can be used to invalidate the current scope at this point in composition. This object can be used to manually cause recompositions.</p>
+      </div>
     </div>
-    <div class="api-item"><a name="getCurrentCompositeKeyHash()"></a><a name="setCurrentCompositeKeyHash()"></a><a name="getCurrentCompositeKeyHash--"></a><a name="setCurrentCompositeKeyHash--"></a>
-      <h3 class="api-name" id="currentCompositeKeyHash()">currentCompositeKeyHash</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;int&nbsp;<a href="/reference/androidx/compose/runtime/package-summary.html#currentCompositeKeyHash()">currentCompositeKeyHash</a></pre>
-      <p>This a hash value used to coordinate map externally stored state to the composition. For example, this is used by saved instance state to preserve state across activity lifetime boundaries.</p>
-      <p>This value is not likely to be unique but is not guaranteed unique. There are known cases, such as for loops without a <code><a href="/reference/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code>, where the runtime does not have enough information to make the compound key hash unique.</p>
-    </div>
-    <div class="api-item"><a name="getCurrentRecomposeScope()"></a><a name="setCurrentRecomposeScope()"></a><a name="getCurrentRecomposeScope--"></a><a name="setCurrentRecomposeScope--"></a>
-      <h3 class="api-name" id="currentRecomposeScope()">currentRecomposeScope</h3>
-      <pre class="api-signature no-pretty-print">public&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/RecomposeScope.html">RecomposeScope</a>&nbsp;<a href="/reference/androidx/compose/runtime/package-summary.html#currentRecomposeScope()">currentRecomposeScope</a></pre>
-      <p>Returns an object which can be used to invalidate the current scope at this point in composition. This object can be used to manually cause recompositions.</p>
-    </div>
-    <h2>Public methods</h2>
-    <div class="api-item"><a name="ComposeNode(kotlin.Function0, kotlin.Function1, kotlin.Function0)"></a><a name="ComposeNode-kotlin.Function0-kotlin.Function1-kotlin.Function0-"></a><a name="composenode"></a>
-      <h3 class="api-name" id="ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">ComposeNode</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;E&nbsp;extends&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html">Applier</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">ComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</pre>
-      <p>Emits a node into the composition of type <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">T</a></code>. Nodes emitted inside of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">content</a></code> will become children of the emitted node.</p>
-      <p>This function will throw a runtime exception if <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
-      <pre class="prettyprint">
+    <div class="list">
+      <h2>Public methods</h2>
+      <div class="api-item"><a name="ComposeNode(kotlin.Function0, kotlin.Function1, kotlin.Function0)"></a><a name="ComposeNode-kotlin.Function0-kotlin.Function1-kotlin.Function0-"></a><a name="composenode"></a>
+        <h3 class="api-name" id="ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">ComposeNode</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;E&nbsp;extends&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html">Applier</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">ComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</pre>
+        <p>Emits a node into the composition of type <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">T</a></code>. Nodes emitted inside of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">content</a></code> will become children of the emitted node.</p>
+        <p>This function will throw a runtime exception if <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
+        <pre class="prettyprint">
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.ComposeNode
 import androidx.compose.runtime.mutableStateOf
@@ -249,65 +260,73 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
         }
     }
 }</pre>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory</code></td>
-              <td>
-                <p>A function which will create a new instance of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">T</a></code>. This function is NOT guaranteed to be called in place.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update</code></td>
-              <td>
-                <p>A function to perform updates on the node. This will run every time emit is executed. This function is called in place and will be inlined.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
-              <td>
-                <p>the composable content that will emit the &quot;children&quot; of this node.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory</code></td>
+                <td>
+                  <p>A function which will create a new instance of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">T</a></code>. This function is NOT guaranteed to be called in place.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update</code></td>
+                <td>
+                  <p>A function to perform updates on the node. This will run every time emit is executed. This function is called in place and will be inlined.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
+                <td>
+                  <p>the composable content that will emit the &quot;children&quot; of this node.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Updater.html">Updater</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Composition.html">Composition</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Updater.html">Updater</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Composition.html">Composition</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="api-item"><a name="ComposeNode(kotlin.Function0, kotlin.Function1, kotlin.Function1, kotlin.Function0)"></a><a name="ComposeNode-kotlin.Function0-kotlin.Function1-kotlin.Function1-kotlin.Function0-"></a><a name="composenode"></a>
-      <h3 class="api-name" id="ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">ComposeNode</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/compose/runtime/ExplicitGroupsComposable.html">ExplicitGroupsComposable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;E&nbsp;extends&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html">Applier</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">ComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/SkippableUpdater.html">SkippableUpdater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;skippableUpdate,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</pre>
-      <p>Emits a node into the composition of type <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">T</a></code>. Nodes emitted inside of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">content</a></code> will become children of the emitted node.</p>
-      <p>This function will throw a runtime exception if <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
-      <pre class="prettyprint">
+      <div class="api-item"><a name="ComposeNode(kotlin.Function0, kotlin.Function1, kotlin.Function1, kotlin.Function0)"></a><a name="ComposeNode-kotlin.Function0-kotlin.Function1-kotlin.Function1-kotlin.Function0-"></a><a name="composenode"></a>
+        <h3 class="api-name" id="ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">ComposeNode</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/compose/runtime/ExplicitGroupsComposable.html">ExplicitGroupsComposable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;E&nbsp;extends&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html">Applier</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">ComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/SkippableUpdater.html">SkippableUpdater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;skippableUpdate,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</pre>
+        <p>Emits a node into the composition of type <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">T</a></code>. Nodes emitted inside of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">content</a></code> will become children of the emitted node.</p>
+        <p>This function will throw a runtime exception if <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
+        <pre class="prettyprint">
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.ComposeNode
 import androidx.compose.runtime.mutableStateOf
@@ -381,75 +400,83 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
         }
     }
 }</pre>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory</code></td>
-              <td>
-                <p>A function which will create a new instance of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">T</a></code>. This function is NOT guaranteed to be called in place.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update</code></td>
-              <td>
-                <p>A function to perform updates on the node. This will run every time emit is executed. This function is called in place and will be inlined.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/SkippableUpdater.html">SkippableUpdater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;skippableUpdate</code></td>
-              <td>
-                <p>A function to perform updates on the node. Unlike <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">update</a></code>, this function is Composable and will therefore be skipped unless it has been invalidated by some other mechanism. This can be useful to perform expensive calculations for updating the node where the calculations are likely to have the same inputs over time, so the function's execution can be skipped.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
-              <td>
-                <p>the composable content that will emit the &quot;children&quot; of this node.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory</code></td>
+                <td>
+                  <p>A function which will create a new instance of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">T</a></code>. This function is NOT guaranteed to be called in place.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update</code></td>
+                <td>
+                  <p>A function to perform updates on the node. This will run every time emit is executed. This function is called in place and will be inlined.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/SkippableUpdater.html">SkippableUpdater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;skippableUpdate</code></td>
+                <td>
+                  <p>A function to perform updates on the node. Unlike <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">update</a></code>, this function is Composable and will therefore be skipped unless it has been invalidated by some other mechanism. This can be useful to perform expensive calculations for updating the node where the calculations are likely to have the same inputs over time, so the function's execution can be skipped.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
+                <td>
+                  <p>the composable content that will emit the &quot;children&quot; of this node.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Updater.html">Updater</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/SkippableUpdater.html">SkippableUpdater</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Composition.html">Composition</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Updater.html">Updater</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/SkippableUpdater.html">SkippableUpdater</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Composition.html">Composition</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="api-item"><a name="ComposeNode(kotlin.Function0, kotlin.Function1)"></a><a name="ComposeNode-kotlin.Function0-kotlin.Function1-"></a><a name="composenode"></a>
-      <h3 class="api-name" id="ComposeNode(kotlin.Function0,kotlin.Function1)">ComposeNode</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;E&nbsp;extends&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html">Applier</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#ComposeNode(kotlin.Function0,kotlin.Function1)">ComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update<br>)</pre>
-      <p>Emits a node into the composition of type <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">T</a></code>.</p>
-      <p>This function will throw a runtime exception if <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
-      <pre class="prettyprint">
+      <div class="api-item"><a name="ComposeNode(kotlin.Function0, kotlin.Function1)"></a><a name="ComposeNode-kotlin.Function0-kotlin.Function1-"></a><a name="composenode"></a>
+        <h3 class="api-name" id="ComposeNode(kotlin.Function0,kotlin.Function1)">ComposeNode</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;E&nbsp;extends&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html">Applier</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#ComposeNode(kotlin.Function0,kotlin.Function1)">ComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update<br>)</pre>
+        <p>Emits a node into the composition of type <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">T</a></code>.</p>
+        <p>This function will throw a runtime exception if <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
+        <pre class="prettyprint">
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.ComposeNode
 import androidx.compose.runtime.mutableStateOf
@@ -523,59 +550,67 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
         }
     }
 }</pre>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory</code></td>
-              <td>
-                <p>A function which will create a new instance of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">T</a></code>. This function is NOT guaranteed to be called in place.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update</code></td>
-              <td>
-                <p>A function to perform updates on the node. This will run every time emit is executed. This function is called in place and will be inlined.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory</code></td>
+                <td>
+                  <p>A function which will create a new instance of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ComposeNode(kotlin.Function0,kotlin.Function1)">T</a></code>. This function is NOT guaranteed to be called in place.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update</code></td>
+                <td>
+                  <p>A function to perform updates on the node. This will run every time emit is executed. This function is called in place and will be inlined.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Updater.html">Updater</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Composition.html">Composition</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Updater.html">Updater</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Composition.html">Composition</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="api-item"><a name="ReusableComposeNode(kotlin.Function0, kotlin.Function1, kotlin.Function0)"></a><a name="ReusableComposeNode-kotlin.Function0-kotlin.Function1-kotlin.Function0-"></a><a name="reusablecomposenode"></a>
-      <h3 class="api-name" id="ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">ReusableComposeNode</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;E&nbsp;extends&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html">Applier</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">ReusableComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</pre>
-      <p>Emits a recyclable node into the composition of type <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">T</a></code>. Nodes emitted inside of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">content</a></code> will become children of the emitted node.</p>
-      <p>This function will throw a runtime exception if <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
-      <pre class="prettyprint">
+      <div class="api-item"><a name="ReusableComposeNode(kotlin.Function0, kotlin.Function1, kotlin.Function0)"></a><a name="ReusableComposeNode-kotlin.Function0-kotlin.Function1-kotlin.Function0-"></a><a name="reusablecomposenode"></a>
+        <h3 class="api-name" id="ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">ReusableComposeNode</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;E&nbsp;extends&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html">Applier</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">ReusableComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</pre>
+        <p>Emits a recyclable node into the composition of type <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">T</a></code>. Nodes emitted inside of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">content</a></code> will become children of the emitted node.</p>
+        <p>This function will throw a runtime exception if <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
+        <pre class="prettyprint">
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.ComposeNode
 import androidx.compose.runtime.mutableStateOf
@@ -649,65 +684,73 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
         }
     }
 }</pre>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory</code></td>
-              <td>
-                <p>A function which will create a new instance of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">T</a></code>. This function is NOT guaranteed to be called in place.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update</code></td>
-              <td>
-                <p>A function to perform updates on the node. This will run every time emit is executed. This function is called in place and will be inlined.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
-              <td>
-                <p>the composable content that will emit the &quot;children&quot; of this node.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory</code></td>
+                <td>
+                  <p>A function which will create a new instance of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function0)">T</a></code>. This function is NOT guaranteed to be called in place.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update</code></td>
+                <td>
+                  <p>A function to perform updates on the node. This will run every time emit is executed. This function is called in place and will be inlined.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
+                <td>
+                  <p>the composable content that will emit the &quot;children&quot; of this node.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Updater.html">Updater</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Composition.html">Composition</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Updater.html">Updater</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Composition.html">Composition</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="api-item"><a name="ReusableComposeNode(kotlin.Function0, kotlin.Function1, kotlin.Function1, kotlin.Function0)"></a><a name="ReusableComposeNode-kotlin.Function0-kotlin.Function1-kotlin.Function1-kotlin.Function0-"></a><a name="reusablecomposenode"></a>
-      <h3 class="api-name" id="ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">ReusableComposeNode</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/compose/runtime/ExplicitGroupsComposable.html">ExplicitGroupsComposable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;E&nbsp;extends&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html">Applier</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">ReusableComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/SkippableUpdater.html">SkippableUpdater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;skippableUpdate,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</pre>
-      <p>Emits a recyclable node into the composition of type <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">T</a></code>. Nodes emitted inside of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">content</a></code> will become children of the emitted node.</p>
-      <p>This function will throw a runtime exception if <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
-      <pre class="prettyprint">
+      <div class="api-item"><a name="ReusableComposeNode(kotlin.Function0, kotlin.Function1, kotlin.Function1, kotlin.Function0)"></a><a name="ReusableComposeNode-kotlin.Function0-kotlin.Function1-kotlin.Function1-kotlin.Function0-"></a><a name="reusablecomposenode"></a>
+        <h3 class="api-name" id="ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">ReusableComposeNode</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>@<a href="/reference/androidx/compose/runtime/ExplicitGroupsComposable.html">ExplicitGroupsComposable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;E&nbsp;extends&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html">Applier</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">ReusableComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/SkippableUpdater.html">SkippableUpdater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;skippableUpdate,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content<br>)</pre>
+        <p>Emits a recyclable node into the composition of type <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">T</a></code>. Nodes emitted inside of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">content</a></code> will become children of the emitted node.</p>
+        <p>This function will throw a runtime exception if <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
+        <pre class="prettyprint">
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.ComposeNode
 import androidx.compose.runtime.mutableStateOf
@@ -781,75 +824,83 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
         }
     }
 }</pre>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory</code></td>
-              <td>
-                <p>A function which will create a new instance of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">T</a></code>. This function is NOT guaranteed to be called in place.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update</code></td>
-              <td>
-                <p>A function to perform updates on the node. This will run every time emit is executed. This function is called in place and will be inlined.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/SkippableUpdater.html">SkippableUpdater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;skippableUpdate</code></td>
-              <td>
-                <p>A function to perform updates on the node. Unlike <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">update</a></code>, this function is Composable and will therefore be skipped unless it has been invalidated by some other mechanism. This can be useful to perform expensive calculations for updating the node where the calculations are likely to have the same inputs over time, so the function's execution can be skipped.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
-              <td>
-                <p>the composable content that will emit the &quot;children&quot; of this node.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory</code></td>
+                <td>
+                  <p>A function which will create a new instance of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">T</a></code>. This function is NOT guaranteed to be called in place.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update</code></td>
+                <td>
+                  <p>A function to perform updates on the node. This will run every time emit is executed. This function is called in place and will be inlined.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/SkippableUpdater.html">SkippableUpdater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;skippableUpdate</code></td>
+                <td>
+                  <p>A function to perform updates on the node. Unlike <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1,kotlin.Function1,kotlin.Function0)">update</a></code>, this function is Composable and will therefore be skipped unless it has been invalidated by some other mechanism. This can be useful to perform expensive calculations for updating the node where the calculations are likely to have the same inputs over time, so the function's execution can be skipped.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
+                <td>
+                  <p>the composable content that will emit the &quot;children&quot; of this node.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Updater.html">Updater</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/SkippableUpdater.html">SkippableUpdater</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Composition.html">Composition</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Updater.html">Updater</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/SkippableUpdater.html">SkippableUpdater</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Composition.html">Composition</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="api-item"><a name="ReusableComposeNode(kotlin.Function0, kotlin.Function1)"></a><a name="ReusableComposeNode-kotlin.Function0-kotlin.Function1-"></a><a name="reusablecomposenode"></a>
-      <h3 class="api-name" id="ReusableComposeNode(kotlin.Function0,kotlin.Function1)">ReusableComposeNode</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;E&nbsp;extends&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html">Applier</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">ReusableComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update<br>)</pre>
-      <p>Emits a recyclable node into the composition of type <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">T</a></code>.</p>
-      <p>This function will throw a runtime exception if <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
-      <pre class="prettyprint">
+      <div class="api-item"><a name="ReusableComposeNode(kotlin.Function0, kotlin.Function1)"></a><a name="ReusableComposeNode-kotlin.Function0-kotlin.Function1-"></a><a name="reusablecomposenode"></a>
+        <h3 class="api-name" id="ReusableComposeNode(kotlin.Function0,kotlin.Function1)">ReusableComposeNode</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>,&nbsp;E&nbsp;extends&nbsp;<a href="/reference/androidx/compose/runtime/Applier.html">Applier</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> ?&gt;&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">ReusableComposeNode</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update<br>)</pre>
+        <p>Emits a recyclable node into the composition of type <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">T</a></code>.</p>
+        <p>This function will throw a runtime exception if <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">E</a></code> is not a subtype of the applier of the <code><a href="/reference/androidx/compose/runtime/package-summary.html#currentComposer()">currentComposer</a></code>.</p>
+        <pre class="prettyprint">
 import androidx.compose.runtime.Composition
 import androidx.compose.runtime.ComposeNode
 import androidx.compose.runtime.mutableStateOf
@@ -923,88 +974,100 @@ fun runApp(root: GroupNode, parent: CompositionContext) {
         }
     }
 }</pre>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory</code></td>
-              <td>
-                <p>A function which will create a new instance of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">T</a></code>. This function is NOT guaranteed to be called in place.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update</code></td>
-              <td>
-                <p>A function to perform updates on the node. This will run every time emit is executed. This function is called in place and will be inlined.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;factory</code></td>
+                <td>
+                  <p>A function which will create a new instance of <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">T</a></code>. This function is NOT guaranteed to be called in place.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-extension-function-type/index.html">ExtensionFunctionType</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function1&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/Updater.html">Updater</a>&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;,&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;update</code></td>
+                <td>
+                  <p>A function to perform updates on the node. This will run every time emit is executed. This function is called in place and will be inlined.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">See also</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Updater.html">Updater</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td width="40%"><code><a href="/reference/androidx/compose/runtime/Composition.html">Composition</a></code></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">See also</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Updater.html">Updater</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Applier.html">Applier</a></code></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td width="40%"><code><a href="/reference/androidx/compose/runtime/Composition.html">Composition</a></code></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="api-item"><a name="ReusableContent(kotlin.Any, kotlin.Function0)"></a><a name="ReusableContent-kotlin.Any-kotlin.Function0-"></a><a name="reusablecontent"></a>
+        <h3 class="api-name" id="ReusableContent(kotlin.Any,kotlin.Function0)">ReusableContent</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/ComposablesKt.html#ReusableContent(kotlin.Any,kotlin.Function0)">ReusableContent</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key,&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content)</pre>
+        <p>A utility function to mark a composition as supporting recycling. If the <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableContent(kotlin.Any,kotlin.Function0)">key</a></code> changes the composition is replaced by a new composition (as would happen for <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableContent(kotlin.Any,kotlin.Function0)">key</a></code>) but reusable nodes that are emitted by <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">ReusableComposeNode</a></code> are reused.</p>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key</code></td>
+                <td>
+                  <p>the value that is used to trigger recycling. If recomposed with a different value the composer creates a new composition but tries to reuse reusable nodes.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
+                <td>
+                  <p>the composable children that are recyclable.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="ReusableContent(kotlin.Any, kotlin.Function0)"></a><a name="ReusableContent-kotlin.Any-kotlin.Function0-"></a><a name="reusablecontent"></a>
-      <h3 class="api-name" id="ReusableContent(kotlin.Any,kotlin.Function0)">ReusableContent</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;void&nbsp;<a href="/reference/androidx/compose/runtime/ComposablesKt.html#ReusableContent(kotlin.Any,kotlin.Function0)">ReusableContent</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key,&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content)</pre>
-      <p>A utility function to mark a composition as supporting recycling. If the <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableContent(kotlin.Any,kotlin.Function0)">key</a></code> changes the composition is replaced by a new composition (as would happen for <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableContent(kotlin.Any,kotlin.Function0)">key</a></code>) but reusable nodes that are emitted by <code><a href="/reference/androidx/compose/runtime/package-summary.html#ReusableComposeNode(kotlin.Function0,kotlin.Function1)">ReusableComposeNode</a></code> are reused.</p>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key</code></td>
-              <td>
-                <p>the value that is used to trigger recycling. If recomposed with a different value the composer creates a new composition but tries to reuse reusable nodes.</p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;&nbsp;content</code></td>
-              <td>
-                <p>the composable children that are recyclable.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="api-item"><a name="key(kotlin.Array, kotlin.Function0)"></a><a name="key-kotlin.Array-kotlin.Function0-"></a><a name="key"></a>
-      <h3 class="api-name" id="key(kotlin.Array,kotlin.Function0)">key</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#key(kotlin.Array,kotlin.Function0)">key</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;keys,&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block)</pre>
-      <p><code><a href="/reference/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code> is a utility composable that is used to &quot;group&quot; or &quot;key&quot; a block of execution inside of a composition. This is sometimes needed for correctness inside of control-flow that may cause a given composable invocation to execute more than once during composition.</p>
-      <p>The value for a key <em>does not need to be globally unique</em>, and needs only be unique amongst the invocations of <code><a href="/reference/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code> <em>at that point</em> in composition.</p>
-      <p>For instance, consider the following example:</p>
-      <pre class="prettyprint">
+      <div class="api-item"><a name="key(kotlin.Array, kotlin.Function0)"></a><a name="key-kotlin.Array-kotlin.Function0-"></a><a name="key"></a>
+        <h3 class="api-name" id="key(kotlin.Array,kotlin.Function0)">key</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#key(kotlin.Array,kotlin.Function0)">key</a>(<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;keys,&nbsp;@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block)</pre>
+        <p><code><a href="/reference/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code> is a utility composable that is used to &quot;group&quot; or &quot;key&quot; a block of execution inside of a composition. This is sometimes needed for correctness inside of control-flow that may cause a given composable invocation to execute more than once during composition.</p>
+        <p>The value for a key <em>does not need to be globally unique</em>, and needs only be unique amongst the invocations of <code><a href="/reference/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code> <em>at that point</em> in composition.</p>
+        <p>For instance, consider the following example:</p>
+        <pre class="prettyprint">
 import androidx.compose.runtime.key
 
 for (user in users) {
@@ -1014,10 +1077,10 @@ for (user in users) {
 for (user in users.filter { isAdmin }) {
     key(user.id) { Friend(friend = user) }
 }</pre>
-      <p>Even though there are users with the same id composed in both the top and the bottom loop, because they are different calls to <code><a href="/reference/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code>, there is no need to create compound keys.</p>
-      <p>The key must be unique for each element in the collection, however, or children and local state might be reused in unintended ways.</p>
-      <p>For instance, consider the following example:</p>
-      <pre class="prettyprint">
+        <p>Even though there are users with the same id composed in both the top and the bottom loop, because they are different calls to <code><a href="/reference/androidx/compose/runtime/package-summary.html#key(kotlin.Array,kotlin.Function0)">key</a></code>, there is no need to create compound keys.</p>
+        <p>The key must be unique for each element in the collection, however, or children and local state might be reused in unintended ways.</p>
+        <p>For instance, consider the following example:</p>
+        <pre class="prettyprint">
 import androidx.compose.runtime.key
 
 for ((child, parent) in relationships) {
@@ -1026,8 +1089,8 @@ for ((child, parent) in relationships) {
         User(user = parent)
     }
 }</pre>
-      <p>This example assumes that <code>parent.id</code> is a unique key for each item in the collection, but this is only true if it is fair to assume that a parent will only ever have a single child, which may not be the case.  Instead, it may be more correct to do the following:</p>
-      <pre class="prettyprint">
+        <p>This example assumes that <code>parent.id</code> is a unique key for each item in the collection, but this is only true if it is fair to assume that a parent will only ever have a single child, which may not be the case.  Instead, it may be more correct to do the following:</p>
+        <pre class="prettyprint">
 import androidx.compose.runtime.key
 
 for ((child, parent) in relationships) {
@@ -1036,8 +1099,8 @@ for ((child, parent) in relationships) {
         User(user = parent)
     }
 }</pre>
-      <p>A compound key can be created by passing in multiple arguments:</p>
-      <pre class="prettyprint">
+        <p>A compound key can be created by passing in multiple arguments:</p>
+        <pre class="prettyprint">
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -1046,59 +1109,64 @@ for (element in elements) {
     val selected by key(element.id, parentId) { remember { mutableStateOf(false) } }
     ListItem(item = element, selected = selected)
 }</pre>
-      <div class="devsite-table-wrapper">
-        <table class="responsive">
-          <thead>
-            <tr>
-              <th colspan="100%">Parameters</th>
-            </tr>
-          </thead>
-          <tbody class="list">
-            <tr>
-              <td width="40%"><code><a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;keys</code></td>
-              <td>
-                <p>The set of values to be used to create a compound key. These will be compared to their previous values using <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/index.html">equals</a></code> and <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/index.html">hashCode</a></code></p>
-              </td>
-            </tr>
-            <tr>
-              <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block</code></td>
-              <td>
-                <p>The composable children for this group.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="devsite-table-wrapper">
+          <table class="responsive">
+            <colgroup>
+              <col width="40%">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th colspan="100%">Parameters</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr>
+                <td width="40%"><code><a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;keys</code></td>
+                <td>
+                  <p>The set of values to be used to create a compound key. These will be compared to their previous values using <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/index.html">equals</a></code> and <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/index.html">hashCode</a></code></p>
+                </td>
+              </tr>
+              <tr>
+                <td width="40%"><code>@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;block</code></td>
+                <td>
+                  <p>The composable children for this group.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <div class="api-item"><a name="remember(kotlin.Any, kotlin.Any, kotlin.Any, kotlin.Function0)"></a><a name="remember-kotlin.Any-kotlin.Any-kotlin.Any-kotlin.Function0-"></a><a name="remember"></a>
-      <h3 class="api-name" id="remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">remember</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key1,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key2,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key3,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;calculation<br>)</pre>
-      <p>Remember the value returned by <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code> if <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">key1</a></code>, <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">key2</a></code> and <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">key3</a></code> are equal to the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code>.</p>
-    </div>
-    <div class="api-item"><a name="remember(kotlin.Any, kotlin.Any, kotlin.Function0)"></a><a name="remember-kotlin.Any-kotlin.Any-kotlin.Function0-"></a><a name="remember"></a>
-      <h3 class="api-name" id="remember(kotlin.Any,kotlin.Any,kotlin.Function0)">remember</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key1,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key2,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;calculation<br>)</pre>
-      <p>Remember the value returned by <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code> if <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">key1</a></code> and <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">key2</a></code> are equal to the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code>.</p>
-    </div>
-    <div class="api-item"><a name="remember(kotlin.Any, kotlin.Function0)"></a><a name="remember-kotlin.Any-kotlin.Function0-"></a><a name="remember"></a>
-      <h3 class="api-name" id="remember(kotlin.Any,kotlin.Function0)">remember</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#remember(kotlin.Any,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key1,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;calculation<br>)</pre>
-      <p>Remember the value returned by <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Function0)">calculation</a></code> if <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Function0)">key1</a></code> is equal to the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Function0)">calculation</a></code>.</p>
-    </div>
-    <div class="api-item"><a name="remember(kotlin.Array, kotlin.Function0)"></a><a name="remember-kotlin.Array-kotlin.Function0-"></a><a name="remember"></a>
-      <h3 class="api-name" id="remember(kotlin.Array,kotlin.Function0)">remember</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#remember(kotlin.Array,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;keys,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;calculation<br>)</pre>
-      <p>Remember the value returned by <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Array,kotlin.Function0)">calculation</a></code> if all values of <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Array,kotlin.Function0)">keys</a></code> are equal to the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Array,kotlin.Function0)">calculation</a></code>.</p>
-    </div>
-    <div class="api-item"><a name="remember-kotlin.Function0-"></a><a name="remember"></a>
-      <h3 class="api-name" id="remember(kotlin.Function0)">remember</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#remember(kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;calculation<br>)</pre>
-      <p>Remember the value produced by <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">calculation</a></code>. <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">calculation</a></code> will only be evaluated during the composition. Recomposition will always return the value produced by composition.</p>
-    </div>
-    <div class="api-item"><a name="rememberCompositionContext--"></a><a name="remembercompositioncontext"></a>
-      <h3 class="api-name" id="rememberCompositionContext()">rememberCompositionContext</h3>
-      <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a>&nbsp;<a href="/reference/androidx/compose/runtime/ComposablesKt.html#rememberCompositionContext()">rememberCompositionContext</a>()</pre>
-      <p>An Effect to construct a <code><a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></code> at the current point of composition. This can be used to run a separate composition in the context of the current one, preserving <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code>s and propagating invalidations. When this call leaves the composition, the context is invalidated.</p>
+      <div class="api-item"><a name="remember(kotlin.Any, kotlin.Any, kotlin.Any, kotlin.Function0)"></a><a name="remember-kotlin.Any-kotlin.Any-kotlin.Any-kotlin.Function0-"></a><a name="remember"></a>
+        <h3 class="api-name" id="remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">remember</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key1,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key2,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key3,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;calculation<br>)</pre>
+        <p>Remember the value returned by <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code> if <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">key1</a></code>, <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">key2</a></code> and <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">key3</a></code> are equal to the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="remember(kotlin.Any, kotlin.Any, kotlin.Function0)"></a><a name="remember-kotlin.Any-kotlin.Any-kotlin.Function0-"></a><a name="remember"></a>
+        <h3 class="api-name" id="remember(kotlin.Any,kotlin.Any,kotlin.Function0)">remember</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key1,<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key2,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;calculation<br>)</pre>
+        <p>Remember the value returned by <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code> if <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">key1</a></code> and <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">key2</a></code> are equal to the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Any,kotlin.Function0)">calculation</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="remember(kotlin.Any, kotlin.Function0)"></a><a name="remember-kotlin.Any-kotlin.Function0-"></a><a name="remember"></a>
+        <h3 class="api-name" id="remember(kotlin.Any,kotlin.Function0)">remember</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#remember(kotlin.Any,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;key1,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;calculation<br>)</pre>
+        <p>Remember the value returned by <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Function0)">calculation</a></code> if <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Function0)">key1</a></code> is equal to the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Any,kotlin.Function0)">calculation</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="remember(kotlin.Array, kotlin.Function0)"></a><a name="remember-kotlin.Array-kotlin.Function0-"></a><a name="remember"></a>
+        <h3 class="api-name" id="remember(kotlin.Array,kotlin.Function0)">remember</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#remember(kotlin.Array,kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&nbsp;keys,<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;calculation<br>)</pre>
+        <p>Remember the value returned by <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Array,kotlin.Function0)">calculation</a></code> if all values of <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Array,kotlin.Function0)">keys</a></code> are equal to the previous composition, otherwise produce and remember a new value by calling <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Array,kotlin.Function0)">calculation</a></code>.</p>
+      </div>
+      <div class="api-item"><a name="remember-kotlin.Function0-"></a><a name="remember"></a>
+        <h3 class="api-name" id="remember(kotlin.Function0)">remember</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&nbsp;&lt;T&nbsp;extends&nbsp;<a href="https://developer.android.com/reference/java/lang/Object.html">Object</a>&gt; <a href="/reference/androidx/compose/runtime/ComposablesKt.html#remember(kotlin.Function0)">remember</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;@<a href="/reference/androidx/compose/runtime/DisallowComposableCalls.html">DisallowComposableCalls</a> @<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> Function0&lt;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> T&gt;&nbsp;calculation<br>)</pre>
+        <p>Remember the value produced by <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">calculation</a></code>. <code><a href="/reference/androidx/compose/runtime/package-summary.html#remember(kotlin.Function0)">calculation</a></code> will only be evaluated during the composition. Recomposition will always return the value produced by composition.</p>
+      </div>
+      <div class="api-item"><a name="rememberCompositionContext--"></a><a name="remembercompositioncontext"></a>
+        <h3 class="api-name" id="rememberCompositionContext()">rememberCompositionContext</h3>
+        <pre class="api-signature no-pretty-print">@<a href="/reference/androidx/compose/runtime/Composable.html">Composable</a><br>public&nbsp;static&nbsp;final&nbsp;@<a href="/reference/androidx/annotation/NonNull.html">NonNull</a> <a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a>&nbsp;<a href="/reference/androidx/compose/runtime/ComposablesKt.html#rememberCompositionContext()">rememberCompositionContext</a>()</pre>
+        <p>An Effect to construct a <code><a href="/reference/androidx/compose/runtime/CompositionContext.html">CompositionContext</a></code> at the current point of composition. This can be used to run a separate composition in the context of the current one, preserving <code><a href="/reference/androidx/compose/runtime/CompositionLocal.html">CompositionLocal</a></code>s and propagating invalidations. When this call leaves the composition, the context is invalidated.</p>
+      </div>
     </div>
   </body>
 </html>
