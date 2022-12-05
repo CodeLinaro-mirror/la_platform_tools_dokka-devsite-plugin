@@ -530,9 +530,8 @@ internal class DocTagConverter(
             when (it) {
                 is Sample -> {
                     val dri = it.name
-
-                    // TODO: fix this to allow KMP to work. Currently asserts single-platform. b/181224204
-                    val sourceSet = sourceSets.single()
+                    // TODO(KMP) we currently have no plan to provide KMP samples b/181224204
+                    val sourceSet = this.getExpectOrCommonSourceSet()
 
                     val facade = analysisMap[sourceSet]?.facade ?: throw RuntimeException(
                         "Cannot resolve facade: ${sourceSet.sourceSetID} for $this"
@@ -551,7 +550,7 @@ internal class DocTagConverter(
                     it.children.forEach { child ->
                         try {
                             recursivelyConsiderPsAndTextsForJavaSamples(
-                                child, components, this.sourceSets.single().samples
+                                child, components, this.getExpectOrCommonSourceSet().samples
                             )
                         } catch (e: Exception) {
                             throw RuntimeException(
@@ -691,7 +690,8 @@ internal class DocTagConverter(
     /**
      * @return the doc tags (aka human-written javadoc or kdoc) associated with this documentable
      */
-    private fun Documentable.tags() = documentation.values.singleOrNull()?.children.orEmpty()
+    private fun Documentable.tags() = documentation[getExpectOrCommonSourceSet()]?.children
+        ?: emptyList()
 
     /** Like singleOrNull, but requires that only one element be present if any. */
     private fun <T> List<T>.strictSingleOrNull() = if (isEmpty()) {

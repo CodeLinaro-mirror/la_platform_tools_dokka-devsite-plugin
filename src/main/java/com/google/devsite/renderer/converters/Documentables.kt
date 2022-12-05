@@ -458,5 +458,9 @@ internal fun List<DProperty>.names() = map { it.name }
 internal fun Documentable.getExpectOrCommonSourceSet() =
     sourceSets.singleOrNull()
         ?: expectPresentInSet
+        ?: sourceSets.singleOrNull { it.analysisPlatform == org.jetbrains.dokka.Platform.common }
         ?: sourceSets.singleOrNull { it.displayName == "common" }
-        ?: sourceSets.singleOrNull { "common" in it.displayName }!!
+        ?: sourceSets.singleOrNull { "common" in it.displayName }
+        ?: throw RuntimeException(
+            "Unable to determine the expect or common sourceSet for ${this::class.simpleName} $dri"
+        )

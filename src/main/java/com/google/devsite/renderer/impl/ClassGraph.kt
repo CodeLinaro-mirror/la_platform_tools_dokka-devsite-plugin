@@ -17,6 +17,7 @@
 package com.google.devsite.renderer.impl
 
 import com.google.devsite.hasBeenHidden
+import com.google.devsite.renderer.converters.getExpectOrCommonSourceSet
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
 import org.jetbrains.dokka.links.DRI
@@ -104,8 +105,8 @@ internal fun computeDocumentablesGraph(classGraph: ClassGraph): DocumentablesGra
 }
 
 /**
- * Updates the [classGraph] by traversing the supertype tree using [classlikes]. [initial] will not
- * change, so it can be added to every parent's subclasses. The recursion occurs on [current].
+ * Updates the [classGraph] by traversing the supertype tree using [driToClasslike]. [initial] will
+ * not change, so it can be added to every parent's subclasses. The recursion occurs on [current].
  *
  * We must recursively traverse the hierarchy graph bottom up because Dokka only provides direct
  * parents as a DRI. We're assuming this will be performant because the JVM doesn't support multiple
@@ -120,7 +121,7 @@ internal fun computeDocumentablesGraph(classGraph: ClassGraph): DocumentablesGra
  * A -> B -> C), we add [initial] to the set of indirect subclasses for each of [current]'s
  * supertypes. Lastly, we add the type hierarchy path of [current] to the parents of [initial],
  * ordered top-down.
- * @param classlikes reverse lookup map to get supertypes from DRIs
+ * @param driToClasslike reverse lookup map to get supertypes from DRIs
  * @param initial constant classlike, storing the starting [current]. This classlike should be one
  * that appears in the docs (has an entry in [classGraph]).
  * @param highestVisibleSubtype the highest-up classlike in the inheritance chain from [current] to
@@ -135,7 +136,8 @@ private fun recursivelyUpdateClasslikeSupertypesTree(
 ) {
     if (current !is WithSupertypes || current.supertypes.isEmpty()) return
 
-    val supertypes = current.supertypes.values.single()
+    // TODO(KMP): this currently only constructs the `common`/`expect` tree. b/253454963
+    val supertypes = current.supertypes[current.getExpectOrCommonSourceSet()]!!
     for ((type, kind) in supertypes) {
         classGraph[type.dri]?.let { (_, all, direct, indirect) ->
             all.add(initial.dri)
@@ -150,7 +152,7 @@ private fun recursivelyUpdateClasslikeSupertypesTree(
         if (supertype != null) {
             // Hidden classes should not be included in the class graph.
             // Only public and protected classes should be included in the class graph.
-            val visibility = supertype.visibility.values.single().name
+            val visibility = supertype.visibility[supertype.getExpectOrCommonSourceSet()]?.name
             val hidden = hasBeenHidden(type.dri) ||
                 (visibility != "public" && visibility != "protected")
 

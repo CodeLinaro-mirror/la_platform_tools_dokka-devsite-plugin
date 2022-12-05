@@ -301,15 +301,18 @@ internal abstract class ClasslikeDocumentableConverter(
             async { functionsToDetail(declaredFunctions.filter(::isPublic)) }
         val protectedFunctionsDetails =
             async { functionsToDetail(declaredFunctions.filter(::isProtected)) }
-        val publicCompanionFunctionsDetail =
-            async { emptyIfJava() ?: functionsToDetail(companionFunctions.filter(::isPublic)) }
-        val protectedCompanionFunctionsDetail =
-            async { emptyIfJava() ?: functionsToDetail(companionFunctions.filter(::isProtected)) }
+        val publicCompanionFunctionsDetail = async {
+            emptyListIfJava() ?: functionsToDetail(companionFunctions.filter(::isPublic))
+        }
+        val protectedCompanionFunctionsDetail = async {
+            emptyListIfJava() ?: functionsToDetail(companionFunctions.filter(::isProtected))
+        }
         val publicCompanionPropertiesDetail = async {
-            emptyIfJava() ?: propertiesToDetail(companionProperties.filter(::isPublicNonConst))
+            emptyListIfJava() ?: propertiesToDetail(companionProperties.filter(::isPublicNonConst))
         }
         val protectedCompanionPropertiesDetail = async {
-            emptyIfJava() ?: propertiesToDetail(companionProperties.filter(::isProtectedNonConst))
+            emptyListIfJava()
+                ?: propertiesToDetail(companionProperties.filter(::isProtectedNonConst))
         }
 
         val signature = async { computeSignature(classlike, docsHolder.classGraph()) }
@@ -461,6 +464,9 @@ internal abstract class ClasslikeDocumentableConverter(
     /** This is intended to be used as (some thing) = emptyIfJava ?: actuallyComputeItIfKotlin() */
     private fun <T : SummaryItem> emptyIfJava() =
         if (displayLanguage == Language.JAVA) emptySummaryList<T>() else null
+
+    private fun <T> emptyListIfJava() =
+        if (displayLanguage == Language.JAVA) emptyList<T>() else null
 
     private fun nestedTypesToSummary(nestedClasslikes: List<DClasslike>, classGraph: ClassGraph):
         ClasslikeSummaryList {
@@ -905,6 +911,8 @@ internal abstract class ClasslikeDocumentableConverter(
      * "/location/to/root/of/source/files/androidx/paging/compose/LazyPagingItems.kt".
      */
     private fun getSourceFilePath(sourceEntry: SourceEntry): String {
+        // It is possible for there to me multiple sourceRoots; e.g. with extension functions.
+        // TODO: verify that first() actually gets the most-correct source file for such situations
         val sourceRoot = sourceEntry.key.sourceRoots.first().toString()
         val filePath = sourceEntry.value.path.substringAfter(sourceRoot)
         return filePath.removePrefix("/")
@@ -1044,8 +1052,8 @@ internal abstract class ClasslikeDocumentableConverter(
             type = GenericTypeConstructor(dri = classlike.dri, projections = emptyList()),
             generics = emptyList(),
             receiver = null,
-            modifier = mapOf(classlike.visibility.keys.single() to KotlinModifier.Final),
-            sourceSets = setOf(classlike.visibility.keys.single()),
+            modifier = classlike.visibility.keys.associateWith { KotlinModifier.Final },
+            sourceSets = classlike.sourceSets,
             isExpectActual = false
         )
 
