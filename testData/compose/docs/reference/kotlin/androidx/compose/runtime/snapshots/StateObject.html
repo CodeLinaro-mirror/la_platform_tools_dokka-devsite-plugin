@@ -22,13 +22,13 @@
             </colgroup>
             <tbody class="list">
               <tr>
-                <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateList.html">SnapshotStateList</a></code></td>
+                <td><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateList.html">SnapshotStateList</a></code></td>
                 <td>
                   <p>An implementation of <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a></code> that can be observed and snapshot.</p>
                 </td>
               </tr>
               <tr>
-                <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateMap.html">SnapshotStateMap</a></code></td>
+                <td><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/SnapshotStateMap.html">SnapshotStateMap</a></code></td>
                 <td>
                   <p>An implementation of <code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a></code> that can be observed and snapshot.</p>
                 </td>
@@ -54,14 +54,14 @@
         </thead>
         <tbody class="list">
           <tr>
-            <td width="40%"><code>open <a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>?</code></td>
+            <td><code>open <a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>?</code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">mergeRecords</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;previous:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;current:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;applied:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a><br>)</code></div>
               <p>Produce a merged state based on the conflicting state changes.</p>
             </td>
           </tr>
           <tr>
-            <td width="40%"><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
+            <td><code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#prependStateRecord(androidx.compose.runtime.snapshots.StateRecord)">prependStateRecord</a>(value:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>)</code></div>
               <p>Add a new state record to the beginning of a list.</p>
@@ -83,7 +83,7 @@
         </thead>
         <tbody class="list">
           <tr>
-            <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a></code></td>
+            <td><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a></code></td>
             <td>
               <div><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#firstStateRecord()">firstStateRecord</a></code></div>
               <p>The first state record in a linked list of state records.</p>
@@ -112,19 +112,19 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td width="40%"><code>previous:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a></code></td>
+                <td><code>previous:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a></code></td>
                 <td>
                   <p>the state record that was used to create the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">applied</a></code> record and is a state that also (though indirectly) produced the <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#mergeRecords(androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord,androidx.compose.runtime.snapshots.StateRecord)">current</a></code> record.</p>
                 </td>
               </tr>
               <tr>
-                <td width="40%"><code>current:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a></code></td>
+                <td><code>current:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a></code></td>
                 <td>
                   <p>the state record of the parent snapshot or global state.</p>
                 </td>
               </tr>
               <tr>
-                <td width="40%"><code>applied:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a></code></td>
+                <td><code>applied:&nbsp;<a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a></code></td>
                 <td>
                   <p>the state record that is being applied of the parent snapshot or global state.</p>
                 </td>
@@ -145,7 +145,7 @@
             </thead>
             <tbody class="list">
               <tr>
-                <td width="40%"><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>?</code></td>
+                <td><code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html">StateRecord</a>?</code></td>
                 <td>
                   <p>the modified state or <code>null</code> if the values cannot be merged. If the states cannot be merged the current apply will fail. Any of the parameters can be returned as a result. If it is not one of the parameter values then it <em>must</em> be a new value that is created by calling <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateRecord.html#create()">StateRecord.create</a></code> on one of the records passed and then can be modified to have the merged value before being returned. If a new record is returned <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/MutableSnapshot.html#apply()">MutableSnapshot.apply</a></code> will update the internal snapshot id and call <code><a href="/reference/kotlin/androidx/compose/runtime/snapshots/StateObject.html#prependStateRecord(androidx.compose.runtime.snapshots.StateRecord)">prependStateRecord</a></code> if the record is used.</p>
                 </td>

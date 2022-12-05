@@ -17,30 +17,16 @@
 package com.google.devsite.components.table
 
 import com.google.devsite.components.ContextFreeComponent
-import kotlinx.html.COL
 import kotlinx.html.DIV
 import kotlinx.html.TABLE
-import kotlinx.html.attributesMapOf
-import kotlinx.html.col
-import kotlinx.html.colGroup
-import kotlinx.html.table
-import kotlinx.html.visit
 
 /** Represents a summary table row. */
 internal interface SummaryItem : RowComponent {
     val data: Params
 
-    fun layout(into: DIV, contents: TABLE.() -> Unit) = into.run {
-        table("responsive") {
-            colGroup {
-                COL(attributesMapOf("width", "40%"), consumer).visit {}
-                col() // Last col should be floating-width. (This method can't set "width".)
-            }
-            contents()
-        }
-    }
-
     interface Params {
         val description: ContextFreeComponent
     }
+
+    fun layout(into: DIV, contents: TABLE.() -> Unit)
 }

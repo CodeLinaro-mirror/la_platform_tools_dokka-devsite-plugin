@@ -36,7 +36,7 @@ class DefaultTableRowSummaryItemTest {
         assertThat(output).isEqualTo(
             """
 <tr>
-  <td width="40%"><code></code></td>
+  <td><code></code></td>
   <td></td>
 </tr>
             """.trim()
@@ -61,7 +61,7 @@ class DefaultTableRowSummaryItemTest {
         assertThat(b).isEqualTo(
             """
 <tr>
-  <td width="40%"><code>Title</code></td>
+  <td><code>Title</code></td>
   <td>Description</td>
 </tr>
             """.trim()

@@ -17,6 +17,14 @@
 package com.google.devsite.components.table
 
 import com.google.devsite.components.ContextFreeComponent
+import kotlinx.html.COL
+import kotlinx.html.DIV
+import kotlinx.html.TABLE
+import kotlinx.html.attributesMapOf
+import kotlinx.html.col
+import kotlinx.html.colGroup
+import kotlinx.html.table
+import kotlinx.html.visit
 
 /** Builds a two-pane layout item. */
 internal interface TableRowSummaryItem<T : ContextFreeComponent?, V : ContextFreeComponent> :
@@ -40,6 +48,16 @@ internal interface TableRowSummaryItem<T : ContextFreeComponent?, V : ContextFre
             var result = title?.hashCode() ?: 0
             result = 31 * result + description.hashCode()
             return result
+        }
+    }
+
+    override fun layout(into: DIV, contents: TABLE.() -> Unit) = into.run {
+        table("responsive") {
+            colGroup {
+                COL(attributesMapOf("width", "40%"), consumer).visit {}
+                col() // Last col should be floating-width. (This method can't set "width".)
+            }
+            contents()
         }
     }
 }

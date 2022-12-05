@@ -32,7 +32,6 @@ internal data class DefaultTableRowSummaryItem<
     override fun render(into: TR) = into.run {
         data.title?.let { title ->
             td {
-                attributes["width"] = "40%"
                 code {
                     title.render(this)
                 }
