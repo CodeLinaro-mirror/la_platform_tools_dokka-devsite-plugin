@@ -35,7 +35,7 @@ internal data class DefaultDevsitePage<T : ContextFreeComponent>(
         head {
             title { +data.title }
             unsafe { +"{% setvar book_path %}${data.bookPath}{% endsetvar %}\n" }
-            unsafe { +"{% include \"_shared/_reference-head-tags.html\" %}\n" }
+            data.includedHeadTagPath?.let { unsafe { +"{% include \"${it}\" %}\n" } }
         }
 
         body {

@@ -57,6 +57,9 @@ internal interface FilePathProvider {
     /** The _book.yaml file, responsible for the sidebar nav. */
     val book: String
 
+    /** The path to a file to be included in the head section of each generated HTML page */
+    val includedHeadTagsPath: String?
+
     val classGraph: ClassGraph
 
     val documentablesGraph: DocumentablesGraph

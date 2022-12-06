@@ -76,13 +76,13 @@ internal class MultiLanguageRenderer(
             launch {
                 renderLanguage(
                     Language.JAVA, devsiteConfiguration.javaDocsPath,
-                    jHolder, locationProvider
+                    jHolder, locationProvider, devsiteConfiguration.includedHeadTagsPathJava
                 )
             }
             launch {
                 renderLanguage(
                     Language.KOTLIN, devsiteConfiguration.kotlinDocsPath,
-                    kHolder, locationProvider
+                    kHolder, locationProvider, devsiteConfiguration.includedHeadTagsPathKotlin
                 )
             }
         }
@@ -93,6 +93,7 @@ internal class MultiLanguageRenderer(
         languageDocsPath: String?,
         holder: DocumentablesHolder,
         locationProvider: ExternalDokkaLocationProvider,
+        includedHeadTagsPath: String?,
     ) {
         if (languageDocsPath == null) return
 
@@ -104,6 +105,7 @@ internal class MultiLanguageRenderer(
             devsiteConfiguration.docRootPath,
             languageDocsPath,
             devsiteConfiguration.projectPath,
+            includedHeadTagsPath,
             locationProvider,
             classGraph,
             documentablesGraph

@@ -168,7 +168,8 @@ class BasicTest : IntegrationTestBase() {
             docRootPath = "reference/tools/gradle-api/7.0",
             projectPath = "",
             kotlinDocsDirectory = "",
-            javaDocsDirectory = null
+            javaDocsDirectory = null,
+            includedHeadTagsPathKotlin = null
         )
     }
 

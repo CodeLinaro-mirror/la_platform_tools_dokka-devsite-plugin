@@ -129,7 +129,8 @@ internal abstract class PackageDocumentableConverter(
                         extensionFunctions = extensionFunctions.await()
                     )
                 ),
-                metadataComponent = null
+                metadataComponent = null,
+                includedHeadTagPath = pathProvider.includedHeadTagsPath,
             )
         )
     }

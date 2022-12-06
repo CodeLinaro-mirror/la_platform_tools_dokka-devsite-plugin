@@ -70,7 +70,9 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         docRootPath: String,
         projectPath: String,
         javaDocsPath: String?,
-        kotlinDocsPath: String?
+        kotlinDocsPath: String?,
+        includedHeadTagsPathJava: String? = "_shared/_reference-head-tags.html",
+        includedHeadTagsPathKotlin: String? = "_shared/_reference-head-tags.html",
     ): DokkaConfigurationImpl {
         sources.forEach { check(it.isDirectory) { "$it does not exist or is not a directory" } }
         val externalLinks = mapOf(
@@ -102,6 +104,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                         libraryMetadataFilename = null,
                         javaDocsPath = javaDocsPath,
                         kotlinDocsPath = kotlinDocsPath,
+                        includedHeadTagsPathJava = includedHeadTagsPathJava,
+                        includedHeadTagsPathKotlin = includedHeadTagsPathKotlin,
                     ).toJsonString()
                 )
             )
@@ -117,7 +121,9 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         docRootPath: String,
         projectPath: String,
         javaDocsDirectory: String?,
-        kotlinDocsDirectory: String?
+        kotlinDocsDirectory: String?,
+        includedHeadTagsPathJava: String?,
+        includedHeadTagsPathKotlin: String?,
     ): DokkaConfigurationImpl {
         val sources = File(sourceDir).absoluteFile
         return makeExternalConfiguration(
@@ -127,7 +133,9 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             docRootPath,
             projectPath,
             javaDocsDirectory,
-            kotlinDocsDirectory
+            kotlinDocsDirectory,
+            includedHeadTagsPathJava,
+            includedHeadTagsPathKotlin,
         )
     }
 
@@ -262,6 +270,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         projectPath: String? = null,
         javaDocsDirectory: String? = "",
         kotlinDocsDirectory: String? = "kotlin",
+        includedHeadTagsPathJava: String? = "_shared/_reference-head-tags.html",
+        includedHeadTagsPathKotlin: String? = "_shared/_reference-head-tags.html",
         suffix: String = "source"
     ) {
         val samplesBaseDir = "testData/$path"
@@ -280,7 +290,9 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             docRootPath,
             inferredProjectPath,
             javaDocsDirectory,
-            kotlinDocsDirectory
+            kotlinDocsDirectory,
+            includedHeadTagsPathJava,
+            includedHeadTagsPathKotlin,
         )
 
         val writerPlugin = TestOutputWriterPlugin()

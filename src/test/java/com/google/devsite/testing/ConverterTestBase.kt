@@ -151,7 +151,8 @@ internal abstract class ConverterTestBase(
                     projectPath = "androidx",
                     locationProvider = externalLocationProvider,
                     classGraph = classGraph,
-                    documentablesGraph = documentablesGraph
+                    documentablesGraph = documentablesGraph,
+                    includedHeadTagsPath = "_shared/_reference-head-tags.html",
                 )
             Language.KOTLIN ->
                 DevsiteFilePathProvider(
@@ -161,7 +162,8 @@ internal abstract class ConverterTestBase(
                     projectPath = "androidx",
                     locationProvider = externalLocationProvider,
                     classGraph = classGraph,
-                    documentablesGraph = documentablesGraph
+                    documentablesGraph = documentablesGraph,
+                    includedHeadTagsPath = "_shared/_reference-head-tags.html",
                 )
         }
     }

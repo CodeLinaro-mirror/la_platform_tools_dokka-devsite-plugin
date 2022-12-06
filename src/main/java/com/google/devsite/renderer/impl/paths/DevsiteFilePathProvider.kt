@@ -30,6 +30,7 @@ internal open class DevsiteFilePathProvider(
     docRootPath: String,
     languagePath: String,
     projectPath: String,
+    override val includedHeadTagsPath: String?,
     override val locationProvider: ExternalDokkaLocationProvider? = null,
     override val classGraph: ClassGraph,
     override val documentablesGraph: DocumentablesGraph,

@@ -460,7 +460,8 @@ internal abstract class ClasslikeDocumentableConverter(
                         inheritedProperties = inheritedProperties ?: emptyInheritedSymbolsList(),
                     )
                 ),
-                metadataComponent = metadataComponent.await()
+                metadataComponent = metadataComponent.await(),
+                includedHeadTagPath = pathProvider.includedHeadTagsPath,
             )
         )
     }

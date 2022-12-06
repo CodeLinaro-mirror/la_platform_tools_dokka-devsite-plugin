@@ -76,7 +76,8 @@ internal class RootDocumentableConverter(
                         componentClasses
                     )
                 ),
-                metadataComponent = null
+                metadataComponent = null,
+                includedHeadTagPath = pathProvider.includedHeadTagsPath,
             )
 
         )
@@ -106,7 +107,8 @@ internal class RootDocumentableConverter(
                         componentPackages
                     )
                 ),
-                metadataComponent = null
+                metadataComponent = null,
+                includedHeadTagPath = pathProvider.includedHeadTagsPath,
             )
         )
     }

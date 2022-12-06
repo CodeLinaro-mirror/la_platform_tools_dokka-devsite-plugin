@@ -36,7 +36,8 @@ class DefaultDevsitePageTest {
                 bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
                 content = NoopContextFreeComponent,
-                metadataComponent = null
+                metadataComponent = null,
+                includedHeadTagPath = "_shared/_reference-head-tags.html"
             )
         )
 
@@ -71,7 +72,8 @@ class DefaultDevsitePageTest {
                 bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
                 content = NoopContextFreeComponent,
-                metadataComponent = null
+                metadataComponent = null,
+                includedHeadTagPath = "_shared/_reference-head-tags.html"
             )
         )
 
@@ -117,7 +119,8 @@ class DefaultDevsitePageTest {
                 bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
                 content = NoopContextFreeComponent,
-                metadataComponent = metadataComponent
+                metadataComponent = metadataComponent,
+                includedHeadTagPath = "_shared/_reference-head-tags.html"
             )
         )
 
@@ -167,7 +170,8 @@ class DefaultDevsitePageTest {
                 bookPath = "/reference/androidx/_book.yaml",
                 title = "Page Title",
                 content = NoopContextFreeComponent,
-                metadataComponent = metadataComponent
+                metadataComponent = metadataComponent,
+                includedHeadTagPath = "_shared/_reference-head-tags.html"
             )
         )
 
@@ -188,6 +192,77 @@ class DefaultDevsitePageTest {
     <div id="metadata-info-block">
       <div id="maven-coordinates">Artifact: android.x:artifact</div>
     </div>
+    <h1>Page Title</h1>
+    <div>noop</div>
+  </body>
+</html>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Page with no included head tag path renders correctly`() {
+        val component = DefaultDevsitePage(
+            Params(
+                displayLanguage = Language.JAVA,
+                path = "page.html",
+                bookPath = "/reference/androidx/_book.yaml",
+                title = "Page Title",
+                content = NoopContextFreeComponent,
+                metadataComponent = null,
+                includedHeadTagPath = null
+            )
+        )
+
+        val output = createHTML().html {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<html devsite="true">
+  <head>
+    <title>Page Title</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+  </head>
+  <body>
+    <h1>Page Title</h1>
+    <div>noop</div>
+  </body>
+</html>
+            """.trim()
+        )
+    }
+
+    @Test
+    fun `Page with different head tag path renders correctly`() {
+        val component = DefaultDevsitePage(
+            Params(
+                displayLanguage = Language.JAVA,
+                path = "page.html",
+                bookPath = "/reference/androidx/_book.yaml",
+                title = "Page Title",
+                content = NoopContextFreeComponent,
+                metadataComponent = null,
+                includedHeadTagPath = "en/docs/reference/android/_reference-head-tags.html"
+            )
+        )
+
+        val output = createHTML().html {
+            component.render(this)
+        }.trim()
+
+        // language=html
+        assertThat(output).isEqualTo(
+            """
+<html devsite="true">
+  <head>
+    <title>Page Title</title>
+{% setvar book_path %}/reference/androidx/_book.yaml{% endsetvar %}
+{% include "en/docs/reference/android/_reference-head-tags.html" %}
+  </head>
+  <body>
     <h1>Page Title</h1>
     <div>noop</div>
   </body>

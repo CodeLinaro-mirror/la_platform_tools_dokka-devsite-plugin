@@ -32,6 +32,7 @@ internal interface DevsitePage<T : ContextFreeComponent> : HtmlComponent<HTML> {
         val bookPath: String,
         val title: String,
         val content: T,
-        val metadataComponent: MetadataComponent?
+        val metadataComponent: MetadataComponent?,
+        val includedHeadTagPath: String?,
     )
 }
