@@ -20,6 +20,7 @@ import com.google.devsite.FunctionSummaryList
 import com.google.devsite.LinkDescriptionSummaryList
 import com.google.devsite.PropertySummaryList
 import com.google.devsite.components.ContextFreeComponent
+import com.google.devsite.components.impl.DefaultDevsitePlatformSelector
 import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
@@ -30,6 +31,7 @@ internal interface PackageSummary : ContextFreeComponent {
     val data: Params
 
     data class Params(
+        val header: DefaultDevsitePlatformSelector?,
         val displayLanguage: Language,
         val description: List<ContextFreeComponent>,
         val interfaces: LinkDescriptionSummaryList,

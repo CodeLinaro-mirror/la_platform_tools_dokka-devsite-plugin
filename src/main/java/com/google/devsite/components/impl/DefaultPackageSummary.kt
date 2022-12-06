@@ -31,8 +31,8 @@ internal data class DefaultPackageSummary(
     override val data: PackageSummary.Params
 ) : PackageSummary {
     override fun render(into: FlowContent) = into.run {
+        data.header?.render(into)
         data.description.render(into, separator = "")
-
         // The reason for checking display language here is to match the ordering of the page
         // sections of existing docs.
         when (data.displayLanguage) {

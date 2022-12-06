@@ -28,7 +28,7 @@ import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.DocTagConverter
 import com.google.devsite.renderer.converters.FunctionDocumentableConverter
 import com.google.devsite.renderer.converters.ModifierHints
-import com.google.devsite.renderer.converters.PackageDocumentableConverter
+import com.google.devsite.renderer.converters.NonKmpPackageConverter
 import com.google.devsite.renderer.converters.isFromBaseClass
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesHolder
@@ -307,7 +307,7 @@ internal abstract class ConverterTestBase(
     protected fun DModule.packagePage(): DevsitePage<PackageSummary> {
         val (holder, pathProvider) = holderAndProvider(this)
         val converter =
-            PackageDocumentableConverter(
+            NonKmpPackageConverter(
                 displayLanguage,
                 packages.single(),
                 pathProvider,

@@ -52,6 +52,7 @@ internal interface TableRowSummaryItem<T : ContextFreeComponent?, V : ContextFre
     }
 
     override fun layout(into: DIV, contents: TABLE.() -> Unit) = into.run {
+        // This format works fine for both 1-column and 2-column
         table("responsive") {
             colGroup {
                 COL(attributesMapOf("width", "40%"), consumer).visit {}

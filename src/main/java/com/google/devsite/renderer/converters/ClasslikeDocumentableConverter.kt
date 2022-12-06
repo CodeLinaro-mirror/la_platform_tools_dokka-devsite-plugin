@@ -851,10 +851,11 @@ internal abstract class ClasslikeDocumentableConverter(
 
         return DefaultRelatedSymbols(
             RelatedSymbols.Params(
+                // TODO(KMP; b/254490320)
                 directSubclasses = linksForClasslikes(directSubclasses),
-                directSummary = javadocConverter.docsToSummary(directSubclasses),
+                directSummary = javadocConverter.docsToSummaryDefault(directSubclasses),
                 indirectSubclasses = linksForClasslikes(indirectSubclasses),
-                indirectSummary = javadocConverter.docsToSummary(indirectSubclasses)
+                indirectSummary = javadocConverter.docsToSummaryDefault(indirectSubclasses)
             )
         )
     }

@@ -40,16 +40,30 @@ internal interface KmpTableRowSummaryItem<T : ContextFreeComponent?, V : Context
         val platforms: PlatformComponent
     ) : TableRowSummaryItem.Params<T, V>(title, description)
 
+    private val nColumns get() = listOfNotNull(data.title, data.description, data.platforms).size
+
     override fun layout(into: DIV, contents: TABLE.() -> Unit) = into.run {
-        devsiteFilter {
-            into.table("fixed") {
-                colGroup {
-                    COL(attributesMapOf("width", "35%"), consumer).visit {}
-                    COL(attributesMapOf("width", "58%"), consumer).visit {}
-                    col() // Last col should be floating-width. (This method can't set "width".)
+        when (nColumns) {
+            3 -> devsiteFilter {
+                into.table("fixed") {
+                    colGroup {
+                        COL(attributesMapOf("width", "35%"), consumer).visit {}
+                        COL(attributesMapOf("width", "58%"), consumer).visit {}
+                        col() // Last col should be floating-width. (This method can't set "width".)
+                    }
+                    contents()
                 }
-                contents()
             }
+            2 -> devsiteFilter { // This happens for KMP constructors
+                into.table("fixed") {
+                    colGroup {
+                        COL(attributesMapOf("width", "93%"), consumer).visit {}
+                        col() // Last col should be floating-width. (This method can't set "width".)
+                    }
+                    contents()
+                }
+            }
+            else -> throw RuntimeException("tried to create KmpSummaryList with $nColumns columns!")
         }
     }
 }

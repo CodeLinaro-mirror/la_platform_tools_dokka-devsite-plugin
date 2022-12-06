@@ -23,8 +23,10 @@ import com.google.devsite.components.DescriptionComponent
 import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultAnnotatedLink
 import com.google.devsite.components.impl.DefaultDescriptionComponent
+import com.google.devsite.components.impl.DefaultKmpTableRowSummaryItem
 import com.google.devsite.components.impl.DefaultLink
 import com.google.devsite.components.impl.DefaultParameterComponent
+import com.google.devsite.components.impl.DefaultPlatformComponent
 import com.google.devsite.components.impl.DefaultPropertySignature
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.impl.DefaultTableRowSummaryItem
@@ -35,6 +37,7 @@ import com.google.devsite.components.symbols.AnnotatedLink
 import com.google.devsite.components.symbols.ParameterComponent
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.TypeProjectionComponent
+import com.google.devsite.components.table.KmpTableRowSummaryItem
 import com.google.devsite.components.table.SummaryList
 import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.components.table.TableTitle
@@ -754,9 +757,9 @@ internal class DocTagConverter(
                 val rest = name.substringBeforeLast(".")
                 if (last.firstOrNull()?.isLowerCase() == true && rest.any { it.isUpperCase() }) {
                     println("Did you mean $rest#$last?")
-                    val (packageName, typeName) = typeToPackageNameAndType(rest)
-                    val url = pathProvider.forType(packageName, typeName)
-                    DefaultLink(Link.Params(typeName, "$url#$last"))
+                    val (packageN, typeN) = typeToPackageNameAndType(rest)
+                    val url = pathProvider.forType(packageN, typeN)
+                    DefaultLink(Link.Params(typeN, "$url#$last"))
                 }
                 DefaultLink(Link.Params(name, url = ""))
             } else if (packageName.isEmpty()) {
@@ -817,13 +820,16 @@ internal class DocTagConverter(
         )
     }
 
+    internal fun docsToSummaryDefault(documentables: List<Documentable>) =
+        docsToSummary(documentables, false)
+
     /**
      * Converts a generic List<Documentable> to a SummaryList.
      * Does nothing clever; only converts Documentables to links (by default with annotations)
      */
     internal fun docsToSummary(
         documentables: List<Documentable>,
-        showAnnotations: Boolean = false
+        showAnnotations: Boolean
     ) = DefaultSummaryList(
         SummaryList.Params(
             items = documentables
@@ -835,7 +841,6 @@ internal class DocTagConverter(
      * Converts generic Documentables to TableRowSummaryItems, as simple maybe-annotated links
      * This is used for mini-signatures, e.g. nested types list, subclasses list, package summary
      */
-    // TODO(KMP, b/256177393)
     internal fun summaryForDocumentable(
         documentable: Documentable,
         showAnnotations: Boolean = false
@@ -858,6 +863,36 @@ internal class DocTagConverter(
                     pathProvider.linkForReference(documentable.dri)
                 },
                 description = summaryDescription(documentable, annotations)
+            )
+        )
+    }
+
+    /**
+     * Converts a generic List<Documentable> to a SummaryList.
+     * Does nothing clever; only converts Documentables to links (by default with annotations)
+     */
+    internal fun docsToSummaryKmp(
+        documentables: List<Documentable>
+    ) = DefaultSummaryList(
+        SummaryList.Params(
+            items = documentables
+                .map { summaryForDocumentableKmp(it) }
+        )
+    )
+
+    /**
+     * Converts generic Documentables to TableRowSummaryItems, as simple maybe-annotated links
+     * This is used for mini-signatures, e.g. nested types list, subclasses list, package summary
+     */
+    internal fun summaryForDocumentableKmp(
+        documentable: Documentable
+    ): TableRowSummaryItem<Link, DescriptionComponent> {
+        val annotations = documentable.annotations()
+        return DefaultKmpTableRowSummaryItem(
+            KmpTableRowSummaryItem.Params(
+                title = pathProvider.linkForReference(documentable.dri),
+                description = summaryDescription(documentable, annotations),
+                platforms = DefaultPlatformComponent(documentable.sourceSets)
             )
         )
     }

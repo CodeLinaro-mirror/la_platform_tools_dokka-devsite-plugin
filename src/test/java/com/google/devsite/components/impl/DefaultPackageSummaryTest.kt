@@ -484,6 +484,7 @@ class DefaultPackageSummaryTest {
         extensionFunctions: List<SymbolDetail<FunctionSignature>> = emptyList()
     ) = DefaultPackageSummary(
         Params(
+            header = null,
             displayLanguage = displayLanguage,
             description = description,
             interfaces = interfaces,

@@ -20,8 +20,9 @@ import com.google.devsite.components.impl.DefaultRedirectPage
 import com.google.devsite.components.pages.RedirectPage
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.converters.KmpClasslikeConverter
+import com.google.devsite.renderer.converters.KmpPackageConverter
 import com.google.devsite.renderer.converters.NonKmpClasslikeConverter
-import com.google.devsite.renderer.converters.PackageDocumentableConverter
+import com.google.devsite.renderer.converters.NonKmpPackageConverter
 import com.google.devsite.renderer.converters.isSynthetic
 import com.google.devsite.renderer.converters.name
 import com.google.devsite.renderer.converters.packageName
@@ -60,9 +61,9 @@ internal class PackageRenderer(
 
     suspend fun writePackageSummary(dPackage: DPackage) {
         val converter = if (dPackage.isKMP())
-            PackageDocumentableConverter(displayLanguage, dPackage, pathProvider, docsHolder)
+            KmpPackageConverter(displayLanguage, dPackage, pathProvider, docsHolder)
         else
-            PackageDocumentableConverter(displayLanguage, dPackage, pathProvider, docsHolder)
+            NonKmpPackageConverter(displayLanguage, dPackage, pathProvider, docsHolder)
         val page = converter.summaryPage()
         val packageSummary = createHTML().html {
             page.render(this)

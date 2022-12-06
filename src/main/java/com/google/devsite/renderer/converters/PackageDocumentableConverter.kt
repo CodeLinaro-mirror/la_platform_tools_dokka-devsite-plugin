@@ -18,7 +18,11 @@ package com.google.devsite.renderer.converters
 
 import com.google.devsite.FunctionSummaryList
 import com.google.devsite.PropertySummaryList
+import com.google.devsite.TypeSummaryItem
+import com.google.devsite.components.DescriptionComponent
+import com.google.devsite.components.Link
 import com.google.devsite.components.impl.DefaultDevsitePage
+import com.google.devsite.components.impl.DefaultDevsitePlatformSelector
 import com.google.devsite.components.impl.DefaultPackageSummary
 import com.google.devsite.components.impl.DefaultSummaryList
 import com.google.devsite.components.pages.DevsitePage
@@ -27,6 +31,7 @@ import com.google.devsite.components.symbols.FunctionSignature
 import com.google.devsite.components.symbols.PropertySignature
 import com.google.devsite.components.symbols.SymbolDetail
 import com.google.devsite.components.table.SummaryList
+import com.google.devsite.components.table.TableRowSummaryItem
 import com.google.devsite.renderer.Language
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.paths.FilePathProvider
@@ -35,43 +40,49 @@ import kotlinx.coroutines.coroutineScope
 import org.jetbrains.dokka.model.DFunction
 import org.jetbrains.dokka.model.DPackage
 import org.jetbrains.dokka.model.DProperty
+import org.jetbrains.dokka.model.Documentable
 
 /** Converts documentables into components for the package summary page. */
-internal class PackageDocumentableConverter(
+internal abstract class PackageDocumentableConverter(
     private val displayLanguage: Language,
     private val dPackage: DPackage,
     private val pathProvider: FilePathProvider,
     private val docsHolder: DocumentablesHolder
 ) {
-    private val javadocConverter = DocTagConverter(displayLanguage, pathProvider, docsHolder)
-    private val functionConverter =
-        FunctionDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
-    private val propertyConverter =
-        PropertyDocumentableConverter(displayLanguage, pathProvider, javadocConverter)
+    protected abstract val header: DefaultDevsitePlatformSelector?
+    protected val javadocConverter = DocTagConverter(displayLanguage, pathProvider, docsHolder)
+    protected abstract val functionToSummaryConverter:
+        (DFunction, ModifierHints) -> TypeSummaryItem<FunctionSignature>
+    protected abstract val functionToDetailConverter:
+        (DFunction, ModifierHints) -> SymbolDetail<FunctionSignature>
+    protected abstract val propertyToSummaryConverter:
+        (DProperty, ModifierHints) -> TypeSummaryItem<PropertySignature>
+    protected abstract val propertyToDetailConverter:
+        (DProperty, ModifierHints) -> SymbolDetail<PropertySignature>
+    protected abstract val docsToSummary:
+        (List<Documentable>) -> SummaryList<TableRowSummaryItem<Link, DescriptionComponent>>
 
     /** @return the root component for the package summary page */
     suspend fun summaryPage(): DevsitePage<PackageSummary> = coroutineScope {
         val interfaces = async {
-            javadocConverter.docsToSummary(docsHolder.interfacesFor(dPackage))
+            docsToSummary(docsHolder.interfacesFor(dPackage))
         }
         val classes = async {
-            javadocConverter.docsToSummary(docsHolder.classesFor(dPackage, displayLanguage))
+            docsToSummary(docsHolder.classesFor(dPackage, displayLanguage))
         }
-        val enums = async { javadocConverter.docsToSummary(docsHolder.enumsFor(dPackage)) }
+        val enums = async { docsToSummary(docsHolder.enumsFor(dPackage)) }
         val objects = async {
-            javadocConverter.docsToSummary(
+            docsToSummary(
                 docsHolder.interestingObjectsFor(dPackage, displayLanguage)
             )
         }
         val exceptions = async {
-            javadocConverter.docsToSummary(docsHolder.exceptionsFor(dPackage))
+            docsToSummary(docsHolder.exceptionsFor(dPackage))
         }
         val annotations = async {
-            javadocConverter.docsToSummary(docsHolder.annotationsFor(dPackage))
+            docsToSummary(docsHolder.annotationsFor(dPackage))
         }
-        val typeAliases = async {
-            javadocConverter.docsToSummary(docsHolder.typeAliasesFor(dPackage))
-        }
+        val typeAliases = async { docsToSummary(docsHolder.typeAliasesFor(dPackage)) }
 
         val topLevelConstantsSummary = async { propertiesToSummary(topLevelConstants()) }
         val topLevelPropertiesSummary = async { propertiesToSummary(topLevelProperties()) }
@@ -93,6 +104,7 @@ internal class PackageDocumentableConverter(
                 title = dPackage.name,
                 content = DefaultPackageSummary(
                     PackageSummary.Params(
+                        header,
                         displayLanguage,
                         description = javadocConverter.metadata(
                             documentable = dPackage,
@@ -131,7 +143,7 @@ internal class PackageDocumentableConverter(
                 isFromJava = it.isFromJava(),
                 isSummary = true
             )
-            functionConverter.summary(it, modifierHints)
+            functionToSummaryConverter(it, modifierHints)
         }
 
         return DefaultSummaryList(
@@ -151,7 +163,7 @@ internal class PackageDocumentableConverter(
                 isFromJava = it.isFromJava(),
                 isSummary = false
             )
-            functionConverter.detail(it, modifierHints)
+            functionToDetailConverter(it, modifierHints)
         }
     }
 
@@ -164,7 +176,7 @@ internal class PackageDocumentableConverter(
                 isFromJava = it.isFromJava(),
                 isSummary = true
             )
-            propertyConverter.summary(it, modifierHints)
+            propertyToSummaryConverter(it, modifierHints)
         }
 
         return DefaultSummaryList(
@@ -184,7 +196,7 @@ internal class PackageDocumentableConverter(
                 isFromJava = it.isFromJava(),
                 isSummary = false
             )
-            propertyConverter.detail(it, modifierHints)
+            propertyToDetailConverter(it, modifierHints)
         }
     }
 
