@@ -17,15 +17,11 @@
 package com.google.devsite.renderer
 
 import com.google.devsite.DevsiteConfiguration
-import com.google.devsite.renderer.impl.ClassGraph
-import com.google.devsite.renderer.impl.DocumentablesGraph
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.MetadataRenderer
 import com.google.devsite.renderer.impl.PackageRenderer
-import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
-import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
-import com.google.devsite.renderer.impl.paths.DacKotlinVersionedDocsFilePathProvider
 import com.google.devsite.renderer.impl.paths.DefaultExternalDokkaLocationProvider
+import com.google.devsite.renderer.impl.paths.DevsiteFilePathProvider
 import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
 import com.google.devsite.util.JsonLibraryMetadata
 import com.google.devsite.util.LibraryMetadata
@@ -68,8 +64,6 @@ internal class MultiLanguageRenderer(
                 excludedPackages = devsiteConfiguration.computedExcludedPackagesForJava,
                 fileMetadataMap = fileMetadataMap,
             )
-            val jClassGraph = jHolder.classGraph()
-            val jDocumentablesGraph = jHolder.documentablesGraph()
             val kHolder = DocumentablesHolder(
                 module = module,
                 scope = this,
@@ -78,47 +72,38 @@ internal class MultiLanguageRenderer(
                 excludedPackages = devsiteConfiguration.computedExcludedPackagesForKotlin,
                 fileMetadataMap = fileMetadataMap,
             )
-            val kClassGraph = kHolder.classGraph()
-            val kDocumentablesGraph = kHolder.documentablesGraph()
 
-            launch { renderJava(jHolder, locationProvider, jClassGraph, jDocumentablesGraph) }
-            launch { renderKotlin(kHolder, locationProvider, kClassGraph, kDocumentablesGraph) }
+            launch {
+                renderLanguage(
+                    Language.JAVA, devsiteConfiguration.javaDocsPath,
+                    jHolder, locationProvider
+                )
+            }
+            launch {
+                renderLanguage(
+                    Language.KOTLIN, devsiteConfiguration.kotlinDocsPath,
+                    kHolder, locationProvider
+                )
+            }
         }
     }
 
-    private suspend fun renderJava(
+    private suspend fun renderLanguage(
+        language: Language,
+        languageDocsPath: String?,
         holder: DocumentablesHolder,
         locationProvider: ExternalDokkaLocationProvider,
-        classGraph: ClassGraph,
-        documentablesGraph: DocumentablesGraph
     ) {
-        if (devsiteConfiguration.versionedTenant != null) return
-        val language = Language.JAVA
-        val filePaths = DacJavaFilePathProvider(
-            devsiteConfiguration.tenant, locationProvider, classGraph,
-            documentablesGraph
-        )
-        DevsiteRenderer(
-            MetadataRenderer(outputWriter, filePaths, language, holder),
-            PackageRenderer(outputWriter, filePaths, language, holder),
-            holder,
-            language
-        ).render()
-    }
+        if (languageDocsPath == null) return
 
-    private suspend fun renderKotlin(
-        holder: DocumentablesHolder,
-        locationProvider: ExternalDokkaLocationProvider,
-        classGraph: ClassGraph,
-        documentablesGraph: DocumentablesGraph
-    ) {
-        val language = Language.KOTLIN
-        val filePaths = devsiteConfiguration.versionedTenant?.let {
-            DacKotlinVersionedDocsFilePathProvider(
-                it, locationProvider, classGraph, documentablesGraph
-            )
-        } ?: DacKotlinFilePathProvider(
-            devsiteConfiguration.tenant,
+        val classGraph = holder.classGraph()
+        val documentablesGraph = holder.documentablesGraph()
+
+        val filePaths = DevsiteFilePathProvider(
+            language,
+            devsiteConfiguration.docRootPath,
+            languageDocsPath,
+            devsiteConfiguration.projectPath,
             locationProvider,
             classGraph,
             documentablesGraph

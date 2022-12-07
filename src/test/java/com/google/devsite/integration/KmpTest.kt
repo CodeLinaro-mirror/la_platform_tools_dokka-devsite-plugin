@@ -42,7 +42,10 @@ class KmpTest : IntegrationTestBase() {
         path: String,
         sampleLocations: List<String>,
         includeFiles: List<String>,
-        versionedTenant: String?,
+        docRootPath: String,
+        projectPath: String?,
+        javaDocsDirectory: String?,
+        kotlinDocsDirectory: String?,
         suffix: String
     ) {
         val baseDir = "testData/$path"
@@ -82,8 +85,9 @@ class KmpTest : IntegrationTestBase() {
         }
         // TODO: write a test that has multiple libraries across the source sets
 
-        val inferredTenant = File(sourceDir).listFiles().orEmpty()
-            .singleOrNull { it.isDirectory }?.name ?: "dokkatest"
+        val inferredProjectPath = projectPath
+            ?: File(sourceDir).listFiles().orEmpty().singleOrNull { it.isDirectory }?.name
+            ?: "dokkatest"
 
         val configuration = dokkaConfiguration {
             sourceSets {
@@ -97,12 +101,14 @@ class KmpTest : IntegrationTestBase() {
                     fqPluginName = "com.google.devsite.DevsitePlugin",
                     serializationFormat = DokkaConfiguration.SerializationFormat.JSON,
                     values = DevsiteConfiguration(
-                        tenant = inferredTenant,
-                        versionedTenant = versionedTenant,
+                        docRootPath = docRootPath,
+                        projectPath = inferredProjectPath,
                         excludedPackages = null,
                         excludedPackagesForJava = null,
                         excludedPackagesForKotlin = null,
-                        libraryMetadataFilename = null
+                        libraryMetadataFilename = null,
+                        javaDocsPath = javaDocsDirectory,
+                        kotlinDocsPath = kotlinDocsDirectory
                     ).toJsonString()
                 )
             )

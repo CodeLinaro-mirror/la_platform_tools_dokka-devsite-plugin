@@ -18,35 +18,33 @@ package com.google.devsite.renderer.impl.paths
 
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesGraph
+import com.google.devsite.renderer.impl.paths.FilePathProvider.Companion.joinPaths
 
 /** Creates relative file paths that have no knowledge of the containing website. */
 internal class RelativeFilePathProvider(
-    tenant: String,
+    projectPath: String,
     override val locationProvider: ExternalDokkaLocationProvider? = null,
     override val classGraph: ClassGraph,
     override val documentablesGraph: DocumentablesGraph
 ) : FilePathProvider {
     override val relative = this
 
-    override val packageList = getFileRelativePath(tenant, MACHINE_PACKAGE_LIST_FILE)
+    override val packageList = joinPaths(projectPath, MACHINE_PACKAGE_LIST_FILE)
 
-    override val packages = getFileRelativePath(tenant, PACKAGE_INDEX_FILE)
+    override val packages = joinPaths(projectPath, PACKAGE_INDEX_FILE)
 
-    override val classes = getFileRelativePath(tenant, CLASS_INDEX_FILE)
+    override val classes = joinPaths(projectPath, CLASS_INDEX_FILE)
 
-    override val rootIndex = getFileRelativePath(tenant, DIR_INDEX_FILE)
+    override val rootIndex = joinPaths(projectPath, DIR_INDEX_FILE)
 
-    override val toc = getFileRelativePath(tenant, TOC_FILE)
+    override val toc = joinPaths(projectPath, TOC_FILE)
 
-    override val book = getFileRelativePath(tenant, BOOK_FILE)
+    override val book = joinPaths(projectPath, BOOK_FILE)
 
     override fun forType(packageName: String, name: String): String {
         val packageAsPath = packageName.replace(".", "/")
-        return "$packageAsPath/$name.html"
+        return joinPaths(packageAsPath, "$name.html")
     }
-
-    private fun getFileRelativePath(tenant: String, fileName: String) =
-        if (tenant.isEmpty()) fileName else "$tenant/$fileName"
 
     override val ANY get() = throw RuntimeException("Not associated with a language")
 }

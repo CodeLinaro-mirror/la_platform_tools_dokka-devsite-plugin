@@ -16,11 +16,14 @@
 
 package com.google.devsite.components.testing
 
-import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProviderBase
+import com.google.devsite.renderer.Language
+import com.google.devsite.renderer.impl.paths.DevsiteFilePathProvider
 
-internal class NoopFilePathProvider : DacKotlinFilePathProviderBase(
+internal class NoopFilePathProvider : DevsiteFilePathProvider(
+    Language.KOTLIN,
     "noop",
-    "noop (kotlin)",
+    "noop",
+    "noop",
     locationProvider = null,
     classGraph = emptyMap(),
     documentablesGraph = emptyMap()

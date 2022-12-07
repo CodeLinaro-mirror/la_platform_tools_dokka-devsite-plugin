@@ -17,6 +17,7 @@
 package com.google.devsite.integration
 
 import com.google.devsite.testing.IntegrationTestBase
+import org.junit.Assert.assertThrows
 import org.junit.Ignore
 import org.junit.Test
 
@@ -161,8 +162,14 @@ class BasicTest : IntegrationTestBase() {
     }
 
     @Test
-    fun `Validate versioned directory support`() {
-        validateDirectory("simpleVersioned", versionedTenant = "tools/gradle-api/7.0")
+    fun `Validate non-standard path arguments`() {
+        validateDirectory(
+            path = "differentDocPath",
+            docRootPath = "reference/tools/gradle-api/7.0",
+            projectPath = "",
+            kotlinDocsDirectory = "",
+            javaDocsDirectory = null
+        )
     }
 
     @Test
@@ -193,5 +200,15 @@ class BasicTest : IntegrationTestBase() {
     @Test
     fun `Validate @VisibleForTesting`() {
         validateDirectory("visibleForTesting")
+    }
+
+    @Test
+    fun `Validate that Java and Kotlin paths cannot have the same value`() {
+        assertThrows(IllegalStateException::class.java) {
+            validateDirectory("simple", javaDocsDirectory = null, kotlinDocsDirectory = null)
+        }
+        assertThrows(IllegalStateException::class.java) {
+            validateDirectory("simple", javaDocsDirectory = "", kotlinDocsDirectory = "")
+        }
     }
 }

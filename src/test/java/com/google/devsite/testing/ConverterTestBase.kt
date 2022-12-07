@@ -34,9 +34,8 @@ import com.google.devsite.renderer.converters.isFromBaseClass
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.computeDocumentablesGraph
-import com.google.devsite.renderer.impl.paths.DacJavaFilePathProvider
-import com.google.devsite.renderer.impl.paths.DacKotlinFilePathProvider
 import com.google.devsite.renderer.impl.paths.DefaultExternalDokkaLocationProvider
+import com.google.devsite.renderer.impl.paths.DevsiteFilePathProvider
 import com.google.devsite.renderer.impl.paths.ExternalDokkaLocationProvider
 import com.google.devsite.renderer.impl.paths.FilePathProvider
 import kotlinx.coroutines.runBlocking
@@ -145,14 +144,24 @@ internal abstract class ConverterTestBase(
         val documentablesGraph = computeDocumentablesGraph(classGraph)
         return when (displayLanguage) {
             Language.JAVA ->
-                DacJavaFilePathProvider(
-                    "androidx", externalLocationProvider, classGraph,
-                    documentablesGraph
+                DevsiteFilePathProvider(
+                    language = Language.JAVA,
+                    docRootPath = "reference",
+                    languagePath = "",
+                    projectPath = "androidx",
+                    locationProvider = externalLocationProvider,
+                    classGraph = classGraph,
+                    documentablesGraph = documentablesGraph
                 )
             Language.KOTLIN ->
-                DacKotlinFilePathProvider(
-                    "androidx", externalLocationProvider, classGraph,
-                    documentablesGraph
+                DevsiteFilePathProvider(
+                    language = Language.KOTLIN,
+                    docRootPath = "reference",
+                    languagePath = "kotlin",
+                    projectPath = "androidx",
+                    locationProvider = externalLocationProvider,
+                    classGraph = classGraph,
+                    documentablesGraph = documentablesGraph
                 )
         }
     }
@@ -207,12 +216,14 @@ internal abstract class ConverterTestBase(
                 fqPluginName = "com.google.devsite.DevsitePlugin",
                 serializationFormat = DokkaConfiguration.SerializationFormat.JSON,
                 values = DevsiteConfiguration(
-                    tenant = "androidx",
-                    versionedTenant = null,
+                    docRootPath = "reference",
+                    projectPath = "androidx",
                     excludedPackages = null,
                     excludedPackagesForJava = null,
                     excludedPackagesForKotlin = null,
                     libraryMetadataFilename = null,
+                    javaDocsPath = "",
+                    kotlinDocsPath = "kotlin"
                 ).toJsonString()
             )
         )

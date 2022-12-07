@@ -45,8 +45,10 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         sources: List<File>,
         samplesLocations: List<String>,
         includeFiles: List<String> = emptyList(),
-        inferredTenant: String,
-        versionedTenant: String? = null
+        docRootPath: String,
+        projectPath: String,
+        javaDocsPath: String?,
+        kotlinDocsPath: String?
     ): DokkaConfigurationImpl {
         sources.forEach { check(it.isDirectory) { "$it does not exist or is not a directory" } }
         val externalLinks = mapOf(
@@ -83,12 +85,14 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                     fqPluginName = "com.google.devsite.DevsitePlugin",
                     serializationFormat = DokkaConfiguration.SerializationFormat.JSON,
                     values = DevsiteConfiguration(
-                        tenant = inferredTenant,
-                        versionedTenant = versionedTenant,
+                        docRootPath = docRootPath,
+                        projectPath = projectPath,
                         excludedPackages = null,
                         excludedPackagesForJava = null,
                         excludedPackagesForKotlin = null,
-                        libraryMetadataFilename = null
+                        libraryMetadataFilename = null,
+                        javaDocsPath = javaDocsPath,
+                        kotlinDocsPath = kotlinDocsPath,
                     ).toJsonString()
                 )
             )
@@ -101,16 +105,20 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         sourceDir: String,
         sampleLocations: List<String> = emptyList(),
         includeFiles: List<String> = emptyList(),
-        inferredTenant: String,
-        versionedTenant: String? = null
+        docRootPath: String,
+        projectPath: String,
+        javaDocsDirectory: String?,
+        kotlinDocsDirectory: String?
     ): DokkaConfigurationImpl {
         val sources = File(sourceDir).absoluteFile
         return makeExternalConfiguration(
             listOf(sources),
             sampleLocations.map { "$samplesBaseDir/$it" },
             includeFiles.map { File(sourceDir, it).absolutePath },
-            inferredTenant,
-            versionedTenant
+            docRootPath,
+            projectPath,
+            javaDocsDirectory,
+            kotlinDocsDirectory
         )
     }
 
@@ -119,14 +127,15 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         paths: List<String>,
         sampleLocations: List<String> = emptyList(),
         includeFiles: List<String> = emptyList(),
-        versionedTenant: String? = null
     ) {
         val configuration = makeExternalConfiguration(
             paths.map { File(it).absoluteFile },
             sampleLocations,
             includeFiles,
-            inferredTenant = "androidx",
-            versionedTenant
+            docRootPath = "reference",
+            projectPath = "androidx",
+            javaDocsPath = "",
+            kotlinDocsPath = "kotlin"
         )
 
         val writerPlugin = TestOutputWriterPlugin()
@@ -185,8 +194,10 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             sourceRoots,
             samplesRoots.toList(),
             emptyList(),
-            inferredTenant = "androidx",
-            versionedTenant = ""
+            docRootPath = "reference",
+            projectPath = "androidx",
+            javaDocsPath = "",
+            kotlinDocsPath = "kotlin"
         )
 
         val writerPlugin = TestOutputWriterPlugin()
@@ -214,7 +225,10 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         val configuration = makeExternalConfiguration(
             artifactNames.map { File("build/explodedSources/$it/").absoluteFile },
             if (samples) listOf(samplesBaseDir) else emptyList(),
-            inferredTenant = "androidx"
+            docRootPath = "reference",
+            projectPath = "androidx",
+            javaDocsPath = "",
+            kotlinDocsPath = "kotlin"
         )
 
         val writerPlugin = TestOutputWriterPlugin()
@@ -235,22 +249,29 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         path: String,
         sampleLocations: List<String> = emptyList(),
         includeFiles: List<String> = emptyList(),
-        versionedTenant: String? = null,
+        docRootPath: String = "reference",
+        projectPath: String? = null,
+        javaDocsDirectory: String? = "",
+        kotlinDocsDirectory: String? = "kotlin",
         suffix: String = "source"
     ) {
         val samplesBaseDir = "testData/$path"
         val outputBaseDir = "testData/$path/docs"
         val sourceDir = "testData/$path/$suffix"
 
-        val inferredTenant = File(sourceDir).listFiles().orEmpty()
-            .singleOrNull { it.isDirectory }?.name ?: "dokkatest"
+        val inferredProjectPath = projectPath
+            ?: File(sourceDir).listFiles().orEmpty().singleOrNull { it.isDirectory }?.name
+            ?: "dokkatest"
+
         val configuration = makeInternalConfiguration(
             samplesBaseDir,
             sourceDir,
             sampleLocations,
             includeFiles,
-            inferredTenant,
-            versionedTenant
+            docRootPath,
+            inferredProjectPath,
+            javaDocsDirectory,
+            kotlinDocsDirectory
         )
 
         val writerPlugin = TestOutputWriterPlugin()
@@ -286,7 +307,10 @@ abstract class IntegrationTestBase : BaseAbstractTest(
             artifactNames.map { File("build/explodedSources/$it/").absoluteFile },
             if (samples) listOf(samplesBaseDir) else emptyList(),
             includeFiles = includeFiles.map { File("testData/$testName/source", it).absolutePath },
-            inferredTenant = "androidx"
+            docRootPath = "reference",
+            projectPath = "androidx",
+            javaDocsPath = "",
+            kotlinDocsPath = "kotlin"
         )
 
         val writerPlugin = TestOutputWriterPlugin()

@@ -26,6 +26,8 @@ import com.google.devsite.renderer.impl.DocumentablesGraph
 import org.jetbrains.dokka.links.DRI
 import org.jetbrains.dokka.model.DEnumEntry
 import org.jetbrains.dokka.model.Documentable
+import java.nio.file.Paths
+import kotlin.io.path.pathString
 
 private val NON_DOCUMENTABLE_PACKAGES = listOf(
     "kotlin.jvm.functions"
@@ -151,6 +153,11 @@ internal interface FilePathProvider {
         }
     }
     val ANY: TypeProjectionComponent
+
+    companion object {
+        fun joinPaths(pathComponent: String, vararg pathComponents: String): String =
+            Paths.get(pathComponent, *pathComponents).pathString
+    }
 }
 
 internal val ANY_DRI: Map<Language, DRI> = mapOf(
