@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer
 
+import com.google.devsite.DevsiteConfiguration
 import com.google.devsite.renderer.impl.ClassGraph
 import com.google.devsite.renderer.impl.DocumentablesGraph
 import com.google.devsite.renderer.impl.DocumentablesHolder
@@ -44,53 +45,9 @@ import org.jetbrains.dokka.renderers.Renderer
 internal class MultiLanguageRenderer(
     private val context: DokkaContext,
     private val outputWriter: OutputWriter,
-    private val externalDocumentablesProvider: ExternalDocumentablesProvider
+    private val externalDocumentablesProvider: ExternalDocumentablesProvider,
+    private val devsiteConfiguration: DevsiteConfiguration
 ) : Renderer {
-    private val tenant: String by lazy {
-        checkNotNull(System.getenv("DEVSITE_TENANT") ?: System.getProperty("tenant")) {
-            "Please specify the DEVSITE_TENANT envar. For example, if you were generating" +
-                " AndroidX docs, you would set DEVSITE_TENANT=\"androidx\""
-        }
-    }
-
-    private val versionedTenant: String? by lazy {
-        System.getenv("DEVSITE_TENANT_VERSIONED") ?: System.getProperty("versionedTenant")
-    }
-
-    // Set of packages that Dackka will exclude for both Java and Kotlin refdoc generation
-    private val excludedPackagesForBoth: Set<Regex> by lazy {
-        System.getenv("DACKKA_EXCLUDED_PACKAGES")?.split(",")
-            ?.map { it.toRegex() }?.toSet() ?: emptySet()
-    }
-
-    // Set of packages that Dackka will exclude for Java refdoc generation, which includes
-    // packages specified in `excludedPackagesForBoth`
-    private val excludedPackagesForJava: Set<Regex> by lazy {
-        excludedPackagesForBoth +
-            (
-                System.getenv("DACKKA_EXCLUDED_PACKAGES_JAVA")?.split(",")
-                    ?.map { it.toRegex() }?.toSet() ?: emptySet()
-                )
-    }
-
-    // Set of packages that Dackka will exclude for Java refdoc generation, which includes
-    // packages specified in `excludedPackagesForBoth`
-    private val excludedPackagesForKotlin: Set<Regex> by lazy {
-        excludedPackagesForBoth +
-            (
-                System.getenv("DACKKA_EXCLUDED_PACKAGES_KOTLIN")?.split(",")
-                    ?.map { it.toRegex() }?.toSet() ?: emptySet()
-                )
-    }
-
-    /**
-     * The location of the JSON file containing the library metadata.
-     *
-     * Returns an empty string if "SHOW_LIBRARY_METADATA" system variable isn't defined.
-     */
-    private val libraryMetadataFilename: String by lazy {
-        System.getenv("LIBRARY_METADATA_FILE") ?: ""
-    }
 
     override fun render(root: RootPageNode) {
         val module = (root as ModulePageNode).documentables.single() as DModule
@@ -100,7 +57,7 @@ internal class MultiLanguageRenderer(
 
         runBlocking(Dispatchers.Default) {
             val libraryMetadataArray = JsonLibraryMetadata.getMetadataFromFile(
-                libraryMetadataFilename
+                devsiteConfiguration.libraryMetadataFilename.orEmpty()
             )
             val fileMetadataMap = LibraryMetadata.convertJsonMetadataToFileMap(libraryMetadataArray)
             val jHolder = DocumentablesHolder(
@@ -108,7 +65,7 @@ internal class MultiLanguageRenderer(
                 scope = this,
                 context = context,
                 externalDocumentablesProvider = externalDocumentablesProvider,
-                excludedPackages = excludedPackagesForJava,
+                excludedPackages = devsiteConfiguration.computedExcludedPackagesForJava,
                 fileMetadataMap = fileMetadataMap,
             )
             val jClassGraph = jHolder.classGraph()
@@ -118,7 +75,7 @@ internal class MultiLanguageRenderer(
                 scope = this,
                 context = context,
                 externalDocumentablesProvider = externalDocumentablesProvider,
-                excludedPackages = excludedPackagesForKotlin,
+                excludedPackages = devsiteConfiguration.computedExcludedPackagesForKotlin,
                 fileMetadataMap = fileMetadataMap,
             )
             val kClassGraph = kHolder.classGraph()
@@ -135,10 +92,10 @@ internal class MultiLanguageRenderer(
         classGraph: ClassGraph,
         documentablesGraph: DocumentablesGraph
     ) {
-        if (versionedTenant != null) return
+        if (devsiteConfiguration.versionedTenant != null) return
         val language = Language.JAVA
         val filePaths = DacJavaFilePathProvider(
-            tenant, locationProvider, classGraph,
+            devsiteConfiguration.tenant, locationProvider, classGraph,
             documentablesGraph
         )
         DevsiteRenderer(
@@ -156,11 +113,16 @@ internal class MultiLanguageRenderer(
         documentablesGraph: DocumentablesGraph
     ) {
         val language = Language.KOTLIN
-        val filePaths = versionedTenant?.let {
+        val filePaths = devsiteConfiguration.versionedTenant?.let {
             DacKotlinVersionedDocsFilePathProvider(
                 it, locationProvider, classGraph, documentablesGraph
             )
-        } ?: DacKotlinFilePathProvider(tenant, locationProvider, classGraph, documentablesGraph)
+        } ?: DacKotlinFilePathProvider(
+            devsiteConfiguration.tenant,
+            locationProvider,
+            classGraph,
+            documentablesGraph
+        )
         DevsiteRenderer(
             MetadataRenderer(outputWriter, filePaths, language, holder),
             PackageRenderer(outputWriter, filePaths, language, holder),

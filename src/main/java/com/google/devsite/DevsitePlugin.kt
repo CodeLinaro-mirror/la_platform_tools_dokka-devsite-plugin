@@ -23,6 +23,7 @@ import org.jetbrains.dokka.CoreExtensions
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.translators.descriptors.ExternalDocumentablesProvider
 import org.jetbrains.dokka.plugability.DokkaPlugin
+import org.jetbrains.dokka.plugability.configuration
 import org.jetbrains.dokka.plugability.querySingle
 
 class DevsitePlugin : DokkaPlugin() {
@@ -37,10 +38,15 @@ class DevsitePlugin : DokkaPlugin() {
 
     val renderer by extending {
         CoreExtensions.renderer providing {
+            val devsiteConfiguration = configuration<DevsitePlugin, DevsiteConfiguration>(it)
+            checkNotNull(devsiteConfiguration) {
+                "Missing Dackka plugin configuration. See go/dackka#running-files for more detail."
+            }
             MultiLanguageRenderer(
                 it,
                 dokkaBase.querySingle { outputWriter },
-                dokkaBase.querySingle { externalDocumentablesProvider }
+                dokkaBase.querySingle { externalDocumentablesProvider },
+                devsiteConfiguration
             )
         } override dokkaBase.htmlRenderer
     }

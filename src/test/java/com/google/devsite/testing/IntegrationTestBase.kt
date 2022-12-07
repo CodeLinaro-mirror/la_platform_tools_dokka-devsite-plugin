@@ -17,13 +17,16 @@
 package com.google.devsite.testing
 
 import com.google.common.truth.Truth.assertWithMessage
+import com.google.devsite.DevsiteConfiguration
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.DokkaConfigurationImpl
 import org.jetbrains.dokka.ExternalDocumentationLink
+import org.jetbrains.dokka.PluginConfigurationImpl
 import org.jetbrains.dokka.base.testApi.testRunner.BaseAbstractTest
 import org.jetbrains.dokka.pages.RootPageNode
 import org.jetbrains.dokka.plugability.DokkaContext
 import org.jetbrains.dokka.testApi.logger.TestLogger
+import org.jetbrains.dokka.toJsonString
 import org.jetbrains.dokka.utilities.DokkaConsoleLogger
 import org.jetbrains.dokka.utilities.LoggingLevel
 import java.io.File
@@ -41,7 +44,9 @@ abstract class IntegrationTestBase : BaseAbstractTest(
     open fun makeExternalConfiguration(
         sources: List<File>,
         samplesLocations: List<String>,
-        includeFiles: List<String> = emptyList()
+        includeFiles: List<String> = emptyList(),
+        inferredTenant: String,
+        versionedTenant: String? = null
     ): DokkaConfigurationImpl {
         sources.forEach { check(it.isDirectory) { "$it does not exist or is not a directory" } }
         val externalLinks = mapOf(
@@ -73,6 +78,20 @@ abstract class IntegrationTestBase : BaseAbstractTest(
                 }
             }
             offlineMode = true
+            pluginsConfigurations = mutableListOf(
+                PluginConfigurationImpl(
+                    fqPluginName = "com.google.devsite.DevsitePlugin",
+                    serializationFormat = DokkaConfiguration.SerializationFormat.JSON,
+                    values = DevsiteConfiguration(
+                        tenant = inferredTenant,
+                        versionedTenant = versionedTenant,
+                        excludedPackages = null,
+                        excludedPackagesForJava = null,
+                        excludedPackagesForKotlin = null,
+                        libraryMetadataFilename = null
+                    ).toJsonString()
+                )
+            )
         }
     }
 
@@ -81,24 +100,18 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         samplesBaseDir: String,
         sourceDir: String,
         sampleLocations: List<String> = emptyList(),
-        includeFiles: List<String> = emptyList()
+        includeFiles: List<String> = emptyList(),
+        inferredTenant: String,
+        versionedTenant: String? = null
     ): DokkaConfigurationImpl {
         val sources = File(sourceDir).absoluteFile
         return makeExternalConfiguration(
             listOf(sources),
             sampleLocations.map { "$samplesBaseDir/$it" },
-            includeFiles.map { File(sourceDir, it).absolutePath }
+            includeFiles.map { File(sourceDir, it).absolutePath },
+            inferredTenant,
+            versionedTenant
         )
-    }
-
-    fun setEnvVarsForTests(inferredTenant: String, versionedTenant: String? = null) {
-        if (versionedTenant != null) {
-            System.setProperty("versionedTenant", versionedTenant)
-            System.clearProperty("tenant")
-        } else {
-            System.setProperty("tenant", inferredTenant)
-            System.clearProperty("versionedTenant")
-        }
     }
 
     /** Executes dackka on source from an androidx checkout on the same machine. No validation. */
@@ -111,11 +124,10 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         val configuration = makeExternalConfiguration(
             paths.map { File(it).absoluteFile },
             sampleLocations,
-            includeFiles
+            includeFiles,
+            inferredTenant = "androidx",
+            versionedTenant
         )
-
-        val inferredTenant = "androidx"
-        setEnvVarsForTests(inferredTenant, versionedTenant)
 
         val writerPlugin = TestOutputWriterPlugin()
 
@@ -172,11 +184,10 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         val configuration = makeExternalConfiguration(
             sourceRoots,
             samplesRoots.toList(),
-            emptyList()
+            emptyList(),
+            inferredTenant = "androidx",
+            versionedTenant = ""
         )
-
-        val inferredTenant = "androidx"
-        setEnvVarsForTests(inferredTenant, "")
 
         val writerPlugin = TestOutputWriterPlugin()
 
@@ -203,9 +214,8 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         val configuration = makeExternalConfiguration(
             artifactNames.map { File("build/explodedSources/$it/").absoluteFile },
             if (samples) listOf(samplesBaseDir) else emptyList(),
+            inferredTenant = "androidx"
         )
-
-        setEnvVarsForTests(inferredTenant = "androidx")
 
         val writerPlugin = TestOutputWriterPlugin()
 
@@ -232,16 +242,16 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         val outputBaseDir = "testData/$path/docs"
         val sourceDir = "testData/$path/$suffix"
 
+        val inferredTenant = File(sourceDir).listFiles().orEmpty()
+            .singleOrNull { it.isDirectory }?.name ?: "dokkatest"
         val configuration = makeInternalConfiguration(
             samplesBaseDir,
             sourceDir,
             sampleLocations,
-            includeFiles
+            includeFiles,
+            inferredTenant,
+            versionedTenant
         )
-
-        val inferredTenant = File(sourceDir).listFiles().orEmpty()
-            .singleOrNull { it.isDirectory }?.name ?: "dokkatest"
-        setEnvVarsForTests(inferredTenant, versionedTenant)
 
         val writerPlugin = TestOutputWriterPlugin()
 
@@ -275,10 +285,9 @@ abstract class IntegrationTestBase : BaseAbstractTest(
         val configuration = makeExternalConfiguration(
             artifactNames.map { File("build/explodedSources/$it/").absoluteFile },
             if (samples) listOf(samplesBaseDir) else emptyList(),
-            includeFiles = includeFiles.map { File("testData/$testName/source", it).absolutePath }
+            includeFiles = includeFiles.map { File("testData/$testName/source", it).absolutePath },
+            inferredTenant = "androidx"
         )
-
-        setEnvVarsForTests(inferredTenant = "androidx")
 
         val writerPlugin = TestOutputWriterPlugin()
 
