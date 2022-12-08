@@ -368,7 +368,7 @@ internal abstract class ClasslikeDocumentableConverter(
         DefaultDevsitePage(
             DevsitePage.Params(
                 displayLanguage,
-                path = pathProvider.relative.forReference(classlike.dri).url,
+                path = pathProvider.forReference(classlike.dri).url,
                 bookPath = pathProvider.book,
                 title = classlike.name(),
                 content = DefaultClasslike(

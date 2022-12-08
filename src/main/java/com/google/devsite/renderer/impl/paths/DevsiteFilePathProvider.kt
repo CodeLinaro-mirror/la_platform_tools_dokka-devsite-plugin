@@ -33,25 +33,24 @@ internal open class DevsiteFilePathProvider(
     override val locationProvider: ExternalDokkaLocationProvider? = null,
     override val classGraph: ClassGraph,
     override val documentablesGraph: DocumentablesGraph,
-    final override val relative: FilePathProvider =
-        RelativeFilePathProvider(projectPath, locationProvider, classGraph, documentablesGraph)
 ) : FilePathProvider {
     private val rootPath = joinPaths("/", docRootPath, languagePath)
 
-    override val packageList = joinPaths(rootPath, relative.packageList)
+    override val packageList = joinPaths(rootPath, projectPath, MACHINE_PACKAGE_LIST_FILE)
 
-    override val packages = joinPaths(rootPath, relative.packages)
+    override val packages = joinPaths(rootPath, projectPath, PACKAGE_INDEX_FILE)
 
-    override val classes = joinPaths(rootPath, relative.classes)
+    override val classes = joinPaths(rootPath, projectPath, CLASS_INDEX_FILE)
 
-    override val rootIndex = joinPaths(rootPath, relative.rootIndex)
+    override val rootIndex = joinPaths(rootPath, projectPath, DIR_INDEX_FILE)
 
-    override val toc = joinPaths(rootPath, relative.toc)
+    override val toc = joinPaths(rootPath, projectPath, TOC_FILE)
 
-    override val book = joinPaths(rootPath, relative.book)
+    override val book = joinPaths(rootPath, projectPath, BOOK_FILE)
 
     override fun forType(packageName: String, name: String): String {
-        return joinPaths(rootPath, relative.forType(packageName, name))
+        val packageAsPath = packageName.replace(".", "/")
+        return joinPaths(rootPath, packageAsPath, "$name.html")
     }
 
     // Set value of ANY based on the language

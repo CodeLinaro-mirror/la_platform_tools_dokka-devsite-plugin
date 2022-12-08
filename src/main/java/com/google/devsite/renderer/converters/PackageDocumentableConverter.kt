@@ -99,7 +99,7 @@ internal abstract class PackageDocumentableConverter(
         DefaultDevsitePage(
             DevsitePage.Params(
                 displayLanguage,
-                path = pathProvider.relative.forReference(dPackage.dri).url,
+                path = pathProvider.forReference(dPackage.dri).url,
                 bookPath = pathProvider.book,
                 title = dPackage.name,
                 content = DefaultPackageSummary(

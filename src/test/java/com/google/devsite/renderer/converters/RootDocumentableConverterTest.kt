@@ -51,7 +51,7 @@ internal class RootDocumentableConverterTest(
             |class Foo
         """.render().indexPageForClasses()
 
-        assertThat(page.data.path).isEqualTo("androidx/classes.html")
+        assertPath(page.data.path, "androidx/classes.html")
     }
 
     @Test
@@ -228,7 +228,7 @@ internal class RootDocumentableConverterTest(
             |class Foo
         """.render().indexPageForPackages()
 
-        assertThat(page.data.path).isEqualTo("androidx/packages.html")
+        assertPath(page.data.path, "androidx/packages.html")
     }
 
     @Test

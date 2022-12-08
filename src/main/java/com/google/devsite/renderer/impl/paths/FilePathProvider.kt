@@ -39,9 +39,6 @@ internal interface FilePathProvider {
     /** The DokkaLocationProvider that is used to provide locations of external documentation */
     val locationProvider: ExternalDokkaLocationProvider?
 
-    /** Get this provider with only relative paths. */
-    val relative: FilePathProvider
-
     /** The raw list of packages in plain text format. */
     val packageList: String
 

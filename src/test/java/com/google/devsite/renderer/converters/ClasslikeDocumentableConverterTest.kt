@@ -76,7 +76,7 @@ internal class ClasslikeDocumentableConverterTest(
             |class Foo
         """.render().page()
 
-        assertThat(page.data.path).isEqualTo("androidx/example/Foo.html")
+        assertPath(page.data.path, "androidx/example/Foo.html")
     }
 
     @Test
