@@ -114,10 +114,10 @@ internal class RootDocumentableConverter(
     }
 
     /** @return the Devsite _toc.yaml */
-    suspend fun tocPage(): TableOfContents {
+    suspend fun tocPage(packagePrefixToRemove: String?): TableOfContents {
         val packageComponents = docsHolder.packages().map { dPackage ->
             coroutineScope {
-                packageForTocAsync(dPackage)
+                packageForTocAsync(dPackage, packagePrefixToRemove)
             }
         }.awaitAll()
 
@@ -136,7 +136,8 @@ internal class RootDocumentableConverter(
     }
 
     private fun CoroutineScope.packageForTocAsync(
-        dPackage: DPackage
+        dPackage: DPackage,
+        packagePrefixToRemove: String?
     ): Deferred<DefaultTocPackage> = async {
         val interfaces = docsHolder.interfacesFor(dPackage).map(::typeForToc)
         val classes = docsHolder.classesFor(dPackage, displayLanguage).map(::typeForToc)
@@ -146,9 +147,12 @@ internal class RootDocumentableConverter(
         val typeAliases = docsHolder.typeAliasesFor(dPackage).map(::typeForToc)
         val objects = docsHolder.interestingObjectsFor(dPackage, displayLanguage).map(::typeForToc)
 
+        // Update the string to trim to end with a `.` if it doesn't already.
+        val prefixToTrim = (packagePrefixToRemove?.removeSuffix(".")?.plus(".")) ?: ""
+
         DefaultTocPackage(
             TocPackage.Params(
-                name = dPackage.name,
+                name = dPackage.name.removePrefix(prefixToTrim),
                 packageUrl = pathProvider.forReference(dPackage.dri).url,
                 interfaces = interfaces,
                 classes = classes,

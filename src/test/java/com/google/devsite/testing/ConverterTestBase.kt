@@ -225,7 +225,8 @@ internal abstract class ConverterTestBase(
                     excludedPackagesForKotlin = null,
                     libraryMetadataFilename = null,
                     javaDocsPath = "",
-                    kotlinDocsPath = "kotlin"
+                    kotlinDocsPath = "kotlin",
+                    packagePrefixToRemoveInToc = null,
                 ).toJsonString()
             )
         )

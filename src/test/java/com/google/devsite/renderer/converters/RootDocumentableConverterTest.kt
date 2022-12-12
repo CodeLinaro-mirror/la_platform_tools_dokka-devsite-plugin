@@ -409,6 +409,27 @@ internal class RootDocumentableConverterTest(
         assertThat(tocPackage.data.classes.size).isEqualTo(2)
     }
 
+    @Test
+    fun `Toc removes package prefix if specified`() {
+        val toc = listOf(
+            """
+                |/src/main/kotlin/androidx/example/B.kt
+                |package androidx.example.b
+                |
+                |class B
+            """.trimMargin(),
+            """
+                |/src/main/kotlin/androidx/example/a/A.kt
+                |package androidx.example.a
+                |
+                |class A
+            """.trimMargin()
+        ).render().toc(packagePrefixToRemove = "androidx.example")
+
+        val packageNames = toc.data.packages.map { it.data.name }
+        assertThat(packageNames).containsExactly("a", "b")
+    }
+
     private fun DModule.indexPageForClasses(): DevsitePage<ClassIndex> {
         val (holder, pathProvider) = holderAndProvider(this)
         val converter = RootDocumentableConverter(
@@ -429,14 +450,14 @@ internal class RootDocumentableConverterTest(
         return runBlocking { converter.packagesIndexPage() }
     }
 
-    private fun DModule.toc(): TableOfContents {
+    private fun DModule.toc(packagePrefixToRemove: String? = null): TableOfContents {
         val (holder, pathProvider) = holderAndProvider(this)
         val converter = RootDocumentableConverter(
             displayLanguage,
             pathProvider,
             holder
         )
-        return runBlocking { converter.tocPage() }
+        return runBlocking { converter.tocPage(packagePrefixToRemove) }
     }
 
     companion object {

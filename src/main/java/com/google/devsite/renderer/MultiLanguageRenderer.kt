@@ -114,7 +114,8 @@ internal class MultiLanguageRenderer(
             MetadataRenderer(outputWriter, filePaths, language, holder),
             PackageRenderer(outputWriter, filePaths, language, holder),
             holder,
-            language
+            language,
+            devsiteConfiguration,
         ).render()
     }
 }

@@ -79,10 +79,10 @@ internal class MetadataRenderer(
     }
 
     /** Writes the ToC for devsite consumption. */
-    suspend fun writeToc() {
+    suspend fun writeToc(packagePrefixToRemove: String?) {
         val converter = RootDocumentableConverter(displayLanguage, pathProvider, docsHolder)
         val toc = buildString {
-            converter.tocPage().render(this)
+            converter.tocPage(packagePrefixToRemove).render(this)
         }
 
         outputWriter.write(pathProvider.toc, toc, "")

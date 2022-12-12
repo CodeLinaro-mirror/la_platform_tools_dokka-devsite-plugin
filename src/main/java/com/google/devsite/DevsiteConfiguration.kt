@@ -48,6 +48,12 @@ import org.jetbrains.dokka.plugability.ConfigurableBlock
  * "_shared/_reference-head-tags.html". To have no file included in the `<head>` section, explicitly
  * pass `null` as the value for [includedHeadTagsPathJava].
  * @param includedHeadTagsPathKotlin Equivalent to [includedHeadTagsPathJava], but for Kotlin docs.
+ * @param packagePrefixToRemoveInToc A string to trim from the beginning of each package name in the
+ * table of contents (for instance, if [packagePrefixToRemoveInToc] were set to `com.google`, the
+ * packages `com.google.a` and `com.google.b` would appear in the TOC as `a` and `b`). If the
+ * provided value does not end in `.`, the `.` is still included in the string to trim. This only
+ * applies to the table of contents, not other pages (e.g. the package index and the summary page
+ * for each package). Optional, defaults to `null` (no string trimmed from package names).
  */
 data class DevsiteConfiguration(
     val docRootPath: String = "reference",
@@ -60,6 +66,7 @@ data class DevsiteConfiguration(
     val libraryMetadataFilename: String?,
     val includedHeadTagsPathJava: String? = "_shared/_reference-head-tags.html",
     val includedHeadTagsPathKotlin: String? = "_shared/_reference-head-tags.html",
+    val packagePrefixToRemoveInToc: String?,
 ) : ConfigurableBlock {
     init {
         if (javaDocsPath == null && kotlinDocsPath == null) {

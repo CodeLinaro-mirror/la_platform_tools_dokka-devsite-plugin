@@ -16,6 +16,7 @@
 
 package com.google.devsite.renderer
 
+import com.google.devsite.DevsiteConfiguration
 import com.google.devsite.renderer.impl.DocumentablesHolder
 import com.google.devsite.renderer.impl.MetadataRenderer
 import com.google.devsite.renderer.impl.PackageRenderer
@@ -30,7 +31,8 @@ internal class DevsiteRenderer(
     private val rootFileRenderer: MetadataRenderer,
     private val packageRenderer: PackageRenderer,
     private val docsHolder: DocumentablesHolder,
-    private val displayLanguage: Language
+    private val displayLanguage: Language,
+    private val devsiteConfiguration: DevsiteConfiguration,
 ) {
     suspend fun render() {
         writeRootMetadata()
@@ -48,7 +50,7 @@ internal class DevsiteRenderer(
         launch { rootFileRenderer.writeRootIndex() }
         launch { rootFileRenderer.writePackages() }
         launch { rootFileRenderer.writeClasses() }
-        launch { rootFileRenderer.writeToc() }
+        launch { rootFileRenderer.writeToc(devsiteConfiguration.packagePrefixToRemoveInToc) }
     }
 
     private suspend fun writePackage(
